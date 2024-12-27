@@ -167,3 +167,7 @@ a.category-link:hover {
         width: 100%;
     }
 }
+
+#category-title {
+    display: none;
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSS Feed - Kris Yotam</title>
+    <style>
+        /* Reset basic styles for the page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: monospace, monospace; /* Simple, monospaced font for a raw text feel */
+            background-color: #fff;
+            color: #000;
+            line-height: 1.5;
+            padding: 10px;
+        }
+
+        .rss-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #000;
+            font-size: 14px;
+            white-space: pre-wrap; /* Maintains line breaks as they are */
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        /* Styling each RSS item */
+        .rss-item {
+            border-bottom: 1px solid #333;
+            padding: 10px 0;
+        }
+
+        .rss-item:last-child {
+            border-bottom: none;
+        }
+
+        .rss-item h2 {
+            font-size: 16px;
+            margin: 0;
+            color: #000;
+        }
+
+        .rss-item h2 a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .rss-item h2 a:hover {
+            text-decoration: underline;
+        }
+
+        .rss-item p {
+            font-size: 13px;
+            margin: 5px 0;
+            color: #444;
+        }
+
+        .rss-item .date {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .rss-item a {
+            color: #0066cc;
+        }
+
+        .rss-item a:hover {
+            color: #cc0000;
+        }
+
+        /* Basic style for the page itself */
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="rss-container">
+        <h1>RSS Feed - Kris Yotam Blog</h1>
+        <div id="rss-feed">
+            <!-- The posts will be inserted here -->
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const apiUrl = "https://kris-yotam.ghost.io/ghost/api/v3/content/posts/?key=dcea71965df8958f83f5ad51fa"; // Your Ghost API URL
+            const rssContainer = document.getElementById('rss-feed');
+
+            // Function to format date in RSS format
+            function formatDate(dateStr) {
+                const date = new Date(dateStr);
+                const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                return date.toLocaleDateString('en-US', options);
+            }
+
+            // Function to fetch posts and display them in the RSS feed style
+            function fetchPosts() {
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        const posts = data.posts;
+                        if (!posts || posts.length === 0) {
+                            rssContainer.innerHTML = "<p>No posts available.</p>";
+                            return;
+                        }
+
+                        rssContainer.innerHTML = ''; // Clear loading text
+
+                        // Loop through the posts and create an RSS item for each
+                        posts.forEach(post => {
+                            const postElement = document.createElement('div');
+                            postElement.classList.add('rss-item');
+
+                            postElement.innerHTML = `
+                                <h2><a href="/ghost-test/ghost_post.html?post=${post.slug}">${post.title}</a></h2>
+                                <p>${post.excerpt}</p>
+                                <p class="date">Published: ${formatDate(post.published_at)}</p>
+                            `;
+
+                            rssContainer.appendChild(postElement);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching posts:', error);
+                        rssContainer.innerHTML = "<p>Error fetching posts. Please try again later.</p>";
+                    });
+            }
+
+            // Initial load of posts
+            fetchPosts();
+        });
+    </script>
+</body>
+</html>

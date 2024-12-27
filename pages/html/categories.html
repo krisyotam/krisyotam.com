@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories - Kris Yotam</title>
+    <title>Category - Kris Yotam</title>
     <link rel="stylesheet" href="/pages/css/styles.css">
     <link rel="stylesheet" href="/pages/css/categories.css">
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <header class="profile">
             <img src="/assets/imgs/krisyotam.jpg" alt="Profile" class="profile-image">
             <h1>Kris Yotam</h1>
-            <p>Browse articles by category.</p>
+            <p id="category-description">Browse posts on the selected category</p>
         </header>
 
         <main>
-            <h2>Categories</h2>
+            <h2 id="category-title">Posts</h2>
 
             <!-- Categories Table -->
             <table class="categories-table">
                 <thead>
                     <tr>
-                        <th>Category</th>
-                        <th>Articles</th>
+                        <th>Posts</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Rows will be populated dynamically by categories.js -->
+                    <!-- Dynamically populated list of posts -->
                 </tbody>
             </table>
         </main>
@@ -52,7 +50,86 @@
         </footer>
     </div>
 
-    <!-- Include categories.js -->
-    <script src="/pages/js/categories.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Extract the category from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryParam = urlParams.get("category"); // Get the category from the query parameter
+            const apiUrl = "https://kris-yotam.ghost.io/ghost/api/v3/content/posts/?key=55704fddcdb457f05e61b3aef2&include=tags"; // Include tags
+            const postsContainer = document.querySelector('table tbody');
+
+            // Function to fetch posts from the Ghost API
+            function fetchPosts() {
+                console.log("Fetching posts from API for category: " + categoryParam);
+
+                // Make the API request
+                fetch(apiUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            // If the response isn't OK, throw an error
+                            console.error("Failed to fetch posts. HTTP Status:", response.status);
+                            throw new Error(`Failed to fetch posts. HTTP Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Log the data received from the API for debugging purposes
+                        console.log("Data received from API:", data);
+
+                        if (!data.posts || data.posts.length === 0) {
+                            console.warn("No posts found in the API response.");
+                            document.getElementById("category-description").textContent = `No posts found for the category: ${categoryParam}`;
+                            return;
+                        }
+
+                        // Find the posts for the selected category and log the filtering process
+                        console.log("Filtering posts by category...");
+                        const filteredPosts = data.posts.filter(post => {
+                            const hasKrisYotamTag = post.tags && post.tags.some(tag => tag.name === "#krisyotam.com");
+                            const isValidCategory = post.tags && post.tags.some(tag => tag.name.toLowerCase().replace(/ /g, "_") === categoryParam.toLowerCase());
+                            if (hasKrisYotamTag && isValidCategory) {
+                                console.log(`Post '${post.title}' matches the category '${categoryParam}'`);
+                            }
+                            return hasKrisYotamTag && isValidCategory;
+                        });
+
+                        if (filteredPosts.length === 0) {
+                            console.warn("No posts found for the selected category: " + categoryParam);
+                            document.getElementById("category-description").textContent = `No posts found for the category: ${categoryParam}`;
+                            return;
+                        }
+
+                        // Update the category title and description
+                        const categoryNameFormatted = categoryParam.replace(/_/g, " ").toUpperCase();
+                        document.getElementById("category-title").textContent = `Posts in ${categoryNameFormatted.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, char => char.toUpperCase())}`;
+                        document.getElementById("category-description").textContent = `Browse my posts on ${categoryNameFormatted}.`;
+
+                        // Render the posts for the selected category
+                        filteredPosts.forEach(post => {
+                            const row = document.createElement('tr');
+                            const postCell = document.createElement('td');
+                            const postLink = document.createElement('a');
+                            postLink.href = `/pages/html/post.html?post=${post.slug}`;  // Adjusting the link to the correct post page
+                            postLink.textContent = post.title;
+                            postCell.appendChild(postLink);
+                            row.appendChild(postCell);
+                            postsContainer.appendChild(row);
+                        });
+                    })
+                    .catch(error => {
+                        // Log the error if the fetch or any part of the process fails
+                        console.error('Error loading posts:', error);
+                    });
+            }
+
+            // Fetch posts for the selected category if categoryParam is available
+            if (categoryParam) {
+                fetchPosts();
+            } else {
+                console.error("No category selected.");
+                document.getElementById("category-description").textContent = "No category selected.";
+            }
+        });
+    </script>
 </body>
 </html>

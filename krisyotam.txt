@@ -1,0 +1,8 @@
+Here is a list of important file paths
+
+Category Pages: 
+MD Blog Posts: 
+HTML Blog Posts: 
+Scripts: 
+Master Script: 
+Template Files: 

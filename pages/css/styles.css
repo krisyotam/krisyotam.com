@@ -175,14 +175,4 @@ footer a:hover {
     color: #0066cc;
 }
 
-@media (max-width: 600px) {
-    .newsletter form {
-        flex-direction: column;
-    }
-
-    .newsletter input,
-    .newsletter button {
-        width: 100%;
-    }
-}
 
