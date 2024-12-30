@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const apiUrl = "https://kris-yotam.ghost.io/ghost/api/v3/content/posts/?key=55704fddcdb457f05e61b3aef2&include=tags"; // Include tags
+  const apiUrl = "https://kris-yotam.ghost.io/ghost/api/v3/content/posts/?key=55704fddcdb457f05e61b3aef2&include=tags&limit=500"; // Include tags
   const postsContainer = document.querySelector('main');
   const postsPerPage = 4; // Number of posts to display per page
   let currentPage = 1;

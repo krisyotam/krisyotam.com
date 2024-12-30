@@ -53,7 +53,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const urlParams = new URLSearchParams(window.location.search);
             const postSlug = urlParams.get("post");  // Get the post slug from the query parameter
-            const apiUrl = "https://kris-yotam.ghost.io/ghost/api/v3/content/posts/?key=55704fddcdb457f05e61b3aef2&include=tags"; // API URL
+            const apiUrl = "https://kris-yotam.ghost.io/ghost/api/v3/content/posts/?key=55704fddcdb457f05e61b3aef2&include=tags&limit=500"; // API URL
 
             // Function to format date as 'Dec 26, 2024'
             function formatDate(dateStr) {
