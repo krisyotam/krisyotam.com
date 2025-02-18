@@ -1,0 +1,89 @@
+{
+  "quotes": [
+    {
+      "id": 1,
+      "text": "In the silence between thoughts, wisdom finds its voice.",
+      "date": "2023-01-15",
+      "category": "Philosophy",
+      "source": "Book, Higher Order Puritism"
+    },
+    {
+      "id": 2,
+      "text": "Knowledge is the bridge between curiosity and understanding.",
+      "date": "2023-03-22",
+      "category": "Education",
+      "source": "Book, The Symphony of Slow Knowledge"
+    },
+    {
+      "id": 3,
+      "text": "The pursuit of simplicity requires complex understanding.",
+      "date": "2023-04-10",
+      "category": "Minimalism",
+      "source": "Book, The Yotam Lectures on Mathematics"
+    },
+    {
+      "id": 4,
+      "text": "True learning begins when certainty ends.",
+      "date": "2023-05-05",
+      "category": "Philosophy",
+      "source": "Book, The Multipotentialite Parent"
+    },
+    {
+      "id": 5,
+      "text": "Digital spaces are extensions of our intellectual architecture.",
+      "date": "2023-06-18",
+      "category": "Technology",
+      "source": "Book, Higher Order Puritism"
+    },
+    {
+      "id": 6,
+      "text": "We read to remember that we're not alone in our thoughts.",
+      "date": "2023-07-01",
+      "category": "Literature",
+      "source": "Book, The Symphony of Slow Knowledge"
+    },
+    {
+      "id": 7,
+      "text": "The best design is the one you don't notice.",
+      "date": "2023-08-15",
+      "category": "Design",
+      "source": "Book, The Yotam Lectures on Mathematics"
+    },
+    {
+      "id": 8,
+      "text": "Questions are the compass of consciousness.",
+      "date": "2023-09-03",
+      "category": "Philosophy",
+      "source": "Book, The Multipotentialite Parent"
+    },
+    {
+      "id": 9,
+      "text": "Time is not a resource to spend, but a dimension to navigate.",
+      "date": "2023-10-12",
+      "category": "Philosophy",
+      "source": "Book, Higher Order Puritism"
+    },
+    {
+      "id": 10,
+      "text": "Classical wisdom survives because it evolves.",
+      "date": "2023-11-28",
+      "category": "Education",
+      "source": "Book, The Symphony of Slow Knowledge"
+    },
+    {
+      "id": 11,
+      "text": "I believe that education should be free and a universal right.",
+      "date": "2023-12-15",
+      "category": "Education",
+      "source": "Book, The Yotam Lectures on Mathematics"
+    },
+    {
+      "id": 12,
+      "text": "What is given freely cannot truly be taken.",
+      "date": "2023-12-16",
+      "category": "Philosophy",
+      "source": "Book, The Multipotentialite Parent"
+    }
+  ]
+}
+

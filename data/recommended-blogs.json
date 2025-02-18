@@ -1,0 +1,30 @@
+{
+  "blogs": [
+    {
+      "title": "Terrance Tao",
+      "tags": ["Expository Papers", "Research Mathematics", "Open Problems"],
+      "url": "https://www.theminimalists.com/"
+    },
+    {
+      "title": "Matt Might",
+      "tags": ["Computer Science", "Machine Learning", "Biomedical Sciences"],
+      "url": "https://matt.might.net/#blog"
+    },
+    {
+      "title": "The Classical Classroom",
+      "tags": ["Web Development", "Architecture", "Technology"],
+      "url": "https://k12blog.hillsdale.edu/"
+    },
+    {
+      "title": "Renewing Classical Education",
+      "tags": ["Classical Education", "Technology", "Society"],
+      "url": "https://christopherperrin.substack.com/"
+    },
+    {
+      "title": "Memoria Press",
+      "tags": ["Classical Education", "Technology", "Lifestyle"],
+      "url": "https://www.memoriapress.com/articles/"
+    }
+  ]
+}
+

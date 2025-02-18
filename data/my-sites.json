@@ -1,0 +1,60 @@
+{
+  "sites": [
+    {
+      "name": "Research",
+      "purpose": "Sharing thoughts and insights on various topics",
+      "link": "https://blog.krisyotam.com"
+    },
+    {
+      "name": "Poetry",
+      "purpose": "Sharing thoughts and insights on various topics",
+      "link": "https://blog.krisyotam.com"
+    },
+    {
+      "name": "Poetry",
+      "purpose": "Sharing thoughts and insights on various topics",
+      "link": "https://blog.krisyotam.com"
+    },
+    {
+      "name": "Pure Maths Blog",
+      "purpose": "math content, research, pedgagy, and class notes",
+      "link": "https://krispuremath.vercel.app"
+    },
+    {
+      "name": "Business Site",
+      "purpose": "invesment interests, current ventures, ect.",
+      "link": "https://kyotam.vercel.app"
+    },
+    {
+      "name": "Physics Blog",
+      "purpose": "Showcasing my professional work and projects",
+      "link": "https://khr1st.vercel.app"
+    },
+    {
+      "name": "Computer Science Blog",
+      "purpose": "Showcasing my professional work and projects",
+      "link": "https://khr1st.vercel.app"
+    },
+    {
+      "name": "Reading Log",
+      "purpose": "Discussing and reviewing literature",
+      "link": "https://readinglog.vercel.app"
+    },
+    {
+      "name": "Goodreads",
+      "purpose": "Displaying my photography work",
+      "link": "https://kriscv.vercel.app"
+    },
+    {
+      "name": "Instagram",
+      "purpose": "not active",
+      "link": "https://instagram.com/krisyotam"
+    },
+    {
+      "name": "X",
+      "purpose": "not active",
+      "link": "https://x.com/krisyotam"
+    }
+  ]
+}
+

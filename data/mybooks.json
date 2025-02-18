@@ -1,0 +1,37 @@
+{
+  "books": [
+    {
+      "title": "Higher Order Puritism",
+      "subtitle": "",
+      "category": "Philosophy",
+      "tags": ["Philosophy", "Ethics", "Metaphysics"],
+      "authors": ["Kris Yotam"],
+      "slug": "higher-order-puritism"
+    },
+    {
+      "title": "The Symphony of Slow Knowledge",
+      "subtitle": "",
+      "category": "Education",
+      "tags": ["Learning", "Cognitive Science", "Personal Development"],
+      "authors": ["Kris Yotam"],
+      "slug": "the-symphony-of-slow-knowledge"
+    },
+    {
+      "title": "The Yotam Lectures on Mathematics",
+      "subtitle": "Part III: Differential Equations",
+      "category": "Mathematics",
+      "tags": ["Mathematics", "Differential Equations", "Advanced Mathematics"],
+      "authors": ["Kris Yotam", "Parker", "Yao"],
+      "slug": "the-yotam-lectures-on-mathematics-partiii-differential-equations"
+    },
+    {
+      "title": "The Multipotentialite Parent",
+      "subtitle": "",
+      "category": "Parenting",
+      "tags": ["Parenting", "Child Development", "Education"],
+      "authors": ["Kris Yotam"],
+      "slug": "the-multipotentialite-parent"
+    }
+  ]
+}
+

@@ -1,0 +1,254 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 89%;
+    --input: 0 0% 89%;
+    --ring: 0 0% 0%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 0 0% 14%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 0 0% 83%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .command-menu-open::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(5px);
+    z-index: 40;
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+.book-content {
+  font-family: "Crimson Text", serif;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  max-width: 65ch;
+  margin: 0 auto;
+}
+
+.book-content h1,
+.book-content h2,
+.book-content h3,
+.book-content h4,
+.book-content h5,
+.book-content h6 {
+  font-family: "Crimson Text", serif;
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.book-content p {
+  margin-bottom: 1.5em;
+}
+
+.book-content a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.book-content blockquote {
+  font-style: italic;
+  border-left: 3px solid currentColor;
+  padding-left: 1em;
+  margin-left: 0;
+}
+
+.book-content pre,
+.book-content code {
+  font-family: "Courier New", Courier, monospace;
+  background-color: #f0f0f0;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+.book-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 2em auto;
+}
+
+
+
+
+
+@layer base {
+  .prose {
+    @apply max-w-none text-foreground;
+  }
+
+  /* Headings */
+  .prose h1, 
+  .prose h2, 
+  .prose h3, 
+  .prose h4, 
+  .prose h5, 
+  .prose h6 {
+    font-family: "Crimson Text", serif;
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+
+  .prose h1 { @apply text-4xl; }
+  .prose h2 { @apply text-3xl; }
+  .prose h3 { @apply text-2xl; }
+  .prose h4 { @apply text-xl; }
+  .prose h5 { @apply text-lg; }
+  .prose h6 { @apply text-base; }
+
+  /* Paragraphs and Links */
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+
+  .prose a {
+    @apply text-primary underline transition-colors hover:text-primary-foreground;
+  }
+
+  /* Lists */
+  .prose ul, 
+  .prose ol {
+    @apply pl-6 mb-4;
+  }
+
+  .prose ul {
+    @apply list-disc;
+  }
+
+  .prose ol {
+    @apply list-decimal;
+  }
+
+  .prose li {
+    @apply mb-2;
+  }
+
+  /* Blockquotes */
+  .prose blockquote {
+    @apply border-l-4 pl-4 italic text-muted-foreground;
+  }
+
+  /* Code Blocks */
+  .prose code {
+    font-family: "Courier New", Courier, monospace;
+    @apply bg-muted text-muted-foreground px-1 py-0.5 rounded;
+  }
+
+  .prose pre {
+    font-family: "Courier New", Courier, monospace;
+    @apply bg-muted text-muted-foreground p-4 rounded-lg overflow-x-auto;
+  }
+
+  /* Images */
+  .prose img {
+    @apply mx-auto my-6 rounded-lg shadow;
+  }
+
+  /* Horizontal Rules */
+  .prose hr {
+    @apply border-t border-border my-6;
+  }
+
+  /* Tables */
+  .prose table {
+    @apply w-full border-collapse border border-border my-4;
+  }
+
+  .prose th, 
+  .prose td {
+    @apply border border-border px-4 py-2;
+  }
+
+  .prose th {
+    @apply bg-secondary text-secondary-foreground font-bold;
+  }
+
+  /* Details and Summary (for collapsible sections) */
+  .prose details {
+    @apply bg-muted p-4 rounded-lg shadow;
+  }
+
+  .prose summary {
+    @apply font-semibold cursor-pointer;
+  }
+
+  /* Light/Dark Mode Adjustments */
+  .dark .prose {
+    @apply text-foreground;
+  }
+
+  .dark .prose code {
+    @apply bg-secondary text-secondary-foreground;
+  }
+
+  .dark .prose pre {
+    @apply bg-secondary text-secondary-foreground;
+  }
+
+  .dark .prose table {
+    @apply border-border;
+  }
+
+  .dark .prose th {
+    @apply bg-muted text-foreground;
+  }
+}
+
