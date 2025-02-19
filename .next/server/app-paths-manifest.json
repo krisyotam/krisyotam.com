@@ -1,10 +1,8 @@
 {
-  "/books/page": "app/books/page.js",
-  "/ocs/page": "app/ocs/page.js",
-  "/keynotes/page": "app/keynotes/page.js",
-  "/ocs/[slug]/page": "app/ocs/[slug]/page.js",
   "/mybooks/page": "app/mybooks/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js",
-  "/speeches/page": "app/speeches/page.js"
+  "/ocs/page": "app/ocs/page.js",
+  "/about/page": "app/about/page.js",
+  "/quotes/page": "app/quotes/page.js",
+  "/mybooks/[slug]/page": "app/mybooks/[slug]/page.js",
+  "/page": "app/page.js"
 }

@@ -137,6 +137,18 @@
       "book": "Death Game",
       "slug": "minerva-remington",
       "status": "active"
+    },
+    {
+      "name": "Lavinia Fairchild",
+      "book": "House Of Fairchild",
+      "slug": "lavinia-fairchild",
+      "status": "active"
+    },
+    {
+      "name": "Delta (Δ)",
+      "book": "Ars Mathematica",
+      "slug": "ars-mathematica-delta",
+      "status": "active"
     }
   ]
 }

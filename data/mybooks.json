@@ -31,6 +31,22 @@
       "tags": ["Parenting", "Child Development", "Education"],
       "authors": ["Kris Yotam"],
       "slug": "the-multipotentialite-parent"
+    },
+    {
+      "title": "House of Fairchild",
+      "subtitle": "",
+      "category": "Horror",
+      "tags": ["Gothic", "Fantasy", "Fairtale"],
+      "authors": ["Kris Yotam"],
+      "slug": "house-of-fairchild"
+    },
+    {
+      "title": "Ars Mathematica",
+      "subtitle": "Vol. VI Number Theory",
+      "category": "Mathematics",
+      "tags": ["Number Theory", "Fantasy", "Fairtale"],
+      "authors": ["Kris Yotam"],
+      "slug": "ars-mathematica-number-theory"
     }
   ]
 }
