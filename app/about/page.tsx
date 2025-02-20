@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
 import aboutMeData from "../../data/about-me.json"
 import missionData from "../../data/mission.json"
@@ -59,6 +59,21 @@ export default function AboutPage() {
   const [blogs, setBlogs] = useState<Array<{ title: string; tags: string[]; url: string }>>([])
   const [sections, setSections] = useState<Array<{ title: string; content: string | React.ReactNode }>>([])
   const [nowPosts, setNowPosts] = useState<Array<{ title: string; published_at: string; slug: string }>>([])
+  const [age, setAge] = useState<string>("")
+
+  const updateAge = useCallback(() => {
+    const birthDate = new Date("2004-08-05T18:31:00")
+    const now = new Date()
+    const ageInMilliseconds = now.getTime() - birthDate.getTime()
+    const ageInYears = Math.floor(ageInMilliseconds / (365.25 * 24 * 60 * 60 * 1000))
+    const ageInSeconds = Math.floor(ageInMilliseconds / 1000)
+    return `I was born on August 5, 2004, at 6:31 PM. As of ${now.toLocaleString()}, I am ${ageInYears} years old, which is approximately ${ageInSeconds.toLocaleString()} seconds since my birth.`
+  }, [])
+
+  useEffect(() => {
+    const timer = setInterval(() => setAge(updateAge()), 1000)
+    return () => clearInterval(timer)
+  }, [updateAge])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,7 +82,34 @@ export default function AboutPage() {
         const fetchedNowPosts = await getNowPosts()
         setNowPosts(fetchedNowPosts)
         setSections([
-          { title: "About Me", content: aboutMeData.content },
+          {
+            title: "About Me",
+            content: (
+              <>
+                <div>{aboutMeData.content}</div>
+                <h3 className="text-lg mt-4 mb-2">Name Breakdown</h3>
+                <ul className="list-disc list-inside mb-4">
+                  <li>
+                    <strong>Kris</strong> (KRISS): Follower of Christ
+                  </li>
+                  <li>
+                    <strong>Lael</strong> (LAY-el): Belonging to God
+                  </li>
+                  <li>
+                    <strong>Uri</strong> (OO-ree): Of Light
+                  </li>
+                  <li>
+                    <strong>Mayim</strong> (mah-YEEM): Water
+                  </li>
+                  <li>
+                    <strong>Yotam</strong> (yo-TAHM): God is Perfect
+                  </li>
+                </ul>
+                <h3 className="text-lg mt-4 mb-2">Age</h3>
+                <p>{age}</p>
+              </>
+            ),
+          },
           { title: "My Mission", content: missionData.content },
           { title: "Experience", content: experienceData.content },
           { title: "Personal Philosophy", content: personalPhilosophyData.content },
@@ -219,4 +261,5 @@ export default function AboutPage() {
     </div>
   )
 }
+
 

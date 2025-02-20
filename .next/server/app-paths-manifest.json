@@ -1,8 +1,4 @@
 {
-  "/mybooks/page": "app/mybooks/page.js",
-  "/ocs/page": "app/ocs/page.js",
   "/about/page": "app/about/page.js",
-  "/quotes/page": "app/quotes/page.js",
-  "/mybooks/[slug]/page": "app/mybooks/[slug]/page.js",
   "/page": "app/page.js"
 }
