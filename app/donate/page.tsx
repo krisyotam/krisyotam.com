@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import { Bitcoin, Wallet2 } from "lucide-react"
 import cryptocurrenciesData from "../../data/cryptocurrencies.json"
+import { Button } from "@/components/ui/button"
+import { Link } from "@radix-ui/react-navigation-menu"
 
 interface Cryptocurrency {
   name: string
@@ -32,12 +34,19 @@ export default function DonatePage() {
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
         <header className="mb-16">
-          <h1 className="text-4xl font-semibold mb-3 text-foreground">Support My Work</h1>
         </header>
         <p className="mb-8 text-muted-foreground">
           If you find my content valuable, consider supporting my work with a crypto donation. Your contribution helps
           me continue creating and sharing knowledge.
         </p>
+        <div className="mb-8">
+          <p className="text-sm text-muted-foreground">
+            If you'd like to purchase something from my wishlist and have it shipped directly to me, you can send it to the following address:
+          </p>
+          <p className="text-sm font-mono break-all text-foreground">
+            [Your Shipping Address Here]
+          </p>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {cryptocurrencies.map((crypto) => {
             const Icon = getCryptoIcon(crypto.symbol)
@@ -53,8 +62,12 @@ export default function DonatePage() {
             )
           })}
         </div>
+        <div className="flex justify-center my-6">
+          <a href="/wishlist" className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 rounded">
+            View My Wishlist
+          </a>
+        </div>
       </div>
     </div>
   )
 }
-

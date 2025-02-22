@@ -894,6 +894,9 @@ video {
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
+.col-span-full {
+  grid-column: 1 / -1;
+}
 .-mx-1 {
   margin-left: -0.25rem;
   margin-right: -0.25rem;
@@ -917,6 +920,10 @@ video {
 .my-1 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
+}
+.my-6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 .-ml-4 {
   margin-left: -1rem;
@@ -1093,6 +1100,9 @@ video {
 .h-svh {
   height: 100svh;
 }
+.h-48 {
+  height: 12rem;
+}
 .max-h-0 {
   max-height: 0px;
 }
@@ -1110,6 +1120,9 @@ video {
 }
 .max-h-\[90vh\] {
   max-height: 90vh;
+}
+.max-h-full {
+  max-height: 100%;
 }
 .max-h-screen {
   max-height: 100vh;
@@ -1237,11 +1250,17 @@ video {
 .max-w-4xl {
   max-width: 56rem;
 }
+.max-w-6xl {
+  max-width: 72rem;
+}
 .max-w-\[--skeleton-width\] {
   max-width: var(--skeleton-width);
 }
 .max-w-\[calc\(100\%-8rem\)\] {
   max-width: calc(100% - 8rem);
+}
+.max-w-full {
+  max-width: 100%;
 }
 .max-w-lg {
   max-width: 32rem;
@@ -1351,11 +1370,11 @@ video {
 .list-inside {
   list-style-position: inside;
 }
-.list-none {
-  list-style-type: none;
-}
 .list-disc {
   list-style-type: disc;
+}
+.list-none {
+  list-style-type: none;
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -1404,6 +1423,9 @@ video {
 }
 .gap-6 {
   gap: 1.5rem;
+}
+.gap-8 {
+  gap: 2rem;
 }
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -1669,6 +1691,9 @@ video {
 }
 .fill-primary {
   fill: hsl(var(--primary));
+}
+.object-contain {
+  object-fit: contain;
 }
 .object-cover {
   object-fit: cover;
@@ -1957,6 +1982,10 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity, 1));
 }
 .underline-offset-4 {
   text-underline-offset: 4px;
@@ -4298,6 +4327,10 @@ video {
     padding: 4rem;
   }
 
+  .md\:p-8 {
+    padding: 2rem;
+  }
+
   .md\:pt-32 {
     padding-top: 8rem;
   }
@@ -4345,8 +4378,20 @@ video {
 
 @media (min-width: 1024px) {
 
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .lg\:p-24 {
     padding: 6rem;
+  }
+
+  .lg\:p-12 {
+    padding: 3rem;
   }
 
   .lg\:pt-40 {

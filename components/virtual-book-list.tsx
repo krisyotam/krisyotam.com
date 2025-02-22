@@ -25,7 +25,6 @@ const Row = ({ index, style, data }: { index: number; style: React.CSSProperties
         authors={book.authors}
         rating={book.rating}
         isInteractive={true}
-        coverUrl={book.coverUrl}
       />
     </div>
   )

@@ -12,6 +12,8 @@ import coreValuesData from "../../data/core-values.json"
 import recommendedBlogsData from "../../data/recommended-blogs.json"
 import mySitesData from "../../data/my-sites.json"
 import { getNowPosts } from "../../utils/ghost"
+import { Button } from "@/components/ui/button";
+
 
 export const dynamic = "force-dynamic"
 
@@ -226,8 +228,17 @@ export default function AboutPage() {
             />
           ))}
         </div>
+        <div className="flex justify-center my-6">
+        <Link href="/wishlist" passHref>
+          <Button className="bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200">
+            View My Wishlist
+          </Button>
+        </Link>
+      </div>
+
+
         <div>
-          <h3 className="text-2xl font-normal mb-6 text-foreground">Recommended Blogs</h3>
+        <h3 className="text-xl font-medium mb-4 text-foreground">Recommended Blogs</h3>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <tbody>

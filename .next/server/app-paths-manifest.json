@@ -1,4 +1,7 @@
 {
-  "/about/page": "app/about/page.js",
-  "/page": "app/page.js"
+  "/mybooks/page": "app/mybooks/page.js",
+  "/donate/page": "app/donate/page.js",
+  "/ocs/page": "app/ocs/page.js",
+  "/books/page": "app/books/page.js",
+  "/wishlist/page": "app/wishlist/page.js"
 }
