@@ -1,0 +1,32 @@
+"use client"
+
+import Image from "next/image"
+import { useState } from "react"
+
+interface OptimizedImageProps {
+  src: string
+  alt: string
+  width: number
+  height: number
+  className?: string
+}
+
+export function OptimizedImage({ src, alt, width, height, className }: OptimizedImageProps) {
+  const [isLoading, setLoading] = useState(true)
+
+  return (
+    <div className={`relative overflow-hidden ${className}`} style={{ aspectRatio: width / height }}>
+      <Image
+        src={src || "/placeholder.svg"}
+        alt={alt}
+        layout="fill"
+        objectFit="cover"
+        className={`duration-700 ease-in-out ${
+          isLoading ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0"
+        }`}
+        onLoadingComplete={() => setLoading(false)}
+      />
+    </div>
+  )
+}
+

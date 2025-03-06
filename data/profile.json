@@ -1,0 +1,171 @@
+{
+    "profileData": [
+      {
+        "type": "image",
+        "subtype": "image1x1",
+        "hierarchy": 1,
+        "src": "/placeholder.svg?height=800&width=800",
+        "alt": "Profile photo"
+      },
+      {
+        "type": "bio",
+        "hierarchy": 2,
+        "birthday": "1995-05-15",
+        "gender": "Man",
+        "height": "5'11\"",
+        "job": "Software Engineer at Offline",
+        "school": "Indiana University",
+        "religiousAffiliation": "Agnostic",
+        "city": "Naperville, IL",
+        "languages": ["English", "Hebrew"],
+        "searchingFor": "Looking for something serious"
+      },
+      {
+        "type": "qAndA",
+        "hierarchy": 3,
+        "question": "I get along best with people who",
+        "answer": "Are passionate about technology and innovation, enjoy meaningful conversations, and appreciate both logic and creativity."
+      },
+      {
+        "type": "qAndA",
+        "hierarchy": 4,
+        "question": "A life goal of mine",
+        "answer": "To contribute to groundbreaking AI research while maintaining a healthy work-life balance and continuing to learn and grow every day."
+      },
+      {
+        "type": "image",
+        "subtype": "image2x2",
+        "hierarchy": 5,
+        "images": [
+          {
+            "src": "/placeholder.svg?height=400&width=400",
+            "alt": "Hobby photo 1"
+          },
+          {
+            "src": "/placeholder.svg?height=400&width=400",
+            "alt": "Hobby photo 2"
+          },
+          {
+            "src": "/placeholder.svg?height=400&width=400",
+            "alt": "Hobby photo 3"
+          },
+          {
+            "src": "/placeholder.svg?height=400&width=400",
+            "alt": "Hobby photo 4"
+          }
+        ]
+      },
+      {
+        "type": "qAndA",
+        "hierarchy": 6,
+        "question": "My most irrational fear",
+        "answer": "That my code will somehow become sentient and decide to take over the world. I've watched too many sci-fi movies!"
+      },
+      {
+        "type": "image",
+        "subtype": "image1x2",
+        "hierarchy": 7,
+        "images": [
+          {
+            "src": "/placeholder.svg?height=800&width=400",
+            "alt": "Travel photo 1"
+          },
+          {
+            "src": "/placeholder.svg?height=400&width=400",
+            "alt": "Travel photo 2"
+          },
+          {
+            "src": "/placeholder.svg?height=400&width=400",
+            "alt": "Travel photo 3"
+          }
+        ]
+      },
+      {
+        "type": "qAndA",
+        "hierarchy": 8,
+        "question": "A quick rant about",
+        "answer": "The overuse of unnecessary acronyms in tech. YAGNI, DRY, SOLID, KISS... it's like we're speaking in code even when we're not coding! Let's just communicate clearly, folks!"
+      },
+      {
+        "type": "qAndA",
+        "hierarchy": 9,
+        "question": "A random fact I love is",
+        "answer": "The world's largest desert is actually in Antarctica. It's called the Antarctic Desert and it covers 5.5 million square miles. Deserts aren't always hot and sandy!"
+      },
+      {
+        "type": "image",
+        "subtype": "image3x3",
+        "hierarchy": 10,
+        "images": [
+          { "src": "/placeholder.svg?height=266&width=266", "alt": "Hobby 1" },
+          { "src": "/placeholder.svg?height=266&width=266", "alt": "Hobby 2" },
+          { "src": "/placeholder.svg?height=266&width=266", "alt": "Hobby 3" },
+          { "src": "/placeholder.svg?height=266&width=266", "alt": "Hobby 4" },
+          { "src": "/placeholder.svg?height=266&width=266", "alt": "Hobby 5" },
+          { "src": "/placeholder.svg?height=266&width=266", "alt": "Hobby 6" },
+          { "src": "/placeholder.svg?height=266&width=266", "alt": "Hobby 7" },
+          { "src": "/placeholder.svg?height=266&width=266", "alt": "Hobby 8" },
+          { "src": "/placeholder.svg?height=266&width=266", "alt": "Hobby 9" }
+        ]
+      },
+      {
+        "type": "qAndA",
+        "hierarchy": 11,
+        "question": "An overshare",
+        "answer": "I once spent an entire weekend debugging a program, only to realize the issue was a misplaced semicolon. I may have cried a little... tears of joy, of course!"
+      },
+      {
+        "type": "qAndA",
+        "hierarchy": 12,
+        "question": "Believe it or not, I",
+        "answer": "Once accidentally set off the fire alarm in my college dorm while trying to make a grilled cheese sandwich with an iron. Let's just say my cooking skills have improved since then!"
+      },
+      {
+        "type": "image",
+        "subtype": "image3x2",
+        "hierarchy": 13,
+        "images": [
+          { "src": "/placeholder.svg?height=266&width=400", "alt": "Travel 1" },
+          { "src": "/placeholder.svg?height=266&width=400", "alt": "Travel 2" },
+          { "src": "/placeholder.svg?height=266&width=400", "alt": "Travel 3" },
+          { "src": "/placeholder.svg?height=266&width=400", "alt": "Travel 4" },
+          { "src": "/placeholder.svg?height=266&width=400", "alt": "Travel 5" },
+          { "src": "/placeholder.svg?height=266&width=400", "alt": "Travel 6" }
+        ]
+      },
+      {
+        "type": "qAndA",
+        "hierarchy": 14,
+        "question": "First round is on me if",
+        "answer": "You can explain the halting problem in a way that my non-tech friends would understand. Bonus points if you can do it without using the words 'algorithm' or 'computation'!"
+      },
+      {
+        "type": "qAndA",
+        "hierarchy": 15,
+        "question": "How to pronounce my name",
+        "answer": "It's Kris (like 'crisp' without the 'p') Yo-tam (rhymes with 'go ham'). But honestly, as long as you're friendly, I don't mind if you mispronounce it!"
+      },
+      {
+        "type": "qAndA",
+        "hierarchy": 16,
+        "question": "Two truths and a lie",
+        "answers": [
+          "I've climbed Mount Kilimanjaro.",
+          "I once won a hot dog eating contest.",
+          "I can solve a Rubik's cube in under 2 minutes."
+        ]
+      },
+      {
+        "type": "qAndA",
+        "hierarchy": 17,
+        "question": "My top 3 favorite programming languages",
+        "answers": [
+          "Python - for its simplicity and versatility",
+          "JavaScript - because it's the language of the web",
+          "Rust - for its performance and safety features"
+        ]
+      }
+    ]
+  }
+  
+  

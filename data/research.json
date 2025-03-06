@@ -1,0 +1,118 @@
+[
+    {
+      "id": "RESEARCH_001",
+      "title": "The Role of Tragic Irony in Ancient Greek Theater",
+      "abstract": "This study explores the concept of tragic irony in Greek plays, focusing on how playwrights like Sophocles and Euripides used it to deepen the psychological complexity of their characters. By analyzing the structure and thematic elements of key tragedies, we argue that tragic irony served as a vehicle for moral reflection and societal critique in Athens.",
+      "importance": "This work offers a new perspective on classical drama by framing tragic irony as a tool not only for dramatic tension but also for the ethical dilemmas faced by ancient Greek society. The findings suggest implications for modern theater and literary criticism.",
+      "authors": ["Kris Yotam", "Eugenia Kollias", "Lysandra Vassilis"],
+      "subject": "Classics",
+      "keywords": ["Tragic Irony", "Greek Theater", "Sophocles", "Euripides", "Drama Analysis"],
+      "postedBy": "Kris Yotam",
+      "postedOn": "2024-05-02",
+      "dateStarted": "2023-06-15",
+      "status": "published",
+      "bibliography": [
+        "Halliwell, S. (2008). The Aesthetics of Mimesis: Ancient Texts and Modern Problems. Princeton University Press.",
+        "Barton, C. (2015). Tragedy and Transformation in Greek Drama. Oxford University Press.",
+        "Vassilis, L. (2020). Irony in Classical Literature: A New Approach. Classical Journal, 35(2), 129-144."
+      ],
+      "img": "/research/tragic-irony.jpg",
+      "pdfLink": "/research/tragic-irony.pdf",
+      "sourceLink": "https://github.com/krisyotam/tragic-irony",
+      "category": "Classics",
+      "tags": ["Greek Tragedy", "Irony", "Drama", "Ancient Greece"]
+    },
+    {
+      "id": "RESEARCH_002",
+      "title": "The Impact of Renaissance Art on Modern Visual Culture",
+      "abstract": "This paper examines how the techniques and themes of Renaissance art have influenced contemporary visual culture. By comparing works by artists such as Leonardo da Vinci and Raphael with modern cinematic visuals, we trace the evolution of perspective, light, and human form in visual storytelling.",
+      "importance": "This research illuminates the enduring legacy of Renaissance aesthetics in contemporary media, offering a new framework for analyzing modern visual narratives. The study highlights the fusion of historical techniques with modern technologies in art and film.",
+      "authors": ["Kris Yotam", "Cassandra M. Rogers", "Julian F. Waters"],
+      "subject": "Art History",
+      "keywords": ["Renaissance Art", "Modern Visual Culture", "Leonardo da Vinci", "Film Theory", "Perspective"],
+      "postedBy": "Kris Yotam",
+      "postedOn": "2023-09-17",
+      "dateStarted": "2022-11-30",
+      "status": "published",
+      "bibliography": [
+        "Gombrich, E. H. (1995). The Story of Art. Phaidon Press.",
+        "Panofsky, E. (1997). Renaissance and Renascences in Western Art. Harper & Row.",
+        "Waters, J. F. (2021). The Renaissance in Contemporary Film. Art and Film Studies Journal, 17(4), 240-257."
+      ],
+      "img": "/research/renaissance-modern-art.jpg",
+      "pdfLink": "/research/renaissance-modern-art.pdf",
+      "sourceLink": "https://github.com/krisyotam/renaissance-legacy",
+      "category": "Art History",
+      "tags": ["Renaissance", "Art History", "Visual Culture", "Modern Art", "Film"]
+    },
+    {
+      "id": "RESEARCH_003",
+      "title": "The Psychological Effects of Aesthetic Experience on Human Behavior",
+      "abstract": "This paper investigates how exposure to aesthetic stimuli, such as art and nature, influences human behavior and emotional states. Through experimental research, we measure changes in mood, cognitive function, and social behavior following aesthetic experiences. We propose a model of aesthetic appreciation that integrates psychological theories with empirical data.",
+      "importance": "This work provides new insights into the cognitive and emotional benefits of aesthetic experiences, supporting the idea that exposure to beauty can lead to improved mental health and well-being. The findings are relevant for psychology, art therapy, and social behavior.",
+      "authors": ["Kris Yotam", "Maria L. Johansson", "David W. Simmons"],
+      "subject": "Psychology",
+      "keywords": ["Aesthetic Experience", "Psychological Effects", "Emotional States", "Cognitive Function", "Art Therapy"],
+      "postedBy": "Kris Yotam",
+      "postedOn": "2024-01-10",
+      "dateStarted": "2023-07-05",
+      "status": "published",
+      "bibliography": [
+        "Vessel, E. A., et al. (2012). The Brain on Art: Exploring the Neural Mechanisms of Aesthetic Experience. PLOS ONE, 7(6), e38929.",
+        "Chatterjee, A. (2014). The Aesthetic Brain. Oxford University Press.",
+        "Johansson, M. L. (2021). Aesthetic Experience and Psychological Well-Being. Journal of Psychology and Aesthetics, 22(3), 185-201."
+      ],
+      "img": "/research/aesthetic-experience.jpg",
+      "pdfLink": "/research/aesthetic-experience.pdf",
+      "sourceLink": "https://github.com/krisyotam/aesthetic-experience",
+      "category": "Psychology",
+      "tags": ["Aesthetics", "Psychology", "Emotions", "Cognition", "Art"]
+    },
+    {
+      "id": "RESEARCH_004",
+      "title": "The Concept of Freedom in Ancient Philosophy: A Comparative Study",
+      "abstract": "This paper compares the concept of freedom as presented in the works of ancient philosophers such as Aristotle, Epictetus, and the Stoics, with modern interpretations of freedom in political and philosophical contexts. By examining both ancient texts and contemporary theories, we aim to uncover how the philosophical understanding of freedom has evolved over time.",
+      "importance": "This research sheds light on the foundational role that ancient philosophy has played in shaping modern political thought and ethics. It contributes to the ongoing debate on the nature of freedom and autonomy in the context of contemporary society.",
+      "authors": ["Kris Yotam", "Theodoros P. Kritikos", "Alexandra Z. Kouris"],
+      "subject": "Philosophy",
+      "keywords": ["Freedom", "Ancient Philosophy", "Aristotle", "Epictetus", "Stoicism"],
+      "postedBy": "Kris Yotam",
+      "postedOn": "2023-08-20",
+      "dateStarted": "2023-02-18",
+      "status": "published",
+      "bibliography": [
+        "Bastian, D. (2010). The Concept of Freedom in Ancient Philosophy. Harvard University Press.",
+        "Hadot, P. (1995). Philosophy as a Way of Life. Blackwell.",
+        "Kritikos, T. P. (2022). Freedom in the Stoic Tradition. Journal of Ancient Philosophy, 39(1), 67-83."
+      ],
+      "img": "/research/freedom-philosophy.jpg",
+      "pdfLink": "/research/freedom-philosophy.pdf",
+      "sourceLink": "https://github.com/krisyotam/freedom-concept",
+      "category": "Philosophy",
+      "tags": ["Freedom", "Ancient Philosophy", "Political Thought", "Ethics"]
+    },
+    {
+      "id": "RESEARCH_005",
+      "title": "Folklore and Identity: The Role of Storytelling in Preserving Cultural Heritage",
+      "abstract": "This research examines the role of folklore in shaping and maintaining cultural identity. By studying traditional stories, myths, and legends from various cultures, we explore how storytelling serves as a tool for cultural continuity, particularly in communities that have undergone significant social or political upheaval.",
+      "importance": "The findings emphasize the importance of folklore in preserving cultural heritage and identity, suggesting that storytelling is not only a form of entertainment but also a crucial mechanism for social cohesion and resilience.",
+      "authors": ["Kris Yotam", "Yulia S. Petrovna", "Eamon O'Rourke"],
+      "subject": "Folklore",
+      "keywords": ["Folklore", "Cultural Identity", "Storytelling", "Mythology", "Heritage"],
+      "postedBy": "Kris Yotam",
+      "postedOn": "2024-02-05",
+      "dateStarted": "2023-08-25",
+      "status": "published",
+      "bibliography": [
+        "Bauman, R. (1992). Folklore in the Modern World. Indiana University Press.",
+        "Ben-Amos, D. (1976). The Role of Folklore in Contemporary Society. Folklore Journal, 5(2), 210-225.",
+        "O'Rourke, E. (2019). The Power of Stories: Folklore and Cultural Identity. Folklore Studies, 38(3), 122-139."
+      ],
+      "img": "/research/folklore-identity.jpg",
+      "pdfLink": "/research/folklore-identity.pdf",
+      "sourceLink": "https://github.com/krisyotam/folklore-identity",
+      "category": "Folklore",
+      "tags": ["Folklore", "Cultural Identity", "Storytelling", "Heritage"]
+    }
+  ]
+  

@@ -1,0 +1,60 @@
+{
+  "sites": [
+    {
+      "name": "Curriculum Vitae (CV)",
+      "purpose": "professional and educational background",
+      "link": "https://kriscv.vercel.app"
+    },
+    {
+      "name": "Bio Generator",
+      "purpose": "You can use this page to generate a bio about me to suit your needs.",
+      "link": "https://blog.krisyotam.com"
+    },
+    {
+      "name": "Poetry",
+      "purpose": "A comprehensive anthology on my poetry organized by form",
+      "link": "https://krispoetry.vercel.app/"
+    },
+    {
+      "name": "khr1st",
+      "purpose": "software engineering, architecture, ai, ml, ctfs",
+      "link": "https://khr1st.vercel.app"
+    },
+    {
+      "name": "Pure Maths",
+      "purpose": "math blog, research, speeches, notes",
+      "link": "https://krispuremath.vercel.app"
+    },
+    {
+      "name": "Physics Blog",
+      "purpose": "physics blog, research, speeches, notes",
+      "link": "https://khr1st.vercel.app"
+    },
+    {
+      "name": "Business Site",
+      "purpose": "invesment interests, current ventures, ect.",
+      "link": "https://kyotam.vercel.app"
+    },
+    {
+      "name": "Reading Log",
+      "purpose": "Discussing and reviewing literature",
+      "link": "https://readinglog.vercel.app"
+    },
+    {
+      "name": "Goodreads",
+      "purpose": "Displaying my photography work",
+      "link": "https://kriscv.vercel.app"
+    },
+    {
+      "name": "Instagram",
+      "purpose": "not active",
+      "link": "https://instagram.com/krisyotam"
+    },
+    {
+      "name": "X",
+      "purpose": "not active",
+      "link": "https://x.com/krisyotam"
+    }
+  ]
+}
+

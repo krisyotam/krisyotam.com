@@ -1,0 +1,516 @@
+[
+    {
+        "name": "Noah's Ark Water Park, Wisconsin Dells, Wisconsin",
+        "description": "The largest water park in the United States!",
+        "coordinates": [
+            -89.7788,
+            43.6253
+        ],
+        "type": "park"
+    },
+    {
+        "name": "Wisconsin Dells, Wisconsin",
+        "description": "A scenic city known for its beautiful landscapes and water parks.",
+        "coordinates": [
+            -89.7778,
+            43.6273
+        ],
+        "type": "city"
+    },
+    {
+        "name": "Mt. Olympus, Wisconsin Dells, Wisconsin",
+        "description": "A massive amusement park with thrilling roller coasters!",
+        "coordinates": [
+            -89.7628,
+            43.6094
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Ducks, Wisconsin Dells, Wisconsin",
+        "description": "Famous for its scenic boat tours through the Dells!",
+        "coordinates": [
+            -89.7696,
+            43.6241
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Downtown Chicago, Illinois",
+        "description": "The heart of the Windy City, known for its iconic skyline!",
+        "coordinates": [
+            -87.6298,
+            41.8781
+        ],
+        "type": "neighborhood"
+    },
+    {
+        "name": "Chicago, Illinois",
+        "description": "A bustling metropolis known for its architecture, art, and history.",
+        "coordinates": [
+            -87.6298,
+            41.8781
+        ],
+        "type": "city"
+    },
+    {
+        "name": "The White House, Washington, DC",
+        "description": "Home of the President of the United States!",
+        "coordinates": [
+            -77.0369,
+            38.9072
+        ],
+        "type": "building"
+    },
+    {
+        "name": "Washington, DC",
+        "description": "The capital city of the United States.",
+        "coordinates": [
+            -77.0369,
+            38.9072
+        ],
+        "type": "city"
+    },
+    {
+        "name": "Georgia Aquarium, Atlanta, Georgia",
+        "description": "One of the largest aquariums in the world!",
+        "coordinates": [
+            -84.3963,
+            33.7637
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Atlanta, Georgia",
+        "description": "A city known for its vibrant culture, history, and Southern hospitality.",
+        "coordinates": [
+            -84.3963,
+            33.7637
+        ],
+        "type": "city"
+    },
+    {
+        "name": "Apex Museum, Atlanta, Georgia",
+        "description": "Exploring African American history and culture in Atlanta.",
+        "coordinates": [
+            -84.3987,
+            33.7597
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Wondr Museum, Chicago, Illinois",
+        "description": "A museum full of immersive, Instagram-worthy exhibits!",
+        "coordinates": [
+            -87.6502,
+            41.898
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Museum of Science and Industry, Chicago, Illinois",
+        "description": "A giant science museum with interactive exhibits for all ages!",
+        "coordinates": [
+            -87.5841,
+            41.7905
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Field Museum, Chicago, Illinois",
+        "description": "Home to Sue, the largest and most complete T. rex fossil!",
+        "coordinates": [
+            -87.5847,
+            41.864
+        ],
+        "type": "place"
+    },
+    {
+        "name": "DuSable Museum of African American History, Chicago, Illinois",
+        "description": "A museum dedicated to preserving the history and culture of African Americans.",
+        "coordinates": [
+            -87.6116,
+            41.7881
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Clarksdale, Coahoma County, Mississippi",
+        "description": "Birthplace of the blues, rich in musical history!",
+        "coordinates": [
+            -90.571,
+            34.2001
+        ],
+        "type": "city"
+    },
+    {
+        "name": "Hampton Inn, Washington, DC",
+        "description": "A great spot for a stay in the nation's capital!",
+        "coordinates": [
+            -77.0369,
+            38.9072
+        ],
+        "type": "hotel"
+    },
+    {
+        "name": "Holodome Hotel, Illinois",
+        "description": "An indoor water park hotel with year-round fun!",
+        "coordinates": [
+            -88.05,
+            41.65
+        ],
+        "type": "hotel"
+    },
+    {
+        "name": "Lake Geneva, Lake Geneva, Wisconsin",
+        "description": "A beautiful, peaceful lake perfect for relaxation.",
+        "coordinates": [
+            -88.433,
+            42.5967
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Gatlinburg, Tennessee",
+        "description": "A beautiful mountain town famous for its nature trails and resorts!",
+        "coordinates": [
+            -83.5102,
+            35.7143
+        ],
+        "type": "city"
+    },
+    {
+        "name": "SeaWorld Orlando, Orlando, Florida",
+        "description": "An exciting marine life park with thrilling rides!",
+        "coordinates": [
+            -81.3792,
+            28.5383
+        ],
+        "type": "park"
+    },
+    {
+        "name": "Gary, Indiana",
+        "description": "Home of the Jackson family and rich in industrial history.",
+        "coordinates": [
+            -87.3464,
+            41.5934
+        ],
+        "type": "city"
+    },
+    {
+        "name": "Bloomington, Indiana",
+        "description": "Known for its beautiful campus at Indiana University.",
+        "coordinates": [
+            -86.5346,
+            39.1653
+        ],
+        "type": "city"
+    },
+    {
+        "name": "Great Falls Dam, Great Falls Park, Virginia",
+        "description": "A stunning natural landmark with amazing views of waterfalls!",
+        "coordinates": [
+            -77.2102,
+            38.7915
+        ],
+        "type": "place"
+    },
+    {
+        "name": "The Pentagon, Arlington, Virginia",
+        "description": "The headquarters of the U.S. Department of Defense!",
+        "coordinates": [
+            -77.0552,
+            38.8719
+        ],
+        "type": "building"
+    },
+    {
+        "name": "Daytona Beach, Daytona Beach, Florida",
+        "description": "Known for its wide beach and the Daytona 500 race!",
+        "coordinates": [
+            -81.0365,
+            29.2108
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Oklahoma City, Oklahoma",
+        "description": "The city with a vibrant arts scene and rich history!",
+        "coordinates": [
+            -97.5164,
+            35.4676
+        ],
+        "type": "city"
+    },
+    {
+        "name": "Paycom Center, Oklahoma City, Oklahoma",
+        "description": "Home of the Oklahoma City Thunder NBA team!",
+        "coordinates": [
+            -97.5142,
+            35.4634
+        ],
+        "type": "place"
+    },
+    {
+        "name": "United Center, Chicago, Illinois",
+        "description": "Home of the Chicago Bulls and Chicago Blackhawks!",
+        "coordinates": [
+            -87.6742,
+            41.8807
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Lincoln Park Zoo, Chicago, Illinois",
+        "description": "One of the oldest zoos in the United States, and it's free!",
+        "coordinates": [
+            -87.6329,
+            41.9213
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Navy Pier, Chicago, Illinois",
+        "description": "An iconic Chicago landmark with beautiful lakefront views!",
+        "coordinates": [
+            -87.6054,
+            41.8917
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Willis Tower (formerly Sears Tower), Chicago, Illinois",
+        "description": "Once the tallest building in the world!",
+        "coordinates": [
+            -87.6359,
+            41.8789
+        ],
+        "type": "building"
+    },
+    {
+        "name": "Brookfield Zoo, Brookfield, Illinois",
+        "description": "A great zoo with a vast collection of animals from all over the world.",
+        "coordinates": [
+            -87.8331,
+            41.8183
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Art Institute of Chicago, Chicago, Illinois",
+        "description": "Home to thousands of works of art, including famous paintings like American Gothic!",
+        "coordinates": [
+            -87.6237,
+            41.8796
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Indiana University, Bloomington, Indiana",
+        "description": "A beautiful campus with a thriving student life!",
+        "coordinates": [
+            -86.522,
+            39.17
+        ],
+        "type": "place"
+    },
+    {
+        "name": "University of Illinois, Urbana-Champaign, Illinois",
+        "description": "A world-class university with an impressive engineering program.",
+        "coordinates": [
+            -88.2272,
+            40.1104
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Illinois University, Springfield, Illinois",
+        "description": "The historic university in the capital city of Illinois.",
+        "coordinates": [
+            -89.6437,
+            39.7817
+        ],
+        "type": "place"
+    },
+    {
+        "name": "Orlando, Florida",
+        "description": "A major city known for its theme parks, especially Walt Disney World!",
+        "coordinates": [
+            -81.3792,
+            28.5383
+        ],
+        "type": "city"
+    },
+    {
+        "name": "Lake Buena Vista, Orlando, Florida",
+        "description": "A neighborhood near Disney World with plenty of resorts and attractions.",
+        "coordinates": [
+            -81.519,
+            28.373
+        ],
+        "type": "neighborhood"
+    },
+    {
+        "name": "Walt Disney World Resort",
+        "description": "The world-famous resort with hotels and theme parks.",
+        "coordinates": [
+            -81.5731,
+            28.3743
+        ],
+        "type": "hotel"
+    },
+    {
+        "name": "Universal's Hard Rock Hotel",
+        "description": "A rock 'n' roll-themed hotel located within Universal Orlando Resort.",
+        "coordinates": [
+            -81.4674,
+            28.4732
+        ],
+        "type": "hotel"
+    },
+    {
+        "name": "Disney's Grand Floridian Resort & Spa",
+        "description": "An elegant, Victorian-style hotel at Walt Disney World Resort.",
+        "coordinates": [
+            -81.5732,
+            28.4172
+        ],
+        "type": "hotel"
+    },
+    {
+        "name": "The Ritz-Carlton Orlando, Grande Lakes",
+        "description": "A luxury hotel offering a relaxing getaway in Orlando.",
+        "coordinates": [
+            -81.346,
+            28.4186
+        ],
+        "type": "hotel"
+    },
+    {
+        "name": "Four Seasons Resort Orlando at Walt Disney World Resort",
+        "description": "A five-star luxury resort offering exclusive amenities.",
+        "coordinates": [
+            -81.5559,
+            28.3663
+        ],
+        "type": "hotel"
+    },
+    {
+        "name": "Disney's Polynesian Village Resort",
+        "description": "A tropical-themed hotel at Walt Disney World Resort.",
+        "coordinates": [
+            -81.5722,
+            28.4189
+        ],
+        "type": "hotel"
+    },
+    {
+        "name": "Loews Sapphire Falls Resort",
+        "description": "A Caribbean-inspired hotel located at Universal Orlando Resort.",
+        "coordinates": [
+            -81.4681,
+            28.4763
+        ],
+        "type": "hotel"
+    },
+    {
+        "name": "Orlando International Airport",
+        "description": "The primary airport serving Orlando and Central Florida.",
+        "coordinates": [
+            -81.3081,
+            28.432
+        ],
+        "type": "airport"
+    },
+    {
+        "name": "Orlando Sanford International Airport",
+        "description": "An alternative airport located in Sanford, serving low-cost airlines.",
+        "coordinates": [
+            -81.2379,
+            28.774
+        ],
+        "type": "airport"
+    },
+    {
+        "name": "Orlando Executive Airport",
+        "description": "A smaller airport catering primarily to general aviation and corporate flights.",
+        "coordinates": [
+            -81.3717,
+            28.5445
+        ],
+        "type": "airport"
+    },
+    {
+        "name": "Niagara Falls, Niagara Falls, New York",
+        "description": "A world-famous natural wonder, known for its stunning waterfalls.",
+        "coordinates": [-79.0377, 43.0896],
+        "type": "city"
+      },
+      {
+        "name": "Niagara Falls State Park, Niagara Falls, New York",
+        "description": "A park featuring stunning views of the falls and various attractions.",
+        "coordinates": [-79.0392, 43.0856],
+        "type": "place"
+      },
+      {
+        "name": "Maid of the Mist, Niagara Falls, New York",
+        "description": "A boat tour that takes visitors up close to the base of the falls!",
+        "coordinates": [-79.0607, 43.0857],
+        "type": "place"
+      },
+      {
+        "name": "Cave of the Winds, Niagara Falls, New York",
+        "description": "A thrilling experience that takes visitors behind the waterfall for a close-up view.",
+        "coordinates": [-79.0511, 43.0849],
+        "type": "place"
+      },
+      {
+        "name": "Rainbow Bridge, Niagara Falls, New York",
+        "description": "A bridge connecting the U.S. and Canada with beautiful views of the falls.",
+        "coordinates": [-79.0502, 43.0896],
+        "type": "place"
+      },
+      {
+        "name": "Niagara Falls International Airport, Niagara Falls, New York",
+        "description": "The main airport serving Niagara Falls, with flights to regional destinations.",
+        "coordinates": [-78.9375, 43.1097],
+        "type": "airport"
+      },
+      {
+        "name": "Buffalo Niagara International Airport, Buffalo, New York",
+        "description": "An airport located near Niagara Falls, serving the Buffalo area.",
+        "coordinates": [-78.7371, 42.9393],
+        "type": "airport"
+      },
+      {
+        "name": "The Giacomo, Niagara Falls, New York",
+        "description": "A luxurious hotel offering stylish accommodations near the falls.",
+        "coordinates": [-79.0599, 43.0854],
+        "type": "hotel"
+      },
+      {
+        "name": "Sheraton Niagara Falls, Niagara Falls, New York",
+        "description": "A modern hotel with stunning views of the falls and convenient amenities.",
+        "coordinates": [-79.0620, 43.0872],
+        "type": "hotel"
+      },
+      {
+        "name": "Niagara Falls Marriott on the Falls, Niagara Falls, Ontario",
+        "description": "A hotel in Canada offering breathtaking views of the falls.",
+        "coordinates": [-79.0698, 43.0890],
+        "type": "hotel"
+      },
+      {
+        "name": "DoubleTree by Hilton Hotel Niagara Falls, Niagara Falls, New York",
+        "description": "A family-friendly hotel located near the falls with comfortable rooms.",
+        "coordinates": [-79.0605, 43.0852],
+        "type": "hotel"
+      },
+      {
+        "name": "Radisson Hotel & Suites Fallsview, Niagara Falls, Ontario",
+        "description": "A hotel located in Canada with fantastic views of the falls.",
+        "coordinates": [-79.0872, 43.0845],
+        "type": "hotel"
+      }
+]
+

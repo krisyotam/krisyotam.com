@@ -1,0 +1,186 @@
+{
+  "characters": [
+    {
+      "name": "Chloe Elyon",
+      "book": "Taiyo no shita kara no mono",
+      "slug": "chloe-elyon",
+      "status": "active"
+    },
+    {
+      "name": "Sydney Lane",
+      "book": "Death Game",
+      "slug": "sydney-lane",
+      "status": "active"
+    },
+    {
+      "name": "Yif'ah Kohen",
+      "book": "Taiyo no shita kara no mono",
+      "slug": "yifah-kohen",
+      "status": "active"
+    },
+    {
+      "name": "Saul Matsuda",
+      "book": "Taiyo no shita kara no mono",
+      "slug": "saul-matsuda",
+      "status": "active"
+    },
+    {
+      "name": "Lior Elyon",
+      "book": "Taiyo no shita kara no mono",
+      "slug": "lior-elyon",
+      "status": "active"
+    },
+    {
+      "name": "Zephyra",
+      "book": "Taiyo no shita kara no mono",
+      "slug": "zephyra",
+      "status": "active"
+    },
+    {
+      "name": "Lillith",
+      "book": "Taiyo no shita kara no mono",
+      "slug": "lilith-taiyo",
+      "status": "active"
+    },
+    {
+      "name": "Azazel \"The Serpent\"",
+      "book": "Taiyo no shita kara no mono",
+      "slug": "azazel",
+      "status": "active"
+    },
+    {
+      "name": "Empress Ena of Mitani",
+      "book": "Taiyo no shita kara no mono",
+      "slug": "ena-of-mitani",
+      "status": "active"
+    },
+    {
+      "name": "Miranda Strauss",
+      "book": "The Whale",
+      "slug": "miranda-strauss",
+      "status": "active"
+    },
+    {
+      "name": "Ella Strauss",
+      "book": "The Whale",
+      "slug": "ella-strauss",
+      "status": "active"
+    },
+    {
+      "name": "Rylee Moncler",
+      "book": "Death Game",
+      "slug": "rylee-moncler",
+      "status": "active"
+    },
+    {
+      "name": "Prescilla Prescott",
+      "book": "Death Game",
+      "slug": "prescilla-prescott",
+      "status": "active"
+    },
+    {
+      "name": "Hortense Fletcher",
+      "book": "Death Game",
+      "slug": "hortense-fletcher",
+      "status": "active"
+    },
+    {
+      "name": "Josephine Gilroy",
+      "book": "Death Game",
+      "slug": "josephine-gilroy",
+      "status": "active"
+    },
+    {
+      "name": "Gertrude Jennings",
+      "book": "Death Game",
+      "slug": "gertrude-jennings",
+      "status": "active"
+    },
+    {
+      "name": "Imogen Riccheti",
+      "book": "Death Game",
+      "slug": "imogen-riccheti",
+      "status": "active"
+    },
+    {
+      "name": "Astrid Baxter",
+      "book": "Death Game",
+      "slug": "astrid-baxter",
+      "status": "active"
+    },
+    {
+      "name": "Morgan Elwood",
+      "book": "Death Game",
+      "slug": "morgan-elwood",
+      "status": "active"
+    },
+    {
+      "name": "Matteo Calloway",
+      "book": "Death Game",
+      "slug": "matteo-calloway",
+      "status": "active"
+    },
+    {
+      "name": "Niklaus Brahms",
+      "book": "Death Game",
+      "slug": "niklaus-brahms",
+      "status": "active"
+    },
+    {
+      "name": "Elmer Remington",
+      "book": "Death Game",
+      "slug": "elmer-remington",
+      "status": "active"
+    },
+    {
+      "name": "Minerva Remington",
+      "book": "Death Game",
+      "slug": "minerva-remington",
+      "status": "active"
+    },
+    {
+      "name": "Lavinia Fairchild",
+      "book": "House Of Fairchild",
+      "slug": "lavinia-fairchild",
+      "status": "active"
+    },
+    {
+      "name": "Delta (Δ)",
+      "book": "Ars Mathematica",
+      "slug": "ars-mathematica-delta",
+      "status": "active"
+    },
+    {
+      "name": "Jane Von Toviah",
+      "book": "Brilliant by Design",
+      "slug": "jane-von-toviah",
+      "status": "active"
+    },
+    {
+      "name": "Prof. Cynthia Clarke",
+      "book": "Brilliant by Design",
+      "slug": "prof-cynthia-clarke",
+      "status": "active"
+    },
+    {
+      "name": "Prof. Allen David",
+      "book": "Brilliant by Design",
+      "slug": "prof-allen-david",
+      "status": "active"
+    },
+    {
+      "name": "Malik Hill",
+      "book": "Brilliant by Design",
+      "slug": "malik-hill",
+      "status": "active"
+    },
+    {
+      "name": "Mariah Leighton",
+      "book": "Brilliant by Design",
+      "slug": "mariah-leighton",
+      "status": "active"
+    }
+  ]
+}
+
+

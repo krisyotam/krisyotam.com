@@ -1,0 +1,377 @@
+{
+  "quotes": [
+    {
+      "text": "I am in a charming state of confusion",
+      "author": "Ada Lovelace"
+    },
+    {
+      "text": "the question has not settled as to if madness is the loftiest intelligence",
+      "author": "Edgar Allen Poe"
+    },
+    {
+      "text": "Oh, you can't help that,” said the Cat: “we're all mad here.",
+      "author": "Lewis Caroll"
+    },
+    {
+      "text": "Why, sometimes I've believed as many as six impossible things before breakfast.",
+      "author": "Lewis Caroll"
+    },
+    {
+      "text": "Who in the world am I? Ah, that's the great puzzle.",
+      "author": "Lewis Caroll"
+    },
+    {
+      "text": "Curiouser and curiouser!",
+      "author": "Lewis Caroll"
+    },
+    {
+      "text": "\"I don't think...\" then you shouldn't talk, said the Hatter.",
+      "author": "Lewis Carroll"
+    },
+    {
+      "text": "The question has not yet settled as to whether madness is or is not the loftiest intelligence",
+      "author": "Lewis Carroll"
+    },
+    {
+      "text": "I'm afraid I can't explain myself, sir. Because I am not myself, you see?",
+      "author": "Lewis Caroll"
+    },
+    {
+      "text": "If you don't know where you are going any road can take you there",
+      "author": "Lewis Caroll"
+    },
+    {
+      "text": "“Well, I never heard it before, but it sounds uncommon nonsense.”",
+      "author": "Lewis Caroll"
+    },
+    {
+      "text": "Yes, that's it! Said the Hatter with a sigh, it's always tea time.",
+      "author": "Lewis Caroll"
+    },
+    {
+      "text": "It would be so nice if something made sense for a change.",
+      "author": "Lewis Caroll"
+    },
+    {
+      "text": "No wise fish would go anywhere without a porpoise.",
+      "author": "Lewis Caroll"
+    },
+    {
+      "text": "If you lay down with dogs, you get up with fleas.",
+      "author": "Mozzie, White Collar"
+    },
+    {
+      "text": "Realists don't fear the results of their study.",
+      "author": "Fyodor Dostoevsky"
+    },
+    {
+      "text": "His heart is a suspended lute; As soon as you touch it, it resonates.",
+      "author": "Edgar Allen Poe"
+    },
+    {
+      "text": "The only way to do great work is to love what you do",
+      "author": "Steve Jobs"
+    },
+    {
+      "text": "Simplicity is the ultimate sophistication",
+      "author": "Leonardo da Vinci"
+    },
+    {
+      "text": "The future belongs to those who believe in the beauty of their dreams",
+      "author": "Eleanor Roosevelt"
+    },
+    {
+      "text": "Innovation distinguishes between a leader and a follower",
+      "author": "Steve Jobs"
+    },
+    {
+      "text": "May you live in interesting times.",
+      "author": "Chinese Proverb"
+    },
+    {
+      "text": "May you find what you are looking for.",
+      "author": "Chinese Proverb"
+    },
+    {
+      "text": "May you get more than you bargained for.",
+      "author": "Chinese Proverb"
+    },
+    {
+      "text": "Paranoia is a skill, the secret to longevity.",
+      "author": "Mozzie, White Collar"
+    },
+    {
+      "text": "We feel free when we escape, even if it be but from the frying pan into the fire.",
+      "author": "Eric Hoffer"
+    },
+    {
+      "text": "There are many things of which a wise man might wish to be ignorant.",
+      "author": "Ralph W Emerson"
+    },
+    {
+      "text": "It's goodbye, but we lean forward to the next crazy venture beneath the skies.",
+      "author": "Jack Kerouac"
+    },
+    {
+      "text": "You’re a collection of impeccable, elaborate masks in orbit of a stunted heart.",
+      "author": "Verna, House of Usher"
+    },
+    {
+      "text": "The reason for time is so that everything doesn't happen at once.",
+      "author": "Albert Einstein"
+    },
+    {
+      "text": "Great Spirits have often encountered violent opposition from weaker minds.",
+      "author": "Albert Einstein"
+    },
+    {
+      "text": "Bureaucracy has a vestes interest in creating the chaos in which they exist.",
+      "author": "Richard Nixon"
+    },
+    {
+      "text": "language in its highest expression is musical",
+      "author": "Verna, House of Usher"
+    },
+    {
+      "text": "If you know the enemy and know yourself, you need not fear the result of a hundred battles.",
+      "author": "Sun Tzu"
+    },
+    {
+      "text": "A wise man once said, it's fun to do the impossible.",
+      "author": "Walt Disney"
+    },
+    {
+      "text": "Love is a temporary madness. It erupts like an earthquake and then subsides.",
+      "author": "Louis de Bernières"
+    },
+    {
+      "text": "Perfection is the antithesis of authenticity.",
+      "author": "Mozzie, White Collar"
+    },
+    {
+      "text": "A careless word may kindle strife",
+      "author": "Unknown"
+    },
+    {
+      "text": "A cruel word may wreck a life",
+      "author": "Unknown"
+    },
+    {
+      "text": "A timely word may lessen stress",
+      "author": "Unknown"
+    },
+    {
+      "text": "A loving word may heal and bless",
+      "author": "Unknown"
+    },
+    {
+      "text": "A bitter word may hate instill,",
+      "author": "T.J. Bach"
+    },
+    {
+      "text": "A brutal word may smite and kill",
+      "author": "T.J. Bach"
+    },
+    {
+      "text": "Flame is a fickle mistress.",
+      "author": "Mozzie, White Collar"
+    },
+    {
+      "text": "Everything good must one day come to an end.",
+      "author": "Mozzie, White Collar"
+    },
+    {
+      "text": "Sacred cows make the best hamburger.",
+      "author": "Mark Twain"
+    },
+    {
+      "text": "Without leaps of imagination, you lose the excitement of possibility.",
+      "author": "Gloria Steinem"
+    },
+    {
+      "text": "Behind every worst-case scenario, there's a worse worst-case scenario.",
+      "author": "Mozzie, White Collar"
+    },
+    {
+      "text": "He who conquers himself is the mightiest warrior.",
+      "author": "Confucius"
+    },
+    {
+      "text": "True knowledge exists in knowing that you know nothing.",
+      "author": "Socrates"
+    },
+    {
+      "text": "Fear gives intelligence even to fools.",
+      "author": "Unknown"
+    },
+    {
+      "text": "Everyone you will ever meet knows something you don't.",
+      "author": "Bill Nye"
+    },
+    {
+      "text": "Give a man a mask and he'll show you his true face.",
+      "author": "Oscar Wilde"
+    },
+    {
+      "text": "Most of us know how to say nothing; few of us know when.",
+      "author": "Unknown"
+    },
+    {
+      "text": "The easy way to teach children the value of money is to borrow from them.",
+      "author": "Unknown"
+    },
+    {
+      "text": "No individual raindrop ever considers itself responsible for the flood.",
+      "author": "Unknown"
+    },
+    {
+      "text": "Time heals almost everything.",
+      "author": "Unknown"
+    },
+    {
+      "text": "Those who don't believe in magic will never find it.",
+      "author": "Roald Dahl"
+    },
+    {
+      "text": "Let not your heart be troubled.",
+      "author": "John 14:1a"
+    },
+    {
+      "text": "In the multitude of counsellors there is safety.",
+      "author": "Proverbs 11:14"
+    },
+    {
+      "text": "He that troubles his own house shall inherit the wind.",
+      "author": "Proverbs 11:29"
+    },
+    {
+      "text": "If you can't stand the heat, get out of the kitchen.",
+      "author": "Harry S. Truman"
+    },
+    {
+      "text": "It is better to try and fail than fail to try.",
+      "author": "Unknown"
+    },
+    {
+      "text": "A journey of a thousand li starts with one step.",
+      "author": "Chinese Proverb"
+    },
+    {
+      "text": "People don't buy what you do; they buy why you do it.",
+      "author": "Simon Sinek"
+    },
+    {
+      "text": "A smooth sea never made a skilled sailor.",
+      "author": "Franklin D. Roosevelt"
+    },
+    {
+      "text": "A ship in harbor is safe, but that is not what ships are built for.",
+      "author": "John A. Shedd"
+    },
+    {
+      "text": "Never half-ass two things, whole-ass one thing.",
+      "author": "Ron Swanson"
+    },
+    {
+      "text": "Vulgarity is no substitute for wit.",
+      "author": "Violet Crawley"
+    },
+    {
+      "text": "I think, therefore I am.",
+      "author": "René Descartes"
+    },
+    {
+      "text": "Injustice anywhere is a threat to justice everywhere.",
+      "author": "Martin Luther King Jr."
+    },
+    {
+      "text": "What we think, we become.",
+      "author": "Buddha"
+    },
+    {
+      "text": "Happiness depends upon ourselves.",
+      "author": "Aristotle"
+    },
+    {
+      "text": "He who has a why to live can bear almost any how.",
+      "author": "Friedrich Nietzsche"
+    },
+    {
+      "text": "The greatest wealth is to live content with little.",
+      "author": "Plato"
+    },
+    {
+      "text": "It is not length of life, but depth of life.",
+      "author": "Ralph Waldo Emerson"
+    },
+    {
+      "text": "Knowing others is intelligence; knowing yourself is true wisdom.",
+      "author": "Lao Tzu"
+    },
+    {
+      "text": "Life is what happens when you’re busy making other plans.",
+      "author": "John Lennon"
+    },
+    {
+      "text": "You must be the change you wish to see in the world.",
+      "author": "Mahatma Gandhi"
+    },
+    {
+      "text": "Time is a great teacher, but unfortunately it kills all its pupils.",
+      "author": "Louis Hector Berlioz"
+    },
+    {
+      "text": "The mind is everything. What you think you become.",
+      "author": "Buddha"
+    },
+    {
+      "text": "The unexamined life is not worth living.",
+      "author": "Socrates"
+    },
+    {
+      "text": "The fear of the Lord is the beginning of wisdom.",
+      "author": "Proverbs 9:10"
+    },
+    {
+      "text": "I can do all things through him who strengthens me.",
+      "author": "Philippians 4:13"
+    },
+    {
+      "text": "The Lord is my shepherd; I shall not want.",
+      "author": "Psalm 23:1"
+    },
+    {
+      "text": "And you will know the truth, and the truth will set you free.",
+      "author": "John 8:32"
+    },
+    {
+      "text": "Love is patient, love is kind.",
+      "author": "1 Corinthians 13:4"
+    },
+    {
+      "text": "Be still, and know that I am God.",
+      "author": "Psalm 46:10"
+    },
+    {
+      "text": "For where your treasure is, there your heart will be also.",
+      "author": "Matthew 6:21"
+    },
+    {
+      "text": "For we walk by faith, not by sight.",
+      "author": "2 Corinthians 5:7"
+    },
+    {
+      "text": "Prove all things; hold fast that which is good.",
+      "author": "1 Thessalonians 5:21"
+    },
+    {
+      "text": "Let God be true, but every man a liar.",
+      "author": "Romans 3:4"
+    },
+    {
+      "text": "Wherefore rebuke them sharply, that they may be sound in the faith.",
+      "author": "Titus 1:13"
+    }        
+  ]
+}
+
