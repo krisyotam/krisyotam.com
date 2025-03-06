@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { getFeaturedImage } from "../../utils/ghost"
 import mybooksData from "../../data/mybooks.json"
 import { MyBookCard } from "../../components/my-book-card"
@@ -15,8 +15,9 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "@/components/ui/dialog"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-export const dynamic = "force-dynamic"
+const revalidate = 1800 // 30 minutes
 
 type Book = {
   subtitle: string
@@ -26,6 +27,7 @@ type Book = {
   authors: string[]
   slug: string
   feature_image?: string
+  classification: string
 }
 
 export default function MyBooksPage() {
@@ -70,6 +72,7 @@ export default function MyBooksPage() {
 function MyBookList({ initialBooks }: { initialBooks: Book[] }) {
   const [searchQuery, setSearchQuery] = useState("")
   const [activeCategory, setActiveCategory] = useState("All")
+  const [activeClassification, setActiveClassification] = useState("All")
   const [booksWithImages, setBooksWithImages] = useState(initialBooks)
 
   useEffect(() => {
@@ -95,42 +98,100 @@ function MyBookList({ initialBooks }: { initialBooks: Book[] }) {
     fetchFeaturedImages()
   }, [initialBooks])
 
-  const categories = Array.from(new Set(initialBooks.map((book) => book.category)))
+  // Get all available classifications
+  const classifications = useMemo(() => {
+    return Array.from(new Set(initialBooks.map((book) => book.classification)))
+  }, [initialBooks])
 
-  const filteredBooks = booksWithImages.filter((book) => {
-    const matchesSearch =
-      searchQuery === "" ||
-      book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      book.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      book.tags.some((tag: string) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      book.authors.some((author: string) => author.toLowerCase().includes(searchQuery.toLowerCase()))
+  // Filter books by classification first
+  const booksFilteredByClassification = useMemo(() => {
+    return booksWithImages.filter(
+      (book) => activeClassification === "All" || book.classification === activeClassification,
+    )
+  }, [booksWithImages, activeClassification])
 
-    const matchesCategory = activeCategory === "All" || book.category === activeCategory
+  // Get categories available for the current classification filter
+  const availableCategories = useMemo(() => {
+    return Array.from(new Set(booksFilteredByClassification.map((book) => book.category)))
+  }, [booksFilteredByClassification])
 
-    return matchesSearch && matchesCategory
-  })
+  // Reset category when changing classification if the category doesn't exist in the new classification
+  useEffect(() => {
+    if (activeCategory !== "All" && !availableCategories.includes(activeCategory)) {
+      setActiveCategory("All")
+    }
+  }, [availableCategories, activeCategory]) // Removed activeClassification from dependencies
+
+  // Final filtered books based on all criteria
+  const filteredBooks = useMemo(() => {
+    return booksWithImages.filter((book) => {
+      const matchesSearch =
+        searchQuery === "" ||
+        book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        book.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        book.tags.some((tag: string) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        book.authors.some((author: string) => author.toLowerCase().includes(searchQuery.toLowerCase()))
+
+      const matchesCategory = activeCategory === "All" || book.category === activeCategory
+
+      const matchesClassification = activeClassification === "All" || book.classification === activeClassification
+
+      return matchesSearch && matchesCategory && matchesClassification
+    })
+  }, [booksWithImages, searchQuery, activeCategory, activeClassification])
+
+  // Handle classification change
+  const handleClassificationChange = (value: string) => {
+    setActiveClassification(value)
+  }
 
   return (
     <div className="space-y-6">
       <BookSearch onSearch={setSearchQuery} />
-      <div className="flex flex-wrap gap-2">
-        <Button
-          key="All"
-          variant={activeCategory === "All" ? "default" : "secondary"}
-          onClick={() => setActiveCategory("All")}
+
+      {/* Classification Filter - Visually distinct but matching aesthetic */}
+      <div className="mb-6">
+        <h3 className="text-sm font-medium mb-2 text-muted-foreground">Classification</h3>
+        <Tabs
+          defaultValue="All"
+          value={activeClassification}
+          onValueChange={handleClassificationChange}
+          className="w-full"
         >
-          All
-        </Button>
-        {categories.map((category) => (
-          <Button
-            key={category}
-            variant={category === activeCategory ? "default" : "secondary"}
-            onClick={() => setActiveCategory(category)}
-          >
-            {category}
-          </Button>
-        ))}
+          <TabsList className="w-full justify-start bg-muted/50">
+            <TabsTrigger value="All">All</TabsTrigger>
+            {classifications.map((classification) => (
+              <TabsTrigger key={classification} value={classification}>
+                {classification}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
       </div>
+
+      {/* Category Filter - Dynamically filtered based on classification */}
+      <div>
+        <h3 className="text-sm font-medium mb-2 text-muted-foreground">Categories</h3>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            key="All"
+            variant={activeCategory === "All" ? "default" : "secondary"}
+            onClick={() => setActiveCategory("All")}
+          >
+            All
+          </Button>
+          {availableCategories.map((category) => (
+            <Button
+              key={category}
+              variant={category === activeCategory ? "default" : "secondary"}
+              onClick={() => setActiveCategory(category)}
+            >
+              {category}
+            </Button>
+          ))}
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {filteredBooks.map((book) => (
           <MyBookCard

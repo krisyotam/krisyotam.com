@@ -6,7 +6,8 @@
       "category": "Philosophy",
       "tags": ["Philosophy", "Ethics", "Metaphysics"],
       "authors": ["Kris Yotam"],
-      "slug": "higher-order-puritism"
+      "slug": "higher-order-puritism",
+      "classification": "Non-Fiction"
     },
     {
       "title": "The Symphony of Slow Knowledge",
@@ -14,7 +15,8 @@
       "category": "Education",
       "tags": ["Learning", "Cognitive Science", "Personal Development"],
       "authors": ["Kris Yotam"],
-      "slug": "the-symphony-of-slow-knowledge"
+      "slug": "the-symphony-of-slow-knowledge",
+      "classification": "Non-Fiction"
     },
     {
       "title": "The Yotam Lectures on Mathematics",
@@ -22,7 +24,8 @@
       "category": "Mathematics",
       "tags": ["Mathematics", "Differential Equations", "Advanced Mathematics"],
       "authors": ["Kris Yotam", "Parker", "Yao"],
-      "slug": "the-yotam-lectures-on-mathematics-partiii-differential-equations"
+      "slug": "the-yotam-lectures-on-mathematics-partiii-differential-equations",
+      "classification": "Non-Fiction"
     },
     {
       "title": "The Multipotentialite Parent",
@@ -30,24 +33,26 @@
       "category": "Parenting",
       "tags": ["Parenting", "Child Development", "Education"],
       "authors": ["Kris Yotam"],
-      "slug": "the-multipotentialite-parent"
+      "slug": "the-multipotentialite-parent",
+      "classification": "Non-Fiction"
     },
     {
       "title": "House of Fairchild",
       "subtitle": "",
       "category": "Horror",
-      "tags": ["Gothic", "Fantasy", "Fairtale"],
+      "tags": ["Gothic", "Fantasy", "Fairytale"],
       "authors": ["Kris Yotam"],
-      "slug": "house-of-fairchild"
+      "slug": "house-of-fairchild",
+      "classification": "Fiction"
     },
     {
       "title": "Ars Mathematica",
       "subtitle": "Vol. VI Number Theory",
       "category": "Mathematics",
-      "tags": ["Number Theory", "Fantasy", "Fairtale"],
+      "tags": ["Number Theory", "Fantasy", "Fairytale"],
       "authors": ["Kris Yotam"],
-      "slug": "ars-mathematica-number-theory"
+      "slug": "ars-mathematica-number-theory",
+      "classification": "Fiction"
     }
   ]
 }
-
