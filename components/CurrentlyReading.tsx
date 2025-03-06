@@ -2,7 +2,8 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Card } from "@/components/ui/card"
 
-const LITERAL_TOKEN = process.env.LITERAL_TOKEN
+const LITERAL_TOKEN = process.env.NEXT_PUBLIC_LITERAL_TOKEN;
+
 
 const bookUrlMapping: { [key: string]: string } = {
   "The Ode Less Travelled": "https://literal.club/krisyotam/book/the-ode-less-travelled-5iny6",

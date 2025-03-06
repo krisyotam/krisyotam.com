@@ -1,0 +1,67 @@
+[
+    {
+        "company": "Kris Yotam Tutoring",
+        "specialties": [
+            "Mathematical Logic",
+            "Elemetary Algebra",
+            "Calculus I-III"
+        ],
+        "status": "building",
+        "description": "M is a cutting-edge mathematical research firm that specializes in abstract and theoretical branches of mathematics. They focus on complex problems in number theory, algebraic geometry, and mathematical logic. Their mission is to advance mathematical understanding and its applications in various industries. M collaborates with universities and research institutions to solve some of the most challenging puzzles in mathematics and has published several papers in high-impact journals.",
+        "website": "https://www.mmath.com",
+        "projects": [
+            "Developing Mathematical Foundations Course",
+            "Developing Course Sequences & Teaching Structure for Integral and Differential Calculus"
+        ],
+        "date_started": "2015"
+    },
+    {
+        "company": "Ivory Tower",
+        "specialties": [
+            "Nonprofit",
+            "Book Club",
+            "Classics"
+        ],
+        "status": "building",
+        "description": "Quantum Physics Solutions is a forward-thinking company focused on applying quantum mechanics, electromagnetism, and relativity to solve real-world problems. They are in the process of developing new quantum computing models and systems with the potential to revolutionize multiple industries, including healthcare, energy, and telecommunications. Their research seeks to create more efficient algorithms and computational methods that take advantage of quantum properties to solve problems previously thought unsolvable.",
+        "website": "https://www.quantumphysics.com",
+        "projects": [
+            "Development of Quantum Computers for Medical Applications",
+            "Electromagnetic Energy Harvesting Project"
+        ],
+        "date_started": "2020"
+    },
+    {
+        "company": "Wisteria",
+        "specialties": [
+            "Web Design",
+            "Web Development",
+            "CLI & GUI Applications",
+            "Minimalism"
+        ],
+        "status": "ideation",
+        "description": "Kris Yotam Tutoring is an educational company that combines traditional tutoring methods with a focus on modern art and museum studies. They offer unique, creative learning experiences that integrate the world of art into mathematics and other subjects. Their goal is to inspire students to think critically and creatively by combining the logical structure of mathematics with the imaginative world of art and cultural studies.",
+        "website": "https://www.krisyotamtutoring.com",
+        "projects": [
+            "Art in Math: A New Curriculum for Students",
+            "Museum Studies Course Development"
+        ],
+        "date_started": "2023"
+    },
+    {
+        "company": "Lael Corporation",
+        "specialties": [
+            "Herbal Medicine",
+            "Therapeutics",
+            "Natural Healing"
+        ],
+        "status": "inactive",
+        "description": "FutureTech Innovations is a tech startup focused on the development of next-generation technologies, including artificial intelligence, robotics, and quantum computing. Although currently inactive, the company has a vision to innovate and disrupt various industries, including manufacturing, healthcare, and logistics. They aim to create autonomous systems that can significantly improve efficiency and productivity in complex environments, once the company resumes operations.",
+        "website": "https://www.laelcorp.com",
+        "projects": [
+            "AI-powered Manufacturing Systems",
+            "Development of Autonomous Robots for Healthcare"
+        ],
+        "date_started": "2022"
+    }
+]

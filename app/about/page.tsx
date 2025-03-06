@@ -1,6 +1,5 @@
 "use client"
 
-
 import type React from "react"
 import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
@@ -12,6 +11,7 @@ import coreValuesData from "../../data/core-values.json"
 import recommendedBlogsData from "../../data/recommended-blogs.json"
 import mySitesData from "../../data/my-sites.json"
 import areasOfInterestData from "../../data/areas-of-interest.json"
+import companiesData from "../../data/companies.json"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -22,9 +22,7 @@ import { QuoteOfTheDay } from "@/components/QuoteOfTheDay"
 import { CurrentlyListening } from "@/components/CurrentlyListening"
 import { CurrentlyReading } from "@/components/CurrentlyReading"
 
-
 export const dynamic = "force-dynamic"
-
 
 interface AccordionItemProps {
   title: string
@@ -32,7 +30,6 @@ interface AccordionItemProps {
   isOpen: boolean
   onToggle: () => void
 }
-
 
 function AccordionItem({ title, content, isOpen, onToggle }: AccordionItemProps) {
   return (
@@ -66,7 +63,6 @@ function AccordionItem({ title, content, isOpen, onToggle }: AccordionItemProps)
   )
 }
 
-
 export default function AboutPage() {
   const [openSections, setOpenSections] = useState<number[]>([0])
   const [sections, setSections] = useState<Array<{ title: string; content: string | React.ReactNode }>>([])
@@ -74,7 +70,7 @@ export default function AboutPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All")
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [selectedBlog, setSelectedBlog] = useState<any>(null)
-
+  const [selectedCompany, setSelectedCompany] = useState<any>(null)
 
   const updateAge = useCallback(() => {
     const birthDate = new Date("2004-08-05T18:31:00")
@@ -85,12 +81,10 @@ export default function AboutPage() {
     return `I was born on August 5, 2004, at 6:31 PM. As of ${now.toLocaleString()}, I am ${ageInYears} years old, which is approximately ${ageInSeconds.toLocaleString()} seconds since my birth.`
   }, [])
 
-
   useEffect(() => {
     const timer = setInterval(() => setAge(updateAge()), 1000)
     return () => clearInterval(timer)
   }, [updateAge])
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -101,7 +95,7 @@ export default function AboutPage() {
             content: (
               <>
                 <div className="mb-6">{aboutMeData.content}</div>
-                
+
                 <div className="mb-6">
                   <h3 className="text-lg font-medium mb-3">Name Breakdown</h3>
                   <ul className="space-y-2 text-muted-foreground">
@@ -122,12 +116,12 @@ export default function AboutPage() {
                     </li>
                   </ul>
                 </div>
-                
+
                 <div className="mb-6">
                   <h3 className="text-lg font-medium mb-3">Age</h3>
                   <p className="text-muted-foreground">{age}</p>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
                     <div className="text-xs text-gray-500 mb-1">listening</div>
@@ -146,20 +140,29 @@ export default function AboutPage() {
                     <QuoteOfTheDay />
                   </div>
                 </div>
-                
+
                 <div className="flex justify-center space-x-4 mt-6">
                   <Link href="/cv" passHref>
-                    <Button variant="outline" className="text-sm px-4 py-2 transition-colors hover:bg-primary hover:text-primary-foreground">
+                    <Button
+                      variant="outline"
+                      className="text-sm px-4 py-2 transition-colors hover:bg-primary hover:text-primary-foreground"
+                    >
                       Curriculum Vitae
                     </Button>
                   </Link>
                   <Link href="/profile" passHref>
-                    <Button variant="outline" className="text-sm px-4 py-2 transition-colors hover:bg-primary hover:text-primary-foreground">
+                    <Button
+                      variant="outline"
+                      className="text-sm px-4 py-2 transition-colors hover:bg-primary hover:text-primary-foreground"
+                    >
                       Profile
                     </Button>
                   </Link>
                   <a href="https://krisbiogenerator.vercel.app" target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" className="text-sm px-4 py-2 transition-colors hover:bg-primary hover:text-primary-foreground">
+                    <Button
+                      variant="outline"
+                      className="text-sm px-4 py-2 transition-colors hover:bg-primary hover:text-primary-foreground"
+                    >
                       Bio Generator
                     </Button>
                   </a>
@@ -259,22 +262,180 @@ export default function AboutPage() {
               </div>
             ),
           },
+          {
+            title: "Companies",
+            content: (
+              <>
+                <div className="mb-6">
+                  <p className="text-lg text-muted-foreground font-light">
+                    Below is a list of companies I own and operate. Each company is marked with a status indicator:
+                  </p>
+                  <ul className="mt-3 space-y-2 text-muted-foreground">
+                    <li className="flex items-center">
+                      <span className="inline-block w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                      <span>
+                        <strong>Active:</strong> Companies that are fully operational and growing.
+                      </span>
+                    </li>
+                    <li className="flex items-center">
+                      <span className="inline-block w-3 h-3 rounded-full bg-orange-500 mr-2"></span>
+                      <span>
+                        <strong>Building:</strong> Companies in the development and construction phase.
+                      </span>
+                    </li>
+                    <li className="flex items-center">
+                      <span className="inline-block w-3 h-3 rounded-full bg-yellow-500 mr-2"></span>
+                      <span>
+                        <strong>Ideation:</strong> Companies in the early concept and planning stage.
+                      </span>
+                    </li>
+                    <li className="flex items-center">
+                      <span className="inline-block w-3 h-3 rounded-full bg-gray-400 mr-2"></span>
+                      <span>
+                        <strong>Inactive:</strong> Companies that are currently on hold or dormant.
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="bg-secondary">
+                        <th className="px-4 py-2 text-left text-foreground">Company</th>
+                        <th className="px-4 py-2 text-left text-foreground">Specialties</th>
+                        <th className="px-4 py-2 text-left text-foreground">Founded</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {companiesData.map((company, index) => (
+                        <tr
+                          key={index}
+                          className="border-t border-border hover:bg-secondary/50 transition-colors duration-200 cursor-pointer"
+                          onClick={() => setSelectedCompany(company)}
+                        >
+                          <td className="px-4 py-2 text-foreground">
+                            <div className="flex items-center">
+                              <span
+                                className={`inline-block w-3 h-3 rounded-full mr-2 ${
+                                  company.status === "active"
+                                    ? "bg-green-500"
+                                    : company.status === "building"
+                                      ? "bg-orange-500"
+                                      : company.status === "ideation"
+                                        ? "bg-yellow-500"
+                                        : "bg-gray-400"
+                                }`}
+                              ></span>
+                              {company.company}
+                            </div>
+                          </td>
+                          <td className="px-4 py-2 text-muted-foreground">{company.specialties.join(", ")}</td>
+                          <td className="px-4 py-2 text-muted-foreground">{company.date_started}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <Dialog open={!!selectedCompany} onOpenChange={(open) => !open && setSelectedCompany(null)}>
+                  <DialogContent className="sm:max-w-[700px]">
+                    <DialogHeader>
+                      <DialogTitle className="text-2xl font-bold">{selectedCompany?.company}</DialogTitle>
+                    </DialogHeader>
+                    <ScrollArea className="max-h-[80vh] overflow-y-auto pr-4">
+                      <div className="space-y-6">
+                        <div className="flex items-center">
+                          <span
+                            className={`inline-block w-4 h-4 rounded-full mr-2 ${
+                              selectedCompany?.status === "active"
+                                ? "bg-green-500"
+                                : selectedCompany?.status === "building"
+                                  ? "bg-orange-500"
+                                  : selectedCompany?.status === "ideation"
+                                    ? "bg-yellow-500"
+                                    : "bg-gray-400"
+                            }`}
+                          ></span>
+                          <span className="capitalize font-medium">{selectedCompany?.status}</span>
+                        </div>
+
+                        <Card>
+                          <CardContent className="p-4">
+                            <h3 className="text-lg font-semibold mb-2">Description</h3>
+                            <p>{selectedCompany?.description}</p>
+                          </CardContent>
+                        </Card>
+
+                        <Card>
+                          <CardContent className="p-4">
+                            <h3 className="text-lg font-semibold mb-2">Specialties</h3>
+                            <div className="flex flex-wrap gap-2">
+                              {selectedCompany?.specialties.map((specialty, index) => (
+                                <span
+                                  key={index}
+                                  className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded"
+                                >
+                                  {specialty}
+                                </span>
+                              ))}
+                            </div>
+                          </CardContent>
+                        </Card>
+
+                        <Card>
+                          <CardContent className="p-4">
+                            <h3 className="text-lg font-semibold mb-2">Projects</h3>
+                            <ul className="list-disc list-inside">
+                              {selectedCompany?.projects.map((project, index) => (
+                                <li key={index}>{project}</li>
+                              ))}
+                            </ul>
+                          </CardContent>
+                        </Card>
+
+                        <Card>
+                          <CardContent className="p-4">
+                            <h3 className="text-lg font-semibold mb-2">Founded</h3>
+                            <p>{selectedCompany?.date_started}</p>
+                          </CardContent>
+                        </Card>
+
+                        <div className="flex justify-center">
+                          <Button asChild>
+                            <a href={selectedCompany?.website} target="_blank" rel="noopener noreferrer">
+                              Visit Website
+                            </a>
+                          </Button>
+                        </div>
+                      </div>
+                    </ScrollArea>
+                  </DialogContent>
+                </Dialog>
+              </>
+            ),
+          },
         ])
       }
     }
 
-
     fetchData()
-  }, [age])
-
+  }, [
+    age,
+    selectedCompany,
+    selectedCompany?.company,
+    selectedCompany?.description,
+    selectedCompany?.date_started,
+    selectedCompany?.status,
+    selectedCompany?.specialties,
+    selectedCompany?.website,
+    selectedCompany?.projects,
+  ])
 
   const toggleSection = (index: number) => {
     setOpenSections((current) => (current.includes(index) ? current.filter((i) => i !== index) : [...current, index]))
   }
 
-
   const categories = ["All", ...Array.from(new Set(recommendedBlogsData.blogs.map((blog) => blog.category)))]
-
 
   const filteredBlogs = recommendedBlogsData.blogs
     .filter((blog) => selectedCategory === "All" || blog.category === selectedCategory)
@@ -285,7 +446,6 @@ export default function AboutPage() {
         blog.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
         (blog.author?.name && blog.author.name.toLowerCase().includes(searchQuery.toLowerCase())),
     )
-
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
@@ -302,7 +462,6 @@ export default function AboutPage() {
           ))}
         </div>
 
-
         <div>
           <h3 className="text-lg font-semibold mb-4 text-foreground">Interesting People</h3>
           <p className="text-sm text-foreground pb-4">
@@ -310,7 +469,6 @@ export default function AboutPage() {
             scientists, innovators, philosophers, educators, engineers, inventors, historians, activists, and more.
             People you should get to know.
           </p>
-
 
           <div className="relative mb-4">
             <input
@@ -329,7 +487,6 @@ export default function AboutPage() {
               </button>
             )}
           </div>
-
 
           <div className="flex flex-wrap gap-2 mb-6">
             {categories.map((category) => (
@@ -390,7 +547,6 @@ export default function AboutPage() {
                                 </CardContent>
                               </Card>
 
-
                               <Card>
                                 <CardContent className="p-4">
                                   <h3 className="text-lg font-semibold mb-2">Author Details</h3>
@@ -426,7 +582,6 @@ export default function AboutPage() {
                                 </CardContent>
                               </Card>
 
-
                               <Card>
                                 <CardContent className="p-4">
                                   <h3 className="text-lg font-semibold mb-2">Blog Highlights</h3>
@@ -453,14 +608,12 @@ export default function AboutPage() {
                                 </CardContent>
                               </Card>
 
-
                               <Card>
                                 <CardContent className="p-4">
                                   <h3 className="text-lg font-semibold mb-2">Reader Level</h3>
                                   <p>{selectedBlog?.readerLevel}</p>
                                 </CardContent>
                               </Card>
-
 
                               <div className="flex justify-center">
                                 <Button asChild>
