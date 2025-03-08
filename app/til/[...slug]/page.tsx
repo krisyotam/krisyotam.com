@@ -10,17 +10,15 @@ export const dynamic = "force-static"
 export async function generateStaticParams() {
   try {
     const tilEntries = await getGitHubTilRepo();
-    return [
-      { slug: [] }, // 👈 Ensures `/til` is treated separately from `/til/[...slug]`
-      ...tilEntries.map((entry) => ({
-        slug: entry.path.split("/"),
-      })),
-    ];
+    return tilEntries.map((entry) => ({
+      slug: entry.path.split("/"), // Only return slugs for actual entries
+    }));
   } catch (error) {
     console.error("Error generating static params:", error);
     return [];
   }
 }
+
 
 
 export default async function TILEntryPage({ params }: { params: { slug: string[] } }) {
