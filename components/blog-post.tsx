@@ -6,6 +6,7 @@ interface BlogPostProps {
   title: string
   date: string
   excerpt: string
+  type: "tsx" | "ghost"; // Add this line
 }
 
 export const BlogPost = memo(function BlogPost({ title, date, excerpt, slug }: BlogPostProps) {

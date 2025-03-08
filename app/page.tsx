@@ -1,5 +1,5 @@
 import { BlogPost } from "../components/blog-post"
-import { getHomePagePosts } from "../utils/homePageGhost"
+import { getAllPosts } from "../utils/posts"
 import quotesData from "../data/header-quotes.json"
 
 function getRandomQuote() {
@@ -12,11 +12,11 @@ export const revalidate = 0
 
 export default async function Home() {
   try {
-    const allPosts = await getHomePagePosts()
-    const NOW_PAGE_FILTER_TAG = process.env.NOW_PAGE_FILTER_TAG || "krisyotam-now"
-
-    // Filter out posts with the NOW_PAGE_FILTER_TAG
-    const posts = allPosts.filter((post) => !post.tags.some((tag) => tag.name === NOW_PAGE_FILTER_TAG))
+    const posts = await getAllPosts()
+    console.log(
+      "Home page posts:",
+      posts.map((p) => ({ slug: p.slug, type: p.type, date: p.date })),
+    )
 
     const randomQuote = getRandomQuote()
 
@@ -36,13 +36,14 @@ export default async function Home() {
                   <BlogPost
                     key={post.slug}
                     slug={post.slug}
+                    type={post.type}
                     title={post.title}
-                    date={new Date(post.published_at).toLocaleDateString("en-US", {
+                    date={new Date(post.date).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
                       year: "numeric",
                     })}
-                    excerpt={post.excerpt}
+                    excerpt={post.preview}
                   />
                 ))}
               </div>

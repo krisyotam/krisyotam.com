@@ -1,0 +1,34 @@
+{
+    "worlds": [
+      {
+        "name": "Eldoria",
+        "description": "A mystical land where magic and technology coexist.",
+        "slug": "eldoria",
+        "books": ["Taiyo no shita kara no mono"],
+        "status": "active"
+      },
+      {
+        "name": "Nyxterra",
+        "description": "A dark, gothic world ruled by ancient vampire clans.",
+        "slug": "nyxterra",
+        "books": ["Death Game"],
+        "status": "active"
+      },
+      {
+        "name": "Zephyria",
+        "description": "A floating archipelago where sky pirates and merchants thrive.",
+        "slug": "zephyria",
+        "books": ["The Whale"],
+        "status": "active"
+      },
+      {
+        "name": "Verdanthia",
+        "description": "A lush jungle world inhabited by sentient plant creatures.",
+        "slug": "verdanthia",
+        "books": [],
+        "status": "active"
+      }
+    ]
+  }
+  
+  

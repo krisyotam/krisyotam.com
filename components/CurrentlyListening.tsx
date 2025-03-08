@@ -4,9 +4,8 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Card } from "@/components/ui/card"
 
-const SPOTIFY_CLIENT_ID = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
-const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
-
+const SPOTIFY_CLIENT_ID = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID
+const SPOTIFY_CLIENT_SECRET = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET
 
 let accessToken: string | null = null
 let refreshToken: string | null = null
@@ -117,8 +116,8 @@ export function CurrentlyListening() {
   }, [accessToken]) // Added accessToken to dependencies
 
   return (
-    <Card className="flex overflow-hidden h-[100px]">
-      <div className="w-[100px] bg-muted p-4 flex items-center justify-center">
+    <Card className="flex overflow-hidden h-[100px] dark:bg-[#121212] dark:border-[#232323]">
+      <div className="w-[100px] bg-muted dark:bg-[#1a1a1a] p-4 flex items-center justify-center">
         <a href={track.spotifyLink} target="_blank" rel="noopener noreferrer" className="relative w-full h-full">
           <Image
             src={track.albumCover || "/placeholder.svg"}
@@ -129,8 +128,8 @@ export function CurrentlyListening() {
         </a>
       </div>
       <div className="flex-1 p-4 overflow-hidden flex flex-col justify-center">
-        <div className="font-normal text-sm truncate">{track.name}</div>
-        <div className="text-gray-600 text-sm truncate">{track.artist}</div>
+        <div className="font-normal text-sm truncate dark:text-[#fafafa]">{track.name}</div>
+        <div className="text-gray-600 dark:text-[#a1a1a1] text-sm truncate">{track.artist}</div>
       </div>
     </Card>
   )

@@ -12,10 +12,10 @@ export function WordOfTheDay() {
   }, [])
 
   return (
-    <div className="bg-gray-50 border-l-2 border-[#CCAC9F] p-3">
-      <div className="font-normal text-sm text-gray-800 mb-0.5">{word.title}</div>
-      <div className="text-gray-600 text-sm mb-0.5">{word.type}</div>
-      <div className="text-gray-700 text-sm">{word.definition}</div>
+    <div className="bg-gray-50 dark:bg-[#121212] border-l-2 border-[#CCAC9F] dark:border-[#232323] p-3">
+      <div className="font-normal text-sm text-gray-800 dark:text-[#fafafa] mb-0.5">{word.title}</div>
+      <div className="text-gray-600 dark:text-[#a1a1a1] text-sm mb-0.5">{word.type}</div>
+      <div className="text-gray-700 dark:text-[#d4d4d4] text-sm">{word.definition}</div>
     </div>
   )
 }

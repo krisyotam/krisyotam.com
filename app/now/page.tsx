@@ -20,6 +20,7 @@ export default function NowPage() {
           <h2 className="text-2xl font-semibold mb-6 text-foreground">Archive</h2>
           <div className="space-y-4">
             <MonthlyArchive month="April 2025" content={<NowPageContent isArchived />} />
+            <MonthlyArchive month="Febuary 2025" content={<NowPageContent isArchived />} />
             {/* Additional archived months would be added here */}
           </div>
         </section>

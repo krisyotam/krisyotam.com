@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Command } from "cmdk"
 import { useRouter } from "next/navigation"
-import { Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll, Earth, Clock} from "lucide-react"
+import { Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll, Earth, Clock, Brain} from "lucide-react"
 import { SnowEffect } from "./snow-effect"
 import { useTheme } from "next-themes"
 
@@ -21,8 +21,9 @@ const menuItems = [
   { icon: Gift, label: "Wishlist", path: "/wishlist" },
   { icon: Heart, label: "Donate", path: "/donate" },
   { icon: Mail, label: "Contact", path: "/contact" },
-  { icon: Clock, label: "NOW", path: "/now" },
-  { icon: Earth, label: "GLOBE", path: "/globe" },
+  { icon: Brain, label: "Today I Learned", path: "/til" },
+  { icon: Clock, label: "Now", path: "/now" },
+  { icon: Earth, label: "Globe", path: "/globe" },
   { icon: User, label: "About", path: "/about" },
 ]
 
@@ -102,7 +103,7 @@ export function CommandMenu() {
         />
 
         <Command.List className="py-2 px-2">
-          <Command.Group heading="Pages" className="px-2 py-1.5 text-xs text-gray-400 dark:text-gray-500 uppercase">
+          <Command.Group heading="Pages" className="px-2 py-1.5 text-xs text-gray-400 dark:text-gray-500">
             {menuItems.map((item, index) => (
               <Command.Item
                 key={`${item.path}-${index}`}

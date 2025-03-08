@@ -1,0 +1,50 @@
+{
+  "posts": [
+    {
+      "title": "Typography and Component Features",
+      "preview": "A comprehensive showcase of all typography and component features available for blog posts.",
+      "date": "2025-05-25",
+      "tags": ["Design", "Documentation", "Web Development"],
+      "category": "Design",
+      "type": "tsx",
+      "slug": "feature-testing"
+    },
+    {
+      "title": "The Art of Mindful Coding",
+      "preview": "Discover how applying mindfulness principles to programming can lead to better code, enhanced problem-solving, and greater developer well-being.",
+      "date": "2025-05-20",
+      "tags": ["Programming", "Mindfulness", "Productivity"],
+      "category": "Technology",
+      "type": "tsx",
+      "slug": "mindful-coding"
+    },
+    {
+      "title": "Poetry Recommendations",
+      "preview": "A curated collection of timeless poetry works that have shaped literature through the ages.",
+      "date": "2025-05-15",
+      "tags": ["Literature", "Poetry", "Recommendations"],
+      "category": "Literature",
+      "type": "tsx",
+      "slug": "poetry-recommendations"
+    },
+    {
+      "title": "Law 1: Never Outshine the Master",
+      "preview": "An exploration of the first law from the 48 Laws of Power and its implications in modern contexts.",
+      "date": "2025-05-01",
+      "tags": ["Philosophy", "Strategy", "Power Dynamics"],
+      "category": "Philosophy",
+      "type": "ghost",
+      "slug": "law-1-never-outshine-the-master"
+    },
+    {
+      "title": "The Starry Night",
+      "preview": "An in-depth exploration of Vincent van Gogh's iconic painting, *The Starry Night*, and its emotional, artistic, and symbolic significance.",
+      "date": "2025-07-07",
+      "tags": ["Van Gogh", "Art", "Expressionism", "Masterpiece", "Symbolism"],
+      "category": "Art",
+      "type": "tsx",
+      "slug": "the-starry-night"
+    }       
+  ]
+}
+

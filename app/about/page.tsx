@@ -1,7 +1,8 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect, useCallback } from "react"
+
+import { useState, useEffect, useCallback, useMemo } from "react"
 import Link from "next/link"
 import aboutMeData from "../../data/about-me.json"
 import missionData from "../../data/mission.json"
@@ -12,15 +13,19 @@ import recommendedBlogsData from "../../data/recommended-blogs.json"
 import mySitesData from "../../data/my-sites.json"
 import areasOfInterestData from "../../data/areas-of-interest.json"
 import companiesData from "../../data/companies.json"
+import siteInfoData from "../../data/site-info.json"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Card, CardContent } from "@/components/ui/card"
-
+import CoreSkills from "@/components/core-skills"
+import skillsData from "@/data/core-skills.json"
 import { WordOfTheDay } from "@/components/WordOfTheDay"
 import { QuoteOfTheDay } from "@/components/QuoteOfTheDay"
 import { CurrentlyListening } from "@/components/CurrentlyListening"
 import { CurrentlyReading } from "@/components/CurrentlyReading"
+import NameBreakdown from "@/components/name-breakdown"
+import PersonalBio from "@/components/personal-bio"
 
 export const dynamic = "force-dynamic"
 
@@ -54,7 +59,7 @@ function AccordionItem({ title, content, isOpen, onToggle }: AccordionItemProps)
       <div
         id={`section-${title.toLowerCase().replace(/\s+/g, "-")}`}
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-[1000px] mb-8" : "max-h-0"
+          isOpen ? "max-h-[5000px] mb-8" : "max-h-0"
         }`}
       >
         {typeof content === "string" ? <p className="text-lg text-muted-foreground font-light">{content}</p> : content}
@@ -66,361 +71,508 @@ function AccordionItem({ title, content, isOpen, onToggle }: AccordionItemProps)
 export default function AboutPage() {
   const [openSections, setOpenSections] = useState<number[]>([0])
   const [sections, setSections] = useState<Array<{ title: string; content: string | React.ReactNode }>>([])
-  const [age, setAge] = useState<string>("")
   const [selectedCategory, setSelectedCategory] = useState<string>("All")
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [selectedBlog, setSelectedBlog] = useState<any>(null)
   const [selectedCompany, setSelectedCompany] = useState<any>(null)
 
-  const updateAge = useCallback(() => {
-    const birthDate = new Date("2004-08-05T18:31:00")
-    const now = new Date()
-    const ageInMilliseconds = now.getTime() - birthDate.getTime()
-    const ageInYears = Math.floor(ageInMilliseconds / (365.25 * 24 * 60 * 60 * 1000))
-    const ageInSeconds = Math.floor(ageInMilliseconds / 1000)
-    return `I was born on August 5, 2004, at 6:31 PM. As of ${now.toLocaleString()}, I am ${ageInYears} years old, which is approximately ${ageInSeconds.toLocaleString()} seconds since my birth.`
+  // Memoize the CoreSkills component to prevent re-renders
+  const coreSkillsComponent = useMemo(
+    () => (
+      <div className="py-4">
+        <CoreSkills data={skillsData} className="max-w-full" />
+      </div>
+    ),
+    [],
+  )
+
+  // Use useCallback for event handlers
+  const toggleSection = useCallback((index: number) => {
+    setOpenSections((current) => (current.includes(index) ? current.filter((i) => i !== index) : [...current, index]))
   }, [])
 
-  useEffect(() => {
-    const timer = setInterval(() => setAge(updateAge()), 1000)
-    return () => clearInterval(timer)
-  }, [updateAge])
+  // Memoize the categories array
+  const categories = useMemo(
+    () => ["All", ...Array.from(new Set(recommendedBlogsData.blogs.map((blog) => blog.category)))],
+    [],
+  )
+
+  // Memoize the filtered blogs
+  const filteredBlogs = useMemo(
+    () =>
+      recommendedBlogsData.blogs
+        .filter((blog) => selectedCategory === "All" || blog.category === selectedCategory)
+        .filter(
+          (blog) =>
+            searchQuery === "" ||
+            blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            blog.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
+            (blog.author?.name && blog.author.name.toLowerCase().includes(searchQuery.toLowerCase())),
+        ),
+    [selectedCategory, searchQuery],
+  )
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (typeof window !== "undefined") {
-        setSections([
-          {
-            title: "About Me",
-            content: (
-              <>
-                <div className="mb-6">{aboutMeData.content}</div>
+    if (typeof window !== "undefined") {
+      setSections([
+        {
+          title: "About Me",
+          content: (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <Card className="col-span-1 md:col-span-2 bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-4">
+                    <h3 className="text-lg font-medium mb-2">About Me</h3>
+                    <p className="text-muted-foreground">{aboutMeData.content}</p>
+                  </CardContent>
+                </Card>
 
-                <div className="mb-6">
-                  <h3 className="text-lg font-medium mb-3">Name Breakdown</h3>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li>
-                      <strong>Kris</strong> (KRISS): Follower of Christ
-                    </li>
-                    <li>
-                      <strong>Lael</strong> (LAY-el): Belonging to God
-                    </li>
-                    <li>
-                      <strong>Uri</strong> (OO-ree): Of Light
-                    </li>
-                    <li>
-                      <strong>Mayim</strong> (mah-YEEM): Water
-                    </li>
-                    <li>
-                      <strong>Yotam</strong> (yo-TAHM): God is Perfect
-                    </li>
-                  </ul>
-                </div>
+                <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-4 flex flex-col justify-between h-full">
+                    <div>
+                      <h3 className="text-lg font-medium mb-2">Connect</h3>
+                      <p className="text-muted-foreground">Find me online and reach out.</p>
+                    </div>
+                    <div className="flex gap-2 mt-4">
+                      <Button variant="outline" size="sm" className="w-full">
+                        <Link
+                          href="https://github.com/krisyotam"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-gray-400 transition-colors"
+                        >
+                          GitHub
+                        </Link>
+                      </Button>
+                      <Button variant="outline" size="sm" className="w-full">
+                        <Link
+                          href="https://x.com/krisyotam"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-gray-400 transition-colors"
+                        >
+                          Twitter
+                        </Link>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
 
-                <div className="mb-6">
-                  <h3 className="text-lg font-medium mb-3">Age</h3>
-                  <p className="text-muted-foreground">{age}</p>
-                </div>
+                <Card className="col-span-1 md:col-span-2 bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-4">
+                    <h3 className="text-lg font-medium mb-2">Current Focus</h3>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">
+                        Pure Mathematics
+                      </span>
+                      <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">
+                        Expositional Writing
+                      </span>
+                      <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">Poetry</span>
+                      <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">
+                        Web Development
+                      </span>
+                      <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">
+                        Classical Education
+                      </span>
+                      <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">AI/ML</span>
+                      <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">
+                        Open Source
+                      </span>
+                      <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">
+                        Classical Pedagogy
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <div className="text-xs text-gray-500 mb-1">listening</div>
-                    <CurrentlyListening />
-                  </div>
-                  <div>
-                    <div className="text-xs text-gray-500 mb-1">reading</div>
-                    <CurrentlyReading />
-                  </div>
-                  <div>
-                    <div className="text-xs text-gray-500 mb-1">word of the day</div>
-                    <WordOfTheDay />
-                  </div>
-                  <div>
-                    <div className="text-xs text-gray-500 mb-1">quote of the day</div>
-                    <QuoteOfTheDay />
-                  </div>
-                </div>
+                <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-4">
+                    <h3 className="text-lg font-medium mb-2">Location</h3>
+                    <p className="text-muted-foreground">Based in the United States</p>
+                    <p className="text-xs text-muted-foreground mt-2">Working remotely & globally</p>
+                  </CardContent>
+                </Card>
+              </div>
 
-                <div className="flex justify-center space-x-4 mt-6">
-                  <Link href="/cv" passHref>
-                    <Button
-                      variant="outline"
-                      className="text-sm px-4 py-2 transition-colors hover:bg-primary hover:text-primary-foreground"
-                    >
-                      Curriculum Vitae
-                    </Button>
-                  </Link>
-                  <Link href="/profile" passHref>
-                    <Button
-                      variant="outline"
-                      className="text-sm px-4 py-2 transition-colors hover:bg-primary hover:text-primary-foreground"
-                    >
-                      Profile
-                    </Button>
-                  </Link>
-                  <a href="https://krisbiogenerator.vercel.app" target="_blank" rel="noopener noreferrer">
-                    <Button
-                      variant="outline"
-                      className="text-sm px-4 py-2 transition-colors hover:bg-primary hover:text-primary-foreground"
-                    >
-                      Bio Generator
-                    </Button>
-                  </a>
-                </div>
-              </>
-            ),
-          },
-          { title: "My Mission", content: missionData.content },
-          { title: "Experience", content: experienceData.content },
-          {
-            title: "Personal Philosophy",
-            content: (
               <div className="mb-6">
-                <p className="text-lg text-muted-foreground font-light">{personalPhilosophyData.content}</p>
+                <NameBreakdown />
               </div>
-            ),
-          },
-          {
-            title: "Areas of Interest",
-            content: (
+
+              <div className="mb-6">
+                <PersonalBio />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <div className="text-xs text-gray-500 mb-1">listening</div>
+                  <CurrentlyListening />
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500 mb-1">reading</div>
+                  <CurrentlyReading />
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500 mb-1">word of the day</div>
+                  <WordOfTheDay />
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500 mb-1">quote of the day</div>
+                  <QuoteOfTheDay />
+                </div>
+              </div>
+
+              <div className="flex justify-center space-x-4 mt-6">
+                <Link href="/cv" passHref>
+                  <Button
+                    variant="outline"
+                    className="text-sm px-4 py-2 transition-colors hover:bg-primary hover:text-primary-foreground"
+                  >
+                    Curriculum Vitae
+                  </Button>
+                </Link>
+                <Link href="/profile" passHref>
+                  <Button
+                    variant="outline"
+                    className="text-sm px-4 py-2 transition-colors hover:bg-primary hover:text-primary-foreground"
+                  >
+                    Profile
+                  </Button>
+                </Link>
+                <a href="https://krisbiogenerator.vercel.app" target="_blank" rel="noopener noreferrer">
+                  <Button
+                    variant="outline"
+                    className="text-sm px-4 py-2 transition-colors hover:bg-primary hover:text-primary-foreground"
+                  >
+                    Bio Generator
+                  </Button>
+                </a>
+              </div>
+            </>
+          ),
+        },
+        { title: "My Mission", content: missionData.content },
+        { title: "Experience", content: experienceData.content },
+        {
+          title: "Core Skills",
+          content: coreSkillsComponent,
+        },
+        {
+          title: "Personal Philosophy",
+          content: (
+            <div className="mb-6">
+              <p className="text-lg text-muted-foreground font-light">{personalPhilosophyData.content}</p>
+            </div>
+          ),
+        },
+        {
+          title: "Areas of Interest",
+          content: (
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-secondary">
+                    <th className="px-4 py-2 text-left text-foreground">Field</th>
+                    <th className="px-4 py-2 text-left text-foreground">Subfields</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {areasOfInterestData.map((area, index) => (
+                    <tr
+                      key={index}
+                      className="border-t border-border hover:bg-secondary/50 transition-colors duration-200"
+                    >
+                      <td className="px-4 py-2 text-foreground">{area.field}</td>
+                      <td className="px-4 py-2 text-muted-foreground">{area.subfields.join(", ")}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ),
+        },
+        {
+          title: "Core Values",
+          content: (
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-secondary">
+                    <th className="px-4 py-2 text-left text-foreground">Value</th>
+                    <th className="px-4 py-2 text-left text-foreground">Definition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {coreValuesData.values.map((value, index) => (
+                    <tr
+                      key={index}
+                      className="border-t border-border hover:bg-secondary/50 transition-colors duration-200"
+                    >
+                      <td className="px-4 py-2 text-foreground">{value.term}</td>
+                      <td className="px-4 py-2 text-muted-foreground">{value.definition}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ),
+        },
+        {
+          title: "Companies",
+          content: (
+            <>
+              <div className="mb-6">
+                <p className="text-lg text-muted-foreground font-light">
+                  Below is a list of companies I own and operate. Each company is marked with a status indicator:
+                </p>
+                <ul className="mt-3 space-y-2 text-muted-foreground">
+                  <li className="flex items-center">
+                    <span className="inline-block w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                    <span>
+                      <strong>Active:</strong> Companies that are fully operational and growing.
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="inline-block w-3 h-3 rounded-full bg-orange-500 mr-2"></span>
+                    <span>
+                      <strong>Building:</strong> Companies in the development and construction phase.
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="inline-block w-3 h-3 rounded-full bg-yellow-500 mr-2"></span>
+                    <span>
+                      <strong>Ideation:</strong> Companies in the early concept and planning stage.
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="inline-block w-3 h-3 rounded-full bg-gray-400 mr-2"></span>
+                    <span>
+                      <strong>Inactive:</strong> Companies that are currently on hold or dormant.
+                    </span>
+                  </li>
+                </ul>
+              </div>
               <div className="overflow-x-auto">
                 <table className="w-full border-collapse">
                   <thead>
                     <tr className="bg-secondary">
-                      <th className="px-4 py-2 text-left text-foreground">Field</th>
-                      <th className="px-4 py-2 text-left text-foreground">Subfields</th>
+                      <th className="px-4 py-2 text-left text-foreground">Company</th>
+                      <th className="px-4 py-2 text-left text-foreground">Specialties</th>
+                      <th className="px-4 py-2 text-left text-foreground">Founded</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {areasOfInterestData.map((area, index) => (
+                    {companiesData.map((company, index) => (
                       <tr
                         key={index}
-                        className="border-t border-border hover:bg-secondary/50 transition-colors duration-200"
-                      >
-                        <td className="px-4 py-2 text-foreground">{area.field}</td>
-                        <td className="px-4 py-2 text-muted-foreground">{area.subfields.join(", ")}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            ),
-          },
-          {
-            title: "Core Values",
-            content: (
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse">
-                  <thead>
-                    <tr className="bg-secondary">
-                      <th className="px-4 py-2 text-left text-foreground">Value</th>
-                      <th className="px-4 py-2 text-left text-foreground">Definition</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {coreValuesData.values.map((value, index) => (
-                      <tr
-                        key={index}
-                        className="border-t border-border hover:bg-secondary/50 transition-colors duration-200"
-                      >
-                        <td className="px-4 py-2 text-foreground">{value.term}</td>
-                        <td className="px-4 py-2 text-muted-foreground">{value.definition}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            ),
-          },
-          {
-            title: "My Sites",
-            content: (
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse">
-                  <thead>
-                    <tr className="bg-secondary">
-                      <th className="px-4 py-2 text-left text-foreground">Name</th>
-                      <th className="px-4 py-2 text-left text-foreground">Purpose</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {mySitesData.sites.map((site, index) => (
-                      <tr
-                        key={index}
-                        className="border-t border-border hover:bg-secondary/50 transition-colors duration-200"
+                        className="border-t border-border hover:bg-secondary/50 transition-colors duration-200 cursor-pointer"
+                        onClick={() => setSelectedCompany(company)}
                       >
                         <td className="px-4 py-2 text-foreground">
-                          <a href={site.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                            {site.name}
-                          </a>
+                          <div className="flex items-center">
+                            <span
+                              className={`inline-block w-3 h-3 rounded-full mr-2 ${
+                                company.status === "active"
+                                  ? "bg-green-500"
+                                  : company.status === "building"
+                                    ? "bg-orange-500"
+                                    : company.status === "ideation"
+                                      ? "bg-yellow-500"
+                                      : "bg-gray-400"
+                              }`}
+                            ></span>
+                            {company.company}
+                          </div>
                         </td>
-                        <td className="px-4 py-2 text-muted-foreground">{site.purpose}</td>
+                        <td className="px-4 py-2 text-muted-foreground">{company.specialties.join(", ")}</td>
+                        <td className="px-4 py-2 text-muted-foreground">{company.date_started}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-            ),
-          },
-          {
-            title: "Companies",
-            content: (
-              <>
-                <div className="mb-6">
-                  <p className="text-lg text-muted-foreground font-light">
-                    Below is a list of companies I own and operate. Each company is marked with a status indicator:
-                  </p>
-                  <ul className="mt-3 space-y-2 text-muted-foreground">
-                    <li className="flex items-center">
-                      <span className="inline-block w-3 h-3 rounded-full bg-green-500 mr-2"></span>
-                      <span>
-                        <strong>Active:</strong> Companies that are fully operational and growing.
-                      </span>
-                    </li>
-                    <li className="flex items-center">
-                      <span className="inline-block w-3 h-3 rounded-full bg-orange-500 mr-2"></span>
-                      <span>
-                        <strong>Building:</strong> Companies in the development and construction phase.
-                      </span>
-                    </li>
-                    <li className="flex items-center">
-                      <span className="inline-block w-3 h-3 rounded-full bg-yellow-500 mr-2"></span>
-                      <span>
-                        <strong>Ideation:</strong> Companies in the early concept and planning stage.
-                      </span>
-                    </li>
-                    <li className="flex items-center">
-                      <span className="inline-block w-3 h-3 rounded-full bg-gray-400 mr-2"></span>
-                      <span>
-                        <strong>Inactive:</strong> Companies that are currently on hold or dormant.
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full border-collapse">
-                    <thead>
-                      <tr className="bg-secondary">
-                        <th className="px-4 py-2 text-left text-foreground">Company</th>
-                        <th className="px-4 py-2 text-left text-foreground">Specialties</th>
-                        <th className="px-4 py-2 text-left text-foreground">Founded</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {companiesData.map((company, index) => (
-                        <tr
-                          key={index}
-                          className="border-t border-border hover:bg-secondary/50 transition-colors duration-200 cursor-pointer"
-                          onClick={() => setSelectedCompany(company)}
-                        >
-                          <td className="px-4 py-2 text-foreground">
-                            <div className="flex items-center">
-                              <span
-                                className={`inline-block w-3 h-3 rounded-full mr-2 ${
-                                  company.status === "active"
-                                    ? "bg-green-500"
-                                    : company.status === "building"
-                                      ? "bg-orange-500"
-                                      : company.status === "ideation"
-                                        ? "bg-yellow-500"
-                                        : "bg-gray-400"
-                                }`}
-                              ></span>
-                              {company.company}
-                            </div>
-                          </td>
-                          <td className="px-4 py-2 text-muted-foreground">{company.specialties.join(", ")}</td>
-                          <td className="px-4 py-2 text-muted-foreground">{company.date_started}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
 
-                <Dialog open={!!selectedCompany} onOpenChange={(open) => !open && setSelectedCompany(null)}>
-                  <DialogContent className="sm:max-w-[700px]">
-                    <DialogHeader>
-                      <DialogTitle className="text-2xl font-bold">{selectedCompany?.company}</DialogTitle>
-                    </DialogHeader>
-                    <ScrollArea className="max-h-[80vh] overflow-y-auto pr-4">
-                      <div className="space-y-6">
-                        <div className="flex items-center">
-                          <span
-                            className={`inline-block w-4 h-4 rounded-full mr-2 ${
-                              selectedCompany?.status === "active"
-                                ? "bg-green-500"
-                                : selectedCompany?.status === "building"
-                                  ? "bg-orange-500"
-                                  : selectedCompany?.status === "ideation"
-                                    ? "bg-yellow-500"
-                                    : "bg-gray-400"
-                            }`}
-                          ></span>
-                          <span className="capitalize font-medium">{selectedCompany?.status}</span>
-                        </div>
+              <Dialog open={!!selectedCompany} onOpenChange={(open) => !open && setSelectedCompany(null)}>
+                <DialogContent className="sm:max-w-[700px]">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-bold">{selectedCompany?.company}</DialogTitle>
+                  </DialogHeader>
+                  <ScrollArea className="max-h-[80vh] overflow-y-auto pr-4">
+                    <div className="space-y-6">
+                      <div className="flex items-center">
+                        <span
+                          className={`inline-block w-4 h-4 rounded-full mr-2 ${
+                            selectedCompany?.status === "active"
+                              ? "bg-green-500"
+                              : selectedCompany?.status === "building"
+                                ? "bg-orange-500"
+                                : selectedCompany?.status === "ideation"
+                                  ? "bg-yellow-500"
+                                  : "bg-gray-400"
+                          }`}
+                        ></span>
+                        <span className="capitalize font-medium">{selectedCompany?.status}</span>
+                      </div>
 
-                        <Card>
-                          <CardContent className="p-4">
-                            <h3 className="text-lg font-semibold mb-2">Description</h3>
-                            <p>{selectedCompany?.description}</p>
-                          </CardContent>
-                        </Card>
+                      <Card>
+                        <CardContent className="p-4">
+                          <h3 className="text-lg font-semibold mb-2">Description</h3>
+                          <p>{selectedCompany?.description}</p>
+                        </CardContent>
+                      </Card>
 
-                        <Card>
-                          <CardContent className="p-4">
-                            <h3 className="text-lg font-semibold mb-2">Specialties</h3>
-                            <div className="flex flex-wrap gap-2">
-                              {selectedCompany?.specialties.map((specialty, index) => (
+                      <Card>
+                        <CardContent className="p-4">
+                          <h3 className="text-lg font-semibold mb-2">Specialties</h3>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedCompany?.specialties.map(
+                              (
+                                specialty:
+                                  | string
+                                  | number
+                                  | bigint
+                                  | boolean
+                                  | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+                                  | Iterable<React.ReactNode>
+                                  | React.ReactPortal
+                                  | Promise<React.AwaitedReactNode>
+                                  | null
+                                  | undefined,
+                                index: React.Key | null | undefined,
+                              ) => (
                                 <span
                                   key={index}
                                   className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded"
                                 >
                                   {specialty}
                                 </span>
-                              ))}
-                            </div>
-                          </CardContent>
-                        </Card>
+                              ),
+                            )}
+                          </div>
+                        </CardContent>
+                      </Card>
 
-                        <Card>
-                          <CardContent className="p-4">
-                            <h3 className="text-lg font-semibold mb-2">Projects</h3>
-                            <ul className="list-disc list-inside">
-                              {selectedCompany?.projects.map((project, index) => (
+                      <Card>
+                        <CardContent className="p-4">
+                          <h3 className="text-lg font-semibold mb-2">Projects</h3>
+                          <ul className="list-disc list-inside">
+                            {selectedCompany?.projects.map(
+                              (
+                                project:
+                                  | string
+                                  | number
+                                  | bigint
+                                  | boolean
+                                  | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+                                  | Iterable<React.ReactNode>
+                                  | React.ReactPortal
+                                  | Promise<React.AwaitedReactNode>
+                                  | null
+                                  | undefined,
+                                index: React.Key | null | undefined,
+                              ) => (
                                 <li key={index}>{project}</li>
-                              ))}
-                            </ul>
-                          </CardContent>
-                        </Card>
+                              ),
+                            )}
+                          </ul>
+                        </CardContent>
+                      </Card>
 
-                        <Card>
-                          <CardContent className="p-4">
-                            <h3 className="text-lg font-semibold mb-2">Founded</h3>
-                            <p>{selectedCompany?.date_started}</p>
-                          </CardContent>
-                        </Card>
+                      <Card>
+                        <CardContent className="p-4">
+                          <h3 className="text-lg font-semibold mb-2">Founded</h3>
+                          <p>{selectedCompany?.date_started}</p>
+                        </CardContent>
+                      </Card>
 
-                        <div className="flex justify-center">
-                          <Button asChild>
-                            <a href={selectedCompany?.website} target="_blank" rel="noopener noreferrer">
-                              Visit Website
-                            </a>
-                          </Button>
-                        </div>
+                      <div className="flex justify-center">
+                        <Button asChild>
+                          <a href={selectedCompany?.website} target="_blank" rel="noopener noreferrer">
+                            Visit Website
+                          </a>
+                        </Button>
                       </div>
-                    </ScrollArea>
-                  </DialogContent>
-                </Dialog>
-              </>
-            ),
-          },
-        ])
-      }
+                    </div>
+                  </ScrollArea>
+                </DialogContent>
+              </Dialog>
+            </>
+          ),
+        },
+        {
+          title: "Site Info",
+          content: (
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-secondary">
+                    <th className="px-4 py-2 text-left text-foreground">Name</th>
+                    <th className="px-4 py-2 text-left text-foreground">Purpose</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {siteInfoData.map((site, index) => (
+                    <tr
+                      key={index}
+                      className="border-t border-border hover:bg-secondary/50 transition-colors duration-200"
+                    >
+                      <td className="px-4 py-2 text-foreground">
+                        <a
+                          href={site.Link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-gray-400 transition-colors"
+                        >
+                          {site.Name}
+                        </a>
+                      </td>
+                      <td className="px-4 py-2 text-muted-foreground">{site.Purpose}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ),
+        },
+        {
+          title: "My Sites",
+          content: (
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-secondary">
+                    <th className="px-4 py-2 text-left text-foreground">Name</th>
+                    <th className="px-4 py-2 text-left text-foreground">Purpose</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {mySitesData.sites.map((site, index) => (
+                    <tr
+                      key={index}
+                      className="border-t border-border hover:bg-secondary/50 transition-colors duration-200"
+                    >
+                      <td className="px-4 py-2 text-foreground">
+                        <a
+                          href={site.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-gray-400 transition-colors"
+                        >
+                          {site.name}
+                        </a>
+                      </td>
+                      <td className="px-4 py-2 text-muted-foreground">{site.purpose}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ),
+        },
+      ])
     }
-
-    fetchData()
   }, [
-    age,
+    coreSkillsComponent,
     selectedCompany,
     selectedCompany?.company,
     selectedCompany?.description,
@@ -430,22 +582,6 @@ export default function AboutPage() {
     selectedCompany?.website,
     selectedCompany?.projects,
   ])
-
-  const toggleSection = (index: number) => {
-    setOpenSections((current) => (current.includes(index) ? current.filter((i) => i !== index) : [...current, index]))
-  }
-
-  const categories = ["All", ...Array.from(new Set(recommendedBlogsData.blogs.map((blog) => blog.category)))]
-
-  const filteredBlogs = recommendedBlogsData.blogs
-    .filter((blog) => selectedCategory === "All" || blog.category === selectedCategory)
-    .filter(
-      (blog) =>
-        searchQuery === "" ||
-        blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        blog.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        (blog.author?.name && blog.author.name.toLowerCase().includes(searchQuery.toLowerCase())),
-    )
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
@@ -493,7 +629,7 @@ export default function AboutPage() {
               <Button
                 key={category}
                 variant={selectedCategory === category ? "default" : "secondary"}
-                className={`transition-colors hover:bg-primary hover:text-primary-foreground ${
+                className={`transition-colors hover:bg-primary  ${
                   selectedCategory === category
                     ? "bg-primary text-primary-foreground"
                     : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
@@ -513,7 +649,12 @@ export default function AboutPage() {
                     className="border-t border-border hover:bg-secondary/50 transition-colors duration-200"
                   >
                     <td className="py-4 pr-4">
-                      <Link href={blog.url} target="_blank" rel="noopener noreferrer" className="block">
+                      <Link
+                        href={blog.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block hover:text-gray-400 transition-colors"
+                      >
                         <span className="text-base font-normal text-foreground">{blog.title}</span>
                         <div className="flex flex-wrap gap-2 mt-2">
                           {blog.tags.map((tag, tagIndex) => (

@@ -1,14 +1,9 @@
-import { getPostBySlug, getPosts } from "../../../utils/ghost"
+import { getPostBySlug } from "../../../utils/posts"
 import { notFound } from "next/navigation"
+import { PostHeader } from "@/components/post-header"
 
 export const dynamic = "force-dynamic"
-
-export async function generateStaticParams() {
-  const posts = await getPosts()
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
-}
+export const revalidate = 0
 
 export default async function PostPage({
   params,
@@ -18,30 +13,15 @@ export default async function PostPage({
   try {
     const post = await getPostBySlug(params.slug)
 
-    if (!post) {
+    if (!post || post.type !== "ghost" || !post.html) {
       notFound()
     }
-
-    const categories = post.tags
-      .filter((tag) => !tag.name.startsWith("#"))
-      .map((tag) => tag.name)
-      .join(" · ")
 
     return (
       <div className="relative min-h-screen bg-background text-foreground">
         <div className="max-w-3xl mx-auto p-8 md:p-16 lg:p-24">
-          <article className="prose dark:prose-invert">
-            <header className="not-prose mb-16">
-              <h1 className="text-4xl font-semibold tracking-tight mb-4 text-foreground">{post.title}</h1>
-              <div className="text-sm text-muted-foreground font-light">
-                {new Date(post.published_at).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                })}{" "}
-                · {categories}
-              </div>
-            </header>
+          <PostHeader title={post.title} date={post.date} tags={post.tags} category={post.category} />
+          <article className="prose dark:prose-invert max-w-none">
             <div dangerouslySetInnerHTML={{ __html: post.html }} className="post-content text-foreground" />
           </article>
         </div>

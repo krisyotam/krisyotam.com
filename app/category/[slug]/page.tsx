@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getPostsByCategory, getCategories } from "../../../utils/ghost"
+import { getPostsByCategory, getCategories } from "../../../utils/posts"
 import { notFound } from "next/navigation"
 
 export const dynamic = "force-dynamic"
@@ -24,7 +24,12 @@ export default async function CategoryPage({
       notFound()
     }
 
-    const categoryName = posts[0]?.tags.find((tag) => !tag.name.startsWith("#"))?.name || params.slug
+    const categoryName =
+      posts[0]?.category ||
+      params.slug
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ")
 
     return (
       <div className="relative min-h-screen bg-background text-foreground">
@@ -45,22 +50,29 @@ export default async function CategoryPage({
                   </tr>
                 </thead>
                 <tbody>
-                  {posts.map((post) => (
-                    <tr key={post.slug} className="border-b border-border hover:bg-secondary/50 transition-colors">
-                      <td className="py-4 px-2">
-                        <Link href={`/post/${post.slug}`} className="text-foreground hover:underline">
-                          {post.title}
-                        </Link>
-                      </td>
-                      <td className="py-4 px-2 text-right text-muted-foreground">
-                        {new Date(post.published_at).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
-                      </td>
-                    </tr>
-                  ))}
+                  {posts.map((post) => {
+                    const postUrl =
+                      post.type === "ghost"
+                        ? `/post/${post.slug}`
+                        : `/posts/${new Date(post.date).getFullYear()}/${post.slug}`
+
+                    return (
+                      <tr key={post.slug} className="border-b border-border hover:bg-secondary/50 transition-colors">
+                        <td className="py-4 px-2">
+                          <Link href={postUrl} className="text-foreground">
+                            {post.title}
+                          </Link>
+                        </td>
+                        <td className="py-4 px-2 text-right text-muted-foreground">
+                          {new Date(post.date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </table>
             </div>
