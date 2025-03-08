@@ -1,34 +1,39 @@
-import Link from "next/link"
-import { ChevronLeft } from "lucide-react"
-import { getGitHubTilRepo } from "@/lib/githubTil"
-import { Button } from "@/components/ui/button"
-import { notFound } from "next/navigation"
-import { MarkdownContent } from "@/components/markdown-content"
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
+import { getGitHubTilRepo } from "@/lib/githubTil";
+import { Button } from "@/components/ui/button";
+import { notFound } from "next/navigation";
+import { MarkdownContent } from "@/components/markdown-content";
 
-export const dynamic = "force-static"
+export const dynamic = "force-static";
 
 export async function generateStaticParams() {
   try {
     const tilEntries = await getGitHubTilRepo();
-    return tilEntries.map((entry) => ({
-      slug: entry.path.split("/"), // Only return slugs for actual entries
-    }));
+    
+    return tilEntries
+      .filter((entry) => entry.path) // Ensure valid paths
+      .map((entry) => ({
+        slug: entry.path.split("/"), // Generate only valid slugs
+      }));
   } catch (error) {
     console.error("Error generating static params:", error);
     return [];
   }
 }
 
-
-
-export default async function TILEntryPage({ params }: { params: { slug: string[] } }) {
+export default async function TILEntryPage({ params }: { params: { slug?: string[] } }) {
   try {
-    const tilEntries = await getGitHubTilRepo()
-    const path = params.slug.join("/")
-    const entry = tilEntries.find((e) => e.path === path)
+    if (!params.slug) {
+      notFound();
+    }
+
+    const tilEntries = await getGitHubTilRepo();
+    const path = decodeURIComponent(params.slug.join("/")); // Ensure the slug is correctly decoded
+    const entry = tilEntries.find((e) => decodeURIComponent(e.path) === path);
 
     if (!entry) {
-      notFound()
+      notFound();
     }
 
     return (
@@ -44,7 +49,9 @@ export default async function TILEntryPage({ params }: { params: { slug: string[
 
           <article>
             <header className="mb-8">
-              <h1 className="text-3xl font-semibold tracking-tight mb-2 text-foreground">{entry.title}</h1>
+              <h1 className="text-3xl font-semibold tracking-tight mb-2 text-foreground">
+                {entry.title}
+              </h1>
               <div className="text-sm text-muted-foreground">
                 {new Date(entry.date).toLocaleDateString("en-US", {
                   year: "numeric",
@@ -67,9 +74,9 @@ export default async function TILEntryPage({ params }: { params: { slug: string[
           </article>
         </div>
       </div>
-    )
+    );
   } catch (error) {
-    console.error("Failed to fetch TIL entry:", error)
+    console.error("Failed to fetch TIL entry:", error);
     return (
       <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
         <div className="max-w-md p-8 text-center">
@@ -83,7 +90,6 @@ export default async function TILEntryPage({ params }: { params: { slug: string[
           </Button>
         </div>
       </div>
-    )
+    );
   }
 }
-
