@@ -1,0 +1,50 @@
+{
+    "memories": [
+      {
+        "id": "1",
+        "title": "Harvard's Itatti Library for Renaissance Studies",
+        "description": "Discovered the Villa I Tatti library, Harvard University's center for Italian Renaissance studies. Contains rare manuscripts and resources for scholars studying Renaissance art, history, and culture. The library houses over 175,000 volumes, a photo archive with 250,000 photographs, and a collection of historic prints.",
+        "image": "/placeholder.svg?height=300&width=400",
+        "category": "Research Resources",
+        "tags": ["Renaissance", "Libraries", "Academic Resources", "Art History"],
+        "dateStarted": "2023-05-15",
+        "status": "Recent",
+        "location": "Florence, Italy"
+      },
+      {
+        "id": "2",
+        "title": "Computational Linguistics at Stanford NLP Group",
+        "description": "Explored the Stanford NLP Group's resources for computational linguistics, including their CoreNLP toolkit and research papers on natural language processing. The Stanford NLP Group has developed numerous open-source tools that have become industry standards for natural language processing tasks.",
+        "image": "/placeholder.svg?height=300&width=400",
+        "category": "Computer Science",
+        "tags": ["NLP", "Computational Linguistics", "AI", "Research"],
+        "dateStarted": "2023-03-10",
+        "status": "Ongoing",
+        "location": "Stanford, CA"
+      },
+      {
+        "id": "3",
+        "title": "MIT's Open Courseware on Quantum Computing",
+        "description": "Found MIT's comprehensive open courseware on quantum computing fundamentals, including lecture videos, notes, and problem sets. The course covers quantum mechanics principles relevant to computation, quantum gates and circuits, quantum algorithms (including Shor's and Grover's algorithms), quantum error correction, and physical implementations of quantum computers.",
+        "image": "/placeholder.svg?height=300&width=400",
+        "category": "Physics",
+        "tags": ["Quantum Computing", "Online Learning", "Physics", "Computer Science"],
+        "dateStarted": "2023-01-22",
+        "status": "Ongoing",
+        "location": null
+      },
+      {
+        "id": "4",
+        "title": "The Internet Archive's Book Collection",
+        "description": "Explored the Internet Archive's vast collection of digitized books, including rare and out-of-print volumes on computer science history. The Internet Archive has digitized millions of books, many of which are no longer in print or commercially available.",
+        "image": "/placeholder.svg?height=300&width=400",
+        "category": "Digital Libraries",
+        "tags": ["Digital Archives", "Books", "Computer History", "Open Access"],
+        "dateStarted": "2022-11-05",
+        "status": "Past",
+        "location": null
+      }
+    ]
+  }
+  
+  

@@ -1,0 +1,149 @@
+"use client"
+
+import { useState } from "react"
+import { ProjectCard } from "@/components/project-card"
+import { Button } from "@/components/ui/button"
+import { HelpCircle } from "lucide-react"
+import projectsData from "@/data/projects.json"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogDescription,
+} from "@/components/ui/dialog"
+
+export const dynamic = "force-dynamic"
+
+export default function ProjectsPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  return (
+    <div className="relative min-h-screen bg-background text-foreground">
+      <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        <ProjectList initialProjects={projectsData.projects} />
+      </div>
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogTrigger asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            className="fixed bottom-4 left-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200"
+            onClick={() => setIsModalOpen(true)}
+          >
+            <HelpCircle className="h-5 w-5" />
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px] bg-background rounded-lg shadow-2xl border-0">
+          <DialogHeader className="space-y-3">
+            <DialogTitle className="text-2xl font-semibold">About My Projects</DialogTitle>
+            <DialogDescription className="text-base leading-relaxed">
+              This page showcases my personal and professional projects. Each project represents a unique challenge I've
+              tackled and a set of skills I've developed. From web applications to design systems, these projects
+              demonstrate my approach to problem-solving and my technical capabilities. I believe in building with
+              purpose and sharing my work openly. Feel free to explore the projects, filter by category, or search for
+              specific technologies. Each project card provides a glimpse into the work, and you can click "View
+              Details" to learn more about any project that catches your interest.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+}
+
+interface ProjectListProps {
+  initialProjects: Array<{
+    id: string
+    title: string
+    slug: string
+    description: string
+    longDescription: string
+    image: string
+    demoUrl?: string
+    repoUrl?: string
+    category: string
+    tags: string[]
+    completionDate: string
+    status: string
+  }>
+}
+
+function ProjectList({ initialProjects }: ProjectListProps) {
+  const [searchQuery, setSearchQuery] = useState("")
+  const [activeCategory, setActiveCategory] = useState("All")
+  const [projects, setProjects] = useState(initialProjects)
+
+  // Get unique categories from projects
+  const categories = Array.from(new Set(initialProjects.map((project) => project.category)))
+
+  // Filter projects based on search query and active category
+  const filteredProjects = projects.filter((project) => {
+    const matchesSearch =
+      searchQuery === "" ||
+      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+
+    const matchesCategory = activeCategory === "All" || project.category === activeCategory
+
+    return matchesSearch && matchesCategory
+  })
+
+  return (
+    <div className="space-y-6">
+      <div className="relative">
+        <input
+          type="text"
+          placeholder="Search projects by title, description, or tags..."
+          className="w-full rounded-md border border-input bg-background px-4 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          onChange={(e) => setSearchQuery(e.target.value)}
+          value={searchQuery}
+        />
+      </div>
+      <div className="flex flex-wrap gap-2">
+        <Button
+          key="All"
+          variant={activeCategory === "All" ? "default" : "secondary"}
+          onClick={() => setActiveCategory("All")}
+        >
+          All
+        </Button>
+        {categories.map((category) => (
+          <Button
+            key={category}
+            variant={category === activeCategory ? "default" : "secondary"}
+            onClick={() => setActiveCategory(category)}
+          >
+            {category}
+          </Button>
+        ))}
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {filteredProjects.map((project) => (
+          <ProjectCard
+            key={project.id}
+            id={project.id}
+            title={project.title}
+            slug={project.slug}
+            description={project.description}
+            longDescription={project.longDescription}
+            image={project.image}
+            demoUrl={project.demoUrl}
+            repoUrl={project.repoUrl}
+            category={project.category}
+            tags={project.tags}
+            completionDate={project.completionDate}
+            status={project.status}
+          />
+        ))}
+        {filteredProjects.length === 0 && (
+          <p className="text-center text-muted-foreground py-8 col-span-2">No projects found matching your criteria.</p>
+        )}
+      </div>
+    </div>
+  )
+}
+

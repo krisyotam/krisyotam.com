@@ -1,0 +1,98 @@
+{
+    "projects": [
+      {
+        "id": "1",
+        "title": "Minimalist Blog Platform",
+        "slug": "minimalist-blog-platform",
+        "description": "A lightweight, fast-loading blog platform built with Next.js and optimized for content creators.",
+        "longDescription": "This minimalist blog platform was designed with performance and simplicity in mind. Built using Next.js, it features server-side rendering, static site generation, and optimized image loading. The platform includes a custom CMS, markdown support, and integrations with popular analytics tools. It's perfect for writers who want a clean, distraction-free environment for their content.",
+        "image": "/projects/minimalist-blog.jpg",
+        "demoUrl": "https://demo.minimalistblog.com",
+        "repoUrl": "https://github.com/krisyotam/minimalist-blog",
+        "category": "Web Development",
+        "tags": ["Next.js", "React", "TypeScript", "Tailwind CSS", "CMS"],
+        "completionDate": "2023-06-15",
+        "status": "Completed"
+      },
+      {
+        "id": "2",
+        "title": "AI Writing Assistant",
+        "slug": "ai-writing-assistant",
+        "description": "An AI-powered writing assistant that helps improve content clarity, grammar, and style.",
+        "longDescription": "The AI Writing Assistant uses natural language processing to analyze text and provide suggestions for improvements. It can detect grammar issues, suggest better word choices, and help maintain a consistent tone throughout your writing. The tool integrates with popular word processors and writing platforms, making it easy to incorporate into your existing workflow. It's designed for writers, students, and professionals who want to enhance their writing quality.",
+        "image": "/projects/ai-writing-assistant.jpg",
+        "demoUrl": "https://aiwriting.krisyotam.com",
+        "repoUrl": "https://github.com/krisyotam/ai-writing-assistant",
+        "category": "Artificial Intelligence",
+        "tags": ["NLP", "Machine Learning", "Python", "React", "API"],
+        "completionDate": "2023-09-22",
+        "status": "In Progress"
+      },
+      {
+        "id": "3",
+        "title": "Digital Garden",
+        "slug": "digital-garden",
+        "description": "A personal knowledge management system for cultivating ideas and connecting thoughts.",
+        "longDescription": "The Digital Garden is a personal knowledge management system inspired by the concept of digital gardening. It allows users to create, connect, and cultivate ideas over time. Unlike traditional note-taking apps, it emphasizes non-linear exploration and the evolution of thoughts. Features include bidirectional linking, visual graph exploration, and spaced repetition for learning. It's built with privacy in mind, with all data stored locally by default.",
+        "image": "/projects/digital-garden.jpg",
+        "demoUrl": "https://garden.krisyotam.com",
+        "repoUrl": "https://github.com/krisyotam/digital-garden",
+        "category": "Productivity",
+        "tags": ["Knowledge Management", "React", "LocalStorage", "Graph Database", "Markdown"],
+        "completionDate": "2023-04-10",
+        "status": "Completed"
+      },
+      {
+        "id": "4",
+        "title": "Mindful Reading App",
+        "slug": "mindful-reading-app",
+        "description": "An app designed to promote focused, mindful reading in a distraction-free environment.",
+        "longDescription": "The Mindful Reading App creates a serene, distraction-free environment for reading digital content. It features customizable typography, gentle reading timers, and progress tracking to encourage regular reading habits. The app includes a bionic reading mode that helps improve focus and reading speed by highlighting key parts of words. It also offers ambient background sounds designed to enhance concentration. Perfect for readers who want to cultivate a more mindful relationship with digital text.",
+        "image": "/projects/mindful-reading.jpg",
+        "demoUrl": "https://read.krisyotam.com",
+        "repoUrl": "https://github.com/krisyotam/mindful-reading",
+        "category": "Wellness",
+        "tags": ["React Native", "Typography", "Focus", "Mobile App", "Wellness"],
+        "completionDate": "2023-02-28",
+        "status": "Completed"
+      },
+      {
+        "id": "5",
+        "title": "Code Snippet Manager",
+        "slug": "code-snippet-manager",
+        "description": "A developer tool for organizing, searching, and sharing useful code snippets.",
+        "longDescription": "The Code Snippet Manager helps developers organize their collection of useful code snippets. It features syntax highlighting for over 100 programming languages, powerful search capabilities, and tagging for easy organization. Snippets can be shared publicly or kept private, and the platform includes version history to track changes over time. The tool integrates with popular IDEs and offers keyboard shortcuts for power users. It's designed to be a developer's second brain for all those useful bits of code you don't want to forget.",
+        "image": "/projects/code-snippet-manager.jpg",
+        "demoUrl": "https://snippets.krisyotam.com",
+        "repoUrl": "https://github.com/krisyotam/code-snippets",
+        "category": "Developer Tools",
+        "tags": ["Vue.js", "Firebase", "Code Editor", "Syntax Highlighting", "Search"],
+        "completionDate": "2023-08-05",
+        "status": "Completed"
+      },
+      {
+        "id": "6",
+        "title": "Sustainable Living Tracker",
+        "slug": "sustainable-living-tracker",
+        "description": "An app that helps users track and reduce their environmental impact through daily choices.",
+        "longDescription": "The Sustainable Living Tracker helps environmentally conscious individuals monitor and reduce their carbon footprint. It tracks various aspects of daily life including transportation, energy usage, food consumption, and purchasing habits. The app provides personalized recommendations based on user behavior and offers challenges to encourage sustainable choices. It includes a community feature where users can share tips and celebrate milestones together. Data visualizations help users understand their impact over time and identify areas for improvement.",
+        "image": "/projects/sustainable-tracker.jpg",
+        "demoUrl": "https://sustainable.krisyotam.com",
+        "repoUrl": "https://github.com/krisyotam/sustainable-tracker",
+        "category": "Lifestyle",
+        "tags": ["React", "D3.js", "Progressive Web App", "Gamification", "Sustainability"],
+        "completionDate": "2023-11-10",
+        "status": "In Progress"
+      }
+    ],
+    "categories": [
+      "Web Development",
+      "Artificial Intelligence",
+      "Productivity",
+      "Wellness",
+      "Developer Tools",
+      "Lifestyle"
+    ]
+  }
+  
+  
