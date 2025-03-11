@@ -31,7 +31,7 @@ function PostNotFound({ slug }: { slug: string }) {
 export default async function PostPage({
   params,
 }: {
-  params: { year: string; slug: string };
+  params: { year: string; slug: string }; // Ensure year and slug are being passed correctly
 }) {
   try {
     console.log(`Rendering post with slug: ${params.slug} from year: ${params.year}`);
@@ -41,7 +41,7 @@ export default async function PostPage({
 
     if (!postData) {
       console.log(`Post not found in feed data: ${params.slug}`);
-      notFound();
+      notFound(); // Handles post not found
     }
 
     // For Ghost posts, we render the HTML content
@@ -60,7 +60,7 @@ export default async function PostPage({
 
     // For TSX posts, get the content component dynamically
     if (postData.type === "tsx") {
-      // Dynamically import the post content
+      // Dynamically import the post content based on the slug
       const ContentModule = await postContent[params.slug as keyof typeof postContent]?.();
       const PostContent = ContentModule?.default ?? null;
 
