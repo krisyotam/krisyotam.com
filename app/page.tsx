@@ -12,10 +12,24 @@ export const revalidate = 0
 
 export default async function Home() {
   try {
+    // Fetch all posts and log the data for debugging
     const posts = await getAllPosts()
+
+    // Ensure posts are available and in the expected format
+    if (!posts || !Array.isArray(posts)) {
+      console.error("Error: Posts data is missing or not an array")
+      return (
+        <div className="min-h-screen flex items-center justify-center">
+          <p className="text-xl text-gray-600 dark:text-gray-400">
+            Failed to load posts. Please try again later.
+          </p>
+        </div>
+      )
+    }
+
     console.log(
       "Home page posts:",
-      posts.map((p) => ({ slug: p.slug, type: p.type, date: p.date })),
+      posts.map((p) => ({ slug: p.slug, type: p.type, date: p.date }))
     )
 
     const randomQuote = getRandomQuote()
@@ -32,20 +46,28 @@ export default async function Home() {
             </header>
             <main>
               <div className="space-y-12">
-                {posts.map((post) => (
-                  <BlogPost
-                    key={post.slug}
-                    slug={post.slug}
-                    type={post.type}
-                    title={post.title}
-                    date={new Date(post.date).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                    excerpt={post.preview}
-                  />
-                ))}
+                {posts.map((post) => {
+                  // Ensure post data is available before rendering each BlogPost
+                  if (!post.slug || !post.type || !post.date || !post.preview) {
+                    console.error("Missing post data:", post)
+                    return null // Skip rendering this post if any required field is missing
+                  }
+
+                  return (
+                    <BlogPost
+                      key={post.slug}
+                      slug={post.slug}
+                      type={post.type}
+                      title={post.title}
+                      date={new Date(post.date).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                      excerpt={post.preview}
+                    />
+                  )
+                })}
               </div>
             </main>
           </div>
@@ -61,4 +83,3 @@ export default async function Home() {
     )
   }
 }
-
