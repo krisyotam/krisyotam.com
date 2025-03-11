@@ -1,3 +1,5 @@
+"use client"
+
 import * as Typography from "@/components/typography"
 import { Art7x4 } from "@/components/posts/art/art-7x4"
 
