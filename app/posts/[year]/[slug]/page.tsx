@@ -1,10 +1,10 @@
-import { notFound } from "next/navigation"
-import { PostHeader } from "@/components/post-header"
-import { getPostBySlug } from "@/utils/posts"
-import { Suspense } from "react"
-import { postContent } from "@/app/posts/content"
+import { notFound } from "next/navigation";
+import { PostHeader } from "@/components/post-header";
+import { getPostBySlug } from "@/utils/posts";
+import { Suspense } from "react";
+import { postContent } from "@/app/posts/content";
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 
 // Fallback content component when a post is not found
 function PostNotFound({ slug }: { slug: string }) {
@@ -25,23 +25,23 @@ function PostNotFound({ slug }: { slug: string }) {
         Also ensure that the content is registered in <code>app/posts/content/index.ts</code>.
       </p>
     </div>
-  )
+  );
 }
 
 export default async function PostPage({
   params,
 }: {
-  params: { year: string; slug: string }
+  params: { year: string; slug: string };
 }) {
   try {
-    console.log(`Rendering post with slug: ${params.slug} from year: ${params.year}`)
+    console.log(`Rendering post with slug: ${params.slug} from year: ${params.year}`);
 
     // Get post data from our posts utility
-    const postData = await getPostBySlug(params.slug)
+    const postData = await getPostBySlug(params.slug);
 
     if (!postData) {
-      console.log(`Post not found in feed data: ${params.slug}`)
-      notFound()
+      console.log(`Post not found in feed data: ${params.slug}`);
+      notFound();
     }
 
     // For Ghost posts, we render the HTML content
@@ -55,13 +55,14 @@ export default async function PostPage({
             </article>
           </div>
         </div>
-      )
+      );
     }
 
-    // For TSX posts, get the content component from the registry
+    // For TSX posts, get the content component dynamically
     if (postData.type === "tsx") {
-      // Get the content component
-      const PostContent = postContent[params.slug as keyof typeof postContent] ?? null;
+      // Dynamically import the post content
+      const ContentModule = await postContent[params.slug as keyof typeof postContent]?.();
+      const PostContent = ContentModule?.default ?? null;
 
       return (
         <div className="relative min-h-screen bg-background text-foreground">
@@ -76,13 +77,13 @@ export default async function PostPage({
             </article>
           </div>
         </div>
-      )
+      );
     }
 
     // If we get here, something went wrong
-    return notFound()
+    return notFound();
   } catch (error) {
-    console.error("Failed to render post:", error)
+    console.error("Failed to render post:", error);
     return (
       <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
         <div className="max-w-3xl mx-auto p-8">
@@ -93,7 +94,6 @@ export default async function PostPage({
           </pre>
         </div>
       </div>
-    )
+    );
   }
 }
-
