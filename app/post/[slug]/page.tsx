@@ -1,39 +1,100 @@
-import { getPostBySlug } from "../../../utils/posts"
 import { notFound } from "next/navigation"
 import { PostHeader } from "@/components/post-header"
+import { getPostBySlug } from "@/utils/posts"
+import { Suspense } from "react"
+import { postContent } from "@/app/posts/content"
 
 export const dynamic = "force-dynamic"
-export const revalidate = 0
+
+// Fallback content component when a post is not found
+function PostNotFound({ slug }: { slug: string }) {
+  return (
+    <div className="post-content">
+      <h1>Post Content Not Found</h1>
+      <p>We couldn't find the content for the post "{slug}". This could be because:</p>
+      <ul>
+        <li>The content file doesn't exist</li>
+        <li>There was an error importing the content</li>
+        <li>The post metadata exists but the content is missing</li>
+      </ul>
+      <p>
+        Please check that the content file exists at <code>app/posts/content/{slug}.tsx</code> and that it exports a
+        default React component.
+      </p>
+      <p>
+        Also ensure that the content is registered in <code>app/posts/content/index.ts</code>.
+      </p>
+    </div>
+  )
+}
 
 export default async function PostPage({
   params,
 }: {
-  params: { slug: string }
+  params: { year: string; slug: string } // Ensure year and slug are being passed correctly
 }) {
   try {
-    const post = await getPostBySlug(params.slug)
+    console.log(`Rendering post with slug: ${params.slug} from year: ${params.year}`)
 
-    if (!post || post.type !== "ghost" || !post.html) {
-      notFound()
+    // Get post data from our posts utility
+    const postData = await getPostBySlug(params.slug)
+
+    if (!postData) {
+      console.log(`Post not found in feed data: ${params.slug}`)
+      notFound() // Handles post not found
     }
 
-    return (
-      <div className="relative min-h-screen bg-background text-foreground">
-        <div className="max-w-3xl mx-auto p-8 md:p-16 lg:p-24">
-          <PostHeader title={post.title} date={post.date} tags={post.tags} category={post.category} />
-          <article className="prose dark:prose-invert max-w-none">
-            <div dangerouslySetInnerHTML={{ __html: post.html }} className="post-content text-foreground" />
-          </article>
+    // **Fix:** Ensure the post type is being detected correctly
+    if (postData.type === "ghost" && postData.html) {
+      // If it's a "ghost" post, render the HTML content
+      return (
+        <div className="relative min-h-screen bg-background text-foreground">
+          <div className="max-w-3xl mx-auto p-8 md:p-16 lg:p-24">
+            <PostHeader title={postData.title} date={postData.date} tags={postData.tags} category={postData.category} />
+            <article className="prose dark:prose-invert max-w-none">
+              <div dangerouslySetInnerHTML={{ __html: postData.html }} className="post-content" />
+            </article>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
+
+    // **Fix:** If it's a "tsx" post, dynamically import the content
+    if (postData.type === "tsx") {
+      // Dynamically import the post content based on the slug
+      const ContentModule = await postContent[params.slug as keyof typeof postContent]?.()
+      const PostContent = ContentModule?.default ?? null
+
+      return (
+        <div className="relative min-h-screen bg-background text-foreground">
+          <div className="max-w-3xl mx-auto p-8 md:p-16 lg:p-24">
+            <PostHeader title={postData.title} date={postData.date} tags={postData.tags} category={postData.category} />
+            <article className="prose dark:prose-invert max-w-none">
+              <div className="post-content">
+                <Suspense fallback={<div>Loading post content...</div>}>
+                  {PostContent ? <PostContent /> : <PostNotFound slug={params.slug} />}
+                </Suspense>
+              </div>
+            </article>
+          </div>
+        </div>
+      )
+    }
+
+    // If we get here, something went wrong
+    return notFound()
   } catch (error) {
-    console.error("Failed to fetch post:", error)
+    console.error("Failed to render post:", error)
     return (
       <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
-        <p className="text-xl text-muted-foreground">Failed to load post. Please try again later.</p>
+        <div className="max-w-3xl mx-auto p-8">
+          <h1 className="text-2xl font-bold mb-4">Error Loading Post</h1>
+          <p className="text-xl text-muted-foreground mb-4">We encountered an error while trying to load this post.</p>
+          <pre className="bg-secondary p-4 rounded-md overflow-auto">
+            {error instanceof Error ? error.message : String(error)}
+          </pre>
+        </div>
       </div>
     )
   }
 }
-
