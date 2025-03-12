@@ -1,0 +1,75 @@
+{
+    "books": [
+      {
+        "isbn": "9780140275360",
+        "title": "The Iliad",
+        "authors": ["Homer"],
+        "category": "Epic Poetry",
+        "tags": ["Greek mythology", "Ancient literature"]
+      },
+      {
+        "isbn": "9780872207547",
+        "title": "The Canterbury Tales",
+        "authors": ["Geoffrey Chaucer"],
+        "category": "Medieval Poetry",
+        "tags": ["Middle English", "Classic"]
+      },
+      {
+        "isbn": "0393974995",
+        "title": "The Waste Land",
+        "authors": ["T.S. Eliot"],
+        "category": "Modernist Poetry",
+        "tags": ["20th century", "Symbolism"]
+      },
+      {
+        "isbn": "9780486456768",
+        "title": "Leaves of Grass",
+        "authors": ["Walt Whitman"],
+        "category": "American Poetry",
+        "tags": ["Transcendentalism", "Free verse"]
+      },
+      {
+        "isbn": "978-5678901234",
+        "title": "The Raven and Other Poems",
+        "authors": ["Edgar Allan Poe"],
+        "category": "Gothic Poetry",
+        "tags": ["Horror", "Dark Romanticism"]
+      },
+      {
+        "isbn": "978-6789012345",
+        "title": "Paradise Lost",
+        "authors": ["John Milton"],
+        "category": "Epic Poetry",
+        "tags": ["Biblical", "Classic"]
+      },
+      {
+        "isbn": "978-7890123456",
+        "title": "The Odyssey",
+        "authors": ["Homer"],
+        "category": "Epic Poetry",
+        "tags": ["Greek mythology", "Adventure"]
+      },
+      {
+        "isbn": "978-8901234567",
+        "title": "Howl and Other Poems",
+        "authors": ["Allen Ginsberg"],
+        "category": "Beat Poetry",
+        "tags": ["Counterculture", "20th century"]
+      },
+      {
+        "isbn": "978-9012345678",
+        "title": "Selected Poems of Emily Dickinson",
+        "authors": ["Emily Dickinson"],
+        "category": "American Poetry",
+        "tags": ["Lyric poetry", "Classic"]
+      },
+      {
+        "isbn": "978-0123456789",
+        "title": "The Divine Comedy",
+        "authors": ["Dante Alighieri"],
+        "category": "Epic Poetry",
+        "tags": ["Italian literature", "Allegory"]
+      }
+    ]
+  }
+  

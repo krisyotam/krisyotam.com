@@ -1,95 +1,74 @@
-"use client"
+// components/book-list.tsx
 
-import { useQuery, gql } from "@apollo/client"
-import { BookCard } from "./book-card"
-import booksData from "../data/books.json"
-import { useState, useMemo } from "react"
-import { BookSearch } from "./book-search"
-import { Button } from "@/components/ui/button"
+import { useMemo, useState } from "react";
+import { BookCard } from "./book-card"; // Import the new BookCard component
+import { Button } from "@/components/ui/button";
 
-const GET_BOOK_BY_ISBN = gql`
-  query GetBookByIsbn($isbn13: String!) {
-    book(where: {isbn13: $isbn13}) {
-      id
-      slug
-      title
-      subtitle
-      authors {
-        name
-      }
-      cover
-    }
-  }
-`
-
+// Define types for the books prop
 interface BookItemProps {
-  isbn13: string
-  title: string
-  authors: string[]
+  isbn: string;
+  title: string;
+  authors: string[];
+  category: string;
+  tags: string[];
 }
 
-function BookItem({ isbn13, title, authors }: BookItemProps) {
-  const { data, loading, error } = useQuery(GET_BOOK_BY_ISBN, {
-    variables: { isbn13 },
-    fetchPolicy: "network-only",
-  })
-
-  if (loading) return <div className="animate-pulse bg-muted rounded-lg h-[140px]"></div>
-
-  if (error || !data?.book) {
-    console.error(`Error fetching book with ISBN ${isbn13}:`, error)
-    return (
-      <BookCard
-        coverUrl="/placeholder.svg"
-        title={title}
-        author={authors.join(", ")}
-        rating={0}
-        isInteractive={false}
-      />
-    )
-  }
-
-  const book = data.book
-
-  return (
-    <BookCard
-      coverUrl={book.cover || "/placeholder.svg"}
-      title={book.title}
-      subtitle={book.subtitle}
-      author={book.authors.map((a: { name: string }) => a.name).join(", ") || authors.join(", ")}
-      rating={0}
-      isInteractive={false}
-    />
-  )
+interface BookListProps {
+  books: {
+    isbn: string; // ISBN
+    title: string;
+    authors: string[];
+    category: string;
+    tags: string[];
+  }[]; // Book list from the JSON
 }
 
-export function BookList() {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [activeCategory, setActiveCategory] = useState<string>("All")
+export function BookList({ books }: BookListProps) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<string>("All");
 
+  // Dynamically extract categories from the books data
   const categories = useMemo(() => {
-    const categorySet = new Set(booksData.books.map((book) => book.category))
-    return ["All", ...Array.from(categorySet)].sort((a, b) => (a === "All" ? -1 : b === "All" ? 1 : a.localeCompare(b)))
-  }, [])
+    try {
+      const categorySet = new Set(books.map((book) => book.category));
+      return ["All", ...Array.from(categorySet)].sort((a, b) =>
+        a === "All" ? -1 : b === "All" ? 1 : a.localeCompare(b)
+      );
+    } catch (error) {
+      console.error("Error extracting categories: ", error);
+      return ["All"]; // Return default category if an error occurs
+    }
+  }, [books]);
 
   const filteredBooks = useMemo(() => {
-    return booksData.books.filter((book) => {
-      const matchesSearch =
-        searchQuery === "" ||
-        book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        book.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        book.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        book.authors.some((author) => author.toLowerCase().includes(searchQuery.toLowerCase()))
+    try {
+      return books.filter((book) => {
+        const matchesSearch =
+          searchQuery === "" ||
+          book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          book.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          book.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
+          book.authors.some((author) => author.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      const matchesCategory = activeCategory === "All" || book.category === activeCategory
+        const matchesCategory = activeCategory === "All" || book.category === activeCategory;
 
-      return matchesSearch && matchesCategory
-    })
-  }, [searchQuery, activeCategory])
+        return matchesSearch && matchesCategory;
+      });
+    } catch (error) {
+      console.error("Error filtering books: ", error);
+      return []; // Return empty list if error occurs during filtering
+    }
+  }, [searchQuery, activeCategory, books]);
 
   return (
     <div className="space-y-6">
-      <BookSearch onSearch={setSearchQuery} />
+      <input
+        type="text"
+        placeholder="Search books..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="w-full p-2 border rounded-md"
+      />
       {categories.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {categories.map((category) => (
@@ -107,14 +86,14 @@ export function BookList() {
         </div>
       )}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {filteredBooks.map((book) => (
-          <BookItem key={book.isbn13} isbn13={book.isbn13} title={book.title} authors={book.authors} />
-        ))}
-        {filteredBooks.length === 0 && (
+        {filteredBooks.length > 0 ? (
+          filteredBooks.map((book) => (
+            <BookCard key={book.isbn} isbn={book.isbn} />
+          ))
+        ) : (
           <p className="text-center text-muted-foreground py-8 col-span-2">No books found matching your criteria.</p>
         )}
       </div>
     </div>
-  )
+  );
 }
-
