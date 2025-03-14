@@ -407,38 +407,20 @@
 
 /* Font declarations */
 @font-face {
-  font-family: "Inter";
+  font-family: "Outfit";
   font-style: normal;
-  font-weight: 300;
+  font-weight: 100 900; /* Full range for variable font */
   font-display: swap;
-  src: url("/fonts/inter-latin-300-normal.woff") format("woff");
+  src: url("/fonts/outfit.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("/fonts/inter-latin-500-normal.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("/fonts/inter-latin-600-normal.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Roboto Mono";
+  font-family: "Outfit Mono";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("/fonts/roboto-mono-latin-400-normal.woff") format("woff");
+  src: url("/fonts/space-mono-400.woff2") format("woff2");
 }
-
-
 
 
 @layer utilities {
@@ -551,4 +533,81 @@
 /* globals.css */
 
 /* globals.css */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

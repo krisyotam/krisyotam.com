@@ -6,13 +6,14 @@ interface BlogPostProps {
   title: string
   date: string
   excerpt: string
-  type: "tsx" | "ghost"; // Add this line
+  type: "tsx" // Updated to only include "tsx"
 }
 
 export const BlogPost = memo(function BlogPost({ title, date, excerpt, slug }: BlogPostProps) {
+  // IMPORTANT: Make sure the link has a leading slash
   return (
     <article className="group pl-8 max-w-2xl">
-      <Link href={`/post/${slug}`} className="block">
+      <Link href={`/${slug}`} className="block">
         <h2 className="text-xl font-condensed font-normal mb-2 text-black dark:text-white group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors duration-200 lowercase">
           {title}
         </h2>

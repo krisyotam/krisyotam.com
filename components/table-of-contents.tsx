@@ -1,74 +1,87 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect } from "react"
-import { ChevronDown, ChevronUp } from "lucide-react"
+import { Card } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 
 interface TOCItem {
   id: string
   text: string
   level: number
+  children?: TOCItem[]
 }
 
-export function TableOfContents({ content }: { content: string }) {
-  const [toc, setToc] = useState<TOCItem[]>([])
-  const [isOpen, setIsOpen] = useState(true)
+interface TableOfContentsProps {
+  className?: string
+  headings?: TOCItem[]
+  style?: React.CSSProperties
+}
+
+export function TableOfContents({ className, headings = [], style }: TableOfContentsProps) {
+  const [activeId, setActiveId] = useState<string>("")
 
   useEffect(() => {
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(content, "text/html")
-    const headings = doc.querySelectorAll("h1, h2, h3, h4, h5, h6")
-    const tocItems: TOCItem[] = Array.from(headings).map((heading, index) => ({
-      id: `heading-${index}`,
-      text: heading.textContent || "",
-      level: Number.parseInt(heading.tagName[1]),
-    }))
-    setToc(tocItems)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id)
+          }
+        })
+      },
+      { rootMargin: "0px 0px -80% 0px" },
+    )
 
-    // Add IDs to the actual content
-    const contentElement = document.querySelector(".book-content")
-    if (contentElement) {
-      const realHeadings = contentElement.querySelectorAll("h1, h2, h3, h4, h5, h6")
-      realHeadings.forEach((heading, index) => {
-        heading.id = `heading-${index}`
-      })
+    const headingElements = document.querySelectorAll("h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]")
+    headingElements.forEach((element) => observer.observe(element))
+
+    return () => {
+      headingElements.forEach((element) => observer.unobserve(element))
     }
-  }, [content]) // Added content to the dependency array
+  }, [])
 
-  if (toc.length === 0) return null
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id)
+    if (element) {
+      // Scroll the element into view with smooth behavior
+      element.scrollIntoView({ behavior: "smooth", block: "start" })
+      // Update the active ID
+      setActiveId(id)
+    }
+  }
+
+  const renderItems = (items: TOCItem[], depth = 0) => {
+    return items.map((item, index) => {
+      const isActive = activeId === item.id
+      const hasChildren = item.children && item.children.length > 0
+
+      return (
+        <div key={item.id} className={cn("text-sm", depth > 0 && "ml-4")}>
+          <button
+            className={cn(
+              "flex items-baseline py-1 hover:text-foreground transition-colors text-left w-full",
+              isActive ? "text-foreground font-medium" : "text-muted-foreground",
+            )}
+            onClick={() => scrollToSection(item.id)}
+          >
+            <span className="mr-2 text-muted-foreground">{depth === 0 ? `${index + 1}` : `${index + 1}.${depth}`}</span>
+            <span className="line-clamp-1">{item.text}</span>
+          </button>
+          {hasChildren && renderItems(item.children!, depth + 1)}
+        </div>
+      )
+    })
+  }
 
   return (
-    <div className="mb-8 border rounded-lg overflow-hidden">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center p-4 bg-secondary text-secondary-foreground font-semibold"
-      >
-        Table of Contents
-        {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-      </button>
-      {isOpen && (
-        <nav className="p-4">
-          <ul className="space-y-2">
-            {toc.map((item) => (
-              <li key={item.id} style={{ marginLeft: `${(item.level - 1) * 1.5}rem` }}>
-                <a
-                  href={`#${item.id}`}
-                  className="text-sm hover:underline cursor-pointer"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    const element = document.getElementById(item.id)
-                    if (element) {
-                      element.scrollIntoView({ behavior: "smooth" })
-                    }
-                  }}
-                >
-                  {item.text}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      )}
-    </div>
+    <Card className={cn("p-4 bg-card text-card-foreground border-border", className)} style={style}>
+      <div className="text-sm font-medium mb-3">Table of Contents</div>
+      <div className="space-y-1">{renderItems(headings)}</div>
+    </Card>
   )
 }
+
+export default TableOfContents
 

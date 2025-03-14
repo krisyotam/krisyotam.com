@@ -26,6 +26,7 @@ import { CurrentlyListening } from "@/components/CurrentlyListening"
 import { CurrentlyReading } from "@/components/CurrentlyReading"
 import NameBreakdown from "@/components/name-breakdown"
 import PersonalBio from "@/components/personal-bio"
+import myMethodsData from "../../data/my-methods.json"
 
 export const dynamic = "force-dynamic"
 
@@ -247,6 +248,45 @@ export default function AboutPage() {
                     Bio Generator
                   </Button>
                 </a>
+              </div>
+            </>
+          ),
+        },
+        {
+          title: "On My Method",
+          content: (
+            <>
+              <div className="mb-6">
+                <p className="text-lg text-muted-foreground font-light">
+                  A collection of evolving essays detailing my systems, processes, and philosophies on learning,
+                  creativity, and problem-solving.
+                </p>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-secondary">
+                      <th className="px-4 py-2 text-left text-foreground">Title</th>
+                      <th className="px-4 py-2 text-left text-foreground">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {myMethodsData.methods.map((item, index) => (
+                      <tr
+                        key={index}
+                        className="border-t border-border hover:bg-secondary/50 transition-colors duration-200 cursor-pointer"
+                        onClick={() => (window.location.href = item.link)}
+                      >
+                        <td className="px-4 py-2 text-foreground">
+                          <Link href={item.link} className="hover:text-gray-400 transition-colors">
+                            {item.title}
+                          </Link>
+                        </td>
+                        <td className="px-4 py-2 text-muted-foreground">{item.description}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </>
           ),

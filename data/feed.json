@@ -6,8 +6,10 @@
       "date": "2025-05-25",
       "tags": ["Design", "Documentation", "Web Development"],
       "category": "Design",
-      "type": "tsx",
-      "slug": "feature-testing"
+      "slug": "feature-testing",
+      "status": "active",
+      "headings": [],
+      "marginNotes": []
     },
     {
       "title": "The Art of Mindful Coding",
@@ -15,17 +17,21 @@
       "date": "2025-05-20",
       "tags": ["Programming", "Mindfulness", "Productivity"],
       "category": "Technology",
-      "type": "tsx",
-      "slug": "mindful-coding"
+      "slug": "mindful-coding",
+      "status": "active",
+      "headings": [],
+      "marginNotes": []
     },
     {
-      "title": "Poetry Recommendations",
+      "title": "On Classical Poetry",
       "preview": "A curated collection of timeless poetry works that have shaped literature through the ages.",
       "date": "2025-05-15",
       "tags": ["Literature", "Poetry", "Recommendations"],
-      "category": "Literature",
-      "type": "tsx",
-      "slug": "poetry-recommendations"
+      "category": "On Building a Personal Library",
+      "slug": "poetry-recommendations",
+      "status": "active",
+      "headings": [],
+      "marginNotes": []
     },
     {
       "title": "Law 1: Never Outshine the Master",
@@ -33,8 +39,10 @@
       "date": "2025-05-01",
       "tags": ["Philosophy", "Strategy", "Power Dynamics"],
       "category": "Philosophy",
-      "type": "ghost",
-      "slug": "law-1-never-outshine-the-master"
+      "slug": "law-1-never-outshine-the-master",
+      "status": "hidden",
+      "headings": [],
+      "marginNotes": []
     },
     {
       "title": "The Starry Night",
@@ -42,9 +50,33 @@
       "date": "2025-07-07",
       "tags": ["Van Gogh", "Art", "Expressionism", "Masterpiece", "Symbolism"],
       "category": "Art",
-      "type": "tsx",
-      "slug": "the-starry-night"
-    }       
+      "slug": "the-starry-night",
+      "status": "active",
+      "headings": [],
+      "marginNotes": []
+    },
+    {
+      "title": "Demo Post",
+      "preview": "An in-depth exploration of Vincent van Gogh's iconic painting, *The Starry Night*, and its emotional, artistic, and symbolic significance.",
+      "date": "2025-09-07",
+      "tags": ["Van Gogh", "Art", "Expressionism", "Masterpiece", "Symbolism"],
+      "category": "Art",
+      "slug": "demo-post",
+      "status": "active",
+      "headings": [],
+      "marginNotes": []
+    },
+    {
+      "title": "Hidden Demo Post",
+      "preview": "This is a hidden post that demonstrates the hidden status functionality.",
+      "date": "2025-10-01",
+      "tags": ["Demo", "Hidden", "Test"],
+      "category": "Examples",
+      "slug": "hidden-demo-post",
+      "status": "hidden",
+      "headings": [],
+      "marginNotes": []
+    }
   ]
 }
 

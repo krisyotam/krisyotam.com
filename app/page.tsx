@@ -1,5 +1,5 @@
 import { BlogPost } from "../components/blog-post"
-import { getAllPosts } from "../utils/posts"
+import { getActivePosts, getPostYear } from "../utils/posts"
 import quotesData from "../data/header-quotes.json"
 
 function getRandomQuote() {
@@ -12,25 +12,24 @@ export const revalidate = 0
 
 export default async function Home() {
   try {
-    // Fetch all posts and log the data for debugging
-    const posts = await getAllPosts()
+    // Fetch active posts directly using the getActivePosts function
+    const posts = await getActivePosts()
+
+    // DEBUG: Log the posts being rendered
+    console.log(
+      "🔍 DEBUG: Home page rendering with posts:",
+      posts.map((p) => ({ slug: p.slug, date: p.date, year: getPostYear(p.date) })),
+    )
 
     // Ensure posts are available and in the expected format
     if (!posts || !Array.isArray(posts)) {
       console.error("Error: Posts data is missing or not an array")
       return (
         <div className="min-h-screen flex items-center justify-center">
-          <p className="text-xl text-gray-600 dark:text-gray-400">
-            Failed to load posts. Please try again later.
-          </p>
+          <p className="text-xl text-gray-600 dark:text-gray-400">Failed to load posts. Please try again later.</p>
         </div>
       )
     }
-
-    console.log(
-      "Home page posts:",
-      posts.map((p) => ({ slug: p.slug, type: p.type, date: p.date }))
-    )
 
     const randomQuote = getRandomQuote()
 
@@ -44,20 +43,30 @@ export default async function Home() {
                 "{randomQuote.text}" - {randomQuote.author}
               </p>
             </header>
+
             <main>
               <div className="space-y-12">
                 {posts.map((post) => {
                   // Ensure post data is available before rendering each BlogPost
-                  if (!post.slug || !post.type || !post.date || !post.preview) {
+                  if (!post.slug || !post.date || !post.preview) {
                     console.error("Missing post data:", post)
                     return null // Skip rendering this post if any required field is missing
                   }
 
+                  // Get the year from the post date for the URL
+                  const year = getPostYear(post.date)
+
+                  // Create the correct slug path - IMPORTANT: This is where we define the link path
+                  const slugPath = `blog/${year}/${post.slug}`
+
+                  // DEBUG: Log the slug path being used
+                  console.log(`🔍 DEBUG: Creating link for post ${post.slug} with path: ${slugPath}`)
+
                   return (
                     <BlogPost
                       key={post.slug}
-                      slug={post.slug}
-                      type={post.type}
+                      slug={slugPath}
+                      type="tsx"
                       title={post.title}
                       date={new Date(post.date).toLocaleDateString("en-US", {
                         month: "short",
@@ -83,3 +92,4 @@ export default async function Home() {
     )
   }
 }
+

@@ -1,159 +1,68 @@
-"use client"
-
-import { useState, useEffect } from "react"
+import { Star } from "lucide-react"
 import Image from "next/image"
+import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Card, CardContent } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
-import { getBookByIsbn } from "@/lib/literal-api"
+import { useQuery, gql } from "@apollo/client"
 
-// Add a style block to reset margins on specific elements
-const resetStyles = `
-  .book-card-wrapper * {
-    margin-top: 0 !important;
-  }
-  .book-card-wrapper h1, 
-  .book-card-wrapper h2, 
-  .book-card-wrapper h3, 
-  .book-card-wrapper h4, 
-  .book-card-wrapper h5, 
-  .book-card-wrapper h6, 
-  .book-card-wrapper p {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
-  .book-card-wrapper {
-    padding-top: 1px !important;
-    margin-top: 0 !important;
+const GET_BOOK_COVER = gql`
+  query GetBookCover($isbn: String!) {
+    book(where: { isbn13: $isbn }) {
+      cover
+    }
   }
 `
 
 interface BookCardProps {
   isbn: string
+  title: string
+  authors: string[]
+  rating: number
+  isInteractive?: boolean
 }
 
-export function BookCard({ isbn }: BookCardProps) {
-  const [book, setBook] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+export function BookCard({ isbn, title, authors, rating, isInteractive = false }: BookCardProps) {
+  const { data, loading, error } = useQuery(GET_BOOK_COVER, {
+    variables: { isbn },
+  })
 
-  useEffect(() => {
-    async function fetchBook() {
-      setLoading(true)
-      setError(null)
-
-      try {
-        const bookData = await getBookByIsbn(isbn)
-        setBook(bookData)
-        if (!bookData) {
-          setError("Book not found")
-        }
-      } catch (err) {
-        setError("Failed to fetch book data")
-        console.error(err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    if (isbn) {
-      fetchBook()
-    }
-  }, [isbn])
-
-  if (loading) {
-    return (
-      <>
-        <style jsx>{resetStyles}</style>
-        <div className="book-card-wrapper">
-          <Card className="!overflow-hidden !transition-all">
-            <div className="!aspect-[2/3] !relative" style={{ width: "100%", overflow: "hidden" }}>
-              <Skeleton className="!h-full !w-full" style={{ position: "absolute", top: 0, left: 0 }} />
-            </div>
-            <CardContent className="!p-4" style={{ overflow: "hidden" }}>
-              <Skeleton className="!h-5 !w-full !mb-2" />
-              <Skeleton className="!h-4 !w-2/3" />
-            </CardContent>
-          </Card>
-        </div>
-      </>
-    )
-  }
-
-  if (error || !book) {
-    return (
-      <>
-        <style jsx>{resetStyles}</style>
-        <div className="book-card-wrapper">
-          <Card className="!overflow-hidden !transition-all">
-            <div
-              className="!aspect-[2/3] !relative !bg-muted !flex !items-center !justify-center"
-              style={{ width: "100%", overflow: "hidden" }}
-            >
-              <p className="!text-sm !text-muted-foreground !px-4 !text-center !font-sans" style={{ margin: 0 }}>
-                Book not found
-              </p>
-            </div>
-            <CardContent className="!p-4" style={{ overflow: "hidden", backgroundColor: "white" }}>
-              <h3
-                className="!font-semibold !line-clamp-1 !mb-1 !text-base !font-sans"
-                style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
-              >
-                Error
-              </h3>
-              <p
-                className="!text-sm !text-muted-foreground !font-sans"
-                style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
-              >
-                {error || "Book not found"}
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </>
-    )
-  }
-
-  const authorNames = book.authors.map((author: any) => author.name).join(", ")
+  const coverUrl = data?.book?.cover || `/placeholder.svg?height=100&width=100`
+  const authorText = authors.join(", ")
 
   return (
-    <>
-      <style jsx>{resetStyles}</style>
-      <div className="book-card-wrapper">
-        <Link
-          href={`https://literal.club/book/${book.slug}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="!block !no-underline !text-inherit hover:!no-underline hover:!text-inherit !border-none !outline-none focus:!outline-none focus:!ring-0"
-        >
-          <Card className="!overflow-hidden !transition-all hover:!shadow-lg hover:!ring-2 hover:!ring-primary hover:!ring-offset-2 !cursor-pointer !border !border-solid !border-gray-200">
-            <div className="!aspect-[2/3] !relative" style={{ width: "100%", overflow: "hidden" }}>
-              <Image
-                src={book.cover || "/placeholder.svg?height=300&width=200"}
-                alt={`Cover of ${book.title}`}
-                fill
-                className="!object-cover"
-                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
-              />
-            </div>
-            <CardContent className="!p-4 !bg-white" style={{ overflow: "hidden" }}>
-              <h3
-                className="!font-semibold !line-clamp-1 !mb-1 !text-base !font-sans !text-gray-900 !no-underline"
-                style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
-              >
-                {book.title}
-              </h3>
-              <p
-                className="!text-sm !text-muted-foreground !font-sans !no-underline"
-                style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
-              >
-                {authorNames}
-              </p>
-            </CardContent>
-          </Card>
-        </Link>
+    <Card
+      className={`flex overflow-hidden transition-colors hover:bg-accent/50 group h-full ${
+        isInteractive ? "cursor-pointer" : ""
+      }`}
+    >
+      <div className="w-[100px] bg-muted p-4 flex items-center justify-center">
+        <div className="relative w-full h-[100px]">
+          {loading ? (
+            <div className="w-full h-full bg-muted animate-pulse" />
+          ) : (
+            <Image src={coverUrl || "/placeholder.svg"} alt={title} fill className="object-cover" />
+          )}
+        </div>
       </div>
-    </>
+      <div className="flex-1 p-4 overflow-hidden flex flex-col justify-between">
+        <div className="space-y-1.5">
+          <h3 className="font-medium leading-tight line-clamp-2">{title}</h3>
+          <p className="text-sm text-muted-foreground truncate">by {authorText}</p>
+        </div>
+        <div className="flex items-center justify-between mt-2">
+          {rating > 0 && (
+            <div className="flex items-center gap-1.5">
+              <Star className="h-4 w-4 fill-primary text-primary" />
+              <span className="text-sm text-muted-foreground">{rating}/5</span>
+            </div>
+          )}
+          {isInteractive && (
+            <Button variant="outline" size="sm" asChild>
+              <Link href={`/books/${isbn}`}>Read</Link>
+            </Button>
+          )}
+        </div>
+      </div>
+    </Card>
   )
 }
-

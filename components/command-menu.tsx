@@ -3,12 +3,13 @@
 import { useState, useEffect } from "react"
 import { Command } from "cmdk"
 import { useRouter } from "next/navigation"
-import { Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll, Earth, Clock, Brain, Waypoints, Notebook} from "lucide-react"
+import { Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll, Earth, Clock, Brain, Waypoints, Notebook, HandCoins, Bitcoin} from "lucide-react"
 import { SnowEffect } from "./snow-effect"
 import { useTheme } from "next-themes"
 
 const menuItems = [
   { icon: Home, label: "Home", path: "/" },
+  { icon: Clock, label: "Now", path: "/now" },
   { icon: List, label: "Categories", path: "/categories" },
   { icon: Quote, label: "Quotes", path: "/quotes" },
   { icon: BookOpen, label: "Books", path: "/books" },
@@ -16,16 +17,18 @@ const menuItems = [
   { icon: Users, label: "OCs", path: "/ocs" },
   { icon: Presentation, label: "Keynotes", path: "/keynotes" },
   { icon: FileText, label: "Speeches", path: "/speeches" },
+  { icon: BookOpen, label: "Poetry", path: "/poetry" },
+  { icon: HandCoins, label: "Nuggets", path: "/nuggets" },
   { icon: Scroll, label: "Theories", path: "/theories" },
   { icon: Notebook, label: "Projects", path: "/projects" },
   { icon: School, label: "Research", path: "/research" },
-  { icon: Gift, label: "Wishlist", path: "/wishlist" },
   { icon: Waypoints, label: "Memory", path: "/memories" },
-  { icon: Heart, label: "Donate", path: "/donate" },
-  { icon: Mail, label: "Contact", path: "/contact" },
-  { icon: Brain, label: "Today I Learned", path: "/til" },
-  { icon: Clock, label: "Now", path: "/now" },
   { icon: Earth, label: "Globe", path: "/globe" },
+  { icon: Gift, label: "Wishlist", path: "/wishlist" },
+  { icon: Brain, label: "Today I Learned", path: "/til" },
+  { icon: Bitcoin, label: "Donate", path: "/donate" },
+  { icon: Mail, label: "Contact", path: "/contact" },
+  { icon: Heart, label: "Colophon", path: "/colophon" },
   { icon: User, label: "About", path: "/about" },
 ]
 

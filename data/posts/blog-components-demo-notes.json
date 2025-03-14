@@ -1,0 +1,24 @@
+[
+  {
+    "id": "note-1",
+    "title": "Marginalia",
+    "content": "Marginalia are notes, comments, or illustrations added in the margins of a book or manuscript. The practice dates back to medieval manuscripts where scholars would annotate texts with their thoughts and references.",
+    "index": 1,
+    "priority": 1
+  },
+  {
+    "id": "note-2",
+    "title": "Navigation Benefits",
+    "content": "Studies show that clear navigation structures like a table of contents can reduce bounce rates by up to 25% on long-form content, as readers can quickly find sections relevant to their interests.",
+    "index": 2,
+    "priority": 1
+  },
+  {
+    "id": "note-3",
+    "title": "Citation Formats",
+    "content": "The Bibliography component supports various citation formats including APA, MLA, and Chicago styles. The format shown here is a simplified version that includes author, year, title, and publisher.",
+    "index": 3,
+    "priority": 2
+  }
+]
+

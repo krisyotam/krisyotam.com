@@ -21,6 +21,8 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  // Add this to ensure the blog routes are handled correctly
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
 }
 
 mergeConfig(nextConfig, userConfig)
@@ -46,3 +48,4 @@ function mergeConfig(nextConfig, userConfig) {
 }
 
 export default nextConfig
+

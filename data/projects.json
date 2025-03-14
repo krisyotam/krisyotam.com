@@ -2,29 +2,29 @@
     "projects": [
       {
         "id": "1",
-        "title": "Minimalist Blog Platform",
+        "title": "Zero to Hero: Pure Mathematics",
         "slug": "minimalist-blog-platform",
         "description": "A lightweight, fast-loading blog platform built with Next.js and optimized for content creators.",
         "longDescription": "This minimalist blog platform was designed with performance and simplicity in mind. Built using Next.js, it features server-side rendering, static site generation, and optimized image loading. The platform includes a custom CMS, markdown support, and integrations with popular analytics tools. It's perfect for writers who want a clean, distraction-free environment for their content.",
-        "image": "/projects/minimalist-blog.jpg",
+        "image": "/zero-to-hero/pure-math.png",
         "demoUrl": "https://demo.minimalistblog.com",
         "repoUrl": "https://github.com/krisyotam/minimalist-blog",
-        "category": "Web Development",
-        "tags": ["Next.js", "React", "TypeScript", "Tailwind CSS", "CMS"],
+        "category": "Education",
+        "tags": ["Algebra", "Calculus", "Trigonometry", "Geometry", "CMS"],
         "completionDate": "2023-06-15",
-        "status": "Completed"
+        "status": "In Progress"
       },
       {
         "id": "2",
-        "title": "AI Writing Assistant",
+        "title": "Zero to Hero: Marine Biology",
         "slug": "ai-writing-assistant",
         "description": "An AI-powered writing assistant that helps improve content clarity, grammar, and style.",
         "longDescription": "The AI Writing Assistant uses natural language processing to analyze text and provide suggestions for improvements. It can detect grammar issues, suggest better word choices, and help maintain a consistent tone throughout your writing. The tool integrates with popular word processors and writing platforms, making it easy to incorporate into your existing workflow. It's designed for writers, students, and professionals who want to enhance their writing quality.",
-        "image": "/projects/ai-writing-assistant.jpg",
+        "image": "/zero-to-hero/marine-biology.png",
         "demoUrl": "https://aiwriting.krisyotam.com",
         "repoUrl": "https://github.com/krisyotam/ai-writing-assistant",
-        "category": "Artificial Intelligence",
-        "tags": ["NLP", "Machine Learning", "Python", "React", "API"],
+        "category": "Education",
+        "tags": ["Ecology", "Biology", "Biodiversity", "Marine Life", "Aquatic"],
         "completionDate": "2023-09-22",
         "status": "In Progress"
       },

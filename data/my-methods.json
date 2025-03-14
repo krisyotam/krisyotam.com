@@ -1,0 +1,20 @@
+{
+    "methods": [
+      {
+        "title": "On Learning",
+        "link": "/learn",
+        "description": "A structured yet flexible approach to continuous growth. I distill complex ideas into essential insights, applying knowledge through deliberate practice and reflection."
+      },
+      {
+        "title": "On Writing",
+        "link": "/write",
+        "description": "Clarity through iteration. I shape raw thoughts into refined narratives, balancing creativity with precision, always striving for authenticity and impact."
+      },
+      {
+        "title": "On Method",
+        "link": "/method",
+        "description": "A look into how I use my Linux setup, scripts, and automation to streamline research, with my server handling data processing and backups to keep everything organized."
+      }
+    ]
+  }
+  

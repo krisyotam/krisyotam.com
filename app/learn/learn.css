@@ -1,0 +1,44 @@
+.draggable-window {
+    position: fixed;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    resize: both;
+  }
+  
+  .window-header {
+    padding: 0.5rem;
+    background-color: #f7fafc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: move;
+    user-select: none;
+  }
+  
+  .window-content {
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .window-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  
+  .window-footer {
+    padding: 0.25rem 0.5rem;
+    background-color: #f7fafc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: #718096;
+  }
+  
+  
