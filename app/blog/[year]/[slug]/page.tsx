@@ -66,7 +66,7 @@ export default async function PostPage({
 
     // If the post exists, dynamically import it
     const PostContent = blogPostExists
-      ? dynamic(() => import(`/blog/${year}/${slug}/page`), {
+      ? dynamic(() => import(`@blog/${year}/${slug}/page`), {
           loading: () => <div>Loading post content...</div>,
           ssr: true,
         })
