@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getCategories } from "../../utils/posts"
+import { getCategories } from "@/utils/posts"
 
 export const dynamic = "force-dynamic"
 
@@ -20,6 +20,10 @@ export default async function CategoriesPage() {
     return (
       <div className="relative min-h-screen bg-background text-foreground">
         <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+          <header className="mb-16">
+            <h1 className="text-4xl font-semibold mb-3 text-foreground">Categories</h1>
+            <p className="text-muted-foreground">Browse posts by category</p>
+          </header>
           <main>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse">

@@ -1,7 +1,7 @@
 "use client"
 
 import { MarginCard } from "@/components/margin-card"
-import { TableOfContents } from "@/components/table-of-contents"
+import TableOfContents from "@/components/table-of-contents";
 import { Bibliography } from "@/components/bibliography"
 import { RelatedPosts } from "@/components/related-posts"
 import { PostMap, type ContentBlock } from "@/components/post-map"
@@ -78,6 +78,8 @@ const headings = [
   },
 ]
 
+// Update the bibliography entries in the demo post to include more entries for testing pagination
+
 // Define bibliography entries
 const bibliographyEntries = [
   {
@@ -107,9 +109,54 @@ const bibliographyEntries = [
     url: "https://www.orimi.com/pdf-test.pdf",
     type: "article",
   },
+  {
+    id: "4",
+    author: "Maria Garcia",
+    title: "Quantum Computing: Principles and Practice",
+    year: 2023,
+    publisher: "Tech Publications",
+    url: "https://www.orimi.com/pdf-test.pdf",
+    type: "book",
+  },
+  {
+    id: "5",
+    author: "David Lee",
+    title: "Neural Networks and Deep Learning",
+    year: 2022,
+    publisher: "AI Research Press",
+    url: "https://www.orimi.com/pdf-test.pdf",
+    type: "book",
+  },
+  {
+    id: "6",
+    author: "Sarah Wilson",
+    title: "The Ethics of Artificial Intelligence",
+    year: 2023,
+    publisher: "Philosophy Today",
+    url: "https://www.orimi.com/pdf-test.pdf",
+    type: "article",
+  },
+  {
+    id: "7",
+    author: "Michael Brown",
+    title: "Understanding Machine Learning",
+    year: 2022,
+    publisher: "Tech Education Press",
+    url: "https://www.orimi.com/pdf-test.pdf",
+    type: "book",
+  },
+  {
+    id: "8",
+    author: "Emily White",
+    title: "The Future of Human-AI Interaction",
+    year: 2023,
+    publisher: "Digital Horizons",
+    url: "https://www.orimi.com/pdf-test.pdf",
+    type: "article",
+  },
 ]
 
-// Define margin notes
+// Update margin notes with a long example
 const marginNotes = [
   {
     id: "note-1",
@@ -117,13 +164,15 @@ const marginNotes = [
     content:
       "Typography is the art and technique of arranging type to make written language legible, readable, and appealing when displayed.",
     index: 1,
+    source: "The Elements of Typographic Style",
   },
   {
     id: "note-2",
-    title: "Markdown",
+    title: "Artificial Intelligence Overview",
     content:
-      "Markdown is a lightweight markup language with plain text formatting syntax designed to be converted to HTML and many other formats.",
+      "Artificial Intelligence represents a fundamental shift in how computers process and interact with information. Modern AI systems, particularly those based on deep learning and neural networks, can recognize patterns, understand natural language, and even generate human-like responses. This technological advancement has implications across numerous fields, from healthcare and scientific research to everyday applications like virtual assistants and recommendation systems. The development of AI raises important questions about automation, ethics, and the future role of human intelligence in an increasingly computerized world. As these systems become more sophisticated, we must carefully consider both their potential benefits and risks to society.",
     index: 2,
+    source: "The Cambridge Handbook of Artificial Intelligence",
   },
   {
     id: "note-3",
@@ -147,7 +196,7 @@ const marginNotes = [
   },
 ]
 
-// Define the blog post content as JSON
+// Update content to include startArticle property for paragraphs and add more keywords
 const postContent: ContentBlock[] = [
   {
     type: "h1",
@@ -157,7 +206,9 @@ const postContent: ContentBlock[] = [
   {
     type: "lead",
     content:
-      "This is a comprehensive example post that demonstrates all the available content types and formatting options in our JSON-based blog system.",
+      "This is a comprehensive example post that demonstrates all the available content types and formatting options in our JSON-based blog system[1]. It touches on topics like artificial intelligence, space exploration, and quantum computing.",
+    tagTerms: true,
+    props: { startArticle: true }, // Mark as start of an article
   },
   {
     type: "h2",
@@ -167,12 +218,20 @@ const postContent: ContentBlock[] = [
   {
     type: "p",
     content:
-      "This post showcases how to use our JSON-based content structure to create rich, interactive blog posts. The content is defined as a structured JSON object that maps to various Typography components. This paragraph contains the term Artificial Intelligence which should be tagged by our script.",
+      "This post showcases how to use our JSON-based content structure to create rich, interactive blog posts. Modern Artificial Intelligence systems have revolutionized how we process and understand content. The content is defined as a structured JSON object that maps to various Typography components.",
+    tagTerms: true,
+    props: { startArticle: true }, // Mark as start of an article
+  },
+  {
+    type: "p",
+    content:
+      "This paragraph contains the term Artificial Intelligence which should be tagged by our script. We also discuss topics related to blockchain technology and sustainable technology approaches in modern computing.",
     tagTerms: true,
   },
   {
     type: "p",
-    content: "Using a JSON structure for content has several advantages:",
+    content:
+      "Using a JSON structure for content has several advantages, especially when dealing with programming languages and software development:",
     tagTerms: true,
   },
   {
@@ -182,7 +241,14 @@ const postContent: ContentBlock[] = [
       "Easier to store in databases or CMS systems",
       "Simpler to generate programmatically",
       "More maintainable and easier to update",
+      "Better integration with modern web development practices",
     ],
+  },
+  {
+    type: "p",
+    content:
+      "The evolution of programming languages has greatly influenced how we structure and process content in modern applications. This is particularly relevant when considering digital privacy concerns in today's interconnected world.",
+    tagTerms: true,
   },
   {
     type: "h2",
@@ -196,7 +262,9 @@ const postContent: ContentBlock[] = [
   },
   {
     type: "p",
-    content: "Our system supports multiple heading levels (H1-H4) to structure your content hierarchically.",
+    content:
+      "Our system supports multiple heading levels (H1-H4) to structure your content hierarchically. This is essential for cognitive processing and decision making when consuming complex information.",
+    tagTerms: true,
   },
   {
     type: "h4",
@@ -209,15 +277,21 @@ const postContent: ContentBlock[] = [
   },
   {
     type: "p",
-    content: "Regular paragraphs are the most common content type. You can also use specialized paragraph styles:",
+    content:
+      "Regular paragraphs are the most common content type. You can also use specialized paragraph styles. Understanding consciousness and how we process information is key to effective communication.",
+    tagTerms: true,
   },
   {
     type: "lead",
-    content: "This is a lead paragraph, typically used at the beginning of an article to introduce the topic.",
+    content:
+      "This is a lead paragraph, typically used at the beginning of an article to introduce the topic. The future of work is increasingly influenced by automation and AI technologies.",
+    tagTerms: true,
   },
   {
     type: "large",
-    content: "This is a large paragraph, used for emphasizing important information.",
+    content:
+      "This is a large paragraph, used for emphasizing important information. Machine learning ethics are becoming increasingly important in today's technological landscape.",
+    tagTerms: true,
   },
   {
     type: "small",
@@ -230,7 +304,7 @@ const postContent: ContentBlock[] = [
   {
     type: "blockquote",
     content:
-      "This is a blockquote. It's used to highlight quotes or important passages from the text. Space Exploration is another term that should be tagged in this blockquote.",
+      "This is a blockquote. It's used to highlight quotes or important passages from the text. Space Exploration is another term that should be tagged in this blockquote. The philosophy of time is also an interesting topic to explore in this context.",
     tagTerms: true,
   },
   {
@@ -287,7 +361,9 @@ const postContent: ContentBlock[] = [
   },
   {
     type: "p",
-    content: "You can include code snippets and blocks:",
+    content:
+      "You can include code snippets and blocks. The blockchain revolution has introduced new paradigms in coding and data structures:",
+    tagTerms: true,
   },
   {
     type: "p",
@@ -318,7 +394,9 @@ export default Component;`,
   },
   {
     type: "p",
-    content: "Tables are useful for presenting structured data:",
+    content:
+      "Tables are useful for presenting structured data. Digital privacy concerns often require careful data organization:",
+    tagTerms: true,
   },
   {
     type: "table",
@@ -338,7 +416,8 @@ export default Component;`,
   },
   {
     type: "p",
-    content: "Figures can be used to include images with captions:",
+    content: "Figures can be used to include images with captions. Exploring the cosmos often requires visual aids:",
+    tagTerms: true,
   },
   {
     type: "figure",
@@ -353,18 +432,23 @@ export default Component;`,
   },
   {
     type: "callout",
-    content: "This is a default callout. It's used to highlight important information.",
+    content:
+      "This is a default callout. It's used to highlight important information about sustainable technology approaches.",
     variant: "default",
+    tagTerms: true,
   },
   {
     type: "callout",
-    content: "This is an info callout. It provides additional information to the reader.",
+    content:
+      "This is an info callout. It provides additional information to the reader about cognitive biases in decision making.",
     variant: "info",
+    tagTerms: true,
   },
   {
     type: "callout",
-    content: "This is a warning callout. It warns the reader about potential issues.",
+    content: "This is a warning callout. It warns the reader about potential issues with machine learning ethics.",
     variant: "warning",
+    tagTerms: true,
   },
   {
     type: "h3",
@@ -419,13 +503,14 @@ export default Component;`,
   {
     type: "p",
     content:
-      "This post has demonstrated all the available content types and formatting options in our JSON-based blog system. You can use this as a reference when creating your own blog posts.",
+      "This post has demonstrated all the available content types and formatting options in our JSON-based blog system. You can use this as a reference when creating your own blog posts. The future of work will increasingly involve these types of structured content systems.",
     tagTerms: true,
   },
   {
     type: "p",
     content:
-      "The JSON structure makes it easy to add new content types and modify existing ones without changing the underlying rendering logic.",
+      "The JSON structure makes it easy to add new content types and modify existing ones without changing the underlying rendering logic. This approach aligns well with the evolution of programming languages and modern development practices.",
+    tagTerms: true,
   },
 ]
 

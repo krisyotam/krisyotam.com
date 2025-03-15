@@ -1,6 +1,20 @@
-import type { ReactNode } from "react"
+import type React from "react"
+import { cn } from "@/lib/utils"
 
-export function H4({ children }: { children: ReactNode }) {
-  return <h4 className="scroll-m-20 text-xl font-semibold tracking-tight mt-6 mb-2">{children}</h4>
+interface H4Props extends React.HTMLAttributes<HTMLHeadingElement> {
+  children: React.ReactNode
+  className?: string
+  id?: string
 }
+
+export function H4({ children, className, id, ...props }: H4Props) {
+  return (
+    <h4 id={id} className={cn("scroll-m-20 text-xl font-semibold tracking-tight", className)} {...props}>
+      {children}
+    </h4>
+  )
+}
+
+// Set displayName explicitly to help with component detection
+H4.displayName = "H4"
 

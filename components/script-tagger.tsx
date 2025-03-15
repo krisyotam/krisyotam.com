@@ -175,32 +175,41 @@ const TaggedTerm = ({ children, term, link }: { children: React.ReactNode; term:
   )
 }
 
-// Main component that scans and tags content
-export function ScriptTagger({ children }: { children: React.ReactNode }) {
-  console.log("🔍 DEBUG: ScriptTagger initialized")
+// Add new MarginNoteReference component
+const MarginNoteReference = ({ index, onClick }: { index: number; onClick: () => void }) => {
+  return (
+    <sup
+      onClick={onClick}
+      className="cursor-pointer text-primary hover:text-primary/80 transition-colors"
+      style={{
+        fontFamily: "EB Garamond, serif",
+        fontSize: "0.8em",
+        fontWeight: "500",
+      }}
+    >
+      [{index}]
+    </sup>
+  )
+}
 
+// Update the ScriptTagger function to track tagged terms and handle case-insensitive matching
+export function ScriptTagger({ children }: { children: React.ReactNode }) {
   const [processedContent, setProcessedContent] = useState<React.ReactNode>(children)
-  const [termsFound, setTermsFound] = useState<string[]>([])
 
   useEffect(() => {
-    // This simplified version is optimized for direct text content
-    // It expects to receive a string directly, not a complex React component tree
-
     if (typeof children !== "string") {
-      console.log("🔍 DEBUG: ScriptTagger received non-string content, returning as is")
       setProcessedContent(children)
       return
     }
 
-    console.log("🔍 DEBUG: ScriptTagger processing string content")
-
     const text = children as string
-    const foundTerms: string[] = []
     let result: React.ReactNode[] = [text]
 
-    // Process each term
+    // Track which terms have already been tagged
+    const taggedTerms = new Set<string>()
+
+    // Process Wikipedia terms
     wikipediaData.terms.forEach(({ term, link }) => {
-      // Create a new result array by processing each segment
       const newResult: React.ReactNode[] = []
 
       result.forEach((segment) => {
@@ -209,35 +218,61 @@ export function ScriptTagger({ children }: { children: React.ReactNode }) {
           return
         }
 
-        // Check if the term exists in the segment
-        const termRegex = new RegExp(`(${term})`, "gi")
-        const termExists = termRegex.test(segment)
-
-        // Only log if the term is found
-        if (termExists) {
-          console.log("🔍 DEBUG: Found term in text:", term)
-
-          // Add to our list of found terms if not already there
-          if (!foundTerms.includes(term)) {
-            foundTerms.push(term)
-          }
+        // If this term has already been tagged, don't process it again
+        // Use lowercase for case-insensitive comparison
+        if (taggedTerms.has(term.toLowerCase())) {
+          newResult.push(segment)
+          return
         }
 
-        // Split the segment by the term
+        // Create a case-insensitive regex for matching
+        const termRegex = new RegExp(`(${term})`, "gi")
         const parts = segment.split(termRegex)
+        let hasTaggedTerm = false
 
-        // Process each part
         parts.forEach((part, index) => {
-          if (part.toLowerCase() === term.toLowerCase()) {
-            // This part matches the term, wrap it with more visible styling
+          // Case-insensitive comparison using toLowerCase()
+          if (part.toLowerCase() === term.toLowerCase() && !hasTaggedTerm) {
+            // Only tag the first occurrence
             newResult.push(
               <TaggedTerm key={`${term}-${index}`} term={term} link={link}>
                 {part}
               </TaggedTerm>,
             )
-          } else if (part) {
-            // This is just text
+            hasTaggedTerm = true
+            taggedTerms.add(term.toLowerCase())
+          } else if (part.toLowerCase() === term.toLowerCase()) {
+            // For subsequent occurrences, just add the text
             newResult.push(part)
+          } else if (part) {
+            // Look for margin note references in the format [n]
+            const noteRegex = /\[(\d+)\]/g
+            const noteParts = part.split(noteRegex)
+
+            noteParts.forEach((notePart, noteIndex) => {
+              if (noteIndex % 2 === 0) {
+                // Regular text
+                if (notePart) newResult.push(notePart)
+              } else {
+                // Margin note reference
+                const noteIndex = Number.parseInt(notePart, 10)
+                newResult.push(
+                  <MarginNoteReference
+                    key={`note-${noteIndex}`}
+                    index={noteIndex}
+                    onClick={() => {
+                      // Scroll to the corresponding margin note
+                      const noteElement = document.querySelector(`[data-note-index="${noteIndex}"]`)
+                      if (noteElement) {
+                        noteElement.scrollIntoView({ behavior: "smooth" })
+                        noteElement.classList.add("highlight")
+                        setTimeout(() => noteElement.classList.remove("highlight"), 2000)
+                      }
+                    }}
+                  />,
+                )
+              }
+            })
           }
         })
       })
@@ -246,14 +281,6 @@ export function ScriptTagger({ children }: { children: React.ReactNode }) {
     })
 
     setProcessedContent(result)
-    setTermsFound(foundTerms)
-
-    // Log if no terms were found
-    if (foundTerms.length === 0) {
-      console.log("🔍 DEBUG: No terms found in content")
-    } else {
-      console.log("🔍 DEBUG: Found terms:", foundTerms)
-    }
   }, [children])
 
   return <>{processedContent}</>

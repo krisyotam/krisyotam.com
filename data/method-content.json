@@ -1,0 +1,989 @@
+{
+  "sections": [
+    {
+      "title": "Research Philosophy",
+      "content": "My approach to research blends rigor with creativity, structure with exploration. I believe that effective research is not just about gathering information, but about creating systems that allow for meaningful connections and insights to emerge from seemingly disparate pieces of knowledge.",
+      "wikiTerms": [
+        {
+          "term": "research",
+          "url": "https://en.wikipedia.org/wiki/Research"
+        },
+        {
+          "term": "knowledge",
+          "url": "https://en.wikipedia.org/wiki/Knowledge"
+        }
+      ],
+      "subsections": [
+        {
+          "title": "First Principles Thinking",
+          "content": "I approach research by breaking down complex topics into their fundamental components—the first principles. Rather than relying solely on analogy or established consensus, I try to understand the underlying mechanisms and core truths. This approach prevents the inheritance of flawed assumptions and creates opportunities for novel insights. When studying a new domain, I identify the foundational concepts, verify them independently, and then build my understanding upward from this solid foundation.",
+          "wikiTerms": [
+            {
+              "term": "first principles",
+              "url": "https://en.wikipedia.org/wiki/First_principle"
+            },
+            {
+              "term": "analogy",
+              "url": "https://en.wikipedia.org/wiki/Analogy"
+            }
+          ]
+        },
+        {
+          "title": "The Importance of Interdisciplinary Connections",
+          "content": "Much of the most valuable knowledge exists at the intersection of different fields. I deliberately cultivate breadth across disciplines while maintaining depth in core areas. My research methodology actively seeks connections between seemingly unrelated domains—applying concepts from biology to social systems, or insights from computer science to educational methods. This cross-pollination of ideas often yields insights that wouldn't be accessible through siloed expertise.",
+          "wikiTerms": [
+            {
+              "term": "interdisciplinary",
+              "url": "https://en.wikipedia.org/wiki/Interdisciplinarity"
+            },
+            {
+              "term": "cross-pollination",
+              "url": "https://en.wikipedia.org/wiki/Cross-pollination"
+            }
+          ]
+        },
+        {
+          "title": "Balancing Depth and Breadth",
+          "content": "The tension between specialization and generalization is central to effective research. I navigate this by maintaining 'T-shaped knowledge'—deep expertise in select domains combined with broad familiarity across many fields. This structure allows me to make meaningful contributions while maintaining the contextual awareness needed to connect ideas across boundaries. I regularly reassess my knowledge landscape, identifying areas that require deeper investigation or new domains that should be added to my broader understanding.",
+          "wikiTerms": [
+            {
+              "term": "specialization",
+              "url": "https://en.wikipedia.org/wiki/Specialization_(functional)"
+            },
+            {
+              "term": "T-shaped skills",
+              "url": "https://en.wikipedia.org/wiki/T-shaped_skills"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Digital Note-Taking Systems",
+      "content": "At the heart of my research methodology lies a sophisticated digital note-taking ecosystem. Beyond simple information capture, these interconnected systems enable knowledge synthesis, relationship discovery, and idea development over extended periods.",
+      "wikiTerms": [
+        {
+          "term": "note-taking",
+          "url": "https://en.wikipedia.org/wiki/Note-taking"
+        },
+        {
+          "term": "knowledge synthesis",
+          "url": "https://en.wikipedia.org/wiki/Knowledge_synthesis"
+        }
+      ],
+      "subsections": [
+        {
+          "title": "Obsidian: My Knowledge Graph Foundation",
+          "content": "Obsidian forms the backbone of my personal knowledge management system. I use it to create a densely interconnected network of atomic notes, each capturing a single concept, observation, or insight. The graph view helps visualize connections between ideas, revealing relationships I might otherwise miss. I've structured my vault with a modified Zettelkasten approach, combining timestamped unique identifiers with descriptive titles. Tags and links create multiple pathways through the knowledge base, while daily notes serve as both journal and inbox for capturing fleeting thoughts.",
+          "wikiTerms": [
+            {
+              "term": "knowledge graph",
+              "url": "https://en.wikipedia.org/wiki/Knowledge_graph"
+            },
+            {
+              "term": "Zettelkasten",
+              "url": "https://en.wikipedia.org/wiki/Zettelkasten"
+            }
+          ]
+        },
+        {
+          "title": "Logseq: For Project-Based Research",
+          "content": "While Obsidian serves as my primary knowledge repository, I use Logseq for project-based research that benefits from its outliner structure and built-in spaced repetition. The block-based nature of Logseq makes it ideal for hierarchical note-taking during literature reviews, where I can nest summaries, quotes, and personal reflections in a structured manner. The daily journal in Logseq helps track project progress and capture task-specific insights, while the query functionality allows me to aggregate related information across multiple pages and journals.",
+          "wikiTerms": [
+            {
+              "term": "outliner",
+              "url": "https://en.wikipedia.org/wiki/Outliner"
+            },
+            {
+              "term": "spaced repetition",
+              "url": "https://en.wikipedia.org/wiki/Spaced_repetition"
+            }
+          ]
+        },
+        {
+          "title": "Kortex: For Advanced Concept Mapping",
+          "content": "For complex conceptual relationships that require more sophisticated visualization than standard knowledge graphs, I use Kortex. This tool allows me to create multi-dimensional concept maps with weighted relationships, nested concepts, and dynamic filtering. I particularly value Kortex for theoretical research where the relationship between concepts is as important as the concepts themselves. By externalizing complex mental models through these maps, I can identify gaps in reasoning, unnecessary complexities, and potential simplifications of theoretical frameworks.",
+          "wikiTerms": [
+            {
+              "term": "concept map",
+              "url": "https://en.wikipedia.org/wiki/Concept_map"
+            },
+            {
+              "term": "mental model",
+              "url": "https://en.wikipedia.org/wiki/Mental_model"
+            }
+          ]
+        },
+        {
+          "title": "Integration and Workflows Between Tools",
+          "content": "The power of my digital note-taking system comes not just from individual tools but from their integration. I've developed custom scripts and workflows that allow seamless movement of information between platforms. References from my research database automatically generate literature notes in Obsidian. Key concepts from Obsidian can be exported to Kortex for visualization. Project notes from Logseq are periodically distilled into more permanent notes in my Obsidian knowledge base. This integration ensures that insights don't remain siloed within specific tools but can evolve across my entire knowledge ecosystem.",
+          "wikiTerms": [
+            {
+              "term": "workflow",
+              "url": "https://en.wikipedia.org/wiki/Workflow"
+            },
+            {
+              "term": "knowledge base",
+              "url": "https://en.wikipedia.org/wiki/Knowledge_base"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Custom Linux Environment",
+      "content": "My research workflow is built atop a carefully crafted Linux environment that prioritizes flexibility, automation, and focused work. This system combines powerful command-line tools with customized graphical interfaces to create a distraction-free yet highly capable research platform.",
+      "wikiTerms": [
+        {
+          "term": "Linux",
+          "url": "https://en.wikipedia.org/wiki/Linux"
+        },
+        {
+          "term": "automation",
+          "url": "https://en.wikipedia.org/wiki/Automation"
+        }
+      ],
+      "subsections": [
+        {
+          "title": "Tiling Window Manager for Focus",
+          "content": "At the heart of my Linux setup is a tiling window manager (i3) that automatically arranges applications in non-overlapping tiles. This approach eliminates the mental overhead of constantly arranging windows and maximizes screen real estate. I've configured specialized workspaces for different research activities: one for reading and note-taking, another for writing, a third for data analysis, and so on. Keyboard-driven navigation between these spaces creates a seamless workflow with minimal distractions or context-switching penalties.",
+          "wikiTerms": [
+            {
+              "term": "tiling window manager",
+              "url": "https://en.wikipedia.org/wiki/Tiling_window_manager"
+            },
+            {
+              "term": "context-switching",
+              "url": "https://en.wikipedia.org/wiki/Context_switch"
+            }
+          ]
+        },
+        {
+          "title": "Terminal-Centric Workflow",
+          "content": "Many of my research tasks are accomplished through terminal-based tools, which offer greater efficiency and automation possibilities than their graphical counterparts. I use Neovim for text editing, ranger for file management, and tmux for session management. Custom scripts automate repetitive tasks: one command can set up my entire research environment for a specific project, opening relevant notes, reference materials, and analysis tools in their appropriate workspaces. This terminal-centric approach creates a distraction-free environment while providing powerful capabilities through command-line interfaces.",
+          "wikiTerms": [
+            {
+              "term": "terminal",
+              "url": "https://en.wikipedia.org/wiki/Terminal_emulator"
+            },
+            {
+              "term": "Neovim",
+              "url": "https://en.wikipedia.org/wiki/Vim_(text_editor)#Neovim"
+            }
+          ]
+        },
+        {
+          "title": "Custom Scripts and Automation",
+          "content": "I've developed numerous scripts that automate aspects of my research workflow. A literature management script extracts bibliographic data from PDFs and generates properly formatted citations. A note-linking script identifies potential connections between notes based on textual similarity and suggests links. A research dashboard script aggregates metrics across projects, showing progress, recent activity, and upcoming deadlines. These automations eliminate repetitive tasks, maintain consistency in my knowledge base, and ensure that my attention remains focused on substantive research rather than administrative overhead.",
+          "wikiTerms": [
+            {
+              "term": "shell script",
+              "url": "https://en.wikipedia.org/wiki/Shell_script"
+            },
+            {
+              "term": "automation",
+              "url": "https://en.wikipedia.org/wiki/Automation"
+            }
+          ]
+        },
+        {
+          "title": "Minimalist Visual Design",
+          "content": "The visual design of my Linux environment emphasizes clarity and focus. I use a monochromatic color scheme with minimal visual elements that might distract from content. Typography is carefully selected for readability during long research sessions. Notifications are heavily filtered, with only truly important alerts breaking through during focused work periods. This minimalist approach reduces cognitive load and creates a calm, contemplative environment conducive to deep thinking and complex problem-solving.",
+          "wikiTerms": [
+            {
+              "term": "minimalism",
+              "url": "https://en.wikipedia.org/wiki/Minimalism"
+            },
+            {
+              "term": "cognitive load",
+              "url": "https://en.wikipedia.org/wiki/Cognitive_load"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Information Gathering Methodology",
+      "content": "The quality of research depends fundamentally on the quality of information gathered. I've developed systematic approaches to finding, evaluating, and processing information from diverse sources, balancing breadth of inputs with depth of analysis.",
+      "wikiTerms": [
+        {
+          "term": "information",
+          "url": "https://en.wikipedia.org/wiki/Information"
+        },
+        {
+          "term": "analysis",
+          "url": "https://en.wikipedia.org/wiki/Analysis"
+        }
+      ],
+      "subsections": [
+        {
+          "title": "Strategic Reading Practices",
+          "content": "Not all texts deserve the same level of attention. I employ tiered reading practices, beginning with skimming to assess relevance and potential value. For promising materials, I use progressive summarization—highlighting key passages during the first read, then adding layers of synthesis on subsequent passes. For foundational texts, I practice close reading with extensive annotation, connecting ideas to my existing knowledge base. Research journals are reserved for active engagement with particularly complex or important sources, where I work through ideas by writing about them extensively.",
+          "wikiTerms": [
+            {
+              "term": "skimming",
+              "url": "https://en.wikipedia.org/wiki/Speed_reading#Skimming"
+            },
+            {
+              "term": "close reading",
+              "url": "https://en.wikipedia.org/wiki/Close_reading"
+            }
+          ]
+        },
+        {
+          "title": "Reference Management and Citation",
+          "content": "I maintain a comprehensive research database using Zotero, enhanced with custom scripts and plugins. Every source is tagged by topic, methodology, and quality assessment, allowing precise filtering. PDF annotations are extracted and linked to my note-taking system. Citation data is rigorously standardized and backed up regularly. For literature reviews, I create visual maps of the citation network to identify seminal papers and potential gaps. This systematic approach ensures I can quickly retrieve relevant sources and their key insights when needed for new projects.",
+          "wikiTerms": [
+            {
+              "term": "Zotero",
+              "url": "https://en.wikipedia.org/wiki/Zotero"
+            },
+            {
+              "term": "citation",
+              "url": "https://en.wikipedia.org/wiki/Citation"
+            }
+          ]
+        },
+        {
+          "title": "Multi-Modal Information Sources",
+          "content": "While academic literature forms the foundation of many research projects, I deliberately incorporate diverse information sources. Expert interviews provide practical insights often absent from formal publications. Podcasts and lectures offer emerging ideas not yet formalized in writing. Online forums reveal practical applications and edge cases. Physical experiences—visits to relevant locations, hands-on experimentation—provide embodied knowledge that text alone cannot convey. This multi-modal approach creates a richer understanding than any single information channel could provide.",
+          "wikiTerms": [
+            {
+              "term": "multi-modal",
+              "url": "https://en.wikipedia.org/wiki/Multimodality"
+            },
+            {
+              "term": "embodied knowledge",
+              "url": "https://en.wikipedia.org/wiki/Embodied_knowledge"
+            }
+          ]
+        },
+        {
+          "title": "Critical Evaluation Frameworks",
+          "content": "Information quality varies tremendously, particularly in the digital age. I apply structured evaluation frameworks to assess sources, considering factors like methodology, evidence quality, author expertise, potential biases, and corroboration across sources. For controversial topics, I deliberately seek out the strongest arguments from multiple perspectives, creating a dialectical analysis that identifies points of agreement, genuine disagreement, and potential synthesis. This approach guards against confirmation bias while ensuring that my research builds upon reliable foundations.",
+          "wikiTerms": [
+            {
+              "term": "confirmation bias",
+              "url": "https://en.wikipedia.org/wiki/Confirmation_bias"
+            },
+            {
+              "term": "dialectical",
+              "url": "https://en.wikipedia.org/wiki/Dialectic"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Knowledge Synthesis Techniques",
+      "content": "Gathering information is only the beginning. The true value of research emerges through systematic synthesis—transforming discrete pieces of information into coherent understanding through processes of connection, pattern recognition, and integration.",
+      "wikiTerms": [
+        {
+          "term": "synthesis",
+          "url": "https://en.wikipedia.org/wiki/Synthesis"
+        },
+        {
+          "term": "pattern recognition",
+          "url": "https://en.wikipedia.org/wiki/Pattern_recognition"
+        }
+      ],
+      "subsections": [
+        {
+          "title": "Progressive Idea Refinement",
+          "content": "Ideas in my research system evolve through deliberate stages of refinement. Initial capture focuses on preserving thoughts with minimal friction. Periodic review sessions identify noteworthy ideas for further development. Promising concepts undergo explicit elaboration—connecting to related ideas, identifying implications, and evaluating evidence. The most valuable insights are then synthesized into more substantial forms: essays, models, or project applications. This progressive refinement ensures that mental energy is allocated efficiently, with the most promising ideas receiving deepening levels of development.",
+          "wikiTerms": [
+            {
+              "term": "elaboration",
+              "url": "https://en.wikipedia.org/wiki/Elaboration"
+            },
+            {
+              "term": "mental energy",
+              "url": "https://en.wikipedia.org/wiki/Mental_energy"
+            }
+          ]
+        },
+        {
+          "title": "Conceptual Framework Building",
+          "content": "For complex research areas, I develop explicit conceptual frameworks that organize key components and their relationships. These frameworks begin as simple diagrams mapping core elements and evolve through multiple iterations as understanding deepens. Visual tools like concept maps and system diagrams externalize my mental models, making assumptions explicit and revealing gaps or inconsistencies. The most robust frameworks become scaffolding for further research, providing organizing structures for new information and insights.",
+          "wikiTerms": [
+            {
+              "term": "conceptual framework",
+              "url": "https://en.wikipedia.org/wiki/Conceptual_framework"
+            },
+            {
+              "term": "system diagram",
+              "url": "https://en.wikipedia.org/wiki/System_diagram"
+            }
+          ]
+        },
+        {
+          "title": "Analogical Thinking and Pattern Recognition",
+          "content": "Some of the most powerful insights come from recognizing patterns across seemingly unrelated domains. I actively cultivate analogical thinking by maintaining a diverse knowledge base and regularly considering how principles from one field might apply to another. When facing a complex problem, I deliberately ask what similar challenges exist in other domains and how those solutions might transfer. This cross-domain pattern recognition often yields novel approaches that wouldn't emerge from within-domain expertise alone.",
+          "wikiTerms": [
+            {
+              "term": "analogical thinking",
+              "url": "https://en.wikipedia.org/wiki/Analogy"
+            },
+            {
+              "term": "transfer learning",
+              "url": "https://en.wikipedia.org/wiki/Transfer_learning"
+            }
+          ]
+        },
+        {
+          "title": "Systematic Contradiction Analysis",
+          "content": "Contradictions in research often signal areas ripe for deeper understanding. When encountering contradictory findings or perspectives, I use a structured approach to reconciliation. First, I verify that the contradiction is real rather than terminological. Then I map the specific conditions under which each perspective holds true. This analysis often reveals that apparent contradictions are actually complementary views applicable in different contexts. When genuine contradictions persist, they become focal points for further investigation, as they typically indicate gaps in current understanding.",
+          "wikiTerms": [
+            {
+              "term": "contradiction",
+              "url": "https://en.wikipedia.org/wiki/Contradiction"
+            },
+            {
+              "term": "reconciliation",
+              "url": "https://en.wikipedia.org/wiki/Reconciliation"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Research Project Management",
+      "content": "Research projects—especially those spanning months or years—require structured systems to maintain momentum, organization, and focus. My project management approach combines rigorous planning with flexibility for the emergent nature of discovery.",
+      "wikiTerms": [
+        {
+          "term": "project management",
+          "url": "https://en.wikipedia.org/wiki/Project_management"
+        },
+        {
+          "term": "emergent",
+          "url": "https://en.wikipedia.org/wiki/Emergence"
+        }
+      ],
+      "subsections": [
+        {
+          "title": "Systematic Project Scoping",
+          "content": "Each research project begins with explicit scoping to define boundaries, key questions, and success criteria. I create a project charter documenting primary research questions, methodological approach, required resources, and anticipated challenges. This charter becomes a touchstone throughout the project, preventing scope creep while remaining open to refinement as new insights emerge. For larger projects, I use progressive elaboration—beginning with broad structure and iteratively detailing components as understanding increases.",
+          "wikiTerms": [
+            {
+              "term": "scope creep",
+              "url": "https://en.wikipedia.org/wiki/Scope_creep"
+            },
+            {
+              "term": "progressive elaboration",
+              "url": "https://en.wikipedia.org/wiki/Progressive_elaboration"
+            }
+          ]
+        },
+        {
+          "title": "Structured Work Breakdown",
+          "content": "Complex research projects are decomposed into manageable components through hierarchical work breakdown structures. These structures map the logical dependencies between tasks, ensuring that work proceeds in an efficient sequence. For each component, I define clear completion criteria and deliverables. This structured breakdown makes progress tangible and helps maintain momentum through the completion of discrete subtasks. The visual representation of project structure also helps identify potential bottlenecks or resource constraints before they become problematic.",
+          "wikiTerms": [
+            {
+              "term": "work breakdown structure",
+              "url": "https://en.wikipedia.org/wiki/Work_breakdown_structure"
+            },
+            {
+              "term": "dependencies",
+              "url": "https://en.wikipedia.org/wiki/Dependency_(project_management)"
+            }
+          ]
+        },
+        {
+          "title": "Rhythmic Research Cadences",
+          "content": "Research work requires different modes of thinking at different stages. I structure projects around rhythmic cadences that alternate between divergent exploration and convergent analysis, between intensive focus and reflective integration. Daily work sessions focus on clearly defined objectives documented the previous day. Weekly reviews assess progress and adjust near-term priorities. Monthly deeper reviews reconnect current work to the broader project objectives and identify any necessary course corrections. This nested rhythm helps balance immediate productivity with long-term direction.",
+          "wikiTerms": [
+            {
+              "term": "divergent thinking",
+              "url": "https://en.wikipedia.org/wiki/Divergent_thinking"
+            },
+            {
+              "term": "convergent thinking",
+              "url": "https://en.wikipedia.org/wiki/Convergent_thinking"
+            }
+          ]
+        },
+        {
+          "title": "Deliverable-Focused Milestones",
+          "content": "To maintain momentum in long-term research, I establish concrete milestones centered around tangible deliverables. These might include literature review summaries, conceptual frameworks, methodology documentation, preliminary findings, or draft sections of final outputs. Each milestone serves dual purposes: creating a sense of completion that sustains motivation and generating artifacts that can be reviewed by collaborators or mentors for feedback. This approach transforms abstract 'progress' into concrete accomplishments while creating natural points for course correction.",
+          "wikiTerms": [
+            {
+              "term": "milestone",
+              "url": "https://en.wikipedia.org/wiki/Milestone_(project_management)"
+            },
+            {
+              "term": "deliverable",
+              "url": "https://en.wikipedia.org/wiki/Deliverable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Collaborative Research Approaches",
+      "content": "While independent research forms the core of my methodology, collaboration amplifies capabilities and provides essential perspective. I've developed systematic approaches to research collaboration that maintain individual depth while leveraging collective intelligence.",
+      "wikiTerms": [
+        {
+          "term": "collaboration",
+          "url": "https://en.wikipedia.org/wiki/Collaboration"
+        },
+        {
+          "term": "collective intelligence",
+          "url": "https://en.wikipedia.org/wiki/Collective_intelligence"
+        }
+      ],
+      "subsections": [
+        {
+          "title": "Structured Knowledge Exchange",
+          "content": "Effective collaboration begins with efficient knowledge exchange. I use structured formats for sharing research—concise summaries with clearly articulated assumptions, methodologies, and findings rather than raw notes or stream-of-consciousness thoughts. Regular synchronization sessions focus on specific questions or challenges rather than general updates. These practices respect collaborators' cognitive resources while ensuring that shared understanding remains aligned as individual work proceeds in parallel.",
+          "wikiTerms": [
+            {
+              "term": "knowledge exchange",
+              "url": "https://en.wikipedia.org/wiki/Knowledge_transfer"
+            },
+            {
+              "term": "cognitive resources",
+              "url": "https://en.wikipedia.org/wiki/Cognitive_psychology"
+            }
+          ]
+        },
+        {
+          "title": "Complementary Expertise Integration",
+          "content": "The most fruitful collaborations leverage complementary rather than redundant expertise. I approach collaborative projects by explicitly mapping team members' knowledge domains, methodological strengths, and thinking styles. This mapping helps allocate responsibilities and identify potential blind spots. When disagreements arise, I focus first on understanding the different mental models and assumptions underlying diverse perspectives. This approach treats disagreement as a resource for deeper understanding rather than an obstacle to progress.",
+          "wikiTerms": [
+            {
+              "term": "expertise",
+              "url": "https://en.wikipedia.org/wiki/Expert"
+            },
+            {
+              "term": "mental models",
+              "url": "https://en.wikipedia.org/wiki/Mental_model"
+            }
+          ]
+        },
+        {
+          "title": "Digital Collaboration Infrastructure",
+          "content": "Collaborative research requires appropriate technical infrastructure. I establish shared digital environments tailored to project needs: version-controlled repositories for evolving documents, synchronized reference databases for literature, collaborative concept mapping tools for shared understanding, and organized communication channels for different types of exchange (quick questions, deep discussions, resource sharing). This infrastructure reduces friction in collaboration while creating persistent records that can be referenced and built upon throughout the project.",
+          "wikiTerms": [
+            {
+              "term": "version control",
+              "url": "https://en.wikipedia.org/wiki/Version_control"
+            },
+            {
+              "term": "digital infrastructure",
+              "url": "https://en.wikipedia.org/wiki/Digital_infrastructure"
+            }
+          ]
+        },
+        {
+          "title": "Intellectual Dialogue Practices",
+          "content": "The quality of collaborative thinking depends on the quality of dialogue. I cultivate specific practices for intellectual exchange: steelmanning opposing views before critiquing them, explicitly distinguishing observation from inference, identifying assumptions underlying conclusions, and regularly engaging in premortems to anticipate potential failures. These structured approaches to dialogue elevate the quality of collective thinking beyond what typically emerges from unstructured discussion, leading to more robust outcomes.",
+          "wikiTerms": [
+            {
+              "term": "steelmanning",
+              "url": "https://en.wikipedia.org/wiki/Straw_man#Steelmanning"
+            },
+            {
+              "term": "premortem",
+              "url": "https://en.wikipedia.org/wiki/Pre-mortem"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Long-term Knowledge Development",
+      "content": "Beyond individual projects, my research methodology includes systems for long-term knowledge development—cultivating expertise and understanding that compounds over years and decades rather than focusing solely on immediate outputs.",
+      "wikiTerms": [
+        {
+          "term": "expertise",
+          "url": "https://en.wikipedia.org/wiki/Expert"
+        },
+        {
+          "term": "compound",
+          "url": "https://en.wikipedia.org/wiki/Compound_interest"
+        }
+      ],
+      "subsections": [
+        {
+          "title": "Deliberate Knowledge Curation",
+          "content": "Building valuable knowledge over time requires intentional curation. I periodically review my knowledge base to identify areas for consolidation, contradictions requiring resolution, or connections between previously separate domains. This curation includes deliberate forgetting—archiving or pruning less relevant information to maintain focus on what's most valuable. Regular 'knowledge inventories' help identify gaps in understanding and areas where deeper investigation would create disproportionate value.",
+          "wikiTerms": [
+            {
+              "term": "curation",
+              "url": "https://en.wikipedia.org/wiki/Content_curation"
+            },
+            {
+              "term": "forgetting",
+              "url": "https://en.wikipedia.org/wiki/Forgetting"
+            }
+          ]
+        },
+        {
+          "title": "Spaced Learning and Review Systems",
+          "content": "Valuable knowledge must be not just acquired but retained and integrated. I use spaced repetition systems for core facts and concepts that benefit from memorization. More importantly, I schedule regular reviews of key insights and frameworks, deliberately retrieving and applying them in new contexts. This practice strengthens both recall and understanding while creating opportunities for novel connections. The spacing of these reviews is systematic—more frequent for newer knowledge, with increasing intervals as understanding deepens.",
+          "wikiTerms": [
+            {
+              "term": "spaced repetition",
+              "url": "https://en.wikipedia.org/wiki/Spaced_repetition"
+            },
+            {
+              "term": "retrieval practice",
+              "url": "https://en.wikipedia.org/wiki/Testing_effect"
+            }
+          ]
+        },
+        {
+          "title": "Knowledge Externalization Practices",
+          "content": "Explaining ideas to others is one of the most powerful ways to deepen understanding. I regularly externalize knowledge through writing, teaching, and discussion. Each mode of externalization reveals different aspects of understanding and exposes different gaps. Teaching forces clarification of core concepts. Writing demands precision and logical coherence. Discussion tests ideas against others' perspectives. Together, these practices transform passive knowledge into active mastery while creating valuable resources for others.",
+          "wikiTerms": [
+            {
+              "term": "externalization",
+              "url": "https://en.wikipedia.org/wiki/Externalization"
+            },
+            {
+              "term": "active learning",
+              "url": "https://en.wikipedia.org/wiki/Active_learning"
+            }
+          ]
+        },
+        {
+          "title": "Learning Infrastructure Maintenance",
+          "content": "Just as physical infrastructure requires maintenance, so too does learning infrastructure. I regularly evaluate and refine my research systems: updating software, revising organizational schemas, improving workflows, and integrating new tools when they offer meaningful improvements. This maintenance includes pruning—removing components that add complexity without commensurate value. The goal is a system that evolves alongside changing research needs while maintaining enough stability to support consistent practice.",
+          "wikiTerms": [
+            {
+              "term": "infrastructure maintenance",
+              "url": "https://en.wikipedia.org/wiki/Maintenance_(technical)"
+            },
+            {
+              "term": "workflow",
+              "url": "https://en.wikipedia.org/wiki/Workflow"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Data Analysis Methodologies",
+      "content": "For research involving quantitative or qualitative data, I employ systematic approaches to analysis that balance rigor with pragmatism, ensuring reliable insights while avoiding methodological overkill.",
+      "wikiTerms": [
+        {
+          "term": "data analysis",
+          "url": "https://en.wikipedia.org/wiki/Data_analysis"
+        },
+        {
+          "term": "rigor",
+          "url": "https://en.wikipedia.org/wiki/Rigor"
+        }
+      ],
+      "subsections": [
+        {
+          "title": "Exploratory Data Analysis Workflow",
+          "content": "Before formal analysis, I conduct structured exploratory data examination to understand key characteristics and potential issues. This process includes visualizing distributions, identifying outliers, checking for missing data patterns, and examining relationships between variables. The insights from this exploration inform subsequent analysis decisions while helping identify potential problems early. This workflow combines automated checks with manual investigation, creating a comprehensive understanding of the dataset before drawing conclusions.",
+          "wikiTerms": [
+            {
+              "term": "exploratory data analysis",
+              "url": "https://en.wikipedia.org/wiki/Exploratory_data_analysis"
+            },
+            {
+              "term": "outliers",
+              "url": "https://en.wikipedia.org/wiki/Outlier"
+            }
+          ]
+        },
+        {
+          "title": "Mixed Methods Integration",
+          "content": "Many research questions benefit from combining quantitative and qualitative approaches. I use structured integration of these methods, typically beginning with qualitative exploration to identify relevant variables and hypotheses, followed by quantitative analysis to test relationships, and then returning to qualitative investigation to interpret unexpected findings. This iterative approach leverages the complementary strengths of each method: qualitative depth and contextual understanding balanced with quantitative precision and generalizability.",
+          "wikiTerms": [
+            {
+              "term": "mixed methods",
+              "url": "https://en.wikipedia.org/wiki/Mixed_methods_research"
+            },
+            {
+              "term": "generalizability",
+              "url": "https://en.wikipedia.org/wiki/Generalizability_theory"
+            }
+          ]
+        },
+        {
+          "title": "Reproducible Analysis Practices",
+          "content": "Research insights are only valuable if they're reliable. I ensure reproducibility through systematic practices: fully documented data processing, version-controlled analysis code, explicit dependency management, and comprehensive recording of analysis decisions. For computational analyses, I use literate programming approaches that combine code, visualizations, and narrative explanation in unified documents. These practices not only support verification by others but also enable my future self to understand and build upon previous work without ambiguity.",
+          "wikiTerms": [
+            {
+              "term": "reproducibility",
+              "url": "https://en.wikipedia.org/wiki/Reproducibility"
+            },
+            {
+              "term": "literate programming",
+              "url": "https://en.wikipedia.org/wiki/Literate_programming"
+            }
+          ]
+        },
+        {
+          "title": "Visual Data Exploration",
+          "content": "Visualization is central to my data analysis methodology, serving both exploratory and communicative functions. I use a systematic approach to visual exploration: starting with distributions of individual variables, progressing to relationships between pairs of variables, and then to multivariate patterns. Interactive visualizations allow for dynamic filtering and transformation, revealing patterns that might be obscured in static views. When communicating findings, visualizations are designed with careful attention to perceptual principles, ensuring that visual representations accurately convey the underlying data patterns.",
+          "wikiTerms": [
+            {
+              "term": "data visualization",
+              "url": "https://en.wikipedia.org/wiki/Data_visualization"
+            },
+            {
+              "term": "multivariate analysis",
+              "url": "https://en.wikipedia.org/wiki/Multivariate_analysis"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Experimental Methods",
+      "content": "For research questions requiring direct intervention or controlled observation, I employ structured experimental approaches adapted from scientific methodology but tailored to practical constraints and specific domains of inquiry.",
+      "wikiTerms": [
+        {
+          "term": "experiment",
+          "url": "https://en.wikipedia.org/wiki/Experiment"
+        },
+        {
+          "term": "scientific method",
+          "url": "https://en.wikipedia.org/wiki/Scientific_method"
+        }
+      ],
+      "subsections": [
+        {
+          "title": "Hypothesis Development and Testing",
+          "content": "Effective experimentation begins with well-formulated hypotheses derived from existing knowledge and theoretical frameworks. I develop explicit predictions with clearly specified conditions and outcomes, avoiding vague or unfalsifiable statements. When possible, I formulate competing hypotheses that make different predictions, allowing findings to meaningfully advance understanding regardless of outcome. The testing process follows structured protocols with predefined analysis plans to prevent post-hoc rationalization or fishing expeditions.",
+          "wikiTerms": [
+            {
+              "term": "hypothesis",
+              "url": "https://en.wikipedia.org/wiki/Hypothesis"
+            },
+            {
+              "term": "falsifiability",
+              "url": "https://en.wikipedia.org/wiki/Falsifiability"
+            }
+          ]
+        },
+        {
+          "title": "Iterative Prototype Testing",
+          "content": "For applied research developing artifacts or interventions, I use iterative testing cycles with progressively refined prototypes. Each iteration begins with specific questions about functionality, usability, or effectiveness. Testing methods are matched to the current development stage: early stages use qualitative feedback and think-aloud protocols, while later stages employ more structured performance metrics. Findings from each round directly inform the next iteration, creating an evidence-based development trajectory.",
+          "wikiTerms": [
+            {
+              "term": "prototype",
+              "url": "https://en.wikipedia.org/wiki/Prototype"
+            },
+            {
+              "term": "think-aloud protocol",
+              "url": "https://en.wikipedia.org/wiki/Think_aloud_protocol"
+            }
+          ]
+        },
+        {
+          "title": "Field Experiments and Natural Observations",
+          "content": "Laboratory settings offer control but may lack ecological validity. When appropriate, I conduct field experiments that test interventions in realistic contexts. These studies balance experimental control with real-world relevance through careful design: identifying natural comparison groups, implementing minimal viable interventions, and measuring outcomes through unobtrusive methods. For purely observational research, I use structured protocols to ensure systematic data collection across different contexts and time periods.",
+          "wikiTerms": [
+            {
+              "term": "ecological validity",
+              "url": "https://en.wikipedia.org/wiki/Ecological_validity"
+            },
+            {
+              "term": "field experiment",
+              "url": "https://en.wikipedia.org/wiki/Field_experiment"
+            }
+          ]
+        },
+        {
+          "title": "Self-Experimentation Protocols",
+          "content": "For certain research questions, particularly those involving personal practices or subjective experiences, I employ structured self-experimentation. These studies follow formal protocols: clear baseline measurement, controlled intervention periods, systematic outcome tracking, and predetermined success criteria. To mitigate self-experimentation biases, I implement blinding procedures where possible, use quantitative measurements alongside subjective assessment, and incorporate third-party evaluation of results. This approach transforms personal exploration into more rigorous inquiry while acknowledging inherent limitations.",
+          "wikiTerms": [
+            {
+              "term": "self-experimentation",
+              "url": "https://en.wikipedia.org/wiki/Self-experimentation"
+            },
+            {
+              "term": "blinding",
+              "url": "https://en.wikipedia.org/wiki/Blinded_experiment"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Applied Research Methodology",
+      "content": "Beyond pure knowledge development, I use structured approaches to research that directly informs action—translating insights into practical applications while maintaining intellectual rigor.",
+      "wikiTerms": [
+        {
+          "term": "applied research",
+          "url": "https://en.wikipedia.org/wiki/Applied_research"
+        },
+        {
+          "term": "rigor",
+          "url": "https://en.wikipedia.org/wiki/Rigor"
+        }
+      ],
+      "subsections": [
+        {
+          "title": "Decision-Oriented Research Frameworks",
+          "content": "When research aims to inform specific decisions, I structure the process around decision requirements. This begins with explicit mapping of the decision space: identifying options, constraints, evaluation criteria, and key uncertainties. Research is then focused on reducing the most consequential uncertainties through targeted investigation. This decision-oriented framing ensures that research remains pragmatically valuable while avoiding unnecessary tangents. The output includes not just findings but structured decision support that connects evidence directly to available options.",
+          "wikiTerms": [
+            {
+              "term": "decision theory",
+              "url": "https://en.wikipedia.org/wiki/Decision_theory"
+            },
+            {
+              "term": "decision support system",
+              "url": "https://en.wikipedia.org/wiki/Decision_support_system"
+            }
+          ]
+        },
+        {
+          "title": "Implementation Science Approaches",
+          "content": "Translating research findings into practice requires dedicated attention to implementation factors. I incorporate principles from implementation science to bridge the knowing-doing gap: identifying potential barriers and facilitators, adapting interventions to specific contexts while maintaining core mechanisms, developing implementation strategies alongside the primary innovation, and establishing feedback systems to monitor adoption and effectiveness. This integrated approach increases the likelihood that research will create actual impact rather than remaining theoretical.",
+          "wikiTerms": [
+            {
+              "term": "implementation science",
+              "url": "https://en.wikipedia.org/wiki/Implementation_science"
+            },
+            {
+              "term": "knowledge translation",
+              "url": "https://en.wikipedia.org/wiki/Knowledge_translation"
+            }
+          ]
+        },
+        {
+          "title": "Impact Evaluation Methods",
+          "content": "For applied research, rigorous evaluation of outcomes and impacts is essential. I use structured approaches that balance methodological rigor with practical constraints: establishing clear theories of change that link interventions to expected outcomes, implementing appropriate measurement at multiple levels (immediate outputs, intermediate outcomes, ultimate impacts), and using comparison groups where feasible to strengthen causal inference. This systematic evaluation not only documents effects but generates knowledge about how and why interventions work, informing future applications.",
+          "wikiTerms": [
+            {
+              "term": "impact evaluation",
+              "url": "https://en.wikipedia.org/wiki/Impact_evaluation"
+            },
+            {
+              "term": "theory of change",
+              "url": "https://en.wikipedia.org/wiki/Theory_of_change"
+            }
+          ]
+        },
+        {
+          "title": "Stakeholder Engagement Processes",
+          "content": "Applied research requires understanding and incorporating stakeholder perspectives. I use structured processes to engage relevant stakeholders throughout the research cycle. Initial mapping identifies all affected parties and their interests. Engagement methods are tailored to different stakeholder types, from in-depth interviews with key decision-makers to broader consultations with affected communities. This engagement serves multiple functions: incorporating diverse knowledge, ensuring research addresses genuine needs, building ownership of findings, and increasing likelihood of implementation.",
+          "wikiTerms": [
+            {
+              "term": "stakeholder analysis",
+              "url": "https://en.wikipedia.org/wiki/Stakeholder_analysis"
+            },
+            {
+              "term": "participatory research",
+              "url": "https://en.wikipedia.org/wiki/Participatory_action_research"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Research Ethics and Integrity",
+      "content": "Ethical considerations are integral to my research methodology, informing practices at every stage from question formulation to dissemination of findings.",
+      "wikiTerms": [
+        {
+          "term": "research ethics",
+          "url": "https://en.wikipedia.org/wiki/Research_ethics"
+        },
+        {
+          "term": "integrity",
+          "url": "https://en.wikipedia.org/wiki/Scientific_integrity"
+        }
+      ],
+      "subsections": [
+        {
+          "title": "Ethical Decision Frameworks",
+          "content": "Research inevitably involves ethical choices—from what questions to pursue to how findings are shared. I use structured frameworks to navigate these decisions, considering principles of beneficence, non-maleficence, autonomy, justice, and transparency. For significant decisions, I document the ethical considerations and reasoning, creating accountability for these judgments. This systematic approach helps avoid unintentional harm and ensures alignment between research practices and ethical commitments.",
+          "wikiTerms": [
+            {
+              "term": "beneficence",
+              "url": "https://en.wikipedia.org/wiki/Beneficence_(ethics)"
+            },
+            {
+              "term": "non-maleficence",
+              "url": "https://en.wikipedia.org/wiki/Non-maleficence"
+            }
+          ]
+        },
+        {
+          "title": "Intellectual Honesty Practices",
+          "content": "The foundation of research integrity is intellectual honesty. I implement specific practices to uphold this value: clearly distinguishing established facts from hypotheses or speculations, acknowledging limitations and uncertainties rather than overstating confidence, giving appropriate credit to sources and collaborators, and transparently disclosing potential conflicts of interest or biases. These practices create the conditions for genuine knowledge development rather than merely persuasive argumentation.",
+          "wikiTerms": [
+            {
+              "term": "intellectual honesty",
+              "url": "https://en.wikipedia.org/wiki/Intellectual_honesty"
+            },
+            {
+              "term": "conflict of interest",
+              "url": "https://en.wikipedia.org/wiki/Conflict_of_interest"
+            }
+          ]
+        },
+        {
+          "title": "Privacy and Data Stewardship",
+          "content": "Research often involves sensitive information requiring careful handling. I implement comprehensive data stewardship practices: obtaining informed consent for data collection and use, employing appropriate anonymization techniques, implementing secure storage and access controls, and establishing clear retention and deletion policies. These practices protect individual privacy while enabling valuable research. When working with publicly available data, I consider not just legal compliance but ethical implications of novel analyses or combinations.",
+          "wikiTerms": [
+            {
+              "term": "data stewardship",
+              "url": "https://en.wikipedia.org/wiki/Data_steward"
+            },
+            {
+              "term": "informed consent",
+              "url": "https://en.wikipedia.org/wiki/Informed_consent"
+            }
+          ]
+        },
+        {
+          "title": "Responsible Knowledge Sharing",
+          "content": "How research is shared affects its impact and potential consequences. I approach dissemination with attention to both accessibility and responsibility: making findings available in forms accessible to relevant audiences while considering potential for misuse or harm. Technical terminology is balanced with clear explanations. Limitations and uncertainties are explicitly acknowledged. When research could have dual-use implications, additional safeguards may be implemented—from publication timing to controlled access—based on careful risk assessment.",
+          "wikiTerms": [
+            {
+              "term": "open access",
+              "url": "https://en.wikipedia.org/wiki/Open_access"
+            },
+            {
+              "term": "dual-use research",
+              "url": "https://en.wikipedia.org/wiki/Dual-use_technology"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Meta-Research Practices",
+      "content": "Beyond specific methodologies, I engage in deliberate meta-research—the systematic study and improvement of my own research practices through reflection, experimentation, and adaptation.",
+      "wikiTerms": [
+        {
+          "term": "meta-research",
+          "url": "https://en.wikipedia.org/wiki/Meta-research"
+        },
+        {
+          "term": "reflection",
+          "url": "https://en.wikipedia.org/wiki/Reflective_practice"
+        }
+      ],
+      "subsections": [
+        {
+          "title": "Research Process Journal",
+          "content": "To enable continuous improvement, I maintain a research process journal documenting methodological decisions, challenges encountered, and effectiveness of different approaches. This journal creates a longitudinal dataset about what works in my research practice. Periodic review of these records reveals patterns of productivity, recurrent obstacles, and successful strategies that might otherwise remain implicit. This empirical approach to personal methodology transforms vague impressions into actionable insights about effective research practices.",
+          "wikiTerms": [
+            {
+              "term": "journaling",
+              "url": "https://en.wikipedia.org/wiki/Reflective_writing"
+            },
+            {
+              "term": "longitudinal study",
+              "url": "https://en.wikipedia.org/wiki/Longitudinal_study"
+            }
+          ]
+        },
+        {
+          "title": "Deliberate Research Skill Development",
+          "content": "Research requires multiple skills that can be deliberately cultivated. I periodically assess my capabilities across dimensions like literature review efficiency, analytical techniques, writing clarity, and technological proficiency. Based on these assessments, I create targeted development plans focusing on high-leverage skills. Practice is structured around deliberate principles: breaking complex skills into components, seeking immediate feedback, working at the edge of current ability, and systematically integrating new capabilities into regular workflow.",
+          "wikiTerms": [
+            {
+              "term": "deliberate practice",
+              "url": "https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice"
+            },
+            {
+              "term": "skill acquisition",
+              "url": "https://en.wikipedia.org/wiki/Skill_acquisition"
+            }
+          ]
+        },
+        {
+          "title": "Methodology Innovation Experiments",
+          "content": "To avoid methodological stagnation, I periodically experiment with novel research approaches. These experiments follow a structured format: clear identification of current limitations, explicit hypotheses about how new methods might address these limitations, controlled testing in limited contexts before broader adoption, and systematic evaluation of outcomes. This experimental approach to methodology allows for continuous evolution while managing the risks of disrupting established workflows. Successful innovations are progressively integrated into standard practice.",
+          "wikiTerms": [
+            {
+              "term": "methodological innovation",
+              "url": "https://en.wikipedia.org/wiki/Methodology"
+            },
+            {
+              "term": "experimentation",
+              "url": "https://en.wikipedia.org/wiki/Experiment"
+            }
+          ]
+        },
+        {
+          "title": "Research Community Engagement",
+          "content": "Methodological development benefits from engagement with broader research communities. I participate in formal and informal exchanges focused on research practices: attending methodology-focused seminars, participating in communities of practice around specific tools or approaches, consulting methodology literature across disciplines, and seeking feedback on my own practices from experienced researchers. This community engagement prevents insularity while providing access to collective wisdom about effective research approaches.",
+          "wikiTerms": [
+            {
+              "term": "community of practice",
+              "url": "https://en.wikipedia.org/wiki/Community_of_practice"
+            },
+            {
+              "term": "peer review",
+              "url": "https://en.wikipedia.org/wiki/Peer_review"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "name": "First Principles Thinking",
+      "url": "https://en.wikipedia.org/wiki/First_principle"
+    },
+    {
+      "name": "Zettelkasten Method",
+      "url": "https://en.wikipedia.org/wiki/Zettelkasten"
+    },
+    {
+      "name": "Knowledge Graph",
+      "url": "https://en.wikipedia.org/wiki/Knowledge_graph"
+    },
+    {
+      "name": "Spaced Repetition",
+      "url": "https://en.wikipedia.org/wiki/Spaced_repetition"
+    },
+    {
+      "name": "Tiling Window Manager",
+      "url": "https://en.wikipedia.org/wiki/Tiling_window_manager"
+    },
+    {
+      "name": "Linux",
+      "url": "https://en.wikipedia.org/wiki/Linux"
+    },
+    {
+      "name": "Obsidian",
+      "url": "https://en.wikipedia.org/wiki/Markdown"
+    },
+    {
+      "name": "Concept Mapping",
+      "url": "https://en.wikipedia.org/wiki/Concept_map"
+    },
+    {
+      "name": "Logseq",
+      "url": "https://en.wikipedia.org/wiki/Personal_knowledge_management"
+    },
+    {
+      "name": "Terminal",
+      "url": "https://en.wikipedia.org/wiki/Terminal_emulator"
+    },
+    {
+      "name": "Shell Scripting",
+      "url": "https://en.wikipedia.org/wiki/Shell_script"
+    },
+    {
+      "name": "Reference Management",
+      "url": "https://en.wikipedia.org/wiki/Reference_management_software"
+    },
+    {
+      "name": "Interdisciplinary Research",
+      "url": "https://en.wikipedia.org/wiki/Interdisciplinarity"
+    },
+    {
+      "name": "Knowledge Synthesis",
+      "url": "https://en.wikipedia.org/wiki/Knowledge_synthesis"
+    },
+    {
+      "name": "Research Methodology",
+      "url": "https://en.wikipedia.org/wiki/Methodology"
+    }
+  ]
+}
+

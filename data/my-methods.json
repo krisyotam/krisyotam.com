@@ -14,6 +14,11 @@
         "title": "On Method",
         "link": "/method",
         "description": "A look into how I use my Linux setup, scripts, and automation to streamline research, with my server handling data processing and backups to keep everything organized."
+      },
+      {
+        "title": "On Website",
+        "link": "/website",
+        "description": "A look into the function & purposes of this website"
       }
     ]
   }

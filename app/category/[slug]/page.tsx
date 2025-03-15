@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getPostsByCategory, getCategories } from "../../../utils/posts"
+import { getPostsByCategory, getCategories, getPostYear } from "@/utils/posts"
 import { notFound } from "next/navigation"
 
 export const dynamic = "force-dynamic"
@@ -51,10 +51,11 @@ export default async function CategoryPage({
                 </thead>
                 <tbody>
                   {posts.map((post) => {
-                    const postUrl =
-                      post.type === "ghost"
-                        ? `/post/${post.slug}`
-                        : `/posts/${new Date(post.date).getFullYear()}/${post.slug}`
+                    // Get the year from the post date for the URL
+                    const year = getPostYear(post.date)
+
+                    // Create the correct URL path using the new blog structure
+                    const postUrl = `/blog/${year}/${post.slug}`
 
                     return (
                       <tr key={post.slug} className="border-b border-border hover:bg-secondary/50 transition-colors">

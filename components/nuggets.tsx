@@ -4,6 +4,8 @@ import { ExternalLink } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import { useState } from "react"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
 
 // KaTeX for LaTeX rendering
 import katex from "katex"
@@ -50,11 +52,30 @@ const processLatex = (text: string) => {
   })
 }
 
+// Function to count words in text
+const countWords = (text: string) => {
+  return text.trim().split(/\s+/).length
+}
+
+// Function to truncate text to a specific word count
+const truncateToWordLimit = (text: string, limit: number) => {
+  const words = text.trim().split(/\s+/)
+  if (words.length <= limit) return text
+  return words.slice(0, limit).join(" ") + "..."
+}
+
 export function Nugget({ nugget, className }: { nugget: NuggetData; className?: string }) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const wordCount = countWords(nugget.content)
+  const exceedsLimit = wordCount > 100
+
   return (
-    <Card className={cn("nugget-card w-full border-0 shadow-none", className)} style={{ all: "revert" }}>
+    <Card
+      className={cn("nugget-card w-full border-0 shadow-none dark:bg-[#121212]", className)}
+      style={{ all: "revert" }}
+    >
       <div
-        className="nugget-container flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-200 pb-6"
+        className="nugget-container flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-200 dark:border-gray-800 pb-6"
         style={{
           display: "flex !important",
           flexDirection: "column !important",
@@ -113,7 +134,7 @@ export function Nugget({ nugget, className }: { nugget: NuggetData; className?: 
               •
             </span>
             <Badge
-              className="nugget-source-badge bg-gray-100 text-gray-800 hover:bg-gray-200 font-normal"
+              className="nugget-source-badge bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-[#1a1a1a] dark:text-gray-300 dark:hover:bg-[#252525] font-normal"
               style={{
                 backgroundColor: "var(--muted) !important",
                 color: "var(--muted-foreground) !important",
@@ -146,13 +167,31 @@ export function Nugget({ nugget, className }: { nugget: NuggetData; className?: 
               whiteSpace: "pre-wrap !important",
             }}
           >
-            {processLatex(nugget.content)}
+            {processLatex(exceedsLimit ? truncateToWordLimit(nugget.content, 100) : nugget.content)}
+
+            {exceedsLimit && (
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="text-blue-600 hover:text-blue-800 font-medium ml-1"
+                style={{
+                  color: "var(--primary) !important",
+                  fontWeight: "500 !important",
+                  marginLeft: "0.25rem !important",
+                  background: "none !important",
+                  border: "none !important",
+                  padding: "0 !important",
+                  cursor: "pointer !important",
+                }}
+              >
+                See more
+              </button>
+            )}
           </div>
           <a
             href={nugget.source.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="nugget-source-link flex items-center gap-1 text-xs text-gray-500 hover:text-gray-800"
+            className="nugget-source-link flex items-center gap-1 text-xs text-gray-500 hover:text-gray-800 dark:hover:text-gray-300"
             style={{
               display: "flex !important",
               alignItems: "center !important",
@@ -168,11 +207,50 @@ export function Nugget({ nugget, className }: { nugget: NuggetData; className?: 
           </a>
         </div>
       </div>
+
+      {/* Bento Box Modal */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="sm:max-w-[450px] max-h-[80vh] p-0 rounded-xl overflow-hidden border-2 border-gray-100 dark:border-gray-800 shadow-lg dark:bg-[#121212]">
+          <div className="flex flex-col h-full">
+            {/* Header */}
+            <div className="p-4 border-b border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-[#1a1a1a]">
+              <h3 className="text-lg font-medium">{nugget.title}</h3>
+              <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
+                <time>{format(new Date(nugget.date), "MMM d, yyyy")}</time>
+                <span>•</span>
+                <Badge variant="outline" className="text-xs py-0 dark:border-gray-700 dark:text-gray-300">
+                  {nugget.source.type}
+                </Badge>
+              </div>
+            </div>
+
+            {/* Scrollable Content */}
+            <div className="p-4 overflow-y-auto" style={{ maxHeight: "50vh" }}>
+              <div className="prose prose-sm">{processLatex(nugget.content)}</div>
+            </div>
+
+            {/* Footer */}
+            <div className="p-3 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-[#1a1a1a] flex justify-end">
+              <a
+                href={nugget.source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-800"
+              >
+                View Source <ExternalLink className="h-3 w-3" />
+              </a>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Card>
   )
 }
 
 export function Nuggets({ data, className }: NuggetsProps) {
+  // Sort nuggets by date in descending order (newest first)
+  const sortedData = [...data].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
   return (
     <div
       className={cn("nuggets-container flex flex-col", className)}
@@ -182,7 +260,7 @@ export function Nuggets({ data, className }: NuggetsProps) {
         gap: "0 !important",
       }}
     >
-      {data.map((nugget) => (
+      {sortedData.map((nugget) => (
         <Nugget key={nugget.id} nugget={nugget} />
       ))}
     </div>

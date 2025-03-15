@@ -2,80 +2,94 @@
   "posts": [
     {
       "title": "Typography and Component Features",
+      "subtitle": "A showcase of design elements",
       "preview": "A comprehensive showcase of all typography and component features available for blog posts.",
       "date": "2025-05-25",
       "tags": ["Design", "Documentation", "Web Development"],
       "category": "Design",
       "slug": "feature-testing",
-      "status": "active",
-      "headings": [],
-      "marginNotes": []
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7,
+      "state": "active"
     },
     {
       "title": "The Art of Mindful Coding",
+      "subtitle": "Merging programming with mindfulness",
       "preview": "Discover how applying mindfulness principles to programming can lead to better code, enhanced problem-solving, and greater developer well-being.",
       "date": "2025-05-20",
       "tags": ["Programming", "Mindfulness", "Productivity"],
       "category": "Technology",
       "slug": "mindful-coding",
-      "status": "active",
-      "headings": [],
-      "marginNotes": []
+      "status": "In Progress",
+      "confidence": "likely",
+      "importance": 6,
+      "state": "active"
     },
     {
       "title": "On Classical Poetry",
+      "subtitle": "Timeless verses through the ages",
       "preview": "A curated collection of timeless poetry works that have shaped literature through the ages.",
       "date": "2025-05-15",
       "tags": ["Literature", "Poetry", "Recommendations"],
       "category": "On Building a Personal Library",
       "slug": "poetry-recommendations",
-      "status": "active",
-      "headings": [],
-      "marginNotes": []
+      "status": "Finished",
+      "confidence": "highly likely",
+      "importance": 5,
+      "state": "active"
     },
     {
       "title": "Law 1: Never Outshine the Master",
+      "subtitle": "Power dynamics in modern contexts",
       "preview": "An exploration of the first law from the 48 Laws of Power and its implications in modern contexts.",
       "date": "2025-05-01",
       "tags": ["Philosophy", "Strategy", "Power Dynamics"],
       "category": "Philosophy",
       "slug": "law-1-never-outshine-the-master",
-      "status": "hidden",
-      "headings": [],
-      "marginNotes": []
+      "status": "Draft",
+      "confidence": "possible",
+      "importance": 8,
+      "state": "hidden"
     },
     {
       "title": "The Starry Night",
+      "subtitle": "Van Gogh's masterpiece examined",
       "preview": "An in-depth exploration of Vincent van Gogh's iconic painting, *The Starry Night*, and its emotional, artistic, and symbolic significance.",
       "date": "2025-07-07",
       "tags": ["Van Gogh", "Art", "Expressionism", "Masterpiece", "Symbolism"],
       "category": "Art",
       "slug": "the-starry-night",
-      "status": "active",
-      "headings": [],
-      "marginNotes": []
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7,
+      "state": "active"
     },
     {
       "title": "Demo Post",
+      "subtitle": "A sample article for testing",
       "preview": "An in-depth exploration of Vincent van Gogh's iconic painting, *The Starry Night*, and its emotional, artistic, and symbolic significance.",
       "date": "2025-09-07",
       "tags": ["Van Gogh", "Art", "Expressionism", "Masterpiece", "Symbolism"],
       "category": "Art",
       "slug": "demo-post",
-      "status": "active",
-      "headings": [],
-      "marginNotes": []
+      "status": "Notes",
+      "confidence": "possible",
+      "importance": 4,
+      "state": "active"
     },
     {
       "title": "Hidden Demo Post",
+      "subtitle": "Demonstrating hidden functionality",
       "preview": "This is a hidden post that demonstrates the hidden status functionality.",
       "date": "2025-10-01",
       "tags": ["Demo", "Hidden", "Test"],
       "category": "Examples",
       "slug": "hidden-demo-post",
-      "status": "hidden",
-      "headings": [],
-      "marginNotes": []
+      "status": "Abandoned",
+      "confidence": "unlikely",
+      "importance": 2,
+      "state": "hidden"
     }
   ]
 }

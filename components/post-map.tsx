@@ -116,18 +116,53 @@ export type ContentBlock =
 
 // Component to render a content block based on its type
 export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
+  if (block.type.startsWith("h") && block.props?.id) {
+    console.log(`Rendering heading with ID: ${block.props.id}`)
+  }
+
+  // Wrap paragraphs in articles when appropriate
+  if (block.type === "p" && block.props?.startArticle) {
+    return (
+      <article className="paragraph-article">
+        <Typography.P {...block.props}>
+          {(block as TextContentBlock).tagTerms ? (
+            <ScriptTagger>{(block as TextContentBlock).content}</ScriptTagger>
+          ) : (
+            (block as TextContentBlock).content
+          )}
+        </Typography.P>
+      </article>
+    )
+  }
+
   switch (block.type) {
     case "h1":
-      return <Typography.H1 {...block.props}>{(block as TextContentBlock).content}</Typography.H1>
+      return (
+        <Typography.H1 id={(block as TextContentBlock).props?.id} {...block.props}>
+          {(block as TextContentBlock).content}
+        </Typography.H1>
+      )
 
     case "h2":
-      return <Typography.H2 {...block.props}>{(block as TextContentBlock).content}</Typography.H2>
+      return (
+        <Typography.H2 id={(block as TextContentBlock).props?.id} {...block.props}>
+          {(block as TextContentBlock).content}
+        </Typography.H2>
+      )
 
     case "h3":
-      return <Typography.H3 {...block.props}>{(block as TextContentBlock).content}</Typography.H3>
+      return (
+        <Typography.H3 id={(block as TextContentBlock).props?.id} {...block.props}>
+          {(block as TextContentBlock).content}
+        </Typography.H3>
+      )
 
     case "h4":
-      return <Typography.H4 {...block.props}>{(block as TextContentBlock).content}</Typography.H4>
+      return (
+        <Typography.H4 id={(block as TextContentBlock).props?.id} {...block.props}>
+          {(block as TextContentBlock).content}
+        </Typography.H4>
+      )
 
     case "p":
       const pBlock = block as TextContentBlock
@@ -307,13 +342,42 @@ export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
 
 // Main component that renders a list of content blocks
 export const PostMap: React.FC<{ content: ContentBlock[] }> = ({ content }) => {
-  return (
-    <>
-      {content.map((block, index) => (
-        <ContentBlock key={index} block={block} />
-      ))}
-    </>
-  )
+  // Group content into semantic sections
+  const groupedContent: React.ReactNode[] = []
+  let currentSection: React.ReactNode[] = []
+  let sectionTitle = ""
+
+  content.forEach((block, index) => {
+    // Start a new section when encountering an h2
+    if (block.type === "h2") {
+      // Add the previous section if it exists
+      if (currentSection.length > 0) {
+        groupedContent.push(
+          <section key={`section-${sectionTitle || index}`} className="content-section">
+            {currentSection}
+          </section>,
+        )
+      }
+
+      // Start a new section
+      sectionTitle = (block as TextContentBlock).content
+      currentSection = [<ContentBlock key={`block-${index}`} block={block} />]
+    } else {
+      // Add to the current section
+      currentSection.push(<ContentBlock key={`block-${index}`} block={block} />)
+    }
+  })
+
+  // Add the last section
+  if (currentSection.length > 0) {
+    groupedContent.push(
+      <section key={`section-${sectionTitle || "last"}`} className="content-section">
+        {currentSection}
+      </section>,
+    )
+  }
+
+  return <>{groupedContent}</>
 }
 
 export default PostMap

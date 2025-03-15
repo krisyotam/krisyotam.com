@@ -1,6 +1,20 @@
-import type { ReactNode } from "react"
+import type React from "react"
+import { cn } from "@/lib/utils"
 
-export function P({ children }: { children: ReactNode }) {
-  return <p className="leading-7 [&:not(:first-child)]:mt-6">{children}</p>
+interface PProps extends React.HTMLAttributes<HTMLParagraphElement> {
+  children: React.ReactNode
+  className?: string
+  startArticle?: boolean
 }
+
+export function P({ children, className, startArticle, ...props }: PProps) {
+  return (
+    <p className={cn("leading-7 [&:not(:first-child)]:mt-6", startArticle && "article-start", className)} {...props}>
+      {children}
+    </p>
+  )
+}
+
+// Set displayName explicitly to help with component detection
+P.displayName = "P"
 

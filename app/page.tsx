@@ -13,6 +13,7 @@ export const revalidate = 0
 export default async function Home() {
   try {
     // Fetch active posts directly using the getActivePosts function
+    // Posts are already sorted by date (newest first) in the getActivePosts function
     const posts = await getActivePosts()
 
     // DEBUG: Log the posts being rendered
@@ -68,6 +69,7 @@ export default async function Home() {
                       slug={slugPath}
                       type="tsx"
                       title={post.title}
+                      subtitle={post.subtitle}
                       date={new Date(post.date).toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",
