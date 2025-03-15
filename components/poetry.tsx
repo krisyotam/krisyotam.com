@@ -45,8 +45,8 @@ const PoetryStyles = () => (
     }
     
     .dark .poetry-card {
-      background-color: hsl(224, 71%, 4%) !important;
-      border-color: hsl(215.4, 16.3%, 30%) !important;
+      background-color: #121212 !important;
+      border-color: #2a2a2a !important;
     }
     
     .poetry-card:hover {
@@ -60,8 +60,8 @@ const PoetryStyles = () => (
     }
     
     .dark .poetry-card:hover {
-      background-color: hsl(223, 47%, 8%) !important;
-      border-color: hsl(215.4, 16.3%, 40%) !important;
+      background-color: #1a1a1a !important;
+      border-color: #333333 !important;
       box-shadow: 0 0 25px rgba(0, 0, 0, 0.3), 
                   0 0 45px rgba(0, 0, 0, 0.2), 
                   0 0 65px rgba(0, 0, 0, 0.1),
@@ -83,7 +83,7 @@ const PoetryStyles = () => (
     
     .dark .poetry-card:hover .poetry-badge {
       background-color: rgba(255, 255, 255, 0.05) !important;
-      border-color: hsl(215.4, 16.3%, 60%) !important;
+      border-color: #4d4d4d !important;
     }
     
     .poetry-card:hover .poetry-card-footer {
@@ -92,8 +92,8 @@ const PoetryStyles = () => (
     }
     
     .dark .poetry-card:hover .poetry-card-footer {
-      background-color: hsla(223, 47%, 9%, 0.8) !important;
-      border-top-color: hsl(215.4, 16.3%, 30%) !important;
+      background-color: #1f1f1f !important;
+      border-top-color: #2a2a2a !important;
     }
     
     .poetry-card-content {
@@ -111,8 +111,8 @@ const PoetryStyles = () => (
     }
     
     .dark .poetry-card-footer {
-      border-top-color: hsl(215.4, 16.3%, 30%) !important;
-      background-color: hsla(223, 47%, 7%, 0.5) !important;
+      border-top-color: #2a2a2a !important;
+      background-color: #161616 !important;
     }
     
     .poetry-button {
@@ -140,7 +140,7 @@ const PoetryStyles = () => (
     }
     
     .dark .poetry-button:hover {
-      background-color: hsla(223, 47%, 15%, 0.8) !important;
+      background-color: #252525 !important;
       color: hsl(210, 40%, 98%) !important;
     }
     
@@ -159,8 +159,8 @@ const PoetryStyles = () => (
     }
     
     .dark .poetry-badge {
-      color: hsl(210, 40%, 80%) !important;
-      border-color: hsl(215.4, 16.3%, 56.9%) !important;
+      color: #d1d5db !important;
+      border-color: #4d4d4d !important;
     }
     
     .poetry-title {
@@ -174,7 +174,7 @@ const PoetryStyles = () => (
     }
     
     .dark .poetry-title {
-      color: hsl(210, 40%, 98%) !important;
+      color: #f3f4f6 !important;
     }
     
     .poetry-collection {
@@ -187,7 +187,7 @@ const PoetryStyles = () => (
     }
     
     .dark .poetry-collection {
-      color: hsl(215.4, 16.3%, 70%) !important;
+      color: #9ca3af !important;
     }
     
     .poetry-date {
@@ -199,7 +199,7 @@ const PoetryStyles = () => (
     }
     
     .dark .poetry-date {
-      color: hsl(215.4, 16.3%, 70%) !important;
+      color: #9ca3af !important;
     }
   `}</style>
 )
