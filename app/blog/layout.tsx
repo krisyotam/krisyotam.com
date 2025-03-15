@@ -9,6 +9,7 @@ import { MarginCard } from "@/components/margin-card"
 import { Bibliography } from "@/components/bibliography"
 import { BentoFooter } from "@/components/bento-footer"
 import { ScriptTagger } from "@/components/script-tagger"
+import Head from "next/head"
 
 interface Post {
   title: string
@@ -53,13 +54,10 @@ export default function PostsLayout({
   useEffect(() => {
     async function fetchPostData() {
       try {
-        // Extract the slug from the pathname
-        // Assuming the pathname format is /blog/YEAR/SLUG
         const pathParts = pathname.split("/")
         if (pathParts.length >= 4 && pathParts[1] === "blog") {
           const slug = pathParts[3]
 
-          // Fetch the post data from your API
           const response = await fetch(`/api/post?slug=${slug}`)
           if (response.ok) {
             const data = await response.json()
@@ -78,10 +76,12 @@ export default function PostsLayout({
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
+      <Head>
+        <script async src="https://cdn.seline.so/seline.js" data-token="9bc08e3c42882e0"></script>
+      </Head>
+
       <div className="max-w-6xl mx-auto px-4">
-        {/* Three-column layout with reduced spacing */}
         <div className="flex flex-col md:flex-row md:gap-4 lg:gap-6">
-          {/* Left sidebar with Table of Contents - Sticky position */}
           <div className="hidden md:block md:w-56 lg:w-64 flex-shrink-0">
             <div className="sticky top-8">
               {postData?.headings && postData.headings.length > 0 && (
@@ -90,9 +90,7 @@ export default function PostsLayout({
             </div>
           </div>
 
-          {/* Main content column */}
           <div className="flex-1 max-w-2xl mx-auto px-0 py-8">
-            {/* Post Header */}
             {postData && (
               <PostHeader
                 title={postData.title}
@@ -102,30 +100,26 @@ export default function PostsLayout({
               />
             )}
 
-            {/* Post Content */}
             <article
               className="prose prose-lg mx-auto"
               style={{
                 fontFamily: "'Outfit', sans-serif",
                 lineHeight: 1.7,
-                maxWidth: "100%", // Allow content to fill the column
+                maxWidth: "100%",
               }}
             >
               <ScriptTagger>{children}</ScriptTagger>
             </article>
 
-            {/* Bibliography - Appears at the bottom of the post content */}
             {postData?.bibliography && postData.bibliography.length > 0 && (
               <div className="mt-16">
                 <Bibliography bibliography={postData.bibliography} />
               </div>
             )}
 
-            {/* Bento Footer - Appears at the very bottom */}
             <BentoFooter className="mt-16" />
           </div>
 
-          {/* Right sidebar with Margin Notes - Sticky position */}
           <div className="hidden md:block md:w-56 lg:w-64 flex-shrink-0">
             <div className="sticky top-8 space-y-4 pb-24">
               {postData?.marginNotes &&
@@ -141,4 +135,3 @@ export default function PostsLayout({
     </div>
   )
 }
-

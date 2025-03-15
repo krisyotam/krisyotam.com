@@ -80,7 +80,10 @@ export default async function PostPage({
         />
         <article className="post-content">
           <Suspense fallback={<div>Loading post content...</div>}>
-            <PostContent />
+            <PostContent params={{
+              year: "",
+              slug: ""
+            }} />
           </Suspense>
         </article>
       </div>
