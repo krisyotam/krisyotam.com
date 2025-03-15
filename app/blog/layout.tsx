@@ -4,7 +4,7 @@ import type React from "react"
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { PostHeader } from "@/components/post-header"
-import { TableOfContents } from "@/components/table-of-contents"
+import TableOfContents from "@/components/table-of-contents";
 import { MarginCard } from "@/components/margin-card"
 import { Bibliography } from "@/components/bibliography"
 import { BentoFooter } from "@/components/bento-footer"
