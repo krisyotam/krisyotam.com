@@ -1,0 +1,63 @@
+[
+  {
+    "id": "chill-vibes",
+    "title": "Chill Vibes",
+    "genre": "Lo-Fi",
+    "artists": ["Nujabes", "J Dilla", "Emancipator"],
+    "description": "A collection of relaxing beats perfect for studying or working.",
+    "coverImage": "/images/playlists/chill-vibes.jpg",
+    "link": "https://open.spotify.com/playlist/37i9dQZF1DX8Uebhn9wzrS",
+    "dateCreated": "2023-05-15"
+  },
+  {
+    "id": "workout-mix",
+    "title": "Workout Mix",
+    "genre": "Electronic",
+    "artists": ["Daft Punk", "Justice", "The Chemical Brothers"],
+    "description": "High-energy tracks to keep you motivated during your workout sessions.",
+    "coverImage": "/images/playlists/workout-mix.jpg",
+    "link": "https://open.spotify.com/playlist/37i9dQZF1DX76Wlfdnj7AP",
+    "dateCreated": "2023-06-22"
+  },
+  {
+    "id": "jazz-essentials",
+    "title": "Jazz Essentials",
+    "genre": "Jazz",
+    "artists": ["Miles Davis", "John Coltrane", "Thelonious Monk"],
+    "description": "Classic jazz tracks from the masters of the genre.",
+    "coverImage": "/images/playlists/jazz-essentials.jpg",
+    "link": "https://open.spotify.com/playlist/37i9dQZF1DXbITWG1ZJKYt",
+    "dateCreated": "2023-04-10"
+  },
+  {
+    "id": "indie-discoveries",
+    "title": "Indie Discoveries",
+    "genre": "Indie",
+    "artists": ["Vampire Weekend", "Arctic Monkeys", "Tame Impala"],
+    "description": "Fresh indie tracks from emerging artists and established bands.",
+    "coverImage": "/images/playlists/indie-discoveries.jpg",
+    "link": "https://open.spotify.com/playlist/37i9dQZF1DX2Nc3B70tvx0",
+    "dateCreated": "2023-07-05"
+  },
+  {
+    "id": "classical-focus",
+    "title": "Classical Focus",
+    "genre": "Classical",
+    "artists": ["Ludwig van Beethoven", "Wolfgang Amadeus Mozart", "Johann Sebastian Bach"],
+    "description": "Classical masterpieces to help you focus and concentrate.",
+    "coverImage": "/images/playlists/hip-hop-classics.jpg",
+    "link": "https://open.spotify.com/playlist/37i9dQZF1DWZd79rJ6a7lp",
+    "dateCreated": "2023-03-18"
+  },
+  {
+    "id": "hip-hop-classics",
+    "title": "Hip-Hop Classics",
+    "genre": "Hip-Hop",
+    "artists": ["Nas", "Jay-Z", "The Notorious B.I.G."],
+    "description": "Timeless hip-hop tracks that defined the genre.",
+    "coverImage": "/images/playlists/hip-hop-classics.jpg",
+    "link": "https://open.spotify.com/playlist/37i9dQZF1DX7Mq3mO5SSDc",
+    "dateCreated": "2023-08-12"
+  }
+]
+
