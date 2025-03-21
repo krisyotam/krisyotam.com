@@ -1,0 +1,52 @@
+[
+  {
+    "title": "AWS Certified Solutions Architect - Associate",
+    "date": "2023-05-15",
+    "link": "https://www.credly.com/badges/aws-certified-solutions-architect-associate"
+  },
+  {
+    "title": "Microsoft Certified: Azure Developer Associate",
+    "date": "2023-02-10",
+    "link": "https://learn.microsoft.com/en-us/certifications/azure-developer/"
+  },
+  {
+    "title": "Google Professional Cloud Architect",
+    "date": "2022-11-28",
+    "link": "https://cloud.google.com/certification/cloud-architect"
+  },
+  {
+    "title": "Certified Kubernetes Administrator (CKA)",
+    "date": "2022-09-05",
+    "link": "https://www.cncf.io/certification/cka/"
+  },
+  {
+    "title": "Certified Ethical Hacker (CEH)",
+    "date": "2022-07-12",
+    "link": "https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/"
+  },
+  {
+    "title": "Cisco Certified Network Professional (CCNP)",
+    "date": "2022-04-20",
+    "link": "https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/professional/ccnp-enterprise.html"
+  },
+  {
+    "title": "CompTIA Security+",
+    "date": "2021-12-08",
+    "link": "https://www.comptia.org/certifications/security"
+  },
+  {
+    "title": "Certified Information Systems Security Professional (CISSP)",
+    "date": "2021-10-15",
+    "link": "https://www.isc2.org/Certifications/CISSP"
+  },
+  {
+    "title": "Salesforce Certified Platform Developer I",
+    "date": "2021-08-03",
+    "link": "https://trailhead.salesforce.com/en/credentials/platformdeveloperi"
+  },
+  {
+    "title": "Oracle Certified Professional, Java SE 11 Developer",
+    "date": "2021-05-17",
+    "link": "https://education.oracle.com/java-se-11-developer/pexam_1Z0-819"
+  }
+]

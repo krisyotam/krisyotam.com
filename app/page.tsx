@@ -17,10 +17,6 @@ export default async function Home() {
     const posts = await getActivePosts()
 
     // DEBUG: Log the posts being rendered
-    console.log(
-      "🔍 DEBUG: Home page rendering with posts:",
-      posts.map((p) => ({ slug: p.slug, date: p.date, year: getPostYear(p.date) })),
-    )
 
     // Ensure posts are available and in the expected format
     if (!posts || !Array.isArray(posts)) {
@@ -60,8 +56,6 @@ export default async function Home() {
                   // Create the correct slug path - IMPORTANT: This is where we define the link path
                   const slugPath = `blog/${year}/${post.slug}`
 
-                  // DEBUG: Log the slug path being used
-                  console.log(`🔍 DEBUG: Creating link for post ${post.slug} with path: ${slugPath}`)
 
                   return (
                     <BlogPost
@@ -86,7 +80,6 @@ export default async function Home() {
       </div>
     )
   } catch (error) {
-    console.error("Failed to fetch posts:", error)
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p className="text-xl text-gray-600 dark:text-gray-400">Failed to load posts. Please try again later.</p>

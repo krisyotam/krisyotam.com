@@ -11,23 +11,18 @@
       "link": "https://blog.krisyotam.com"
     },
     {
-      "name": "Poetry",
-      "purpose": "A comprehensive anthology on my poetry organized by form",
-      "link": "https://krispoetry.vercel.app/"
-    },
-    {
       "name": "khr1st",
       "purpose": "software engineering, architecture, ai, ml, ctfs",
       "link": "https://khr1st.vercel.app"
     },
     {
-      "name": "Pure Maths",
-      "purpose": "math blog, research, speeches, notes",
+      "name": "Math Blog",
+      "purpose": "blog, research, speeches, notes",
       "link": "https://krispuremath.vercel.app"
     },
     {
       "name": "Physics Blog",
-      "purpose": "physics blog, research, speeches, notes",
+      "purpose": "blog, research, speeches, notes",
       "link": "https://khr1st.vercel.app"
     },
     {
@@ -41,8 +36,13 @@
       "link": "https://readinglog.vercel.app"
     },
     {
+      "name": "Poetry",
+      "purpose": "A comprehensive anthology on my poetry organized by form",
+      "link": "https://krispoetry.vercel.app/"
+    },
+    {
       "name": "Goodreads",
-      "purpose": "Displaying my photography work",
+      "purpose": "Add me and keep up with my reading updates.",
       "link": "https://kriscv.vercel.app"
     },
     {

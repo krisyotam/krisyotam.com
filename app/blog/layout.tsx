@@ -4,11 +4,13 @@ import type React from "react"
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { PostHeader } from "@/components/post-header"
-import TableOfContents from "@/components/table-of-contents";
+import TableOfContents from "@/components/table-of-contents"
 import { MarginCard } from "@/components/margin-card"
 import { Bibliography } from "@/components/bibliography"
 import { BentoFooter } from "@/components/bento-footer"
 import { ScriptTagger } from "@/components/script-tagger"
+import { PostLatexRenderer } from "@/components/post-latex-renderer"
+import { Commento } from "@/components/commento"
 
 // Add Google Fonts import for EB Garamond and Old English font
 const fontImport = `
@@ -318,7 +320,9 @@ export default function PostsLayout({
                     maxWidth: "100%",
                   }}
                 >
-                  <ScriptTagger>{children}</ScriptTagger>
+                  <PostLatexRenderer>
+                    <ScriptTagger>{children}</ScriptTagger>
+                  </PostLatexRenderer>
                 </article>
               </section>
 
@@ -331,6 +335,11 @@ export default function PostsLayout({
                   </article>
                 </section>
               )}
+
+              {/* Comments section */}
+              <section className="comments-section" aria-label="Comments">
+                <Commento />
+              </section>
 
               {/* Footer section */}
               <footer>

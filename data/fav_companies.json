@@ -1,0 +1,57 @@
+[
+  {
+    "name": "A-1 Pictures",
+    "photolink": "/images/anime/companies/a1.jpg",
+    "link": "https://myanimelist.net/anime/producer/56/A-1_Pictures",
+    "ranking": 1
+  },
+  {
+    "name": "Kyoto Animation",
+    "photolink": "/images/anime/companies/kyoani.jpg",
+    "link": "https://myanimelist.net/anime/producer/2/Kyoto_Animation",
+    "ranking": 2
+  },
+  {
+    "name": "MAPPA",
+    "photolink": "/images/anime/companies/mappa.jpg",
+    "link": "https://myanimelist.net/anime/producer/569/MAPPA",
+    "ranking": 3
+  },
+  {
+    "name": "Shaft",
+    "photolink": "/images/anime/companies/shaft.jpg",
+    "link": "https://myanimelist.net/anime/producer/44/Shaft",
+    "ranking": 4
+  },
+  {
+    "name": "ufotable",
+    "photolink": "/images/anime/companies/ufotable.jpg",
+    "link": "https://myanimelist.net/anime/producer/43/ufotable",
+    "ranking": 5
+  },
+  {
+    "name": "MAPPA",
+    "photolink": "/images/anime/companies/mappa.jpg",
+    "link": "https://myanimelist.net/anime/producer/569/MAPPA",
+    "ranking": 6
+  },
+  {
+    "name": "CloverWorks",
+    "photolink": "/images/anime/companies/cloverworks.jpg",
+    "link": "https://myanimelist.net/anime/producer/1835/CloverWorks",
+    "ranking": 7
+  },
+  {
+    "name": "Sunrise",
+    "photolink": "/images/anime/companies/sunrise.jpg",
+    "link": "https://myanimelist.net/anime/producer/14/Sunrise",
+    "ranking": 8
+  },
+  {
+    "name": "Toei Animation",
+    "photolink": "/images/anime/companies/toei.jpg",
+    "link": "https://myanimelist.net/anime/producer/18/Toei_Animation",
+    "ranking": 9
+  }
+]
+

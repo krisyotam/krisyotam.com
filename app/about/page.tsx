@@ -27,6 +27,7 @@ import { CurrentlyReading } from "@/components/CurrentlyReading"
 import NameBreakdown from "@/components/name-breakdown"
 import PersonalBio from "@/components/personal-bio"
 import myMethodsData from "../../data/my-methods.json"
+import certificationsData from "../../data/certifications.json"
 
 export const dynamic = "force-dynamic"
 
@@ -292,6 +293,33 @@ export default function AboutPage() {
           ),
         },
         { title: "My Mission", content: missionData.content },
+        {
+          title: "Certifications",
+          content: (
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-secondary">
+                    <th className="px-4 py-2 text-left text-foreground">Title</th>
+                    <th className="px-4 py-2 text-left text-foreground">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {certificationsData.map((cert, index) => (
+                    <tr
+                      key={index}
+                      className="border-t border-border hover:bg-secondary/50 transition-colors duration-200 cursor-pointer"
+                      onClick={() => window.open(cert.link, "_blank")}
+                    >
+                      <td className="px-4 py-2 text-foreground">{cert.title}</td>
+                      <td className="px-4 py-2 text-muted-foreground">{cert.date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ),
+        },
         { title: "Experience", content: experienceData.content },
         {
           title: "Core Skills",

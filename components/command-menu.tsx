@@ -3,15 +3,17 @@
 import { useState, useEffect } from "react"
 import { Command } from "cmdk"
 import { useRouter } from "next/navigation"
-import { Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll, Earth, Clock, Brain, Waypoints, Notebook, HandCoins, Bitcoin, Archive, Music, Origami, Film} from "lucide-react"
+import { Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll, Earth, Clock, Brain, Waypoints, Notebook, HandCoins, Bitcoin, Archive, Music, Origami, Film, Newspaper, StickyNote} from "lucide-react"
 import { SnowEffect } from "./snow-effect"
 import { useTheme } from "next-themes"
 
 const menuItems = [
   { icon: Home, label: "Home", path: "/" },
+  { icon: Quote, label: "Quotes", path: "/quotes" },
+  { icon: StickyNote, label: "Notes", path: "/notes" },
   { icon: Clock, label: "Now", path: "/now" },
   { icon: List, label: "Categories", path: "/categories" },
-  { icon: Quote, label: "Quotes", path: "/quotes" },
+  { icon: Newspaper, label: "Newsletter", path: "/newsletter" },
   { icon: BookOpen, label: "Books", path: "/books" },
   { icon: BookOpen, label: "My Books", path: "/mybooks" },
   { icon: Users, label: "OCs", path: "/ocs" },

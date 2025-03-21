@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Loader2, AlertTriangle } from "lucide-react"
+import { Loader2, AlertTriangle, CheckCircle, PauseCircle, Heart } from "lucide-react"
 import { ProfileHeader } from "@/components/anime/profile-header"
 import { TabSwitcher } from "@/components/anime/tab-switcher"
 import { CollectionsPage } from "@/components/anime/collections-page"
@@ -12,18 +12,34 @@ import { AnimeHelpModal } from "@/components/anime/help-modal"
 import { Badge } from "@/components/ui/badge"
 import { Pagination } from "@/components/anime/pagination"
 import "./anime.css"
-import { CheckCircle, PauseCircle, Heart } from "lucide-react"
+
+import favCharacters from "@/data/fav_chars.json"
+import favPeople from "@/data/fav_people.json"
+import favCompanies from "@/data/fav_companies.json"
 
 // Number of items to show per page
 const ITEMS_PER_PAGE = 5
 
+// Define types for our data
+interface AnimeItem {
+  id?: number
+  mal_id?: number
+  node?: any
+  list_status?: any
+  [key: string]: any
+}
+
 export default function AnimePage() {
   const [profile, setProfile] = useState<any>(null)
-  const [watching, setWatching] = useState<any[]>([])
-  const [completed, setCompleted] = useState<any[]>([])
-  const [reading, setReading] = useState<any[]>([])
-  const [completedManga, setCompletedManga] = useState<any[]>([])
-  const [favorites, setFavorites] = useState<any>({ anime: [], characters: [], manga: [] })
+  const [watching, setWatching] = useState<AnimeItem[]>([])
+  const [completed, setCompleted] = useState<AnimeItem[]>([])
+  const [reading, setReading] = useState<AnimeItem[]>([])
+  const [completedManga, setCompletedManga] = useState<AnimeItem[]>([])
+  const [favorites, setFavorites] = useState<{
+    anime: AnimeItem[]
+    characters: AnimeItem[]
+    manga: AnimeItem[]
+  }>({ anime: [], characters: [], manga: [] })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
   const [activeTab, setActiveTab] = useState<"anime" | "manga" | "collections">("anime")
@@ -33,6 +49,8 @@ export default function AnimePage() {
   const [completedPage, setCompletedPage] = useState(1)
   const [favoritesPage, setFavoritesPage] = useState(1)
   const [charactersPage, setCharactersPage] = useState(1)
+  const [peoplePage, setPeoplePage] = useState(1)
+  const [companiesPage, setCompaniesPage] = useState(1)
 
   useEffect(() => {
     // Reset pagination when tab changes
@@ -40,6 +58,8 @@ export default function AnimePage() {
     setCompletedPage(1)
     setFavoritesPage(1)
     // Don't reset charactersPage as characters are the same for both tabs
+    setPeoplePage(1)
+    setCompaniesPage(1)
   }, [activeTab])
 
   useEffect(() => {
@@ -168,7 +188,16 @@ export default function AnimePage() {
   const watchingTotalPages = Math.max(1, Math.ceil(currentContent.ongoing.length / ITEMS_PER_PAGE))
   const completedTotalPages = Math.max(1, Math.ceil(currentContent.completed.length / ITEMS_PER_PAGE))
   const favoritesTotalPages = Math.max(1, Math.ceil(currentContent.favorites.length / ITEMS_PER_PAGE))
-  const charactersTotalPages = Math.max(1, Math.ceil(favorites.characters.length / ITEMS_PER_PAGE))
+  const charactersTotalPages = Math.max(1, Math.ceil(favCharacters.length / ITEMS_PER_PAGE))
+
+  // Sort the favorites by ranking
+  const sortedFavCharacters = [...favCharacters].sort((a, b) => a.ranking - b.ranking)
+  const sortedFavPeople = [...favPeople].sort((a, b) => a.ranking - b.ranking)
+  const sortedFavCompanies = [...favCompanies].sort((a, b) => a.ranking - b.ranking)
+
+  // Calculate pagination for new sections
+  const peopleTotalPages = Math.max(1, Math.ceil(sortedFavPeople.length / ITEMS_PER_PAGE))
+  const companiesTotalPages = Math.max(1, Math.ceil(sortedFavCompanies.length / ITEMS_PER_PAGE))
 
   // Get paginated items
   const paginatedWatching = currentContent.ongoing.slice(
@@ -186,9 +215,17 @@ export default function AnimePage() {
     favoritesPage * ITEMS_PER_PAGE,
   )
 
-  const paginatedCharacters = favorites.characters.slice(
+  // Get paginated items for new sections
+  const paginatedCharacters = sortedFavCharacters.slice(
     (charactersPage - 1) * ITEMS_PER_PAGE,
     charactersPage * ITEMS_PER_PAGE,
+  )
+
+  const paginatedPeople = sortedFavPeople.slice((peoplePage - 1) * ITEMS_PER_PAGE, peoplePage * ITEMS_PER_PAGE)
+
+  const paginatedCompanies = sortedFavCompanies.slice(
+    (companiesPage - 1) * ITEMS_PER_PAGE,
+    companiesPage * ITEMS_PER_PAGE,
   )
 
   // Set up labels based on active tab
@@ -218,7 +255,7 @@ export default function AnimePage() {
 
       {activeTab === "collections" ? (
         <div className="mt-8">
-          <CollectionsPage profile={profile} activeTab={activeTab === "manga" ? "manga" : "anime"} />
+          <CollectionsPage profile={profile} activeTab={activeTab} />
         </div>
       ) : (
         <>
@@ -270,13 +307,13 @@ export default function AnimePage() {
             <div className="flex justify-between items-center">
               <h3 className="text-base font-medium mt-6 mb-3 text-muted-foreground flex items-center">
                 Favorite Characters
-                {favorites.characters?.length > 0 && (
+                {sortedFavCharacters?.length > 0 && (
                   <Badge variant="outline" className="ml-2 text-xs dark:border-gray-700 dark:text-gray-300">
-                    {favorites.characters.length}
+                    {sortedFavCharacters.length}
                   </Badge>
                 )}
               </h3>
-              {favorites.characters.length > ITEMS_PER_PAGE && (
+              {sortedFavCharacters.length > ITEMS_PER_PAGE && (
                 <Pagination
                   currentPage={charactersPage}
                   totalPages={charactersTotalPages}
@@ -285,9 +322,9 @@ export default function AnimePage() {
               )}
             </div>
             <div className="grid grid-cols-5 gap-4">
-              {favorites.characters && favorites.characters.length > 0 ? (
+              {sortedFavCharacters && sortedFavCharacters.length > 0 ? (
                 paginatedCharacters.map((character, index) => (
-                  <div key={character?.id || character?.mal_id || index} className="w-full">
+                  <div key={index} className="w-full">
                     <FavoriteCard item={character} type="character" />
                   </div>
                 ))
@@ -314,8 +351,8 @@ export default function AnimePage() {
             <div className="mt-3">
               <div className="grid grid-cols-5 gap-4">
                 {paginatedWatching.length > 0 ? (
-                  paginatedWatching.map((item) => (
-                    <div key={item?.node?.id || Math.random().toString()} className="w-full">
+                  paginatedWatching.map((item, index) => (
+                    <div key={item?.node?.id || index} className="w-full">
                       <WatchingAnimeCard
                         anime={item?.node || null}
                         status={item?.list_status || null}
@@ -331,7 +368,7 @@ export default function AnimePage() {
           </section>
 
           {/* Recently Completed Section */}
-          <section className="mt-10 mb-12">
+          <section className="mt-10">
             <div className="flex justify-between items-center">
               <SectionHeader
                 title={completedLabel}
@@ -349,8 +386,8 @@ export default function AnimePage() {
             <div className="mt-3">
               <div className="grid grid-cols-5 gap-4">
                 {paginatedCompleted.length > 0 ? (
-                  paginatedCompleted.map((item) => (
-                    <div key={item?.node?.id || Math.random().toString()} className="w-full">
+                  paginatedCompleted.map((item, index) => (
+                    <div key={item?.node?.id || index} className="w-full">
                       <CompletedAnimeCard
                         anime={item?.node || null}
                         status={item?.list_status || null}
@@ -364,6 +401,70 @@ export default function AnimePage() {
                   </p>
                 )}
               </div>
+            </div>
+          </section>
+
+          {/* Favorite People Section */}
+          <section className="mt-10">
+            <div className="flex justify-between items-center">
+              <h3 className="text-base font-medium mb-3 text-muted-foreground flex items-center">
+                Favorite People
+                {sortedFavPeople?.length > 0 && (
+                  <Badge variant="outline" className="ml-2 text-xs dark:border-gray-700 dark:text-gray-300">
+                    {sortedFavPeople.length}
+                  </Badge>
+                )}
+              </h3>
+              {sortedFavPeople.length > ITEMS_PER_PAGE && (
+                <Pagination currentPage={peoplePage} totalPages={peopleTotalPages} onPageChange={setPeoplePage} />
+              )}
+            </div>
+            <div className="grid grid-cols-5 gap-4">
+              {paginatedPeople.length > 0 ? (
+                paginatedPeople.map((person, index) => (
+                  <div key={index} className="w-full">
+                    <FavoriteCard item={person} type="character" />
+                  </div>
+                ))
+              ) : (
+                <p className="col-span-full text-center text-muted-foreground py-3 text-sm">
+                  No favorite people added yet.
+                </p>
+              )}
+            </div>
+          </section>
+
+          {/* Favorite Companies Section */}
+          <section className="mt-10 mb-12">
+            <div className="flex justify-between items-center">
+              <h3 className="text-base font-medium mb-3 text-muted-foreground flex items-center">
+                Favorite Companies
+                {sortedFavCompanies?.length > 0 && (
+                  <Badge variant="outline" className="ml-2 text-xs dark:border-gray-700 dark:text-gray-300">
+                    {sortedFavCompanies.length}
+                  </Badge>
+                )}
+              </h3>
+              {sortedFavCompanies.length > ITEMS_PER_PAGE && (
+                <Pagination
+                  currentPage={companiesPage}
+                  totalPages={companiesTotalPages}
+                  onPageChange={setCompaniesPage}
+                />
+              )}
+            </div>
+            <div className="grid grid-cols-5 gap-4">
+              {paginatedCompanies.length > 0 ? (
+                paginatedCompanies.map((company, index) => (
+                  <div key={index} className="w-full">
+                    <FavoriteCard item={company} type="character" isCompany={true} />
+                  </div>
+                ))
+              ) : (
+                <p className="col-span-full text-center text-muted-foreground py-3 text-sm">
+                  No favorite companies added yet.
+                </p>
+              )}
             </div>
           </section>
         </>

@@ -132,22 +132,26 @@ export function CompletedAnimeCard({ anime, type = "anime" }: AnimeCardProps) {
 interface FavoriteCardProps {
   item: any
   type: "anime" | "manga" | "character"
+  isCompany?: boolean
 }
 
-export function FavoriteCard({ item, type }: FavoriteCardProps) {
+export function FavoriteCard({ item, type, isCompany = false }: FavoriteCardProps) {
   // Handle different API response formats
   const imageUrl =
     item?.images?.jpg?.image_url ||
     item?.picture?.large ||
     item?.main_picture?.large ||
+    item?.photolink ||
     "/placeholder.svg?height=180&width=120"
 
   const title = item?.name || item?.title || "Unknown"
-  const url = item?.url || `https://myanimelist.net/${type}/${item?.id || item?.mal_id}`
+  const url = item?.url || item?.link || `https://myanimelist.net/${type}/${item?.id || item?.mal_id}`
+
+  const aspectRatioClass = isCompany ? "aspect-square" : "aspect-[2/3]"
 
   return (
     <Card className="w-full overflow-hidden border dark:border-gray-800 dark:bg-[#1a1a1a] flex flex-col h-full transition-all duration-200 hover:scale-[1.02] hover:shadow-md">
-      <div className="relative aspect-[2/3] overflow-hidden">
+      <div className={`relative ${aspectRatioClass} overflow-hidden`}>
         <img
           src={imageUrl || "/placeholder.svg"}
           alt={title}

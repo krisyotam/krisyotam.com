@@ -179,6 +179,84 @@ export async function getUserProfile(accessToken: string) {
     }
   }
   
+  // Function to get anime by ID
+  export async function getAnimeById(id: number) {
+    try {
+      // First try with MAL API if we have access token
+      const accessToken = process.env.MAL_ACCESS_TOKEN
+      if (accessToken) {
+        try {
+          const fields =
+            "id,title,main_picture,alternative_titles,start_date,end_date,synopsis,mean,rank,popularity,num_list_users,num_scoring_users,nsfw,created_at,updated_at,media_type,status,genres,my_list_status,num_episodes,start_season,broadcast,source,average_episode_duration,rating,pictures,background,related_anime,related_manga,recommendations,studios,statistics"
+  
+          const response = await fetch(`https://api.myanimelist.net/v2/anime/${id}?fields=${fields}`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          })
+  
+          if (response.ok) {
+            return await response.json()
+          }
+        } catch (error) {
+          console.error("Error fetching anime with MAL API:", error)
+        }
+      }
+  
+      // Fallback to Jikan API
+      const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`)
+  
+      if (!response.ok) {
+        throw new Error(`Failed to fetch anime: ${response.status}`)
+      }
+  
+      const data = await response.json()
+      return data.data
+    } catch (error) {
+      console.error("Error fetching anime by ID:", error)
+      throw error
+    }
+  }
+  
+  // Function to get manga by ID
+  export async function getMangaById(id: number) {
+    try {
+      // First try with MAL API if we have access token
+      const accessToken = process.env.MAL_ACCESS_TOKEN
+      if (accessToken) {
+        try {
+          const fields =
+            "id,title,main_picture,alternative_titles,start_date,end_date,synopsis,mean,rank,popularity,num_list_users,num_scoring_users,nsfw,created_at,updated_at,media_type,status,genres,my_list_status,num_volumes,num_chapters,authors{first_name,last_name},pictures,background,related_anime,related_manga,recommendations"
+  
+          const response = await fetch(`https://api.myanimelist.net/v2/manga/${id}?fields=${fields}`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          })
+  
+          if (response.ok) {
+            return await response.json()
+          }
+        } catch (error) {
+          console.error("Error fetching manga with MAL API:", error)
+        }
+      }
+  
+      // Fallback to Jikan API
+      const response = await fetch(`https://api.jikan.moe/v4/manga/${id}/full`)
+  
+      if (!response.ok) {
+        throw new Error(`Failed to fetch manga: ${response.status}`)
+      }
+  
+      const data = await response.json()
+      return data.data
+    } catch (error) {
+      console.error("Error fetching manga by ID:", error)
+      throw error
+    }
+  }
+  
   // Helper function to get user data
   export async function getUserData() {
     try {

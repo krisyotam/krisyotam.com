@@ -3,6 +3,7 @@ type TIL = {
   date: string
   path: string
   title: string
+  id?: number
 }
 
 // Client-side cache for TIL entries
@@ -19,11 +20,11 @@ export const getGitHubTilRepo = async () => {
 
   try {
     // Fetch the feed.json file from GitHub
-    const response = await fetch("https://raw.githubusercontent.com/krisyotam/til/master/feed.json", {
+    const response = await fetch("https://raw.githubusercontent.com/krisyotam/til/main/feed.json", {
       headers: {
         Accept: "application/json",
       },
-      next: { revalidate: 3600 }, // Revalidate once per hour
+      next: { revalidate: 36 }, // Revalidate once per hour
     })
 
     if (!response.ok) {
@@ -36,36 +37,18 @@ export const getGitHubTilRepo = async () => {
       // Parse the JSON and process the entries
       const til = JSON.parse(body) as TIL[]
 
-      // Process the entries to ensure paths are correctly formatted
-      const processedTil = await Promise.all(
-        til.map(async (item) => {
-          // Remove file extension from path
-          const cleanPath = item.path.substring(0, item.path.lastIndexOf("."))
+      // Process the entries to ensure paths are correctly formatted but don't fetch individual files
+      const processedTil = til.map((item) => {
+        // Remove file extension from path
+        const cleanPath = item.path.replace(/\.md$/, "")
 
-          // If content is not already included in the feed, fetch it
-          let content = item.content
-          if (!content) {
-            try {
-              const contentResponse = await fetch(
-                `https://raw.githubusercontent.com/krisyotam/til/master/${item.path}`,
-                { next: { revalidate: 3600 } },
-              )
-
-              if (contentResponse.ok) {
-                content = await contentResponse.text()
-              }
-            } catch (error) {
-              console.error(`Failed to fetch content for ${item.path}:`, error)
-            }
-          }
-
-          return {
-            ...item,
-            path: cleanPath,
-            content: content || "",
-          }
-        }),
-      )
+        return {
+          ...item,
+          path: cleanPath,
+          // Use the content already in the feed.json
+          content: item.content || ""
+        }
+      })
 
       // Update cache
       cachedTilEntries = processedTil
@@ -88,4 +71,3 @@ export const getGitHubTilRepo = async () => {
     return []
   }
 }
-
