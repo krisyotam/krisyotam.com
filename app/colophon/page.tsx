@@ -4,6 +4,18 @@ import { useState, useEffect } from "react"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import { AnimatedTagV2 } from "@/components/animated-tag-v2"
 import { UpdateModal } from "@/components/update-modal"
+import { PageHeader } from "@/components/page-header"
+
+// Add colophon page metadata after the other imports
+const colophonPageData = {
+  title: "Colophon",
+  subtitle: "Design and Technical Details",
+  date: new Date().toISOString(),
+  preview: "Information about the design, typography, and technology used to create this website.",
+  status: "Finished" as const,
+  confidence: "certain" as const,
+  importance: 6,
+}
 
 interface Inspiration {
   name: string
@@ -78,8 +90,6 @@ export default function ColophonPage() {
     return (
       <div className="relative min-h-screen bg-background text-foreground">
         <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-          <h1 className="text-4xl font-semibold mb-3 text-foreground">Colophon</h1>
-          <p>Loading...</p>
         </div>
       </div>
     )
@@ -88,12 +98,17 @@ export default function ColophonPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-        <div className="mb-8">
-          <h1 className="text-4xl font-semibold mb-3 text-foreground">Colophon</h1>
-          <p className="text-sm text-muted-foreground">Last updated: {currentDate}</p>
-        </div>
+        <PageHeader
+          title={colophonPageData.title}
+          subtitle={colophonPageData.subtitle}
+          date={colophonPageData.date}
+          preview={colophonPageData.preview}
+          status={colophonPageData.status}
+          confidence={colophonPageData.confidence}
+          importance={colophonPageData.importance}
+        />
 
-        <div className="space-y-12">
+        <div className="space-y-4">
           <section>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 border-t border-border">
               <h2 className="text-xl font-normal text-foreground">Typography</h2>

@@ -14,6 +14,19 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "@/components/ui/dialog"
+import { PageHeader } from "@/components/page-header"
+
+// Add research page metadata
+const researchPageData = {
+  title: "Research",
+  subtitle: "Academic Papers and Projects",
+  date: new Date().toISOString(),
+  preview:
+    "A collection of my research papers, publications, and ongoing academic projects across various disciplines.",
+  status: "In Progress" as const,
+  confidence: "likely" as const,
+  importance: 8,
+}
 
 interface Research {
   id: string
@@ -59,37 +72,45 @@ export default function ResearchPage() {
   })
 
   return (
-    <main className="min-h-screen px-4 py-20 bg-background text-foreground">
-      <div className="max-w-2xl mx-auto">
-        <div className="mb-8">
+    <main className="min-h-screen bg-background text-foreground">
+      <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={researchPageData.title}
+          subtitle={researchPageData.subtitle}
+          date={researchPageData.date}
+          preview={researchPageData.preview}
+          status={researchPageData.status}
+          confidence={researchPageData.confidence}
+          importance={researchPageData.importance}
+        />
 
-          {/* Search and Filters */}
-          <div className="space-y-4">
-            <Input
-              placeholder="Search research..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full"
-            />
+        {/* Search and Filters */}
+        <div className="space-y-4 mb-8">
+          <Input
+            placeholder="Search research..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full"
+          />
 
-            {/* Categories Filters */}
-            <div className="flex flex-wrap gap-2 mt-4">
+          {/* Categories Filters */}
+          <div className="flex flex-wrap gap-2 mt-4">
+            <button
+              onClick={() => setSelectedCategory(null)}
+              className={`p-2 text-sm rounded-md transition-colors ${selectedCategory === null ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"}`}
+            >
+              All Categories
+            </button>
+            {categories.map((category) => (
               <button
-                onClick={() => setSelectedCategory(null)}
-                className={`p-2 text-sm rounded-md transition-colors ${selectedCategory === null ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"}`}
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`p-2 text-sm rounded-md transition-colors ${selectedCategory === category ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"}`}
               >
-                All Categories
+                {category}
               </button>
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`p-2 text-sm rounded-md transition-colors ${selectedCategory === category ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"}`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
+            ))}
           </div>
         </div>
 
@@ -138,17 +159,44 @@ export default function ResearchPage() {
           <DialogHeader className="space-y-3">
             <DialogTitle className="text-2xl font-semibold">About Research</DialogTitle>
             <DialogDescription className="text-base leading-relaxed">
-            This page showcases my research papers, publications, and ongoing projects. Each card provides a summary
-            of the research topic, its importance, and links to the full paper and source materials. You can filter by
-            category or search for specific topics using the search bar. 
-            Any research related to 
-            <a href="https://saintkris.vercel.app" target="_blank" rel="noopener noreferrer" style={{ color: '#1e3a8a' }} className="hover:text-theology-blue no-underline"> theology</a>, 
-            <a href="https://krisphysics.vercel.app" target="_blank" rel="noopener noreferrer" style={{ color: '#1e3a8a' }} className="hover:text-theology-blue no-underline"> physics</a>, or 
-            <a href="https://krismathblog.vercel.app" target="_blank" rel="noopener noreferrer" style={{ color: '#1e3a8a' }} className="hover:text-theology-blue no-underline"> mathematics</a>. 
-            can be found at their own respective sites as those are some isolated topics in my life, which my research is more rigirous and of a longer time horizon.
+              This page showcases my research papers, publications, and ongoing projects. Each card provides a summary
+              of the research topic, its importance, and links to the full paper and source materials. You can filter by
+              category or search for specific topics using the search bar. Any research related to
+              <a
+                href="https://saintkris.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#1e3a8a" }}
+                className="hover:text-theology-blue no-underline"
+              >
+                {" "}
+                theology
+              </a>
+              ,
+              <a
+                href="https://krisphysics.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#1e3a8a" }}
+                className="hover:text-theology-blue no-underline"
+              >
+                {" "}
+                physics
+              </a>
+              , or
+              <a
+                href="https://krismathblog.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#1e3a8a" }}
+                className="hover:text-theology-blue no-underline"
+              >
+                {" "}
+                mathematics
+              </a>
+              . can be found at their own respective sites as those are some isolated topics in my life, which my
+              research is more rigirous and of a longer time horizon.
             </DialogDescription>
-
-
           </DialogHeader>
         </DialogContent>
       </Dialog>

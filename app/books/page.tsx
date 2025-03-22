@@ -15,6 +15,18 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import booksData from "../../data/books.json"
+import { PageHeader } from "@/components/page-header"
+
+// Add Books page metadata after other imports
+const booksPageData = {
+  title: "Recommended Books",
+  subtitle: "Reading Suggestions and Reviews",
+  date: new Date().toISOString(),
+  preview: "A curated collection of recommended books spanning various genres, topics, and fields of interest.",
+  status: "In Progress" as const,
+  confidence: "likely" as const,
+  importance: 7,
+}
 
 const client = new ApolloClient({
   uri: "https://literal.club/graphql/",
@@ -28,6 +40,17 @@ export default function BooksPage() {
     <ApolloProvider client={client}>
       <div className="relative min-h-screen bg-background text-foreground">
         <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+          {/* Add the PageHeader component */}
+          <PageHeader
+            title={booksPageData.title}
+            subtitle={booksPageData.subtitle}
+            date={booksPageData.date}
+            preview={booksPageData.preview}
+            status={booksPageData.status}
+            confidence={booksPageData.confidence}
+            importance={booksPageData.importance}
+          />
+
           <main>
             <BookList />
           </main>

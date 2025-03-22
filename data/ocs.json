@@ -4,181 +4,211 @@
       "name": "Chloe Elyon",
       "book": "Taiyo no shita kara no mono",
       "slug": "chloe-elyon",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Sydney Lane",
       "book": "Death Game",
       "slug": "sydney-lane",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Yif'ah Kohen",
       "book": "Taiyo no shita kara no mono",
       "slug": "yifah-kohen",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Saul Matsuda",
       "book": "Taiyo no shita kara no mono",
       "slug": "saul-matsuda",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Lior Elyon",
       "book": "Taiyo no shita kara no mono",
       "slug": "lior-elyon",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Zephyra",
       "book": "Taiyo no shita kara no mono",
       "slug": "zephyra",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Lillith",
       "book": "Taiyo no shita kara no mono",
       "slug": "lilith-taiyo",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Azazel \"The Serpent\"",
       "book": "Taiyo no shita kara no mono",
       "slug": "azazel",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Empress Ena of Mitani",
       "book": "Taiyo no shita kara no mono",
       "slug": "ena-of-mitani",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Miranda Strauss",
       "book": "The Whale",
       "slug": "miranda-strauss",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Ella Strauss",
       "book": "The Whale",
       "slug": "ella-strauss",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Rylee Moncler",
       "book": "Death Game",
       "slug": "rylee-moncler",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Prescilla Prescott",
       "book": "Death Game",
       "slug": "prescilla-prescott",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Hortense Fletcher",
       "book": "Death Game",
       "slug": "hortense-fletcher",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Josephine Gilroy",
       "book": "Death Game",
       "slug": "josephine-gilroy",
-      "status": "active"
+      "status": "active",
+     "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Gertrude Jennings",
       "book": "Death Game",
       "slug": "gertrude-jennings",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Imogen Riccheti",
       "book": "Death Game",
       "slug": "imogen-riccheti",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Astrid Baxter",
       "book": "Death Game",
       "slug": "astrid-baxter",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Morgan Elwood",
       "book": "Death Game",
       "slug": "morgan-elwood",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Matteo Calloway",
       "book": "Death Game",
       "slug": "matteo-calloway",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Niklaus Brahms",
       "book": "Death Game",
       "slug": "niklaus-brahms",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Elmer Remington",
       "book": "Death Game",
       "slug": "elmer-remington",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Minerva Remington",
       "book": "Death Game",
       "slug": "minerva-remington",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Lavinia Fairchild",
       "book": "House Of Fairchild",
       "slug": "lavinia-fairchild",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Delta (Δ)",
       "book": "Ars Mathematica",
       "slug": "ars-mathematica-delta",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Jane Von Toviah",
       "book": "Brilliant by Design",
       "slug": "jane-von-toviah",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Prof. Cynthia Clarke",
       "book": "Brilliant by Design",
       "slug": "prof-cynthia-clarke",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Prof. Allen David",
       "book": "Brilliant by Design",
       "slug": "prof-allen-david",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Malik Hill",
       "book": "Brilliant by Design",
       "slug": "malik-hill",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     },
     {
       "name": "Mariah Leighton",
       "book": "Brilliant by Design",
       "slug": "mariah-leighton",
-      "status": "active"
+      "status": "active",
+      "photo": "/characters/niklaus-brahms.jpg"
     }
   ]
 }

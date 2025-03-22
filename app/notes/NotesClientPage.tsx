@@ -5,6 +5,18 @@ import { NotesSearch } from "@/components/notes-search"
 import { NotesCategoryFilter } from "@/components/notes-category-filter"
 import { NotesList } from "@/components/notes-list"
 import { HelpCircle, X } from "lucide-react"
+import { PageHeader } from "@/components/page-header"
+
+// Add Notes page metadata after other imports
+const notesPageData = {
+  title: "Notes",
+  subtitle: "Thoughts and Observations",
+  date: new Date().toISOString(),
+  preview: "A collection of short notes, thoughts, and observations on various topics and ideas.",
+  status: "In Progress" as const,
+  confidence: "likely" as const,
+  importance: 6,
+}
 
 interface Note {
   title: string
@@ -43,6 +55,17 @@ export default function NotesClientPage({ notes }: NotesClientPageProps) {
         }
       `}</style>
       <div className="notes-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={notesPageData.title}
+          subtitle={notesPageData.subtitle}
+          date={notesPageData.date}
+          preview={notesPageData.preview}
+          status={notesPageData.status}
+          confidence={notesPageData.confidence}
+          importance={notesPageData.importance}
+        />
+
         <NotesSearch onSearch={handleSearch} />
 
         <NotesCategoryFilter

@@ -13,6 +13,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { PageHeader } from "@/components/page-header"
+
+// Add Quotes page metadata after other imports
+const quotesPageData = {
+  title: "Quotes",
+  subtitle: "Notable Sayings and Excerpts",
+  date: new Date().toISOString(),
+  preview: "A collection of notable quotes and excerpts from my writings, speeches, and other creative works.",
+  status: "In Progress" as const,
+  confidence: "certain" as const,
+  importance: 7,
+}
 
 export const dynamic = "force-dynamic"
 
@@ -20,9 +32,21 @@ export default function QuotesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const sortedQuotes = [...quotesData.quotes].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
+  // In the return statement, add the PageHeader component before the quotes list
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={quotesPageData.title}
+          subtitle={quotesPageData.subtitle}
+          date={quotesPageData.date}
+          preview={quotesPageData.preview}
+          status={quotesPageData.status}
+          confidence={quotesPageData.confidence}
+          importance={quotesPageData.importance}
+        />
+
         <div className="space-y-16">
           {sortedQuotes.map((quote) => (
             <QuoteCard

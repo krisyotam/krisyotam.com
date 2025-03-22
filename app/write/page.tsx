@@ -5,6 +5,7 @@ import { ConceptsBento } from "@/components/concepts-bento"
 import { ExpandableSubsection } from "@/components/expandable-subsection"
 import { WikiText } from "@/components/wiki-text"
 import { BookOpen } from "lucide-react"
+import { PageHeader } from "@/components/page-header"
 
 interface WikiTerm {
   term: string
@@ -38,6 +39,16 @@ export default function WritePage() {
   const [content, setContent] = useState<WritingContent | null>(null)
   const [openSections, setOpenSections] = useState<number[]>([0])
   const [currentDate, setCurrentDate] = useState<string>("")
+
+  const writePageData = {
+    title: "Writing",
+    subtitle: "A philosophy and system for clear, impactful writing",
+    date: new Date().toISOString(),
+    preview: "Explore principles and techniques for effective writing across various contexts and purposes.",
+    status: "In Progress",
+    confidence: "likely",
+    importance: 8,
+  }
 
   useEffect(() => {
     // Format current date
@@ -74,7 +85,15 @@ export default function WritePage() {
     return (
       <div className="relative min-h-screen bg-background text-foreground">
         <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-          <h1 className="text-4xl font-semibold mb-3 text-foreground">On Writing</h1>
+          <PageHeader
+            title={writePageData.title}
+            subtitle={writePageData.subtitle}
+            date={writePageData.date}
+            preview={writePageData.preview}
+            status={writePageData.status}
+            confidence={writePageData.confidence}
+            importance={writePageData.importance}
+          />
           <p>Loading...</p>
         </div>
       </div>
@@ -84,11 +103,15 @@ export default function WritePage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-        <div className="mb-8">
-          <h1 className="text-4xl font-semibold mb-3 text-foreground">On Writing</h1>
-          <p className="text-sm text-muted-foreground">Last updated: {currentDate}</p>
-          <p className="mt-4 text-lg text-muted-foreground">A philosophy and system for clear, impactful writing.</p>
-        </div>
+        <PageHeader
+          title={writePageData.title}
+          subtitle={writePageData.subtitle}
+          date={writePageData.date}
+          preview={writePageData.preview}
+          status={writePageData.status}
+          confidence={writePageData.confidence}
+          importance={writePageData.importance}
+        />
 
         <div className="mb-6 p-4 bg-muted/30 border border-border rounded-md">
           <div className="flex items-start">

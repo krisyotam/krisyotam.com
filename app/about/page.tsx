@@ -28,8 +28,20 @@ import NameBreakdown from "@/components/name-breakdown"
 import PersonalBio from "@/components/personal-bio"
 import myMethodsData from "../../data/my-methods.json"
 import certificationsData from "../../data/certifications.json"
+import { PageHeader } from "@/components/page-header"
 
 export const dynamic = "force-dynamic"
+
+// About page metadata
+const aboutPageData = {
+  title: "About",
+  subtitle: "Personal Information and Background",
+  date: new Date().toISOString(),
+  preview: "A comprehensive overview of my background, skills, interests, and values.",
+  status: "Finished" as const,
+  confidence: "certain" as const,
+  importance: 8,
+}
 
 interface AccordionItemProps {
   title: string
@@ -654,6 +666,16 @@ export default function AboutPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 pt-24 md:p-16 md:pt-32 lg:p-24 lg:pt-40">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={aboutPageData.title}
+          subtitle={aboutPageData.subtitle}
+          date={aboutPageData.date}
+          preview={aboutPageData.preview}
+          status={aboutPageData.status}
+          confidence={aboutPageData.confidence}
+          importance={aboutPageData.importance}
+        />
         <div className="space-y-px mb-16">
           {sections.map((section, index) => (
             <AccordionItem

@@ -5,6 +5,21 @@ import { ConceptsBento } from "@/components/concepts-bento"
 import { ExpandableSubsection } from "@/components/expandable-subsection"
 import { WikiText } from "@/components/wiki-text"
 import { BookOpen } from "lucide-react"
+import { PageHeader } from "@/components/page-header"
+import { WebsitePreview } from "@/components/website-preview"
+import websitePreviewData from "@/data/website-preview.json"
+
+// Website page metadata
+const websitePageData = {
+  title: "Website",
+  subtitle: "Design, Architecture, and Philosophy",
+  date: new Date().toISOString(),
+  preview:
+    "An exploration of the design principles, technical architecture, and philosophical approach behind this website.",
+  status: "In Progress" as const,
+  confidence: "certain" as const,
+  importance: 7,
+}
 
 interface WikiTerm {
   term: string
@@ -74,7 +89,15 @@ export default function WebsitePage() {
     return (
       <div className="relative min-h-screen bg-background text-foreground">
         <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-          <h1 className="text-4xl font-semibold mb-3 text-foreground">On Website</h1>
+          <PageHeader
+            title={websitePageData.title}
+            subtitle={websitePageData.subtitle}
+            date={websitePageData.date}
+            preview={websitePageData.preview}
+            status={websitePageData.status}
+            confidence={websitePageData.confidence}
+            importance={websitePageData.importance}
+          />
           <p>Loading...</p>
         </div>
       </div>
@@ -84,13 +107,22 @@ export default function WebsitePage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-        <div className="mb-8">
-          <h1 className="text-4xl font-semibold mb-3 text-foreground">On Website</h1>
-          <p className="text-sm text-muted-foreground">Last updated: {currentDate}</p>
-          <p className="mt-4 text-lg text-muted-foreground">
-            The design, architecture, and philosophy behind this site.
-          </p>
-        </div>
+        <PageHeader
+          title={websitePageData.title}
+          subtitle={websitePageData.subtitle}
+          date={websitePageData.date}
+          preview={websitePageData.preview}
+          status={websitePageData.status}
+          confidence={websitePageData.confidence}
+          importance={websitePageData.importance}
+        />
+
+        {/* Website Preview Component */}
+        <WebsitePreview
+          description={websitePreviewData.description}
+          lightModeImage={websitePreviewData.lightModeImage}
+          darkModeImage={websitePreviewData.darkModeImage}
+        />
 
         <div className="mb-6 p-4 bg-muted/30 border border-border rounded-md">
           <div className="flex items-start">

@@ -7,15 +7,20 @@ import { Input } from "@/components/ui/input"
 import { ResearchCard } from "@/components/research-card"
 import theoriesData from "@/data/theories.json"
 import { Button } from "@/components/ui/button"
-import { HelpCircle } from "lucide-react"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogDescription,
-} from "@/components/ui/dialog"
+
+// Import the PageHeader component
+import { PageHeader } from "@/components/page-header"
+
+// Add theories page metadata after the other imports
+const theoriesPageData = {
+  title: "Theories",
+  subtitle: "Hypotheses and Conceptual Frameworks",
+  date: new Date().toISOString(),
+  preview: "A collection of my theoretical work, hypotheses, and conceptual frameworks across various disciplines.",
+  status: "In Progress" as const,
+  confidence: "possible" as const,
+  importance: 8,
+}
 
 interface Theory {
   id: string
@@ -128,154 +133,107 @@ export default function TheoriesPage() {
   }
 
   return (
-    <main className="min-h-screen px-4 py-20 bg-background text-foreground">
-      <div className="max-w-2xl mx-auto">
-        <div className="mb-8">
-          <div className="space-y-4">
-            <Input
-              placeholder="Search theories..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full"
-            />
+    <main className="min-h-screen bg-background text-foreground">
+      <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        <PageHeader
+          title={theoriesPageData.title}
+          subtitle={theoriesPageData.subtitle}
+          date={theoriesPageData.date}
+          preview={theoriesPageData.preview}
+          status={theoriesPageData.status}
+          confidence={theoriesPageData.confidence}
+          importance={theoriesPageData.importance}
+        />
 
-            {/* Tier Filters */}
-            <div className="flex flex-wrap gap-2 mt-4 mb-4">
-              <button
-                onClick={() => {
-                  setSelectedTier(null)
-                  setSelectedCategory(null)
-                }}
-                className={`p-2 text-sm rounded-md transition-colors ${
-                  selectedTier === null ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"
-                }`}
-              >
-                All Tiers
-              </button>
-              {getTiers().map((tier) => (
+        <div className="space-y-6">
+          <div className="mb-8">
+            <div className="space-y-4">
+              <Input
+                placeholder="Search theories..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full"
+              />
+
+              {/* Tier Filters */}
+              <div className="flex flex-wrap gap-2 mt-4 mb-4">
                 <button
-                  key={tier}
                   onClick={() => {
-                    setSelectedTier(tier)
+                    setSelectedTier(null)
                     setSelectedCategory(null)
                   }}
                   className={`p-2 text-sm rounded-md transition-colors ${
-                    selectedTier === tier ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"
+                    selectedTier === null ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"
                   }`}
                 >
-                  Tier {tier}
+                  All Tiers
                 </button>
-              ))}
-            </div>
+                {getTiers().map((tier) => (
+                  <button
+                    key={tier}
+                    onClick={() => {
+                      setSelectedTier(tier)
+                      setSelectedCategory(null)
+                    }}
+                    className={`p-2 text-sm rounded-md transition-colors ${
+                      selectedTier === tier ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"
+                    }`}
+                  >
+                    Tier {tier}
+                  </button>
+                ))}
+              </div>
 
-            <div className="flex flex-wrap gap-2 mt-4">
-              <button
-                onClick={() => setSelectedCategory(null)}
-                className={`p-2 text-sm rounded-md transition-colors ${selectedCategory === null ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"}`}
-              >
-                All Categories
-              </button>
-              {categories.map((category) => (
+              <div className="flex flex-wrap gap-2 mt-4">
                 <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`p-2 text-sm rounded-md transition-colors ${selectedCategory === category ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"}`}
+                  onClick={() => setSelectedCategory(null)}
+                  className={`p-2 text-sm rounded-md transition-colors ${selectedCategory === null ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"}`}
                 >
-                  {category}
+                  All Categories
                 </button>
-              ))}
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`p-2 text-sm rounded-md transition-colors ${selectedCategory === category ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"}`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
+
+          {filteredTheories.length === 0 ? (
+            <p className="text-center text-muted-foreground mt-8">No theories found matching your criteria.</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {filteredTheories.map((item) => (
+                <ResearchCard
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  abstract={item.abstract}
+                  importance={item.importance}
+                  authors={item.authors}
+                  subject={item.subject}
+                  keywords={item.keywords}
+                  postedBy={item.postedBy}
+                  postedOn={item.postedOn}
+                  dateStarted={item.dateStarted}
+                  status={item.status}
+                  bibliography={item.bibliography}
+                  img={item.img}
+                  pdfLink={item.pdfLink}
+                  sourceLink={item.sourceLink}
+                  category={item.category}
+                  tags={item.tags}
+                />
+              ))}
+            </div>
+          )}
         </div>
-
-        {filteredTheories.length === 0 ? (
-          <p className="text-center text-muted-foreground mt-8">No theories found matching your criteria.</p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {filteredTheories.map((item) => (
-              <ResearchCard
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                abstract={item.abstract}
-                importance={item.importance}
-                authors={item.authors}
-                subject={item.subject}
-                keywords={item.keywords}
-                postedBy={item.postedBy}
-                postedOn={item.postedOn}
-                dateStarted={item.dateStarted}
-                status={item.status}
-                bibliography={item.bibliography}
-                img={item.img}
-                pdfLink={item.pdfLink}
-                sourceLink={item.sourceLink}
-              />
-            ))}
-          </div>
-        )}
       </div>
-
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="fixed bottom-4 left-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200"
-            onClick={() => setIsModalOpen(true)}
-          >
-            <HelpCircle className="h-5 w-5" />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-background rounded-lg shadow-2xl border-0">
-          <DialogHeader className="space-y-3">
-            <DialogTitle className="text-2xl font-semibold">About Theories</DialogTitle>
-            <DialogDescription className="text-base leading-relaxed">
-              This page showcases my theoretical work, hypotheses, and conceptual frameworks. Each card provides a
-              summary of the theory, its importance, and links to the full paper and source materials. You can filter by
-              category or search for specific topics using the search bar. Any theories related to
-              <a
-                href="https://saintkris.vercel.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#1e3a8a" }}
-                className="hover:text-theology-blue no-underline"
-              >
-                {" "}
-                theology
-              </a>
-              ,
-              <a
-                href="https://krisphysics.vercel.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#1e3a8a" }}
-                className="hover:text-theology-blue no-underline"
-              >
-                {" "}
-                physics
-              </a>
-              , or
-              <a
-                href="https://krismathblog.vercel.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#1e3a8a" }}
-                className="hover:text-theology-blue no-underline"
-              >
-                {" "}
-                mathematics
-              </a>
-              . can be found at their own respective sites as those are some isolated topics in my life, 
-              in which the knowledge is not interconnected to the research seen here. Another thing you will notice is 
-              the elementary tier system in which I have created. The system organizes theories from <strong>Tiers 1 - 5</strong>.
-              1 being the largest reserved for high level theories that have several sub theories to prove specific branches of it. 
-              5 being the lowest level or more basic theories in which are foundational building blocks for some of the higher level theories.
-              Tier makes them no more/less important.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
     </main>
   )
 }

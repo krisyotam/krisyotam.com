@@ -15,6 +15,18 @@ import {
 } from "@/components/ui/dialog"
 import poemsData from "@/data/poems.json"
 import type { Poem } from "@/utils/poems"
+import { PageHeader } from "@/components/page-header"
+
+// Poetry page metadata
+const poetryPageData = {
+  title: "Poetry",
+  subtitle: "Verses and Reflections",
+  date: new Date().toISOString(),
+  preview: "A collection of original poems exploring themes of existence, nature, and the human experience.",
+  status: "In Progress" as const,
+  confidence: "certain" as const,
+  importance: 7,
+}
 
 export default function PoetryPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -42,6 +54,16 @@ export default function PoetryPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={poetryPageData.title}
+          subtitle={poetryPageData.subtitle}
+          date={poetryPageData.date}
+          preview={poetryPageData.preview}
+          status={poetryPageData.status}
+          confidence={poetryPageData.confidence}
+          importance={poetryPageData.importance}
+        />
 
         {/* Search */}
         <div className="relative mb-6">

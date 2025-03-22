@@ -16,6 +16,18 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { PageHeader } from "@/components/page-header"
+
+// Add MyBooks page metadata after other imports
+const mybooksPageData = {
+  title: "My Books",
+  subtitle: "Published Works and Writings",
+  date: new Date().toISOString(),
+  preview: "A collection of my published books, manuscripts, and ongoing writing projects across various genres.",
+  status: "In Progress" as const,
+  confidence: "certain" as const,
+  importance: 9,
+}
 
 const revalidate = 1800 // 30 minutes
 
@@ -33,9 +45,21 @@ type Book = {
 export default function MyBooksPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  // In the return statement, add the PageHeader component before the MyBookList component
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={mybooksPageData.title}
+          subtitle={mybooksPageData.subtitle}
+          date={mybooksPageData.date}
+          preview={mybooksPageData.preview}
+          status={mybooksPageData.status}
+          confidence={mybooksPageData.confidence}
+          importance={mybooksPageData.importance}
+        />
+
         <MyBookList initialBooks={mybooksData.books} />
       </div>
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>

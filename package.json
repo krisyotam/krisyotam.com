@@ -73,6 +73,7 @@
     "react-window": "latest",
     "recharts": "2.15.0",
     "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
     "remark-html": "^16.0.1",
     "sonner": "^1.7.1",
     "subscriptions-transport-ws": "latest",

@@ -7,6 +7,18 @@ import NewsletterCard from "@/components/newsletter-card"
 import NewsletterYearFilter from "@/components/newsletter-year-filter"
 import NewsletterHelpModal from "@/components/newsletter-help-modal"
 import { HelpCircle, Grid, List } from "lucide-react"
+import { PageHeader } from "@/components/page-header"
+
+// Add Newsletter page metadata after other imports
+const newsletterPageData = {
+  title: "Newsletter",
+  subtitle: "Regular Updates and Insights",
+  date: new Date().toISOString(),
+  preview: "An archive of my newsletter issues, featuring updates, insights, and curated content on various topics.",
+  status: "In Progress" as const,
+  confidence: "certain" as const,
+  importance: 6,
+}
 
 interface Newsletter {
   id: string
@@ -55,6 +67,17 @@ export default function NewsletterClientPage({ initialNewsletters }: NewsletterC
     <div className="min-h-screen bg-white dark:bg-[#121212] text-black dark:text-white">
       <div className="container mx-auto px-4 py-8">
         <div className="w-full max-w-3xl mx-auto">
+          {/* Add the PageHeader component */}
+          <PageHeader
+            title={newsletterPageData.title}
+            subtitle={newsletterPageData.subtitle}
+            date={newsletterPageData.date}
+            preview={newsletterPageData.preview}
+            status={newsletterPageData.status}
+            confidence={newsletterPageData.confidence}
+            importance={newsletterPageData.importance}
+          />
+
           <NewsletterHeader />
 
           <div className="mb-6">

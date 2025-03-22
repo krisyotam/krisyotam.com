@@ -15,6 +15,20 @@ import {
 } from "@/components/ui/dialog"
 import nuggetsData from "@/data/nuggets.json"
 
+// Import the PageHeader component
+import { PageHeader } from "@/components/page-header"
+
+// Add nuggets page metadata after the other imports
+const nuggetsPageData = {
+  title: "Nuggets",
+  subtitle: "Bite-sized Insights and Ideas",
+  date: new Date().toISOString(),
+  preview: "A collection of interesting concepts, theories, and perspectives I've shared across the web.",
+  status: "In Progress" as const,
+  confidence: "likely" as const,
+  importance: 6,
+}
+
 export const dynamic = "force-dynamic"
 
 export default function NuggetsPage() {
@@ -42,6 +56,16 @@ export default function NuggetsPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={nuggetsPageData.title}
+          subtitle={nuggetsPageData.subtitle}
+          date={nuggetsPageData.date}
+          preview={nuggetsPageData.preview}
+          status={nuggetsPageData.status}
+          confidence={nuggetsPageData.confidence}
+          importance={nuggetsPageData.importance}
+        />
 
         {/* Search */}
         <div className="relative mb-6">

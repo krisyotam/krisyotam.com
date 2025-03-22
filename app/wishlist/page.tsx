@@ -13,6 +13,18 @@ import {
 } from "@/components/ui/dialog"
 import wishlistData from "@/data/wishlist.json"
 import Wishlist from "@/components/wishlist"
+import { PageHeader } from "@/components/page-header"
+
+// Wishlist page metadata
+const wishlistPageData = {
+  title: "Wishlist",
+  subtitle: "Items I'd Like to Have",
+  date: new Date().toISOString(),
+  preview: "A curated collection of items that inspire and intrigue me, reflecting my interests and aspirations.",
+  status: "In Progress" as const,
+  confidence: "certain" as const,
+  importance: 4,
+}
 
 export default function WishlistPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -24,7 +36,7 @@ export default function WishlistPage() {
 
   // Effect to filter items whenever searchQuery or activeCategory changes
   useEffect(() => {
-    console.log("Filtering items based on:", activeCategory); // Debug log
+    console.log("Filtering items based on:", activeCategory) // Debug log
     const filtered = wishlistData.products.filter((item) => {
       const matchesSearch =
         searchQuery === "" ||
@@ -37,13 +49,24 @@ export default function WishlistPage() {
       return matchesSearch && matchesCategory
     })
 
-    console.log("Filtered items:", filtered); // Debug log
+    console.log("Filtered items:", filtered) // Debug log
     setFilteredItems(filtered) // Update the state with filtered items
   }, [searchQuery, activeCategory]) // Re-run effect when these change
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={wishlistPageData.title}
+          subtitle={wishlistPageData.subtitle}
+          date={wishlistPageData.date}
+          preview={wishlistPageData.preview}
+          status={wishlistPageData.status}
+          confidence={wishlistPageData.confidence}
+          importance={wishlistPageData.importance}
+        />
+
         <div className="mb-6 space-y-4">
           {/* Search input */}
           <input
@@ -61,8 +84,8 @@ export default function WishlistPage() {
                 key={category}
                 variant={category === activeCategory ? "default" : "secondary"}
                 onClick={() => {
-                  setActiveCategory(category); // Update active category when button is clicked
-                  console.log("Category clicked:", category); // Debug log
+                  setActiveCategory(category) // Update active category when button is clicked
+                  console.log("Category clicked:", category) // Debug log
                 }}
               >
                 {category}
@@ -100,3 +123,4 @@ export default function WishlistPage() {
     </div>
   )
 }
+

@@ -13,6 +13,18 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "@/components/ui/dialog"
+import { PageHeader } from "@/components/page-header"
+
+// Add projects page metadata
+const projectsPageData = {
+  title: "Projects",
+  subtitle: "Personal and Professional Work",
+  date: new Date().toISOString(),
+  preview: "A showcase of my development projects, design work, and creative endeavors across various domains.",
+  status: "In Progress" as const,
+  confidence: "certain" as const,
+  importance: 9,
+}
 
 export const dynamic = "force-dynamic"
 
@@ -22,6 +34,17 @@ export default function ProjectsPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={projectsPageData.title}
+          subtitle={projectsPageData.subtitle}
+          date={projectsPageData.date}
+          preview={projectsPageData.preview}
+          status={projectsPageData.status}
+          confidence={projectsPageData.confidence}
+          importance={projectsPageData.importance}
+        />
+
         <ProjectList initialProjects={projectsData.projects} />
       </div>
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>

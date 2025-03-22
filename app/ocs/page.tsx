@@ -1,14 +1,13 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { getFeaturedImage } from "../../utils/ghost"
+import { useState } from "react"
 import ocsData from "../../data/ocs.json"
 import worldsData from "../../data/worlds.json"
 import { CharacterCard } from "../../components/character-card"
+import FictionWorld from "../../components/fiction-world"
 import { BookSearch } from "../../components/book-search"
 import { Button } from "@/components/ui/button"
 import { HelpCircle } from "lucide-react"
-import FictionWorld from "@/components/fiction-world"
 import {
   Dialog,
   DialogContent,
@@ -18,8 +17,20 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { PageHeader } from "@/components/page-header"
 
 export const dynamic = "force-dynamic"
+
+// Add OCS page metadata after other imports
+const ocsPageData = {
+  title: "Characters",
+  subtitle: "Fictional Characters and Worlds",
+  date: new Date().toISOString(),
+  preview: "A showcase of original characters and fictional worlds from my books and creative writing projects.",
+  status: "In Progress" as const,
+  confidence: "certain" as const,
+  importance: 6,
+}
 
 // Define types for our data structures
 interface Character {
@@ -27,7 +38,7 @@ interface Character {
   slug: string
   book: string
   status: string
-  feature_image?: string
+  photo?: string
 }
 
 interface World {
@@ -36,16 +47,28 @@ interface World {
   slug: string
   status: string
   books: string[]
-  feature_image?: string
+  photo?: string
 }
 
 export default function OCsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [activeView, setActiveView] = useState("characters")
 
+  // In the return statement, add the PageHeader component before the Tabs component
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={ocsPageData.title}
+          subtitle={ocsPageData.subtitle}
+          date={ocsPageData.date}
+          preview={ocsPageData.preview}
+          status={ocsPageData.status}
+          confidence={ocsPageData.confidence}
+          importance={ocsPageData.importance}
+        />
+
         <Tabs defaultValue="characters" className="mb-8" onValueChange={setActiveView}>
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="characters">Characters</TabsTrigger>
@@ -90,47 +113,13 @@ export default function OCsPage() {
 function WorldsList({ worlds }: { worlds: World[] }) {
   const [searchQuery, setSearchQuery] = useState("")
   const [activeCategory, setActiveCategory] = useState("All")
-  const [worldsWithImages, setWorldsWithImages] = useState<World[]>(worlds)
-
-  useEffect(() => {
-    const fetchFeaturedImages = async () => {
-      try {
-        console.log("Fetching featured images for worlds...")
-        const updatedWorlds = await Promise.all(
-          worlds.map(async (world: World) => {
-            try {
-              const featuredImage = await getFeaturedImage(world.slug)
-              console.log(`Fetched image for ${world.name}:`, featuredImage)
-              return {
-                ...world,
-                feature_image:
-                  featuredImage && featuredImage !== "null" ? featuredImage : "/placeholder.svg?height=600&width=800",
-              }
-            } catch (error) {
-              console.error(`Error fetching image for ${world.name}:`, error)
-              return { ...world, feature_image: "/placeholder.svg?height=600&width=800" }
-            }
-          }),
-        )
-        console.log("All featured images fetched successfully")
-        setWorldsWithImages(updatedWorlds)
-      } catch (error) {
-        console.error("Error fetching featured images:", error)
-        setWorldsWithImages(
-          worlds.map((world) => ({ ...world, feature_image: "/placeholder.svg?height=600&width=800" })),
-        )
-      }
-    }
-
-    fetchFeaturedImages()
-  }, [worlds])
 
   // Get all unique categories (books)
   const allCategories = Array.from(new Set(worlds.flatMap((world) => world.books))).filter((book): book is string =>
     Boolean(book),
   )
 
-  const filteredWorlds = worldsWithImages.filter((world) => {
+  const filteredWorlds = worlds.filter((world) => {
     const matchesSearch =
       searchQuery === "" ||
       world.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -168,7 +157,7 @@ function WorldsList({ worlds }: { worlds: World[] }) {
             key={world.slug}
             name={world.name}
             novel={world.books[0] || "Upcoming"}
-            imageSrc={world.feature_image || "/placeholder.svg?height=600&width=800"}
+            imageSrc={world.photo || "/placeholder.svg?height=600&width=800"}
             slug={world.slug}
             author="Kris Yotam"
           />
@@ -184,43 +173,10 @@ function WorldsList({ worlds }: { worlds: World[] }) {
 function CharacterList({ initialCharacters }: { initialCharacters: Character[] }) {
   const [searchQuery, setSearchQuery] = useState("")
   const [activeCategory, setActiveCategory] = useState("All")
-  const [charactersWithImages, setCharactersWithImages] = useState<Character[]>(initialCharacters)
-
-  useEffect(() => {
-    const fetchFeaturedImages = async () => {
-      try {
-        console.log("Fetching featured images for characters...")
-        const updatedCharacters = await Promise.all(
-          initialCharacters.map(async (character: Character) => {
-            try {
-              const featuredImage = await getFeaturedImage(character.slug)
-              console.log(`Fetched image for ${character.name}:`, featuredImage)
-              return {
-                ...character,
-                feature_image: featuredImage && featuredImage !== "null" ? featuredImage : "/placeholder-square.svg",
-              }
-            } catch (error) {
-              console.error(`Error fetching image for ${character.name}:`, error)
-              return { ...character, feature_image: "/placeholder-square.svg" }
-            }
-          }),
-        )
-        console.log("All featured images fetched successfully")
-        setCharactersWithImages(updatedCharacters)
-      } catch (error) {
-        console.error("Error fetching featured images:", error)
-        setCharactersWithImages(
-          initialCharacters.map((character) => ({ ...character, feature_image: "/placeholder-square.svg" })),
-        )
-      }
-    }
-
-    fetchFeaturedImages()
-  }, [initialCharacters])
 
   const categories = Array.from(new Set(initialCharacters.map((character) => character.book)))
 
-  const filteredCharacters = charactersWithImages.filter((character) => {
+  const filteredCharacters = initialCharacters.filter((character) => {
     const matchesSearch =
       searchQuery === "" ||
       character.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -256,7 +212,7 @@ function CharacterList({ initialCharacters }: { initialCharacters: Character[] }
         {filteredCharacters.map((character) => (
           <CharacterCard
             key={character.slug}
-            imageUrl={character.feature_image || "/placeholder-square.svg"}
+            imageUrl={character.photo || "/placeholder-square.svg"}
             name={character.name}
             book={character.book}
             slug={character.slug}

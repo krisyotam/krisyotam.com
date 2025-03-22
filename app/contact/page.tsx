@@ -7,12 +7,35 @@ import contactData from "@/data/contact.json"
 import pgpData from "@/data/pgp.json"
 import contactFormInfo from "@/data/contact-form-info.json"
 import { Card } from "@/components/ui/card"
-import { MessageSquare } from "lucide-react"
+import { MessageSquare } from 'lucide-react'
+import { PageHeader } from "@/components/page-header"
+
+// Contact page metadata
+const contactPageData = {
+  title: "Contact",
+  subtitle: "Get in Touch",
+  date: new Date().toISOString(),
+  preview: "Various ways to contact me, including email, PGP encryption, and a contact form.",
+  status: "Finished" as const,
+  confidence: "certain" as const,
+  importance: 7,
+}
 
 export default function ContactPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={contactPageData.title}
+          subtitle={contactPageData.subtitle}
+          date={contactPageData.date}
+          preview={contactPageData.preview}
+          status={contactPageData.status}
+          confidence={contactPageData.confidence}
+          importance={contactPageData.importance}
+        />
+        
         {/* Contact Info Component */}
         <ContactInfo
           notice={contactData.Notice}
@@ -53,4 +76,3 @@ export default function ContactPage() {
     </div>
   )
 }
-

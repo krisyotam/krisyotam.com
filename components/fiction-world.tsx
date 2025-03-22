@@ -16,17 +16,17 @@ interface FictionWorldProps {
 }
 
 export default function FictionWorld({
-  name = "Arrakis",
-  novel = "Dune",
+  name,
+  novel,
   imageSrc = "/placeholder.svg?height=600&width=800",
   slug,
-  author = "Frank Herbert",
+  author = "Kris Yotam",
 }: FictionWorldProps) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
     <Card className="overflow-hidden w-full max-w-sm mx-auto group cursor-pointer">
-      <Link href={`/worlds/${slug}`} className="block">
+      <Link href={`/ocs/${slug}`} className="block">
         <div className="relative" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
           <div className="relative aspect-square w-full overflow-hidden">
             <Image

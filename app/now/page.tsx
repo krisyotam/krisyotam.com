@@ -3,10 +3,22 @@ import type { Metadata } from "next"
 import { NowContent } from "@/components/now-content"
 import { MonthlyArchive } from "@/components/monthly-archive"
 import "./now-page.css"
+import { PageHeader } from "@/components/page-header"
 
 export const metadata: Metadata = {
   title: "Now",
   description: "What I'm focused on right now",
+}
+
+// Add Now page metadata after other imports
+const nowPageData = {
+  title: "Now",
+  subtitle: "Current Focus and Activities",
+  date: new Date().toISOString(),
+  preview: "A snapshot of what I'm currently focused on, working on, and thinking about at this moment in time.",
+  status: "In Progress" as const,
+  confidence: "certain" as const,
+  importance: 8,
 }
 
 export default async function NowPage() {
@@ -18,20 +30,27 @@ export default async function NowPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-        <header className="mb-16">
-          <h1 className="text-4xl font-semibold mb-3 text-foreground">Now</h1>
-          <p className="text-muted-foreground">Last updated: {lastUpdated}</p>
-          <div className="mt-6 text-foreground">
-            <p>
-              This is my{" "}
-              <a href="https://nownownow.com/about" className="text-blue-600 hover:underline dark:text-blue-400">
-                now page
-              </a>
-              . Inspired by Derek Sivers, it's a snapshot of what I'm focused on at this point in my life. Unlike social
-              media that captures moments, this page reflects my current priorities, interests, and endeavors.
-            </p>
-          </div>
-        </header>
+        {/* Replace the existing header with PageHeader */}
+        <PageHeader
+          title={nowPageData.title}
+          subtitle={nowPageData.subtitle}
+          date={lastUpdated}
+          preview={nowPageData.preview}
+          status={nowPageData.status}
+          confidence={nowPageData.confidence}
+          importance={nowPageData.importance}
+        />
+
+        <div className="mt-6 text-foreground">
+          <p>
+            This is my{" "}
+            <a href="https://nownownow.com/about" className="text-blue-600 hover:underline dark:text-blue-400">
+              now page
+            </a>
+            . Inspired by Derek Sivers, it's a snapshot of what I'm focused on at this point in my life. Unlike social
+            media that captures moments, this page reflects my current priorities, interests, and endeavors.
+          </p>
+        </div>
 
         {activePost && activePost.content && <NowContent content={activePost.content} />}
 

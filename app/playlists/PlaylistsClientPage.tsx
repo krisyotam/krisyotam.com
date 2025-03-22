@@ -1,13 +1,24 @@
 "use client"
 
 import { DialogTrigger } from "@/components/ui/dialog"
-
 import { useState } from "react"
 import PlaylistList from "@/components/playlist-list"
 import playlists from "@/data/playlists.json"
 import { Button } from "@/components/ui/button"
 import { HelpCircle } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
+import { PageHeader } from "@/components/page-header"
+
+// Playlists page metadata
+const playlistsPageData = {
+  title: "Playlists",
+  subtitle: "Curated Music Collections",
+  date: new Date().toISOString(),
+  preview: "A collection of carefully curated playlists spanning various genres, moods, and musical eras.",
+  status: "In Progress" as const,
+  confidence: "certain" as const,
+  importance: 6,
+}
 
 export default function PlaylistsClientPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -15,6 +26,17 @@ export default function PlaylistsClientPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground dark:bg-[#0d0d0d] dark:text-[#f2f2f2]">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={playlistsPageData.title}
+          subtitle={playlistsPageData.subtitle}
+          date={playlistsPageData.date}
+          preview={playlistsPageData.preview}
+          status={playlistsPageData.status}
+          confidence={playlistsPageData.confidence}
+          importance={playlistsPageData.importance}
+        />
+
         <PlaylistList playlists={playlists} />
       </div>
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>

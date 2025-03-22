@@ -5,6 +5,7 @@ import { ConceptsBento } from "@/components/concepts-bento"
 import { ExpandableSubsection } from "@/components/expandable-subsection"
 import { WikiText } from "@/components/wiki-text"
 import { BookOpen } from "lucide-react"
+import { PageHeader } from "@/components/page-header"
 
 interface WikiTerm {
   term: string
@@ -32,6 +33,16 @@ interface Reference {
 interface LearningContent {
   sections: Section[]
   references: Reference[]
+}
+
+const learnPageData = {
+  title: "Learning",
+  subtitle: "A lifelong approach to deep, structured learning",
+  date: new Date().toISOString(),
+  preview: "Explore principles and techniques for effective learning across various contexts and disciplines.",
+  status: "In Progress",
+  confidence: "likely",
+  importance: 8,
 }
 
 export default function LearnPage() {
@@ -74,7 +85,15 @@ export default function LearnPage() {
     return (
       <div className="relative min-h-screen bg-background text-foreground">
         <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-          <h1 className="text-4xl font-semibold mb-3 text-foreground">On Learning</h1>
+          <PageHeader
+            title={learnPageData.title}
+            subtitle={learnPageData.subtitle}
+            date={learnPageData.date}
+            preview={learnPageData.preview}
+            status={learnPageData.status}
+            confidence={learnPageData.confidence}
+            importance={learnPageData.importance}
+          />
           <p>Loading...</p>
         </div>
       </div>
@@ -84,11 +103,15 @@ export default function LearnPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-        <div className="mb-8">
-          <h1 className="text-4xl font-semibold mb-3 text-foreground">On Learning</h1>
-          <p className="text-sm text-muted-foreground">Last updated: {currentDate}</p>
-          <p className="mt-4 text-lg text-muted-foreground">A lifelong approach to deep, structured learning.</p>
-        </div>
+        <PageHeader
+          title={learnPageData.title}
+          subtitle={learnPageData.subtitle}
+          date={learnPageData.date}
+          preview={learnPageData.preview}
+          status={learnPageData.status}
+          confidence={learnPageData.confidence}
+          importance={learnPageData.importance}
+        />
 
         <div className="mb-6 p-4 bg-muted/30 border border-border rounded-md">
           <div className="flex items-start">

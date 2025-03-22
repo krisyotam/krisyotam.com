@@ -1,0 +1,173 @@
+{
+  "pages": [
+    {
+      "title": "Learning Resources",
+      "description": "A curated collection of resources to help you learn programming, design, and other creative skills.",
+      "status": "active",
+      "slug": "learn",
+      "tags": ["education", "resources", "programming"]
+    },
+    {
+      "title": "Writing Guide",
+      "description": "Tips, techniques, and methodologies for improving your writing skills and creative process.",
+      "status": "active",
+      "slug": "write",
+      "tags": ["writing", "creativity", "guides"]
+    },
+    {
+      "title": "Method Framework",
+      "description": "A systematic approach to problem-solving and creative thinking developed over years of practice.",
+      "status": "active",
+      "slug": "method",
+      "tags": ["methodology", "framework", "thinking"]
+    },
+    {
+      "title": "Website Development",
+      "description": "Insights into web development practices, technologies, and design principles.",
+      "status": "active",
+      "slug": "website",
+      "tags": ["development", "web", "design"]
+    },
+    {
+      "title": "Archives",
+      "description": "A collection of historical content, older projects, and preserved materials.",
+      "status": "active",
+      "slug": "archives",
+      "tags": ["history", "collection", "preservation"]
+    },
+    {
+      "title": "Anime Collection",
+      "description": "My personal anime collection, reviews, and recommendations.",
+      "status": "active",
+      "slug": "anime",
+      "tags": ["anime", "entertainment", "reviews"]
+    },
+    {
+      "title": "Music Playlists",
+      "description": "Curated music playlists for different moods, activities, and genres.",
+      "status": "active",
+      "slug": "playlists",
+      "tags": ["music", "playlists", "entertainment"]
+    },
+    {
+      "title": "Progymnasmata",
+      "description": "Classical writing exercises and rhetorical training methods.",
+      "status": "active",
+      "slug": "progymnasmata",
+      "tags": ["rhetoric", "writing", "classical"]
+    },
+    {
+      "title": "Guestbook",
+      "description": "Leave a message, comment, or drawing in the digital guestbook.",
+      "status": "active",
+      "slug": "guest",
+      "tags": ["community", "interaction", "social"]
+    },
+    {
+      "title": "Quick Notes",
+      "description": "Brief thoughts, ideas, and observations on various topics.",
+      "status": "active",
+      "slug": "notes",
+      "tags": ["notes", "thoughts", "ideas"]
+    },
+    {
+      "title": "Now Page",
+      "description": "What I'm currently focused on, working on, and thinking about.",
+      "status": "active",
+      "slug": "now",
+      "tags": ["current", "updates", "personal"]
+    },
+    {
+      "title": "Original Characters",
+      "description": "Meet the original characters from my books and stories.",
+      "status": "active",
+      "slug": "ocs",
+      "tags": ["fiction", "characters", "creative"]
+    },
+    {
+      "title": "Newsletter Archive",
+      "description": "Past issues of my newsletter with insights, updates, and thoughts.",
+      "status": "active",
+      "slug": "newsletter",
+      "tags": ["newsletter", "updates", "archive"]
+    },
+    {
+      "title": "Book Recommendations",
+      "description": "Books I've read, enjoyed, and recommend to others.",
+      "status": "active",
+      "slug": "books",
+      "tags": ["books", "reading", "recommendations"]
+    },
+    {
+      "title": "My Published Books",
+      "description": "Books I've written and published, with excerpts and background information.",
+      "status": "active",
+      "slug": "mybooks",
+      "tags": ["books", "writing", "published"]
+    },
+    {
+      "title": "Inspirational Quotes",
+      "description": "A collection of quotes that inspire, motivate, and provoke thought.",
+      "status": "active",
+      "slug": "quotes",
+      "tags": ["quotes", "inspiration", "wisdom"]
+    },
+    {
+      "title": "Speaking Engagements",
+      "description": "Information about my keynotes, speeches, and public appearances.",
+      "status": "active",
+      "slug": "keynotes",
+      "tags": ["speaking", "events", "public"]
+    },
+    {
+      "title": "Colophon",
+      "description": "Technical details about how this website was built and is maintained.",
+      "status": "active",
+      "slug": "colophon",
+      "tags": ["technical", "website", "development"]
+    },
+    {
+      "title": "Future Projects",
+      "description": "Upcoming projects, ideas in development, and future plans.",
+      "status": "hidden",
+      "slug": "future",
+      "tags": ["upcoming", "projects", "plans"]
+    },
+    {
+      "title": "Research Notes",
+      "description": "Notes and findings from various research projects and explorations.",
+      "status": "hidden",
+      "slug": "research",
+      "tags": ["research", "notes", "findings"]
+    },
+    {
+      "title": "Digital Garden",
+      "description": "A collection of interconnected notes, thoughts, and ideas that grow over time.",
+      "status": "active",
+      "slug": "garden",
+      "tags": ["notes", "knowledge", "growth"]
+    },
+    {
+      "title": "Photography",
+      "description": "A gallery of my photography work and visual explorations.",
+      "status": "active",
+      "slug": "photos",
+      "tags": ["photography", "visual", "art"]
+    },
+    {
+      "title": "Travel Journal",
+      "description": "Notes, stories, and reflections from my travels around the world.",
+      "status": "active",
+      "slug": "travel",
+      "tags": ["travel", "journal", "experiences"]
+    },
+    {
+      "title": "Coding Experiments",
+      "description": "A showcase of coding experiments, prototypes, and technical explorations.",
+      "status": "active",
+      "slug": "experiments",
+      "tags": ["code", "experiments", "technical"]
+    }
+  ]
+}
+

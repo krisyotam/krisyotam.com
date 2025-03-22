@@ -3,8 +3,20 @@
 import { useEffect, useState } from "react"
 import { SpeechCard } from "../../components/speech-card"
 import { Button } from "@/components/ui/button"
+import { PageHeader } from "@/components/page-header"
 
 export const dynamic = "force-dynamic"
+
+// Speeches page metadata
+const speechesPageData = {
+  title: "Speeches",
+  subtitle: "Public Addresses and Presentations",
+  date: new Date().toISOString(),
+  preview: "A collection of speeches, presentations, and public addresses on various topics.",
+  status: "In Progress" as const,
+  confidence: "certain" as const,
+  importance: 7,
+}
 
 interface Speech {
   id: string
@@ -74,6 +86,17 @@ const SpeechesPage = () => {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={speechesPageData.title}
+          subtitle={speechesPageData.subtitle}
+          date={speechesPageData.date}
+          preview={speechesPageData.preview}
+          status={speechesPageData.status}
+          confidence={speechesPageData.confidence}
+          importance={speechesPageData.importance}
+        />
+
         <div className="space-y-6">
           <div className="flex flex-wrap gap-2">
             {categories.map((category) => (

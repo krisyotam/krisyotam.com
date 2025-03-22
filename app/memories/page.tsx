@@ -14,9 +14,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { PageHeader } from "@/components/page-header"
 
 // Import the memories data directly
 import memoriesData from "@/data/memories.json"
+
+// Add memories page metadata after the other imports
+const memoriesPageData = {
+  title: "Memories",
+  subtitle: "Collected Thoughts and Discoveries",
+  date: new Date().toISOString(),
+  preview: "A digital repository of interesting discoveries, research notes, and intellectual curiosities.",
+  status: "In Progress" as const,
+  confidence: "likely" as const,
+  importance: 6,
+}
 
 export default function MemoriesPage() {
   // State for data
@@ -107,6 +119,16 @@ export default function MemoriesPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+        {/* Add the PageHeader component */}
+        <PageHeader
+          title={memoriesPageData.title}
+          subtitle={memoriesPageData.subtitle}
+          date={memoriesPageData.date}
+          preview={memoriesPageData.preview}
+          status={memoriesPageData.status}
+          confidence={memoriesPageData.confidence}
+          importance={memoriesPageData.importance}
+        />
 
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">

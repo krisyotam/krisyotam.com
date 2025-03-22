@@ -1,7 +1,21 @@
+"use client"
+
 import Link from "next/link"
 import { getGitHubTilFeed } from "@/lib/githubTilFeed"
+import { PageHeader } from "@/components/page-header"
 
 export const dynamic = "force-static"
+
+// TIL page metadata
+const tilPageData = {
+  title: "Today I Learned",
+  subtitle: "Daily Learning Summaries",
+  date: new Date().toISOString(),
+  preview: "A collection of short notes from my cross-disciplinary studies, shared as I learn in public.",
+  status: "In Progress" as const,
+  confidence: "certain" as const,
+  importance: 7,
+}
 
 export default async function TILPage() {
   try {
@@ -15,28 +29,32 @@ export default async function TILPage() {
     return (
       <div className="relative min-h-screen bg-background text-foreground">
         <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-          <header className="mb-8">
-            <h1 className="text-4xl font-semibold mb-3 text-foreground">Today I Learned</h1>
-            <p className="text-muted-foreground mb-4">
-              This is a collection of short notes that are an amalgamation of my daily<br />
-              learning summaries from cross-disciplinary studies. I share these notes<br /> as I learn in public.
-            </p>
-            <p className="text-muted-foreground mb-4">
-              <strong>{tilEntries.length}</strong> TILs and counting... Feeling lucky?
-            </p>
-            <p className="text-muted-foreground">
-              You can follow along by watching my{" "}
-              <a
-                href="https://github.com/krisyotam/til"
-                className="text-foreground underline hover:text-primary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub repository
-              </a>
-              .
-            </p>
-          </header>
+          {/* Add the PageHeader component */}
+          <PageHeader
+            title={tilPageData.title}
+            subtitle={tilPageData.subtitle}
+            date={tilPageData.date}
+            preview={tilPageData.preview}
+            status={tilPageData.status}
+            confidence={tilPageData.confidence}
+            importance={tilPageData.importance}
+          />
+
+          <p className="text-muted-foreground mb-4">
+            <strong>{tilEntries.length}</strong> TILs and counting... Feeling lucky?
+          </p>
+          <p className="text-muted-foreground mb-8">
+            You can follow along by watching my{" "}
+            <a
+              href="https://github.com/krisyotam/til"
+              className="text-foreground underline hover:text-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub repository
+            </a>
+            .
+          </p>
 
           <div className="space-y-0">
             {sortedEntries.map(({ date, title, path }) => (
@@ -72,3 +90,4 @@ export default async function TILPage() {
     )
   }
 }
+
