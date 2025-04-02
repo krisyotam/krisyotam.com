@@ -6,7 +6,7 @@ import { getPostBySlug, isPostMDX } from "@/utils/posts"
 import { Suspense, useEffect, useState } from "react"
 import dynamic from "next/dynamic"
 import { MDXRemote } from "next-mdx-remote/rsc"
-import { components } from "@/mdx-components"
+import { useMDXComponents } from "@/mdx-components"
 import { MDXRenderer } from "./mdx-renderer"
 
 export const dynamicParams = true
