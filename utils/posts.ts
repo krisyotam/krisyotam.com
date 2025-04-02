@@ -86,3 +86,34 @@ export async function getPostsByCategory(categorySlug: string): Promise<Post[]> 
   }
 }
 
+// New function to get content for a post (MDX or other)
+export async function getPostContent(year: string, slug: string) {
+  try {
+    // Check if there's an MDX version of the post
+    const mdxPath = path.join(process.cwd(), "data", "posts", year, slug, "content.mdx")
+    const fileExists = await fs.stat(mdxPath).catch(() => null)
+    
+    if (fileExists) {
+      const mdxData = await fs.readFile(mdxPath, "utf-8")
+      return {
+        isMDX: true,
+        mdxData,
+        blogPostExists: true,
+      }
+    }
+
+    // Return default if no MDX content exists
+    return {
+      isMDX: false,
+      mdxData: null,
+      blogPostExists: false,
+    }
+  } catch (error) {
+    console.error("Error loading MDX content:", error)
+    return {
+      isMDX: false,
+      mdxData: null,
+      blogPostExists: false,
+    }
+  }
+}
