@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getPostsByCategory, getCategories, getPostYear } from "@/lib/posts"
+import { getPostsByCategory, getCategories, getPostYear } from "@/utils/posts"
 import { notFound } from "next/navigation"
 
 export const dynamic = "force-dynamic"

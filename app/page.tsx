@@ -1,5 +1,5 @@
 import { BlogPost } from "../components/blog-post"
-import { getActivePosts, getPostYear } from "../lib/posts"
+import { getActivePosts, getPostYear } from "../utils/posts"
 import quotesData from "../data/header-quotes.json"
 
 function getRandomQuote() {
