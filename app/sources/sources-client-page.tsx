@@ -7,13 +7,18 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { Mail, ExternalLink, HelpCircle } from "lucide-react"
 import "./sources.css"
 
-interface Source {
-  from: string
-  content: string
-  date: string
-  link: string
+// Define your types here for source data
+type Source = {
+  id: string
+  title: string
+  url?: string
+  author?: string
   type: string
-  profileLink: string
+  topics: string[]
+  description: string
+  yearPublished?: number
+  dateAccessed?: string
+  rating?: number
 }
 
 export default function SourcesClientPage() {
@@ -25,46 +30,59 @@ export default function SourcesClientPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isHelpModalOpen, setIsHelpModalOpen] = useState(false)
   const [searchValue, setSearchValue] = useState("")
+  const [selectedType, setSelectedType] = useState<string | null>(null)
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null)
+  const [searchQuery, setSearchQuery] = useState("")
 
   const router = useRouter()
+  // Use searchParams safely with null checks
   const searchParams = useSearchParams()
-  const searchQuery = searchParams?.get("q") || ""
+  const searchQueryParam = searchParams?.get("q") || ""
 
   useEffect(() => {
-    setSearchValue(searchQuery)
-  }, [searchQuery])
+    setSearchValue(searchQueryParam)
+  }, [searchQueryParam])
 
   useEffect(() => {
+    // Safe access of searchParams with null check
+    const typeFromUrl = searchParams?.get("type")
+    const topicFromUrl = searchParams?.get("topic")
+
+    if (typeFromUrl) setSelectedType(typeFromUrl)
+    if (topicFromUrl) setSelectedTopic(topicFromUrl)
+
+    // Fetch sources data
     const fetchSources = async () => {
       try {
         const response = await fetch("/api/sources")
         if (!response.ok) {
-          throw new Error("Failed to fetch sources")
+          throw new Error(`Failed to fetch sources: ${response.status}`)
         }
         const data = await response.json()
-        setSources(data.sources)
-        setFilteredSources(data.sources)
+        setSources(data)
+        setFilteredSources(data)
         setLoading(false)
       } catch (err) {
-        setError("Failed to load sources. Please try again later.")
+        setError(err instanceof Error ? err.message : "An unknown error occurred")
+        console.error("Error fetching sources:", err)
         setLoading(false)
       }
     }
 
     fetchSources()
-  }, [])
+  }, [searchParams])
 
   useEffect(() => {
-    if (searchQuery && sources.length > 0) {
-      const query = searchQuery.toLowerCase()
+    if (searchQueryParam && sources.length > 0) {
+      const query = searchQueryParam.toLowerCase()
       const filtered = sources.filter(
-        (source) => source.from.toLowerCase().includes(query) || source.content.toLowerCase().includes(query),
+        (source) => source.title.toLowerCase().includes(query) || source.description.toLowerCase().includes(query),
       )
       setFilteredSources(filtered)
     } else {
       setFilteredSources(sources)
     }
-  }, [searchQuery, sources])
+  }, [searchQueryParam, sources])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -83,9 +101,9 @@ export default function SourcesClientPage() {
   const handleProfileClick = (source: Source, e: React.MouseEvent) => {
     e.stopPropagation()
     if (source.type === "email") {
-      window.location.href = `mailto:${source.from}`
-    } else {
-      window.open(source.profileLink, "_blank")
+      window.location.href = `mailto:${source.author}`
+    } else if (source.url) {
+      window.open(source.url, "_blank")
     }
   }
 
@@ -130,7 +148,7 @@ export default function SourcesClientPage() {
   }
 
   return (
-    <div className="py-8 relative dark:bg-[#121212]">
+    <div className="py-8 relative dark:bg-[#121212] sources-container">
       {/* Search Bar */}
       <div className="mb-8">
         <form onSubmit={handleSearch} className="flex w-full">
@@ -181,17 +199,17 @@ export default function SourcesClientPage() {
                       <div className="flex items-center space-x-2">
                         {getTypeIcon(source.type)}
                         <span className="text-sm font-medium text-gray-900 dark:text-[#FAFAFA] hover:underline">
-                          {source.from}
+                          {source.title || source.author}
                         </span>
                       </div>
                       <div className="text-xs text-gray-500 dark:text-[#A6A6A6] mt-1">{source.type}</div>
                     </td>
                     <td className="px-6 py-4 cursor-pointer" onClick={() => handleOpenModal(source)}>
-                      <div className="text-sm text-gray-900 dark:text-[#FAFAFA] line-clamp-2">{source.content}</div>
+                      <div className="text-sm text-gray-900 dark:text-[#FAFAFA] line-clamp-2">{source.description}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-500 dark:text-[#A6A6A6]">
-                        {new Date(source.date).toLocaleDateString("en-US", {
+                        {new Date(source.dateAccessed || "").toLocaleDateString("en-US", {
                           year: "numeric",
                           month: "short",
                           day: "numeric",
@@ -250,9 +268,11 @@ export default function SourcesClientPage() {
           >
             <div className="flex justify-between items-start mb-4">
               <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-[#FAFAFA]">{selectedSource.from}</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-[#FAFAFA]">
+                  {selectedSource.title || selectedSource.author}
+                </h3>
                 <p className="text-sm text-gray-500 dark:text-[#A6A6A6]">
-                  {new Date(selectedSource.date).toLocaleDateString("en-US", {
+                  {new Date(selectedSource.dateAccessed || "").toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -264,15 +284,17 @@ export default function SourcesClientPage() {
               </span>
             </div>
             <div className="border-t border-b border-gray-200 dark:border-[#252525] py-4 mb-4">
-              <div className="text-gray-700 dark:text-[#FAFAFA] whitespace-pre-wrap">{selectedSource.content}</div>
+              <div className="text-gray-700 dark:text-[#FAFAFA] whitespace-pre-wrap">{selectedSource.description}</div>
             </div>
             <div className="flex justify-end">
-              <a
-                href={selectedSource.link}
-                className="px-4 py-2 bg-gray-200 dark:bg-[#252525] text-gray-700 dark:text-[#FAFAFA] rounded-md hover:bg-gray-300 dark:hover:bg-[#323232] focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-[#323232]"
-              >
-                View Inspired Content
-              </a>
+              {selectedSource.url && (
+                <a
+                  href={selectedSource.url}
+                  className="px-4 py-2 bg-gray-200 dark:bg-[#252525] text-gray-700 dark:text-[#FAFAFA] rounded-md hover:bg-gray-300 dark:hover:bg-[#323232] focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-[#323232]"
+                >
+                  View Inspired Content
+                </a>
+              )}
             </div>
           </div>
         </div>
