@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getCategories } from "@/utils/posts"
+import { getCategories } from "@/lib/posts"
 
 export const dynamic = "force-dynamic"
 

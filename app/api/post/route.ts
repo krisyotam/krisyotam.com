@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { getPostBySlug } from "@/utils/posts"
+import { getPostBySlug } from "@/lib/posts"
 import { getPostMetadata } from "@/utils/mdx-utils"
 import path from "path"
 import fs from "fs"

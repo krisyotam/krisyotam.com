@@ -1,8 +1,6 @@
-"use client"
-
 import { notFound } from "next/navigation"
 import { PostHeader } from "@/components/post-header"
-import { getPostBySlug, isPostMDX } from "@/utils/posts"
+import { getPostBySlug, isPostMDX } from "@/lib/posts"
 import { Suspense, useEffect, useState } from "react"
 import dynamic from "next/dynamic"
 import { MDXRemote } from "next-mdx-remote/rsc"
