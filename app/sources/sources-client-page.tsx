@@ -7,18 +7,13 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { Mail, ExternalLink, HelpCircle } from "lucide-react"
 import "./sources.css"
 
-// Define your types here for source data
-type Source = {
-  id: string
-  title: string
-  url?: string
-  author?: string
+interface Source {
+  from: string
+  content: string
+  date: string
+  link: string
   type: string
-  topics: string[]
-  description: string
-  yearPublished?: number
-  dateAccessed?: string
-  rating?: number
+  profileLink: string
 }
 
 export default function SourcesClientPage() {
@@ -30,59 +25,59 @@ export default function SourcesClientPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isHelpModalOpen, setIsHelpModalOpen] = useState(false)
   const [searchValue, setSearchValue] = useState("")
-  const [selectedType, setSelectedType] = useState<string | null>(null)
-  const [selectedTopic, setSelectedTopic] = useState<string | null>(null)
-  const [searchQuery, setSearchQuery] = useState("")
 
   const router = useRouter()
-  // Use searchParams safely with null checks
   const searchParams = useSearchParams()
-  const searchQueryParam = searchParams?.get("q") || ""
+  const searchQuery = searchParams?.get("q") || ""
 
   useEffect(() => {
-    setSearchValue(searchQueryParam)
-  }, [searchQueryParam])
+    setSearchValue(searchQuery)
+  }, [searchQuery])
 
   useEffect(() => {
-    // Safe access of searchParams with null check
-    const typeFromUrl = searchParams?.get("type")
-    const topicFromUrl = searchParams?.get("topic")
-
-    if (typeFromUrl) setSelectedType(typeFromUrl)
-    if (topicFromUrl) setSelectedTopic(topicFromUrl)
-
-    // Fetch sources data
     const fetchSources = async () => {
       try {
         const response = await fetch("/api/sources")
         if (!response.ok) {
-          throw new Error(`Failed to fetch sources: ${response.status}`)
+          throw new Error("Failed to fetch sources")
         }
         const data = await response.json()
-        setSources(data)
-        setFilteredSources(data)
+
+        // Debug the API response structure
+        console.log("API Response:", data)
+
+        // Check if data has a sources property (common API pattern)
+        const sourcesArray = Array.isArray(data)
+          ? data
+          : data.sources && Array.isArray(data.sources)
+            ? data.sources
+            : []
+
+        // Ensure we're setting an array
+        setSources(sourcesArray)
+        setFilteredSources(sourcesArray)
         setLoading(false)
       } catch (err) {
-        setError(err instanceof Error ? err.message : "An unknown error occurred")
         console.error("Error fetching sources:", err)
+        setError("Failed to load sources. Please try again later.")
         setLoading(false)
       }
     }
 
     fetchSources()
-  }, [searchParams])
+  }, [])
 
   useEffect(() => {
-    if (searchQueryParam && sources.length > 0) {
-      const query = searchQueryParam.toLowerCase()
+    if (searchQuery && Array.isArray(sources) && sources.length > 0) {
+      const query = searchQuery.toLowerCase()
       const filtered = sources.filter(
-        (source) => source.title.toLowerCase().includes(query) || source.description.toLowerCase().includes(query),
+        (source) => source.from?.toLowerCase().includes(query) || source.content?.toLowerCase().includes(query),
       )
       setFilteredSources(filtered)
     } else {
       setFilteredSources(sources)
     }
-  }, [searchQueryParam, sources])
+  }, [searchQuery, sources])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -101,9 +96,9 @@ export default function SourcesClientPage() {
   const handleProfileClick = (source: Source, e: React.MouseEvent) => {
     e.stopPropagation()
     if (source.type === "email") {
-      window.location.href = `mailto:${source.author}`
-    } else if (source.url) {
-      window.open(source.url, "_blank")
+      window.location.href = `mailto:${source.from}`
+    } else {
+      window.open(source.profileLink, "_blank")
     }
   }
 
@@ -147,8 +142,21 @@ export default function SourcesClientPage() {
     )
   }
 
+  // Safety check to ensure filteredSources is an array before rendering
+  if (!Array.isArray(filteredSources)) {
+    return (
+      <div className="py-8">
+        <div className="text-center">
+          <div className="bg-yellow-50 dark:bg-[#171717] text-yellow-800 dark:text-yellow-300 p-4 rounded-md border border-yellow-100 dark:border-[#252525]">
+            Error: Sources data is not in the expected format. Please try again later.
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div className="py-8 relative dark:bg-[#121212] sources-container">
+    <div className="py-8 relative dark:bg-[#121212]">
       {/* Search Bar */}
       <div className="mb-8">
         <form onSubmit={handleSearch} className="flex w-full">
@@ -199,17 +207,17 @@ export default function SourcesClientPage() {
                       <div className="flex items-center space-x-2">
                         {getTypeIcon(source.type)}
                         <span className="text-sm font-medium text-gray-900 dark:text-[#FAFAFA] hover:underline">
-                          {source.title || source.author}
+                          {source.from}
                         </span>
                       </div>
                       <div className="text-xs text-gray-500 dark:text-[#A6A6A6] mt-1">{source.type}</div>
                     </td>
                     <td className="px-6 py-4 cursor-pointer" onClick={() => handleOpenModal(source)}>
-                      <div className="text-sm text-gray-900 dark:text-[#FAFAFA] line-clamp-2">{source.description}</div>
+                      <div className="text-sm text-gray-900 dark:text-[#FAFAFA] line-clamp-2">{source.content}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-500 dark:text-[#A6A6A6]">
-                        {new Date(source.dateAccessed || "").toLocaleDateString("en-US", {
+                        {new Date(source.date).toLocaleDateString("en-US", {
                           year: "numeric",
                           month: "short",
                           day: "numeric",
@@ -268,11 +276,9 @@ export default function SourcesClientPage() {
           >
             <div className="flex justify-between items-start mb-4">
               <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-[#FAFAFA]">
-                  {selectedSource.title || selectedSource.author}
-                </h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-[#FAFAFA]">{selectedSource.from}</h3>
                 <p className="text-sm text-gray-500 dark:text-[#A6A6A6]">
-                  {new Date(selectedSource.dateAccessed || "").toLocaleDateString("en-US", {
+                  {new Date(selectedSource.date).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -284,17 +290,15 @@ export default function SourcesClientPage() {
               </span>
             </div>
             <div className="border-t border-b border-gray-200 dark:border-[#252525] py-4 mb-4">
-              <div className="text-gray-700 dark:text-[#FAFAFA] whitespace-pre-wrap">{selectedSource.description}</div>
+              <div className="text-gray-700 dark:text-[#FAFAFA] whitespace-pre-wrap">{selectedSource.content}</div>
             </div>
             <div className="flex justify-end">
-              {selectedSource.url && (
-                <a
-                  href={selectedSource.url}
-                  className="px-4 py-2 bg-gray-200 dark:bg-[#252525] text-gray-700 dark:text-[#FAFAFA] rounded-md hover:bg-gray-300 dark:hover:bg-[#323232] focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-[#323232]"
-                >
-                  View Inspired Content
-                </a>
-              )}
+              <a
+                href={selectedSource.link}
+                className="px-4 py-2 bg-gray-200 dark:bg-[#252525] text-gray-700 dark:text-[#FAFAFA] rounded-md hover:bg-gray-300 dark:hover:bg-[#323232] focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-[#323232]"
+              >
+                View Inspired Content
+              </a>
             </div>
           </div>
         </div>
