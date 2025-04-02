@@ -1,10 +1,11 @@
-import "server-only"
+// Remove the server-only import
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
 import { cache } from "react"
 
-// This file is marked with "server-only" and should never be imported by client components
+// This file contains server-side functions
+// IMPORTANT: Only import this file in server components or getServerSideProps/getStaticProps
 
 export interface Post {
   title: string
