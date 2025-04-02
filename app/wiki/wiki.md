@@ -1,8 +1,16 @@
 # Kris Yotam: A Personal Wiki
 
+> "Do I contradict myself? Very well then I contradict myself, (I am large, I contain multitudes)
+
 ## Introduction
 
-This is my personal wiki, a digital garden where I collect thoughts, ideas, and knowledge. It's a living document that evolves as I learn and grow.
+This is my personal wiki, a more long-form version of what you saw at [about](/about). It will however introduce several 
+things the like are not shown anywhere else on this site. Before we get started I would like to introduce you to some more useful
+pages on this site. If you would like to learn about it's design philosophy, & functionality navigate [here](/website). For my in-depth meta-learning 
+strategies I have wrote at length about them [here](/learn). If you are interested in the development of my writing style across various formats 
+and the philosophy behind it that is [here](/write). Lastly if you are looking for my robust research setup full of custom functionality, analog methods,
+and FOSS Software you are welcome to check out [this](/method).
+
 
 ## About Me
 

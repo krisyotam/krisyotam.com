@@ -1,0 +1,45 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "The Structure of Scientific Revolutions",
+      "author": "Thomas S. Kuhn",
+      "coverUrl": "/books/scientific-revolutions.jpg",
+      "classification": "Q",
+      "subClassification": "Q175"
+    },
+    {
+      "id": "2",
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "coverUrl": "/books/to-kill-a-mockingbird.jpg",
+      "classification": "P",
+      "subClassification": "PS3562"
+    },
+    {
+      "id": "3",
+      "title": "A Brief History of Time",
+      "author": "Stephen Hawking",
+      "coverUrl": "/books/brief-history-of-time.jpg",
+      "classification": "Q",
+      "subClassification": "QB981"
+    },
+    {
+      "id": "4",
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "coverUrl": "/books/catcher-in-the-rye.jpg",
+      "classification": "P",
+      "subClassification": "PS3537"
+    },
+    {
+      "id": "5",
+      "title": "The Wealth of Nations",
+      "author": "Adam Smith",
+      "coverUrl": "/books/wealth-of-nations.jpg",
+      "classification": "H",
+      "subClassification": "HB161"
+    }
+  ]
+}
+

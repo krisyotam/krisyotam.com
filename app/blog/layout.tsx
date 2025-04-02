@@ -12,9 +12,10 @@ import { ScriptTagger } from "@/components/script-tagger"
 import { PostLatexRenderer } from "@/components/post-latex-renderer"
 import { Commento } from "@/components/commento"
 
-// Add Google Fonts import for EB Garamond and Old English font
+// Add Google Fonts import for Source Serif 4 and Old English font
 const fontImport = `
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;500;600;700;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
 `
@@ -60,192 +61,13 @@ export default function PostsLayout({
   const pathname = usePathname()
   const [postData, setPostData] = useState<Post | null>(null)
 
-  // Update the style injection to make content more condensed and enhance the drop cap
+  // Add a loading state at the top of the component
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Add font imports
   useEffect(() => {
     const style = document.createElement("style")
-    style.textContent = `
-    ${fontImport}
-    
-    /* Set default fonts */
-    .prose {
-      font-family: 'EB Garamond', serif;
-      font-size: 0.95rem; /* Smaller base font size */
-      line-height: 1.6; /* Tighter line height */
-      letter-spacing: -0.01em;
-      max-width: 55ch; /* Narrower content width */
-    }
-    
-    .prose h1, .prose h2, .prose h3, .prose h4 {
-      font-family: 'EB Garamond', serif;
-      font-weight: 500;
-      margin-top: 1.5em; /* Reduced top margin */
-      margin-bottom: 0.5em; /* Reduced bottom margin */
-    }
-    
-    /* Enhanced drop cap styling with UnifrakturMaguntia font */
-    .prose > p:first-of-type::first-letter,
-    article > p:first-of-type::first-letter {
-      float: left;
-      font-family: 'UnifrakturMaguntia', serif;
-      font-size: 5.5em;
-      line-height: 0.8;
-      padding: 0.05em 0.05em 0 0;
-      margin-bottom: -0.1em;
-      color: hsl(var(--foreground));
-    }
-
-    /* Typography refinements for more condensed academic look */
-    .prose {
-      font-size: 1rem;
-      line-height: 1.6;
-      letter-spacing: -0.01em;
-    }
-
-    .prose h1 {
-      font-size: 2rem;
-      letter-spacing: -0.03em;
-      margin-bottom: 1rem;
-    }
-
-    .prose h2 {
-      font-size: 1.5rem;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      font-weight: 500;
-      margin-bottom: 0.75rem;
-    }
-    
-    .prose h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .prose p {
-      margin-bottom: 0.75rem; /* Reduced paragraph spacing */
-    }
-
-    .prose blockquote {
-      font-style: italic;
-      border-left: none;
-      padding-left: 1.5rem;
-      font-size: 0.95em;
-      margin: 1rem 0;
-    }
-
-    .prose blockquote cite {
-      display: block;
-      font-style: normal;
-      font-size: 0.9em;
-      margin-top: 0.5em;
-    }
-    
-    /* Reduced spacing between list items */
-    .prose ul li, .prose ol li {
-      margin-top: 0.25rem;
-      margin-bottom: 0.25rem;
-    }
-
-    /* Highlight effect for margin notes */
-    [data-note-index].highlight {
-      animation: highlight 2s ease-out;
-    }
-
-    @keyframes highlight {
-      0% { background-color: hsl(var(--primary) / 0.1); }
-      100% { background-color: transparent; }
-    }
-
-    /* Semantic section styling with reduced spacing */
-    section {
-      margin-bottom: 1.5rem;
-    }
-
-    section > h2 {
-      font-size: 1.25rem;
-      font-weight: 500;
-      margin-bottom: 0.75rem;
-      color: hsl(var(--muted-foreground));
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .content-section article {
-      margin-bottom: 1.5rem;
-    }
-
-    .content-section article h3 {
-      margin-bottom: 0.75rem;
-    }
-    
-    /* Table of contents styling */
-    .toc-container {
-      position: relative;
-    }
-    
-    .toc-controls {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      display: flex;
-      gap: 0.25rem;
-    }
-    
-    .toc-control-button {
-      width: 1.5rem;
-      height: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      color: hsl(var(--muted-foreground));
-      transition: color 0.2s ease;
-    }
-    
-    .toc-control-button:hover {
-      color: hsl(var(--foreground));
-    }
-    
-    .toc-minimized {
-      width: 2rem;
-      overflow: hidden;
-    }
-    
-    .toc-minimized .toc-title {
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-      text-align: center;
-      padding: 0.5rem 0;
-      white-space: nowrap;
-    }
-    
-    .toc-modal {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 50;
-      width: 80%;
-      max-width: 500px;
-      max-height: 80vh;
-      overflow-y: auto;
-      background: hsl(var(--background));
-      border: 1px solid hsl(var(--border));
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      padding: 1rem;
-    }
-    
-    .toc-modal-backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 49;
-    }
-  `
+    style.textContent = fontImport
     document.head.appendChild(style)
     return () => {
       document.head.removeChild(style)
@@ -278,103 +100,113 @@ export default function PostsLayout({
     }
   }, [pathname])
 
+  // Add this useEffect to scroll to top and handle loading state
+  useEffect(() => {
+    // Scroll to top when pathname changes
+    window.scrollTo(0, 0)
+
+    // Set loading to true on route change
+    setIsLoading(true)
+
+    // Set a small timeout to ensure components have time to load
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [pathname])
+
+  // Modify the return statement to include loading state
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex flex-col md:flex-row md:gap-4 lg:gap-6">
-          {/* Left sidebar column */}
-          <div className="hidden md:block md:w-56 lg:w-64 flex-shrink-0">
-            <section className="metadata-section" aria-label="Table of Contents">
-              <div className="sticky top-8 z-20">
-                {postData?.headings && postData.headings.length > 0 && (
-                  <article className="toc-article">
-                    <TableOfContents headings={postData.headings} className="mt-8" />
-                  </article>
-                )}
-              </div>
-            </section>
-          </div>
-
-          {/* Main content column */}
-          <div className="flex-1 max-w-2xl mx-auto px-0">
-            {/* Header section */}
-            <header>
-              {postData && (
-                <PostHeader
-                  title={postData.title}
-                  date={postData.date}
-                  tags={postData.tags}
-                  category={postData.category}
-                />
-              )}
-            </header>
-
-            {/* Main content section */}
-            <main>
-              <section className="content-section" aria-label="Post Content">
-                <article
-                  className="prose prose-sm mx-auto mt-2"
-                  style={{
-                    fontFamily: "'EB Garamond', serif",
-                    lineHeight: 1.6,
-                    maxWidth: "100%",
-                  }}
-                >
-                  <PostLatexRenderer>
-                    <ScriptTagger>{children}</ScriptTagger>
-                  </PostLatexRenderer>
-                </article>
-              </section>
-
-              {/* Bibliography section */}
-              {postData?.bibliography && postData.bibliography.length > 0 && (
-                <section className="bibliography-section" aria-label="Bibliography">
-                  <h2>References</h2>
-                  <article>
-                    <Bibliography bibliography={postData.bibliography} />
-                  </article>
-                </section>
-              )}
-
-              {/* Comments section */}
-              <section className="comments-section" aria-label="Comments">
-                <Commento />
-              </section>
-
-              {/* Footer section */}
-              <footer>
-                <BentoFooter className="mt-12" />
-              </footer>
-            </main>
-          </div>
-
-          {/* Right sidebar column */}
-          <div className="hidden md:block md:w-56 lg:w-64 flex-shrink-0">
-            <section className="margin-notes-section" aria-label="Margin Notes">
-              <div className="sticky top-8 space-y-4 pb-24">
-                {postData?.marginNotes &&
-                  postData.marginNotes.map((note) => (
-                    <article key={note.id} className="mt-8">
-                      <MarginCard note={note} />
-                    </article>
-                  ))}
-              </div>
-            </section>
+      {isLoading ? (
+        <div className="max-w-6xl mx-auto px-4 animate-fade-in">
+          <div className="flex flex-col items-center justify-center min-h-[50vh]">
+            <div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+            <p className="mt-4 text-sm text-muted-foreground">Loading post...</p>
           </div>
         </div>
+      ) : (
+        <div className="max-w-6xl mx-auto px-4 animate-fade-in">
+          {/* Header outside the grid - made smaller */}
+          <header className="mb-2 max-w-xl mx-auto px-0">
+            {postData && (
+              <PostHeader
+                title={postData.title}
+                date={postData.date}
+                tags={postData.tags}
+                category={postData.category}
+                className="post-header"
+              />
+            )}
+          </header>
 
-        {/* Positioning data section at the bottom */}
-        <section className="positioning-section" aria-hidden="true" style={{ display: "none" }}>
-          <article className="toc-positioning">
-            {/* Table of Contents positioning data */}
-            <div id="toc-position" data-position="left-sidebar" data-sticky="true" data-offset="8"></div>
-          </article>
-          <article className="margin-notes-positioning">
-            {/* Margin Notes positioning data */}
-            <div id="margin-notes-position" data-position="right-sidebar" data-sticky="true" data-offset="8"></div>
-          </article>
-        </section>
-      </div>
+          {/* Grid for sidebars and content */}
+          <div className="grid grid-cols-1 md:grid-cols-[16rem_1fr_16rem] md:gap-4 lg:gap-6">
+            {/* Left Sidebar - moved down */}
+            <div className="hidden md:block self-start mt-4">
+              <section className="metadata-section">
+                <div className="sticky top-6">
+                  <TableOfContents key={pathname} headings={postData?.headings || []} />
+                </div>
+              </section>
+            </div>
+
+            {/* Main Content */}
+            <div className="flex-1 max-w-2xl mx-auto px-0 self-start">
+              <main>
+                <section className="content-section" aria-label="Post Content">
+                  <article
+                    className="prose prose-sm mx-auto mt-0 post-content"
+                    style={{
+                      fontFamily: "'Source Serif 4', serif",
+                      maxWidth: "100%",
+                    }}
+                  >
+                    <PostLatexRenderer>
+                      <ScriptTagger>{children}</ScriptTagger>
+                    </PostLatexRenderer>
+                  </article>
+                </section>
+
+                {/* Bibliography section */}
+                {postData?.bibliography && postData.bibliography.length > 0 && (
+                  <section className="bibliography-section" aria-label="Bibliography">
+                    <article>
+                      <Bibliography bibliography={postData.bibliography} />
+                    </article>
+                  </section>
+                )}
+
+                {/* Comments section */}
+                <section className="comments-section" aria-label="Comments">
+                  <Commento />
+                </section>
+
+                {/* Footer section */}
+                <footer>
+                  <BentoFooter className="mt-12" />
+                </footer>
+              </main>
+            </div>
+
+            {/* Right Sidebar - moved down */}
+            <div className="hidden md:block self-start mt-4">
+              <section className="margin-notes-section">
+                <div className="sticky top-6 space-y-4 pb-24">
+                  {postData?.marginNotes &&
+                    postData.marginNotes.map((note) => (
+                      <article key={note.id} className="mb-4">
+                        <MarginCard note={note} />
+                      </article>
+                    ))}
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }

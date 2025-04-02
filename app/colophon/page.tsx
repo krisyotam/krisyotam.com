@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { ChevronDown, ChevronUp } from "lucide-react"
-import { AnimatedTagV2 } from "@/components/animated-tag-v2"
+import { AnimatedTag } from "@/components/animated-tag"
 import { UpdateModal } from "@/components/update-modal"
 import { PageHeader } from "@/components/page-header"
 
@@ -89,8 +89,7 @@ export default function ColophonPage() {
   if (!inspirationsData || !updatesData) {
     return (
       <div className="relative min-h-screen bg-background text-foreground">
-        <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-        </div>
+        <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24"></div>
       </div>
     )
   }
@@ -114,8 +113,8 @@ export default function ColophonPage() {
               <h2 className="text-xl font-normal text-foreground">Typography</h2>
               <div className="md:col-span-2">
                 <p className="text-foreground mb-4">
-                  The awesome font I use throughout my site is <AnimatedTagV2 text="Britti-Sans" />. It is a sans-serif
-                  font with contextual alternates, which look absolutely phenomenal.
+                  The awesome font I use throughout my site is <AnimatedTag text="Britti-Sans" className="ml-1" />. It
+                  is a sans-serif font with contextual alternates, which look absolutely phenomenal.
                 </p>
               </div>
             </div>
@@ -127,7 +126,7 @@ export default function ColophonPage() {
               <div className="md:col-span-2">
                 <p className="text-foreground">
                   I don't use many icons on my site, but the few I do are all from{" "}
-                  <AnimatedTagV2 text="Lucide" href="https://lucide.dev" />.
+                  <AnimatedTag text="Lucide" href="https://lucide.dev" className="ml-1" />.
                 </p>
               </div>
             </div>
@@ -138,12 +137,13 @@ export default function ColophonPage() {
               <h2 className="text-xl font-normal text-foreground">Technology</h2>
               <div className="md:col-span-2">
                 <p className="text-foreground mb-4">
-                  The site was designed and built in <AnimatedTagV2 text="Framer" href="https://framer.com" />. Of
-                  course.
+                  The site was designed and built in{" "}
+                  <AnimatedTag text="Framer" href="https://framer.com" className="ml-1" />. Of course.
                 </p>
                 <p className="text-foreground">
-                  I also use <AnimatedTagV2 text="Seline" href="https://seline.io" /> for analytics. It's cookieless,
-                  lightweight, and as simple as it gets. If you haven't heard of it, you should definitely check it out.
+                  I also use <AnimatedTag text="Seline" href="https://seline.io" className="ml-1" /> for analytics. It's
+                  cookieless, lightweight, and as simple as it gets. If you haven't heard of it, you should definitely
+                  check it out.
                 </p>
               </div>
             </div>
@@ -158,9 +158,9 @@ export default function ColophonPage() {
                   styles, typography, layouts, and even ideas for my bucket list. Here are a few astonishing sites
                   created by equally astonishing people that have inspired me, listed in no particular order:
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {inspirationsData.inspirations.map((inspiration, index) => (
-                    <AnimatedTagV2 key={index} text={inspiration.name} href={inspiration.url} />
+                    <AnimatedTag key={index} text={inspiration.name} href={inspiration.url} />
                   ))}
                 </div>
               </div>

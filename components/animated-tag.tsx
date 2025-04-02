@@ -1,9 +1,8 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { useAnimation } from "@/contexts/animation-context"
+import { motion } from "framer-motion"
 
 interface AnimatedTagProps {
   text: string
@@ -11,92 +10,123 @@ interface AnimatedTagProps {
   className?: string
 }
 
-export function AnimatedTag({ text, href, className }: AnimatedTagProps) {
+export function AnimatedTag({ text, href, className = "" }: AnimatedTagProps) {
+  const [isAnimating, setIsAnimating] = useState(false)
   const [displayText, setDisplayText] = useState(text)
-  const { isAnyAnimating, setIsAnimating } = useAnimation()
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
-  const [width, setWidth] = useState<number | null>(null)
-  const tagRef = useRef<HTMLSpanElement | null>(null)
+  const tagRef = useRef<HTMLDivElement>(null)
+  const animationRef = useRef<NodeJS.Timeout | null>(null)
+  const frameRef = useRef(0)
+  const totalFrames = 10 // Total animation frames
+  const [tagWidth, setTagWidth] = useState<number | null>(null)
 
-  // Store the original width of the tag to prevent layout shifts
+  // Pre-calculate the width to prevent layout shifts
   useEffect(() => {
     if (tagRef.current) {
-      setWidth(tagRef.current.offsetWidth)
+      // Create a hidden element to measure the final text width
+      const measurer = document.createElement("span")
+      measurer.style.visibility = "hidden"
+      measurer.style.position = "absolute"
+      measurer.style.whiteSpace = "nowrap"
+      measurer.style.fontFamily = window.getComputedStyle(tagRef.current).fontFamily
+      measurer.style.fontSize = window.getComputedStyle(tagRef.current).fontSize
+      measurer.style.fontWeight = window.getComputedStyle(tagRef.current).fontWeight
+      measurer.innerText = text
+      document.body.appendChild(measurer)
+
+      // Store the width plus padding
+      const width = measurer.offsetWidth + 24 // 24px for padding (12px on each side)
+      setTagWidth(width)
+
+      // Clean up
+      document.body.removeChild(measurer)
     }
   }, [text])
 
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/"
-
   const handleMouseEnter = () => {
-    // Only start animation if no other animation is running
-    if (isAnyAnimating) return
-
+    if (animationRef.current) {
+      clearTimeout(animationRef.current)
+    }
     setIsAnimating(true)
-
-    let iterations = 0
-    intervalRef.current = setInterval(() => {
-      setDisplayText((prevText) =>
-        prevText
-          .split("")
-          .map((char, index) => {
-            if (index < iterations) {
-              return text[index]
-            }
-            return characters[Math.floor(Math.random() * characters.length)]
-          })
-          .join(""),
-      )
-
-      if (iterations >= text.length) {
-        if (intervalRef.current) {
-          clearInterval(intervalRef.current)
-          intervalRef.current = null
-        }
-        setDisplayText(text)
-        setIsAnimating(false)
-      }
-
-      iterations += 1 / 3
-    }, 30)
+    frameRef.current = 0
+    animateDecryption()
   }
 
   const handleMouseLeave = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-      intervalRef.current = null
-    }
-    setDisplayText(text)
-    setIsAnimating(false)
+    // Allow the animation to complete even when mouse leaves
+    // It will return to the original text at the end
   }
 
-  // Clean up interval on unmount
+  const animateDecryption = () => {
+    if (frameRef.current <= totalFrames) {
+      // Calculate how many characters should be scrambled vs. real
+      const scrambledCount = Math.floor(((totalFrames - frameRef.current) / totalFrames) * text.length)
+
+      // Create an array of characters from the original text
+      const chars = text.split("")
+
+      // Scramble the appropriate number of characters
+      for (let i = 0; i < scrambledCount; i++) {
+        const randomIndex = Math.floor(Math.random() * text.length)
+        chars[randomIndex] = String.fromCharCode(Math.floor(Math.random() * 26) + 97)
+      }
+
+      // Update the display text
+      setDisplayText(chars.join(""))
+
+      // Increment the frame counter
+      frameRef.current++
+
+      // Schedule the next frame
+      animationRef.current = setTimeout(animateDecryption, 50) // 50ms per frame
+    } else {
+      // Animation complete, reset to original text
+      setDisplayText(text)
+      setIsAnimating(false)
+    }
+  }
+
+  // Clean up any ongoing animations when component unmounts
   useEffect(() => {
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-        setIsAnimating(false)
+      if (animationRef.current) {
+        clearTimeout(animationRef.current)
       }
     }
-  }, [setIsAnimating])
+  }, [])
 
-  const TagComponent = href ? Link : "span"
-  const tagProps = href ? { href, target: "_blank", rel: "noopener noreferrer" } : {}
-
-  const style = width ? { minWidth: `${width}px` } : {}
-
-  return (
-    <TagComponent
-      {...tagProps}
-      className={cn(
-        "inline-block px-3 py-1 bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors",
-        className,
-      )}
+  const TagComponent = (
+    <motion.div
+      ref={tagRef}
+      className={`inline-flex items-center justify-center px-3 py-1 rounded-md bg-secondary dark:bg-secondary text-foreground dark:text-foreground text-sm font-medium transition-colors hover:bg-secondary/80 dark:hover:bg-secondary/80 ${className}`}
+      style={{
+        width: tagWidth ? `${tagWidth}px` : "auto",
+        minWidth: tagWidth ? `${tagWidth}px` : "auto",
+        maxWidth: tagWidth ? `${tagWidth}px` : "auto",
+        fontVariantNumeric: "tabular-nums",
+        fontFeatureSettings: '"tnum"',
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+      }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={style}
     >
-      <span ref={tagRef}>{displayText}</span>
-    </TagComponent>
+      {displayText}
+    </motion.div>
   )
+
+  if (href) {
+    return href.startsWith("http") ? (
+      <a href={href} target="_blank" rel="noopener noreferrer" className="no-underline">
+        {TagComponent}
+      </a>
+    ) : (
+      <Link href={href} className="no-underline">
+        {TagComponent}
+      </Link>
+    )
+  }
+
+  return TagComponent
 }
 

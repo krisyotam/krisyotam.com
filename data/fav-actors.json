@@ -1,0 +1,78 @@
+[
+  {
+    "id": "1",
+    "name": "Winona Ryder",
+    "image": "https://i.postimg.cc/g035LycW/winona-ryder.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Marilyn Monroe",
+    "image": "https://i.postimg.cc/SNtHBN1w/marilyn-monroe.webp"
+  },
+  {
+    "id": "3",
+    "name": "Denzel Washington",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "4",
+    "name": "Viola Davis",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "5",
+    "name": "Leonardo DiCaprio",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "6",
+    "name": "Cate Blanchett",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "7",
+    "name": "Morgan Freeman",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "8",
+    "name": "Jennifer Lawrence",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "9",
+    "name": "Robert Downey Jr.",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "10",
+    "name": "Scarlett Johansson",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "11",
+    "name": "Brad Pitt",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "12",
+    "name": "Emma Stone",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "13",
+    "name": "Joaquin Phoenix",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "14",
+    "name": "Frances McDormand",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "15",
+    "name": "Daniel Day-Lewis",
+    "image": "/placeholder.svg?height=150&width=150"
+  }
+]
+

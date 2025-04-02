@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Command } from "cmdk"
 import { useRouter } from "next/navigation"
-import { Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll, Earth, Clock, Brain, Waypoints, Notebook, HandCoins, Bitcoin, Archive, Music, Origami, Film, Newspaper, StickyNote, SquareLibrary} from "lucide-react"
+import { Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll, Earth, Clock, Brain, Waypoints, Notebook, HandCoins, Bitcoin, Archive, Music, Origami, Film, Newspaper, StickyNote, SquareLibrary, Feather, PenLine, CircleHelp} from "lucide-react"
 import { SnowEffect } from "./snow-effect"
 import { useTheme } from "next-themes"
 
@@ -14,12 +14,12 @@ const menuItems = [
   { icon: Clock, label: "Now", path: "/now" },
   { icon: List, label: "Categories", path: "/categories" },
   { icon: Newspaper, label: "Newsletter", path: "/newsletter" },
-  { icon: BookOpen, label: "Books", path: "/books" },
-  { icon: BookOpen, label: "My Books", path: "/mybooks" },
+  { icon: BookOpen, label: "Reading", path: "/reading" },
+  { icon: PenLine, label: "My Books", path: "/mybooks" },
   { icon: Users, label: "OCs", path: "/ocs" },
   { icon: Presentation, label: "Keynotes", path: "/keynotes" },
   { icon: FileText, label: "Speeches", path: "/speeches" },
-  { icon: BookOpen, label: "Poetry", path: "/poetry" },
+  { icon: Feather, label: "Poetry", path: "/poetry" },
   { icon: Music, label: "Playlist", path: "/playlists" },
   { icon: Origami, label: "Anime", path: "/anime" },
   { icon: Film, label: "Film", path: "/film" },
@@ -34,7 +34,8 @@ const menuItems = [
   { icon: Bitcoin, label: "Donate", path: "/donate" },
   { icon: Mail, label: "Contact", path: "/contact" },
   { icon: Archive, label: "Archive", path: "/archive" },
-  { icon: SquareLibrary, label: "Wiki", path: "/wiki" },
+  { icon: CircleHelp, label: "Wiki", path: "/wiki" },
+  { icon: SquareLibrary, label: "Library", path: "/library" },
   { icon: Heart, label: "Colophon", path: "/colophon" },
   { icon: User, label: "About", path: "/about" },
 ]

@@ -26,6 +26,11 @@ export function MarginCard({ className, note }: MarginCardProps) {
   const contentRef = useRef<HTMLDivElement>(null)
   const CHARACTER_LIMIT = 550
 
+  // Add debugging to see what data we're receiving
+  useEffect(() => {
+    console.log("📝 MARGIN CARD COMPONENT: Received margin note:", note)
+  }, [note])
+
   // Check if content is long enough to need expansion
   useEffect(() => {
     if (note.content.length > CHARACTER_LIMIT) {

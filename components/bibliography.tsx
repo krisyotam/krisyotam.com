@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card } from "@/components/ui/card"
 import { Book, FileText, Video } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
@@ -29,6 +29,11 @@ export function Bibliography({ bibliography, className }: BibliographyProps) {
   // Add pagination state
   const [currentPage, setCurrentPage] = useState(1)
   const entriesPerPage = 5
+
+  // Add debugging to see what data we're receiving
+  useEffect(() => {
+    console.log("📚 BIBLIOGRAPHY COMPONENT: Received bibliography entries:", bibliography)
+  }, [bibliography])
 
   const handleEntryClick = (entry: BibliographyEntry) => {
     setSelectedEntry(entry)

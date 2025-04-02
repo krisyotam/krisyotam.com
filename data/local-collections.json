@@ -1,0 +1,104 @@
+{
+  "collections": [
+    {
+      "id": "1",
+      "title": "Great Books of the Western World",
+      "subtitle": "Essential Classical Literature",
+      "description": "A series of books that are considered to be among the most important and influential works of literature, philosophy, and science in Western civilization.",
+      "lastUpdated": "2025-03-10T12:00:00Z",
+      "status": "complete",
+      "confidence": "certain",
+      "importance": 9,
+      "books": [
+        {
+          "id": "gb1",
+          "title": "The Iliad",
+          "author": "Homer",
+          "cover": "/placeholder.svg",
+          "rating": 5
+        },
+        {
+          "id": "gb2",
+          "title": "The Republic",
+          "author": "Plato",
+          "cover": "/placeholder.svg",
+          "rating": 5
+        },
+        {
+          "id": "gb3",
+          "title": "Hamlet",
+          "author": "William Shakespeare",
+          "cover": "/placeholder.svg",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Harvard Classics",
+      "subtitle": "The Five-Foot Shelf of Books",
+      "description": "A 51-volume anthology of classic works from world literature, compiled and edited by Harvard University president Charles W. Eliot.",
+      "lastUpdated": "2025-02-15T12:00:00Z",
+      "status": "maintained",
+      "confidence": "highly likely",
+      "importance": 8,
+      "books": [
+        {
+          "id": "hc1",
+          "title": "The Autobiography of Benjamin Franklin",
+          "author": "Benjamin Franklin",
+          "cover": "/placeholder.svg",
+          "rating": 4
+        },
+        {
+          "id": "hc2",
+          "title": "The Odyssey",
+          "author": "Homer",
+          "cover": "/placeholder.svg",
+          "rating": 5
+        },
+        {
+          "id": "hc3",
+          "title": "Don Quixote",
+          "author": "Miguel de Cervantes",
+          "cover": "/placeholder.svg",
+          "rating": 5
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Penguin Classics",
+      "subtitle": "Contemporary Classic Literature",
+      "description": "A curated collection of classic literature published by Penguin Books, featuring a wide range of authors and genres.",
+      "lastUpdated": "2025-03-20T12:00:00Z",
+      "status": "in progress",
+      "confidence": "likely",
+      "importance": 7,
+      "books": [
+        {
+          "id": "pc1",
+          "title": "Pride and Prejudice",
+          "author": "Jane Austen",
+          "cover": "/placeholder.svg",
+          "rating": 4
+        },
+        {
+          "id": "pc2",
+          "title": "1984",
+          "author": "George Orwell",
+          "cover": "/placeholder.svg",
+          "rating": 5
+        },
+        {
+          "id": "pc3",
+          "title": "The Great Gatsby",
+          "author": "F. Scott Fitzgerald",
+          "cover": "/placeholder.svg",
+          "rating": 4
+        }
+      ]
+    }
+  ]
+}
+

@@ -1,12 +1,16 @@
-let userConfig = undefined
+import withMDX from '@next/mdx';
+
+let userConfig = undefined;
 try {
-  userConfig = await import('./v0-user-next.config')
+  userConfig = await import('./v0-user-next.config');
 } catch (e) {
   // ignore error
 }
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = withMDX({
+  extension: /\.mdx?$/,
+})({
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -21,15 +25,14 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
-  // Add this to ensure the blog routes are handled correctly
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-}
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'], // Added MDX support
+});
 
-mergeConfig(nextConfig, userConfig)
+mergeConfig(nextConfig, userConfig);
 
 function mergeConfig(nextConfig, userConfig) {
   if (!userConfig) {
-    return
+    return;
   }
 
   for (const key in userConfig) {
@@ -40,12 +43,11 @@ function mergeConfig(nextConfig, userConfig) {
       nextConfig[key] = {
         ...nextConfig[key],
         ...userConfig[key],
-      }
+      };
     } else {
-      nextConfig[key] = userConfig[key]
+      nextConfig[key] = userConfig[key];
     }
   }
 }
 
-export default nextConfig
-
+export default nextConfig;

@@ -1,0 +1,43 @@
+import type React from "react"
+import { Book, FileText, ShoppingBag } from "lucide-react"
+import { A } from "@/components/typography/a"
+
+interface LinkProps {
+  href: string
+  children: React.ReactNode
+  title?: string
+}
+
+export function BookLink({ href, children, title }: LinkProps) {
+  return (
+    <span className="inline-flex items-center">
+      <Book className="inline-block mr-1 h-4 w-4 text-primary" />
+      <A href={href} title={title}>
+        {children}
+      </A>
+    </span>
+  )
+}
+
+export function ArticleLink({ href, children, title }: LinkProps) {
+  return (
+    <span className="inline-flex items-center">
+      <FileText className="inline-block mr-1 h-4 w-4 text-primary" />
+      <A href={href} title={title}>
+        {children}
+      </A>
+    </span>
+  )
+}
+
+export function ItemLink({ href, children, title }: LinkProps) {
+  return (
+    <span className="inline-flex items-center">
+      <ShoppingBag className="inline-block mr-1 h-4 w-4 text-primary" />
+      <A href={href} title={title}>
+        {children}
+      </A>
+    </span>
+  )
+}
+

@@ -100,7 +100,7 @@ export function PostHeader({
   importance = 5,
 }: PostHeaderProps) {
   return (
-    <header className="mb-16 relative">
+    <header className="mb-4 relative">
       {/* Back to home link */}
       <Link
         href="/"

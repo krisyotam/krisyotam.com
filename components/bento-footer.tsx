@@ -25,7 +25,7 @@ export function BentoFooter({ className }: BentoFooterProps) {
             >
               <span className="text-muted-foreground group-hover:text-foreground transition-colors flex items-center gap-2">
                 <Scroll className="h-3 w-3" />
-                <span>Colophon</span>
+                <span>About</span>
               </span>
             </a>
 
@@ -36,7 +36,7 @@ export function BentoFooter({ className }: BentoFooterProps) {
             >
               <span className="text-muted-foreground group-hover:text-foreground transition-colors flex items-center gap-2">
                 <Scroll className="h-3 w-3" />
-                <span>About</span>
+                <span>Colophon</span>
               </span>
             </a>
 

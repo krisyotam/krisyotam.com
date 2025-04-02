@@ -17,7 +17,7 @@ export default function ProductGrid({ items }: ProductGridProps) {
       {items.map((product, index) => (
         <Link key={index} href={product.link} passHref legacyBehavior>
           <a target="_blank" rel="noopener noreferrer" className="group block">
-            <div className="aspect-square bg-gray-100 dark:bg-[#1a1a1a] relative mb-2 rounded-md overflow-hidden transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-[#252525] border border-gray-200 dark:border-gray-800">
+            <div className="aspect-square bg-gray-100 dark:bg-[#1a1a1a] relative mb-2 rounded-md overflow-hidden transition-colors duration-200 hover:bg-gray-200 dark:hover:bg-[#252525] border border-[#1a1a1a] dark:border-[#1f1f1f]">
               <div className="absolute inset-0 flex items-center justify-center p-4">
                 <Image
                   src={product.imageUrl || "/placeholder.svg"}
@@ -38,4 +38,3 @@ export default function ProductGrid({ items }: ProductGridProps) {
     </div>
   )
 }
-

@@ -24,7 +24,7 @@ const memoriesPageData = {
   title: "Memories",
   subtitle: "Collected Thoughts and Discoveries",
   date: new Date().toISOString(),
-  preview: "A digital repository of interesting discoveries, research notes, and intellectual curiosities.",
+  preview: "A digital repository of interesting discoveries on the interwebs.",
   status: "In Progress" as const,
   confidence: "likely" as const,
   importance: 6,

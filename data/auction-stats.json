@@ -1,0 +1,11 @@
+{
+  "highestBid": "$4,250",
+  "successRate": "78%",
+  "totalBids": 127,
+  "totalSpend": "$18,750",
+  "bidTypes": {
+    "inPerson": 42,
+    "online": 85
+  }
+}
+

@@ -6,7 +6,6 @@ import { useState, useEffect, useCallback, useMemo } from "react"
 import Link from "next/link"
 import aboutMeData from "../../data/about-me.json"
 import missionData from "../../data/mission.json"
-import experienceData from "../../data/experience.json"
 import personalPhilosophyData from "../../data/personal-philosophy.json"
 import coreValuesData from "../../data/core-values.json"
 import recommendedBlogsData from "../../data/recommended-blogs.json"
@@ -29,6 +28,9 @@ import PersonalBio from "@/components/personal-bio"
 import myMethodsData from "../../data/my-methods.json"
 import certificationsData from "../../data/certifications.json"
 import { PageHeader } from "@/components/page-header"
+import Experience from "@/components/experience"
+// Import the new ProgymPractice component at the top of the file
+import ProgymPractice from "@/components/progymnasmata/progym-practice"
 
 export const dynamic = "force-dynamic"
 
@@ -332,7 +334,29 @@ export default function AboutPage() {
             </div>
           ),
         },
-        { title: "Experience", content: experienceData.content },
+        {
+          title: "Experience",
+          content: (
+            <div className="py-4">
+              <Experience />
+            </div>
+          ),
+        },
+        // Add the new Practice section to the sections array in the useEffect
+        // Insert this after the Experience section (which is at index 4)
+        {
+          title: "Practice",
+          content: (
+            <div className="py-4">
+              <p className="text-lg text-muted-foreground font-light mb-6">
+                My progymnasmata exercises - classical rhetorical training practices from ancient Greece and Rome. These
+                exercises develop skills in composition, rhetoric, and critical thinking through a structured
+                curriculum.
+              </p>
+              <ProgymPractice />
+            </div>
+          ),
+        },
         {
           title: "Core Skills",
           content: coreSkillsComponent,

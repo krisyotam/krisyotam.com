@@ -110,7 +110,7 @@ export function PageHeader({
       <div className="border border-border bg-card text-card-foreground p-6 rounded-sm shadow-sm">
         {/* Title with academic styling */}
         <h1 className="text-4xl font-serif font-medium tracking-tight mb-2 text-center uppercase">
-          {title.split(" ").join("-")}
+          {title.split(" ").join(" ")}
         </h1>
 
         {/* Subtitle */}

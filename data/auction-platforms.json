@@ -1,0 +1,35 @@
+{
+  "platforms": [
+    {
+      "platform": "Sotheby's",
+      "purpose": "Fine Art & Luxury Items",
+      "link": "https://www.sothebys.com"
+    },
+    {
+      "platform": "Christie's",
+      "purpose": "Premium Auctions & Private Sales",
+      "link": "https://www.christies.com"
+    },
+    {
+      "platform": "eBay",
+      "purpose": "General Collectibles & Daily Finds",
+      "link": "https://www.ebay.com"
+    },
+    {
+      "platform": "Heritage Auctions",
+      "purpose": "Collectibles & Memorabilia",
+      "link": "https://www.ha.com"
+    },
+    {
+      "platform": "Bonhams",
+      "purpose": "Fine Art & Antiques",
+      "link": "https://www.bonhams.com"
+    },
+    {
+      "platform": "LiveAuctioneers",
+      "purpose": "Online Auction Aggregator",
+      "link": "https://www.liveauctioneers.com"
+    }
+  ]
+}
+

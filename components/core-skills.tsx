@@ -48,7 +48,7 @@ export default function CoreSkills({ data = defaultSkillsData, className }: Core
   const CATEGORY_STAGGER_DELAY = 0.09 // 200ms between categories
 
   return (
-    <div className={cn("container mx-auto px-4 py-12", className)}>
+    <div className={cn("container mx-auto px-4 py-0", className)}>
       <Card className="overflow-hidden border shadow-md">
         <CardHeader className="border-b bg-muted/30 flex flex-row items-center justify-end">
           <Tabs defaultValue="bento" className="w-[200px]" onValueChange={handleViewChange}>

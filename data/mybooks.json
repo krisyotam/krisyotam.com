@@ -7,7 +7,11 @@
       "tags": ["Philosophy", "Ethics", "Metaphysics"],
       "authors": ["Kris Yotam"],
       "slug": "higher-order-puritism",
-      "classification": "Non-Fiction"
+      "classification": "Non-Fiction",
+      "cover_photo": "https://i.postimg.cc/LXN41g2x/puritism.jpg",
+      "status": "active",
+      "access": "free",
+      "link": ""
     },
     {
       "title": "The Symphony of Slow Knowledge",
@@ -16,7 +20,11 @@
       "tags": ["Learning", "Cognitive Science", "Personal Development"],
       "authors": ["Kris Yotam"],
       "slug": "the-symphony-of-slow-knowledge",
-      "classification": "Non-Fiction"
+      "classification": "Non-Fiction",
+      "cover_photo": "/images/books/the-symphony-of-slow-knowledge.jpg",
+      "status": "active",
+      "access": "free",
+      "link": ""
     },
     {
       "title": "The Yotam Lectures on Mathematics",
@@ -25,7 +33,11 @@
       "tags": ["Mathematics", "Differential Equations", "Advanced Mathematics"],
       "authors": ["Kris Yotam", "Parker", "Yao"],
       "slug": "the-yotam-lectures-on-mathematics-partiii-differential-equations",
-      "classification": "Non-Fiction"
+      "classification": "Non-Fiction",
+      "cover_photo": "/images/books/the-yotam-lectures-on-mathematics.jpg",
+      "status": "active",
+      "access": "free",
+      "link": ""
     },
     {
       "title": "The Multipotentialite Parent",
@@ -34,7 +46,11 @@
       "tags": ["Parenting", "Child Development", "Education"],
       "authors": ["Kris Yotam"],
       "slug": "the-multipotentialite-parent",
-      "classification": "Non-Fiction"
+      "classification": "Non-Fiction",
+      "cover_photo": "/images/books/the-multipotentialite-parent.jpg",
+      "status": "active",
+      "access": "paid",
+      "link": "https://www.amazon.com/dp/B0CQXYZ123"
     },
     {
       "title": "House of Fairchild",
@@ -43,7 +59,11 @@
       "tags": ["Gothic", "Fantasy", "Fairytale"],
       "authors": ["Kris Yotam"],
       "slug": "house-of-fairchild",
-      "classification": "Fiction"
+      "classification": "Fiction",
+      "cover_photo": "/images/books/house-of-fairchild.jpg",
+      "status": "active",
+      "access": "paid",
+      "link": "https://www.amazon.com/dp/B0CQXYZ456"
     },
     {
       "title": "Ars Mathematica",
@@ -52,7 +72,12 @@
       "tags": ["Number Theory", "Fantasy", "Fairytale"],
       "authors": ["Kris Yotam"],
       "slug": "ars-mathematica-number-theory",
-      "classification": "Fiction"
+      "classification": "Fiction",
+      "cover_photo": "/images/books/ars-mathematica.jpg",
+      "status": "hidden",
+      "access": "free",
+      "link": ""
     }
   ]
 }
+

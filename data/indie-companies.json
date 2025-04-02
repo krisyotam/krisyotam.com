@@ -1,0 +1,221 @@
+{
+  "companies": [
+    {
+      "id": "codefast",
+      "name": "CodeFast",
+      "description": "Learn to code in weeks, not years",
+      "logo": "/companies/codefast.svg",
+      "stripeAccountId": "acct_1234567890",
+      "color": "#5046e5",
+      "demoData": {
+        "monthlyRevenue": 68500,
+        "revenueHistory": [
+          { "month": "Mar", "value": 55000 },
+          { "month": "Apr", "value": 57000 },
+          { "month": "May", "value": 59000 },
+          { "month": "Jun", "value": 62000 },
+          { "month": "Jul", "value": 65000 },
+          { "month": "Aug", "value": 70000 },
+          { "month": "Sep", "value": 90000 },
+          { "month": "Oct", "value": 180000 },
+          { "month": "Nov", "value": 220000 },
+          { "month": "Dec", "value": 200000 },
+          { "month": "Jan", "value": 190000 },
+          { "month": "Feb", "value": 180000 }
+        ],
+        "minValue": 55000,
+        "maxValue": 220000
+      }
+    },
+    {
+      "id": "shipfast",
+      "name": "ShipFast",
+      "description": "Ship your startup in days, not months",
+      "logo": "/companies/shipfast.svg",
+      "stripeAccountId": "acct_0987654321",
+      "color": "#5046e5",
+      "demoData": {
+        "monthlyRevenue": 25700,
+        "revenueHistory": [
+          { "month": "Mar", "value": 35000 },
+          { "month": "Apr", "value": 140000 },
+          { "month": "May", "value": 120000 },
+          { "month": "Jun", "value": 110000 },
+          { "month": "Jul", "value": 100000 },
+          { "month": "Aug", "value": 95000 },
+          { "month": "Sep", "value": 90000 },
+          { "month": "Oct", "value": 85000 },
+          { "month": "Nov", "value": 90000 },
+          { "month": "Dec", "value": 85000 },
+          { "month": "Jan", "value": 80000 },
+          { "month": "Feb", "value": 75000 }
+        ],
+        "minValue": 35000,
+        "maxValue": 140000
+      }
+    },
+    {
+      "id": "datafast",
+      "name": "DataFast",
+      "description": "Grow your startup with data, not guesses",
+      "logo": "/companies/datafast.svg",
+      "stripeAccountId": "acct_1357924680",
+      "color": "#5046e5",
+      "demoData": {
+        "monthlyRevenue": 2300,
+        "revenueHistory": [
+          { "month": "Mar", "value": 500 },
+          { "month": "Apr", "value": 600 },
+          { "month": "May", "value": 700 },
+          { "month": "Jun", "value": 800 },
+          { "month": "Jul", "value": 900 },
+          { "month": "Aug", "value": 1200 },
+          { "month": "Sep", "value": 1500 },
+          { "month": "Oct", "value": 1800 },
+          { "month": "Nov", "value": 2000 },
+          { "month": "Dec", "value": 2200 },
+          { "month": "Jan", "value": 2400 },
+          { "month": "Feb", "value": 2500 }
+        ],
+        "minValue": 500,
+        "maxValue": 2500
+      }
+    },
+    {
+      "id": "zenvoice",
+      "name": "Zenvoice",
+      "description": "Focus on your startup, not the invoices",
+      "logo": "/companies/zenvoice.svg",
+      "stripeAccountId": "acct_2468013579",
+      "color": "#5046e5",
+      "demoData": {
+        "monthlyRevenue": 532,
+        "revenueHistory": [
+          { "month": "Mar", "value": 450 },
+          { "month": "Apr", "value": 1800 },
+          { "month": "May", "value": 1600 },
+          { "month": "Jun", "value": 1400 },
+          { "month": "Jul", "value": 1500 },
+          { "month": "Aug", "value": 1700 },
+          { "month": "Sep", "value": 1500 },
+          { "month": "Oct", "value": 1300 },
+          { "month": "Nov", "value": 1100 },
+          { "month": "Dec", "value": 900 },
+          { "month": "Jan", "value": 700 },
+          { "month": "Feb", "value": 600 }
+        ],
+        "minValue": 450,
+        "maxValue": 1800
+      }
+    },
+    {
+      "id": "indiepage",
+      "name": "Indie Page",
+      "description": "All your startups in a page, like this one",
+      "logo": "/companies/indiepage.svg",
+      "stripeAccountId": "acct_1122334455",
+      "color": "#5046e5",
+      "demoData": {
+        "monthlyRevenue": 1500,
+        "revenueHistory": [
+          { "month": "Mar", "value": 2000 },
+          { "month": "Apr", "value": 2500 },
+          { "month": "May", "value": 3000 },
+          { "month": "Jun", "value": 2500 },
+          { "month": "Jul", "value": 3500 },
+          { "month": "Aug", "value": 5000 },
+          { "month": "Sep", "value": 8000 },
+          { "month": "Oct", "value": 6000 },
+          { "month": "Nov", "value": 4000 },
+          { "month": "Dec", "value": 3000 },
+          { "month": "Jan", "value": 2500 },
+          { "month": "Feb", "value": 2000 }
+        ],
+        "minValue": 2000,
+        "maxValue": 8000
+      }
+    },
+    {
+      "id": "popup",
+      "name": "PopUp",
+      "description": "Turn your visitors into customers with wake-up call",
+      "logo": "/companies/popup.svg",
+      "stripeAccountId": "acct_5566778899",
+      "color": "#5046e5",
+      "demoData": {
+        "monthlyRevenue": 169,
+        "revenueHistory": [
+          { "month": "Mar", "value": 1000 },
+          { "month": "Apr", "value": 900 },
+          { "month": "May", "value": 800 },
+          { "month": "Jun", "value": 700 },
+          { "month": "Jul", "value": 600 },
+          { "month": "Aug", "value": 500 },
+          { "month": "Sep", "value": 400 },
+          { "month": "Oct", "value": 350 },
+          { "month": "Nov", "value": 300 },
+          { "month": "Dec", "value": 275 },
+          { "month": "Jan", "value": 250 },
+          { "month": "Feb", "value": 250 }
+        ],
+        "minValue": 250,
+        "maxValue": 1000
+      }
+    },
+    {
+      "id": "byedispute",
+      "name": "ByeDispute",
+      "description": "Prevent disputes before getting banned from Stripe",
+      "logo": "/companies/byedispute.svg",
+      "stripeAccountId": "acct_9988776655",
+      "color": "#5046e5",
+      "demoData": {
+        "monthlyRevenue": 332,
+        "revenueHistory": [
+          { "month": "Mar", "value": 100 },
+          { "month": "Apr", "value": 150 },
+          { "month": "May", "value": 200 },
+          { "month": "Jun", "value": 250 },
+          { "month": "Jul", "value": 300 },
+          { "month": "Aug", "value": 600 },
+          { "month": "Sep", "value": 800 },
+          { "month": "Oct", "value": 500 },
+          { "month": "Nov", "value": 400 },
+          { "month": "Dec", "value": 350 },
+          { "month": "Jan", "value": 300 },
+          { "month": "Feb", "value": 250 }
+        ],
+        "minValue": 100,
+        "maxValue": 800
+      }
+    },
+    {
+      "id": "workbookpdf",
+      "name": "WorkbookPDF",
+      "description": "Language workbooks you'll love",
+      "logo": "/companies/workbookpdf.svg",
+      "stripeAccountId": "acct_1029384756",
+      "color": "#5046e5",
+      "demoData": {
+        "monthlyRevenue": 19,
+        "revenueHistory": [
+          { "month": "Mar", "value": 50 },
+          { "month": "Apr", "value": 60 },
+          { "month": "May", "value": 70 },
+          { "month": "Jun", "value": 80 },
+          { "month": "Jul", "value": 90 },
+          { "month": "Aug", "value": 100 },
+          { "month": "Sep", "value": 120 },
+          { "month": "Oct", "value": 140 },
+          { "month": "Nov", "value": 120 },
+          { "month": "Dec", "value": 100 },
+          { "month": "Jan", "value": 140 },
+          { "month": "Feb", "value": 190 }
+        ],
+        "minValue": 50,
+        "maxValue": 190
+      }
+    }
+  ]
+}
+

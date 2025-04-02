@@ -1,7 +1,6 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
-import { getFeaturedImage } from "../../utils/ghost"
+import { useState, useMemo, useEffect } from "react"
 import mybooksData from "../../data/mybooks.json"
 import { MyBookCard } from "../../components/my-book-card"
 import { BookSearch } from "../../components/book-search"
@@ -29,23 +28,24 @@ const mybooksPageData = {
   importance: 9,
 }
 
-const revalidate = 1800 // 30 minutes
-
 type Book = {
-  subtitle: string
   title: string
+  subtitle: string
   category: string
   tags: string[]
   authors: string[]
   slug: string
-  feature_image?: string
   classification: string
+  cover_photo?: string
+  status: "active" | "hidden"
+  access: "free" | "paid"
+  link?: string
+  feature_image?: string
 }
 
 export default function MyBooksPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // In the return statement, add the PageHeader component before the MyBookList component
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
@@ -97,42 +97,21 @@ function MyBookList({ initialBooks }: { initialBooks: Book[] }) {
   const [searchQuery, setSearchQuery] = useState("")
   const [activeCategory, setActiveCategory] = useState("All")
   const [activeClassification, setActiveClassification] = useState("All")
-  const [booksWithImages, setBooksWithImages] = useState(initialBooks)
 
-  useEffect(() => {
-    const fetchFeaturedImages = async () => {
-      try {
-        const updatedBooks = await Promise.all(
-          initialBooks.map(async (book: any) => {
-            try {
-              const featuredImage = await getFeaturedImage(book.slug)
-              return { ...book, feature_image: featuredImage || "/placeholder.svg" }
-            } catch (error) {
-              console.error(`Error fetching image for ${book.title}:`, error)
-              return { ...book, feature_image: "/placeholder.svg" }
-            }
-          }),
-        )
-        setBooksWithImages(updatedBooks)
-      } catch (error) {
-        console.error("Error fetching featured images:", error)
-      }
-    }
-
-    fetchFeaturedImages()
+  // Filter out hidden books
+  const activeBooks = useMemo(() => {
+    return initialBooks.filter((book) => book.status === "active")
   }, [initialBooks])
 
   // Get all available classifications
   const classifications = useMemo(() => {
-    return Array.from(new Set(initialBooks.map((book) => book.classification)))
-  }, [initialBooks])
+    return Array.from(new Set(activeBooks.map((book) => book.classification)))
+  }, [activeBooks])
 
   // Filter books by classification first
   const booksFilteredByClassification = useMemo(() => {
-    return booksWithImages.filter(
-      (book) => activeClassification === "All" || book.classification === activeClassification,
-    )
-  }, [booksWithImages, activeClassification])
+    return activeBooks.filter((book) => activeClassification === "All" || book.classification === activeClassification)
+  }, [activeBooks, activeClassification])
 
   // Get categories available for the current classification filter
   const availableCategories = useMemo(() => {
@@ -144,11 +123,11 @@ function MyBookList({ initialBooks }: { initialBooks: Book[] }) {
     if (activeCategory !== "All" && !availableCategories.includes(activeCategory)) {
       setActiveCategory("All")
     }
-  }, [availableCategories, activeCategory]) // Removed activeClassification from dependencies
+  }, [availableCategories, activeCategory])
 
   // Final filtered books based on all criteria
   const filteredBooks = useMemo(() => {
-    return booksWithImages.filter((book) => {
+    return activeBooks.filter((book) => {
       const matchesSearch =
         searchQuery === "" ||
         book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -157,12 +136,11 @@ function MyBookList({ initialBooks }: { initialBooks: Book[] }) {
         book.authors.some((author: string) => author.toLowerCase().includes(searchQuery.toLowerCase()))
 
       const matchesCategory = activeCategory === "All" || book.category === activeCategory
-
       const matchesClassification = activeClassification === "All" || book.classification === activeClassification
 
       return matchesSearch && matchesCategory && matchesClassification
     })
-  }, [booksWithImages, searchQuery, activeCategory, activeClassification])
+  }, [activeBooks, searchQuery, activeCategory, activeClassification])
 
   // Handle classification change
   const handleClassificationChange = (value: string) => {
@@ -218,18 +196,7 @@ function MyBookList({ initialBooks }: { initialBooks: Book[] }) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {filteredBooks.map((book) => (
-          <MyBookCard
-            key={book.slug}
-            book={{
-              title: book.title,
-              subtitle: book.subtitle,
-              slug: book.slug,
-              excerpt: "",
-              feature_image: book.feature_image || "",
-              published_at: "",
-              authors: book.authors,
-            }}
-          />
+          <MyBookCard key={book.slug} book={book} />
         ))}
         {filteredBooks.length === 0 && (
           <p className="text-center text-muted-foreground py-8 col-span-2">No books found matching your criteria.</p>
