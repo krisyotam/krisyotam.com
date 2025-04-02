@@ -25,7 +25,6 @@ export default async function PostPage({
     }
 
     // Check if there's an MDX version of the post and get content if it exists
-    // This uses server-side functions from utils/posts.ts
     const { isMDX, mdxData, blogPostExists } = await getPostContent(year, slug)
     console.log(`🔍 DEBUG: Is MDX post:`, isMDX)
 

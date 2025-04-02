@@ -2,14 +2,13 @@
 
 import type React from "react"
 
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 import dynamic from "next/dynamic"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { useMDXComponents } from "@/mdx-components"
 import { BlogModalProvider } from "./blog-modal-provider"
-
-// IMPORTANT: This client component does NOT import from utils/posts.ts
-// All data is passed as props from the server component
+import { MarginCard } from "@/components/margin-card"
+import TableOfContents from "@/components/table-of-contents"
 
 // Fallback content component when a post is not found
 function PostNotFound({ slug, year }: { slug: string; year: string }) {
@@ -27,53 +26,50 @@ function PostNotFound({ slug, year }: { slug: string; year: string }) {
 function MDXRenderer({
   children,
   frontmatter,
+  postData,
 }: {
   children: React.ReactNode
   frontmatter: any
+  postData: any
 }) {
+  // Debug logging to check what we're working with
+  useEffect(() => {
+    console.log("MDXRenderer mounted with frontmatter:", frontmatter)
+    console.log("MDXRenderer has margin notes:", frontmatter?.marginNotes ? "Yes" : "No")
+    console.log("MDXRenderer has headings:", frontmatter?.headings ? "Yes" : "No")
+  }, [frontmatter])
+
+  // Ensure we have margin notes, even if they're not in frontmatter
+  const marginNotes = frontmatter?.marginNotes || []
+  const headings = frontmatter?.headings || []
+
   return (
-    <div className="mdx-content grid grid-cols-1 md:grid-cols-[1fr_3fr_1fr] gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr_1fr] gap-8">
       {/* Left sidebar - Table of Contents */}
-      <div className="hidden md:block sticky top-6">
-        {frontmatter.headings && frontmatter.headings.length > 0 && (
-          <div className="toc-container p-4">
-            <h3 className="text-lg font-semibold mb-2">Table of Contents</h3>
-            <ul className="space-y-1">
-              {frontmatter.headings.map((heading: any, index: number) => (
-                <li
-                  key={index}
-                  className={`${
-                    heading.level === 1 ? "ml-0 font-medium" : heading.level === 2 ? "ml-2 text-sm" : "ml-4 text-xs"
-                  }`}
-                >
-                  <a href={`#${heading.id}`} className="hover:underline">
-                    {heading.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+      <div className="hidden md:block">
+        <div className="sticky top-8">
+          <TableOfContents headings={headings} />
+        </div>
       </div>
 
       {/* Main content */}
       <div className="mdx-main-content">{children}</div>
 
       {/* Right sidebar - Margin Notes */}
-      <div className="hidden md:block sticky top-6">
-        {frontmatter.marginNotes && frontmatter.marginNotes.length > 0 && (
-          <div className="margin-notes-container p-4">
-            <h3 className="text-lg font-semibold mb-2">Notes</h3>
-            <div className="space-y-4">
-              {frontmatter.marginNotes.map((note: any, index: number) => (
-                <div key={index} className="text-sm p-3 bg-muted rounded-md">
-                  <div className="font-medium mb-1">{note.title}</div>
-                  <div>{note.content}</div>
-                </div>
-              ))}
+      <div className="hidden md:block">
+        <div className="sticky top-8 space-y-4">
+          {marginNotes.length > 0 ? (
+            marginNotes.map((note: any) => (
+              <div key={note.id || note.index} className="mb-4">
+                <MarginCard note={note} />
+              </div>
+            ))
+          ) : (
+            <div className="text-sm text-muted-foreground p-4 border border-border rounded-md">
+              No margin notes available for this post.
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   )
@@ -88,9 +84,22 @@ interface BlogPostContentProps {
     frontmatter: any
   } | null
   blogPostExists: boolean
+  postData: any // Add postData to props
 }
 
-export function BlogPostContent({ year, slug, isMDX, mdxData, blogPostExists }: BlogPostContentProps) {
+export function BlogPostContent({ year, slug, isMDX, mdxData, blogPostExists, postData }: BlogPostContentProps) {
+  // Debug logging
+  useEffect(() => {
+    console.log("BlogPostContent mounted with props:", { isMDX, blogPostExists })
+    if (mdxData) {
+      console.log("MDX data available:", {
+        contentLength: mdxData.content.length,
+        hasFrontmatter: !!mdxData.frontmatter,
+        hasMarginNotes: mdxData.frontmatter?.marginNotes ? "Yes" : "No",
+      })
+    }
+  }, [isMDX, mdxData, blogPostExists])
+
   // Get MDX components
   const mdxComponents = useMDXComponents({})
 
@@ -98,7 +107,7 @@ export function BlogPostContent({ year, slug, isMDX, mdxData, blogPostExists }: 
   if (isMDX && mdxData) {
     return (
       <BlogModalProvider>
-        <MDXRenderer frontmatter={mdxData.frontmatter}>
+        <MDXRenderer frontmatter={mdxData.frontmatter} postData={postData}>
           <MDXRemote source={mdxData.content} components={mdxComponents} />
         </MDXRenderer>
       </BlogModalProvider>
