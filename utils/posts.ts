@@ -1,7 +1,10 @@
+import "server-only"
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
 import { cache } from "react"
+
+// This file is marked with "server-only" and should never be imported by client components
 
 export interface Post {
   title: string

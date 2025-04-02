@@ -8,6 +8,9 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import { useMDXComponents } from "@/mdx-components"
 import { BlogModalProvider } from "./blog-modal-provider"
 
+// IMPORTANT: This client component does NOT import from utils/posts.ts
+// All data is passed as props from the server component
+
 // Fallback content component when a post is not found
 function PostNotFound({ slug, year }: { slug: string; year: string }) {
   return (
