@@ -50,7 +50,6 @@
     "embla-carousel-react": "8.5.1",
     "escodegen": "latest",
     "framer-motion": "^12.4.10",
-    "fs": "^0.0.1-security",
     "graphql": "latest",
     "graphql-ws": "latest",
     "gray-matter": "^4.0.3",
