@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation"
 import { PostHeader } from "@/components/post-header"
-import { getPostBySlug, getPostContent } from "@/utils/posts"
 import { BlogPostContent } from "./blog-post-content"
 
 export const dynamicParams = true
@@ -15,8 +14,16 @@ export default async function PostPage({
   try {
     const { year, slug } = params
 
-    // Get post data from our posts utility (using feed.json)
-    const postData = await getPostBySlug(slug)
+    // Fetch post data from the API route
+    const response = await fetch(`/api/posts`)
+    if (!response.ok) {
+      console.error("Error fetching posts data")
+      notFound()
+    }
+    const data = await response.json()
+
+    // Find the post by slug
+    const postData = data.posts.find((post: any) => post.slug === slug)
     console.log("🔍 DEBUG: Post data retrieved:", postData ? "Found" : "Not found")
 
     if (!postData) {
@@ -39,16 +46,4 @@ export default async function PostPage({
   } catch (error) {
     console.error("Failed to render post:", error)
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="max-w-3xl mx-auto p-8">
-          <h1 className="text-2xl font-bold mb-4">Error Loading Post</h1>
-          <p className="text-xl text-muted-foreground mb-4">We encountered an error while trying to load this post.</p>
-          <pre className="bg-secondary p-4 rounded-md overflow-auto">
-            {error instanceof Error ? error.message : String(error)}
-          </pre>
-        </div>
-      </div>
-    )
-  }
-}
-
+      <div
