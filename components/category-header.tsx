@@ -1,10 +1,10 @@
 import { formatDate } from "@/utils/date-formatter"
-import Link from "next/link"
-import { ArrowLeft, Info } from "lucide-react"
+import { Info, ArrowLeft } from "lucide-react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
-interface PageHeaderProps {
+interface CategoryHeaderProps {
   title: string
   subtitle?: string
   date: string
@@ -20,9 +20,10 @@ interface PageHeaderProps {
     | "highly likely"
     | "certain"
   importance?: number
+  className?: string
 }
 
-const confidenceExplanation = `The confidence tag expresses how well-supported the page is, or how likely its overall ideas are right. This uses a scale from "impossible" to "certain", based on the Kesselman List of Estimative Words:
+const confidenceExplanation = `The confidence tag expresses how well-supported the essay is, or how likely its overall ideas are right. This uses a scale from "impossible" to "certain", based on the Kesselman List of Estimative Words:
 
 1. "certain"
 2. "highly likely"
@@ -86,7 +87,7 @@ function getImportanceColor(importance: number) {
   return "text-gray-400 dark:text-gray-600"
 }
 
-export function PageHeader({
+export function CategoryHeader({
   title,
   subtitle,
   date,
@@ -94,24 +95,27 @@ export function PageHeader({
   status = "Draft",
   confidence = "possible",
   importance = 5,
-}: PageHeaderProps) {
+  className,
+}: CategoryHeaderProps) {
   return (
-    <header className="mb-4 relative">
-      {/* Back to home link */}
-      <Link
-        href="/"
-        data-no-preview="true"
-        className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 group font-serif italic"
-      >
-        <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-        Return to Home
-      </Link>
+    <header className={cn("mb-8", className)}>
+      {/* Back button to categories */}
+      <div className="mb-4">
+        <Link
+          href="/categories"
+          data-no-preview="true"
+          className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="mr-1 h-4 w-4" />
+          Back to Categories
+        </Link>
+      </div>
 
       {/* Academic bento container */}
       <div className="border border-border bg-card text-card-foreground p-6 rounded-sm shadow-sm">
         {/* Title with academic styling */}
         <h1 className="text-4xl font-serif font-medium tracking-tight mb-2 text-center uppercase">
-          {title.split(" ").join(" ")}
+          {title.split(" ").join("-")}
         </h1>
 
         {/* Subtitle */}
@@ -188,9 +192,6 @@ export function PageHeader({
             </HoverCardContent>
           </HoverCard>
         </div>
-
-        {/* Decorative bottom border */}
-        <div className="mt-4 border-b border-border"></div>
       </div>
 
       {/* Decorative bottom border */}

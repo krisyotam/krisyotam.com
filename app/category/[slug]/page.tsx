@@ -1,6 +1,8 @@
 import Link from "next/link"
-import { getPostsByCategory, getCategories, getPostYear } from "@/utils/posts"
+import { getPostsByCategory, getCategories, getPostYear, getCategoryDataBySlug } from "@/utils/posts"
 import { notFound } from "next/navigation"
+import { CategoryHeader } from "@/components/category-header"
+import { ArrowLeft } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 export const revalidate = 0
@@ -19,12 +21,15 @@ export default async function CategoryPage({
 }) {
   try {
     const posts = await getPostsByCategory(params.slug)
+    const categoryData = await getCategoryDataBySlug(params.slug)
 
     if (posts.length === 0) {
       notFound()
     }
 
+    // If we have category data, use it; otherwise, fallback to derived data
     const categoryName =
+      categoryData?.title ||
       posts[0]?.category ||
       params.slug
         .split("-")
@@ -34,12 +39,35 @@ export default async function CategoryPage({
     return (
       <div className="relative min-h-screen bg-background text-foreground">
         <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-          <header className="mb-16">
-            <h1 className="text-4xl font-semibold mb-3 text-foreground">{categoryName}</h1>
-            <p className="text-muted-foreground">
-              {posts.length} {posts.length === 1 ? "post" : "posts"}
-            </p>
-          </header>
+          {categoryData ? (
+            <CategoryHeader
+              title={categoryData.title}
+              subtitle={categoryData.subtitle}
+              date={categoryData.date}
+              preview={categoryData.preview}
+              status="Finished"
+              confidence={categoryData.confidence || "possible"}
+              importance={categoryData.importance || 5}
+              className="mb-12"
+            />
+          ) : (
+            <header className="mb-16">
+              <div className="mb-4">
+                <Link
+                  href="/categories"
+                  className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <ArrowLeft className="mr-1 h-4 w-4" />
+                  Back to Categories
+                </Link>
+              </div>
+              <h1 className="text-xl font-medium mb-1 text-foreground">{categoryName}</h1>
+              <p className="text-muted-foreground">
+                {posts.length} {posts.length === 1 ? "post" : "posts"}
+              </p>
+            </header>
+          )}
+
           <main>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse">

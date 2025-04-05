@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Command } from "cmdk"
 import { useRouter } from "next/navigation"
-import { Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll, Earth, Clock, Brain, Waypoints, Notebook, HandCoins, Bitcoin, Archive, Music, Origami, Film, Newspaper, StickyNote, SquareLibrary, Feather, PenLine, CircleHelp} from "lucide-react"
+import { Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll, Earth, Clock, Brain, Waypoints, Notebook, HandCoins, Bitcoin, Archive, Music, Origami, Film, Newspaper, StickyNote, SquareLibrary, Feather, PenLine, CircleHelp, PencilRuler} from "lucide-react"
 import { SnowEffect } from "./snow-effect"
 import { useTheme } from "next-themes"
 

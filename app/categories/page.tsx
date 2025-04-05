@@ -1,16 +1,27 @@
 import Link from "next/link"
 import { getCategories } from "@/utils/posts"
+import { PageHeader } from "@/components/page-header"
 
 export const dynamic = "force-dynamic"
 
 export default async function CategoriesPage() {
   try {
     const categories = await getCategories()
+    const currentDate = new Date().toISOString()
 
     if (categories.length === 0) {
       return (
         <div className="relative min-h-screen bg-background text-foreground">
           <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+            <PageHeader
+              title="Categories"
+              subtitle="Content organized by topic"
+              date={currentDate}
+              preview="This directory helps you navigate content by subject area."
+              status="Finished"
+              confidence="certain"
+              importance={8}
+            />
             <p className="text-xl text-muted-foreground">No categories found.</p>
           </div>
         </div>
@@ -20,10 +31,16 @@ export default async function CategoriesPage() {
     return (
       <div className="relative min-h-screen bg-background text-foreground">
         <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-          <header className="mb-16">
-            <h1 className="text-4xl font-semibold mb-3 text-foreground">Categories</h1>
-            <p className="text-muted-foreground">Browse posts by category</p>
-          </header>
+          <PageHeader
+            title="Categories"
+            subtitle="Content organized by topic"
+            date={currentDate}
+            preview="Browse articles and essays by subject area to explore related ideas across the site."
+            status="Finished"
+            confidence="certain"
+            importance={8}
+          />
+
           <main>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse">

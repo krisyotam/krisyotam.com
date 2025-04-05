@@ -155,6 +155,7 @@ export default function AboutPage() {
                           href="https://github.com/krisyotam"
                           target="_blank"
                           rel="noopener noreferrer"
+                          data-no-preview="true"
                           className="hover:text-gray-400 transition-colors"
                         >
                           GitHub
@@ -165,6 +166,7 @@ export default function AboutPage() {
                           href="https://x.com/krisyotam"
                           target="_blank"
                           rel="noopener noreferrer"
+                          data-no-preview="true"
                           className="hover:text-gray-400 transition-colors"
                         >
                           Twitter
@@ -242,6 +244,7 @@ export default function AboutPage() {
                 <Link href="/cv" passHref>
                   <Button
                     variant="outline"
+                    data-no-preview="true"
                     className="text-sm px-4 py-2 transition-colors hover:bg-primary hover:text-primary-foreground"
                   >
                     Curriculum Vitae
@@ -293,7 +296,7 @@ export default function AboutPage() {
                         onClick={() => (window.location.href = item.link)}
                       >
                         <td className="px-4 py-2 text-foreground">
-                          <Link href={item.link} className="hover:text-gray-400 transition-colors">
+                          <Link href={item.link} data-no-preview="true" className="hover:text-gray-400 transition-colors">
                             {item.title}
                           </Link>
                         </td>
@@ -591,7 +594,7 @@ export default function AboutPage() {
 
                       <div className="flex justify-center">
                         <Button asChild>
-                          <a href={selectedCompany?.website} target="_blank" rel="noopener noreferrer">
+                          <a href={selectedCompany?.website} target="_blank" data-no-preview="true" rel="noopener noreferrer">
                             Visit Website
                           </a>
                         </Button>
@@ -624,6 +627,7 @@ export default function AboutPage() {
                         <a
                           href={site.Link}
                           target="_blank"
+                          data-no-preview="true"
                           rel="noopener noreferrer"
                           className="hover:text-gray-400 transition-colors"
                         >
@@ -659,6 +663,7 @@ export default function AboutPage() {
                         <a
                           href={site.link}
                           target="_blank"
+                          data-no-preview="true"
                           rel="noopener noreferrer"
                           className="hover:text-gray-400 transition-colors"
                         >
@@ -766,6 +771,7 @@ export default function AboutPage() {
                       <Link
                         href={blog.url}
                         target="_blank"
+                        data-no-preview="true"
                         rel="noopener noreferrer"
                         className="block hover:text-gray-400 transition-colors"
                       >

@@ -1,6 +1,6 @@
-import { BlogPost } from "../components/blog-post"
-import { getActivePosts, getPostYear } from "../utils/posts"
+import { getActivePosts } from "../utils/posts"
 import quotesData from "../data/header-quotes.json"
+import { HomeClient } from "../components/home-client"
 
 function getRandomQuote() {
   const quotes = quotesData.quotes
@@ -29,55 +29,8 @@ export default async function Home() {
 
     const randomQuote = getRandomQuote()
 
-    return (
-      <div className="relative min-h-screen bg-background text-foreground">
-        <div className="p-8 md:p-16 lg:p-24">
-          <div className="max-w-4xl mx-auto">
-            <header className="mb-16 pl-8">
-              <h1 className="text-4xl font-semibold mb-3 text-gray-900 dark:text-gray-100">Kris Yotam</h1>
-              <p className="text-sm font-light italic text-gray-600 dark:text-gray-400">
-                "{randomQuote.text}" - {randomQuote.author}
-              </p>
-            </header>
-
-            <main>
-              <div className="space-y-12">
-                {posts.map((post) => {
-                  // Ensure post data is available before rendering each BlogPost
-                  if (!post.slug || !post.date || !post.preview) {
-                    console.error("Missing post data:", post)
-                    return null // Skip rendering this post if any required field is missing
-                  }
-
-                  // Get the year from the post date for the URL
-                  const year = getPostYear(post.date)
-
-                  // Create the correct slug path - IMPORTANT: This is where we define the link path
-                  const slugPath = `blog/${year}/${post.slug}`
-
-
-                  return (
-                    <BlogPost
-                      key={post.slug}
-                      slug={slugPath}
-                      type="tsx"
-                      title={post.title}
-                      subtitle={post.subtitle}
-                      date={new Date(post.date).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                      excerpt={post.preview}
-                    />
-                  )
-                })}
-              </div>
-            </main>
-          </div>
-        </div>
-      </div>
-    )
+    // Use the HomeClient component which includes the toggle button
+    return <HomeClient posts={posts} randomQuote={randomQuote} />
   } catch (error) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -86,3 +39,4 @@ export default async function Home() {
     )
   }
 }
+

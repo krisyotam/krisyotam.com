@@ -104,6 +104,7 @@ export function PostHeader({
       {/* Back to home link */}
       <Link
         href="/"
+        data-no-preview="true"
         className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 group font-serif italic"
       >
         <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />

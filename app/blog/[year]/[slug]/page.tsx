@@ -9,7 +9,7 @@ export default async function PostPage({
 }: {
   params: { year: string; slug: string };
 }) {
-  console.log("🔍 DEBUG: [year]/[slug]/page.tsx is rendering with params:", params);
+  console.log("🔍 DEBUG: [year]/[slug]/page.mdx is rendering with params:", params);
 
   try {
     const { year, slug } = params;

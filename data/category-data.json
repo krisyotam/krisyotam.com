@@ -1,0 +1,65 @@
+{
+  "categories": [
+    {
+      "slug": "design",
+      "title": "Design",
+      "subtitle": "Exploring visual and user experience principles",
+      "preview": "Articles about design principles, visual aesthetics, and creating meaningful user experiences.",
+      "date": "2025-01-01",
+      "status": "active",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "technology",
+      "title": "Technology",
+      "subtitle": "Exploring the digital frontier",
+      "preview": "Deep dives into programming languages, frameworks, and the evolving landscape of technology.",
+      "date": "2025-01-02",
+      "status": "active",
+      "confidence": "highly likely",
+      "importance": 8
+    },
+    {
+      "slug": "on-building-a-personal-library",
+      "title": "On Building a Personal Library",
+      "subtitle": "Curating knowledge through books",
+      "preview": "Thoughts on collecting, organizing, and engaging with books as a means of personal growth and intellectual development.",
+      "date": "2025-01-03",
+      "status": "active",
+      "confidence": "likely",
+      "importance": 6
+    },
+    {
+      "slug": "philosophy",
+      "title": "Philosophy",
+      "subtitle": "Exploring fundamental questions",
+      "preview": "Examinations of philosophical concepts, ethical frameworks, and the pursuit of wisdom in everyday life.",
+      "date": "2025-01-04",
+      "status": "active",
+      "confidence": "possible",
+      "importance": 9
+    },
+    {
+      "slug": "art",
+      "title": "Art",
+      "subtitle": "Visual expressions and interpretations",
+      "preview": "Analysis and appreciation of artistic works, movements, and the cultural significance of visual expression.",
+      "date": "2025-01-05",
+      "status": "active",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "examples",
+      "title": "Examples",
+      "subtitle": "Demonstration and reference materials",
+      "preview": "Sample posts and demonstrations of various content formats and features available on this site.",
+      "date": "2025-01-06",
+      "status": "hidden",
+      "confidence": "certain",
+      "importance": 4
+    }
+  ]
+}
+

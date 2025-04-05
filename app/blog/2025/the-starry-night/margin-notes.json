@@ -1,0 +1,36 @@
+[
+    {
+      "id": "note-1",
+      "title": "About Typography",
+      "content": "Typography is the art and technique of arranging type to make written language legible, readable, and appealing when displayed.",
+      "index": 1,
+      "source": "The Elements of Typographic Style"
+    },
+    {
+      "id": "note-2",
+      "title": "Artificial Intelligence Overview",
+      "content": "Artificial Intelligence represents a fundamental shift in how computers process and interact with information. Modern AI systems, particularly those based on deep learning and neural networks, can recognize patterns, understand natural language, and even generate human-like responses. This technological advancement has implications across numerous fields, from healthcare and scientific research to everyday applications like virtual assistants and recommendation systems.",
+      "index": 2,
+      "source": "The Cambridge Handbook of Artificial Intelligence"
+    },
+    {
+      "id": "note-3",
+      "title": "JSON Structure",
+      "content": "JSON (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.",
+      "index": 3
+    },
+    {
+      "id": "note-4",
+      "title": "React Components",
+      "content": "React components are reusable pieces of code that return React elements describing what should appear on the screen.",
+      "index": 4
+    },
+    {
+      "id": "note-5",
+      "title": "Footnotes",
+      "content": "Footnotes provide additional information or citations at the bottom of a page or document.",
+      "index": 5
+    }
+  ]
+  
+  
