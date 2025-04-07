@@ -1,0 +1,30 @@
+import AnimeDisplay from "@/components/posts/content/anime-display";
+import animeData from "./anime.json";
+
+# Background
+
+For those unaware, this article is on the subject of a battle between Satoru Gojo & Ryomen Sukuna. This battle takes place
+in Shinjuku, Tokyo, on December 24th, which is the in-universe anniversary of the death of [Suguru Geto](https://jujutsu-kaisen.fandom.com/wiki/Suguru_Geto).
+
+Gojo was sealed in the Prison Realm on October 31 during the Shibuya Incident and was unsealed approximately 19 days later, around November 19. After being released,
+Gojo went to confront Kenjaku. Upon confronting Kenjaku, Gojo fully intended to kill him.
+
+{/* Anime Grid - full-width breakout */}
+<div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] my-12 py-12" data-no-preview="true">
+  <div className="post-component px-4 md:px-8 max-w-6xl mx-auto">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {animeData.map((anime, index) => (
+        <AnimeDisplay 
+          key={index}
+          coverImage={anime.coverImage}
+          title={anime.title}
+          studio={anime.studio}
+          director={anime.director}
+          year={anime.year}
+          episodes={anime.episodes}
+          genre={anime.genre}
+        />
+      ))}
+    </div>
+  </div>
+</div>

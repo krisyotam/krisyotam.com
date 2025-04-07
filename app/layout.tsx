@@ -3,11 +3,19 @@ import { CommandMenu } from "../components/command-menu"
 import type { Metadata } from "next"
 import { ThemeProvider } from "../components/theme-provider"
 import { UniversalLinkModal } from "../components/universal-link-modal"
-import type React from "react" // Added import for React
+import type React from "react"
 
 export const metadata: Metadata = {
   title: "Kris Yotam",
   description: "Ideas, works, and reflections of a contemporary polymath",
+}
+
+// Toggle this to true or false to control execution
+const SHOW_UNIVERSAL_LINK_MODAL = false
+
+function UniversalLinkModalWrapper() {
+  if (!SHOW_UNIVERSAL_LINK_MODAL) return null
+  return <UniversalLinkModal />
 }
 
 export default function RootLayout({
@@ -26,11 +34,10 @@ export default function RootLayout({
           <div className="min-h-screen flex flex-col">
             <main className="flex-grow">{children}</main>
             <CommandMenu />
-            <UniversalLinkModal />
+            <UniversalLinkModalWrapper />
           </div>
         </ThemeProvider>
       </body>
     </html>
   )
 }
-

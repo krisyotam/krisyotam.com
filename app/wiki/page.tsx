@@ -6,7 +6,6 @@ import wikiPagesData from "@/data/wiki-pages.json"
 import { remark } from "remark"
 import html from "remark-html"
 import { PageHeader } from "@/components/page-header"
-import { WikiLinkHandler } from "@/components/wiki-link-handler"
 import "./wiki.css"
 
 export const metadata = {
@@ -29,7 +28,6 @@ async function WikiContent() {
         className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary prose-pre:bg-muted prose-pre:rounded-lg prose-img:rounded-lg font-serif wiki-content"
         dangerouslySetInnerHTML={{ __html: contentHtml }}
       />
-      <WikiLinkHandler />
     </>
   )
 }

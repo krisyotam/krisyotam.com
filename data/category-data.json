@@ -6,7 +6,8 @@
       "subtitle": "Exploring visual and user experience principles",
       "preview": "Articles about design principles, visual aesthetics, and creating meaningful user experiences.",
       "date": "2025-01-01",
-      "status": "active",
+      "show-status": "active",
+      "status": "In Progress",
       "confidence": "certain",
       "importance": 7
     },
@@ -16,7 +17,8 @@
       "subtitle": "Exploring the digital frontier",
       "preview": "Deep dives into programming languages, frameworks, and the evolving landscape of technology.",
       "date": "2025-01-02",
-      "status": "active",
+      "show-status": "active",
+      "status": "In Progress",
       "confidence": "highly likely",
       "importance": 8
     },
@@ -26,7 +28,8 @@
       "subtitle": "Curating knowledge through books",
       "preview": "Thoughts on collecting, organizing, and engaging with books as a means of personal growth and intellectual development.",
       "date": "2025-01-03",
-      "status": "active",
+      "show-status": "active",
+      "status": "In Progress",
       "confidence": "likely",
       "importance": 6
     },
@@ -36,7 +39,8 @@
       "subtitle": "Exploring fundamental questions",
       "preview": "Examinations of philosophical concepts, ethical frameworks, and the pursuit of wisdom in everyday life.",
       "date": "2025-01-04",
-      "status": "active",
+      "show-status": "active",
+      "status": "In Progress",
       "confidence": "possible",
       "importance": 9
     },
@@ -46,7 +50,8 @@
       "subtitle": "Visual expressions and interpretations",
       "preview": "Analysis and appreciation of artistic works, movements, and the cultural significance of visual expression.",
       "date": "2025-01-05",
-      "status": "active",
+      "show-status": "active",
+      "status": "In Progress",
       "confidence": "certain",
       "importance": 7
     },
@@ -56,10 +61,68 @@
       "subtitle": "Demonstration and reference materials",
       "preview": "Sample posts and demonstrations of various content formats and features available on this site.",
       "date": "2025-01-06",
-      "status": "hidden",
+      "show-status": "hidden",
+      "status": "In Progress",
       "confidence": "certain",
       "importance": 4
+    },
+    {
+      "slug": "poetic-analysis",
+      "title": "Poetic Analysis",
+      "subtitle": "Demonstration and reference materials",
+      "preview": "Sample posts and demonstrations of various content formats and features available on this site.",
+      "date": "2025-01-06",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 4
+    },
+    {
+      "slug": "character-analysis",
+      "title": "Character Analysis",
+      "subtitle": "Demonstration and reference materials",
+      "preview": "Sample posts and demonstrations of various content formats and features available on this site.",
+      "date": "2025-01-06",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 4
+    },
+    {
+      "slug": "anime-analysis",
+      "title": "Anime Analysis",
+      "subtitle": "Critical Analysis Essays of Anime",
+      "preview": "A compilation of anime reviews.",
+      "date": "2025-01-06",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 3
+    },
+    {
+      "slug": "powerscaling",
+      "title": "Powerscaling",
+      "subtitle": "",
+      "preview": "Powerscaling of anime, manga, comics, & film.",
+      "date": "2025-01-06",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 3
+    },
+    {
+      "slug": "anime-recommendations",
+      "title": "Anime Recommendations",
+      "subtitle": "",
+      "preview": "various lists of anime recs from all types of genres.",
+      "date": "2025-01-06",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 3
     }
   ]
 }
+
+
 

@@ -18,7 +18,7 @@ export default async function CategoriesPage() {
               subtitle="Content organized by topic"
               date={currentDate}
               preview="This directory helps you navigate content by subject area."
-              status="Finished"
+              status="In Progress"
               confidence="certain"
               importance={8}
             />

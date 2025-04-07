@@ -12,7 +12,7 @@ import rehypeSanitize from "rehype-sanitize"
 
 // Bio content in markdown format
 const bioContent = `
-This is the website of **Kris Yotam**. I am a autodidact, philomath, and polymath. I write about mathematics, philosophy, psychology, physics, and a 
+This is the website of **Kris Yotam**. I am an autodidact, philomath, and polymath. I write about mathematics, philosophy, psychology, physics, and a 
 multitude of other things you can view in my interests [here](/about).
 
 **Navigation**: This site is fairly simple, in the bottom left there is a button which allows you toggle between home page & home feed. Home Feed lists direct access to the most recent posts
@@ -61,7 +61,13 @@ function MarkdownContent({ content }: { content: string }) {
         rehypePlugins={[rehypeRaw, rehypeSanitize]}
         components={{
           a: ({ href, children }) => (
-            <a href={href} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-no-preview="true"
+              className="text-primary hover:underline"
+            >
               {children}
             </a>
           ),
@@ -89,6 +95,30 @@ export function HomeClient({ posts, randomQuote }: HomeClientProps) {
     return new Date(dateString).getFullYear().toString()
   }
 
+  const formatQuoteWithLineBreaks = (text: string, maxCharsPerLine = 100): string => {
+    const words = text.split(" ")
+    const lines: string[] = []
+    let currentLine = ""
+
+    words.forEach((word) => {
+      // If adding this word would exceed the max length, start a new line
+      if (currentLine.length + word.length + 1 > maxCharsPerLine && currentLine.length > 0) {
+        lines.push(currentLine)
+        currentLine = word
+      } else {
+        // Add word to current line (with a space if not the first word on the line)
+        currentLine = currentLine.length === 0 ? word : `${currentLine} ${word}`
+      }
+    })
+
+    // Add the last line if it's not empty
+    if (currentLine.length > 0) {
+      lines.push(currentLine)
+    }
+
+    return lines.join("\n")
+  }
+
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       {viewMode === "list" ? (
@@ -97,8 +127,8 @@ export function HomeClient({ posts, randomQuote }: HomeClientProps) {
           <div className="max-w-4xl mx-auto">
             <header className="mb-16 pl-8">
               <h1 className="text-4xl font-semibold mb-3 text-gray-900 dark:text-gray-100">Kris Yotam</h1>
-              <p className="text-sm font-light italic text-gray-600 dark:text-gray-400">
-                "{randomQuote.text}" - {randomQuote.author}
+              <p className="text-sm font-light italic text-gray-600 dark:text-gray-400 whitespace-pre-line">
+                {formatQuoteWithLineBreaks(`"${randomQuote.text}" - ${randomQuote.author}`, 100)}
               </p>
             </header>
             <main>

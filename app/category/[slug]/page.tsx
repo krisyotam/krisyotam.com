@@ -45,7 +45,7 @@ export default async function CategoryPage({
               subtitle={categoryData.subtitle}
               date={categoryData.date}
               preview={categoryData.preview}
-              status="Finished"
+              status={categoryData.status || "In Progress"}
               confidence={categoryData.confidence || "possible"}
               importance={categoryData.importance || 5}
               className="mb-12"

@@ -542,6 +542,21 @@
 
 
 
+/* Hide scrollbars but allow scrolling */
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Hide scrollbar in WebKit-based browsers */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ensure body remains scrollable */
+body {
+  overflow: auto;
+}
 
 
 

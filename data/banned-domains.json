@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Literal",
+    "domain": "literal.club"
+  },
+  {
+    "name": "Amazon",
+    "domain": "amazon.com"
+  },
+  {
+    "name": "Amazon",
+    "domain": "localhost:3000"
+  }
+]
+

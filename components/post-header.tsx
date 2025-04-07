@@ -104,7 +104,6 @@ export function PostHeader({
       {/* Back to home link */}
       <Link
         href="/"
-        data-no-preview="true"
         className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 group font-serif italic"
       >
         <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
@@ -113,9 +112,14 @@ export function PostHeader({
 
       {/* Academic bento container */}
       <div className="border border-border bg-card text-card-foreground p-6 rounded-sm shadow-sm">
-        {/* Title with academic styling */}
-        <h1 className="text-4xl font-serif font-medium tracking-tight mb-2 text-center uppercase">
-          {title.split(" ").join("-")}
+        {/* Responsive title that gets smaller based on length */}
+        <h1
+          className={cn(
+            "font-serif font-medium tracking-tight mb-2 text-center uppercase",
+            title.length > 50 ? "text-2xl" : title.length > 30 ? "text-3xl" : "text-4xl",
+          )}
+        >
+          {title}
         </h1>
 
         {/* Subtitle */}

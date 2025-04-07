@@ -27,7 +27,8 @@ export interface CategoryData {
   subtitle?: string
   preview?: string
   date: string
-  status: "active" | "hidden"
+  "show-status": "active" | "hidden"
+  status: string
   confidence?: string
   importance?: number
 }
@@ -94,26 +95,45 @@ export async function getCategoryDataBySlug(slug: string): Promise<CategoryData 
 }
 
 // Get all unique categories (only active ones)
-export async function getCategories(): Promise<{ slug: string; name: string }[]> {
+export async function getCategories(): Promise<{ slug: string; name: string; count: number }[]> {
   try {
-    const allPosts = await getAllPosts()
+    const allPosts = await getActivePosts() // Only count active posts
     const categoryData = await getAllCategoryData()
 
     // Get active category slugs
     const activeCategorySlugs = categoryData
-      .filter((category) => category.status === "active")
+      .filter((category) => category["show-status"] === "active")
       .map((category) => category.slug)
 
-    // Extract unique categories from posts
-    const uniqueCategories = Array.from(new Set(allPosts.map((post) => post.category)))
+    // Create a map to count posts per category
+    const categoryCounts = new Map<string, number>()
 
-    // Map to { slug, name } format and filter out hidden categories
-    return uniqueCategories
-      .map((category) => ({
-        slug: category.toLowerCase().replace(/\s+/g, "-"), // e.g., "Tech News" -> "tech-news"
-        name: category, // Original category name
-      }))
-      .filter((category) => activeCategorySlugs.includes(category.slug))
+    // Count posts for each category
+    allPosts.forEach((post) => {
+      if (post.category) {
+        const slug = post.category.toLowerCase().replace(/\s+/g, "-")
+        categoryCounts.set(slug, (categoryCounts.get(slug) || 0) + 1)
+      }
+    })
+
+    // Map to { slug, name, count } format and filter out hidden categories
+    return activeCategorySlugs
+      .map((slug) => {
+        // Find the category data for this slug
+        const category = categoryData.find((c) => c.slug === slug)
+
+        return {
+          slug,
+          name:
+            category?.title ||
+            slug
+              .split("-")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" "),
+          count: categoryCounts.get(slug) || 0,
+        }
+      })
+      .filter((category) => category.count > 0) // Only include categories with posts
   } catch (error) {
     console.error("Error loading categories:", error)
     return []
@@ -123,15 +143,31 @@ export async function getCategories(): Promise<{ slug: string; name: string }[]>
 // Get posts by category
 export async function getPostsByCategory(categorySlug: string): Promise<Post[]> {
   try {
-    const allPosts = await getAllPosts()
+    const allPosts = await getActivePosts() // Only include active posts
+
     // Filter posts by matching category slug
     return allPosts.filter((post) => {
+      if (!post.category) return false
+
       const postCategorySlug = post.category.toLowerCase().replace(/\s+/g, "-")
       return postCategorySlug === categorySlug
     })
   } catch (error) {
     console.error("Error loading posts by category:", error)
     return []
+  }
+}
+
+// Check if a post is MDX
+export function isPostMDX(year: string, slug: string): boolean {
+  try {
+    const mdxPath = path.join(process.cwd(), "app", "blog", year, slug, "page.mdx")
+    return fs
+      .stat(mdxPath)
+      .then(() => true)
+      .catch(() => false)
+  } catch {
+    return false
   }
 }
 

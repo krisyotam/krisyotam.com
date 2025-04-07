@@ -1,0 +1,253 @@
+import AnimeDisplay from "@/components/posts/content/anime-display"
+import MangaDisplay from "@/components/posts/content/manga-display"
+import MovieDisplay from "@/components/posts/content/movie-display"
+import HauteCouture from "@/components/posts/fashion/haute-couture"
+import HauteCoutureCollection from "@/components/posts/fashion/haute-couture-collection"
+import MangaPanelDisplay from "@/components/posts/content/manga-panel-display"
+import MangaPanelDisplayCollection from "@/components/posts/content/manga-panel-display-collection"
+import { BookCard } from "@/components/posts/books/book-card"
+import booksData from "@/data/posts/poems.json"
+import Chateau from "@/components/posts/architecture/chateau"
+import ChateauCollection from "@/components/posts/architecture/chateau-collection"
+import Human from "@/components/posts/basic/human"
+import Company from "@/components/posts/basic/company"
+
+# Comparative Analysis: Anime, Manga, Film, and Fashion
+
+<iframe src="https://embed.tidal.com/playlists/e38706f1-b2bc-43c7-92db-0ce27c44b199" width="600" height="600" allow="encrypted-media" sandbox="allow-same-origin allow-scripts allow-forms allow-popups" title="TIDAL Embed Player" />
+
+<div className="flex flex-wrap justify-center gap-8 my-8">
+
+<AnimeDisplay 
+    coverImage="https://i.postimg.cc/pV3pxkz2/sousou-no-frieren.jpg"
+    title="Frieren: Beyond Journey’s End"
+    studio="Madhouse"
+    director="Kazuya Iwata"
+    year={2023}
+    episodes={24}
+    genre="Fantasy/Adventure"
+  />
+  
+<MangaDisplay 
+    coverImage="https://i.postimg.cc/7P5fpjCs/classroom-of-the-elite.jpg"
+    title="Classroom of the Elite"
+    author="Shougo Kinugasa"
+    publisher="Media Factory"
+    yearStarted={2015}
+    volumes={12} 
+    genre="Psychological/Thriller"
+  />
+
+  
+<MovieDisplay 
+    coverImage="https://i.postimg.cc/vDRRj41s/girl-interrupted.png"
+    title="Girl, Interrupted"
+    director="James Mangold"
+    year={1999}
+    genre="Drama"
+    runtime={127}
+  />
+</div>
+
+## Introduction
+
+Storytelling takes many forms across different media. In this analysis, I'll explore how narrative techniques, visual language, and thematic elements differ between anime, manga, and live-action film. Each medium offers unique strengths and limitations that shape how stories are told and experienced.
+
+## Narrative Structure
+
+Anime series like "Spirited Away" often employ dreamlike pacing and visual metaphors that would be difficult to achieve in live-action. The animated format allows for seamless transitions between reality and fantasy, making it ideal for stories that blur these boundaries.
+
+Manga such as "Berserk" utilizes the unique aspects of the comic medium - panel layouts, page turns, and reader-controlled pacing - to create tension and immersion. The black and white art style of most manga focuses attention on line work and composition rather than color.
+
+Films like "Parasite" rely on cinematography, editing, and performance to convey meaning. The camera becomes the storyteller's primary tool, with framing and movement creating subtext that complements the dialogue.
+
+## Visual Language
+
+Each medium has developed its own visual shorthand:
+
+- Anime often uses exaggerated expressions and symbolic imagery to convey emotion
+- Manga employs speed lines, symbolic backgrounds, and stylized text to represent action and feeling
+- Film depends on lighting, color grading, and composition to establish mood and guide viewer attention
+
+## Cultural Context
+
+These works also reflect their cultural origins. Japanese anime and manga often incorporate Shinto and Buddhist concepts, while Korean cinema like "Parasite" frequently addresses class divisions and social hierarchies. Understanding these contexts enriches our appreciation of these stories.
+
+## Fashion as Narrative
+
+<div className="flex flex-wrap justify-center gap-8 my-8">
+  <HauteCouture 
+    image="/placeholder.svg?height=360&width=240"
+    collectionName="Autumn Whispers"
+    designer="Miuccia Prada"
+    fashionHouse="Prada"
+    year={2023}
+    season="Fall/Winter"
+    theme="Urban Minimalism"
+  />
+  
+  <HauteCoutureCollection 
+    images={[
+      "/placeholder.svg?height=360&width=240",
+      "/placeholder.svg?height=360&width=240",
+      "/placeholder.svg?height=360&width=240"
+    ]}
+    collectionName="Ethereal Dreams"
+    designer="Maria Grazia Chiuri"
+    fashionHouse="Dior"
+    year={2024}
+    season="Spring/Summer"
+    theme="Mythological Femininity"
+  />
+</div>
+
+Fashion, like other art forms, tells stories through its visual language. Haute couture collections present narratives through fabric, silhouette, and presentation. Designers like Miuccia Prada create cohesive stories that reflect cultural moments and artistic movements.
+
+The runway presentation itself becomes a form of theater, with models, music, and set design all contributing to the overall experience. Collections like Dior's "Ethereal Dreams" create immersive worlds that transport viewers into the designer's vision.
+
+## Conclusion
+
+While the fundamental elements of storytelling remain consistent across media, each format offers unique tools for creators. By studying these differences, we gain a deeper appreciation for the craft of narrative in all its forms.
+
+
+
+## Manga Panels as Narrative Elements
+
+Manga panels serve as the fundamental building blocks of visual storytelling in Japanese comics. The composition, framing, and sequence of these panels create rhythm and pacing that guide the reader's experience.
+
+    <div className="flex flex-wrap justify-center gap-8 my-8 w-full max-w-7xl">
+    <MangaPanelDisplay 
+        image="https://i.postimg.cc/9Q40DQqH/08cb00b8dc47880d0be02a793c77baff.jpg"
+        mangaTitle="Vagabond"
+        pageName="Duel at Dawn"
+        layout="vertical"
+        artist="Takehiko Inoue"
+        chapter="Chapter 42"
+        className="mx-auto"
+    />
+
+  
+  <MangaPanelDisplayCollection 
+    panels={[
+      { image: "https://i.postimg.cc/9Q40DQqH/08cb00b8dc47880d0be02a793c77baff.jpg", pageName: "The Encounter" },
+      { image: "https://i.postimg.cc/9Q40DQqH/08cb00b8dc47880d0be02a793c77baff.jpg", pageName: "The Challenge" },
+      { image: "https://i.postimg.cc/9Q40DQqH/08cb00b8dc47880d0be02a793c77baff.jpg", pageName: "The Resolution" }
+    ]}
+    mangaTitle="Blade of the Immortal"
+    layout="vertical"
+    artist="Hiroaki Samura"
+    chapter="Chapter 23"
+    className="mx-auto"
+  />
+</div>
+
+<div className="flex flex-wrap justify-center gap-8 my-8 w-full">
+  <MangaPanelDisplay 
+    image="https://i.postimg.cc/YCJ9YB1G/3ec1e-16908923074171-1920.webp"
+    mangaTitle="Akira"
+    pageName="Neo-Tokyo Explosion"
+    layout="horizontal"
+    artist="Katsuhiro Otomo"
+    chapter="Chapter 17"
+    className="mx-auto"
+  />
+  
+  <MangaPanelDisplayCollection 
+    panels={[
+      { image: "https://i.postimg.cc/YCJ9YB1G/3ec1e-16908923074171-1920.webp", pageName: "1" },
+      { image: "https://i.postimg.cc/YCJ9YB1G/3ec1e-16908923074171-1920.webp", pageName: "The Transformation" },
+      { image: "https://i.postimg.cc/YCJ9YB1G/3ec1e-16908923074171-1920.webp", pageName: "The Aftermath" }
+    ]}
+    mangaTitle="Jujutsu Kaisen"
+    layout="horizontal"
+    artist="Gege Akutami"
+    chapter="Chapter 31, Inhuman Makyo Shinjuku Showdown, Part 1"
+    className="mx-auto"
+  />
+</div>
+
+Unlike Western comics, manga is traditionally read from right to left, creating a unique flow that influences how artists compose their panels. Vertical panels often emphasize character emotions or dramatic moments, while horizontal panels are used to establish settings or convey action sequences.
+
+The negative space between panels, known as "gutters," plays a crucial role in manga storytelling. These spaces invite readers to mentally connect the images, becoming active participants in constructing the narrative.
+
+## Conclusion
+
+While the fundamental elements of storytelling remain consistent across media, each format offers unique tools for creators. By studying these differences, we gain a deeper appreciation for the craft of narrative in all its forms.
+
+
+
+    {/* Component section - completely breaks out of the page layout */}
+    <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] my-12 py-12" data-no-preview="true">
+    <div className="post-component px-4 md:px-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {booksData.books.map((book) => (
+            <div className="individual-book-card-wrapper" key={book.isbn}>
+            <BookCard isbn={book.isbn} />
+            </div>
+        ))}
+        </div>
+    </div>
+    </div>
+
+# Architecture Components for Architectural Reviews
+
+<div className="flex flex-wrap justify-center gap-8 my-8 w-full">
+  <Chateau 
+    image="https://i.postimg.cc/vHBcYSHj/Ch-teau-de-Ferri-res.jpg"
+    estateName="Château de Versailles"
+    view="Hall of Mirrors"
+    location="Versailles, France"
+    datePeriod="1631-1715"
+    architect="Louis Le Vau, Jules Hardouin-Mansart"
+    patron="Louis XIV"
+    style="French Baroque"
+    className="mx-auto"
+  />
+  
+  <ChateauCollection 
+    images={[
+      { image: "/placeholder.svg?height=360&width=640", view: "Gardens" },
+      { image: "/placeholder.svg?height=360&width=640", view: "Grand Trianon" },
+      { image: "/placeholder.svg?height=360&width=640", view: "Royal Chapel" }
+    ]}
+    estateName="Château de Chambord"
+    location="Loire Valley, France"
+    datePeriod="1519-1547"
+    architect="Domenico da Cortona"
+    patron="Francis I"
+    style="French Renaissance"
+    className="mx-auto"
+  />
+</div>
+
+# Components for a person & company
+
+<div className="flex flex-wrap justify-center gap-8 my-8 w-full">
+  <Human 
+    image="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Marie_Curie_c._1920s.jpg/250px-Marie_Curie_c._1920s.jpg"
+    fullName="Marie Curie"
+    birthDate="November 7, 1867"
+    deathDate="July 4, 1934"
+    profession="Physicist and Chemist"
+    nationality="Polish-French"
+    achievements={[
+      "First woman to win a Nobel Prize",
+      "Only person to win Nobel Prizes in multiple scientific fields",
+      "Discovery of the elements polonium and radium",
+      "Development of theory of radioactivity"
+    ]}
+    className="mx-auto"
+  />
+  
+  <Company 
+    logo="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/CERN_logo.svg/1200px-CERN_logo.svg.png"
+    name="CERN"
+    foundedYear={1954}
+    headquarters="Geneva, Switzerland"
+    industry="Scientific Research"
+    ceo="Fabiola Gianotti"
+    tagline="Accelerating science"
+    employees={2500}
+    className="mx-auto"
+  />
+</div>

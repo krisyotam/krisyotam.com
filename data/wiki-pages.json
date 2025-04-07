@@ -1,29 +1,29 @@
 {
   "pages": [
     {
-      "title": "Learning Resources",
-      "description": "A curated collection of resources to help you learn programming, design, and other creative skills.",
+      "title": "On Learning",
+      "description": "My flexible science backed meta-learning process making use of deliberate practice, spaced repition, & dopamine priming.",
       "status": "active",
       "slug": "learn",
-      "tags": ["education", "resources", "programming"]
+      "tags": ["education", "learn", "meta-learning"]
     },
     {
-      "title": "Writing Guide",
-      "description": "Tips, techniques, and methodologies for improving your writing skills and creative process.",
+      "title": "On Writing",
+      "description": "Tips, techniques, and methodologies I use for my creative process.",
       "status": "active",
       "slug": "write",
       "tags": ["writing", "creativity", "guides"]
     },
     {
-      "title": "Method Framework",
-      "description": "A systematic approach to problem-solving and creative thinking developed over years of practice.",
+      "title": "On Method",
+      "description": "A look into my Linux setup, scripts, and automation to streamline research.",
       "status": "active",
       "slug": "method",
       "tags": ["methodology", "framework", "thinking"]
     },
     {
-      "title": "Website Development",
-      "description": "Insights into web development practices, technologies, and design principles.",
+      "title": "On Website",
+      "description": "A look into the function, philosophy, and purposes of this website.",
       "status": "active",
       "slug": "website",
       "tags": ["development", "web", "design"]
@@ -36,42 +36,35 @@
       "tags": ["history", "collection", "preservation"]
     },
     {
-      "title": "Anime Collection",
-      "description": "My personal anime collection, reviews, and recommendations.",
+      "title": "Anime Profile",
+      "description": "A display of my animanga activity, and favorite chars, studios, vas, mangaka, ect.",
       "status": "active",
       "slug": "anime",
       "tags": ["anime", "entertainment", "reviews"]
     },
     {
-      "title": "Music Playlists",
-      "description": "Curated music playlists for different moods, activities, and genres.",
+      "title": "Playlists",
+      "description": "A panoply of curated playlists for music related articles.",
       "status": "active",
       "slug": "playlists",
       "tags": ["music", "playlists", "entertainment"]
     },
     {
       "title": "Progymnasmata",
-      "description": "Classical writing exercises and rhetorical training methods.",
+      "description": "A ongoing archive of my progym excercises.",
       "status": "active",
       "slug": "progymnasmata",
       "tags": ["rhetoric", "writing", "classical"]
     },
     {
-      "title": "Guestbook",
-      "description": "Leave a message, comment, or drawing in the digital guestbook.",
-      "status": "active",
-      "slug": "guest",
-      "tags": ["community", "interaction", "social"]
-    },
-    {
-      "title": "Quick Notes",
+      "title": "Notes",
       "description": "Brief thoughts, ideas, and observations on various topics.",
       "status": "active",
       "slug": "notes",
       "tags": ["notes", "thoughts", "ideas"]
     },
     {
-      "title": "Now Page",
+      "title": "Now",
       "description": "What I'm currently focused on, working on, and thinking about.",
       "status": "active",
       "slug": "now",
@@ -106,17 +99,17 @@
       "tags": ["books", "writing", "published"]
     },
     {
-      "title": "Inspirational Quotes",
-      "description": "A collection of quotes that inspire, motivate, and provoke thought.",
+      "title": "Quotes",
+      "description": "A collection of quotes pulled from my various works.",
       "status": "active",
       "slug": "quotes",
       "tags": ["quotes", "inspiration", "wisdom"]
     },
     {
-      "title": "Speaking Engagements",
-      "description": "Information about my keynotes, speeches, and public appearances.",
+      "title": "Library",
+      "description": "Comprehensive documentation of my library organized by Library of Congress Classification.",
       "status": "active",
-      "slug": "keynotes",
+      "slug": "library",
       "tags": ["speaking", "events", "public"]
     },
     {
@@ -127,47 +120,67 @@
       "tags": ["technical", "website", "development"]
     },
     {
-      "title": "Future Projects",
-      "description": "Upcoming projects, ideas in development, and future plans.",
+      "title": "Changelog",
+      "description": "A upkept detailed log of changes made to the site by date",
       "status": "hidden",
-      "slug": "future",
-      "tags": ["upcoming", "projects", "plans"]
+      "slug": "changelog",
+      "tags": ["updates", "development", "plans"]
     },
     {
-      "title": "Research Notes",
-      "description": "Notes and findings from various research projects and explorations.",
+      "title": "Research",
+      "description": "Extensive Research Repositories available by invite (sometimes request), after completed.",
       "status": "hidden",
       "slug": "research",
       "tags": ["research", "notes", "findings"]
     },
     {
-      "title": "Digital Garden",
-      "description": "A collection of interconnected notes, thoughts, and ideas that grow over time.",
+      "title": "Theories",
+      "description": "A list of conspiracy theories that vary in magnitude, and comprehensive analysis performed on them.",
       "status": "active",
-      "slug": "garden",
-      "tags": ["notes", "knowledge", "growth"]
+      "slug": "theories",
+      "tags": ["conspiracy", "knowledge", "esoteric"]
     },
     {
-      "title": "Photography",
-      "description": "A gallery of my photography work and visual explorations.",
+      "title": "Film",
+      "description": "A on-going tracking of my currently watching, and documented list of my favorite, character, actors, movies, directors, and film studios.",
       "status": "active",
-      "slug": "photos",
-      "tags": ["photography", "visual", "art"]
+      "slug": "film",
+      "tags": ["film", "movies", "tv"]
     },
     {
-      "title": "Travel Journal",
-      "description": "Notes, stories, and reflections from my travels around the world.",
+      "title": "Companies",
+      "description": "A list of my companies with tracked stripe performance.",
       "status": "active",
-      "slug": "travel",
+      "slug": "companies",
       "tags": ["travel", "journal", "experiences"]
     },
     {
-      "title": "Coding Experiments",
-      "description": "A showcase of coding experiments, prototypes, and technical explorations.",
+      "title": "Auction",
+      "description": "My tracked auction stats.",
       "status": "active",
-      "slug": "experiments",
-      "tags": ["code", "experiments", "technical"]
+      "slug": "auction",
+      "tags": ["auction", "christys", "soethbys"]
+    },
+    {
+      "title": "CV",
+      "description": "My resume.",
+      "status": "active",
+      "slug": "cv",
+      "tags": ["curriculum vitae", "cv", "soethbys"]
+    },
+    {
+      "title": "Globe",
+      "description": "My tracked auction stats.",
+      "status": "active",
+      "slug": "globe",
+      "tags": ["auction", "christys", "soethbys"]
+    },
+    {
+      "title": "Reading",
+      "description": "My currently reading list.",
+      "status": "active",
+      "slug": "globe",
+      "tags": ["reading", "read", "tbr"]
     }
   ]
 }
-

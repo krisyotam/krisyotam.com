@@ -4,6 +4,8 @@ import type React from "react"
 import { useState, useEffect, useRef } from "react"
 import { X, Maximize2, ChevronLeft, ChevronRight, Copy, ExternalLink, Check, Minimize2 } from "lucide-react"
 import { linkEvents } from "@/components/typography/a"
+import { usePathname } from "next/navigation"
+import bannedDomains from "@/data/banned-domains.json"
 
 type ModalData = {
   id: string
@@ -13,12 +15,43 @@ type ModalData = {
   isFullScreen: boolean
 }
 
+type BannedDomain = {
+  name: string
+  domain: string
+}
+
 // Configuration switches
 const DEBUG_MODE = false
 const ENABLE_INTERNAL_LINK_PREVIEWS = false // Set to false to disable previews for internal links
 const ENABLE_EXTERNAL_LINK_PREVIEWS = true // Set to true to enable previews for external links
+const ENABLE_BANNED_DOMAINS_CHECK = true // Set to false to disable banned domains check
+
+// Add an array of page paths where link previews should be disabled
+const EXCLUDED_PAGES = [
+  "/",
+  "/categories",
+  // Add more paths as needed
+]
+
+// Additional banned domains (these will be combined with the ones from the JSON file)
+const ADDITIONAL_BANNED_DOMAINS: BannedDomain[] = [
+  { name: "TikTok", domain: "tiktok.com" },
+  { name: "Medium", domain: "medium.com" },
+  // Add more domains as needed
+]
+
+// Helper function to check if a path should be excluded
+const isPathExcluded = (path: string): boolean => {
+  return EXCLUDED_PAGES.some((excludedPath) => path === excludedPath || path.startsWith(`${excludedPath}/`))
+}
 
 export function UniversalLinkModal() {
+  // Get the current pathname synchronously
+  const pathname = usePathname()
+
+  // Check if current page is excluded - this happens synchronously during component initialization
+  const isExcluded = isPathExcluded(pathname)
+
   // Use state for modals to ensure rendering
   const [modals, setModals] = useState<ModalData[]>([])
   const [focusedModalIndex, setFocusedModalIndex] = useState<number | null>(null)
@@ -27,7 +60,7 @@ export function UniversalLinkModal() {
   const openModalUrls = useRef<Set<string>>(new Set())
   const hoverTimerRef = useRef<NodeJS.Timeout | null>(null)
   const hoveredLinkRef = useRef<HTMLAnchorElement | null>(null)
-  const [showDebug] = useState(DEBUG_MODE)
+  const [showDebug, setShowDebug] = useState(DEBUG_MODE)
 
   // Dragging state
   const [isDragging, setIsDragging] = useState(false)
@@ -51,6 +84,14 @@ export function UniversalLinkModal() {
     linkElements: 0,
   })
 
+  // If the page is excluded, initialize state to avoid conditional hook calls
+  const [renderModal, setRenderModal] = useState(!isExcluded)
+
+  // If the page is excluded, return null immediately without rendering anything
+  if (!renderModal) {
+    return null
+  }
+
   // Extract domain name for the title
   const getDomainFromUrl = (url: string) => {
     try {
@@ -61,28 +102,54 @@ export function UniversalLinkModal() {
     }
   }
 
-  // Update debug display periodically
-  useEffect(() => {
-    if (!showDebug) return
-
-    const updateDebug = () => {
-      // Count all links on the page
-      const allLinks = document.querySelectorAll("a")
-      debugRef.current.linkElements = allLinks.length
-
-      setDebugState({
-        hoverCount: debugRef.current.hoverCount,
-        modalAttempts: debugRef.current.modalAttempts,
-        lastHoveredUrl: debugRef.current.lastHoveredUrl,
-        errors: debugRef.current.errors,
-        openModals: modals.length,
-        linkElements: debugRef.current.linkElements,
-      })
+  // Check if a domain is in the banned list
+  const isDomainBanned = (url: string): boolean => {
+    // Skip check if feature is disabled
+    if (!ENABLE_BANNED_DOMAINS_CHECK) {
+      return false
     }
 
-    // Update debug info every 100ms
-    const interval = setInterval(updateDebug, 100)
-    return () => clearInterval(interval)
+    try {
+      const domain = getDomainFromUrl(url)
+      // Check against both the JSON file and additional banned domains
+      return [...bannedDomains, ...ADDITIONAL_BANNED_DOMAINS].some(
+        (bannedDomain: BannedDomain) => domain === bannedDomain.domain || domain.endsWith(`.${bannedDomain.domain}`),
+      )
+    } catch (e) {
+      console.error("Error checking banned domain:", e)
+      return false
+    }
+  }
+
+  // Update debug display periodically
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null
+
+    if (showDebug) {
+      const updateDebug = () => {
+        // Count all links on the page
+        const allLinks = document.querySelectorAll("a")
+        debugRef.current.linkElements = allLinks.length
+
+        setDebugState({
+          hoverCount: debugRef.current.hoverCount,
+          modalAttempts: debugRef.current.modalAttempts,
+          lastHoveredUrl: debugRef.current.lastHoveredUrl,
+          errors: debugRef.current.errors,
+          openModals: modals.length,
+          linkElements: debugRef.current.linkElements,
+        })
+      }
+
+      // Update debug info every 100ms
+      interval = setInterval(updateDebug, 100)
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval)
+      }
+    }
   }, [modals.length, showDebug])
 
   // Check if a URL is internal
@@ -103,8 +170,32 @@ export function UniversalLinkModal() {
     }
   }
 
+  // Check if a URL is a blog post link
+  const isBlogPostLink = (url: string): boolean => {
+    try {
+      // Check if the URL contains /blog/ in the path
+      if (url.includes("/blog/")) {
+        return true
+      }
+      return false
+    } catch (e) {
+      return false
+    }
+  }
+
   // Check if preview should be shown for a URL
   const shouldShowPreview = (url: string): boolean => {
+    // First check if the domain is banned
+    if (isDomainBanned(url)) {
+      console.log(`Domain banned: ${getDomainFromUrl(url)}`)
+      return false
+    }
+
+    // Always show previews for blog post links
+    if (isBlogPostLink(url)) {
+      return true
+    }
+
     const isInternal = isInternalLink(url)
 
     // For internal links, check ENABLE_INTERNAL_LINK_PREVIEWS
@@ -116,28 +207,69 @@ export function UniversalLinkModal() {
     return ENABLE_EXTERNAL_LINK_PREVIEWS
   }
 
-  // Create a modal
-  const createModal = (url: string, title: string, x: number, y: number) => {
+  // Check if a URL can be loaded in an iframe
+  const checkIframeCompatibility = async (url: string): Promise<boolean> => {
     try {
-      // Don't create duplicate modals
+      // Try to fetch the URL with a HEAD request to check headers
+      const response = await fetch(url, {
+        method: "HEAD",
+        mode: "no-cors", // This is needed for cross-origin requests
+        credentials: "omit",
+      })
+
+      // If we get here, the request didn't throw an error
+      // But we can't actually check headers due to CORS restrictions with no-cors mode
+      // So we'll return true and let the iframe attempt to load
+      return true
+    } catch (error) {
+      console.error("Error checking iframe compatibility:", error)
+      debugRef.current.errors.push(`Iframe check error: ${error}`)
+      return false
+    }
+  }
+
+  // Create a modal
+  const createModal = async (url: string, title: string, x: number, y: number) => {
+    try {
+      // IMPORTANT: All checks must be done before any modal creation logic
+
+      // 1. Check if modal already exists
       if (openModalUrls.current.has(url)) {
         console.log("Modal already exists for:", url)
         return
       }
 
-      // Skip URLs with data-no-modal attribute
+      // 2. Skip invalid URLs
       if (url.startsWith("javascript:") || url === "#" || url === "") {
         console.log("Skipping non-URL:", url)
         return
       }
 
-      console.log("Creating modal for:", url, "at position:", x, y)
+      // 3. Check if domain is banned
+      if (isDomainBanned(url)) {
+        console.log("Domain is banned, skipping modal creation:", getDomainFromUrl(url))
+        return
+      }
 
+      // 4. Check if the URL can be loaded in an iframe
+      const canLoadInIframe = await checkIframeCompatibility(url)
+      if (!canLoadInIframe) {
+        console.log("URL cannot be loaded in iframe:", url)
+        return
+      }
+
+      // All checks passed, now we can create the modal
+      console.log("Creating modal for:", url)
+
+      // Always position in the center of the screen, ignoring mouse position
       const newModal: ModalData = {
         id: `modal-${Date.now()}`,
         url,
         title: title || getDomainFromUrl(url),
-        position: { x, y },
+        position: {
+          x: window.innerWidth / 2,
+          y: window.innerHeight / 2,
+        },
         isFullScreen: false,
       }
 
@@ -155,28 +287,52 @@ export function UniversalLinkModal() {
 
   // Track mouse position and handle global link hovering
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    let handleMouseMove: (e: MouseEvent) => void
+    let handleMouseUp: () => void
+
+    handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY })
 
-      // Handle dragging
+      // Handle dragging with screen boundary constraints
       if (isDragging && activeModalId) {
+        const modal = modals.find((m) => m.id === activeModalId)
+        if (!modal) return
+
+        // Calculate new position
+        let newX = e.clientX - dragOffset.x
+        let newY = e.clientY - dragOffset.y
+
+        // Get modal dimensions (using the styles from getModalStyles)
+        const modalWidth = 600 // Width from getModalStyles
+        const modalHeight = 500 // Height from getModalStyles
+
+        // Apply strict screen boundary constraints
+        // Left boundary: don't allow modal to go beyond left edge
+        newX = Math.max(newX, modalWidth / 2)
+
+        // Right boundary: don't allow modal to go beyond right edge
+        newX = Math.min(newX, window.innerWidth - modalWidth / 2)
+
+        // Top boundary: don't allow modal to go beyond top edge
+        newY = Math.max(newY, modalHeight / 2)
+
+        // Bottom boundary: don't allow modal to go beyond bottom edge
+        newY = Math.min(newY, window.innerHeight - modalHeight / 2)
+
         setModals((prev) =>
-          prev.map((modal) =>
-            modal.id === activeModalId
+          prev.map((m) =>
+            m.id === activeModalId
               ? {
-                  ...modal,
-                  position: {
-                    x: e.clientX - dragOffset.x,
-                    y: e.clientY - dragOffset.y,
-                  },
+                  ...m,
+                  position: { x: newX, y: newY },
                 }
-              : modal,
+              : m,
           ),
         )
       }
     }
 
-    const handleMouseUp = () => {
+    handleMouseUp = () => {
       if (isDragging) {
         setIsDragging(false)
         setActiveModalId(null)
@@ -190,11 +346,14 @@ export function UniversalLinkModal() {
       window.removeEventListener("mousemove", handleMouseMove)
       window.removeEventListener("mouseup", handleMouseUp)
     }
-  }, [isDragging, activeModalId, dragOffset])
+  }, [isDragging, activeModalId, dragOffset, modals])
 
   // Global event delegation for link hovering (for links not using the A component)
   useEffect(() => {
-    const handleGlobalMouseOver = (e: MouseEvent) => {
+    let handleGlobalMouseOver: (e: MouseEvent) => void
+    let handleGlobalMouseOut: (e: MouseEvent) => void
+
+    handleGlobalMouseOver = (e: MouseEvent) => {
       // Find the closest anchor element
       const target = e.target as HTMLElement
       const linkElement = target.closest("a") as HTMLAnchorElement | null
@@ -214,6 +373,17 @@ export function UniversalLinkModal() {
       // Skip if this is a javascript: link or empty href
       const href = linkElement.href
       if (!href || href === "#" || href.startsWith("javascript:")) return
+
+      // IMPORTANT: Don't interfere with normal click behavior
+      // Only add hover behavior, don't prevent default link actions
+      linkElement.onclick = null // Ensure we're not overriding the default click behavior
+
+      // Check if domain is banned - do this check immediately
+      if (isDomainBanned(href)) {
+        // Mark this link as no-preview and exit immediately
+        linkElement.setAttribute("data-no-preview", "true")
+        return
+      }
 
       // Check if we should show preview for this URL
       if (!shouldShowPreview(href)) {
@@ -237,7 +407,7 @@ export function UniversalLinkModal() {
       debugRef.current.lastHoveredUrl = href
 
       // Set a timer to create the modal after a delay
-      hoverTimerRef.current = setTimeout(() => {
+      hoverTimerRef.current = setTimeout(async () => {
         if (hoveredLinkRef.current !== linkElement) return
 
         debugRef.current.modalAttempts++
@@ -248,11 +418,11 @@ export function UniversalLinkModal() {
         const y = rect.top
 
         // Create the modal
-        createModal(href, linkElement.textContent || "", x, y)
+        await createModal(href, linkElement.textContent || "", x, y)
       }, 500)
     }
 
-    const handleGlobalMouseOut = (e: MouseEvent) => {
+    handleGlobalMouseOut = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       const linkElement = target.closest("a")
 
@@ -277,13 +447,22 @@ export function UniversalLinkModal() {
         clearTimeout(hoverTimerRef.current)
       }
     }
-  }, [])
+  }, [modals])
 
   // Listen for link hover events from the A component
   useEffect(() => {
-    const handleLinkHover = (url: string, text: string, x: number, y: number) => {
+    let handleLinkHover: (url: string, text: string, x: number, y: number) => Promise<void>
+    let unsubscribe: () => void
+
+    handleLinkHover = async (url: string, text: string, x: number, y: number) => {
       debugRef.current.hoverCount++
       debugRef.current.lastHoveredUrl = url
+
+      // Check if domain is banned - do this check immediately
+      if (isDomainBanned(url)) {
+        console.log(`Skipping banned domain: ${getDomainFromUrl(url)}`)
+        return
+      }
 
       // Check if we should show preview for this URL
       if (!shouldShowPreview(url)) {
@@ -293,20 +472,22 @@ export function UniversalLinkModal() {
       debugRef.current.modalAttempts++
 
       console.log("Link hover event received:", url, text, x, y)
-      createModal(url, text, x, y)
+      await createModal(url, text, x, y)
     }
 
     // Subscribe to link hover events
-    const unsubscribe = linkEvents.addListener(handleLinkHover)
+    unsubscribe = linkEvents.addListener(handleLinkHover)
 
     return () => {
       unsubscribe()
     }
-  }, [])
+  }, [modals])
 
   // Handle keyboard navigation
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    let handleKeyDown: (e: KeyboardEvent) => void
+
+    handleKeyDown = (e: KeyboardEvent) => {
       if (focusedModalIndex === null) return
 
       if (e.key === "ArrowLeft") {
@@ -319,22 +500,19 @@ export function UniversalLinkModal() {
     }
 
     window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
   }, [focusedModalIndex, modals.length])
 
   // Copy URL to clipboard
-  const copyToClipboard = (url: string) => {
-    navigator.clipboard
-      .writeText(url)
-      .then(() => {
-        setCopySuccess(true)
-        setTimeout(() => setCopySuccess(false), 2000)
-      })
-      .catch((err) => {
-        console.error("Failed to copy URL: ", err)
-        debugRef.current.errors.push(`Copy error: ${err}`)
-      })
-  }
+  useEffect(() => {
+    if (copySuccess) {
+      const timer = setTimeout(() => setCopySuccess(false), 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [copySuccess])
 
   // Open URL in new tab
   const openInNewTab = (url: string) => {
@@ -487,6 +665,48 @@ export function UniversalLinkModal() {
     setFocusedModalIndex(null)
   }
 
+  // Function to copy URL to clipboard
+  const copyToClipboard = (url: string | undefined) => {
+    if (!url) return
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        setCopySuccess(true)
+      })
+      .catch((err) => {
+        console.error("Failed to copy URL: ", err)
+      })
+  }
+
+  // Initialize the keydown event listener only once
+  const [isKeyDownListenerActive, setIsKeyDownListenerActive] = useState(false)
+
+  useEffect(() => {
+    let handleKeyDown: (e: KeyboardEvent) => void
+
+    handleKeyDown = (e: KeyboardEvent) => {
+      if (focusedModalIndex === null) return
+
+      if (e.key === "ArrowLeft") {
+        goToPrevModal()
+      } else if (e.key === "ArrowRight") {
+        goToNextModal()
+      } else if (e.key === "Escape") {
+        setFocusedModalIndex(null)
+      }
+    }
+
+    if (!isKeyDownListenerActive) {
+      window.addEventListener("keydown", handleKeyDown)
+      setIsKeyDownListenerActive(true) // Mark the listener as active
+
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown)
+        setIsKeyDownListenerActive(false) // Reset the flag on unmount
+      }
+    }
+  }, [focusedModalIndex, modals.length, isKeyDownListenerActive])
+
   return (
     <>
       {/* Debug panel - only shown when DEBUG_MODE is true */}
@@ -538,92 +758,92 @@ export function UniversalLinkModal() {
       )}
 
       {/* Regular modals */}
-      {modals.map((modal, index) => (
-        <div
-          key={modal.id}
-          className="fixed shadow-xl rounded-lg overflow-hidden"
-          style={{
-            ...getModalStyles(modal),
-            display: focusedModalIndex === index ? "none" : "block",
-          }}
-          onMouseDown={(e) => handleMouseDown(e, modal.id)}
-        >
-          <div className="bg-background border border-border rounded-lg flex flex-col h-full relative">
-            {/* Top header - draggable */}
-            <div className="flex items-center justify-between p-3 bg-muted/30 border-b border-border drag-handle cursor-grab">
-              <h3 className="text-sm font-medium truncate max-w-[400px]">{modal.title}</h3>
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => enlargeModal(index)}
-                  className="text-muted-foreground hover:text-foreground"
-                  aria-label="Maximize modal"
-                  title="Maximize"
-                >
-                  <Maximize2 className="h-4 w-4" />
-                </button>
-                <button
-                  onClick={() => closeModal(modal.id)}
-                  className="text-muted-foreground hover:text-foreground"
-                  aria-label="Close modal"
-                  title="Close"
-                >
-                  <X className="h-4 w-4" />
-                </button>
+      {renderModal &&
+        modals.map((modal, index) => (
+          <div
+            key={modal.id}
+            className="fixed shadow-xl rounded-lg overflow-hidden"
+            style={{
+              ...getModalStyles(modal),
+              display: focusedModalIndex === index ? "none" : "block",
+            }}
+            onMouseDown={(e) => handleMouseDown(e, modal.id)}
+          >
+            <div className="bg-background border border-border rounded-lg flex flex-col h-full relative">
+              {/* Top header - draggable */}
+              <div className="flex items-center justify-end p-2 bg-muted/30 border-b border-border drag-handle cursor-grab">
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => enlargeModal(index)}
+                    className="text-muted-foreground hover:text-foreground"
+                    aria-label="Maximize modal"
+                    title="Maximize"
+                  >
+                    <Maximize2 className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={() => closeModal(modal.id)}
+                    className="text-muted-foreground hover:text-foreground"
+                    aria-label="Close modal"
+                    title="Close"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
               </div>
-            </div>
 
-            {/* Left border - draggable */}
-            <div
-              className="absolute left-0 top-0 w-8 h-full cursor-ew-resize drag-handle hover:bg-muted/20 transition-colors"
-              style={{ top: "40px", bottom: "0" }}
-            />
+              {/* Left border - draggable */}
+              <div
+                className="absolute left-0 top-0 w-8 h-full cursor-ew-resize drag-handle hover:bg-muted/20 transition-colors"
+                style={{ top: "40px", bottom: "0" }}
+              />
 
-            {/* Right border - draggable */}
-            <div
-              className="absolute right-0 top-0 w-8 h-full cursor-ew-resize drag-handle hover:bg-muted/20 transition-colors"
-              style={{ top: "40px", bottom: "0" }}
-            />
+              {/* Right border - draggable */}
+              <div
+                className="absolute right-0 top-0 w-8 h-full cursor-ew-resize drag-handle hover:bg-muted/20 transition-colors"
+                style={{ top: "40px", bottom: "0" }}
+              />
 
-            {/* Bottom border - draggable */}
-            <div className="absolute left-0 bottom-0 w-full h-8 cursor-ns-resize drag-handle hover:bg-muted/20 transition-colors" />
+              {/* Bottom border - draggable */}
+              <div className="absolute left-0 bottom-0 w-full h-8 cursor-ns-resize drag-handle hover:bg-muted/20 transition-colors" />
 
-            {/* Bottom-left corner - draggable */}
-            <div className="absolute left-0 bottom-0 w-12 h-12 cursor-nesw-resize drag-handle hover:bg-muted/20 transition-colors" />
+              {/* Bottom-left corner - draggable */}
+              <div className="absolute left-0 bottom-0 w-12 h-12 cursor-nesw-resize drag-handle hover:bg-muted/20 transition-colors" />
 
-            {/* Bottom-right corner - draggable */}
-            <div className="absolute right-0 bottom-0 w-12 h-12 cursor-nwse-resize drag-handle hover:bg-muted/20 transition-colors" />
+              {/* Bottom-right corner - draggable */}
+              <div className="absolute right-0 bottom-0 w-12 h-12 cursor-nwse-resize drag-handle hover:bg-muted/20 transition-colors" />
 
-            {/* Content area */}
-            <div className="flex-1 relative">
-              <div className="absolute inset-0 flex items-center justify-center bg-background">
-                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
-              </div>
-              <iframe
-                src={modal.url}
-                className="w-full h-full border-0"
-                title={`External content: ${modal.url}`}
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                referrerpolicy="no-referrer"
-                onLoad={(e) => {
-                  // Remove loading indicator when iframe loads
-                  const iframe = e.currentTarget
-                  const parent = iframe.parentElement
-                  if (parent && parent.firstChild !== iframe) {
-                    parent.firstChild?.remove()
-                  }
-                }}
-                onError={(e) => {
-                  console.error("Iframe loading error:", e)
-                  debugRef.current.errors.push(`Iframe error: ${e}`)
+              {/* Content area */}
+              <div className="flex-1 relative">
+                <div className="absolute inset-0 flex items-center justify-center bg-background">
+                  <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
+                </div>
+                <iframe
+                  src={modal.url}
+                  className="w-full h-full border-0"
+                  title={`External content: ${modal.url}`}
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                  referrerpolicy="no-referrer"
+                  onLoad={(e) => {
+                    // Remove loading indicator when iframe loads
+                    const iframe = e.currentTarget
+                    const parent = iframe.parentElement
+                    if (parent && parent.firstChild !== iframe) {
+                      parent.firstChild?.remove()
+                    }
+                  }}
+                  onError={(e) => {
+                    console.error("Iframe loading error:", e)
+                    debugRef.current.errors.push(`Iframe error: ${e}`)
 
-                  // Add a message to the iframe container
-                  const iframe = e.currentTarget
-                  const parent = iframe.parentElement
-                  if (parent) {
-                    const errorDiv = document.createElement("div")
-                    errorDiv.className =
-                      "absolute inset-0 flex flex-col items-center justify-center bg-background p-4 text-center"
-                    errorDiv.innerHTML = `
+                    // Add a message to the iframe container
+                    const iframe = e.currentTarget
+                    const parent = iframe.parentElement
+                    if (parent) {
+                      const errorDiv = document.createElement("div")
+                      errorDiv.className =
+                        "absolute inset-0 flex flex-col items-center justify-center bg-background p-4 text-center"
+                      errorDiv.innerHTML = `
                       <div class="text-red-500 mb-2">Failed to load content</div>
                       <div class="text-sm text-muted-foreground mb-4">The website may be blocking embedding in iframes</div>
                       <a href="${iframe.src}" target="_blank" rel="noopener noreferrer" 
@@ -631,17 +851,17 @@ export function UniversalLinkModal() {
                         Open in New Tab
                       </a>
                     `
-                    parent.appendChild(errorDiv)
-                  }
-                }}
-              />
+                      parent.appendChild(errorDiv)
+                    }
+                  }}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
 
       {/* Focused modal with pagination */}
-      {focusedModalIndex !== null && modals[focusedModalIndex] && (
+      {renderModal && focusedModalIndex !== null && modals[focusedModalIndex] && (
         <>
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[1001]" onClick={minimizeFocusedModal} />
 
@@ -713,7 +933,7 @@ export function UniversalLinkModal() {
                     onClick={closeFocusedModal}
                     className="p-1.5 rounded hover:bg-muted/50 transition text-muted-foreground hover:text-foreground"
                     aria-label="Close modal"
-                    title="Close"
+                    title="Close modal"
                   >
                     <X className="h-5 w-5" />
                   </button>
