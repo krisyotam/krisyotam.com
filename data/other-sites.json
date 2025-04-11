@@ -1,0 +1,37 @@
+[
+  {
+    "ownerName": "The Minimalist",
+    "siteSticker": "https://i.postimg.cc/QxZszQPt/the-minimalists.jpg",
+    "siteUrl": "https://www.theminimalists.com/",
+    "tags": ["Minimalism", "Mathematics", "Algorithms"],
+    "description": "A digital garden exploring."
+  },
+  {
+    "ownerName": "Gwern",
+    "siteSticker": "https://i.postimg.cc/CMPkHK6m/gwern.png",
+    "siteUrl": "https://gwern.net",
+    "tags": ["Computer Science", "AI", "Cryptography"],
+    "description": "A collection of essays and interactive demonstrations on Turing machines, artificial intelligence, and the mathematical foundations of computation."
+  },
+  {
+    "ownerName": "Grace Hopper",
+    "siteSticker": "https://v0.dev/placeholder.svg?height=200&width=200&text=Grace's+Compiler",
+    "siteUrl": "https://hopper-compiler.example.com",
+    "tags": ["Programming", "COBOL", "Naval History"],
+    "description": "Documenting the evolution of programming languages and compilers, with a focus on Grace Hopper's contributions to computer science and the US Navy."
+  },
+  {
+    "ownerName": "John von Neumann",
+    "siteSticker": "https://v0.dev/placeholder.svg?height=200&width=200&text=von+Neumann+Architecture",
+    "siteUrl": "https://von-neumann.example.com",
+    "tags": ["Computer Architecture", "Game Theory", "Mathematics"],
+    "description": "An exploration of von Neumann architecture, cellular automata, and the mathematical foundations of computing and artificial life."
+  },
+  {
+    "ownerName": "Claude Shannon",
+    "siteSticker": "https://v0.dev/placeholder.svg?height=200&width=200&text=Shannon's+Information+Theory",
+    "siteUrl": "https://shannon-information.example.com",
+    "tags": ["Information Theory", "Communication", "Mathematics"],
+    "description": "A digital notebook on information theory, communication systems, and the mathematical foundations of the digital age."
+  }
+]

@@ -66,33 +66,13 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
 
   return (
     <div
-      className="container mx-auto py-8 px-4 max-w-6xl dark:bg-[#121212]"
+      className="container mx-auto pt-0 pb-8 px-4 max-w-6xl dark:bg-[#121212]"
       style={{ fontFamily: "Georgia, serif !important" }}
     >
       <div
         className="mb-8 border-b border-gray-200 dark:border-gray-800 pb-4"
         style={{ borderBottom: "1px solid var(--border) !important" }}
       >
-        <h1
-          className="text-2xl font-serif tracking-tight mb-2 dark:text-gray-100"
-          style={{
-            fontSize: "1.5rem !important",
-            fontFamily: "Georgia, serif !important",
-            letterSpacing: "-0.025em !important",
-            marginBottom: "0.5rem !important",
-          }}
-        >
-          Archives
-        </h1>
-        <p
-          className="text-sm text-gray-600 dark:text-gray-400 font-serif"
-          style={{
-            fontSize: "0.875rem !important",
-            fontFamily: "Georgia, serif !important",
-          }}
-        >
-          A collection of rare and valuable digital archives for academic research and scholarly purposes.
-        </p>
       </div>
 
       {/* Filters and search */}

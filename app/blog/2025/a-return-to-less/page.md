@@ -1,0 +1,1 @@
+> Reduce the complexity of life by eliminating the needless wants of life, and the labors of life reduce themselves

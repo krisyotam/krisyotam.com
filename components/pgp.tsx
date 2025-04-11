@@ -37,7 +37,7 @@ export default function PGP({ email, fingerprint, publicKey, mirror }: PgpProps)
   return (
     <div className="!flex !flex-col !gap-4 !max-w-2xl !mx-auto">
       {/* Contact Info Bento */}
-      <Card className="!p-4 !bg-card dark:!bg-zinc-900 !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800">
+      <Card className="!p-4 !bg-card dark:bg-[#1A1A1A] !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800">
         <div className="!flex !flex-col !gap-2">
           <div className="!flex !items-start !gap-2">
             <div className="!text-muted-foreground dark:!text-zinc-400">
@@ -109,7 +109,7 @@ export default function PGP({ email, fingerprint, publicKey, mirror }: PgpProps)
       </Card>
 
       {/* Public Key Bento */}
-      <Card className="!p-4 !bg-card dark:!bg-zinc-900 !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800">
+      <Card className="!p-4 !bg-card dark:bg-[#1A1A1A] !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800">
         <div className="!flex !justify-between !items-center !mb-2">
           <div className="!text-sm !text-muted-foreground dark:!text-zinc-400">PGP PUBLIC KEY</div>
           <Button

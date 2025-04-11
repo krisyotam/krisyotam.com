@@ -54,7 +54,7 @@ export default function ContactPage() {
         </div>
 
         {/* Contact Form Info Bento */}
-        <Card className="!p-4 !bg-card dark:!bg-zinc-900 !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800 !mb-6">
+        <Card className="!p-4 !bg-card dark:bg-[#1A1A1A] !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800 !mb-6">
           <div className="!flex !items-start !gap-3">
             <MessageSquare className="!h-5 !w-5 !text-muted-foreground dark:!text-zinc-400 !mt-0.5 !flex-shrink-0" />
             <div>

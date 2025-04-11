@@ -207,6 +207,84 @@
       "confidence": "unlikely",
       "importance": 4,
       "state": "active"
+    },
+    {
+      "title": "Treatise on Rational Tactics",
+      "subtitle": "A introduction to the case files of k",
+      "preview": "a introduction to formal logic, rationalism, & inductive/deductive reasoning.",
+      "date": "2025-04-9",
+      "tags": ["Formal Logic", "Rationalism", "Reasoning"],
+      "category": "Case Files of K",
+      "slug": "analysis-of-poem2",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 4,
+      "state": "active"
+    },
+    {
+      "title": "The Fall of Gaia Online",
+      "subtitle": "a in-depth case study of gaia online's downfall",
+      "preview": "a introduction to formal logic, rationalism, & inductive/deductive reasoning.",
+      "date": "2025-04-9",
+      "tags": ["Formal Logic", "Rationalism", "Reasoning"],
+      "category": "Game Analysis",
+      "slug": "analysis-of-poem2",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 4,
+      "state": "hidden"
+    },
+    {
+      "title": "Treatise on Rational Tactics",
+      "subtitle": "A introduction to the case files of k",
+      "preview": "a introduction to formal logic, rationalism, & inductive/deductive reasoning.",
+      "date": "2025-04-9",
+      "tags": ["Formal Logic", "Rationalism", "Reasoning"],
+      "category": "Case Files of K",
+      "slug": "analysis-of-poem2",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 4,
+      "state": "hidden"
+    },
+    {
+      "title": "Don't they know it's the end?",
+      "subtitle": "A introduction to the case files of k",
+      "preview": "a introduction to formal logic, rationalism, & inductive/deductive reasoning.",
+      "date": "2025-04-9",
+      "tags": ["Formal Logic", "Rationalism", "Reasoning"],
+      "category": "My Dreams",
+      "slug": "analysis-of-poem2",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 2,
+      "state": "hidden"
+    },
+    {
+      "title": "Multiples of 3 or 5",
+      "subtitle": "Project Euler Solution(s)",
+      "preview": "a set of solutions to multiples of 3 or 5.",
+      "date": "2025-04-10",
+      "tags": ["Project Euler", "C", "Go"],
+      "category": "Project Euler",
+      "slug": "multiples-of-3-or-5",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 2,
+      "state": "active"
+    },
+    {
+      "title": "A Return to Less",
+      "subtitle": "Introduction to Minimalism",
+      "preview": "On Academic Minimalism and the Liberation of the Mind",
+      "date": "2025-04-11",
+      "tags": ["Academia", "Minimalism", "Liberation of the Mind"],
+      "category": "Minimalism",
+      "slug": "a-return-to-less",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 6,
+      "state": "active"
     }
   ]
 }

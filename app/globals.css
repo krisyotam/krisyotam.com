@@ -9,29 +9,29 @@
       COLOR THEME VARIABLES
       ========================================================================== */
    @layer base {
-     :root {
-       /* Light mode colors */
-       --background: 0 0% 100%;
-       --foreground: 0 0% 0%;
-       --card: 0 0% 100%;
-       --card-foreground: 0 0% 0%;
-       --popover: 0 0% 100%;
-       --popover-foreground: 0 0% 0%;
-       --primary: 0 0% 0%;
-       --primary-foreground: 0 0% 100%;
-       --secondary: 0 0% 96%;
-       --secondary-foreground: 0 0% 0%;
-       --muted: 0 0% 96%;
-       --muted-foreground: 0 0% 45%;
-       --accent: 0 0% 96%;
-       --accent-foreground: 0 0% 0%;
-       --destructive: 0 84% 60%;
-       --destructive-foreground: 0 0% 100%;
-       --border: 0 0% 89%;
-       --input: 0 0% 89%;
-       --ring: 0 0% 0%;
-       --radius: 0.5rem;
-     }
+    :root {
+      /* Light mode colors inspired by Kenya Hara's "100 Whites" */
+      --background: 0 0% 98%; /* A soft, warm white like rice paper */
+      --foreground: 0 0% 20%; /* A deep, muted charcoal instead of pure black */
+      --card: 0 0% 99%; /* A crisp, clean white like fresh snow */
+      --card-foreground: 0 0% 15%; /* A slightly softer dark tone */
+      --popover: 0 0% 97%; /* A delicate white, like wax or silk */
+      --popover-foreground: 0 0% 25%; /* A muted gray for readability */
+      --primary: 0 0% 10%; /* A near-black with a hint of warmth */
+      --primary-foreground: 0 0% 95%; /* A bright, airy white like clouds */
+      --secondary: 0 0% 90%; /* A slightly darker off-white for more contrast */
+      --secondary-foreground: 0 0% 30%; /* A soft gray for contrast */
+      --muted: 0 0% 92%; /* A faint white, like mist or frosted glass */
+      --muted-foreground: 0 0% 50%; /* A mid-tone gray for subdued text */
+      --accent: 0 0% 96%; /* A gentle white, like polished ivory */
+      --accent-foreground: 0 0% 20%; /* A dark, understated tone */
+      --destructive: 0 70% 55%; /* A muted red, softened to fit the palette */
+      --destructive-foreground: 0 0% 98%; /* A near-white for legibility */
+      --border: 0 0% 88%; /* A pale gray-white, like stone or ash */
+      --input: 0 0% 90%; /* A light, clean white for fields */
+      --ring: 0 0% 40%; /* A subtle gray for focus states */
+      --radius: 0.5rem; /* Unchanged, as it’s a structural property */
+    }
    
      .dark {
        /* Dark mode colors - monochrome palette */

@@ -28,7 +28,7 @@ export default function ContactInfo({ notice, rules, blacklistNotes }: ContactIn
   return (
     <div className="!flex !flex-col !gap-4 !max-w-2xl !mx-auto !mb-6">
       {/* Notice Bento */}
-      <Card className="!p-4 !bg-card dark:!bg-zinc-900 !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800">
+      <Card className="!p-4 !bg-card dark:bg-[#1A1A1A] !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800">
         <div className="!flex !items-start !gap-3">
           <AlertCircle className="!h-5 !w-5 !text-muted-foreground dark:!text-zinc-400 !mt-0.5 !flex-shrink-0" />
           <div>
@@ -39,7 +39,7 @@ export default function ContactInfo({ notice, rules, blacklistNotes }: ContactIn
       </Card>
 
       {/* Rules Bento */}
-      <Card className="!p-4 !bg-card dark:!bg-zinc-900 !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800">
+      <Card className="!p-4 !bg-card dark:bg-[#1A1A1A] !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800">
         <button className="!w-full !flex !items-start !gap-3 !text-left !focus:outline-none" onClick={toggleRules}>
           <Shield className="!h-5 !w-5 !text-muted-foreground dark:!text-zinc-400 !mt-0.5 !flex-shrink-0" />
           <div className="!flex-1">
@@ -81,7 +81,7 @@ export default function ContactInfo({ notice, rules, blacklistNotes }: ContactIn
       </Card>
 
       {/* Blacklist Notes Bento */}
-      <Card className="!p-4 !bg-card dark:!bg-zinc-900 !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800">
+      <Card className="!p-4 !bg-card dark:bg-[#1A1A1A] !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800">
         <div className="!flex !items-start !gap-3">
           <XCircle className="!h-5 !w-5 !text-muted-foreground dark:!text-zinc-400 !mt-0.5 !flex-shrink-0" />
           <div>

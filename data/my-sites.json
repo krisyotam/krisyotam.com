@@ -6,6 +6,11 @@
       "link": "https://kriscv.vercel.app"
     },
     {
+      "name": "TypeShare",
+      "purpose": "my initial posts catalogued on a social blogging platform",
+      "link": "https://typeshare.co/krisyotam"
+    },
+    {
       "name": "Bio Generator",
       "purpose": "You can use this page to generate a bio about me to suit your needs.",
       "link": "https://blog.krisyotam.com"
@@ -21,24 +26,9 @@
       "link": "https://krispuremath.vercel.app"
     },
     {
-      "name": "Physics Blog",
-      "purpose": "blog, research, speeches, notes",
-      "link": "https://khr1st.vercel.app"
-    },
-    {
       "name": "Business Site",
       "purpose": "invesment interests, current ventures, ect.",
       "link": "https://kyotam.vercel.app"
-    },
-    {
-      "name": "Reading Log",
-      "purpose": "Discussing and reviewing literature",
-      "link": "https://readinglog.vercel.app"
-    },
-    {
-      "name": "Poetry",
-      "purpose": "A comprehensive anthology on my poetry organized by form",
-      "link": "https://krispoetry.vercel.app/"
     },
     {
       "name": "Goodreads",

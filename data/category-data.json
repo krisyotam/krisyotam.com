@@ -120,6 +120,94 @@
       "status": "In Progress",
       "confidence": "certain",
       "importance": 3
+    },
+    {
+      "slug": "case-files-of-k",
+      "title": "Case Files of K",
+      "subtitle": "",
+      "preview": "a series of investigations, mysteries, and analytical entries under the guise of 'K'.",
+      "date": "2025-04-09",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "high",
+      "importance": 9
+    },
+    {
+      "slug": "dreams",
+      "title": "Dreams",
+      "subtitle": "",
+      "preview": "a collection or log of personal dreams, symbolic interpretations, or subconscious narratives.",
+      "date": "2025-04-09",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 7
+    },
+    {
+      "slug": "frameworks",
+      "title": "Frameworks",
+      "subtitle": "systems & frameworks",
+      "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
+      "date": "2025-04-09",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 7
+    },
+    {
+      "slug": "anime-reviews",
+      "title": "Anime Reviews",
+      "subtitle": "systems & frameworks",
+      "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
+      "date": "2025-04-09",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 7
+    },
+    {
+      "slug": "film-reviews",
+      "title": "Film Reviews",
+      "subtitle": "systems & frameworks",
+      "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
+      "date": "2025-04-09",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 7
+    },
+    {
+      "slug": "opera-reviews",
+      "title": "Opera Reviews",
+      "subtitle": "systems & frameworks",
+      "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
+      "date": "2025-04-09",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 7
+    },
+    {
+      "slug": "play-reviews",
+      "title": "Play Reviews",
+      "subtitle": "systems & frameworks",
+      "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
+      "date": "2025-04-09",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 7
+    },
+    {
+      "slug": "project-euler",
+      "title": "Project Euler",
+      "subtitle": "mathematical coding challenges",
+      "preview": "a archive of my evolving solutions to problems on projecteuler.net in various languages",
+      "date": "2025-04-09",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 7
     }
   ]
 }

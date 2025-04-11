@@ -1,0 +1,33 @@
+{
+  "briefBio": "At the moment I am not taking comissions for books reviews, projects, ect. but this will change soon. I plan to use my [Patreon](https://patreon.com/krisyotam) in the near future for such things. Everything on krisyotam.com is expressely mine own. No opinions shared should otherwise reflect on my past, current, future associates, clients, partners, ect.",
+  "quote": "The limits of my language mean the limits of my world.",
+  "selfExperiments": [
+    {
+      "title": "Daily Writing Ritual",
+      "description": "Writing 1000 words before sunrise every day for 365 days",
+      "link": "/blog/2025/writing-ritual-results"
+    },
+    {
+      "title": "Mathematical Intuition Training",
+      "description": "Structured approach to developing mathematical intuition through visualization",
+      "link": "/blog/2025/math-intuition-experiment"
+    },
+    {
+      "title": "Classical Memory Techniques",
+      "description": "Implementing memory palace and loci methods for mathematical formulas",
+      "link": "/blog/2024/memory-techniques-mathematics"
+    }
+  ],
+  "masksIWear": [
+    "Mathematician",
+    "Writer",
+    "Teacher",
+    "Student",
+    "Philosopher",
+    "Poet",
+    "Explorer",
+    "Observer",
+    "Creator",
+    "Curator"
+  ]
+}

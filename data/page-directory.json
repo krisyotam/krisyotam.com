@@ -1,0 +1,158 @@
+{
+  "pages": [
+    {
+      "title": "Home",
+      "subtitle": "central article feed/main description page",
+      "preview": "The primary entry point to the site with featured content and recent updates.",
+      "date": "2023-01-01T00:00:00Z",
+      "show-status": "active",
+      "status": "Complete",
+      "confidence": "certain",
+      "importance": 10,
+      "path": "/"
+    },
+    {
+      "title": "About",
+      "subtitle": "Personal information and background",
+      "preview": "Details about my background, interests, personality, and professional experience.",
+      "date": "2023-01-02T00:00:00Z",
+      "show-status": "active",
+      "status": "Complete",
+      "confidence": "certain",
+      "importance": 4,
+      "path": "/about"
+    },
+    {
+      "title": "Index",
+      "subtitle": "Collection of articles and essays",
+      "preview": "A chronological archive of all published articles, essays, and thought pieces.",
+      "date": "2023-01-03T00:00:00Z",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 9,
+      "path": "/blog"
+    },
+    {
+      "title": "Reading",
+      "subtitle": "Current and past reading materials",
+      "preview": "A curated list of books I'm currently reading and have read in the past.",
+      "date": "2023-01-04T00:00:00Z",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 7,
+      "path": "/reading"
+    },
+    {
+      "title": "Library",
+      "subtitle": "Personal book collection",
+      "preview": "An organized catalog of my personal library with notes and recommendations.",
+      "date": "2023-01-05T00:00:00Z",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8,
+      "path": "/library"
+    },
+    {
+      "title": "Film",
+      "subtitle": "Movie reviews and analysis",
+      "preview": "Reviews, ratings, and analysis of films I've watched.",
+      "date": "2023-01-06T00:00:00Z",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 7,
+      "path": "/film"
+    },
+    {
+      "title": "Companies",
+      "subtitle": "Business ventures and projects",
+      "preview": "Information about companies and business projects I'm involved with.",
+      "date": "2023-01-07T00:00:00Z",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 5,
+      "path": "/companies"
+    },
+    {
+      "title": "Colophon",
+      "subtitle": "About this website",
+      "preview": "Technical details and information about how this website was built.",
+      "date": "2023-01-08T00:00:00Z",
+      "show-status": "active",
+      "status": "Complete",
+      "confidence": "certain",
+      "importance": 2,
+      "path": "/colophon"
+    },
+    {
+      "title": "Auction",
+      "subtitle": "Items for sale or auction",
+      "preview": "A listing of items I'm currently selling or auctioning.",
+      "date": "2023-01-09T00:00:00Z",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 2,
+      "path": "/auction"
+    },
+    {
+      "title": "My Books",
+      "subtitle": "Books I've written",
+      "preview": "A collection of books and publications I've authored.",
+      "date": "2023-01-10T00:00:00Z",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8,
+      "path": "/mybooks"
+    },
+    {
+      "title": "Sources",
+      "subtitle": "Reference materials and citations",
+      "preview": "A comprehensive list of sources, references, and citations used in my work.",
+      "date": "2023-01-11T00:00:00Z",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 6,
+      "path": "/sources"
+    },
+    {
+      "title": "Progymnasmata",
+      "subtitle": "Classical writing exercises",
+      "preview": "My practice of classical rhetorical exercises from the progymnasmata tradition.",
+      "date": "2023-01-12T00:00:00Z",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 7,
+      "path": "/progymnasmata"
+    },
+    {
+      "title": "Categories",
+      "subtitle": "Content organized by topic",
+      "preview": "A topical organization of all content on the site by subject matter.",
+      "date": "2023-01-13T00:00:00Z",
+      "show-status": "active",
+      "status": "Complete",
+      "confidence": "certain",
+      "importance": 7,
+      "path": "/categories"
+    },
+    {
+      "title": "Changelog",
+      "subtitle": "Site updates and changes",
+      "preview": "A chronological record of updates, changes, and improvements to the website.",
+      "date": "2023-01-14T00:00:00Z",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 3,
+      "path": "/changelog"
+    }
+  ]
+}

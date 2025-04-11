@@ -15,6 +15,7 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import ArchivesComponent from "@/components/archive"
 import type { ArchiveItem } from "@/components/archive"
+import { PageHeader } from "@/components/page-header"
 
 export default function ArchivesPage() {
   const [archivesData, setArchivesData] = useState<ArchiveItem[]>([])
@@ -148,6 +149,17 @@ export default function ArchivesPage() {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
+      <div className="container mx-auto max-w-6xl px-4 pt-8">
+        <PageHeader
+          title="Archive"
+          subtitle="Collection of Documents"
+          date={new Date().toISOString()}
+          status="Finished"
+          confidence="certain"
+          importance={7}
+          preview="a archive page providing access to a expansive collection of documents."
+        />
+      </div>
       <ArchivesComponent archivesData={archivesData} />
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
@@ -180,4 +192,3 @@ export default function ArchivesPage() {
     </div>
   )
 }
-

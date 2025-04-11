@@ -1,0 +1,176 @@
+{
+  "mbti": {
+    "type": "INTJ-A",
+    "name": "The Architect",
+    "breakdown": {
+      "introversion": 90,
+      "extraversion": 10,
+      "intuition": 88,
+      "sensing": 12,
+      "thinking": 88,
+      "feeling": 12,
+      "judging": 79,
+      "perceiving": 21,
+      "assertive": 92,
+      "turbulent": 8
+    },
+    "strengths": ["Strategic thinking", "Independent", "Analytical", "Determined", "Knowledgeable"],
+    "challenges": ["Perfectionist", "Judgmental", "Overly private", "Dismissive of emotions"],
+    "pdfs": {
+      "pdf-2023": "/pdfs/mbti-2023.pdf",
+      "pdf-2022": "/pdfs/mbti-2022.pdf",
+      "pdf-2021": "/pdfs/mbti-2021.pdf",
+      "pdf-2020": "/pdfs/mbti-2020.pdf",
+      "pdf-2019": "/pdfs/mbti-2019.pdf"
+    }
+  },
+  "bigFive": {
+    "name": "OCEAN / Big Five",
+    "breakdown": {
+      "openness": 68,
+      "conscientiousness": 90,
+      "extraversion": 63,
+      "agreeableness": 44,
+      "neuroticism": 39
+    },
+    "details": {
+      "openness": "High openness to experience, intellectually curious, creative, and appreciative of art",
+      "conscientiousness": "Highly organized, dependable, and self-disciplined with a preference for planned behavior",
+      "extraversion": "More introverted, preferring deeper one-on-one interactions over large social gatherings",
+      "agreeableness": "Moderately compassionate and cooperative, balancing empathy with objectivity",
+      "neuroticism": "Relatively emotionally stable with good stress management capabilities"
+    },
+    "pdfs": {
+      "pdf-2023": "/pdfs/ocean-2023.pdf",
+      "pdf-2022": "/pdfs/ocean-2022.pdf",
+      "pdf-2021": "/pdfs/ocean-2021.pdf",
+      "pdf-2020": "/pdfs/ocean-2020.pdf"
+    }
+  },
+  "enneagram": {
+    "type": "1w2",
+    "name": "The Reformer (with Two Wing)",
+    "typeScores": {
+      "type1": 14,
+      "type5": 11,
+      "type8": 10.6,
+      "type3": 9.3,
+      "type2": 6.3,
+      "type9": 5
+    },
+    "wingScores": {
+      "1w2": 17.2,
+      "1w9": 16.5,
+      "8w7": 13.4,
+      "2w1": 13.3,
+      "8w9": 13.1,
+      "3w2": 12.5,
+      "5w6": 12,
+      "9w1": 12,
+      "5w4": 11.5,
+      "2w3": 11,
+      "9w8": 10.3,
+      "3w4": 9.8
+    },
+    "core": {
+      "basicFear": "Being corrupt, evil, defective, or imperfect",
+      "basicDesire": "To be good, virtuous, balanced, and have integrity",
+      "keyMotivation": "To improve themselves and their environment, to be consistent with their ideals, to be justified"
+    },
+    "wings": {
+      "wing2": "Adds warmth, helpfulness, and people-orientation",
+      "wing9": "Adds calmness, emotional stability, and acceptance"
+    },
+    "pdfs": {
+      "pdf-2025": "https://gateway.pinata.cloud/ipfs/bafkreie6liiqcubg7yayavvu5nzhmj6ds3fkrsdkeynviuu3zsavdtwari",
+      "pdf-2022": "/pdfs/enneagram-2022.pdf",
+      "pdf-2021": "/pdfs/enneagram-2021.pdf"
+    }
+  },
+  "cliftonStrengths": {
+    "name": "CliftonStrengths",
+    "topThemes": ["Learner", "Analytical", "Strategic", "Intellection", "Input"],
+    "breakdown": {
+      "executing": 35,
+      "influencing": 15,
+      "relationship": 20,
+      "strategic": 80
+    },
+    "domainDetails": {
+      "strategic": "Constantly absorbing and analyzing information to make better decisions",
+      "executing": "Moderate ability to implement solutions and turn ideas into reality",
+      "relationship": "Some capacity for building strong relationships, but not a primary strength",
+      "influencing": "Less focused on persuading others, more on developing ideas"
+    },
+    "pdfs": {
+      "pdf-2023": "/pdfs/clifton-2023.pdf",
+      "pdf-2022": "/pdfs/clifton-2022.pdf",
+      "pdf-2021": "/pdfs/clifton-2021.pdf",
+      "pdf-2020": "/pdfs/clifton-2020.pdf",
+      "pdf-2019": "/pdfs/clifton-2019.pdf"
+    }
+  },
+  "hexaco": {
+    "name": "HEXACO Personality Inventory",
+    "breakdown": {
+      "honesty-humility": 4.51,
+      "emotionality": 2.58,
+      "extraversion": 4.05,
+      "agreeableness": 3.43,
+      "conscientiousness": 6.32,
+      "openness": 6.51,
+      "altruism": 6.34
+    },
+    "facetScores": {
+      "honesty-humility": {
+        "Sincerity": 4.07,
+        "Fairness": 3.28,
+        "Greed Avoidance": 5.86,
+        "Modesty": 3.27
+      },
+      "emotionality": {
+        "Fearfulness": 4.05,
+        "Anxiety": 1.88,
+        "Dependence": 2.4,
+        "Sentimentality": 1.6
+      },
+      "extraversion": {
+        "Social Self-esteem": 6.01,
+        "Social Boldness": 5.55,
+        "Sociability": 3.98,
+        "Liveliness": 2.68
+      },
+      "agreeableness": {
+        "Forgiveness": 2.86,
+        "Gentleness": 2.93,
+        "Flexibility": 2.56,
+        "Patience": 6.77
+      },
+      "conscientiousness": {
+        "Organization": 5.62,
+        "Diligence": 6.78,
+        "Perfectionism": 5.54,
+        "Prudence": 7.44
+      },
+      "openness": {
+        "Aesthetic Appreciation": 5.87,
+        "Inquisitiveness": 7.09,
+        "Creativity": 5.53,
+        "Unconventionality": 7.43
+      }
+    },
+    "facets": {
+      "honesty-humility": ["Sincerity", "Fairness", "Greed Avoidance", "Modesty"],
+      "emotionality": ["Fearfulness", "Anxiety", "Dependence", "Sentimentality"],
+      "extraversion": ["Social Self-Esteem", "Social Boldness", "Sociability", "Liveliness"],
+      "agreeableness": ["Forgiveness", "Gentleness", "Flexibility", "Patience"],
+      "conscientiousness": ["Organization", "Diligence", "Perfectionism", "Prudence"],
+      "openness": ["Aesthetic Appreciation", "Inquisitiveness", "Creativity", "Unconventionality"]
+    },
+    "pdfs": {
+      "pdf-2023": "/pdfs/hexaco-2023.pdf",
+      "pdf-2022": "/pdfs/hexaco-2022.pdf",
+      "pdf-2021": "/pdfs/hexaco-2021.pdf"
+    }
+  }
+}

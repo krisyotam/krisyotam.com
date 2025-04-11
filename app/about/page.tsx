@@ -31,6 +31,17 @@ import { PageHeader } from "@/components/page-header"
 import Experience from "@/components/experience"
 // Import the new ProgymPractice component at the top of the file
 import ProgymPractice from "@/components/progymnasmata/progym-practice"
+// After importing the existing components, add these new imports
+import ProfileBento from "@/components/profile-bento"
+import PersonalityCarousel from "@/components/personality-carousel"
+import aboutProfileData from "../../data/about-profile.json"
+import aboutPredictionsData from "../../data/about-predictions.json"
+import personalityAssessmentsData from "../../data/personality-assessments.json"
+import personalityMoralsData from "../../data/personality-morals.json"
+import Image from "next/image"
+import SiteStickerCarousel from "@/components/site-sticker-carousel"
+import themeSongData from "../../data/theme-song-caption.json"
+import otherSitesData from "../../data/other-sites.json"
 
 export const dynamic = "force-dynamic"
 
@@ -42,7 +53,7 @@ const aboutPageData = {
   preview: "A comprehensive overview of my background, skills, interests, and values.",
   status: "Finished" as const,
   confidence: "certain" as const,
-  importance: 8,
+  importance: 4,
 }
 
 interface AccordionItemProps {
@@ -270,6 +281,64 @@ export default function AboutPage() {
             </>
           ),
         },
+        // Add the Profile section after About Me
+        {
+          title: "Profile",
+          content: (
+            <div className="py-4">
+              <ProfileBento data={aboutProfileData} predictions={aboutPredictionsData.predictions} />
+            </div>
+          ),
+        },
+
+        // Add the Personality section after Profile
+        {
+          title: "Personality",
+          content: (
+            <div className="py-4">
+              <p className="text-lg text-muted-foreground font-light mb-6">
+                Results from various personality assessments that provide insight into my cognitive preferences,
+                behavioral tendencies, and working style.
+              </p>
+              <PersonalityCarousel data={personalityAssessmentsData} />
+            </div>
+          ),
+        },
+
+        // Add the Personality/Morals section after Personality
+        {
+          title: "Personality/Morals",
+          content: (
+            <div className="py-4">
+              <p className="text-lg text-muted-foreground font-light mb-6">
+                Results from various moral and ethical assessments that provide insight into my value system and ethical
+                framework.
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-secondary">
+                      <th className="px-4 py-2 text-left text-foreground">Assessment</th>
+                      <th className="px-4 py-2 text-left text-foreground">Definition</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {personalityMoralsData.map((item, index) => (
+                      <tr
+                        key={index}
+                        className="border-t border-border hover:bg-secondary/50 transition-colors duration-200 cursor-pointer"
+                        onClick={() => window.open(item.link, "_blank")}
+                      >
+                        <td className="px-4 py-2 text-foreground">{item.test}</td>
+                        <td className="px-4 py-2 text-muted-foreground">{item.definition}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ),
+        },
         {
           title: "On My Method",
           content: (
@@ -296,7 +365,11 @@ export default function AboutPage() {
                         onClick={() => (window.location.href = item.link)}
                       >
                         <td className="px-4 py-2 text-foreground">
-                          <Link href={item.link} data-no-preview="true" className="hover:text-gray-400 transition-colors">
+                          <Link
+                            href={item.link}
+                            data-no-preview="true"
+                            className="hover:text-gray-400 transition-colors"
+                          >
                             {item.title}
                           </Link>
                         </td>
@@ -309,7 +382,47 @@ export default function AboutPage() {
             </>
           ),
         },
-        { title: "My Mission", content: missionData.content },
+        {
+          title: "My Mission",
+          content: (
+            <div className="py-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <Card className="col-span-1 md:col-span-3 bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-medium mb-4 text-foreground">Mission Statement</h3>
+                    <p className="text-muted-foreground leading-relaxed">{missionData.content}</p>
+                  </CardContent>
+                </Card>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-4">
+                    <h3 className="text-lg font-medium mb-2">Educate</h3>
+                    <p className="text-muted-foreground">
+                      Share knowledge and insights to help others grow intellectually and personally.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-4">
+                    <h3 className="text-lg font-medium mb-2">Create</h3>
+                    <p className="text-muted-foreground">
+                      Build tools, content, and systems that solve real problems and inspire others.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-4">
+                    <h3 className="text-lg font-medium mb-2">Connect</h3>
+                    <p className="text-muted-foreground">
+                      Foster meaningful relationships and communities around shared interests and values.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          ),
+        },
         {
           title: "Certifications",
           content: (
@@ -367,8 +480,55 @@ export default function AboutPage() {
         {
           title: "Personal Philosophy",
           content: (
-            <div className="mb-6">
-              <p className="text-lg text-muted-foreground font-light">{personalPhilosophyData.content}</p>
+            <div className="py-4">
+              <div className="grid grid-cols-1 gap-4 mb-6">
+                <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-medium mb-4 text-foreground">My Philosophy</h3>
+                    <p className="text-muted-foreground leading-relaxed">{personalPhilosophyData.content}</p>
+                  </CardContent>
+                </Card>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-4">
+                    <h3 className="text-lg font-medium mb-2">Principles</h3>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary mt-2 mr-2"></span>
+                        <span>Continuous learning and intellectual growth</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary mt-2 mr-2"></span>
+                        <span>Balance between tradition and innovation</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary mt-2 mr-2"></span>
+                        <span>Thoughtful creation over mindless consumption</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-4">
+                    <h3 className="text-lg font-medium mb-2">Approach</h3>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary mt-2 mr-2"></span>
+                        <span>Systematic thinking with room for intuition</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary mt-2 mr-2"></span>
+                        <span>Balancing depth and breadth of knowledge</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary mt-2 mr-2"></span>
+                        <span>Embracing complexity while seeking clarity</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           ),
         },
@@ -594,7 +754,12 @@ export default function AboutPage() {
 
                       <div className="flex justify-center">
                         <Button asChild>
-                          <a href={selectedCompany?.website} target="_blank" data-no-preview="true" rel="noopener noreferrer">
+                          <a
+                            href={selectedCompany?.website}
+                            target="_blank"
+                            data-no-preview="true"
+                            rel="noopener noreferrer"
+                          >
                             Visit Website
                           </a>
                         </Button>
@@ -604,42 +769,6 @@ export default function AboutPage() {
                 </DialogContent>
               </Dialog>
             </>
-          ),
-        },
-        {
-          title: "Site Info",
-          content: (
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="bg-secondary">
-                    <th className="px-4 py-2 text-left text-foreground">Name</th>
-                    <th className="px-4 py-2 text-left text-foreground">Purpose</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {siteInfoData.map((site, index) => (
-                    <tr
-                      key={index}
-                      className="border-t border-border hover:bg-secondary/50 transition-colors duration-200"
-                    >
-                      <td className="px-4 py-2 text-foreground">
-                        <a
-                          href={site.Link}
-                          target="_blank"
-                          data-no-preview="true"
-                          rel="noopener noreferrer"
-                          className="hover:text-gray-400 transition-colors"
-                        >
-                          {site.Name}
-                        </a>
-                      </td>
-                      <td className="px-4 py-2 text-muted-foreground">{site.Purpose}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           ),
         },
         {
@@ -675,6 +804,83 @@ export default function AboutPage() {
                   ))}
                 </tbody>
               </table>
+            </div>
+          ),
+        },
+        {
+          title: "Other Sites",
+          content: (
+            <div className="py-4">
+              <p className="text-lg text-muted-foreground font-light mb-6">
+                A collection of site stickers from other websites and creators that I admire and recommend.
+              </p>
+              <SiteStickerCarousel sites={otherSitesData} />
+            </div>
+          ),
+        },
+        {
+          title: "Site Info",
+          content: (
+            <div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-4">
+                    <div className="flex justify-center">
+                      <div className="relative w-full h-[200px]">
+                        <Image
+                          src={themeSongData.stickerUrl || "/placeholder.svg"}
+                          alt="Site Sticker"
+                          fill
+                          style={{ objectFit: "contain" }}
+                          className="rounded-md"
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-4">
+                    <p className="text-muted-foreground mb-3">{themeSongData.caption}</p>
+                    <audio controls className="w-full mt-2">
+                      <source src={themeSongData.themeSongUrl} type="audio/mpeg" />
+                      Your browser does not support the audio element.
+                    </audio>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-secondary">
+                      <th className="px-4 py-2 text-left text-foreground">Name</th>
+                      <th className="px-4 py-2 text-left text-foreground">Purpose</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {siteInfoData.map((site, index) => (
+                      <tr
+                        key={index}
+                        className="border-t border-border hover:bg-secondary/50 transition-colors duration-200"
+                      >
+                        <td className="px-4 py-2 text-foreground">
+                          <a
+                            href={site.Link}
+                            target="_blank"
+                            data-no-preview="true"
+                            rel="noopener noreferrer"
+                            className="hover:text-gray-400 transition-colors"
+                          >
+                            {site.Name}
+                          </a>
+                        </td>
+                        <td className="px-4 py-2 text-muted-foreground">{site.Purpose}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           ),
         },
@@ -898,4 +1104,3 @@ export default function AboutPage() {
     </div>
   )
 }
-
