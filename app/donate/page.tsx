@@ -1,95 +1,123 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Bitcoin, Wallet2 } from "lucide-react"
-import cryptocurrenciesData from "../../data/cryptocurrencies.json"
+import { useState } from "react"
+import { Copy, Check } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import { PageHeader } from "@/components/page-header"
+import SiteStickerCarousel from "@/components/site-sticker-carousel"
+import supportThemData from "@/data/support-them.json"
 
-// Donate page metadata
-const donatePageData = {
-  title: "Donate",
-  subtitle: "Support My Work",
-  date: new Date().toISOString(),
-  preview: "If you find my content valuable, consider supporting my work with a cryptocurrency donation.",
-  status: "Finished" as const,
-  confidence: "certain" as const,
-  importance: 5,
-}
-
-interface Cryptocurrency {
-  name: string
-  symbol: string
-  address: string
-}
-
-const getCryptoIcon = (symbol: string) => {
-  switch (symbol.toUpperCase()) {
-    case "BTC":
-      return Bitcoin
-    default:
-      return Wallet2
-  }
-}
 
 export default function DonatePage() {
-  const [cryptocurrencies, setCryptocurrencies] = useState<Cryptocurrency[]>([])
+  const [copied, setCopied] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCryptocurrencies(cryptocurrenciesData.cryptocurrencies)
-    }
-  }, [])
+  const cryptoAddresses = [
+    {
+      name: "Bitcoin (BTC)",
+      address: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
+    },
+    {
+      name: "Ethereum (ETH)",
+      address: "0x71C7656EC7ab88b098defB751B7401B5f6d8976F",
+    },
+    {
+      name: "Litecoin (LTC)",
+      address: "ltc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
+    },
+    {
+      name: "Monero (XMR)",
+      address: "44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A",
+    },
+  ]
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+    setCopied(text)
+    setTimeout(() => setCopied(null), 2000)
+  }
+
+  const patreonData = {
+    ownerName: "Kris Yotam",
+    siteSticker: "https://i.postimg.cc/5yzs0wj0/krisyotam.jpg",
+    siteUrl: "https://www.patreon.com/krisyotam",
+    tags: ["Essays", "Critical Analysis", "Research"],
+    description: "long term stable essays on krisyotam.com",
+  }
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
-      <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-        {/* Add the PageHeader component */}
-        <PageHeader
-          title={donatePageData.title}
-          subtitle={donatePageData.subtitle}
-          date={donatePageData.date}
-          preview={donatePageData.preview}
-          status={donatePageData.status}
-          confidence={donatePageData.confidence}
-          importance={donatePageData.importance}
-        />
+    <div className="container mx-auto px-4 py-12 max-w-[650px]">
+      <PageHeader
+        title="Donate"
+        subtitle="Support My Work"
+        date={new Date().toISOString()}
+        status="Active"
+        confidence="certain"
+        importance={8}
+        preview="Your support helps me continue creating high-quality content and research."
+      />
 
-        <p className="mb-8 text-muted-foreground">
-          If you find my content valuable, consider supporting my work with a crypto donation. Your contribution helps
-          me continue creating and sharing knowledge.
+      <div className="mb-12">
+        <h2 className="text-2xl font-serif mb-4">Support My Work</h2>
+        <p className="text-muted-foreground mb-6">
+          If you enjoy my essays and research, consider supporting me on Patreon for exclusive content and early access.
         </p>
-        <div className="mb-8">
-          <p className="text-sm text-muted-foreground">
-            If you'd like to purchase something from my wishlist and have it shipped directly to me, you can send it to
-            the following address:
-          </p>
-          <p className="text-sm font-mono break-all text-foreground">[Your Shipping Address Here]</p>
+        <div className="w-full mx-auto">
+          <SiteStickerCarousel sites={[patreonData]} />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {cryptocurrencies.map((crypto) => {
-            const Icon = getCryptoIcon(crypto.symbol)
-            return (
-              <div key={crypto.symbol} className="p-6 bg-card rounded-lg shadow-md">
-                <div className="flex items-center mb-4">
-                  <Icon className="w-6 h-6 mr-2 text-foreground" />
-                  <h2 className="text-xl font-semibold text-foreground">{crypto.name}</h2>
-                </div>
-                <p className="text-sm mb-2 text-muted-foreground">Address:</p>
-                <p className="text-xs font-mono break-all text-foreground">{crypto.address}</p>
+      </div>
+
+      <div className="mb-12">
+        <h2 className="text-2xl font-serif mb-4">Cryptocurrency Donations</h2>
+        <p className="text-muted-foreground mb-6">
+          I accept donations in various cryptocurrencies. Simply copy the address to send your contribution.
+        </p>
+
+        <div className="grid grid-cols-2 gap-4">
+          {cryptoAddresses.map((crypto) => (
+            <div key={crypto.name} className="border border-border p-4 rounded-sm bg-card shadow-sm">
+              <h3 className="text-sm font-medium mb-2">{crypto.name}</h3>
+              <div className="flex items-center">
+                <code className="text-xs bg-muted p-1.5 rounded-sm flex-1 overflow-hidden whitespace-nowrap text-ellipsis">
+                  {crypto.address}
+                </code>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => copyToClipboard(crypto.address)}
+                  className="ml-1 flex-shrink-0 h-7 w-7 p-0"
+                >
+                  {copied === crypto.address ? (
+                    <Check className="h-3 w-3 text-green-500" />
+                  ) : (
+                    <Copy className="h-3 w-3" />
+                  )}
+                </Button>
               </div>
-            )
-          })}
+            </div>
+          ))}
         </div>
-        <div className="flex justify-center my-6">
-          <a
-            href="/wishlist"
-            className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 rounded"
-          >
-            View My Wishlist
+      </div>
+
+      <div className="mb-12">
+        <h2 className="text-2xl font-serif mb-4">Support These Creators</h2>
+        <p className="text-muted-foreground mb-6">
+          Here are some other creators whose work I admire. Consider supporting them as well.
+        </p>
+        <SiteStickerCarousel sites={supportThemData} />
+      </div>
+
+      <div className="text-center mt-12 text-muted-foreground">
+        <p className="mb-2">
+          Thank you for your support! It helps me continue creating content and conducting research.
+        </p>
+        <p className="text-sm">
+          For other donation methods or questions, please{" "}
+          <a href="/contact" className="underline hover:text-foreground">
+            contact me
           </a>
-        </div>
+          .
+        </p>
       </div>
     </div>
   )
 }
-

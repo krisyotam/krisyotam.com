@@ -81,6 +81,7 @@
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.1",
     "remark-html": "^16.0.1",
+    "remark-math": "^6.0.0",
     "sonner": "^1.7.1",
     "stripe": "^17.7.0",
     "subscriptions-transport-ws": "latest",

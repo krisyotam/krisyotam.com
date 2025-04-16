@@ -1,10 +1,17 @@
 [
   {
-    "ownerName": "The Minimalist",
-    "siteSticker": "https://i.postimg.cc/QxZszQPt/the-minimalists.jpg",
-    "siteUrl": "https://www.theminimalists.com/",
-    "tags": ["Minimalism", "Mathematics", "Algorithms"],
-    "description": "A digital garden exploring."
+    "ownerName": "Kris Yotam",
+    "siteSticker": "https://i.postimg.cc/5yzs0wj0/krisyotam.jpg",
+    "siteUrl": "https://krisyotam.substack.com/",
+    "tags": ["Essays", "Critical Analysis", "Research"],
+    "description": "long term stable essays on krisyotam.com"
+  },
+  {
+    "ownerName": "Frances Leader",
+    "siteSticker": "https://i.postimg.cc/wBdrTzsp/francesleader.webp",
+    "siteUrl": "https://substack.com/@francesleader",
+    "tags": ["Geopolitics", "Totalitarianism", "Techocracy"],
+    "description": "British female Geo-political writer banned from most social media now writing exclusively on Substack about the history of totalitarianism and technocracy. Other interests include holistic healing and campaigning against electrosmog."
   },
   {
     "ownerName": "Gwern",
@@ -14,24 +21,24 @@
     "description": "A collection of essays and interactive demonstrations on Turing machines, artificial intelligence, and the mathematical foundations of computation."
   },
   {
-    "ownerName": "Grace Hopper",
-    "siteSticker": "https://v0.dev/placeholder.svg?height=200&width=200&text=Grace's+Compiler",
-    "siteUrl": "https://hopper-compiler.example.com",
-    "tags": ["Programming", "COBOL", "Naval History"],
-    "description": "Documenting the evolution of programming languages and compilers, with a focus on Grace Hopper's contributions to computer science and the US Navy."
+    "ownerName": "Phoenician Hunter",
+    "siteSticker": "https://i.postimg.cc/rstGrdvY/phoenician-hunter.png",
+    "siteUrl": "https://substack.com/@phoenicianhunter",
+    "tags": ["Forbidden History", "Rational Inquiry", "Truth-Seeking"],
+    "description": "For thy merchants were the great men of the Earth; for by thy sorceries were all the nations deceived."
   },
   {
-    "ownerName": "John von Neumann",
-    "siteSticker": "https://v0.dev/placeholder.svg?height=200&width=200&text=von+Neumann+Architecture",
-    "siteUrl": "https://von-neumann.example.com",
-    "tags": ["Computer Architecture", "Game Theory", "Mathematics"],
-    "description": "An exploration of von Neumann architecture, cellular automata, and the mathematical foundations of computing and artificial life."
+    "ownerName": "Edward Snowden",
+    "siteSticker": "https://i.postimg.cc/QxyX9rGC/edward-snowden.jpg",
+    "siteUrl": "https://edwardsnowden.substack.com/",
+    "tags": ["Geopolitics", "Civil Liberties", "Mass Surveilance"],
+    "description": "I used to work for the government. Now I work for the public."
   },
   {
-    "ownerName": "Claude Shannon",
-    "siteSticker": "https://v0.dev/placeholder.svg?height=200&width=200&text=Shannon's+Information+Theory",
-    "siteUrl": "https://shannon-information.example.com",
-    "tags": ["Information Theory", "Communication", "Mathematics"],
-    "description": "A digital notebook on information theory, communication systems, and the mathematical foundations of the digital age."
+    "ownerName": "The Cultural Tutor",
+    "siteSticker": "https://i.postimg.cc/VNf621pv/the-cultural-tutor.webp",
+    "siteUrl": "https://culturaltutor.substack.com/",
+    "tags": ["Classical Music", "Rhetoric", "Architecture"],
+    "description": "A beautiful education."
   }
 ]

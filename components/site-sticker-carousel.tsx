@@ -57,7 +57,7 @@ export default function SiteStickerCarousel({ sites }: SiteStickerCarouselProps)
                 />
               </Link>
             </div>
-            <h3 className="text-lg font-medium mb-2 text-center">{currentSite.ownerName}'s Site</h3>
+            <h3 className="text-lg font-medium mb-2 text-center">{currentSite.ownerName}</h3>
 
             {/* Tags */}
             <div className="flex flex-wrap justify-center gap-2 mb-3">
