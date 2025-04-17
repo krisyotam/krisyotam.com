@@ -22,15 +22,24 @@ export function LibraryNotesContent() {
         const response = await fetch("/api/library-notes")
         const data = await response.json()
 
+        let parsedNotes: Note[] = []
+
         if (data && Array.isArray(data.notes)) {
-          setNotes(data.notes)
+          parsedNotes = data.notes
         } else if (Array.isArray(data)) {
-          setNotes(data)
+          parsedNotes = data
         } else {
           console.error("Unexpected data format:", data)
           setError("Received invalid data format from API")
-          setNotes([])
+          return
         }
+
+        // ✅ Sort notes by descending date (newest first)
+        const sortedNotes = parsedNotes.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        )
+
+        setNotes(sortedNotes)
       } catch (error) {
         console.error("Error fetching notes:", error)
         setError("Failed to load notes")
@@ -61,7 +70,9 @@ export function LibraryNotesContent() {
         <Card key={note.id} className="p-4">
           <div className="flex justify-between items-start mb-2">
             <h3 className="font-medium">{note.title}</h3>
-            <span className="text-xs text-muted-foreground">{formatDate(new Date(note.date))}</span>
+            <span className="text-xs text-muted-foreground">
+              {formatDate(new Date(note.date))}
+            </span>
           </div>
           <p className="text-sm text-muted-foreground">{note.content}</p>
         </Card>
@@ -69,4 +80,3 @@ export function LibraryNotesContent() {
     </div>
   )
 }
-

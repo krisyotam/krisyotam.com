@@ -45,6 +45,12 @@ export default async function CollectionPage({ params }: { params: { slug: strin
     return <div>Collection not found</div>
   }
 
+  // Reverse the order of notes so the newest show up first
+  const reversedCollection = {
+    ...collection,
+    books: [...collection.books].reverse(),
+  }
+
   // Set metadata for the page
   const metadata = {
     title: `${collection.title} | Kris Yotam's Library`,
@@ -63,8 +69,7 @@ export default async function CollectionPage({ params }: { params: { slug: strin
         importance={collection.importance}
         backLink="/library"
       />
-      <LocalCollectionContent collection={collection} />
+      <LocalCollectionContent collection={reversedCollection} />
     </main>
   )
 }
-

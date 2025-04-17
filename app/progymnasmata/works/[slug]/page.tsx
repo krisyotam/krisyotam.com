@@ -12,6 +12,7 @@ interface ProgymnasmataItem {
   description: string
   slug: string
   inspiration?: string
+  image?: string // Add this line
 }
 
 interface Props {

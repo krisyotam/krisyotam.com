@@ -14,22 +14,19 @@
           "id": "gb1",
           "title": "The Iliad",
           "author": "Homer",
-          "cover": "/placeholder.svg",
-          "rating": 5
+          "cover": "/placeholder.svg"
         },
         {
           "id": "gb2",
           "title": "The Republic",
           "author": "Plato",
-          "cover": "/placeholder.svg",
-          "rating": 5
+          "cover": "/placeholder.svg"
         },
         {
           "id": "gb3",
           "title": "Hamlet",
           "author": "William Shakespeare",
-          "cover": "/placeholder.svg",
-          "rating": 5
+          "cover": "/placeholder.svg"
         }
       ]
     },
@@ -47,22 +44,19 @@
           "id": "hc1",
           "title": "The Autobiography of Benjamin Franklin",
           "author": "Benjamin Franklin",
-          "cover": "/placeholder.svg",
-          "rating": 4
+          "cover": "/placeholder.svg"
         },
         {
           "id": "hc2",
           "title": "The Odyssey",
           "author": "Homer",
-          "cover": "/placeholder.svg",
-          "rating": 5
+          "cover": "/placeholder.svg"
         },
         {
           "id": "hc3",
           "title": "Don Quixote",
           "author": "Miguel de Cervantes",
-          "cover": "/placeholder.svg",
-          "rating": 5
+          "cover": "/placeholder.svg"
         }
       ]
     },
@@ -70,7 +64,7 @@
       "id": "3",
       "title": "Penguin Classics",
       "subtitle": "Contemporary Classic Literature",
-      "description": "A curated collection of classic literature published by Penguin Books, featuring a wide range of authors and genres.",
+      "description": "A curated collection of classic literature published by Penguin Books, I use these copies for my literary analysis.",
       "lastUpdated": "2025-03-20T12:00:00Z",
       "status": "in progress",
       "confidence": "likely",
@@ -80,22 +74,25 @@
           "id": "pc1",
           "title": "Pride and Prejudice",
           "author": "Jane Austen",
-          "cover": "/placeholder.svg",
-          "rating": 4
+          "cover": "/placeholder.svg"
         },
         {
           "id": "pc2",
-          "title": "1984",
-          "author": "George Orwell",
-          "cover": "/placeholder.svg",
-          "rating": 5
+          "title": "Sense & Sensebility",
+          "author": "Jane Austen",
+          "cover": "/placeholder.svg"
         },
         {
           "id": "pc3",
-          "title": "The Great Gatsby",
-          "author": "F. Scott Fitzgerald",
-          "cover": "/placeholder.svg",
-          "rating": 4
+          "title": "Mrs Dalloway",
+          "author": "Virginia Woolf",
+          "cover": "/placeholder.svg"
+        },
+        {
+          "id": "pc4",
+          "title": "Mansfield Park",
+          "author": "Jane Austen",
+          "cover": "/placeholder.svg"
         }
       ]
     }
