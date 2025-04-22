@@ -208,7 +208,19 @@
       "status": "In Progress",
       "confidence": "medium",
       "importance": 7
+    },
+    {
+      "slug": "verse",
+      "title": "Verse",
+      "subtitle": "Poetic Forms",
+      "preview": "A curated collection of my poetic explorations—from structured forms like sonnets and haiku to free‐verse innovations.",
+      "date": "2025-04-21",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 1
     }
+    
   ]
 }
 

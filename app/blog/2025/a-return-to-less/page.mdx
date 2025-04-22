@@ -1,4 +1,8 @@
 import { EnhancedImageDisplay } from "@/components/posts/images/enhanced-image-display";
+import Book from "@/components/books/book"
+import BookCollection from "@/components/books/book-collection"
+import MiniBio from '@/components/posts/people/mini-bio';
+
 
 > Reduce the complexity of life by eliminating the needless wants of life, and the labors of life reduce themselves
 
@@ -62,3 +66,60 @@ Rather than a simple celebration of individualism, the poem offers a more comple
 In the end, perhaps the most profound insight of the poem is not about which road to take, but about how we justify and mythologize our choices after the fact.
 
 
+<div className="flex flex-col items-center justify-center min-h-screen space-y-12">
+  {/* 1-book demo */}
+  <Book
+    coverImage="https://images.squarespace-cdn.com/content/v1/624da83e75ca872f189ffa42/1660938091838-OPRIN3NA7SEHYSW7VSDH/image001.jpg"
+    title="Brave New World"
+    author="Aldous Huxley"
+    edition="First Edition"
+    originallyPublished={1932}
+    genre="Science Fiction"
+    link="https://en.wikipedia.org/wiki/Brave_New_World"
+  />
+
+  {/* Space between */}
+
+  {/* 3-book collection demo */}
+  <BookCollection
+    title="Timeless Classics"
+    books={[
+      {
+        coverImage: "https://images.squarespace-cdn.com/content/v1/624da83e75ca872f189ffa42/1660938091838-OPRIN3NA7SEHYSW7VSDH/image001.jpg",
+        title: "1984",
+        author: "George Orwell",
+        edition: "First Edition",
+        originallyPublished: 1949,
+        genre: "Dystopian",
+        link: "https://en.wikipedia.org/wiki/Nineteen_Eighty-Four"
+      },
+      {
+        coverImage: "https://images.squarespace-cdn.com/content/v1/624da83e75ca872f189ffa42/1660938091838-OPRIN3NA7SEHYSW7VSDH/image001.jpg",
+        title: "To Kill a Mockingbird",
+        author: "Harper Lee",
+        edition: "First Edition",
+        originallyPublished: 1960,
+        genre: "Southern Gothic",
+        link: "https://images.squarespace-cdn.com/content/v1/624da83e75ca872f189ffa42/1660938091838-OPRIN3NA7SEHYSW7VSDH/image001.jpg"
+      },
+      {
+        coverImage: "https://images.squarespace-cdn.com/content/v1/624da83e75ca872f189ffa42/1660938091838-OPRIN3NA7SEHYSW7VSDH/image001.jpg",
+        title: "The Great Gatsby",
+        author: "F. Scott Fitzgerald",
+        edition: "First Edition",
+        originallyPublished: 1925,
+        genre: "Tragedy",
+        link: "https://images.squarespace-cdn.com/content/v1/624da83e75ca872f189ffa42/1660938091838-OPRIN3NA7SEHYSW7VSDH/image001.jpg"
+      }
+    ]}
+  />
+</div>
+
+# Here is a sample of a new component
+
+<MiniBio
+  ghibliImage="https://i.postimg.cc/26R6HtFC/ada-lovelace.png"
+  realImage="https://www.salientwomen.com/wp-content/uploads/2020/05/ada-portada-2.png"
+  name="Ada Lovelace"
+  description="First Programmer"
+/>

@@ -1,11 +1,11 @@
 [
   {
     "id": "1",
-    "title": "JSTOR Digital Library",
-    "url": "https://www.jstor.org/",
-    "description": "Digital library of academic journals, books, and primary sources.",
-    "category": "Research",
-    "tags": ["academic", "journals", "digital library", "research papers"]
+    "title": "Shakespeare: The Sonnets",
+    "url": "https://shakespeare.mit.edu/Poetry/sonnets.html",
+    "description": "A comrephensive online collection of shakespeares sonnets.",
+    "category": "Poetry",
+    "tags": ["Poetry", "Verse", "Shakespeare", "Sonnets"]
   },
   {
     "id": "2",

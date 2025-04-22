@@ -3,6 +3,7 @@ import { CommandMenu } from "../components/command-menu"
 import type { Metadata } from "next"
 import { ThemeProvider } from "../components/theme-provider"
 import { UniversalLinkModal } from "../components/universal-link-modal"
+import { SettingsMenu } from "../components/settings-menu"
 import type React from "react"
 
 export const metadata: Metadata = {
@@ -34,6 +35,7 @@ export default function RootLayout({
           <div className="min-h-screen flex flex-col">
             <main className="flex-grow">{children}</main>
             <CommandMenu />
+            <SettingsMenu />
             <UniversalLinkModalWrapper />
           </div>
         </ThemeProvider>

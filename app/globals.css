@@ -536,76 +536,67 @@
 
 
 
-
-
-
-
-
-
-/* Hide scrollbars but allow scrolling */
-html, body {
-  overflow: hidden;
-  height: 100%;
+/* 1) Always reserve space for a vertical scrollbar */
+html {
+  /* modern: reserve gutter space even when no scrollbar */
+  scrollbar-gutter: stable;
 }
-
-/* Hide scrollbar in WebKit-based browsers */
-::-webkit-scrollbar {
-  display: none;
-}
-
-/* Ensure body remains scrollable */
 body {
-  overflow: auto;
+  /* fallback / more consistent: always show a (possibly empty) scrollbar gutter */
+  overflow-y: scroll;
+}
+
+/* 2) Hide the scrollbar visually */
+
+/* — Chrome, Safari, Opera — */
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+/* — Firefox — */
+body {
+  scrollbar-width: none;       /* hides scrollbar but still reserves space because of overflow-y: scroll */
+}
+
+/* — IE 10+ / Edge Legacy — */
+body {
+  -ms-overflow-style: none;
 }
 
 
 
-/* Targets the span wrapper added by next/image */
-span[data-nextjs-image-wrapper] {
-  display: block;
-  line-height: 0;
-  margin: 0;
-  padding: 0;
+
+
+
+
+
+
+/* target the Next.js Image wrapper <span> by its data‑attribute */
+span[data-nimg] {
+  display: block !important;
 }
 
 
 
+/* globals.css */
 
+span[data-nimg] {
+  display: block !important;      /* kill inline‑block spacing */
+  margin: 0 !important;           /* no margins */
+  padding: 0 !important;          /* no padding */
+  vertical-align: top !important; /* align it flush */
+  /* leave border-radius & overflow alone */
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+img {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  vertical-align: top !important;
+}
 
 
 

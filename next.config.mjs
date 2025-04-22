@@ -9,7 +9,7 @@ try {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = withMDX({
-  extension: /\.mdx?$/,
+  extension: /\.mdx?$/
 })({
   eslint: {
     ignoreDuringBuilds: true,
@@ -26,6 +26,15 @@ const nextConfig = withMDX({
     parallelServerCompiles: true,
   },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'], // Added MDX support
+
+  // Alias next/image → next/future/image globally
+  webpack(config) {
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      'next/image$': 'next/future/image',
+    };
+    return config;
+  },
 
   // ✅ Add security headers
   async headers() {

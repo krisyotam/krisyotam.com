@@ -1,0 +1,71 @@
+{
+    "tags": [
+      {
+        "slug": "design",
+        "title": "Design",
+        "subtitle": "Exploring visual and user experience principles",
+        "preview": "Articles about design principles, visual aesthetics, and creating meaningful user experiences.",
+        "date": "2025-01-25",
+        "show-status": "active",
+        "status": "Finished",
+        "confidence": "certain",
+        "importance": 7
+      },
+      {
+        "slug": "documentation",
+        "title": "Documentation",
+        "subtitle": "Guides for clear writing and reference materials",
+        "preview": "Best practices and examples for documenting projects.",
+        "date": "2025-01-25",
+        "show-status": "active",
+        "status": "Finished",
+        "confidence": "likely",
+        "importance": 6
+      },
+      {
+        "slug": "web-development",
+        "title": "Web Development",
+        "subtitle": "Building modern web applications",
+        "preview": "Insights into frameworks, tools, and techniques for web development.",
+        "date": "2025-01-25",
+        "show-status": "active",
+        "status": "Finished",
+        "confidence": "likely",
+        "importance": 8
+      },
+      {
+        "slug": "programming",
+        "title": "Programming",
+        "subtitle": "Coding paradigms and best practices",
+        "preview": "Deep dives into programming concepts and mindset.",
+        "date": "2025-01-20",
+        "show-status": "active",
+        "status": "In Progress",
+        "confidence": "likely",
+        "importance": 7
+      },
+      {
+        "slug": "mindfulness",
+        "title": "Mindfulness",
+        "subtitle": "Applying mindfulness to work and life",
+        "preview": "Techniques for cultivating presence and focus in daily tasks.",
+        "date": "2025-01-20",
+        "show-status": "active",
+        "status": "Draft",
+        "confidence": "possible",
+        "importance": 5
+      },
+      {
+        "slug": "productivity",
+        "title": "Productivity",
+        "subtitle": "Strategies for effective time and task management",
+        "preview": "Tips and frameworks to boost productivity.",
+        "date": "2025-01-20",
+        "show-status": "active",
+        "status": "In Progress",
+        "confidence": "likely",
+        "importance": 6
+      }
+    ]
+  }
+  

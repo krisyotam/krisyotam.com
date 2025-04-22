@@ -92,12 +92,12 @@ async function getTMDBImages(items: any[], type: "movie" | "show" | "episode") {
   console.log(`Getting TMDB images for ${items.length} ${type}s`)
 
   // IMPORTANT: Fixed the typo in the environment variable name
-  const tmdbApiKey = process.env.TMBD_API_KEY
+  const tmdbApiKey = process.env.TMDB_API_KEY
 
   console.log(`TMDB API Key found: ${tmdbApiKey ? "YES" : "NO"}`)
 
   if (!tmdbApiKey) {
-    console.error("TMBD_API_KEY not found in environment variables! Check your .env.local file.")
+    console.error("TMDB_API_KEY not found in environment variables! Check your .env.local file.")
     console.log(
       "Available environment variables:",
       Object.keys(process.env)

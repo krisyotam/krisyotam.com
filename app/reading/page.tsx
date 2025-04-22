@@ -10,9 +10,9 @@ export default function ReadingPage() {
   // Reading page metadata
   const readingPageData = {
     title: "Reading",
-    subtitle: "Books and Literature",
+    subtitle: "",
     date: new Date().toISOString(),
-    preview: "A curated collection of books I'm currently reading, have read, and plan to read in the future.",
+    preview: "my currently reading, read, and tbr tracked with literal.club",
     status: "In Progress" as const,
     confidence: "certain" as const,
     importance: 7,

@@ -1,148 +1,107 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { PoetryCard } from "@/components/poetry"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { HelpCircle, Search } from "lucide-react"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import poemsData from "@/data/poems.json"
-import type { Poem } from "@/utils/poems"
-import { PageHeader } from "@/components/page-header"
+import { useState, useEffect } from "react";
+import { PoetryCard } from "@/components/poetry";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import poemsData from "@/data/poems.json";
+import type { Poem } from "@/utils/poems";
+import { PageHeader } from "@/components/page-header";
 
-// Poetry page metadata
-const poetryPageData = {
-  title: "Poetry",
-  subtitle: "Verses and Reflections",
-  date: new Date().toISOString(),
-  preview: "A collection of original poems exploring themes of existence, nature, and the human experience.",
-  status: "In Progress" as const,
-  confidence: "certain" as const,
-  importance: 7,
-}
+const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
 
 export default function PoetryPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [activeType, setActiveType] = useState("All")
-  const poems = poemsData as Poem[]
+  const allPoems = poemsData as Poem[];
+  const poemTypes = ["All", ...Array.from(new Set(allPoems.map((p) => p.type)))];
 
-  // Get unique poem types
-  const poemTypes = Array.from(new Set(poems.map((poem: Poem) => poem.type)))
+  // derive initial type from the URL, or default to All
+  const [activeType, setActiveType] = useState< string>(
+    () => {
+      const parts = window.location.pathname.split("/");
+      return parts[2] ? poemTypes.find(t => slugify(t) === parts[2])! : "All";
+    }
+  );
 
-  // Filter poems based on search query and active type
-  const filteredPoems = poems.filter((poem) => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // listen for browser back/forward so UI stays in sync
+  useEffect(() => {
+    const onPop = () => {
+      const parts = window.location.pathname.split("/");
+      const newType = parts[2]
+        ? poemTypes.find((t) => slugify(t) === parts[2]) || "All"
+        : "All";
+      setActiveType(newType);
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, [poemTypes]);
+
+  // click handler: update URL and state without a full reload
+  const handleTypeClick = (t: string) => {
+    const slug = slugify(t);
+    const newPath = t === "All" ? "/poetry" : `/poetry/${slug}`;
+    window.history.pushState({}, "", newPath);
+    setSearchQuery("");
+    setActiveType(t);
+  };
+
+  // filter by search + type
+  const filtered = allPoems.filter((poem) => {
+    const matchesType = activeType === "All" || poem.type === activeType;
     const matchesSearch =
-      searchQuery === "" ||
       poem.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      poem.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (poem.collection && poem.collection.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (poem.description && poem.description.toLowerCase().includes(searchQuery.toLowerCase()))
-
-    const matchesType = activeType === "All" || poem.type === activeType
-
-    return matchesSearch && matchesType
-  })
+      poem.type.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesType && matchesSearch;
+  });
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
-      <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-        {/* Add the PageHeader component */}
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="max-w-4xl mx-auto p-8">
         <PageHeader
-          title={poetryPageData.title}
-          subtitle={poetryPageData.subtitle}
-          date={poetryPageData.date}
-          preview={poetryPageData.preview}
-          status={poetryPageData.status}
-          confidence={poetryPageData.confidence}
-          importance={poetryPageData.importance}
+          title="Poetry"
+          subtitle="Verses and Reflections"
+          date={new Date().toISOString()}
+          preview="A collection of original poems..."
+          status="In Progress"
+          confidence="certain"
+          importance={7}
         />
 
-        {/* Search */}
-        <div className="relative mb-6">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+        <div className="mb-6">
           <Input
-            type="text"
-            placeholder="Search poems by title, type, collection..."
-            className="pl-10"
+            placeholder="Search poems…"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
 
-        {/* Types Filter */}
         <div className="flex flex-wrap gap-2 mb-8">
-          <Button
-            key="type-all"
-            variant={activeType === "All" ? "default" : "secondary"}
-            onClick={() => setActiveType("All")}
-            className="text-sm"
-          >
-            All
-          </Button>
-
-          {poemTypes.map((type) => (
-            <Button
-              key={`type-${type}`}
-              variant={activeType === type ? "default" : "secondary"}
-              onClick={() => setActiveType(type)}
-              className="text-sm"
-            >
-              {type}
-            </Button>
-          ))}
+          {poemTypes.map((t) => {
+            const isActive = t === activeType;
+            return (
+              <Button
+                key={t}
+                variant={isActive ? "default" : "secondary"}
+                className="text-sm"
+                onClick={() => handleTypeClick(t)}
+              >
+                {t}
+              </Button>
+            );
+          })}
         </div>
 
-        {/* Poems Grid */}
-        {filteredPoems.length > 0 ? (
+        {filtered.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {filteredPoems.map((poem) => (
+            {filtered.map((poem) => (
               <PoetryCard key={poem.id} poem={poem} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 bg-gray-50 rounded-lg">
-            <p className="text-gray-500">No poems found matching your criteria.</p>
-          </div>
+          <p className="text-center text-gray-500">No poems found.</p>
         )}
-
-        {/* Help Button */}
-        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <DialogTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              className="fixed bottom-4 left-4 rounded-full shadow-lg hover:shadow-xl"
-              onClick={() => setIsModalOpen(true)}
-            >
-              <HelpCircle className="h-5 w-5" />
-              <span className="sr-only">Help</span>
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>About Poetry</DialogTitle>
-              <DialogDescription>
-                This page showcases my personal poetry collection. You can browse poems by type, search for specific
-                themes or titles, and read the full text of each poem.
-                <ul className="list-disc pl-5 mt-2 space-y-1">
-                  <li>Search for specific poems using the search bar</li>
-                  <li>Filter by poem type using the buttons above</li>
-                  <li>Click on "Read Poem" to view the full text</li>
-                </ul>
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
       </div>
     </div>
-  )
+  );
 }
-

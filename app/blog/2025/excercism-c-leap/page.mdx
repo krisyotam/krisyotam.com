@@ -1,0 +1,31 @@
+# Exercism: leap
+
+A leap year (in the Gregorian calendar) occurs:
+
+- In every year that is evenly divisible by 4.  
+- Unless the year is evenly divisible by 100, in which case it’s only a leap year if it’s also evenly divisible by 400.
+
+**Some examples:**
+- 1997 was not a leap year (not divisible by 4).  
+- 1900 was not a leap year (divisible by 100 but not 400).  
+- 2000 was a leap year!  
+
+---
+
+# Solution
+
+```c
+#include "leap.h"
+#include <stdbool.h>
+
+bool leap_year(int year) {
+    return (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0);
+}
+```
+
+My solution reduces the entire check to this single return expression:
+
+```c
+return (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0);
+```
+

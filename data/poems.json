@@ -71,7 +71,7 @@
     "collection": "",
     "description": "",
     "slug": "yersinia-pestis",
-    "image": "",
+    "image": "https://i.postimg.cc/XJJpYrkD/a50fe21e-fe8a-46ce-84ab-40ed35b3a0a1.png",
     "stanza1": "Out of these boils,\nPours darkness I behold,\nI awaken in a coffin."
   },
   {
@@ -210,7 +210,7 @@
     "collection": "",
     "description": "",
     "slug": "truth",
-    "image": "",
+    "image": "https://i.postimg.cc/bJWcLbPn/truth.png",
     "stanza1": "What is it that makes people so keen to\nbelieve without sight?",
     "stanza2": "In a world that bores so many stories, a\ngeneration could",
     "stanza3": "recite\neven",
@@ -234,7 +234,7 @@
     "collection": "",
     "description": "",
     "slug": "laborius-night-sky",
-    "image": "",
+    "image": "https://i.postimg.cc/ncLc3Kqs/laborius-night-sky.png",
     "stanza1": "Under the cover of night\nShine solus beings dethroned,\nIf only you knew you weren’t alone.",
     "stanza2": "Your redemption lamented,\nTehom says attest to the harshness,\nConfined to a precinct of darkness.",
     "stanza3": "Sloane’s machinate propaganda,\nThere ruthless starkness strikes home,\nIf only you knew you weren’t alone.",
@@ -275,7 +275,7 @@
     "collection": "",
     "description": "",
     "slug": "ode-to-a-debutante",
-    "image": "",
+    "image": "https://i.postimg.cc/TYXHGGRg/Chat-GPT-Image-Apr-17-2025-04-45-31-AM.png",
     "stanza1": "Oh, Debutante your radiance gleems,\nThe inside flows out like a marvelous stream.\nThy Missive reaches me, even as my heart averts thou,\nMy words freeze up if only I could convert thine.",
     "stanza2": "Your brusque illudes me,\nStill your warmth includes me.\nA sense of folly it gives me,\nUntil our next meet a tally I keep thee.",
     "stanza3": "Your presence inspires me,\nI shall acquire thee.\nThy morals are worn,\nLike garments untorn.",
@@ -1060,6 +1060,22 @@
     "stanza5": "My skin is warm,\nyet I cannot stop shivering.",
     "stanza6": "My heart races,\nbut my hands remain still.",
     "stanza7": "Surrounded by love—\nthat fails to surround me."
+  },
+  {
+    "id": "85",
+    "title": "Shall I Compare Thee to a Winter's Night?",
+    "dateCreated": "2025-04-10",
+    "year": 2025,
+    "type": "Sonnet",
+    "collection": "",
+    "description": "The challenge was to do the inverse of a famous poem, in which I chose Shakespheares Sonnet XVIII. This was inspired by a great deal many relationships I have witnessed with the humurous addition of dan humprey, and blaire waldorfs.",
+    "slug": "shall-i-compare-thee-to-a-winters-night",
+    "image": "https://i.postimg.cc/6p4X2MNX/shall-i-compare-thee-to-a-winters-night.png",
+    "stanza1": "Shall I compare thee to a winter's night?\nThou art more prickly, sharper in thy sting.\nA bitter breeze doth seize November light,\nand winter's reign hath far too strong a cling.",
+    "stanza2": "A soul beguiled by snow in chilling clasp,\nand at night heaven lends it's clearest view.\nEnough that I'd now yield to heaven's grasp,\nand yet even still ice be frozen through.",
+    "stanza3": "While splinters of scorn fall like winter hail.\nMy pride, it fades as winter tows its cost.\nThose eyes of glass that froze me in her stare.\nA harsh reminder, with a heart of frost.",
+    "stanza4": "Not flame nor time dare try to reach to thee\nSublime! A glance that froze the sun had she."
   }
+  
 ]
 

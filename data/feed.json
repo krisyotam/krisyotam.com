@@ -37,7 +37,7 @@
       "status": "Finished",
       "confidence": "highly likely",
       "importance": 5,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Law 1: Never Outshine the Master",
@@ -50,7 +50,7 @@
       "status": "Draft",
       "confidence": "possible",
       "importance": 8,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "The Starry Night",
@@ -63,7 +63,7 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 7,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Demo Post",
@@ -115,7 +115,7 @@
       "status": "Abandoned",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Susanna Kaysen",
@@ -128,7 +128,7 @@
       "status": "In Progress",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Analysis Components Demo",
@@ -141,7 +141,7 @@
       "status": "In Progress",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Analysis of Frieren",
@@ -154,7 +154,7 @@
       "status": "In Progress",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Gojo vs. Sukuna",
@@ -167,7 +167,7 @@
       "status": "In Progress",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Summer Anime 2025",
@@ -180,7 +180,7 @@
       "status": "In Progress",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Analysis of Ubel",
@@ -193,7 +193,7 @@
       "status": "In Progress",
       "confidence": "likely",
       "importance": 2,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Do not go gentle into that good night",
@@ -206,7 +206,7 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 4,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Treatise on Rational Tactics",
@@ -219,7 +219,7 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 4,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "The Fall of Gaia Online",
@@ -271,7 +271,7 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "A Return to Less",
@@ -284,8 +284,86 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 6,
+      "state": "hidden"
+    },
+    {
+      "title": "On Haiku",
+      "subtitle": "A Concise Evolution of the Haiku",
+      "preview": "Origins, structure, and inspiration distilled to their essence.",
+      "date": "2025-04-16",
+      "tags": ["Poetry", "Haiku", "Form"],
+      "category": "Verse",
+      "slug": "on-haiku",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 2,
+      "state": "active"
+    },
+    {
+      "title": "On Limericks",
+      "subtitle": "A Concise Evolution of the Limerick",
+      "preview": "Origins, structure, and inspiration distilled to their essence.",
+      "date": "2025-04-17",
+      "tags": ["Poetry", "Limerick", "Meter"],
+      "category": "Verse",
+      "slug": "on-limericks",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 2,
+      "state": "active"
+    },
+    {
+      "title": "Anatomy of Verse",
+      "subtitle": "Structural Elements of Poetry",
+      "preview": "Exploring meter, rhyme, and rhythm in verse",
+      "date": "2025-04-18",
+      "tags": ["Rhetoric", "Poetry", "Technique"],
+      "category": "Verse",
+      "slug": "anatomy-of-verse",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 4,
+      "state": "active"
+    },
+    {
+      "title": "Excercism C: Leap",
+      "subtitle": "Solution to the Leap Exercise in C",
+      "preview": "A minimalistic C implementation for date validation",
+      "date": "2025-04-19",
+      "tags": ["Coding", "Excercism C", "C"],
+      "category": "Programming",
+      "slug": "excercism-c-leap",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 1,
+      "state": "active"
+    },
+    {
+      "title": "Ada Lovelace",
+      "subtitle": "Biography",
+      "preview": "A concise biography of the first computer programmer",
+      "date": "2025-04-20",
+      "tags": ["Biography", "History", "Computing"],
+      "category": "Biography",
+      "slug": "bio-ada-lovelace",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 7,
+      "state": "active"
+    },
+    {
+      "title": "Hypatia of Alexandria",
+      "subtitle": "Biography",
+      "preview": "A concise biography of the famed Neoplatonist philosopher",
+      "date": "2025-04-21",
+      "tags": ["Mathematician", "History", "Philosophy", "Writer"],
+      "category": "Biography",
+      "slug": "bio-hypatia-of-alexandria",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 6,
       "state": "active"
     }
-  ]
+   ]
 }
 

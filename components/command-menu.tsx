@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Command } from "cmdk"
 import { useRouter } from "next/navigation"
-import { Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll, Earth, Clock, Brain, Waypoints, Notebook, HandCoins, Bitcoin, Archive, Music, Origami, Film, Newspaper, StickyNote, SquareLibrary, Feather, PenLine, CircleHelp, PencilRuler} from "lucide-react"
+import { Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll, Earth, Clock, Brain, Waypoints, Notebook, HandCoins, Bitcoin, Archive, Music, Origami, Film, Newspaper, StickyNote, SquareLibrary, Feather, PenLine, CircleHelp, PencilRuler, Tags} from "lucide-react"
 import { SnowEffect } from "./snow-effect"
 import { useTheme } from "next-themes"
 
@@ -13,30 +13,31 @@ const menuItems = [
   { icon: StickyNote, label: "Notes", path: "/notes" },
   { icon: Clock, label: "Now", path: "/now" },
   { icon: List, label: "Categories", path: "/categories" },
-  { icon: Newspaper, label: "Newsletter", path: "/newsletter" },
+  { icon: Tags, label: "Tags", path: "/tags" },
+  // { icon: Newspaper, label: "Newsletter", path: "/newsletter" },
   { icon: BookOpen, label: "Reading", path: "/reading" },
-  { icon: PenLine, label: "My Books", path: "/mybooks" },
-  { icon: Users, label: "OCs", path: "/ocs" },
-  { icon: Presentation, label: "Keynotes", path: "/keynotes" },
-  { icon: FileText, label: "Speeches", path: "/speeches" },
+  // { icon: PenLine, label: "My Books", path: "/mybooks" },
+  // { icon: Users, label: "OCs", path: "/ocs" },
+  // { icon: Presentation, label: "Keynotes", path: "/keynotes" },
+  // { icon: FileText, label: "Speeches", path: "/speeches" },
   { icon: Feather, label: "Poetry", path: "/poetry" },
-  { icon: Music, label: "Playlist", path: "/playlists" },
-  { icon: Origami, label: "Anime", path: "/anime" },
-  { icon: Film, label: "Film", path: "/film" },
+  // { icon: Music, label: "Playlist", path: "/playlists" },
+  // { icon: Origami, label: "Anime", path: "/anime" },
+  // { icon: Film, label: "Film", path: "/film" },
   { icon: HandCoins, label: "Nuggets", path: "/nuggets" },
-  { icon: Scroll, label: "Theories", path: "/theories" },
-  { icon: Notebook, label: "Projects", path: "/projects" },
+  // { icon: Scroll, label: "Theories", path: "/theories" },
+  // { icon: Notebook, label: "Projects", path: "/projects" },
   { icon: School, label: "Research", path: "/research" },
-  { icon: Waypoints, label: "Memory", path: "/memories" },
+  // { icon: Waypoints, label: "Memory", path: "/memories" },
   { icon: Earth, label: "Globe", path: "/globe" },
   { icon: Gift, label: "Wishlist", path: "/wishlist" },
   { icon: Brain, label: "Today I Learned", path: "/til" },
   { icon: Bitcoin, label: "Donate", path: "/donate" },
   { icon: Mail, label: "Contact", path: "/contact" },
   { icon: Archive, label: "Archive", path: "/archive" },
-  { icon: CircleHelp, label: "Wiki", path: "/wiki" },
+  // { icon: CircleHelp, label: "Wiki", path: "/wiki" },
   { icon: SquareLibrary, label: "Library", path: "/library" },
-  { icon: Heart, label: "Colophon", path: "/colophon" },
+  // { icon: Heart, label: "Colophon", path: "/colophon" },
   { icon: User, label: "About", path: "/about" },
 ]
 

@@ -1,11 +1,12 @@
-"use client"
-import Link from "next/link"
-import { Calendar, BookText, Bookmark } from "lucide-react"
-import { useTheme } from "next-themes"
-import type { Poem } from "@/utils/poems"
+"use client";
+
+import Link from "next/link";
+import { Calendar, BookText, Bookmark } from "lucide-react";
+import { useTheme } from "next-themes";
+import type { Poem } from "@/utils/poems";
 
 interface PoetryCardProps {
-  poem: Poem
+  poem: Poem;
 }
 
 // CSS Reset and Component Styles with Dark Mode Support
@@ -147,66 +148,67 @@ const PoetryStyles = () => (
     .poetry-badge {
       display: inline-flex !important;
       align-items: center !important;
-      border: 1px solid hsl(215.4, 16.3%, 46.9%) !important;
+      border: 1px solid hsl(215.4, 16.3%, 46.9%) !Important;
       border-radius: 9999px !important;
-      padding: 0.25rem 0.75rem !important;
+      padding: 0.25rem 0.75rem !Important;
       font-size: 0.75rem !important;
-      font-weight: 500 !important;
-      line-height: 1 !important;
-      color: hsl(215.4, 16.3%, 46.9%) !important;
-      background-color: transparent !important;
-      transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease !important;
+      font-weight: 500 !Important;
+      line-height: 1 !Important;
+      color: hsl(215.4, 16.3%, 46.9%) !Important;
+      background-color: transparent !Important;
+      transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease !Important;
     }
     
     .dark .poetry-badge {
       color: #d1d5db !important;
-      border-color: #4d4d4d !important;
+      border-color: #4d4d4d !Important;
     }
     
     .poetry-title {
-      margin-top: 0.5rem !important;
-      font-size: 1.5rem !important;
-      font-weight: 500 !important;
-      line-height: 1.2 !important;
-      letter-spacing: -0.025em !important;
-      color: hsl(222.2, 47.4%, 11.2%) !important;
-      transition: color 0.3s ease !important;
+      margin-top: 0.5rem !Important;
+      font-size: 1.5rem !Important;
+      font-weight: 500 !Important;
+      line-height: 1.2 !Important;
+      letter-spacing: -0.025em !Important;
+      color: hsl(222.2, 47.4%, 11.2%) !Important;
+      transition: color 0.3s ease !Important;
     }
     
     .dark .poetry-title {
-      color: #f3f4f6 !important;
+      color: #f3f4f6 !Important;
     }
     
     .poetry-collection {
-      display: flex !important;
-      align-items: center !important;
-      font-size: 0.875rem !important;
-      color: hsl(215.4, 16.3%, 46.9%) !important;
-      margin-top: 0.25rem !important;
-      transition: color 0.3s ease !important;
+      display: flex !Important;
+      align-items: center !Important;
+      font-size: 0.875rem !Important;
+      color: hsl(215.4, 16.3%, 46.9%) !Important;
+      margin-top: 0.25rem !Important;
+      transition: color 0.3s ease !Important;
     }
     
     .dark .poetry-collection {
-      color: #9ca3af !important;
+      color: #9ca3af !Important;
     }
     
     .poetry-date {
-      display: flex !important;
-      align-items: center !important;
-      font-size: 0.75rem !important;
-      color: hsl(215.4, 16.3%, 46.9%) !important;
-      transition: color 0.3s ease !important;
+      display: flex !Important;
+      align-items: center !Important;
+      font-size: 0.75rem !Important;
+      color: hsl(215.4, 16.3%, 46.9%) !Important;
+      transition: color 0.3s ease !Important;
     }
     
     .dark .poetry-date {
-      color: #9ca3af !important;
+      color: #9ca3af !Important;
     }
   `}</style>
 )
 
 export function PoetryCard({ poem }: PoetryCardProps) {
   const { theme } = useTheme()
-  const poemUrl = `/poetry/${poem.year}/${poem.slug}`
+  const typeSlug = poem.type.toLowerCase().replace(/\s+/g, "-")
+  const poemUrl = `/poetry/${typeSlug}/${poem.year}/${poem.slug}`
 
   return (
     <>
@@ -233,7 +235,7 @@ export function PoetryCard({ poem }: PoetryCardProps) {
           </div>
         </div>
         <div className="poetry-card-footer">
-          <Link href={poemUrl} className="poetry-button" scroll={true}>
+          <Link href={poemUrl} className="poetry-button" scroll>
             <BookText style={{ marginRight: "0.5rem", height: "1rem", width: "1rem" }} />
             Read Poem
           </Link>
@@ -242,4 +244,3 @@ export function PoetryCard({ poem }: PoetryCardProps) {
     </>
   )
 }
-

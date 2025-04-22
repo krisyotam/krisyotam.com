@@ -197,16 +197,19 @@ export function PostHeader({
           </HoverCard>
         </div>
 
-        {/* Tags with academic styling - non-clickable */}
+        {/* Tags with academic styling - clickable links, max 3 */}
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap justify-center gap-2 mt-4">
-            {tags.map((tag) => (
-              <span
+            {tags.slice(0, 3).map((tag) => (
+              <Link
                 key={tag}
-                className="border border-border bg-secondary/40 px-2 py-1 text-xs font-mono hover:bg-secondary transition-colors cursor-default"
+                href={`/tag/${encodeURIComponent(tag.toLowerCase().replace(/\s+/g, "-"))}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-border bg-secondary/40 px-2 py-1 text-xs font-mono hover:bg-secondary transition-colors"
               >
                 {tag}
-              </span>
+              </Link>
             ))}
           </div>
         )}
@@ -215,7 +218,7 @@ export function PostHeader({
         {category && (
           <div className="text-center mt-4">
             <Link
-              href={`/category/${category.toLowerCase().replace(/\s+/g, "-")}`}
+              href={`/category/${encodeURIComponent(category.toLowerCase().replace(/\s+/g, "-"))}`}
               className="text-sm font-serif italic text-muted-foreground hover:text-foreground transition-colors"
             >
               Filed under: {category}
@@ -229,4 +232,3 @@ export function PostHeader({
     </header>
   )
 }
-

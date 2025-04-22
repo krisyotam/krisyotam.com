@@ -11,6 +11,8 @@ import { BentoFooter } from "@/components/bento-footer"
 import { ScriptTagger } from "@/components/script-tagger"
 import { PostLatexRenderer } from "@/components/post-latex-renderer"
 import { Commento } from "@/components/commento"
+import RelatedPosts from "@/components/related-posts"
+import { PostNotice } from "@/components/post-notice"
 
 // Add Google Fonts import for Source Serif 4 and Old English font
 const fontImport = `
@@ -60,11 +62,9 @@ export default function PostsLayout({
 }) {
   const pathname = usePathname()
   const [postData, setPostData] = useState<Post | null>(null)
-
-  // Add a loading state at the top of the component
   const [isLoading, setIsLoading] = useState(true)
 
-  // Add font imports
+  // Inject fonts
   useEffect(() => {
     const style = document.createElement("style")
     style.textContent = fontImport
@@ -74,49 +74,33 @@ export default function PostsLayout({
     }
   }, [])
 
+  // Fetch post JSON
   useEffect(() => {
     async function fetchPostData() {
       try {
-        // Extract the slug from the pathname
-        // Assuming the pathname format is /blog/YEAR/SLUG
-        const pathParts = pathname.split("/")
-        if (pathParts.length >= 4 && pathParts[1] === "blog") {
-          const slug = pathParts[3]
-
-          // Fetch the post data from your API
-          const response = await fetch(`/api/post?slug=${slug}`)
-          if (response.ok) {
-            const data = await response.json()
-            setPostData(data)
+        const parts = pathname.split("/")
+        if (parts[1] === "blog" && parts.length >= 4) {
+          const slug = parts[3]
+          const res = await fetch(`/api/post?slug=${slug}`)
+          if (res.ok) {
+            setPostData(await res.json())
           }
         }
-      } catch (error) {
-        console.error("Failed to fetch post data:", error)
+      } catch (e) {
+        console.error(e)
       }
     }
-
-    if (pathname.startsWith("/blog/")) {
-      fetchPostData()
-    }
+    if (pathname.startsWith("/blog/")) fetchPostData()
   }, [pathname])
 
-  // Add this useEffect to scroll to top and handle loading state
+  // Loading state & scroll
   useEffect(() => {
-    // Scroll to top when pathname changes
     window.scrollTo(0, 0)
-
-    // Set loading to true on route change
     setIsLoading(true)
-
-    // Set a small timeout to ensure components have time to load
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 100)
-
-    return () => clearTimeout(timer)
+    const t = setTimeout(() => setIsLoading(false), 100)
+    return () => clearTimeout(t)
   }, [pathname])
 
-  // Modify the return statement to include loading state
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
       {isLoading ? (
@@ -128,7 +112,7 @@ export default function PostsLayout({
         </div>
       ) : (
         <div className="max-w-6xl mx-auto px-4 animate-fade-in">
-          {/* Header outside the grid - made smaller */}
+          {/* Post header */}
           <header className="mb-2 max-w-xl mx-auto px-0">
             {postData && (
               <PostHeader
@@ -141,73 +125,73 @@ export default function PostsLayout({
             )}
           </header>
 
-          {/* Grid for sidebars and content */}
+          {/* Layout grid */}
           <div className="grid grid-cols-1 md:grid-cols-[16rem_1fr_16rem] md:gap-4 lg:gap-6">
-            {/* Left Sidebar - moved down */}
-            <div className="hidden md:block self-start mt-4">
-              <section className="metadata-section">
-                <div className="sticky top-6">
-                  <TableOfContents key={pathname} headings={postData?.headings || []} />
-                </div>
-              </section>
-            </div>
+            {/* Left TOC */}
+            <aside className="hidden md:block self-start mt-4">
+              <div className="sticky top-6">
+                <TableOfContents headings={postData?.headings || []} key={pathname} />
+              </div>
+            </aside>
 
-            {/* Main Content */}
-            <div className="flex-1 max-w-2xl mx-auto px-0 self-start">
-              <main>
-                <section className="content-section" aria-label="Post Content">
-                  <article
-                    className="prose prose-sm mx-auto mt-0 post-content"
-                    style={{
-                      fontFamily: "'Source Serif 4', serif",
-                      maxWidth: "100%",
-                    }}
-                  >
-                    <PostLatexRenderer>
-                      <ScriptTagger>{children}</ScriptTagger>
-                    </PostLatexRenderer>
-                  </article>
+            {/* Main content */}
+            <main className="flex-1 max-w-2xl mx-auto px-0 self-start">
+              <article
+                className="prose prose-sm mx-auto post-content"
+                style={{ fontFamily: "'Source Serif 4', serif", marginTop: 0 }}
+              >
+                <PostLatexRenderer>
+                  <ScriptTagger>{children}</ScriptTagger>
+                </PostLatexRenderer>
+              </article>
+
+              {/* Bibliography */}
+              {postData?.bibliography?.length > 0 && (
+                <section
+                  className="bibliography-section mt-12"
+                  aria-label="Bibliography"
+                >
+                  <Bibliography bibliography={postData.bibliography} />
                 </section>
+              )}
 
-                {/* Bibliography section */}
-                {postData?.bibliography && postData.bibliography.length > 0 && (
-                  <section className="bibliography-section" aria-label="Bibliography">
-                    <article>
-                      <Bibliography bibliography={postData.bibliography} />
-                    </article>
-                  </section>
-                )}
-
-                {/* Comments section */}
-                <section className="comments-section" aria-label="Comments">
-                  <Commento />
+              {/* Related posts */}
+              {postData?.slug && (
+                <section
+                  className="related-posts-section mt-12"
+                  aria-label="Related Posts"
+                >
+                  <RelatedPosts slug={postData.slug} />
                 </section>
+              )}
 
-                {/* Footer section */}
-                <footer>
-                  <BentoFooter className="mt-12" />
-                </footer>
-              </main>
-            </div>
-
-            {/* Right Sidebar - moved down */}
-            <div className="hidden md:block self-start mt-4">
-              <section className="margin-notes-section">
-                <div className="sticky top-6 space-y-4 pb-24">
-                  {postData?.marginNotes &&
-                    postData.marginNotes.map((note) => (
-                      <article key={note.id} className="mb-4">
-                        <MarginCard note={note} />
-                      </article>
-                    ))}
-                </div>
+              {/* Comments */}
+              <section className="comments-section mt-12" aria-label="Comments">
+                <Commento />
               </section>
-            </div>
+
+              {/* Post notice */}
+              <section className="post-notice-section mt-12">
+                <PostNotice />
+              </section>
+
+              {/* Footer */}
+              <footer className="mt-12">
+                <BentoFooter />
+              </footer>
+            </main>
+
+            {/* Right margin notes */}
+            <aside className="hidden md:block self-start mt-4">
+              <div className="sticky top-6 space-y-4 pb-24">
+                {postData?.marginNotes?.map((note) => (
+                  <MarginCard key={note.id} note={note} />
+                ))}
+              </div>
+            </aside>
           </div>
         </div>
       )}
-
     </div>
   )
 }
-
