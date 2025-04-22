@@ -1,0 +1,28 @@
+[
+    {
+      "id": "note-1",
+      "title": "Director",
+      "content": "Wistoria was directed by Tatsuya Yoshihara (Black Clover, Chainsaw Man action director).",
+      "index": 1,
+      "sourceName": "IMDB",
+      "sourceLink": "https://www.imdb.com/news/ni64702614/"
+    },
+    {
+      "id": "note-2",
+      "title": "Source Material",
+      "content": "Adapted from the manga by Fujino Ōmori (writer) and Toshi Aoi (illustrator).",
+      "index": 2,
+      "sourceName": "Wikipedia",
+      "sourceLink": "https://en.wikipedia.org/wiki/Wistoria:_Wand_and_Sword"
+    },
+    {
+      "id": "note-3",
+      "title": "Manga Publisher",
+      "content": "Serialized in Bessatsu Shōnen Magazine (Kodansha).",
+      "index": 3,
+      "sourceName": "Manga Publisher",
+      "sourceLink": "https://en.wikipedia.org/wiki/Wistoria:_Wand_and_Sword"
+    }
+  ]
+  
+  

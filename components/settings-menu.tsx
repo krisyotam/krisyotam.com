@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
-import { Search, Settings, Rss, X, Maximize, Move } from "lucide-react"
+import { Search, Settings, Rss, X, Maximize, Move, MailQuestion, GitCompare } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
@@ -233,6 +233,16 @@ export function SettingsMenu() {
     setIsOpen(false)
   }
 
+  const openFAQ = () => {
+    window.open("/faq", "_blank")
+    setIsOpen(false)
+  }
+
+  const openChangelog = () => {
+    window.open("/changelog", "_blank")
+    setIsOpen(false)
+  }
+
   const toggleMaximize = () => {
     const newMaximizedState = !isMaximized
     setIsMaximized(newMaximizedState)
@@ -306,6 +316,26 @@ export function SettingsMenu() {
               <Rss className="h-4 w-4" />
               <span className="absolute right-full mr-2 w-auto min-w-max rounded bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-white dark:text-black">
                 View RSS.xml
+              </span>
+            </button>
+            <button
+              onClick={openFAQ}
+              className="group relative flex h-8 w-8 items-center justify-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
+              aria-label="FAQ"
+            >
+              <MailQuestion className="h-4 w-4" />
+              <span className="absolute right-full mr-2 w-auto min-w-max rounded bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-white dark:text-black">
+                FAQ
+              </span>
+            </button>
+            <button
+              onClick={openChangelog}
+              className="group relative flex h-8 w-8 items-center justify-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
+              aria-label="Changelog"
+            >
+              <GitCompare className="h-4 w-4" />
+              <span className="absolute right-full mr-2 w-auto min-w-max rounded bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-white dark:text-black">
+                Changelog
               </span>
             </button>
           </div>

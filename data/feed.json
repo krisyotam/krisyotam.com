@@ -363,6 +363,19 @@
       "confidence": "unlikely",
       "importance": 6,
       "state": "active"
+    },
+    {
+      "title": "Review of Wistoria Wand & Sword",
+      "subtitle": "Wand meets Sword",
+      "preview": "A critical deep dive into Wistoria’s blend of spellcasting mechanics and swordplay, evaluating its narrative, gameplay balance, and world-building.",
+      "date": "2025-04-22",
+      "tags": ["Fantasy", "Anime", "Action", "Wistoria Wand & Sword"],
+      "category": "Anime Review",
+      "slug": "wistoria-wand-and-sword-review",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 1,
+      "state": "active"
     }
    ]
 }

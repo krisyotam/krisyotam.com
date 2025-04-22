@@ -2,7 +2,6 @@
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
 import { notFound } from "next/navigation"
-import { PostHeader } from "@/components/post-header"
 import { getAllPosts, getPostContent } from "@/utils/posts"
 
 const BlogPostContent = dynamic(
@@ -30,14 +29,6 @@ export default async function PostPage({
 
   return (
     <>
-      {/* Render header immediately */}
-      <PostHeader
-        title={postData.title}
-        date={postData.date}
-        tags={postData.tags}
-        category={postData.category}
-      />
-
       {/* Suspend only the MDX body */}
       <Suspense fallback={<div className="min-h-[200px]">Loading...</div>}>
         <article className="post-content">
