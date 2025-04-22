@@ -1,4 +1,6 @@
+// app/progymnasmata/page.tsx
 import type { Metadata } from "next"
+import { Suspense } from "react"
 import { Progymnasmata } from "@/components/progymnasmata/progymnasmata"
 import { PageHeader } from "@/components/page-header"
 
@@ -19,12 +21,13 @@ export default function ProgymnasmataPage() {
         status="In Progress"
         confidence="likely"
         importance={7}
-        className="w-full" // Add this to ensure the header takes the full width of its container
       />
+
       <div className="mt-8">
-        <Progymnasmata />
+        <Suspense fallback={<div>Loading exercises…</div>}>
+          <Progymnasmata />
+        </Suspense>
       </div>
     </main>
   )
 }
-

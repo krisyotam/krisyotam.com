@@ -1,33 +1,31 @@
-import { NextResponse } from "next/server"
-import newsletters from "@/data/newsletters.json"
+// app/api/newsletters/route.ts
+export const dynamic = 'force-dynamic';
+
+import { NextResponse } from "next/server";
+import newsletters from "@/data/newsletters.json";
 
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url)
-    const query = searchParams.get("query")?.toLowerCase() || ""
-    const year = searchParams.get("year") || ""
+    const { searchParams } = new URL(request.url);
+    const query = searchParams.get("query")?.toLowerCase() || "";
+    const year = searchParams.get("year") || "";
 
-    let filteredNewsletters = [...newsletters]
-
-    // Filter by search query
+    let results = [...newsletters];
     if (query) {
-      filteredNewsletters = filteredNewsletters.filter(
-        (newsletter) =>
-          newsletter.title.toLowerCase().includes(query) ||
-          newsletter.description.toLowerCase().includes(query) ||
-          newsletter.tags.some((tag) => tag.toLowerCase().includes(query)),
-      )
+      results = results.filter(n =>
+        n.title.toLowerCase().includes(query) ||
+        n.description.toLowerCase().includes(query) ||
+        n.tags.some(t => t.toLowerCase().includes(query))
+      );
     }
-
-    // Filter by year
     if (year && year !== "all") {
-      filteredNewsletters = filteredNewsletters.filter((newsletter) => newsletter.year === year)
+      results = results.filter(n => n.year === year);
     }
 
-    return NextResponse.json(filteredNewsletters)
+    return NextResponse.json(results);
   } catch (error) {
-    console.error("Error fetching newsletters:", error)
-    return NextResponse.json({ error: "Failed to fetch newsletters" }, { status: 500 })
+    console.error("Error fetching newsletters:", error);
+    return NextResponse.json({ error: "Failed to fetch newsletters" }, { status: 500 });
   }
 }
 

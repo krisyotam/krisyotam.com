@@ -1,3 +1,4 @@
+// app/poetry/page.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -14,30 +15,26 @@ export default function PoetryPage() {
   const allPoems = poemsData as Poem[];
   const poemTypes = ["All", ...Array.from(new Set(allPoems.map((p) => p.type)))];
 
-  // derive initial type from the URL, or default to All
-  const [activeType, setActiveType] = useState< string>(
-    () => {
-      const parts = window.location.pathname.split("/");
-      return parts[2] ? poemTypes.find(t => slugify(t) === parts[2])! : "All";
-    }
-  );
-
+  // start with "All"; will be overridden on mount
+  const [activeType, setActiveType] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // listen for browser back/forward so UI stays in sync
+  // sync activeType to URL on mount and on back/forward
   useEffect(() => {
-    const onPop = () => {
+    const syncTypeFromPath = () => {
       const parts = window.location.pathname.split("/");
-      const newType = parts[2]
-        ? poemTypes.find((t) => slugify(t) === parts[2]) || "All"
+      const type = parts[2]
+        ? poemTypes.find((t) => slugify(t) === parts[2])
         : "All";
-      setActiveType(newType);
+      setActiveType(type || "All");
     };
-    window.addEventListener("popstate", onPop);
-    return () => window.removeEventListener("popstate", onPop);
+
+    syncTypeFromPath();
+    window.addEventListener("popstate", syncTypeFromPath);
+    return () => window.removeEventListener("popstate", syncTypeFromPath);
   }, [poemTypes]);
 
-  // click handler: update URL and state without a full reload
+  // update URL + state when clicking a type
   const handleTypeClick = (t: string) => {
     const slug = slugify(t);
     const newPath = t === "All" ? "/poetry" : `/poetry/${slug}`;
@@ -46,7 +43,7 @@ export default function PoetryPage() {
     setActiveType(t);
   };
 
-  // filter by search + type
+  // filter poems by type + search
   const filtered = allPoems.filter((poem) => {
     const matchesType = activeType === "All" || poem.type === activeType;
     const matchesSearch =
