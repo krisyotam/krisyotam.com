@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { FileText, Clock, Download, Copy, Maximize2 } from "lucide-react"
+import { Download, Copy, Maximize2 } from "lucide-react"
 import { useTheme } from "next-themes"
-import { formatDistanceToNow } from "date-fns"
+import { format } from "date-fns"
 import { useRouter } from "next/navigation"
 
 interface ScriptFile {
@@ -89,8 +89,8 @@ export function ScriptsClient() {
       const blob = new Blob([selectedScript.content], { type: "text/plain" })
       const url = URL.createObjectURL(blob)
       const a = document.createElement("a")
-      a.href = url
       a.download = selectedScript.name
+      a.href = url
       document.body.appendChild(a)
       a.click()
       document.body.removeChild(a)
@@ -111,7 +111,7 @@ export function ScriptsClient() {
   }
 
   return (
-    <div className="max-w-[650px] mx-auto mt-8">
+    <div className="max-w-[800px] mx-auto mt-8">
       {loading && !selectedScript && <div className="text-center">Loading scripts...</div>}
 
       {error && <div className="text-red-500 text-center">{error}</div>}
@@ -121,25 +121,31 @@ export function ScriptsClient() {
       )}
 
       {!selectedScript ? (
-        <div className="space-y-4">
-          {scripts.map((script) => (
-            <div
-              key={script.name}
-              onClick={() => handleScriptClick(script.name)}
-              className="flex items-center p-4 border border-border rounded-md hover:bg-accent/50 cursor-pointer transition-colors"
-            >
-              <FileText className="h-5 w-5 mr-3 text-primary" />
-              <div className="flex-1">
-                <h3 className="font-medium">{script.name}</h3>
-                <div className="flex items-center text-xs text-muted-foreground mt-1">
-                  <span>{formatFileSize(script.size)}</span>
-                  <span className="mx-2">•</span>
-                  <Clock className="h-3 w-3 mr-1" />
-                  <span>{formatDistanceToNow(new Date(script.modified), { addSuffix: true })}</span>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="font-mono">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="text-left text-sm text-muted-foreground">
+                <th className="pb-2 font-normal">date</th>
+                <th className="pb-2 font-normal">title</th>
+                <th className="pb-2 font-normal text-right">size</th>
+              </tr>
+            </thead>
+            <tbody>
+              {scripts.map((script) => (
+                <tr
+                  key={script.name}
+                  onClick={() => handleScriptClick(script.name)}
+                  className="border-t border-border hover:bg-secondary/50 transition-colors duration-200 cursor-pointer"
+                >
+                  <td className="py-3 pr-4 text-sm text-muted-foreground whitespace-nowrap">
+                    {format(new Date(script.modified), "yyyy-MM-dd")}
+                  </td>
+                  <td className="py-3 pr-4">{script.name}</td>
+                  <td className="py-3 text-right text-sm text-blue-500">{formatFileSize(script.size)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       ) : (
         <div className="border border-border rounded-md overflow-hidden">

@@ -10,9 +10,9 @@ import { PageHeader } from "@/components/page-header"
 // Add Notes page metadata after other imports
 const notesPageData = {
   title: "Notes",
-  subtitle: "Thoughts and Observations",
+  subtitle: "",
   date: new Date().toISOString(),
-  preview: "A collection of short notes, thoughts, and observations on various topics and ideas.",
+  preview: "Misc thoughts, memories, proto-essays, musings, etc.",
   status: "In Progress" as const,
   confidence: "likely" as const,
   importance: 6,

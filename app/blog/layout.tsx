@@ -14,8 +14,8 @@ import { PostLatexRenderer } from "@/components/post-latex-renderer";
 import { Commento } from "@/components/commento";
 import RelatedPosts from "@/components/related-posts";
 import { PostNotice } from "@/components/post-notice";
+import LinkTags from "@/components/link-tags"; // ✅ NEW IMPORT
 
-// Add Google Fonts import for Source Serif 4 and Old English font
 const fontImport = `
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
@@ -65,7 +65,6 @@ export default function PostsLayout({
   const [postData, setPostData] = useState<Post | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Inject fonts
   useEffect(() => {
     const style = document.createElement("style");
     style.textContent = fontImport;
@@ -75,7 +74,6 @@ export default function PostsLayout({
     };
   }, []);
 
-  // Fetch post JSON
   useEffect(() => {
     async function fetchPostData() {
       try {
@@ -94,7 +92,6 @@ export default function PostsLayout({
     if (pathname.startsWith("/blog/")) fetchPostData();
   }, [pathname]);
 
-  // Loading state & scroll
   useEffect(() => {
     window.scrollTo(0, 0);
     setIsLoading(true);
@@ -113,7 +110,6 @@ export default function PostsLayout({
         </div>
       ) : (
         <div className="max-w-6xl mx-auto px-4 animate-fade-in">
-          {/* Post header */}
           <header className="mb-2 max-w-xl mx-auto px-0">
             {postData && (
               <PostHeader
@@ -126,27 +122,25 @@ export default function PostsLayout({
             )}
           </header>
 
-          {/* Layout grid */}
           <div className="grid grid-cols-1 md:grid-cols-[16rem_1fr_16rem] md:gap-4 lg:gap-6">
-            {/* Left TOC */}
             <aside className="hidden md:block self-start mt-4">
               <div className="sticky top-6">
                 <TableOfContents headings={postData?.headings || []} key={pathname} />
               </div>
             </aside>
 
-            {/* Main content */}
             <main className="flex-1 max-w-2xl mx-auto px-0 self-start">
               <article
                 className="prose prose-sm mx-auto post-content"
                 style={{ fontFamily: "'Source Serif 4', serif", marginTop: 0 }}
               >
-                <PostLatexRenderer>
-                  <ScriptTagger>{children}</ScriptTagger>
-                </PostLatexRenderer>
+                <LinkTags> {/* ✅ Wrap content in LinkTags */}
+                  <PostLatexRenderer>
+                    <ScriptTagger>{children}</ScriptTagger>
+                  </PostLatexRenderer>
+                </LinkTags>
               </article>
 
-              {/* Citation */}
               {postData && (
                 <section className="mt-4">
                   <Citation
@@ -158,37 +152,31 @@ export default function PostsLayout({
                 </section>
               )}
 
-              {/* Bibliography */}
               {postData?.bibliography?.length > 0 && (
                 <section className="mt-4" aria-label="Bibliography">
                   <Bibliography bibliography={postData.bibliography} />
                 </section>
               )}
 
-              {/* Related posts */}
               {postData?.slug && (
                 <section className="mt-4" aria-label="Related Posts">
                   <RelatedPosts slug={postData.slug} />
                 </section>
               )}
 
-              {/* Comments */}
               <section className="mt-4" aria-label="Comments">
                 <Commento />
               </section>
 
-              {/* Post notice */}
               <section className="mt-4">
                 <PostNotice />
               </section>
 
-              {/* Footer */}
               <footer className="mt-4">
                 <BentoFooter />
               </footer>
             </main>
 
-            {/* Right margin notes */}
             <aside className="hidden md:block self-start mt-4">
               <div className="sticky top-6 space-y-4 pb-24">
                 {postData?.marginNotes?.map((note) => (

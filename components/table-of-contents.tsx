@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Minimize2, Maximize2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +12,10 @@ interface TableOfContentsItem {
 }
 
 interface TableOfContentsProps {
-  headings?: TableOfContentsItem[]; // optional prop: if provided, skip DOM scan
+  /**
+   * If provided, skips DOM scan and uses these headings instead
+   */
+  headings?: TableOfContentsItem[];
   className?: string;
 }
 
@@ -22,8 +25,8 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings = [], classN
   const [numberedHeadings, setNumberedHeadings] = useState<TableOfContentsItem[]>([]);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  // Build or scan headings once (now including h1–h4)
-  useLayoutEffect(() => {
+  // Scan or build headings on mount and whenever `headings` prop changes
+  useEffect(() => {
     let items: TableOfContentsItem[] = [];
 
     if (headings.length > 0) {
@@ -83,9 +86,8 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings = [], classN
     const counters = [0, 0, 0, 0];
     return items.map((item) => {
       const lvl = item.level;
-      for (let i = lvl; i < counters.length; i++) {
-        counters[i] = 0;
-      }
+      // reset deeper levels
+      for (let i = lvl; i < counters.length; i++) counters[i] = 0;
       counters[lvl - 1]++;
       const number = counters.slice(0, lvl).join(".");
       return { ...item, number };
@@ -104,15 +106,9 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings = [], classN
 
   if (numberedHeadings.length === 0) return null;
 
-  // Minimized sidebar: show only expand button
   if (isMinimized) {
     return (
-      <div
-        className={cn(
-          "bg-card border border-border p-2 sticky top-8",
-          className
-        )}
-      >
+      <div className={cn("bg-card border border-border p-2 sticky top-8", className)}>
         <div className="flex items-center justify-between">
           <span className="text-xs font-medium">TOC</span>
           <button type="button" onClick={toggleMinimize} className="p-1">
@@ -123,7 +119,6 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings = [], classN
     );
   }
 
-  // Expanded sidebar with only minimize button
   return (
     <div
       className={cn(

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 // Toggle this to true or false to control execution
-const SHOW_UNIVERSAL_LINK_MODAL = false
+const SHOW_UNIVERSAL_LINK_MODAL = true
 
 function UniversalLinkModalWrapper() {
   if (!SHOW_UNIVERSAL_LINK_MODAL) return null

@@ -1,0 +1,33 @@
+**************************************************
+* Author: Kris Yotam
+* Date: 2025-04-23
+* Title: Article Title Generator
+* Model: GPT 4.5
+* Type: Chat Prompt (Pair with the 
+* brainstorm-article-titles-gpt4.5.txt prompt for best results)
+* Description:
+*   Generates refined, modular titles for long-form articles
+*   following aesthetic, minimalist, and categorical naming
+*   conventions. Each title reflects precision, rhythm,
+*   and typographic grace, supporting multiple structural
+*   patterns (e.g., "On X", "Analysis of Y").
+* Contact: krisyotam@protonmail.com
+* Copyright (c) Kris Yotam 2025. All rights reserved.
+**************************************************
+
+<Input>
+Generate 5–10 minimalist article titles in table format using the following inputs:
+
+Main Topic: [Insert topic here]  
+Article Type: [Essay, Analysis, Comparative, Polemic, Historical]  
+Tone: [Formal, Ironic, Reflective, Apocalyptic, etc.]  
+Optional Tags or Themes: [e.g., Cybersecurity, Christianity, Anime]
+</Input>
+
+
+<output_format>
+Title | Rationale | Type
+... | ... | ...
+
+</output_format>
+

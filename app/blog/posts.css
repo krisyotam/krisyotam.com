@@ -315,3 +315,126 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+.post-content .dropcap-image-wrapper {
+  float: left;
+  margin-right: 0.5em;    /* tweak for text wrap */
+  margin-top: 0.1em;      /* align to baseline */
+  line-height: 0;
+}
+
+.post-content .dropcap-image {
+  background: transparent;
+  border: none;
+  user-select: none;
+  /* you can also set width/height via CSS if you prefer: */
+  /* width: 3em; */
+  /* height: auto; */
+}
+
+.post-content .dropcap-image {
+  /* disable any outlines, highlights, shadows, or filters */
+  outline: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  background: transparent !important;
+}
+
+.post-content .dropcap-image {
+  /* make it big enough to admire — 5em is ~5× your 1em body text */
+  width: 10em !important;
+  height: 10em !important;
+  /* keep it perfectly square */
+  object-fit: contain;
+}
+
+/* ensure the browser can hyphenate text in English */
+.post-content {
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
+/* justify all but the last line, and allow hyphenated breaks */
+.post-content p {
+  text-align: justify;
+  text-align-last: left;  /* keep the last line ragged-right */
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
+
+
+
+
+
+
+/******************************/
+/* BASE LINK ICON STYLES      */
+/******************************/
+
+a[data-link-icon-type*='svg'] .link-icon-hook::after {
+  content: "";
+  position: relative;
+  bottom: 0.15em;
+  margin-left: 0.2em;
+  background-image: var(--link-icon-url);
+  background-size: 0.55em;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.55;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+
+
+/********************************/
+/* GLOBAL ICON HOVER STYLING    */
+/* (All icons turn red on hover)*/
+/********************************/
+
+a[data-link-icon-type*='svg'][data-link-icon-color]:hover .link-icon-hook::after {
+  background-image: var(--link-icon-url-hover, var(--link-icon-url));
+  filter: brightness(0) saturate(100%) sepia(100%) hue-rotate(-10deg) saturate(800%) brightness(1.2); /* Red tint */
+  opacity: 1;
+}
+
+
+/**********************************************/
+/* LINK UNDERLINE COLOR SHIFT (RED ON HOVER)  */
+/**********************************************/
+
+a[data-link-icon-type*='svg'][data-link-icon-color]:hover {
+  /* force the underline gradient line to your hover-color */
+  --link-underline-gradient-line-color: var(--link-icon-color-hover, #e00) !important;
+}
+
+
+/**************************/
+/* PER-DOMAIN ICON STYLES */
+/**************************/
+
+/* Apple Icon Style */
+a[data-link-icon="apple"] .link-icon-hook::after {
+  --link-icon-size: 0.60em;
+  --link-icon-offset-y: 0.25em;
+  --link-icon-opacity: 0.5;
+  --link-underline-gradient-line-color: var(--link-icon-color-hover, #e00) !important;
+}
+
+/* Internal page links: shift icon further left */
+a[data-link-icon="internal"] .link-icon-hook::after {
+  margin-left: 0.05em; /* even closer to the text */
+  bottom: 0.10em;      /* drop it 0.05–0.10em lower */
+}
+
+/* YouTube Icon Style */
+a[data-link-icon="youtube"] .link-icon-hook::after {
+  --link-icon-size: 1em; /* larger than default */
+  margin-left: 0.05em;      /* closer to text */
+  bottom: 0.10em;           /* drop it a little lower */
+  --link-icon-opacity: 0.6;
+  --link-underline-gradient-line-color: var(--link-icon-color-hover, #e00) !important;
+}

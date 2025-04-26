@@ -1,7 +1,6 @@
 // utils/posts.ts
 
 export interface Post {
-  cover: any
   title: string
   subtitle?: string
   preview: string

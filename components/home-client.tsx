@@ -329,27 +329,29 @@ export function HomeClient({ posts, randomQuote }: HomeClientProps) {
             </header>
             <main>
               <div className="space-y-12">
-                {posts.map((post) => {
-                  if (!post.slug || !post.date || !post.preview) {
-                    console.error("Missing post data:", post)
-                    return null
-                  }
-                  const year = getPostYear(post.date)
-                  const slugPath = `blog/${year}/${post.slug}`
-                  // Assume all posts are tsx since we can't use isPostMDX
-                  const postType = "tsx"
-                  return (
-                    <BlogPost
-                      key={post.slug}
-                      slug={slugPath}
-                      type={postType}
-                      title={post.title}
-                      subtitle={post.subtitle}
-                      date={formatDate(post.date)}
-                      excerpt={post.preview}
-                    />
-                  )
-                })}
+                 {posts
+                  .filter(post => !["On Myself", "ExcludedCategory2"].includes(post.category))
+                  .map((post) => {
+                    if (!post.slug || !post.date || !post.preview) {
+                      console.error("Missing post data:", post)
+                      return null
+                    }
+
+                    const year = getPostYear(post.date)
+                    const slugPath = `blog/${year}/${post.slug}`
+
+                    return (
+                      <BlogPost
+                        key={post.slug}
+                        slug={slugPath}
+                        type={"tsx"}
+                        title={post.title}
+                        subtitle={post.subtitle}
+                        date={formatDate(post.date)}
+                        excerpt={post.preview}
+                      />
+                    )
+                  })}
               </div>
             </main>
           </div>

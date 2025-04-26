@@ -12,6 +12,8 @@ interface MiniBioProps {
   className?: string;
 }
 
+// …rest of imports/interface…
+
 export default function MiniBio({
   ghibliImage,
   realImage,
@@ -19,8 +21,8 @@ export default function MiniBio({
   description,
   className,
 }: MiniBioProps) {
-  const [showReal, setShowReal] = useState(false);
-  const imgSrc = showReal ? realImage : ghibliImage;
+  const [showReal, setShowReal] = useState(false)
+  const imgSrc = showReal ? realImage : ghibliImage
 
   return (
     <div
@@ -41,9 +43,8 @@ export default function MiniBio({
           />
         </div>
 
-        {/* two-dot indicator with click handlers */}
+        {/* Indicator dots */}
         <div className="flex space-x-2 mt-2">
-          {/* Ghibli dot */}
           <span
             onClick={() => setShowReal(false)}
             className={cn(
@@ -51,7 +52,6 @@ export default function MiniBio({
               !showReal ? "bg-foreground" : "bg-muted-foreground"
             )}
           />
-          {/* Realistic dot */}
           <span
             onClick={() => setShowReal(true)}
             className={cn(
@@ -61,13 +61,13 @@ export default function MiniBio({
           />
         </div>
 
-        {/* name & tagline */}
+        {/* Name & tagline */}
         <div className="p-4 space-y-1 w-full">
           <h2 className="text-base font-medium text-foreground text-center">
             {name}
           </h2>
           <p
-            className="text-sm text-muted-foreground text-center break-words"
+            className="text-sm text-muted-foreground !text-center break-words"
             title={description}
           >
             {description}
@@ -75,5 +75,5 @@ export default function MiniBio({
         </div>
       </div>
     </div>
-  );
+  )
 }

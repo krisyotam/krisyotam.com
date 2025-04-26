@@ -8,8 +8,17 @@
     "domain": "amazon.com"
   },
   {
-    "name": "Amazon",
-    "domain": "localhost:3000"
+    "name": "Oxford English Dictionary",
+    "domain": "oed.com"
+  },
+  {
+    "name": "Github",
+    "domain": "github.com"
+  },
+  {
+    "name": "Youtube",
+    "domain": "youtube.com"
   }
 ]
+
 

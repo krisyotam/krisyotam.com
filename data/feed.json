@@ -376,7 +376,34 @@
       "confidence": "unlikely",
       "importance": 1,
       "state": "active"
+    },
+    {
+      "title": "On the site as self",
+      "subtitle": "Blogging as identity, accountability, and creative architecture",
+      "preview": "A personal essay exploring the use of a public site not just as a portfolio, but as a mirror of self-discipline, evolving passions, and the quiet pressure of being witnessed. Writing as a method of becoming, and the blog as both map and mirror.",
+      "date": "2025-04-23",
+      "tags": ["Fantasy", "Anime", "Action", "Wistoria Wand & Sword"],
+      "category": "Essays",
+      "slug": "on-the-site-as-self",
+      "status": "Notes",
+      "confidence": "unlikely",
+      "importance": 7,
+      "state": "active"
+    },
+    {
+      "title": "On Myself",
+      "subtitle": "A self-portrait in words: motivations, values, and vision",
+      "preview": "An intimate essay revealing my journey as a polymath, the philosophies that guide my pursuits, and the evolution of my passions. This about-me page serves as a mirror reflecting the mind behind the work.",
+      "date": "2025-04-24",
+      "tags": ["About", "Biography", "Identity", "Philosophy", "Polymath"],
+      "category": "On Myself",
+      "slug": "on-myself",
+      "status": "Published",
+      "confidence": "high",
+      "importance": 6,
+      "state": "active"
     }
+    
    ]
 }
 

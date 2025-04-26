@@ -7,6 +7,19 @@ import { linkEvents } from "@/components/typography/a"
 import { usePathname } from "next/navigation"
 import bannedDomains from "@/data/banned-domains.json"
 
+// Configuration
+const CONFIG = {
+  debug: false,
+  internalPreviews: false,
+  externalPreviews: true,
+  checkBannedDomains: true,
+  excludedPages: ["/", "/categories"],
+  additionalBannedDomains: [
+    { name: "TikTok", domain: "tiktok.com" },
+    { name: "Medium", domain: "medium.com" },
+  ],
+}
+
 type ModalData = {
   id: string
   url: string
@@ -15,59 +28,23 @@ type ModalData = {
   isFullScreen: boolean
 }
 
-type BannedDomain = {
-  name: string
-  domain: string
-}
-
-// Configuration switches
-const DEBUG_MODE = false
-const ENABLE_INTERNAL_LINK_PREVIEWS = false // Set to false to disable previews for internal links
-const ENABLE_EXTERNAL_LINK_PREVIEWS = true // Set to true to enable previews for external links
-const ENABLE_BANNED_DOMAINS_CHECK = true // Set to false to disable banned domains check
-
-// Add an array of page paths where link previews should be disabled
-const EXCLUDED_PAGES = [
-  "/",
-  "/categories",
-  // Add more paths as needed
-]
-
-// Additional banned domains (these will be combined with the ones from the JSON file)
-const ADDITIONAL_BANNED_DOMAINS: BannedDomain[] = [
-  { name: "TikTok", domain: "tiktok.com" },
-  { name: "Medium", domain: "medium.com" },
-  // Add more domains as needed
-]
-
-// Helper function to check if a path should be excluded
-const isPathExcluded = (path: string): boolean => {
-  return EXCLUDED_PAGES.some((excludedPath) => path === excludedPath || path.startsWith(`${excludedPath}/`))
-}
-
 export function UniversalLinkModal() {
-  // Get the current pathname synchronously
   const pathname = usePathname()
+  const isExcluded = CONFIG.excludedPages.some((path) => pathname === path || pathname?.startsWith(`${path}/`))
 
-  // Check if current page is excluded - this happens synchronously during component initialization
-  const isExcluded = isPathExcluded(pathname)
+  if (isExcluded) return null
 
-  // Use state for modals to ensure rendering
   const [modals, setModals] = useState<ModalData[]>([])
   const [focusedModalIndex, setFocusedModalIndex] = useState<number | null>(null)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [copySuccess, setCopySuccess] = useState(false)
-  const openModalUrls = useRef<Set<string>>(new Set())
-  const hoverTimerRef = useRef<NodeJS.Timeout | null>(null)
-  const hoveredLinkRef = useRef<HTMLAnchorElement | null>(null)
-  const [showDebug, setShowDebug] = useState(DEBUG_MODE)
-
-  // Dragging state
   const [isDragging, setIsDragging] = useState(false)
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
   const [activeModalId, setActiveModalId] = useState<string | null>(null)
 
-  // Debug state
+  // Refs
+  const openModalUrls = useRef<Set<string>>(new Set())
+  const hoverTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const hoveredLinkRef = useRef<HTMLAnchorElement | null>(null)
   const debugRef = useRef({
     hoverCount: 0,
     modalAttempts: 0,
@@ -75,264 +52,165 @@ export function UniversalLinkModal() {
     errors: [] as string[],
     linkElements: 0,
   })
-  const [debugState, setDebugState] = useState({
-    hoverCount: debugRef.current.hoverCount,
-    modalAttempts: debugRef.current.modalAttempts,
-    lastHoveredUrl: debugRef.current.lastHoveredUrl,
-    errors: [] as string[],
-    openModals: 0,
-    linkElements: 0,
-  })
 
-  // If the page is excluded, initialize state to avoid conditional hook calls
-  const [renderModal, setRenderModal] = useState(!isExcluded)
-
-  // If the page is excluded, return null immediately without rendering anything
-  if (!renderModal) {
-    return null
-  }
-
-  // Extract domain name for the title
+  // Helper functions
   const getDomainFromUrl = (url: string) => {
     try {
-      const domain = new URL(url).hostname.replace("www.", "")
-      return domain
-    } catch (e) {
+      return new URL(url).hostname.replace("www.", "")
+    } catch {
       return url
     }
   }
 
-  // Check if a domain is in the banned list
   const isDomainBanned = (url: string): boolean => {
-    // Skip check if feature is disabled
-    if (!ENABLE_BANNED_DOMAINS_CHECK) {
-      return false
-    }
+    if (!CONFIG.checkBannedDomains) return false
 
     try {
       const domain = getDomainFromUrl(url)
-      // Check against both the JSON file and additional banned domains
-      return [...bannedDomains, ...ADDITIONAL_BANNED_DOMAINS].some(
-        (bannedDomain: BannedDomain) => domain === bannedDomain.domain || domain.endsWith(`.${bannedDomain.domain}`),
+      return [...bannedDomains, ...CONFIG.additionalBannedDomains].some(
+        (bannedDomain) => domain === bannedDomain.domain || domain.endsWith(`.${bannedDomain.domain}`),
       )
-    } catch (e) {
-      console.error("Error checking banned domain:", e)
+    } catch {
       return false
     }
   }
 
-  // Update debug display periodically
-  useEffect(() => {
-    let interval: NodeJS.Timeout | null = null
-
-    if (showDebug) {
-      const updateDebug = () => {
-        // Count all links on the page
-        const allLinks = document.querySelectorAll("a")
-        debugRef.current.linkElements = allLinks.length
-
-        setDebugState({
-          hoverCount: debugRef.current.hoverCount,
-          modalAttempts: debugRef.current.modalAttempts,
-          lastHoveredUrl: debugRef.current.lastHoveredUrl,
-          errors: debugRef.current.errors,
-          openModals: modals.length,
-          linkElements: debugRef.current.linkElements,
-        })
-      }
-
-      // Update debug info every 100ms
-      interval = setInterval(updateDebug, 100)
-    }
-
-    return () => {
-      if (interval) {
-        clearInterval(interval)
-      }
-    }
-  }, [modals.length, showDebug])
-
-  // Check if a URL is internal
   const isInternalLink = (url: string): boolean => {
     try {
-      // Check if it's a relative URL
       if (url.startsWith("/") || url.startsWith("#") || url.startsWith("./") || url.startsWith("../")) {
         return true
       }
-
-      // Check if it's on the same domain
-      const currentDomain = window.location.hostname
-      const urlDomain = new URL(url).hostname
-      return urlDomain === currentDomain
-    } catch (e) {
-      // If there's an error parsing the URL, assume it's internal
+      return new URL(url).hostname === window.location.hostname
+    } catch {
       return true
     }
   }
 
-  // Check if a URL is a blog post link
-  const isBlogPostLink = (url: string): boolean => {
-    try {
-      // Check if the URL contains /blog/ in the path
-      if (url.includes("/blog/")) {
-        return true
-      }
-      return false
-    } catch (e) {
-      return false
-    }
-  }
-
-  // Check if preview should be shown for a URL
   const shouldShowPreview = (url: string): boolean => {
-    // First check if the domain is banned
-    if (isDomainBanned(url)) {
-      console.log(`Domain banned: ${getDomainFromUrl(url)}`)
-      return false
-    }
+    if (isDomainBanned(url)) return false
+    if (url.includes("/blog/")) return true
 
-    // Always show previews for blog post links
-    if (isBlogPostLink(url)) {
-      return true
-    }
-
-    const isInternal = isInternalLink(url)
-
-    // For internal links, check ENABLE_INTERNAL_LINK_PREVIEWS
-    if (isInternal) {
-      return ENABLE_INTERNAL_LINK_PREVIEWS
-    }
-
-    // For external links, check ENABLE_EXTERNAL_LINK_PREVIEWS
-    return ENABLE_EXTERNAL_LINK_PREVIEWS
+    return isInternalLink(url) ? CONFIG.internalPreviews : CONFIG.externalPreviews
   }
 
-  // Check if a URL can be loaded in an iframe
-  const checkIframeCompatibility = async (url: string): Promise<boolean> => {
-    try {
-      // Try to fetch the URL with a HEAD request to check headers
-      const response = await fetch(url, {
-        method: "HEAD",
-        mode: "no-cors", // This is needed for cross-origin requests
-        credentials: "omit",
+  // Modal management
+  const createModal = async (url: string, title: string, x: number, y: number) => {
+    if (openModalUrls.current.has(url)) return
+    if (url.startsWith("javascript:") || url === "#" || url === "") return
+    if (isDomainBanned(url)) return
+
+    const newModal: ModalData = {
+      id: `modal-${Date.now()}`,
+      url,
+      title: title || getDomainFromUrl(url),
+      position: {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+      },
+      isFullScreen: false,
+    }
+
+    setModals((prev) => [...prev, newModal])
+    openModalUrls.current.add(url)
+  }
+
+  const closeModal = (id: string) => {
+    const modalToClose = modals.find((modal) => modal.id === id)
+    if (modalToClose) {
+      openModalUrls.current.delete(modalToClose.url)
+    }
+
+    const closingIndex = modals.findIndex((modal) => modal.id === id)
+    setModals((prev) => prev.filter((modal) => modal.id !== id))
+
+    if (focusedModalIndex !== null) {
+      if (modals.length <= 1) {
+        setFocusedModalIndex(null)
+      } else if (closingIndex === focusedModalIndex) {
+        setFocusedModalIndex(Math.max(0, focusedModalIndex - 1))
+      } else if (closingIndex < focusedModalIndex) {
+        setFocusedModalIndex(focusedModalIndex - 1)
+      }
+    }
+  }
+
+  // Event handlers
+  const handleMouseDown = (e: React.MouseEvent, id: string) => {
+    const target = e.target as HTMLElement
+    if (target.tagName === "BUTTON" || target.closest("button")) return
+    if (!target.closest(".drag-handle")) return
+
+    const modal = modals.find((m) => m.id === id)
+    if (modal && !modal.isFullScreen) {
+      setIsDragging(true)
+      setActiveModalId(id)
+      setDragOffset({
+        x: e.clientX - modal.position.x,
+        y: e.clientY - modal.position.y,
       })
 
-      // If we get here, the request didn't throw an error
-      // But we can't actually check headers due to CORS restrictions with no-cors mode
-      // So we'll return true and let the iframe attempt to load
-      return true
-    } catch (error) {
-      console.error("Error checking iframe compatibility:", error)
-      debugRef.current.errors.push(`Iframe check error: ${error}`)
-      return false
+      setModals((prev) => {
+        const filtered = prev.filter((m) => m.id !== id)
+        return [...filtered, modal]
+      })
+
+      e.preventDefault()
     }
   }
 
-  // Create a modal
-  const createModal = async (url: string, title: string, x: number, y: number) => {
-    try {
-      // IMPORTANT: All checks must be done before any modal creation logic
-
-      // 1. Check if modal already exists
-      if (openModalUrls.current.has(url)) {
-        console.log("Modal already exists for:", url)
-        return
-      }
-
-      // 2. Skip invalid URLs
-      if (url.startsWith("javascript:") || url === "#" || url === "") {
-        console.log("Skipping non-URL:", url)
-        return
-      }
-
-      // 3. Check if domain is banned
-      if (isDomainBanned(url)) {
-        console.log("Domain is banned, skipping modal creation:", getDomainFromUrl(url))
-        return
-      }
-
-      // 4. Check if the URL can be loaded in an iframe
-      const canLoadInIframe = await checkIframeCompatibility(url)
-      if (!canLoadInIframe) {
-        console.log("URL cannot be loaded in iframe:", url)
-        return
-      }
-
-      // All checks passed, now we can create the modal
-      console.log("Creating modal for:", url)
-
-      // Always position in the center of the screen, ignoring mouse position
-      const newModal: ModalData = {
-        id: `modal-${Date.now()}`,
-        url,
-        title: title || getDomainFromUrl(url),
-        position: {
-          x: window.innerWidth / 2,
-          y: window.innerHeight / 2,
-        },
-        isFullScreen: false,
-      }
-
-      // Add to open modals
-      setModals((prev) => [...prev, newModal])
-      openModalUrls.current.add(url)
-
-      console.log("Modal created:", newModal.id)
-      console.log("Current open modals:", modals.length + 1)
-    } catch (err) {
-      console.error("Error creating modal:", err)
-      debugRef.current.errors.push(`Create error: ${err}`)
-    }
+  const copyToClipboard = (url: string | undefined) => {
+    if (!url) return
+    navigator.clipboard
+      .writeText(url)
+      .then(() => setCopySuccess(true))
+      .catch((err) => console.error("Failed to copy URL: ", err))
   }
 
-  // Track mouse position and handle global link hovering
+  const openInNewTab = (url: string) => {
+    window.open(url, "_blank", "noopener,noreferrer")
+  }
+
+  // Navigation
+  const goToNextModal = () => {
+    if (focusedModalIndex === null || modals.length <= 1) return
+    setFocusedModalIndex((focusedModalIndex + 1) % modals.length)
+  }
+
+  const goToPrevModal = () => {
+    if (focusedModalIndex === null || modals.length <= 1) return
+    setFocusedModalIndex((focusedModalIndex - 1 + modals.length) % modals.length)
+  }
+
+  // Effects
   useEffect(() => {
-    let handleMouseMove: (e: MouseEvent) => void
-    let handleMouseUp: () => void
+    if (copySuccess) {
+      const timer = setTimeout(() => setCopySuccess(false), 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [copySuccess])
 
-    handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-
-      // Handle dragging with screen boundary constraints
+  // Mouse movement and dragging
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
       if (isDragging && activeModalId) {
         const modal = modals.find((m) => m.id === activeModalId)
         if (!modal) return
 
-        // Calculate new position
+        // Calculate new position with boundary constraints
         let newX = e.clientX - dragOffset.x
         let newY = e.clientY - dragOffset.y
 
-        // Get modal dimensions (using the styles from getModalStyles)
-        const modalWidth = 600 // Width from getModalStyles
-        const modalHeight = 500 // Height from getModalStyles
+        const modalWidth = 600
+        const modalHeight = 500
 
-        // Apply strict screen boundary constraints
-        // Left boundary: don't allow modal to go beyond left edge
-        newX = Math.max(newX, modalWidth / 2)
+        newX = Math.max(modalWidth / 2, Math.min(newX, window.innerWidth - modalWidth / 2))
+        newY = Math.max(modalHeight / 2, Math.min(newY, window.innerHeight - modalHeight / 2))
 
-        // Right boundary: don't allow modal to go beyond right edge
-        newX = Math.min(newX, window.innerWidth - modalWidth / 2)
-
-        // Top boundary: don't allow modal to go beyond top edge
-        newY = Math.max(newY, modalHeight / 2)
-
-        // Bottom boundary: don't allow modal to go beyond bottom edge
-        newY = Math.min(newY, window.innerHeight - modalHeight / 2)
-
-        setModals((prev) =>
-          prev.map((m) =>
-            m.id === activeModalId
-              ? {
-                  ...m,
-                  position: { x: newX, y: newY },
-                }
-              : m,
-          ),
-        )
+        setModals((prev) => prev.map((m) => (m.id === activeModalId ? { ...m, position: { x: newX, y: newY } } : m)))
       }
     }
 
-    handleMouseUp = () => {
+    const handleMouseUp = () => {
       if (isDragging) {
         setIsDragging(false)
         setActiveModalId(null)
@@ -348,85 +226,59 @@ export function UniversalLinkModal() {
     }
   }, [isDragging, activeModalId, dragOffset, modals])
 
-  // Global event delegation for link hovering (for links not using the A component)
+  // Link hover detection
   useEffect(() => {
-    let handleGlobalMouseOver: (e: MouseEvent) => void
-    let handleGlobalMouseOut: (e: MouseEvent) => void
-
-    handleGlobalMouseOver = (e: MouseEvent) => {
-      // Find the closest anchor element
+    const handleGlobalMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       const linkElement = target.closest("a") as HTMLAnchorElement | null
 
       if (!linkElement) return
-
-      // Skip if this link already has our custom hover handling
       if (linkElement.hasAttribute("data-hover-listener")) return
-
-      // Skip if this link has data-no-preview or data-no-modal
       if (
         linkElement.getAttribute("data-no-preview") === "true" ||
         linkElement.getAttribute("data-no-modal") === "true"
       )
         return
 
-      // Skip if this is a javascript: link or empty href
       const href = linkElement.href
       if (!href || href === "#" || href.startsWith("javascript:")) return
 
-      // IMPORTANT: Don't interfere with normal click behavior
-      // Only add hover behavior, don't prevent default link actions
-      linkElement.onclick = null // Ensure we're not overriding the default click behavior
-
-      // Check if domain is banned - do this check immediately
       if (isDomainBanned(href)) {
-        // Mark this link as no-preview and exit immediately
         linkElement.setAttribute("data-no-preview", "true")
         return
       }
 
-      // Check if we should show preview for this URL
       if (!shouldShowPreview(href)) {
-        // Mark this link as no-preview
         linkElement.setAttribute("data-no-preview", "true")
         return
       }
 
-      // Skip if we're already hovering this link
       if (hoveredLinkRef.current === linkElement) return
 
-      // Clear any existing timer
       if (hoverTimerRef.current) {
         clearTimeout(hoverTimerRef.current)
-        hoverTimerRef.current = null
       }
 
-      // Set the currently hovered link
       hoveredLinkRef.current = linkElement
       debugRef.current.hoverCount++
       debugRef.current.lastHoveredUrl = href
 
-      // Set a timer to create the modal after a delay
-      hoverTimerRef.current = setTimeout(async () => {
+      hoverTimerRef.current = setTimeout(() => {
         if (hoveredLinkRef.current !== linkElement) return
 
         debugRef.current.modalAttempts++
-
-        // Get position for the modal
         const rect = linkElement.getBoundingClientRect()
         const x = rect.left + rect.width / 2
         const y = rect.top
 
-        // Create the modal
-        await createModal(href, linkElement.textContent || "", x, y)
+        createModal(href, linkElement.textContent || "", x, y)
       }, 500)
     }
 
-    handleGlobalMouseOut = (e: MouseEvent) => {
+    const handleGlobalMouseOut = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       const linkElement = target.closest("a")
 
-      // If we're leaving the currently hovered link, clear the timer
       if (linkElement && hoveredLinkRef.current === linkElement) {
         if (hoverTimerRef.current) {
           clearTimeout(hoverTimerRef.current)
@@ -436,7 +288,6 @@ export function UniversalLinkModal() {
       }
     }
 
-    // Add global event listeners
     document.addEventListener("mouseover", handleGlobalMouseOver)
     document.addEventListener("mouseout", handleGlobalMouseOut)
 
@@ -449,45 +300,25 @@ export function UniversalLinkModal() {
     }
   }, [modals])
 
-  // Listen for link hover events from the A component
+  // Link events from A component
   useEffect(() => {
-    let handleLinkHover: (url: string, text: string, x: number, y: number) => Promise<void>
-    let unsubscribe: () => void
-
-    handleLinkHover = async (url: string, text: string, x: number, y: number) => {
+    const handleLinkHover = async (url: string, text: string, x: number, y: number) => {
       debugRef.current.hoverCount++
       debugRef.current.lastHoveredUrl = url
 
-      // Check if domain is banned - do this check immediately
-      if (isDomainBanned(url)) {
-        console.log(`Skipping banned domain: ${getDomainFromUrl(url)}`)
-        return
-      }
-
-      // Check if we should show preview for this URL
-      if (!shouldShowPreview(url)) {
-        return
-      }
+      if (isDomainBanned(url) || !shouldShowPreview(url)) return
 
       debugRef.current.modalAttempts++
-
-      console.log("Link hover event received:", url, text, x, y)
       await createModal(url, text, x, y)
     }
 
-    // Subscribe to link hover events
-    unsubscribe = linkEvents.addListener(handleLinkHover)
-
-    return () => {
-      unsubscribe()
-    }
+    const unsubscribe = linkEvents.addListener(handleLinkHover)
+    return unsubscribe
   }, [modals])
 
-  // Handle keyboard navigation
+  // Keyboard navigation
   useEffect(() => {
-    let handleKeyDown: (e: KeyboardEvent) => void
-
-    handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (focusedModalIndex === null) return
 
       if (e.key === "ArrowLeft") {
@@ -500,137 +331,10 @@ export function UniversalLinkModal() {
     }
 
     window.addEventListener("keydown", handleKeyDown)
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown)
-    }
+    return () => window.removeEventListener("keydown", handleKeyDown)
   }, [focusedModalIndex, modals.length])
 
-  // Copy URL to clipboard
-  useEffect(() => {
-    if (copySuccess) {
-      const timer = setTimeout(() => setCopySuccess(false), 2000)
-      return () => clearTimeout(timer)
-    }
-  }, [copySuccess])
-
-  // Open URL in new tab
-  const openInNewTab = (url: string) => {
-    window.open(url, "_blank", "noopener,noreferrer")
-  }
-
-  // Close a modal
-  const closeModal = (id: string) => {
-    try {
-      const modalToClose = modals.find((modal) => modal.id === id)
-      if (modalToClose) {
-        openModalUrls.current.delete(modalToClose.url)
-      }
-
-      // Find the index of the modal being closed
-      const closingIndex = modals.findIndex((modal) => modal.id === id)
-
-      // Update modals state
-      setModals((prev) => prev.filter((modal) => modal.id !== id))
-
-      // Update focused index if needed
-      if (focusedModalIndex !== null) {
-        if (modals.length <= 1) {
-          // If this was the last modal, clear the focus
-          setFocusedModalIndex(null)
-        } else if (closingIndex === focusedModalIndex) {
-          // If we're closing the focused modal, focus the previous one
-          setFocusedModalIndex(Math.max(0, focusedModalIndex - 1))
-        } else if (closingIndex < focusedModalIndex) {
-          // If we're closing a modal before the focused one, adjust the index
-          setFocusedModalIndex(focusedModalIndex - 1)
-        }
-      }
-    } catch (err) {
-      console.error("Error closing modal:", err)
-      debugRef.current.errors.push(`Close error: ${err}`)
-    }
-  }
-
-  // Toggle fullscreen for a modal
-  const toggleFullScreen = (index: number) => {
-    try {
-      setModals((prev) =>
-        prev.map((modal, i) => (i === index ? { ...modal, isFullScreen: !modal.isFullScreen } : modal)),
-      )
-    } catch (err) {
-      console.error("Error toggling fullscreen:", err)
-      debugRef.current.errors.push(`Fullscreen error: ${err}`)
-    }
-  }
-
-  // Enlarge and focus a modal
-  const enlargeModal = (index: number) => {
-    setFocusedModalIndex(index)
-  }
-
-  // Handle mouse down for dragging - now works on the entire modal
-  const handleMouseDown = (e: React.MouseEvent, id: string) => {
-    // Don't initiate drag if clicking on a button
-    const target = e.target as HTMLElement
-    if (target.tagName === "BUTTON" || target.closest("button")) {
-      return
-    }
-
-    // Only initiate drag if clicking on a drag handle
-    if (!target.closest(".drag-handle")) {
-      return
-    }
-
-    // Get the modal
-    const modal = modals.find((m) => m.id === id)
-    if (modal && !modal.isFullScreen) {
-      setIsDragging(true)
-      setActiveModalId(id)
-
-      // Calculate offset from the mouse position to the modal position
-      setDragOffset({
-        x: e.clientX - modal.position.x,
-        y: e.clientY - modal.position.y,
-      })
-
-      // Move this modal to the end of the array to bring it to front
-      setModals((prev) => {
-        const filtered = prev.filter((m) => m.id !== id)
-        return [...filtered, modal]
-      })
-
-      // Prevent text selection during drag
-      e.preventDefault()
-    }
-  }
-
-  // Navigation between modals when in focused mode
-  const goToNextModal = () => {
-    if (focusedModalIndex === null || modals.length <= 1) return
-    setFocusedModalIndex((focusedModalIndex + 1) % modals.length)
-  }
-
-  const goToPrevModal = () => {
-    if (focusedModalIndex === null || modals.length <= 1) return
-    setFocusedModalIndex((focusedModalIndex - 1 + modals.length) % modals.length)
-  }
-
-  // Add a test modal for debugging
-  const addTestModal = () => {
-    createModal("https://example.com", "Example.com", window.innerWidth / 2, window.innerHeight / 2)
-  }
-
-  // Force open specific URLs for testing
-  const forceOpenVercel = () => {
-    createModal("https://vercel.com", "Vercel", window.innerWidth / 2, window.innerHeight / 2)
-  }
-
-  const forceOpenGitHub = () => {
-    createModal("https://github.com", "GitHub", window.innerWidth / 2, window.innerHeight / 2)
-  }
-
-  // Calculate modal styles based on fullscreen state
+  // Modal styles
   const getModalStyles = (modal: ModalData) => {
     if (modal.isFullScreen) {
       return {
@@ -652,342 +356,247 @@ export function UniversalLinkModal() {
     }
   }
 
-  // Close the focused modal completely
-  const closeFocusedModal = () => {
-    if (focusedModalIndex === null) return
+  // Render functions
+  const renderRegularModals = () => {
+    return modals.map((modal, index) => (
+      <div
+        key={modal.id}
+        className="fixed shadow-xl rounded-lg overflow-hidden"
+        style={{
+          ...getModalStyles(modal),
+          display: focusedModalIndex === index ? "none" : "block",
+        }}
+        onMouseDown={(e) => handleMouseDown(e, modal.id)}
+      >
+        <div className="bg-background border border-border rounded-lg flex flex-col h-full relative">
+          {/* Header */}
+          <div className="flex items-center justify-end p-2 bg-muted/30 border-b border-border drag-handle cursor-grab">
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => setFocusedModalIndex(index)}
+                className="text-muted-foreground hover:text-foreground"
+                aria-label="Maximize modal"
+                title="Maximize"
+              >
+                <Maximize2 className="h-4 w-4" />
+              </button>
+              <button
+                onClick={() => closeModal(modal.id)}
+                className="text-muted-foreground hover:text-foreground"
+                aria-label="Close modal"
+                title="Close"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
 
-    const modalId = modals[focusedModalIndex].id
-    closeModal(modalId)
+          {/* Drag handles */}
+          <div
+            className="absolute left-0 top-0 w-8 h-full cursor-ew-resize drag-handle hover:bg-muted/20 transition-colors"
+            style={{ top: "40px", bottom: "0" }}
+          />
+          <div
+            className="absolute right-0 top-0 w-8 h-full cursor-ew-resize drag-handle hover:bg-muted/20 transition-colors"
+            style={{ top: "40px", bottom: "0" }}
+          />
+          <div className="absolute left-0 bottom-0 w-full h-8 cursor-ns-resize drag-handle hover:bg-muted/20 transition-colors" />
+          <div className="absolute left-0 bottom-0 w-12 h-12 cursor-nesw-resize drag-handle hover:bg-muted/20 transition-colors" />
+          <div className="absolute right-0 bottom-0 w-12 h-12 cursor-nwse-resize drag-handle hover:bg-muted/20 transition-colors" />
+
+          {/* Content */}
+          <div className="flex-1 relative">
+            <div className="absolute inset-0 flex items-center justify-center bg-background">
+              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
+            </div>
+            <iframe
+              src={modal.url}
+              className="w-full h-full border-0"
+              title={`External content: ${modal.url}`}
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+              referrerpolicy="no-referrer"
+              onLoad={(e) => {
+                const iframe = e.currentTarget
+                const parent = iframe.parentElement
+                if (parent && parent.firstChild !== iframe) {
+                  parent.firstChild?.remove()
+                }
+              }}
+              onError={(e) => {
+                const iframe = e.currentTarget
+                const parent = iframe.parentElement
+                if (parent) {
+                  const errorDiv = document.createElement("div")
+                  errorDiv.className =
+                    "absolute inset-0 flex flex-col items-center justify-center bg-background p-4 text-center"
+                  errorDiv.innerHTML = `
+                    <div class="text-red-500 mb-2">Failed to load content</div>
+                    <div class="text-sm text-muted-foreground mb-4">The website may be blocking embedding in iframes</div>
+                    <a href="${iframe.src}" target="_blank" rel="noopener noreferrer" 
+                       class="px-3 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
+                      Open in New Tab
+                    </a>
+                  `
+                  parent.appendChild(errorDiv)
+                }
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    ))
   }
 
-  // Minimize the focused modal back to its original size
-  const minimizeFocusedModal = () => {
-    setFocusedModalIndex(null)
+  const renderFocusedModal = () => {
+    if (focusedModalIndex === null || !modals[focusedModalIndex]) return null
+
+    return (
+      <>
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[1001]"
+          onClick={() => setFocusedModalIndex(null)}
+        />
+
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vh] rounded-xl shadow-2xl bg-background border border-border overflow-hidden z-[1002]">
+          {/* URL bar and controls */}
+          <div className="p-3 flex flex-col gap-2 bg-muted/30 border-b border-border">
+            <div className="flex items-center w-full">
+              <div className="flex-1 flex items-center bg-background border border-border rounded-md px-3 py-2 mr-2 overflow-hidden">
+                <span className="text-sm font-mono truncate text-muted-foreground">
+                  {modals[focusedModalIndex]?.url}
+                </span>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => copyToClipboard(modals[focusedModalIndex]?.url)}
+                  className="p-1.5 rounded hover:bg-muted/50 transition text-muted-foreground hover:text-foreground"
+                  aria-label="Copy URL"
+                  title="Copy URL"
+                >
+                  {copySuccess ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
+                </button>
+
+                <button
+                  onClick={() => openInNewTab(modals[focusedModalIndex]?.url)}
+                  className="p-1.5 rounded hover:bg-muted/50 transition text-muted-foreground hover:text-foreground"
+                  aria-label="Open in new tab"
+                  title="Open in new tab"
+                >
+                  <ExternalLink className="h-5 w-5" />
+                </button>
+
+                {modals.length > 1 && (
+                  <>
+                    <div className="h-6 border-l border-border mx-1"></div>
+                    <button
+                      onClick={goToPrevModal}
+                      className="p-1.5 rounded hover:bg-muted/50 transition text-muted-foreground hover:text-foreground"
+                      aria-label="Previous modal"
+                      title="Previous modal"
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <span className="text-sm text-muted-foreground">
+                      {focusedModalIndex + 1} / {modals.length}
+                    </span>
+                    <button
+                      onClick={goToNextModal}
+                      className="p-1.5 rounded hover:bg-muted/50 transition text-muted-foreground hover:text-foreground"
+                      aria-label="Next modal"
+                      title="Next modal"
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                  </>
+                )}
+
+                <div className="h-6 border-l border-border mx-1"></div>
+                <button
+                  onClick={() => setFocusedModalIndex(null)}
+                  className="p-1.5 rounded hover:bg-muted/50 transition text-muted-foreground hover:text-foreground"
+                  aria-label="Minimize modal"
+                  title="Minimize"
+                >
+                  <Minimize2 className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={() => closeModal(modals[focusedModalIndex].id)}
+                  className="p-1.5 rounded hover:bg-muted/50 transition text-muted-foreground hover:text-foreground"
+                  aria-label="Close modal"
+                  title="Close modal"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="h-[calc(100%-4.5rem)] overflow-hidden relative">
+            <div className="absolute inset-0 flex items-center justify-center bg-background">
+              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
+            </div>
+            <iframe
+              src={modals[focusedModalIndex]?.url}
+              title={`External content: ${modals[focusedModalIndex]?.url}`}
+              className="w-full h-full border-0"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+              referrerpolicy="no-referrer"
+              onLoad={(e) => {
+                const iframe = e.currentTarget
+                const parent = iframe.parentElement
+                if (parent && parent.firstChild !== iframe) {
+                  parent.firstChild?.remove()
+                }
+              }}
+              onError={(e) => {
+                const iframe = e.currentTarget
+                const parent = iframe.parentElement
+                if (parent) {
+                  const errorDiv = document.createElement("div")
+                  errorDiv.className =
+                    "absolute inset-0 flex flex-col items-center justify-center bg-background p-4 text-center"
+                  errorDiv.innerHTML = `
+                    <div class="text-red-500 mb-2">Failed to load content</div>
+                    <div class="text-sm text-muted-foreground mb-4">The website may be blocking embedding in iframes</div>
+                    <a href="${iframe.src}" target="_blank" rel="noopener noreferrer" 
+                       class="px-3 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
+                      Open in New Tab
+                    </a>
+                  `
+                  parent.appendChild(errorDiv)
+                }
+              }}
+            />
+          </div>
+        </div>
+      </>
+    )
   }
-
-  // Function to copy URL to clipboard
-  const copyToClipboard = (url: string | undefined) => {
-    if (!url) return
-    navigator.clipboard
-      .writeText(url)
-      .then(() => {
-        setCopySuccess(true)
-      })
-      .catch((err) => {
-        console.error("Failed to copy URL: ", err)
-      })
-  }
-
-  // Initialize the keydown event listener only once
-  const [isKeyDownListenerActive, setIsKeyDownListenerActive] = useState(false)
-
-  useEffect(() => {
-    let handleKeyDown: (e: KeyboardEvent) => void
-
-    handleKeyDown = (e: KeyboardEvent) => {
-      if (focusedModalIndex === null) return
-
-      if (e.key === "ArrowLeft") {
-        goToPrevModal()
-      } else if (e.key === "ArrowRight") {
-        goToNextModal()
-      } else if (e.key === "Escape") {
-        setFocusedModalIndex(null)
-      }
-    }
-
-    if (!isKeyDownListenerActive) {
-      window.addEventListener("keydown", handleKeyDown)
-      setIsKeyDownListenerActive(true) // Mark the listener as active
-
-      return () => {
-        window.removeEventListener("keydown", handleKeyDown)
-        setIsKeyDownListenerActive(false) // Reset the flag on unmount
-      }
-    }
-  }, [focusedModalIndex, modals.length, isKeyDownListenerActive])
 
   return (
     <>
-      {/* Debug panel - only shown when DEBUG_MODE is true */}
-      {showDebug && (
+      {CONFIG.debug && (
         <div className="fixed bottom-0 left-0 bg-black/80 text-white p-2 text-xs z-[9999] font-mono">
-          <div className="flex gap-2 mb-2">
-            <button onClick={addTestModal} className="bg-green-500 text-white p-1 rounded">
-              Test Modal
-            </button>
-            <button onClick={forceOpenVercel} className="bg-blue-500 text-white p-1 rounded">
-              Open Vercel
-            </button>
-            <button onClick={forceOpenGitHub} className="bg-purple-500 text-white p-1 rounded">
-              Open GitHub
-            </button>
-            {modals.length > 0 && (
-              <button onClick={() => enlargeModal(modals.length - 1)} className="bg-orange-500 text-white p-1 rounded">
-                Focus Latest
-              </button>
-            )}
-          </div>
-          Hover count: {debugState.hoverCount}
-          <br />
-          Modal attempts: {debugState.modalAttempts}
-          <br />
-          Open modals: {debugState.openModals}
-          <br />
-          Links on page: {debugState.linkElements}
-          <br />
-          {focusedModalIndex !== null && (
-            <>
-              Focused modal: {focusedModalIndex + 1} / {modals.length}
-              <br />
-            </>
-          )}
-          Last URL: {debugState.lastHoveredUrl.substring(0, 30)}...
-          <br />
-          {debugState.errors.length > 0 && (
-            <>
-              <div className="text-red-400 mt-1">Errors:</div>
-              {debugState.errors.slice(-3).map((err, i) => (
+          <div>Hover count: {debugRef.current.hoverCount}</div>
+          <div>Modal attempts: {debugRef.current.modalAttempts}</div>
+          <div>Open modals: {modals.length}</div>
+          <div>Last URL: {debugRef.current.lastHoveredUrl.substring(0, 30)}...</div>
+          {debugRef.current.errors.length > 0 && (
+            <div className="text-red-400 mt-1">
+              {debugRef.current.errors.slice(-3).map((err, i) => (
                 <div key={i} className="text-red-300 truncate">
                   {err}
                 </div>
               ))}
-            </>
+            </div>
           )}
         </div>
       )}
 
-      {/* Regular modals */}
-      {renderModal &&
-        modals.map((modal, index) => (
-          <div
-            key={modal.id}
-            className="fixed shadow-xl rounded-lg overflow-hidden"
-            style={{
-              ...getModalStyles(modal),
-              display: focusedModalIndex === index ? "none" : "block",
-            }}
-            onMouseDown={(e) => handleMouseDown(e, modal.id)}
-          >
-            <div className="bg-background border border-border rounded-lg flex flex-col h-full relative">
-              {/* Top header - draggable */}
-              <div className="flex items-center justify-end p-2 bg-muted/30 border-b border-border drag-handle cursor-grab">
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => enlargeModal(index)}
-                    className="text-muted-foreground hover:text-foreground"
-                    aria-label="Maximize modal"
-                    title="Maximize"
-                  >
-                    <Maximize2 className="h-4 w-4" />
-                  </button>
-                  <button
-                    onClick={() => closeModal(modal.id)}
-                    className="text-muted-foreground hover:text-foreground"
-                    aria-label="Close modal"
-                    title="Close"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Left border - draggable */}
-              <div
-                className="absolute left-0 top-0 w-8 h-full cursor-ew-resize drag-handle hover:bg-muted/20 transition-colors"
-                style={{ top: "40px", bottom: "0" }}
-              />
-
-              {/* Right border - draggable */}
-              <div
-                className="absolute right-0 top-0 w-8 h-full cursor-ew-resize drag-handle hover:bg-muted/20 transition-colors"
-                style={{ top: "40px", bottom: "0" }}
-              />
-
-              {/* Bottom border - draggable */}
-              <div className="absolute left-0 bottom-0 w-full h-8 cursor-ns-resize drag-handle hover:bg-muted/20 transition-colors" />
-
-              {/* Bottom-left corner - draggable */}
-              <div className="absolute left-0 bottom-0 w-12 h-12 cursor-nesw-resize drag-handle hover:bg-muted/20 transition-colors" />
-
-              {/* Bottom-right corner - draggable */}
-              <div className="absolute right-0 bottom-0 w-12 h-12 cursor-nwse-resize drag-handle hover:bg-muted/20 transition-colors" />
-
-              {/* Content area */}
-              <div className="flex-1 relative">
-                <div className="absolute inset-0 flex items-center justify-center bg-background">
-                  <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
-                </div>
-                <iframe
-                  src={modal.url}
-                  className="w-full h-full border-0"
-                  title={`External content: ${modal.url}`}
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                  referrerpolicy="no-referrer"
-                  onLoad={(e) => {
-                    // Remove loading indicator when iframe loads
-                    const iframe = e.currentTarget
-                    const parent = iframe.parentElement
-                    if (parent && parent.firstChild !== iframe) {
-                      parent.firstChild?.remove()
-                    }
-                  }}
-                  onError={(e) => {
-                    console.error("Iframe loading error:", e)
-                    debugRef.current.errors.push(`Iframe error: ${e}`)
-
-                    // Add a message to the iframe container
-                    const iframe = e.currentTarget
-                    const parent = iframe.parentElement
-                    if (parent) {
-                      const errorDiv = document.createElement("div")
-                      errorDiv.className =
-                        "absolute inset-0 flex flex-col items-center justify-center bg-background p-4 text-center"
-                      errorDiv.innerHTML = `
-                      <div class="text-red-500 mb-2">Failed to load content</div>
-                      <div class="text-sm text-muted-foreground mb-4">The website may be blocking embedding in iframes</div>
-                      <a href="${iframe.src}" target="_blank" rel="noopener noreferrer" 
-                         class="px-3 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
-                        Open in New Tab
-                      </a>
-                    `
-                      parent.appendChild(errorDiv)
-                    }
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        ))}
-
-      {/* Focused modal with pagination */}
-      {renderModal && focusedModalIndex !== null && modals[focusedModalIndex] && (
-        <>
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[1001]" onClick={minimizeFocusedModal} />
-
-          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vh] rounded-xl shadow-2xl bg-background border border-border overflow-hidden z-[1002]">
-            {/* URL bar and controls */}
-            <div className="p-3 flex flex-col gap-2 bg-muted/30 border-b border-border">
-              {/* URL bar */}
-              <div className="flex items-center w-full">
-                <div className="flex-1 flex items-center bg-background border border-border rounded-md px-3 py-2 mr-2 overflow-hidden">
-                  <span className="text-sm font-mono truncate text-muted-foreground">
-                    {modals[focusedModalIndex]?.url}
-                  </span>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => copyToClipboard(modals[focusedModalIndex]?.url)}
-                    className="p-1.5 rounded hover:bg-muted/50 transition text-muted-foreground hover:text-foreground"
-                    aria-label="Copy URL"
-                    title="Copy URL"
-                  >
-                    {copySuccess ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
-                  </button>
-
-                  <button
-                    onClick={() => openInNewTab(modals[focusedModalIndex]?.url)}
-                    className="p-1.5 rounded hover:bg-muted/50 transition text-muted-foreground hover:text-foreground"
-                    aria-label="Open in new tab"
-                    title="Open in new tab"
-                  >
-                    <ExternalLink className="h-5 w-5" />
-                  </button>
-
-                  {modals.length > 1 && (
-                    <>
-                      <div className="h-6 border-l border-border mx-1"></div>
-                      <button
-                        onClick={goToPrevModal}
-                        className="p-1.5 rounded hover:bg-muted/50 transition text-muted-foreground hover:text-foreground"
-                        aria-label="Previous modal"
-                        title="Previous modal"
-                      >
-                        <ChevronLeft className="h-5 w-5" />
-                      </button>
-                      <span className="text-sm text-muted-foreground">
-                        {focusedModalIndex + 1} / {modals.length}
-                      </span>
-                      <button
-                        onClick={goToNextModal}
-                        className="p-1.5 rounded hover:bg-muted/50 transition text-muted-foreground hover:text-foreground"
-                        aria-label="Next modal"
-                        title="Next modal"
-                      >
-                        <ChevronRight className="h-5 w-5" />
-                      </button>
-                    </>
-                  )}
-
-                  <div className="h-6 border-l border-border mx-1"></div>
-                  <button
-                    onClick={minimizeFocusedModal}
-                    className="p-1.5 rounded hover:bg-muted/50 transition text-muted-foreground hover:text-foreground"
-                    aria-label="Minimize modal"
-                    title="Minimize"
-                  >
-                    <Minimize2 className="h-5 w-5" />
-                  </button>
-                  <button
-                    onClick={closeFocusedModal}
-                    className="p-1.5 rounded hover:bg-muted/50 transition text-muted-foreground hover:text-foreground"
-                    aria-label="Close modal"
-                    title="Close modal"
-                  >
-                    <X className="h-5 w-5" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="h-[calc(100%-4.5rem)] overflow-hidden relative">
-              <div className="absolute inset-0 flex items-center justify-center bg-background">
-                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
-              </div>
-              <iframe
-                src={modals[focusedModalIndex]?.url}
-                title={`External content: ${modals[focusedModalIndex]?.url}`}
-                className="w-full h-full border-0"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                referrerpolicy="no-referrer"
-                onLoad={(e) => {
-                  // Remove loading indicator when iframe loads
-                  const iframe = e.currentTarget
-                  const parent = iframe.parentElement
-                  if (parent && parent.firstChild !== iframe) {
-                    parent.firstChild?.remove()
-                  }
-                }}
-                onError={(e) => {
-                  console.error("Iframe loading error:", e)
-                  debugRef.current.errors.push(`Iframe error: ${e}`)
-
-                  // Add a message to the iframe container
-                  const iframe = e.currentTarget
-                  const parent = iframe.parentElement
-                  if (parent) {
-                    const errorDiv = document.createElement("div")
-                    errorDiv.className =
-                      "absolute inset-0 flex flex-col items-center justify-center bg-background p-4 text-center"
-                    errorDiv.innerHTML = `
-                      <div class="text-red-500 mb-2">Failed to load content</div>
-                      <div class="text-sm text-muted-foreground mb-4">The website may be blocking embedding in iframes</div>
-                      <a href="${iframe.src}" target="_blank" rel="noopener noreferrer" 
-                         class="px-3 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
-                        Open in New Tab
-                      </a>
-                    `
-                    parent.appendChild(errorDiv)
-                  }
-                }}
-              />
-            </div>
-          </div>
-        </>
-      )}
+      {renderRegularModals()}
+      {renderFocusedModal()}
     </>
   )
 }
-
