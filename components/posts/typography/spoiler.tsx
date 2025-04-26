@@ -1,6 +1,6 @@
 // components/Spoiler.tsx
 import React, { ReactNode } from "react";
-import "./Spoiler.css";
+import "./spoiler.css";
 
 interface SpoilerProps {
   children: ReactNode;
