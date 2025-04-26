@@ -1,16 +1,18 @@
-import withMDX from '@next/mdx';
+// nextconfig.mjs
 
-let userConfig = undefined;
+import withMDX from '@next/mdx';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+
+let userConfig;
 try {
   userConfig = await import('./v0-user-next.config');
-} catch (e) {
-  // ignore error
+} catch {
+  // ignore if not present
 }
 
 /** @type {import('next').NextConfig} */
-const nextConfig = withMDX({
-  extension: /\.mdx?$/
-})({
+const baseConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -25,8 +27,7 @@ const nextConfig = withMDX({
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'], // Added MDX support
-
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   // Alias next/image → next/future/image globally
   webpack(config) {
     config.resolve.alias = {
@@ -35,45 +36,40 @@ const nextConfig = withMDX({
     };
     return config;
   },
-
-  // ✅ Add security headers
+  // Security headers
   async headers() {
     return [
       {
-        source: '/(.*)', // apply to all routes
+        source: '/(.*)',
         headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-          {
-            key: 'Content-Security-Policy',
-            value: "frame-ancestors 'none';",
-          },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Content-Security-Policy', value: "frame-ancestors 'none';" },
         ],
       },
     ];
   },
+};
+
+const mdxConfig = withMDX({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
+  },
 });
 
-mergeConfig(nextConfig, userConfig);
+let nextConfig = mdxConfig(baseConfig);
 
-function mergeConfig(nextConfig, userConfig) {
-  if (!userConfig) {
-    return;
-  }
-
-  for (const key in userConfig) {
+if (userConfig) {
+  const uc = userConfig.default || userConfig;
+  for (const key in uc) {
     if (
       typeof nextConfig[key] === 'object' &&
       !Array.isArray(nextConfig[key])
     ) {
-      nextConfig[key] = {
-        ...nextConfig[key],
-        ...userConfig[key],
-      };
+      nextConfig[key] = { ...nextConfig[key], ...uc[key] };
     } else {
-      nextConfig[key] = userConfig[key];
+      nextConfig[key] = uc[key];
     }
   }
 }

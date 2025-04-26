@@ -1,75 +1,66 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState, useEffect } from "react"
+import Link from "next/link";
+import { useState, useEffect } from "react";
 
+/* ----------  metadata-only type ---------- */
 interface Note {
-  title: string
-  date: string
-  slug: string
-  tags: string[]
-  category: string
-  content: string
+  title: string;
+  date: string;
+  slug: string;
+  tags: string[];
+  category: string;
 }
 
 interface NotesListProps {
-  notes: Note[]
-  searchQuery: string
-  activeCategory: string
+  notes: Note[];
+  searchQuery: string;
+  activeCategory: string;
 }
 
 export function NotesList({ notes, searchQuery, activeCategory }: NotesListProps) {
-  const [filteredNotes, setFilteredNotes] = useState<Note[]>(notes)
-  const [groupedNotes, setGroupedNotes] = useState<Record<string, Record<string, Note[]>>>({})
+  const [filteredNotes, setFilteredNotes] = useState<Note[]>(notes);
+  const [groupedNotes, setGroupedNotes] = useState<Record<string, Record<string, Note[]>>>({});
 
+  /* ----------  filter + group ---------- */
   useEffect(() => {
-    // Filter notes based on search query and active category
     const filtered = notes.filter((note) => {
+      const q = searchQuery.toLowerCase();
       const matchesSearch =
-        searchQuery === "" ||
-        note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        note.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        note.category.toLowerCase().includes(searchQuery.toLowerCase())
+        !q ||
+        note.title.toLowerCase().includes(q) ||
+        note.tags.some((t) => t.toLowerCase().includes(q)) ||
+        note.category.toLowerCase().includes(q);
 
-      const matchesCategory = activeCategory === "all" || note.category === activeCategory
+      const matchesCategory = activeCategory === "all" || note.category === activeCategory;
+      return matchesSearch && matchesCategory;
+    });
 
-      return matchesSearch && matchesCategory
-    })
+    setFilteredNotes(filtered);
 
-    setFilteredNotes(filtered)
-
-    // Group notes by year and month
-    const grouped: Record<string, Record<string, Note[]>> = {}
-
+    /* group by year → month */
+    const grouped: Record<string, Record<string, Note[]>> = {};
     filtered.forEach((note) => {
-      const date = new Date(note.date)
-      const year = date.getFullYear().toString()
-      const month = date.toLocaleString("default", { month: "long" })
+      const d = new Date(note.date);
+      const year = d.getFullYear().toString();
+      const month = d.toLocaleString("default", { month: "long" });
 
-      if (!grouped[year]) {
-        grouped[year] = {}
-      }
+      grouped[year] ??= {};
+      grouped[year][month] ??= [];
+      grouped[year][month].push(note);
+    });
 
-      if (!grouped[year][month]) {
-        grouped[year][month] = []
-      }
+    /* sort newest-first inside each month */
+    Object.values(grouped).forEach((months) =>
+      Object.values(months).forEach((list) =>
+        list.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      )
+    );
 
-      grouped[year][month].push(note)
-    })
+    setGroupedNotes(grouped);
+  }, [notes, searchQuery, activeCategory]);
 
-    // Sort notes within each month by date (newest first)
-    Object.keys(grouped).forEach((year) => {
-      Object.keys(grouped[year]).forEach((month) => {
-        grouped[year][month].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      })
-    })
-
-    setGroupedNotes(grouped)
-  }, [notes, searchQuery, activeCategory])
-
-  if (filteredNotes.length === 0) {
-    return <p className="text-center py-10">No notes found.</p>
-  }
+  if (!filteredNotes.length) return <p className="text-center py-10">No notes found.</p>;
 
   return (
     <div>
@@ -84,27 +75,29 @@ export function NotesList({ notes, searchQuery, activeCategory }: NotesListProps
                     {year} — {month}
                   </div>
                 </div>
+
                 <div className="border-t border-border">
                   {groupedNotes[year][month].map((note) => {
-                    const date = new Date(note.date)
-                    const day = date.getDate()
-                    const suffix = getDaySuffix(day)
+                    const d = new Date(note.date);
+                    const day = d.getDate();
+                    const suffix = getDaySuffix(day);
 
                     return (
                       <Link
-                        href={`/notes/${note.slug}`}
+                        /* ----------  new URL pattern ---------- */
+                        href={`/notes/${year}/${note.slug}`}
                         key={note.slug}
                         className="block border-b border-border hover:bg-muted/50 transition-colors"
                       >
                         <div className="flex justify-between items-center py-4">
-                          <div className="text-foreground">{note.title}</div>
-                          <div className="text-muted-foreground">
+                          <span className="text-foreground">{note.title}</span>
+                          <span className="text-muted-foreground">
                             {day}
                             {suffix}
-                          </div>
+                          </span>
                         </div>
                       </Link>
-                    )
+                    );
                   })}
                 </div>
               </div>
@@ -112,21 +105,20 @@ export function NotesList({ notes, searchQuery, activeCategory }: NotesListProps
           </div>
         ))}
     </div>
-  )
+  );
 }
 
-// Helper function to get the correct day suffix (st, nd, rd, th)
+/* helper for 1st/2nd/3rd/4th… */
 function getDaySuffix(day: number): string {
-  if (day > 3 && day < 21) return "th"
+  if (day > 3 && day < 21) return "th";
   switch (day % 10) {
     case 1:
-      return "st"
+      return "st";
     case 2:
-      return "nd"
+      return "nd";
     case 3:
-      return "rd"
+      return "rd";
     default:
-      return "th"
+      return "th";
   }
 }
-

@@ -1,10 +1,4 @@
-/*
- * getVerseFromBible.ts
- *
- * Fetches one or more verses from the KJV 1611 Bible JSON repository on GitHub.
- * Supports fuzzy matching of book names, common abbreviations, multiple comma-separated references,
- * and verse ranges (e.g., "gen 1:18-24, ex 2:1-8").
- */
+// getVerseFromBible.ts
 
 // Minimal Levenshtein distance for fuzzy matching
 function levenshtein(a: string, b: string): number {
@@ -99,49 +93,70 @@ function levenshtein(a: string, b: string): number {
     { file: "2 John", aliases: ["2 john","2 jn","2jo","ii john","2john"] },
     { file: "3 John", aliases: ["3 john","3 jn","3jo","iii john","3john"] },
     { file: "Jude", aliases: ["jude"] },
-    { file: "Revelation", aliases: ["revelation","rev","re"] },
-    // Apocrypha
-    { file: "1 Esdras", aliases: ["1 esdras","1esdras","esdras","esd"] },
-    { file: "2 Esdras", aliases: ["2 esdras","2esdras","esdras2"] },
-    { file: "1 Maccabees", aliases: ["1 maccabees","1maccabees","maccabees","mac"] },
-    { file: "2 Maccabees", aliases: ["2 maccabees","2maccabees","maccabees2","mac2"] },
-    { file: "Tobit", aliases: ["tobit","tobi"] },
-    { file: "Judith", aliases: ["judith"] },
-    { file: "Wisdom of Solomon", aliases: ["wisdom of solomon","wisdom","wisd"] },
-    { file: "Ecclesiasticus", aliases: ["ecclesiasticus","sirach","eccl"] },
-    { file: "Baruch", aliases: ["baruch"] },
-    { file: "Letter of Jeremiah", aliases: ["letter of jeremiah","jeremiah letter","letter jeremiah"] },
-    { file: "Prayer of Azariah", aliases: ["prayer of azariah","azariah"] },
-    { file: "Prayer of Manasseh", aliases: ["prayer of manasseh","manasseh"] },
-    { file: "Susanna", aliases: ["susanna"] },
-    { file: "Bel and the Dragon", aliases: ["bel and the dragon","bel dragon","bel"] }
+    { file: "Revelation", aliases: ["revelation","rev","re"] }
   ];
   
   const loadedBooks: Record<string, any> = {};
+  let loadedStrongsGreek: Record<string, any> | null = null;
+  let loadedStrongsHebrew: Record<string, any> | null = null;
   
   export interface VerseResult {
     reference: string;
     text: string;
   }
   
-  // Fetch and parse a single reference part (with optional range)
+  async function fetchStrongsGreek() {
+    if (loadedStrongsGreek) return;
+    const res = await fetch('https://raw.githubusercontent.com/krisyotam/strongs/main/strongs-greek.json');
+    if (res.ok) loadedStrongsGreek = await res.json();
+    else {
+      console.error('Failed to load strongs-greek.json');
+      loadedStrongsGreek = {};
+    }
+  }
+  
+  async function fetchStrongsHebrew() {
+    if (loadedStrongsHebrew) return;
+    const res = await fetch('https://raw.githubusercontent.com/krisyotam/strongs/main/strongs-hebrew.json');
+    if (res.ok) loadedStrongsHebrew = await res.json();
+    else {
+      console.error('Failed to load strongs-hebrew.json');
+      loadedStrongsHebrew = {};
+    }
+  }
+  
+  function escapeRegExp(s: string): string {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+  
+  function annotateWithStrongs(text: string, dict: Record<string, any>, isOT: boolean): string {
+    let annotated = text;
+    for (const key in dict) {
+      const entry = dict[key];
+      const word = isOT ? entry.lemma : entry.greek_unicode;
+      const strongsId = isOT ? key : "G" + entry.strongs.padStart(3, "0");
+  
+      if (word && word.length > 1) {
+        const regex = new RegExp(`(${escapeRegExp(word)})`, 'g');
+        annotated = annotated.replace(regex, `$1<sup>${strongsId}</sup>`);
+      }
+    }
+    return annotated;
+  }
+  
   async function fetchRefPart(refPart: string): Promise<VerseResult[]> {
     const m = refPart.toLowerCase().match(/^(.+?)\s+(\d+):(\d+)(?:-(\d+))?$/);
     if (!m) return [];
     let [_, rawBook, chapStr, startStr, endStr] = m;
   
-    // Handle roman numerals I/II/III prefix
     const romanMap: Record<string,string> = { i: "1", ii: "2", iii: "3" };
     const romanMatch = rawBook.match(/^(i{1,3})\s+(.*)$/);
-    if (romanMatch) {
-      rawBook = romanMap[romanMatch[1]] + " " + romanMatch[2];
-    }
+    if (romanMatch) rawBook = romanMap[romanMatch[1]] + " " + romanMatch[2];
   
     const chapterNum = parseInt(chapStr, 10);
     const verseStart = parseInt(startStr, 10);
     const verseEnd = endStr ? parseInt(endStr, 10) : verseStart;
   
-    // Find best matching book by fuzzy alias
     let best: { file: string; distance: number } | null = null;
     for (const book of BOOKS) {
       for (const alias of book.aliases) {
@@ -161,6 +176,21 @@ function levenshtein(a: string, b: string): number {
       else return [];
     }
   
+    const isOldTestament = [
+      "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
+      "Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel", "1 Kings", "2 Kings",
+      "1 Chronicles", "2 Chronicles", "Ezra", "Nehemiah", "Esther", "Job",
+      "Psalms", "Proverbs", "Ecclesiastes", "Song of Solomon", "Isaiah",
+      "Jeremiah", "Lamentations", "Ezekiel", "Daniel", "Hosea", "Joel",
+      "Amos", "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk",
+      "Zephaniah", "Haggai", "Zechariah", "Malachi"
+    ].includes(bookName);
+  
+    if (isOldTestament) await fetchStrongsHebrew();
+    else await fetchStrongsGreek();
+  
+    const dict = isOldTestament ? loadedStrongsHebrew! : loadedStrongsGreek!;
+  
     const bookJson = loadedBooks[bookName];
     const chapter = bookJson.chapters.find((c: any) => c.chapter === chapterNum);
     if (!chapter) return [];
@@ -168,12 +198,14 @@ function levenshtein(a: string, b: string): number {
     const verses: VerseResult[] = [];
     for (let v = verseStart; v <= verseEnd; v++) {
       const vObj = chapter.verses.find((x: any) => x.verse === v);
-      if (vObj) verses.push({ reference: `${chapterNum}:${v}`, text: vObj.text });
+      if (vObj) {
+        const annotatedText = annotateWithStrongs(vObj.text, dict, isOldTestament);
+        verses.push({ reference: `${chapterNum}:${v}`, text: annotatedText });
+      }
     }
     return verses;
   }
   
-  // Main entry: handles multiple comma-separated refs
   export async function getVerseFromBible(ref: string): Promise<VerseResult[]> {
     const parts = ref.split(",").map(p => p.trim()).filter(Boolean);
     const all: VerseResult[] = [];

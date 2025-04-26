@@ -368,8 +368,6 @@
 
 
 
-
-
 /******************************/
 /* BASE LINK ICON STYLES      */
 /******************************/
@@ -438,3 +436,5 @@ a[data-link-icon="youtube"] .link-icon-hook::after {
   --link-icon-opacity: 0.6;
   --link-underline-gradient-line-color: var(--link-icon-color-hover, #e00) !important;
 }
+
+

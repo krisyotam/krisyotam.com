@@ -1,19 +1,13 @@
 [
   {
-    "title": "AI in design",
-    "date": "2024-06-26",
-    "slug": "ai-in-design",
-    "tags": ["AI", "design", "tools"],
-    "category": "technology",
-    "content": "I, for one, don't mind design tools experimenting with AI features.<br><br>Much of what we're doing is just going through the motions until we reach the stage where the real work begins. If a tool can help me design an MVP of a form in 3 seconds that would have otherwise required 1,200 clicks, I'm greeting it with open arms.<br><br>My valuable skill is not drawing boxes in slightly different iterations but thinking about complex products that require a bird's-eye view and a vision. It will take some time until AI gets us there."
-  },
-  {
     "title": "mathematics and beauty",
     "date": "2024-07-15",
     "slug": "mathematics-and-beauty",
     "tags": ["math", "beauty", "philosophy"],
     "category": "mathematics",
-    "content": "There's something profoundly beautiful about mathematical expressions. The Pythagorean theorem $a^2 + b^2 = c^2$ is elegant in its simplicity yet powerful in its applications.<br><br>Einstein's field equations of general relativity are another example of mathematical beauty:<br><br>$$G_{\\mu\\nu} = \\frac{8\\pi G}{c^4}T_{\\mu\\nu}$$<br><br>This compact equation describes how matter and energy curve spacetime. The left side represents the curvature of spacetime, while the right side represents the energy and momentum of matter.<br><br>Even the simple quadratic formula has its own elegance:<br><br>$$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$<br><br>Mathematics is the language of the universe, and these equations are its poetry."
+    "status": "In Progress",
+    "confidence": "possible",
+    "importance": 7
   },
   {
     "title": "running ideas",
@@ -21,7 +15,9 @@
     "slug": "running-ideas",
     "tags": ["running", "fitness", "ideas"],
     "category": "health",
-    "content": "The best ideas come to me when I'm running. There's something about the rhythm of movement and the absence of screens that lets my mind wander productively.<br><br>Today's run yielded three potential solutions to a problem I've been stuck on for weeks. Going to prototype them tomorrow and see which one works best.<br><br>Maybe we should rename 'running' to 'thinking in motion'."
+    "status": "Notes",
+    "confidence": "likely",
+    "importance": 5
   },
   {
     "title": "how do you grow?",
@@ -29,7 +25,9 @@
     "slug": "how-do-you-grow",
     "tags": ["growth", "learning", "reflection"],
     "category": "personal",
-    "content": "Growth happens in the spaces between comfort and panic.<br><br>Too comfortable? You're not learning anything new.<br><br>Too panicked? Your brain can't process effectively.<br><br>The sweet spot is that stretch zone where you feel challenged but not overwhelmed. I try to spend at least an hour there every day."
+    "status": "Draft",
+    "confidence": "possible",
+    "importance": 6
   },
   {
     "title": "keeping it simple",
@@ -37,7 +35,9 @@
     "slug": "keeping-it-simple",
     "tags": ["simplicity", "design", "philosophy"],
     "category": "design",
-    "content": "Complexity is easy. Simplicity is hard.<br><br>Anyone can add features until the product does everything poorly. The real challenge is removing elements until you have something that does a few things exceptionally well.<br><br>My design mantra for this year: If in doubt, take it out."
+    "status": "Draft",
+    "confidence": "likely",
+    "importance": 7
   },
   {
     "title": "drink some hot cocoa",
@@ -45,7 +45,9 @@
     "slug": "drink-some-hot-cocoa",
     "tags": ["comfort", "relaxation", "simple-pleasures"],
     "category": "lifestyle",
-    "content": "Sometimes the most productive thing you can do is make yourself a cup of hot cocoa and stare out the window for 15 minutes.<br><br>Our brains need downtime to process, connect, and create. Constant input without reflection leads to mental congestion.<br><br>The hot cocoa is optional, but highly recommended."
+    "status": "Finished",
+    "confidence": "highly likely",
+    "importance": 4
   },
   {
     "title": "walk to ikea",
@@ -53,15 +55,28 @@
     "slug": "walk-to-ikea",
     "tags": ["walking", "urban-exploration", "furniture"],
     "category": "lifestyle",
-    "content": "Walked to IKEA today instead of driving. It's only 3 miles away, but it feels like a pilgrimage when you're on foot.<br><br>The journey through the city revealed so many details I miss when driving: a new coffee shop, an interesting piece of street art, a tiny park I never knew existed.<br><br>Bought a single plant and carried it home like a trophy. Somehow more satisfying than a car full of furniture."
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 3
   },
   {
     "title": "a parasite",
-    "date": "2024-10-08",
+    "date": "2025-03-08",
     "slug": "a-parasite",
     "tags": ["movies", "storytelling", "society"],
     "category": "culture",
-    "content": "Finally watched Parasite. A masterclass in tension, visual storytelling, and social commentary without being preachy.<br><br>The way it shifts between comedy, thriller, and tragedy so seamlessly is remarkable. Every frame feels intentional.<br><br>It's rare to find a film that's both accessible and layered with meaning. Will be thinking about this one for weeks."
+    "status": "Notes",
+    "confidence": "likely",
+    "importance": 6
+  },
+  {
+    "title": "On Suicide",
+    "date": "2025-04-26",
+    "slug": "on-suicide",
+    "tags": ["Suicide", "Philosophy", "Powerlessness"],
+    "category": "Philosophy",
+    "status": "Notes",
+    "confidence": "likely",
+    "importance": 6
   }
 ]
-

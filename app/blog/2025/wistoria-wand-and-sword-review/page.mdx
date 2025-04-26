@@ -1,12 +1,12 @@
 import AnimeDisplay from "@/components/posts/content/anime-display"
 import AnimeCharacterDisplay from "@/components/posts/content/anime-character-display"
 import RatingDisplay from "@/components/posts/content/rating"
-import { Spoiler } from "@/components/posts/typography/Spoiler";
+import { Spoiler } from "spoiled";
 
 import Dropcap from '@/components/dropcap'
 
 
-<div className="flex flex-wrap justify-center gap-8 mt-4 mb-8">
+<div className="flex flex-col items-center gap-8 mt-4 mb-8">
   <AnimeDisplay
     coverImage="https://i.postimg.cc/W4KZq98J/wistoria-wand-and-sword.jpg"
     title="Wistoria Wand & Sword"
@@ -17,15 +17,15 @@ import Dropcap from '@/components/dropcap'
     genre="Fantasy/Adventure"
   />
   <RatingDisplay
-  ratings={{
-    story: 4.3,
-    visuals: 4.8,
-    audio: 4.1,
-    characters: 4.5,
-    direction: 4.2,
-    atmosphere: 4.7,
-  }}
-/>
+    ratings={{
+      story: 4.3,
+      visuals: 4.8,
+      audio: 4.1,
+      characters: 4.5,
+      direction: 4.2,
+      atmosphere: 4.7,
+    }}
+  />
 </div>
 
 

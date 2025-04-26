@@ -1,54 +1,57 @@
-import { useState, useRef, useEffect } from "react"
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { ChevronDown, ChevronUp } from "lucide-react"
-import { cn } from "@/lib/utils"
+"use client";
 
-interface MarginNote {
-  id: string
-  title: string
-  content: string
-  index: number
-  sourceName?: string
-  sourceLink?: string
-  priority?: number
+import { useState, useRef, useEffect } from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+export interface MarginNote {
+  id: string;
+  title: string;
+  content: string;
+  index: number;
+  sourceName?: string;
+  sourceLink?: string;
+  priority?: number;
 }
 
 interface MarginCardProps {
-  className?: string
-  note: MarginNote
+  className?: string;
+  note: MarginNote;
 }
 
 export function MarginCard({ className, note }: MarginCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false)
-  const [canExpand, setCanExpand] = useState(false)
-  const contentRef = useRef<HTMLDivElement>(null)
-  const CHARACTER_LIMIT = 550
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [canExpand, setCanExpand] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const CHARACTER_LIMIT = 550;
 
   // Debugging data
   useEffect(() => {
-    console.log("📝 MARGIN CARD COMPONENT: Received margin note:", note)
-  }, [note])
+    console.log("📝 MARGIN CARD COMPONENT: Received margin note:", note);
+  }, [note]);
 
   // Determine if content needs expand/collapse
   useEffect(() => {
     if (note.content.length > CHARACTER_LIMIT) {
-      setCanExpand(true)
+      setCanExpand(true);
     } else if (contentRef.current) {
-      const isOverflowing = contentRef.current.scrollHeight > contentRef.current.clientHeight
-      setCanExpand(isOverflowing)
+      const isOverflowing =
+        contentRef.current.scrollHeight > contentRef.current.clientHeight;
+      setCanExpand(isOverflowing);
     }
-  }, [note.content])
+  }, [note.content]);
 
   // Truncated content helper
   const getTruncatedContent = () => {
     if (note.content.length <= CHARACTER_LIMIT || isExpanded) {
-      return note.content
+      return note.content;
     }
-    const lastSpace = note.content.lastIndexOf(" ", CHARACTER_LIMIT)
-    const truncateAt = lastSpace > 0 ? lastSpace : CHARACTER_LIMIT
-    return note.content.substring(0, truncateAt) + "..."
-  }
+    const lastSpace = note.content.lastIndexOf(" ", CHARACTER_LIMIT);
+    const truncateAt = lastSpace > 0 ? lastSpace : CHARACTER_LIMIT;
+    return note.content.substring(0, truncateAt) + "...";
+  };
 
   return (
     <div className="relative" data-note-index={note.index}>
@@ -139,7 +142,7 @@ export function MarginCard({ className, note }: MarginCardProps) {
         </div>
       </Card>
     </div>
-  )
+  );
 }
 
-export default MarginCard
+export default MarginCard;

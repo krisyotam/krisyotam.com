@@ -402,7 +402,34 @@
       "confidence": "high",
       "importance": 6,
       "state": "active"
+    },
+    {
+      "title": "Meditations I",
+      "subtitle": "On Hope",
+      "preview": "A biblical reflection on the nature of hope as the sustaining pillar of faith, exploring scriptural passages that illuminate its transformative power.",
+      "date": "2025-04-26",
+      "tags": ["Hope", "Faith", "Scripture", "Redemption", "Grace"],
+      "category": "Meditations",
+      "slug": "meditations-I",
+      "status": "Published",
+      "confidence": "high",
+      "importance": 7,
+      "state": "active"
+    },
+    {
+      "title": "Musings I",
+      "subtitle": "On Control & Choice",
+      "preview": "A philosophical meditation on the nature of virtue, drawing on Stoic teachings to examine how we cultivate moral excellence in daily life.",
+      "date": "2025-04-26",
+      "tags": ["Philosophy", "Virtue", "Stoicism", "Ethics", "Reflection"],
+      "category": "Musings",
+      "slug": "musings-I",
+      "status": "Published",
+      "confidence": "high",
+      "importance": 7,
+      "state": "active"
     }
+    
     
    ]
 }

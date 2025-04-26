@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { MarginCard } from "@/components/margin-card"
+import { MarginCard } from "@/components/margin-notes"
 import TableOfContents from "@/components/table-of-contents"
 import { Bibliography } from "@/components/bibliography"
 import { RelatedPosts } from "@/components/related-posts"

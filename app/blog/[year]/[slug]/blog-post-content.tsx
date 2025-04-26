@@ -4,7 +4,7 @@ import React, { useEffect } from "react"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { useMDXComponents } from "@/mdx-components"
 import { BlogModalProvider } from "./blog-modal-provider"
-import { MarginCard } from "@/components/margin-card"
+import { MarginCard } from "@/components/margin-notes"
 import TableOfContents from "@/components/table-of-contents"
 
 interface BlogPostContentProps {

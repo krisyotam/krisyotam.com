@@ -15,10 +15,18 @@ interface RefGroup {
   count: number;
 }
 
+// Dynamic fetch URLs for Strong's dictionaries
+const STRONGS_GREEK_URL = "https://raw.githubusercontent.com/krisyotam/strongs/main/strongs-greek.json";
+const STRONGS_HEBREW_URL = "https://raw.githubusercontent.com/krisyotam/strongs/main/strongs-hebrew.json";
+
+let strongsGreek: Record<string, any> | null = null;
+let strongsHebrew: Record<string, any> | null = null;
+
 export default function Bible({ children }: BibleProps) {
   const [verses, setVerses] = useState<VerseResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const [hoveredStrongs, setHoveredStrongs] = useState<string | null>(null);
 
   // Build reference groups
   const refParts = useMemo(
@@ -46,14 +54,29 @@ export default function Bible({ children }: BibleProps) {
     [refParts]
   );
 
-  // Fetch verses on open
+  // Fetch verses + Strong's on open
   useEffect(() => {
     let mounted = true;
-    if (isOpen) {
-      getVerseFromBible(children).then((results) => {
-        if (mounted) setVerses(results);
-      });
+
+    async function loadData() {
+      if (!strongsGreek) {
+        const res = await fetch(STRONGS_GREEK_URL);
+        strongsGreek = res.ok ? await res.json() : {};
+      }
+      if (!strongsHebrew) {
+        const res = await fetch(STRONGS_HEBREW_URL);
+        strongsHebrew = res.ok ? await res.json() : {};
+      }
+      if (mounted) {
+        const results = await getVerseFromBible(children);
+        setVerses(results);
+      }
     }
+
+    if (isOpen) {
+      loadData();
+    }
+
     return () => {
       mounted = false;
     };
@@ -70,6 +93,48 @@ export default function Bible({ children }: BibleProps) {
       y.set((window.innerHeight - h) / 3);
     }
   }, [isOpen, x, y]);
+
+  // Fetch Strong's definition for a superscript
+  function getStrongsInfo(id: string) {
+    if (id.startsWith("G")) {
+      const key = id.slice(1).padStart(5, "0"); // G1 -> 00001
+      return strongsGreek ? strongsGreek[key] : null;
+    } else if (id.startsWith("H")) {
+      return strongsHebrew ? strongsHebrew[id] : null;
+    }
+    return null;
+  }
+
+  // Render verse text with interactive superscripts
+  function renderVerseText(text: string) {
+    const parts = text.split(/(<sup>.*?<\/sup>)/g);
+    return parts.map((part, idx) => {
+      if (part.startsWith("<sup>") && part.endsWith("</sup>")) {
+        const strongsId = part.replace(/<\/?sup>/g, "");
+        const info = getStrongsInfo(strongsId);
+
+        return (
+          <span
+            key={idx}
+            className="text-primary cursor-help relative"
+            onMouseEnter={() => setHoveredStrongs(strongsId)}
+            onMouseLeave={() => setHoveredStrongs(null)}
+          >
+            <sup>{strongsId}</sup>
+            {hoveredStrongs === strongsId && info && (
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-56 bg-background text-foreground text-xs rounded-md shadow-lg p-2 border z-10">
+                <div className="font-semibold mb-1">{info.greek_unicode || info.lemma}</div>
+                <div className="italic mb-1">{info.transliteration || info.greek_translit}</div>
+                <div>{info.strongs_def || info.translation}</div>
+              </div>
+            )}
+          </span>
+        );
+      } else {
+        return <span key={idx}>{part}</span>;
+      }
+    });
+  }
 
   return (
     <div className="relative inline-block" onMouseEnter={() => setIsOpen(true)}>
@@ -108,8 +173,9 @@ export default function Bible({ children }: BibleProps) {
                   <div key={grp.raw} className="mb-4">
                     <div className="font-semibold mb-2">{grp.label}</div>
                     {slice.map((v, i) => (
-                      <p key={i} className="mb-1">
-                        <span className="font-semibold">{v.reference}</span> {v.text}
+                      <p key={i} className="mb-1 text-sm leading-relaxed">
+                        <span className="font-semibold">{v.reference} </span>
+                        {renderVerseText(v.text)}
                       </p>
                     ))}
                   </div>

@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { NotesSearch } from "@/components/notes-search"
-import { NotesCategoryFilter } from "@/components/notes-category-filter"
-import { NotesList } from "@/components/notes-list"
-import { HelpCircle, X } from "lucide-react"
-import { PageHeader } from "@/components/page-header"
+import { useState } from "react";
+import { NotesSearch } from "@/components/notes-search";
+import { NotesCategoryFilter } from "@/components/notes-category-filter";
+import { NotesList } from "@/components/notes-list";
+import { HelpCircle, X } from "lucide-react";
+import { PageHeader } from "@/components/page-header";
 
-// Add Notes page metadata after other imports
+/* page-level metadata for the header */
 const notesPageData = {
   title: "Notes",
   subtitle: "",
@@ -16,36 +16,27 @@ const notesPageData = {
   status: "In Progress" as const,
   confidence: "likely" as const,
   importance: 6,
-}
+};
 
+/* ---------- updated type ---------- */
 interface Note {
-  title: string
-  date: string
-  slug: string
-  tags: string[]
-  category: string
-  content: string
+  title: string;
+  date: string;
+  slug: string;
+  tags: string[];
+  category: string;
 }
 
 interface NotesClientPageProps {
-  notes: Note[]
+  notes: Note[];
 }
 
 export default function NotesClientPage({ notes }: NotesClientPageProps) {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [activeCategory, setActiveCategory] = useState("all")
-  const [showHelp, setShowHelp] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [showHelp, setShowHelp] = useState(false);
 
-  // Extract unique categories from notes
-  const categories = ["all", ...Array.from(new Set(notes.map((note) => note.category)))]
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query)
-  }
-
-  const handleCategorySelect = (category: string) => {
-    setActiveCategory(category)
-  }
+  const categories = ["all", ...Array.from(new Set(notes.map(n => n.category)))];
 
   return (
     <>
@@ -54,29 +45,26 @@ export default function NotesClientPage({ notes }: NotesClientPageProps) {
           font-family: 'Geist', sans-serif;
         }
       `}</style>
-      <div className="notes-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
-        {/* Add the PageHeader component */}
-        <PageHeader
-          title={notesPageData.title}
-          subtitle={notesPageData.subtitle}
-          date={notesPageData.date}
-          preview={notesPageData.preview}
-          status={notesPageData.status}
-          confidence={notesPageData.confidence}
-          importance={notesPageData.importance}
-        />
 
-        <NotesSearch onSearch={handleSearch} />
+      <div className="notes-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
+        <PageHeader {...notesPageData} />
+
+        <NotesSearch onSearch={setSearchQuery} />
 
         <NotesCategoryFilter
           categories={categories}
           activeCategory={activeCategory}
-          onCategorySelect={handleCategorySelect}
+          onCategorySelect={setActiveCategory}
         />
 
-        <NotesList notes={notes} searchQuery={searchQuery} activeCategory={activeCategory} />
+        {/* Pass metadata-only list */}
+        <NotesList
+          notes={notes}
+          searchQuery={searchQuery}
+          activeCategory={activeCategory}
+        />
 
-        {/* Help icon in bottom left */}
+        {/* help overlay */}
         <div className="fixed bottom-4 left-4 z-10">
           <button
             onClick={() => setShowHelp(true)}
@@ -87,7 +75,6 @@ export default function NotesClientPage({ notes }: NotesClientPageProps) {
           </button>
         </div>
 
-        {/* Help modal */}
         {showHelp && (
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
             <div className="bg-background p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
@@ -107,13 +94,12 @@ export default function NotesClientPage({ notes }: NotesClientPageProps) {
                   Use the search bar to find specific notes by title, tag, or category. You can also filter notes by
                   category using the buttons below the search bar.
                 </p>
-                <p>Notes support LaTeX for mathematical expressions, both inline ($...$) and block ($$...$$).</p>
+                <p>Full text now lives in each <code>.mdx</code> file &mdash; titles, tags, and categories are searchable here.</p>
               </div>
             </div>
           </div>
         )}
       </div>
     </>
-  )
+  );
 }
-
