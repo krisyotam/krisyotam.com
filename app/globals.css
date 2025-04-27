@@ -637,3 +637,18 @@ img {
 
 
 
+/* ensure the browser can hyphenate text in English */
+.post-content {
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
+/* justify all but the last line, and allow hyphenated breaks */
+.post-content p {
+  text-align: justify;
+  text-align-last: left;  /* keep the last line ragged-right */
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
