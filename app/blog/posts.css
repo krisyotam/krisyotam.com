@@ -315,38 +315,6 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-.dropcap-image-wrapper {
-  float: left;
-  margin-right: 0.5em;    /* tweak for text wrap */
-  margin-top: 0.1em;      /* align to baseline */
-  line-height: 0;
-}
-
-.dropcap-image {
-  background: transparent;
-  border: none;
-  user-select: none;
-  /* you can also set width/height via CSS if you prefer: */
-  /* width: 3em; */
-  /* height: auto; */
-}
-
-.dropcap-image {
-  /* disable any outlines, highlights, shadows, or filters */
-  outline: none !important;
-  box-shadow: none !important;
-  filter: none !important;
-  opacity: 1 !important;
-  background: transparent !important;
-}
-
-.dropcap-image {
-  /* make it big enough to admire — 5em is ~5× your 1em body text */
-  width: 10em !important;
-  height: 10em !important;
-  /* keep it perfectly square */
-  object-fit: contain;
-}
 
 /* ensure the browser can hyphenate text in English */
 .post-content {
