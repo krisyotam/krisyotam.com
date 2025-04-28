@@ -2,6 +2,10 @@
 
 ## April 2025
 
+### April 28, 2025
+- Updated changelog to automate with commit messages, guess these matter now
+
+
 ### April 21, 2025
 - Working on several new pages that will later be pushed to the main project
   - Film Page (updates of past and currently watching movies & shows, favorite actors, directors, studios, and characters)
