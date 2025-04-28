@@ -219,7 +219,74 @@
       "status": "In Progress",
       "confidence": "medium",
       "importance": 1
+    },
+    {
+      "slug": "on-myself",
+      "title": "On Myself",
+      "subtitle": "Personal Reflections",
+      "preview": "Personal reflections on my identity, growth, and guiding philosophies.",
+      "date": "2025-04-27",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 1
+    },
+    {
+      "slug": "on-website",
+      "title": "On Website",
+      "subtitle": "Site Architecture & Evolution",
+      "preview": "Insights into the design, architecture, and ongoing evolution of my personal website.",
+      "date": "2025-04-27",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 1
+    },
+    {
+      "slug": "on-learning",
+      "title": "On Learning",
+      "subtitle": "Educational Frameworks",
+      "preview": "Documenting my learning pathways—methods, resources, and progress across various disciplines.",
+      "date": "2025-04-27",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 1
+    },
+    {
+      "slug": "on-writing",
+      "title": "On Writing",
+      "subtitle": "Composition Techniques",
+      "preview": "my writing processes, stylistic evolutions, and compositional approaches.",
+      "date": "2025-04-27",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 1
+    },
+    {
+      "slug": "on-method",
+      "title": "On Method",
+      "subtitle": "Methodological Frameworks",
+      "preview": "Analyses of the methodologies and frameworks underpinning my research",
+      "date": "2025-04-27",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 1
+    },
+    {
+      "slug": "short-stories",
+      "title": "Short Stories",
+      "subtitle": "Narrative Fiction",
+      "preview": "A curated collection of my original short fiction",
+      "date": "2025-04-27",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 1
     }
+    
     
   ]
 }

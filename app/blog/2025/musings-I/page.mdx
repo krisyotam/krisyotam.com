@@ -6,6 +6,80 @@ import { Excerpt } from "@/components/posts/typography/excerpt";
 import { Quote } from "@/components/posts/typography/quote";
 import Define from "@/components/references/language/oed";
 import { Spoiler } from "@/components/posts/typography/spoiler";
+import { PoemBox } from "@/components/posts/typography/poem"
+import Collapse from "@/components/posts/typography/collapse"
+import FileViewer from "@/components/posts/typography/file-viewer"
+
+
+
+
+    <div className="container mx-auto ">
+      <h1 className="text-2xl font-semibold mb-4">Repository Configuration</h1>
+      <FileViewer
+        url="https://github.com/krisyotam/krisyotam.com/blob/main/scripts/url-archiver.go"
+        className="shadow-lg"
+      />
+    </div>
+
+
+# My Article
+
+Some intro text here.
+
+<Collapse title="Read More">
+This is **Markdown** content inside the collapse. You can:
+
+- Use lists
+- Include **bold** or _italic_ text
+- Add links: [Example](https://example.com)
+
+> Blockquotes work too.
+
+1. First item  
+2. Second item  
+
+Enjoy!
+</Collapse>
+
+More content below.
+
+
+<PoemBox>
+# this is a test  
+But we all will be alone,  
+illusions moving in memory,  
+someday, surely, so:  
+show no sorrow, laugh and love;  
+bravely walk bearing no wish but  
+to live while you will live---   
+    
+  
+   
+and not forget these feelings.  
+    
+See your school yard;  
+blanched blackboards,  
+gleaming grinders,  
+sharp sticky seats,  
+restless paper piles recalling  
+cheerful companions of childhood.  
+  
+But we all will be alone,  
+illusions moving in memory,  
+someday, surely, so:  
+show no sorrow, laugh and love;  
+bravely walk bearing no wish but  
+to live while you will live---  
+and not forget these feelings.  
+  
+See your school yard;  
+blanched blackboards,  
+gleaming grinders,  
+sharp sticky seats,  
+restless paper piles recalling  
+cheerful companions of childhood.  
+</PoemBox>
+
 
 
 <Excerpt title="Discourses 2.5.4-5" author="Epictetus" version="Loeb Classical Library (H. Zimmern trans.)" year="c. 135 AD">

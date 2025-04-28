@@ -330,7 +330,7 @@ export function HomeClient({ posts, randomQuote }: HomeClientProps) {
             <main>
               <div className="space-y-12">
                  {posts
-                  .filter(post => !["On Myself", "ExcludedCategory2"].includes(post.category))
+                  .filter(post => !["On Myself", "On Website", "On Learning", "On Writing", "On Method"].includes(post.category))
                   .map((post) => {
                     if (!post.slug || !post.date || !post.preview) {
                       console.error("Missing post data:", post)

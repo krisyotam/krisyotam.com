@@ -652,3 +652,29 @@ img {
   -webkit-hyphens: auto;
   -ms-hyphens: auto;
 }
+
+/* Constrain FileViewer and its <pre> to 100% of whatever parent they live in */
+.post-content .file-viewer {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+.post-content .file-viewer pre {
+  /* force the <pre> itself to fill its container */
+  width: 100% !important;
+  max-width: 100% !important;
+  
+  /* scroll rather than overflow the page */
+  overflow-x: auto !important;
+  box-sizing: border-box;
+}
+
+/* (optional) wrap long words/URLs rather than overflow */
+.post-content .file-viewer code {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+
+

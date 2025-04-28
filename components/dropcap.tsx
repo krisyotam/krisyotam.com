@@ -1,51 +1,65 @@
-"use client"
+"use client";
 
-/**
- * Dropcap component for MDX
- * Usage in MDX:
- *   import Dropcap from '@/components/dropcap'
- *   <Dropcap>p</Dropcap>
- */
-import React from 'react'
-import Image from 'next/image'
+import React from "react";
+import Image from "next/image";
 
 interface DropcapProps {
-  /** Single letter to render as a dropcap */
-  children: string
-  /** Width of the dropcap image (default: 64) */
-  width?: number
-  /** Height of the dropcap image (default: 64) */
-  height?: number
-  /** Additional CSS classes to apply to the wrapper */
-  className?: string
+  children: string;
+  width?: number;
+  height?: number;
+  className?: string;
+  type?: string;
 }
+
+// All dropcap folders
+const dropcapTypes = [
+  "gothic-traditional",
+  "vinework-gothic",
+  "alice-in-wonderland",
+  "william-morris-gothic",
+];
+
+// Which types should invert in dark mode
+const darkModeInvertTypes = [
+  "william-morris-gothic",
+];
 
 const Dropcap: React.FC<DropcapProps> = ({
   children,
   width = 64,
   height = 64,
-  className = ''
+  className = "",
+  type = "gothic-traditional",
 }) => {
-  const letter = typeof children === 'string' ? children.toLowerCase() : ''
-  const src = `/fonts/dropcaps/gothic-traditional/dropcap-${letter}.png`
+  const letter = typeof children === "string" ? children.toLowerCase() : "";
+
+  const folder = dropcapTypes.includes(type) ? type : "gothic-traditional";
+  const src = `/fonts/dropcaps/${folder}/dropcap-${letter}.png`;
+
+  const shouldInvert = darkModeInvertTypes.includes(type);
 
   return (
     <span
       className={`dropcap-image-wrapper ${className}`}
-      style={{ display: 'inline-block', lineHeight: 0 }}
+      style={{ display: "inline-block", lineHeight: 0 }}
       onContextMenu={(e) => e.preventDefault()}
     >
-      <Image
-        src={src}
-        alt={`Dropcap ${letter}`}
-        width={width}
-        height={height}
-        draggable={false}
-        onDragStart={(e) => e.preventDefault()}
-        className="dropcap-image"
-      />
+      <span
+        className={`${shouldInvert ? "dark:invert" : ""}`}
+        style={{ display: "inline-block" }}
+      >
+        <Image
+          src={src}
+          alt={`Dropcap ${letter}`}
+          width={width}
+          height={height}
+          draggable={false}
+          onDragStart={(e) => e.preventDefault()}
+          className="dropcap-image"
+        />
+      </span>
     </span>
-  )
-}
+  );
+};
 
-export default Dropcap
+export default Dropcap;

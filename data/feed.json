@@ -428,7 +428,73 @@
       "confidence": "high",
       "importance": 7,
       "state": "active"
+    },
+    {
+      "title": "Automated URL Archiving",
+      "subtitle": "Link Rot Protection",
+      "preview": "Preservation of sources through automated url archival.",
+      "date": "2025-04-27",
+      "tags": ["Philosophy", "Virtue", "Stoicism", "Ethics", "Reflection"],
+      "category": "On Website",
+      "slug": "automated-url-archiving",
+      "status": "Published",
+      "confidence": "high",
+      "importance": 7,
+      "state": "active"
+    },
+    {
+      "title": "LFS for krisyotam.com",
+      "subtitle": "Large File Storage",
+      "preview": "A solution for files and HTTP downloads.",
+      "date": "2025-04-27",
+      "tags": ["Philosophy", "Virtue", "Stoicism", "Ethics", "Reflection"],
+      "category": "On Website",
+      "slug": "krisyotam-lfs",
+      "status": "Published",
+      "confidence": "high",
+      "importance": 7,
+      "state": "active"
+    },
+    {
+      "title": "Linting for Prose",
+      "subtitle": "error correcting in long-form writing using llms",
+      "preview": "The creation and implementation of a linter for prose.",
+      "date": "2025-04-27",
+      "tags": ["Philosophy", "Virtue", "Stoicism", "Ethics", "Reflection"],
+      "category": "On Writing",
+      "slug": "linting-for-prose",
+      "status": "Published",
+      "confidence": "high",
+      "importance": 7,
+      "state": "active"
+    },
+    {
+      "title": "Toward a Unified Writing Style",
+      "subtitle": "on stylistic fidelity",
+      "preview": "The integration, and slight modification of several style guides I use.",
+      "date": "2025-04-27",
+      "tags": ["Writing", "Style", "Composition", "Guides", "Editorial"],
+      "category": "On Writing",
+      "slug": "toward-a-unified-writing-style",
+      "status": "Published",
+      "confidence": "high",
+      "importance": 7,
+      "state": "active"
+    },
+    {
+      "title": "How They Fall",
+      "subtitle": "a short story",
+      "preview": "Two orphaned siblings arrive at the illustrious Château de Noya.",
+      "date": "2025-04-27",
+      "tags": ["Horror", "Thriller", "Psychological", "Suspense", "Dark Fiction"],
+      "category": "Short Stories",
+      "slug": "how-they-fall",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 6,
+      "state": "active"
     }
+    
     
     
    ]

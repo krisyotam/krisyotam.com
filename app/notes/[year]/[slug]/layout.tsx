@@ -1,4 +1,4 @@
-import "../../notes.css";           // →  app/notes/notes.css
+import "../../notes.css";          
 
 export default function NoteLayout({
   children,
