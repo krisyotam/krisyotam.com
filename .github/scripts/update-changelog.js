@@ -31,7 +31,13 @@ async function updateChangelog() {
     changelog = '# Changelog\n\n';
   }
 
-  const commitEntry = `- ${latest.message}`;
+  // Split message into lines and convert to separate bullets
+  const commitEntry = latest.message
+    .split('\n')
+    .map(line => line.trim())
+    .filter(Boolean) // remove empty lines
+    .map(line => `- ${line}`)
+    .join('\n');
 
   // Ensure Month Section
   if (!changelog.includes(`## ${todayMonthYear}`)) {
@@ -45,7 +51,7 @@ async function updateChangelog() {
       `## ${todayMonthYear}\n\n### ${todayDate}\n${commitEntry}\n`
     );
   } else {
-    // If today's date exists, append new commit
+    // If today's date exists, append new commit entries
     changelog = changelog.replace(
       `### ${todayDate}`,
       `### ${todayDate}\n${commitEntry}`
