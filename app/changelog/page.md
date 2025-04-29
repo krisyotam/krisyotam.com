@@ -2,6 +2,10 @@
 
 ## April 2025
 
+### April 29, 2025
+- New:  Pride and Prejudice - Book Notes
+
+
 ### April 28, 2025
 - Updated changelog to automate with commit messages, guess these matter now
 
