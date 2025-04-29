@@ -1,20 +1,5 @@
 [
   {
-    "id": "1",
-    "title": "The Road Not Taken",
-    "dateCreated": "1916-08-18",
-    "year": 1916,
-    "type": "Narrative Poem",
-    "collection": "Mountain Interval",
-    "description": "Written as a gentle mockery of indecision, particularly the indecision that Robert Frost felt in his friend Edward Thomas.",
-    "slug": "the-road-not-taken",
-    "image": "/images/poetry/road-not-taken.jpg",
-    "stanza1": "Two roads diverged in a yellow wood,\nAnd sorry I could not travel both\nAnd be one traveler, long I stood\nAnd looked down one as far as I could\nTo where it bent in the undergrowth;",
-    "stanza2": "Then took the other, as just as fair,\nAnd having perhaps the better claim,\nBecause it was grassy and wanted wear;\nThough as for that the passing there\nHad worn them really about the same,",
-    "stanza3": "And both that morning equally lay\nIn leaves no step had trodden black.\nOh, I kept the first for another day!\nYet knowing how way leads on to way,\nI doubted if I should ever come back.",
-    "stanza4": "I shall be telling this with a sigh\nSomewhere ages and ages hence:\nTwo roads diverged in a wood, and I—\nI took the one less traveled by,\nAnd that has made all the difference."
-  },
-  {
     "id": "2",
     "title": "Afternoon Retreat",
     "dateCreated": "2024-12-02",
