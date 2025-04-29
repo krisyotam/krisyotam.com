@@ -1,0 +1,51 @@
+import Dropcap from '@/components/dropcap'
+import LinkTags from "@/components/link-tags"
+import { Box } from "@/components/posts/typography/box";
+import { Excerpt } from "@/components/posts/typography/excerpt";
+import { Quote } from "@/components/posts/typography/quote";
+import Define from "@/components/references/language/oed";
+import { Spoiler } from "@/components/posts/typography/spoiler";
+import { PoemBox } from "@/components/posts/typography/poem"
+import Collapse from "@/components/posts/typography/collapse"
+import { EnhancedImageDisplay } from "@/components/posts/images/enhanced-image-display";
+
+As of (4/28/2025) krisyotam.com now has support for Large Files (>200MB). The post here from [gwern.net](https://gwern.net/blog/2025-large-files) details much of the 
+necessity of this for a "long-now" focused site. For those who would rather not read I will provide a synopsis of such here. 
+
+# Why Large File Storage 
+<Dropcap>L</Dropcap>ots of people make use of services like OneDrive, Google Drive, iCloud Drive, and Mega for cloud storage services. These platforms tend to be failry straightforward, 
+designed for ease of use, and []. This does come with tons of draw backs however. With these platforms there is a lot of High Level Abstraction (you interact with apps, not servers), 
+Freemium Models (Small free amounts that scale prices terribly), Shared Hosting (your files live with a million others), Integrated Ecosystems (Locked into apple, microsoft, ect.), and severe Privacy Concerns.
+So how is [Hetzner Storage Boxes](https://www.hetzner.com/storage/storage-box/) different? HSB is Infrastructure Focused (designed for developers, and power users), and provides Low-Level Control (Access via FTP, SFTP, SCP, rsync, ect.). 
+It can also act as a system hardrive (otehr cloud providers can use this specific feature). It has no Ecosystem Lock-in (works with any os, tool, or client). 
+
+# Large Storage Technical Drawbacks
+
+
+# Competitor Price Comparison
+
+Unlike the popular consumer cloud providers above there are a number of *viable* alternatives to Hetzner. Those include Wasabi, Scaleway, Storj, and my own system backup provider BackBlaze B2. 
+As you can see below however there is simply no comparison when it comes to pricing models. 
+
+<EnhancedImageDisplay
+  images={[
+    {
+      src: "https://i.postimg.cc/jjchBmRD/hetzner-storage-comparison-light-mode.png",
+      darkSrc: "https://i.postimg.cc/C1K407Km/hetzner-storage-comparison-dark-mode.png", // optional
+      alt: "Hetzner Competitor Price Comparison",
+      caption: "As of 4/28/2025 a comparison between Hetzner, BackBlaze B2, Wasabi, Scaleway, Storj."
+    }
+  ]}
+/>
+
+
+# Technical Implementation 
+
+
+# Use Cases 
+<Dropcap>T</Dropcap>he immediate use case that comes to mind for the newly integrated Large File Storage (LFS) is the completion of the formerly delayed 
+archive page. It should be of no suprise that the future of this blog will discuss at length a variety of topics that must be heavily supported with documentation. Documentation like 
+Panama Papers, Paradise Papers, Offshore Leaks, Silk Road Archives, RaidForums Dumps, and many more data sets. It will also include the storage of youtube videos I think are in danger of being silenced. 
+Things like this as well as research papers, historical documents, ect. are to be stored for reference here on the site and the archive page to be made available to people at my discretion. 
+
+more fun things to store include GeoCities Archives. 

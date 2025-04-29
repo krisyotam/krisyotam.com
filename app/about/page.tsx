@@ -64,15 +64,21 @@ interface AccordionItemProps {
 }
 
 function AccordionItem({ title, content, isOpen, onToggle }: AccordionItemProps) {
+  const slug = title.toLowerCase().replace(/\s+/g, "-")
+  
   return (
-    <div className="border-b border-border">
+    <div className="border-b border-border" id={slug}>
       <button
         onClick={onToggle}
         className="w-full py-8 flex justify-between items-center text-left"
         aria-expanded={isOpen}
-        aria-controls={`section-${title.toLowerCase().replace(/\s+/g, "-")}`}
+        aria-controls={`section-${slug}`}
       >
-        <h2 className="text-2xl font-normal text-foreground">{title}</h2>
+        <h2 className="text-2xl font-normal text-foreground">
+          <a href={`#${slug}`} className="hover:text-primary transition-colors">
+            {title}
+          </a>
+        </h2>
         {isOpen ? (
           <span className="text-2xl text-foreground" aria-hidden="true">
             -
@@ -84,7 +90,7 @@ function AccordionItem({ title, content, isOpen, onToggle }: AccordionItemProps)
         )}
       </button>
       <div
-        id={`section-${title.toLowerCase().replace(/\s+/g, "-")}`}
+        id={`section-${slug}`}
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
           isOpen ? "max-h-[5000px] mb-8" : "max-h-0"
         }`}
@@ -103,6 +109,57 @@ export default function AboutPage() {
   const [selectedBlog, setSelectedBlog] = useState<any>(null)
   const [selectedCompany, setSelectedCompany] = useState<any>(null)
 
+  // Use useCallback for event handlers
+  const toggleSection = useCallback((index: number) => {
+    setOpenSections((current) => {
+      const newSections = current.includes(index) 
+        ? current.filter((i) => i !== index)
+        : [...current, index]
+      
+      // Update URL hash with the last interacted section
+      const lastSection = sections[newSections[newSections.length - 1]]
+      if (lastSection) {
+        const slug = lastSection.title.toLowerCase().replace(/\s+/g, "-")
+        window.location.hash = slug
+      }
+      
+      return newSections
+    })
+  }, [sections])
+
+  // Handle URL hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1)
+      if (hash) {
+        const index = sections.findIndex(section => 
+          section.title.toLowerCase().replace(/\s+/g, "-") === hash
+        )
+        if (index !== -1) {
+          // Only add to open sections if not already open
+          setOpenSections(current => 
+            current.includes(index) ? current : [...current, index]
+          )
+          // Scroll to the section after a short delay
+          setTimeout(() => {
+            const element = document.getElementById(hash)
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }
+          }, 100)
+        }
+      }
+    }
+
+    // Check for initial hash on mount
+    if (window.location.hash) {
+      handleHashChange()
+    }
+
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [sections])
+
   // Memoize the CoreSkills component to prevent re-renders
   const coreSkillsComponent = useMemo(
     () => (
@@ -112,11 +169,6 @@ export default function AboutPage() {
     ),
     [],
   )
-
-  // Use useCallback for event handlers
-  const toggleSection = useCallback((index: number) => {
-    setOpenSections((current) => (current.includes(index) ? current.filter((i) => i !== index) : [...current, index]))
-  }, [])
 
   // Memoize the categories array
   const categories = useMemo(
@@ -825,6 +877,40 @@ export default function AboutPage() {
           title: "Site Info",
           content: (
             <div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-4 flex items-center justify-center h-full">
+                    <div className="relative w-[250px] h-[250px]">
+                      <Image
+                        src="https://i.postimg.cc/4394QG8z/krisyotam-aristocratic-logo.png"
+                        alt="Kris Yotam Logo"
+                        fill
+                        style={{ objectFit: "contain" }}
+                        className="rounded-md dark:invert dark:brightness-0 dark:contrast-100 select-none pointer-events-none"
+                        onContextMenu={(e) => e.preventDefault()}
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <CardContent className="p-4 flex flex-col items-center justify-center h-full">
+                    <div className="relative w-[250px] h-[250px]">
+                      <Image
+                        src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://orcid.org/0000-0003-0632-8894`}
+                        alt="ORCID QR Code"
+                        fill
+                        style={{ objectFit: "contain" }}
+                        className="rounded-md"
+                      />
+                    </div>
+                    <p className="text-center text-sm text-muted-foreground mt-4">
+                      Scan to view my ORCID profile
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
                   <CardContent className="p-4">

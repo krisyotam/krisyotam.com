@@ -115,8 +115,10 @@ export default function GlobePage() {
         // Add atmosphere and fog effects
         map.current.setFog({
           color: "rgb(255, 255, 255)",
-          "high-color": "rgb(245, 245, 245)",
-          "horizon-blend": 0.1,
+          "high-color": "rgb(255, 255, 255)",
+          "horizon-blend": 0.02,
+          "space-color": "rgb(255, 255, 255)",
+          "star-intensity": 0
         })
 
         map.current.setLight({
@@ -132,31 +134,80 @@ export default function GlobePage() {
             "sky-type": "atmosphere",
             "sky-atmosphere-sun": [0.0, 90.0],
             "sky-atmosphere-sun-intensity": 15,
+            "sky-atmosphere-color": "rgb(255, 255, 255)",
+            "sky-atmosphere-halo-color": "rgb(255, 255, 255)"
           },
         })
 
         // Add location markers
         locations.forEach((place) => {
           const el = document.createElement("div")
-          el.className = `pin pin-${place.type.toLowerCase()}`
+          el.className = `h-4 w-4 cursor-pointer rounded-full border-2 pin-${place.type.toLowerCase()} bg-clip-content p-0.5 hover:scale-125 transition-transform duration-200`
+          el.setAttribute("aria-label", `${place.name}, ${place.type}`)
+          el.setAttribute("role", "button")
 
-          // Create popup content with escaped HTML
+          // Create popup content with modern design
           const popupContent = `
-            <h3>${place.name}</h3>
-            <p>${place.description}</p>
-            <button onclick="window.openStreetView([${place.coordinates[0]}, ${place.coordinates[1]}], '${place.name.replace(/'/g, "\\'")}')">View Street View</button>
+            <div class="location-popup">
+              <div class="location-popup-header">
+                <div class="location-popup-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <div class="location-popup-title">
+                  <h3 class="location-popup-name">${place.name}</h3>
+                  <p class="location-popup-type">${place.type}</p>
+                </div>
+              </div>
+              
+              <div class="location-popup-stats">
+                <div class="location-popup-stat">
+                  <p class="location-popup-stat-label">Visited</p>
+                  <p class="location-popup-stat-value">${place.visitDate || 'Unknown'}</p>
+                </div>
+                <div class="location-popup-stat">
+                  <p class="location-popup-stat-label">Duration</p>
+                  <p class="location-popup-stat-value">${place.duration || 'N/A'}</p>
+                </div>
+              </div>
+
+              <p class="location-popup-description">${place.description}</p>
+
+              <div class="location-popup-actions">
+                <button class="location-popup-button" onclick="window.open('https://www.google.com/maps/search/${encodeURIComponent(place.name)}', '_blank')">
+                  View on Maps
+                </button>
+                <button class="location-popup-button location-popup-button-primary" onclick="window.openStreetView([${place.coordinates[0]}, ${place.coordinates[1]}], '${place.name.replace(/'/g, "\\'")}')">
+                  Street View
+                </button>
+              </div>
+            </div>
           `
 
           // Add marker with popup
-          new mapboxgl.Marker({
+          const marker = new mapboxgl.Marker({
             element: el,
             anchor: "center",
             rotationAlignment: "map",
             pitchAlignment: "map",
           })
             .setLngLat(place.coordinates as [number, number])
-            .setPopup(new mapboxgl.Popup({ offset: 25, closeButton: false }).setHTML(popupContent))
-            .addTo(map.current)
+            .setPopup(
+              new mapboxgl.Popup({ 
+                offset: 25,
+                closeButton: true,
+                maxWidth: '320px'
+              }).setHTML(popupContent)
+            )
+            .addTo(map.current!)
+
+          // Add click handler
+          el.addEventListener("click", (e) => {
+            e.stopPropagation()
+            marker.togglePopup()
+          })
         })
 
         // Enable map controls
@@ -211,8 +262,8 @@ export default function GlobePage() {
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden">
       <div className="absolute top-8 left-1/2 -translate-x-1/2 text-center z-10">
-        <h1 className="text-4xl font-bold text-white">Globe</h1>
-        <p className="text-gray-300 mt-2">Places I've been to. Inspired by conquer.earth</p>
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Globe</h1>
+        <p className="text-gray-700 dark:text-gray-300 mt-2">Places I've been to. Inspired by conquer.earth</p>
       </div>
       {loading && (
         <div className="absolute inset-0 flex items-center justify-center bg-white/80 dark:bg-gray-900/80 z-10">
@@ -225,7 +276,7 @@ export default function GlobePage() {
         </div>
       )}
       <div ref={mapContainer} className="w-full h-full" />
-      <div className="absolute bottom-4 left-4 text-sm text-gray-400">© Mapbox © OpenStreetMap</div>
+      <div className="absolute bottom-4 left-4 text-sm text-gray-600 dark:text-gray-400">© Mapbox © OpenStreetMap</div>
     </div>
   )
 }

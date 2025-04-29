@@ -1,120 +1,114 @@
-"use client"
+"use client";
 
-import { cn } from "@/lib/utils"
-import { useState, useEffect } from "react"
-import { Copy, Check, FileCode, ExternalLink } from "lucide-react"
-import Link from "next/link"
+import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
+import { Copy, Check, FileCode, ExternalLink } from "lucide-react";
+import Link from "next/link";
 
 interface FileViewerProps {
   /** GitHub file URL (raw or blob) */
-  url: string
+  url: string;
   /** Additional CSS classes for outer wrapper */
-  className?: string
+  className?: string;
 }
 
-export default function FileViewer({
-  url,
-  className,
-}: FileViewerProps) {
-  const accessToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN || ""
-  const [fileContent, setFileContent] = useState<string>("")
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
-  const [copied, setCopied] = useState<boolean>(false)
+export default function FileViewer({ url, className }: FileViewerProps) {
+  const [fileContent, setFileContent] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState<boolean>(false);
   const [fileInfo, setFileInfo] = useState<{
-    owner: string
-    repo: string
-    path: string
-    fileName: string
-    branch: string
-  } | null>(null)
+    owner: string;
+    repo: string;
+    path: string;
+    fileName: string;
+    branch: string;
+  } | null>(null);
 
   // Parse GitHub URL once
   useEffect(() => {
     try {
-      let owner: string, repo: string, branch: string, path: string, fileName: string
+      let owner: string, repo: string, branch: string, path: string, fileName: string;
       if (url.includes("raw.githubusercontent.com")) {
-        ;[owner, repo, branch, ...path] = url.replace("https://raw.githubusercontent.com/", "").split("/")
-        path = path.join("/")
-        fileName = path.split("/").pop() || ""
+        const parts = url.replace("https://raw.githubusercontent.com/", "").split("/");
+        owner = parts[0];
+        repo = parts[1];
+        branch = parts[2];
+        const pathParts = parts.slice(3);
+        path = pathParts.join("/");
+        fileName = path.split("/").pop() || "";
       } else {
-        const parts = url.replace("https://github.com/", "").split("/")
-        owner = parts[0]
-        repo = parts[1]
+        const parts = url.replace("https://github.com/", "").split("/");
+        owner = parts[0];
+        repo = parts[1];
         if (["blob", "tree", "raw"].includes(parts[2])) {
-          branch = parts[3]
-          path = parts.slice(4).join("/")
+          branch = parts[3];
+          const pathParts = parts.slice(4);
+          path = pathParts.join("/");
         } else {
-          branch = "main"
-          path = parts.slice(2).join("/")
+          branch = "main";
+          const pathParts = parts.slice(2);
+          path = pathParts.join("/");
         }
-        fileName = path.split("/").pop() || ""
+        fileName = path.split("/").pop() || "";
       }
-      setFileInfo({ owner, repo, path, fileName, branch })
+      setFileInfo({ owner, repo, path, fileName, branch });
     } catch {
-      setError("Failed to parse GitHub URL")
-      setIsLoading(false)
+      setError("Failed to parse GitHub URL");
+      setIsLoading(false);
     }
-  }, [url])
+  }, [url]);
 
-  // Fetch file content
+  // Fetch file content using secure API route
   useEffect(() => {
-    if (!fileInfo) return
-    ;(async () => {
-      setIsLoading(true)
-      setError(null)
+    if (!fileInfo) return;
+    (async () => {
+      setIsLoading(true);
+      setError(null);
       try {
-        let fetchUrl: string
-        const headers: HeadersInit = {}
-        if (accessToken) {
-          fetchUrl = `https://api.github.com/repos/${fileInfo.owner}/${fileInfo.repo}/contents/${fileInfo.path}?ref=${fileInfo.branch}`
-          headers.Authorization = `token ${accessToken}`
-          headers.Accept = "application/vnd.github.v3.raw"
-        } else {
-          fetchUrl = `https://raw.githubusercontent.com/${fileInfo.owner}/${fileInfo.repo}/${fileInfo.branch}/${fileInfo.path}`
-        }
-        const res = await fetch(fetchUrl, { headers })
-        if (!res.ok) throw new Error(`Failed to fetch file: ${res.status}`)
-        const text = await res.text()
-        setFileContent(text)
+        const apiUrl = `/api/github-file?url=${encodeURIComponent(url)}`;
+        const res = await fetch(apiUrl);
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || "Failed to fetch file content");
+        setFileContent(json.content);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to fetch file content")
+        setError(err instanceof Error ? err.message : "Failed to fetch file content");
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
-    })()
-  }, [fileInfo, accessToken])
+    })();
+  }, [fileInfo, url]);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(fileContent)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+    navigator.clipboard.writeText(fileContent);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const getLanguageClass = (fileName: string): string => {
-    const ext = fileName.split('.').pop()?.toLowerCase() || ''
+    const ext = fileName.split('.').pop()?.toLowerCase() || '';
     switch (ext) {
-      case 'js': return 'language-javascript'
-      case 'ts': return 'language-typescript'
-      case 'tsx': return 'language-tsx'
-      case 'jsx': return 'language-jsx'
-      case 'html': return 'language-html'
-      case 'css': return 'language-css'
-      case 'json': return 'language-json'
-      case 'md': return 'language-markdown'
-      case 'py': return 'language-python'
-      case 'go': return 'language-go'
-      case 'java': return 'language-java'
-      case 'rb': return 'language-ruby'
-      case 'php': return 'language-php'
-      case 'c': case 'cpp': case 'h': return 'language-c'
-      case 'cs': return 'language-csharp'
-      case 'sh': case 'bash': return 'language-bash'
-      case 'yml': case 'yaml': return 'language-yaml'
-      case 'sql': return 'language-sql'
-      default: return 'language-plaintext'
+      case 'js': return 'language-javascript';
+      case 'ts': return 'language-typescript';
+      case 'tsx': return 'language-tsx';
+      case 'jsx': return 'language-jsx';
+      case 'html': return 'language-html';
+      case 'css': return 'language-css';
+      case 'json': return 'language-json';
+      case 'md': return 'language-markdown';
+      case 'py': return 'language-python';
+      case 'go': return 'language-go';
+      case 'java': return 'language-java';
+      case 'rb': return 'language-ruby';
+      case 'php': return 'language-php';
+      case 'c': case 'cpp': case 'h': return 'language-c';
+      case 'cs': return 'language-csharp';
+      case 'sh': case 'bash': return 'language-bash';
+      case 'yml': case 'yaml': return 'language-yaml';
+      case 'sql': return 'language-sql';
+      default: return 'language-plaintext';
     }
-  }
+  };
 
   return (
     <div
@@ -195,5 +189,5 @@ export default function FileViewer({
         </div>
       )}
     </div>
-  )
+  );
 }

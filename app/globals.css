@@ -30,7 +30,7 @@
       --border: 0 0% 88%; /* A pale gray-white, like stone or ash */
       --input: 0 0% 90%; /* A light, clean white for fields */
       --ring: 0 0% 40%; /* A subtle gray for focus states */
-      --radius: 0.5rem; /* Unchanged, as it’s a structural property */
+      --radius: 0.5rem; /* Unchanged, as it's a structural property */
     }
    
      .dark {
@@ -378,6 +378,7 @@
      border-radius: 50%;
      box-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
      position: relative;
+     transition: all 0.3s ease;
    }
    
    .pin::after {
@@ -394,6 +395,7 @@
    /* City Marker */
    .pin-city {
      background-color: rgba(236, 72, 153, 0.7);
+     border: 2px solid rgba(236, 72, 153, 0.1);
    }
    .pin-city::after {
      background-color: rgba(236, 72, 153, 0.7);
@@ -402,6 +404,7 @@
    /* Place Marker */
    .pin-place {
      background-color: rgba(168, 85, 247, 0.7);
+     border: 2px solid rgba(168, 85, 247, 0.1);
    }
    .pin-place::after {
      background-color: rgba(168, 85, 247, 0.7);
@@ -410,6 +413,7 @@
    /* Airport Marker */
    .pin-airport {
      background-color: rgba(244, 63, 94, 0.7);
+     border: 2px solid rgba(244, 63, 94, 0.1);
    }
    .pin-airport::after {
      background-color: rgba(244, 63, 94, 0.7);
@@ -418,6 +422,7 @@
    /* Country Marker */
    .pin-country {
      background-color: rgba(34, 197, 94, 0.7);
+     border: 2px solid rgba(34, 197, 94, 0.1);
    }
    .pin-country::after {
      background-color: rgba(34, 197, 94, 0.7);
@@ -426,6 +431,7 @@
    /* Neighborhood Marker */
    .pin-neighborhood {
      background-color: rgba(249, 115, 22, 0.7);
+     border: 2px solid rgba(249, 115, 22, 0.1);
    }
    .pin-neighborhood::after {
      background-color: rgba(249, 115, 22, 0.7);
@@ -434,6 +440,7 @@
    /* Hotel Marker */
    .pin-hotel {
      background-color: rgba(250, 204, 21, 0.7);
+     border: 2px solid rgba(250, 204, 21, 0.1);
    }
    .pin-hotel::after {
      background-color: rgba(250, 204, 21, 0.7);
@@ -442,6 +449,7 @@
    /* Park Marker */
    .pin-park {
      background-color: rgba(16, 185, 129, 0.7);
+     border: 2px solid rgba(16, 185, 129, 0.1);
    }
    .pin-park::after {
      background-color: rgba(16, 185, 129, 0.7);
@@ -450,32 +458,211 @@
    /* Building Marker */
    .pin-building {
      background-color: rgba(59, 130, 246, 0.7);
+     border: 2px solid rgba(59, 130, 246, 0.1);
    }
    .pin-building::after {
      background-color: rgba(59, 130, 246, 0.7);
    }
    
-   /* Popup Styles */
-   .mapboxgl-popup-tip,
-   .mapboxgl-popup-close-button {
-     display: none;
+   /* Modern Popup Styles */
+   .mapboxgl-popup {
+     max-width: 320px !important;
+     font-family: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
    }
    
    .mapboxgl-popup-content {
-     border-radius: 0.375rem;
-     border: 1px solid transparent;
-     background-color: rgb(38, 38, 38);
-     padding: 0.75rem 1rem;
-     font-family: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
-     font-size: 1rem;
-     font-weight: 500;
-     color: #c0c0c0;
-     font-variation-settings: "opsz" 15, "wght" 500;
+     padding: 1.5rem !important;
+     border-radius: 1rem !important;
+     background: rgba(255, 255, 255, 0.95) !important;
+     backdrop-filter: blur(10px) !important;
+     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08) !important;
+     border: 1px solid rgba(0, 0, 0, 0.05) !important;
    }
    
    .dark .mapboxgl-popup-content {
-     border-color: rgba(255, 255, 255, 0.08);
-     background-color: rgba(0, 0, 0, 0.96);
+     background: rgba(23, 23, 23, 0.95) !important;
+     border: 1px solid rgba(255, 255, 255, 0.1) !important;
+   }
+   
+   .mapboxgl-popup-tip {
+     display: none !important;
+   }
+   
+   .mapboxgl-popup-close-button {
+     padding: 0.5rem !important;
+     right: 0.5rem !important;
+     top: 0.5rem !important;
+     color: #666 !important;
+     font-size: 1.5rem !important;
+     line-height: 1 !important;
+     background: transparent !important;
+     border: none !important;
+     cursor: pointer !important;
+     transition: color 0.2s ease !important;
+   }
+   
+   .dark .mapboxgl-popup-close-button {
+     color: #999 !important;
+   }
+   
+   .mapboxgl-popup-close-button:hover {
+     color: #000 !important;
+     background: transparent !important;
+   }
+   
+   .dark .mapboxgl-popup-close-button:hover {
+     color: #fff !important;
+   }
+   
+   /* Location Popup Content Styles */
+   .location-popup {
+     min-width: 280px;
+   }
+   
+   .location-popup-header {
+     display: flex;
+     align-items: center;
+     margin-bottom: 1rem;
+     gap: 0.75rem;
+   }
+   
+   .location-popup-icon {
+     width: 2.5rem;
+     height: 2.5rem;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background: #f3f4f6;
+   }
+   
+   .dark .location-popup-icon {
+     background: rgba(255, 255, 255, 0.1);
+   }
+   
+   .location-popup-title {
+     flex: 1;
+   }
+   
+   .location-popup-name {
+     font-size: 1.25rem;
+     font-weight: 600;
+     color: #111;
+     margin: 0;
+     line-height: 1.2;
+   }
+   
+   .dark .location-popup-name {
+     color: #fff;
+   }
+   
+   .location-popup-type {
+     font-size: 0.875rem;
+     color: #666;
+     margin: 0;
+   }
+   
+   .dark .location-popup-type {
+     color: #999;
+   }
+   
+   .location-popup-stats {
+     display: flex;
+     gap: 1rem;
+     padding: 0.75rem 0;
+     border-top: 1px solid rgba(0, 0, 0, 0.05);
+     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+     margin: 1rem 0;
+   }
+   
+   .dark .location-popup-stats {
+     border-color: rgba(255, 255, 255, 0.1);
+   }
+   
+   .location-popup-stat {
+     flex: 1;
+   }
+   
+   .location-popup-stat-label {
+     font-size: 0.75rem;
+     color: #666;
+     margin: 0;
+   }
+   
+   .dark .location-popup-stat-label {
+     color: #999;
+   }
+   
+   .location-popup-stat-value {
+     font-size: 1rem;
+     font-weight: 600;
+     color: #111;
+     margin: 0;
+   }
+   
+   .dark .location-popup-stat-value {
+     color: #fff;
+   }
+   
+   .location-popup-description {
+     font-size: 0.875rem;
+     color: #444;
+     line-height: 1.5;
+     margin: 0 0 1rem 0;
+   }
+   
+   .dark .location-popup-description {
+     color: #bbb;
+   }
+   
+   .location-popup-actions {
+     display: flex;
+     gap: 0.5rem;
+   }
+   
+   .location-popup-button {
+     flex: 1;
+     padding: 0.5rem 1rem;
+     border-radius: 0.5rem;
+     font-size: 0.875rem;
+     font-weight: 500;
+     text-align: center;
+     cursor: pointer;
+     transition: all 0.2s ease;
+     background: #f3f4f6;
+     color: #111;
+     border: none;
+   }
+   
+   .dark .location-popup-button {
+     background: rgba(255, 255, 255, 0.1);
+     color: #fff;
+   }
+   
+   .location-popup-button:hover {
+     background: #e5e7eb;
+   }
+   
+   .dark .location-popup-button:hover {
+     background: rgba(255, 255, 255, 0.15);
+   }
+   
+   .location-popup-button-primary {
+     background: #111;
+     color: #fff;
+   }
+   
+   .dark .location-popup-button-primary {
+     background: #fff;
+     color: #111;
+   }
+   
+   .location-popup-button-primary:hover {
+     background: #000;
+   }
+   
+   .dark .location-popup-button-primary:hover {
+     background: #f3f4f6;
    }
    
    /* =============================================================================

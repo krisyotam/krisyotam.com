@@ -6,7 +6,11 @@
             -89.7788,
             43.6253
         ],
-        "type": "park"
+        "type": "park",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Wave Pool", "Black Anaconda", "Scorpion's Tail"],
+        "rating": 4
     },
     {
         "name": "Wisconsin Dells, Wisconsin",
@@ -15,7 +19,11 @@
             -89.7778,
             43.6273
         ],
-        "type": "city"
+        "type": "city",
+        "visitDate": "July 2022",
+        "duration": "2 days",
+        "highlights": ["Downtown", "Water Parks"],
+        "rating": 5
     },
     {
         "name": "Mt. Olympus, Wisconsin Dells, Wisconsin",
@@ -24,7 +32,11 @@
             -89.7628,
             43.6094
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Roller Coasters", "Water Slides"],
+        "rating": 4
     },
     {
         "name": "Ducks, Wisconsin Dells, Wisconsin",
@@ -33,7 +45,11 @@
             -89.7696,
             43.6241
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Boat Tours"],
+        "rating": 4
     },
     {
         "name": "Downtown Chicago, Illinois",
@@ -42,7 +58,11 @@
             -87.6298,
             41.8781
         ],
-        "type": "neighborhood"
+        "type": "neighborhood",
+        "visitDate": "July 2022",
+        "duration": "2 days",
+        "highlights": ["Skyline", "Food Scene"],
+        "rating": 5
     },
     {
         "name": "Chicago, Illinois",
@@ -51,7 +71,11 @@
             -87.6298,
             41.8781
         ],
-        "type": "city"
+        "type": "city",
+        "visitDate": "July 2022",
+        "duration": "2 days",
+        "highlights": ["Architecture", "Art Scene"],
+        "rating": 5
     },
     {
         "name": "The White House, Washington, DC",
@@ -60,7 +84,11 @@
             -77.0369,
             38.9072
         ],
-        "type": "building"
+        "type": "building",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Presidential Residence"],
+        "rating": 5
     },
     {
         "name": "Washington, DC",
@@ -69,7 +97,11 @@
             -77.0369,
             38.9072
         ],
-        "type": "city"
+        "type": "city",
+        "visitDate": "July 2022",
+        "duration": "2 days",
+        "highlights": ["Monuments", "History"],
+        "rating": 5
     },
     {
         "name": "Georgia Aquarium, Atlanta, Georgia",
@@ -78,7 +110,11 @@
             -84.3963,
             33.7637
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Aquarium", "Dolphins"],
+        "rating": 4
     },
     {
         "name": "Atlanta, Georgia",
@@ -87,7 +123,11 @@
             -84.3963,
             33.7637
         ],
-        "type": "city"
+        "type": "city",
+        "visitDate": "July 2022",
+        "duration": "2 days",
+        "highlights": ["Culture", "Food"],
+        "rating": 5
     },
     {
         "name": "Apex Museum, Atlanta, Georgia",
@@ -96,7 +136,11 @@
             -84.3987,
             33.7597
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["African American History"],
+        "rating": 4
     },
     {
         "name": "Wondr Museum, Chicago, Illinois",
@@ -105,7 +149,11 @@
             -87.6502,
             41.898
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Immersive Exhibits"],
+        "rating": 4
     },
     {
         "name": "Museum of Science and Industry, Chicago, Illinois",
@@ -114,7 +162,11 @@
             -87.5841,
             41.7905
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Interactive Exhibits"],
+        "rating": 4
     },
     {
         "name": "Field Museum, Chicago, Illinois",
@@ -123,7 +175,11 @@
             -87.5847,
             41.864
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["T. rex Fossil"],
+        "rating": 4
     },
     {
         "name": "DuSable Museum of African American History, Chicago, Illinois",
@@ -132,7 +188,11 @@
             -87.6116,
             41.7881
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["African American History"],
+        "rating": 4
     },
     {
         "name": "Clarksdale, Coahoma County, Mississippi",
@@ -141,7 +201,11 @@
             -90.571,
             34.2001
         ],
-        "type": "city"
+        "type": "city",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Blues History"],
+        "rating": 4
     },
     {
         "name": "Hampton Inn, Washington, DC",
@@ -150,7 +214,11 @@
             -77.0369,
             38.9072
         ],
-        "type": "hotel"
+        "type": "hotel",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Comfortable Stay"],
+        "rating": 4
     },
     {
         "name": "Holodome Hotel, Illinois",
@@ -159,7 +227,11 @@
             -88.05,
             41.65
         ],
-        "type": "hotel"
+        "type": "hotel",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Water Park"],
+        "rating": 4
     },
     {
         "name": "Lake Geneva, Lake Geneva, Wisconsin",
@@ -168,7 +240,11 @@
             -88.433,
             42.5967
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Peaceful Lake"],
+        "rating": 4
     },
     {
         "name": "Gatlinburg, Tennessee",
@@ -177,7 +253,11 @@
             -83.5102,
             35.7143
         ],
-        "type": "city"
+        "type": "city",
+        "visitDate": "July 2022",
+        "duration": "2 days",
+        "highlights": ["Nature Trails", "Resorts"],
+        "rating": 5
     },
     {
         "name": "SeaWorld Orlando, Orlando, Florida",
@@ -186,7 +266,11 @@
             -81.3792,
             28.5383
         ],
-        "type": "park"
+        "type": "park",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Marine Life", "Rides"],
+        "rating": 4
     },
     {
         "name": "Gary, Indiana",
@@ -195,7 +279,11 @@
             -87.3464,
             41.5934
         ],
-        "type": "city"
+        "type": "city",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Jackson Family"],
+        "rating": 4
     },
     {
         "name": "Bloomington, Indiana",
@@ -204,7 +292,11 @@
             -86.5346,
             39.1653
         ],
-        "type": "city"
+        "type": "city",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Campus"],
+        "rating": 4
     },
     {
         "name": "Great Falls Dam, Great Falls Park, Virginia",
@@ -213,7 +305,11 @@
             -77.2102,
             38.7915
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Waterfalls"],
+        "rating": 4
     },
     {
         "name": "The Pentagon, Arlington, Virginia",
@@ -222,7 +318,11 @@
             -77.0552,
             38.8719
         ],
-        "type": "building"
+        "type": "building",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Headquarters"],
+        "rating": 5
     },
     {
         "name": "Daytona Beach, Daytona Beach, Florida",
@@ -231,7 +331,11 @@
             -81.0365,
             29.2108
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Beach", "Race"],
+        "rating": 4
     },
     {
         "name": "Oklahoma City, Oklahoma",
@@ -240,7 +344,11 @@
             -97.5164,
             35.4676
         ],
-        "type": "city"
+        "type": "city",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Arts Scene", "History"],
+        "rating": 4
     },
     {
         "name": "Paycom Center, Oklahoma City, Oklahoma",
@@ -249,7 +357,11 @@
             -97.5142,
             35.4634
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["NBA Games", "Sports Events"],
+        "rating": 4
     },
     {
         "name": "United Center, Chicago, Illinois",
@@ -258,7 +370,11 @@
             -87.6742,
             41.8807
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Basketball Games", "Hockey Games"],
+        "rating": 5
     },
     {
         "name": "Lincoln Park Zoo, Chicago, Illinois",
@@ -267,7 +383,11 @@
             -87.6329,
             41.9213
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Animal Exhibits", "Free Admission"],
+        "rating": 4
     },
     {
         "name": "Navy Pier, Chicago, Illinois",
@@ -276,7 +396,11 @@
             -87.6054,
             41.8917
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Ferris Wheel", "Lakefront Views"],
+        "rating": 4
     },
     {
         "name": "Willis Tower (formerly Sears Tower), Chicago, Illinois",
@@ -285,7 +409,11 @@
             -87.6359,
             41.8789
         ],
-        "type": "building"
+        "type": "building",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Skydeck", "City Views"],
+        "rating": 5
     },
     {
         "name": "Brookfield Zoo, Brookfield, Illinois",
@@ -294,7 +422,11 @@
             -87.8331,
             41.8183
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Animal Exhibits", "Conservation Efforts"],
+        "rating": 4
     },
     {
         "name": "Art Institute of Chicago, Chicago, Illinois",
@@ -303,7 +435,11 @@
             -87.6237,
             41.8796
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["American Gothic", "Impressionist Collection"],
+        "rating": 5
     },
     {
         "name": "Indiana University, Bloomington, Indiana",
@@ -312,7 +448,11 @@
             -86.522,
             39.17
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Campus Tour", "Student Union"],
+        "rating": 4
     },
     {
         "name": "University of Illinois, Urbana-Champaign, Illinois",
@@ -321,7 +461,11 @@
             -88.2272,
             40.1104
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Engineering Campus", "Quad"],
+        "rating": 4
     },
     {
         "name": "Illinois University, Springfield, Illinois",
@@ -330,7 +474,11 @@
             -89.6437,
             39.7817
         ],
-        "type": "place"
+        "type": "place",
+        "visitDate": "July 2022",
+        "duration": "1 day",
+        "highlights": ["Campus Tour", "Library"],
+        "rating": 3
     },
     {
         "name": "Orlando, Florida",
@@ -339,7 +487,11 @@
             -81.3792,
             28.5383
         ],
-        "type": "city"
+        "type": "city",
+        "visitDate": "June 2021",
+        "duration": "5 days",
+        "highlights": ["Theme Parks", "Entertainment"],
+        "rating": 5
     },
     {
         "name": "Lake Buena Vista, Orlando, Florida",
@@ -348,7 +500,11 @@
             -81.519,
             28.373
         ],
-        "type": "neighborhood"
+        "type": "neighborhood",
+        "visitDate": "June 2021",
+        "duration": "3 days",
+        "highlights": ["Disney Springs", "Resort Area"],
+        "rating": 4
     },
     {
         "name": "Walt Disney World Resort",
@@ -357,7 +513,11 @@
             -81.5731,
             28.3743
         ],
-        "type": "hotel"
+        "type": "hotel",
+        "visitDate": "June 2021",
+        "duration": "4 days",
+        "highlights": ["Magic Kingdom", "Epcot"],
+        "rating": 5
     },
     {
         "name": "Universal's Hard Rock Hotel",
@@ -366,7 +526,11 @@
             -81.4674,
             28.4732
         ],
-        "type": "hotel"
+        "type": "hotel",
+        "visitDate": "June 2021",
+        "duration": "2 days",
+        "highlights": ["Rock Memorabilia", "Pool Area"],
+        "rating": 4
     },
     {
         "name": "Disney's Grand Floridian Resort & Spa",
@@ -375,7 +539,11 @@
             -81.5732,
             28.4172
         ],
-        "type": "hotel"
+        "type": "hotel",
+        "visitDate": "June 2021",
+        "duration": "1 day",
+        "highlights": ["Victorian Architecture", "Luxury Amenities"],
+        "rating": 5
     },
     {
         "name": "The Ritz-Carlton Orlando, Grande Lakes",
@@ -384,7 +552,11 @@
             -81.346,
             28.4186
         ],
-        "type": "hotel"
+        "type": "hotel",
+        "visitDate": "June 2021",
+        "duration": "1 day",
+        "highlights": ["Spa Services", "Golf Course"],
+        "rating": 5
     },
     {
         "name": "Four Seasons Resort Orlando at Walt Disney World Resort",
@@ -393,7 +565,11 @@
             -81.5559,
             28.3663
         ],
-        "type": "hotel"
+        "type": "hotel",
+        "visitDate": "June 2021",
+        "duration": "1 day",
+        "highlights": ["Luxury Accommodations", "Disney Views"],
+        "rating": 5
     },
     {
         "name": "Disney's Polynesian Village Resort",
@@ -402,7 +578,11 @@
             -81.5722,
             28.4189
         ],
-        "type": "hotel"
+        "type": "hotel",
+        "visitDate": "June 2021",
+        "duration": "1 day",
+        "highlights": ["Tropical Theme", "Monorail Access"],
+        "rating": 4
     },
     {
         "name": "Loews Sapphire Falls Resort",
@@ -411,7 +591,11 @@
             -81.4681,
             28.4763
         ],
-        "type": "hotel"
+        "type": "hotel",
+        "visitDate": "June 2021",
+        "duration": "1 day",
+        "highlights": ["Caribbean Theme", "Water Features"],
+        "rating": 4
     },
     {
         "name": "Orlando International Airport",
@@ -420,7 +604,11 @@
             -81.3081,
             28.432
         ],
-        "type": "airport"
+        "type": "airport",
+        "visitDate": "June 2021",
+        "duration": "1 day",
+        "highlights": ["Main Terminal", "Shopping"],
+        "rating": 4
     },
     {
         "name": "Orlando Sanford International Airport",
@@ -429,7 +617,11 @@
             -81.2379,
             28.774
         ],
-        "type": "airport"
+        "type": "airport",
+        "visitDate": "June 2021",
+        "duration": "1 day",
+        "highlights": ["Smaller Size", "Easy Navigation"],
+        "rating": 3
     },
     {
         "name": "Orlando Executive Airport",
@@ -438,79 +630,130 @@
             -81.3717,
             28.5445
         ],
-        "type": "airport"
+        "type": "airport",
+        "visitDate": "June 2021",
+        "duration": "1 day",
+        "highlights": ["Private Aviation", "Business Travel"],
+        "rating": 3
     },
     {
         "name": "Niagara Falls, Niagara Falls, New York",
         "description": "A world-famous natural wonder, known for its stunning waterfalls.",
         "coordinates": [-79.0377, 43.0896],
-        "type": "city"
-      },
-      {
+        "type": "city",
+        "visitDate": "August 2019",
+        "duration": "3 days",
+        "highlights": ["Waterfalls", "Natural Beauty"],
+        "rating": 5
+    },
+    {
         "name": "Niagara Falls State Park, Niagara Falls, New York",
         "description": "A park featuring stunning views of the falls and various attractions.",
         "coordinates": [-79.0392, 43.0856],
-        "type": "place"
-      },
-      {
+        "type": "place",
+        "visitDate": "August 2019",
+        "duration": "2 days",
+        "highlights": ["Observation Points", "Hiking Trails"],
+        "rating": 5
+    },
+    {
         "name": "Maid of the Mist, Niagara Falls, New York",
         "description": "A boat tour that takes visitors up close to the base of the falls!",
         "coordinates": [-79.0607, 43.0857],
-        "type": "place"
-      },
-      {
+        "type": "place",
+        "visitDate": "August 2019",
+        "duration": "1 day",
+        "highlights": ["Boat Tour", "Falls Experience"],
+        "rating": 5
+    },
+    {
         "name": "Cave of the Winds, Niagara Falls, New York",
         "description": "A thrilling experience that takes visitors behind the waterfall for a close-up view.",
         "coordinates": [-79.0511, 43.0849],
-        "type": "place"
-      },
-      {
+        "type": "place",
+        "visitDate": "August 2019",
+        "duration": "1 day",
+        "highlights": ["Hurricane Deck", "Waterfall Views"],
+        "rating": 5
+    },
+    {
         "name": "Rainbow Bridge, Niagara Falls, New York",
         "description": "A bridge connecting the U.S. and Canada with beautiful views of the falls.",
         "coordinates": [-79.0502, 43.0896],
-        "type": "place"
-      },
-      {
+        "type": "place",
+        "visitDate": "August 2019",
+        "duration": "1 day",
+        "highlights": ["International Border", "Panoramic Views"],
+        "rating": 4
+    },
+    {
         "name": "Niagara Falls International Airport, Niagara Falls, New York",
         "description": "The main airport serving Niagara Falls, with flights to regional destinations.",
         "coordinates": [-78.9375, 43.1097],
-        "type": "airport"
-      },
-      {
+        "type": "airport",
+        "visitDate": "August 2019",
+        "duration": "1 day",
+        "highlights": ["Regional Flights", "Convenient Location"],
+        "rating": 3
+    },
+    {
         "name": "Buffalo Niagara International Airport, Buffalo, New York",
         "description": "An airport located near Niagara Falls, serving the Buffalo area.",
         "coordinates": [-78.7371, 42.9393],
-        "type": "airport"
-      },
-      {
+        "type": "airport",
+        "visitDate": "August 2019",
+        "duration": "1 day",
+        "highlights": ["Major Airlines", "Rental Car Services"],
+        "rating": 4
+    },
+    {
         "name": "The Giacomo, Niagara Falls, New York",
         "description": "A luxurious hotel offering stylish accommodations near the falls.",
         "coordinates": [-79.0599, 43.0854],
-        "type": "hotel"
-      },
-      {
+        "type": "hotel",
+        "visitDate": "August 2019",
+        "duration": "2 days",
+        "highlights": ["Boutique Experience", "Falls Views"],
+        "rating": 5
+    },
+    {
         "name": "Sheraton Niagara Falls, Niagara Falls, New York",
         "description": "A modern hotel with stunning views of the falls and convenient amenities.",
         "coordinates": [-79.0620, 43.0872],
-        "type": "hotel"
-      },
-      {
+        "type": "hotel",
+        "visitDate": "August 2019",
+        "duration": "1 day",
+        "highlights": ["Modern Amenities", "Central Location"],
+        "rating": 4
+    },
+    {
         "name": "Niagara Falls Marriott on the Falls, Niagara Falls, Ontario",
         "description": "A hotel in Canada offering breathtaking views of the falls.",
         "coordinates": [-79.0698, 43.0890],
-        "type": "hotel"
-      },
-      {
+        "type": "hotel",
+        "visitDate": "August 2019",
+        "duration": "1 day",
+        "highlights": ["Canadian Side Views", "Luxury Accommodations"],
+        "rating": 5
+    },
+    {
         "name": "DoubleTree by Hilton Hotel Niagara Falls, Niagara Falls, New York",
         "description": "A family-friendly hotel located near the falls with comfortable rooms.",
         "coordinates": [-79.0605, 43.0852],
-        "type": "hotel"
-      },
-      {
+        "type": "hotel",
+        "visitDate": "August 2019",
+        "duration": "1 day",
+        "highlights": ["Family Amenities", "Comfortable Rooms"],
+        "rating": 4
+    },
+    {
         "name": "Radisson Hotel & Suites Fallsview, Niagara Falls, Ontario",
         "description": "A hotel located in Canada with fantastic views of the falls.",
         "coordinates": [-79.0872, 43.0845],
-        "type": "hotel"
-      }
+        "type": "hotel",
+        "visitDate": "August 2019",
+        "duration": "1 day",
+        "highlights": ["Falls Views", "Comfortable Suites"],
+        "rating": 4
+    }
 ]
-

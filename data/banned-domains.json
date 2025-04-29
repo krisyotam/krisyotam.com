@@ -18,6 +18,10 @@
   {
     "name": "Youtube",
     "domain": "youtube.com"
+  },
+  {
+    "name": "Localhost",
+    "domain": "http://localhost:3000/"
   }
 ]
 

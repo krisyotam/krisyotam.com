@@ -434,7 +434,7 @@
       "subtitle": "Link Rot Protection",
       "preview": "Preservation of sources through automated url archival.",
       "date": "2025-04-27",
-      "tags": ["Philosophy", "Virtue", "Stoicism", "Ethics", "Reflection"],
+      "tags": ["Archiving", "Link Rot", "Automation"],
       "category": "On Website",
       "slug": "automated-url-archiving",
       "status": "Published",
@@ -443,11 +443,11 @@
       "state": "active"
     },
     {
-      "title": "LFS for krisyotam.com",
+      "title": "Large File Storage for krisyotam.com",
       "subtitle": "Large File Storage",
       "preview": "A solution for files and HTTP downloads.",
       "date": "2025-04-27",
-      "tags": ["Philosophy", "Virtue", "Stoicism", "Ethics", "Reflection"],
+      "tags": ["Large File Storage", "Hetzner", "Archiving", "Data Management", "Longevity"],
       "category": "On Website",
       "slug": "krisyotam-lfs",
       "status": "Published",
@@ -460,7 +460,7 @@
       "subtitle": "error correcting in long-form writing using llms",
       "preview": "The creation and implementation of a linter for prose.",
       "date": "2025-04-27",
-      "tags": ["Philosophy", "Virtue", "Stoicism", "Ethics", "Reflection"],
+      "tags": ["Writing", "Editing", "Prose"],
       "category": "On Writing",
       "slug": "linting-for-prose",
       "status": "Published",
@@ -489,11 +489,67 @@
       "tags": ["Horror", "Thriller", "Psychological", "Suspense", "Dark Fiction"],
       "category": "Short Stories",
       "slug": "how-they-fall",
-      "status": "In Progress",
+      "status": "Notes",
       "confidence": "medium",
       "importance": 6,
       "state": "active"
+    },
+    {
+      "title": "Myths from Mesopotamia",
+      "subtitle": "Book Notes",
+      "preview": "A collection of ancient Mesopotamian myths translated by Stephanie Dalley, featuring foundational stories like the Epic of Gilgamesh and Atrahasis.",
+      "date": "2025-04-28",
+      "tags": ["Mythology", "Mesopotamia", "Ancient History", "Literature", "Epic", "Oxford World Classics"],
+      "category": "Book Notes",
+      "slug": "myths-from-mesopotamia",
+      "status": "Notes",
+      "confidence": "high",
+      "importance": 7,
+      "state": "active"
+    },
+    {
+      "title": "The First Philosophers",
+      "subtitle": "Book Notes",
+      "preview": "An Oxford World's Classics edition presenting the earliest Greek thinkers, whose ideas laid the foundations of Western philosophy.",
+      "date": "2025-04-28",
+      "tags": ["Philosophy", "Presocratics", "Sophists", "Ancient Greece", "Classics"],
+      "category": "Book Notes",
+      "slug": "the-first-philosophers",
+      "status": "Notes",
+      "confidence": "high",
+      "importance": 7,
+      "state": "active"
+    },
+    {
+      "title": "Pride and Prejudice",
+      "subtitle": "Book Notes",
+      "preview": "Jane Austen's masterful novel exploring manners, marriage, and morality among the British landed gentry.",
+      "date": "2025-04-28",
+      "tags": ["Literature", "Classic Fiction", "Romance", "Social Commentary", "British Literature"],
+      "category": "Book Notes",
+      "slug": "pride-and-prejudice",
+      "status": "Notes",
+      "confidence": "high",
+      "importance": 6,
+      "state": "active"
+    },
+    {
+      "title": "Kristoo",
+      "subtitle": "Building My Custom Gentoo Linux System",
+      "preview": "A detailed account of the philosophy, choices, and implementation behind my handcrafted Gentoo Linux setup.",
+      "date": "2025-04-28",
+      "tags": ["Linux", "Gentoo", "Software", "Hardware", "Philosophy"],
+      "category": "On My Method",
+      "slug": "kristoo",
+      "status": "In Progress",
+      "confidence": "high",
+      "importance": 9,
+      "state": "active"
     }
+    
+    
+    
+    
     
     
     

@@ -285,7 +285,19 @@
       "status": "In Progress",
       "confidence": "medium",
       "importance": 1
+    },
+    {
+      "slug": "book-notes",
+      "title": "Book Notes",
+      "subtitle": "Reading Summaries and Insights",
+      "preview": "A curated repository of notes, and reflections on books as I read.",
+      "date": "2025-04-28",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 1
     }
+    
     
     
   ]
