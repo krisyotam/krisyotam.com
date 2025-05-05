@@ -1,6 +1,6 @@
 'use server'
 
-import { getActivePosts } from "../utils/posts"
+import { getActivePosts, getAllPosts } from "../utils/posts"
 import quotesData from "../data/header-quotes.json"
 import { HomeClient } from "@/components/home-client"
 import fs from 'fs'
@@ -15,48 +15,117 @@ function getRandomQuote() {
   return quotes[Math.floor(Math.random() * quotes.length)]
 }
 
+// Default bio content as fallback
+const DEFAULT_BIO = `
+# Welcome to Kris Yotam's Website
+
+I am an autodidact, philomath, and polymath. I write about mathematics, philosophy, 
+psychology, literature, and many other topics.
+
+Check out my recent posts and explore the site using the navigation menu.
+`
+
 interface HomeWrapperProps {
   initialView?: 'list' | 'grid'
 }
 
 export default async function HomeWrapper({ initialView = 'list' }: HomeWrapperProps) {
   try {
-    // Fetch active posts directly using the getActivePosts function
-    const posts = await getActivePosts()
+    // Try to load posts from feed.json first
+    console.log("Attempting to load posts...")
+    
+    let posts;
+    try {
+      // Try to get active posts first (filtered for state==="active")
+      posts = await getActivePosts()
+      console.log(`Successfully loaded ${posts.length} active posts`)
+    } catch (postError) {
+      console.error("Error loading active posts:", postError)
+      
+      // Fallback: try to get all posts unfiltered
+      try {
+        console.log("Falling back to loading all posts...")
+        posts = await getAllPosts()
+        console.log(`Successfully loaded ${posts.length} unfiltered posts`)
+      } catch (allPostsError) {
+        console.error("Error loading all posts:", allPostsError)
+        throw new Error("Failed to load any posts from feed.json")
+      }
+    }
 
-    // Ensure posts are available and in the expected format
-    if (!posts || !Array.isArray(posts)) {
-      console.error("Error: Posts data is missing or not an array")
-      return (
-        <div className="min-h-screen flex items-center justify-center">
-          <p className="text-xl text-gray-600 dark:text-gray-400">Failed to load posts. Please try again later.</p>
-        </div>
-      )
+    // Even if posts exist but are empty array or not an array, use a fallback
+    if (!posts || !Array.isArray(posts) || posts.length === 0) {
+      console.warn("Posts data is missing, not an array, or empty. Using fallback data.")
+      // Create a minimal fallback post
+      posts = [{
+        title: "Welcome to Kris Yotam's Blog",
+        subtitle: "Content is currently being updated",
+        preview: "Please check back soon for new content.",
+        date: new Date().toISOString(),
+        tags: ["Update"],
+        category: "Announcement",
+        slug: "welcome",
+        state: "active",
+        status: "Published",
+        confidence: "certain",
+        importance: 9
+      }]
     }
 
     const randomQuote = getRandomQuote()
 
     // Read and serialize the bio content
-    const bioFilePath = path.join(process.cwd(), 'app', 'home-bio.mdx')
-    const bioContent = await fs.promises.readFile(bioFilePath, 'utf8')
-    
-    const serializedBio = await serialize(bioContent, {
-      mdxOptions: {
-        remarkPlugins: [remarkGfm],
-        rehypePlugins: [
-          rehypeSlug,
-          [rehypeAutolinkHeadings, { behavior: 'wrap' }]
-        ],
+    let serializedBio;
+    try {
+      let bioContent = DEFAULT_BIO;
+      const bioFilePath = path.join(process.cwd(), 'app', 'home-bio.mdx')
+      
+      // Check if the file exists before trying to read it
+      if (fs.existsSync(bioFilePath)) {
+        try {
+          bioContent = await fs.promises.readFile(bioFilePath, 'utf8')
+          console.log("Successfully loaded bio file")
+        } catch (readError) {
+          console.error("Error reading bio file:", readError)
+          // Fall back to default bio content
+        }
+      } else {
+        console.log("Bio file not found, using default content")
       }
-    })
+      
+      serializedBio = await serialize(bioContent, {
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [
+            rehypeSlug,
+            [rehypeAutolinkHeadings, { behavior: 'wrap' }]
+          ],
+        }
+      })
+    } catch (bioError) {
+      console.error("Error processing bio content:", bioError)
+      // Create a simple fallback bio
+      serializedBio = await serialize(DEFAULT_BIO, {
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [
+            rehypeSlug,
+            [rehypeAutolinkHeadings, { behavior: 'wrap' }]
+          ],
+        }
+      })
+    }
 
     // Use the HomeClient component which includes the toggle button
     return <HomeClient posts={posts} randomQuote={randomQuote} bioContent={serializedBio} initialView={initialView} />
   } catch (error) {
-    console.error("Error loading home page:", error)
+    console.error("Critical error loading home page:", error)
+    // Return a minimal error page
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl text-gray-600 dark:text-gray-400">Failed to load posts. Please try again later.</p>
+      <div className="min-h-screen flex flex-col items-center justify-center p-8 text-center">
+        <h1 className="text-2xl font-semibold mb-4">We're updating our site</h1>
+        <p className="text-muted-foreground mb-6">Please check back soon for new content.</p>
+        <p className="text-sm text-red-500">Error details: {error instanceof Error ? error.message : String(error)}</p>
       </div>
     )
   }
