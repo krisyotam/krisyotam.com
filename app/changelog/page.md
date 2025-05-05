@@ -33,3 +33,8 @@
 - Initial launch of the redesigned personal website
 - Implemented responsive design for all screen sizes
 - Set up automated deployment pipeline
+
+## May 2025
+
+### May 5, 2025
+- Merge branch 'main' of https://github.com/krisyotam/krisblog
