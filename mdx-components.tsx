@@ -35,6 +35,7 @@ import Chateau from "@/components/posts/architecture/chateau"
 import ChateauCollection from "@/components/posts/architecture/chateau-collection"
 import Human from "@/components/posts/basic/human"
 import Company from "@/components/posts/basic/company"
+import CppCodeBlock from "@/components/posts/code/cplusplus"
 
 // Define components for MDX
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -141,6 +142,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     HauteCoutureCollection,
     Chateau,
     ChateauCollection,
+    
+    // Code components
+    CppCodeBlock,
     
     // Special content components
     TryHackMe,

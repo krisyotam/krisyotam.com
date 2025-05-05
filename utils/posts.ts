@@ -14,6 +14,8 @@ export interface Post {
   importance?: number
   headings?: string[]
   marginNotes?: string[]
+  cover_image?: string
+  cover?: string
 }
 
 export interface PostsData {

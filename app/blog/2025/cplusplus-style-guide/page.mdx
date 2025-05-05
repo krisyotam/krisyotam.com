@@ -1,5 +1,3 @@
-import Collapse from "@/components/posts/typography/collapse"
-
 <Collapse title="Purpose of Guide">
 For those wondering I intend on using C++ strictly for competitive programming. I am learning C, Python, and Bash to take care off a number 
 of other issues such as my planned open source contributions, scripting, and data analysis. So while I may have a abundance of usecases that arise for the C++ language at a later date. 
@@ -22,3 +20,71 @@ below which over the next year (05/04/2025) should all see at least some use.
 # C++ Style Guide
 
 A comprehensive guide to writing clean and efficient C++ code. 
+
+## Interactive Code Examples
+
+Below is an example of a simple algorithm implemented in C++. Click the "Run Code" button to see the output.
+
+<CppCodeBlock 
+  title="Binary Search Implementation"
+  description="An efficient O(log n) search algorithm for sorted arrays"
+  code={`#include <iostream>
+#include <vector>
+using namespace std;
+
+// Binary search implementation
+// Returns index of target if found, otherwise -1
+int binarySearch(const vector<int>& nums, int target) {
+    int left = 0;
+    int right = nums.size() - 1;
+    
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        
+        // Check if target is present at mid
+        if (nums[mid] == target)
+            return mid;
+        
+        // If target greater, ignore left half
+        if (nums[mid] < target)
+            left = mid + 1;
+        
+        // If target smaller, ignore right half
+        else
+            right = mid - 1;
+    }
+    
+    // Element not present
+    return -1;
+}
+
+int main() {
+    vector<int> arr = {2, 3, 4, 10, 40};
+    int target = 10;
+    
+    int result = binarySearch(arr, target);
+    
+    if (result != -1)
+        cout << "Element found at index " << result << endl;
+    else
+        cout << "Element not found in array" << endl;
+    
+    return 0;
+}`}
+  output={"Element found at index 3"}
+/>
+
+## Proper Formatting
+
+The code above follows key C++ formatting guidelines:
+- Consistent indentation (2 or 4 spaces)
+- Proper spacing around operators
+- Clear function and variable names
+- Appropriate comments for complex logic
+
+```cpp
+// Example function in C++
+int add(int a, int b) {
+return a + b;
+}
+```

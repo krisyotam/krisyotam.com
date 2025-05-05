@@ -1,84 +1,6 @@
 {
   "posts": [
     {
-      "title": "A Manifesto for Holistic Computing",
-      "subtitle": "A Philosophy for Hardware, Software, and Coding",
-      "preview": "A comprehensive philosophy for approaching hardware, software, and coding practices as interconnected elements of a holistic computing ecosystem.",
-      "date": "2025-05-16",
-      "tags": ["Programming", "Philosophy", "Software Engineering", "Hardware", "Best Practices"],
-      "category": "Programming",
-      "slug": "a-manifesto-for-holistic-computing",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 9,
-      "state": "active"
-    },
-    {
-      "title": "Python Style Guide",
-      "subtitle": "Best Practices for Clean Python Code",
-      "preview": "A comprehensive guide to writing clean, maintainable Python code following best practices and community standards.",
-      "date": "2025-05-20",
-      "tags": ["Programming", "Python", "Programming Style Guides", "Best Practices"],
-      "category": "Programming",
-      "slug": "python-style-guide",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 8,
-      "state": "active"
-    },
-    {
-      "title": "C++ Style Guide",
-      "subtitle": "Writing Robust and Maintainable C++ Code",
-      "preview": "Guidelines for writing clean, efficient, and maintainable C++ code that follows modern best practices.",
-      "date": "2025-05-19",
-      "tags": ["Programming", "C++", "Programming Style Guides", "Best Practices"],
-      "category": "Programming",
-      "slug": "cplusplus-style-guide",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 8,
-      "state": "active"
-    },
-    {
-      "title": "C Style Guide",
-      "subtitle": "Best Practices for C Programming",
-      "preview": "A guide to writing clean, efficient, and maintainable C code following industry standards and best practices.",
-      "date": "2025-05-18",
-      "tags": ["Programming", "C", "Programming Style Guides", "Best Practices"],
-      "category": "Programming",
-      "slug": "c-style-guide",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 8,
-      "state": "active"
-    },
-    {
-      "title": "LaTeX Style Guide",
-      "subtitle": "Best Practices for Professional LaTeX Documents",
-      "preview": "A comprehensive guide to creating professional documents with LaTeX, including formatting, packages, and typesetting best practices.",
-      "date": "2025-05-15",
-      "tags": ["LaTeX", "Typography", "Documentation", "Publishing", "Programming Style Guides"],
-      "category": "Publishing",
-      "slug": "latex-style-guide",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 8,
-      "state": "active"
-    },
-    {
-      "title": "Bash Style Guide",
-      "subtitle": "Writing Clean and Effective Shell Scripts",
-      "preview": "Guidelines for writing robust, maintainable, and efficient Bash shell scripts for system administration and automation.",
-      "date": "2025-05-17",
-      "tags": ["Programming", "Bash", "Shell Scripting", "Programming Style Guides", "Best Practices"],
-      "category": "Programming",
-      "slug": "bash-style-guide",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 8,
-      "state": "active"
-    },
-    {
       "title": "The Starry Night",
       "subtitle": "a art critique",
       "preview": "in-depth exploration of the starry night composition, lore, and history.",
@@ -86,6 +8,7 @@
       "tags": ["Van Gogh", "Art", "Expressionism", "Masterpiece", "Symbolism"],
       "category": "Art Criticism",
       "slug": "the-starry-night",
+      "cover_image": "https://i.postimg.cc/ZKGgPQ4R/krisctf-oak-tree-roman-empire-period-black-and-white-child-anim-df5113ad-426c-4ff5-bfc3-88fc0c25f3cb.webp",
       "status": "Notes",
       "confidence": "certain",
       "importance": 7,
@@ -106,6 +29,7 @@
       "tags": ["Minimalism", "Lifestyle", "Decluttering"],
       "category": "Minimalism",
       "slug": "the-art-of-minimalism",
+      "cover_image": "https://i.postimg.cc/9F88sWXP/minimalism.jpg",
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 6,
@@ -237,7 +161,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "Analysis of Ubel",
@@ -311,7 +234,6 @@
       "confidence": "unlikely",
       "importance": 4,
       "state": "hidden"
-
     },
     {
       "title": "The Fall of Gaia Online",
@@ -372,7 +294,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "On Limericks",
@@ -413,7 +334,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "Anatomy of Verse",
@@ -454,7 +374,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "Ada Lovelace",
@@ -475,7 +394,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "Hypatia of Alexandria",
@@ -556,7 +474,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "Meditations I",
@@ -577,7 +494,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "Musings I",
@@ -598,7 +514,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "Automated URL Archiving",
@@ -619,7 +534,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "Large File Storage for krisyotam.com",
@@ -640,7 +554,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "Linting for Prose",
@@ -681,7 +594,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "Toward a Unified Writing Style",
@@ -702,7 +614,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "How They Fall",
@@ -712,6 +623,7 @@
       "tags": ["Horror", "Thriller", "Psychological", "Suspense", "Dark Fiction"],
       "category": "Short Stories",
       "slug": "how-they-fall",
+      "cover_image": "https://i.postimg.cc/Wb5XMm0M/aurora-miller.png",
       "status": "Notes",
       "confidence": "medium",
       "importance": 6,
@@ -723,7 +635,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "Myths from Mesopotamia",
@@ -744,7 +655,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "The First Philosophers",
@@ -765,7 +675,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "Pride and Prejudice",
@@ -786,7 +695,6 @@
       "agenda_progress": 0.25,
       "agenda_valueScore": 7,
       "agenda_dependancies": ["RESEARCH_001"]
-
     },
     {
       "title": "Kristoo",
@@ -827,9 +735,87 @@
       "agenda_progress": 0.40,
       "agenda_valueScore": 9,
       "agenda_dependancies": ["RESEARCH_002"]
+    },
+    {
+      "title": "A Manifesto for Holistic Computing",
+      "subtitle": "A Philosophy for Hardware, Software, and Coding",
+      "preview": "A comprehensive philosophy for approaching hardware, software, and coding practices as interconnected elements of a holistic computing ecosystem.",
+      "date": "2025-05-16",
+      "tags": ["Programming", "Philosophy", "Software Engineering", "Hardware", "Best Practices"],
+      "category": "Programming",
+      "slug": "a-manifesto-for-holistic-computing",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 9,
+      "state": "active"
+    },
+    {
+      "title": "Python Style Guide",
+      "subtitle": "Best Practices for Clean Python Code",
+      "preview": "A comprehensive guide to writing clean, maintainable Python code following best practices and community standards.",
+      "date": "2025-05-20",
+      "tags": ["Programming", "Python", "Programming Style Guides", "Best Practices"],
+      "category": "Programming",
+      "slug": "python-style-guide",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
+    },
+    {
+      "title": "C++ Style Guide",
+      "subtitle": "Best Practices for C Programming",
+      "preview": "A guide to writing clean, efficient, and maintainable C code following industry standards and best practices.",
+      "date": "2025-05-19",
+      "tags": ["Programming", "C++", "Programming Style Guides", "Best Practices"],
+      "category": "Programming",
+      "slug": "cplusplus-style-guide",
+      "cover_image": "https://i.postimg.cc/MTdFfz9J/cpp-style-guide.jpg",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
+    },
+    {
+      "title": "C Style Guide",
+      "subtitle": "Best Practices for C Programming",
+      "preview": "A guide to writing clean, efficient, and maintainable C code following industry standards and best practices.",
+      "date": "2025-05-18",
+      "tags": ["Programming", "C", "Programming Style Guides", "Best Practices"],
+      "category": "Programming",
+      "slug": "c-style-guide",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
+    },
+    {
+      "title": "LaTeX Style Guide",
+      "subtitle": "Best Practices for Professional LaTeX Documents",
+      "preview": "A comprehensive guide to creating professional documents with LaTeX, including formatting, packages, and typesetting best practices.",
+      "date": "2025-05-15",
+      "tags": ["LaTeX", "Typography", "Documentation", "Publishing", "Programming Style Guides"],
+      "category": "Publishing",
+      "slug": "latex-style-guide",
+      "cover_image": "https://i.postimg.cc/XY7THcBZ/latex-guide.jpg",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
+    },
+    {
+      "title": "Bash Style Guide",
+      "subtitle": "Writing Clean and Effective Shell Scripts",
+      "preview": "Guidelines for writing robust, maintainable, and efficient Bash shell scripts for system administration and automation.",
+      "date": "2025-05-17",
+      "tags": ["Programming", "Bash", "Shell Scripting", "Programming Style Guides", "Best Practices"],
+      "category": "Programming",
+      "slug": "bash-style-guide",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
     }
-    
-    
-   ]
+  ]
 }
 

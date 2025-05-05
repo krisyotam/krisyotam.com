@@ -4,6 +4,7 @@ import { Suspense } from "react"
 import Head from "next/head"
 import { notFound } from "next/navigation"
 import { getAllPosts, getPostContent } from "@/utils/posts"
+import { Metadata } from "next"
 
 const BlogPostContent = dynamic(
   () => import("./blog-post-content").then((mod) => mod.BlogPostContent),
@@ -11,6 +12,50 @@ const BlogPostContent = dynamic(
 )
 
 export const dynamicParams = true
+
+// Generate metadata for SEO and social sharing
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { year: string; slug: string } 
+}): Promise<Metadata> {
+  const { year, slug } = params
+  
+  // Fetch post data
+  const posts = await getAllPosts()
+  const postData = posts.find((post: any) => post.slug === slug)
+  if (!postData) return { title: 'Post Not Found' }
+  
+  // Get cover image URL
+  const coverUrl = postData.cover_image || 
+    postData.cover || 
+    `https://picsum.photos/1200/630?text=${encodeURIComponent(postData.title)}`
+  
+  // SEO fields
+  const title = postData.title
+  const description = postData.preview || "Thoughts on math, poetry, and more."
+  const url = `https://krisyotam.com/blog/${year}/${slug}`
+  
+  return {
+    title: `${title} | Kris Yotam`,
+    description,
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: 'Kris Yotam',
+      images: [{ url: coverUrl, width: 1200, height: 630, alt: title }],
+      locale: 'en_US',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [coverUrl],
+    },
+  }
+}
 
 export default async function PostPage({
   params,
@@ -37,46 +82,15 @@ export default async function PostPage({
     },
   }
 
-  // 4) SEO fields (using your domain)
-  const title = postData.title
-  const description = postData.preview || "Thoughts on math, poetry, and more."
-  const coverUrl =
-    postData.cover?.startsWith("http")
-      ? postData.cover
-      : `https://krisyotam.com${postData.cover || "/images/default-cover.jpg"}`
-  const url = `https://krisyotam.com/blog/${year}/${slug}`
-  const publishedTime = postData.date
-
   return (
-    <>
-      <Head>
-        <title>{title} | Kris Yotam</title>
-        <meta name="description" content={description} />
-
-        {/* Open Graph */}
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:url" content={url} />
-        <meta property="og:image" content={coverUrl} />
-        <meta property="article:published_time" content={publishedTime} />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={coverUrl} />
-      </Head>
-
-      <Suspense fallback={<div className="min-h-[200px]">Loading…</div>}>
-        <article className="post-content">
-          <BlogPostContent
-            year={year}
-            slug={slug}
-            mdxData={mdxDataForComponent}
-          />
-        </article>
-      </Suspense>
-    </>
+    <Suspense fallback={<div className="min-h-[200px]">Loading…</div>}>
+      <article className="post-content">
+        <BlogPostContent
+          year={year}
+          slug={slug}
+          mdxData={mdxDataForComponent}
+        />
+      </article>
+    </Suspense>
   )
 }
