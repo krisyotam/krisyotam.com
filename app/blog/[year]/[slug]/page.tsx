@@ -26,33 +26,43 @@ export async function generateMetadata({
   const postData = posts.find((post: any) => post.slug === slug)
   if (!postData) return { title: 'Post Not Found' }
   
-  // Get cover image URL
+  // Get cover image URL - prioritize cover_image field
   const coverUrl = postData.cover_image || 
     postData.cover || 
     `https://picsum.photos/1200/630?text=${encodeURIComponent(postData.title)}`
   
   // SEO fields
   const title = postData.title
+  const subtitle = postData.subtitle ? ` - ${postData.subtitle}` : ''
   const description = postData.preview || "Thoughts on math, poetry, and more."
   const url = `https://krisyotam.com/blog/${year}/${slug}`
   
   return {
-    title: `${title} | Kris Yotam`,
+    title: `${title}${subtitle} | Kris Yotam`,
     description,
     openGraph: {
-      title,
+      title: title + subtitle,
       description,
       url,
       siteName: 'Kris Yotam',
-      images: [{ url: coverUrl, width: 1200, height: 630, alt: title }],
+      images: [{ 
+        url: coverUrl, 
+        width: 1200, 
+        height: 630, 
+        alt: title 
+      }],
       locale: 'en_US',
       type: 'article',
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: title + subtitle,
       description,
       images: [coverUrl],
+      creator: '@krisyotam',
+    },
+    alternates: {
+      canonical: url,
     },
   }
 }

@@ -2,7 +2,7 @@
 export const dynamic = 'force-dynamic';
 
 import { type NextRequest, NextResponse } from "next/server";
-import { getPostBySlug } from "@/utils/posts";
+import { getPostBySlug, getAllPosts } from "@/utils/posts";
 import { getPostMetadata } from "@/utils/mdx-utils";
 import path from "path";
 import fs from "fs";
@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
       console.error("Error loading metadata for", slug, e);
     }
 
-    return NextResponse.json({
+    const responseData = {
       ...postData,
       headings,
       marginNotes,
@@ -50,7 +50,9 @@ export async function GET(request: NextRequest) {
         marginNotes: fs.existsSync(marginNotesPath),
         bibliography: fs.existsSync(bibliographyPath),
       },
-    });
+    };
+
+    return NextResponse.json(responseData);
   } catch (error) {
     console.error("Error in post API route:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

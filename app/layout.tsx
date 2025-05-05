@@ -7,9 +7,34 @@ import { SettingsMenu } from "../components/settings-menu"
 import { ScrollbarController } from "../components/scrollbar-controller"
 import type React from "react"
 
+// Default metadata for the site
 export const metadata: Metadata = {
   title: "Kris Yotam",
   description: "Ideas, works, and reflections of a contemporary polymath",
+  openGraph: {
+    title: "Kris Yotam",
+    description: "Ideas, works, and reflections of a contemporary polymath",
+    url: "https://krisyotam.com",
+    siteName: "Kris Yotam",
+    images: [
+      {
+        url: "https://krisyotam.com/social.png", // Update this with your default image
+        width: 1200,
+        height: 630,
+        alt: "Kris Yotam",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kris Yotam",
+    description: "Ideas, works, and reflections of a contemporary polymath",
+    creator: "@krisyotam",
+    images: ["https://krisyotam.com/social.png"], // Update this with your default image
+  },
+  metadataBase: new URL("https://krisyotam.com"),
 }
 
 // Toggle this to true or false to control execution
