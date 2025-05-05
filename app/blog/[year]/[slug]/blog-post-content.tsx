@@ -6,6 +6,7 @@ import { useMDXComponents } from "@/mdx-components"
 import { BlogModalProvider } from "./blog-modal-provider"
 import { MarginCard } from "@/components/margin-notes"
 import TableOfContents from "@/components/table-of-contents"
+import { BlogPostMeta } from "./blog-post-meta"
 
 interface BlogPostContentProps {
   year: string
@@ -17,6 +18,12 @@ interface BlogPostContentProps {
       marginNotes?: any[]
     }
   } | null
+  postData?: {
+    title: string
+    subtitle?: string
+    preview?: string
+    cover_image?: string
+  }
 }
 
 function PostNotFound({ slug, year }: { slug: string; year: string }) {
@@ -28,7 +35,7 @@ function PostNotFound({ slug, year }: { slug: string; year: string }) {
   )
 }
 
-export function BlogPostContent({ year, slug, mdxData }: BlogPostContentProps) {
+export function BlogPostContent({ year, slug, mdxData, postData }: BlogPostContentProps) {
   // If there's no MDX data, show a fallback
   if (!mdxData) {
     return <PostNotFound slug={slug} year={year} />
@@ -44,8 +51,23 @@ export function BlogPostContent({ year, slug, mdxData }: BlogPostContentProps) {
     if (typeof window !== "undefined") window.scrollTo(0, 0)
   }, [])
 
+  // Prepare metadata for the BlogPostMeta component
+  const title = postData?.title || slug
+  const subtitle = postData?.subtitle ? ` - ${postData.subtitle}` : ''
+  const description = postData?.preview || "Read more on Kris Yotam's blog"
+  const coverUrl = postData?.cover_image || `https://picsum.photos/1200/630?text=${encodeURIComponent(title)}`
+  const url = `https://krisyotam.com/blog/${year}/${slug}`
+
   return (
     <BlogModalProvider>
+      {/* Add the meta component for extra tags */}
+      <BlogPostMeta 
+        title={`${title}${subtitle}`}
+        description={description}
+        imageUrl={coverUrl}
+        url={url}
+      />
+
       <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr_1fr] gap-8">
         {/* Left sidebar: Table of Contents */}
         {headings.length > 0 && (

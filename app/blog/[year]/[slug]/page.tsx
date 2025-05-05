@@ -4,7 +4,7 @@ import { Suspense } from "react"
 import Head from "next/head"
 import { notFound } from "next/navigation"
 import { getAllPosts, getPostContent } from "@/utils/posts"
-import { Metadata } from "next"
+import { Metadata, ResolvingMetadata } from "next"
 
 const BlogPostContent = dynamic(
   () => import("./blog-post-content").then((mod) => mod.BlogPostContent),
@@ -18,7 +18,7 @@ export async function generateMetadata({
   params 
 }: { 
   params: { year: string; slug: string } 
-}): Promise<Metadata> {
+}, parent: ResolvingMetadata): Promise<Metadata> {
   const { year, slug } = params
   
   // Fetch post data
@@ -36,6 +36,13 @@ export async function generateMetadata({
   const subtitle = postData.subtitle ? ` - ${postData.subtitle}` : ''
   const description = postData.preview || "Thoughts on math, poetry, and more."
   const url = `https://krisyotam.com/blog/${year}/${slug}`
+  
+  console.log(`Generating metadata for ${slug}:`, { 
+    title, subtitle, coverUrl, description 
+  })
+  
+  // Get parent metadata
+  const parentMetadata = await parent
   
   return {
     title: `${title}${subtitle} | Kris Yotam`,
@@ -63,6 +70,10 @@ export async function generateMetadata({
     },
     alternates: {
       canonical: url,
+    },
+    other: {
+      'og:image': coverUrl,
+      'twitter:image': coverUrl,
     },
   }
 }
@@ -99,6 +110,7 @@ export default async function PostPage({
           year={year}
           slug={slug}
           mdxData={mdxDataForComponent}
+          postData={postData}
         />
       </article>
     </Suspense>

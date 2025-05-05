@@ -544,7 +544,7 @@
       "author": "Oscar Wilde"
     },
     {
-      "text": "Those who were seen dancing were thought to be insane by those who could not hear the music.",
+      "text": "And those who were seen dancing were thought to be insane by those who could not hear the music.",
       "author": "Friedrich Nietzsche"
     },
     {
@@ -714,6 +714,10 @@
     {
       "text": "Do what you can, with what you have, where you are.",
       "author": "Theodore Roosevelt"
+    },
+    {
+      "text": "We are all in the gutter, but some of us are looking at the stars.",
+      "author": "Oscar Wilde"
     }
   ]
 }
