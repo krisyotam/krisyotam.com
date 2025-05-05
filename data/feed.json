@@ -1,121 +1,122 @@
 {
   "posts": [
     {
-      "title": "Typography and Component Features",
-      "subtitle": "A showcase of design elements",
-      "preview": "A comprehensive showcase of all typography and component features available for blog posts.",
-      "date": "2025-01-25",
-      "tags": ["Design", "Documentation", "Web Development"],
-      "category": "Design",
-      "slug": "feature-testing",
-      "status": "Finished",
-      "confidence": "certain",
-      "importance": 7,
-      "state": "hidden"
-    },
-    {
-      "title": "The Art of Mindful Coding",
-      "subtitle": "Merging programming with mindfulness",
-      "preview": "Discover how applying mindfulness principles to programming can lead to better code, enhanced problem-solving, and greater developer well-being.",
-      "date": "2025-01-20",
-      "tags": ["Programming", "Mindfulness", "Productivity"],
-      "category": "Technology",
-      "slug": "mindful-coding",
+      "title": "A Manifesto for Holistic Computing",
+      "subtitle": "A Philosophy for Hardware, Software, and Coding",
+      "preview": "A comprehensive philosophy for approaching hardware, software, and coding practices as interconnected elements of a holistic computing ecosystem.",
+      "date": "2025-05-16",
+      "tags": ["Programming", "Philosophy", "Software Engineering", "Hardware", "Best Practices"],
+      "category": "Programming",
+      "slug": "a-manifesto-for-holistic-computing",
       "status": "In Progress",
-      "confidence": "likely",
-      "importance": 6,
-      "state": "hidden"
+      "confidence": "certain",
+      "importance": 9,
+      "state": "active"
     },
     {
-      "title": "On Classical Poetry",
-      "subtitle": "Timeless verses through the ages",
-      "preview": "A curated collection of timeless poetry works that have shaped literature through the ages.",
-      "date": "2025-01-15",
-      "tags": ["Literature", "Poetry", "Recommendations"],
-      "category": "On Building a Personal Library",
-      "slug": "poetry-recommendations",
-      "status": "Finished",
-      "confidence": "highly likely",
-      "importance": 5,
-      "state": "hidden"
-    },
-    {
-      "title": "Law 1: Never Outshine the Master",
-      "subtitle": "Power dynamics in modern contexts",
-      "preview": "An exploration of the first law from the 48 Laws of Power and its implications in modern contexts.",
-      "date": "2025-01-01",
-      "tags": ["Philosophy", "Strategy", "Power Dynamics"],
-      "category": "Philosophy",
-      "slug": "law-1-never-outshine-the-master",
-      "status": "Draft",
-      "confidence": "possible",
+      "title": "Python Style Guide",
+      "subtitle": "Best Practices for Clean Python Code",
+      "preview": "A comprehensive guide to writing clean, maintainable Python code following best practices and community standards.",
+      "date": "2025-05-20",
+      "tags": ["Programming", "Python", "Programming Style Guides", "Best Practices"],
+      "category": "Programming",
+      "slug": "python-style-guide",
+      "status": "In Progress",
+      "confidence": "certain",
       "importance": 8,
-      "state": "hidden"
+      "state": "active"
+    },
+    {
+      "title": "C++ Style Guide",
+      "subtitle": "Writing Robust and Maintainable C++ Code",
+      "preview": "Guidelines for writing clean, efficient, and maintainable C++ code that follows modern best practices.",
+      "date": "2025-05-19",
+      "tags": ["Programming", "C++", "Programming Style Guides", "Best Practices"],
+      "category": "Programming",
+      "slug": "cplusplus-style-guide",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
+    },
+    {
+      "title": "C Style Guide",
+      "subtitle": "Best Practices for C Programming",
+      "preview": "A guide to writing clean, efficient, and maintainable C code following industry standards and best practices.",
+      "date": "2025-05-18",
+      "tags": ["Programming", "C", "Programming Style Guides", "Best Practices"],
+      "category": "Programming",
+      "slug": "c-style-guide",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
+    },
+    {
+      "title": "LaTeX Style Guide",
+      "subtitle": "Best Practices for Professional LaTeX Documents",
+      "preview": "A comprehensive guide to creating professional documents with LaTeX, including formatting, packages, and typesetting best practices.",
+      "date": "2025-05-15",
+      "tags": ["LaTeX", "Typography", "Documentation", "Publishing", "Programming Style Guides"],
+      "category": "Publishing",
+      "slug": "latex-style-guide",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
+    },
+    {
+      "title": "Bash Style Guide",
+      "subtitle": "Writing Clean and Effective Shell Scripts",
+      "preview": "Guidelines for writing robust, maintainable, and efficient Bash shell scripts for system administration and automation.",
+      "date": "2025-05-17",
+      "tags": ["Programming", "Bash", "Shell Scripting", "Programming Style Guides", "Best Practices"],
+      "category": "Programming",
+      "slug": "bash-style-guide",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
     },
     {
       "title": "The Starry Night",
-      "subtitle": "Van Gogh's masterpiece examined",
-      "preview": "An in-depth exploration of Vincent van Gogh's iconic painting, *The Starry Night*, and its emotional, artistic, and symbolic significance.",
+      "subtitle": "a art critique",
+      "preview": "in-depth exploration of the starry night composition, lore, and history.",
       "date": "2025-02-07",
       "tags": ["Van Gogh", "Art", "Expressionism", "Masterpiece", "Symbolism"],
-      "category": "Art",
+      "category": "Art Criticism",
       "slug": "the-starry-night",
-      "status": "Finished",
+      "status": "Notes",
       "confidence": "certain",
       "importance": 7,
-      "state": "hidden"
+      "state": "hidden",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 60,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
-      "title": "Demo Post",
-      "subtitle": "A sample article for testing",
-      "preview": "An in-depth exploration of Vincent van Gogh's iconic painting, *The Starry Night*, and its emotional, artistic, and symbolic significance.",
-      "date": "2025-01-07",
-      "tags": ["Van Gogh", "Art", "Expressionism", "Masterpiece", "Symbolism"],
-      "category": "Art",
-      "slug": "demo-post",
-      "status": "Notes",
-      "confidence": "possible",
-      "importance": 4,
-      "state": "hidden"
-    },
-    {
-      "title": "New Post",
-      "subtitle": "A sample article for testing",
-      "preview": "An in-depth exploration of Vincent van Gogh's iconic painting, *The Starry Night*, and its emotional, artistic, and symbolic significance.",
-      "date": "2025-01-07",
-      "tags": ["Van Gogh", "Art", "Expressionism", "Masterpiece", "Symbolism"],
-      "category": "Art",
-      "slug": "law1-of-48",
-      "status": "Notes",
-      "confidence": "possible",
-      "importance": 4,
-      "state": "hidden"
-    },
-    {
-      "title": "Hidden Demo Post",
-      "subtitle": "Demonstrating hidden functionality",
-      "preview": "This is a hidden post that demonstrates the hidden status functionality.",
-      "date": "2025-01-01",
-      "tags": ["Demo", "Hidden", "Test"],
-      "category": "Examples",
-      "slug": "hidden-demo-post",
-      "status": "Abandoned",
+      "title": "The Art of Minimalism",
+      "subtitle": "A guide to decluttering your life",
+      "preview": "An exploration of minimalism as a lifestyle choice, focusing on its principles, benefits, and practical tips for decluttering your life.",
+      "date": "2025-02-15",
+      "tags": ["Minimalism", "Lifestyle", "Decluttering"],
+      "category": "Minimalism",
+      "slug": "the-art-of-minimalism",
+      "status": "Draft",
       "confidence": "unlikely",
-      "importance": 2,
-      "state": "hidden"
-    },
-    {
-      "title": "Whispers of Dawn",
-      "subtitle": "A Critical Poetic Analysis",
-      "preview": "This is a hidden post that demonstrates the hidden status functionality.",
-      "date": "2025-02-01",
-      "tags": ["Demo", "Hidden", "Test"],
-      "category": "Poetic Analysis",
-      "slug": "analysis-of-poem1",
-      "status": "Abandoned",
-      "confidence": "unlikely",
-      "importance": 2,
-      "state": "hidden"
+      "importance": 6,
+      "state": "hidden",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
       "title": "Susanna Kaysen",
@@ -128,20 +129,54 @@
       "status": "In Progress",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "hidden"
+      "state": "hidden",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
-      "title": "Analysis Components Demo",
+      "title": "The Bell Jar",
       "subtitle": "A Critical Character Analysis",
-      "preview": "a in-depth analysis of susanna kaysen, girl, interrupted",
-      "date": "2025-03-1",
-      "tags": ["Demo", "Hidden", "Test"],
+      "preview": "a in-depth analysis of the bell jar.",
+      "date": "2025-03-01",
+      "tags": ["The Bell Jar", "Character Analysis", "Sylvia Plath"],
       "category": "Character Analysis",
-      "slug": "complete-analysis",
+      "slug": "analysis-of-the-bell-jar",
       "status": "In Progress",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "hidden"
+      "state": "hidden",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+    },
+    {
+      "title": "The Fall of the House of Usher",
+      "subtitle": "A Critical Character Analysis",
+      "preview": "a in-depth analysis of the fall of the house of usher.",
+      "date": "2025-03-01",
+      "tags": ["Edgar Allan Poe", "Character Analysis", "Gothic"],
+      "category": "Character Analysis",
+      "slug": "analysis-of-the-fall-of-the-house-of-usher",
+      "status": "In Progress",
+      "confidence": "unlikely",
+      "importance": 2,
+      "state": "hidden",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
       "title": "Analysis of Frieren",
@@ -154,7 +189,14 @@
       "status": "In Progress",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "hidden"
+      "state": "hidden",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
       "title": "Gojo vs. Sukuna",
@@ -167,7 +209,14 @@
       "status": "In Progress",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "hidden"
+      "state": "hidden",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
       "title": "Summer Anime 2025",
@@ -180,20 +229,35 @@
       "status": "In Progress",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "hidden"
+      "state": "hidden",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "Analysis of Ubel",
       "subtitle": "A Critical Character Analysis",
-      "preview": "An in-depth analysis of Ubel from *Frieren: Beyond Journey’s End*.",
+      "preview": "An in-depth analysis of Ubel from *Frieren: Beyond Journey's End*.",
       "date": "2025-04-6",
-      "tags": ["Frieren: Beyond Journey’s End", "Character Analysis", "Ubel"],
+      "tags": ["Frieren: Beyond Journey's End", "Character Analysis", "Ubel"],
       "category": "Character Analysis",
       "slug": "analysis-of-ubel",
       "status": "In Progress",
       "confidence": "likely",
       "importance": 2,
-      "state": "hidden"
+      "state": "hidden",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
       "title": "Do not go gentle into that good night",
@@ -206,7 +270,14 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 4,
-      "state": "hidden"
+      "state": "hidden",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
       "title": "Treatise on Rational Tactics",
@@ -219,7 +290,28 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 4,
+      "state": "hidden",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+    },
+    {
+      "title": "The Fall of the House of Usher",
+      "subtitle": "a in-depth case study of the fall of the house of usher.",
+      "preview": "a introduction to formal logic, rationalism, & inductive/deductive reasoning.",
+      "date": "2025-04-9",
+      "tags": ["Formal Logic", "Rationalism", "Reasoning"],
+      "category": "Game Analysis",
+      "slug": "analysis-of-poem2",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 4,
       "state": "hidden"
+
     },
     {
       "title": "The Fall of Gaia Online",
@@ -232,46 +324,14 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 4,
-      "state": "hidden"
-    },
-    {
-      "title": "Treatise on Rational Tactics",
-      "subtitle": "A introduction to the case files of k",
-      "preview": "a introduction to formal logic, rationalism, & inductive/deductive reasoning.",
-      "date": "2025-04-9",
-      "tags": ["Formal Logic", "Rationalism", "Reasoning"],
-      "category": "Case Files of K",
-      "slug": "analysis-of-poem2",
-      "status": "Draft",
-      "confidence": "unlikely",
-      "importance": 4,
-      "state": "hidden"
-    },
-    {
-      "title": "Don't they know it's the end?",
-      "subtitle": "A introduction to the case files of k",
-      "preview": "a introduction to formal logic, rationalism, & inductive/deductive reasoning.",
-      "date": "2025-04-9",
-      "tags": ["Formal Logic", "Rationalism", "Reasoning"],
-      "category": "My Dreams",
-      "slug": "analysis-of-poem2",
-      "status": "Draft",
-      "confidence": "unlikely",
-      "importance": 2,
-      "state": "hidden"
-    },
-    {
-      "title": "Multiples of 3 or 5",
-      "subtitle": "Project Euler Solution(s)",
-      "preview": "a set of solutions to multiples of 3 or 5.",
-      "date": "2025-04-10",
-      "tags": ["Project Euler", "C", "Go"],
-      "category": "Project Euler",
-      "slug": "multiples-of-3-or-5",
-      "status": "Draft",
-      "confidence": "unlikely",
-      "importance": 1,
-      "state": "hidden"
+      "state": "hidden",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
       "title": "A Return to Less",
@@ -284,7 +344,14 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 6,
-      "state": "hidden"
+      "state": "hidden",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
       "title": "On Haiku",
@@ -297,7 +364,15 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "On Limericks",
@@ -310,7 +385,35 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+    },
+    {
+      "title": "On Sonnets",
+      "subtitle": "A Concise Evolution of the Sonnet",
+      "preview": "Origins, structure, and inspiration distilled to their essence.",
+      "date": "2025-04-17",
+      "tags": ["Poetry", "Sonnet", "Form"],
+      "category": "Verse",
+      "slug": "on-sonnets",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 2,
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "Anatomy of Verse",
@@ -323,7 +426,14 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 4,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
       "title": "Excercism C: Leap",
@@ -336,7 +446,15 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 1,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "Ada Lovelace",
@@ -349,7 +467,15 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 7,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "Hypatia of Alexandria",
@@ -362,12 +488,19 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 6,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
       "title": "Review of Wistoria Wand & Sword",
       "subtitle": "Wand meets Sword",
-      "preview": "A critical deep dive into Wistoria’s blend of spellcasting mechanics and swordplay, evaluating its narrative, gameplay balance, and world-building.",
+      "preview": "A critical deep dive into Wistoria's blend of spellcasting mechanics and swordplay, evaluating its narrative, gameplay balance, and world-building.",
       "date": "2025-04-22",
       "tags": ["Fantasy", "Anime", "Action", "Wistoria Wand & Sword"],
       "category": "Anime Review",
@@ -375,7 +508,14 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 1,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
       "title": "On the site as self",
@@ -388,7 +528,14 @@
       "status": "Notes",
       "confidence": "unlikely",
       "importance": 7,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
     },
     {
       "title": "On Myself",
@@ -401,7 +548,15 @@
       "status": "Published",
       "confidence": "high",
       "importance": 6,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "Meditations I",
@@ -414,7 +569,15 @@
       "status": "Published",
       "confidence": "high",
       "importance": 7,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "Musings I",
@@ -427,7 +590,15 @@
       "status": "Published",
       "confidence": "high",
       "importance": 7,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "Automated URL Archiving",
@@ -440,7 +611,15 @@
       "status": "Published",
       "confidence": "high",
       "importance": 7,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "Large File Storage for krisyotam.com",
@@ -453,7 +632,15 @@
       "status": "Published",
       "confidence": "high",
       "importance": 7,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "Linting for Prose",
@@ -466,7 +653,35 @@
       "status": "Published",
       "confidence": "high",
       "importance": 7,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+    },
+    {
+      "title": "The Art of Writing",
+      "subtitle": "on writing as a craft",
+      "preview": "A comprehensive guide to the art of writing, covering techniques, styles, and the creative process.",
+      "date": "2025-04-27",
+      "tags": ["Writing", "Craft", "Techniques", "Creativity"],
+      "category": "On Writing",
+      "slug": "the-art-of-writing",
+      "status": "Published",
+      "confidence": "high",
+      "importance": 7,
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "Toward a Unified Writing Style",
@@ -479,7 +694,15 @@
       "status": "Published",
       "confidence": "high",
       "importance": 7,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "How They Fall",
@@ -492,7 +715,15 @@
       "status": "Notes",
       "confidence": "medium",
       "importance": 6,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "Myths from Mesopotamia",
@@ -505,7 +736,15 @@
       "status": "Notes",
       "confidence": "high",
       "importance": 7,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "The First Philosophers",
@@ -518,7 +757,15 @@
       "status": "Notes",
       "confidence": "high",
       "importance": 7,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "Pride and Prejudice",
@@ -531,7 +778,15 @@
       "status": "Notes",
       "confidence": "high",
       "importance": 6,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+
     },
     {
       "title": "Kristoo",
@@ -544,13 +799,35 @@
       "status": "In Progress",
       "confidence": "high",
       "importance": 9,
-      "state": "active"
+      "state": "active",
+      "agenda_dueDate": "2025-05-10",
+      "agenda_importance": 5,
+      "agenda_effort": 120,
+      "agenda_urgency": 3,
+      "agenda_progress": 0.25,
+      "agenda_valueScore": 7,
+      "agenda_dependancies": ["RESEARCH_001"]
+    },
+    {
+      "title": "Review of Evangelion",
+      "subtitle": "A Critical Analysis of Mecha and Existentialism",
+      "preview": "An in-depth exploration of Neon Genesis Evangelion, examining its psychological themes, visual storytelling, and cultural impact.",
+      "date": "2025-05-15",
+      "tags": ["Anime", "Analysis", "Mecha", "Psychological", "Hideaki Anno"],
+      "category": "Anime Analysis",
+      "slug": "review-of-evangelion",
+      "status": "In Progress",
+      "confidence": "likely",
+      "importance": 8,
+      "state": "active",
+      "agenda_dueDate": "2025-06-10",
+      "agenda_importance": 8,
+      "agenda_effort": 180,
+      "agenda_urgency": 4,
+      "agenda_progress": 0.40,
+      "agenda_valueScore": 9,
+      "agenda_dependancies": ["RESEARCH_002"]
     }
-    
-    
-    
-    
-    
     
     
    ]

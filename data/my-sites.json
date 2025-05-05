@@ -6,24 +6,24 @@
       "link": "https://kriscv.vercel.app"
     },
     {
+      "name": "Math Blog",
+      "purpose": "blog, research, speeches, notes",
+      "link": "https://krisyotam.net"
+    },
+    {
       "name": "TypeShare",
       "purpose": "my initial posts catalogued on a social blogging platform",
       "link": "https://typeshare.co/krisyotam"
     },
     {
-      "name": "Bio Generator",
-      "purpose": "You can use this page to generate a bio about me to suit your needs.",
-      "link": "https://blog.krisyotam.com"
+      "name": "TryHackMe",
+      "purpose": "CTF, pentesting, red teaming, blue teaming, ect.",
+      "link": "https://tryhackme.com/p/khr1st"
     },
     {
       "name": "khr1st",
       "purpose": "software engineering, architecture, ai, ml, ctfs",
       "link": "https://khr1st.vercel.app"
-    },
-    {
-      "name": "Math Blog",
-      "purpose": "blog, research, speeches, notes",
-      "link": "https://krispuremath.vercel.app"
     },
     {
       "name": "Business Site",

@@ -1,29 +1,29 @@
 [
   {
-    "id": "RESEARCH_001",
-    "title": "The Role of Tragic Irony in Ancient Greek Theater",
-    "abstract": "This study explores the concept of tragic irony in Greek plays, focusing on how playwrights like Sophocles and Euripides used it to deepen the psychological complexity of their characters. By analyzing the structure and thematic elements of key tragedies, we argue that tragic irony served as a vehicle for moral reflection and societal critique in Athens.",
-    "importance": "This work offers a new perspective on classical drama by framing tragic irony as a tool not only for dramatic tension but also for the ethical dilemmas faced by ancient Greek society. The findings suggest implications for modern theater and literary criticism.",
-    "authors": ["Kris Yotam", "Eugenia Kollias", "Lysandra Vassilis"],
-    "subject": "Classics",
-    "keywords": ["Tragic Irony", "Greek Theater", "Sophocles", "Euripides", "Drama Analysis"],
+    "id": "1",
+    "title": "Composition and Symbolism in Van Gogh’s The Starry Night",
+    "abstract": "This research examines the compositional structure and symbolic significance of Vincent Van Gogh’s The Starry Night, exploring its lore, historical context, and expressive use of color and form.",
+    "importance": 7,
+    "authors": ["Kris Yotam"],
+    "subject": "Art Criticism",
+    "keywords": ["Van Gogh", "Art", "Expressionism", "Masterpiece", "Symbolism"],
     "postedBy": "Kris Yotam",
-    "postedOn": "2024-05-02",
-    "dateStarted": "2023-06-15",
-    "status": "published",
+    "postedOn": "2025-02-07",
+    "dateStarted": "2025-02-07",
+    "status": "active",
     "bibliography": [
-      "Halliwell, S. (2008). The Aesthetics of Mimesis: Ancient Texts and Modern Problems. Princeton University Press.",
-      "Barton, C. (2015). Tragedy and Transformation in Greek Drama. Oxford University Press.",
-      "Vassilis, L. (2020). Irony in Classical Literature: A New Approach. Classical Journal, 35(2), 129-144."
+      "Placeholder Author A. (2025). Placeholder Title A. Placeholder Publisher.",
+      "Placeholder Author B. (2025). Placeholder Title B. Placeholder Publisher.",
+      "Placeholder Author C. (2025). Placeholder Title C. Placeholder Publisher."
     ],
-    "img": "/research/tragic-irony.jpg",
-    "pdfLink": "/research/tragic-irony.pdf",
-    "sourceLink": "https://github.com/krisyotam/tragic-irony",
-    "category": "Classics",
-    "tags": ["Greek Tragedy", "Irony", "Drama", "Ancient Greece"]
-  },
+    "img": "/research/the-starry-night.jpg",
+    "pdfLink": "/research/the-starry-night.pdf",
+    "sourceLink": "https://github.com/krisyotam",
+    "category": "Art Criticism",
+    "tags": ["Van Gogh", "Art", "Expressionism", "Masterpiece", "Symbolism"]
+  },  
   {
-    "id": "RESEARCH_002",
+    "id": "2",
     "title": "The Impact of Renaissance Art on Modern Visual Culture",
     "abstract": "This paper examines how the techniques and themes of Renaissance art have influenced contemporary visual culture. By comparing works by artists such as Leonardo da Vinci and Raphael with modern cinematic visuals, we trace the evolution of perspective, light, and human form in visual storytelling.",
     "importance": "This research illuminates the enduring legacy of Renaissance aesthetics in contemporary media, offering a new framework for analyzing modern visual narratives. The study highlights the fusion of historical techniques with modern technologies in art and film.",
@@ -46,7 +46,7 @@
     "tags": ["Renaissance", "Art History", "Visual Culture", "Modern Art", "Film"]
   },
   {
-    "id": "RESEARCH_003",
+    "id": "3",
     "title": "The Psychological Effects of Aesthetic Experience on Human Behavior",
     "abstract": "This paper investigates how exposure to aesthetic stimuli, such as art and nature, influences human behavior and emotional states. Through experimental research, we measure changes in mood, cognitive function, and social behavior following aesthetic experiences. We propose a model of aesthetic appreciation that integrates psychological theories with empirical data.",
     "importance": "This work provides new insights into the cognitive and emotional benefits of aesthetic experiences, supporting the idea that exposure to beauty can lead to improved mental health and well-being. The findings are relevant for psychology, art therapy, and social behavior.",
@@ -69,7 +69,7 @@
     "tags": ["Aesthetics", "Psychology", "Emotions", "Cognition", "Art"]
   },
   {
-    "id": "RESEARCH_004",
+    "id": "4",
     "title": "The Concept of Freedom in Ancient Philosophy: A Comparative Study",
     "abstract": "This paper compares the concept of freedom as presented in the works of ancient philosophers such as Aristotle, Epictetus, and the Stoics, with modern interpretations of freedom in political and philosophical contexts. By examining both ancient texts and contemporary theories, we aim to uncover how the philosophical understanding of freedom has evolved over time.",
     "importance": "This research sheds light on the foundational role that ancient philosophy has played in shaping modern political thought and ethics. It contributes to the ongoing debate on the nature of freedom and autonomy in the context of contemporary society.",
@@ -92,7 +92,7 @@
     "tags": ["Freedom", "Ancient Philosophy", "Political Thought", "Ethics"]
   },
   {
-    "id": "RESEARCH_005",
+    "id": "5",
     "title": "Folklore and Identity: The Role of Storytelling in Preserving Cultural Heritage",
     "abstract": "This research examines the role of folklore in shaping and maintaining cultural identity. By studying traditional stories, myths, and legends from various cultures, we explore how storytelling serves as a tool for cultural continuity, particularly in communities that have undergone significant social or political upheaval.",
     "importance": "The findings emphasize the importance of folklore in preserving cultural heritage and identity, suggesting that storytelling is not only a form of entertainment but also a crucial mechanism for social cohesion and resilience.",

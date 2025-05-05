@@ -719,6 +719,148 @@
      border-color: #fff;
    }
    
+   /* =============================================================================
+      SCROLLBAR CONTROL
+      ========================================================================== */
+   /* Default scrollbar styles */
+   html {
+     scrollbar-gutter: stable; /* Always reserve space for scrollbar to prevent layout shift */
+   }
+   
+   /* Show scrollbar explicitly for blog posts and notes */
+   html.show-scrollbar {
+     overflow-y: scroll;
+   }
+   
+   /* Hide scrollbar for regular pages while preserving space for it */
+   html.hide-scrollbar {
+     scrollbar-width: none; /* Firefox */
+     -ms-overflow-style: none; /* IE and Edge */
+   }
+   
+   /* Hide scrollbar for Webkit browsers while preserving space */
+   html.hide-scrollbar::-webkit-scrollbar {
+     width: 0;
+     background: transparent;
+     display: none;
+   }
+   
+   /* =============================================================================
+      BASE ELEMENT STYLES
+      ========================================================================== */
+   @layer base {
+     * {
+       @apply border-border;
+     }
+   
+     body {
+       @apply bg-background text-foreground;
+       font-feature-settings: "rlig" 1, "calt" 1;
+       -webkit-font-smoothing: antialiased;
+       -moz-osx-font-smoothing: grayscale;
+       text-rendering: optimizeLegibility;
+     }
+   }
+   
+   /* =============================================================================
+      TARGET THE NEXT.JS IMAGE WRAPPER <SPAN> BY ITS DATA‑ATTRIBUTE
+      ========================================================================== */
+   span[data-nimg] {
+     display: block !important;
+   }
+   
+   /* globals.css */
+   span[data-nimg] {
+     display: block !important;      /* kill inline‑block spacing */
+     margin: 0 !important;           /* no margins */
+     padding: 0 !important;          /* no padding */
+     vertical-align: top !important; /* align it flush */
+     /* leave border-radius & overflow alone */
+   }
+   
+   img {
+     display: block !important;
+     margin: 0 !important;
+     padding: 0 !important;
+     border: 0 !important;
+     vertical-align: top !important;
+   }
+   
+   .dropcap-image-wrapper {
+     float: left;
+     margin-right: 0.5em;    /* tweak for text wrap */
+     margin-top: 0.1em;      /* align to baseline */
+     line-height: 0;
+   }
+   
+   .dropcap-image {
+     background: transparent;
+     border: none;
+     user-select: none;
+     /* you can also set width/height via CSS if you prefer: */
+     /* width: 3em; */
+     /* height: auto; */
+   }
+   
+   .dropcap-image {
+     /* disable any outlines, highlights, shadows, or filters */
+     outline: none !important;
+     box-shadow: none !important;
+     filter: none !important;
+     opacity: 1 !important;
+     background: transparent !important;
+   }
+   
+   .dropcap-image {
+     /* make it big enough to admire — 5em is ~5× your 1em body text */
+     width: 10em !important;
+     height: 10em !important;
+     /* keep it perfectly square */
+     object-fit: contain;
+   }
+   
+   /* =============================================================================
+      POST CONTENT STYLES
+      ========================================================================== */
+   /* ensure the browser can hyphenate text in English */
+   .post-content {
+     hyphens: auto;
+     -webkit-hyphens: auto;
+     -ms-hyphens: auto;
+   }
+   
+   /* justify all but the last line, and allow hyphenated breaks */
+   .post-content p {
+     text-align: justify;
+     text-align-last: left;  /* keep the last line ragged-right */
+     hyphens: auto;
+     -webkit-hyphens: auto;
+     -ms-hyphens: auto;
+   }
+   
+   /* Constrain FileViewer and its <pre> to 100% of whatever parent they live in */
+   .post-content .file-viewer {
+     width: 100% !important;
+     max-width: 100% !important;
+     box-sizing: border-box;
+   }
+   
+   .post-content .file-viewer pre {
+     /* force the <pre> itself to fill its container */
+     width: 100% !important;
+     max-width: 100% !important;
+     
+     /* scroll rather than overflow the page */
+     overflow-x: auto !important;
+     box-sizing: border-box;
+   }
+   
+   /* (optional) wrap long words/URLs rather than overflow */
+   .post-content .file-viewer code {
+     word-break: break-word;
+     overflow-wrap: anywhere;
+   }
+   
    
 
 
@@ -752,23 +894,12 @@ body {
   -ms-overflow-style: none;
 }
 
-
-
-
-
-
-
-
-
 /* target the Next.js Image wrapper <span> by its data‑attribute */
 span[data-nimg] {
   display: block !important;
 }
 
-
-
 /* globals.css */
-
 span[data-nimg] {
   display: block !important;      /* kill inline‑block spacing */
   margin: 0 !important;           /* no margins */
@@ -784,8 +915,6 @@ img {
   border: 0 !important;
   vertical-align: top !important;
 }
-
-
 
 .dropcap-image-wrapper {
   float: left;
@@ -819,10 +948,6 @@ img {
   /* keep it perfectly square */
   object-fit: contain;
 }
-
-
-
-
 
 /* ensure the browser can hyphenate text in English */
 .post-content {

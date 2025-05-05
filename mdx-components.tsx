@@ -4,6 +4,38 @@ import * as Typography from "@/components/typography"
 import { InternalLink } from "@/components/internal-link"
 import { EnhancedLink } from "@/components/enhanced-link"
 
+// Import all post-related components
+import MiniBio from '@/components/posts/people/mini-bio'
+import Dropcap from '@/components/dropcap'
+import Bible from "@/components/references/christianity/1611bible"
+import LinkTags from "@/components/link-tags"
+import { Box } from "@/components/posts/typography/box"
+import { Excerpt } from "@/components/posts/typography/excerpt"
+import { Quote } from "@/components/posts/typography/quote"
+import Define from "@/components/references/language/oed"
+import { Spoiler } from "@/components/posts/typography/spoiler"
+import { PoemBox } from "@/components/posts/typography/poem"
+import Collapse from "@/components/posts/typography/collapse"
+import FileViewer from "@/components/posts/typography/file-viewer"
+import OcCharacterDisplay from "@/components/posts/characters/oc-character-display"
+import Inflation from "@/components/inflation"
+import { EnhancedImageDisplay } from "@/components/posts/images/enhanced-image-display"
+import { Image as BasicImage } from "@/components/posts/images/basic-image-display"
+import TryHackMe from "@/components/posts/ctfs/tryhackme"
+import Book from "@/components/posts/books/book"
+import { BookCard } from "@/components/posts/books/book-card"
+import AnimeDisplay from "@/components/posts/content/anime-display"
+import MangaDisplay from "@/components/posts/content/manga-display"
+import MovieDisplay from "@/components/posts/content/movie-display"
+import HauteCouture from "@/components/posts/fashion/haute-couture"
+import HauteCoutureCollection from "@/components/posts/fashion/haute-couture-collection"
+import MangaPanelDisplay from "@/components/posts/content/manga-panel-display"
+import MangaPanelDisplayCollection from "@/components/posts/content/manga-panel-display-collection"
+import Chateau from "@/components/posts/architecture/chateau"
+import ChateauCollection from "@/components/posts/architecture/chateau-collection"
+import Human from "@/components/posts/basic/human"
+import Company from "@/components/posts/basic/company"
+
 // Define components for MDX
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -65,7 +97,55 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Large: Typography.Large,
     Small: Typography.Small,
     Muted: Typography.Muted,
-    InternalLink: InternalLink,
+    
+    // Text formatting and layout components
+    InternalLink,
+    Dropcap,
+    Box,
+    Excerpt,
+    Quote,
+    Spoiler,
+    PoemBox,
+    Collapse,
+    FileViewer,
+    
+    // References and specialized components
+    Bible,
+    Define,
+    LinkTags,
+    Inflation,
+    
+    // Character and people components
+    MiniBio,
+    OcCharacterDisplay,
+    Human,
+    Company,
+    
+    // Images and media components
+    EnhancedImageDisplay,
+    BasicImage,
+    
+    // Books and reading components
+    Book,
+    BookCard,
+    
+    // Content display components
+    AnimeDisplay,
+    MangaDisplay,
+    MovieDisplay,
+    MangaPanelDisplay,
+    MangaPanelDisplayCollection,
+    
+    // Fashion and architecture components
+    HauteCouture,
+    HauteCoutureCollection,
+    Chateau,
+    ChateauCollection,
+    
+    // Special content components
+    TryHackMe,
+    
+    // Pass through any provided components (for overrides)
     ...components,
   }
 }

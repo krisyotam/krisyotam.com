@@ -1,0 +1,42 @@
+[
+  {
+    "id": "note-1",
+    "title": "Original Broadcast",
+    "content": "Neon Genesis Evangelion originally aired from October 4, 1995, to March 27, 1996, on TV Tokyo.",
+    "index": 1,
+    "sourceName": "Wikipedia",
+    "sourceLink": "https://en.wikipedia.org/wiki/Neon_Genesis_Evangelion"
+  },
+  {
+    "id": "note-2",
+    "title": "Budget Constraints",
+    "content": "The series famously faced severe budget constraints in its final episodes, leading to the minimalist animation style and extensive use of still frames.",
+    "index": 2,
+    "sourceName": "Interview with Hideaki Anno",
+    "sourceLink": "https://www.gwern.net/docs/eva/2003-omoide-anno-interview"
+  },
+  {
+    "id": "note-3",
+    "title": "Anime Influence",
+    "content": "Evangelion is frequently cited as one of the most influential anime series of all time, credited with revitalizing the anime industry in the mid-1990s.",
+    "index": 3,
+    "sourceName": "The Rise and Fall of Anime",
+    "sourceLink": "https://www.animenewsnetwork.com/feature/2021-02-24/the-rise-and-fall-of-anime/.169789"
+  },
+  {
+    "id": "note-4",
+    "title": "Anno's Depression",
+    "content": "Director Hideaki Anno has openly discussed how his own battle with depression influenced the psychological themes of Evangelion.",
+    "index": 4,
+    "sourceName": "Anno Interview",
+    "sourceLink": "https://www.animenewsnetwork.com/interest/2019-06-19/hideaki-anno-discusses-his-depression-and-evangelion-ending/.147964"
+  },
+  {
+    "id": "note-5",
+    "title": "Rebuild Series",
+    "content": "The Rebuild of Evangelion is a tetralogy of films released between 2007 and 2021, retelling the original story with significant differences and a new conclusion.",
+    "index": 5,
+    "sourceName": "Rebuild of Evangelion",
+    "sourceLink": "https://wiki.evageeks.org/Rebuild_of_Evangelion"
+  }
+] 

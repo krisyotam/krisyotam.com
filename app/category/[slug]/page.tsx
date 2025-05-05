@@ -48,6 +48,8 @@ export default async function CategoryPage({
               status={categoryData.status || "In Progress"}
               confidence={categoryData.confidence || "possible"}
               importance={categoryData.importance || 5}
+              backText="Categories"
+              backHref="/categories"
               className="mb-12"
             />
           ) : (
@@ -55,10 +57,10 @@ export default async function CategoryPage({
               <div className="mb-4">
                 <Link
                   href="/categories"
-                  className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors group font-serif italic"
                 >
-                  <ArrowLeft className="mr-1 h-4 w-4" />
-                  Back to Categories
+                  <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                  Return to Categories
                 </Link>
               </div>
               <h1 className="text-xl font-medium mb-1 text-foreground">{categoryName}</h1>

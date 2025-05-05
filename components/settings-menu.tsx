@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
-import { Search, Settings, Rss, X, Maximize, Move, CircleHelp, GitCompare, Code, Github } from "lucide-react"
+import { Search, Settings, Rss, X, Maximize, Move, CircleHelp, GitCompare, Code, Github, Link2, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
@@ -56,15 +56,83 @@ export function SettingsMenu() {
   const [pages, setPages] = useState<Page[]>([])
   const [searchFilter, setSearchFilter] = useState<"all" | "posts" | "pages">("all")
   const [isMaximized, setIsMaximized] = useState(false)
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [universalLinkModalEnabled, setUniversalLinkModalEnabled] = useState(true)
+  const [universalLinkModalMode, setUniversalLinkModalMode] = useState<"all" | "external" | "off">("external")
+  const [isLinkHoverMenuVisible, setIsLinkHoverMenuVisible] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const searchInputRef = useRef<HTMLInputElement>(null)
   const searchWindowRef = useRef<HTMLDivElement>(null)
+  const linkOptionRef = useRef<HTMLButtonElement>(null)
+  const linkSubmenuRef = useRef<HTMLDivElement>(null)
+  const hideSubmenuTimerRef = useRef<NodeJS.Timeout | null>(null)
   const router = useRouter()
   const { theme } = useTheme()
 
   // Use motion values for position
   const x = useMotionValue(0)
   const y = useMotionValue(0)
+
+  // Functions to handle submenu visibility
+  const showSubmenu = () => {
+    if (hideSubmenuTimerRef.current) {
+      clearTimeout(hideSubmenuTimerRef.current)
+      hideSubmenuTimerRef.current = null
+    }
+    setIsLinkHoverMenuVisible(true)
+  }
+
+  const hideSubmenuWithDelay = () => {
+    if (hideSubmenuTimerRef.current) {
+      clearTimeout(hideSubmenuTimerRef.current)
+    }
+    hideSubmenuTimerRef.current = setTimeout(() => {
+      setIsLinkHoverMenuVisible(false)
+    }, 300) // 300ms delay to allow moving to submenu
+  }
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (hideSubmenuTimerRef.current) {
+        clearTimeout(hideSubmenuTimerRef.current)
+      }
+    }
+  }, [])
+
+  // Load universal link modal settings from localStorage
+  useEffect(() => {
+    const storedSetting = localStorage.getItem("settings_universalLinkModal")
+    if (storedSetting !== null) {
+      setUniversalLinkModalEnabled(storedSetting === "true")
+    }
+    
+    const storedMode = localStorage.getItem("settings_universalLinkModalMode")
+    if (storedMode !== null && ["all", "external", "off"].includes(storedMode)) {
+      setUniversalLinkModalMode(storedMode as "all" | "external" | "off")
+    }
+  }, [])
+
+  // Toggle universal link modal setting
+  const toggleUniversalLinkModal = () => {
+    const newValue = !universalLinkModalEnabled
+    setUniversalLinkModalEnabled(newValue)
+    localStorage.setItem("settings_universalLinkModal", String(newValue))
+  }
+
+  // Set universal link modal mode
+  const setLinkModalMode = (mode: "all" | "external" | "off") => {
+    setUniversalLinkModalMode(mode)
+    localStorage.setItem("settings_universalLinkModalMode", mode)
+    
+    // Also update enabled state based on mode
+    const isEnabled = mode !== "off"
+    setUniversalLinkModalEnabled(isEnabled)
+    localStorage.setItem("settings_universalLinkModal", String(isEnabled))
+    
+    // Hide the hover menu after selection
+    setIsLinkHoverMenuVisible(false)
+  }
 
   // Set initial position when search window opens
   useEffect(() => {
@@ -253,6 +321,11 @@ export function SettingsMenu() {
     setIsOpen(false)
   }
 
+  const openSettings = () => {
+    setIsSettingsOpen(true)
+    setIsOpen(false)
+  }
+
   const toggleMaximize = () => {
     const newMaximizedState = !isMaximized
     setIsMaximized(newMaximizedState)
@@ -318,6 +391,75 @@ export function SettingsMenu() {
                 Search
               </span>
             </button>
+            
+            {/* Link Modal Options with improved hover handling */}
+            <div className="relative pointer-events-none">
+              <button
+                ref={linkOptionRef}
+                onMouseEnter={showSubmenu}
+                onMouseLeave={hideSubmenuWithDelay}
+                className="group relative flex h-8 w-8 items-center justify-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground pointer-events-auto"
+                aria-label="Link Preview Settings"
+              >
+                <ExternalLink className="h-4 w-4" />
+                <span className="absolute right-full mr-2 w-auto min-w-max rounded bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-white dark:text-black">
+                  Link Preview
+                </span>
+                
+                {/* Invisible bridge/buffer to prevent hover-gap issues */}
+                {isLinkHoverMenuVisible && (
+                  <span 
+                    className="absolute right-0 w-12 h-[100%] z-10 pointer-events-auto"
+                    onMouseEnter={showSubmenu}
+                    onMouseLeave={hideSubmenuWithDelay}
+                  ></span>
+                )}
+                
+                {/* Hover submenu */}
+                {isLinkHoverMenuVisible && (
+                  <div
+                    ref={linkSubmenuRef}
+                    className="absolute right-full top-0 mr-2 w-auto min-w-max bg-background rounded-md border border-border shadow-md p-1 pointer-events-auto"
+                    onMouseEnter={showSubmenu}
+                    onMouseLeave={hideSubmenuWithDelay}
+                  >
+                    <div className="text-xs font-medium px-2 py-1 mb-1 border-b border-border">Link Preview Mode</div>
+                    <button
+                      onClick={() => setLinkModalMode("all")}
+                      className={`flex items-center justify-between w-full text-left px-2 py-1 text-xs rounded hover:bg-accent hover:text-accent-foreground ${universalLinkModalMode === "all" ? "font-medium bg-accent/30" : ""}`}
+                    >
+                      <span>All Links</span>
+                      {universalLinkModalMode === "all" && <span className="text-primary">✓</span>}
+                    </button>
+                    <button
+                      onClick={() => setLinkModalMode("external")}
+                      className={`flex items-center justify-between w-full text-left px-2 py-1 text-xs rounded hover:bg-accent hover:text-accent-foreground ${universalLinkModalMode === "external" ? "font-medium bg-accent/30" : ""}`}
+                    >
+                      <span>External Only</span>
+                      {universalLinkModalMode === "external" && <span className="text-primary">✓</span>}
+                    </button>
+                    <button
+                      onClick={() => setLinkModalMode("off")}
+                      className={`flex items-center justify-between w-full text-left px-2 py-1 text-xs rounded hover:bg-accent hover:text-accent-foreground ${universalLinkModalMode === "off" ? "font-medium bg-accent/30" : ""}`}
+                    >
+                      <span>Off</span>
+                      {universalLinkModalMode === "off" && <span className="text-primary">✓</span>}
+                    </button>
+                  </div>
+                )}
+              </button>
+            </div>
+            
+            <button
+              onClick={openSettings}
+              className="group relative flex h-8 w-8 items-center justify-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
+              aria-label="User Settings"
+            >
+              <Settings className="h-4 w-4" />
+              <span className="absolute right-full mr-2 w-auto min-w-max rounded bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-white dark:text-black">
+                User Settings
+              </span>
+            </button>
             <button
               onClick={openRSS}
               className="group relative flex h-8 w-8 items-center justify-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
@@ -368,6 +510,84 @@ export function SettingsMenu() {
                 GitHub
               </span>
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* User Settings Modal */}
+      {isSettingsOpen && (
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+          <div className="w-full max-w-md rounded-lg border border-border bg-background p-6 shadow-lg">
+            <div className="flex items-center justify-between border-b border-border pb-4">
+              <h2 className="text-lg font-semibold">User Settings</h2>
+              <button 
+                onClick={() => setIsSettingsOpen(false)}
+                className="rounded-full p-1 hover:bg-accent hover:text-accent-foreground"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="space-y-4 py-4">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center space-x-2">
+                    <ExternalLink className="h-4 w-4" />
+                    <label className="text-sm font-medium">
+                      Link Preview Modal
+                    </label>
+                  </div>
+                </div>
+                
+                <div className="ml-6 space-y-2">
+                  <label className="flex items-center space-x-2">
+                    <input 
+                      type="radio" 
+                      name="linkModalMode" 
+                      checked={universalLinkModalMode === "all"} 
+                      onChange={() => setLinkModalMode("all")}
+                      className="h-4 w-4"
+                    />
+                    <span className="text-sm">All links (internal & external)</span>
+                  </label>
+                  
+                  <label className="flex items-center space-x-2">
+                    <input 
+                      type="radio" 
+                      name="linkModalMode" 
+                      checked={universalLinkModalMode === "external"} 
+                      onChange={() => setLinkModalMode("external")}
+                      className="h-4 w-4"
+                    />
+                    <span className="text-sm">External links only</span>
+                  </label>
+                  
+                  <label className="flex items-center space-x-2">
+                    <input 
+                      type="radio" 
+                      name="linkModalMode" 
+                      checked={universalLinkModalMode === "off"} 
+                      onChange={() => setLinkModalMode("off")}
+                      className="h-4 w-4"
+                    />
+                    <span className="text-sm">Off (no link previews)</span>
+                  </label>
+                </div>
+                
+                <p className="text-xs text-muted-foreground mt-2">
+                  Configure how the link preview modal works when you hover over links on the site.
+                </p>
+              </div>
+            </div>
+
+            <div className="border-t border-border pt-4">
+              <button
+                onClick={() => setIsSettingsOpen(false)}
+                className="w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                Save Settings
+              </button>
+            </div>
           </div>
         </div>
       )}

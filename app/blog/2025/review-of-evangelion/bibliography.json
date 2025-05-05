@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1",
+    "author": "Anno, Hideaki",
+    "title": "Neon Genesis Evangelion: The Official Guide",
+    "year": 1997,
+    "publisher": "Kadokawa Shoten",
+    "url": "https://en.wikipedia.org/wiki/Neon_Genesis_Evangelion",
+    "type": "book"
+  },
+  {
+    "id": "2",
+    "author": "MyAnimeList",
+    "title": "Neon Genesis Evangelion",
+    "year": 2023,
+    "publisher": "MyAnimeList.net",
+    "url": "https://myanimelist.net/anime/30/Neon_Genesis_Evangelion",
+    "type": "wiki"
+  },
+  {
+    "id": "3",
+    "author": "Napier, Susan J.",
+    "title": "Anime from Akira to Princess Mononoke: Experiencing Contemporary Japanese Animation",
+    "year": 2001,
+    "publisher": "Palgrave Macmillan",
+    "url": "https://books.google.com/books/about/Anime_from_Akira_to_Princess_Mononoke.html?id=sWJM4PUXk3EC",
+    "type": "book"
+  },
+  {
+    "id": "4",
+    "author": "Fujie, Kazuhisa & Foster, Martin",
+    "title": "Neon Genesis Evangelion: The Unofficial Guide",
+    "year": 2004,
+    "publisher": "DH Publishing",
+    "url": "https://www.goodreads.com/book/show/538750.Neon_Genesis_Evangelion",
+    "type": "book"
+  },
+  {
+    "id": "5",
+    "author": "EvaGeeks",
+    "title": "EvaWiki",
+    "year": 2023,
+    "publisher": "EvaGeeks.org",
+    "url": "https://wiki.evageeks.org/",
+    "type": "wiki"
+  }
+] 

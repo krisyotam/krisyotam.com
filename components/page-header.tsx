@@ -20,6 +20,8 @@ interface PageHeaderProps {
     | "highly likely"
     | "certain"
   importance?: number
+  backText?: string
+  backHref?: string
 }
 
 const confidenceExplanation = `The confidence tag expresses how well-supported the page is, or how likely its overall ideas are right. This uses a scale from "impossible" to "certain", based on the Kesselman List of Estimative Words:
@@ -94,17 +96,19 @@ export function PageHeader({
   status = "Draft",
   confidence = "possible",
   importance = 5,
+  backText = "Home",
+  backHref = "/",
 }: PageHeaderProps) {
   return (
     <header className="mb-4 relative">
-      {/* Back to home link */}
+      {/* Back button with customizable text and link */}
       <Link
-        href="/"
+        href={backHref}
         data-no-preview="true"
         className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 group font-serif italic"
       >
         <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-        Return to Home
+        Return to {backText}
       </Link>
 
       {/* Academic bento container */}
@@ -130,7 +134,11 @@ export function PageHeader({
             dateTime={typeof date === "string" ? date : undefined}
             className="font-mono text-sm text-muted-foreground"
           >
-            {typeof date === "string" ? formatDate(new Date(date)) : date}
+            {typeof date === "string" 
+              ? formatDate(date) 
+              : date 
+                ? formatDate(date.toString()) 
+                : "No date specified"}
           </time>
         </div>
 

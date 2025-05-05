@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback, useMemo } from "react"
 import { X, Maximize2, ChevronLeft, ChevronRight, Copy, ExternalLink, Check, Minimize2 } from "lucide-react"
 import { linkEvents } from "@/components/typography/a"
 import { usePathname } from "next/navigation"
@@ -30,16 +30,25 @@ type ModalData = {
 
 export function UniversalLinkModal() {
   const pathname = usePathname()
-  const isExcluded = CONFIG.excludedPages.some((path) => pathname === path || pathname?.startsWith(`${path}/`))
+  // Calculate exclusion once and memoize it
+  const isExcluded = useMemo(() => {
+    return CONFIG.excludedPages.some((path) => pathname === path || pathname?.startsWith(`${path}/`))
+  }, [pathname])
 
-  if (isExcluded) return null
-
+  // Get the universal link modal settings from localStorage
+  const [isEnabled, setIsEnabled] = useState(true)
+  const [modalMode, setModalMode] = useState<"all" | "external" | "off">("external")
+  
+  // Define all hooks before any conditional returns
   const [modals, setModals] = useState<ModalData[]>([])
   const [focusedModalIndex, setFocusedModalIndex] = useState<number | null>(null)
   const [copySuccess, setCopySuccess] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
   const [activeModalId, setActiveModalId] = useState<string | null>(null)
+  
+  // State for rendering control - ensures component renders consistently
+  const [shouldRenderContent, setShouldRenderContent] = useState(false)
 
   // Refs
   const openModalUrls = useRef<Set<string>>(new Set())
@@ -53,16 +62,16 @@ export function UniversalLinkModal() {
     linkElements: 0,
   })
 
-  // Helper functions
-  const getDomainFromUrl = (url: string) => {
+  // Helper functions - wrap in useCallback to maintain reference stability
+  const getDomainFromUrl = useCallback((url: string) => {
     try {
       return new URL(url).hostname.replace("www.", "")
     } catch {
       return url
     }
-  }
+  }, [])
 
-  const isDomainBanned = (url: string): boolean => {
+  const isDomainBanned = useCallback((url: string): boolean => {
     if (!CONFIG.checkBannedDomains) return false
 
     try {
@@ -73,9 +82,9 @@ export function UniversalLinkModal() {
     } catch {
       return false
     }
-  }
+  }, [getDomainFromUrl])
 
-  const isInternalLink = (url: string): boolean => {
+  const isInternalLink = useCallback((url: string): boolean => {
     try {
       if (url.startsWith("/") || url.startsWith("#") || url.startsWith("./") || url.startsWith("../")) {
         return true
@@ -84,20 +93,28 @@ export function UniversalLinkModal() {
     } catch {
       return true
     }
-  }
+  }, [])
 
-  const shouldShowPreview = (url: string): boolean => {
+  const shouldShowPreview = useCallback((url: string): boolean => {
     if (isDomainBanned(url)) return false
-    if (url.includes("/blog/")) return true
-
-    return isInternalLink(url) ? CONFIG.internalPreviews : CONFIG.externalPreviews
-  }
+    
+    // Check if internal and handle based on mode
+    if (isInternalLink(url)) {
+      return modalMode === "all" // Only show internal previews in "all" mode
+    }
+    
+    // External links are shown in both "all" and "external" modes
+    return modalMode === "all" || modalMode === "external"
+  }, [isDomainBanned, isInternalLink, modalMode])
 
   // Modal management
-  const createModal = async (url: string, title: string, x: number, y: number) => {
+  const createModal = useCallback(async (url: string, title: string, x: number, y: number) => {
     if (openModalUrls.current.has(url)) return
     if (url.startsWith("javascript:") || url === "#" || url === "") return
     if (isDomainBanned(url)) return
+    
+    // Don't create modals for internal links unless in "all" mode
+    if (isInternalLink(url) && modalMode !== "all") return
 
     const newModal: ModalData = {
       id: `modal-${Date.now()}`,
@@ -112,9 +129,9 @@ export function UniversalLinkModal() {
 
     setModals((prev) => [...prev, newModal])
     openModalUrls.current.add(url)
-  }
+  }, [isDomainBanned, isInternalLink, modalMode, getDomainFromUrl])
 
-  const closeModal = (id: string) => {
+  const closeModal = useCallback((id: string) => {
     const modalToClose = modals.find((modal) => modal.id === id)
     if (modalToClose) {
       openModalUrls.current.delete(modalToClose.url)
@@ -132,10 +149,10 @@ export function UniversalLinkModal() {
         setFocusedModalIndex(focusedModalIndex - 1)
       }
     }
-  }
+  }, [modals, focusedModalIndex])
 
   // Event handlers
-  const handleMouseDown = (e: React.MouseEvent, id: string) => {
+  const handleMouseDown = useCallback((e: React.MouseEvent, id: string) => {
     const target = e.target as HTMLElement
     if (target.tagName === "BUTTON" || target.closest("button")) return
     if (!target.closest(".drag-handle")) return
@@ -156,30 +173,80 @@ export function UniversalLinkModal() {
 
       e.preventDefault()
     }
-  }
+  }, [modals])
 
-  const copyToClipboard = (url: string | undefined) => {
+  const copyToClipboard = useCallback((url: string | undefined) => {
     if (!url) return
     navigator.clipboard
       .writeText(url)
       .then(() => setCopySuccess(true))
       .catch((err) => console.error("Failed to copy URL: ", err))
-  }
+  }, [])
 
-  const openInNewTab = (url: string) => {
+  const openInNewTab = useCallback((url: string) => {
     window.open(url, "_blank", "noopener,noreferrer")
-  }
+  }, [])
 
   // Navigation
-  const goToNextModal = () => {
+  const goToNextModal = useCallback(() => {
     if (focusedModalIndex === null || modals.length <= 1) return
-    setFocusedModalIndex((focusedModalIndex + 1) % modals.length)
-  }
+    setFocusedModalIndex((prevIndex) => (prevIndex + 1) % modals.length)
+  }, [focusedModalIndex, modals.length])
 
-  const goToPrevModal = () => {
+  const goToPrevModal = useCallback(() => {
     if (focusedModalIndex === null || modals.length <= 1) return
-    setFocusedModalIndex((focusedModalIndex - 1 + modals.length) % modals.length)
-  }
+    setFocusedModalIndex((prevIndex) => (prevIndex - 1 + modals.length) % modals.length)
+  }, [focusedModalIndex, modals.length])
+
+  // Modal styles
+  const getModalStyles = useCallback((modal: ModalData) => {
+    if (modal.isFullScreen) {
+      return {
+        left: "5vw",
+        top: "5vh",
+        width: "90vw",
+        height: "90vh",
+        zIndex: 1000,
+      }
+    } else {
+      return {
+        left: `${modal.position.x}px`,
+        top: `${modal.position.y}px`,
+        width: "600px",
+        height: "500px",
+        transform: "translate(-50%, -50%)",
+        zIndex: 1000,
+      }
+    }
+  }, [])
+
+  // Load settings from localStorage
+  useEffect(() => {
+    // Check if the user has disabled the universal link modal
+    const storedSetting = localStorage.getItem("settings_universalLinkModal")
+    if (storedSetting !== null) {
+      setIsEnabled(storedSetting === "true")
+    }
+    
+    // Get the modal mode setting
+    const storedMode = localStorage.getItem("settings_universalLinkModalMode")
+    if (storedMode !== null && ["all", "external", "off"].includes(storedMode)) {
+      setModalMode(storedMode as "all" | "external" | "off")
+    }
+    
+    // Update rendering state
+    setShouldRenderContent(true)
+  }, [])
+
+  // Reset timers when component unmounts
+  useEffect(() => {
+    return () => {
+      if (hoverTimerRef.current) {
+        clearTimeout(hoverTimerRef.current)
+        hoverTimerRef.current = null
+      }
+    }
+  }, [])
 
   // Effects
   useEffect(() => {
@@ -298,7 +365,7 @@ export function UniversalLinkModal() {
         clearTimeout(hoverTimerRef.current)
       }
     }
-  }, [modals])
+  }, [isDomainBanned, shouldShowPreview, createModal])
 
   // Link events from A component
   useEffect(() => {
@@ -314,7 +381,7 @@ export function UniversalLinkModal() {
 
     const unsubscribe = linkEvents.addListener(handleLinkHover)
     return unsubscribe
-  }, [modals])
+  }, [isDomainBanned, shouldShowPreview, createModal])
 
   // Keyboard navigation
   useEffect(() => {
@@ -332,31 +399,14 @@ export function UniversalLinkModal() {
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [focusedModalIndex, modals.length])
+  }, [focusedModalIndex, goToPrevModal, goToNextModal])
 
-  // Modal styles
-  const getModalStyles = (modal: ModalData) => {
-    if (modal.isFullScreen) {
-      return {
-        left: "5vw",
-        top: "5vh",
-        width: "90vw",
-        height: "90vh",
-        zIndex: 1000,
-      }
-    } else {
-      return {
-        left: `${modal.position.x}px`,
-        top: `${modal.position.y}px`,
-        width: "600px",
-        height: "500px",
-        transform: "translate(-50%, -50%)",
-        zIndex: 1000,
-      }
-    }
+  // Always render the same structure with the same number of hooks
+  if (!shouldRenderContent || !isEnabled || modalMode === "off" || isExcluded) {
+    return null
   }
 
-  // Render functions
+  // Render functions - wrapped in memoized components
   const renderRegularModals = () => {
     return modals.map((modal, index) => (
       <div

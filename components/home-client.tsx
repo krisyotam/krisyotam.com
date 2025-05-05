@@ -6,25 +6,22 @@ import { useState, useEffect } from "react"
 import { BlogPost } from "./blog-post"
 import { LayoutGrid, Text, BookOpen, Calendar, Hash, Github, BookMarked, Tag } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { PageHeader } from "@/components/page-header"
 import ReactMarkdown from "react-markdown"
 import rehypeRaw from "rehype-raw"
 import rehypeSanitize from "rehype-sanitize"
 import Link from "next/link"
-
-// Bio content in markdown format
-const bioContent = `
-This is the website of **Kris Yotam**. I am an autodidact, philomath, and polymath. I write about mathematics, philosophy, psychology, physics, and a 
-multitude of other things you can view in my interests [here](/about).
-
-**Navigation**: This site is fairly simple, in the bottom left there is a button which allows you toggle between home page & home feed. Home Feed lists direct access to the most recent posts
-which can be found categorized [here](/categories). Home Page where you are currently located lists some basic information on this site. To the bottom right there is a home button,
-this is the central navigation for the site. Through it you can access most pages, however some unlinked pages may be documented in my [wiki](/wiki).
-
-Some other highly notable pages on this site are my [changelog](/changelog), [design page](/website), [research methods](/method), [meta-learning](/learn) strategies, and 
-my [writing style](/write).
-`
+import Image from "next/image"
+import { MDXRemote } from 'next-mdx-remote'
+import { Box } from "@/components/posts/typography/box";
+import { Excerpt } from "@/components/posts/typography/excerpt";
+import { Quote } from "@/components/posts/typography/quote";
+import { Spoiler } from "@/components/posts/typography/spoiler";
+import { PoemBox } from "@/components/posts/typography/poem"
+import Collapse from "@/components/posts/typography/collapse"
+import { EnhancedImageDisplay } from "@/components/posts/images/enhanced-image-display";
+import { Image as BasicImage } from "@/components/posts/images/basic-image-display";
 
 // Type definitions for props
 interface Post {
@@ -64,25 +61,35 @@ interface Poem {
 interface HomeClientProps {
   posts: Post[]
   randomQuote: { text: string; author: string }
+  bioContent: any
+  initialView?: 'list' | 'grid'
 }
 
 // Home page metadata for the grid view
 const homePageData = {
   title: "Kris Yotam",
-  subtitle: "Essays, Notes, and Explorations",
+  subtitle: "Essays, Notes, and Musings",
   date: new Date().toISOString(),
-  preview: "A collection of writings on various topics including mathematics, philosophy, and technology.",
+  preview: "A collection of writings on multiple disciplines.",
   status: "Finished" as const,
   confidence: "certain" as const,
   importance: 9,
 }
 
-function MarkdownContent({ content }: { content: string }) {
+function MarkdownContent({ content }: { content: any }) {
   return (
-    <div className="prose prose-sm max-w-none font-serif text-foreground post-content">
-      <ReactMarkdown
-        rehypePlugins={[rehypeRaw, rehypeSanitize]}
+    <div className="prose prose-sm max-w-none font-serif text-foreground post-content [&>h1]:mt-0 [&>h2]:mt-0 [&>h3]:mt-0">
+      <MDXRemote
+        {...content}
         components={{
+          Box,
+          Excerpt,
+          Quote,
+          Spoiler,
+          PoemBox,
+          Collapse,
+          EnhancedImageDisplay,
+          Image: BasicImage,
           a: ({ href, children }) => (
             <a
               href={href}
@@ -94,10 +101,38 @@ function MarkdownContent({ content }: { content: string }) {
               {children}
             </a>
           ),
+          h1: ({ children }) => (
+            <h1 className="text-2xl font-semibold mb-4">{children}</h1>
+          ),
+          h2: ({ children }) => (
+            <h2 className="text-xl font-semibold mb-3">{children}</h2>
+          ),
+          h3: ({ children }) => (
+            <h3 className="text-lg font-semibold mb-2">{children}</h3>
+          ),
+          p: ({ children }) => (
+            <p className="mb-4 leading-relaxed">{children}</p>
+          ),
+          ul: ({ children }) => (
+            <ul className="list-disc pl-6 mb-4 space-y-1">{children}</ul>
+          ),
+          ol: ({ children }) => (
+            <ol className="list-decimal pl-6 mb-4 space-y-1">{children}</ol>
+          ),
+          li: ({ children }) => (
+            <li className="mb-1">{children}</li>
+          ),
+          blockquote: ({ children }) => (
+            <blockquote className="border-l-4 border-primary pl-4 italic my-4">{children}</blockquote>
+          ),
+          code: ({ children }) => (
+            <code className="bg-muted px-1 py-0.5 rounded text-sm font-mono">{children}</code>
+          ),
+          pre: ({ children }) => (
+            <pre className="bg-muted p-4 rounded-lg overflow-x-auto my-4">{children}</pre>
+          ),
         }}
-      >
-        {content}
-      </ReactMarkdown>
+      />
     </div>
   )
 }
@@ -238,8 +273,8 @@ function GitHubContributions() {
   )
 }
 
-export function HomeClient({ posts, randomQuote }: HomeClientProps) {
-  const [viewMode, setViewMode] = useState("list") // "list" or "grid"
+export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list' }: HomeClientProps) {
+  const [viewMode, setViewMode] = useState(initialView) // "list" or "grid"
   const [randomPosts, setRandomPosts] = useState<Post[]>([])
   const [randomPoems, setRandomPoems] = useState<Poem[]>([])
   const [uniqueCategories, setUniqueCategories] = useState<string[]>([])
@@ -331,12 +366,8 @@ export function HomeClient({ posts, randomQuote }: HomeClientProps) {
               <div className="space-y-12">
                  {posts
                   .filter(post => !["On Myself", "On Website", "On Learning", "On Writing", "On Method"].includes(post.category))
+                  .filter(post => post.slug && post.date && post.preview)
                   .map((post) => {
-                    if (!post.slug || !post.date || !post.preview) {
-                      console.error("Missing post data:", post)
-                      return null
-                    }
-
                     const year = getPostYear(post.date)
                     const slugPath = `blog/${year}/${post.slug}`
 
@@ -369,6 +400,41 @@ export function HomeClient({ posts, randomQuote }: HomeClientProps) {
               confidence={homePageData.confidence}
               importance={homePageData.importance}
             />
+
+            {/* Logo and QR Code Bento Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                <CardContent className="p-4 flex items-center justify-center h-full">
+                  <div className="relative w-[250px] h-[250px]">
+                    <Image
+                      src="https://i.postimg.cc/4394QG8z/krisyotam-aristocratic-logo.png"
+                      alt="Kris Yotam Logo"
+                      fill
+                      style={{ objectFit: "contain" }}
+                      className="rounded-md dark:invert dark:brightness-0 dark:contrast-100 select-none pointer-events-none"
+                      onContextMenu={(e) => e.preventDefault()}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+                <CardContent className="p-4 flex flex-col items-center justify-center h-full">
+                  <div className="relative w-[250px] h-[250px]">
+                    <Image
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://orcid.org/0000-0003-0632-8894`}
+                      alt="ORCID QR Code"
+                      fill
+                      style={{ objectFit: "contain" }}
+                      className="rounded-md"
+                    />
+                  </div>
+                  <p className="text-center text-sm text-muted-foreground mt-4">
+                    Scan to view my ORCID profile
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
 
             {/* Bio Card */}
             <Card className="mb-8 p-6 bg-card border border-border">
@@ -430,7 +496,12 @@ export function HomeClient({ posts, randomQuote }: HomeClientProps) {
         <Button
           variant="outline"
           size="icon"
-          onClick={() => setViewMode(viewMode === "list" ? "grid" : "list")}
+          onClick={() => {
+            const newView = viewMode === "list" ? "grid" : "list"
+            setViewMode(newView)
+            // Update URL without page reload
+            window.history.pushState({}, '', newView === "list" ? "/" : "/grid")
+          }}
           className="bg-background border border-border shadow-md hover:bg-secondary"
           aria-label={`Switch to ${viewMode === "list" ? "grid" : "list"} view`}
         >

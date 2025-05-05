@@ -1,29 +1,32 @@
-import Dropcap from '@/components/dropcap'
-import LinkTags from "@/components/link-tags"
-import { Box } from "@/components/posts/typography/box";
-import { Excerpt } from "@/components/posts/typography/excerpt";
-import { Quote } from "@/components/posts/typography/quote";
-import Define from "@/components/references/language/oed";
-import { Spoiler } from "@/components/posts/typography/spoiler";
-import { PoemBox } from "@/components/posts/typography/poem"
-import Collapse from "@/components/posts/typography/collapse"
-import { EnhancedImageDisplay } from "@/components/posts/images/enhanced-image-display";
-
 As of (4/28/2025) krisyotam.com now has support for Large Files (>200MB). The post here from [gwern.net](https://gwern.net/blog/2025-large-files) details much of the 
 necessity of this for a "long-now" focused site. For those who would rather not read I will provide a synopsis of such here. 
 
 # Why Large File Storage 
-<Dropcap>L</Dropcap>ots of people make use of services like OneDrive, Google Drive, iCloud Drive, and Mega for cloud storage services. These platforms tend to be failry straightforward, 
+<Dropcap type="william-morris-gothic">L</Dropcap>ots of people make use of services like OneDrive, Google Drive, iCloud Drive, and Mega for cloud storage services. These platforms tend to be failry straightforward, 
 designed for ease of use, and []. This does come with tons of draw backs however. With these platforms there is a lot of High Level Abstraction (you interact with apps, not servers), 
 Freemium Models (Small free amounts that scale prices terribly), Shared Hosting (your files live with a million others), Integrated Ecosystems (Locked into apple, microsoft, ect.), and severe Privacy Concerns.
 So how is [Hetzner Storage Boxes](https://www.hetzner.com/storage/storage-box/) different? HSB is Infrastructure Focused (designed for developers, and power users), and provides Low-Level Control (Access via FTP, SFTP, SCP, rsync, ect.). 
 It can also act as a system hardrive (otehr cloud providers can use this specific feature). It has no Ecosystem Lock-in (works with any os, tool, or client). 
 
-# Large Storage Technical Drawbacks
+# Need for Large-File Support 
+<Dropcap type="william-morris-gothic">I</Dropcap>t's no secret that this site will have tons expository work done over the years. That comes with thousands of references, resources, and citations. With this number easily multiplying itself due to the ease of implementing tools like perplexity 
+to help myself discover new sources I would have otherwise not found. I find with sources the more the better. Why lean towards a scarcity mindset? Would it not be more convicning to see 10, 20, or even 30 studies with reproducable resutls on a certain topic. 
+Then say being motivatied to make a otherwise significant change in your life based off a one of source. So for this first reason it is less a need for the store of singular "Large Files" but the need for elphantine storage sizes caused by the consistent accumulation of 
+small pdfs, mp3s, mp4s, ect. See also my method of countering this via my [automated url archving](/blog/2025/automated-url-archiving) script. Beyond the simple things my main need for this implementation of the preservation of sites. Such as that of
+geologist, and Independant Researcher [Leuren Moret](https://independent.academia.edu/LeurenKMoret). Her site recently when down between the last time I had visited it in mid 2024. It's no telling when valuable assets of information may go down. I have more thoughts on the extended preservation of acess in situations like these. 
+Such as the retaining of eth domains such as leurenmoret.eth and pinning her content via IPFS, or even using off-shore hosting providers which I have been deliberating of which to switch to before the content here starts to get more serious. For now at least using a viable LFS provider allows me to take my time weighing my options and retain 
+offline access to such information while my doing so. I am still weighing the value of mp4s for long-term storage. They might be pleasing and add visual stimuli but for most content with great information density it is just not necessary. I would rather sacrifice the visual fiedlity of a mp4 for the extra stroage gained by using mp3s. In such situations 
+I am also thinking about ideas for the transcription of videos through things like OpenAI whisper. Maybe getting a extra Hetzner server for such purposes would not be a bad idea. 
+
+<Quote author="Rollo May">The opposite of courage in our society is not cowardice... it is conformity.</Quote>
+
+# Drawbacks of Implementation 
+<Dropcap type="william-morris-gothic">I</Dropcap> have deliberated for a while about tons of alternative solutions to this problem as mentioned above in (#Why Large File Storage?). There where several drawbacks to consider such as privacy, security, ease of access, 
+pricing over the long-term, portability, ect. a number of these factors out right eliminated the more traditional options such as OneDrive, Google Drive (G-Suite), iCloud Drive, and even Mega as a main source for LFS. Even though I am still particularly fond of Mega, and still retain 
+my subscription due to the not infrequent use of receiving massive amounts of data from people via the platform. The biggest drawback that most of these platforms have was either the inabillity to download via HTTPS. I was also drastically influenced by the massive pricing difference which we will dicuss next. 
 
 
 # Competitor Price Comparison
-
 Unlike the popular consumer cloud providers above there are a number of *viable* alternatives to Hetzner. Those include Wasabi, Scaleway, Storj, and my own system backup provider BackBlaze B2. 
 As you can see below however there is simply no comparison when it comes to pricing models. 
 
@@ -38,14 +41,11 @@ As you can see below however there is simply no comparison when it comes to pric
   ]}
 />
 
-
-# Technical Implementation 
-
-
 # Use Cases 
-<Dropcap>T</Dropcap>he immediate use case that comes to mind for the newly integrated Large File Storage (LFS) is the completion of the formerly delayed 
+<Dropcap type="william-morris-gothic">T</Dropcap>he immediate use case that comes to mind for the newly integrated Large File Storage (LFS) is the completion of the formerly delayed 
 archive page. It should be of no suprise that the future of this blog will discuss at length a variety of topics that must be heavily supported with documentation. Documentation like 
 Panama Papers, Paradise Papers, Offshore Leaks, Silk Road Archives, RaidForums Dumps, and many more data sets. It will also include the storage of youtube videos I think are in danger of being silenced. 
 Things like this as well as research papers, historical documents, ect. are to be stored for reference here on the site and the archive page to be made available to people at my discretion. 
 
-more fun things to store include GeoCities Archives. 
+More fun things to store include the GeoCities Archives, which represent an important piece of early internet history that would otherwise be lost to time. 
+

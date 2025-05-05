@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import { ThemeProvider } from "../components/theme-provider"
 import { UniversalLinkModal } from "../components/universal-link-modal"
 import { SettingsMenu } from "../components/settings-menu"
+import { ScrollbarController } from "../components/scrollbar-controller"
 import type React from "react"
 
 export const metadata: Metadata = {
@@ -37,6 +38,7 @@ export default function RootLayout({
             <CommandMenu />
             <SettingsMenu />
             <UniversalLinkModalWrapper />
+            <ScrollbarController />
           </div>
         </ThemeProvider>
       </body>

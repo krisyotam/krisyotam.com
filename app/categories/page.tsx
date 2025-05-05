@@ -21,6 +21,8 @@ export default async function CategoriesPage() {
               status="In Progress"
               confidence="certain"
               importance={8}
+              backText="Home"
+              backHref="/"
             />
             <p className="text-xl text-muted-foreground">No categories found.</p>
           </div>
@@ -39,6 +41,8 @@ export default async function CategoriesPage() {
             status="Finished"
             confidence="certain"
             importance={8}
+            backText="Home"
+            backHref="/"
           />
 
           <main>

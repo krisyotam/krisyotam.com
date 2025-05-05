@@ -1,0 +1,139 @@
+{
+  "series": [
+    {
+      "slug": "frieren-character-studies",
+      "title": "Frieren Character Studies",
+      "subtitle": "Character analyses from Frieren: Beyond Journey's End",
+      "preview": "In-depth exploration of the rich characters from the acclaimed anime that dethroned FMA.",
+      "date": "2025-04-10",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "likely",
+      "importance": 7,
+      "posts": [
+        {
+          "slug": "analysis-of-ubel",
+          "order": 1
+        },
+        {
+          "slug": "analysis-of-frieren-anime",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "slug": "literary-character-analyses",
+      "title": "Literary Character Analyses",
+      "subtitle": "Deep dives into complex literary figures",
+      "preview": "Examinations of notable characters from classic literature, exploring their psychology and narrative significance.",
+      "date": "2025-03-05",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 6,
+      "posts": [
+        {
+          "slug": "analysis-of-susanna-kaysen",
+          "order": 1
+        },
+        {
+          "slug": "analysis-of-the-bell-jar",
+          "order": 2
+        },
+        {
+          "slug": "analysis-of-the-fall-of-the-house-of-usher",
+          "order": 3
+        }
+      ]
+    },
+    {
+      "slug": "anime-season-guides",
+      "title": "Anime Season Guides",
+      "subtitle": "Seasonal anime recommendations and analyses",
+      "preview": "Curated lists of must-watch anime for each season, with thoughtful commentary on standout series.",
+      "date": "2025-04-15",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 5,
+      "posts": [
+        {
+          "slug": "my-summer-2025-anime-recs",
+          "order": 1
+        },
+        {
+          "slug": "analysis-of-frieren-anime",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "slug": "powerscaling-deep-dives",
+      "title": "Powerscaling Deep Dives",
+      "subtitle": "Analytical comparisons of fictional power levels",
+      "preview": "Detailed examinations of power dynamics between iconic characters from anime, manga, and other media.",
+      "date": "2025-04-20",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "likely",
+      "importance": 4,
+      "posts": [
+        {
+          "slug": "gojo-vs-sukuna-powerscaled",
+          "order": 1
+        }
+      ]
+    },
+    {
+      "slug": "art-critique-collection",
+      "title": "Art Critique Collection",
+      "subtitle": "Analytical perspectives on visual masterpieces",
+      "preview": "Detailed examinations of significant works of art, exploring technique, symbolism, and historical context.",
+      "date": "2025-02-10",
+      "show-status": "active",
+      "status": "Notes",
+      "confidence": "certain",
+      "importance": 8,
+      "posts": [
+        {
+          "slug": "the-starry-night",
+          "order": 1
+        }
+      ]
+    },
+    {
+      "slug": "poetic-analyses",
+      "title": "Poetic Analyses",
+      "subtitle": "Explorations of poetic form and meaning",
+      "preview": "Critical examinations of poems, focusing on structure, language, and thematic elements.",
+      "date": "2025-04-10",
+      "show-status": "active",
+      "status": "Draft",
+      "confidence": "likely",
+      "importance": 5,
+      "posts": [
+        {
+          "slug": "analysis-of-poem2",
+          "order": 1
+        }
+      ]
+    },
+    {
+      "slug": "lifestyle-philosophy",
+      "title": "Lifestyle Philosophy",
+      "subtitle": "Approaches to intentional living",
+      "preview": "Essays exploring different philosophical approaches to lifestyle design and personal development.",
+      "date": "2025-02-20",
+      "show-status": "active",
+      "status": "Draft",
+      "confidence": "unlikely",
+      "importance": 6,
+      "posts": [
+        {
+          "slug": "the-art-of-minimalism",
+          "order": 1
+        }
+      ]
+    }
+  ]
+} 

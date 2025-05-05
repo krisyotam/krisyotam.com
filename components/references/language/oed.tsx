@@ -15,6 +15,7 @@ export default function Define({ children, className }: DefineProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const [constraints, setConstraints] = useState({ top: 0, left: 0, right: 0, bottom: 0 });
 
   const word = children.trim();
 
@@ -37,6 +38,27 @@ export default function Define({ children, className }: DefineProps) {
     };
   }, [word]);
 
+  // Calculate drag constraints based on screen boundaries
+  useEffect(() => {
+    if (isOpen && modalRef.current) {
+      // Get the modal element and its position
+      const modalElement = modalRef.current;
+      const modalRect = modalElement.getBoundingClientRect();
+      
+      // Calculate constraints relative to the window
+      setConstraints({
+        // Allow dragging up to the top of the screen
+        top: -modalRect.top,
+        // Allow dragging left to the left edge of the screen
+        left: -modalRect.left,
+        // Allow dragging right to the right edge of the screen
+        right: window.innerWidth - modalRect.left - modalRect.width,
+        // Allow dragging down to the bottom edge of the screen
+        bottom: window.innerHeight - modalRect.top - modalRect.height,
+      });
+    }
+  }, [isOpen]);
+
   // Click outside to close
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -55,7 +77,7 @@ export default function Define({ children, className }: DefineProps) {
   }, [isOpen]);
 
   return (
-    <div className="relative inline-block" ref={modalRef}>
+    <div className="relative inline-block">
       <span
         className={`cursor-help underline decoration-dotted ${className ?? ""}`}
         onMouseEnter={() => setIsOpen(true)}
@@ -68,12 +90,7 @@ export default function Define({ children, className }: DefineProps) {
           ref={modalRef}
           drag
           dragMomentum={false}
-          dragConstraints={{
-            top: 0,
-            left: 0,
-            right: window.innerWidth - 320,
-            bottom: window.innerHeight - 300,
-          }}
+          dragConstraints={constraints}
           style={{ x, y }}
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}

@@ -21,6 +21,8 @@ interface CategoryHeaderProps {
     | "certain"
   importance?: number
   className?: string
+  backText?: string
+  backHref?: string
 }
 
 const confidenceExplanation = `The confidence tag expresses how well-supported the essay is, or how likely its overall ideas are right. This uses a scale from "impossible" to "certain", based on the Kesselman List of Estimative Words:
@@ -96,17 +98,19 @@ export function CategoryHeader({
   confidence = "possible",
   importance = 5,
   className,
+  backText = "Categories",
+  backHref = "/categories",
 }: CategoryHeaderProps) {
   return (
     <header className={cn("mb-8", className)}>
-      {/* Back button to categories */}
+      {/* Back button with customizable text and link */}
       <div className="mb-4">
         <Link
-          href="/categories"
-          className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
+          href={backHref}
+          className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors group font-serif italic"
         >
-          <ArrowLeft className="mr-1 h-4 w-4" />
-          Back to Categories
+          <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+          Return to {backText}
         </Link>
       </div>
 
@@ -138,7 +142,7 @@ export function CategoryHeader({
             dateTime={typeof date === "string" ? date : undefined}
             className="font-mono text-sm text-muted-foreground"
           >
-            {typeof date === "string" ? formatDate(new Date(date)) : date}
+            {typeof date === "string" ? formatDate(date) : formatDate(date.toString())}
           </time>
         </div>
 
