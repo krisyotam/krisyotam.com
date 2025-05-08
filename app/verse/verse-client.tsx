@@ -3,41 +3,33 @@
 import poemsData from "@/data/poems.json"
 import type { Poem } from "@/utils/poems"
 import { PageHeader } from "@/components/page-header"
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 function slugifyType(type: string) {
   return type.toLowerCase().replace(/\s+/g, "-");
 }
 
-function unslugifyType(slug: string, allTypes: string[]) {
-  // Find the type whose slug matches
-  return allTypes.find(t => slugifyType(t) === slug) || "All";
-}
-
-export function VerseClient() {
+export function VerseClient({ initialType = "All" }: { initialType?: string }) {
   const [loading, setLoading] = useState(true)
+  const [currentType, setCurrentType] = useState(initialType)
   const poems = poemsData as Poem[]
   const poemTypes = Array.from(new Set(poems.map(poem => poem.type))).sort()
   const router = useRouter()
-  const pathname = usePathname()
-
-  // Determine current type from URL
-  let currentTypeSlug = null;
-  const match = pathname.match(/^\/verse\/?([^\/]*)/);
-  if (match && match[1] && match[1] !== "") {
-    currentTypeSlug = match[1];
-  }
-  const currentType = currentTypeSlug ? unslugifyType(currentTypeSlug, poemTypes) : "All";
 
   // Sort poems by date descending
   const sortedPoems = [...poems].sort((a, b) => new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime());
   const filteredPoems = currentType === "All" ? sortedPoems : sortedPoems.filter(poem => poem.type === currentType)
 
   useEffect(() => {
-    const timeout = setTimeout(() => setLoading(false), 400)
+    // Update current type when initialType changes
+    setCurrentType(initialType)
+    
+    // Show loading state briefly for better UX during type changes
+    setLoading(true)
+    const timeout = setTimeout(() => setLoading(false), 300)
     return () => clearTimeout(timeout)
-  }, [pathname])
+  }, [initialType])
 
   // Helper to build the correct route for a poem
   function getPoemUrl(poem: Poem) {
@@ -103,7 +95,7 @@ export function VerseClient() {
                   <tr
                     key={poem.slug}
                     className="border-b border-muted/30 hover:bg-muted/20 cursor-pointer transition-colors"
-                    onClick={() => window.location.href = getPoemUrl(poem)}
+                    onClick={() => router.push(getPoemUrl(poem))}
                   >
                     <td className="py-2 pr-4 px-3 font-medium">{poem.title}</td>
                     <td className="py-2 pr-4 px-3">{poem.type}</td>
@@ -120,4 +112,4 @@ export function VerseClient() {
       </div>
     </main>
   )
-} 
+}
