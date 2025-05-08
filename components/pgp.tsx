@@ -35,7 +35,7 @@ export default function PGP({ email, fingerprint, publicKey, mirror }: PgpProps)
   }
 
   return (
-    <div className="!flex !flex-col !gap-4 !max-w-2xl !mx-auto">
+    <div className="!flex !flex-col !gap-4 !w-full">
       {/* Contact Info Bento */}
       <Card className="!p-4 !bg-card dark:bg-[#1A1A1A] !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800">
         <div className="!flex !flex-col !gap-2">

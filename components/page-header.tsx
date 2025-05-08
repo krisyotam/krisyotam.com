@@ -118,9 +118,6 @@ export function PageHeader({
           {title.split(" ").join(" ")}
         </h1>
 
-        {/* Subtitle */}
-        {subtitle && <h2 className="text-lg font-serif text-muted-foreground mb-4 text-center">{subtitle}</h2>}
-
         {/* Preview/description text */}
         {preview && (
           <p className="text-center font-serif text-sm text-muted-foreground italic mb-6 max-w-2xl mx-auto">

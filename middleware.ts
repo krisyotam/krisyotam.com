@@ -8,6 +8,12 @@ export function middleware(request: NextRequest) {
 
   console.log(`🔍 MIDDLEWARE: Handling request for ${path}`)
 
+  // Skip doc routes entirely - we'll add an exclude in the matcher config
+  if (path.startsWith('/doc/')) {
+    console.log(`[middleware] Skipping middleware processing for doc route: ${path}`)
+    return NextResponse.next()
+  }
+
   // Check if the path is for a post (original functionality)
   if (path.startsWith("/post/")) {
     const slug = path.replace("/post/", "")
@@ -21,6 +27,12 @@ export function middleware(request: NextRequest) {
       // Update to use the new blog path structure
       return NextResponse.redirect(new URL(`/blog/${year}/${post.slug}`, request.url))
     }
+  }
+  
+  // Redirect wishlist path to Amazon wishlist
+  if (path === "/wishlist" || path === "/wishlist/") {
+    console.log('🔄 MIDDLEWARE: Redirecting to Amazon wishlist')
+    return NextResponse.redirect('https://www.amazon.com/hz/wishlist/ls/1ID8ZRMZ7CMDI?ref_=wl_share')
   }
 
   // Handle direct access to blog post files (new functionality)
@@ -42,8 +54,16 @@ export function middleware(request: NextRequest) {
   return NextResponse.next()
 }
 
-// Update the matcher to include both original and new paths
+// Configure the middleware to run only for certain paths
 export const config = {
-  matcher: ["/post/:path*", "/blog/:year/:slug*"],
+  matcher: [
+    // Match all paths except:
+    // 1. /api routes
+    // 2. /_next (Next.js internals)
+    // 3. /_static (inside /public)
+    // 4. all root files inside /public (e.g. /favicon.ico)
+    // 5. /doc routes (for document direct access)
+    '/((?!api|_next|_static|_vercel|doc|[\\w-]+\\.\\w+).*)',
+  ],
 }
 

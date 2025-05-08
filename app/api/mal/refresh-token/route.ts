@@ -29,19 +29,25 @@ export async function POST() {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}))
+      console.error("MAL API Debug - refresh-token: Failed to refresh token:", errorData)
       return NextResponse.json({ error: "Failed to refresh token", details: errorData }, { status: response.status })
     }
 
     const tokenData = await response.json()
+    console.log("MAL API Debug - refresh-token: Successfully refreshed token")
 
-    // In a production app, you would update the environment variables or store the tokens securely
-    // For this example, we'll just return success
+    // Update environment variables
+    process.env.MAL_ACCESS_TOKEN = tokenData.access_token
+    process.env.MAL_REFRESH_TOKEN = tokenData.refresh_token
+
     return NextResponse.json({
       success: true,
-      message: "Token refreshed successfully. In a production app, you would update the environment variables.",
+      message: "Token refreshed successfully",
+      access_token: tokenData.access_token,
+      refresh_token: tokenData.refresh_token,
     })
   } catch (error) {
-    console.error("Token refresh error:", error)
+    console.error("MAL API Debug - refresh-token: Error:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

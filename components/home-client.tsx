@@ -222,7 +222,8 @@ function PoetryCard({ poem }: { poem: Poem }) {
   const previewStanza = stanzas[0]
 
   // Correct poetry path format
-  const poetryPath = `/poetry/${poem.type.toLowerCase()}/${poem.year}/${poem.slug}`
+  const typeSlug = poem.type.toLowerCase().replace(/\s+/g, "-");
+  const poetryPath = `/verse/${typeSlug}/${poem.year}/${poem.slug}`
 
   return (
     <Card className="p-4 bg-card border border-border hover:bg-accent/50 transition-colors">

@@ -138,9 +138,6 @@ export function CollectionHeader({
         {/* Title with academic styling */}
         <h1 className="text-3xl font-serif font-medium tracking-tight mb-2">{title}</h1>
 
-        {/* Subtitle if provided */}
-        {subtitle && <p className="text-xl font-serif text-muted-foreground mb-4 italic">{subtitle}</p>}
-
         {/* Metadata row */}
         <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm text-muted-foreground mb-4">
           {/* Date */}

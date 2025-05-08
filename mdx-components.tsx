@@ -21,6 +21,8 @@ import OcCharacterDisplay from "@/components/posts/characters/oc-character-displ
 import Inflation from "@/components/inflation"
 import { EnhancedImageDisplay } from "@/components/posts/images/enhanced-image-display"
 import { Image as BasicImage } from "@/components/posts/images/basic-image-display"
+import { Video as BasicVideo } from "@/components/posts/images/basic-video"
+import { EnhancedVideoDisplay } from "@/components/posts/images/enhanced-video-display"
 import TryHackMe from "@/components/posts/ctfs/tryhackme"
 import Book from "@/components/posts/books/book"
 import { BookCard } from "@/components/posts/books/book-card"
@@ -36,6 +38,7 @@ import ChateauCollection from "@/components/posts/architecture/chateau-collectio
 import Human from "@/components/posts/basic/human"
 import Company from "@/components/posts/basic/company"
 import CppCodeBlock from "@/components/posts/code/cplusplus"
+import { Tree } from "@/components/family-tree"
 
 // Define components for MDX
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -121,10 +124,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     OcCharacterDisplay,
     Human,
     Company,
+    Tree,
     
     // Images and media components
     EnhancedImageDisplay,
     BasicImage,
+    BasicVideo,
+    EnhancedVideoDisplay,
     
     // Books and reading components
     Book,

@@ -113,9 +113,47 @@ export default function ColophonPage() {
               <h2 className="text-xl font-normal text-foreground">Typography</h2>
               <div className="md:col-span-2">
                 <p className="text-foreground mb-4">
-                  The awesome font I use throughout my site is <AnimatedTag text="Britti-Sans" className="ml-1" />. It
-                  is a sans-serif font with contextual alternates, which look absolutely phenomenal.
+                  The site uses a carefully selected combination of fonts for different purposes:
                 </p>
+                <ul className="list-disc pl-5 space-y-2 text-foreground">
+                  <li>
+                    <strong>Primary Sans-serif:</strong> Outfit (variable font, weights 100-900) for headings and UI elements
+                  </li>
+                  <li>
+                    <strong>Primary Serif:</strong> Source Serif 4 for blog posts and long-form content
+                  </li>
+                  <li>
+                    <strong>Monospace:</strong> Outfit Mono for code blocks and technical content
+                  </li>
+                  <li>
+                    <strong>Special Purpose:</strong> EB Garamond for wiki content, with UnifrakturMaguntia for decorative drop caps
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 border-t border-border">
+              <h2 className="text-xl font-normal text-foreground">Hosting & Infrastructure</h2>
+              <div className="md:col-span-2">
+                <p className="text-foreground mb-4">
+                  The site is built with modern web technologies and hosted on reliable infrastructure:
+                </p>
+                <ul className="list-disc pl-5 space-y-2 text-foreground">
+                  <li>
+                    <strong>Web Hosting:</strong> Hetzner for reliable and secure web hosting
+                  </li>
+                  <li>
+                    <strong>Large File Storage:</strong> Hetzner for efficient handling of large media files
+                  </li>
+                  <li>
+                    <strong>Framework:</strong> Next.js for server-side rendering and optimal performance
+                  </li>
+                  <li>
+                    <strong>Analytics:</strong> Seline for privacy-focused, cookieless analytics
+                  </li>
+                </ul>
               </div>
             </div>
           </section>
@@ -125,25 +163,8 @@ export default function ColophonPage() {
               <h2 className="text-xl font-normal text-foreground">Icons</h2>
               <div className="md:col-span-2">
                 <p className="text-foreground">
-                  I don't use many icons on my site, but the few I do are all from{" "}
-                  <AnimatedTag text="Lucide" href="https://lucide.dev" className="ml-1" />.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 border-t border-border">
-              <h2 className="text-xl font-normal text-foreground">Technology</h2>
-              <div className="md:col-span-2">
-                <p className="text-foreground mb-4">
-                  The site was designed and built in{" "}
-                  <AnimatedTag text="Framer" href="https://framer.com" className="ml-1" />. Of course.
-                </p>
-                <p className="text-foreground">
-                  I also use <AnimatedTag text="Seline" href="https://seline.io" className="ml-1" /> for analytics. It's
-                  cookieless, lightweight, and as simple as it gets. If you haven't heard of it, you should definitely
-                  check it out.
+                  Icons throughout the site are from{" "}
+                  <AnimatedTag text="Lucide" href="https://lucide.dev" className="ml-1" />, chosen for their clean, consistent design and excellent dark mode support.
                 </p>
               </div>
             </div>
@@ -154,9 +175,7 @@ export default function ColophonPage() {
               <h2 className="text-xl font-normal text-foreground">Inspiration</h2>
               <div className="md:col-span-2">
                 <p className="text-foreground mb-6">
-                  I've gathered an immense amount of inspiration over weeks and months for various aspects of my site -
-                  styles, typography, layouts, and even ideas for my bucket list. Here are a few astonishing sites
-                  created by equally astonishing people that have inspired me, listed in no particular order:
+                  I've gathered inspiration from various sources for different aspects of the site - styles, typography, layouts, and ideas. Here are some notable sites that have influenced this project:
                 </p>
                 <div className="flex flex-wrap gap-3">
                   {inspirationsData.inspirations.map((inspiration, index) => (

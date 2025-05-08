@@ -102,26 +102,25 @@ export function DirectoryCategoryHeader({
   slug,
 }: DirectoryCategoryHeaderProps) {
   return (
-    <Link href={path} className="block">
-      <header className={cn("mb-6", className)}>
+    <Link href={`/category/${slug}`} className="block">
+      <header className={cn("mb-4 relative", className)}>
         {/* Academic bento container */}
-        <div className="border border-border bg-card text-card-foreground p-4 rounded-sm shadow-sm">
+        <div className="border border-border bg-card text-card-foreground p-4 rounded-sm shadow-sm hover:shadow-md transition-shadow">
+          {/* Path breadcrumb */}
+          <div className="mb-2">
+            <span className="text-xs font-mono text-muted-foreground">
+              {path}/{slug}
+            </span>
+          </div>
+
           {/* Title with academic styling */}
-          <h1
-            className={cn(
-              "font-serif font-medium tracking-tight mb-2 text-center uppercase",
-              title.length > 50 ? "text-xl" : title.length > 30 ? "text-2xl" : "text-2xl",
-            )}
-          >
+          <h1 className="font-serif font-medium tracking-tight mb-2 text-center uppercase text-lg">
             {title}
           </h1>
 
-          {/* Subtitle */}
-          {subtitle && <h2 className="text-sm font-serif text-muted-foreground mb-3 text-center">{subtitle}</h2>}
-
           {/* Preview/description text */}
           {preview && (
-            <p className="text-center font-serif text-xs text-muted-foreground italic mb-4 max-w-2xl mx-auto">
+            <p className="text-center font-serif text-xs text-muted-foreground italic mb-3 max-w-xl mx-auto line-clamp-2">
               {preview}
             </p>
           )}

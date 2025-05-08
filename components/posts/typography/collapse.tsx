@@ -19,7 +19,7 @@ export default function Collapse({ title, children, className }: CollapseProps) 
   return (
     <div
       className={cn(
-        "my-6 rounded-lg bg-muted/50 dark:bg-[hsl(var(--popover))]",
+        "my-2 rounded-lg bg-muted/50 dark:bg-[hsl(var(--popover))]",
         className
       )}
     >
@@ -36,11 +36,14 @@ export default function Collapse({ title, children, className }: CollapseProps) 
           )}
         />
       </button>
-      {isOpen && (
-        <div className="px-4 py-4 prose dark:prose-invert">
-          {children}
-        </div>
-      )}
+      <div 
+        className={cn(
+          "px-4 py-2",
+          !isOpen && "hidden"
+        )}
+      >
+        {children}
+      </div>
     </div>
   )
 }

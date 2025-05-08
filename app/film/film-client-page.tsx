@@ -2,30 +2,30 @@
 
 import { useState, useEffect } from "react"
 import { HelpCircle } from "lucide-react"
+import { PageHeader } from "@/components/page-header"
 import { TraktHelpModal } from "@/components/trakt/trakt-help-modal"
 import { TraktHorizontalScroll } from "@/components/trakt/trakt-horizontal-scroll"
-import { TraktStatsSection } from "@/components/trakt/trakt-stats-section"
-import { TraktProfileHeader } from "@/components/trakt/trakt-profile-header"
+import { FilmStatsSection } from "@/components/film/film-stats-section"
 import { TraktMovieCard } from "@/components/trakt/trakt-movie-card"
 import { TraktShowCard } from "@/components/trakt/trakt-show-card"
 import { TraktFavActorCard } from "@/components/trakt/trakt-fav-actor-card"
 import { TraktFavCompanyCard } from "@/components/trakt/trakt-fav-company-card"
 import { TraktFavCharacterCard } from "@/components/trakt/trakt-fav-character-card"
-import { TraktFavProducerCard } from "@/components/trakt/trakt-fav-producer-card"
+import { TraktFavDirectorCard } from "@/components/trakt/trakt-fav-director-card"
 import { TraktEmptyState } from "@/components/trakt/trakt-empty-state"
 import { TraktSectionHeader } from "@/components/trakt/trakt-section-header"
 
 export default function FilmClientPage() {
   const [isHelpModalOpen, setIsHelpModalOpen] = useState(false)
-  const [userData, setUserData] = useState<any>(null)
-  const [watchedCounts, setWatchedCounts] = useState<any>(null)
+  const [watchedStats, setWatchedStats] = useState<any>(null)
   const [recentMovies, setRecentMovies] = useState<any[]>([])
-  const [recentShows, setRecentShows] = useState<any[]>([]) // Changed from recentEpisodes to recentShows
-  const [mostWatchedGenres, setMostWatchedGenres] = useState<any[]>([])
+  const [recentShows, setRecentShows] = useState<any[]>([])
+  const [mostWatchedMovies, setMostWatchedMovies] = useState<any[]>([])
   const [mostWatchedShows, setMostWatchedShows] = useState<any[]>([])
+  const [mostWatchedGenres, setMostWatchedGenres] = useState<any[]>([])
   const [favoriteMovies, setFavoriteMovies] = useState<any[]>([])
   const [favoriteShows, setFavoriteShows] = useState<any[]>([])
-  const [favProducers, setFavProducers] = useState<any[]>([])
+  const [favDirectors, setFavDirectors] = useState<any[]>([])
   const [favActors, setFavActors] = useState<any[]>([])
   const [favCompanies, setFavCompanies] = useState<any[]>([])
   const [favCharacters, setFavCharacters] = useState<any[]>([])
@@ -41,34 +41,38 @@ export default function FilmClientPage() {
         console.log("FilmClientPage: Fetching API data")
         // Fetch API data
         const [
-          userDataRes,
-          watchedCountsRes,
+          watchedStatsRes,
+          genresRes,
           recentMoviesRes,
-          recentShowsRes, // Changed from recentEpisodesRes to recentShowsRes
-          mostWatchedGenresRes,
+          recentShowsRes,
+          mostWatchedMoviesRes,
           mostWatchedShowsRes,
           favoriteMoviesRes,
           favoriteShowsRes,
+          favDirectorsRes,
+          favActorsRes,
+          favCompaniesRes,
+          favCharactersRes,
         ] = await Promise.all([
-          fetch("/api/trakt/user-data")
+          fetch("/api/film/stats")
             .then((res) => {
-              console.log("FilmClientPage: User data response status:", res.status)
+              console.log("FilmClientPage: Stats response status:", res.status)
               return res.json()
             })
             .catch((err) => {
-              console.error("FilmClientPage: Error fetching user data:", err)
-              return null
-            }),
-          fetch("/api/trakt/watched-counts")
-            .then((res) => {
-              console.log("FilmClientPage: Watched counts response status:", res.status)
-              return res.json()
-            })
-            .catch((err) => {
-              console.error("FilmClientPage: Error fetching watched counts:", err)
+              console.error("FilmClientPage: Error fetching stats:", err)
               return { movies: 0, episodes: 0, minutes: 0 }
             }),
-          fetch("/api/trakt/recent-movies?limit=20")
+          fetch("/api/film/genres")
+            .then((res) => {
+              console.log("FilmClientPage: Genres response status:", res.status)
+              return res.json()
+            })
+            .catch((err) => {
+              console.error("FilmClientPage: Error fetching genres:", err)
+              return []
+            }),
+          fetch("/api/film/recent-movies?limit=20")
             .then((res) => {
               console.log("FilmClientPage: Recent movies response status:", res.status)
               return res.json()
@@ -77,7 +81,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching recent movies:", err)
               return []
             }),
-          fetch("/api/trakt/recent-shows?limit=20") // Changed from recent-episodes to recent-shows
+          fetch("/api/film/recent-shows?limit=20")
             .then((res) => {
               console.log("FilmClientPage: Recent shows response status:", res.status)
               return res.json()
@@ -86,16 +90,16 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching recent shows:", err)
               return []
             }),
-          fetch("/api/trakt/most-watched-genres")
+          fetch("/api/film/most-watched-movies?limit=20")
             .then((res) => {
-              console.log("FilmClientPage: Most watched genres response status:", res.status)
+              console.log("FilmClientPage: Most watched movies response status:", res.status)
               return res.json()
             })
             .catch((err) => {
-              console.error("FilmClientPage: Error fetching most watched genres:", err)
+              console.error("FilmClientPage: Error fetching most watched movies:", err)
               return []
             }),
-          fetch("/api/trakt/most-watched-shows?limit=20")
+          fetch("/api/film/most-watched-shows?limit=20")
             .then((res) => {
               console.log("FilmClientPage: Most watched shows response status:", res.status)
               return res.json()
@@ -104,7 +108,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching most watched shows:", err)
               return []
             }),
-          fetch("/api/trakt/favorite-movies?limit=20")
+          fetch("/api/film/favorite-movies?limit=20")
             .then((res) => {
               console.log("FilmClientPage: Favorite movies response status:", res.status)
               return res.json()
@@ -113,7 +117,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching favorite movies:", err)
               return []
             }),
-          fetch("/api/trakt/favorite-shows?limit=20")
+          fetch("/api/film/favorite-shows?limit=20")
             .then((res) => {
               console.log("FilmClientPage: Favorite shows response status:", res.status)
               return res.json()
@@ -122,51 +126,17 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching favorite shows:", err)
               return []
             }),
-        ])
-
-        console.log("FilmClientPage: API data fetched, setting state")
-
-        // Log received data
-        console.log("FilmClientPage: Recent movies received:", recentMoviesRes.length)
-        if (recentMoviesRes.length > 0) {
-          console.log("FilmClientPage: Sample movie data:", {
-            title: recentMoviesRes[0].movie?.title,
-            posterUrl: recentMoviesRes[0].posterUrl,
-          })
-        }
-
-        console.log("FilmClientPage: Recent shows received:", recentShowsRes.length) // Changed from episodes to shows
-        if (recentShowsRes.length > 0) {
-          console.log("FilmClientPage: Sample show data:", {
-            // Changed from episode to show
-            title: recentShowsRes[0].show?.title,
-            posterUrl: recentShowsRes[0].posterUrl,
-          })
-        }
-
-        // Set API data
-        setUserData(userDataRes)
-        setWatchedCounts(watchedCountsRes)
-        setRecentMovies(recentMoviesRes)
-        setRecentShows(recentShowsRes) // Changed from setRecentEpisodes to setRecentShows
-        setMostWatchedGenres(mostWatchedGenresRes)
-        setMostWatchedShows(mostWatchedShowsRes)
-        setFavoriteMovies(favoriteMoviesRes)
-        setFavoriteShows(favoriteShowsRes)
-
-        console.log("FilmClientPage: Fetching JSON data for favorites")
-        // Fetch JSON data for favorites
-        const [producersRes, actorsRes, companiesRes, charactersRes] = await Promise.all([
-          fetch("/api/trakt/fav-producers")
+          // JSON-based favorites
+          fetch("/api/film/fav-directors")
             .then((res) => {
-              console.log("FilmClientPage: Favorite producers response status:", res.status)
+              console.log("FilmClientPage: Favorite directors response status:", res.status)
               return res.json()
             })
             .catch((err) => {
-              console.error("FilmClientPage: Error fetching favorite producers:", err)
+              console.error("FilmClientPage: Error fetching favorite directors:", err)
               return []
             }),
-          fetch("/api/trakt/fav-actors")
+          fetch("/api/film/fav-actors")
             .then((res) => {
               console.log("FilmClientPage: Favorite actors response status:", res.status)
               return res.json()
@@ -175,7 +145,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching favorite actors:", err)
               return []
             }),
-          fetch("/api/trakt/fav-companies")
+          fetch("/api/film/fav-companies")
             .then((res) => {
               console.log("FilmClientPage: Favorite companies response status:", res.status)
               return res.json()
@@ -184,7 +154,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching favorite companies:", err)
               return []
             }),
-          fetch("/api/trakt/fav-characters")
+          fetch("/api/film/fav-characters")
             .then((res) => {
               console.log("FilmClientPage: Favorite characters response status:", res.status)
               return res.json()
@@ -195,13 +165,40 @@ export default function FilmClientPage() {
             }),
         ])
 
-        console.log("FilmClientPage: JSON data fetched, setting state")
+        console.log("FilmClientPage: API data fetched, setting state")
 
-        // Set JSON data
-        setFavProducers(producersRes)
-        setFavActors(actorsRes)
-        setFavCompanies(companiesRes)
-        setFavCharacters(charactersRes)
+        // Log received data
+        console.log("FilmClientPage: Recent movies received:", recentMoviesRes.length)
+        if (recentMoviesRes.length > 0) {
+          console.log("FilmClientPage: Sample movie data:", {
+            title: recentMoviesRes[0].title,
+            posterUrl: recentMoviesRes[0].posterUrl,
+          })
+        }
+
+        console.log("FilmClientPage: Recent shows received:", recentShowsRes.length)
+        if (recentShowsRes.length > 0) {
+          console.log("FilmClientPage: Sample show data:", {
+            title: recentShowsRes[0].title,
+            posterUrl: recentShowsRes[0].posterUrl,
+          })
+        }
+
+        // Set API data
+        setWatchedStats(watchedStatsRes)
+        setMostWatchedGenres(genresRes)
+        setRecentMovies(recentMoviesRes)
+        setRecentShows(recentShowsRes)
+        setMostWatchedMovies(mostWatchedMoviesRes)
+        setMostWatchedShows(mostWatchedShowsRes)
+        setFavoriteMovies(favoriteMoviesRes)
+        setFavoriteShows(favoriteShowsRes)
+        
+        // Set JSON-based favorites data
+        setFavDirectors(favDirectorsRes)
+        setFavActors(favActorsRes)
+        setFavCompanies(favCompaniesRes)
+        setFavCharacters(favCharactersRes)
 
         console.log("FilmClientPage: All data fetched and state set")
       } catch (err) {
@@ -246,7 +243,7 @@ export default function FilmClientPage() {
 
   console.log("FilmClientPage: Rendering content with data")
   console.log("FilmClientPage: Recent movies count:", recentMovies.length)
-  console.log("FilmClientPage: Recent shows count:", recentShows.length) // Changed from episodes to shows
+  console.log("FilmClientPage: Recent shows count:", recentShows.length)
 
   return (
     <div className="film-page">
@@ -262,30 +259,30 @@ export default function FilmClientPage() {
         <HelpCircle className="h-5 w-5 dark:text-zinc-300" />
       </button>
 
-      {/* Profile Header */}
-      <TraktProfileHeader
-        username={userData?.username || "krisyotam"}
-        fullName={userData?.name || "Kris Yotam"}
-        avatar={userData?.images?.avatar?.full || "/placeholder.svg?height=96&width=96"}
-        bio={userData?.about || "Film enthusiast and creator."}
-        joinedAt={userData?.joined_at || "2020-01-01T00:00:00.000Z"}
-        location={userData?.location || "Digital Nomad"}
-        vip={userData?.vip || false}
+      {/* Page Header */}
+      <PageHeader
+        title="Film"
+        subtitle=""
+        date="2025-01-01"
+        preview="a compilation of all the films I've watched to date"
+        status="In Progress"
+        confidence="certain"
+        importance={8}
       />
 
       {/* Stats Section */}
       <section className="film-section">
         <TraktSectionHeader title="" />
-        <TraktStatsSection
-          moviesCount={watchedCounts?.movies || 0}
-          episodesCount={watchedCounts?.episodes || 0}
-          minutesWatched={watchedCounts?.minutes || 0}
+        <FilmStatsSection
+          moviesCount={watchedStats?.movies || 0}
+          episodesCount={watchedStats?.episodes || 0}
+          minutesWatched={watchedStats?.minutes || 0}
         />
       </section>
 
       {/* Genres Section */}
       <section className="film-section">
-        <TraktSectionHeader title="" />
+        <TraktSectionHeader title="Most Watched Genres" />
         {mostWatchedGenres && mostWatchedGenres.length > 0 ? (
           <div className="bg-white dark:bg-[#1a1a1a] rounded-lg shadow-md border border-gray-200 dark:border-zinc-800 p-4">
             <div className="flex flex-wrap gap-2">
@@ -309,13 +306,13 @@ export default function FilmClientPage() {
         <TraktSectionHeader title="Recently Watched Movies" />
         {recentMovies && recentMovies.length > 0 ? (
           <TraktHorizontalScroll>
-            {recentMovies.map((item) => (
+            {recentMovies.map((movie) => (
               <TraktMovieCard
-                key={item.id || `movie-${Math.random()}`}
-                id={item.movie?.ids?.trakt || Math.floor(Math.random() * 1000)}
-                title={item.movie?.title || "Movie Title"}
-                year={item.movie?.year}
-                posterUrl={item.posterUrl || "/placeholder.svg?height=270&width=180"}
+                key={movie.id}
+                id={movie.id}
+                title={movie.title}
+                year={movie.year}
+                posterUrl={movie.posterUrl}
               />
             ))}
           </TraktHorizontalScroll>
@@ -324,18 +321,18 @@ export default function FilmClientPage() {
         )}
       </section>
 
-      {/* Recently Watched Shows Section - Changed from Episodes to Shows */}
+      {/* Recently Watched Shows Section */}
       <section className="film-section">
         <TraktSectionHeader title="Recently Watched Shows" />
         {recentShows && recentShows.length > 0 ? (
           <TraktHorizontalScroll>
-            {recentShows.map((item) => (
+            {recentShows.map((show) => (
               <TraktShowCard
-                key={item.id || `show-${Math.random()}`}
-                id={item.show?.ids?.trakt || Math.floor(Math.random() * 1000)}
-                title={item.show?.title || "Show Title"}
-                year={item.show?.year}
-                posterUrl={item.posterUrl || "/placeholder.svg?height=270&width=180"}
+                key={show.id}
+                id={show.id}
+                title={show.title}
+                year={show.year}
+                posterUrl={show.posterUrl}
               />
             ))}
           </TraktHorizontalScroll>
@@ -344,18 +341,38 @@ export default function FilmClientPage() {
         )}
       </section>
 
+      {/* Most Watched Movies Section */}
+      <section className="film-section">
+        <TraktSectionHeader title="Most Watched Movies" />
+        {mostWatchedMovies && mostWatchedMovies.length > 0 ? (
+          <TraktHorizontalScroll>
+            {mostWatchedMovies.map((movie) => (
+              <TraktMovieCard
+                key={movie.id}
+                id={movie.id}
+                title={movie.title}
+                year={movie.year}
+                posterUrl={movie.posterUrl}
+              />
+            ))}
+          </TraktHorizontalScroll>
+        ) : (
+          <TraktEmptyState message="No most watched movies available." />
+        )}
+      </section>
+
       {/* Most Watched Shows Section */}
       <section className="film-section">
         <TraktSectionHeader title="Most Watched Shows" />
         {mostWatchedShows && mostWatchedShows.length > 0 ? (
           <TraktHorizontalScroll>
-            {mostWatchedShows.map((item) => (
+            {mostWatchedShows.map((show) => (
               <TraktShowCard
-                key={item.show?.ids?.trakt || `show-${Math.random()}`}
-                id={item.show?.ids?.trakt || Math.floor(Math.random() * 1000)}
-                title={item.show?.title || "Show Title"}
-                year={item.show?.year}
-                posterUrl={item.posterUrl || "/placeholder.svg?height=270&width=180"}
+                key={show.id}
+                id={show.id}
+                title={show.title}
+                year={show.year}
+                posterUrl={show.posterUrl}
               />
             ))}
           </TraktHorizontalScroll>
@@ -364,46 +381,57 @@ export default function FilmClientPage() {
         )}
       </section>
 
-      {/* Favorites Section */}
+      {/* Favorite Movies Section */}
       <section className="film-section">
-        <TraktSectionHeader title="Favorite Movies & Shows" />
-        {(favoriteMovies && favoriteMovies.length > 0) || (favoriteShows && favoriteShows.length > 0) ? (
+        <TraktSectionHeader title="Favorite Movies" />
+        {favoriteMovies && favoriteMovies.length > 0 ? (
           <TraktHorizontalScroll>
-            {favoriteMovies.map((item) => (
+            {favoriteMovies.map((movie) => (
               <TraktMovieCard
-                key={item.movie?.ids?.trakt || `fav-movie-${Math.random()}`}
-                id={item.movie?.ids?.trakt || Math.floor(Math.random() * 1000)}
-                title={item.movie?.title || "Movie Title"}
-                year={item.movie?.year}
-                posterUrl={item.posterUrl || "/placeholder.svg?height=270&width=180"}
-              />
-            ))}
-            {favoriteShows.map((item) => (
-              <TraktShowCard
-                key={item.show?.ids?.trakt || `fav-show-${Math.random()}`}
-                id={item.show?.ids?.trakt || Math.floor(Math.random() * 1000)}
-                title={item.show?.title || "Show Title"}
-                year={item.show?.year}
-                posterUrl={item.posterUrl || "/placeholder.svg?height=270&width=180"}
+                key={movie.id}
+                id={movie.id}
+                title={movie.title}
+                year={movie.year}
+                posterUrl={movie.posterUrl}
               />
             ))}
           </TraktHorizontalScroll>
         ) : (
-          <TraktEmptyState message="No favorite movies or shows available." />
+          <TraktEmptyState message="No favorite movies available." />
         )}
       </section>
 
-      {/* Favorite Producers Section - JSON-based */}
+      {/* Favorite Shows Section */}
       <section className="film-section">
-        <TraktSectionHeader title="Favorite Producers" />
-        {favProducers && favProducers.length > 0 ? (
+        <TraktSectionHeader title="Favorite Shows" />
+        {favoriteShows && favoriteShows.length > 0 ? (
           <TraktHorizontalScroll>
-            {favProducers.map((producer) => (
-              <TraktFavProducerCard key={producer.id} id={producer.id} name={producer.name} image={producer.image} />
+            {favoriteShows.map((show) => (
+              <TraktShowCard
+                key={show.id}
+                id={show.id}
+                title={show.title}
+                year={show.year}
+                posterUrl={show.posterUrl}
+              />
             ))}
           </TraktHorizontalScroll>
         ) : (
-          <TraktEmptyState message="No favorite producers available." />
+          <TraktEmptyState message="No favorite shows available." />
+        )}
+      </section>
+
+      {/* Favorite Directors Section - JSON-based */}
+      <section className="film-section">
+        <TraktSectionHeader title="Favorite Directors" />
+        {favDirectors && favDirectors.length > 0 ? (
+          <TraktHorizontalScroll>
+            {favDirectors.map((director) => (
+              <TraktFavDirectorCard key={director.id} id={director.id} name={director.name} image={director.image} />
+            ))}
+          </TraktHorizontalScroll>
+        ) : (
+          <TraktEmptyState message="No favorite directors available." />
         )}
       </section>
 
@@ -418,26 +446,6 @@ export default function FilmClientPage() {
           </TraktHorizontalScroll>
         ) : (
           <TraktEmptyState message="No favorite actors available." />
-        )}
-      </section>
-
-      {/* Favorite Film Companies Section - JSON-based */}
-      <section className="film-section">
-        <TraktSectionHeader title="Favorite Film Companies" />
-        {favCompanies && favCompanies.length > 0 ? (
-          <TraktHorizontalScroll>
-            {favCompanies.map((company) => (
-              <TraktFavCompanyCard
-                key={company.id}
-                id={company.id}
-                name={company.name}
-                image={company.image}
-                description={company.description}
-              />
-            ))}
-          </TraktHorizontalScroll>
-        ) : (
-          <TraktEmptyState message="No favorite film companies available." />
         )}
       </section>
 
@@ -458,6 +466,26 @@ export default function FilmClientPage() {
           </TraktHorizontalScroll>
         ) : (
           <TraktEmptyState message="No favorite characters available." />
+        )}
+      </section>
+
+      {/* Favorite Film Companies Section - JSON-based */}
+      <section className="film-section">
+        <TraktSectionHeader title="Favorite Film Companies" />
+        {favCompanies && favCompanies.length > 0 ? (
+          <TraktHorizontalScroll>
+            {favCompanies.map((company) => (
+              <TraktFavCompanyCard
+                key={company.id}
+                id={company.id}
+                name={company.name}
+                image={company.image}
+                description={company.description}
+              />
+            ))}
+          </TraktHorizontalScroll>
+        ) : (
+          <TraktEmptyState message="No favorite film companies available." />
         )}
       </section>
     </div>

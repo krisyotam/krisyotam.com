@@ -109,9 +109,6 @@ export function DirectoryPageHeader({
             {title.split(" ").join("-")}
           </h1>
 
-          {/* Subtitle */}
-          {subtitle && <h2 className="text-sm font-serif text-muted-foreground mb-3 text-center">{subtitle}</h2>}
-
           {/* Preview/description text */}
           {preview && (
             <p className="text-center font-serif text-xs text-muted-foreground italic mb-4 max-w-2xl mx-auto">

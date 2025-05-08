@@ -1,0 +1,65 @@
+{
+  "posts": [
+    {
+      "id": "lw1",
+      "title": "Rediscovering some math",
+      "content": "I just rediscovered something in math, and the way it came out to me felt really funny.\n\nI was thinking about startup incubators, and thinking about how it can be worth it to make a bet on a company that you think has only a one in ten chance of success, especially if you can incubate, y'know, ten such companies.\n\nAnd of course, you're not guaranteed success if you incubate ten companies, in the same way that you can flip a coin twice and have it come up tails both times. The expected value is one, but the probability of at least one success is not one.\n\nSo what is it? More specifically, if you consider ten such 1-in-10 events, do you think you're more or less likely to have at least one of them succeed? It's not intuitively obvious which way that should go.\n\nWell, if they're independent events, then the probability of all of them failing is 0.9^10, or\n\n$$(1 - \\frac{1}{10})^{10} \\approx 0.35$$\n\nAnd therefore the probability of at least one succeeding is $1 - 0.35 = 0.65$. More likely than not! That's great. But not hugely more likely than not.\n\n(As a side note, how many events do you need before you're more likely than not to have one success? It turns out the answer is 7. At seven 1-in-10 events, the probability that at least one succeeds is 0.52, and at 6 events, it's 0.47.)\n\nSo then I thought, it's kind of weird that that's not intuitive. Let's see if I can make it intuitive by stretching the quantities way up and down — that's a strategy that often works. Let's say I have a 1-in-a-million event, and I do it a million times. Then what is the probability that I'll have had at least one success? Is it basically 0 or basically 1?\n\n...surprisingly, my intuition still wasn't sure! I would think, it can't be too close to 0, because we've rolled these dice so many times that surely they came up a success once! But that intuition doesn't work, because we've exactly calibrated the dice so that the number of rolls is the same as the unlikelihood of success. So it feels like the probability also can't be too close to 1.\n\nSo then I just actually typed this into a calculator. It's the same equation as before, but with a million instead of ten. I added more and more zeros, and then what I saw was that the number just converges to somewhere in the middle.\n\n$$(1 - \\frac{1}{1000000})^{1000000} = 0.632121$$\n\nIf it was the 1300s then this would have felt like some kind of discovery. But by this point, I had realized what I was doing, and felt pretty silly. Let's drop the \"1−\", and look at this limit:\n\n$$\\lim_{n \\to \\infty} (1 - \\frac{1}{n})^n$$\n\nIf this rings any bells, then it may be because you've seen this limit before:\n\n$$e = \\lim_{n \\to \\infty} (1 + \\frac{1}{n})^n$$\n\nor perhaps as\n\n$$e^x = \\lim_{n \\to \\infty} (1 + \\frac{x}{n})^n$$\n\nThe probability I was looking for was $1 - \\frac{1}{e}$, or about 0.632.\n\nI think it's really cool that my intuition somehow knew to be confused here! And to me this path of discovery was way more intuitive that just seeing the standard definition, or by wondering about functions that are their own derivatives. I also think it's cool that this path made $e$ pop out on its own, since I almost always think of $e$ in the context of an exponential function, rather than as a constant. It also makes me wonder if $\\frac{1}{e}$ is more fundamental than $e$. (Similar to how $2\\pi$ is more fundamental than $\\pi$.)",
+      "date": "2023-10-03",
+      "source": {
+        "type": "lesswrong",
+        "url": "https://www.lesswrong.com/posts/rediscovering-some-math"
+      },
+      "author": "krisyotam",
+      "conversation": [
+        {
+          "author": "Zach_Furman",
+          "content": "Understanding deep learning isn't a leaderboard sport - handle with care. Saliency maps, neuron dissection, sparse autoencoders - each surged on hype, then stalled[1] when follow-up work showed the insight was mostly noise, easily fooled, or a misinterpretation.",
+          "date": "2023-10-03"
+        },
+        {
+          "author": "the_gears_to_ascension",
+          "content": "post ideas, ascending order of \"I think causes good things\": 1. (lowest value, possibly quite negative) my prompting techniques 2. velocity of action as a primary measurement of impact (how long until this, how long until that) sketchy?",
+          "date": "2023-10-03"
+        },
+        {
+          "author": "Morpheus",
+          "content": "It is time that I apply the principle of more dakka and just start writing (or rather publishing) more. I know deliberate practice works for writing. If you want to be good at something, you need to do it badly and then just keep going with it.",
+          "date": "2023-10-04"
+        },
+        {
+          "author": "ryan_greenblatt",
+          "content": "Quick take titles should end in a period. Quick takes (previously known as short forms) are often viewed via preview on the front page. This preview removes formatting and newlines for space reasons. So, if your title doesn't end in a period, it can look very strange in the preview.",
+          "date": "2023-10-04"
+        }
+      ]
+    },
+    {
+      "id": "lw2",
+      "title": "Thinking about probabilistic reasoning and Bayesian updates",
+      "content": "I've been thinking about how we use probability in everyday reasoning, and I've noticed some interesting patterns in how people (including myself) naturally update beliefs.\n\nConsider two scenarios:\n\n1. You have a prior belief that some hypothesis H has a 30% chance of being true.\n2. You observe evidence E that you think is twice as likely to occur if H is true versus if H is false.\n\nBy Bayes' rule, we know:\n\n$$P(H|E) = \\frac{P(E|H) \\cdot P(H)}{P(E)}$$\n\nWe can expand this to:\n\n$$P(H|E) = \\frac{P(E|H) \\cdot P(H)}{P(E|H) \\cdot P(H) + P(E|\\neg H) \\cdot P(\\neg H)}$$\n\nPlugging in our values:\n- $P(H) = 0.3$\n- $P(\\neg H) = 0.7$\n- $P(E|H) = 2 \\cdot P(E|\\neg H)$\n\nSetting $P(E|\\neg H) = x$ for simplicity, we get $P(E|H) = 2x$\n\n$$P(H|E) = \\frac{2x \\cdot 0.3}{2x \\cdot 0.3 + x \\cdot 0.7} = \\frac{0.6x}{0.6x + 0.7x} = \\frac{0.6}{1.3} \\approx 0.46$$\n\nSo our posterior probability increases from 30% to 46%.\n\nWhat I find interesting is that most people don't naturally do these calculations when updating beliefs. Instead, they seem to use simplifications or heuristics that sometimes work well and sometimes don't.\n\nIn practice, I've observed three common patterns:\n\n1. Conservatism bias: People update less than Bayes' rule would suggest\n2. Base rate neglect: People focus too much on the new evidence and ignore prior probabilities\n3. Confirmation bias: People update more strongly for evidence supporting their current beliefs\n\nI wonder if there's a simple heuristic we could teach that would help people make more accurate probabilistic updates without requiring the full calculation. Maybe something like: \"If evidence is twice as likely under one hypothesis, move your probability estimate about 1/3 of the way toward that hypothesis.\"\n\nWhat do you think? Do you have any rules of thumb for updating beliefs that you find helpful?",
+      "date": "2024-02-15",
+      "source": {
+        "type": "lesswrong",
+        "url": "https://www.lesswrong.com/posts/thinking-about-probabilistic-reasoning"
+      },
+      "author": "krisyotam",
+      "conversation": [
+        {
+          "author": "bayesian_thinker",
+          "content": "I think the logarithmic odds scale is actually a much more intuitive way to think about this for most people. In log-odds, Bayes' rule becomes addition rather than multiplication, which is cognitively easier.\n\nFor your example:\n- Prior odds: 0.3/0.7 ≈ 0.43\n- Log prior odds: log(0.43) ≈ -0.84\n- Bayes factor: 2\n- Log Bayes factor: log(2) ≈ 0.69\n- Log posterior odds: -0.84 + 0.69 = -0.15\n- Posterior odds: exp(-0.15) ≈ 0.86\n- Posterior probability: 0.86/(1+0.86) ≈ 0.46\n\nThe nice thing is that the middle step is just addition: -0.84 + 0.69 = -0.15. This makes it easier to do sequential updates and also gives you a better intuition for the strength of evidence.\n\nA Bayes factor of 2 is worth about 0.69 decibels of evidence, which isn't that much. A Bayes factor of 10 is worth 1 ban (10 decibels) of evidence. This gives us a natural unit system for thinking about evidence strength.",
+          "date": "2024-02-15"
+        },
+        {
+          "author": "krisyotam",
+          "content": "That's a great point about log-odds! I agree it makes sequential updates much more tractable. The fact that likelihood ratios translate to addition in log space is powerful.\n\nOne challenge I see with this approach for everyday use is that people aren't generally comfortable thinking in log-odds. But perhaps we could develop a simplified version?\n\nWhat if we used a scale from -5 to +5 to represent log-odds, where:\n\n0 = 50% probability\n+1 = ~73% probability\n+2 = ~88% probability\n+3 = ~95% probability\n+4 = ~98% probability\n+5 = ~99.3% probability\n\nAnd negative values represent the same probabilities for the negation of the hypothesis.\n\nThen evidence could be rated by how many \"points\" it moves you on this scale. Evidence with a Bayes factor of 2 moves you +0.7 points. Evidence with a Bayes factor of 3 moves you +1.1 points.\n\nThis might be more intuitive than dealing with the exact logarithms, while still preserving the additive property that makes log-odds so useful.\n\nWhat do you think? Has anyone created a simplified system like this for practical use?",
+          "date": "2024-02-16"
+        },
+        {
+          "author": "rationality_coach",
+          "content": "This is similar to the approach used in intelligence analysis with the Words of Estimative Probability (WEP) scale. Although they don't explicitly frame it in terms of log-odds, they do use verbal phrases mapped to probability ranges:\n\n- Almost certainly: 93%+\n- Highly likely: 75-85%\n- Likely: 55-75%\n- Chances about even: 45-55%\n- Unlikely: 30-45%\n- Highly unlikely: 15-25%\n- Remote: less than 5%\n\nI think the key insight here is that precise probability numbers often give a false sense of accuracy in everyday reasoning. Your -5 to +5 scale could work well as a practical tool, especially if you provide clear examples of what different levels of evidence look like.\n\nOne addition I'd suggest is having different scales for different domains. The strength of evidence needed to move your beliefs might be different for scientific claims versus social observations versus personal predictions.",
+          "date": "2024-02-16"
+        }
+      ]
+    }
+  ]
+} 

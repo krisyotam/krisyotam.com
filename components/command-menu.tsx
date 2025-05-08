@@ -92,7 +92,7 @@ const menuItems = [
   { icon: StickyNote, label: "Notes", path: "/notes" },
   { icon: Tags, label: "Tags", path: "/tags" },
   { icon: Quote, label: "Quotes", path: "/quotes" },
-  { icon: Feather, label: "Poetry", path: "/poetry" },
+  { icon: Feather, label: "Verse", path: "/verse" },
   { icon: HandCoins, label: "Nuggets", path: "/nuggets" },
   { icon: BookMarked, label: "Reading", path: "/reading" },
   { icon: Clock, label: "Now", path: "/now" },

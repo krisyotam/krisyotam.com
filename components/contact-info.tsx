@@ -26,7 +26,7 @@ export default function ContactInfo({ notice, rules, blacklistNotes }: ContactIn
   }
 
   return (
-    <div className="!flex !flex-col !gap-4 !max-w-2xl !mx-auto !mb-6">
+    <div className="!flex !flex-col !gap-4 !mb-6 !w-full">
       {/* Notice Bento */}
       <Card className="!p-4 !bg-card dark:bg-[#1A1A1A] !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800">
         <div className="!flex !items-start !gap-3">
