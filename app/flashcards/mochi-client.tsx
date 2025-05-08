@@ -1,15 +1,15 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ArrowLeft, Download } from "lucide-react"
+import { ArrowLeft, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { formatFileSize } from "@/lib/utils"
 
 interface FlashcardDeck {
   name: string
   date: string
-  fileName: string
-  type: "mochi" | "anki"
+  fileName?: string
+  link: string
   description: string
   size?: number
 }
@@ -47,14 +47,8 @@ export default function MochiClientPage() {
     setSelectedDeck(null)
   }
 
-  const handleDownload = (deck: FlashcardDeck) => {
-    const filePath = `/flashcards/${deck.type}/${deck.fileName}`
-    const link = document.createElement("a")
-    link.href = filePath
-    link.download = deck.fileName
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+  const handleOpenLink = (deck: FlashcardDeck) => {
+    window.open(deck.link, '_blank', 'noopener,noreferrer')
   }
 
   if (loading) {
@@ -67,7 +61,7 @@ export default function MochiClientPage() {
 
   if (selectedDeck) {
     return (
-      <div className="bg-card border border-border rounded-md p-6">
+      <div className="bg-card border border-border p-6">
         <div className="flex items-center mb-4">
           <Button variant="ghost" size="sm" onClick={handleBack} className="mr-2">
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -78,8 +72,7 @@ export default function MochiClientPage() {
         <div className="mb-6">
           <h2 className="text-2xl font-bold mb-2">{selectedDeck.name}</h2>
           <div className="flex items-center text-sm text-muted-foreground mb-4">
-            <span className="mr-4">Type: {selectedDeck.type.toUpperCase()}</span>
-            <span>Added: {new Date(selectedDeck.date).toLocaleDateString()}</span>
+            <span>Added: {new Date(selectedDeck.date).getFullYear()}</span>
             {selectedDeck.size && <span className="ml-4">Size: {formatFileSize(selectedDeck.size)}</span>}
           </div>
 
@@ -87,9 +80,9 @@ export default function MochiClientPage() {
             <p>{selectedDeck.description}</p>
           </div>
 
-          <Button onClick={() => handleDownload(selectedDeck)}>
-            <Download className="h-4 w-4 mr-2" />
-            Download {selectedDeck.fileName}
+          <Button onClick={() => handleOpenLink(selectedDeck)}>
+            <ExternalLink className="h-4 w-4 mr-2" />
+            Open Deck
           </Button>
         </div>
       </div>
@@ -98,10 +91,9 @@ export default function MochiClientPage() {
 
   return (
     <div className="font-mono">
-      <div className="grid grid-cols-3 text-sm text-muted-foreground mb-2 px-4">
-        <div>date</div>
+      <div className="grid grid-cols-2 text-sm text-muted-foreground mb-2 px-4">
+        <div>year</div>
         <div>title</div>
-        <div className="text-right">type</div>
       </div>
 
       <div className="border-t border-border">
@@ -110,11 +102,10 @@ export default function MochiClientPage() {
             <div
               key={index}
               onClick={() => handleDeckClick(deck)}
-              className="grid grid-cols-3 px-4 py-3 border-b border-border hover:bg-secondary/50 transition-colors duration-200 cursor-pointer"
+              className="grid grid-cols-2 px-4 py-3 border-b border-border hover:bg-secondary/50 transition-colors duration-200 cursor-pointer"
             >
-              <div className="text-sm text-muted-foreground">{new Date(deck.date).toISOString().split("T")[0]}</div>
+              <div className="text-sm text-muted-foreground">{new Date(deck.date).getFullYear()}</div>
               <div>{deck.name}</div>
-              <div className="text-right text-blue-500">{deck.type.toUpperCase()}</div>
             </div>
           ))
         ) : (

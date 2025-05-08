@@ -851,6 +851,30 @@
       "confidence": "certain",
       "importance": 5,
       "state": "active"
+    },
+    {
+      "title": "On Living Simply",
+      "preview": "a overview of the simplifications I make to life",
+      "date": "2025-05-07",
+      "tags": ["Minimalism", "Quality Of Life", "History"],
+      "category": "On Myself",
+      "slug": "on-living-simply",
+      "status": "Published",
+      "confidence": "certain",
+      "importance": 5,
+      "state": "active"
+    },
+    {
+      "title": "On Life Improvement",
+      "preview": "list of improvements to my quality-of-life in all areas.",
+      "date": "2025-05-07",
+      "tags": ["Quality of Life", "History", "Technology", "Economics"],
+      "category": "On Myself",
+      "slug": "on-life-improvement",
+      "status": "Published",
+      "confidence": "certain",
+      "importance": 5,
+      "state": "active"
     }
   ]
 }

@@ -13,7 +13,7 @@ export default function MochiPage() {
         title="Flashcards"
         subtitle="Spaced Repetition Collection"
         date={new Date().toISOString()}
-        preview="Collection of Mochi and Anki flashcard decks for spaced repetition learning."
+        preview="constantly updatedflashcards for spaced repetition"
         status="In Progress"
         confidence="certain"
         importance={7}

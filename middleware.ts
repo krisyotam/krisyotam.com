@@ -35,6 +35,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect('https://www.amazon.com/hz/wishlist/ls/1ID8ZRMZ7CMDI?ref_=wl_share')
   }
 
+  // Redirect memory path to Are.na
+  if (path === "/memory" || path === "/memory/") {
+    console.log('🔄 MIDDLEWARE: Redirecting to Are.na')
+    return NextResponse.redirect('https://www.are.na/kris-yotam/channels')
+  }
+
   // Handle direct access to blog post files (new functionality)
   const blogPostMatch = path.match(/^\/blog\/(\d{4})\/([^/]+)$/)
   if (blogPostMatch) {

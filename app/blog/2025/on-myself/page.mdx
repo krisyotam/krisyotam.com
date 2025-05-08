@@ -1,31 +1,43 @@
-import MiniBio from '@/components/posts/people/mini-bio';
-import Dropcap from '@/components/dropcap'
-import Bible from "@/components/references/christianity/1611bible"
-import LinkTags from "@/components/link-tags"
-import { Box } from "@/components/posts/typography/box";
-import { Excerpt } from "@/components/posts/typography/excerpt";
-import { Quote } from "@/components/posts/typography/quote";
-import Define from "@/components/references/language/oed";
-import { Spoiler } from "@/components/posts/typography/spoiler";
-import Collapse from "@/components/posts/typography/collapse"
-
-
-<div className="flex justify-center text-center mt-0 mb-8">
-  <MiniBio
-    ghibliImage="https://i.postimg.cc/5yzs0wj0/krisyotam.jpg"
-    realImage="https://i.postimg.cc/PqNzJmRj/krisyotam-colored.jpg"
-    name="Kris Yotam"
-    description="Researcher & Essayist"
-  />
-</div>
-
+<WikiPerson
+  name="Kris Yotam"
+  image="https://i.postimg.cc/PqNzJmRj/krisyotam-colored.jpg"
+  born="August 5, 2004"
+  nationality="African American"
+  career="Academic & Professional Career"
+  fields={["Mathematics", "Essay Writing", "Software Development"]}
+  knownFor={[
+    "Mathematics Undergrad",
+    "Pen Tester",
+    "Essayist",
+    "Software Engineer"
+  ]}
+  float="right"
+  width={300}
+/>
 
 # About Me
 
 <Dropcap>I</Dropcap>f you are looking for a more concise, or even perhaps aesthetically pleasing presentation of this information although more limited. I beseige you to check 
 the carefully assembled [about page](/about). In this page I will try to give the rather uninteresting answers to Who are you?, What have you done?, Where are you online?, and other 
 typical questions a proper about page should answer. If you were looking for something more up to date about specific goals for the month I have a [now page](https://nownownow.com/about) 
-which is located [here](/now). 
+which is located [here](/now). I am currently <Age format="age" />. I am currently a student at IU bloomington studying for a mathematics B.S. with a Pure Mathematics certificate. If you are interested 
+in more maths related content [see here](https://krisyotam.net). I am also a practicing software engineer learning C, C++, and Python. My interests are in Systems Programming, Embedded Systems, and Computer Architecture. 
+I also have a <Define>penchant</Define> for web design. Web development has also recently become a hobby of mine. I am not a bleeding edge person, and tend to be more of a never adopter. I like stable things that fit my 
+usecases and are easy to use. So Next.js will be my ongoing webframework of choice for the forseeable future. I tend to dabble quite a bit in applications of unique ideas like [script](/scripts/404-suggester.js) using the levenshtein distance 
+to calculate the distance a user's mistyped url is from the various urls of my site, and suggest the assumed proper urls ordered by closest match first. I enjoy [reinventing the wheel](https://en.wikipedia.org/wiki/Reinventing_the_wheel), it's a frequent pastime of mine. 
+I owe much to the mindset of [Richard Feynman]() on the basis of 
+<Quote author="Richard Feynman">What I cannot create, I do not understand.</Quote> 
+You could consider me both a [Classicist](https://en.wikipedia.org/wiki/Classicism) and a [Innovator](https://en.wikipedia.org/wiki/Innovation). I am a classicist in the sense that I believe in the importance of the old masters, and taking as much as possible from them. Furthermore I do disagree with the modern notion that "newer" is inherently better. 
+Rather I am of the belief that
+<Quote author="Kris Yotam">Rules are meant to be broken once they are understood.</Quote>
+Man was created to be a master of multidues, not to have a multitude of masters. 
+<Quote author="Walt Whitman">Do I contradict myself? Very well then I contradict myself. I am large, I have multitudes.</Quote>
+To that end I am interested in a [number of things](/about#areas-of-interest). One of my major interests happens to be [Pedagogy](https://en.wikipedia.org/wiki/Pedagogy). Specifically that of the 
+[Classical Education](https://en.wikipedia.org/wiki/Classical_education#:~:text=Classical%20education%20refers%20to%20a,and%20cultural%20life%20were%20laid). I advocate for ad fontes learning, and [living](https://en.wikipedia.org/wiki/Eternal_return). 
+I also write the [progymnasmata](https://en.wikipedia.org/wiki/Progymnasmata) myself, excercises can be [found here](/progymnasmata). I am also a [Christian](). My beleifs are summed up as <Bible>Romans 12:18, John 14:6, Ecc 12:13, Luke 4:18</Bible>, somewhat in line with [Messianic Judaism](https://en.wikipedia.org/wiki/Messianic_Judaism), or [Hebrew Roots](https://shorturl.at/m2gTs). I won't cover much on that 
+here but I will write a essay exploring my beliefs and there justification at a later date. Im sure a huge question is "How do your religious views influence your content?". I won't lie and say "They won't". Naturally based on the [Familiarity Principle](https://en.wikipedia.org/wiki/Mere-exposure_effect), and <Bible>John 1:8</Bible> It will influence mostly everything I do. So in response I have implemented a system 
+for all pages, prose, verse, categories, tags, ect. This is the "certainty" rating. It is a rating from certain-impossible, and I base this off of mainstream scientific views. So something that is rated relatively low may be a foundational belief of mine. Where as something that I do not support may be highly rated. This covers most of the [media bias](https://en.wikipedia.org/wiki/Media_bias). I am not a emotional person so 
+most essays I write will tend to be highly generous to both sides. Even to such things I consider a "atrocity" I am likely to explore from multiple points of view. Such is the reflective nature of 'writing', and one that does not necessarily betray the same in person. 
 
 
 # Personal 
@@ -177,5 +189,5 @@ Tell me what you eat, and I will tell you what you are.
 # Morals
 
 
----
+--- 
 For other related posts visit the category page [On Myself](/category/on-myself).

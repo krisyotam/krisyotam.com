@@ -6,10 +6,15 @@
     "year": 2024,
     "type": "Haiku",
     "collection": "",
-    "description": "",
+    "description": "A reflection on the quiet moments shared between a child and their dog, illustrating the serenity of nature's simple pleasures.",
+    "headerDescription": "Serene moments between a child and dog by the water.",
     "slug": "afternoon-retreat",
     "image": "/images/poetry/road-not-taken.jpg",
-    "stanza1": "Water softly speaks,\nBoy and dog with hearts at ease,\nAfternoon retreat."
+    "stanza1": "Water softly speaks,\nBoy and dog with hearts at ease,\nAfternoon retreat.",
+    "tags": ["Nature", "Tranquility", "Childhood"],
+    "status": "Finished",
+    "confidence": "highly likely",
+    "importance": 7
   },
   {
     "id": "3",
@@ -17,11 +22,16 @@
     "dateCreated": "2024-12-02",
     "year": 2024,
     "type": "Haiku",
-    "collection": "",
-    "description": "",
+    "collection": "Science Series",
+    "description": "A poetic exploration of nuclear fission and its metaphorical relationship to human connections.",
+    "headerDescription": "Nuclear science as a metaphor for severed relationships.",
     "slug": "fission",
     "image": "",
-    "stanza1": "Forever separated,\nOur power was evaporated,\nSplit but equal."
+    "stanza1": "Forever separated,\nOur power was evaporated,\nSplit but equal.",
+    "tags": ["Science", "Relationships", "Power"],
+    "status": "In Progress",
+    "confidence": "possible",
+    "importance": 6
   },
   {
     "id": "4",
@@ -29,11 +39,16 @@
     "dateCreated": "2024-12-02",
     "year": 2024,
     "type": "Haiku",
-    "collection": "",
-    "description": "",
+    "collection": "Science Series",
+    "description": "Contemplating the theoretical particle that travels faster than light as a metaphor for human aspirations.",
+    "headerDescription": "Faster-than-light particles as symbols of impossible human dreams.",
     "slug": "tachyon",
     "image": "",
-    "stanza1": "Faster than light,\nMoving forever, nothing in sight,\nBlink darkness."
+    "stanza1": "Faster than light,\nMoving forever, nothing in sight,\nBlink darkness.",
+    "tags": ["Physics", "Time", "Infinity"],
+    "status": "Draft",
+    "confidence": "unlikely",
+    "importance": 8
   },
   {
     "id": "5",
@@ -41,11 +56,16 @@
     "dateCreated": "2024-12-03",
     "year": 2024,
     "type": "Haiku",
-    "collection": "",
-    "description": "",
+    "collection": "Wisdom Collection",
+    "description": "A commentary on the paradox of knowledge acquisition and the humility of true wisdom.",
+    "headerDescription": "The paradox of wisdom: those who claim it most possess it least.",
     "slug": "knowledge",
     "image": "",
-    "stanza1": "Fools think they have it,\nThe shrewd know they must have it,\nJust go get a book."
+    "stanza1": "Fools think they have it,\nThe shrewd know they must have it,\nJust go get a book.",
+    "tags": ["Wisdom", "Learning", "Humility"],
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 9
   },
   {
     "id": "6",
@@ -129,7 +149,7 @@
     "description": "",
     "slug": "antiphon-for-the-abyss",
     "image": "",
-    "stanza1": "You the guard of the abyss\nYou who vitiates the sins of the sacrilegious\nYou the one who’s laugh like quicksand\nCoagulates those who stand testament against\nGod\nYou who is abaddon angel of sheol\nThe one who resides above the orthoptera\nKeyholder of the bottomless pit\nApprobation for the destroyer!\nReverence for abbadon!"
+    "stanza1": "You the guard of the abyss\nYou who vitiates the sins of the sacrilegious\nYou the one who's laugh like quicksand\nCoagulates those who stand testament against\nGod\nYou who is abaddon angel of sheol\nThe one who resides above the orthoptera\nKeyholder of the bottomless pit\nApprobation for the destroyer!\nReverence for abbadon!"
   },
   {
     "id": "13",
@@ -165,7 +185,7 @@
     "description": "",
     "slug": "antiphon-for-the-seraphim",
     "image": "",
-    "stanza1": "You are the complete ones,\nWhose burning desire permeates in the presence of the Perfect One.\nYou, the al-mash’ama (companions of the flame),\nThe ones who extol the Lord unfalteringly,\nThe ones whose faith is pure and without fail.\nAdmiration for the Seraph.\nReverence to the Burning Ones."
+    "stanza1": "You are the complete ones,\nWhose burning desire permeates in the presence of the Perfect One.\nYou, the al-mash'ama (companions of the flame),\nThe ones who extol the Lord unfalteringly,\nThe ones whose faith is pure and without fail.\nAdmiration for the Seraph.\nReverence to the Burning Ones."
   },
   {
     "id": "16",
@@ -201,13 +221,13 @@
     "stanza3": "recite\neven",
     "stanza4": "The most lilliputian part—\nyet dare to inquire\nabout the truth behind Columbus and your—",
     "stanza5": "a\nFraud—\none who detests history as he was taught,\nbecause why think that his story is",
-    "stanza6": "any\nMore than just that—\na tale, a tall one,\nwho’s\nunremitting presence towers above the mind",
+    "stanza6": "any\nMore than just that—\na tale, a tall one,\nwho's\nunremitting presence towers above the mind",
     "stanza7": "of every\nChild that enters this system—\nlearning about a\nhistory they have not witnessed: before\nthey can comprehend the elements that make\nit up.",
     "stanza8": "Kids are subject to scrutiny for using the\nsame words as another as an account of\nPlagiarism—\nsubject to placate the owner of\nwords that were never his.",
     "stanza9": "Teachers meant to teach us—\ninstead\nperpetuate lies in order to conciliate Mann, the\nprogenitor of a system designed to uniformly\ncreate—",
     "stanza10": "machines.",
     "stanza11": "We are told to be independent, yet taught as a\nmonolithic unit designed\nTo work for the system—\nan apparatus who will\ngive its life for the advancement of a world",
-    "stanza12": "Whose face it doesn’t even know.\nThe ones who deviate, who deviate—\ncast aside as lunatics.",
+    "stanza12": "Whose face it doesn't even know.\nThe ones who deviate, who deviate—\ncast aside as lunatics.",
     "stanza13": "In a world that offers no proof,\nthe loudest voices\noften drown out the truth."
   },
   {
@@ -220,11 +240,11 @@
     "description": "",
     "slug": "laborius-night-sky",
     "image": "https://i.postimg.cc/ncLc3Kqs/laborius-night-sky.png",
-    "stanza1": "Under the cover of night\nShine solus beings dethroned,\nIf only you knew you weren’t alone.",
+    "stanza1": "Under the cover of night\nShine solus beings dethroned,\nIf only you knew you weren't alone.",
     "stanza2": "Your redemption lamented,\nTehom says attest to the harshness,\nConfined to a precinct of darkness.",
-    "stanza3": "Sloane’s machinate propaganda,\nThere ruthless starkness strikes home,\nIf only you knew you weren’t alone.",
+    "stanza3": "Sloane's machinate propaganda,\nThere ruthless starkness strikes home,\nIf only you knew you weren't alone.",
     "stanza4": "Your concealment carried out,\nYou lie harmless but obnoxious,\nConfined to a precinct of darkness.",
-    "stanza5": "Your pain forgotten,\nThrough time neglected,\nIf only you knew you weren’t alone.",
+    "stanza5": "Your pain forgotten,\nThrough time neglected,\nIf only you knew you weren't alone.",
     "stanza6": "You are forever bound,\nYour freedom compound,\nConfined to a precinct of darkness."
   },
   {
@@ -288,7 +308,7 @@
     "description": "a challenge on who could create a poem using sesquipedalian words from the list.",
     "slug": "sesquipedalian-reverie",
     "image": "",
-    "stanza1": "Antidisestablishmentarian dreams,\nSupercalifragilisticexpialidocious gleams.\nFloccinaucinihilipilification’s plight,\nHonorificabilitudinitatibus alight.",
+    "stanza1": "Antidisestablishmentarian dreams,\nSupercalifragilisticexpialidocious gleams.\nFloccinaucinihilipilification's plight,\nHonorificabilitudinitatibus alight.",
     "stanza2": "Counterrevolutionaries weave their prose,\nPseudopseudohypoparathyroidism grows.\nIncomprehensibilities linger near,\nHippopotomonstrosesquipedaliophobia      : a fear.",
     "stanza3": "Disproportionableness clouds the air,\nUncharacteristically, words declare:\nThat even sesquipedalian minds,\nFind joy in syllabic binds."
   },
@@ -389,7 +409,7 @@
     "description": "",
     "slug": "calm-still",
     "image": "",
-    "stanza1": "I feel the rains fall,\nHiss, Hiss, ahhhhhh,\nThe light dims low,\nThe storm won’t end."
+    "stanza1": "I feel the rains fall,\nHiss, Hiss, ahhhhhh,\nThe light dims low,\nThe storm won't end."
   },
   {
     "id": "32",
@@ -402,15 +422,15 @@
     "slug": "struggle",
     "image": "",
     "stanza1": "Wake up, eat, sleep, repeat.\nWake up, eat, sleep, repeat.\nWake up, eat, sleep, repeat.",
-    "stanza2": "Every day’s a gray pebble on a gravel path,\nMy future subject to the devil's wrath.",
+    "stanza2": "Every day's a gray pebble on a gravel path,\nMy future subject to the devil's wrath.",
     "stanza3": "Hope—forget hope.",
-    "stanza4": "If I had a dollar for every time I hoped,\nThen I’d be broke.",
+    "stanza4": "If I had a dollar for every time I hoped,\nThen I'd be broke.",
     "stanza5": "Oh wait—broke. I am broke,\nAlmost like my wallet had a stroke.",
     "stanza6": "But scream—scream at me some more,\nAs if I like standing by while my destiny gets choked,\nWhile I stay cloaked.",
-    "stanza7": "Now you’ve got me provoked.",
-    "stanza8": "Four-fourths of my life spent a slave—\nIf only I could rent freedom for a day,\nI’d stay away.",
+    "stanza7": "Now you've got me provoked.",
+    "stanza8": "Four-fourths of my life spent a slave—\nIf only I could rent freedom for a day,\nI'd stay away.",
     "stanza9": "Away from that ravenous wolf,\nAway from that venomous snake,\nWhile desire pursues me like fleeting fire.",
-    "stanza10": "Once, I carried a thorn in my side,\nNow, I’m a battered vase inside.",
+    "stanza10": "Once, I carried a thorn in my side,\nNow, I'm a battered vase inside.",
     "stanza11": "Sometimes you must get shattered\nTo let the light abide."
   },
   {
@@ -1040,7 +1060,7 @@
     "image": "https://i.postimg.cc/NjK9RMTx/forsaken.png",
     "stanza1": "I have forsaken my passion,\nand my passion has forsaken me.",
     "stanza2": "I grieve,\nbut my tears fail to fall.",
-    "stanza3": "I’ve given up,\nyet my body continues to move.",
+    "stanza3": "I've given up,\nyet my body continues to move.",
     "stanza4": "This silent body\nhouses a screaming soul.",
     "stanza5": "My skin is warm,\nyet I cannot stop shivering.",
     "stanza6": "My heart races,\nbut my hands remain still.",

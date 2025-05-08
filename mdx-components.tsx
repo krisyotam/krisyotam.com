@@ -10,6 +10,7 @@ import Dropcap from '@/components/dropcap'
 import Bible from "@/components/references/christianity/1611bible"
 import LinkTags from "@/components/link-tags"
 import { Box } from "@/components/posts/typography/box"
+import { Age } from "@/components/posts/typography/age"
 import { Excerpt } from "@/components/posts/typography/excerpt"
 import { Quote } from "@/components/posts/typography/quote"
 import Define from "@/components/references/language/oed"
@@ -39,6 +40,8 @@ import Human from "@/components/posts/basic/human"
 import Company from "@/components/posts/basic/company"
 import CppCodeBlock from "@/components/posts/code/cplusplus"
 import { Tree } from "@/components/family-tree"
+import WebsiteDemo from "@/components/posts/website/website"
+import { WikiPerson } from "@/components/posts/wikipedia/wiki-person"
 
 // Define components for MDX
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -112,6 +115,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     PoemBox,
     Collapse,
     FileViewer,
+    Age,
     
     // References and specialized components
     Bible,
@@ -125,6 +129,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Human,
     Company,
     Tree,
+    WikiPerson,
     
     // Images and media components
     EnhancedImageDisplay,
@@ -154,6 +159,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     
     // Special content components
     TryHackMe,
+    
+    // Website embedding component
+    WebsiteDemo,
     
     // Pass through any provided components (for overrides)
     ...components,

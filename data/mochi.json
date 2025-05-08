@@ -2,43 +2,37 @@
   {
     "name": "Computer Science Fundamentals",
     "date": "2025-04-01",
-    "fileName": "cs-fundamentals.csv",
-    "type": "mochi",
+    "link": "https://app.mochi.cards/decks/cs-fundamentals",
     "description": "A comprehensive deck covering computer science fundamentals including data structures, algorithms, and complexity analysis. Perfect for interview preparation or refreshing core CS concepts."
   },
   {
     "name": "JavaScript Core Concepts",
     "date": "2025-03-15",
-    "fileName": "javascript-core.csv",
-    "type": "mochi",
+    "link": "https://app.mochi.cards/decks/javascript-core",
     "description": "Master JavaScript fundamentals with this deck covering closures, prototypes, async programming, and ES6+ features. Ideal for web developers looking to strengthen their JS knowledge."
   },
   {
     "name": "React Hooks & Patterns",
     "date": "2025-02-28",
-    "fileName": "react-hooks.csv",
-    "type": "mochi",
+    "link": "https://app.mochi.cards/decks/react-hooks",
     "description": "Learn all React hooks and common design patterns. This deck covers useState, useEffect, useContext, useMemo, useCallback, and custom hooks implementation strategies."
   },
   {
     "name": "System Design Principles",
     "date": "2025-02-10",
-    "fileName": "system-design.csv",
-    "type": "anki",
+    "link": "https://ankiweb.net/shared/info/1234567890",
     "description": "Prepare for system design interviews with this comprehensive Anki deck. Covers scalability, load balancing, caching, database sharding, and microservices architecture."
   },
   {
     "name": "TypeScript Advanced Types",
     "date": "2025-01-20",
-    "fileName": "typescript-advanced.csv",
-    "type": "anki",
+    "link": "https://ankiweb.net/shared/info/9876543210",
     "description": "Master advanced TypeScript concepts including conditional types, mapped types, utility types, and type inference. Great for developers looking to leverage TypeScript's type system fully."
   },
   {
     "name": "Next.js & Server Components",
     "date": "2025-01-05",
-    "fileName": "nextjs-server-components.csv",
-    "type": "mochi",
+    "link": "https://app.mochi.cards/decks/nextjs-server-components",
     "description": "Learn Next.js 14 features with a focus on React Server Components, Server Actions, and the App Router. This deck helps you understand the modern Next.js architecture and best practices."
   }
 ]

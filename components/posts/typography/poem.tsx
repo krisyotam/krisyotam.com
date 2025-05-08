@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 export interface PoemBoxProps {
   children: React.ReactNode
   className?: string
+  disableHover?: boolean
 }
 
 type Item =
@@ -54,7 +55,7 @@ function extractItems(children: React.ReactNode): Item[] {
   return items
 }
 
-export function PoemBox({ children, className }: PoemBoxProps) {
+export function PoemBox({ children, className, disableHover = false }: PoemBoxProps) {
   const items = extractItems(children)
   const base = cn(
     "p-6 my-6 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))] " +
@@ -62,31 +63,44 @@ export function PoemBox({ children, className }: PoemBoxProps) {
     className
   )
 
+  // Define line class with or without hover effect
+  const lineClass = disableHover 
+    ? "px-1 transition-colors" 
+    : "poem-line px-1 transition-colors"
+
   return (
     <div className={base}>
       {items.map((item, idx) => {
         if (item.type === "stanza") {
-          return <div key={idx} style={{ height: "3rem" }} />
+          // Create 2 empty lines for stanza spacing, each with its own hover effect
+          return (
+            <React.Fragment key={idx}>
+              <div className={lineClass} style={{ height: "1.5rem" }}>&nbsp;</div>
+              <div className={lineClass} style={{ height: "1.5rem" }}>&nbsp;</div>
+            </React.Fragment>
+          )
         } else {
           return (
-            <div key={idx} className="poem-line px-1 rounded-sm transition-colors">
+            <div key={idx} className={lineClass}>
               {item.content}
             </div>
           )
         }
       })}
 
-      <style jsx global>{`
-        .poem-line {
-          background-color: transparent !important;
-        }
-        .poem-line:hover {
-          background-color: #e5e5e5 !important;
-        }
-        :global(.dark) .poem-line:hover {
-          background-color: #2a2a2a !important;
-        }
-      `}</style>
+      {!disableHover && (
+        <style jsx global>{`
+          .poem-line {
+            background-color: transparent !important;
+          }
+          .poem-line:hover {
+            background-color: #e5e5e5 !important;
+          }
+          :global(.dark) .poem-line:hover {
+            background-color: #2a2a2a !important;
+          }
+        `}</style>
+      )}
     </div>
   )
 }
