@@ -77,20 +77,33 @@ export default async function HomeWrapper({ initialView = 'list' }: HomeWrapperP
     // Read and serialize the bio content
     let serializedBio;
     try {
-      let bioContent = DEFAULT_BIO;
       const bioFilePath = path.join(process.cwd(), 'app', 'home-bio.mdx')
       
-      // Check if the file exists before trying to read it
-      if (fs.existsSync(bioFilePath)) {
+      let bioContent;
+      try {
+        // Use fs.promises to properly await the file read
+        bioContent = await fs.promises.readFile(bioFilePath, 'utf8')
+        console.log("Successfully loaded bio file")
+      } catch (readError) {
+        console.error("Error reading bio file:", readError)
+        console.error("File path tried:", bioFilePath)
+        // Try alternative path for deployed environment
         try {
-          bioContent = await fs.promises.readFile(bioFilePath, 'utf8')
-          console.log("Successfully loaded bio file")
-        } catch (readError) {
-          console.error("Error reading bio file:", readError)
-          // Fall back to default bio content
+          const altBioFilePath = path.join(process.cwd(), '.', 'app', 'home-bio.mdx')
+          bioContent = await fs.promises.readFile(altBioFilePath, 'utf8')
+          console.log("Successfully loaded bio file from alternative path")
+        } catch (altError) {
+          console.error("Error reading bio file from alternative path:", altError)
+          // Last resort - try with absolute file path resolution
+          try {
+            const resolvedPath = require.resolve('../app/home-bio.mdx')
+            bioContent = await fs.promises.readFile(resolvedPath, 'utf8')
+            console.log("Successfully loaded bio file with require.resolve")
+          } catch (resolveError) {
+            console.error("All attempts to load bio file failed. Using default content.")
+            bioContent = DEFAULT_BIO
+          }
         }
-      } else {
-        console.log("Bio file not found, using default content")
       }
       
       serializedBio = await serialize(bioContent, {
@@ -100,6 +113,11 @@ export default async function HomeWrapper({ initialView = 'list' }: HomeWrapperP
             rehypeSlug,
             [rehypeAutolinkHeadings, { behavior: 'wrap' }]
           ],
+        },
+        // Ensure all imported components are properly handled
+        scope: {
+          // Empty scope to prevent mdx serialization errors with imports
+          // The actual components are provided in home-client.tsx
         }
       })
     } catch (bioError) {
@@ -129,4 +147,4 @@ export default async function HomeWrapper({ initialView = 'list' }: HomeWrapperP
       </div>
     )
   }
-} 
+}
