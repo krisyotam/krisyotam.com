@@ -74,7 +74,8 @@ import {
   MessageSquare,
   Link,
   Grid,
-  Receipt
+  Receipt,
+  MessageSquareText
 } from "lucide-react"
 import { SnowEffect } from "./snow-effect"
 import { useTheme } from "next-themes"
@@ -93,7 +94,7 @@ const menuItems = [
   { icon: Tags, label: "Tags", path: "/tags" },
   { icon: Quote, label: "Quotes", path: "/quotes" },
   { icon: Feather, label: "Verse", path: "/verse" },
-  { icon: HandCoins, label: "Nuggets", path: "/nuggets" },
+  { icon: MessageSquareText, label: "Social", path: "/social" },
   { icon: BookMarked, label: "Reading", path: "/reading" },
   { icon: Clock, label: "Now", path: "/now" },
   
