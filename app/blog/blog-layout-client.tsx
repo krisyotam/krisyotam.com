@@ -16,6 +16,7 @@ import { PostNotice } from "@/components/post-notice";
 import LinkTags from "@/components/link-tags";
 import Citation from "@/components/citation";
 
+// Import fonts
 const fontImport = `
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
@@ -34,11 +35,6 @@ interface Post {
   headings: { id: string; text: string; level: number; children?: any[] }[];
   marginNotes: MarginNote[];
   bibliography?: { id: string; author: string; title: string; year: number; publisher: string; url: string; type: string }[];
-}
-
-// Define props interface for RelatedPosts if it doesn't accept slug directly
-interface RelatedPostsProps {
-  slug: string;
 }
 
 export function BlogLayoutClient({ children }: { children: React.ReactNode }) {
