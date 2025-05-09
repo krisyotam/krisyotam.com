@@ -1,0 +1,15 @@
+**************************************************
+* Author: Kris Yotam
+* Date: 2025-05-08
+* Title: Novice Deep Research
+* Model: OpenAI o4‑mini (high)
+* Description:
+*   A prompt engineered to transform any field of 
+*   nascent familiarity into a bespoke, strategic 
+*   research pathway. Given your detailed inputs—prior 
+*   experience, preferred methodologies, and aspirational 
+*   horizons—it formulates enduring, high‑impact options 
+*   calibrated for long‑term intellectual and practical gain.
+* Contact: krisyotam@protonmail.com
+* Copyright (c) Kris Yotam 2025. All rights reserved.
+**************************************************

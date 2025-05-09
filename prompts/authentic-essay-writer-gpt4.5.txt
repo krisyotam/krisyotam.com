@@ -1,0 +1,15 @@
+**************************************************
+* Author: Kris Yotam
+* Date: 2025-05-08
+* Title: Authentic Essay Writer
+* Model: OpenAI GPT 4.5
+* Description:
+*   A prompt that ingests provided PDF source material 
+*   to emulate an author’s unique voice, syntax, and 
+*   idiosyncrasies. Delivers essays with flawless 
+*   grammar while preserving original-length sentences, 
+*   occasional word misapplications, and stylistic quirks 
+*   for utmost authenticity.
+* Contact: krisyotam@protonmail.com
+* Copyright (c) Kris Yotam 2025. All rights reserved.
+**************************************************

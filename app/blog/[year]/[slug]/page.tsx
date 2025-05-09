@@ -1,7 +1,6 @@
 // app/blog/[year]/[slug]/page.tsx
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
-import Head from "next/head"
 import { notFound } from "next/navigation"
 import { getAllPosts, getPostContent } from "@/utils/posts"
 import { Metadata, ResolvingMetadata } from "next"
@@ -13,18 +12,30 @@ const BlogPostContent = dynamic(
 
 export const dynamicParams = true
 
+// This ensures we generate static paths for all blog posts
+export async function generateStaticParams() {
+  const posts = await getAllPosts()
+  return posts.map(post => ({
+    year: new Date(post.date).getFullYear().toString(),
+    slug: post.slug,
+  }))
+}
+
 // Generate metadata for SEO and social sharing
 export async function generateMetadata({ 
   params 
 }: { 
   params: { year: string; slug: string } 
-}, parent: ResolvingMetadata): Promise<Metadata> {
+}): Promise<Metadata> {
   const { year, slug } = params
   
   // Fetch post data
   const posts = await getAllPosts()
-  const postData = posts.find((post: any) => post.slug === slug)
-  if (!postData) return { title: 'Post Not Found' }
+  const postData = posts.find((post) => post.slug === slug)
+  
+  if (!postData) {
+    return { title: 'Post Not Found' }
+  }
   
   // Get cover image URL - prioritize cover_image field
   const coverUrl = postData.cover_image || 
@@ -37,12 +48,10 @@ export async function generateMetadata({
   const description = postData.preview || "Thoughts on math, poetry, and more."
   const url = `https://krisyotam.com/blog/${year}/${slug}`
   
-  console.log(`Generating metadata for ${slug}:`, { 
-    title, subtitle, coverUrl, description 
+  // Debug log for troubleshooting
+  console.log(`[${new Date().toISOString()}] Generated metadata for ${slug}:`, { 
+    title, description, coverUrl
   })
-  
-  // Get parent metadata
-  const parentMetadata = await parent
   
   return {
     title: `${title}${subtitle} | Kris Yotam`,
@@ -71,10 +80,6 @@ export async function generateMetadata({
     alternates: {
       canonical: url,
     },
-    other: {
-      'og:image': coverUrl,
-      'twitter:image': coverUrl,
-    },
   }
 }
 
@@ -87,7 +92,7 @@ export default async function PostPage({
 
   // 1) Fetch list metadata
   const posts = await getAllPosts()
-  const postData = posts.find((post: any) => post.slug === slug)
+  const postData = posts.find((post) => post.slug === slug)
   if (!postData) notFound()
 
   // 2) Load the raw MDX data
