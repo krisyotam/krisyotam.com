@@ -1,48 +1,30 @@
 // app/blog/[year]/[slug]/page.tsx
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
+import Head from "next/head"
 import { notFound } from "next/navigation"
 import { getAllPosts, getPostContent } from "@/utils/posts"
-import { Metadata } from "next"
+import { Metadata, ResolvingMetadata } from "next"
 
-// Import the client components with dynamic imports
 const BlogPostContent = dynamic(
   () => import("./blog-post-content").then((mod) => mod.BlogPostContent),
   { suspense: true }
 )
 
-// Add BlogLayout for client-side UI elements
-const BlogLayoutClient = dynamic(
-  () => import("../../blog-layout-client").then((mod) => mod.BlogLayoutClient),
-  { suspense: true }
-)
-
 export const dynamicParams = true
-
-// This ensures we generate static paths for all blog posts
-export async function generateStaticParams() {
-  const posts = await getAllPosts()
-  return posts.map(post => ({
-    year: new Date(post.date).getFullYear().toString(),
-    slug: post.slug,
-  }))
-}
 
 // Generate metadata for SEO and social sharing
 export async function generateMetadata({ 
   params 
 }: { 
   params: { year: string; slug: string } 
-}): Promise<Metadata> {
+}, parent: ResolvingMetadata): Promise<Metadata> {
   const { year, slug } = params
   
   // Fetch post data
   const posts = await getAllPosts()
-  const postData = posts.find((post) => post.slug === slug)
-  
-  if (!postData) {
-    return { title: 'Post Not Found' }
-  }
+  const postData = posts.find((post: any) => post.slug === slug)
+  if (!postData) return { title: 'Post Not Found' }
   
   // Get cover image URL - prioritize cover_image field
   const coverUrl = postData.cover_image || 
@@ -54,6 +36,13 @@ export async function generateMetadata({
   const subtitle = postData.subtitle ? ` - ${postData.subtitle}` : ''
   const description = postData.preview || "Thoughts on math, poetry, and more."
   const url = `https://krisyotam.com/blog/${year}/${slug}`
+  
+  console.log(`Generating metadata for ${slug}:`, { 
+    title, subtitle, coverUrl, description 
+  })
+  
+  // Get parent metadata
+  const parentMetadata = await parent
   
   return {
     title: `${title}${subtitle} | Kris Yotam`,
@@ -82,6 +71,10 @@ export async function generateMetadata({
     alternates: {
       canonical: url,
     },
+    other: {
+      'og:image': coverUrl,
+      'twitter:image': coverUrl,
+    },
   }
 }
 
@@ -94,7 +87,7 @@ export default async function PostPage({
 
   // 1) Fetch list metadata
   const posts = await getAllPosts()
-  const postData = posts.find((post) => post.slug === slug)
+  const postData = posts.find((post: any) => post.slug === slug)
   if (!postData) notFound()
 
   // 2) Load the raw MDX data
@@ -110,19 +103,16 @@ export default async function PostPage({
     },
   }
 
-  // Wrap the content with BlogLayoutClient for styling and UI
   return (
-    <BlogLayoutClient>
-      <Suspense fallback={<div className="min-h-[200px]">Loading…</div>}>
-        <article className="post-content">
-          <BlogPostContent
-            year={year}
-            slug={slug}
-            mdxData={mdxDataForComponent}
-            postData={postData}
-          />
-        </article>
-      </Suspense>
-    </BlogLayoutClient>
+    <Suspense fallback={<div className="min-h-[200px]">Loading…</div>}>
+      <article className="post-content">
+        <BlogPostContent
+          year={year}
+          slug={slug}
+          mdxData={mdxDataForComponent}
+          postData={postData}
+        />
+      </article>
+    </Suspense>
   )
 }
