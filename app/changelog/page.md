@@ -37,6 +37,7 @@
 ## May 2025
 
 ### May 8, 2025
+- fixed poetry slugs to a cleaner  verse/type/year/slug
 - Merge branch 'main' of https://github.com/krisyotam/krisblog
 - Merge branch 'main' of https://github.com/krisyotam/krisblog
 
