@@ -15,15 +15,17 @@ interface Reference {
 
 export function ReferenceViewerWrapper({ reference }: { reference: Reference }) {
   return (
-    <ReferenceViewer
-      id={reference.id}
-      title={reference.title}
-      type={reference.type}
-      format={reference.format}
-      author={reference.author}
-      date={reference.date}
-      url={reference.url}
-      preview={reference.preview}
-    />
+    <div className="w-full max-w-3xl mx-auto">
+      <ReferenceViewer
+        id={reference.id}
+        title={reference.title}
+        type={reference.type}
+        format={reference.format}
+        author={reference.author}
+        date={reference.date}
+        url={reference.url}
+        preview={reference.preview}
+      />
+    </div>
   )
-} 
+}

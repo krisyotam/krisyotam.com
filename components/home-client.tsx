@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import { BlogPost } from "./blog-post"
-import { LayoutGrid, Text, BookOpen, Calendar, Hash, Github, BookMarked, Tag } from "lucide-react"
+import { LayoutGrid, Text, BookOpen, Calendar, Hash, Github, BookMarked, Tag, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { PageHeader } from "@/components/page-header"
@@ -78,7 +78,7 @@ const homePageData = {
 
 function MarkdownContent({ content }: { content: any }) {
   return (
-    <div className="prose prose-sm max-w-none font-serif text-foreground post-content [&>h1]:mt-0 [&>h2]:mt-0 [&>h3]:mt-0">
+    <div className="prose prose-sm max-w-none font-serif text-foreground post-content [&>h1]:mt-0 [&>h2]:mt-0 [&>h3]:mt-0 [&_p]:text-foreground [&_a]:text-primary [&_ul]:text-foreground [&_ol]:text-foreground [&_li]:text-foreground [&_blockquote]:text-foreground/80">
       <MDXRemote
         {...content}
         components={{
@@ -129,7 +129,7 @@ function MarkdownContent({ content }: { content: any }) {
             <code className="bg-muted px-1 py-0.5 rounded text-sm font-mono">{children}</code>
           ),
           pre: ({ children }) => (
-            <pre className="bg-muted p-4 rounded-lg overflow-x-auto my-4">{children}</pre>
+            <pre className="bg-muted p-4 rounded-lg overflow-x-auto my-4 font-mono text-sm">{children}</pre>
           ),
         }}
       />
@@ -221,9 +221,8 @@ function PoetryCard({ poem }: { poem: Poem }) {
 
   const previewStanza = stanzas[0]
 
-  // Correct poetry path format
-  const typeSlug = poem.type.toLowerCase().replace(/\s+/g, "-");
-  const poetryPath = `/verse/${typeSlug}/${poem.year}/${poem.slug}`
+  // Fixed poetry path to use /verse directly
+  const poetryPath = `/verse/${poem.slug}`
 
   return (
     <Card className="p-4 bg-card border border-border hover:bg-accent/50 transition-colors">
@@ -271,6 +270,104 @@ function GitHubContributions() {
         </a>
       </div>
     </Card>
+  )
+}
+
+// Post Table Row Component
+function PostTableRow({ post }: { post: Post }) {
+  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })
+  
+  const year = new Date(post.date).getFullYear().toString()
+  const slugPath = `blog/${year}/${post.slug}`
+  
+  return (
+    <tr className="border-t border-border hover:bg-muted/30 transition-colors">
+      <td className="py-2 pr-4 text-sm text-muted-foreground font-mono">{formattedDate}</td>
+      <td className="py-2 pr-4">
+        <Link href={slugPath} className="hover:underline">
+          {post.title}
+        </Link>
+      </td>
+      <td className="py-2 text-sm text-right">
+        <span className="px-2 py-0.5 text-xs rounded-full bg-muted text-muted-foreground">{post.category}</span>
+      </td>
+    </tr>
+  )
+}
+
+// Posts Table Component with Pagination
+function PostsTable({ posts }: { posts: Post[] }) {
+  const [currentPage, setCurrentPage] = useState(1)
+  const postsPerPage = 10
+  
+  // Filter out excluded categories and sort by date (newest first)
+  const filteredPosts = posts
+    .filter(post => !["On Myself", "On Website", "On Learning", "On Writing", "On Method"].includes(post.category))
+    .filter(post => post.slug && post.date && post.preview)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage)
+  const indexOfLastPost = currentPage * postsPerPage
+  const indexOfFirstPost = indexOfLastPost - postsPerPage
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost)
+  
+  // Handle page changes
+  const goToNextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages))
+  const goToPrevPage = () => setCurrentPage(prev => Math.max(prev - 1, 1))
+  
+  return (
+    <div className="w-full mb-8">
+      <div className="overflow-x-auto">
+        <table className="w-full">
+          <thead>
+            <tr className="text-left text-muted-foreground">
+              <th className="w-1/5 pb-2 text-sm font-normal">Date</th>
+              <th className="pb-2 text-sm font-normal">Title</th>
+              <th className="w-1/6 pb-2 text-sm font-normal text-right">Category</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentPosts.map((post) => (
+              <PostTableRow key={post.slug} post={post} />
+            ))}
+          </tbody>
+        </table>
+      </div>
+      
+      {/* Pagination controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-between items-center mt-4">
+          <div className="text-sm text-muted-foreground">
+            Page {currentPage} of {totalPages}
+          </div>
+          <div className="flex space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={goToPrevPage}
+              disabled={currentPage === 1}
+              className="h-8 w-8 p-0"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={goToNextPage}
+              disabled={currentPage === totalPages}
+              className="h-8 w-8 p-0"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -442,6 +539,11 @@ export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list
               <MarkdownContent content={bioContent} />
             </Card>
 
+            {/* Posts Table with Feed Data */}
+            <Card className="mb-8 p-6 bg-card border border-border">
+              <PostsTable posts={posts} />
+            </Card>
+
             {/* Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
               <StatsCard
@@ -465,10 +567,6 @@ export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list
             </div>
 
             {/* Random Blog Posts */}
-            <h2 className="text-xl font-medium mb-4 flex items-center gap-2">
-              <BookMarked className="h-5 w-5" />
-              Suggested Readings
-            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               {randomPosts.map((post) => (
                 <BlogPostCard key={post.slug} post={post} />
@@ -476,10 +574,6 @@ export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list
             </div>
 
             {/* Random Poetry */}
-            <h2 className="text-xl font-medium mb-4 flex items-center gap-2">
-              <BookOpen className="h-5 w-5" />
-              Featured Poetry
-            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               {randomPoems.map((poem) => (
                 <PoetryCard key={poem.id} poem={poem} />

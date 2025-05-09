@@ -95,14 +95,16 @@ export function ReferenceViewer({
       )
     }
     
-    // Handle PDF format
+    // Handle PDF format - using responsive width and increased height
     if (format.toUpperCase() === 'PDF') {
       return (
-        <iframe 
-          src={`${url}#toolbar=0&navpanes=0&scrollbar=0`} 
-          className="w-full h-[1100px] border-0 rounded-md"
-          title={title}
-        />
+        <div className="w-full">
+          <iframe 
+            src={`${url}#toolbar=0&navpanes=0&scrollbar=0`} 
+            className="w-full h-[1000px] border-0 rounded-md"
+            title={title}
+          />
+        </div>
       )
     }
     
@@ -192,7 +194,7 @@ export function ReferenceViewer({
   }
 
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="w-full max-w-full">
       <div className="border border-border rounded-md overflow-hidden">
         {/* Header with file info and controls */}
         <div className="flex items-center justify-between p-4 bg-muted/50 border-b border-border">
@@ -236,11 +238,11 @@ export function ReferenceViewer({
           </div>
         </div>
         
-        {/* File viewer */}
-        <div className={`p-0 ${format.toUpperCase() === 'PDF' ? '' : 'p-4'} overflow-x-auto`}>
+        {/* File viewer with consistent width */}
+        <div className={`${format.toUpperCase() === 'PDF' ? '' : 'p-4'} overflow-x-auto w-full`}>
           {renderViewer()}
         </div>
       </div>
     </div>
   )
-} 
+}
