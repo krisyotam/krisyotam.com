@@ -3,10 +3,17 @@ import dynamic from "next/dynamic"
 import { Suspense } from "react"
 import { notFound } from "next/navigation"
 import { getAllPosts, getPostContent } from "@/utils/posts"
-import { Metadata, ResolvingMetadata } from "next"
+import { Metadata } from "next"
 
+// Import the client components with dynamic imports
 const BlogPostContent = dynamic(
   () => import("./blog-post-content").then((mod) => mod.BlogPostContent),
+  { suspense: true }
+)
+
+// Add BlogLayout for client-side UI elements
+const BlogLayoutClient = dynamic(
+  () => import("../../blog-layout-client").then((mod) => mod.BlogLayoutClient),
   { suspense: true }
 )
 
@@ -47,11 +54,6 @@ export async function generateMetadata({
   const subtitle = postData.subtitle ? ` - ${postData.subtitle}` : ''
   const description = postData.preview || "Thoughts on math, poetry, and more."
   const url = `https://krisyotam.com/blog/${year}/${slug}`
-  
-  // Debug log for troubleshooting
-  console.log(`[${new Date().toISOString()}] Generated metadata for ${slug}:`, { 
-    title, description, coverUrl
-  })
   
   return {
     title: `${title}${subtitle} | Kris Yotam`,
@@ -108,16 +110,19 @@ export default async function PostPage({
     },
   }
 
+  // Wrap the content with BlogLayoutClient for styling and UI
   return (
-    <Suspense fallback={<div className="min-h-[200px]">Loading…</div>}>
-      <article className="post-content">
-        <BlogPostContent
-          year={year}
-          slug={slug}
-          mdxData={mdxDataForComponent}
-          postData={postData}
-        />
-      </article>
-    </Suspense>
+    <BlogLayoutClient>
+      <Suspense fallback={<div className="min-h-[200px]">Loading…</div>}>
+        <article className="post-content">
+          <BlogPostContent
+            year={year}
+            slug={slug}
+            mdxData={mdxDataForComponent}
+            postData={postData}
+          />
+        </article>
+      </Suspense>
+    </BlogLayoutClient>
   )
 }

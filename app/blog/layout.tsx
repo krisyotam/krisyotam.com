@@ -1,5 +1,4 @@
-// Server component for blog layout
-import { BlogLayoutClient } from "./blog-layout-client";
+import React from "react";
 import { Metadata } from "next";
 
 // Define default metadata for the blog section
@@ -19,11 +18,11 @@ export const metadata: Metadata = {
   }
 };
 
-// Server component as the main layout
+// Simple pass-through layout that preserves the URL structure
 export default function BlogLayout({
   children
 }: {
   children: React.ReactNode
 }) {
-  return <BlogLayoutClient>{children}</BlogLayoutClient>;
+  return children;
 }
