@@ -3,12 +3,12 @@
 import { getActivePosts, getAllPosts } from "../utils/posts"
 import quotesData from "../data/header-quotes.json"
 import { HomeClient } from "@/components/home-client"
-import fs from 'fs'
-import path from 'path'
 import { serialize } from 'next-mdx-remote/serialize'
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import fs from 'fs'
+import path from 'path'
 
 function getRandomQuote() {
   const quotes = quotesData.quotes
@@ -77,34 +77,13 @@ export default async function HomeWrapper({ initialView = 'list' }: HomeWrapperP
     // Read and serialize the bio content
     let serializedBio;
     try {
-      // Try multiple possible paths for the bio file
-      const possiblePaths = [
-        path.join(process.cwd(), 'app', 'home-bio.mdx'),
-        path.join(process.cwd(), '.', 'app', 'home-bio.mdx'),
-        path.join(process.cwd(), '..', 'app', 'home-bio.mdx'),
-        path.join(process.cwd(), 'src', 'app', 'home-bio.mdx'),
-        path.join(process.cwd(), '..', 'src', 'app', 'home-bio.mdx')
-      ];
-
-      let bioContent;
-      let loadedPath = null;
-
-      // Try each path until we find the file
-      for (const bioPath of possiblePaths) {
-        try {
-          bioContent = await fs.promises.readFile(bioPath, 'utf8');
-          loadedPath = bioPath;
-          console.log(`Successfully loaded bio file from: ${bioPath}`);
-          break;
-        } catch (readError) {
-          console.log(`Failed to load bio from: ${bioPath}`);
-          continue;
-        }
-      }
-
-      if (!bioContent) {
-        throw new Error('Could not find home-bio.mdx in any of the expected locations');
-      }
+      // Get the bio content using a more reliable method
+      const bioPath = path.join(process.cwd(), 'app', 'home-bio.mdx');
+      console.log('Attempting to load bio from:', bioPath);
+      console.log('Current working directory:', process.cwd());
+      
+      const bioContent = await fs.promises.readFile(bioPath, 'utf8');
+      console.log('Successfully loaded bio content');
       
       serializedBio = await serialize(bioContent, {
         mdxOptions: {

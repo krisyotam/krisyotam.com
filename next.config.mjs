@@ -34,6 +34,13 @@ const baseConfig = {
       ...(config.resolve.alias || {}),
       'next/image$': 'next/future/image',
     };
+
+    // Add support for raw MDX imports
+    config.module.rules.push({
+      test: /\.mdx\?raw$/,
+      type: 'asset/source',
+    });
+
     return config;
   },
   // Security headers
