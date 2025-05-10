@@ -77,33 +77,33 @@ export default async function HomeWrapper({ initialView = 'list' }: HomeWrapperP
     // Read and serialize the bio content
     let serializedBio;
     try {
-      const bioFilePath = path.join(process.cwd(), 'app', 'home-bio.mdx')
-      
+      // Try multiple possible paths for the bio file
+      const possiblePaths = [
+        path.join(process.cwd(), 'app', 'home-bio.mdx'),
+        path.join(process.cwd(), '.', 'app', 'home-bio.mdx'),
+        path.join(process.cwd(), '..', 'app', 'home-bio.mdx'),
+        path.join(process.cwd(), 'src', 'app', 'home-bio.mdx'),
+        path.join(process.cwd(), '..', 'src', 'app', 'home-bio.mdx')
+      ];
+
       let bioContent;
-      try {
-        // Use fs.promises to properly await the file read
-        bioContent = await fs.promises.readFile(bioFilePath, 'utf8')
-        console.log("Successfully loaded bio file")
-      } catch (readError) {
-        console.error("Error reading bio file:", readError)
-        console.error("File path tried:", bioFilePath)
-        // Try alternative path for deployed environment
+      let loadedPath = null;
+
+      // Try each path until we find the file
+      for (const bioPath of possiblePaths) {
         try {
-          const altBioFilePath = path.join(process.cwd(), '.', 'app', 'home-bio.mdx')
-          bioContent = await fs.promises.readFile(altBioFilePath, 'utf8')
-          console.log("Successfully loaded bio file from alternative path")
-        } catch (altError) {
-          console.error("Error reading bio file from alternative path:", altError)
-          // Last resort - try with absolute file path resolution
-          try {
-            const resolvedPath = require.resolve('../app/home-bio.mdx')
-            bioContent = await fs.promises.readFile(resolvedPath, 'utf8')
-            console.log("Successfully loaded bio file with require.resolve")
-          } catch (resolveError) {
-            console.error("All attempts to load bio file failed. Using default content.")
-            bioContent = DEFAULT_BIO
-          }
+          bioContent = await fs.promises.readFile(bioPath, 'utf8');
+          loadedPath = bioPath;
+          console.log(`Successfully loaded bio file from: ${bioPath}`);
+          break;
+        } catch (readError) {
+          console.log(`Failed to load bio from: ${bioPath}`);
+          continue;
         }
+      }
+
+      if (!bioContent) {
+        throw new Error('Could not find home-bio.mdx in any of the expected locations');
       }
       
       serializedBio = await serialize(bioContent, {
@@ -114,14 +114,10 @@ export default async function HomeWrapper({ initialView = 'list' }: HomeWrapperP
             [rehypeAutolinkHeadings, { behavior: 'wrap' }]
           ],
         },
-        // Ensure all imported components are properly handled
-        scope: {
-          // Empty scope to prevent mdx serialization errors with imports
-          // The actual components are provided in home-client.tsx
-        }
-      })
+        scope: {}
+      });
     } catch (bioError) {
-      console.error("Error processing bio content:", bioError)
+      console.error("Error processing bio content:", bioError);
       // Create a simple fallback bio
       serializedBio = await serialize(DEFAULT_BIO, {
         mdxOptions: {
@@ -131,7 +127,7 @@ export default async function HomeWrapper({ initialView = 'list' }: HomeWrapperP
             [rehypeAutolinkHeadings, { behavior: 'wrap' }]
           ],
         }
-      })
+      });
     }
 
     // Use the HomeClient component which includes the toggle button
