@@ -27,6 +27,7 @@ const baseConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  transpilePackages: ['react-syntax-highlighter'],
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   // Alias next/image → next/future/image globally
   webpack(config) {

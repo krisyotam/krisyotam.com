@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/Prism";
-import { prism } from "react-syntax-highlighter/dist/cjs/styles/Prism";
+import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { prism } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { IconCheck, IconCopy } from "@tabler/icons-react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
@@ -106,7 +106,7 @@ export const CodeBlock = ({
           }}
           wrapLines={true}
           showLineNumbers={true}
-          lineProps={(lineNumber) => ({
+          lineProps={(lineNumber: number) => ({
             style: {
               backgroundColor: activeHighlightLines.includes(lineNumber)
                 ? theme === 'dark' 
