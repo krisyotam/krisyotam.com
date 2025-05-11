@@ -1,6 +1,23 @@
 {
   "series": [
     {
+      "slug": "wisdom-ai",
+      "title": "Wisdom AI",
+      "subtitle": "Building a custom AI assistant",
+      "preview": "A series documenting the development of a custom AI assistant using OpenAI Whisper, Deepseek, CLI functionality and various other tools.",
+      "date": "2023-05-24",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8,
+      "posts": [
+        {
+          "slug": "a-prelude-to-wisdom",
+          "order": 1
+        }
+      ]
+    },
+    {
       "slug": "frieren-character-studies",
       "title": "Frieren Character Studies",
       "subtitle": "Character analyses from Frieren: Beyond Journey's End",

@@ -861,132 +861,156 @@
      overflow-wrap: anywhere;
    }
    
+   /* =============================================================================
+      SCROLLBAR STYLES
+      ========================================================================== */
+   /* Custom scrollbar styling */
+   ::-webkit-scrollbar {
+     width: 8px !important;
+     height: 8px !important;
+   }
    
-
-
-
-/* 1) Always reserve space for a vertical scrollbar */
-html {
-  /* modern: reserve gutter space even when no scrollbar */
-  scrollbar-gutter: stable;
-}
-body {
-  /* fallback / more consistent: always show a (possibly empty) scrollbar gutter */
-  overflow-y: scroll;
-}
-
-/* 2) Hide the scrollbar visually */
-
-/* — Chrome, Safari, Opera — */
-body::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  background: transparent;
-}
-
-/* — Firefox — */
-body {
-  scrollbar-width: none;       /* hides scrollbar but still reserves space because of overflow-y: scroll */
-}
-
-/* — IE 10+ / Edge Legacy — */
-body {
-  -ms-overflow-style: none;
-}
-
-/* target the Next.js Image wrapper <span> by its data‑attribute */
-span[data-nimg] {
-  display: block !important;
-}
-
-/* globals.css */
-span[data-nimg] {
-  display: block !important;      /* kill inline‑block spacing */
-  margin: 0 !important;           /* no margins */
-  padding: 0 !important;          /* no padding */
-  vertical-align: top !important; /* align it flush */
-  /* leave border-radius & overflow alone */
-}
-
-img {
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  vertical-align: top !important;
-}
-
-.dropcap-image-wrapper {
-  float: left;
-  margin-right: 0.5em;    /* tweak for text wrap */
-  margin-top: 0.1em;      /* align to baseline */
-  line-height: 0;
-}
-
-.dropcap-image {
-  background: transparent;
-  border: none;
-  user-select: none;
-  /* you can also set width/height via CSS if you prefer: */
-  /* width: 3em; */
-  /* height: auto; */
-}
-
-.dropcap-image {
-  /* disable any outlines, highlights, shadows, or filters */
-  outline: none !important;
-  box-shadow: none !important;
-  filter: none !important;
-  opacity: 1 !important;
-  background: transparent !important;
-}
-
-.dropcap-image {
-  /* make it big enough to admire — 5em is ~5× your 1em body text */
-  width: 10em !important;
-  height: 10em !important;
-  /* keep it perfectly square */
-  object-fit: contain;
-}
-
-/* ensure the browser can hyphenate text in English */
-.post-content {
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-}
-
-/* justify all but the last line, and allow hyphenated breaks */
-.post-content p {
-  text-align: justify;
-  text-align-last: left;  /* keep the last line ragged-right */
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-}
-
-/* Constrain FileViewer and its <pre> to 100% of whatever parent they live in */
-.post-content .file-viewer {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box;
-}
-
-.post-content .file-viewer pre {
-  /* force the <pre> itself to fill its container */
-  width: 100% !important;
-  max-width: 100% !important;
-  
-  /* scroll rather than overflow the page */
-  overflow-x: auto !important;
-  box-sizing: border-box;
-}
-
-/* (optional) wrap long words/URLs rather than overflow */
-.post-content .file-viewer code {
-  word-break: break-word;
-  overflow-wrap: anywhere;
-}
-
+   ::-webkit-scrollbar-track {
+     background: transparent !important;
+   }
+   
+   ::-webkit-scrollbar-thumb {
+     background: hsl(var(--muted-foreground) / 0.3) !important;
+     border-radius: 0 !important;
+   }
+   
+   ::-webkit-scrollbar-thumb:hover {
+     background: hsl(var(--muted-foreground) / 0.5) !important;
+   }
+   
+   /* Firefox scrollbar styling */
+   * {
+     scrollbar-width: thin !important;
+     scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent !important;
+   }
+   
+   /* 1) Always reserve space for a vertical scrollbar */
+   html {
+     /* modern: reserve gutter space even when no scrollbar */
+     scrollbar-gutter: stable !important;
+   }
+   body {
+     /* fallback / more consistent: always show a (possibly empty) scrollbar gutter */
+     overflow-y: scroll !important;
+   }
+   
+   /* 2) Hide the scrollbar visually */
+   
+   /* — Chrome, Safari, Opera — */
+   body::-webkit-scrollbar {
+     width: 0 !important;
+     height: 0 !important;
+     background: transparent !important;
+   }
+   
+   /* — Firefox — */
+   body {
+     scrollbar-width: none !important;       /* hides scrollbar but still reserves space because of overflow-y: scroll */
+   }
+   
+   /* — IE 10+ / Edge Legacy — */
+   body {
+     -ms-overflow-style: none !important;
+   }
+   
+   /* target the Next.js Image wrapper <span> by its data‑attribute */
+   span[data-nimg] {
+     display: block !important;
+   }
+   
+   /* globals.css */
+   span[data-nimg] {
+     display: block !important;      /* kill inline‑block spacing */
+     margin: 0 !important;           /* no margins */
+     padding: 0 !important;          /* no padding */
+     vertical-align: top !important; /* align it flush */
+     /* leave border-radius & overflow alone */
+   }
+   
+   img {
+     display: block !important;
+     margin: 0 !important;
+     padding: 0 !important;
+     border: 0 !important;
+     vertical-align: top !important;
+   }
+   
+   .dropcap-image-wrapper {
+     float: left;
+     margin-right: 0.5em;    /* tweak for text wrap */
+     margin-top: 0.1em;      /* align to baseline */
+     line-height: 0;
+   }
+   
+   .dropcap-image {
+     background: transparent;
+     border: none;
+     user-select: none;
+     /* you can also set width/height via CSS if you prefer: */
+     /* width: 3em; */
+     /* height: auto; */
+   }
+   
+   .dropcap-image {
+     /* disable any outlines, highlights, shadows, or filters */
+     outline: none !important;
+     box-shadow: none !important;
+     filter: none !important;
+     opacity: 1 !important;
+     background: transparent !important;
+   }
+   
+   .dropcap-image {
+     /* make it big enough to admire — 5em is ~5× your 1em body text */
+     width: 10em !important;
+     height: 10em !important;
+     /* keep it perfectly square */
+     object-fit: contain;
+   }
+   
+   /* ensure the browser can hyphenate text in English */
+   .post-content {
+     hyphens: auto;
+     -webkit-hyphens: auto;
+     -ms-hyphens: auto;
+   }
+   
+   /* justify all but the last line, and allow hyphenated breaks */
+   .post-content p {
+     text-align: justify;
+     text-align-last: left;  /* keep the last line ragged-right */
+     hyphens: auto;
+     -webkit-hyphens: auto;
+     -ms-hyphens: auto;
+   }
+   
+   /* Constrain FileViewer and its <pre> to 100% of whatever parent they live in */
+   .post-content .file-viewer {
+     width: 100% !important;
+     max-width: 100% !important;
+     box-sizing: border-box;
+   }
+   
+   .post-content .file-viewer pre {
+     /* force the <pre> itself to fill its container */
+     width: 100% !important;
+     max-width: 100% !important;
+     
+     /* scroll rather than overflow the page */
+     overflow-x: auto !important;
+     box-sizing: border-box;
+   }
+   
+   /* (optional) wrap long words/URLs rather than overflow */
+   .post-content .file-viewer code {
+     word-break: break-word;
+     overflow-wrap: anywhere;
+   }
+   
 
 

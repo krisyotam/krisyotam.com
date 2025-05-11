@@ -3,6 +3,7 @@ import Image, { type ImageProps } from "next/image"
 import * as Typography from "@/components/typography"
 import { InternalLink } from "@/components/internal-link"
 import { EnhancedLink } from "@/components/enhanced-link"
+import { CodeBlock } from "@/components/ui/code-block"
 
 // Import all post-related components
 import MiniBio from '@/components/posts/people/mini-bio'
@@ -156,6 +157,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     
     // Code components
     CppCodeBlock,
+    CodeBlock,
     
     // Special content components
     TryHackMe,

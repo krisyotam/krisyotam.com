@@ -38,20 +38,50 @@ async function readDataFile<T>(filename: string): Promise<T | null> {
     import("fs"),
     import("path"),
   ])
+  
   try {
     const fullPath = path.join(process.cwd(), "data", filename)
+    console.log(`Attempting to read file: ${fullPath}`)
+    
+    // Verify file exists
+    const fileExists = await fs.access(fullPath).then(() => true).catch(() => false)
+    if (!fileExists) {
+      console.error(`File not found: ${fullPath}`)
+      return null
+    }
+    
     const contents = await fs.readFile(fullPath, "utf8")
-    return JSON.parse(contents) as T
+    
+    try {
+      return JSON.parse(contents) as T
+    } catch (parseError) {
+      console.error(`Error parsing JSON from ${filename}:`, parseError)
+      console.error(`Content sample: ${contents.substring(0, 100)}...`)
+      return null
+    }
   } catch (e) {
     console.error(`Error reading ${filename}:`, e)
     return null
   }
 }
 
-// Get all series data
+// Get all series data with caching for production
+let cachedSeriesData: SeriesData[] | null = null;
 export async function getAllSeriesData(): Promise<SeriesData[]> {
+  // Use cached data if available in production
+  if (process.env.NODE_ENV === 'production' && cachedSeriesData) {
+    return cachedSeriesData;
+  }
+  
   const data = await readDataFile<SeriesListData>("series.json")
-  return data?.series || []
+  const seriesData = data?.series || [];
+  
+  // Cache the data in production
+  if (process.env.NODE_ENV === 'production') {
+    cachedSeriesData = seriesData;
+  }
+  
+  return seriesData;
 }
 
 // Get a specific series by slug

@@ -887,6 +887,32 @@
       "confidence": "certain",
       "importance": 5,
       "state": "active"
+    },
+    {
+      "title": "Thoughts on Simple Systems",
+      "subtitle": "Embracing minimalism in my desktop setup",
+      "preview": "My journey towards a simpler desktop setup and plans for the future.",
+      "date": "2025-05-24",
+      "tags": ["Minimalism", "Productivity", "Desktop Setup", "Simplicity"],
+      "category": "On Website",
+      "slug": "thoughts-on-simple-systems",
+      "status": "Published",
+      "confidence": "certain",
+      "importance": 7,
+      "state": "active"
+    },
+    {
+      "title": "A Prelude to Wisdom",
+      "subtitle": "Building my custom AI assistant",
+      "preview": "Creating an AI assistant using OpenAI Whisper, Deepseek, CLI functionality and various other tools.",
+      "date": "2023-05-24",
+      "tags": ["AI", "OpenAI", "Whisper", "Deepseek", "CLI", "Assistant", "C"],
+      "category": "Wisdom AI",
+      "slug": "a-prelude-to-wisdom",
+      "status": "Published",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
     }
   ]
 }

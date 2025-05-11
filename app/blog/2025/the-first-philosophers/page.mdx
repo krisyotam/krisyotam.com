@@ -1,4 +1,5 @@
 import Book from "@/components/posts/books/book";
+import { CodeBlock } from "@/components/ui/code-block";
 
 # The First Philosophers
 
@@ -29,4 +30,70 @@ An Oxford World's Classics edition presenting the earliest Greek thinkers, whose
 - Democritus
 
 ## Analysis
-[Your analysis and notes will go here] 
+[Your analysis and notes will go here]
+
+## Philosophical Programming
+Here's a simple C program that demonstrates Heraclitus' famous concept of constant change and the impossibility of stepping into the same river twice:
+
+<CodeBlock
+  language="c"
+  filename="river_of_change.c"
+  highlightLines={[4, 7, 8, 9]}
+  code={`#include <stdio.h>
+#include <time.h>
+
+int main() {
+    // The river is never the same
+    time_t current_time = time(NULL);
+    printf("The river flows at timestamp: %ld\\n", current_time);
+    
+    // Wait a moment
+    sleep(1);
+    
+    // Try to step in the same river again
+    time_t new_time = time(NULL);
+    printf("The river has changed: %ld\\n", new_time);
+    
+    return 0;
+}`}
+/>
+
+## Long Example: Simulating a Dialogue (Socratic Method)
+Here's a longer C program that simulates a simple Socratic dialogue between Socrates and a student, to test the scroll bar for long code blocks:
+
+<CodeBlock
+  language="c"
+  filename="socratic_dialogue.c"
+  code={`#include <stdio.h>
+#include <string.h>
+
+void socrates_asks(const char* question) {
+    printf("Socrates: %s\n", question);
+}
+
+void student_answers(const char* answer) {
+    printf("Student: %s\n", answer);
+}
+
+int main() {
+    socrates_asks("What is virtue?");
+    student_answers("Virtue is doing good.");
+    socrates_asks("And what is good?");
+    student_answers("Good is what benefits others.");
+    socrates_asks("Is all that benefits others good, even if it harms you?");
+    student_answers("Perhaps not always.");
+    socrates_asks("So, is virtue always good for the one who is virtuous?");
+    student_answers("I suppose it must be.");
+    socrates_asks("Then can someone be virtuous and unhappy?");
+    student_answers("That seems unlikely.");
+    socrates_asks("So, virtue leads to happiness?");
+    student_answers("Yes, Socrates, I think so.");
+    socrates_asks("Let us continue to examine this further...");
+    // ... imagine many more lines of dialogue ...
+    for (int i = 0; i < 20; ++i) {
+        socrates_asks("Is this always the case?");
+        student_answers("I'm not sure, Socrates.");
+    }
+    return 0;
+}`}
+/> 

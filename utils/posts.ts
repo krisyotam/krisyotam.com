@@ -47,7 +47,20 @@ function assertServer() {
 
 // Extract year from date
 export function getPostYear(dateString: string): string {
-  return new Date(dateString).getFullYear().toString()
+  try {
+    const date = new Date(dateString);
+    
+    // Check if the date is valid
+    if (isNaN(date.getTime())) {
+      console.error(`Invalid date string: ${dateString}`);
+      return new Date().getFullYear().toString(); // Default to current year
+    }
+    
+    return date.getFullYear().toString();
+  } catch (error) {
+    console.error(`Error extracting year from date ${dateString}:`, error);
+    return new Date().getFullYear().toString(); // Default to current year
+  }
 }
 
 // Read a JSON file from /data
@@ -57,23 +70,55 @@ async function readDataFile<T>(filename: string): Promise<T | null> {
     import("fs"),
     import("path"),
   ])
+  
   try {
     const fullPath = path.join(process.cwd(), "data", filename)
+    console.log(`Attempting to read file: ${fullPath}`)
+    
+    // Verify file exists
+    const fileExists = await fs.access(fullPath).then(() => true).catch(() => false)
+    if (!fileExists) {
+      console.error(`File not found: ${fullPath}`)
+      return null
+    }
+    
     const contents = await fs.readFile(fullPath, "utf8")
-    return JSON.parse(contents) as T
+    
+    try {
+      return JSON.parse(contents) as T
+    } catch (parseError) {
+      console.error(`Error parsing JSON from ${filename}:`, parseError)
+      console.error(`Content sample: ${contents.substring(0, 100)}...`)
+      return null
+    }
   } catch (e) {
     console.error(`Error reading ${filename}:`, e)
     return null
   }
 }
 
+// Add caching for production
+let cachedPosts: Post[] | null = null;
+
 // Get all posts, sorted newest first
 export async function getAllPosts(): Promise<Post[]> {
+  // Use cached data if available in production
+  if (process.env.NODE_ENV === 'production' && cachedPosts) {
+    return cachedPosts;
+  }
+  
   const data = await readDataFile<PostsData>("feed.json")
   const posts = data?.posts || []
-  return posts.sort(
+  const sortedPosts = posts.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
+  
+  // Cache the data in production
+  if (process.env.NODE_ENV === 'production') {
+    cachedPosts = sortedPosts;
+  }
+  
+  return sortedPosts
 }
 
 // Only active posts (state === "active")
