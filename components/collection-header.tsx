@@ -22,6 +22,7 @@ interface CollectionHeaderProps {
   importance?: number
   backLink?: string
   className?: string
+  backText?: string
 }
 
 const confidenceExplanation = `The confidence tag expresses how well-supported the collection is, or how authoritative its curation. This uses a scale from "impossible" to "certain", based on the Kesselman List of Estimative Words:
@@ -56,54 +57,42 @@ const statusExplanation = `The status indicator reflects the current state of th
 
 This helps readers understand the maturity and ongoing development of the collection.`
 
-function getStatusStyle(status: string) {
-  switch (status?.toLowerCase()) {
-    case "abandoned":
-      return "font-semibold"
-    case "notes":
-      return "font-medium"
-    case "draft":
-      return "font-medium"
-    case "in progress":
-      return "font-medium"
-    case "finished":
-      return "font-semibold"
-    case "maintained":
-      return "font-semibold"
-    case "complete":
-      return "font-bold"
-    default:
-      return "text-muted-foreground"
+function getConfidenceColor(confidence: string) {
+  const colors = {
+    certain: "text-gray-900 dark:text-gray-100",
+    "highly likely": "text-gray-800 dark:text-gray-200",
+    likely: "text-gray-700 dark:text-gray-300",
+    possible: "text-gray-600 dark:text-gray-400",
+    unlikely: "text-gray-500 dark:text-gray-500",
+    "highly unlikely": "text-gray-400 dark:text-gray-600",
+    remote: "text-gray-300 dark:text-gray-700",
+    impossible: "text-gray-200 dark:text-gray-800",
   }
+  return colors[confidence as keyof typeof colors] || "text-gray-600 dark:text-gray-400"
 }
 
-function getConfidenceStyle(confidence: string) {
-  switch (confidence?.toLowerCase()) {
-    case "impossible":
-    case "remote":
-      return "font-light"
-    case "highly unlikely":
-    case "unlikely":
-      return "font-light"
-    case "possible":
-      return "font-normal"
-    case "likely":
-      return "font-medium"
-    case "highly likely":
-      return "font-semibold"
-    case "certain":
-      return "font-bold"
-    default:
-      return "text-muted-foreground"
+function getStatusColor(status: string) {
+  // Convert status to lowercase and match with standard format keys
+  const statusKey = status.toLowerCase().replace(/ /g, " ")
+  
+  const colors = {
+    complete: "text-gray-900 dark:text-gray-100",
+    finished: "text-gray-900 dark:text-gray-100",
+    maintained: "text-gray-800 dark:text-gray-200",
+    "in progress": "text-gray-800 dark:text-gray-200",
+    draft: "text-gray-700 dark:text-gray-300",
+    notes: "text-gray-500 dark:text-gray-500",
+    abandoned: "text-gray-400 dark:text-gray-600",
   }
+  return colors[statusKey as keyof typeof colors] || "text-gray-600 dark:text-gray-400"
 }
 
-function getImportanceStyle(importance: number) {
-  if (importance >= 9) return "font-bold"
-  if (importance >= 7) return "font-semibold"
-  if (importance >= 5) return "font-medium"
-  if (importance >= 3) return "font-normal"
-  return "font-light"
+function getImportanceColor(importance: number) {
+  if (importance >= 8) return "text-gray-900 dark:text-gray-100"
+  if (importance >= 6) return "text-gray-800 dark:text-gray-200"
+  if (importance >= 4) return "text-gray-600 dark:text-gray-400"
+  if (importance >= 2) return "text-gray-500 dark:text-gray-500"
+  return "text-gray-400 dark:text-gray-600"
 }
 
 export function CollectionHeader({
@@ -115,107 +104,109 @@ export function CollectionHeader({
   confidence = "likely",
   importance = 7,
   backLink = "/library",
+  backText = "Library",
   className,
 }: CollectionHeaderProps) {
   // Parse the date string to a Date object
   const dateObj = date ? new Date(date) : new Date()
 
   return (
-    <header className={cn("mb-8", className)}>
-      {/* Back link */}
-      <div className="mb-4">
-        <Link
-          href={backLink}
-          className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <ArrowLeft className="mr-1 h-4 w-4" />
-          Back to Library
-        </Link>
-      </div>
+    <header className={cn("mb-4 relative", className)}>
+      {/* Back button with customizable text and link */}
+      <Link
+        href={backLink}
+        data-no-preview="true"
+        className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 group font-serif italic"
+      >
+        <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+        Return to {backText}
+      </Link>
 
       {/* Academic bento container */}
       <div className="border border-border bg-card text-card-foreground p-6 rounded-sm shadow-sm">
         {/* Title with academic styling */}
-        <h1 className="text-3xl font-serif font-medium tracking-tight mb-2">{title}</h1>
+        <h1 className="text-4xl font-serif font-medium tracking-tight mb-2 text-center uppercase">
+          {title.split(" ").join(" ")}
+        </h1>
 
-        {/* Metadata row */}
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm text-muted-foreground mb-4">
-          {/* Date */}
-          <div className="font-mono">{formatDateWithValidation(dateObj)}</div>
+        {/* Preview/description text */}
+        {preview && (
+          <p className="text-center font-serif text-sm text-muted-foreground italic mb-6 max-w-2xl mx-auto">
+            {preview}
+          </p>
+        )}
 
-          {/* Separator dot */}
-          <div className="mx-1">·</div>
-
-          {/* Status with hover explanation */}
-          <div className="flex items-center">
-            <HoverCard>
-              <HoverCardTrigger asChild>
-                <div className="flex items-center cursor-help">
-                  <span className="text-muted-foreground">status:</span>
-                  <span className={cn("ml-1", getStatusStyle(status))}>{status || "maintained"}</span>
-                  <Info className="ml-1 h-3 w-3 text-muted-foreground" />
-                </div>
-              </HoverCardTrigger>
-              <HoverCardContent className="w-80 text-sm bg-card text-card-foreground border-border p-4 font-serif">
-                <div className="space-y-2">
-                  <h4 className="font-medium text-foreground">Status Indicator</h4>
-                  <p className="text-muted-foreground whitespace-pre-wrap">{statusExplanation}</p>
-                </div>
-              </HoverCardContent>
-            </HoverCard>
-          </div>
-
-          {/* Separator dot */}
-          <div className="mx-1">·</div>
-
-          {/* Confidence with hover explanation */}
-          <div className="flex items-center">
-            <HoverCard>
-              <HoverCardTrigger asChild>
-                <div className="flex items-center cursor-help">
-                  <span className="text-muted-foreground">certainty:</span>
-                  <span className={cn("ml-1", getConfidenceStyle(confidence))}>{confidence || "likely"}</span>
-                  <Info className="ml-1 h-3 w-3 text-muted-foreground" />
-                </div>
-              </HoverCardTrigger>
-              <HoverCardContent className="w-80 text-sm bg-card text-card-foreground border-border p-4 font-serif">
-                <div className="space-y-2">
-                  <h4 className="font-medium text-foreground">Confidence Rating</h4>
-                  <p className="text-muted-foreground whitespace-pre-wrap">{confidenceExplanation}</p>
-                </div>
-              </HoverCardContent>
-            </HoverCard>
-          </div>
-
-          {/* Separator dot */}
-          <div className="mx-1">·</div>
-
-          {/* Importance with hover explanation */}
-          <div className="flex items-center">
-            <HoverCard>
-              <HoverCardTrigger asChild>
-                <div className="flex items-center cursor-help">
-                  <span className="text-muted-foreground">importance:</span>
-                  <span className={cn("ml-1", getImportanceStyle(importance || 7))}>{importance || 7}/10</span>
-                  <Info className="ml-1 h-3 w-3 text-muted-foreground" />
-                </div>
-              </HoverCardTrigger>
-              <HoverCardContent className="w-80 text-sm bg-card text-card-foreground border-border p-4 font-serif">
-                <div className="space-y-2">
-                  <h4 className="font-medium text-foreground">Importance Rating</h4>
-                  <p className="text-muted-foreground whitespace-pre-wrap">{importanceExplanation}</p>
-                </div>
-              </HoverCardContent>
-            </HoverCard>
-          </div>
+        {/* Date above other metadata */}
+        <div className="text-center mb-4">
+          <time
+            dateTime={typeof date === "string" ? date : undefined}
+            className="font-mono text-sm text-muted-foreground"
+          >
+            {formatDateWithValidation(dateObj)}
+          </time>
         </div>
 
-        {/* Preview text */}
-        {preview && <p className="text-muted-foreground font-serif leading-relaxed">{preview}</p>}
+        {/* Metadata section with academic styling */}
+        <div className="flex flex-wrap justify-center items-center gap-x-3 text-sm font-mono mb-6">
+          {/* Status */}
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <div className={cn("flex items-center gap-1 cursor-help", getStatusColor(status))}>
+                <Info className="h-3 w-3" />
+                <span className="font-medium">status: {status}</span>
+              </div>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-80 text-sm bg-card text-card-foreground border-border p-4 font-serif">
+              <div className="space-y-2">
+                <h4 className="font-medium text-foreground">Status Indicator</h4>
+                <p className="text-muted-foreground whitespace-pre-wrap">{statusExplanation}</p>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+
+          <span className="text-muted-foreground">·</span>
+
+          {/* Confidence */}
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <div className={cn("flex items-center gap-1 cursor-help", getConfidenceColor(confidence))}>
+                <Info className="h-3 w-3" />
+                <span className="font-medium">certainty: {confidence}</span>
+              </div>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-80 text-sm bg-card text-card-foreground border-border p-4 font-serif">
+              <div className="space-y-2">
+                <h4 className="font-medium text-foreground">Confidence Rating</h4>
+                <p className="text-muted-foreground whitespace-pre-wrap">{confidenceExplanation}</p>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+
+          <span className="text-muted-foreground">·</span>
+
+          {/* Importance */}
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <div className={cn("flex items-center gap-1 cursor-help", getImportanceColor(importance))}>
+                <Info className="h-3 w-3" />
+                <span className="font-medium">importance: {importance}/10</span>
+              </div>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-80 text-sm bg-card text-card-foreground border-border p-4 font-serif">
+              <div className="space-y-2">
+                <h4 className="font-medium text-foreground">Importance Rating</h4>
+                <p className="text-muted-foreground whitespace-pre-wrap">{importanceExplanation}</p>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+        </div>
+
+        {/* Decorative bottom border */}
+        <div className="mt-4 border-b border-border"></div>
       </div>
 
       {/* Decorative bottom border */}
-      <div className="mt-4 border-b border-border"></div>
+      <div className="mt-6 border-b border-border"></div>
     </header>
   )
 }

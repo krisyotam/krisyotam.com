@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react"
 import { Card } from "@/components/ui/card"
-import { Book, FileText, Video } from "lucide-react"
+import { Book, FileText, Video, Copy, ExternalLink, Check } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 interface BibliographyEntry {
   id: string
@@ -29,6 +30,7 @@ export function Bibliography({ bibliography, className }: BibliographyProps) {
   // Add pagination state
   const [currentPage, setCurrentPage] = useState(1)
   const entriesPerPage = 5
+  const [copied, setCopied] = useState(false)
 
   // Add debugging to see what data we're receiving
   useEffect(() => {
@@ -38,6 +40,27 @@ export function Bibliography({ bibliography, className }: BibliographyProps) {
   const handleEntryClick = (entry: BibliographyEntry) => {
     setSelectedEntry(entry)
     setIsModalOpen(true)
+  }
+
+  // Handle copy link to clipboard
+  const handleCopyLink = () => {
+    if (selectedEntry) {
+      navigator.clipboard.writeText(selectedEntry.url)
+        .then(() => {
+          setCopied(true)
+          setTimeout(() => setCopied(false), 2000)
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err)
+        })
+    }
+  }
+
+  // Handle open in new tab
+  const handleOpenInNewTab = () => {
+    if (selectedEntry) {
+      window.open(selectedEntry.url, '_blank', 'noopener,noreferrer')
+    }
   }
 
   // Calculate pagination
@@ -141,6 +164,54 @@ export function Bibliography({ bibliography, className }: BibliographyProps) {
               </div>
             </DialogTitle>
           </DialogHeader>
+          
+          {/* URL display and action buttons */}
+          <div className="p-3 border-b border-border flex flex-wrap items-center justify-between gap-2 bg-muted/20">
+            <div className="flex-1 truncate min-w-0 text-xs text-muted-foreground">
+              <span className="mr-2 font-medium">URL:</span>
+              <span className="truncate">{selectedEntry?.url}</span>
+            </div>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={handleCopyLink} 
+                      className="h-8 px-2 text-xs"
+                    >
+                      {copied ? <Check className="h-3.5 w-3.5 mr-1" /> : <Copy className="h-3.5 w-3.5 mr-1" />}
+                      {copied ? 'Copied' : 'Copy Link'}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Copy source URL to clipboard</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+              
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={handleOpenInNewTab} 
+                      className="h-8 px-2 text-xs"
+                    >
+                      <ExternalLink className="h-3.5 w-3.5 mr-1" />
+                      Open in New Tab
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>View source in a new browser tab</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+          </div>
+          
           <div className="h-[70vh] w-full">
             {selectedEntry &&
               (isYouTubeUrl(selectedEntry.url) ? (

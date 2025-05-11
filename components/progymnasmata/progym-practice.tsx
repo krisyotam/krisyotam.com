@@ -160,98 +160,98 @@ export default function ProgymPractice() {
         count={stats?.chreia || 0}
         icon={<Quote className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/chreia"
       />
       <StatCard
         title="Commonplace"
         count={stats?.commonplace || 0}
         icon={<MessageSquare className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/commonplace"
       />
       <StatCard
         title="Comparison"
         count={stats?.comparison || 0}
         icon={<Scale className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/comparison"
       />
       <StatCard
         title="Confirmation"
         count={stats?.confirmation || 0}
         icon={<CheckSquare className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/confirmation"
       />
       <StatCard
         title="Description"
         count={stats?.description || 0}
         icon={<FileText className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/description"
       />
       <StatCard
         title="Encomium"
         count={stats?.encomium || 0}
         icon={<Award className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/encomium"
       />
       <StatCard
         title="Fable"
         count={stats?.fable || 0}
         icon={<BookMarked className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/fable"
       />
       <StatCard
         title="Impersonation"
         count={stats?.impersonation || 0}
         icon={<User className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/impersonation"
       />
       <StatCard
         title="Law Introduction"
         count={stats?.introductionOfLaw || 0}
         icon={<ScrollText className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/introductionoflaw"
       />
       <StatCard
         title="Maxim"
         count={stats?.maxim || 0}
         icon={<BookOpen className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/maxim"
       />
       <StatCard
         title="Narrative"
         count={stats?.narrative || 0}
         icon={<FileSpreadsheet className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/narrative"
       />
       <StatCard
         title="Refutation"
         count={stats?.refutation || 0}
         icon={<XSquare className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/refutation"
       />
       <StatCard
         title="Thesis"
         count={stats?.thesis || 0}
         icon={<HelpCircle className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/thesis"
       />
       <StatCard
         title="Vituperation"
         count={stats?.vituperation || 0}
         icon={<ThumbsDown className="h-6 w-6 text-primary" />}
         variants={item}
-        href="/progymnasmata"
+        href="/progymnasmata/vituperation"
       />
     </motion.div>
   )

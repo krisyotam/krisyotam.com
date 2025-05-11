@@ -5,6 +5,6 @@ export default function NoteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  /* Wrap so the styles apply automatically */
-  return <article className="note-content">{children}</article>;
+  /* Don't wrap the entire content in note-content anymore */
+  return <>{children}</>;
 }

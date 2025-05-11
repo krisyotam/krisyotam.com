@@ -194,7 +194,7 @@ export function CommandMenu() {
 
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-5 right-5 bg-background w-[42px] h-[42px] rounded-[4px] shadow-[0_1px_1px_rgba(0,0,0,0.1)] hover:bg-accent focus:outline-none text-[13px] font-mono border border-border flex items-center justify-center"
+        className="fixed bottom-5 right-5 bg-background w-[42px] h-[42px] shadow-[0_1px_1px_rgba(0,0,0,0.1)] hover:bg-accent focus:outline-none text-[13px] font-mono border border-border flex items-center justify-center"
       >
         ⌘K
       </button>

@@ -43,6 +43,8 @@ import CppCodeBlock from "@/components/posts/code/cplusplus"
 import { Tree } from "@/components/family-tree"
 import WebsiteDemo from "@/components/posts/website/website"
 import { WikiPerson } from "@/components/posts/wikipedia/wiki-person"
+import Product from "@/components/posts/basic/product"
+import { RedditEmbed } from "@/components/typography/reddit-embed"
 
 // Define components for MDX
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -117,6 +119,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Collapse,
     FileViewer,
     Age,
+    RedditEmbed,
     
     // References and specialized components
     Bible,
@@ -131,6 +134,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Company,
     Tree,
     WikiPerson,
+    
+    // Product components
+    Product,
     
     // Images and media components
     EnhancedImageDisplay,

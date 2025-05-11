@@ -913,6 +913,19 @@
       "confidence": "certain",
       "importance": 8,
       "state": "active"
+    },
+    {
+      "title": "Notes on Old ThinkPads",
+      "subtitle": "Laptop Review",
+      "preview": "an appreciation of IBM/Lenovo's classic laptops",
+      "date": "2025-05-11",
+      "tags": ["Technology", "Hardware", "ThinkPad", "Vintage Computing", "IBM", "Lenovo"],
+      "category": "ThinkPads",
+      "slug": "notes-on-old-thinkpads",
+      "status": "Draft",
+      "confidence": "certain",
+      "importance": 4,
+      "state": "active"
     }
   ]
 }

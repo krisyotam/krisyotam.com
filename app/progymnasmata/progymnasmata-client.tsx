@@ -2,12 +2,20 @@
 
 import { useEffect, useState } from "react"
 import { PageHeader } from "@/components/page-header"
+import { useRouter, usePathname } from "next/navigation"
 
-export function ProgymnasmataClient() {
+interface ProgymnasmataClientProps {
+  initialTypeFilter?: string
+}
+
+export function ProgymnasmataClient({ initialTypeFilter = "All" }: ProgymnasmataClientProps) {
   const [entries, setEntries] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
-  const [typeFilter, setTypeFilter] = useState<string>("All")
+  const [typeFilter, setTypeFilter] = useState<string>(initialTypeFilter)
+  const router = useRouter()
+  const pathname = usePathname()
 
+  // Fetch entries on mount
   useEffect(() => {
     async function fetchEntries() {
       try {
@@ -24,15 +32,39 @@ export function ProgymnasmataClient() {
     fetchEntries()
   }, [])
 
+  // Sync typeFilter with URL path
+  useEffect(() => {
+    if (!pathname) return;
+    
+    if (pathname === "/progymnasmata") {
+      setTypeFilter("All")
+    } else if (pathname.startsWith("/progymnasmata/")) {
+      const urlType = pathname.split("/")[2]
+      // Find the type with proper capitalization from entries
+      const matchedType = entries.find(e => 
+        e.type.toLowerCase() === urlType.toLowerCase()
+      )?.type || urlType
+      setTypeFilter(matchedType)
+    }
+  }, [pathname, entries])
+
   // Get all unique types for the filter
   const types = Array.from(new Set(entries.map(e => e.type))).sort()
 
   // Sort by date descending (assuming date is ISO string or similar)
   const sortedEntries = [...entries].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  const filteredEntries = typeFilter === "All" ? sortedEntries : sortedEntries.filter(e => e.type === typeFilter)
+  const filteredEntries = typeFilter === "All" ? sortedEntries : sortedEntries.filter(e => e.type === typeFilter || e.type.toLowerCase() === typeFilter.toLowerCase())
 
   function handleTypeChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    setTypeFilter(e.target.value)
+    const newType = e.target.value;
+    setTypeFilter(newType)
+    
+    // Update URL based on selected filter
+    if (newType === "All") {
+      router.push("/progymnasmata")
+    } else {
+      router.push(`/progymnasmata/${newType.toLowerCase()}`)
+    }
   }
 
   function getEntryUrl(entry: any) {

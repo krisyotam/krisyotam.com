@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import { BlogPost } from "./blog-post"
-import { LayoutGrid, Text, BookOpen, Calendar, Hash, Github, BookMarked, Tag, ChevronLeft, ChevronRight } from "lucide-react"
+import { LayoutGrid, Text, BookOpen, Calendar, Hash, Github, BookMarked, Tag, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { PageHeader } from "@/components/page-header"
@@ -63,6 +63,7 @@ interface HomeClientProps {
   randomQuote: { text: string; author: string }
   bioContent: any
   initialView?: 'list' | 'grid'
+  onRequestNewQuote?: () => void
 }
 
 // Home page metadata for the grid view
@@ -376,6 +377,10 @@ export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list
   const [randomPosts, setRandomPosts] = useState<Post[]>([])
   const [randomPoems, setRandomPoems] = useState<Poem[]>([])
   const [uniqueCategories, setUniqueCategories] = useState<string[]>([])
+  const [expandQuote, setExpandQuote] = useState(false)
+  const [currentQuote, setCurrentQuote] = useState(randomQuote)
+  const [quoteLines, setQuoteLines] = useState<string[]>([])
+  const [showMoreQuote, setShowMoreQuote] = useState(false)
 
   // Calculate consecutive writing streak (days since Jan 1, 2025)
   const startDate = new Date("2025-01-01")
@@ -410,6 +415,14 @@ export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list
 
     fetchPoems()
   }, [posts])
+
+  useEffect(() => {
+    // Format the quote to check if it needs the "show more" functionality
+    const lines = formatQuoteWithLineBreaks(`"${currentQuote.text}" - ${currentQuote.author}`, 75).split('\n');
+    setQuoteLines(lines);
+    setShowMoreQuote(lines.length > 2);
+    setExpandQuote(false);
+  }, [currentQuote]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -448,6 +461,20 @@ export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list
     return lines.join("\n")
   }
 
+  const getNewRandomQuote = async () => {
+    try {
+      // Get a new random quote from the server
+      const response = await fetch('/api/random-quote');
+      const newQuote = await response.json();
+      setCurrentQuote(newQuote);
+    } catch (error) {
+      // If the API fails, generate a new random quote client-side
+      // This assumes we have access to all quotes on the client, which may not be true
+      // Fallback to a simple refresh of the page to get a new server-rendered quote
+      window.location.reload();
+    }
+  };
+
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       {viewMode === "list" ? (
@@ -456,12 +483,48 @@ export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list
           <div className="max-w-4xl mx-auto">
             <header className="mb-16 pl-8">
               <h1 className="text-4xl font-semibold mb-3 text-gray-900 dark:text-gray-100">Kris Yotam</h1>
-              <p className="text-sm font-light italic text-gray-600 dark:text-gray-400 whitespace-pre-line">
-                {formatQuoteWithLineBreaks(`"${randomQuote.text}" - ${randomQuote.author}`, 75)}
-              </p>
+              <div className="relative">
+                <p 
+                  onClick={getNewRandomQuote}
+                  className="text-sm font-light italic text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary cursor-pointer transition-colors"
+                >
+                  {showMoreQuote ? (
+                    expandQuote ? (
+                      quoteLines.map((line, index) => (
+                        <span key={index} className="block">
+                          {line}
+                        </span>
+                      ))
+                    ) : (
+                      <>
+                        <span className="block">{quoteLines[0]}</span>
+                        <span className="block">{quoteLines[1]}</span>
+                      </>
+                    )
+                  ) : (
+                    quoteLines.map((line, index) => (
+                      <span key={index} className="block">
+                        {line}
+                      </span>
+                    ))
+                  )}
+                </p>
+                {showMoreQuote && (
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setExpandQuote(!expandQuote);
+                    }}
+                    className="inline-flex items-center text-xs text-gray-500 dark:text-gray-500 hover:text-primary dark:hover:text-primary mt-1 cursor-pointer"
+                  >
+                    <ChevronDown className={`h-4 w-4 transition-transform ${expandQuote ? 'rotate-180' : ''}`} />
+                    <span className="ml-1">{expandQuote ? 'Show less' : 'Show more'}</span>
+                  </button>
+                )}
+              </div>
             </header>
             <main>
-              <div className="space-y-12">
+              <div className="space-y-8">
                  {posts
                   .filter(post => !["On Myself", "On Website", "On Learning", "On Writing", "On Method"].includes(post.category))
                   .filter(post => post.slug && post.date && post.preview)

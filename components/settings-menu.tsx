@@ -372,22 +372,22 @@ export function SettingsMenu() {
     <div className="fixed top-5 right-5 z-50" ref={dropdownRef}>
       <button
         onClick={toggleDropdown}
-        className="flex h-10 w-10 items-center justify-center rounded-md border border-input bg-background shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+        className="flex h-10 w-10 items-center justify-center border border-input bg-background shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
         aria-label="Settings"
       >
         <Settings className="h-5 w-5" />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-10 rounded-md border border-border bg-background shadow-md">
+        <div className="absolute right-0 mt-2 w-10 border border-border bg-background shadow-md">
           <div className="flex flex-col items-center p-1">
             <button
               onClick={toggleSearch}
-              className="group relative flex h-8 w-8 items-center justify-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
+              className="relative flex h-8 w-8 items-center justify-center p-2 hover:bg-accent hover:text-accent-foreground"
               aria-label="Search"
             >
               <Search className="h-4 w-4" />
-              <span className="absolute right-full mr-2 w-auto min-w-max rounded bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-white dark:text-black">
+              <span className="absolute right-full mr-2 w-auto min-w-max bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity hover:opacity-100 dark:bg-white dark:text-black pointer-events-none [.h-8:hover>&]:opacity-100">
                 Search
               </span>
             </button>
@@ -398,11 +398,11 @@ export function SettingsMenu() {
                 ref={linkOptionRef}
                 onMouseEnter={showSubmenu}
                 onMouseLeave={hideSubmenuWithDelay}
-                className="group relative flex h-8 w-8 items-center justify-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground pointer-events-auto"
+                className="relative flex h-8 w-8 items-center justify-center p-2 hover:bg-accent hover:text-accent-foreground pointer-events-auto"
                 aria-label="Link Preview Settings"
               >
                 <ExternalLink className="h-4 w-4" />
-                <span className="absolute right-full mr-2 w-auto min-w-max rounded bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-white dark:text-black">
+                <span className="absolute right-full mr-2 w-auto min-w-max bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity hover:opacity-100 dark:bg-white dark:text-black pointer-events-none [.h-8:hover>&]:opacity-100">
                   Link Preview
                 </span>
                 
@@ -419,28 +419,28 @@ export function SettingsMenu() {
                 {isLinkHoverMenuVisible && (
                   <div
                     ref={linkSubmenuRef}
-                    className="absolute right-full top-0 mr-2 w-auto min-w-max bg-background rounded-md border border-border shadow-md p-1 pointer-events-auto"
+                    className="absolute right-full top-0 mr-2 w-auto min-w-max bg-background border border-border shadow-md p-1 pointer-events-auto"
                     onMouseEnter={showSubmenu}
                     onMouseLeave={hideSubmenuWithDelay}
                   >
                     <div className="text-xs font-medium px-2 py-1 mb-1 border-b border-border">Link Preview Mode</div>
                     <button
                       onClick={() => setLinkModalMode("all")}
-                      className={`flex items-center justify-between w-full text-left px-2 py-1 text-xs rounded hover:bg-accent hover:text-accent-foreground ${universalLinkModalMode === "all" ? "font-medium bg-accent/30" : ""}`}
+                      className={`flex items-center justify-between w-full text-left px-2 py-1 text-xs hover:bg-accent hover:text-accent-foreground ${universalLinkModalMode === "all" ? "font-medium bg-accent/30" : ""}`}
                     >
                       <span>All Links</span>
                       {universalLinkModalMode === "all" && <span className="text-primary">✓</span>}
                     </button>
                     <button
                       onClick={() => setLinkModalMode("external")}
-                      className={`flex items-center justify-between w-full text-left px-2 py-1 text-xs rounded hover:bg-accent hover:text-accent-foreground ${universalLinkModalMode === "external" ? "font-medium bg-accent/30" : ""}`}
+                      className={`flex items-center justify-between w-full text-left px-2 py-1 text-xs hover:bg-accent hover:text-accent-foreground ${universalLinkModalMode === "external" ? "font-medium bg-accent/30" : ""}`}
                     >
                       <span>External Only</span>
                       {universalLinkModalMode === "external" && <span className="text-primary">✓</span>}
                     </button>
                     <button
                       onClick={() => setLinkModalMode("off")}
-                      className={`flex items-center justify-between w-full text-left px-2 py-1 text-xs rounded hover:bg-accent hover:text-accent-foreground ${universalLinkModalMode === "off" ? "font-medium bg-accent/30" : ""}`}
+                      className={`flex items-center justify-between w-full text-left px-2 py-1 text-xs hover:bg-accent hover:text-accent-foreground ${universalLinkModalMode === "off" ? "font-medium bg-accent/30" : ""}`}
                     >
                       <span>Off</span>
                       {universalLinkModalMode === "off" && <span className="text-primary">✓</span>}
@@ -452,61 +452,61 @@ export function SettingsMenu() {
             
             <button
               onClick={openSettings}
-              className="group relative flex h-8 w-8 items-center justify-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
+              className="relative flex h-8 w-8 items-center justify-center p-2 hover:bg-accent hover:text-accent-foreground"
               aria-label="User Settings"
             >
               <Settings className="h-4 w-4" />
-              <span className="absolute right-full mr-2 w-auto min-w-max rounded bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-white dark:text-black">
+              <span className="absolute right-full mr-2 w-auto min-w-max bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity hover:opacity-100 dark:bg-white dark:text-black pointer-events-none [.h-8:hover>&]:opacity-100">
                 User Settings
               </span>
             </button>
             <button
               onClick={openRSS}
-              className="group relative flex h-8 w-8 items-center justify-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
+              className="relative flex h-8 w-8 items-center justify-center p-2 hover:bg-accent hover:text-accent-foreground"
               aria-label="RSS Feed"
             >
               <Rss className="h-4 w-4" />
-              <span className="absolute right-full mr-2 w-auto min-w-max rounded bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-white dark:text-black">
+              <span className="absolute right-full mr-2 w-auto min-w-max bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity hover:opacity-100 dark:bg-white dark:text-black pointer-events-none [.h-8:hover>&]:opacity-100">
                 View RSS.xml
               </span>
             </button>
             <button
               onClick={openFAQ}
-              className="group relative flex h-8 w-8 items-center justify-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
+              className="relative flex h-8 w-8 items-center justify-center p-2 hover:bg-accent hover:text-accent-foreground"
               aria-label="FAQ"
             >
               <CircleHelp className="h-4 w-4" />
-              <span className="absolute right-full mr-2 w-auto min-w-max rounded bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-white dark:text-black">
+              <span className="absolute right-full mr-2 w-auto min-w-max bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity hover:opacity-100 dark:bg-white dark:text-black pointer-events-none [.h-8:hover>&]:opacity-100">
                 FAQ
               </span>
             </button>
             <button
               onClick={openChangelog}
-              className="group relative flex h-8 w-8 items-center justify-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
+              className="relative flex h-8 w-8 items-center justify-center p-2 hover:bg-accent hover:text-accent-foreground"
               aria-label="Changelog"
             >
               <GitCompare className="h-4 w-4" />
-              <span className="absolute right-full mr-2 w-auto min-w-max rounded bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-white dark:text-black">
+              <span className="absolute right-full mr-2 w-auto min-w-max bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity hover:opacity-100 dark:bg-white dark:text-black pointer-events-none [.h-8:hover>&]:opacity-100">
                 Changelog
               </span>
             </button>
             <button
               onClick={openScripts}
-              className="group relative flex h-8 w-8 items-center justify-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
+              className="relative flex h-8 w-8 items-center justify-center p-2 hover:bg-accent hover:text-accent-foreground"
               aria-label="Scripts"
             >
               <Code className="h-4 w-4" />
-              <span className="absolute right-full mr-2 w-auto min-w-max rounded bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-white dark:text-black">
+              <span className="absolute right-full mr-2 w-auto min-w-max bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity hover:opacity-100 dark:bg-white dark:text-black pointer-events-none [.h-8:hover>&]:opacity-100">
                 Scripts
               </span>
             </button>
             <button
               onClick={openGithub}
-              className="group relative flex h-8 w-8 items-center justify-center rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
+              className="relative flex h-8 w-8 items-center justify-center p-2 hover:bg-accent hover:text-accent-foreground"
               aria-label="GitHub"
             >
               <Github className="h-4 w-4" />
-              <span className="absolute right-full mr-2 w-auto min-w-max rounded bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity group-hover:opacity-100 dark:bg-white dark:text-black">
+              <span className="absolute right-full mr-2 w-auto min-w-max bg-black px-2 py-1 text-xs font-medium text-white opacity-0 shadow transition-opacity hover:opacity-100 dark:bg-white dark:text-black pointer-events-none [.h-8:hover>&]:opacity-100">
                 GitHub
               </span>
             </button>
@@ -517,12 +517,12 @@ export function SettingsMenu() {
       {/* User Settings Modal */}
       {isSettingsOpen && (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-background/80 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-lg border border-border bg-background p-6 shadow-lg">
+          <div className="w-full max-w-md border border-border bg-background p-6 shadow-lg">
             <div className="flex items-center justify-between border-b border-border pb-4">
               <h2 className="text-lg font-semibold">User Settings</h2>
               <button 
                 onClick={() => setIsSettingsOpen(false)}
-                className="rounded-full p-1 hover:bg-accent hover:text-accent-foreground"
+                className="p-1 hover:bg-accent hover:text-accent-foreground"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -583,7 +583,7 @@ export function SettingsMenu() {
             <div className="border-t border-border pt-4">
               <button
                 onClick={() => setIsSettingsOpen(false)}
-                className="w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+                className="w-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
               >
                 Save Settings
               </button>
@@ -608,7 +608,7 @@ export function SettingsMenu() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className={`absolute bg-background border border-border rounded-md shadow-md overflow-hidden pointer-events-auto ${
+              className={`absolute bg-background border border-border shadow-md overflow-hidden pointer-events-auto ${
                 isMaximized ? "w-[90vw] h-[90vh]" : "w-[600px]"
               }`}
             >
@@ -616,14 +616,14 @@ export function SettingsMenu() {
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={closeSearch}
-                    className="rounded-full p-1 hover:bg-accent hover:text-accent-foreground"
+                    className="p-1 hover:bg-accent hover:text-accent-foreground"
                     aria-label="Close"
                   >
                     <X className="h-3 w-3" />
                   </button>
                   <button
                     onClick={toggleMaximize}
-                    className="rounded-full p-1 hover:bg-accent hover:text-accent-foreground"
+                    className="p-1 hover:bg-accent hover:text-accent-foreground"
                     aria-label="Maximize"
                   >
                     <Maximize className="h-3 w-3" />
@@ -643,11 +643,11 @@ export function SettingsMenu() {
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder="KrisYotam.com search"
-                      className="flex h-9 w-full rounded-l-md border border-r-0 border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                      className="flex h-9 w-full border-l border-y border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                     />
                     <button
                       type="submit"
-                      className="inline-flex h-9 items-center justify-center rounded-r-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                      className="inline-flex h-9 items-center justify-center border-r border-y border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     >
                       Search
                     </button>
@@ -702,11 +702,11 @@ export function SettingsMenu() {
                           setIsSearchOpen(false)
                           setIsOpen(false)
                         }}
-                        className="block rounded-md px-3 py-2 hover:bg-accent hover:text-accent-foreground"
+                        className="block px-3 py-2 hover:bg-accent hover:text-accent-foreground"
                       >
                         <div className="flex items-center justify-between">
                           <h4 className="text-sm font-medium">{result.title}</h4>
-                          <span className="ml-2 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                          <span className="ml-2 bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
                             {result.resultType === "post" ? result.category : result.resultType}
                           </span>
                         </div>

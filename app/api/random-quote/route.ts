@@ -1,18 +1,18 @@
 import { NextResponse } from 'next/server';
-import quotes from '@/data/header-quotes.json';
+import quotesData from '../../../data/header-quotes.json';
 
 export async function GET() {
   try {
-    // Get a random quote from the quotes array
-    const randomIndex = Math.floor(Math.random() * quotes.quotes.length);
-    const randomQuote = quotes.quotes[randomIndex];
+    const quotes = quotesData.quotes;
     
-    // Return the random quote
+    // Get a random quote
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    
     return NextResponse.json(randomQuote);
   } catch (error) {
-    console.error('Error fetching random quote:', error);
+    console.error('Error retrieving random quote:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch random quote' },
+      { error: 'Failed to retrieve a random quote' },
       { status: 500 }
     );
   }

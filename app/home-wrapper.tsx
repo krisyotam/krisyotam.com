@@ -19,7 +19,6 @@ function getRandomQuote() {
 const DEFAULT_BIO = `
 I am an autodidact, philomath, and polymath dedicated to the pursuit of knowledge across multiple disciplines. My intellectual endeavors span mathematics, philosophy, psychology, literature, computer science, and numerous other fields which you can explore in my [areas of interest](/about#areas-of-interest).
 
-
 This digital space serves as both a personal knowledge repository and a public garden of ideas. Unlike traditional blogs that prioritize recency, this site is organized around interconnected themes and evolving thoughts. Every page is meticulously crafted to provide both depth and accessibility.
 
 The architecture follows a principle of longterm utility - content here is meant to persist and evolve rather than fade into archival obscurity. I've drawn inspiration from several thoughtful online spaces, most notably [Gwern Branwen](https://gwern.net/index), [Fabian Schultz](https://www.fabianschultz.com/), and [Guillermo Rauch](https://rauchg.com/), among others documented in my [Colophon](/colophon) page.
@@ -37,7 +36,6 @@ The site offers multiple pathways to explore content:
 - **[On Website](/category/on-website)**: Meta-documentation about this site's design, development, and evolution.
 - **[Changelog](/changelog)**: A chronological record of site updates, automatically synced with my GitHub commits.
 - **[Notes](/notes)**: Shorter-form thoughts and explorations that don't warrant full essays.
-- **[Wisdom AI](/series/wisdom-ai)**: Documentation of my custom AI assistant development.
 
 
 This site is built with Next.js and currently deployed on Vercel, though I plan to transition to a more permanent hosting solution for long-term preservation. The technical architecture prioritizes:
@@ -55,7 +53,6 @@ In the top right settings menu, you'll find several utilities:
 - **Scripts**: Utility scripts including URL archiving, prose linting, and other content maintenance tools.
 - **GitHub**: Access to the site's source code and content repositories.
 
-## Philosophy of Content
 
 Each piece of writing here is tagged with confidence levels and importance ratings. This intellectual honesty system indicates how certain I am about specific claims and how significant I consider particular ideas.
 

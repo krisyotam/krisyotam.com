@@ -68,6 +68,7 @@ export default async function CollectionPage({ params }: { params: { slug: strin
         confidence={collection.confidence}
         importance={collection.importance}
         backLink="/library"
+        backText="Library"
       />
       <LocalCollectionContent collection={reversedCollection} />
     </main>
