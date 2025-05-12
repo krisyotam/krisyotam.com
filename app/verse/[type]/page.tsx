@@ -23,11 +23,50 @@ export async function generateMetadata({ params }: { params: { type: string } })
     }
   }
 
+  // Get a representative poem with an image for this type (if available)
+  const poemsOfType = matchedType 
+    ? poems.filter(poem => poem.type === matchedType) 
+    : poems;
+  
+  // Find a poem with an image to use as the featured image
+  const featuredPoem = poemsOfType.find(poem => poem.image && poem.image.length > 0);
+  
+  const title = matchedType ? `${matchedType} | Verse | Kris Yotam` : "Verse | Kris Yotam";
+  const description = matchedType 
+    ? `A collection of ${matchedType.toLowerCase()} poems and verses.`
+    : "A collection of poems, haikus, and other verse forms.";
+  
   return {
-    title: matchedType ? `${matchedType} | Verse | Kris Yotam` : "Verse | Kris Yotam",
-    description: matchedType 
-      ? `A collection of ${matchedType.toLowerCase()} poems and verses.`
-      : "A collection of poems, haikus, and other verse forms."
+    title,
+    description,
+    openGraph: {
+      title: matchedType ? `${matchedType} Collection | Kris Yotam` : "Poetry Collection | Kris Yotam",
+      description,
+      type: "website",
+      images: featuredPoem?.image 
+        ? [
+            {
+              url: featuredPoem.image,
+              alt: `${matchedType || 'Poetry'} Collection by Kris Yotam`,
+              width: 1200,
+              height: 630,
+            },
+          ]
+        : [
+            {
+              url: "https://i.postimg.cc/6p4X2MNX/shall-i-compare-thee-to-a-winters-night.png",
+              alt: `${matchedType || 'Poetry'} Collection by Kris Yotam`,
+              width: 1200,
+              height: 630,
+            }
+          ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: matchedType ? `${matchedType} Collection | Kris Yotam` : "Poetry Collection | Kris Yotam",
+      description,
+      images: featuredPoem?.image ? [featuredPoem.image] : ["https://i.postimg.cc/6p4X2MNX/shall-i-compare-thee-to-a-winters-night.png"],
+    },
   }
 }
 

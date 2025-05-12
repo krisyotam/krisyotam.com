@@ -6,6 +6,25 @@ import { redirect } from "next/navigation"
 export const metadata: Metadata = {
   title: "Verse | Kris Yotam",
   description: "A collection of poems, haikus, and other verse forms.",
+  openGraph: {
+    title: "Poetry Collection | Kris Yotam",
+    description: "Explore a diverse collection of original poems, haikus, and other verse forms by Kris Yotam.",
+    type: "website",
+    images: [
+      {
+        url: "https://i.postimg.cc/6p4X2MNX/shall-i-compare-thee-to-a-winters-night.png", // Using one of your poem images as a default
+        alt: "Kris Yotam's Poetry Collection",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Poetry Collection | Kris Yotam",
+    description: "Explore a diverse collection of original poems, haikus, and other verse forms by Kris Yotam.",
+    images: ["https://i.postimg.cc/6p4X2MNX/shall-i-compare-thee-to-a-winters-night.png"],
+  },
 }
 
 export default function VersePage({

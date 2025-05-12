@@ -309,15 +309,14 @@
       "path": "/playlists"
     },
     {
-      "title": "Poetry",
-      "subtitle": "Verses and Reflections",
-      "preview": "A collection of original poems exploring themes of existence, nature, and the human experience.",
+      "title": "Verse",
+      "preview": "a anthology of original verse",
       "date": "2025-04-14T00:00:00Z",
       "show-status": "active",
       "status": "In Progress",
       "confidence": "certain",
       "importance": 2,
-      "path": "/poetry"
+      "path": "/verse"
     },
     {
       "title": "Predictions",
