@@ -1,0 +1,36 @@
+name: Proof of Existence Hashing
+
+on:
+  push:
+    paths:
+      - 'data/poems.json'
+      - 'data/ocs.json'
+      - 'blog/**/*.mdx'
+      - 'blog/**/*.json'
+      - 'scripts/hash-and-timestamp.js'
+      - '.github/workflows/proof-of-existence.yml'
+
+jobs:
+  hash-and-proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run hash and timestamp script
+        run: node scripts/hash-and-timestamp.js
+
+      - name: Commit and push if hashes.json changed
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/hashes.json
+          git diff --cached --quiet || git commit -m "Update hashes.json [auto]"
+          git push 

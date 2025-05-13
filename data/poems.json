@@ -1086,7 +1086,7 @@
     "title": "Ode to a Pillar",
     "dateCreated": "2025-05-11",
     "year": 2025,
-    "type": "Free Verse",
+    "type": "Ode",
     "collection": "",
     "description": "a tribute to my mother",
     "slug": "ode-to-a-pillar",
@@ -1094,8 +1094,24 @@
     "stanza1": "O mother-pillar of the dawn—\nWhose body brings forth light.\nThou poureth without measure,\nand yet seeketh no recompense.",
     "stanza2": "You stand firm as the mountains,\nhewn from rock and do not faulter.\nThou singest lullaby's midst war,\nagainst a hidden hand.",
     "stanza3": "I knew not how your hands ached\nhow life sought to devour thee.\nI mistook your tiredness for stillness,\nnot knowing still waters carry the most weight.",
-    "stanza4": "O mother—whose foot does not faulter—\non the jagged stone?\nto what can one measure, the love of a mother?\nMayest thou point to god and non other?"
+    "stanza4": "O mother—whose foot does not faulter—\non the jagged stone.\nto what can one measure, the love of a mother?\nMayest thou point to god and non other?"
+  },
+  {
+    "id": "87",
+    "title": "Elegy of the Saints",
+    "dateCreated": "2025-05-12",
+    "year": 2025,
+    "type": "Elegy",
+    "collection": "",
+    "description": "",
+    "slug": "elegy-of-the-saints",
+    "image": "https://i.postimg.cc/kgnR5FQs/elegy-of-the-saints.png",
+    "stanza1": "O patient ones, Ones of Old—\nThe light has fled from twain eyes.\nThou perfect ones, the bold—\nYe that set thy word on highs.",
+    "stanza2": "Let not part from part began veering,\nor to byword be our fate resigned.\nBlistering winds we weather blind, steering—\nthe dotted line where death hath signed.",
+    "stanza3": "Hallowed halls beneath cinders lie,\nand a mote of light is hence removed.\nWitness as Gaia’s face is set awry,\nfor by sword the spec is reproved.",
+    "stanza4": "The unclean damn the clean for it taints,\nwhereby I implore the patience of the saints."
   }
+  
   
 ]
 

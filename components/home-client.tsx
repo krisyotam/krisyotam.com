@@ -564,7 +564,7 @@ export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list
 
             {/* Logo and QR Code Bento Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+              <Card className="bg-muted/50 hover:bg-muted/70 transition-colors border-0">
                 <CardContent className="p-4 flex items-center justify-center h-full">
                   <div className="relative w-[250px] h-[250px]">
                     <Image
