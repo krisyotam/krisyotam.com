@@ -38,10 +38,10 @@ export async function generateMetadata(
   // Construct metadata with OpenGraph properties
   return {
     title: `${poem.title} | ${poem.type} | Kris Yotam`,
-    description: poem.description || `A ${poem.type.toLowerCase()} about ${poem.title.toLowerCase()}`,
+    description: poem.description || `${poem.title} by Kris Yotam`,
     openGraph: {
       title: poem.title,
-      description: poem.description || `A ${poem.type.toLowerCase()} about ${poem.title.toLowerCase()}`,
+      description: poem.description || `${poem.title} by Kris Yotam`,
       type: "article",
       publishedTime: poem.dateCreated,
       authors: ["Kris Yotam"],
@@ -58,7 +58,7 @@ export async function generateMetadata(
     twitter: {
       card: "summary_large_image",
       title: poem.title,
-      description: poem.description || `A ${poem.type.toLowerCase()} about ${poem.title.toLowerCase()}`,
+      description: poem.description || `${poem.title} by Kris Yotam`,
       images: poem.image ? [poem.image] : [],
     },
   };

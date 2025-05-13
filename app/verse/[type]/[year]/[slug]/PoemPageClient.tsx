@@ -52,13 +52,6 @@ export default function PoemPageClient({
           tags={tags}
         />
 
-        {/* Display full description in a PoemBox with hover disabled */}
-        {poem.description && (
-          <PoemBox className="my-6" disableHover={true}>
-            {poem.description}
-          </PoemBox>
-        )}
-
         {/* Use PoemBox for the poem content without the title */}
         <PoemBox>
           {stanzas.length > 0 ? (

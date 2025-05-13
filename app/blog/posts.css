@@ -321,8 +321,10 @@ body {
 .dark .post-content h1,
 .dark .post-content h2,
 .dark .post-content h3,
-.dark .post-content h4 {
-  color: rgba(255, 255, 255, 0.95);
+.dark .post-content h4,
+.dark .post-content h5,
+.dark .post-content h6 {
+  color: rgba(255, 255, 255, 0.95) !important;
 }
 
 .dark .post-content a {
