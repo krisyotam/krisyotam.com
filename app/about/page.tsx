@@ -882,7 +882,7 @@ export default function AboutPage() {
                   <CardContent className="p-4 flex items-center justify-center h-full">
                     <div className="relative w-[250px] h-[250px]">
                       <Image
-                        src="https://i.postimg.cc/4394QG8z/krisyotam-aristocratic-logo.png"
+                        src="https://i.postimg.cc/xTdhKB3b/krisyotam-aristocratic-logo.png"
                         alt="Kris Yotam Logo"
                         fill
                         style={{ objectFit: "contain" }}
