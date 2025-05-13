@@ -327,6 +327,34 @@ body {
   color: rgba(255, 255, 255, 0.95) !important;
 }
 
+/* Strengthen dark mode header styles individually */
+.dark .post-content h1 {
+  color: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.3) !important;
+}
+
+.dark .post-content h2 {
+  color: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.25) !important;
+}
+
+.dark .post-content h3 {
+  color: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark .post-content h4 {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.dark .post-content h5 {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.dark .post-content h6 {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
 .dark .post-content a {
   color: rgba(255, 255, 255, 0.9);
   border-bottom-color: rgba(255, 255, 255, 0.5);
