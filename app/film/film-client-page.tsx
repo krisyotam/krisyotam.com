@@ -1,9 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { HelpCircle } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
-import { TraktHelpModal } from "@/components/trakt/trakt-help-modal"
+import { PageDescription } from "@/components/posts/typography/page-description"
 import { TraktHorizontalScroll } from "@/components/trakt/trakt-horizontal-scroll"
 import { FilmStatsSection } from "@/components/film/film-stats-section"
 import { TraktMovieCard } from "@/components/trakt/trakt-movie-card"
@@ -16,7 +15,6 @@ import { TraktEmptyState } from "@/components/trakt/trakt-empty-state"
 import { TraktSectionHeader } from "@/components/trakt/trakt-section-header"
 
 export default function FilmClientPage() {
-  const [isHelpModalOpen, setIsHelpModalOpen] = useState(false)
   const [watchedStats, setWatchedStats] = useState<any>(null)
   const [recentMovies, setRecentMovies] = useState<any[]>([])
   const [recentShows, setRecentShows] = useState<any[]>([])
@@ -247,17 +245,11 @@ export default function FilmClientPage() {
 
   return (
     <div className="film-page">
-      {/* Help Modal */}
-      <TraktHelpModal isOpen={isHelpModalOpen} onClose={() => setIsHelpModalOpen(false)} />
-
-      {/* Help button - moved to bottom left */}
-      <button
-        onClick={() => setIsHelpModalOpen(true)}
-        className="fixed bottom-4 left-4 p-2 rounded-full bg-gray-200 dark:bg-zinc-800 hover:bg-gray-300 dark:hover:bg-zinc-700 transition-colors z-10"
-        aria-label="Help"
-      >
-        <HelpCircle className="h-5 w-5 dark:text-zinc-300" />
-      </button>
+      {/* PageDescription component instead of modal and help button */}
+      <PageDescription 
+        title="Film Page Help"
+        description="This page displays Kris's film and TV watching activity and preferences. View Kris's profile information and watching statistics. Browse through the most recent movies and TV episodes Kris has watched. Explore Kris's favorite movies, shows, actors, producers, and characters."
+      />
 
       {/* Page Header */}
       <PageHeader

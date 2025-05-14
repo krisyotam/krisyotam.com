@@ -17,6 +17,7 @@ import { HelpCircle, Download, ExternalLink } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { PasswordDialog } from "@/components/password-dialog"
 import { Input } from "@/components/ui/input"
+import { PageDescription } from "@/components/posts/typography/page-description"
 
 // Add research page metadata
 const researchPageData = {
@@ -24,7 +25,7 @@ const researchPageData = {
   subtitle: "Academic Papers and Projects",
   date: new Date().toISOString(),
   preview:
-    "A collection of my research papers, publications, and ongoing academic projects across various disciplines.",
+    "a collection of my more formal writings on diverse topics",
   status: "In Progress" as const,
   confidence: "likely" as const,
   importance: 8,
@@ -43,7 +44,7 @@ interface Research {
   dateStarted: string
   status: string
   bibliography: string[]
-  img: string
+  img?: string
   pdfLink: string
   sourceLink: string
   category: string
@@ -64,7 +65,6 @@ export function ResearchClient({ initialCategory = "All" }: { initialCategory?: 
   const [searchQuery, setSearchQuery] = useState("")
   const [research, setResearch] = useState<Research[]>(researchData)
   const [categories, setCategories] = useState<string[]>([])
-  const [helpModalOpen, setHelpModalOpen] = useState(false)
   const [itemModalOpen, setItemModalOpen] = useState(false)
   const [selectedResearch, setSelectedResearch] = useState<Research | null>(null)
   const [showPasswordDialog, setShowPasswordDialog] = useState(false)
@@ -203,29 +203,11 @@ export function ResearchClient({ initialCategory = "All" }: { initialCategory?: 
         )}
       </div>
       
-      {/* Help Modal */}
-      <Dialog open={helpModalOpen} onOpenChange={setHelpModalOpen}>
-        <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="fixed bottom-4 left-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200"
-            onClick={() => setHelpModalOpen(true)}
-          >
-            <HelpCircle className="h-5 w-5" />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-background rounded-lg shadow-2xl border-0">
-          <DialogHeader className="space-y-3">
-            <DialogTitle className="text-2xl font-semibold">About Research</DialogTitle>
-            <DialogDescription className="text-base leading-relaxed">
-              This page showcases my research papers, publications, and ongoing projects. Each entry provides a summary
-              of the research topic, its importance, and links to the full paper and source materials. You can filter by
-              category or search for specific topics using the search bar.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
+      {/* Help Information using PageDescription component */}
+      <PageDescription 
+        title="About Research"
+        description="This page showcases my more formal writings on topics. These are tex documents for writings that I just felt should be done in a more formal way. A lot of these also come from my experiments with taking literature curricula via things like MIT OpenCourseWare."
+      />
 
       {/* Research Item Modal */}
       {selectedResearch && (

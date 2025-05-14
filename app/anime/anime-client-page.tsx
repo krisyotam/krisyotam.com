@@ -8,9 +8,9 @@ import { ListsPage } from "@/components/anime/lists-page"
 import { WatchingAnimeCard, CompletedAnimeCard, FavoriteCard } from "@/components/anime/anime-cards"
 import { StatsSection } from "@/components/anime/stats-section"
 import { SectionHeader } from "@/components/anime/section-header"
-import { AnimeHelpModal } from "@/components/anime/help-modal"
 import { Badge } from "@/components/ui/badge"
 import { Pagination } from "@/components/anime/pagination"
+import { PageDescription } from "@/components/posts/typography/page-description"
 
 import favCharacters from "@/data/fav_chars.json"
 import favPeople from "@/data/fav_people.json"
@@ -436,6 +436,12 @@ export default function AnimeClientPage() {
           </>
         )}
       </div>
+      
+      {/* Add PageDescription */}
+      <PageDescription
+        title="About This Page"
+        description="This page showcases my anime experience and taste as a powerscaler, anime reviewer, and anime philosophy writer. Here you can explore my anime statistics, watching history, and favorites. The data is pulled directly from my MyAnimeList profile. I've curated this collection to reflect my journey through anime, highlighting series that have influenced my thinking and writing about anime philosophy."
+      />
     </div>
   )
 } 

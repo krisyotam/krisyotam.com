@@ -5,9 +5,9 @@ import NewsletterHeader from "@/components/newsletter-header"
 import NewsletterFooter from "@/components/newsletter-footer"
 import NewsletterCard from "@/components/newsletter-card"
 import NewsletterYearFilter from "@/components/newsletter-year-filter"
-import NewsletterHelpModal from "@/components/newsletter-help-modal"
-import { HelpCircle, Grid, List } from "lucide-react"
+import { Grid, List } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
+import { PageDescription } from "@/components/posts/typography/page-description"
 
 // Add Newsletter page metadata after other imports
 const newsletterPageData = {
@@ -40,7 +40,6 @@ export default function NewsletterClientPage({ initialNewsletters }: NewsletterC
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedYear, setSelectedYear] = useState("all")
   const [view, setView] = useState<"grid" | "list">("grid")
-  const [isHelpModalOpen, setIsHelpModalOpen] = useState(false)
 
   // Extract unique years from newsletters
   const years = useMemo(() => {
@@ -142,15 +141,11 @@ export default function NewsletterClientPage({ initialNewsletters }: NewsletterC
 
           <NewsletterFooter />
 
-          <button
-            onClick={() => setIsHelpModalOpen(true)}
-            className="fixed bottom-4 left-4 p-2 rounded-full bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
-            aria-label="Help"
-          >
-            <HelpCircle className="w-5 h-5 text-gray-600 dark:text-zinc-400" />
-          </button>
-
-          <NewsletterHelpModal isOpen={isHelpModalOpen} onClose={() => setIsHelpModalOpen(false)} />
+          {/* PageDescription component */}
+          <PageDescription
+            title="About Newsletter Archive"
+            description="This page contains an archive of all newsletters. Use the search bar to find newsletters by title, content, or tags. Filter newsletters by publication year. Switch between grid view (with images) and list view (text only). Read newsletters directly on this site or on Substack."
+          />
         </div>
       </div>
     </div>

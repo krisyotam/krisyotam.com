@@ -6,6 +6,7 @@ import { PoemBox } from "@/components/posts/typography/poem";
 import poemsData from "@/data/poems.json";
 import type { Poem } from "@/utils/poems";
 import { notFound } from "next/navigation";
+import { Footer } from "@/app/blog/(post)/components/footer";
 
 export default function PoemPageClient({
   params: { type, year, slug },
@@ -60,6 +61,8 @@ export default function PoemPageClient({
             "No content available for this poem."
           )}
         </PoemBox>
+        
+        <Footer />
       </div>
     </div>
   );

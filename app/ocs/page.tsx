@@ -7,17 +7,9 @@ import { CharacterCard } from "../../components/character-card"
 import FictionWorld from "../../components/fiction-world"
 import { BookSearch } from "../../components/book-search"
 import { Button } from "@/components/ui/button"
-import { HelpCircle } from "lucide-react"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogDescription,
-} from "@/components/ui/dialog"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { PageHeader } from "@/components/page-header"
+import { PageDescription } from "@/components/posts/typography/page-description"
 
 export const dynamic = "force-dynamic"
 
@@ -51,7 +43,6 @@ interface World {
 }
 
 export default function OCsPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const [activeView, setActiveView] = useState("characters")
 
   // In the return statement, add the PageHeader component before the Tabs component
@@ -82,30 +73,16 @@ export default function OCsPage() {
           <WorldsList worlds={worldsData.worlds as World[]} />
         )}
       </div>
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="fixed bottom-4 left-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200"
-            onClick={() => setIsModalOpen(true)}
-          >
-            <HelpCircle className="h-5 w-5" />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-background rounded-lg shadow-2xl border-0">
-          <DialogHeader className="space-y-3">
-            <DialogTitle className="text-2xl font-semibold">
-              {activeView === "characters" ? "About OCs" : "About Fictional Worlds"}
-            </DialogTitle>
-            <DialogDescription className="text-base leading-relaxed">
-              {activeView === "characters"
-                ? "This page showcases the original characters (OCs) from my books and series. Each character card provides a glimpse into their world and story."
-                : "This page showcases the fictional worlds from my books and series. Each world has its own unique characteristics, cultures, and stories."}
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
+      
+      {/* PageDescription component with dynamic content based on activeView */}
+      <PageDescription
+        title={activeView === "characters" ? "About OCs" : "About Fictional Worlds"}
+        description={
+          activeView === "characters"
+            ? "This page showcases the original characters (OCs) from my books and series. Each character card provides a glimpse into their world and story."
+            : "This page showcases the fictional worlds from my books and series. Each world has its own unique characteristics, cultures, and stories."
+        }
+      />
     </div>
   )
 }

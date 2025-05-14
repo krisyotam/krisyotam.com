@@ -5,17 +5,9 @@ import mybooksData from "../../data/mybooks.json"
 import { MyBookCard } from "../../components/my-book-card"
 import { BookSearch } from "../../components/book-search"
 import { Button } from "@/components/ui/button"
-import { HelpCircle } from "lucide-react"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogDescription,
-} from "@/components/ui/dialog"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { PageHeader } from "@/components/page-header"
+import { PageDescription } from "@/components/posts/typography/page-description"
 
 // Add MyBooks page metadata after other imports
 const mybooksPageData = {
@@ -44,8 +36,6 @@ type Book = {
 }
 
 export default function MyBooksPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
@@ -62,33 +52,12 @@ export default function MyBooksPage() {
 
         <MyBookList initialBooks={mybooksData.books} />
       </div>
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="fixed bottom-4 left-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200"
-            onClick={() => setIsModalOpen(true)}
-          >
-            <HelpCircle className="h-5 w-5" />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-background rounded-lg shadow-2xl border-0">
-          <DialogHeader className="space-y-3">
-            <DialogTitle className="text-2xl font-semibold">About My Books</DialogTitle>
-            <DialogDescription className="text-base leading-relaxed">
-              I believe that education should be free and a universal right, aligning with the Russian school of thought
-              on this matter. Specifically, this view resonates with the ideas of Anton Makarenko, a prominent Soviet
-              educator who advocated for universal access to education as a means of social transformation and personal
-              development. This page is an experiment in building in public. I don't fear someone stealing content from
-              me because I believe that what is given freely cannot truly be taken. Knowledge shared is knowledge
-              multiplied, not divided. By making these books available, I'm contributing to the democratization of
-              knowledge and inviting collaboration and discussion. This approach not only aligns with my educational
-              philosophy but also fosters a community of learners and thinkers.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
+      
+      {/* PageDescription component */}
+      <PageDescription
+        title="About My Books"
+        description="I believe that education should be free and a universal right, aligning with the Russian school of thought on this matter. Specifically, this view resonates with the ideas of Anton Makarenko, a prominent Soviet educator who advocated for universal access to education as a means of social transformation and personal development. This page is an experiment in building in public. I don't fear someone stealing content from me because I believe that what is given freely cannot truly be taken. Knowledge shared is knowledge multiplied, not divided. By making these books available, I'm contributing to the democratization of knowledge and inviting collaboration and discussion. This approach not only aligns with my educational philosophy but also fosters a community of learners and thinkers."
+      />
     </div>
   )
 }

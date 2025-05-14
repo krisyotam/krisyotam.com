@@ -7,7 +7,6 @@ import TableOfContents from "@/components/table-of-contents";
 import MarginCard, { MarginNote } from "@/components/margin-notes";
 import Footnotes from "@/components/footnotes";
 import { Bibliography } from "@/components/bibliography";
-import { BentoFooter } from "@/components/bento-footer";
 import { ScriptTagger } from "@/components/script-tagger";
 import { PostLatexRenderer } from "@/components/post-latex-renderer";
 import { Commento } from "@/components/commento";
@@ -15,6 +14,7 @@ import RelatedPosts from "@/components/related-posts";
 import { PostNotice } from "@/components/post-notice";
 import LinkTags from "@/components/link-tags";
 import Citation from "@/components/citation";
+import { Footer } from "./(post)/components/footer";
 
 const fontImport = `
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
@@ -161,9 +161,7 @@ export default function PostsLayout({ children }: { children: React.ReactNode })
               <section className="mt-4">
                 <PostNotice />
               </section>
-              <footer className="mt-4">
-                <BentoFooter />
-              </footer>
+              <Footer />
             </main>
 
             {/* Right sidebar: Margin Notes (desktop) */}

@@ -135,30 +135,6 @@ export function ResearchHeader({
           {title}
         </h1>
 
-        {/* Subject/preview text */}
-        {subject && (
-          <p className="text-center font-serif text-sm text-muted-foreground italic mb-6 max-w-2xl mx-auto">
-            {subject}
-          </p>
-        )}
-
-        {/* Date above other metadata */}
-        <div className="text-center mb-4">
-          <time
-            dateTime={dateStarted}
-            className="font-mono text-sm text-muted-foreground"
-          >
-            {formatDate(new Date(dateStarted))}
-          </time>
-        </div>
-
-        {/* Author display */}
-        {authors.length > 0 && (
-          <div className="text-center mb-4 font-serif text-sm text-muted-foreground">
-            By {authors.join(", ")}
-          </div>
-        )}
-
         {/* Metadata section with academic styling */}
         <div className="flex flex-wrap justify-center items-center gap-x-3 text-sm font-mono mb-6">
           {/* Status */}
@@ -221,7 +197,7 @@ export function ResearchHeader({
               <Badge
                 key={tag}
                 variant="outline"
-                className="bg-secondary/40 text-xs font-mono hover:bg-secondary transition-colors"
+                className="bg-secondary/40 text-xs font-mono hover:bg-secondary transition-colors rounded-none"
               >
                 {tag}
               </Badge>

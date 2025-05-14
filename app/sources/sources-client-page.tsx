@@ -4,8 +4,9 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { Mail, ExternalLink, HelpCircle } from "lucide-react"
+import { Mail, ExternalLink } from "lucide-react"
 import "./sources.css"
+import { PageDescription } from "@/components/posts/typography/page-description"
 
 interface Source {
   from: string
@@ -23,7 +24,6 @@ export default function SourcesClientPage() {
   const [error, setError] = useState<string | null>(null)
   const [selectedSource, setSelectedSource] = useState<Source | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isHelpModalOpen, setIsHelpModalOpen] = useState(false)
   const [searchValue, setSearchValue] = useState("")
 
   const router = useRouter()
@@ -100,10 +100,6 @@ export default function SourcesClientPage() {
     } else {
       window.open(source.profileLink, "_blank")
     }
-  }
-
-  const toggleHelpModal = () => {
-    setIsHelpModalOpen(!isHelpModalOpen)
   }
 
   const getTypeIcon = (type: string) => {
@@ -232,37 +228,11 @@ export default function SourcesClientPage() {
         </div>
       )}
 
-      {/* Help Modal Button - Bottom Left */}
-      <button
-        onClick={toggleHelpModal}
-        className="fixed bottom-4 left-4 p-2 bg-gray-200 dark:bg-[#252525] rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-[#323232] focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-[#323232] z-10"
-        aria-label="Help"
-      >
-        <HelpCircle className="h-5 w-5 text-gray-700 dark:text-[#FAFAFA]" />
-      </button>
-
-      {/* Help Modal with Backdrop Blur */}
-      {isHelpModalOpen && (
-        <div className="fixed inset-0 backdrop-blur-sm z-50 flex items-center justify-center" onClick={toggleHelpModal}>
-          <div
-            className="bg-white dark:bg-[#171717] p-6 rounded-lg shadow-xl max-w-md mx-4 border border-gray-200 dark:border-[#252525]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-[#FAFAFA]">About Sources</h3>
-            <p className="text-gray-700 dark:text-[#FAFAFA] mb-4">
-              If you would like to be excluded from being mentioned, please email krisyotam@protonmail.com or mention
-              that you would like to be excluded in your source emails. If you would like your content to be taken down,
-              please mention that as well.
-            </p>
-            <button
-              onClick={toggleHelpModal}
-              className="w-full py-2 bg-gray-200 dark:bg-[#252525] text-gray-700 dark:text-[#FAFAFA] rounded-md hover:bg-gray-300 dark:hover:bg-[#323232] focus:outline-none focus:ring-2 focus:ring-gray-400 dark:focus:ring-[#323232]"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+      {/* Page Description Component */}
+      <PageDescription
+        title="About Sources"
+        description="If you would like to be excluded from being mentioned, please email krisyotam@protonmail.com or mention that you would like to be excluded in your source emails. If you would like your content to be taken down, please mention that as well."
+      />
 
       {/* Source Content Modal with Backdrop Blur */}
       {isModalOpen && selectedSource && (

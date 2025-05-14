@@ -3,17 +3,9 @@
 import { useState } from "react"
 import { ProjectCard } from "@/components/project-card"
 import { Button } from "@/components/ui/button"
-import { HelpCircle } from "lucide-react"
 import projectsData from "@/data/projects.json"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogDescription,
-} from "@/components/ui/dialog"
 import { PageHeader } from "@/components/page-header"
+import { PageDescription } from "@/components/posts/typography/page-description"
 
 // Add projects page metadata
 const projectsPageData = {
@@ -29,8 +21,6 @@ const projectsPageData = {
 export const dynamic = "force-dynamic"
 
 export default function ProjectsPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
@@ -47,31 +37,12 @@ export default function ProjectsPage() {
 
         <ProjectList initialProjects={projectsData.projects} />
       </div>
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="fixed bottom-4 left-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200"
-            onClick={() => setIsModalOpen(true)}
-          >
-            <HelpCircle className="h-5 w-5" />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-background rounded-lg shadow-2xl border-0">
-          <DialogHeader className="space-y-3">
-            <DialogTitle className="text-2xl font-semibold">About My Projects</DialogTitle>
-            <DialogDescription className="text-base leading-relaxed">
-              This page showcases my personal and professional projects. Each project represents a unique challenge I've
-              tackled and a set of skills I've developed. From web applications to design systems, these projects
-              demonstrate my approach to problem-solving and my technical capabilities. I believe in building with
-              purpose and sharing my work openly. Feel free to explore the projects, filter by category, or search for
-              specific technologies. Each project card provides a glimpse into the work, and you can click "View
-              Details" to learn more about any project that catches your interest.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
+      
+      {/* PageDescription component */}
+      <PageDescription
+        title="About My Projects"
+        description="This page showcases my personal and professional projects. Each project represents a unique challenge I've tackled and a set of skills I've developed. From web applications to design systems, these projects demonstrate my approach to problem-solving and my technical capabilities. I believe in building with purpose and sharing my work openly. Feel free to explore the projects, filter by category, or search for specific technologies. Each project card provides a glimpse into the work, and you can click 'View Details' to learn more about any project that catches your interest."
+      />
     </div>
   )
 }

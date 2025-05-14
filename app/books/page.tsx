@@ -5,17 +5,9 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
 import { BookCard } from "../../components/book-card"
 import { BookSearch } from "../../components/book-search"
 import { Button } from "@/components/ui/button"
-import { HelpCircle } from "lucide-react"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import booksData from "../../data/books.json"
 import { PageHeader } from "@/components/page-header"
+import { PageDescription } from "@/components/posts/typography/page-description"
+import booksData from "../../data/books.json"
 
 // Add Books page metadata after other imports
 const booksPageData = {
@@ -34,8 +26,6 @@ const client = new ApolloClient({
 })
 
 export default function BooksPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
   return (
     <ApolloProvider client={client}>
       <div className="relative min-h-screen bg-background text-foreground">
@@ -55,28 +45,10 @@ export default function BooksPage() {
             <BookList />
           </main>
         </div>
-        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <DialogTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              className="fixed bottom-4 left-4 rounded-full"
-              onClick={() => setIsModalOpen(true)}
-            >
-              <HelpCircle className="h-4 w-4" />
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] bg-background">
-            <DialogHeader>
-              <DialogTitle>About the Books Page</DialogTitle>
-              <DialogDescription>
-                This page presents a curated list of recommended readings covering a variety of topics. These
-                recommendations are based on personal experience and trusted opinions, offering a diverse selection of
-                books to expand your knowledge and perspective.
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
+        <PageDescription
+          title="About the Books Page"
+          description="This page presents a curated list of recommended readings covering a variety of topics. These recommendations are based on personal experience and trusted opinions, offering a diverse selection of books to expand your knowledge and perspective."
+        />
       </div>
     </ApolloProvider>
   )

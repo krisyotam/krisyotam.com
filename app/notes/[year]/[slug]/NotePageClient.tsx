@@ -6,6 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LiveClock } from "@/components/live-clock";
 import { PostHeader } from "@/components/post-header";
+import { Footer } from "@/app/blog/(post)/components/footer";
 
 interface NoteMeta {
   title: string;
@@ -90,6 +91,7 @@ export default function NotePageClient({ note, allNotes, children }: Props) {
       </div>
 
       <LiveClock />
+      <Footer />
     </div>
   );
 }

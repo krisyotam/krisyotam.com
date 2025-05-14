@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Search, HelpCircle, X } from "lucide-react"
+import { Search, X } from "lucide-react"
+import { PageDescription } from "@/components/posts/typography/page-description"
 
 type Bounty = {
   id: string
@@ -24,7 +25,6 @@ export default function ResearchBountiesClient({ initialBounties }: ResearchBoun
   const [bounties] = useState<Bounty[]>(initialBounties)
   const [filter, setFilter] = useState<string>("all")
   const [searchQuery, setSearchQuery] = useState<string>("")
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
   const filteredBounties = bounties.filter((bounty) => {
     // Filter by type
@@ -154,41 +154,11 @@ export default function ResearchBountiesClient({ initialBounties }: ResearchBoun
         )}
       </div>
 
-      {/* Help button */}
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="fixed bottom-4 left-4 w-8 h-8 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-      >
-        <HelpCircle className="h-5 w-5" />
-      </button>
-
-      {/* Modal */}
-      {isModalOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          onClick={() => setIsModalOpen(false)}
-        >
-          <div
-            className="bg-white dark:bg-gray-900 p-6 max-w-2xl max-h-[80vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex justify-between items-start mb-4">
-              <h2 className="text-xl font-bold">About Research Bounties</h2>
-              <button onClick={() => setIsModalOpen(false)}>
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-            <div className="prose dark:prose-invert prose-sm max-w-none">
-              <p>
-                This page lists papers, books, and other materials I have been unable to obtain through conventional
-                means. Click the "About Research Bounties" section at the top of the page for more information on how
-                the bounty system works.
-              </p>
-              <p>Use the search bar to find specific items, or filter by type using the buttons above the list.</p>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* PageDescription component */}
+      <PageDescription 
+        title="About Research Bounties"
+        description="This page lists papers, books, and other materials I have been unable to obtain through conventional means. Click the 'About Research Bounties' section at the top of the page for more information on how the bounty system works. Use the search bar to find specific items, or filter by type using the buttons above the list."
+      />
     </div>
   )
 }

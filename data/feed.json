@@ -926,6 +926,20 @@
       "confidence": "certain",
       "importance": 4,
       "state": "active"
+    },
+    {
+      "title": "Villa Ephrussi de Rothschild",
+      "subtitle": "Case Study",
+      "preview": "Exploring the stunning Belle Époque villa and its magnificent gardens on the French Riviera, showcasing the elegance of early 20th century architecture.",
+      "date": "2025-05-13",
+      "tags": ["Architecture", "French Riviera", "Belle Époque", "Gardens", "Rothschild"],
+      "category": "Architecture",
+      "slug": "villa-ephrussi-de-rothschild",
+      "cover_image": "https://i.postimg.cc/3JQzFxcr/villa-ephrussi.jpg",
+      "status": "Notes",
+      "confidence": "certain",
+      "importance": 7,
+      "state": "active"
     }
   ]
 }

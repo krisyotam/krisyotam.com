@@ -6,6 +6,7 @@ import Image from "next/image";
 import { formatDate } from "@/utils/date-formatter";
 import { LiveClock } from "@/components/live-clock";
 import type { ProgymnasmataEntry } from "@/types/progymnasmata";
+import { Footer } from "@/app/blog/(post)/components/footer";
 
 interface ProgymnasmataEntryPageProps {
   entry: ProgymnasmataEntry;
@@ -88,6 +89,7 @@ export function ProgymnasmataEntryPage({ entry }: ProgymnasmataEntryPageProps) {
 
         {/* Live Clock at bottom */}
         <LiveClock />
+        <Footer />
       </div>
     </>
   );

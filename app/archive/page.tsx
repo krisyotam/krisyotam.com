@@ -1,25 +1,17 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { HelpCircle, Lock, AlertCircle } from "lucide-react"
+import { Lock, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import ArchivesComponent from "@/components/archive"
 import type { ArchiveItem } from "@/components/archive"
 import { PageHeader } from "@/components/page-header"
+import { PageDescription } from "@/components/posts/typography/page-description"
 
 export default function ArchivesPage() {
   const [archivesData, setArchivesData] = useState<ArchiveItem[]>([])
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [password, setPassword] = useState("")
@@ -162,33 +154,10 @@ export default function ArchivesPage() {
       </div>
       <ArchivesComponent archivesData={archivesData} />
 
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="fixed bottom-4 left-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200"
-            onClick={() => setIsModalOpen(true)}
-          >
-            <HelpCircle className="h-5 w-5" />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-background rounded-lg shadow-2xl border-0">
-          <DialogHeader className="space-y-3">
-            <DialogTitle className="text-2xl font-semibold">About Archives</DialogTitle>
-            <DialogDescription className="text-base leading-relaxed">
-              The "Archives" page is a specialized hub designed to provide access to rare and expansive collections,
-              including massive data sets, rare book PDFs, manuscripts, and extensive video series that are not widely
-              available. Structured similarly to the "OCs page," it features a user-friendly interface with a search bar
-              and categorized sections at the top for easy navigation. Each entry is presented through a custom archive
-              component displaying key details such as the title, type (e.g., PDF, video, dataset), and a concise
-              description—no images are included due to the large scale of the content. Links within each entry direct
-              users to an external platform where these unique resources can be downloaded, making the Archives page an
-              invaluable resource for researchers, enthusiasts, and curious minds alike.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
+      <PageDescription
+        title="About Archives"
+        description="The 'Archives' page is a specialized hub designed to provide access to rare and expansive collections, including massive data sets, rare book PDFs, manuscripts, and extensive video series that are not widely available. Structured similarly to the 'OCs page,' it features a user-friendly interface with a search bar and categorized sections at the top for easy navigation. Each entry is presented through a custom archive component displaying key details such as the title, type (e.g., PDF, video, dataset), and a concise description—no images are included due to the large scale of the content. Links within each entry direct users to an external platform where these unique resources can be downloaded, making the Archives page an invaluable resource for researchers, enthusiasts, and curious minds alike."
+      />
     </div>
   )
 }

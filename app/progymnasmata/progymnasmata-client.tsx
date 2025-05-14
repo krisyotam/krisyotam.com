@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { PageHeader } from "@/components/page-header"
 import { useRouter, usePathname } from "next/navigation"
+import { PageDescription } from "@/components/posts/typography/page-description"
 
 interface ProgymnasmataClientProps {
   initialTypeFilter?: string
@@ -135,6 +136,11 @@ export function ProgymnasmataClient({ initialTypeFilter = "All" }: Progymnasmata
           </>
         )}
       </div>
+      
+      <PageDescription
+        title="About Progymnasmata"
+        description="Progymnasmata are preliminary rhetorical exercises originated in ancient Greece. These exercises were designed to prepare students for more advanced rhetorical training by teaching them basic composition skills. The exercises include fable, narrative, chreia, maxim, refutation, confirmation, commonplace, encomium, vituperation, comparison, impersonation, description, thesis, and introduction of law. Each type follows specific rhetorical patterns and serves different purposes in developing argumentative and literary skills."
+      />
     </main>
   )
 } 

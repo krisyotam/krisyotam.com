@@ -1,0 +1,98 @@
+[
+  {
+    "title": "Robin Sloan",
+    "url": "https://www.robinsloan.com",
+    "description": "Home of the author of 'Mr. Penumbra's 24-Hour Bookstore' and 'Sourdough.' Features essays on technology, books, and other media.",
+    "category": "Fiction Authors",
+    "tags": ["novels", "technology", "newsletters", "media", "digital"],
+    "slug": "robin-sloan"
+  },
+  {
+    "title": "Gwern Branwen",
+    "url": "https://www.gwern.net",
+    "description": "A collection of essays and research on a variety of topics including statistics, technology, self-experimentation, and psychology.",
+    "category": "Researchers",
+    "tags": ["research", "statistics", "psychology", "AI", "long-form"],
+    "slug": "gwern-branwen"
+  },
+  {
+    "title": "Maggie Appleton",
+    "url": "https://maggieappleton.com",
+    "description": "Digital garden featuring essays and illustrations on design, anthropology, and technology.",
+    "category": "Designers",
+    "tags": ["design", "anthropology", "illustrations", "programming", "digital garden"],
+    "slug": "maggie-appleton"
+  },
+  {
+    "title": "Andy Matuschak",
+    "url": "https://andymatuschak.org",
+    "description": "Software engineer, designer, and researcher focusing on tools for thought and knowledge work.",
+    "category": "Researchers",
+    "tags": ["tools for thought", "note-taking", "spaced repetition", "learning", "memory"],
+    "slug": "andy-matuschak"
+  },
+  {
+    "title": "Craig Mod",
+    "url": "https://craigmod.com",
+    "description": "Writer and photographer exploring the intersection of technology, media, and photography.",
+    "category": "Writers",
+    "tags": ["photography", "japan", "walking", "books", "publishing"],
+    "slug": "craig-mod"
+  },
+  {
+    "title": "Anne-Laure Le Cunff",
+    "url": "https://nesslabs.com",
+    "description": "Founder of Ness Labs, writing about mindful productivity, metacognition, and mental models.",
+    "category": "Researchers",
+    "tags": ["productivity", "mental models", "metacognition", "neuroscience", "learning"],
+    "slug": "anne-laure-le-cunff"
+  },
+  {
+    "title": "Frank Chimero",
+    "url": "https://frankchimero.com",
+    "description": "Designer and writer exploring design, process, and creative work.",
+    "category": "Designers",
+    "tags": ["design", "creativity", "process", "books", "writing"],
+    "slug": "frank-chimero"
+  },
+  {
+    "title": "Austin Kleon",
+    "url": "https://austinkleon.com",
+    "description": "Writer who draws, focusing on creativity and sharing your work.",
+    "category": "Writers",
+    "tags": ["creativity", "art", "writing", "books", "inspiration"],
+    "slug": "austin-kleon"
+  },
+  {
+    "title": "Ted Chiang",
+    "url": "https://www.newyorker.com/contributors/ted-chiang",
+    "description": "Author of science fiction short stories including 'Story of Your Life' (adapted into the film 'Arrival').",
+    "category": "Fiction Authors",
+    "tags": ["science fiction", "short stories", "philosophy", "technology", "ethics"],
+    "slug": "ted-chiang"
+  },
+  {
+    "title": "Tiago Forte",
+    "url": "https://fortelabs.co",
+    "description": "Writer and productivity consultant known for his Building a Second Brain methodology.",
+    "category": "Productivity Experts",
+    "tags": ["productivity", "note-taking", "BASB", "knowledge management", "personal knowledge"],
+    "slug": "tiago-forte"
+  },
+  {
+    "title": "Nick Cammarata",
+    "url": "https://nickcammarata.com",
+    "description": "Researcher at Anthropic, writing about AI, meditation, and consciousness.",
+    "category": "Researchers",
+    "tags": ["AI", "consciousness", "meditation", "learning", "psychology"],
+    "slug": "nick-cammarata"
+  },
+  {
+    "title": "Maria Popova",
+    "url": "https://www.themarginalian.org",
+    "description": "Writer exploring the intersection of art, science, philosophy, and other subjects through The Marginalian (formerly Brain Pickings).",
+    "category": "Writers",
+    "tags": ["literature", "philosophy", "art", "science", "history"],
+    "slug": "maria-popova"
+  }
+] 

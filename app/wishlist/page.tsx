@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { HelpCircle } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -14,6 +13,7 @@ import {
 import wishlistData from "@/data/wishlist.json"
 import Wishlist from "@/components/wishlist"
 import { PageHeader } from "@/components/page-header"
+import { PageDescription } from "@/components/posts/typography/page-description"
 
 // Wishlist page metadata
 const wishlistPageData = {
@@ -27,7 +27,6 @@ const wishlistPageData = {
 }
 
 export default function WishlistPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [activeCategory, setActiveCategory] = useState("All")
   const [filteredItems, setFilteredItems] = useState(wishlistData.products)
@@ -98,28 +97,11 @@ export default function WishlistPage() {
         <Wishlist items={filteredItems} />
       </div>
 
-      {/* Modal for "About Wishlist" */}
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="fixed bottom-4 left-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200"
-          >
-            <HelpCircle className="h-5 w-5" />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-background rounded-lg shadow-2xl border-0">
-          <DialogHeader className="space-y-3">
-            <DialogTitle className="text-2xl font-semibold">About My Wishlist</DialogTitle>
-            <DialogDescription className="text-base leading-relaxed">
-              This wishlist represents a curated collection of items that inspire and intrigue me. It's a reflection of
-              my interests, aspirations, and the things I find beautiful or useful. By sharing this list, I hope to
-              provide insights into my tastes and perhaps inspire others in their own pursuits.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
+      {/* Page Description Component */}
+      <PageDescription
+        title="About My Wishlist"
+        description="This wishlist represents a curated collection of items that inspire and intrigue me. It's a reflection of my interests, aspirations, and the things I find beautiful or useful. By sharing this list, I hope to provide insights into my tastes and perhaps inspire others in their own pursuits."
+      />
     </div>
   )
 }

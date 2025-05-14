@@ -1,0 +1,48 @@
+# Agenda: Convert Question Mark Components to PageDescription
+
+## Tasks:
+1. [x] Scan the main app directory to identify all main pages
+2. [x] Check each main page file for question mark buttons (exclude slug pages)
+3. [x] For each identified page:
+   - [x] Check if it uses a built-in question mark or a component
+   - [x] Replace with the PageDescription component
+   - [x] Delete any obsolete question mark components (if applicable)
+
+## Pages to Check (with HelpCircle icon usage):
+- [x] app/wishlist/page.tsx
+- [x] app/sources/sources-client-page.tsx
+- [x] app/researchbounties/ResearchBountiesClient.tsx
+- [x] app/research/research-client.tsx (already converted)
+- [x] app/playlists/PlaylistsClientPage.tsx
+- [x] app/quotes/page.tsx
+- [x] app/projects/page.tsx
+- [x] app/mybooks/page.tsx
+- [x] app/newsletter/NewsletterClientPage.tsx
+- [x] app/ocs/page.tsx
+- [x] app/notes/NotesClientPage.tsx
+- [x] app/film/film-client-page.tsx
+- [x] app/books/page.tsx
+- [x] app/archive/page.tsx
+
+## Components to Check:
+- [x] components/anime/help-modal.tsx (replaced with PageDescription in anime-client-page)
+- [x] components/progymnasmata/progym-practice.tsx (doesn't have a Help button or Dialog to replace)
+- [x] components/newsletter-help-modal.tsx (removed when no longer needed)
+
+## Completed Conversions:
+- [x] app/research/research-client.tsx - Converted to PageDescription
+- [x] app/wishlist/page.tsx - Converted to PageDescription
+- [x] app/sources/sources-client-page.tsx - Converted to PageDescription
+- [x] app/researchbounties/ResearchBountiesClient.tsx - Converted to PageDescription
+- [x] app/playlists/PlaylistsClientPage.tsx - Converted to PageDescription
+- [x] app/quotes/page.tsx - Converted to PageDescription
+- [x] app/projects/page.tsx - Converted to PageDescription
+- [x] app/mybooks/page.tsx - Converted to PageDescription
+- [x] app/newsletter/NewsletterClientPage.tsx - Converted to PageDescription
+- [x] app/ocs/page.tsx - Converted to PageDescription
+- [x] app/notes/NotesClientPage.tsx - Converted to PageDescription
+- [x] app/film/film-client-page.tsx - Converted to PageDescription
+- [x] app/books/page.tsx - Converted to PageDescription
+- [x] app/archive/page.tsx - Converted to PageDescription
+- [x] app/progymnasmata/progymnasmata-client.tsx - Added PageDescription
+- [x] app/anime/anime-client-page.tsx - Replaced AnimeHelpModal with PageDescription

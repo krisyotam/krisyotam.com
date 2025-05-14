@@ -1,8 +1,8 @@
 [
   {
     "id": "1",
-    "title": "Composition and Symbolism in Van Gogh’s The Starry Night",
-    "abstract": "This research examines the compositional structure and symbolic significance of Vincent Van Gogh’s The Starry Night, exploring its lore, historical context, and expressive use of color and form.",
+    "title": "Composition and Symbolism in Van Gogh's The Starry Night",
+    "abstract": "This research examines the compositional structure and symbolic significance of Vincent Van Gogh's The Starry Night, exploring its lore, historical context, and expressive use of color and form.",
     "importance": 7,
     "authors": ["Kris Yotam"],
     "subject": "Art Criticism",
@@ -16,8 +16,7 @@
       "Placeholder Author B. (2025). Placeholder Title B. Placeholder Publisher.",
       "Placeholder Author C. (2025). Placeholder Title C. Placeholder Publisher."
     ],
-    "img": "/research/the-starry-night.jpg",
-    "pdfLink": "/research/the-starry-night.pdf",
+    "pdfLink": "https://pdfobject.com/pdf/sample.pdf",
     "sourceLink": "https://github.com/krisyotam",
     "category": "Art Criticism",
     "tags": ["Van Gogh", "Art", "Expressionism", "Masterpiece", "Symbolism"]
@@ -39,8 +38,7 @@
       "Panofsky, E. (1997). Renaissance and Renascences in Western Art. Harper & Row.",
       "Waters, J. F. (2021). The Renaissance in Contemporary Film. Art and Film Studies Journal, 17(4), 240-257."
     ],
-    "img": "/research/renaissance-modern-art.jpg",
-    "pdfLink": "/research/renaissance-modern-art.pdf",
+    "pdfLink": "",
     "sourceLink": "https://github.com/krisyotam/renaissance-legacy",
     "category": "Art History",
     "tags": ["Renaissance", "Art History", "Visual Culture", "Modern Art", "Film"]
@@ -62,7 +60,6 @@
       "Chatterjee, A. (2014). The Aesthetic Brain. Oxford University Press.",
       "Johansson, M. L. (2021). Aesthetic Experience and Psychological Well-Being. Journal of Psychology and Aesthetics, 22(3), 185-201."
     ],
-    "img": "/research/aesthetic-experience.jpg",
     "pdfLink": "/research/aesthetic-experience.pdf",
     "sourceLink": "https://github.com/krisyotam/aesthetic-experience",
     "category": "Psychology",
@@ -85,7 +82,6 @@
       "Hadot, P. (1995). Philosophy as a Way of Life. Blackwell.",
       "Kritikos, T. P. (2022). Freedom in the Stoic Tradition. Journal of Ancient Philosophy, 39(1), 67-83."
     ],
-    "img": "/research/freedom-philosophy.jpg",
     "pdfLink": "/research/freedom-philosophy.pdf",
     "sourceLink": "https://github.com/krisyotam/freedom-concept",
     "category": "Philosophy",
@@ -108,7 +104,6 @@
       "Ben-Amos, D. (1976). The Role of Folklore in Contemporary Society. Folklore Journal, 5(2), 210-225.",
       "O'Rourke, E. (2019). The Power of Stories: Folklore and Cultural Identity. Folklore Studies, 38(3), 122-139."
     ],
-    "img": "/research/folklore-identity.jpg",
     "pdfLink": "/research/folklore-identity.pdf",
     "sourceLink": "https://github.com/krisyotam/folklore-identity",
     "category": "Folklore",
