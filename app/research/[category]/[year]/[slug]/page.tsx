@@ -76,20 +76,20 @@ export async function generateMetadata(
       publishedTime: item.postedOn,
       authors: item.authors,
       tags: item.tags || [],
-      images: item.img 
-        ? [
-            {
-              url: item.img,
-              alt: `Image for ${item.title}`,
-            },
-          ]
-        : previousImages,
+      images: [
+        {
+          url: "https://i.postimg.cc/jSDMT1Sn/research.png",
+          alt: `${item.title} | Research`,
+          width: 1200,
+          height: 630
+        }
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: item.title,
       description: item.abstract,
-      images: item.img ? [item.img] : [],
+      images: ["https://i.postimg.cc/jSDMT1Sn/research.png"],
     },
   };
 }

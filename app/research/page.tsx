@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/research/research-cover.jpg", 
+        url: "https://i.postimg.cc/jSDMT1Sn/research.png", 
         alt: "Kris Yotam's Research Collection",
         width: 1200,
         height: 630,
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Research Collection | Kris Yotam",
     description: "Explore a diverse collection of academic papers, publications, and ongoing research projects by Kris Yotam.",
-    images: ["/research/research-cover.jpg"],
+    images: ["https://i.postimg.cc/jSDMT1Sn/research.png"],
   },
 }
 

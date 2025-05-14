@@ -61,29 +61,20 @@ export async function generateMetadata({ params }: { params: { category: string 
       title: matchedCategory ? `${matchedCategory} Research | Kris Yotam` : "Research Collection | Kris Yotam",
       description,
       type: "website",
-      images: featuredResearch?.img 
-        ? [
-            {
-              url: featuredResearch.img,
-              alt: `${matchedCategory || 'Research'} by Kris Yotam`,
-              width: 1200,
-              height: 630,
-            },
-          ]
-        : [
-            {
-              url: "/research/research-cover.jpg",
-              alt: `${matchedCategory || 'Research'} by Kris Yotam`,
-              width: 1200,
-              height: 630,
-            }
-          ],
+      images: [
+        {
+          url: "https://i.postimg.cc/jSDMT1Sn/research.png",
+          alt: `${matchedCategory || 'Research'} by Kris Yotam`,
+          width: 1200,
+          height: 630,
+        }
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: matchedCategory ? `${matchedCategory} Research | Kris Yotam` : "Research Collection | Kris Yotam",
       description,
-      images: featuredResearch?.img ? [featuredResearch.img] : ["/research/research-cover.jpg"],
+      images: ["https://i.postimg.cc/jSDMT1Sn/research.png"],
     },
   }
 }

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "1",
+    "title": "Advanced Neural Network Architectures",
+    "slug": "advanced-neural-network-architectures",
+    "description": "This document provides a comprehensive overview of modern neural network architectures, including transformers, diffusion models, and graph neural networks. It explores their applications, advantages, and limitations in various domains.",
+    "category": "Machine Learning",
+    "tags": ["Neural Networks", "Deep Learning", "Transformers"],
+    "date": "2025-03-10",
+    "pdfUrl": "https://pdfobject.com/pdf/sample.pdf",
+    "sourceUrl": "https://github.com/krisyotam/ai-research",
+    "aiModel": "GPT",
+    "version": "4.5"
+  },
+  {
+    "id": "2",
+    "title": "Quantum Computing: Current State and Future Directions",
+    "slug": "quantum-computing-current-state",
+    "description": "An in-depth exploration of quantum computing technologies, including quantum gates, qubits, and quantum algorithms. This document analyzes the current capabilities and limitations of quantum systems and forecasts potential breakthroughs in the next decade.",
+    "category": "Quantum Computing",
+    "tags": ["Quantum", "Computing", "Algorithms"],
+    "date": "2025-02-15",
+    "pdfUrl": "https://pdfobject.com/pdf/sample.pdf",
+    "sourceUrl": "https://github.com/krisyotam/quantum-research",
+    "aiModel": "Claude",
+    "version": "3.7"
+  },
+  {
+    "id": "3",
+    "title": "Ethical Implications of Artificial General Intelligence",
+    "slug": "ethical-implications-agi",
+    "description": "This research document examines the ethical considerations surrounding the development of Artificial General Intelligence (AGI). It covers topics such as alignment, value loading, and the potential societal impacts of highly autonomous AI systems.",
+    "category": "AI Ethics",
+    "tags": ["Ethics", "AGI", "Philosophy"],
+    "date": "2025-01-22",
+    "pdfUrl": "https://pdfobject.com/pdf/sample.pdf",
+    "sourceUrl": "https://github.com/krisyotam/ai-ethics",
+    "aiModel": "GPT",
+    "version": "5.0"
+  },
+  {
+    "id": "4",
+    "title": "Large Language Models: Architecture and Scaling Laws",
+    "slug": "llm-architecture-scaling-laws",
+    "description": "A technical analysis of large language model architectures and the empirical scaling laws that govern their performance. This document discusses attention mechanisms, parameter efficiency techniques, and the relationship between model size, compute, and capabilities.",
+    "category": "Natural Language Processing",
+    "tags": ["LLM", "Transformers", "Scaling"],
+    "date": "2024-12-05",
+    "pdfUrl": "https://pdfobject.com/pdf/sample.pdf",
+    "sourceUrl": "https://github.com/krisyotam/llm-research",
+    "aiModel": "Claude",
+    "version": "3.5"
+  },
+  {
+    "id": "5",
+    "title": "Multimodal AI Systems: Vision, Language, and Beyond",
+    "slug": "multimodal-ai-systems",
+    "description": "This document explores the integration of multiple modalities in AI systems, focusing on the combination of vision and language. It covers architectures like CLIP, Flamingo, and GPT-4V, discussing their training methodologies, capabilities, and potential applications.",
+    "category": "Multimodal AI",
+    "tags": ["Computer Vision", "NLP", "Multimodal"],
+    "date": "2024-11-18",
+    "pdfUrl": "https://pdfobject.com/pdf/sample.pdf",
+    "sourceUrl": "https://github.com/krisyotam/multimodal-research",
+    "aiModel": "Anthropic",
+    "version": "Claude-3 Opus"
+  }
+]

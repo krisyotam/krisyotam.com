@@ -47,7 +47,7 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
+    <main className="max-w-2xl mx-auto px-4 py-12">
       <PageHeader
         title="Verse"
         subtitle="Poems, Haikus, and Other Forms"

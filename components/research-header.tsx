@@ -103,25 +103,14 @@ export function ResearchHeader({
 }: ResearchHeaderProps) {
   return (
     <header className="mb-4 relative">
-      {/* Breadcrumb navigation */}
-      <div className="mb-6 flex items-center text-sm text-muted-foreground">
-        <Link href="/" className="hover:underline">home</Link>
-        <span className="mx-2">›</span>
-        <Link href="/research" className="hover:underline">research</Link>
-        {category && (
-          <>
-            <span className="mx-2">›</span>
-            <Link 
-              href={`/research/${category.toLowerCase().replace(/\s+/g, "-")}`} 
-              className="hover:underline"
-            >
-              {category}
-            </Link>
-          </>
-        )}
-        <span className="mx-2">›</span>
-        <span className="truncate max-w-[200px]">{title}</span>
-      </div>
+      {/* Back to research link */}
+      <Link
+        href="/research"
+        className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 group font-serif italic"
+      >
+        <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+        Return to Research
+      </Link>
 
       {/* Academic bento container */}
       <div className="border border-border bg-card text-card-foreground p-6 rounded-sm shadow-sm">
