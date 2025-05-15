@@ -1,7 +1,6 @@
-import Head from 'next/head'
 import feedData from '@/data/feed.json'
 
-export default function HeadTags() {
+export default function Head() {
   const post = (feedData.posts || []).find((p: any) => p.slug === 'notes-on-identifying-unknowns')
   if (!post) return null
   const title = post.title
@@ -9,7 +8,7 @@ export default function HeadTags() {
   const coverUrl = post.cover_image || post.cover || `https://picsum.photos/1200/630?text=${encodeURIComponent(title)}`
   const url = `https://krisyotam.com/blog/2025/${post.slug}`
   return (
-    <Head>
+    <>
       <title>{`${title} | Kris Yotam`}</title>
       <meta name="description" content={description} />
 
@@ -25,6 +24,6 @@ export default function HeadTags() {
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={coverUrl} />
-    </Head>
+    </>
   )
 } 
