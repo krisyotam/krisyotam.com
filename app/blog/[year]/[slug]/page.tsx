@@ -33,22 +33,19 @@ export async function generateMetadata({
   
   // SEO fields
   const title = postData.title
-  const subtitle = postData.subtitle ? ` - ${postData.subtitle}` : ''
   const description = postData.preview || "Thoughts on math, poetry, and more."
   const url = `https://krisyotam.com/blog/${year}/${slug}`
   
-  console.log(`Generating metadata for ${slug}:`, { 
-    title, subtitle, coverUrl, description 
-  })
+  console.log(`Generating metadata for ${slug}:`, { title, coverUrl, description })
   
   // Get parent metadata
   const parentMetadata = await parent
   
   return {
-    title: `${title}${subtitle} | Kris Yotam`,
+    title: `${title} | Kris Yotam`,
     description,
     openGraph: {
-      title: title + subtitle,
+      title,
       description,
       url,
       siteName: 'Kris Yotam',
@@ -63,7 +60,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: title + subtitle,
+      title,
       description,
       images: [coverUrl],
       creator: '@krisyotam',
