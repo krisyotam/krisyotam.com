@@ -940,6 +940,19 @@
       "confidence": "certain",
       "importance": 7,
       "state": "active"
+    },
+    {
+      "title": "Notes on Identifying Unknowns",
+      "subtitle": "Musings",
+      "preview": "Investing in what you don't know",
+      "date": "2025-05-15",
+      "tags": ["Research", "Unknowns", "Inquiry", "Methodology"],
+      "category": "Research",
+      "slug": "notes-on-identifying-unknowns",
+      "status": "Notes",
+      "confidence": "likely",
+      "importance": 6,
+      "state": "active"
     }
   ]
 }
