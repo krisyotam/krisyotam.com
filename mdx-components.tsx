@@ -32,6 +32,7 @@ import { BookCard } from "@/components/posts/books/book-card"
 import AnimeDisplay from "@/components/posts/content/anime-display"
 import MangaDisplay from "@/components/posts/content/manga-display"
 import MovieDisplay from "@/components/posts/content/movie-display"
+import Movie from "@/components/posts/media/movie"
 import HauteCouture from "@/components/posts/fashion/haute-couture"
 import HauteCoutureCollection from "@/components/posts/fashion/haute-couture-collection"
 import MangaPanelDisplay from "@/components/posts/content/manga-panel-display"
@@ -154,6 +155,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     AnimeDisplay,
     MangaDisplay,
     MovieDisplay,
+    Movie,
     MangaPanelDisplay,
     MangaPanelDisplayCollection,
     
