@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useCallback } from "react"
 import { Search, Settings, Rss, X, Maximize, Move, CircleHelp, GitCompare, Code, Github, Link2, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -54,7 +54,8 @@ export function SettingsMenu() {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
   const [posts, setPosts] = useState<Post[]>([])
   const [pages, setPages] = useState<Page[]>([])
-  const [searchFilter, setSearchFilter] = useState<"all" | "posts" | "pages">("all")
+  const [searchFilter, setSearchFilter] = useState<"all" | "posts" | "pages" | "bible">("all")
+  const [bibleVersion, setBibleVersion] = useState<string>("NKJV")
   const [isMaximized, setIsMaximized] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [universalLinkModalEnabled, setUniversalLinkModalEnabled] = useState(true)
@@ -274,6 +275,16 @@ export function SettingsMenu() {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    
+    if (searchFilter === "bible" && searchQuery.trim() !== "") {
+      // Generate the Bible search URL
+      const bibleSearchUrl = `https://www.blueletterbible.org/search/preSearch.cfm?Criteria=${encodeURIComponent(searchQuery)}&t=${bibleVersion}`
+      
+      // Trigger the universal link modal to open with this URL
+      createModal(bibleSearchUrl, `Bible Search: ${searchQuery}`, window.innerWidth / 2, window.innerHeight / 2)
+      return
+    }
+    
     if (searchResults.length > 0) {
       const firstResult = searchResults[0]
       router.push(firstResult.path)
@@ -367,6 +378,21 @@ export function SettingsMenu() {
       bottom: window.innerHeight - height,
     }
   }
+
+  // Create a reference to the modal creation function from universal-link-modal
+  // This is a simplified version just for our component
+  const createModal = useCallback((url: string, title: string, x: number, y: number) => {
+    // Create a custom event to trigger the universal link modal
+    const event = new CustomEvent('openUniversalLinkModal', { 
+      detail: { url, title, x, y }
+    });
+    window.dispatchEvent(event);
+    
+    // Close the search
+    setIsSearchOpen(false)
+    setIsOpen(false)
+    setSearchQuery("")
+  }, []);
 
   return (
     <div className="fixed top-5 right-5 z-50" ref={dropdownRef}>
@@ -688,8 +714,45 @@ export function SettingsMenu() {
                     />
                     <span className="text-sm">Pages only</span>
                   </label>
+                  <label className="flex items-center space-x-1">
+                    <input
+                      type="radio"
+                      name="searchFilter"
+                      checked={searchFilter === "bible"}
+                      onChange={() => setSearchFilter("bible")}
+                      className="h-3.5 w-3.5 rounded-full border-muted-foreground"
+                    />
+                    <span className="text-sm">Bible</span>
+                  </label>
                 </div>
               </div>
+
+              {searchFilter === "bible" && (
+                <div className="border-b border-border p-2">
+                  <div className="text-xs text-muted-foreground mb-1">Bible version:</div>
+                  <select 
+                    value={bibleVersion}
+                    onChange={(e) => setBibleVersion(e.target.value)}
+                    className="w-full text-sm px-2 py-1 border border-border rounded bg-background"
+                  >
+                    <option value="KJV">KJV</option>
+                    <option value="NKJV">NKJV</option>
+                    <option value="NLT">NLT</option>
+                    <option value="NIV">NIV</option>
+                    <option value="ESV">ESV</option>
+                    <option value="CSB">CSB</option>
+                    <option value="NASB20">NASB20</option>
+                    <option value="NASB95">NASB95</option>
+                    <option value="LSB">LSB</option>
+                    <option value="AMP">AMP</option>
+                    <option value="NET">NET</option>
+                    <option value="RSV">RSV</option>
+                  </select>
+                  <div className="mt-1 text-xs text-muted-foreground">
+                    Enter a Bible verse or search term and press Search
+                  </div>
+                </div>
+              )}
 
               <div className={`${isMaximized ? "max-h-[calc(90vh-120px)]" : "max-h-[300px]"} overflow-y-auto`}>
                 {searchResults.length > 0 ? (

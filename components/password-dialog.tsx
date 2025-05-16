@@ -11,12 +11,14 @@ import { useState } from "react"
 import { useToast } from "@/components/ui/use-toast"
 
 interface PasswordDialogProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen?: boolean
+  open?: boolean
+  onClose?: () => void
+  onOpenChange?: (open: boolean) => void
   onSuccess: () => void
-  researchId: string
-  title: string
-  status: string
+  researchId?: string
+  title?: string
+  status?: string
 }
 
 interface AccessRequest {
@@ -26,7 +28,23 @@ interface AccessRequest {
   return: string  // Added return field for return address
 }
 
-export function PasswordDialog({ isOpen, onClose, onSuccess, researchId, title, status }: PasswordDialogProps) {
+export function PasswordDialog({
+  isOpen,
+  open,
+  onClose,
+  onOpenChange,
+  onSuccess,
+  researchId = "",
+  title = "Protected Resource",
+  status = "active"
+}: PasswordDialogProps) {
+  // Handle both old and new dialog open state props
+  const isDialogOpen = isOpen || open || false
+  const handleOpenChange = (state: boolean) => {
+    if (onOpenChange) onOpenChange(state)
+    if (!state && onClose) onClose()
+  }
+
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [showRequestForm, setShowRequestForm] = useState(false)
@@ -57,7 +75,7 @@ export function PasswordDialog({ isOpen, onClose, onSuccess, researchId, title, 
 
       if (response.ok) {
         onSuccess()
-        onClose()
+        handleOpenChange(false)
       } else {
         const data = await response.json()
         const newAttempts = failedAttempts + 1
@@ -104,7 +122,7 @@ export function PasswordDialog({ isOpen, onClose, onSuccess, researchId, title, 
         toast({
           description: "Request submitted",
         })
-        onClose()
+        handleOpenChange(false)
       } else {
         toast({
           description: "Try again",
@@ -124,7 +142,7 @@ export function PasswordDialog({ isOpen, onClose, onSuccess, researchId, title, 
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isDialogOpen} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{showRequestForm ? "Request Access" : "Enter Password"}</DialogTitle>
@@ -147,7 +165,7 @@ export function PasswordDialog({ isOpen, onClose, onSuccess, researchId, title, 
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex justify-end gap-2">
-                <Button type="button" variant="outline" onClick={onClose}>
+                <Button type="button" variant="outline" onClick={() => handleOpenChange(false)}>
                   Cancel
                 </Button>
                 <Button type="submit" disabled={password.length !== 6 || isLoading || failedAttempts >= 3}>

@@ -401,6 +401,27 @@ export function UniversalLinkModal() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [focusedModalIndex, goToPrevModal, goToNextModal])
 
+  // Handle custom event from settings menu for Bible search
+  useEffect(() => {
+    const handleOpenUniversalLinkModal = (event: CustomEvent) => {
+      const { url, title, x, y } = event.detail;
+      
+      // Skip if modal is disabled or if we shouldn't show a preview for this URL
+      if (!isEnabled || modalMode === "off" || !shouldShowPreview(url)) return;
+      
+      // Create the modal
+      createModal(url, title, x, y);
+    };
+
+    // Add event listener for the custom event
+    window.addEventListener('openUniversalLinkModal', handleOpenUniversalLinkModal as EventListener);
+    
+    // Clean up
+    return () => {
+      window.removeEventListener('openUniversalLinkModal', handleOpenUniversalLinkModal as EventListener);
+    };
+  }, [isEnabled, modalMode, shouldShowPreview, createModal]);
+
   // Always render the same structure with the same number of hooks
   if (!shouldRenderContent || !isEnabled || modalMode === "off" || isExcluded) {
     return null

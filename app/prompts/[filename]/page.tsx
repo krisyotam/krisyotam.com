@@ -64,6 +64,8 @@ export default function PromptPage({ params }: { params: { filename: string } })
           status="In Progress"
           confidence="certain"
           importance={7}
+          backText="Prompts"
+          backHref="/prompts"
         />
       </div>
 

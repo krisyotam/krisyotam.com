@@ -25,6 +25,8 @@ interface ResearchHeaderProps {
     | "certain"
     | string
   importance?: number
+  backText?: string
+  backHref?: string
 }
 
 const confidenceExplanation = `The confidence tag expresses how well-supported the research is, or how likely its overall ideas are right. This uses a scale from "impossible" to "certain", based on the Kesselman List of Estimative Words:
@@ -100,16 +102,18 @@ export function ResearchHeader({
   status = "active",
   confidence = "possible",
   importance = 5,
+  backText = "Research",
+  backHref = "/research",
 }: ResearchHeaderProps) {
   return (
     <header className="mb-4 relative">
-      {/* Back to research link */}
+      {/* Back button with customizable text and link */}
       <Link
-        href="/research"
+        href={backHref}
         className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 group font-serif italic"
       >
         <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-        Return to Research
+        Return to {backText}
       </Link>
 
       {/* Academic bento container */}
