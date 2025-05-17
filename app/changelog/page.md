@@ -37,6 +37,7 @@
 ## May 2025
 
 ### May 17, 2025
+- added exaltatio mortis to verse collection
 - Merge branch 'main' of https://github.com/krisyotam/krisblog
 
 
