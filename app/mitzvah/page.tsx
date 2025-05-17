@@ -17,8 +17,8 @@ export default function MitzvahPage() {
           date={new Date().toISOString()}
           preview="A comprehensive listing of the Biblical commandments (Mitzvot)"
           status="Finished"
-          confidence="highly likely"
-          importance={8}
+          confidence="certain"
+          importance={10}
         />
 
         <PageDescription
