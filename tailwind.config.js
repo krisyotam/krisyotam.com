@@ -1,7 +1,41 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx,css}",
+    "./lib/**/*.{js,ts,jsx,tsx}",
+    "./utils/**/*.{js,ts,jsx,tsx}",
+    "./contexts/**/*.{js,ts,jsx,tsx}",
+    "./hooks/**/*.{js,ts,jsx,tsx}",
+    "./styles/**/*.{css,scss}"
+  ],
+  safelist: [
+    // Preserve dark mode text colors
+    { pattern: /^dark:text-(gray|white|slate|neutral|black|blue|red)-\d{2,3}$/ },
+    // Preserve dark mode background colors
+    { pattern: /^dark:bg-(gray|black|white|slate|neutral|blue|red)-\d{2,3}$/ },
+    // Preserve dark mode border colors
+    { pattern: /^dark:border-(gray|black|white|slate|neutral|blue)-\d{2,3}$/ },
+    // Ensure dark prose styles are preserved
+    'dark:prose-invert',
+    // Ensure specific colors that match our custom CSS
+    'dark:text-white',
+    'dark:text-f5f5f5',
+    'dark:text-e5e5e5',
+    'dark:text-a3a3a3',
+    'dark:text-3b82f6',
+    'dark:text-60a5fa',
+    'dark:text-93c5fd',
+    'dark:text-d4d4d4',
+    'dark:text-bbb',
+    'dark:text-e0e0e0',
+    'dark:border-zinc-700',
+    'dark:border-neutral-700',
+    'dark:border-gray-700',
+    'dark:border-slate-700'
+  ],
   theme: {
     extend: {
       colors: {
@@ -38,6 +72,16 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Add exact colors from our custom CSS to make them available as utilities
+        f5f5f5: "#f5f5f5",
+        e5e5e5: "#e5e5e5",
+        a3a3a3: "#a3a3a3",
+        bbb: "#bbb",
+        e0e0e0: "#e0e0e0",
+        "60a5fa": "#60a5fa",
+        "93c5fd": "#93c5fd",
+        "3b82f6": "#3b82f6",
+        d4d4d4: "#d4d4d4",
       },
       borderRadius: {
         lg: "var(--radius)",

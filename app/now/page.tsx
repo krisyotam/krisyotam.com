@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { NowContent } from "@/components/now-content"
 import { MonthlyArchive } from "@/components/monthly-archive"
 import "./now-page.css"
+import "../blog/tailwind-dark.css"
 import { PageHeader } from "@/components/page-header"
 
 export const metadata: Metadata = {
