@@ -38,19 +38,20 @@
 - [x] Theme persistence via localStorage may not be working in production
   - next-themes requires client-side hydration to work correctly
 
-## Solutions to Implement
-- [ ] Unify CSS approach: Ensure all hard-coded .dark selectors follow the same pattern
-  - In page-specific CSS files like app/blog/posts.css, use :is(.dark) consistently
-  - In component CSS, ensure theme class is properly applied to parent elements
-- [ ] Fix ThemeProvider initialization:
-  - Modify app/layout.tsx to ensure dark mode class is properly added to html element
-  - Use forcedTheme in SSR contexts to prevent hydration mismatch
-- [ ] Add script for early theme detection:
-  - Add a script to prevent flash of wrong theme on initial load
-  - The script should run before React hydration to set theme class
-- [ ] Improve theme persistence:
-  - Ensure localStorage theme setting is read early and consistently
-  - Add a global theme class to html element based on localStorage
-- [ ] Verify darkmode media query handling:
-  - Check if system preference is properly detected in production
-  - Ensure prefers-color-scheme is properly handled
+## Solutions Implemented
+- [x] Unify CSS approach: Ensure all hard-coded .dark selectors follow the same pattern
+  - Updated app/blog/posts.css to use :is(.dark) consistently
+  - Now page CSS already uses correct selectors
+- [x] Fix ThemeProvider initialization:
+  - Updated app/layout.tsx to add className="light" to html element
+  - Added proper storageKey to ThemeProvider
+  - Added disableTransitionOnChange to prevent flicker
+- [x] Add script for early theme detection:
+  - Created components/dark-mode-script.tsx for early theme detection
+  - Script runs before React hydration to set theme class properly
+- [x] Improve theme persistence:
+  - Added localStorage check and system preference detection in script
+  - Script handles changes to system preference dynamically
+- [x] Verify darkmode media query handling:
+  - Added theme-color meta tags for browser UI
+  - Added data-prefers-dark attribute to track system preference

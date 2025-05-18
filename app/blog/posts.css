@@ -314,80 +314,77 @@ body {
 }
 
 /* Dark mode adjustments */
-.dark .post-content {
-  color: rgba(255, 255, 255, 0.9);
+:is(.dark) .post-content {
+  color: #e5e5e5;
 }
 
-.dark .post-content h1,
-.dark .post-content h2,
-.dark .post-content h3,
-.dark .post-content h4,
-.dark .post-content h5,
-.dark .post-content h6 {
-  color: rgba(255, 255, 255, 0.95) !important;
-}
-
-/* Strengthen dark mode header styles individually */
-.dark .post-content h1 {
-  color: rgba(255, 255, 255, 0.95) !important;
-  border-bottom: 1px dotted rgba(255, 255, 255, 0.3) !important;
-}
-
-.dark .post-content h2 {
-  color: rgba(255, 255, 255, 0.95) !important;
-  border-bottom: 1px dotted rgba(255, 255, 255, 0.25) !important;
-}
-
-.dark .post-content h3 {
-  color: rgba(255, 255, 255, 0.95) !important;
-  border-bottom: 1px dotted rgba(255, 255, 255, 0.2) !important;
-}
-
-.dark .post-content h4 {
-  color: rgba(255, 255, 255, 0.95) !important;
-}
-
-.dark .post-content h5 {
-  color: rgba(255, 255, 255, 0.95) !important;
-}
-
-.dark .post-content h6 {
-  color: rgba(255, 255, 255, 0.95) !important;
-}
-
-.dark .post-content a {
-  color: rgba(255, 255, 255, 0.9);
-  border-bottom-color: rgba(255, 255, 255, 0.5);
-}
-
-.dark .post-content a:hover {
-  border-bottom-color: rgba(255, 255, 255, 0.8);
-}
-
-.dark .post-content a.internal-link {
-  color: #60a5fa; /* Lighter blue for dark mode */
-  border-bottom-color: rgba(96, 165, 250, 0.3);
-}
-
-.dark .post-content a.internal-link:hover {
-  color: #93c5fd; /* Even lighter blue on hover in dark mode */
-  border-bottom-color: rgba(96, 165, 250, 0.6);
-}
-
-.dark .post-content a.internal-link::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 7 10 10'/%3E%3Cpath d='M17 7v10H7'/%3E%3C/svg%3E");
-}
-
-.dark .post-content blockquote {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.dark .post-content code,
-.dark .post-content pre {
-  background-color: rgba(255, 255, 255, 0.1);
+:is(.dark) .post-content h1,
+:is(.dark) .post-content h2,
+:is(.dark) .post-content h3,
+:is(.dark) .post-content h4,
+:is(.dark) .post-content h5,
+:is(.dark) .post-content h6 {
+  color: #f5f5f5;
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Strengthen dark mode header styles individually */
+:is(.dark) .post-content h1 {
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+}
+
+:is(.dark) .post-content h2 {
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.25);
+}
+
+:is(.dark) .post-content h3 {
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.2);
+}
+
+:is(.dark) .post-content h4 {
+  color: #f5f5f5;
+}
+
+:is(.dark) .post-content h5 {
+  color: #f5f5f5;
+}
+
+:is(.dark) .post-content h6 {
+  color: #f5f5f5;
+}
+
+:is(.dark) .post-content a {
+  color: #d4d4d4;
+  border-color: #666;
+}
+
+:is(.dark) .post-content a:hover {
+  border-color: #999;
+}
+
+:is(.dark) .post-content a.internal-link {
+  color: #60a5fa; /* Lighter blue for dark mode */
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+:is(.dark) .post-content a.internal-link:hover {
+  color: #93c5fd; /* Even lighter blue on hover in dark mode */
+  border-color: rgba(147, 197, 253, 0.6);
+}
+
+:is(.dark) .post-content a.internal-link::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 7 10 10'/%3E%3Cpath d='M17 7v10H7'/%3E%3C/svg%3E");
+}
+
+:is(.dark) .post-content blockquote {
+  color: #bbb;
+}
+
+:is(.dark) .post-content code,
+:is(.dark) .post-content pre {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #e0e0e0;
+}
 
 /* ensure the browser can hyphenate text in English */
 .post-content {
