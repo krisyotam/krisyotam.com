@@ -1,0 +1,56 @@
+# Darkmode CSS Investigation Agenda
+
+## CSS Files Investigation
+- [x] Check global CSS files in styles directory
+  - Found darkmode variables in styles/globals.css
+  - Found another globals.css in app directory with darkmode CSS variables
+- [x] Examine CSS modules or styling in app directory
+  - Found app/globals.css with extensive styling including darkmode variables
+  - Found app/blog/posts.css with blog post styling including darkmode selectors
+  - Found app/now/now-page.css with now page styling including darkmode selectors
+- [x] Review Tailwind configuration for darkmode settings
+  - Verified darkMode: ["class"] in tailwind.config.js
+- [x] Inspect theme configuration and context providers
+  - Found two theme providers:
+    1. contexts/theme-context.tsx (not being used)
+    2. components/theme-provider.tsx (used in layout)
+  - Layout uses next-themes ThemeProvider
+
+## Page-Specific Investigation
+- [x] Blog post pages darkmode styling
+  - Blog has extensive styling in posts.css with dark mode selectors
+  - Blog layout uses ThemeProvider
+- [x] Notes pages darkmode styling
+  - Similar pattern to blog pages
+- [x] MDX pages darkmode styling (now page, wants pages)
+  - Now page uses now-page.css with dark mode selectors
+  - Blog and notes are MDX-based pages
+
+## Identified Issues
+- [x] Theme toggle mechanism via command-menu and settings-menu
+  - Uses next-themes to toggle between light/dark
+  - Command menu has proper toggle with proper localStorage usage
+- [x] Hard-coded dark selectors not using Tailwind syntax
+  - Many `.dark` selectors in CSS, but not using Tailwind's classes
+  - CSS specificity battles may be occurring
+- [x] Theme application inconsistency between client and server rendering
+  - ThemeProvider in layout.tsx uses "system" as default, could be inconsistent with CSS
+- [x] Theme persistence via localStorage may not be working in production
+  - next-themes requires client-side hydration to work correctly
+
+## Solutions to Implement
+- [ ] Unify CSS approach: Ensure all hard-coded .dark selectors follow the same pattern
+  - In page-specific CSS files like app/blog/posts.css, use :is(.dark) consistently
+  - In component CSS, ensure theme class is properly applied to parent elements
+- [ ] Fix ThemeProvider initialization:
+  - Modify app/layout.tsx to ensure dark mode class is properly added to html element
+  - Use forcedTheme in SSR contexts to prevent hydration mismatch
+- [ ] Add script for early theme detection:
+  - Add a script to prevent flash of wrong theme on initial load
+  - The script should run before React hydration to set theme class
+- [ ] Improve theme persistence:
+  - Ensure localStorage theme setting is read early and consistently
+  - Add a global theme class to html element based on localStorage
+- [ ] Verify darkmode media query handling:
+  - Check if system preference is properly detected in production
+  - Ensure prefers-color-scheme is properly handled

@@ -167,24 +167,24 @@ export function DocsClient({ initialCategory = "All" }: { initialCategory?: stri
           </div>
         ) : (
           <>
-            <table className="w-full text-sm border border-muted/40 rounded-md overflow-hidden">
+            <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
               <thead>
-                <tr className="text-muted-foreground border-b border-muted/40 bg-muted/10">
-                  <th className="py-2 text-left font-normal px-3">Title</th>
-                  <th className="py-2 text-left font-normal px-3">Model</th>
-                  <th className="py-2 text-left font-normal px-3">Year</th>
+                <tr className="border-b border-border bg-muted/50 text-foreground">
+                  <th className="py-2 text-left font-medium px-3">Title</th>
+                  <th className="py-2 text-left font-medium px-3">Model</th>
+                  <th className="py-2 text-left font-medium px-3">Year</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredDocs.map(item => (
+                {filteredDocs.map((item, index) => (
                   <tr
                     key={item.id}
-                    className="border-b border-muted/30 hover:bg-muted/20 cursor-pointer transition-colors"
+                    className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
                     onClick={() => handleItemClick(item)}
                   >
-                    <td className="py-2 pr-4 px-3 font-medium">{item.title}</td>
-                    <td className="py-2 pr-4 px-3">{item.aiModel} {item.version}</td>
-                    <td className="py-2 pr-4 px-3">{new Date(item.date).getFullYear()}</td>
+                    <td className="py-2 px-3 font-medium">{item.title}</td>
+                    <td className="py-2 px-3">{item.aiModel} {item.version}</td>
+                    <td className="py-2 px-3">{new Date(item.date).getFullYear()}</td>
                   </tr>
                 ))}
               </tbody>

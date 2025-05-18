@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import researchData from "@/data/research.json"
+import essaysData from "@/data/essays.json"
 import { PageHeader } from "@/components/page-header"
 import { useRouter } from "next/navigation"
 import {
@@ -19,20 +19,10 @@ import { PasswordDialog } from "@/components/password-dialog"
 import { Input } from "@/components/ui/input"
 import { PageDescription } from "@/components/posts/typography/page-description"
 
-// Add research page metadata
-type ResearchPageData = {
-  title: string;
-  subtitle: string;
-  date: string;
-  preview: string;
-  status: "In Progress";
-  confidence: "likely";
-  importance: number;
-};
-
-const researchPageData: ResearchPageData = {
-  title: "Research",
-  subtitle: "Academic Papers and Projects",
+// Add essays page metadata
+const essaysPageData = {
+  title: "Essays",
+  subtitle: "Formal Writings on Diverse Topics",
   date: new Date().toISOString(),
   preview:
     "a collection of my more formal writings on diverse topics",
@@ -41,20 +31,15 @@ const researchPageData: ResearchPageData = {
   importance: 8,
 }
 
-interface Research {
+interface Essay {
   id: string
   title: string
-  abstract: string
   importance: string | number
   authors: string[]
-  subject: string
-  keywords: string[]
   postedBy: string
   postedOn: string
   dateStarted: string
   status: string
-  bibliography: string[]
-  img?: string
   pdfLink: string
   sourceLink: string
   category: string
@@ -69,21 +54,21 @@ function slugifyTitle(title: string) {
   return title.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
 }
 
-export function ResearchClient({ initialCategory = "All" }: { initialCategory?: string }) {
+export function EssaysClient({ initialCategory = "All" }: { initialCategory?: string }) {
   const [loading, setLoading] = useState(true)
   const [currentCategory, setCurrentCategory] = useState(initialCategory)
   const [searchQuery, setSearchQuery] = useState("")
-  const [research, setResearch] = useState<Research[]>(researchData)
+  const [essays, setEssays] = useState<Essay[]>(essaysData)
   const [categories, setCategories] = useState<string[]>([])
   const [itemModalOpen, setItemModalOpen] = useState(false)
-  const [selectedResearch, setSelectedResearch] = useState<Research | null>(null)
+  const [selectedEssay, setSelectedEssay] = useState<Essay | null>(null)
   const [showPasswordDialog, setShowPasswordDialog] = useState(false)
   const [selectedLink, setSelectedLink] = useState<string>("")
   const router = useRouter()
 
   useEffect(() => {
     // Extract unique categories and sort them
-    setCategories(Array.from(new Set(researchData.map((item) => item.category))).sort())
+    setCategories(Array.from(new Set(essaysData.map((item) => item.category))).sort())
     
     // Update current category when initialCategory changes
     setCurrentCategory(initialCategory)
@@ -94,38 +79,36 @@ export function ResearchClient({ initialCategory = "All" }: { initialCategory?: 
     return () => clearTimeout(timeout)
   }, [initialCategory])
 
-  // Helper to build the correct route for a research item
-  function getResearchUrl(item: Research) {
+  // Helper to build the correct route for an essay item
+  function getEssayUrl(item: Essay) {
     const categorySlug = slugifyCategory(item.category);
     const year = new Date(item.dateStarted).getFullYear();
     const titleSlug = slugifyTitle(item.title);
-    return `/research/${encodeURIComponent(categorySlug)}/${year}/${encodeURIComponent(titleSlug)}`
+    return `/essays/${encodeURIComponent(categorySlug)}/${year}/${encodeURIComponent(titleSlug)}`
   }
 
   function handleCategoryChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const selectedCategory = e.target.value;
     if (selectedCategory === "All") {
-      router.push("/research");
+      router.push("/essays");
     } else {
-      router.push(`/research/${slugifyCategory(selectedCategory)}`);
+      router.push(`/essays/${slugifyCategory(selectedCategory)}`);
     }
   }
 
-  // Filter research based on search and category
-  const filteredResearch = research.filter((item) => {
+  // Filter essays based on search and category
+  const filteredEssays = essays.filter((item) => {
     const matchesSearch = searchQuery === "" || 
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.abstract.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.keywords.some((keyword) => keyword.toLowerCase().includes(searchQuery.toLowerCase()))
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
 
     const matchesCategory = currentCategory === "All" || item.category === currentCategory
 
     return matchesSearch && matchesCategory
   }).sort((a, b) => new Date(b.dateStarted).getTime() - new Date(a.dateStarted).getTime());
 
-  const handleItemClick = (item: Research) => {
+  const handleItemClick = (item: Essay) => {
     // Navigate to the detail page instead of opening a modal
-    router.push(getResearchUrl(item))
+    router.push(getEssayUrl(item))
   }
 
   const handleDownloadClick = (link: string, e: React.MouseEvent) => {
@@ -139,15 +122,15 @@ export function ResearchClient({ initialCategory = "All" }: { initialCategory?: 
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
+    <main className="max-w-2xl mx-auto px-4 py-12">
       <PageHeader
-        title={researchPageData.title}
-        subtitle={researchPageData.subtitle}
-        date={researchPageData.date}
-        preview={researchPageData.preview}
-        status={researchPageData.status}
-        confidence={researchPageData.confidence}
-        importance={researchPageData.importance}
+        title={essaysPageData.title}
+        subtitle={essaysPageData.subtitle}
+        date={essaysPageData.date}
+        preview={essaysPageData.preview}
+        status={essaysPageData.status}
+        confidence={essaysPageData.confidence}
+        importance={essaysPageData.importance}
       />
 
       <div className="mt-8">
@@ -169,7 +152,7 @@ export function ResearchClient({ initialCategory = "All" }: { initialCategory?: 
           
           <div className="relative flex-1">
             <Input
-              placeholder="Search research papers..."
+              placeholder="Search essays..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full"
@@ -195,7 +178,7 @@ export function ResearchClient({ initialCategory = "All" }: { initialCategory?: 
                 </tr>
               </thead>
               <tbody>
-                {filteredResearch.map((item, index) => (
+                {filteredEssays.map((item, index) => (
                   <tr
                     key={item.id}
                     className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
@@ -208,8 +191,8 @@ export function ResearchClient({ initialCategory = "All" }: { initialCategory?: 
                 ))}
               </tbody>
             </table>
-            {filteredResearch.length === 0 && !loading && (
-              <div className="text-muted-foreground text-sm mt-6">No research found for this category.</div>
+            {filteredEssays.length === 0 && !loading && (
+              <div className="text-muted-foreground text-sm mt-6">No essays found for this category.</div>
             )}
           </>
         )}
@@ -217,71 +200,65 @@ export function ResearchClient({ initialCategory = "All" }: { initialCategory?: 
       
       {/* Help Information using PageDescription component */}
       <PageDescription 
-        title="About Research"
-        description="A collection of my published research papers, final pdfs, and LaTeX source code."
+        title="About Essays"
+        description="This page showcases my more formal writings on topics. These are tex documents for writings that I just felt should be done in a more formal way. A lot of these also come from my experiments with Ultralearning, and taking courses via things like MIT OpenCourseWare."
       />
 
-      {/* Research Item Modal */}
-      {selectedResearch && (
+      {/* Essay Item Modal */}
+      {selectedEssay && (
         <Dialog open={itemModalOpen} onOpenChange={setItemModalOpen}>
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="text-xl font-semibold mb-4">
-                {selectedResearch.title}
-                <Badge variant={selectedResearch.status === "active" ? "destructive" : "secondary"} className="ml-2">
-                  {selectedResearch.status}
+                {selectedEssay.title}
+                <Badge variant={selectedEssay.status === "active" ? "destructive" : "secondary"} className="ml-2">
+                  {selectedEssay.status}
                 </Badge>
               </DialogTitle>
             </DialogHeader>
             <div className="space-y-6">
               <div>
-                <h4 className="text-sm font-semibold mb-2">Abstract</h4>
-                <p className="text-sm text-muted-foreground">{selectedResearch.abstract}</p>
-              </div>
-
-              <div>
                 <h4 className="text-sm font-semibold mb-2">Importance</h4>
-                <p className="text-sm text-muted-foreground">{selectedResearch.importance}</p>
+                <p className="text-sm text-muted-foreground">{selectedEssay.importance}</p>
               </div>
 
               <div>
                 <h4 className="text-sm font-semibold mb-2">Authors</h4>
-                <p className="text-sm text-muted-foreground">{selectedResearch.authors.join(", ")}</p>
+                <p className="text-sm text-muted-foreground">{selectedEssay.authors.join(", ")}</p>
               </div>
 
               <div>
-                <h4 className="text-sm font-semibold mb-2">Keywords</h4>
+                <h4 className="text-sm font-semibold mb-2">Tags</h4>
                 <div className="flex flex-wrap gap-2">
-                  {selectedResearch.keywords.map((keyword, index) => (
+                  {selectedEssay.tags.map((tag, index) => (
                     <Badge key={index} variant="outline" className="text-xs">
-                      {keyword}
+                      {tag}
                     </Badge>
                   ))}
                 </div>
               </div>
 
-              <div className="flex justify-between items-center pt-4 border-t border-border gap-4">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center gap-2"
-                  onClick={(e) => handleDownloadClick(selectedResearch.pdfLink, e)}
-                >
-                  <Download className="h-4 w-4" />
-                  Download PDF
-                </Button>
+              <div className="flex flex-wrap gap-4 pt-4 border-t border-border">
+                {selectedEssay.pdfLink ? (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2"
+                    onClick={(e) => handleDownloadClick(selectedEssay.pdfLink, e)}
+                  >
+                    <Download className="h-4 w-4" />
+                    Download PDF
+                  </Button>
+                ) : null}
                 
                 <Button
                   variant="outline"
                   size="sm"
                   className="flex items-center gap-2"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    window.open(selectedResearch.sourceLink, "_blank");
-                  }}
+                  onClick={() => window.open(selectedEssay.sourceLink, "_blank")}
                 >
                   <ExternalLink className="h-4 w-4" />
-                  View Source
+                  Source
                 </Button>
               </div>
             </div>

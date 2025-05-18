@@ -8,8 +8,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { formatDistanceToNow } from "date-fns"
 import { CommandMenu } from "@/components/command-menu"
 
-export const dynamic = "force-dynamic"
-export const revalidate = 60 // Revalidate every minute
+// Increase revalidation time to reduce API load
+export const revalidate = 300 // Revalidate every 5 minutes
 
 export default async function TypePage() {
   return (
@@ -44,32 +44,37 @@ export default async function TypePage() {
 }
 
 async function StatsOverview() {
-  const stats = await getStats()
+  try {
+    const stats = await getStats()
 
-  if (!stats) {
+    if (!stats) {
+      return <StatsCardSkeleton />
+    }
+
+    const { completedTests, startedTests, timeTyping } = stats
+
+    // Convert timeTyping from seconds to hours and minutes
+    const hours = Math.floor(timeTyping / 3600)
+    const minutes = Math.floor((timeTyping % 3600) / 60)
+
+    // Calculate completion rate
+    const completionRate = startedTests > 0 ? Math.round((completedTests / startedTests) * 100) : 0
+
+    return (
+      <Card className="p-6">
+        <h2 className="text-xl font-medium mb-4">Overview</h2>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <StatItem title="Tests Completed" value={completedTests.toLocaleString()} icon="check-circle" />
+          <StatItem title="Tests Started" value={startedTests.toLocaleString()} icon="play" />
+          <StatItem title="Completion Rate" value={`${completionRate}%`} icon="percent" />
+          <StatItem title="Time Typing" value={`${hours}h ${minutes}m`} icon="clock" />
+        </div>
+      </Card>
+    )
+  } catch (error) {
+    console.error("Error loading stats:", error)
     return <StatsCardSkeleton />
   }
-
-  const { completedTests, startedTests, timeTyping } = stats
-
-  // Convert timeTyping from seconds to hours and minutes
-  const hours = Math.floor(timeTyping / 3600)
-  const minutes = Math.floor((timeTyping % 3600) / 60)
-
-  // Calculate completion rate
-  const completionRate = startedTests > 0 ? Math.round((completedTests / startedTests) * 100) : 0
-
-  return (
-    <Card className="p-6">
-      <h2 className="text-xl font-medium mb-4">Overview</h2>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <StatItem title="Tests Completed" value={completedTests.toLocaleString()} icon="check-circle" />
-        <StatItem title="Tests Started" value={startedTests.toLocaleString()} icon="play" />
-        <StatItem title="Completion Rate" value={`${completionRate}%`} icon="percent" />
-        <StatItem title="Time Typing" value={`${hours}h ${minutes}m`} icon="clock" />
-      </div>
-    </Card>
-  )
 }
 
 async function PersonalBestsCard() {
@@ -85,18 +90,20 @@ async function PersonalBestsCard() {
   ]
 
   try {
-    const personalBests = await Promise.all(
-      modes.map(async ({ mode, mode2 }) => {
-        try {
-          const pb = await getPersonalBests(mode, mode2)
-          console.log(`PB for ${mode} ${mode2}:`, pb)
-          return { mode, mode2, data: pb }
-        } catch (error) {
-          console.error(`Error fetching PB for ${mode} ${mode2}:`, error)
-          return { mode, mode2, data: null, error: true }
-        }
-      }),
+    // Use Promise.allSettled instead of Promise.all to prevent one failed request from failing all
+    const personalBestsResults = await Promise.allSettled(
+      modes.map(({ mode, mode2 }) => getPersonalBests(mode, mode2))
     )
+    
+    const personalBests = modes.map(({ mode, mode2 }, index) => {
+      const result = personalBestsResults[index]
+      return {
+        mode,
+        mode2,
+        data: result.status === 'fulfilled' ? result.value : null,
+        error: result.status === 'rejected'
+      }
+    })
 
     return (
       <Card className="p-6 h-full">
@@ -170,122 +177,138 @@ async function PersonalBestsCard() {
 }
 
 async function StreakCard() {
-  const streak = await getStreak()
+  try {
+    const streak = await getStreak()
 
-  if (!streak) {
+    if (!streak) {
+      return <CardSkeleton title="Current Streak" />
+    }
+
+    const { length, maxLength, lastResultTimestamp } = streak
+    const lastTestDate = new Date(lastResultTimestamp)
+
+    return (
+      <Card className="p-6 h-full">
+        <h2 className="text-xl font-medium mb-4">Streak</h2>
+        <div className="grid grid-cols-2 gap-6">
+          <div className="flex flex-col items-center justify-center p-6 bg-primary/10 rounded-lg">
+            <span className="text-3xl font-medium">{length}</span>
+            <span className="text-sm text-muted-foreground mt-2 font-light">Current Streak</span>
+          </div>
+          <div className="flex flex-col items-center justify-center p-6 bg-primary/10 rounded-lg">
+            <span className="text-3xl font-medium">{maxLength}</span>
+            <span className="text-sm text-muted-foreground mt-2 font-light">Max Streak</span>
+          </div>
+        </div>
+        <div className="mt-6 text-center text-sm text-muted-foreground">
+          Last test: {formatDistanceToNow(lastTestDate, { addSuffix: true })}
+        </div>
+      </Card>
+    )
+  } catch (error) {
+    console.error("Error loading streak data:", error)
     return <CardSkeleton title="Current Streak" />
   }
-
-  const { length, maxLength, lastResultTimestamp } = streak
-  const lastTestDate = new Date(lastResultTimestamp)
-
-  return (
-    <Card className="p-6 h-full">
-      <h2 className="text-xl font-medium mb-4">Streak</h2>
-      <div className="grid grid-cols-2 gap-6">
-        <div className="flex flex-col items-center justify-center p-6 bg-primary/10 rounded-lg">
-          <span className="text-3xl font-medium">{length}</span>
-          <span className="text-sm text-muted-foreground mt-2 font-light">Current Streak</span>
-        </div>
-        <div className="flex flex-col items-center justify-center p-6 bg-primary/10 rounded-lg">
-          <span className="text-3xl font-medium">{maxLength}</span>
-          <span className="text-sm text-muted-foreground mt-2 font-light">Max Streak</span>
-        </div>
-      </div>
-      <div className="mt-6 text-center text-sm text-muted-foreground">
-        Last test: {formatDistanceToNow(lastTestDate, { addSuffix: true })}
-      </div>
-    </Card>
-  )
 }
 
 async function ActivityCard() {
-  const activity = await getTestActivity()
+  try {
+    const activity = await getTestActivity()
 
-  if (!activity) {
+    if (!activity) {
+      return <CardSkeleton title="Typing Activity" height="h-80" />
+    }
+
+    const { testsByDays } = activity
+
+    // Prepare data for heatmap
+    const heatmapData = testsByDays.map((count, index) => {
+      const date = new Date()
+      date.setDate(date.getDate() - (testsByDays.length - 1 - index))
+      return {
+        date: date.toISOString().split("T")[0],
+        count,
+      }
+    })
+
+    // Prepare data for line chart - limit to last 30 days for better performance
+    const last30Days = heatmapData.slice(-30)
+    const chartData = {
+      labels: last30Days.map((d) => d.date.split("-")[2]), // Just the day
+      datasets: [
+        {
+          label: "Tests",
+          data: last30Days.map((d) => d.count),
+        },
+      ],
+    }
+
+    return (
+      <Card className="p-6">
+        <h2 className="text-xl font-medium mb-4">Typing Activity</h2>
+        <div className="space-y-6">
+          <div className="h-40">
+            <LineChart data={chartData} />
+          </div>
+          <div className="h-32">
+            <CalendarHeatmap data={heatmapData} />
+          </div>
+        </div>
+      </Card>
+    )
+  } catch (error) {
+    console.error("Error loading activity data:", error)
     return <CardSkeleton title="Typing Activity" height="h-80" />
   }
-
-  const { testsByDays } = activity
-
-  // Prepare data for heatmap
-  const heatmapData = testsByDays.map((count, index) => {
-    const date = new Date()
-    date.setDate(date.getDate() - (testsByDays.length - 1 - index))
-    return {
-      date: date.toISOString().split("T")[0],
-      count,
-    }
-  })
-
-  // Prepare data for line chart
-  const last30Days = heatmapData.slice(-30)
-  const chartData = {
-    labels: last30Days.map((d: { date: string }) => d.date.split("-")[2]), // Just the day
-    datasets: [
-      {
-        label: "Tests",
-        data: last30Days.map((d: { count: number }) => d.count),
-      },
-    ],
-  }
-
-  return (
-    <Card className="p-6">
-      <h2 className="text-xl font-medium mb-4">Typing Activity</h2>
-      <div className="space-y-6">
-        <div className="h-40">
-          <LineChart data={chartData} />
-        </div>
-        <div className="h-32">
-          <CalendarHeatmap data={heatmapData} />
-        </div>
-      </div>
-    </Card>
-  )
 }
 
 async function RecentResultsCard() {
-  const results = await getResults(20)
+  try {
+    // Limit to 10 results instead of 20 for faster initial load
+    const results = await getResults(10)
 
-  if (!results || results.length === 0) {
+    if (!results || results.length === 0) {
+      return <CardSkeleton title="Recent Results" height="h-96" />
+    }
+
+    return (
+      <Card className="p-6">
+        <h2 className="text-xl font-medium mb-4">Recent Results</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b">
+                <th className="text-left py-2">Date</th>
+                <th className="text-left py-2">Mode</th>
+                <th className="text-right py-2">WPM</th>
+                <th className="text-right py-2">Accuracy</th>
+                <th className="text-right py-2">Consistency</th>
+                <th className="text-right py-2">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {results.map((result, index) => (
+                <tr key={index} className="border-b hover:bg-muted/50">
+                  <td className="py-2">{new Date(result.timestamp).toLocaleDateString()}</td>
+                  <td className="py-2">
+                    {result.mode} {result.mode2}
+                    {result.isPb && <Badge className="ml-2">PB</Badge>}
+                  </td>
+                  <td className="py-2 text-right font-mono">{result.wpm.toFixed(2)}</td>
+                  <td className="py-2 text-right font-mono">{result.acc.toFixed(2)}%</td>
+                  <td className="py-2 text-right font-mono">{result.consistency?.toFixed(2) || "-"}%</td>
+                  <td className="py-2 text-right font-mono">{result.testDuration.toFixed(1)}s</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+    )
+  } catch (error) {
+    console.error("Error loading results:", error)
     return <CardSkeleton title="Recent Results" height="h-96" />
   }
-
-  return (
-    <Card className="p-6">
-      <h2 className="text-xl font-medium mb-4">Recent Results</h2>
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b">
-              <th className="text-left py-2">Date</th>
-              <th className="text-left py-2">Mode</th>
-              <th className="text-right py-2">WPM</th>
-              <th className="text-right py-2">Accuracy</th>
-              <th className="text-right py-2">Consistency</th>
-              <th className="text-right py-2">Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {results.map((result: any, index: number) => (
-              <tr key={index} className="border-b hover:bg-muted/50">
-                <td className="py-2">{new Date(result.timestamp).toLocaleDateString()}</td>
-                <td className="py-2">
-                  {result.mode} {result.mode2}
-                  {result.isPb && <Badge className="ml-2">PB</Badge>}
-                </td>
-                <td className="py-2 text-right font-mono">{result.wpm.toFixed(2)}</td>
-                <td className="py-2 text-right font-mono">{result.acc.toFixed(2)}%</td>
-                <td className="py-2 text-right font-mono">{result.consistency?.toFixed(2) || "-"}%</td>
-                <td className="py-2 text-right font-mono">{result.testDuration.toFixed(1)}s</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </Card>
-  )
 }
 
 interface StatItemProps {

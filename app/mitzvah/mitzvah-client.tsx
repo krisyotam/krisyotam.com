@@ -212,7 +212,7 @@ export function MitzvahClient() {
             {itemsToDisplay.map((item, index) => (
               <tr 
                 key={item.id} 
-                className={`border-b border-border hover:bg-secondary/50 transition-colors ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
+                className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
               >
                 <td className="py-2 px-3 align-top font-medium">{item.id}</td>
                 <td className="py-2 px-3 align-top">{item.law}</td>

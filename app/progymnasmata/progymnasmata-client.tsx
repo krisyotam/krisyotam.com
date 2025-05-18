@@ -13,6 +13,7 @@ export function ProgymnasmataClient({ initialTypeFilter = "All" }: Progymnasmata
   const [entries, setEntries] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [typeFilter, setTypeFilter] = useState<string>(initialTypeFilter)
+  const [searchQuery, setSearchQuery] = useState<string>("")
   const router = useRouter()
   const pathname = usePathname()
 
@@ -54,7 +55,15 @@ export function ProgymnasmataClient({ initialTypeFilter = "All" }: Progymnasmata
 
   // Sort by date descending (assuming date is ISO string or similar)
   const sortedEntries = [...entries].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  const filteredEntries = typeFilter === "All" ? sortedEntries : sortedEntries.filter(e => e.type === typeFilter || e.type.toLowerCase() === typeFilter.toLowerCase())
+  const filteredEntries = sortedEntries.filter(entry => {
+    const matchesType = typeFilter === "All" || 
+                       entry.type === typeFilter || 
+                       entry.type.toLowerCase() === typeFilter.toLowerCase();
+    const matchesSearch = !searchQuery || 
+                         entry.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                         (entry.description && entry.description.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesType && matchesSearch;
+  });
 
   function handleTypeChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const newType = e.target.value;
@@ -85,19 +94,31 @@ export function ProgymnasmataClient({ initialTypeFilter = "All" }: Progymnasmata
         importance={7}
       />
       <div className="mt-8">
-        <div className="mb-4 flex items-center gap-2">
-          <label htmlFor="type-filter" className="text-sm text-muted-foreground">Filter by type:</label>
-          <select
-            id="type-filter"
-            className="border rounded px-2 py-1 text-sm bg-background"
-            value={typeFilter}
-            onChange={handleTypeChange}
-          >
-            <option value="All">All</option>
-            {types.map(type => (
-              <option key={type} value={type}>{type}</option>
-            ))}
-          </select>
+        <div className="mb-6 flex items-center gap-4">
+          <div className="flex items-center gap-2 whitespace-nowrap">
+            <label htmlFor="type-filter" className="text-sm text-muted-foreground">Filter by type:</label>
+            <select
+              id="type-filter"
+              className="border rounded px-2 py-1 text-sm bg-background"
+              value={typeFilter}
+              onChange={handleTypeChange}
+            >
+              <option value="All">All</option>
+              {types.map(type => (
+                <option key={type} value={type}>{type}</option>
+              ))}
+            </select>
+          </div>
+          
+          <div className="relative flex-1">
+            <input 
+              type="text" 
+              placeholder="Search exercises..." 
+              className="w-full px-3 py-1 border rounded text-sm bg-background"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+            />
+          </div>
         </div>
         {loading ? (
           <div className="flex justify-center items-center py-24">
@@ -108,24 +129,24 @@ export function ProgymnasmataClient({ initialTypeFilter = "All" }: Progymnasmata
           </div>
         ) : (
           <>
-            <table className="w-full text-sm border border-muted/40 rounded-md overflow-hidden">
+            <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
               <thead>
-                <tr className="text-muted-foreground border-b border-muted/40 bg-muted/10">
-                  <th className="py-2 text-left font-normal px-3">Title</th>
-                  <th className="py-2 text-left font-normal px-3">Type</th>
-                  <th className="py-2 text-left font-normal px-3">Date</th>
+                <tr className="border-b border-border bg-muted/50 text-foreground">
+                  <th className="py-2 text-left font-medium px-3">Title</th>
+                  <th className="py-2 text-left font-medium px-3">Type</th>
+                  <th className="py-2 text-left font-medium px-3">Date</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredEntries.map(entry => (
+                {filteredEntries.map((entry, index) => (
                   <tr
                     key={entry.slug}
-                    className="border-b border-muted/30 hover:bg-muted/20 cursor-pointer transition-colors"
+                    className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
                     onClick={() => window.location.href = getEntryUrl(entry)}
                   >
-                    <td className="py-2 pr-4 px-3 font-medium">{entry.title}</td>
-                    <td className="py-2 pr-4 px-3">{entry.type}</td>
-                    <td className="py-2 pr-4 px-3">{new Date(entry.date).getFullYear()}</td>
+                    <td className="py-2 px-3 font-medium">{entry.title}</td>
+                    <td className="py-2 px-3">{entry.type}</td>
+                    <td className="py-2 px-3">{new Date(entry.date).getFullYear()}</td>
                   </tr>
                 ))}
               </tbody>
