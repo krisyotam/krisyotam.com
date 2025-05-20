@@ -16,6 +16,7 @@ export interface Post {
   marginNotes?: string[]
   cover_image?: string
   cover?: string
+  path?: string // Custom URL path for the post
 }
 
 export interface PostsData {

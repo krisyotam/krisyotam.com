@@ -5,7 +5,7 @@ import path from "path"
 export async function GET() {
   console.log("Fetching favorite producers from JSON")
   try {
-    const filePath = path.join(process.cwd(), "data", "fav-producers.json")
+    const filePath = path.join(process.cwd(), "data", "film", "fav-producers.json")
     const fileContents = fs.readFileSync(filePath, "utf8")
     const data = JSON.parse(fileContents)
 

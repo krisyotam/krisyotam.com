@@ -8,12 +8,12 @@ import { LayoutGrid, Text, BookOpen, Calendar, Hash, Github, BookMarked, Tag, Ch
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { PageHeader } from "@/components/page-header"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ReactMarkdown from "react-markdown"
 import rehypeRaw from "rehype-raw"
 import rehypeSanitize from "rehype-sanitize"
 import Link from "next/link"
 import Image from "next/image"
-import { MDXRemote } from 'next-mdx-remote'
 import { Box } from "@/components/posts/typography/box";
 import { Excerpt } from "@/components/posts/typography/excerpt";
 import { Quote } from "@/components/posts/typography/quote";
@@ -22,6 +22,24 @@ import { PoemBox } from "@/components/posts/typography/poem"
 import Collapse from "@/components/posts/typography/collapse"
 import { EnhancedImageDisplay } from "@/components/posts/images/enhanced-image-display";
 import { Image as BasicImage } from "@/components/posts/images/basic-image-display";
+import AboutMe from "@/components/about/AboutMe"
+import Profile from "@/components/about/Profile"
+import Personality from "@/components/about/Personality"
+import PersonalityMorals from "@/components/about/PersonalityMorals"
+import InterestingPeople from "@/components/about/InterestingPeople"
+import OnMyMethod from "@/components/about/OnMyMethod"
+import MyMission from "@/components/about/MyMission"
+import Certifications from "@/components/about/Certifications"
+import CoreValues from "@/components/about/CoreValues"
+import ExperienceComponent from "@/components/about/Experience"
+import CoreSkillsComponent from "@/components/about/CoreSkills"
+import PersonalPhilosophy from "@/components/about/PersonalPhilosophy"
+import AreasOfInterest from "@/components/about/AreasOfInterest"
+import Practice from "@/components/about/Practice"
+import Companies from "@/components/about/Companies"
+import MySites from "@/components/about/MySites"
+import OtherSites from "@/components/about/OtherSites"
+import SiteInfo from "@/components/about/SiteInfo"
 
 // Type definitions for props
 interface Post {
@@ -61,7 +79,6 @@ interface Poem {
 interface HomeClientProps {
   posts: Post[]
   randomQuote: { text: string; author: string }
-  bioContent: any
   initialView?: 'list' | 'grid'
   onRequestNewQuote?: () => void
 }
@@ -75,67 +92,6 @@ const homePageData = {
   status: "Finished" as const,
   confidence: "certain" as const,
   importance: 9,
-}
-
-function MarkdownContent({ content }: { content: any }) {
-  return (
-    <div className="prose prose-sm max-w-none font-serif text-foreground post-content [&>h1]:mt-0 [&>h2]:mt-0 [&>h3]:mt-0 [&_p]:text-foreground [&_a]:text-primary [&_ul]:text-foreground [&_ol]:text-foreground [&_li]:text-foreground [&_blockquote]:text-foreground/80">
-      <MDXRemote
-        {...content}
-        components={{
-          Box,
-          Excerpt,
-          Quote,
-          Spoiler,
-          PoemBox,
-          Collapse,
-          EnhancedImageDisplay,
-          Image: BasicImage,
-          a: ({ href, children }) => (
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-no-preview="true"
-              className="text-primary hover:underline"
-            >
-              {children}
-            </a>
-          ),
-          h1: ({ children }) => (
-            <h1 className="text-2xl font-semibold mb-4">{children}</h1>
-          ),
-          h2: ({ children }) => (
-            <h2 className="text-xl font-semibold mb-3">{children}</h2>
-          ),
-          h3: ({ children }) => (
-            <h3 className="text-lg font-semibold mb-2">{children}</h3>
-          ),
-          p: ({ children }) => (
-            <p className="mb-4 leading-relaxed">{children}</p>
-          ),
-          ul: ({ children }) => (
-            <ul className="list-disc pl-6 mb-4 space-y-1">{children}</ul>
-          ),
-          ol: ({ children }) => (
-            <ol className="list-decimal pl-6 mb-4 space-y-1">{children}</ol>
-          ),
-          li: ({ children }) => (
-            <li className="mb-1">{children}</li>
-          ),
-          blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-primary pl-4 italic my-4">{children}</blockquote>
-          ),
-          code: ({ children }) => (
-            <code className="bg-muted px-1 py-0.5 rounded text-sm font-mono">{children}</code>
-          ),
-          pre: ({ children }) => (
-            <pre className="bg-muted p-4 rounded-lg overflow-x-auto my-4 font-mono text-sm">{children}</pre>
-          ),
-        }}
-      />
-    </div>
-  )
 }
 
 // Stats Card Component
@@ -362,9 +318,7 @@ function PostsTable({ posts }: { posts: Post[] }) {
               onClick={goToNextPage}
               disabled={currentPage === totalPages}
               className="h-8 w-8 p-0"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
+            />
           </div>
         </div>
       )}
@@ -372,7 +326,56 @@ function PostsTable({ posts }: { posts: Post[] }) {
   )
 }
 
-export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list' }: HomeClientProps) {
+// Add this AccordionItem component
+function AccordionItem({ 
+  title, 
+  content, 
+  isOpen, 
+  onToggle 
+}: { 
+  title: string; 
+  content: React.ReactNode; 
+  isOpen: boolean; 
+  onToggle: () => void;
+}) {
+  const slug = title.toLowerCase().replace(/\s+/g, "-")
+  
+  return (
+    <div className="border-b border-border" id={slug}>
+      <button
+        onClick={onToggle}
+        className="w-full py-8 flex justify-between items-center text-left"
+        aria-expanded={isOpen}
+        aria-controls={`section-${slug}`}
+      >
+        <h2 className="text-2xl font-normal text-foreground">
+          <a className="hover:text-primary transition-colors">
+            {title}
+          </a>
+        </h2>
+        {isOpen ? (
+          <span className="text-2xl text-foreground" aria-hidden="true">
+            -
+          </span>
+        ) : (
+          <span className="text-2xl text-foreground" aria-hidden="true">
+            +
+          </span>
+        )}
+      </button>
+      <div
+        id={`section-${slug}`}
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen ? "max-h-[5000px] mb-8" : "max-h-0"
+        }`}
+      >
+        {content}
+      </div>
+    </div>
+  )
+}
+
+export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeClientProps) {
   const [viewMode, setViewMode] = useState(initialView) // "list" or "grid"
   const [randomPosts, setRandomPosts] = useState<Post[]>([])
   const [randomPoems, setRandomPoems] = useState<Poem[]>([])
@@ -381,6 +384,8 @@ export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list
   const [currentQuote, setCurrentQuote] = useState(randomQuote)
   const [quoteLines, setQuoteLines] = useState<string[]>([])
   const [showMoreQuote, setShowMoreQuote] = useState(false)
+  const [activeAboutTab, setActiveAboutTab] = useState<string>("about-me")
+  const [openSections, setOpenSections] = useState<number[]>([0])
 
   // Calculate consecutive writing streak (days since Jan 1, 2025)
   const startDate = new Date("2025-01-01")
@@ -474,6 +479,17 @@ export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list
       window.location.reload();
     }
   };
+
+  // Toggle accordion sections
+  const toggleSection = (index: number) => {
+    setOpenSections((current) => {
+      if (current.includes(index)) {
+        return current.filter((i) => i !== index)
+      } else {
+        return [...current, index]
+      }
+    })
+  }
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
@@ -597,10 +613,111 @@ export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list
               </Card>
             </div>
 
-            {/* Bio Card */}
-            <Card className="mb-8 p-6 bg-card border border-border">
-              <MarkdownContent content={bioContent} />
-            </Card>
+            {/* About Accordion */}
+            <div className="mb-8">
+              <AccordionItem
+                title="About Me"
+                content={<AboutMe />}
+                isOpen={openSections.includes(0)}
+                onToggle={() => toggleSection(0)}
+              />
+              <AccordionItem
+                title="Profile"
+                content={<Profile />}
+                isOpen={openSections.includes(1)}
+                onToggle={() => toggleSection(1)}
+              />
+              <AccordionItem
+                title="Personality"
+                content={<Personality />}
+                isOpen={openSections.includes(2)}
+                onToggle={() => toggleSection(2)}
+              />
+              <AccordionItem
+                title="Personality/Morals"
+                content={<PersonalityMorals />}
+                isOpen={openSections.includes(3)}
+                onToggle={() => toggleSection(3)}
+              />
+              <AccordionItem
+                title="On My Method"
+                content={<OnMyMethod />}
+                isOpen={openSections.includes(4)}
+                onToggle={() => toggleSection(4)}
+              />
+              <AccordionItem
+                title="My Mission"
+                content={<MyMission />}
+                isOpen={openSections.includes(5)}
+                onToggle={() => toggleSection(5)}
+              />
+              <AccordionItem
+                title="Certifications"
+                content={<Certifications />}
+                isOpen={openSections.includes(6)}
+                onToggle={() => toggleSection(6)}
+              />
+              <AccordionItem
+                title="Core Values"
+                content={<CoreValues />}
+                isOpen={openSections.includes(7)}
+                onToggle={() => toggleSection(7)}
+              />
+              <AccordionItem
+                title="Experience"
+                content={<ExperienceComponent />}
+                isOpen={openSections.includes(8)}
+                onToggle={() => toggleSection(8)}
+              />
+              <AccordionItem
+                title="Practice"
+                content={<Practice />}
+                isOpen={openSections.includes(9)}
+                onToggle={() => toggleSection(9)}
+              />
+              <AccordionItem
+                title="Core Skills"
+                content={<CoreSkillsComponent />}
+                isOpen={openSections.includes(10)}
+                onToggle={() => toggleSection(10)}
+              />
+              <AccordionItem
+                title="Personal Philosophy"
+                content={<PersonalPhilosophy />}
+                isOpen={openSections.includes(11)}
+                onToggle={() => toggleSection(11)}
+              />
+              <AccordionItem
+                title="Areas of Interest"
+                content={<AreasOfInterest />}
+                isOpen={openSections.includes(12)}
+                onToggle={() => toggleSection(12)}
+              />
+              <AccordionItem
+                title="Companies"
+                content={<Companies />}
+                isOpen={openSections.includes(13)}
+                onToggle={() => toggleSection(13)}
+              />
+              <AccordionItem
+                title="My Sites"
+                content={<MySites />}
+                isOpen={openSections.includes(14)}
+                onToggle={() => toggleSection(14)}
+              />
+              <AccordionItem
+                title="Other Sites"
+                content={<OtherSites />}
+                isOpen={openSections.includes(15)}
+                onToggle={() => toggleSection(15)}
+              />
+              <AccordionItem
+                title="Site Info"
+                content={<SiteInfo />}
+                isOpen={openSections.includes(16)}
+                onToggle={() => toggleSection(16)}
+              />
+            </div>
 
             {/* Posts Table with Feed Data */}
             <Card className="mb-8 p-6 bg-card border border-border">
@@ -641,6 +758,11 @@ export function HomeClient({ posts, randomQuote, bioContent, initialView = 'list
               {randomPoems.map((poem) => (
                 <PoetryCard key={poem.id} poem={poem} />
               ))}
+            </div>
+
+            {/* Interesting People */}
+            <div className="mb-8">
+              <InterestingPeople />
             </div>
 
             {/* GitHub Contributions */}

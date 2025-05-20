@@ -1,73 +1,38 @@
-**Why it behaves in dev but breaks after `next build`**
+# About Page Merge into Home Grid Tasks
 
-In development Tailwind runs its JIT compiler on‑the‑fly, so *any* class name the browser ever sees (even ones created by string‑concatenation at runtime) still exists in memory.
-During a production build Tailwind *statically scans your files*, throws away anything it cannot find **as an exact literal match**, and writes the trimmed CSS to `/app.css`. If every dark‑variant that colours your headings is assembled dynamically or lives in a file outside the scan paths, it is purged, so after deploy the browser adds `.dark` to `<html>` but there is no CSS left that targets it. ([Stack Overflow][1], [GitHub][2])
+- [x] Remove MDX file part of the grid view and remove fallback text
+- [x] Create components for About sections in components/about/
+  - [x] About Me component (FIXED to match original exactly)
+  - [x] Profile component (FIXED to match original exactly)
+  - [x] Personality component (FIXED to match original exactly)
+  - [x] Personality Morals component (FIXED to match original exactly)
+  - [x] Interesting People component
+- [x] Create remaining components for About sections in components/about/
+  - [x] On My Method component
+  - [x] My Mission component (FIXED to match original exactly)
+  - [x] Certifications component
+  - [x] Experience component
+  - [x] Practice component
+  - [x] Core Skills component (IMPROVED with max width and better category styling)
+  - [x] Personal Philosophy component (FIXED with proper Approach section)
+  - [x] Areas of Interest component
+  - [x] Core Values component (FIXED to match original exactly)
+  - [x] Companies component
+  - [x] My Sites component
+  - [x] Other Sites component
+  - [x] Site Info component
+- [x] Replace tabs with accordion-style flaps (expandable sections) exactly matching the About page
+- [x] Move "Interesting People" section above "GitHub Contributions"
+- [x] Move all sections above posts table and under logo/ORCID blocks
+- [x] Delete /about route 
+- [x] Add "path" key to posts JSON for URL overriding
+- [x] Test with "On Myself" post:
+  - [x] Change slug to "about"
+  - [x] Set path to "/"
 
----
+IMPORTANT: All components MUST maintain EXACT same appearance, styling, layout, and behavior as in the original About page. Do not redesign or modify the components in any way. They should look exactly the same as they did on the About page.
 
-### 3 fast checks
+CRITICAL: The About page uses ACCORDION FLAPS (expandable sections), NOT tabs. Each section must expand/collapse with "+" and "-" indicators exactly as shown in the original About page.
 
-| ✔                       | What to do                                                                                                                                                                                                                       | Typical symptom if wrong                                                    |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| **Content paths**       | Make sure *every* folder that can contain Tailwind classes is listed in `content:` (or `purge:` in v2).<br>`"./app/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx}" …`                                             | Works locally; in prod only the pages/components inside `src/` switch theme |
-| **Literal class names** | Avoid `className={\`dark\:text-\${color}\`}`or building the string with an array.<br>Instead enumerate the exact classes or use`clsx`/`classnames`with object syntax:`className={clsx('text-gray-900', 'dark\:text-gray-100')}\` | Headings lose only the *dark* colour, other (static) utilities survive      |
-| **Safelist one‑offs**   | If a class really must be formed dynamically, put a regexp in `safelist:` so Tailwind always keeps it.                                                                                                                           | After adding the pattern, the colour suddenly appears in prod               |
-
-```js
-// tailwind.config.js  (v3+)
-module.exports = {
-  darkMode: 'class',               // make sure this matches how you toggle
-  content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './lib/**/*.{js,ts}',
-  ],
-  safelist: [
-    { pattern: /dark:text-(gray|white|slate)-\d{2,3}/ },   // keep any dark text colour you use
-  ],
-  theme: { extend: {} },
-  plugins: [],
-};
-```
-
-> **Bonus tip for `@tailwindcss/typography` users**
-> Headings inside a `.prose` container ignore `dark:` utilities unless you add `dark:prose-invert` (or define a custom inverted palette). That is a separate but common gotcha. ([Stack Overflow][3])
-
----
-
-### Quick way to confirm
-
-1. Run `npm run build && npm run start`, open the local production server, and inspect one of the headings.
-2. In **Elements → Styles** search for `.dark .text-…` rules. If they are missing, the purge step removed them—your config paths or safelist are incomplete.
-3. If the rule exists but still does not apply, something downstream is overriding it (typography plugin, a custom `h1 { color: … }`, etc.).
-
----
-
-### Implemented Solutions
-
-We've implemented a comprehensive solution to ensure dark mode works correctly in production:
-
-1. **Updated Tailwind configuration**:
-   - Expanded content paths to include all relevant directories
-   - Added safelist patterns for all dark mode classes
-   - Added custom color definitions to match exact CSS values
-
-2. **Created Tailwind-compatible dark mode CSS**:
-   - New file `app/blog/tailwind-dark.css` using `@apply dark:` syntax
-   - Exact same colors and styling as the original CSS
-   - Uses Tailwind's component layer for proper specificity
-
-3. **Ensured critical dark mode classes survive purging**:
-   - Created `DarkModeClasses` component with all critical classes
-   - Added it to the main layout to ensure it's included in the bundle
-
-4. **Updated imports in key layouts**:
-   - Added Tailwind dark mode CSS to blog and now pages
-   - Kept original CSS for backwards compatibility
-
-These changes maintain the exact same visual styling as before, but ensure dark mode will work properly in production builds by making all dark mode classes visible to Tailwind's static analysis.
-
-[1]: https://stackoverflow.com/questions/66484296/some-tailwind-styles-not-working-in-production-with-next-js "javascript - Some Tailwind styles not working in production with Next.js - Stack Overflow"
-[2]: https://github.com/tailwindlabs/tailwindcss/discussions/4358 "dark mode not working in production · tailwindlabs tailwindcss · Discussion #4358 · GitHub"
-[3]: https://stackoverflow.com/questions/79423910/tailwindcss-dark-mode-cant-change-html-or-add-class-dark-tag-on-production?utm_source=chatgpt.com "laravel - TailwindCSS dark mode can't change <html> or add class ..."
+PRIORITY NEXT STEPS:
+1. ✅ Work on the final URL/routing steps

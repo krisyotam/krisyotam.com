@@ -1,6 +1,6 @@
 import "../app/globals.css"
 import { CommandMenu } from "../components/command-menu"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { ThemeProvider } from "../components/theme-provider"
 import { UniversalLinkModal } from "../components/universal-link-modal"
 import { SettingsMenu } from "../components/settings-menu"
@@ -38,6 +38,10 @@ export const metadata: Metadata = {
     images: ["https://krisyotam.com/social.png"], // Update this with your default image
   },
   metadataBase: new URL("https://krisyotam.com"),
+}
+
+// Viewport export for theme color
+export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#0c0c0c" },

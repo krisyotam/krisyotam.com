@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { getCategories } from "@/utils/posts"
 import { PageHeader } from "@/components/page-header"
+import { PageDescription } from "@/components/posts/typography/page-description"
+import { CategoriesClient } from "./categories-client"
 
 export const dynamic = "force-dynamic"
 
@@ -30,42 +32,7 @@ export default async function CategoriesPage() {
       )
     }
 
-    return (
-      <div className="relative min-h-screen bg-background text-foreground">
-        <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-          <PageHeader
-            title="Categories"
-            subtitle="Content organized by topic"
-            date={currentDate}
-            preview="Browse articles and essays by subject area to explore related ideas across the site."
-            status="Finished"
-            confidence="certain"
-            importance={8}
-            backText="Home"
-            backHref="/"
-          />
-
-          <main>
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse">
-                <tbody>
-                  {categories.map((category) => (
-                    <tr key={category.slug} className="border-b border-border hover:bg-secondary/50 transition-colors">
-                      <td className="py-4 px-2">
-                        <Link href={`/category/${category.slug}`} className="text-foreground">
-                          {category.name}
-                        </Link>
-                      </td>
-                      <td className="py-4 px-2 text-right text-muted-foreground">{category.count}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </main>
-        </div>
-      </div>
-    )
+    return <CategoriesClient categories={categories} currentDate={currentDate} />
   } catch (error) {
     console.error("Failed to fetch categories:", error)
     return (

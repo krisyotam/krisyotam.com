@@ -12,6 +12,13 @@ const nextConfig = {
     config.externals = [...config.externals, { canvas: "canvas" }]
     return config
   },
+  images: {
+    domains: [
+      'api.qrserver.com', 
+      'i.postimg.cc', 
+      'gateway.pinata.cloud'
+    ],
+  },
 }
 
 module.exports = nextConfig

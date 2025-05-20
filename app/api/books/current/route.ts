@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 
 type ReadingState = {
   status: string
-  startedAt: string
+  createdAt: string
   book: {
     id: string
     title: string
@@ -26,7 +26,7 @@ export async function GET() {
       query {
         myReadingStates {
           status
-          startedAt
+          createdAt
           book {
             id
             title
@@ -74,7 +74,7 @@ export async function GET() {
     title: current.book.title,
     author: current.book.authors[0]?.name || "Unknown Author",
     coverImage: current.book.cover,
-    dateStarted: current.startedAt,
+    dateStarted: current.createdAt,
     status: "READING",
   })
 }

@@ -17,6 +17,7 @@ import Citation from "@/components/citation";
 import { Footer } from "./(post)/components/footer";
 import "./posts.css";
 import "./tailwind-dark.css";
+import feedData from "@/data/feed.json";
 
 const fontImport = `
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
@@ -24,6 +25,32 @@ const fontImport = `
 @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
 `;
+
+// Dynamically create custom routes map from feed data
+const CUSTOM_ROUTES_MAP: Record<string, { slug: string, year: string }> = {};
+
+// Build the custom routes map
+feedData.posts.forEach(post => {
+  if (post.customPath) {
+    const year = new Date(post.date).getFullYear().toString();
+    CUSTOM_ROUTES_MAP[post.customPath] = { 
+      slug: post.slug,
+      year 
+    };
+  }
+});
+
+// Pattern-based route mappings
+const PATTERN_ROUTES = [
+  {
+    pattern: /^\/research\/(\d{4})\/([^/]+)$/,
+    resolver: (matches: string[]) => {
+      const [, year, slug] = matches;
+      return { slug, year };
+    }
+  },
+  // Add more patterns as needed
+];
 
 interface Post {
   title: string;
@@ -51,21 +78,59 @@ export default function PostsLayout({ children }: { children: React.ReactNode })
     return () => document.head.removeChild(style);
   }, []);
 
-  // Fetch post data
+  // Fetch post data using the current URL path
   useEffect(() => {
     async function fetchPostData() {
       try {
-        const parts = pathname.split('/');
-        if (parts[1] === 'blog' && parts.length >= 4) {
-          const slug = parts[3];
+        let slug: string | null = null;
+        
+        // Normalize path to handle trailing slashes consistently
+        const normalizedPath = pathname.endsWith('/') && pathname !== '/' 
+          ? pathname.slice(0, -1) 
+          : pathname;
+        
+        // Check for custom route matches from feed.json
+        if (CUSTOM_ROUTES_MAP[normalizedPath]) {
+          slug = CUSTOM_ROUTES_MAP[normalizedPath].slug;
+          console.log(`Client: Custom route matched: ${normalizedPath} → using slug: ${slug}`);
+        }
+        // Check for pattern-based routes
+        else {
+          for (const patternRoute of PATTERN_ROUTES) {
+            const matches = normalizedPath.match(patternRoute.pattern);
+            if (matches) {
+              const result = patternRoute.resolver(matches);
+              slug = result.slug;
+              console.log(`Client: Pattern route matched: ${normalizedPath} → using slug: ${slug}`);
+              break;
+            }
+          }
+        }
+        // Default blog path handling
+        if (!slug && normalizedPath.startsWith('/blog/')) {
+          const parts = normalizedPath.split('/');
+          if (parts.length >= 4) {
+            slug = parts[3];
+          }
+        }
+        
+        // If we found a slug, fetch the post data
+        if (slug) {
           const res = await fetch(`/api/post?slug=${slug}`);
-          if (res.ok) setPostData(await res.json());
+          if (res.ok) {
+            const data = await res.json();
+            console.log(`Post data fetched for slug: ${slug}`, data);
+            setPostData(data);
+          } else {
+            console.error(`Failed to fetch post data for slug: ${slug}`, res.status);
+          }
         }
       } catch (e) {
-        console.error(e);
+        console.error('Error fetching post data:', e);
       }
     }
-    if (pathname.startsWith('/blog/')) fetchPostData();
+    
+    fetchPostData();
   }, [pathname]);
 
   // Loading indicator
@@ -169,7 +234,7 @@ export default function PostsLayout({ children }: { children: React.ReactNode })
             {/* Right sidebar: Margin Notes (desktop) */}
             <aside className="hidden xl:block self-start mt-4">
               <div className="sticky top-6 space-y-4 pb-24">
-                {postData?.marginNotes.map((note) => (
+                {postData?.marginNotes?.map((note) => (
                   <MarginCard key={note.id} note={note} />
                 ))}
               </div>

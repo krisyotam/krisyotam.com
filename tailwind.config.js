@@ -12,12 +12,6 @@ module.exports = {
     "./styles/**/*.{css,scss}"
   ],
   safelist: [
-    // Preserve dark mode text colors
-    { pattern: /^dark:text-(gray|white|slate|neutral|black|blue|red)-\d{2,3}$/ },
-    // Preserve dark mode background colors
-    { pattern: /^dark:bg-(gray|black|white|slate|neutral|blue|red)-\d{2,3}$/ },
-    // Preserve dark mode border colors
-    { pattern: /^dark:border-(gray|black|white|slate|neutral|blue)-\d{2,3}$/ },
     // Ensure dark prose styles are preserved
     'dark:prose-invert',
     // Ensure specific colors that match our custom CSS

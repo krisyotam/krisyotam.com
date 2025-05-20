@@ -12,14 +12,7 @@
       "status": "Notes",
       "confidence": "certain",
       "importance": 7,
-      "state": "hidden",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 60,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "state": "hidden"
     },
     {
       "title": "The Art of Minimalism",
@@ -33,14 +26,7 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 6,
-      "state": "hidden",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "state": "hidden"
     },
     {
       "title": "Susanna Kaysen",
@@ -54,13 +40,7 @@
       "confidence": "unlikely",
       "importance": 2,
       "state": "hidden",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "The Bell Jar",
@@ -74,13 +54,7 @@
       "confidence": "unlikely",
       "importance": 2,
       "state": "hidden",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "The Fall of the House of Usher",
@@ -94,13 +68,7 @@
       "confidence": "unlikely",
       "importance": 2,
       "state": "hidden",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Analysis of Frieren",
@@ -114,13 +82,7 @@
       "confidence": "unlikely",
       "importance": 2,
       "state": "hidden",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Gojo vs. Sukuna",
@@ -134,13 +96,7 @@
       "confidence": "unlikely",
       "importance": 2,
       "state": "hidden",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Summer Anime 2025",
@@ -154,13 +110,7 @@
       "confidence": "unlikely",
       "importance": 2,
       "state": "hidden",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Analysis of Ubel",
@@ -174,13 +124,7 @@
       "confidence": "likely",
       "importance": 2,
       "state": "hidden",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Do not go gentle into that good night",
@@ -194,13 +138,7 @@
       "confidence": "unlikely",
       "importance": 4,
       "state": "hidden",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Treatise on Rational Tactics",
@@ -214,13 +152,7 @@
       "confidence": "unlikely",
       "importance": 4,
       "state": "hidden",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "The Fall of the House of Usher",
@@ -233,7 +165,8 @@
       "status": "Draft",
       "confidence": "unlikely",
       "importance": 4,
-      "state": "hidden"
+      "state": "hidden",
+      "cover_image": ""
     },
     {
       "title": "The Fall of Gaia Online",
@@ -247,13 +180,7 @@
       "confidence": "unlikely",
       "importance": 4,
       "state": "hidden",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "A Return to Less",
@@ -267,13 +194,7 @@
       "confidence": "unlikely",
       "importance": 6,
       "state": "hidden",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "On Haiku",
@@ -287,13 +208,7 @@
       "confidence": "unlikely",
       "importance": 2,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "On Limericks",
@@ -307,13 +222,7 @@
       "confidence": "unlikely",
       "importance": 2,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "On Sonnets",
@@ -327,13 +236,7 @@
       "confidence": "unlikely",
       "importance": 2,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Anatomy of Verse",
@@ -347,13 +250,7 @@
       "confidence": "unlikely",
       "importance": 4,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Excercism C: Leap",
@@ -367,13 +264,7 @@
       "confidence": "unlikely",
       "importance": 1,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Ada Lovelace",
@@ -387,13 +278,7 @@
       "confidence": "unlikely",
       "importance": 7,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Hypatia of Alexandria",
@@ -407,13 +292,7 @@
       "confidence": "unlikely",
       "importance": 6,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Review of Wistoria Wand & Sword",
@@ -427,13 +306,7 @@
       "confidence": "unlikely",
       "importance": 1,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "On the site as self",
@@ -447,13 +320,7 @@
       "confidence": "unlikely",
       "importance": 7,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "On Myself",
@@ -463,17 +330,13 @@
       "tags": ["About", "Biography", "Identity", "Philosophy", "Polymath"],
       "category": "On Myself",
       "slug": "on-myself",
+      "customPath": "/about",
+      "path": "/",
       "status": "In Progress",
       "confidence": "high",
       "importance": 6,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Meditations I",
@@ -487,13 +350,7 @@
       "confidence": "high",
       "importance": 7,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Musings I",
@@ -507,13 +364,7 @@
       "confidence": "high",
       "importance": 7,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Automated URL Archiving",
@@ -527,13 +378,7 @@
       "confidence": "high",
       "importance": 7,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Large File Storage for krisyotam.com",
@@ -547,13 +392,7 @@
       "confidence": "high",
       "importance": 7,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Linting for Prose",
@@ -567,13 +406,7 @@
       "confidence": "high",
       "importance": 7,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "The Art of Writing",
@@ -587,13 +420,7 @@
       "confidence": "high",
       "importance": 7,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Toward a Unified Writing Style",
@@ -607,13 +434,7 @@
       "confidence": "high",
       "importance": 7,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "How They Fall",
@@ -627,14 +448,7 @@
       "status": "Notes",
       "confidence": "medium",
       "importance": 6,
-      "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "state": "active"
     },
     {
       "title": "Myths from Mesopotamia",
@@ -648,13 +462,7 @@
       "confidence": "high",
       "importance": 7,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "The First Philosophers",
@@ -664,17 +472,12 @@
       "tags": ["Philosophy", "Presocratics", "Sophists", "Ancient Greece", "Classics"],
       "category": "Book Notes",
       "slug": "the-first-philosophers",
+      "customPath": "/research/2025/the-first-philosophers",
       "status": "Notes",
       "confidence": "high",
       "importance": 7,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Pride and Prejudice",
@@ -688,13 +491,7 @@
       "confidence": "high",
       "importance": 6,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Kristoo",
@@ -708,13 +505,7 @@
       "confidence": "high",
       "importance": 9,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Review of Evangelion",
@@ -728,13 +519,7 @@
       "confidence": "likely",
       "importance": 8,
       "state": "active",
-      "agenda_dueDate": "2025-06-10",
-      "agenda_importance": 8,
-      "agenda_effort": 180,
-      "agenda_urgency": 4,
-      "agenda_progress": 0.40,
-      "agenda_valueScore": 9,
-      "agenda_dependancies": ["RESEARCH_002"]
+      "cover_image": ""
     },
     {
       "title": "A Manifesto for Holistic Computing",
@@ -747,7 +532,8 @@
       "status": "In Progress",
       "confidence": "certain",
       "importance": 9,
-      "state": "active"
+      "state": "active",
+      "cover_image": ""
     },
     {
       "title": "Python Style Guide",
@@ -760,7 +546,8 @@
       "status": "In Progress",
       "confidence": "certain",
       "importance": 8,
-      "state": "active"
+      "state": "active",
+      "cover_image": ""
     },
     {
       "title": "C++ Style Guide",
@@ -830,13 +617,7 @@
       "confidence": "high",
       "importance": 8,
       "state": "active",
-      "agenda_dueDate": "2025-05-10",
-      "agenda_importance": 5,
-      "agenda_effort": 120,
-      "agenda_urgency": 3,
-      "agenda_progress": 0.25,
-      "agenda_valueScore": 7,
-      "agenda_dependancies": ["RESEARCH_001"]
+      "cover_image": ""
     },
     {
       "title": "Uses This",
@@ -862,7 +643,8 @@
       "status": "In Progress",
       "confidence": "certain",
       "importance": 5,
-      "state": "active"
+      "state": "active",
+      "cover_image": ""
     },
     {
       "title": "On Life Improvement",
@@ -874,7 +656,8 @@
       "status": "In Progress",
       "confidence": "certain",
       "importance": 5,
-      "state": "active"
+      "state": "active",
+      "cover_image": ""
     },
     {
       "title": "On Types of Content",
@@ -886,7 +669,8 @@
       "status": "In Progress",
       "confidence": "certain",
       "importance": 5,
-      "state": "active"
+      "state": "active",
+      "cover_image": ""
     },
     {
       "title": "Thoughts on Simple Systems",
@@ -899,7 +683,8 @@
       "status": "Published",
       "confidence": "certain",
       "importance": 7,
-      "state": "active"
+      "state": "active",
+      "cover_image": ""
     },
     {
       "title": "A Prelude to Wisdom",
@@ -912,7 +697,8 @@
       "status": "Published",
       "confidence": "certain",
       "importance": 8,
-      "state": "active"
+      "state": "active",
+      "cover_image": ""
     },
     {
       "title": "Notes on Old ThinkPads",
@@ -925,7 +711,8 @@
       "status": "Draft",
       "confidence": "certain",
       "importance": 4,
-      "state": "active"
+      "state": "active",
+      "cover_image": ""
     },
     {
       "title": "Villa Ephrussi de Rothschild",
@@ -952,7 +739,8 @@
       "status": "Notes",
       "confidence": "likely",
       "importance": 6,
-      "state": "active"
+      "state": "active",
+      "cover_image": ""
     },
     {
       "title": "Release of OpenAI Deep Learning",
@@ -970,4 +758,3 @@
     }
   ]
 }
-

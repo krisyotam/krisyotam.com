@@ -48,9 +48,12 @@ export default function CoreSkills({ data = defaultSkillsData, className }: Core
   const CATEGORY_STAGGER_DELAY = 0.09 // 200ms between categories
 
   return (
-    <div className={cn("container mx-auto px-4 py-0", className)}>
+    <div className={cn("w-full mx-auto", className)}>
       <Card className="overflow-hidden border shadow-md">
-        <CardHeader className="border-b bg-muted/30 flex flex-row items-center justify-end">
+        <CardHeader className="border-b bg-muted/30 flex flex-row items-center justify-between">
+          <h3 className="text-sm font-medium text-muted-foreground hidden sm:block">
+            View skills by:
+          </h3>
           <Tabs defaultValue="bento" className="w-[200px]" onValueChange={handleViewChange}>
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="bento">
@@ -73,8 +76,11 @@ export default function CoreSkills({ data = defaultSkillsData, className }: Core
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: ANIMATION_DURATION }}
-                className="flex flex-wrap gap-3 justify-center"
+                className="flex flex-wrap gap-3 justify-center p-2"
               >
+                <div className="w-full text-center mb-2 text-sm text-muted-foreground">
+                  Hover over skills to see their category
+                </div>
                 {shuffledSkills.map((skillItem, index) => (
                   <SkillTag
                     key={`${skillItem.categoryId}-${skillItem.skill}-bento`}
@@ -108,9 +114,16 @@ export default function CoreSkills({ data = defaultSkillsData, className }: Core
                         duration: ANIMATION_DURATION,
                         delay: categoryIndex * CATEGORY_STAGGER_DELAY,
                       }}
-                      className={cn("rounded-lg border p-4", category.color.border, category.color.bg)}
+                      className={cn(
+                        "rounded-lg border p-4 shadow-sm transition-all duration-300", 
+                        "hover:shadow-md hover:translate-y-[-2px]",
+                        category.color.border, 
+                        category.color.bg
+                      )}
                     >
-                      <h3 className={cn("font-medium mb-3", category.color.text)}>{category.name}</h3>
+                      <h3 className={cn("font-medium mb-3 text-base", category.color.text)}>
+                        {category.name}
+                      </h3>
                       <div className="flex flex-wrap gap-2">
                         {category.skills.map((skill, skillIndex) => {
                           const skillItem = {
@@ -192,6 +205,7 @@ function SkillTag({
         variant="outline"
         className={cn(
           "px-3 py-2 text-sm font-medium transition-all cursor-pointer",
+          "shadow-sm hover:shadow-md",
           `duration-${hoverTransitionDuration * 1000}`,
           color.text,
           isHovered ? color.bg : "hover:bg-muted",
@@ -205,7 +219,7 @@ function SkillTag({
 
       {showTooltip && isHovered && (
         <motion.div
-          className="absolute -top-8 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded bg-popover shadow-md text-xs whitespace-nowrap z-10"
+          className="absolute -top-8 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded bg-popover shadow-md text-xs font-medium whitespace-nowrap z-10 border border-border"
           initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 5 }}

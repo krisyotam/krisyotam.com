@@ -89,6 +89,7 @@ export default function AnimeCharacterDisplay({
           >
             {characterName}
           </h2>
+          {voiceActor && (
           <div
             className="text-sm text-gray-600 dark:text-zinc-400 font-light !important"
             style={{
@@ -100,6 +101,7 @@ export default function AnimeCharacterDisplay({
           >
             Voiced by {voiceActor}
           </div>
+          )}
         </div>
 
         <div

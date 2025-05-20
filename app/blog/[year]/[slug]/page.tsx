@@ -1,10 +1,10 @@
 // app/blog/[year]/[slug]/page.tsx
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
-import Head from "next/head"
 import { notFound } from "next/navigation"
-import { getAllPosts, getPostContent } from "@/utils/posts"
+import { getPostContent } from "@/utils/posts"
 import { Metadata, ResolvingMetadata } from "next"
+import { getPostByYearAndSlug, getAllPosts } from "@/utils/feed-utils"
 
 const BlogPostContent = dynamic(
   () => import("./blog-post-content").then((mod) => mod.BlogPostContent),
@@ -21,25 +21,20 @@ export async function generateMetadata({
 }, parent: ResolvingMetadata): Promise<Metadata> {
   const { year, slug } = params
   
-  // Fetch post data
-  const posts = await getAllPosts()
-  const postData = posts.find((post: any) => post.slug === slug)
+  // Fetch post data from feed.json
+  const postData = getPostByYearAndSlug(year, slug)
   if (!postData) return { title: 'Post Not Found' }
   
   // Get cover image URL - prioritize cover_image field
   const coverUrl = postData.cover_image || 
-    postData.cover || 
     `https://picsum.photos/1200/630?text=${encodeURIComponent(postData.title)}`
   
-  // SEO fields
+  // SEO fields from feed.json
   const title = postData.title
   const description = postData.preview || "Thoughts on math, poetry, and more."
   const url = `https://krisyotam.com/blog/${year}/${slug}`
   
   console.log(`Generating metadata for ${slug}:`, { title, coverUrl, description })
-  
-  // Get parent metadata
-  const parentMetadata = await parent
   
   return {
     title: `${title} | Kris Yotam`,
@@ -75,6 +70,19 @@ export async function generateMetadata({
   }
 }
 
+export async function generateStaticParams() {
+  // Generate static routes for all posts in feed.json
+  const posts = getAllPosts();
+  
+  return posts.map(post => {
+    const year = new Date(post.date).getFullYear().toString();
+    return {
+      year,
+      slug: post.slug
+    };
+  });
+}
+
 export default async function PostPage({
   params,
 }: {
@@ -82,9 +90,8 @@ export default async function PostPage({
 }) {
   const { year, slug } = params
 
-  // 1) Fetch list metadata
-  const posts = await getAllPosts()
-  const postData = posts.find((post: any) => post.slug === slug)
+  // 1) Fetch post data from feed.json
+  const postData = getPostByYearAndSlug(year, slug)
   if (!postData) notFound()
 
   // 2) Load the raw MDX data
