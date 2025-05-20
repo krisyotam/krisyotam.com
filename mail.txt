@@ -1,0 +1,534 @@
+[13:22:41.024] Running build in Washington, D.C., USA (East) – iad1
+[13:22:41.025] Build machine configuration: 2 cores, 8 GB
+[13:22:41.085] Cloning github.com/krisyotam/krisyotam.com (Branch: main, Commit: aed5136)
+[13:22:47.505] Cloning completed: 6.420s
+[13:23:00.388] Restored build cache from previous deployment (vcNSy92AwYZ7wktJhEJeGJ6qFjtN)
+[13:23:01.524] Running "vercel build"
+[13:23:01.971] Vercel CLI 42.1.1
+[13:23:02.168] WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+[13:23:02.369] Installing dependencies...
+[13:23:03.706] npm warn deprecated topojson@3.0.2: Use topojson-client, topojson-server or topojson-simplify directly.
+[13:23:04.001] 
+[13:23:04.002] changed 4 packages in 1s
+[13:23:04.002] 
+[13:23:04.002] 224 packages are looking for funding
+[13:23:04.003]   run `npm fund` for details
+[13:23:04.040] Detected Next.js version: 14.2.28
+[13:23:04.045] Running "npm run build"
+[13:23:04.160] 
+[13:23:04.160] > kris-yotam@0.1.0 build
+[13:23:04.161] > next build
+[13:23:04.161] 
+[13:23:05.491]   ▲ Next.js 14.2.28
+[13:23:05.491]   - Experiments (use with caution):
+[13:23:05.491]     · webpackBuildWorker
+[13:23:05.491]     · parallelServerCompiles
+[13:23:05.492]     · parallelServerBuildTraces
+[13:23:05.492] 
+[13:23:05.595]    Creating an optimized production build ...
+[13:23:37.627]  ⚠ Compiled with warnings
+[13:23:37.627] 
+[13:23:37.627] ./app/flashcards/mochi-client.tsx
+[13:23:37.627] Attempted import error: 'formatFileSize' is not exported from '@/lib/utils' (imported as 'formatFileSize').
+[13:23:37.627] 
+[13:23:37.627] Import trace for requested module:
+[13:23:37.627] ./app/flashcards/mochi-client.tsx
+[13:23:37.627] 
+[13:23:46.429] 
+[13:23:46.429] [1m[33mwarn[39m[22m - The safelist pattern `/^dark:text-(gray|white|slate|neutral|black|blue|red)-\d{2,3}$/` doesn't match any Tailwind CSS classes.
+[13:23:46.430] [1m[33mwarn[39m[22m - Fix this pattern or remove it from your `safelist` configuration.
+[13:23:46.430] [1m[33mwarn[39m[22m - https://tailwindcss.com/docs/content-configuration#safelisting-classes
+[13:23:46.430] 
+[13:23:46.430] [1m[33mwarn[39m[22m - The safelist pattern `/^dark:bg-(gray|black|white|slate|neutral|blue|red)-\d{2,3}$/` doesn't match any Tailwind CSS classes.
+[13:23:46.431] [1m[33mwarn[39m[22m - Fix this pattern or remove it from your `safelist` configuration.
+[13:23:46.431] [1m[33mwarn[39m[22m - https://tailwindcss.com/docs/content-configuration#safelisting-classes
+[13:23:46.431] 
+[13:23:46.431] [1m[33mwarn[39m[22m - The safelist pattern `/^dark:border-(gray|black|white|slate|neutral|blue)-\d{2,3}$/` doesn't match any Tailwind CSS classes.
+[13:23:46.432] [1m[33mwarn[39m[22m - Fix this pattern or remove it from your `safelist` configuration.
+[13:23:46.432] [1m[33mwarn[39m[22m - https://tailwindcss.com/docs/content-configuration#safelisting-classes
+[13:23:46.765] 
+[13:23:46.769] [1m[33mwarn[39m[22m - The safelist pattern `/^dark:text-(gray|white|slate|neutral|black|blue|red)-\d{2,3}$/` doesn't match any Tailwind CSS classes.
+[13:23:46.769] [1m[33mwarn[39m[22m - Fix this pattern or remove it from your `safelist` configuration.
+[13:23:46.770] [1m[33mwarn[39m[22m - https://tailwindcss.com/docs/content-configuration#safelisting-classes
+[13:23:46.770] 
+[13:23:46.770] [1m[33mwarn[39m[22m - The safelist pattern `/^dark:bg-(gray|black|white|slate|neutral|blue|red)-\d{2,3}$/` doesn't match any Tailwind CSS classes.
+[13:23:46.771] [1m[33mwarn[39m[22m - Fix this pattern or remove it from your `safelist` configuration.
+[13:23:46.771] [1m[33mwarn[39m[22m - https://tailwindcss.com/docs/content-configuration#safelisting-classes
+[13:23:46.772] 
+[13:23:46.772] [1m[33mwarn[39m[22m - The safelist pattern `/^dark:border-(gray|black|white|slate|neutral|blue)-\d{2,3}$/` doesn't match any Tailwind CSS classes.
+[13:23:46.772] [1m[33mwarn[39m[22m - Fix this pattern or remove it from your `safelist` configuration.
+[13:23:46.773] [1m[33mwarn[39m[22m - https://tailwindcss.com/docs/content-configuration#safelisting-classes
+[13:24:12.124]  ⚠ Compiled with warnings
+[13:24:12.125] 
+[13:24:12.126] ./app/flashcards/mochi-client.tsx
+[13:24:12.126] Attempted import error: 'formatFileSize' is not exported from '@/lib/utils' (imported as 'formatFileSize').
+[13:24:12.126] 
+[13:24:12.126] Import trace for requested module:
+[13:24:12.127] ./app/flashcards/mochi-client.tsx
+[13:24:12.127] 
+[13:24:12.231]  ✓ Compiled successfully
+[13:24:12.232]    Skipping validation of types
+[13:24:12.232]    Skipping linting
+[13:24:12.651]    Collecting page data ...
+[13:24:17.593] Attempting to read file: /vercel/path0/data/feed.json
+[13:24:17.595] Attempting to read file: /vercel/path0/data/category-data.json
+[13:24:17.780] Attempting to read file: /vercel/path0/data/series.json
+[13:24:18.085]    Generating static pages (0/680) ...
+[13:24:18.301] Literal API error: {"errors":[{"message":"Cannot query field \"startedAt\" on type \"ReadingState\". Did you mean \"createdAt\"?","extensions":{"code":"GRAPHQL_VALIDATION_FAILED"}}]}
+[13:24:18.302] 
+[13:24:18.406] Literal API error: {"errors":[{"message":"Cannot query field \"startedAt\" on type \"ReadingState\". Did you mean \"createdAt\"?","extensions":{"code":"GRAPHQL_VALIDATION_FAILED"}},{"message":"Cannot query field \"finishedAt\" on type \"ReadingState\".","extensions":{"code":"GRAPHQL_VALIDATION_FAILED"}}]}
+[13:24:18.406] 
+[13:24:18.427] Fetching favorite actors from JSON
+[13:24:18.428] Retrieved 15 favorite actors
+[13:24:18.430] Fetching favorite characters from JSON
+[13:24:18.430] Retrieved 26 favorite characters
+[13:24:18.432] Fetching favorite film companies from JSON
+[13:24:18.432] Retrieved 12 favorite film companies
+[13:24:18.436] Fetching favorite directors from JSON
+[13:24:18.436] Retrieved 13 favorite directors
+[13:24:18.440] Fetching favorite producers from JSON
+[13:24:18.440] Error fetching favorite producers: Error: ENOENT: no such file or directory, open '/vercel/path0/data/film/fav-producers.json'
+[13:24:18.440]     at Object.readFileSync (node:fs:442:20)
+[13:24:18.440]     at l (/vercel/path0/.next/server/app/api/film/fav-producers/route.js:1:751)
+[13:24:18.440]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.440]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.440]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.440]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.440]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.440]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.440]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103
+[13:24:18.441]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062) {
+[13:24:18.441]   errno: -2,
+[13:24:18.441]   code: 'ENOENT',
+[13:24:18.441]   syscall: 'open',
+[13:24:18.441]   path: '/vercel/path0/data/film/fav-producers.json'
+[13:24:18.441] }
+[13:24:18.442] Error fetching favorite movies: B [Error]: Dynamic server usage: Route /api/film/favorite-movies couldn't be rendered statically because it used `nextUrl.searchParams`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[13:24:18.442]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[13:24:18.442]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29137)
+[13:24:18.442]     at u (/vercel/path0/.next/server/app/api/film/favorite-movies/route.js:1:615)
+[13:24:18.442]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.442]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.442]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.442]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.442]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.442]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.442]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[13:24:18.443]   description: "Route /api/film/favorite-movies couldn't be rendered statically because it used `nextUrl.searchParams`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[13:24:18.443]   digest: 'DYNAMIC_SERVER_USAGE'
+[13:24:18.443] }
+[13:24:18.446] Error fetching favorite shows: B [Error]: Dynamic server usage: Route /api/film/favorite-shows couldn't be rendered statically because it used `nextUrl.searchParams`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[13:24:18.446]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[13:24:18.446]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29137)
+[13:24:18.446]     at u (/vercel/path0/.next/server/app/api/film/favorite-shows/route.js:1:613)
+[13:24:18.446]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.446]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.446]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.446]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.446]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.446]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.446]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[13:24:18.446]   description: "Route /api/film/favorite-shows couldn't be rendered statically because it used `nextUrl.searchParams`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[13:24:18.446]   digest: 'DYNAMIC_SERVER_USAGE'
+[13:24:18.446] }
+[13:24:18.452] Error fetching most watched movies: B [Error]: Dynamic server usage: Route /api/film/most-watched-movies couldn't be rendered statically because it used `nextUrl.searchParams`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[13:24:18.452]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[13:24:18.452]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29137)
+[13:24:18.452]     at u (/vercel/path0/.next/server/app/api/film/most-watched-movies/route.js:1:615)
+[13:24:18.452]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.452]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.452]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.452]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.452]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.452]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.452]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[13:24:18.453]   description: "Route /api/film/most-watched-movies couldn't be rendered statically because it used `nextUrl.searchParams`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[13:24:18.453]   digest: 'DYNAMIC_SERVER_USAGE'
+[13:24:18.453] }
+[13:24:18.455] Error fetching most watched shows: B [Error]: Dynamic server usage: Route /api/film/most-watched-shows couldn't be rendered statically because it used `nextUrl.searchParams`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[13:24:18.455]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[13:24:18.456]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29137)
+[13:24:18.456]     at u (/vercel/path0/.next/server/app/api/film/most-watched-shows/route.js:1:613)
+[13:24:18.456]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.456]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.456]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.456]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.456]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.456]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.456]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[13:24:18.456]   description: "Route /api/film/most-watched-shows couldn't be rendered statically because it used `nextUrl.searchParams`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[13:24:18.456]   digest: 'DYNAMIC_SERVER_USAGE'
+[13:24:18.456] }
+[13:24:18.458] Error fetching recent movies: B [Error]: Dynamic server usage: Route /api/film/recent-movies couldn't be rendered statically because it used `nextUrl.searchParams`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[13:24:18.459]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[13:24:18.459]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29137)
+[13:24:18.459]     at u (/vercel/path0/.next/server/app/api/film/recent-movies/route.js:1:615)
+[13:24:18.459]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.459]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.459]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.459]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.459]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.459]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.459]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[13:24:18.459]   description: "Route /api/film/recent-movies couldn't be rendered statically because it used `nextUrl.searchParams`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[13:24:18.459]   digest: 'DYNAMIC_SERVER_USAGE'
+[13:24:18.459] }
+[13:24:18.461] Error fetching recent shows: B [Error]: Dynamic server usage: Route /api/film/recent-shows couldn't be rendered statically because it used `nextUrl.searchParams`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[13:24:18.461]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[13:24:18.461]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29137)
+[13:24:18.461]     at u (/vercel/path0/.next/server/app/api/film/recent-shows/route.js:1:615)
+[13:24:18.461]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.461]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.461]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.461]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.461]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.461]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.461]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[13:24:18.461]   description: "Route /api/film/recent-shows couldn't be rendered statically because it used `nextUrl.searchParams`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[13:24:18.462]   digest: 'DYNAMIC_SERVER_USAGE'
+[13:24:18.462] }
+[13:24:18.499] Error in OG debug endpoint: B [Error]: Dynamic server usage: Route /api/og-debug couldn't be rendered statically because it used `request.url`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[13:24:18.499]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[13:24:18.499]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29465)
+[13:24:18.499]     at p (/vercel/path0/.next/server/app/api/og-debug/route.js:1:629)
+[13:24:18.499]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.500]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.500]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.500]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.500]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.500]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.500]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[13:24:18.500]   description: "Route /api/og-debug couldn't be rendered statically because it used `request.url`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[13:24:18.500]   digest: 'DYNAMIC_SERVER_USAGE'
+[13:24:18.500] }
+[13:24:18.528] Error in prompts API: B [Error]: Dynamic server usage: Route /api/prompts couldn't be rendered statically because it used `request.url`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[13:24:18.528]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[13:24:18.529]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29465)
+[13:24:18.529]     at h (/vercel/path0/.next/server/app/api/prompts/route.js:1:801)
+[13:24:18.529]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.529]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.529]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.529]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.529]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.529]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.529]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[13:24:18.529]   description: "Route /api/prompts couldn't be rendered statically because it used `request.url`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[13:24:18.529]   digest: 'DYNAMIC_SERVER_USAGE'
+[13:24:18.529] }
+[13:24:18.532] Error fetching references: B [Error]: Dynamic server usage: Route /api/references couldn't be rendered statically because it used `request.url`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[13:24:18.532]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[13:24:18.532]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29465)
+[13:24:18.532]     at f (/vercel/path0/.next/server/app/api/references/route.js:1:658)
+[13:24:18.532]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.532]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.532]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.532]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.532]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.532]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.532]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[13:24:18.533]   description: "Route /api/references couldn't be rendered statically because it used `request.url`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[13:24:18.533]   digest: 'DYNAMIC_SERVER_USAGE'
+[13:24:18.533] }
+[13:24:18.535] Error in scripts API: B [Error]: Dynamic server usage: Route /api/scripts couldn't be rendered statically because it used `request.url`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[13:24:18.535]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[13:24:18.536]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29465)
+[13:24:18.536]     at h (/vercel/path0/.next/server/app/api/scripts/route.js:1:801)
+[13:24:18.536]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.536]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.536]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.536]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.536]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.536]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.536]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[13:24:18.536]   description: "Route /api/scripts couldn't be rendered statically because it used `request.url`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[13:24:18.536]   digest: 'DYNAMIC_SERVER_USAGE'
+[13:24:18.536] }
+[13:24:18.541] Fetching favorite actors from JSON
+[13:24:18.542] Error fetching favorite actors: Error: ENOENT: no such file or directory, open '/vercel/path0/data/fav-actors.json'
+[13:24:18.542]     at Object.readFileSync (node:fs:442:20)
+[13:24:18.542]     at l (/vercel/path0/.next/server/app/api/trakt/fav-actors/route.js:1:738)
+[13:24:18.542]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.542]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.542]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.542]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.542]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.543]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.543]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103
+[13:24:18.543]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062) {
+[13:24:18.543]   errno: -2,
+[13:24:18.543]   code: 'ENOENT',
+[13:24:18.543]   syscall: 'open',
+[13:24:18.543]   path: '/vercel/path0/data/fav-actors.json'
+[13:24:18.543] }
+[13:24:18.545] Fetching favorite film characters from JSON
+[13:24:18.546] Error fetching favorite film characters: Error: ENOENT: no such file or directory, open '/vercel/path0/data/fav-film-characters.json'
+[13:24:18.546]     at Object.readFileSync (node:fs:442:20)
+[13:24:18.546]     at f (/vercel/path0/.next/server/app/api/trakt/fav-characters/route.js:1:756)
+[13:24:18.546]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.546]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.547]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.547]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.547]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.547]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.547]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103
+[13:24:18.547]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062) {
+[13:24:18.547]   errno: -2,
+[13:24:18.547]   code: 'ENOENT',
+[13:24:18.547]   syscall: 'open',
+[13:24:18.548]   path: '/vercel/path0/data/fav-film-characters.json'
+[13:24:18.548] }
+[13:24:18.549] Fetching favorite film companies from JSON
+[13:24:18.549] Error fetching favorite film companies: Error: ENOENT: no such file or directory, open '/vercel/path0/data/fav-film-companies.json'
+[13:24:18.549]     at Object.readFileSync (node:fs:442:20)
+[13:24:18.549]     at m (/vercel/path0/.next/server/app/api/trakt/fav-companies/route.js:1:754)
+[13:24:18.549]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.549]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.549]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.550]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.550]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.550]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.550]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103
+[13:24:18.550]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062) {
+[13:24:18.550]   errno: -2,
+[13:24:18.550]   code: 'ENOENT',
+[13:24:18.550]   syscall: 'open',
+[13:24:18.550]   path: '/vercel/path0/data/fav-film-companies.json'
+[13:24:18.550] }
+[13:24:18.551] Fetching favorite producers from JSON
+[13:24:18.551] Error fetching favorite producers: Error: ENOENT: no such file or directory, open '/vercel/path0/data/fav-producers.json'
+[13:24:18.552]     at Object.readFileSync (node:fs:442:20)
+[13:24:18.552]     at l (/vercel/path0/.next/server/app/api/trakt/fav-producers/route.js:1:744)
+[13:24:18.552]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[13:24:18.552]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[13:24:18.552]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[13:24:18.552]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[13:24:18.552]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[13:24:18.552]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[13:24:18.552]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103
+[13:24:18.553]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062) {
+[13:24:18.553]   errno: -2,
+[13:24:18.553]   code: 'ENOENT',
+[13:24:18.553]   syscall: 'open',
+[13:24:18.553]   path: '/vercel/path0/data/fav-producers.json'
+[13:24:18.553] }
+[13:24:18.565] Fetching user profile
+[13:24:18.565] Fetching from Trakt API: /users/me?extended=full
+[13:24:18.566] Attempting to get Trakt access token
+[13:24:18.566] Using existing access token
+[13:24:18.631] Trakt API error: Unauthorized for /users/me?extended=full
+[13:24:18.631] Error fetching from Trakt API (/users/me?extended=full): Error: Trakt API error: Unauthorized
+[13:24:18.632]     at n (/vercel/path0/.next/server/chunks/6172.js:1:1556)
+[13:24:18.632]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[13:24:18.632]     at async c (/vercel/path0/.next/server/chunks/6172.js:1:5443)
+[13:24:18.632]     at async l (/vercel/path0/.next/server/app/api/trakt/user-data/route.js:1:536)
+[13:24:18.632]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[13:24:18.632]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[13:24:18.632]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[13:24:18.632]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[13:24:18.632]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[13:24:18.632]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[13:24:18.633] Error fetching user profile: Error: Trakt API error: Unauthorized
+[13:24:18.633]     at n (/vercel/path0/.next/server/chunks/6172.js:1:1556)
+[13:24:18.633]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[13:24:18.633]     at async c (/vercel/path0/.next/server/chunks/6172.js:1:5443)
+[13:24:18.633]     at async l (/vercel/path0/.next/server/app/api/trakt/user-data/route.js:1:536)
+[13:24:18.633]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[13:24:18.633]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[13:24:18.633]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[13:24:18.633]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[13:24:18.633]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[13:24:18.633]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[13:24:18.634] Failed to get profile from API, using fallback data: Error: Trakt API error: Unauthorized
+[13:24:18.634]     at n (/vercel/path0/.next/server/chunks/6172.js:1:1556)
+[13:24:18.634]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[13:24:18.634]     at async c (/vercel/path0/.next/server/chunks/6172.js:1:5443)
+[13:24:18.634]     at async l (/vercel/path0/.next/server/app/api/trakt/user-data/route.js:1:536)
+[13:24:18.634]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[13:24:18.634]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[13:24:18.634]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[13:24:18.634]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[13:24:18.634]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[13:24:18.634]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[13:24:18.637] Fetching watched counts from API
+[13:24:18.637] Fetching watched stats
+[13:24:18.637] Fetching from Trakt API: /users/me/stats
+[13:24:18.637] Attempting to get Trakt access token
+[13:24:18.637] Using existing access token
+[13:24:18.664] Trakt API error: Unauthorized for /users/me/stats
+[13:24:18.665] Error fetching from Trakt API (/users/me/stats): Error: Trakt API error: Unauthorized
+[13:24:18.665]     at n (/vercel/path0/.next/server/chunks/6172.js:1:1556)
+[13:24:18.665]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[13:24:18.665]     at async m (/vercel/path0/.next/server/chunks/6172.js:1:10566)
+[13:24:18.665]     at async i (/vercel/path0/.next/server/app/api/trakt/watched-counts/route.js:1:580)
+[13:24:18.665]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[13:24:18.665]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[13:24:18.665]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[13:24:18.665]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[13:24:18.665]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[13:24:18.665]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[13:24:18.665] Error fetching watched stats: Error: Trakt API error: Unauthorized
+[13:24:18.665]     at n (/vercel/path0/.next/server/chunks/6172.js:1:1556)
+[13:24:18.666]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[13:24:18.666]     at async m (/vercel/path0/.next/server/chunks/6172.js:1:10566)
+[13:24:18.666]     at async i (/vercel/path0/.next/server/app/api/trakt/watched-counts/route.js:1:580)
+[13:24:18.666]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[13:24:18.666]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[13:24:18.666]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[13:24:18.666]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[13:24:18.666]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[13:24:18.666]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[13:24:18.666] Error fetching watched counts: Error: Trakt API error: Unauthorized
+[13:24:18.666]     at n (/vercel/path0/.next/server/chunks/6172.js:1:1556)
+[13:24:18.666]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[13:24:18.666]     at async m (/vercel/path0/.next/server/chunks/6172.js:1:10566)
+[13:24:18.666]     at async i (/vercel/path0/.next/server/app/api/trakt/watched-counts/route.js:1:580)
+[13:24:18.666]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[13:24:18.666]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[13:24:18.666]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[13:24:18.667]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[13:24:18.667]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[13:24:18.667]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[13:24:18.709]  ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[13:24:18.709] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.718]  ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[13:24:18.719] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.844]  ⚠ Unsupported metadata themeColor is configured in metadata export in /archive. Please move it to viewport export instead.
+[13:24:18.844] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.850]  ⚠ Unsupported metadata themeColor is configured in metadata export in /archive. Please move it to viewport export instead.
+[13:24:18.850] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.867]  ⚠ Unsupported metadata themeColor is configured in metadata export in /art. Please move it to viewport export instead.
+[13:24:18.868] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.870]  ⚠ Unsupported metadata themeColor is configured in metadata export in /art. Please move it to viewport export instead.
+[13:24:18.871] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.894]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/a-manifesto-for-holistic-computing. Please move it to viewport export instead.
+[13:24:18.895] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.900]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/a-manifesto-for-holistic-computing. Please move it to viewport export instead.
+[13:24:18.901] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.922]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/a-prelude-to-wisdom. Please move it to viewport export instead.
+[13:24:18.923] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.928]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/a-prelude-to-wisdom. Please move it to viewport export instead.
+[13:24:18.928] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.941]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/a-return-to-less. Please move it to viewport export instead.
+[13:24:18.941] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.943]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/a-return-to-less. Please move it to viewport export instead.
+[13:24:18.943] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.956]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/analysis-of-frieren-anime. Please move it to viewport export instead.
+[13:24:18.957] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.964]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/analysis-of-frieren-anime. Please move it to viewport export instead.
+[13:24:18.964] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.975]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/analysis-of-poem1. Please move it to viewport export instead.
+[13:24:18.976] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.978]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/analysis-of-poem1. Please move it to viewport export instead.
+[13:24:18.978] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.992]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/analysis-of-poem2. Please move it to viewport export instead.
+[13:24:18.992] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:18.995]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/analysis-of-poem2. Please move it to viewport export instead.
+[13:24:18.995] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.011]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/analysis-of-susanna-kaysen. Please move it to viewport export instead.
+[13:24:19.011] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.014]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/analysis-of-susanna-kaysen. Please move it to viewport export instead.
+[13:24:19.014] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.028]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/analysis-of-ubel. Please move it to viewport export instead.
+[13:24:19.031] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.031]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/analysis-of-ubel. Please move it to viewport export instead.
+[13:24:19.031] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.045]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/anatomy-of-verse. Please move it to viewport export instead.
+[13:24:19.046] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.047]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/anatomy-of-verse. Please move it to viewport export instead.
+[13:24:19.047] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.062]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/automated-url-archiving. Please move it to viewport export instead.
+[13:24:19.062] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.063]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/automated-url-archiving. Please move it to viewport export instead.
+[13:24:19.064] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.075]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/bash-style-guide. Please move it to viewport export instead.
+[13:24:19.075] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.076]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/bash-style-guide. Please move it to viewport export instead.
+[13:24:19.077] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.087]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/bio-ada-lovelace. Please move it to viewport export instead.
+[13:24:19.087] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.090]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/bio-ada-lovelace. Please move it to viewport export instead.
+[13:24:19.090] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.104]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/bio-hypatia-of-alexandria. Please move it to viewport export instead.
+[13:24:19.105] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.106]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/bio-hypatia-of-alexandria. Please move it to viewport export instead.
+[13:24:19.107] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.119]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/c-style-guide. Please move it to viewport export instead.
+[13:24:19.119] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.120]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/c-style-guide. Please move it to viewport export instead.
+[13:24:19.121] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.132]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/cplusplus-style-guide. Please move it to viewport export instead.
+[13:24:19.132] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.134]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/cplusplus-style-guide. Please move it to viewport export instead.
+[13:24:19.134] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.145]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/demo-post. Please move it to viewport export instead.
+[13:24:19.146] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.153]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/demo-post. Please move it to viewport export instead.
+[13:24:19.154] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.161]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/excercism-c-leap. Please move it to viewport export instead.
+[13:24:19.162] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.163]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/excercism-c-leap. Please move it to viewport export instead.
+[13:24:19.163] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.178]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/feature-testing. Please move it to viewport export instead.
+[13:24:19.178] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.185]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/feature-testing. Please move it to viewport export instead.
+[13:24:19.185] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.196]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/gojo-vs-sukuna-powerscaled. Please move it to viewport export instead.
+[13:24:19.197] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.199]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/gojo-vs-sukuna-powerscaled. Please move it to viewport export instead.
+[13:24:19.199] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.211]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/how-they-fall. Please move it to viewport export instead.
+[13:24:19.211] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.214]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/how-they-fall. Please move it to viewport export instead.
+[13:24:19.214] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.225]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/kristoo. Please move it to viewport export instead.
+[13:24:19.226] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.228]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/kristoo. Please move it to viewport export instead.
+[13:24:19.228] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.239]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/krisyotam-lfs. Please move it to viewport export instead.
+[13:24:19.239] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.241]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/krisyotam-lfs. Please move it to viewport export instead.
+[13:24:19.241] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.260]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/latex-style-guide. Please move it to viewport export instead.
+[13:24:19.261] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.263]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/latex-style-guide. Please move it to viewport export instead.
+[13:24:19.263] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.272]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/law1-of-48. Please move it to viewport export instead.
+[13:24:19.272] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.275]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/law1-of-48. Please move it to viewport export instead.
+[13:24:19.276] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.286]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/meditations-I. Please move it to viewport export instead.
+[13:24:19.286] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.289]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/meditations-I. Please move it to viewport export instead.
+[13:24:19.289] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.299]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/miseducation-of-the-negro. Please move it to viewport export instead.
+[13:24:19.299] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.305]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/miseducation-of-the-negro. Please move it to viewport export instead.
+[13:24:19.306] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.319]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/multiples-of-3-or-5. Please move it to viewport export instead.
+[13:24:19.319] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.326]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/multiples-of-3-or-5. Please move it to viewport export instead.
+[13:24:19.326] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.340]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/musings-I. Please move it to viewport export instead.
+[13:24:19.340] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.342]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/musings-I. Please move it to viewport export instead.
+[13:24:19.342] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.358]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/my-summer-2025-anime-recs. Please move it to viewport export instead.
+[13:24:19.359] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.363]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/my-summer-2025-anime-recs. Please move it to viewport export instead.
+[13:24:19.363] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.375]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/myths-from-mesopotamia. Please move it to viewport export instead.
+[13:24:19.375] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.377]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/myths-from-mesopotamia. Please move it to viewport export instead.
+[13:24:19.377] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.387]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/notes-on-identifying-unknowns. Please move it to viewport export instead.
+[13:24:19.387] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.388]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/notes-on-identifying-unknowns. Please move it to viewport export instead.
+[13:24:19.388] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.400]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/on-haiku. Please move it to viewport export instead.
+[13:24:19.401] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.403]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/on-haiku. Please move it to viewport export instead.
+[13:24:19.403] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.413]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/on-life-improvement. Please move it to viewport export instead.
+[13:24:19.414] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[13:24:19.416]  ⚠ Unsupported metadata themeColor is configured in metadata export in /blog/2025/on-life-improvement. Please move it to viewport export instead.
+[13:24:19.416] Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport

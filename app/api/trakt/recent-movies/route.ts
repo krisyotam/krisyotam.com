@@ -1,18 +1,29 @@
-import { getRecentlyWatchedMovies } from "@/lib/trakt-api"
 import { NextResponse } from "next/server"
+import fs from "fs"
+import path from "path"
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
-  const limit = Number.parseInt(searchParams.get("limit") || "10", 10)
+// Use static rendering instead of dynamic
+export const dynamic = 'force-static';
 
-  console.log(`Fetching recent movies with limit ${limit} from API`)
+export async function GET() {
   try {
-    const movies = await getRecentlyWatchedMovies(limit)
-    console.log(`Retrieved ${movies.length} recent movies`)
-    return NextResponse.json(movies)
+    // Use a fixed limit
+    const limit = 10;
+    
+    // Read from the JSON file instead of API
+    const filePath = path.join(process.cwd(), "data", "film", "movies.json")
+    const fileContents = fs.readFileSync(filePath, "utf8")
+    const allMovies = JSON.parse(fileContents)
+    
+    // Sort by date to get most recent and limit the results
+    const sortedMovies = allMovies.sort((a, b) => new Date(b.watched_at || b.date).getTime() - new Date(a.watched_at || a.date).getTime())
+    const recentMovies = sortedMovies.slice(0, limit)
+    
+    console.log(`Retrieved ${recentMovies.length} recent movies from JSON file`)
+    return NextResponse.json(recentMovies)
   } catch (error) {
-    console.error("Error fetching recently watched movies:", error)
-    return NextResponse.json({ error: "Failed to fetch recently watched movies" }, { status: 500 })
+    console.error("Error fetching recent movies from JSON:", error)
+    return NextResponse.json({ error: "Failed to fetch recent movies" }, { status: 500 })
   }
 }
 

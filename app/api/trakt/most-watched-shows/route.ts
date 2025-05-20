@@ -1,17 +1,28 @@
-import { getMostWatchedShows } from "@/lib/trakt-api"
 import { NextResponse } from "next/server"
+import fs from "fs"
+import path from "path"
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
-  const limit = Number.parseInt(searchParams.get("limit") || "10", 10)
+// Use static rendering
+export const dynamic = 'force-static';
 
-  console.log(`Fetching most watched shows with limit ${limit} from API`)
+export async function GET() {
   try {
-    const shows = await getMostWatchedShows(limit)
-    console.log(`Retrieved ${shows.length} most watched shows`)
-    return NextResponse.json(shows)
+    // Use a fixed limit
+    const limit = 10;
+    
+    // Read from the JSON file instead of API
+    const filePath = path.join(process.cwd(), "data", "film", "shows.json")
+    const fileContents = fs.readFileSync(filePath, "utf8")
+    const allShows = JSON.parse(fileContents)
+    
+    // Sort by play_count to get most watched and limit the results
+    const sortedShows = allShows.sort((a, b) => (b.play_count || 0) - (a.play_count || 0))
+    const mostWatchedShows = sortedShows.slice(0, limit)
+    
+    console.log(`Retrieved ${mostWatchedShows.length} most watched shows from JSON file`)
+    return NextResponse.json(mostWatchedShows)
   } catch (error) {
-    console.error("Error fetching most watched shows:", error)
+    console.error("Error fetching most watched shows from JSON:", error)
     return NextResponse.json({ error: "Failed to fetch most watched shows" }, { status: 500 })
   }
 }
