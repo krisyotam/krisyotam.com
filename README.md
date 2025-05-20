@@ -28,3 +28,14 @@ rest of the site.
 ![PageSpeed-Insights-01-19-2025_06_46_AM](https://github.com/user-attachments/assets/aa588b17-83e1-43f4-b1ba-58cabbc0ed80)
 
 😔 The Accessibility `93` score cannot be `100` without sacrificing stylistic fidelity.</sup>
+
+
+
+
+
+
+
+
+
+
+

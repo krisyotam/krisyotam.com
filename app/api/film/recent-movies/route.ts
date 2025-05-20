@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRecentMovies } from '@/lib/film-utils';
 
-// Use static rendering
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
   try {
-    // Use a fixed limit
-    const limit = 10;
+    const searchParams = request.nextUrl.searchParams;
+    const limit = parseInt(searchParams.get('limit') || '10', 10);
     
     const movies = await getRecentMovies(limit);
     return NextResponse.json(movies);

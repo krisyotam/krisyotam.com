@@ -1,29 +1,14 @@
 // app/api/trakt/recent-shows/route.ts
-import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+export const dynamic = 'force-dynamic';
 
-// Use static rendering
-export const dynamic = 'force-static';
+import { type NextRequest, NextResponse } from "next/server";
+import { getRecentlyWatchedShows } from "@/lib/trakt-api";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    // Use a fixed limit
-    const limit = 10;
-    
-    // Read from the JSON file instead of API
-    const filePath = path.join(process.cwd(), "data", "film", "shows.json");
-    const fileContents = fs.readFileSync(filePath, "utf8");
-    const allShows = JSON.parse(fileContents);
-    
-    // Sort by date to get most recent and limit the results
-    const sortedShows = allShows.sort((a, b) => 
-      new Date(b.watched_at || b.date).getTime() - new Date(a.watched_at || a.date).getTime()
-    );
-    const recentShows = sortedShows.slice(0, limit);
-    
-    console.log(`Retrieved ${recentShows.length} recent shows from JSON file`);
-    return NextResponse.json(recentShows);
+    const limit = Number.parseInt(request.nextUrl.searchParams.get("limit") || "10", 10);
+    const shows = await getRecentlyWatchedShows(limit);
+    return NextResponse.json(shows);
   } catch (error) {
     console.error("Error in recent-shows API route:", error);
     return NextResponse.json(
