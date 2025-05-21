@@ -6,7 +6,8 @@
       "description": "A journey through digital landscapes",
       "imageUrl": "/art/digital-dreams.jpg",
       "dimension": "1x1",
-      "date": "2024-01-15"
+      "date": "2024-01-15",
+      "type": "Digital Art"
     },
     {
       "id": "2",
@@ -14,7 +15,8 @@
       "description": "Exploring abstract forms and colors",
       "imageUrl": "/art/abstract-flow.jpg",
       "dimension": "7x4",
-      "date": "2024-01-10"
+      "date": "2024-01-10",
+      "type": "Abstract"
     },
     {
       "id": "3",
@@ -22,7 +24,8 @@
       "description": "City life captured in lines",
       "imageUrl": "/art/urban-sketch.jpg",
       "dimension": "4x7",
-      "date": "2024-01-05"
+      "date": "2024-01-05",
+      "type": "Sketch"
     }
   ]
 } 
