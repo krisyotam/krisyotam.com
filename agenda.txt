@@ -1,0 +1,121 @@
+# Action Plan to Fix Next.js Build Errors
+
+## Step 1: Fix Missing Export in Utils Library
+- [x] 1. Locate the `lib/utils.ts` file
+- [x] 2. Check if `formatFileSize` function is defined but not exported
+- [x] 3. If it exists, add export to the function: `export function formatFileSize(...)`
+- [x] 4. If it doesn't exist, add this function:
+   ```typescript
+   export function formatFileSize(bytes: number): string {
+     if (bytes === 0) return '0 Bytes';
+     const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+     const i = Math.floor(Math.log(bytes) / Math.log(1024));
+     return `${(bytes / Math.pow(1024, i)).toFixed(2)} ${sizes[i]}`;
+   }
+   ```
+
+## Step 2: Fix Tailwind CSS Safelist Patterns
+- [x] 1. Update the Tailwind config file (tailwind.config.js) by modifying the safelist patterns:
+   - Replace:
+     ```
+     /^dark:text-(gray|white|slate|neutral|black|blue|red)-\d{2,3}$/
+     /^dark:bg-(gray|black|white|slate|neutral|blue|red)-\d{2,3}$/
+     /^dark:border-(gray|black|white|slate|neutral|blue)-\d{2,3}$/
+     ```
+   - With specific class names that match the actual Tailwind syntax:
+     ```
+     'dark:text-gray-100', 'dark:text-gray-200'... etc.
+     'dark:bg-gray-800', 'dark:bg-gray-900'... etc.
+     'dark:border-gray-800', 'dark:border-gray-900'... etc.
+     ```
+
+## Step 3: Fix GraphQL Queries
+- [x] 1. Find all GraphQL queries that use `startedAt` and `finishedAt` fields on `ReadingState` type
+- [x] 2. Replace `startedAt` with `createdAt` based on the error message
+- [x] 3. Identify and replace `finishedAt` with the correct field name (possibly `completedAt` or `updatedAt`)
+- [x] 4. Check schema documentation or introspect GraphQL schema to find the correct field names
+
+## Step 4: Fix JSON File Paths
+- [x] 1. Verified all required JSON files already exist in the correct location:
+   - [x] The API routes are correctly looking in data/film/ directory
+   - [x] All necessary files already exist in data/film/ directory
+   - [x] No need to create new files since they already exist in the correct location
+
+## Step 5: Fix Dynamic API Routes
+- [x] 1. For each route using dynamic features:
+   - [x] Added `export const dynamic = 'force-dynamic'` to all route files:
+     - [x] Script automated the process for all applicable API routes
+     - [x] Manually fixed routes that the script couldn't handle
+   - [x] Analysis of 85 route files:
+     - 28 already had the directive
+     - 55 didn't need it (no search parameters)
+     - 2 were manually updated (post-exists/route.ts and post-mdx/route.ts)
+
+- [x] 2. Result:
+   ```javascript
+   // Before
+   export async function GET(request) {
+     const { searchParams } = new URL(request.url)
+     const limit = searchParams.get('limit') || 10
+     // Rest of the code
+   }
+
+   // After
+   export const dynamic = 'force-dynamic'
+   export async function GET(request) {
+     const { searchParams } = new URL(request.url)
+     const limit = searchParams.get('limit') || 10
+     // Rest of the code
+   }
+   ```
+
+## Step 6: Remove Trakt API (No Longer Used)
+- [x] 1. Removed all Trakt API routes since they've been replaced by film API:
+   - [x] Deleted all route files in app/api/trakt directory 
+   - [x] Deleted the lib/trakt-api.ts utility file
+   - [x] Kept the Trakt component names for backwards compatibility (UI components still used)
+- [x] 2. The application now exclusively uses:
+   - [x] JSON files in data/film/ for film data
+   - [x] API routes in app/api/film/ that access these JSON files
+   - [x] film-utils.ts for data fetching and processing
+
+## Step 7: Fix Missing Component
+- [x] 1. Create the missing AnimeCharacterDisplay component:
+   - [x] Create file: `components/AnimeCharacterDisplay.tsx` (file already existed at components/posts/content/anime-character-display.tsx)
+   - [x] Implement the component based on its usage in `/blog/2025/wistoria-wand-and-sword-review`
+- [x] 2. Ensure the component is properly imported in the file where it's used (Added to mdx-components.tsx to make it globally available)
+
+## Step 8: Fix Metadata themeColor Configuration
+- [ ] 1. Update metadata configuration throughout the codebase:
+   - [ ] Find all files with metadata configuration (likely many based on the errors)
+   - [ ] Move `themeColor` from metadata export to viewport export
+- [ ] 2. Example modification:
+   ```javascript
+   // Before
+   export const metadata = {
+     title: 'Page Title',
+     themeColor: '#000000'
+   }
+
+   // After
+   export const metadata = {
+     title: 'Page Title'
+   }
+   
+   export const viewport = {
+     themeColor: '#000000'
+   }
+   ```
+- [ ] 3. Consider using a script to automate this change across many files
+
+## Step 9: Test After Each Major Fix
+- [ ] 1. Run development server after each major fix to ensure changes work as expected
+- [ ] 2. Check build logs for any new or remaining errors
+- [ ] 3. Prioritize fixing critical errors that prevent the build from completing
+- [ ] 4. Iterate on fixes as needed
+
+## Step 10: Final Verification
+- [ ] 1. Run a full build with `next build` to verify all errors are resolved
+- [ ] 2. Test the site thoroughly to ensure all functionality works as expected
+- [ ] 3. Document any remaining issues that require further investigation
+- [ ] 4. Update the project's README with any new requirements or configurations

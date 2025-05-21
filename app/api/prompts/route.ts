@@ -3,6 +3,8 @@ import fs from "fs"
 import path from "path"
 import { promisify } from "util"
 
+
+export const dynamic = 'force-dynamic';
 const readdir = promisify(fs.readdir)
 const stat = promisify(fs.stat)
 const readFile = promisify(fs.readFile)
@@ -73,3 +75,4 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Failed to fetch prompts" }, { status: 500 })
   }
 }
+

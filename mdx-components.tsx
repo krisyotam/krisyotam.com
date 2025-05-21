@@ -47,6 +47,7 @@ import WebsiteDemo from "@/components/posts/website/website"
 import { WikiPerson } from "@/components/posts/wikipedia/wiki-person"
 import Product from "@/components/posts/basic/product"
 import { RedditEmbed } from "@/components/typography/reddit-embed"
+import AnimeCharacterDisplay from "@/components/posts/content/anime-character-display"
 
 // Define components for MDX
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -153,6 +154,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     
     // Content display components
     AnimeDisplay,
+    AnimeCharacterDisplay,
     MangaDisplay,
     MovieDisplay,
     Movie,

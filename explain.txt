@@ -1,0 +1,62 @@
+# Next.js Build Errors Explanation
+
+## Import Errors
+1. **Missing Export Error**: 
+   - In app/flashcards/mochi-client.tsx, there's an attempt to import `formatFileSize` from '@/lib/utils', but this function is not exported from that file.
+   - Error: `Attempted import error: 'formatFileSize' is not exported from '@/lib/utils'`
+
+## Tailwind CSS Safelist Errors
+- Multiple warnings about safelist patterns not matching any Tailwind CSS classes:
+  - `/^dark:text-(gray|white|slate|neutral|black|blue|red)-\d{2,3}$/`
+  - `/^dark:bg-(gray|black|white|slate|neutral|blue|red)-\d{2,3}$/`
+  - `/^dark:border-(gray|black|white|slate|neutral|blue)-\d{2,3}$/`
+  - These patterns don't match any Tailwind CSS classes, likely because the dark mode syntax has changed or the classes are defined differently.
+
+## GraphQL API Errors
+- GraphQL field validation errors:
+  - `Cannot query field "startedAt" on type "ReadingState". Did you mean "createdAt"?`
+  - `Cannot query field "finishedAt" on type "ReadingState".`
+  - These indicate that your GraphQL queries are using field names that don't exist in the schema or have been renamed.
+
+## Missing JSON Files
+Multiple data files are missing:
+1. `/data/film/fav-producers.json`
+2. `/data/fav-actors.json`
+3. `/data/fav-film-characters.json`
+4. `/data/fav-film-companies.json`
+5. `/data/fav-producers.json`
+
+## Dynamic API Route Errors
+Multiple API routes cannot be statically rendered due to using dynamic features:
+- Routes using `nextUrl.searchParams`:
+  - `/api/film/favorite-movies`
+  - `/api/film/favorite-shows`
+  - `/api/film/most-watched-movies`
+  - `/api/film/most-watched-shows`
+  - `/api/film/recent-movies`
+  - `/api/film/recent-shows`
+
+- Routes using `request.url`:
+  - `/api/og-debug`
+  - `/api/prompts`
+  - `/api/references`
+  - `/api/scripts`
+
+These routes need to be modified to work with static generation or configured to use dynamic rendering.
+
+## Authentication Errors
+The build is failing to authenticate with the Trakt API:
+- `Trakt API error: Unauthorized for /users/me?extended=full`
+- `Trakt API error: Unauthorized for /users/me/stats`
+
+## Component Errors
+- Missing component: `Expected component 'AnimeCharacterDisplay' to be defined`
+  - This component is referenced in `/blog/2025/wistoria-wand-and-sword-review` but is not defined or imported.
+
+## Metadata Warnings
+Hundreds of warnings about using `themeColor` in metadata export instead of viewport export:
+- `Unsupported metadata themeColor is configured in metadata export in [path]. Please move it to viewport export instead.`
+- This is due to a Next.js change in how theme colors should be defined.
+
+## Next.js Version Incompatibilities
+The build is using Next.js 14.2.28 but many of the errors indicate compatibility issues with this version. Some of the APIs and patterns used in the code may be from an older version of Next.js.

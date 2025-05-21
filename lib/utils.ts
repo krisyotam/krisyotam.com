@@ -5,6 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+/**
+ * Formats a file size in bytes to a human-readable string (e.g., '2.5 MB')
+ * @param bytes The size in bytes
+ * @returns A formatted string representing the file size
+ */
 export function formatFileSize(bytes: number): string {
   if (bytes === 0) return '0 Bytes';
   const k = 1024;

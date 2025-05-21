@@ -5,6 +5,8 @@ export const GET_READING_STATES = gql`
     myReadingStates {
       id
       status
+      createdAt
+      updatedAt
       book {
         id
         slug

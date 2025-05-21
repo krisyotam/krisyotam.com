@@ -4,6 +4,8 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const year = searchParams.get("year");

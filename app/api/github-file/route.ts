@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+
+export const dynamic = 'force-dynamic';
 const ALLOWED_GITHUB_USER = "krisyotam"; // Hardcoded your username
 
 // Simple in-memory cache (lives only while the server is running)
@@ -75,3 +77,4 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
+

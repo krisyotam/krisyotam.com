@@ -28,7 +28,17 @@ module.exports = {
     'dark:border-zinc-700',
     'dark:border-neutral-700',
     'dark:border-gray-700',
-    'dark:border-slate-700'
+    'dark:border-slate-700',
+    // Additional dark mode classes for common color values
+    'dark:text-gray-100', 'dark:text-gray-200', 'dark:text-gray-300', 'dark:text-gray-400', 'dark:text-gray-500',
+    'dark:text-slate-100', 'dark:text-slate-200', 'dark:text-slate-300', 'dark:text-slate-400', 'dark:text-slate-500',
+    'dark:text-neutral-100', 'dark:text-neutral-200', 'dark:text-neutral-300', 'dark:text-neutral-400', 'dark:text-neutral-500',
+    'dark:text-blue-100', 'dark:text-blue-200', 'dark:text-blue-300', 'dark:text-blue-400', 'dark:text-blue-500',
+    'dark:text-red-100', 'dark:text-red-200', 'dark:text-red-300', 'dark:text-red-400', 'dark:text-red-500',
+    'dark:bg-gray-800', 'dark:bg-gray-900', 'dark:bg-black', 'dark:bg-slate-800', 'dark:bg-slate-900',
+    'dark:bg-neutral-800', 'dark:bg-neutral-900', 'dark:bg-blue-800', 'dark:bg-blue-900', 'dark:bg-red-800', 'dark:bg-red-900',
+    'dark:border-gray-800', 'dark:border-gray-900', 'dark:border-slate-800', 'dark:border-slate-900',
+    'dark:border-neutral-800', 'dark:border-neutral-900', 'dark:border-blue-800', 'dark:border-blue-900'
   ],
   theme: {
     extend: {
