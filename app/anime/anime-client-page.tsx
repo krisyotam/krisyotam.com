@@ -263,7 +263,7 @@ export default function AnimeClientPage() {
                       paginatedWatching.map((item, index) => (
                         <div key={item?.node?.id || index} className="w-full">
                           <WatchingAnimeCard
-                            anime={{ ...item?.node, list_status: item?.list_status } || null}
+                            anime={item?.node ? { ...item.node, list_status: item.list_status } : null}
                             type={activeTab}
                           />
                         </div>
