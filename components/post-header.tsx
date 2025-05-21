@@ -11,6 +11,7 @@ interface PostHeaderProps {
   tags?: string[]
   category?: string
   preview?: string
+  className?: string
   status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
   confidence?:
     | "impossible"
@@ -95,12 +96,13 @@ export function PostHeader({
   tags,
   category,
   preview,
+  className,
   status = "Draft",
   confidence = "possible",
   importance = 5,
 }: PostHeaderProps) {
   return (
-    <header className="mb-4 relative">
+    <header className={cn("mb-4 relative", className)}>
       {/* Back to home link */}
       <Link
         href="/"
