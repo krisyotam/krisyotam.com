@@ -1,85 +1,75 @@
-// nextconfig.mjs
-
+// next.config.mjs
 import withMDX from '@next/mdx';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
-let userConfig;
-try {
-  userConfig = await import('./v0-user-next.config');
-} catch {
-  // ignore if not present
-}
-
-/** @type {import('next').NextConfig} */
+/* ─── Consolidated Next.js configuration ───────────────────── */
 const baseConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  reactStrictMode: true,
+  swcMinify: true,
+
+  // No build-time ignores for stability:
+  // eslint: { ignoreDuringBuilds: true },
+  // typescript: { ignoreBuildErrors: true },
+
   images: {
     unoptimized: true,
+    remotePatterns: [
+      { protocol: 'https', hostname: 'api.qrserver.com', pathname: '/v1/**' },
+    ],
+    domains: ['api.qrserver.com', 'i.postimg.cc', 'gateway.pinata.cloud'],
   },
+
   experimental: {
+    // Disable unused experimental flags:
+    // serverActions: true,
+    // mdxRs: true,
+    
+    // Keep only build performance improvements:
     webpackBuildWorker: true,
-    parallelServerBuildTraces: true,
-    parallelServerCompiles: true,
   },
+
+  output: 'standalone',
   transpilePackages: ['react-syntax-highlighter'],
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-  // Alias next/image → next/future/image globally
+
   webpack(config) {
+    /* Alias next/image → next/future/image */
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       'next/image$': 'next/future/image',
     };
 
-    // Add support for raw MDX imports
-    config.module.rules.push({
-      test: /\.mdx\?raw$/,
-      type: 'asset/source',
-    });
+    /* Raw‑MDX imports ( `import content from "./foo.mdx?raw"` ) */
+    config.module.rules.push({ test: /\.mdx\?raw$/, type: 'asset/source' });
+
+    /* External native module */
+    config.externals = [...(config.externals || []), { canvas: 'canvas' }];
 
     return config;
   },
-  // Security headers
+
+  /* Simple security headers */
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: [
           { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
-          { key: 'Content-Security-Policy', value: "frame-ancestors 'none';" },
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'none';",
+          },
         ],
       },
     ];
   },
 };
 
-const mdxConfig = withMDX({
+/* ─── MDX wrapper (Math + KaTeX) ───────────────────────────── */
+const nextConfig = withMDX({
   extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex],
-  },
-});
-
-let nextConfig = mdxConfig(baseConfig);
-
-if (userConfig) {
-  const uc = userConfig.default || userConfig;
-  for (const key in uc) {
-    if (
-      typeof nextConfig[key] === 'object' &&
-      !Array.isArray(nextConfig[key])
-    ) {
-      nextConfig[key] = { ...nextConfig[key], ...uc[key] };
-    } else {
-      nextConfig[key] = uc[key];
-    }
-  }
-}
+  options: { remarkPlugins: [remarkMath], rehypePlugins: [rehypeKatex] },
+})(baseConfig);
 
 export default nextConfig;

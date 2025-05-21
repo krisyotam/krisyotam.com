@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default async function ChangelogPage() {
   // Read the changelog content from the Markdown file
-  const content = await getMarkdownContent("app/changelog/page.md")
+  const content = await getMarkdownContent("app/changelog/data/page.md")
 
   // Changelog metadata for the header
   const changelogData = {

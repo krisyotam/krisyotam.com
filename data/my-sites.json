@@ -3,52 +3,72 @@
     {
       "name": "Curriculum Vitae (CV)",
       "purpose": "professional and educational background",
-      "link": "https://kriscv.vercel.app"
+      "link": "https://kriscv.vercel.app",
+      "category": "Professional",
+      "tags": ["resume", "career", "education"]
     },
     {
       "name": "Math Blog",
       "purpose": "blog, research, speeches, notes",
-      "link": "https://krisyotam.net"
+      "link": "https://krisyotam.net",
+      "category": "Content Creation",
+      "tags": ["mathematics", "research", "writing"]
     },
     {
       "name": "TypeShare",
       "purpose": "my initial posts catalogued on a social blogging platform",
-      "link": "https://typeshare.co/krisyotam"
+      "link": "https://typeshare.co/krisyotam",
+      "category": "Content Creation",
+      "tags": ["blogging", "social media", "writing"]
     },
     {
       "name": "TryHackMe",
       "purpose": "CTF, pentesting, red teaming, blue teaming, ect.",
-      "link": "https://tryhackme.com/p/khr1st"
+      "link": "https://tryhackme.com/p/khr1st",
+      "category": "Learning/Development",
+      "tags": ["cybersecurity", "CTF", "pentesting"]
     },
     {
       "name": "khr1st",
       "purpose": "software engineering, architecture, ai, ml, ctfs",
-      "link": "https://khr1st.vercel.app"
+      "link": "https://khr1st.vercel.app",
+      "category": "Professional",
+      "tags": ["software engineering", "portfolio", "ai/ml"]
     },
     {
       "name": "Business Site",
       "purpose": "invesment interests, current ventures, ect.",
-      "link": "https://kyotam.vercel.app"
+      "link": "https://kyotam.vercel.app",
+      "category": "Professional",
+      "tags": ["investments", "ventures", "business"]
     },
     {
       "name": "Goodreads",
       "purpose": "Add me and keep up with my reading updates.",
-      "link": "https://kriscv.vercel.app"
+      "link": "https://kriscv.vercel.app",
+      "category": "Hobbies",
+      "tags": ["books", "reading", "social"]
     },
     {
       "name": "MyAnimeList",
       "purpose": "follow the anime/manga I watch with auto updates",
-      "link": "https://myanimelist.net/profile/krisyotam"
+      "link": "https://myanimelist.net/profile/krisyotam",
+      "category": "Hobbies",
+      "tags": ["anime", "manga", "tracking"]
     },
     {
       "name": "Instagram",
       "purpose": "not active",
-      "link": "https://instagram.com/krisyotam"
+      "link": "https://instagram.com/krisyotam",
+      "category": "Social Networking",
+      "tags": ["photos", "personal", "inactive"]
     },
     {
       "name": "X",
       "purpose": "not active",
-      "link": "https://x.com/krisyotam"
+      "link": "https://x.com/krisyotam",
+      "category": "Social Networking",
+      "tags": ["microblogging", "news", "inactive"]
     }
   ]
 }

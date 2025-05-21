@@ -700,7 +700,7 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                 onToggle={() => toggleSection(13)}
               />
               <AccordionItem
-                title="My Sites"
+                title="Socials"
                 content={<MySites />}
                 isOpen={openSections.includes(14)}
                 onToggle={() => toggleSection(14)}
