@@ -75,7 +75,11 @@ export default function PostsLayout({ children }: { children: React.ReactNode })
     const style = document.createElement('style');
     style.textContent = fontImport;
     document.head.appendChild(style);
-    return () => document.head.removeChild(style);
+    return () => {
+      if (style.parentNode) {
+        style.parentNode.removeChild(style);
+      }
+    };
   }, []);
 
   // Fetch post data using the current URL path
