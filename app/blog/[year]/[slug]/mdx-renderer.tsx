@@ -60,7 +60,9 @@ export function MDXRenderer({ children, frontmatter }: MDXRendererProps) {
         )}
 
         {/* Related Posts */}
-        {textContent && <RelatedPosts content={textContent} />}
+        <div className="my-8">
+          <RelatedPosts />
+        </div>
       </div>
 
       {/* Right sidebar: Margin Notes */}
