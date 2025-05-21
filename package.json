@@ -2,7 +2,7 @@
   "name": "kris-yotam",
   "version": "0.1.0",
   "private": true,
-  "description": "Personal website of Kris Yotam - using Next.js 14.2.26 with all dependencies pinned for long-term stability. IMPORTANT: Upgrades to any framework or library should only be done if absolutely necessary (e.g., critical security patches). This project is intentionally frozen at known-good versions to avoid breaking changes.",
+  "description": "Personal website of Kris Yotam - using Next.js 14.2.26 with all dependencies pinned for long-term stability. IMPORTANT: Upgrades to any framework or library should only be done never. This project is intentionally frozen at known-good versions to avoid breaking changes.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
