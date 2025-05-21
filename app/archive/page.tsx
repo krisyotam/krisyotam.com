@@ -75,9 +75,9 @@ export default function ArchivesPage() {
     }
   }
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handlePasswordSubmit(e)
+      handlePasswordSubmit(e as unknown as React.FormEvent<HTMLFormElement>)
     }
   }
 
