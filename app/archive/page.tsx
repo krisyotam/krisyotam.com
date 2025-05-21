@@ -45,7 +45,7 @@ export default function ArchivesPage() {
     }
   }
 
-  const handlePasswordSubmit = async (e) => {
+  const handlePasswordSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError("")
     setIsVerifying(true)
