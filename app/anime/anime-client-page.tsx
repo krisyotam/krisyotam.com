@@ -398,7 +398,7 @@ export default function AnimeClientPage() {
                 <div className="grid grid-cols-5 gap-4">
                   {paginatedPeople.map((person, index) => (
                     <div key={person.name || index} className="w-full">
-                      <FavoriteCard item={person} type="person" />
+                      <FavoriteCard item={person} type="character" isCompany={false} />
                     </div>
                   ))}
                 </div>
@@ -425,7 +425,7 @@ export default function AnimeClientPage() {
                 <div className="grid grid-cols-5 gap-4">
                   {paginatedCompanies.map((company, index) => (
                     <div key={company.name || index} className="w-full">
-                      <FavoriteCard item={company} type="company" />
+                      <FavoriteCard item={company} type="character" isCompany={true} />
                     </div>
                   ))}
                 </div>
