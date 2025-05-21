@@ -203,14 +203,14 @@ export default function PostsLayout({ children }: { children: React.ReactNode })
               )}
 
               {/* Footnotes */}
-              {postData?.marginNotes?.length > 0 && (
+              {postData?.marginNotes && postData.marginNotes.length > 0 && (
                 <section className="mt-4 xl:hidden" aria-label="Footnotes">
                   <Footnotes notes={postData.marginNotes} />
                 </section>
               )}
 
               {/* Bibliography */}
-              {postData?.bibliography?.length > 0 && (
+              {postData?.bibliography && postData.bibliography.length > 0 && (
                 <section className="mt-4" aria-label="Bibliography">
                   <Bibliography bibliography={postData.bibliography} />
                 </section>
