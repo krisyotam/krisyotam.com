@@ -41,8 +41,6 @@ export function BlogPostContent({ year, slug, mdxData, postData }: BlogPostConte
   }
 
   const { content, frontmatter } = mdxData
-  const headings = frontmatter.headings || []
-  const marginNotes = frontmatter.marginNotes || []
   const mdxComponents = useMDXComponents({})
 
   // Scroll to top on mount
@@ -67,34 +65,9 @@ export function BlogPostContent({ year, slug, mdxData, postData }: BlogPostConte
         url={url}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr_1fr] gap-8">
-        {/* Left sidebar: Table of Contents */}
-        {headings.length > 0 && (
-          <div className="hidden md:block sticky top-8">
-            <TableOfContents headings={headings} />
-          </div>
-        )}
-
-        {/* Main content */}
-        <div className="mdx-content">
-          <MDXRenderer frontmatter={frontmatter} slug={slug}>
-            <MDXRemote source={content} components={mdxComponents} />
-          </MDXRenderer>
-        </div>
-
-        {/* Right sidebar: Margin Notes */}
-        <div className="hidden md:block sticky top-8 space-y-4">
-          {marginNotes.length > 0 ? (
-            marginNotes.map((note, idx) => (
-              <MarginCard key={note.id || idx} note={note} />
-            ))
-          ) : (
-            <div className="text-sm text-muted-foreground p-4 border border-border rounded-md">
-              No margin notes available for this post.
-            </div>
-          )}
-        </div>
-      </div>
+      <MDXRenderer frontmatter={frontmatter} slug={slug}>
+        <MDXRemote source={content} components={mdxComponents} />
+      </MDXRenderer>
     </BlogModalProvider>
   )
 }
