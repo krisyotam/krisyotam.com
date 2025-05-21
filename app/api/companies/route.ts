@@ -3,6 +3,13 @@ import fs from "fs"
 import path from "path"
 import Stripe from "stripe"
 
+// Define the Company interface
+interface Company {
+  name: string
+  stripeAccountId?: string
+  [key: string]: any
+}
+
 // Initialize Stripe with your secret key
 const stripe = process.env.STRIPE_SECRET_KEY
   ? new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2025-02-24.acacia" })
@@ -22,7 +29,7 @@ export async function GET() {
 
     // Fetch revenue data from Stripe for each company
     const companiesWithRevenue = await Promise.all(
-      companiesData.companies.map(async (company) => {
+      companiesData.companies.map(async (company: Company) => {
         try {
           if (!company.stripeAccountId) {
             return { ...company, useDemo: true }
