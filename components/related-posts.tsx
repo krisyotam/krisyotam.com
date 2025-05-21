@@ -17,26 +17,38 @@ interface PostPreview {
 }
 
 interface RelatedPostsClientProps {
-  posts?: PostPreview[]
+  slug: string
   className?: string
 }
 
 export default function RelatedPostsClient({
-  posts,
+  slug,
   className,
 }: RelatedPostsClientProps) {
+  const [posts, setPosts] = useState<PostPreview[]>([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const entriesPerPage = 5
+
+  useEffect(() => {
+    async function fetchRelatedPosts() {
+      try {
+        const response = await fetch(`/api/related-posts?slug=${slug}`)
+        if (response.ok) {
+          const data = await response.json()
+          setPosts(data)
+        }
+      } catch (error) {
+        console.error('Error fetching related posts:', error)
+      }
+    }
+
+    fetchRelatedPosts()
+  }, [slug])
+
   // Guard against undefined or empty posts
   if (!posts || posts.length === 0) {
     return null
   }
-
-  const [currentPage, setCurrentPage] = useState(1)
-  const entriesPerPage = 5
-
-  // Debug log
-  useEffect(() => {
-    console.log("🔗 RELATED POSTS COMPONENT: Received posts:", posts)
-  }, [posts])
 
   const totalPages = Math.ceil(posts.length / entriesPerPage)
   const startIndex = (currentPage - 1) * entriesPerPage
