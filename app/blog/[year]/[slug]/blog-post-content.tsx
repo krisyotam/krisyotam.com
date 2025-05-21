@@ -4,8 +4,7 @@ import React, { useEffect } from "react"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { useMDXComponents } from "@/mdx-components"
 import { BlogModalProvider } from "./blog-modal-provider"
-import { MarginCard } from "@/components/margin-notes"
-import TableOfContents from "@/components/table-of-contents"
+import { MDXRenderer } from "./mdx-renderer"
 import { BlogPostMeta } from "./blog-post-meta"
 
 interface BlogPostContentProps {
@@ -78,7 +77,9 @@ export function BlogPostContent({ year, slug, mdxData, postData }: BlogPostConte
 
         {/* Main content */}
         <div className="mdx-content">
-          <MDXRemote source={content} components={mdxComponents} />
+          <MDXRenderer frontmatter={frontmatter} slug={slug}>
+            <MDXRemote source={content} components={mdxComponents} />
+          </MDXRenderer>
         </div>
 
         {/* Right sidebar: Margin Notes */}

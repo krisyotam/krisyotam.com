@@ -14,9 +14,10 @@ interface MDXRendererProps {
     marginNotes?: MarginNote[]
     bibliography?: BibliographyEntry[]
   }
+  slug: string
 }
 
-export function MDXRenderer({ children, frontmatter }: MDXRendererProps) {
+export function MDXRenderer({ children, frontmatter, slug }: MDXRendererProps) {
   const { headings = [], marginNotes = [], bibliography = [] } = frontmatter
 
   // Assign IDs to headings synchronously to avoid layout shifts
@@ -61,7 +62,7 @@ export function MDXRenderer({ children, frontmatter }: MDXRendererProps) {
 
         {/* Related Posts */}
         <div className="my-8">
-          <RelatedPosts />
+          <RelatedPosts slug={slug} />
         </div>
       </div>
 
