@@ -6,7 +6,7 @@ export async function generateMetadata(): Promise<Metadata> {
   if (!post) return {}
   const title = post.title
   const description = post.preview
-  const coverUrl = post.cover_image || post.cover || `https://picsum.photos/1200/630?text=${encodeURIComponent(title)}`
+  const coverUrl = post.cover_image || `https://picsum.photos/1200/630?text=${encodeURIComponent(title)}`
   const url = `https://krisyotam.com/blog/2025/${post.slug}`
   return {
     title: `${title} | Kris Yotam`,
