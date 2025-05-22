@@ -16,9 +16,9 @@ interface Post {
 
 interface CategoryData {
   title: string
-  subtitle: string
+  subtitle?: string
   date: string
-  preview: string
+  preview?: string
   status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
   confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"
   importance: number
@@ -49,9 +49,9 @@ export function CategoryClient({ posts, categoryData, categoryName, slug }: Cate
         {categoryData ? (
           <CategoryHeader
             title={categoryData.title}
-            subtitle={categoryData.subtitle}
+            subtitle={categoryData.subtitle || ""}
             date={categoryData.date}
-            preview={categoryData.preview}
+            preview={categoryData.preview || ""}
             status={categoryData.status || "Draft"}
             confidence={categoryData.confidence || "possible"}
             importance={categoryData.importance || 5}
