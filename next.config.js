@@ -1,6 +1,14 @@
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+})
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Turn off React’s extra checks
+  // Turn off React's extra checks
   reactStrictMode: false,
 
   // Completely ignore all TypeScript errors
@@ -15,12 +23,11 @@ const nextConfig = {
 
   // Static optimization and timeouts
   staticPageGenerationTimeout: 120,
-  buildTimeout: 300_000,
 
-  // Don’t generate source maps in production
+  // Don't generate source maps in production
   productionBrowserSourceMaps: false,
 
-  // Leave all images unoptimized so image‐loader errors never occur
+  // Leave all images unoptimized so image-loader errors never occur
   images: {
     unoptimized: true,
   },
@@ -43,8 +50,23 @@ const nextConfig = {
     config.stats.errors = false;
     config.stats.errorDetails = false;
 
+    // Add MDX loader
+    config.module.rules.push({
+      test: /\.mdx?$/,
+      use: [
+        {
+          loader: '@mdx-js/loader',
+          options: {
+            providerImportSource: '@mdx-js/react',
+          },
+        },
+      ],
+    });
+
     return config;
   },
+
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 };
 
-module.exports = nextConfig;
+module.exports = withMDX(nextConfig);

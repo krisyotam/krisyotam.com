@@ -9,6 +9,9 @@ import { DarkModeScript } from "../components/dark-mode-script"
 import { DarkModeClasses } from "../components/dark-mode-classes"
 import type React from "react"
 import Script from "next/script"
+import { MDXProviderWrapper } from './mdx-provider'
+import { cn } from '../lib/utils'
+import { fontSans } from '../styles/fonts'
 
 // Default metadata for the site
 export const metadata: Metadata = {
@@ -70,7 +73,7 @@ export default function RootLayout({
         <script async src="https://cdn.seline.so/seline.js" data-token="9bc08e3c42882e0"></script>
         <DarkModeScript />
       </head>
-      <body className="bg-background text-foreground">
+      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
         <ThemeProvider 
           attribute="class" 
           defaultTheme="system" 
@@ -78,14 +81,16 @@ export default function RootLayout({
           disableTransitionOnChange
           storageKey="theme"
         >
-          <div className="min-h-screen flex flex-col">
-            <main className="flex-grow">{children}</main>
-            <CommandMenu />
-            <SettingsMenu />
-            <UniversalLinkModalWrapper />
-            <ScrollbarController />
-            <DarkModeClasses />
-          </div>
+          <MDXProviderWrapper>
+            <div className="min-h-screen flex flex-col">
+              <main className="flex-grow">{children}</main>
+              <CommandMenu />
+              <SettingsMenu />
+              <UniversalLinkModalWrapper />
+              <ScrollbarController />
+              <DarkModeClasses />
+            </div>
+          </MDXProviderWrapper>
         </ThemeProvider>
       </body>
     </html>
