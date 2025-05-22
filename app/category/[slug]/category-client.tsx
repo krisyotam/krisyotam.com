@@ -19,7 +19,7 @@ interface CategoryData {
   subtitle?: string
   date: string
   preview?: string
-  status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
+  status: string
   confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"
   importance: number
 }
@@ -52,7 +52,7 @@ export function CategoryClient({ posts, categoryData, categoryName, slug }: Cate
             subtitle={categoryData.subtitle || ""}
             date={categoryData.date}
             preview={categoryData.preview || ""}
-            status={categoryData.status || "Draft"}
+            status={categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" || "Draft"}
             confidence={categoryData.confidence || "possible"}
             importance={categoryData.importance || 5}
             backText="Categories"
