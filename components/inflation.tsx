@@ -8,12 +8,6 @@ interface CPIData {
   [key: string]: number
 }
 
-const cpiData: CPIData = {
-  "1947": 22.3,
-  "1948": 24.1,
-  // ... rest of the data ...
-}
-
 interface InflationProps {
   type: "USD" | "BTC";
   children: string;
@@ -37,7 +31,8 @@ function formatNumber(value: number): string {
 
 // Calculate inflation-adjusted USD value
 function calculateUsdAdjustment(amount: number, year: number): string {
-  const cpiStart = cpiData[year.toString()];
+  const yearStr = year.toString() as keyof typeof cpiData;
+  const cpiStart = cpiData[yearStr];
   const cpiNow = cpiData[2025];
 
   if (!cpiStart || !cpiNow) {
