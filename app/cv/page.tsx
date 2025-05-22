@@ -1,78 +1,74 @@
 "use client"
 
-import { ResumeHeader } from "@/components/resume-header"
-import { ResumeSection } from "@/components/resume-section"
-import { Separator } from "@/components/ui/separator"
-import { Button } from "@/components/ui/button"
-import { Download } from "lucide-react"
-import cv from "@/data/cv" // Ensure this is the correct import path
-import { useRef } from "react"
-import type { Metadata } from "next"
-
-interface CV {
-  name: string
-  title: string
-  email: string
-  phone: string
-  location: string
-  summary: string
-  experience: Array<{
-    company: string
-    title: string
-    startDate: string
-    endDate: string
-    description: string
-  }>
-  education: Array<{
-    school: string
-    degree: string
-    startDate: string
-    endDate: string
-  }>
-  skills: string[]
-  contact: {
-    email: string
-    phone: string
-    location: string
-  }
-}
-
-export const metadata: Metadata = {
-  title: `${cv.name} - ${cv.title}`,
-  description: cv.summary,
-}
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { cv } from '@/data/cv'
+import { ResumeSection } from '@/components/resume-section'
+import { PageHeader } from '@/components/page-header'
+import { cn } from '@/lib/utils'
 
 export default function CVPage() {
-  const resumeRef = useRef<HTMLDivElement>(null)
+  const [activeSection, setActiveSection] = useState('experience')
 
-  const handlePrint = () => {
-    window.print()
-  }
+  const sections = [
+    { id: 'experience', label: 'Experience' },
+    { id: 'education', label: 'Education' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'certifications', label: 'Certifications' },
+  ]
 
   return (
-    <main className="min-h-screen bg-muted/40 py-10 print:bg-white print:py-0 dark:bg-muted/20 dark:text-white">
-      <div className="mx-auto max-w-3xl">
-        <div className="mb-4 flex justify-end print:hidden">
-          <Button onClick={handlePrint} variant="secondary" className="gap-2 bg-black text-white hover:bg-black/90 dark:bg-gray-800 dark:text-white">
-            <Download className="h-4 w-4" />
-            Download as PDF
-          </Button>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+      <PageHeader
+        title="Curriculum Vitae"
+        description="A comprehensive overview of my professional journey, skills, and achievements."
+      />
+
+      <div className="container mx-auto px-4 py-12">
+        <div className="mb-8 flex justify-center space-x-4">
+          {sections.map((section) => (
+            <motion.button
+              key={section.id}
+              onClick={() => setActiveSection(section.id)}
+              className={cn(
+                'rounded-full px-6 py-2 text-sm font-medium transition-colors',
+                activeSection === section.id
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
+              )}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {section.label}
+            </motion.button>
+          ))}
         </div>
 
-        <div ref={resumeRef} className="space-y-8 bg-white p-10 shadow-sm print:shadow-none dark:bg-gray-800 dark:text-gray-200">
-          <ResumeHeader name={cv.name} title={cv.title} contact={cv.contact} summary={cv.summary} />
-
-          <Separator className="my-6" />
-
-          <div className="space-y-6">
-            <ResumeSection title="Experience" items={cv.experience} />
-            <ResumeSection title="Education" items={cv.education} />
-            <ResumeSection title="Skills" items={cv.skills} />
-            <ResumeSection title="Projects" items={cv.projects} />
-            <ResumeSection title="Certifications" items={cv.certifications} />
-          </div>
-        </div>
+        <motion.div
+          key={activeSection}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ResumeSection
+            title={sections.find((s) => s.id === activeSection)?.label || ''}
+            items={
+              cv[
+                activeSection as keyof typeof cv
+              ] as Array<{
+                title: string
+                organization: string
+                location: string
+                date: string
+                description: string
+                technologies?: string[]
+              }>
+            }
+          />
+        </motion.div>
       </div>
-    </main>
+    </div>
   )
 }
