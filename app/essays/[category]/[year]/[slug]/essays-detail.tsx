@@ -22,6 +22,7 @@ interface Essay {
   sourceLink?: string;
   category: string;
   tags: string[];
+  subject?: string;
 }
 
 export function EssaysDetail({ essay }: { essay: Essay }) {

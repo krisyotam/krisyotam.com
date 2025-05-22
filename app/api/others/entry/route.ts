@@ -11,16 +11,27 @@ export async function GET(request: NextRequest) {
   if (!slug) {
     return NextResponse.json({ error: "Slug is required" }, { status: 400 })
   }
-
   try {
-    const filePath = path.join(process.cwd(), "data", "others.json")
+    // Try different path resolutions to handle both local and deployment environments
+    let fileContent;
+    let entries;
     
-    if (!fs.existsSync(filePath)) {
-      return NextResponse.json({ error: "Data file not found" }, { status: 404 })
+    try {
+      const filePath = path.join(process.cwd(), "data", "others.json")
+      if (!fs.existsSync(filePath)) {
+        throw new Error("File not found in primary path")
+      }
+      fileContent = fs.readFileSync(filePath, "utf8")
+    } catch (e) {
+      // Fallback path for deployment
+      const altPath = path.join(process.cwd(), "..", "data", "others.json")
+      if (!fs.existsSync(altPath)) {
+        return NextResponse.json({ error: "Data file not found in any location" }, { status: 404 })
+      }
+      fileContent = fs.readFileSync(altPath, "utf8")
     }
-
-    const fileContent = fs.readFileSync(filePath, "utf8")
-    const entries = JSON.parse(fileContent)
+    
+    entries = JSON.parse(fileContent)
 
     const entry = entries.find((e: any) => e.slug === slug)
 

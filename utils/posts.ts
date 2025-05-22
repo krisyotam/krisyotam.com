@@ -72,30 +72,45 @@ async function readDataFile<T>(filename: string): Promise<T | null> {
     import("path"),
   ])
   
-  try {
-    const fullPath = path.join(process.cwd(), "data", filename)
-    console.log(`Attempting to read file: ${fullPath}`)
-    
-    // Verify file exists
-    const fileExists = await fs.access(fullPath).then(() => true).catch(() => false)
-    if (!fileExists) {
-      console.error(`File not found: ${fullPath}`)
-      return null
-    }
-    
-    const contents = await fs.readFile(fullPath, "utf8")
-    
+  // Define multiple possible paths to try
+  const pathsToTry = [
+    path.join(process.cwd(), "data", filename),
+    path.join(process.cwd(), "..", "data", filename),
+    path.join(process.cwd(), "public", "data", filename)
+  ]
+  
+  console.log(`Attempting to read data file: ${filename}`)
+  console.log(`Current working directory: ${process.cwd()}`)
+  
+  // Try each path until one works
+  for (const fullPath of pathsToTry) {
     try {
-      return JSON.parse(contents) as T
-    } catch (parseError) {
-      console.error(`Error parsing JSON from ${filename}:`, parseError)
-      console.error(`Content sample: ${contents.substring(0, 100)}...`)
-      return null
+      console.log(`Trying path: ${fullPath}`)
+      
+      // Verify file exists
+      const fileExists = await fs.access(fullPath).then(() => true).catch(() => false)
+      if (!fileExists) {
+        console.log(`File not found at: ${fullPath}`)
+        continue
+      }
+      
+      const contents = await fs.readFile(fullPath, "utf8")
+      
+      try {
+        return JSON.parse(contents) as T
+      } catch (parseError) {
+        console.error(`Error parsing JSON from ${filename}:`, parseError)
+        console.error(`Content sample: ${contents.substring(0, 100)}...`)
+        break
+      }
+    } catch (e) {
+      console.log(`Error reading from ${fullPath}:`, e)
+      continue
     }
-  } catch (e) {
-    console.error(`Error reading ${filename}:`, e)
-    return null
   }
+  
+  console.error(`File ${filename} not found in any location`)
+  return null
 }
 
 // Add caching for production
@@ -217,18 +232,32 @@ export async function getPostContent(year: string, slug: string) {
     import("fs"),
     import("path"),
   ])
-  const mdxPath = path.join(
-    process.cwd(),
-    "data",
-    "posts",
-    year,
-    slug,
-    "content.mdx"
-  )
-  try {
-    const mdxData = await fs.readFile(mdxPath, "utf-8")
-    return { isMDX: true, mdxData, blogPostExists: true }
-  } catch {
-    return { isMDX: false, mdxData: null, blogPostExists: false }
+  
+  // Try multiple possible paths to handle different deployment environments
+  const possiblePaths = [
+    // Standard path
+    path.join(process.cwd(), "data", "posts", year, slug, "content.mdx"),
+    // Alternative deployment paths
+    path.join(process.cwd(), "..", "data", "posts", year, slug, "content.mdx"),
+    path.join(process.cwd(), "public", "data", "posts", year, slug, "content.mdx")
+  ]
+  
+  console.log(`Attempting to load MDX for ${year}/${slug}`)
+  console.log(`CWD: ${process.cwd()}`)
+  
+  for (const mdxPath of possiblePaths) {
+    try {
+      console.log(`Trying path: ${mdxPath}`)
+      const mdxData = await fs.readFile(mdxPath, "utf-8")
+      console.log(`Successfully loaded MDX from ${mdxPath}`)
+      return { isMDX: true, mdxData, blogPostExists: true }
+    } catch (err) {
+      console.log(`Failed to load from ${mdxPath}: ${(err as Error).message}`)
+      // Continue to next path
+    }
   }
+  
+  // If we reach here, all paths failed
+  console.log(`Could not find MDX for ${year}/${slug} in any location`)
+  return { isMDX: false, mdxData: null, blogPostExists: false }
 }
