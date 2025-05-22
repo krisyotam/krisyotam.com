@@ -28,7 +28,7 @@ interface ArchivesComponentProps {
   archivesData: ArchiveItem[]
 }
 
-type ArchiveType = "note" | "essay" | "lecture-note" | "book" | "article" | "video" | "podcast" | "tool" | "project" | "dataset" | "manuscript"
+type ArchiveType = "note" | "essay" | "lecture-note" | "book" | "article" | "video" | "podcast" | "tool" | "project" | "dataset" | "manuscript" | "pdf"
 
 export default function ArchivesComponent({ archivesData }: ArchivesComponentProps) {
   const [searchQuery, setSearchQuery] = useState("")
@@ -54,6 +54,8 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
   // Get icon based on archive type
   const getTypeIcon = (type: ArchiveType) => {
     switch (type) {
+      case "pdf":
+        return <FileText className="h-4 w-4" />
       case "note":
         return <FileText className="h-4 w-4" />
       case "essay":

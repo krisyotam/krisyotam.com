@@ -11,7 +11,13 @@ import type React from "react"
 import Script from "next/script"
 import { MDXProviderWrapper } from './mdx-provider'
 import { cn } from '../lib/utils'
-import { fontSans } from '../styles/fonts'
+import localFont from 'next/font/local';
+
+// Define fontSans using localFont
+const fontSans = localFont({
+  src: '../public/fonts/outfit.woff2', // Adjust path if necessary
+  variable: '--font-sans', // Optional: for CSS variable usage
+});
 
 // Default metadata for the site
 export const metadata: Metadata = {

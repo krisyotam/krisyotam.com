@@ -1,6 +1,6 @@
 "use client"
 
-import ContactForm from "@/components/ContactForm"
+import dynamic from 'next/dynamic'
 import ContactInfo from "@/components/contact-info"
 import PGP from "@/components/pgp"
 import contactData from "@/data/contact.json"
@@ -9,6 +9,12 @@ import contactFormInfo from "@/data/contact-form-info.json"
 import { Card } from "@/components/ui/card"
 import { MessageSquare } from 'lucide-react'
 import { PageHeader } from "@/components/page-header"
+
+// Dynamically import ContactForm with no SSR
+const ContactFormWithNoSSR = dynamic(() => import('@/components/ContactForm'), {
+  ssr: false,
+  loading: () => <p>Loading form...</p>, 
+})
 
 // Contact page metadata
 const contactPageData = {
@@ -69,7 +75,7 @@ export default function ContactPage() {
           </div>
         </Card>
 
-        <ContactForm />
+        <ContactFormWithNoSSR />
       </div>
     </div>
   )

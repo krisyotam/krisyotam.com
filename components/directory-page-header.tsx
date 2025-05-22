@@ -122,7 +122,7 @@ export function DirectoryPageHeader({
               dateTime={typeof date === "string" ? date : date.toISOString()}
               className="font-mono text-xs text-muted-foreground"
             >
-              {formatDate(typeof date === "string" ? new Date(date) : date)}
+              {formatDate((typeof date === "string" ? new Date(date) : date).toISOString())}
             </time>
           </div>
 

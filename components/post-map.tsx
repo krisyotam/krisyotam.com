@@ -143,28 +143,28 @@ export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
   switch (block.type) {
     case "h1":
       return (
-        <Typography.H1 id={block.props?.id} {...block.props}>
+        <Typography.H1 id={typeof block.props?.id === 'string' ? block.props.id : undefined} {...block.props}>
           {(block as TextContentBlock).content}
         </Typography.H1>
       )
 
     case "h2":
       return (
-        <Typography.H2 id={block.props?.id} {...block.props}>
+        <Typography.H2 id={typeof block.props?.id === 'string' ? block.props.id : undefined} {...block.props}>
           {(block as TextContentBlock).content}
         </Typography.H2>
       )
 
     case "h3":
       return (
-        <Typography.H3 id={block.props?.id} {...block.props}>
+        <Typography.H3 id={typeof block.props?.id === 'string' ? block.props.id : undefined} {...block.props}>
           {(block as TextContentBlock).content}
         </Typography.H3>
       )
 
     case "h4":
       return (
-        <Typography.H4 id={block.props?.id} {...block.props}>
+        <Typography.H4 id={typeof block.props?.id === 'string' ? block.props.id : undefined} {...block.props}>
           {(block as TextContentBlock).content}
         </Typography.H4>
       )
@@ -289,8 +289,10 @@ export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
       return <Typography.Ref id={(block as RefContentBlock).id} {...block.props} />
 
     case "footnote":
+      // Assuming if type is "footnote", 'id' must be present.
+      // If 'block.id' could truly be undefined here, conditional rendering or a default ID would be needed.
       return (
-        <Typography.FootNote id={block.id}>
+        <Typography.FootNote id={block.id!}> 
           {(block as TextContentBlock).content}
         </Typography.FootNote>
       )
@@ -344,7 +346,7 @@ export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
       )
 
     default:
-      console.warn(`Unknown block type: ${block.type}`)
+      console.warn(`Unknown block type: ${(block as BaseContentBlock).type}`)
       return null
   }
 }

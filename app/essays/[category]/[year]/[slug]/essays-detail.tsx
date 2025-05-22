@@ -74,7 +74,7 @@ export function EssaysDetail({ essay }: { essay: Essay }) {
               title={essay.title}
               date={formattedDate}
               author={essay.authors.join(", ")}
-              pdfUrl={essay.pdfLink}
+              pdfUrl={essay.pdfLink!} // Asserting pdfLink is non-null here due to isPdfAvailable check
             />
           ) : (
             <>
@@ -100,7 +100,7 @@ export function EssaysDetail({ essay }: { essay: Essay }) {
               <Button
                 variant="outline"
                 className="flex items-center gap-2"
-                onClick={() => handleDownloadClick(essay.pdfLink)}
+                onClick={() => handleDownloadClick(essay.pdfLink!)} // Asserting pdfLink is non-null
               >
                 <Download className="h-4 w-4" />
                 Download PDF

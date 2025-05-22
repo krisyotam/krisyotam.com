@@ -75,21 +75,27 @@ export function AnimatedTagV2({ text, href, className }: AnimatedTagV2Props) {
     }
   }, [])
 
-  const TagComponent = href ? Link : "span"
-  const tagProps = href ? { href } : {}
+  const commonProps = {
+    className: cn(
+      "inline-block px-3 py-1 bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors",
+      className,
+    ),
+    onMouseEnter: handleMouseEnter,
+    onMouseLeave: handleMouseLeave,
+  };
+
+  if (href) {
+    return (
+      <Link href={href} {...commonProps}>
+        {displayText}
+      </Link>
+    );
+  }
 
   return (
-    <TagComponent
-      {...tagProps}
-      className={cn(
-        "inline-block px-3 py-1 bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors",
-        className,
-      )}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <span {...commonProps}>
       {displayText}
-    </TagComponent>
-  )
+    </span>
+  );
 }
 
