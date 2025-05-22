@@ -31,7 +31,7 @@ export interface CategoryData {
   date: string
   "show-status": "active" | "hidden"
   status: string
-  confidence?: string
+  confidence?: "certain" | "unlikely" | "likely" | "impossible" | "remote" | "highly unlikely" | "possible" | "highly likely"
   importance?: number
 }
 
