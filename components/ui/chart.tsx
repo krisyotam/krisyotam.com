@@ -9,13 +9,46 @@ import { cn } from "@/lib/utils"
 const THEMES = { light: "", dark: ".dark" } as const
 
 export type ChartConfig = {
-  [k in string]: {
-    label?: React.ReactNode
-    icon?: React.ComponentType
-  } & (
-    | { color?: string; theme?: never }
-    | { color?: never; theme: Record<keyof typeof THEMES, string> }
-  )
+  type: "line" | "bar" | "pie" | "doughnut"
+  data: {
+    labels: string[]
+    datasets: {
+      label: string
+      data: number[]
+      backgroundColor?: string | string[]
+      borderColor?: string | string[]
+      borderWidth?: number
+      fill?: boolean
+      tension?: number
+    }[]
+  }
+  options?: {
+    responsive?: boolean
+    maintainAspectRatio?: boolean
+    plugins?: {
+      legend?: {
+        display?: boolean
+        position?: "top" | "bottom" | "left" | "right"
+      }
+      tooltip?: {
+        enabled?: boolean
+      }
+    }
+    scales?: {
+      x?: {
+        display?: boolean
+        grid?: {
+          display?: boolean
+        }
+      }
+      y?: {
+        display?: boolean
+        grid?: {
+          display?: boolean
+        }
+      }
+    }
+  }
 }
 
 type ChartContextProps = {
@@ -319,40 +352,18 @@ ChartLegendContent.displayName = "ChartLegend"
 // Helper to extract item config from a payload.
 function getPayloadConfigFromPayload(
   config: ChartConfig,
-  payload: unknown,
+  payload: {
+    dataKey?: string;
+    name?: string;
+    value?: number;
+    payload?: {
+      fill?: string;
+    };
+    color?: string;
+  },
   key: string
 ) {
-  if (typeof payload !== "object" || payload === null) {
-    return undefined
-  }
-
-  const payloadPayload =
-    "payload" in payload &&
-    typeof payload.payload === "object" &&
-    payload.payload !== null
-      ? payload.payload
-      : undefined
-
-  let configLabelKey: string = key
-
-  if (
-    key in payload &&
-    typeof payload[key as keyof typeof payload] === "string"
-  ) {
-    configLabelKey = payload[key as keyof typeof payload] as string
-  } else if (
-    payloadPayload &&
-    key in payloadPayload &&
-    typeof payloadPayload[key as keyof typeof payloadPayload] === "string"
-  ) {
-    configLabelKey = payloadPayload[
-      key as keyof typeof payloadPayload
-    ] as string
-  }
-
-  return configLabelKey in config
-    ? config[configLabelKey]
-    : config[key as keyof typeof config]
+  return config[key]
 }
 
 export {

@@ -15,9 +15,45 @@ interface ContentTableProps {
     slug: string
     year?: number
   }[]
-  onItemClick: (item: any) => void
+  onItemClick: (item: {
+    title: string
+    type?: string
+    date: string
+    description: string
+    slug: string
+    year?: number
+  }) => void
   searchPlaceholder?: string
 }
+
+interface SearchInputProps {
+  placeholder: string
+  value: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  className: string
+  icon: React.ReactNode
+}
+
+const SearchInput: React.FC<SearchInputProps> = ({
+  placeholder,
+  value,
+  onChange,
+  className,
+  icon
+}) => (
+  <div className="relative">
+    <Input
+      type="search"
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      className={className}
+    />
+    <div className="absolute right-3 top-1/2 -translate-y-1/2">
+      {icon}
+    </div>
+  </div>
+)
 
 export function ContentTable({ title, items, onItemClick, searchPlaceholder = "Search..." }: ContentTableProps) {
   const [searchQuery, setSearchQuery] = useState("")
@@ -35,12 +71,11 @@ export function ContentTable({ title, items, onItemClick, searchPlaceholder = "S
   return (
     <div className="w-full">
       <div className="mb-6">
-        <Input
-          type="search"
-          placeholder={searchPlaceholder}
+        <SearchInput
+          placeholder="Search..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="max-w-sm"
+          className="w-full"
           icon={<Search className="h-4 w-4" />}
         />
       </div>

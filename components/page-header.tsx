@@ -131,11 +131,7 @@ export function PageHeader({
             dateTime={typeof date === "string" ? date : undefined}
             className="font-mono text-sm text-muted-foreground"
           >
-            {typeof date === "string" 
-              ? formatDate(date) 
-              : date 
-                ? formatDate(date.toString()) 
-                : "No date specified"}
+            {formatDate(date?.toString() || "")}
           </time>
         </div>
 

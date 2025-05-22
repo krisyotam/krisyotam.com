@@ -4,6 +4,20 @@ import { useRef, useEffect, useState } from "react"
 import Script from "next/script"
 import { RefreshCw } from "lucide-react"
 
+interface MathJax {
+  typeset: () => void;
+  typesetPromise?: (elements: HTMLElement[]) => Promise<void>;
+  startup?: {
+    typesetPromise: (elements: HTMLElement[]) => Promise<void>;
+  };
+}
+
+declare global {
+  interface Window {
+    MathJax: MathJax;
+  }
+}
+
 export function Commento() {
   const commentoRef = useRef<HTMLDivElement>(null)
   const [isReloading, setIsReloading] = useState(false)
@@ -295,12 +309,5 @@ export function Commento() {
       `}</style>
     </div>
   )
-}
-
-// Add TypeScript interface for MathJax
-declare global {
-  interface Window {
-    MathJax: any
-  }
 }
 

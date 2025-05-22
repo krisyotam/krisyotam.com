@@ -54,21 +54,37 @@ export function SimpleAnimatedTag({ text, href, className }: SimpleAnimatedTagPr
     setDisplayText(text)
   }
 
-  const TagComponent = href ? Link : "span"
-  const tagProps = href ? { href, target: "_blank", rel: "noopener noreferrer" } : {}
+  const isLink = href && href.startsWith("http")
 
   return (
-    <TagComponent
-      {...tagProps}
-      className={cn(
-        "inline-block px-3 py-1 bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors",
-        className,
+    <>
+      {isLink ? (
+        <Link
+          href={href}
+          className={cn(
+            "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+            className
+          )}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {displayText}
+        </Link>
+      ) : (
+        <span
+          className={cn(
+            "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+            className
+          )}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {displayText}
+        </span>
       )}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {displayText}
-    </TagComponent>
+    </>
   )
 }
 

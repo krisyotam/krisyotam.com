@@ -109,6 +109,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@types/escodegen": "^0.0.10",
     "@types/mapbox-gl": "^3.4.1",
     "@types/node": "22.15.3",
     "@types/nodemailer": "^6.4.17",

@@ -7,7 +7,7 @@ interface BlogPostProps {
   subtitle?: string
   date: string
   excerpt: string
-  type: "mdx" // Updated to only include "tsx"
+  type: "mdx" | "tsx"
 }
 
 export const BlogPost = memo(function BlogPost({ title, subtitle, date, excerpt, slug }: BlogPostProps) {

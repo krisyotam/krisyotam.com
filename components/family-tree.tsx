@@ -37,6 +37,13 @@ interface TreeProps {
   family: string
 }
 
+interface FamilyEntry {
+  slug: string;
+  name: string;
+  members: FamilyMember[];
+  rootMemberId: string;
+}
+
 // Utility functions
 function buildFamilyTree(data: FamilyTree, startId: string = data.rootMemberId, level = 0): TreeNode | null {
   const member = data.members.find((m) => m.id === startId)
@@ -74,10 +81,14 @@ function buildFamilyTree(data: FamilyTree, startId: string = data.rootMemberId, 
   return node
 }
 
-function formatDate(dateString?: string): string {
+function getDateString(dateString: string | null | undefined): string {
   if (!dateString) return "Unknown"
-  const date = new Date(dateString)
-  return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
+  return new Date(dateString).toLocaleDateString()
+}
+
+function getBirthDate(birthDate: string | null | undefined): string {
+  if (!birthDate) return "Unknown"
+  return new Date(birthDate).toLocaleDateString()
 }
 
 function calculateAge(birthDate?: string, deathDate?: string): string {
@@ -131,8 +142,8 @@ function FamilyMemberDetail({
               <div className="flex items-center gap-2">
                 <Calendar className="h-5 w-5 text-muted-foreground" />
                 <div>
-                  <p className="text-sm font-medium">Born: {formatDate(member.birthDate)}</p>
-                  {member.deathDate && <p className="text-sm font-medium">Died: {formatDate(member.deathDate)}</p>}
+                  <p className="text-sm font-medium">Born: {getDateString(member.birthDate)}</p>
+                  {member.deathDate && <p className="text-sm font-medium">Died: {getDateString(member.deathDate)}</p>}
                   <p className="text-sm text-muted-foreground">
                     Age: {calculateAge(member.birthDate, member.deathDate)}
                   </p>
@@ -254,8 +265,8 @@ function FamilyTreeNode({
               <h3 className="font-medium text-xs truncate">{member.name}</h3>
               <div className="flex items-center text-[10px] text-muted-foreground">
                 <span className="truncate">
-                  {member.birthDate ? formatDate(member.birthDate).split(' ')[2] : ""} 
-                  {member.deathDate ? ` - ${formatDate(member.deathDate).split(' ')[2]}` : ""}
+                  {member.birthDate ? getDateString(member.birthDate).split(' ')[2] : ""} 
+                  {member.deathDate ? ` - ${getDateString(member.deathDate).split(' ')[2]}` : ""}
                 </span>
                 <Button variant="ghost" size="icon" className="h-4 w-4 ml-auto" onClick={(e) => {e.stopPropagation(); onSelectMember(member.id)}}>
                   <Info className="h-2.5 w-2.5" />
@@ -328,8 +339,8 @@ function FamilyTreeNode({
 
           <h3 className="font-medium text-center text-xs">{member.name}</h3>
           <p className="text-xs text-muted-foreground text-center">
-            {member.birthDate ? formatDate(member.birthDate).split(' ')[2] : ""} 
-            {member.deathDate ? ` - ${formatDate(member.deathDate).split(' ')[2]}` : ""}
+            {member.birthDate ? getDateString(member.birthDate).split(' ')[2] : ""} 
+            {member.deathDate ? ` - ${getDateString(member.deathDate).split(' ')[2]}` : ""}
           </p>
         </CardContent>
       </Card>
@@ -441,7 +452,7 @@ export function Tree({ family }: TreeProps) {
         }
         
         const indexData = await indexResponse.json()
-        const familyEntry = indexData.find((entry: any) => entry.slug === family)
+        const familyEntry = indexData.find((entry: FamilyEntry) => entry.slug === family)
         
         if (!familyEntry) {
           throw new Error(`Family "${family}" not found in index`)

@@ -1,8 +1,56 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Star } from "lucide-react"
 
+interface AnimeNode {
+  main_picture?: {
+    medium?: string;
+    large?: string;
+  };
+  title?: string;
+  my_list_status?: {
+    score?: number;
+    num_episodes_watched?: number;
+    num_chapters_read?: number;
+  };
+  num_episodes?: number;
+  num_chapters?: number;
+}
+
+interface AnimeItem {
+  node?: AnimeNode;
+  main_picture?: {
+    medium?: string;
+    large?: string;
+  };
+  images?: {
+    jpg?: {
+      image_url?: string;
+    };
+  };
+  picture?: {
+    large?: string;
+  };
+  title?: string;
+  name?: string;
+  list_status?: {
+    score?: number;
+    num_episodes_watched?: number;
+    num_chapters_read?: number;
+  };
+  my_list_status?: {
+    score?: number;
+    num_episodes_watched?: number;
+    num_chapters_read?: number;
+  };
+  id?: number;
+  mal_id?: number;
+  url?: string;
+  link?: string;
+  photolink?: string;
+}
+
 // Helper function to get image URL with fallback
-function getImageUrl(item: any): string {
+function getImageUrl(item: AnimeItem): string {
   return (
     item?.node?.main_picture?.medium ||
     item?.main_picture?.medium ||
@@ -13,30 +61,30 @@ function getImageUrl(item: any): string {
 }
 
 // Helper function to get title with fallback
-function getTitle(item: any): string {
+function getTitle(item: AnimeItem): string {
   return item?.node?.title || item?.title || item?.name || "Unknown Title"
 }
 
 // Helper function to get score with fallback
-function getScore(item: any): number | null {
+function getScore(item: AnimeItem): number | null {
   const listStatus = item?.node?.my_list_status || item?.list_status || item?.my_list_status
   return listStatus?.score || null
 }
 
 // Helper function to get progress with fallback
-function getProgress(item: any, type: "anime" | "manga" = "anime"): number {
+function getProgress(item: AnimeItem, type: "anime" | "manga" = "anime"): number {
   const listStatus = item?.node?.my_list_status || item?.list_status || item?.my_list_status
   return listStatus?.[type === "anime" ? "num_episodes_watched" : "num_chapters_read"] || 0
 }
 
 // Helper function to get total with fallback
-function getTotal(item: any, type: "anime" | "manga" = "anime"): number | null {
+function getTotal(item: AnimeItem, type: "anime" | "manga" = "anime"): number | null {
   const node = item?.node || item
   return node?.[type === "anime" ? "num_episodes" : "num_chapters"] || null
 }
 
 interface AnimeCardProps {
-  anime: any
+  anime: AnimeItem
   type?: "anime" | "manga"
 }
 
@@ -130,7 +178,7 @@ export function CompletedAnimeCard({ anime, type = "anime" }: AnimeCardProps) {
 }
 
 interface FavoriteCardProps {
-  item: any
+  item: AnimeItem
   type: "anime" | "manga" | "character"
   isCompany?: boolean
 }

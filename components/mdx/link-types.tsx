@@ -8,6 +8,12 @@ interface LinkProps {
   title?: string
 }
 
+interface AProps {
+  href: string
+  title?: string
+  children: React.ReactNode
+}
+
 export function BookLink({ href, children, title }: LinkProps) {
   return (
     <span className="inline-flex items-center">

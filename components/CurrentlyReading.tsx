@@ -10,6 +10,24 @@ const bookUrlMapping: { [key: string]: string } = {
   "The Ode Less Travelled": "https://literal.club/krisyotam/book/the-ode-less-travelled-5iny6",
 }
 
+interface Author {
+  name: string;
+}
+
+interface Book {
+  id: string;
+  title: string;
+  authors: Author[];
+  cover: string;
+}
+
+interface ReadingState {
+  id: string;
+  status: string;
+  createdAt: string;
+  book: Book;
+}
+
 export function CurrentlyReading() {
   const [book, setBook] = useState({
     title: "Loading...",
@@ -82,12 +100,12 @@ export function CurrentlyReading() {
 
       // Handle the response data
       if (data.data?.myReadingStates?.length > 0) {
-        const readingBooks = data.data.myReadingStates.filter((state: { book: any }) => state.book)
+        const readingBooks = data.data.myReadingStates.filter((state: ReadingState) => state.book)
         console.log("Filtered reading books:", readingBooks)
 
         if (readingBooks.length > 0) {
           const latestBook = readingBooks.sort(
-            (a: { createdAt: string }, b: { createdAt: string }) =>
+            (a: ReadingState, b: ReadingState) =>
               new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
           )[0].book
           console.log("Latest book found:", latestBook)

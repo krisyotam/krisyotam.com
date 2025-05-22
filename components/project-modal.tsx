@@ -3,14 +3,14 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Badge } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import { Calendar, ExternalLink, Github, X } from "lucide-react"
-import type { ProjectCardProps } from "./project-card"
+import { ProjectCard } from "./project-card"
 
 interface ProjectModalProps {
   isOpen: boolean
   onClose: () => void
-  project: ProjectCardProps
+  project: ProjectCard
 }
 
 export function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
@@ -89,13 +89,10 @@ export function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
         <div className="mb-6">
           <h3 className="mb-2 text-sm font-medium text-muted-foreground">Technologies</h3>
           <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <span
-                key={`modal-${project.id}-${tag}`}
-                className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
-              >
+            {project.tags.map((tag: string) => (
+              <Badge key={tag} variant="secondary">
                 {tag}
-              </span>
+              </Badge>
             ))}
           </div>
         </div>

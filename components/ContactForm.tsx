@@ -24,7 +24,7 @@ const collaborateSchema = z.object({
   projectTitle: z.string().min(3, "Please provide a project title."),
   projectDescription: z.string().min(50, "Please provide a detailed project description."),
   contactInfo: z.string().email("Please provide a valid email address."),
-  cvUpload: z.any().optional(),
+  cvUpload: z.instanceof(File).optional(),
   portfolioLink: z.string().url().optional(),
   githubLink: z.string().url().optional(),
   researchGateLink: z.string().url().optional(),

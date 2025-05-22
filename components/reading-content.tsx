@@ -10,6 +10,24 @@ import { AlertCircle } from "lucide-react"
 
 type ReadingStatus = "IS_READING" | "FINISHED" | "WANTS_TO_READ"
 
+interface Author {
+  name: string
+}
+
+interface Book {
+  id: Key | null | undefined
+  cover?: string
+  title: string
+  subtitle?: string
+  authors: Author[]
+  slug: string
+}
+
+interface ReadingState {
+  status: string
+  book: Book
+}
+
 export function ReadingContent() {
   const [activeStatus, setActiveStatus] = useState<ReadingStatus>("IS_READING")
   const { data, loading, error } = useQuery(GET_READING_STATES, {
@@ -51,7 +69,7 @@ export function ReadingContent() {
   }
 
   const readingStates = data?.myReadingStates || []
-  const filteredBooks = readingStates.filter((state: { status: string }) => state.status === activeStatus)
+  const filteredBooks = readingStates.filter((state: ReadingState) => state.status === activeStatus)
 
   const statusLabels: Record<ReadingStatus, string> = {
     IS_READING: "Reading",
@@ -76,13 +94,13 @@ export function ReadingContent() {
 
       {filteredBooks.length > 0 ? (
         <div className="space-y-6">
-          {filteredBooks.map((state: { book: { id: Key | null | undefined; cover: any; title: string; subtitle: any; authors: { name: any }[]; slug: any } }) => (
+          {filteredBooks.map((state: ReadingState) => (
             <ReadingBookCard
               key={state.book.id}
               coverUrl={state.book.cover || "/placeholder.svg?height=100&width=100"}
               title={state.book.title}
               subtitle={state.book.subtitle || ""}
-              author={state.book.authors.map((a: { name: any }) => a.name).join(", ")}
+              author={state.book.authors.map((a: Author) => a.name).join(", ")}
               rating={0}
               onClick={() => window.open(`https://literal.club/book/${state.book.slug}`, "_blank")}
             />

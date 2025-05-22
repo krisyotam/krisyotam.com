@@ -137,7 +137,7 @@ export function PostHeader({
             dateTime={typeof date === "string" ? date : undefined}
             className="font-mono text-sm text-muted-foreground"
           >
-            {typeof date === "string" ? formatDate(new Date(date)) : date}
+            {typeof date === "string" ? formatDate(date) : date ? formatDate(date.toString()) : ""}
           </time>
         </div>
 

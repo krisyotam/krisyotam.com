@@ -18,6 +18,11 @@ import {
   HandCoins,
   Newspaper,
   Rss,
+  BookOpen,
+  Search,
+  Book,
+  Award,
+  Pen,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -109,7 +114,10 @@ export default function Experience() {
     title: string
     count: number
     icon: React.ReactNode
-    variants: any
+    variants: {
+      hidden: { y: number; opacity: number }
+      show: { y: number; opacity: number }
+    }
     href?: string
   }
 
@@ -173,65 +181,65 @@ export default function Experience() {
       <StatCard
         title="Notes"
         count={stats?.notes || 0}
-        icon={<FileText className="h-6 w-6 text-primary" />}
+        icon={<BookOpen className="h-4 w-4" />}
         variants={item}
         href="/notes"
       />
       <StatCard
         title="Research"
         count={stats?.research || 0}
-        icon={<School className="h-6 w-6 text-primary" />}
+        icon={<Search className="h-4 w-4" />}
         variants={item}
         href="/research"
       />
       <StatCard
         title="Speeches"
         count={stats?.speeches || 0}
-        icon={<Mic className="h-6 w-6 text-primary" />}
+        icon={<Mic className="h-4 w-4" />}
         variants={item}
         href="/speeches"
       />
       <StatCard
         title="Books"
         count={stats?.books || 0}
-        icon={<BookMarked className="h-6 w-6 text-primary" />}
+        icon={<Book className="h-4 w-4" />}
         variants={item}
-        href="/mybooks"
+        href="/books"
       />
       <StatCard
         title="Keynotes"
         count={stats?.keynotes || 0}
-        icon={<Presentation className="h-6 w-6 text-primary" />}
+        icon={<Presentation className="h-4 w-4" />}
         variants={item}
         href="/keynotes"
       />
       <StatCard
         title="Quotes"
         count={stats?.quotes || 0}
-        icon={<Quote className="h-6 w-6 text-primary" />}
+        icon={<Quote className="h-4 w-4" />}
         variants={item}
         href="/quotes"
       />
       <StatCard
         title="Poems"
         count={stats?.poems || 0}
-        icon={<PenTool className="h-6 w-6 text-primary" />}
+        icon={<Pen className="h-4 w-4" />}
         variants={item}
-        href="/poetry"
+        href="/poems"
       />
       <StatCard
         title="Characters"
         count={stats?.characters || 0}
-        icon={<Users className="h-6 w-6 text-primary" />}
+        icon={<Users className="h-4 w-4" />}
         variants={item}
-        href="/ocs"
+        href="/characters"
       />
       <StatCard
         title="Certifications"
         count={stats?.certifications || 0}
-        icon={<GraduationCap className="h-6 w-6 text-primary" />}
+        icon={<Award className="h-4 w-4" />}
         variants={item}
-        href="/about"
+        href="/certifications"
       />
     </motion.div>
   )

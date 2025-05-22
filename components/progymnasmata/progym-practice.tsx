@@ -115,7 +115,10 @@ export default function ProgymPractice() {
     title: string
     count: number
     icon: React.ReactNode
-    variants: any
+    variants: {
+      hidden: { y: number; opacity: number }
+      show: { y: number; opacity: number }
+    }
     href?: string
   }
 

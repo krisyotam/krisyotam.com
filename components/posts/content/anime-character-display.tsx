@@ -21,37 +21,37 @@ export default function AnimeCharacterDisplay({
   return (
     <div
       className={cn(
-        "max-w-md mx-auto p-8 bg-white dark:bg-[#1A1A1A] border border-gray-200 dark:border-zinc-800 shadow-sm !important",
-        "font-sans antialiased !important",
+        "max-w-md mx-auto p-8 bg-white dark:bg-[#1A1A1A] border border-gray-200 dark:border-zinc-800 shadow-sm",
+        "font-sans antialiased",
         className,
       )}
       style={{
         /* CSS Reset */
-        margin: "0 !important",
-        padding: "2rem !important",
-        boxSizing: "border-box !important",
-        fontFamily: "inherit !important",
-        lineHeight: "1.5 !important",
-        WebkitFontSmoothing: "antialiased !important",
-        MozOsxFontSmoothing: "grayscale !important",
+        margin: "0",
+        padding: "2rem",
+        boxSizing: "border-box",
+        fontFamily: "inherit",
+        lineHeight: "1.5",
+        WebkitFontSmoothing: "antialiased",
+        MozOsxFontSmoothing: "grayscale",
       }}
     >
       <div
-        className="space-y-6 !important"
+        className="space-y-6"
         style={{
-          margin: "0 !important",
-          padding: "0 !important",
-          boxSizing: "border-box !important",
+          margin: "0",
+          padding: "0",
+          boxSizing: "border-box",
         }}
       >
         <div
-          className="aspect-[3/4] overflow-hidden rounded-md bg-gray-100 dark:bg-[#1A1A1A] mx-auto relative !important"
+          className="aspect-[3/4] overflow-hidden rounded-md bg-gray-100 dark:bg-[#1A1A1A] mx-auto relative"
           style={{
-            width: "100% !important",
-            height: "auto !important",
-            position: "relative !important",
-            display: "block !important",
-            minHeight: "300px !important",
+            width: "100%",
+            height: "auto",
+            position: "relative",
+            display: "block",
+            minHeight: "300px",
           }}
         >
           <Image
@@ -59,44 +59,44 @@ export default function AnimeCharacterDisplay({
             alt={characterName}
             fill
             sizes="(max-width: 768px) 100vw, 300px"
-            className="object-cover !important"
+            className="object-cover"
             style={{
-              objectFit: "cover !important",
-              objectPosition: "center !important",
-              display: "block !important",
+              objectFit: "cover",
+              objectPosition: "center",
+              display: "block",
             }}
             priority
           />
         </div>
 
         <div
-          className="space-y-2 text-center !important"
+          className="space-y-2 text-center"
           style={{
-            margin: "1.5rem 0 0 0 !important",
-            padding: "0 !important",
-            boxSizing: "border-box !important",
+            margin: "1.5rem 0 0 0",
+            padding: "0",
+            boxSizing: "border-box",
           }}
         >
           <h2
-            className="text-2xl font-serif tracking-tight text-gray-900 dark:text-white m-0 !important"
+            className="text-2xl font-serif tracking-tight text-gray-900 dark:text-white m-0"
             style={{
-              margin: "0 !important",
-              padding: "0 !important",
-              fontSize: "1.5rem !important",
-              fontWeight: "600 !important",
-              lineHeight: "1.2 !important",
+              margin: "0",
+              padding: "0",
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              lineHeight: "1.2",
             }}
           >
             {characterName}
           </h2>
           {voiceActor && (
           <div
-            className="text-sm text-gray-600 dark:text-zinc-400 font-light !important"
+            className="text-sm text-gray-600 dark:text-zinc-400 font-light"
             style={{
-              margin: "0.5rem 0 0 0 !important",
-              padding: "0 !important",
-              fontSize: "0.875rem !important",
-              fontWeight: "300 !important",
+              margin: "0.5rem 0 0 0",
+              padding: "0",
+              fontSize: "0.875rem",
+              fontWeight: "300",
             }}
           >
             Voiced by {voiceActor}
@@ -105,29 +105,29 @@ export default function AnimeCharacterDisplay({
         </div>
 
         <div
-          className="pt-4 border-t border-gray-200 dark:border-zinc-800 text-xs text-gray-500 dark:text-zinc-500 font-light !important"
+          className="pt-4 border-t border-gray-200 dark:border-zinc-800 text-xs text-gray-500 dark:text-zinc-500 font-light"
           style={{
-            marginTop: "1.5rem !important",
-            paddingTop: "1rem !important",
-            borderTopWidth: "1px !important",
-            fontSize: "0.75rem !important",
-            fontWeight: "300 !important",
+            marginTop: "1.5rem",
+            paddingTop: "1rem",
+            borderTopWidth: "1px",
+            fontSize: "0.75rem",
+            fontWeight: "300",
           }}
         >
           <div
-            className="grid grid-cols-2 gap-4 !important"
+            className="grid grid-cols-2 gap-4"
             style={{
-              display: "grid !important",
-              gridTemplateColumns: "1fr 1fr !important",
-              gap: "1rem !important",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "1rem",
             }}
           >
-            <div className="!important" style={{ margin: "0 !important", padding: "0 !important" }}>
+            <div style={{ margin: "0", padding: "0" }}>
               Anime: {animeName}
             </div>
             <div
-              className="text-right !important"
-              style={{ margin: "0 !important", padding: "0 !important", textAlign: "right !important" }}
+              className="text-right"
+              style={{ margin: "0", padding: "0", textAlign: "right" }}
             >
               Year: {animeYear}
             </div>

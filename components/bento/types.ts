@@ -8,6 +8,9 @@ export interface BaseItem {
   description?: string
   author: string
   blockType: BlockType
+  icon?: React.ComponentType
+  color?: string
+  theme?: Record<string, string>
 }
 
 export interface PaintingItem extends BaseItem {
@@ -44,4 +47,37 @@ export interface MovieItem extends BaseItem {
   runtime?: number
 }
 
-export type Item = PaintingItem | PoemItem | QuoteItem | BookItem | MovieItem | BaseItem 
+interface LinkItem extends BaseItem {
+  type: "link"
+  href: string
+}
+
+interface ProjectItem extends BaseItem {
+  type: "project"
+  image: string
+  tags: string[]
+  github?: string
+  demo?: string
+}
+
+interface SocialItem extends BaseItem {
+  type: "social"
+  username: string
+  platform: string
+  url: string
+}
+
+interface ToolItem extends BaseItem {
+  type: "tool"
+  category: string
+  url: string
+}
+
+interface ArticleItem extends BaseItem {
+  type: "article"
+  date: string
+  url: string
+  readingTime?: string
+}
+
+type Item = LinkItem | ProjectItem | SocialItem | ToolItem | BookItem | ArticleItem | PaintingItem | PoemItem | QuoteItem | MovieItem | BaseItem 

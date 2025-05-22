@@ -67,23 +67,23 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
   return (
     <div
       className="container mx-auto pt-0 pb-8 px-4 max-w-6xl dark:bg-[#121212]"
-      style={{ fontFamily: "Georgia, serif !important" }}
+      style={{ fontFamily: "Georgia, serif" }}
     >
       <div
         className="mb-8 border-b border-gray-200 dark:border-gray-800 pb-4"
-        style={{ borderBottom: "1px solid var(--border) !important" }}
+        style={{ borderBottom: "1px solid var(--border)" }}
       >
       </div>
 
       {/* Filters and search */}
-      <div className="flex flex-col md:flex-row gap-4 mb-8" style={{ marginBottom: "2rem !important" }}>
+      <div className="flex flex-col md:flex-row gap-4 mb-8" style={{ marginBottom: "2rem" }}>
         <div className="flex-1 relative">
           <div
             className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
             style={{
-              position: "absolute !important",
-              left: "0 !important",
-              paddingLeft: "0.75rem !important",
+              position: "absolute",
+              left: "0",
+              paddingLeft: "0.75rem",
             }}
           >
             <Search className="h-4 w-4 text-gray-400 dark:text-gray-500" />
@@ -94,11 +94,11 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 bg-white dark:bg-[#1a1a1a] border-gray-300 dark:border-gray-700 rounded-none focus:ring-0 focus:border-black dark:focus:border-gray-500 text-sm dark:text-gray-300"
             style={{
-              width: "100% !important",
-              paddingLeft: "2.5rem !important",
-              borderRadius: "0 !important",
-              fontSize: "0.875rem !important",
-              boxShadow: "none !important",
+              width: "100%",
+              paddingLeft: "2.5rem",
+              borderRadius: "0",
+              fontSize: "0.875rem",
+              boxShadow: "none",
             }}
           />
         </div>
@@ -109,10 +109,10 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
               <SelectTrigger
                 className="w-[180px] rounded-none border-gray-300 dark:border-gray-700 focus:ring-0 focus:border-black dark:focus:border-gray-500 text-sm bg-white dark:bg-[#1a1a1a] dark:text-gray-300"
                 style={{
-                  width: "180px !important",
-                  borderRadius: "0 !important",
-                  fontSize: "0.875rem !important",
-                  boxShadow: "none !important",
+                  width: "180px",
+                  borderRadius: "0",
+                  fontSize: "0.875rem",
+                  boxShadow: "none",
                 }}
               >
                 <SelectValue placeholder="Filter by type" />
@@ -120,7 +120,7 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
               <SelectContent
                 className="rounded-none border-gray-300 dark:border-gray-700 dark:bg-[#1a1a1a]"
                 style={{
-                  borderRadius: "0 !important",
+                  borderRadius: "0",
                 }}
               >
                 <SelectItem
@@ -162,10 +162,10 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
               <SelectTrigger
                 className="w-[180px] rounded-none border-gray-300 dark:border-gray-700 focus:ring-0 focus:border-black dark:focus:border-gray-500 text-sm bg-white dark:bg-[#1a1a1a] dark:text-gray-300"
                 style={{
-                  width: "180px !important",
-                  borderRadius: "0 !important",
-                  fontSize: "0.875rem !important",
-                  boxShadow: "none !important",
+                  width: "180px",
+                  borderRadius: "0",
+                  fontSize: "0.875rem",
+                  boxShadow: "none",
                 }}
               >
                 <SelectValue placeholder="Filter by category" />
@@ -173,7 +173,7 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
               <SelectContent
                 className="rounded-none border-gray-300 dark:border-gray-700 dark:bg-[#1a1a1a]"
                 style={{
-                  borderRadius: "0 !important",
+                  borderRadius: "0",
                 }}
               >
                 {categories.map((category) => (
@@ -195,16 +195,16 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
       <div
         className="border border-gray-200 dark:border-gray-800 hidden md:block"
         style={{
-          border: "1px solid var(--border) !important",
-          display: "none !important",
+          border: "1px solid var(--border)",
+          display: "none",
         }}
         className="md:!block"
       >
         <table
           className="min-w-full divide-y divide-gray-200 dark:divide-gray-800"
           style={{
-            width: "100% !important",
-            borderCollapse: "collapse !important",
+            width: "100%",
+            borderCollapse: "collapse",
           }}
         >
           <thead className="bg-gray-50 dark:bg-[#1a1a1a]">
@@ -213,12 +213,12 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
                 style={{
-                  padding: "0.75rem 1rem !important",
-                  textAlign: "left !important",
-                  fontSize: "0.75rem !important",
-                  fontWeight: "500 !important",
-                  textTransform: "uppercase !important",
-                  letterSpacing: "0.05em !important",
+                  padding: "0.75rem 1rem",
+                  textAlign: "left",
+                  fontSize: "0.75rem",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
                 }}
               >
                 Title & Description
@@ -227,12 +227,12 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
                 style={{
-                  padding: "0.75rem 1rem !important",
-                  textAlign: "left !important",
-                  fontSize: "0.75rem !important",
-                  fontWeight: "500 !important",
-                  textTransform: "uppercase !important",
-                  letterSpacing: "0.05em !important",
+                  padding: "0.75rem 1rem",
+                  textAlign: "left",
+                  fontSize: "0.75rem",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
                 }}
               >
                 Type & Category
@@ -241,12 +241,12 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
                 style={{
-                  padding: "0.75rem 1rem !important",
-                  textAlign: "left !important",
-                  fontSize: "0.75rem !important",
-                  fontWeight: "500 !important",
-                  textTransform: "uppercase !important",
-                  letterSpacing: "0.05em !important",
+                  padding: "0.75rem 1rem",
+                  textAlign: "left",
+                  fontSize: "0.75rem",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
                 }}
               >
                 Details
@@ -255,12 +255,12 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
                 style={{
-                  padding: "0.75rem 1rem !important",
-                  textAlign: "left !important",
-                  fontSize: "0.75rem !important",
-                  fontWeight: "500 !important",
-                  textTransform: "uppercase !important",
-                  letterSpacing: "0.05em !important",
+                  padding: "0.75rem 1rem",
+                  textAlign: "left",
+                  fontSize: "0.75rem",
+                  fontWeight: "500",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
                 }}
               >
                 Download
@@ -271,12 +271,12 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
             {filteredArchives.length > 0 ? (
               filteredArchives.map((archive) => (
                 <tr key={archive.id} className="hover:bg-gray-50 dark:hover:bg-[#1a1a1a]">
-                  <td className="px-4 py-4" style={{ padding: "1rem !important" }}>
+                  <td className="px-4 py-4" style={{ padding: "1rem" }}>
                     <div
                       className="text-sm font-medium text-gray-900 dark:text-gray-100"
                       style={{
-                        fontSize: "0.875rem !important",
-                        fontWeight: "500 !important",
+                        fontSize: "0.875rem",
+                        fontWeight: "500",
                       }}
                     >
                       {archive.title}
@@ -284,26 +284,26 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                     <div
                       className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2"
                       style={{
-                        fontSize: "0.75rem !important",
-                        marginTop: "0.25rem !important",
-                        display: "-webkit-box !important",
-                        WebkitLineClamp: "2 !important",
-                        WebkitBoxOrient: "vertical !important",
-                        overflow: "hidden !important",
+                        fontSize: "0.75rem",
+                        marginTop: "0.25rem",
+                        display: "-webkit-box",
+                        WebkitLineClamp: "2",
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
                       }}
                     >
                       {archive.description}
                     </div>
-                    <div className="mt-2 flex flex-wrap gap-1" style={{ marginTop: "0.5rem !important" }}>
+                    <div className="mt-2 flex flex-wrap gap-1" style={{ marginTop: "0.5rem" }}>
                       {archive.tags.slice(0, 3).map((tag, index) => (
                         <Badge
                           key={index}
                           variant="outline"
                           className="text-[10px] px-1.5 py-0 rounded-sm bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#1a1a1a] dark:text-gray-400 dark:border-gray-700"
                           style={{
-                            fontSize: "10px !important",
-                            padding: "0 0.375rem !important",
-                            borderRadius: "0.125rem !important",
+                            fontSize: "10px",
+                            padding: "0 0.375rem",
+                            borderRadius: "0.125rem",
                           }}
                         >
                           {tag}
@@ -314,9 +314,9 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                           variant="outline"
                           className="text-[10px] px-1.5 py-0 rounded-sm bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#1a1a1a] dark:text-gray-400 dark:border-gray-700"
                           style={{
-                            fontSize: "10px !important",
-                            padding: "0 0.375rem !important",
-                            borderRadius: "0.125rem !important",
+                            fontSize: "10px",
+                            padding: "0 0.375rem",
+                            borderRadius: "0.125rem",
                           }}
                         >
                           +{archive.tags.length - 3} more
@@ -324,20 +324,20 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                       )}
                     </div>
                   </td>
-                  <td className="px-4 py-4" style={{ padding: "1rem !important" }}>
+                  <td className="px-4 py-4" style={{ padding: "1rem" }}>
                     <div className="flex items-center">
                       <span
                         className="flex-shrink-0 mr-2 dark:text-gray-300"
-                        style={{ marginRight: "0.5rem !important" }}
+                        style={{ marginRight: "0.5rem" }}
                       >
                         {getTypeIcon(archive.type)}
                       </span>
                       <span
                         className="text-xs uppercase tracking-wide text-gray-700 dark:text-gray-300"
                         style={{
-                          fontSize: "0.75rem !important",
-                          textTransform: "uppercase !important",
-                          letterSpacing: "0.025em !important",
+                          fontSize: "0.75rem",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.025em",
                         }}
                       >
                         {archive.type}
@@ -346,34 +346,34 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                     <div
                       className="text-xs text-gray-500 dark:text-gray-400 mt-2"
                       style={{
-                        fontSize: "0.75rem !important",
-                        marginTop: "0.5rem !important",
+                        fontSize: "0.75rem",
+                        marginTop: "0.5rem",
                       }}
                     >
                       Category:{" "}
                       <span
                         className="text-gray-700 dark:text-gray-300 font-medium"
                         style={{
-                          fontWeight: "500 !important",
+                          fontWeight: "500",
                         }}
                       >
                         {archive.category}
                       </span>
                     </div>
                   </td>
-                  <td className="px-4 py-4" style={{ padding: "1rem !important" }}>
+                  <td className="px-4 py-4" style={{ padding: "1rem" }}>
                     <div
                       className="text-xs text-gray-500 dark:text-gray-400"
-                      style={{ fontSize: "0.75rem !important" }}
+                      style={{ fontSize: "0.75rem" }}
                     >
-                      <div className="mb-1" style={{ marginBottom: "0.25rem !important" }}>
+                      <div className="mb-1" style={{ marginBottom: "0.25rem" }}>
                         Size: <span className="text-gray-700 dark:text-gray-300">{archive.size}</span>
                       </div>
-                      <div className="mb-1" style={{ marginBottom: "0.25rem !important" }}>
+                      <div className="mb-1" style={{ marginBottom: "0.25rem" }}>
                         Format: <span className="text-gray-700 dark:text-gray-300">{archive.format}</span>
                       </div>
                       {archive.duration && (
-                        <div className="mb-1" style={{ marginBottom: "0.25rem !important" }}>
+                        <div className="mb-1" style={{ marginBottom: "0.25rem" }}>
                           Duration: <span className="text-gray-700 dark:text-gray-300">{archive.duration}</span>
                         </div>
                       )}
@@ -384,26 +384,26 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                   </td>
                   <td
                     className="px-4 py-4 text-sm"
-                    style={{ padding: "1rem !important", fontSize: "0.875rem !important" }}
+                    style={{ padding: "1rem", fontSize: "0.875rem" }}
                   >
                     <Button
                       asChild
                       variant="outline"
                       className="rounded-none border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#1a1a1a] hover:text-gray-900 dark:hover:text-gray-100 text-xs h-8 px-3 dark:text-gray-300"
                       style={{
-                        borderRadius: "0 !important",
-                        fontSize: "0.75rem !important",
-                        height: "2rem !important",
-                        padding: "0 0.75rem !important",
+                        borderRadius: "0",
+                        fontSize: "0.75rem",
+                        height: "2rem",
+                        padding: "0 0.75rem",
                       }}
                     >
                       <Link href={archive.downloadUrl} target="_blank" rel="noopener noreferrer">
                         <Download
                           className="h-3 w-3 mr-1"
                           style={{
-                            height: "0.75rem !important",
-                            width: "0.75rem !important",
-                            marginRight: "0.25rem !important",
+                            height: "0.75rem",
+                            width: "0.75rem",
+                            marginRight: "0.25rem",
                           }}
                         />
                         Download
@@ -418,9 +418,9 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                   colSpan={4}
                   className="px-4 py-8 text-center text-sm text-gray-500 dark:text-gray-400"
                   style={{
-                    padding: "2rem 1rem !important",
-                    textAlign: "center !important",
-                    fontSize: "0.875rem !important",
+                    padding: "2rem 1rem",
+                    textAlign: "center",
+                    fontSize: "0.875rem",
                   }}
                 >
                   <div>No archives found matching your criteria.</div>
@@ -428,9 +428,9 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                     variant="outline"
                     className="mt-4 rounded-none border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#1a1a1a] text-xs dark:text-gray-300"
                     style={{
-                      marginTop: "1rem !important",
-                      borderRadius: "0 !important",
-                      fontSize: "0.75rem !important",
+                      marginTop: "1rem",
+                      borderRadius: "0",
+                      fontSize: "0.75rem",
                     }}
                     onClick={() => {
                       setSearchQuery("")
@@ -448,22 +448,22 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
       </div>
 
       {/* Alternative card view for mobile */}
-      <div className="md:hidden mt-8 space-y-4" style={{ marginTop: "2rem !important" }}>
+      <div className="md:hidden mt-8 space-y-4" style={{ marginTop: "2rem" }}>
         {filteredArchives.length > 0 ? (
           filteredArchives.map((archive) => (
             <Card
               key={archive.id}
               className="rounded-none border-gray-200 dark:border-gray-800 dark:bg-[#121212]"
               style={{
-                borderRadius: "0 !important",
-                boxShadow: "none !important",
+                borderRadius: "0",
+                boxShadow: "none",
               }}
             >
               <CardHeader
                 className="p-4 pb-2 border-b border-gray-100 dark:border-gray-800"
                 style={{
-                  padding: "1rem !important",
-                  paddingBottom: "0.5rem !important",
+                  padding: "1rem",
+                  paddingBottom: "0.5rem",
                 }}
               >
                 <div className="flex items-center justify-between">
@@ -472,24 +472,24 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                     <span
                       className="text-xs uppercase tracking-wide text-gray-700 dark:text-gray-300"
                       style={{
-                        fontSize: "0.75rem !important",
-                        textTransform: "uppercase !important",
-                        letterSpacing: "0.025em !important",
+                        fontSize: "0.75rem",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.025em",
                       }}
                     >
                       {archive.type}
                     </span>
                   </div>
-                  <span className="text-xs text-gray-500 dark:text-gray-400" style={{ fontSize: "0.75rem !important" }}>
+                  <span className="text-xs text-gray-500 dark:text-gray-400" style={{ fontSize: "0.75rem" }}>
                     {archive.dateAdded}
                   </span>
                 </div>
                 <h3
                   className="text-sm font-medium mt-2 dark:text-gray-100"
                   style={{
-                    fontSize: "0.875rem !important",
-                    fontWeight: "500 !important",
-                    marginTop: "0.5rem !important",
+                    fontSize: "0.875rem",
+                    fontWeight: "500",
+                    marginTop: "0.5rem",
                   }}
                 >
                   {archive.title}
@@ -497,8 +497,8 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                 <div
                   className="text-xs text-gray-600 dark:text-gray-400 mt-1"
                   style={{
-                    fontSize: "0.75rem !important",
-                    marginTop: "0.25rem !important",
+                    fontSize: "0.75rem",
+                    marginTop: "0.25rem",
                   }}
                 >
                   Category: {archive.category}
@@ -507,33 +507,33 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
               <CardContent
                 className="p-4 pt-3 text-xs text-gray-500 dark:text-gray-400"
                 style={{
-                  padding: "1rem !important",
-                  paddingTop: "0.75rem !important",
-                  fontSize: "0.75rem !important",
+                  padding: "1rem",
+                  paddingTop: "0.75rem",
+                  fontSize: "0.75rem",
                 }}
               >
                 <p
                   className="mb-3 line-clamp-2"
                   style={{
-                    marginBottom: "0.75rem !important",
-                    display: "-webkit-box !important",
-                    WebkitLineClamp: "2 !important",
-                    WebkitBoxOrient: "vertical !important",
-                    overflow: "hidden !important",
+                    marginBottom: "0.75rem",
+                    display: "-webkit-box",
+                    WebkitLineClamp: "2",
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
                   }}
                 >
                   {archive.description}
                 </p>
-                <div className="mb-3 flex flex-wrap gap-1" style={{ marginBottom: "0.75rem !important" }}>
+                <div className="mb-3 flex flex-wrap gap-1" style={{ marginBottom: "0.75rem" }}>
                   {archive.tags.slice(0, 3).map((tag, index) => (
                     <Badge
                       key={index}
                       variant="outline"
                       className="text-[10px] px-1.5 py-0 rounded-sm bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#1a1a1a] dark:text-gray-400 dark:border-gray-700"
                       style={{
-                        fontSize: "10px !important",
-                        padding: "0 0.375rem !important",
-                        borderRadius: "0.125rem !important",
+                        fontSize: "10px",
+                        padding: "0 0.375rem",
+                        borderRadius: "0.125rem",
                       }}
                     >
                       {tag}
@@ -544,9 +544,9 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                       variant="outline"
                       className="text-[10px] px-1.5 py-0 rounded-sm bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#1a1a1a] dark:text-gray-400 dark:border-gray-700"
                       style={{
-                        fontSize: "10px !important",
-                        padding: "0 0.375rem !important",
-                        borderRadius: "0.125rem !important",
+                        fontSize: "10px",
+                        padding: "0 0.375rem",
+                        borderRadius: "0.125rem",
                       }}
                     >
                       +{archive.tags.length - 3} more
@@ -556,9 +556,9 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                 <div
                   className="grid grid-cols-2 gap-2"
                   style={{
-                    display: "grid !important",
-                    gridTemplateColumns: "repeat(2, minmax(0, 1fr)) !important",
-                    gap: "0.5rem !important",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                    gap: "0.5rem",
                   }}
                 >
                   <div>
@@ -568,31 +568,31 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
                     Format: <span className="text-gray-700 dark:text-gray-300">{archive.format}</span>
                   </div>
                   {archive.duration && (
-                    <div className="col-span-2" style={{ gridColumn: "span 2 / span 2 !important" }}>
+                    <div className="col-span-2" style={{ gridColumn: "span 2 / span 2" }}>
                       Duration: <span className="text-gray-700 dark:text-gray-300">{archive.duration}</span>
                     </div>
                   )}
                 </div>
               </CardContent>
-              <CardFooter className="p-4 pt-0" style={{ padding: "1rem !important", paddingTop: "0 !important" }}>
+              <CardFooter className="p-4 pt-0" style={{ padding: "1rem", paddingTop: "0" }}>
                 <Button
                   asChild
                   variant="outline"
                   className="w-full rounded-none border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#1a1a1a] hover:text-gray-900 dark:hover:text-gray-100 text-xs h-8 dark:text-gray-300"
                   style={{
-                    width: "100% !important",
-                    borderRadius: "0 !important",
-                    fontSize: "0.75rem !important",
-                    height: "2rem !important",
+                    width: "100%",
+                    borderRadius: "0",
+                    fontSize: "0.75rem",
+                    height: "2rem",
                   }}
                 >
                   <Link href={archive.downloadUrl} target="_blank" rel="noopener noreferrer">
                     <Download
                       className="h-3 w-3 mr-1"
                       style={{
-                        height: "0.75rem !important",
-                        width: "0.75rem !important",
-                        marginRight: "0.25rem !important",
+                        height: "0.75rem",
+                        width: "0.75rem",
+                        marginRight: "0.25rem",
                       }}
                     />
                     Download
@@ -605,9 +605,9 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
           <div
             className="text-center py-8 text-sm text-gray-500 dark:text-gray-400"
             style={{
-              textAlign: "center !important",
-              padding: "2rem 0 !important",
-              fontSize: "0.875rem !important",
+              textAlign: "center",
+              padding: "2rem 0",
+              fontSize: "0.875rem",
             }}
           >
             <div>No archives found matching your criteria.</div>
@@ -615,9 +615,9 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
               variant="outline"
               className="mt-4 rounded-none border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#1a1a1a] text-xs dark:text-gray-300"
               style={{
-                marginTop: "1rem !important",
-                borderRadius: "0 !important",
-                fontSize: "0.75rem !important",
+                marginTop: "1rem",
+                borderRadius: "0",
+                fontSize: "0.75rem",
               }}
               onClick={() => {
                 setSearchQuery("")

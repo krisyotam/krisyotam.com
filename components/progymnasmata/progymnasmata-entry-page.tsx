@@ -14,7 +14,7 @@ interface ProgymnasmataEntryPageProps {
 
 export function ProgymnasmataEntryPage({ entry }: ProgymnasmataEntryPageProps) {
   const date = new Date(entry.date);
-  const formattedDate = formatDate(date, "MM-dd-yyyy");
+  const formattedDate = formatDate(date);
 
   // Always treat entry.type as defined here
   const typeSlug = entry.type.toLowerCase();

@@ -3,6 +3,8 @@ import path from "path"
 import { remark } from "remark"
 import remarkMdx from "remark-mdx"
 import { visit } from "unist-util-visit"
+import type { Node, Parent } from "unist"
+import type { Heading as MdastHeading, Text } from "mdast"
 
 // Types for headings, margin notes, and bibliography
 export interface Heading {
@@ -38,10 +40,10 @@ export async function extractHeadingsFromMdx(mdxContent: string): Promise<Headin
   const processor = remark().use(remarkMdx)
   const ast = await processor.parse(mdxContent)
 
-  visit(ast, "heading", (node: any) => {
+  visit(ast, "heading", (node: MdastHeading) => {
     // Extract text from the heading
     let text = ""
-    visit(node, "text", (textNode: any) => {
+    visit(node, "text", (textNode: Text) => {
       text += textNode.value
     })
 

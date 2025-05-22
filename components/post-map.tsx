@@ -34,7 +34,12 @@ export type ContentBlockType =
 // Define the base content block interface
 export interface BaseContentBlock {
   type: ContentBlockType
-  props?: Record<string, any>
+  props?: {
+    id?: string
+    className?: string
+    startArticle?: boolean
+    [key: string]: string | boolean | undefined
+  }
   tagTerms?: boolean
 }
 
@@ -243,12 +248,12 @@ export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
       return <Typography.Muted {...block.props}>{(block as TextContentBlock).content}</Typography.Muted>
 
     case "hr":
-      return <Typography.HR {...block.props} />
+      return <Typography.HR />
 
     case "callout":
       const calloutBlock = block as CalloutContentBlock
       return (
-        <Typography.Callout variant={calloutBlock.variant} {...calloutBlock.props}>
+        <Typography.Callout>
           {calloutBlock.content}
         </Typography.Callout>
       )
@@ -284,7 +289,11 @@ export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
       return <Typography.Ref id={(block as RefContentBlock).id} {...block.props} />
 
     case "footnote":
-      return <Typography.FootNote {...block.props}>{(block as TextContentBlock).content}</Typography.FootNote>
+      return (
+        <Typography.FootNote id={block.id}>
+          {(block as TextContentBlock).content}
+        </Typography.FootNote>
+      )
 
     case "table":
       const tableBlock = block as TableContentBlock
@@ -314,7 +323,7 @@ export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
       )
 
     case "image":
-      const imgBlock = block as FigureContentBlock
+      const imgBlock = block as unknown as FigureContentBlock
       return (
         <img
           src={imgBlock.src || "/placeholder.svg"}

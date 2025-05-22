@@ -21,7 +21,7 @@ export default function NewsletterCard({ newsletter, view }: NewsletterCardProps
   // Format date from MM-DD-YY to Month DD, YYYY
   const formatDate = (dateStr: string) => {
     const [month, day, year] = dateStr.split("-")
-    const date = new Date(`20${year}`, Number.parseInt(month) - 1, Number.parseInt(day))
+    const date = new Date(parseInt(`20${year}`), parseInt(month) - 1, parseInt(day))
     return date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
   }
 

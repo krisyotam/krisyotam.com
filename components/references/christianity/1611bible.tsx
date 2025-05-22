@@ -15,12 +15,21 @@ interface RefGroup {
   count: number;
 }
 
+interface StrongsEntry {
+  greek_unicode?: string;
+  lemma?: string;
+  transliteration?: string;
+  greek_translit?: string;
+  strongs_def?: string;
+  translation?: string;
+}
+
 // Dynamic fetch URLs for Strong's dictionaries
 const STRONGS_GREEK_URL = "https://raw.githubusercontent.com/krisyotam/strongs/main/strongs-greek.json";
 const STRONGS_HEBREW_URL = "https://raw.githubusercontent.com/krisyotam/strongs/main/strongs-hebrew.json";
 
-let strongsGreek: Record<string, any> | null = null;
-let strongsHebrew: Record<string, any> | null = null;
+let strongsGreek: Record<string, StrongsEntry> | null = null;
+let strongsHebrew: Record<string, StrongsEntry> | null = null;
 
 export default function Bible({ children }: BibleProps) {
   const [verses, setVerses] = useState<VerseResult[]>([]);

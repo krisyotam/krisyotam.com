@@ -7,6 +7,20 @@ import { BookSearch } from "./book-search"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
+interface Book {
+  slug: string
+  title: string
+  subtitle: string
+  authors: string[]
+  cover_photo?: string
+  feature_image?: string
+  access: "free" | "paid"
+  link?: string
+  classification: string
+  category: string
+  tags: string[]
+}
+
 export function MyBookList() {
   const [searchQuery, setSearchQuery] = useState("")
   const [activeCategory, setActiveCategory] = useState<string>("All")

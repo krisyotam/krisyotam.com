@@ -29,6 +29,18 @@ interface NuggetsProps {
   className?: string
 }
 
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column" as const,
+  },
+  mediaQuery: {
+    "@media (min-width: 768px)": {
+      flexDirection: "row" as const,
+    },
+  },
+}
+
 // Function to process LaTeX in text
 const processLatex = (text: string) => {
   // Find all LaTeX expressions between $$ and $$
@@ -76,33 +88,19 @@ export function Nugget({ nugget, className }: { nugget: NuggetData; className?: 
     >
       <div
         className="nugget-container flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-200 dark:border-gray-800 pb-6"
-        style={{
-          display: "flex !important",
-          flexDirection: "column !important",
-          gap: "1rem !important",
-          borderBottom: "1px solid #e5e7eb !important",
-          paddingBottom: "1.5rem !important",
-          marginBottom: "1.5rem !important",
-        }}
+        style={styles.container}
       >
         <div
           className="nugget-header md:w-1/4 flex flex-col"
-          style={{
-            display: "flex !important",
-            flexDirection: "column !important",
-            width: "100% !important",
-            "@media (min-width: 768px)": {
-              width: "25% !important",
-            },
-          }}
+          style={styles.mediaQuery}
         >
           <h3
             className="nugget-title text-base font-normal mb-1"
             style={{
-              fontSize: "1rem !important",
-              fontWeight: "normal !important",
-              marginBottom: "0.25rem !important",
-              color: "var(--foreground) !important",
+              fontSize: "1rem",
+              fontWeight: "normal",
+              marginBottom: "0.25rem",
+              color: "var(--foreground)",
             }}
           >
             {nugget.title}
@@ -110,17 +108,17 @@ export function Nugget({ nugget, className }: { nugget: NuggetData; className?: 
           <div
             className="nugget-meta flex items-center gap-2 text-xs text-gray-500"
             style={{
-              display: "flex !important",
-              alignItems: "center !important",
-              gap: "0.5rem !important",
-              fontSize: "0.75rem !important",
-              color: "var(--muted-foreground) !important",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              fontSize: "0.75rem",
+              color: "var(--muted-foreground)",
             }}
           >
             <time
               className="nugget-date"
               style={{
-                fontFeatureSettings: "'tnum' !important",
+                fontFeatureSettings: "'tnum'",
               }}
             >
               {format(new Date(nugget.date), "MMM d, yyyy")}
@@ -128,7 +126,7 @@ export function Nugget({ nugget, className }: { nugget: NuggetData; className?: 
             <span
               className="nugget-separator"
               style={{
-                color: "var(--muted-foreground) !important",
+                color: "var(--muted-foreground)",
               }}
             >
               •
@@ -136,11 +134,11 @@ export function Nugget({ nugget, className }: { nugget: NuggetData; className?: 
             <Badge
               className="nugget-source-badge bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-[#1a1a1a] dark:text-gray-300 dark:hover:bg-[#252525] font-normal"
               style={{
-                backgroundColor: "var(--muted) !important",
-                color: "var(--muted-foreground) !important",
-                fontWeight: "normal !important",
-                fontSize: "0.75rem !important",
-                padding: "0.125rem 0.5rem !important",
+                backgroundColor: "var(--muted)",
+                color: "var(--muted-foreground)",
+                fontWeight: "normal",
+                fontSize: "0.75rem",
+                padding: "0.125rem 0.5rem",
               }}
             >
               {nugget.source.type}
@@ -150,21 +148,16 @@ export function Nugget({ nugget, className }: { nugget: NuggetData; className?: 
 
         <div
           className="nugget-content md:w-3/4"
-          style={{
-            width: "100% !important",
-            "@media (min-width: 768px)": {
-              width: "75% !important",
-            },
-          }}
+          style={styles.mediaQuery}
         >
           <div
             className="nugget-text prose prose-sm text-gray-800 mb-2"
             style={{
-              fontSize: "0.875rem !important",
-              lineHeight: "1.5 !important",
-              color: "var(--foreground) !important",
-              marginBottom: "0.5rem !important",
-              whiteSpace: "pre-wrap !important",
+              fontSize: "0.875rem",
+              lineHeight: "1.5",
+              color: "var(--foreground)",
+              marginBottom: "0.5rem",
+              whiteSpace: "pre-wrap",
             }}
           >
             {processLatex(exceedsLimit ? truncateToWordLimit(nugget.content, 100) : nugget.content)}
@@ -174,13 +167,13 @@ export function Nugget({ nugget, className }: { nugget: NuggetData; className?: 
                 onClick={() => setIsModalOpen(true)}
                 className="text-blue-600 hover:text-blue-800 font-medium ml-1"
                 style={{
-                  color: "var(--primary) !important",
-                  fontWeight: "500 !important",
-                  marginLeft: "0.25rem !important",
-                  background: "none !important",
-                  border: "none !important",
-                  padding: "0 !important",
-                  cursor: "pointer !important",
+                  color: "var(--primary)",
+                  fontWeight: "500",
+                  marginLeft: "0.25rem",
+                  background: "none",
+                  border: "none",
+                  padding: "0",
+                  cursor: "pointer",
                 }}
               >
                 See more
@@ -193,17 +186,17 @@ export function Nugget({ nugget, className }: { nugget: NuggetData; className?: 
             rel="noopener noreferrer"
             className="nugget-source-link flex items-center gap-1 text-xs text-gray-500 hover:text-gray-800 dark:hover:text-gray-300"
             style={{
-              display: "flex !important",
-              alignItems: "center !important",
-              gap: "0.25rem !important",
-              fontSize: "0.75rem !important",
-              color: "var(--muted-foreground) !important",
-              textDecoration: "none !important",
-              transition: "color 0.2s ease-in-out !important",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.25rem",
+              fontSize: "0.75rem",
+              color: "var(--muted-foreground)",
+              textDecoration: "none",
+              transition: "color 0.2s ease-in-out",
             }}
           >
             Source{" "}
-            <ExternalLink className="h-3 w-3" style={{ height: "0.75rem !important", width: "0.75rem !important" }} />
+            <ExternalLink className="h-3 w-3" style={{ height: "0.75rem", width: "0.75rem" }} />
           </a>
         </div>
       </div>
@@ -254,11 +247,7 @@ export function Nuggets({ data, className }: NuggetsProps) {
   return (
     <div
       className={cn("nuggets-container flex flex-col", className)}
-      style={{
-        display: "flex !important",
-        flexDirection: "column !important",
-        gap: "0 !important",
-      }}
+      style={styles.container}
     >
       {sortedData.map((nugget) => (
         <Nugget key={nugget.id} nugget={nugget} />

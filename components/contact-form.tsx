@@ -16,14 +16,14 @@ const reasonSchema = z.object({
 })
 
 const collaborateSchema = z.object({
-  professionalBackground: z.string().min(10, "Please provide a brief summary of your professional background."),
-  projectTitle: z.string().min(3, "Please provide a project title."),
-  projectDescription: z.string().min(50, "Please provide a detailed project description."),
-  contactInfo: z.string().email("Please provide a valid email address."),
-  cvUpload: z.any().optional(),
-  portfolioLink: z.string().url().optional(),
-  preferredCollaboration: z.enum(["in-person", "remote"]).optional(),
-  additionalComments: z.string().optional(),
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  reason: z.literal("collaborate"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+  cvUpload: z.instanceof(File).optional(),
+  projectDetails: z.string().min(10, "Please provide some details about your project"),
+  timeline: z.string().min(1, "Please provide a timeline"),
+  budget: z.string().min(1, "Please provide budget information"),
 })
 
 const askQuestionSchema = z.object({
@@ -123,12 +123,12 @@ export function ContactForm() {
           <>
             <FormField
               control={form.control}
-              name="professionalBackground"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Professional Background Summary</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Textarea {...field} placeholder="Provide a brief overview of your professional experience..." />
+                    <Input {...field} placeholder="Enter your name" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -136,12 +136,12 @@ export function ContactForm() {
             />
             <FormField
               control={form.control}
-              name="projectTitle"
+              name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Project Title</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Enter the title of your project" />
+                    <Input {...field} type="email" placeholder="Enter your email" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -149,12 +149,12 @@ export function ContactForm() {
             />
             <FormField
               control={form.control}
-              name="projectDescription"
+              name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Project Description</FormLabel>
+                  <FormLabel>Message</FormLabel>
                   <FormControl>
-                    <Textarea {...field} placeholder="Describe your project in detail..." />
+                    <Textarea {...field} placeholder="Enter your message" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -162,12 +162,12 @@ export function ContactForm() {
             />
             <FormField
               control={form.control}
-              name="contactInfo"
+              name="cvUpload"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Contact Information</FormLabel>
+                  <FormLabel>CV Upload (Optional)</FormLabel>
                   <FormControl>
-                    <Input {...field} type="email" placeholder="Enter your email address" />
+                    <Input {...field} type="file" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -175,12 +175,12 @@ export function ContactForm() {
             />
             <FormField
               control={form.control}
-              name="portfolioLink"
+              name="projectDetails"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Portfolio/LinkedIn/Website Link (Optional)</FormLabel>
+                  <FormLabel>Project Details</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="https://your-portfolio.com" />
+                    <Textarea {...field} placeholder="Enter project details" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -188,33 +188,25 @@ export function ContactForm() {
             />
             <FormField
               control={form.control}
-              name="preferredCollaboration"
+              name="timeline"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Preferred Collaboration Method (Optional)</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a preference" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="in-person">In-person</SelectItem>
-                      <SelectItem value="remote">Remote</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <FormLabel>Project Timeline</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder="Enter project timeline" />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
-              name="additionalComments"
+              name="budget"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Additional Comments (Optional)</FormLabel>
+                  <FormLabel>Project Budget</FormLabel>
                   <FormControl>
-                    <Textarea {...field} placeholder="Any extra information you wish to share..." />
+                    <Input {...field} placeholder="Enter project budget" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

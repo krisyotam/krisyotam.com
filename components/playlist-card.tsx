@@ -24,7 +24,7 @@ export default function PlaylistCard({
   dateCreated,
 }: PlaylistCardProps) {
   // Convert string date to Date object
-  const formattedDate = dateCreated ? formatDate(new Date(dateCreated)) : ""
+  const formattedDate = dateCreated ? formatDate(dateCreated.toString()) : ""
 
   // Format artists list: show first 3, then "et al." if more
   const displayArtists = artists.length > 3 ? `${artists.slice(0, 3).join(", ")} et al.` : artists.join(", ")

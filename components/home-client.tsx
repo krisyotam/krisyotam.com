@@ -189,10 +189,10 @@ function PoetryCard({ poem }: { poem: Poem }) {
           {poem.type} • {poem.year}
         </p>
         <div className="prose prose-sm prose-gray dark:prose-invert line-clamp-4 text-sm italic">
-          {previewStanza.split("\n").map((line, i) => (
-            <span key={i} className="block">
+          {previewStanza?.split("\n").map((line, i) => (
+            <p key={i} className="text-sm text-muted-foreground">
               {line}
-            </span>
+            </p>
           ))}
         </div>
       </Link>

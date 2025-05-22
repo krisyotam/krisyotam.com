@@ -14,10 +14,10 @@ type CodeBlockProps = {
 } & (
   | {
       code: string;
-      tabs?: never;
+      tabs?: undefined;
     }
   | {
-      code?: never;
+      code?: undefined;
       tabs: Array<{
         name: string;
         code: string;

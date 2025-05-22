@@ -71,7 +71,7 @@ export function LibraryNotesContent() {
           <div className="flex justify-between items-start mb-2">
             <h3 className="font-medium">{note.title}</h3>
             <span className="text-xs text-muted-foreground">
-              {formatDate(new Date(note.date))}
+              {formatDate(note.date.toString())}
             </span>
           </div>
           <p className="text-sm text-muted-foreground">{note.content}</p>

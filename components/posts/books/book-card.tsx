@@ -28,12 +28,23 @@ const resetStyles = `
   }
 `
 
+interface Author {
+  name: string
+}
+
+interface Book {
+  title: string
+  slug: string
+  cover?: string
+  authors: Author[]
+}
+
 interface BookCardProps {
   isbn: string
 }
 
 export function BookCard({ isbn }: BookCardProps) {
-  const [book, setBook] = useState<any>(null)
+  const [book, setBook] = useState<Book | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -114,7 +125,7 @@ export function BookCard({ isbn }: BookCardProps) {
     )
   }
 
-  const authorNames = book.authors.map((author: any) => author.name).join(", ")
+  const authorNames = book.authors.map((author: Author) => author.name).join(", ")
 
   return (
     <>

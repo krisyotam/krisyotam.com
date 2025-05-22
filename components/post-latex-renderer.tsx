@@ -7,6 +7,47 @@ interface PostLatexRendererProps {
   children: React.ReactNode;
 }
 
+interface MathJaxError extends Error {
+  message: string;
+  stack?: string;
+}
+
+interface MathJaxConfig {
+  loader: {
+    load: string[];
+  };
+  tex: {
+    inlineMath: [string, string][];
+    displayMath: [string, string][];
+    processEscapes: boolean;
+    processEnvironments: boolean;
+    tags: string;
+  };
+  svg: {
+    fontCache: string;
+    scale: number;
+  };
+  options: {
+    skipHtmlTags: string[];
+    enableMenu: boolean;
+  };
+}
+
+interface MathJax {
+  typesetPromise: (elements: HTMLElement[]) => Promise<void>
+  typeset: (elements: HTMLElement[]) => void
+  startup: {
+    promise: Promise<void>
+    typesetPromise: (elements: HTMLElement[]) => Promise<void>
+  }
+  tex2chtml: (math: string, options?: { display?: boolean }) => HTMLElement
+  tex2svg: (math: string, options?: { display?: boolean }) => HTMLElement
+  tex2mml: (math: string, options?: { display?: boolean }) => string
+  tex2chtmlPromise: (math: string, options?: { display?: boolean }) => Promise<HTMLElement>
+  tex2svgPromise: (math: string, options?: { display?: boolean }) => Promise<HTMLElement>
+  tex2mmlPromise: (math: string, options?: { display?: boolean }) => Promise<string>
+}
+
 export function PostLatexRenderer({ children }: PostLatexRendererProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [mathjaxReady, setMathjaxReady] = useState(false);
@@ -15,19 +56,22 @@ export function PostLatexRenderer({ children }: PostLatexRendererProps) {
   useEffect(() => {
     if (!mathjaxReady || !contentRef.current) return;
 
-    if (typeof window.MathJax.typesetPromise === "function") {
+    if (
+      typeof window.MathJax !== "undefined" &&
+      typeof window.MathJax.startup !== "undefined" &&
+      typeof window.MathJax.startup.typesetPromise === "function"
+    ) {
+      window.MathJax.startup.typesetPromise([contentRef.current])
+        .catch((err: MathJaxError) => console.error("MathJax error:", err));
+    } else if (typeof window.MathJax.typesetPromise === "function") {
       window.MathJax.typesetPromise([contentRef.current])
-        .catch((err: any) => console.error("MathJax error:", err));
+        .catch((err: MathJaxError) => console.error("MathJax error:", err));
     } else if (typeof window.MathJax.typeset === "function") {
       try {
         window.MathJax.typeset([contentRef.current]);
       } catch (err) {
         console.error("MathJax error:", err);
       }
-    } else if (window.MathJax.startup &&
-               typeof window.MathJax.startup.typesetPromise === "function") {
-      window.MathJax.startup.typesetPromise([contentRef.current])
-        .catch((err: any) => console.error("MathJax error:", err));
     } else {
       console.warn("No MathJax render method found");
     }
@@ -79,7 +123,8 @@ export function PostLatexRenderer({ children }: PostLatexRendererProps) {
   );
 }
 
-// loosened TS declaration to accept any MathJax export
 declare global {
-  interface Window { MathJax: any; }
+  interface Window {
+    MathJax: MathJax
+  }
 }

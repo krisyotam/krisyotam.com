@@ -19,8 +19,30 @@ interface CollectionModalProps {
   type: "anime" | "manga"
 }
 
+interface Anime {
+  id: string;
+  title: string;
+  synopsis: string;
+  image: string;
+  episodes: number;
+  rating: string;
+  studio: string;
+  year: string;
+}
+
+interface Manga {
+  id: string;
+  title: string;
+  synopsis: string;
+  image: string;
+  volumes: number;
+  rating: string;
+  author: string;
+  year: string;
+}
+
 export function CollectionModal({ isOpen, onClose, collection, type }: CollectionModalProps) {
-  const [items, setItems] = useState<any[]>([])
+  const [items, setItems] = useState<(Anime | Manga)[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
 
@@ -54,9 +76,9 @@ export function CollectionModal({ isOpen, onClose, collection, type }: Collectio
 
         const results = await Promise.all(itemPromises)
         setItems(results.filter(Boolean))
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error(`Error fetching ${type} collection items:`, err)
-        setError(err.message || `Failed to load ${type} collection items`)
+        setError(err instanceof Error ? err.message : `Failed to load ${type} collection items`)
       } finally {
         setLoading(false)
       }
@@ -109,7 +131,7 @@ export function CollectionModal({ isOpen, onClose, collection, type }: Collectio
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05 }}
                   >
-                    {type === "anime" ? <AnimeItem anime={item} /> : <MangaItem manga={item} />}
+                    {type === "anime" ? <AnimeItem anime={item as Anime} /> : <MangaItem manga={item as Manga} />}
                   </motion.div>
                 ))
               ) : (
@@ -125,7 +147,7 @@ export function CollectionModal({ isOpen, onClose, collection, type }: Collectio
   )
 }
 
-function AnimeItem({ anime }: { anime: any }) {
+function AnimeItem({ anime }: { anime: Anime }) {
   return (
     <div className="flex bg-card dark:bg-[#1a1a1a] border dark:border-gray-800 rounded-lg overflow-hidden h-full">
       <div className="w-1/3 flex-shrink-0">
@@ -166,7 +188,7 @@ function AnimeItem({ anime }: { anime: any }) {
   )
 }
 
-function MangaItem({ manga }: { manga: any }) {
+function MangaItem({ manga }: { manga: Manga }) {
   return (
     <div className="flex bg-card dark:bg-[#1a1a1a] border dark:border-gray-800 rounded-lg overflow-hidden h-full">
       <div className="w-1/3 flex-shrink-0">

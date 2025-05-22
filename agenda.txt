@@ -1,0 +1,121 @@
+# TypeScript Fixes Agenda
+
+## 1. Import/Export Issues
+- [ ] Fix default vs named exports in components/index.ts
+  - Convert all default exports to named exports
+  - Update all import statements accordingly
+- [ ] Add missing type declarations
+  - [ ] Install @types/escodegen
+  - [ ] Create type declarations for missing modules
+- [ ] Fix incorrect import paths
+- [ ] Resolve missing module declarations
+
+## 2. Type Mismatches
+### CSS Properties
+- [ ] Fix textAlign type issues in components/archive.tsx
+- [ ] Fix textTransform type issues in components/archive.tsx
+- [ ] Fix WebkitBoxOrient type issues in components/archive.tsx
+- [ ] Fix boxSizing type issues in character display components
+- [ ] Fix position type issues in character display components
+- [ ] Fix objectFit type issues in character display components
+- [ ] Fix flexDirection type issues in components/nuggets.tsx
+- [ ] Fix !important style properties
+- [ ] Update CSS-in-JS type definitions
+- [ ] Resolve style property type conflicts
+
+### Date Handling
+- [ ] Fix Date type issues in components/category-header.tsx
+- [ ] Fix Date type issues in components/directory-category-header.tsx
+- [ ] Fix Date type issues in components/directory-page-header.tsx
+- [ ] Fix Date type issues in components/docs/docs-header.tsx
+- [ ] Fix Date type issues in components/home-client.tsx
+- [ ] Fix Date type issues in components/library-notes-content.tsx
+- [ ] Fix Date type issues in components/page-header.tsx
+- [ ] Fix Date type issues in components/playlist-card.tsx
+- [ ] Fix Date type issues in components/post-header.tsx
+- [ ] Fix Date type issues in components/tag-header.tsx
+- [ ] Fix Date type issues in components/verse-header.tsx
+- [ ] Fix Date type issues in utils/markdown.ts
+- [ ] Fix Date to string conversions
+- [ ] Update date formatting functions
+- [ ] Resolve date type mismatches
+
+### Props Type Mismatches
+- [ ] Fix BookCard props in components/book-list.tsx
+- [ ] Fix CategoryData props in app/category/[slug]/page.tsx
+- [ ] Fix MyBookCard props in components/my-book-list.tsx
+- [ ] Fix ProjectCard props in components/project-modal.tsx
+- [ ] Fix FavoriteCard props in trakt components
+- [ ] Fix DialogPortal props in components/ui/dialog-alt.tsx
+- [ ] Fix AProps in components/mdx/link-types.tsx
+- [ ] Fix FootNote props in components/typography/footnotes.tsx
+- [ ] Fix component prop type definitions
+- [ ] Update interface definitions
+- [ ] Resolve union type conflicts
+
+## 3. React/TypeScript Configuration
+- [ ] Update tsconfig.json to target ES2015 or higher
+- [ ] Add --downlevelIteration flag
+- [ ] Fix Set iteration issues in components/catalog-content.tsx
+- [ ] Fix Set iteration issues in components/home-client.tsx
+- [ ] Fix Map iteration issues in utils/posts.ts
+- [ ] Update tsconfig.json settings
+- [ ] Enable downlevelIteration
+- [ ] Set appropriate target version
+- [ ] Add missing type declarations
+
+## 4. Error Handling
+- [ ] Fix error handling in components/CodeGenerator.tsx
+- [ ] Fix error handling in components/universal-link-modal.tsx
+- [ ] Fix null checks in components/universal-link-modal.tsx
+- [ ] Add proper error type checking
+- [ ] Implement null checks
+- [ ] Add type guards where needed
+- [ ] Fix undefined property access
+
+## 5. Regular Expression Issues
+- [ ] Fix regex flag in lib/getDefinitionFromOED.ts
+- [ ] Update regex flags for ES6 compatibility
+- [ ] Fix string manipulation functions
+- [ ] Update text processing utilities
+
+## 6. Navigation/API Issues
+- [ ] Fix navigation type issues in lib/vitals.ts
+- [ ] Fix URLSearchParams type issues in lib/vitals.ts
+- [ ] Fix route parameter types
+- [ ] Update API response types
+- [ ] Resolve navigation type conflicts
+
+## 7. Component-Specific Issues
+- [ ] Fix post-map.tsx type issues
+- [ ] Fix content-table.tsx type issues
+- [ ] Fix simple-animated-tag.tsx type issues
+- [ ] Fix universal-link-modal.tsx type issues
+- [ ] Fix individual component type errors
+- [ ] Update component interfaces
+- [ ] Resolve prop type conflicts
+
+## Priority Order:
+1. Fix Import/Export Issues
+2. Update TypeScript Configuration
+3. Resolve Type Mismatches
+4. Fix Error Handling
+5. Update Regular Expressions
+6. Fix Navigation/API Issues
+7. Address Component-Specific Issues
+
+## Notes:
+- Each fix should be tested after implementation
+- Keep track of any new issues that arise during fixes
+- Update this agenda as we progress
+- Keep track of breaking changes
+- Document type changes
+- Update related components
+- Maintain backward compatibility
+
+## Testing Strategy:
+- Test each fix individually
+- Run TypeScript checks after each category
+- Verify build process
+- Test affected components
+- Update documentation as needed
