@@ -244,3 +244,5 @@ export function PoetryCard({ poem }: PoetryCardProps) {
     </>
   )
 }
+
+export const Poetry = PoetryCard;

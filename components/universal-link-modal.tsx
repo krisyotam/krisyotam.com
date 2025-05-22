@@ -421,11 +421,11 @@ export function UniversalLinkModal() {
     };
 
     // Add event listener for the custom event
-    window.addEventListener('openUniversalLinkModal', handleOpenUniversalLinkModal as EventListener);
+    window.addEventListener('openUniversalLinkModal', handleOpenUniversalLinkModal as unknown as EventListener);
     
     // Clean up
     return () => {
-      window.removeEventListener('openUniversalLinkModal', handleOpenUniversalLinkModal as EventListener);
+      window.removeEventListener('openUniversalLinkModal', handleOpenUniversalLinkModal as unknown as EventListener);
     };
   }, [isEnabled, modalMode, shouldShowPreview, createModal]);
 
@@ -492,7 +492,7 @@ export function UniversalLinkModal() {
               className="w-full h-full border-0"
               title={`External content: ${modal.url}`}
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-              referrerpolicy="no-referrer"
+              referrerPolicy="no-referrer"
               onLoad={(e) => {
                 const iframe = e.currentTarget
                 const parent = iframe.parentElement
@@ -620,7 +620,7 @@ export function UniversalLinkModal() {
               title={`External content: ${modals[focusedModalIndex]?.url}`}
               className="w-full h-full border-0"
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-              referrerpolicy="no-referrer"
+              referrerPolicy="no-referrer"
               onLoad={(e) => {
                 const iframe = e.currentTarget
                 const parent = iframe.parentElement

@@ -6,17 +6,11 @@ import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-interface DialogPortalProps extends DialogPrimitive.DialogPortalProps {
-  className?: string
-}
-
 const Dialog = DialogPrimitive.Root
 
 const DialogTrigger = DialogPrimitive.Trigger
 
-const DialogPortal = ({ className, ...props }: DialogPortalProps) => (
-  <DialogPrimitive.Portal className={cn(className)} {...props} />
-)
+const DialogPortal = DialogPrimitive.Portal
 DialogPortal.displayName = DialogPrimitive.Portal.displayName
 
 const DialogOverlay = React.forwardRef<

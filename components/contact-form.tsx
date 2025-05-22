@@ -19,7 +19,7 @@ const collaborateSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   message: z.string().min(10, "Message must be at least 10 characters"),
-  cvUpload: z.instanceof(File).optional(),
+  cvUpload: z.any().optional(),
   projectDetails: z.string().min(10, "Please provide some details about your project"),
   timeline: z.string().min(1, "Please provide a timeline"),
   budget: z.string().min(1, "Please provide budget information"),
@@ -67,7 +67,16 @@ const friendRequestSchema = z.object({
 })
 
 const formSchema = z.discriminatedUnion("reason", [
-  z.object({ reason: z.literal("collaborate"), ...collaborateSchema.shape }),
+  z.object({ 
+    reason: z.literal("collaborate"),
+    name: z.string().min(2, "Name must be at least 2 characters"),
+    email: z.string().email("Please enter a valid email address"),
+    message: z.string().min(10, "Message must be at least 10 characters"),
+    cvUpload: z.any().optional(),
+    projectDetails: z.string().min(10, "Please provide some details about your project"),
+    timeline: z.string().min(1, "Please provide a timeline"),
+    budget: z.string().min(1, "Please provide budget information"),
+  }),
   z.object({ reason: z.literal("ask-question"), ...askQuestionSchema.shape }),
   z.object({ reason: z.literal("research-idea"), ...researchIdeaSchema.shape }),
   z.object({ reason: z.literal("advice"), ...adviceSchema.shape }),

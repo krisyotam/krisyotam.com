@@ -29,7 +29,12 @@ export function MyBookList() {
 
   // Filter out hidden books
   const activeBooks = useMemo(() => {
-    return mybooksData.books.filter((book) => book.status === "active")
+    return mybooksData.books
+      .filter((book) => book.status === "active")
+      .map((book) => ({
+        ...book,
+        access: book.access as "free" | "paid" // Ensure proper typing
+      }));
   }, [])
 
   // Get all available classifications

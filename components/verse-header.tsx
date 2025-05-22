@@ -102,7 +102,7 @@ export function VerseHeader({
   importance = 5,
 }: VerseHeaderProps) {
   // Convert type to a slug format for the back link
-  const typeSlug = type.toLowerCase().replace(/\s+/g, "-")
+  const typeSlug = String(type).toLowerCase().replace(/\s+/g, "-")
   
   return (
     <header className="mb-4 relative">

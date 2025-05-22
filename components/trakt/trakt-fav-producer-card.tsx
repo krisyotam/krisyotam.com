@@ -1,4 +1,4 @@
-import { FavoriteCard } from "@/components/anime/anime-cards"
+import { AnimeFavoriteCard } from "@/components/anime/anime-cards"
 
 interface TraktFavProducerCardProps {
   id: string | number
@@ -8,7 +8,7 @@ interface TraktFavProducerCardProps {
 
 export function TraktFavProducerCard({ id, name, image }: TraktFavProducerCardProps) {
   return (
-    <FavoriteCard
+    <AnimeFavoriteCard
       item={{
         name: name,
         images: { jpg: { image_url: image } },

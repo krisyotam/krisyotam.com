@@ -182,9 +182,11 @@ interface FavoriteCardProps {
   item: AnimeItem
   type: "anime" | "manga" | "character"
   isCompany?: boolean
+  subtitle?: string
+  onImageError?: () => void
 }
 
-export function AnimeFavoriteCard({ item, type, isCompany = false }: FavoriteCardProps) {
+export function AnimeFavoriteCard({ item, type, isCompany = false, subtitle, onImageError }: FavoriteCardProps) {
   // Handle different API response formats
   const imageUrl =
     item?.images?.jpg?.image_url ||
@@ -205,9 +207,7 @@ export function AnimeFavoriteCard({ item, type, isCompany = false }: FavoriteCar
           src={imageUrl || "/placeholder.svg"}
           alt={title}
           className="w-full h-full object-cover"
-          onError={(e) => {
-            e.currentTarget.src = "/placeholder.svg?height=180&width=120"
-          }}
+          onError={onImageError}
         />
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
           <span className="text-white text-xs font-medium">Favorite</span>
@@ -219,6 +219,9 @@ export function AnimeFavoriteCard({ item, type, isCompany = false }: FavoriteCar
             {title}
           </a>
         </h3>
+        {subtitle && (
+          <p className="text-xs text-muted-foreground">{subtitle}</p>
+        )}
       </CardContent>
     </Card>
   )

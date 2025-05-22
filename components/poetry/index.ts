@@ -1,1 +1,1 @@
-export { Poetry as PoetryComponent } from './poetry' 
+export { Poetry as PoetryComponent } from '../poetry' 

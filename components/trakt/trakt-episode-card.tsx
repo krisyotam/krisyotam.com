@@ -1,6 +1,6 @@
 "use client"
 
-import { FavoriteCard } from "@/components/anime/anime-cards"
+import { AnimeFavoriteCard } from "@/components/anime/anime-cards"
 import { useState, useEffect } from "react"
 
 interface FavoriteCardProps {
@@ -62,7 +62,7 @@ export function TraktEpisodeCard({
   }, [showTitle, episodeTitle, season, episode, posterUrl, imageUrl])
 
   return (
-    <FavoriteCard
+    <AnimeFavoriteCard
       item={{
         name: showTitle,
         images: {

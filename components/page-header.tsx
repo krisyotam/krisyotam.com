@@ -23,6 +23,7 @@ interface PageHeaderProps {
   importance?: number
   backText?: string
   backHref?: string
+  className?: string
 }
 
 const confidenceExplanation = `The confidence tag expresses how well-supported the page is, or how likely its overall ideas are right. This uses a scale from "impossible" to "certain", based on the Kesselman List of Estimative Words:
@@ -100,9 +101,10 @@ export function PageHeader({
   importance = 5,
   backText = "Home",
   backHref = "/",
+  className,
 }: PageHeaderProps) {
   return (
-    <header className="mb-4 relative">
+    <header className={cn("mb-4 relative", className)}>
       {/* Back button with customizable text and link */}
       <Link
         href={backHref}

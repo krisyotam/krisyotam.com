@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge"
 interface DocsHeaderProps {
   title: string
   subtitle?: string
-  date: string
+  date: string | Date
   tags?: string[]
   category?: string
   preview?: string
@@ -57,10 +57,10 @@ export function DocsHeader({
         {/* Date above other metadata */}
         <div className="text-center mb-4">
           <time
-            dateTime={typeof date === "string" ? date : undefined}
+            dateTime={typeof date === "string" ? date : date.toISOString()}
             className="font-mono text-sm text-muted-foreground"
           >
-            {typeof date === "string" ? formatDate(new Date(date)) : date}
+            {formatDate(typeof date === "string" ? new Date(date) : date)}
           </time>
         </div>
 

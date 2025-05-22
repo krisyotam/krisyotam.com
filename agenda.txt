@@ -1,295 +1,88 @@
+# Rules for Fixing TypeScript Errors
+1. Fix the identified error
+2. Run TypeScript scan to check for new errors
+3. Update agenda.txt with results
+
 # TypeScript Errors to Fix
 
-## Missing Imports
-- [ ] Add missing imports for `cn` from "@/lib/utils" in:
-  - [ ] components/tag-cloud.tsx
-  - [ ] components/tag-filter.tsx
-  - [ ] components/tag-input.tsx
-  - [ ] components/tag-list-item.tsx
-  - [ ] components/tag-list.tsx
-  - [ ] components/tag-page-about.tsx
-  - [ ] components/tag-page-content.tsx
-  - [ ] components/tag-page-empty.tsx
-  - [ ] components/tag-page-error.tsx
-  - [ ] components/tag-page-filter.tsx
-  - [ ] components/tag-page-footer.tsx
-  - [ ] components/tag-page-header.tsx
-  - [ ] components/tag-page-layout.tsx
-  - [ ] components/tag-page-loading.tsx
-  - [ ] components/tag-page-navigation.tsx
-  - [ ] components/tag-page-not-found.tsx
-  - [ ] components/tag-page-pagination.tsx
-  - [ ] components/tag-page-posts.tsx
-  - [ ] components/tag-page-sidebar.tsx
-  - [ ] components/tag-page-sort.tsx
-  - [ ] components/tag-page-tabs.tsx
-  - [ ] components/tag.tsx
-  - [ ] components/tag-suggestions.tsx
+## Import/Export Issues
+- [x] app/anime/anime-client-page.tsx: Module has no exported member 'FavoriteCard'
+- [x] components/poetry/index.ts: Cannot find module './poetry'
+- [x] components/index.ts: Module './ui' has already exported a member named 'Pagination'
+- [x] components/poetry.tsx: Cannot redeclare exported variable 'PoetryCard'
+- [x] components/project-modal.tsx: Module has no exported member 'ProjectCardProps'
+- [x] components/trakt/*: Multiple files importing non-existent 'FavoriteCard' from anime-cards
 
-- [ ] Add missing imports for `Link` from "next/link" in:
-  - [ ] components/tag-cloud.tsx
-  - [ ] components/tag-list-item.tsx
-  - [ ] components/tag-list.tsx
-  - [ ] components/tag-page-content.tsx
-  - [ ] components/tag-page-navigation.tsx
-  - [ ] components/tag-page-not-found.tsx
-  - [ ] components/tag-page-pagination.tsx
-  - [ ] components/tag-page-posts.tsx
-  - [ ] components/tag-page-sidebar.tsx
-  - [ ] components/tag-page.tsx
-  - [ ] components/tag.tsx
+## Type Mismatch Issues
+- [x] app/cv/page.tsx: Multiple type mismatches in ResumeSection items
+  - [x] Experience items missing organization, location
+  - [x] Education items missing organization, location, title
+  - [x] Skills items not assignable to ResumeItem[]
+  - [x] Projects items missing issuer, date, title
+  - [x] Certifications items missing title
 
-- [ ] Add missing imports for `useState` from "react" in:
-  - [ ] components/tag-input.tsx
-  - [ ] components/tag-search.tsx
-  - [ ] components/tag-select.tsx
+- [x] app/essays/[category]/[year]/[slug]/page.tsx: Type 'Essay' has incompatible pdfLink type (string | undefined vs string)
 
-- [ ] Add missing imports for `formatDate` from "@/lib/utils" in:
-  - [ ] components/tag-page-content.tsx
-  - [ ] components/tag-page-posts.tsx
-  - [ ] components/tag-page.tsx
+- [x] app/lecture-notes/[category]/[year]/[slug]/page.tsx:
+  - [x] LectureNote missing properties: status, pdfLink, sourceLink
 
-- [ ] Add missing imports for `Image` from "next/image" in:
-  - [ ] components/tag-page-content.tsx
-  - [ ] components/tag-page-posts.tsx
-  - [ ] components/tag-page.tsx
+- [x] app/sources/page.tsx:
+  - [x] Property 'className' does not exist on type 'PageHeaderProps'
 
-## Type Mismatches
-- [x] Fix `access` property type mismatch in my-book-list.tsx
-- [x] Fix property access issues in resume-section.tsx:
-  - type property access
-  - title property access
-  - organization property access
-  - location property access
-  - startDate property access
-  - endDate property access
-  - description property access
-  - highlights property access
-  - category property access
-  - skills property access
-  - technologies property access
-  - date property access
-  - issuer property access
+## Form and Schema Issues
+- [x] components/contact-form.tsx: Multiple issues
+  - [x] Type 'true' is not assignable to type 'never' in Zod schema
+  - [x] Multiple form field names not assignable to expected types:
+    - [x] 'name'
+    - [x] 'message'
+    - [x] 'cvUpload'
+    - [x] 'projectDetails'
+    - [x] 'timeline'
+    - [x] 'budget'
 
-- [x] Fix theme and color property access in chart.tsx:
-  - theme property access
-  - color property access
-  - label property access
-  - payload type issues
+## Component Prop Type Issues
+- [ ] components/post-map.tsx: Multiple issues
+  - [ ] Type 'string | boolean | undefined' not assignable to 'string | undefined' for id props
+  - [ ] Property 'type' does not exist on type 'never'
+  - [ ] Type 'string | undefined' not assignable to type 'string' for FootNote id
 
-- [x] Fix type mismatches in trakt components:
-  - trakt-episode-card.tsx: type "episode" not assignable
-  - trakt-fav-company-card.tsx: description property
-  - trakt-movie-card.tsx: type "movie" not assignable
-  - trakt-show-card.tsx: type "show" not assignable
+- [ ] components/archive.tsx:
+  - [ ] Argument of type '"pdf"' is not assignable to parameter of type 'ArchiveType'
 
-## Style-related Issues
-- [x] Fix invalid style object properties in nuggets.tsx:
-  - mediaQuery style object
-  - flexDirection style property
+- [ ] components/anime/anime-cards.tsx:
+  - [ ] Property 'num_episodes' does not exist on type 'AnimeNode | AnimeItem'
 
 ## Date Handling Issues
-- [x] Fix date type mismatches in:
-  - components/post-header.tsx
-  - components/verse-header.tsx
-  - components/progymnasmata/progymnasmata-entry-page.tsx
-  - utils/markdown.ts
+- [ ] components/directory-category-header.tsx:
+  - [ ] Argument of type 'Date' is not assignable to parameter of type 'string'
 
-## Other Issues
-- [x] Fix dialog-alt.tsx className prop issues
-- [x] Fix universal-link-modal.tsx:
-  - prevIndex null checks
-  - useEffect return type
-  - referrerpolicy vs referrerPolicy
-- [x] Fix vitals.ts:
-  - navigator.connection type check
-  - URLSearchParams type issues
-- [x] Fix footnotes.tsx id prop issue
-- [x] Fix post-map.tsx:
-  - block.id property access
-  - block.type property access
+- [ ] components/directory-page-header.tsx:
+  - [ ] Argument of type 'Date' is not assignable to parameter of type 'string'
 
-### Critical Type Issues
-- [x] Fix universal-link-modal.tsx:
-  - SetStateAction type issues with prevIndex
-  - useEffect return type
-  - referrerpolicy vs referrerPolicy
-- [x] Fix chart.tsx type issues:
-  - theme and color property access
-  - Payload type mismatches
-  - ChartConfig indexing
-- [x] Fix directory-client.tsx:
-  - status type mismatches
-  - confidence type mismatches
+- [ ] components/docs/docs-header.tsx:
+  - [ ] Argument of type 'Date' is not assignable to parameter of type 'string'
 
-### Component Type Issues
-- [x] Fix dialog-alt.tsx className prop
-- [x] Fix link-types.tsx title prop
-- [x] Fix footnotes.tsx id prop
-- [x] Fix trakt card components subtitle prop
-- [x] Fix book-list.tsx BookCard props
+## Chart and UI Component Issues
+- [ ] components/ui/chart.tsx:
+  - [ ] Argument of type 'Payload' is not assignable to parameter of type 'Payload<any, any>'
 
-### Data Type Issues
-- [ ] Fix date handling type issues
+## Effect and Event Handler Issues
+- [ ] components/universal-link-modal.tsx:
+  - [ ] Argument of type '() => () => boolean' is not assignable to parameter of type 'EffectCallback'
 
-### Import/Export Issues
-- [x] Fix missing module imports:
-  - @/config/site
-  - @/data/cv
-- [x] Fix export conflicts:
-  - Poetry export
-  - Pagination export
-  - FavoriteCard export
+## MathJax Related Issues
+- [ ] components/commento.tsx:
+  - [ ] Cannot find name 'MathJax'
+  - [ ] Argument of type 'Element[]' is not assignable to parameter of type 'HTMLElement[]'
 
-### Utility Type Issues
-- [x] Fix formatDate utility exports
-- [x] Fix cn utility imports
-- [x] Fix Input component imports
+## Implicit Any Types
+- [ ] app/type/page.tsx:
+  - [ ] Parameter 'd' implicitly has an 'any' type in map callbacks
 
-### Error Handling
-- [x] Fix unknown error type handling in route handlers
-- [x] Fix error message property access
+## Error Handling Issues
+- [ ] components/CodeGenerator.tsx:
+  - [ ] 'error' is of type 'unknown'
 
-# TypeScript Errors To Fix (from last tsc run)
-
-## app/cv/page.tsx
-- [x] Property 'contact' does not exist on type 'cv'.
-- [x] Property 'projects' does not exist on type 'cv'.
-- [x] Property 'certifications' does not exist on type 'cv'.
-- [x] Readonly array type mismatch for 'cv.experience', 'cv.education', and 'cv.skills'.
-
-## app/directory/page.tsx
-- [x] Type '"Complete"' is not assignable to type 'Status'.
-
-## app/doc/[...slug]/route.ts
-- [x] 'fileError' is of type 'unknown'.
-
-## app/doc/[id]/route.ts
-- [x] 'fileError' and 'error' are of type 'unknown'.
-
-## app/doc/debug/route.ts
-- [x] 'fileError' and 'error' are of type 'unknown'.
-
-## app/doc/test/page.tsx
-- [x] 'parseError' and 'err' are of type 'unknown'.
-
-## app/docs/docs-client.tsx
-- [x] Property 'subtitle' does not exist on type 'docsPageData'.
-
-## app/essays/[category]/[year]/[slug]/page.tsx
-- [x] EssayData type assertion mismatch (missing properties: abstract, confidence, subject, keywords).
-- [x] Essay type mismatch for EssaysDetail (missing: status, pdfLink, sourceLink, category).
-
-## app/essays/[category]/page.tsx
-- [x] Property 'img' does not exist on type 'Essay'.
-
-## app/faq/page.tsx
-- [x] Property 'description' does not exist on type 'PageHeaderProps'.
-
-## app/favs/[category]/page.tsx, app/favs/favs-client.tsx, components/bento/bento-card.tsx, components/bento/bento-grid.tsx
-- [x] Module './types' declares 'Item' locally, but it is not exported.
-
-## app/lecture-notes/[category]/[year]/[slug]/page.tsx
-- [ ] Cannot find module '@/types/lecture-note'.
-- [ ] Cannot find name 'lectureNotesData'.
-- [ ] Cannot find name 'ResolvingMetadata' or 'Metadata'.
-
-## app/lecture-notes/[category]/page.tsx, app/lecture-notes/lecture-notes-client.tsx
-- [x] Property 'bibliography' is missing in type but required in 'LectureNote'.
-
-## app/newsletter/articles/[slug]/page.tsx
-- [x] Argument of type 'string' is not assignable to parameter of type 'number'.
-
-## app/notes/[year]/[slug]/MdxRenderer.tsx
-- [x] Cannot find name 'MyComponent'.
-
-## app/resources/page.tsx
-- [x] Type '"Updated"' is not assignable to type 'Status'.
-
-## app/series/[slug]/page.tsx
-- [x] Type 'string' is not assignable to type 'Status' or 'Confidence'.
-
-## app/sources/page.tsx
-- [x] Type 'string' is not assignable to type 'Status' or 'Confidence'.
-
-## app/tag/[slug]/page.tsx
-- [x] Type 'string' is not assignable to type 'Status' or 'Confidence'.
-
-## app/type/page.tsx
-- [x] Parameter 'count', 'index', 'd', 'result' implicitly has an 'any' type.
-
-## app/verse/verse-client.tsx
-- [x] 'poem.content' is possibly 'undefined'.
-
-## components/about/Companies.tsx
-- [x] Parameter 'project', 'index' implicitly has an 'any' type.
-
-## components/animated-tag-v2.tsx
-- [x] Type for TagComponent props is not assignable to InternalLinkProps.
-
-## components/anime/anime-cards.tsx
-- [x] Element implicitly has an 'any' type because expression of type '"num_episodes" | "num_chapters"' can't be used to index type 'AnimeItem | AnimeNode'.
-
-## components/anime/index.ts
-- [x] Module './anime-cards' has already exported a member named 'FavoriteCard'.
-
-## components/archive.tsx
-- [x] Import 'Tool' from 'lucide-react' does not exist.
-- [x] Cannot find name 'Book'.
-- [x] Type '"dataset"' or '"manuscript"' is not comparable to type 'ArchiveType'.
-- [x] JSX elements cannot have multiple attributes with the same name.
-- [x] Argument of type '"video" | "pdf" | "dataset" | "manuscript"' is not assignable to parameter of type 'ArchiveType'.
-
-## components/category-header.tsx, components/post-header.tsx, components/tag-header.tsx, components/verse-header.tsx
-- [x] Property 'toString' does not exist on type 'never'.
-
-## components/CodeGenerator.tsx
-- [x] Property 'toString' does not exist on type 'never'.
-
-## components/commento.tsx
-- [ ] Subsequent property declarations must have the same type for 'MathJax'.
-- [ ] window.MathJax.typeset() missing argument.
-
-## components/contact-form.tsx
-- [ ] 'reason' is specified more than once, so this usage will be overwritten.
-- [ ] Type 'File | undefined' is not assignable to type 'string | number | readonly string[] | undefined'.
-
-## components/directory-category-header.tsx, components/directory-page-header.tsx, components/docs/docs-header.tsx
-- [ ] Argument of type 'Date' is not assignable to parameter of type 'string'.
-
-## components/index.ts
-- [ ] Module './poetry' has no exported member 'PoetryComponent'.
-- [ ] Module './ui' has already exported a member named 'Pagination'.
-
-## components/my-book-list.tsx
-- [ ] Type 'string' is not assignable to type '"free" | "paid"' for 'access'.
-
-## components/poetry/index.ts
-- [ ] Cannot find module './poetry'.
-
-## components/post-map.tsx
-- [ ] Property 'id' does not exist on type 'TextContentBlock'.
-- [ ] Property 'type' does not exist on type 'never'.
-
-## components/project-modal.tsx
-- [ ] 'ProjectCard' refers to a value, but is being used as a type here.
-
-## components/trakt/trakt-episode-card.tsx, components/trakt/trakt-movie-card.tsx, components/trakt/trakt-show-card.tsx
-- [ ] Property 'subtitle' does not exist on type 'FavoriteCardProps'.
-
-## components/ui/chart.tsx
-- [ ] Property 'label' and 'icon' do not exist on type 'PayloadConfig'.
-- [ ] Argument of type 'Payload' is not assignable to parameter of type 'Payload<any, any>'.
-
-## components/ui/dialog-alt.tsx
-- [ ] Property 'className' does not exist on type 'DialogPortalProps'.
-
-## components/universal-link-modal.tsx
-- [ ] useEffect return type is not assignable.
-- [ ] Property 'referrerpolicy' does not exist on type 'IframeHTMLAttributes'.
-
-## components/verse-header.tsx
-- [ ] Property 'toString' does not exist on type 'never'.
-
----
-# Start fixing these errors one by one and check them off as you go.
+## Link Component Issues
+- [ ] components/animated-tag-v2.tsx:
+  - [ ] Type issues with href property in Link component 

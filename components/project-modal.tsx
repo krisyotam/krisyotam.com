@@ -5,12 +5,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, ExternalLink, Github, X } from "lucide-react"
-import { ProjectCard } from "./project-card"
+import { ProjectCard, ProjectCardProps } from "./project-card"
 
 interface ProjectModalProps {
   isOpen: boolean
   onClose: () => void
-  project: ProjectCard
+  project: ProjectCardProps
 }
 
 export function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {

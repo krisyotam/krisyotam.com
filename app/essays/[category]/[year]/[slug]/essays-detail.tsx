@@ -18,8 +18,8 @@ interface Essay {
   postedOn: string;
   dateStarted: string;
   status: string;
-  pdfLink: string;
-  sourceLink: string;
+  pdfLink?: string;
+  sourceLink?: string;
   category: string;
   tags: string[];
 }

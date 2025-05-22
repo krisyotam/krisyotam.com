@@ -5,7 +5,7 @@ import { Loader2, AlertTriangle, CheckCircle, PauseCircle, Heart, PlayCircle } f
 import { PageHeader } from "@/components/page-header"
 import { TabSwitcher } from "@/components/anime/tab-switcher"
 import { ListsPage } from "@/components/anime/lists-page"
-import { WatchingAnimeCard, CompletedAnimeCard, FavoriteCard } from "@/components/anime/anime-cards"
+import { WatchingAnimeCard, CompletedAnimeCard, AnimeFavoriteCard } from "@/components/anime/anime-cards"
 import { StatsSection } from "@/components/anime/stats-section"
 import { SectionHeader } from "@/components/anime/section-header"
 import { Badge } from "@/components/ui/badge"
@@ -338,7 +338,7 @@ export default function AnimeClientPage() {
                     {paginatedFavorites.length > 0 ? (
                       paginatedFavorites.map((item, index) => (
                         <div key={item?.id || index} className="w-full">
-                          <FavoriteCard item={item} type={activeTab} />
+                          <AnimeFavoriteCard item={item} type={activeTab} />
                         </div>
                       ))
                     ) : (
@@ -371,7 +371,7 @@ export default function AnimeClientPage() {
                 <div className="grid grid-cols-5 gap-4">
                   {paginatedCharacters.map((character, index) => (
                     <div key={character.name || index} className="w-full">
-                      <FavoriteCard item={character} type="character" />
+                      <AnimeFavoriteCard item={character} type="character" />
                     </div>
                   ))}
                 </div>
@@ -398,7 +398,7 @@ export default function AnimeClientPage() {
                 <div className="grid grid-cols-5 gap-4">
                   {paginatedPeople.map((person, index) => (
                     <div key={person.name || index} className="w-full">
-                      <FavoriteCard item={person} type="character" isCompany={false} />
+                      <AnimeFavoriteCard item={person} type="character" isCompany={false} />
                     </div>
                   ))}
                 </div>
@@ -425,7 +425,7 @@ export default function AnimeClientPage() {
                 <div className="grid grid-cols-5 gap-4">
                   {paginatedCompanies.map((company, index) => (
                     <div key={company.name || index} className="w-full">
-                      <FavoriteCard item={company} type="character" isCompany={true} />
+                      <AnimeFavoriteCard item={company} type="character" isCompany={true} />
                     </div>
                   ))}
                 </div>

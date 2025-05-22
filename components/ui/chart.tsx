@@ -16,6 +16,7 @@ interface ChartConfig {
     }
     color?: string
     label?: string
+    icon?: React.ComponentType
   }
 }
 
@@ -27,6 +28,8 @@ interface PayloadConfig {
     fill?: string
   }
   color?: string
+  label?: string
+  icon?: React.ComponentType
 }
 
 const getPayloadConfigFromPayload = (
@@ -40,7 +43,9 @@ const getPayloadConfigFromPayload = (
     name: item.name,
     value: item.value,
     payload: item.payload,
-    color: itemConfig.theme?.[key] || itemConfig.color
+    color: itemConfig.theme?.[key] || itemConfig.color,
+    label: itemConfig.label,
+    icon: itemConfig.icon
   }
 }
 

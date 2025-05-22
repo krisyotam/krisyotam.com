@@ -12,40 +12,72 @@ const cv = {
   },
   experience: [
     {
-      company: "Example Corp",
       title: "Senior Software Engineer",
+      organization: "Example Corp",
+      location: "San Francisco, CA",
       startDate: "2020-01",
       endDate: "Present",
       description: "Led development of key features and mentored junior developers.",
+      highlights: [
+        "Led a team of 5 developers",
+        "Improved application performance by 40%",
+        "Implemented CI/CD pipeline"
+      ]
     },
   ],
   education: [
     {
-      school: "Example University",
-      degree: "Bachelor of Science in Computer Science",
+      title: "Bachelor of Science in Computer Science",
+      organization: "Example University",
+      location: "San Francisco, CA",
       startDate: "2016-09",
       endDate: "2020-05",
+      description: "Graduated with honors",
+      highlights: [
+        "Dean's List",
+        "Computer Science Club President",
+        "Senior Project: AI-powered Code Review System"
+      ]
     },
   ],
   skills: [
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Node.js",
-    "Python",
+    {
+      category: "Programming Languages",
+      skills: ["JavaScript", "TypeScript", "Python", "Java", "C++"]
+    },
+    {
+      category: "Web Technologies",
+      skills: ["React", "Node.js", "Next.js", "HTML", "CSS"]
+    },
+    {
+      category: "Tools & Platforms",
+      skills: ["Git", "Docker", "AWS", "Linux", "VS Code"]
+    }
   ],
   projects: [
     {
-      name: "Sample Project",
+      title: "Sample Project",
+      technologies: "React, Node.js, MongoDB",
+      date: "2023-01",
       description: "A sample project description.",
-      url: "https://github.com/krisyotam/sample-project",
+      highlights: [
+        "Implemented real-time features",
+        "Reduced load time by 50%",
+        "Achieved 99.9% uptime"
+      ]
     },
   ],
   certifications: [
     {
-      name: "Certified Web Developer",
+      title: "Certified Web Developer",
       issuer: "Web Cert Org",
       date: "2022-01",
+      description: "Advanced web development certification",
+      highlights: [
+        "Full-stack development",
+        "Security best practices",
+        "Performance optimization"
+      ]
     },
   ],
 }

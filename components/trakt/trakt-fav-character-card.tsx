@@ -1,4 +1,4 @@
-import { FavoriteCard } from "@/components/anime/anime-cards";
+import { AnimeFavoriteCard } from "@/components/anime/anime-cards";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface TraktFavCharacterCardProps {
@@ -46,7 +46,7 @@ export function TraktFavCharacterCard({ id, name, image, actor }: TraktFavCharac
 
   // If no actor name, use the original FavoriteCard component
   return (
-    <FavoriteCard
+    <AnimeFavoriteCard
       item={{
         name: name,
         images: { jpg: { image_url: image } },

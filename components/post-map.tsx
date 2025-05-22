@@ -34,8 +34,8 @@ export type ContentBlockType =
 // Define the base content block interface
 export interface BaseContentBlock {
   type: ContentBlockType
+  id?: string
   props?: {
-    id?: string
     className?: string
     startArticle?: boolean
     [key: string]: string | boolean | undefined

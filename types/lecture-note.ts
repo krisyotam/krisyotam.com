@@ -14,4 +14,7 @@ export interface LectureNote {
   bibliography?: string[]
   img?: string
   category: string
+  status: string
+  pdfLink?: string
+  sourceLink?: string
 } 

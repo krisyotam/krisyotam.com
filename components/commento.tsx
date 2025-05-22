@@ -4,14 +4,6 @@ import { useRef, useEffect, useState } from "react"
 import Script from "next/script"
 import { RefreshCw } from "lucide-react"
 
-interface MathJax {
-  typeset: () => void;
-  typesetPromise?: (elements: HTMLElement[]) => Promise<void>;
-  startup?: {
-    typesetPromise: (elements: HTMLElement[]) => Promise<void>;
-  };
-}
-
 declare global {
   interface Window {
     MathJax: MathJax;

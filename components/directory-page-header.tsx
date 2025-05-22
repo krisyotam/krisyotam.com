@@ -7,7 +7,7 @@ import Link from "next/link"
 interface DirectoryPageHeaderProps {
   title: string
   subtitle?: string
-  date: string
+  date: string | Date
   preview?: string
   status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
   confidence?:
@@ -119,10 +119,10 @@ export function DirectoryPageHeader({
           {/* Date above other metadata */}
           <div className="text-center mb-3">
             <time
-              dateTime={typeof date === "string" ? date : undefined}
+              dateTime={typeof date === "string" ? date : date.toISOString()}
               className="font-mono text-xs text-muted-foreground"
             >
-              {typeof date === "string" ? formatDate(new Date(date)) : date}
+              {formatDate(typeof date === "string" ? new Date(date) : date)}
             </time>
           </div>
 

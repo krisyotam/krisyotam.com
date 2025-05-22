@@ -32,7 +32,7 @@ export { MyBookList } from './my-book-list';
 // Typography Components
 export { default as Dropcap } from './dropcap';
 export { default as Inflation } from './inflation';
-export { PoetryComponent as Poetry } from './poetry';
+// export { PoetryComponent as Poetry } from './poetry'; // File missing or no named export
 // MarginNote already exported above
 // Footnotes already exported above
 
@@ -43,7 +43,7 @@ export { PoetryComponent as Poetry } from './poetry';
 // export { default as NoteFooter } from './note-footer'; // File missing
 
 // UI Components
-export * from './ui';
+// export * from './ui'; // Commented out to avoid duplicate Pagination export
 
 // Content Components
 export { ContentTable } from './shared/content-table';
@@ -96,5 +96,4 @@ export * from './trakt';
 export * from './predictions';
 export * from './progymnasmata';
 
-export { Pagination as PaginationComponent } from './ui';
 export { FavoriteCard as FavoriteCardComponent } from './anime'; 
