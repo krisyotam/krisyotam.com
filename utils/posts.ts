@@ -232,30 +232,20 @@ export async function getPostContent(year: string, slug: string) {
     import("path"),
   ])
   
-  // Try multiple possible paths to handle different deployment environments
-  const possiblePaths = [
-    // Standard path
-    path.join(process.cwd(), "data", "posts", year, slug, "content.mdx"),
-    // Alternative deployment paths
-    path.join(process.cwd(), "..", "data", "posts", year, slug, "content.mdx"),
-    path.join(process.cwd(), "public", "data", "posts", year, slug, "content.mdx")
-  ]
+  // Only use the app/blog structure which is the canonical location for MDX content
+  const mdxPath = path.join(process.cwd(), "app", "blog", year, slug, "page.mdx")
   
   console.log(`Attempting to load MDX for ${year}/${slug}`)
   console.log(`CWD: ${process.cwd()}`)
-    for (const mdxPath of possiblePaths) {
-    try {
-      console.log(`Trying path: ${mdxPath}`)
-      const mdxData = await fs.readFile(mdxPath, "utf-8")
-      console.log(`Successfully loaded MDX from ${mdxPath}`)
-      return { isMDX: true, mdxData, blogPostExists: true }
-    } catch (err) {
-      console.log(`Failed to load from ${mdxPath}: ${err instanceof Error ? err.message : String(err)}`)
-      // Continue to next path
-    }
-  }
+  console.log(`Trying path: ${mdxPath}`)
   
-  // If we reach here, all paths failed
-  console.log(`Could not find MDX for ${year}/${slug} in any location`)
-  return { isMDX: false, mdxData: null, blogPostExists: false }
+  try {
+    const mdxData = await fs.readFile(mdxPath, "utf-8")
+    console.log(`Successfully loaded MDX from ${mdxPath}`)
+    return { isMDX: true, mdxData, blogPostExists: true }
+  } catch (err) {
+    console.log(`Failed to load from ${mdxPath}: ${err instanceof Error ? err.message : String(err)}`)
+    console.log(`Could not find MDX for ${year}/${slug} at app/blog/${year}/${slug}/page.mdx`)
+    return { isMDX: false, mdxData: null, blogPostExists: false }
+  }
 }
