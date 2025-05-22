@@ -1,26 +1,25 @@
-import lectureNotesData from "@/data/lecture-notes.json";
-import type { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
-import { LectureNoteDetail } from "./lecture-note-detail";
+import type { LectureNote } from "@/types/lecture-note"
+import type { Metadata, ResolvingMetadata } from "next"
+import { notFound } from "next/navigation"
+import { LectureNoteDetail } from "./lecture-note-detail"
+import lectureNotesData from "@/data/lecture-notes.json"
 
-interface LectureNote {
+interface LectureNoteData {
   id: string;
   title: string;
   abstract: string;
-  importance: string | number;
+  importance: number;
+  confidence: string;
   authors: string[];
   subject: string;
   keywords: string[];
   postedBy: string;
   postedOn: string;
   dateStarted: string;
-  status: string;
-  bibliography: string[];
-  img: string;
-  pdfLink: string;
-  sourceLink: string;
-  category: string;
   tags: string[];
+  bibliography?: string[];
+  img?: string;
+  category: string;
 }
 
 function slugifyTitle(title: string) {

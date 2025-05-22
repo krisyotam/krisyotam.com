@@ -2,12 +2,13 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { FileText, Film, Database, BookOpen, Download, Search, Filter, Tag } from "lucide-react"
+import { FileText, Film, Database, BookOpen, Download, Search, Filter, Tag, Video, Headphones, Wrench, Code, Book } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
 
 export type ArchiveItem = {
   id: string
@@ -26,6 +27,8 @@ export type ArchiveItem = {
 interface ArchivesComponentProps {
   archivesData: ArchiveItem[]
 }
+
+type ArchiveType = "note" | "essay" | "lecture-note" | "book" | "article" | "video" | "podcast" | "tool" | "project" | "dataset" | "manuscript"
 
 export default function ArchivesComponent({ archivesData }: ArchivesComponentProps) {
   const [searchQuery, setSearchQuery] = useState("")
@@ -49,11 +52,25 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
   })
 
   // Get icon based on archive type
-  const getTypeIcon = (type) => {
+  const getTypeIcon = (type: ArchiveType) => {
     switch (type) {
-      case "pdf":
+      case "note":
+        return <FileText className="h-4 w-4" />
+      case "essay":
+        return <Book className="h-4 w-4" />
+      case "lecture-note":
+        return <Book className="h-4 w-4" />
+      case "book":
+        return <Book className="h-4 w-4" />
+      case "article":
         return <FileText className="h-4 w-4" />
       case "video":
+        return <Video className="h-4 w-4" />
+      case "podcast":
+        return <Headphones className="h-4 w-4" />
+      case "tool":
+        return <Wrench className="h-4 w-4" />
+      case "project":
         return <Film className="h-4 w-4" />
       case "dataset":
         return <Database className="h-4 w-4" />
@@ -196,9 +213,7 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
         className="border border-gray-200 dark:border-gray-800 hidden md:block"
         style={{
           border: "1px solid var(--border)",
-          display: "none",
         }}
-        className="md:!block"
       >
         <table
           className="min-w-full divide-y divide-gray-200 dark:divide-gray-800"

@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils"
+
 interface Tag {
   id: string;
   name: string;

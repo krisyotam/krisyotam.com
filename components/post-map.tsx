@@ -143,28 +143,28 @@ export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
   switch (block.type) {
     case "h1":
       return (
-        <Typography.H1 id={(block as TextContentBlock).props?.id} {...block.props}>
+        <Typography.H1 id={block.props?.id} {...block.props}>
           {(block as TextContentBlock).content}
         </Typography.H1>
       )
 
     case "h2":
       return (
-        <Typography.H2 id={(block as TextContentBlock).props?.id} {...block.props}>
+        <Typography.H2 id={block.props?.id} {...block.props}>
           {(block as TextContentBlock).content}
         </Typography.H2>
       )
 
     case "h3":
       return (
-        <Typography.H3 id={(block as TextContentBlock).props?.id} {...block.props}>
+        <Typography.H3 id={block.props?.id} {...block.props}>
           {(block as TextContentBlock).content}
         </Typography.H3>
       )
 
     case "h4":
       return (
-        <Typography.H4 id={(block as TextContentBlock).props?.id} {...block.props}>
+        <Typography.H4 id={block.props?.id} {...block.props}>
           {(block as TextContentBlock).content}
         </Typography.H4>
       )

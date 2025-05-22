@@ -1,8 +1,4 @@
-import * as escodegen from "escodegen"
-
-export function generateCode(ast: any): string {
-  return escodegen.generate(ast)
-}
+import { generateCode } from "./ast-utils"
 
 // Add a test to ensure escodegen is working
 const testAst = {

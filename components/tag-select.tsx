@@ -1,3 +1,7 @@
+import { useState } from "react"
+import { cn } from "@/lib/utils"
+import { Input } from "@/components/ui/input"
+
 interface Tag {
   id: string;
   name: string;
@@ -11,10 +15,12 @@ interface TagSelectProps {
   selectedTags: Tag[];
   onChange: (tags: Tag[]) => void;
   className?: string;
+  onSelect: (tag: string) => void;
 }
 
-export function TagSelect({ tags, selectedTags, onChange, className }: TagSelectProps) {
+export function TagSelect({ tags, selectedTags, onChange, className, onSelect }: TagSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState("")
 
   const toggleTag = (tag: Tag) => {
     const isSelected = selectedTags.some((t) => t.id === tag.id);
@@ -27,6 +33,15 @@ export function TagSelect({ tags, selectedTags, onChange, className }: TagSelect
 
   return (
     <div className={cn("relative", className)}>
+      <Input
+        type="text"
+        placeholder="Select a tag..."
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value)
+          onSelect(e.target.value)
+        }}
+      />
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}

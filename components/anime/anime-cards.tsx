@@ -47,6 +47,7 @@ interface AnimeItem {
   url?: string;
   link?: string;
   photolink?: string;
+  description?: string;
 }
 
 // Helper function to get image URL with fallback
@@ -183,7 +184,7 @@ interface FavoriteCardProps {
   isCompany?: boolean
 }
 
-export function FavoriteCard({ item, type, isCompany = false }: FavoriteCardProps) {
+export function AnimeFavoriteCard({ item, type, isCompany = false }: FavoriteCardProps) {
   // Handle different API response formats
   const imageUrl =
     item?.images?.jpg?.image_url ||

@@ -19,6 +19,24 @@ interface Reference {
   importance: number;
 }
 
+function isErrorWithMessage(error: unknown): error is { message: string; stack?: string } {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "message" in error &&
+    typeof (error as Record<string, unknown>).message === "string"
+  )
+}
+
+function toErrorWithMessage(maybeError: unknown): { message: string; stack?: string } {
+  if (isErrorWithMessage(maybeError)) return maybeError
+  try {
+    return new Error(JSON.stringify(maybeError))
+  } catch {
+    return new Error(String(maybeError))
+  }
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -36,9 +54,10 @@ export async function GET(
     try {
       data = await fs.readFile(dataPath, 'utf8');
       console.log(`[doc/[id]] Successfully loaded references.json`);
-    } catch (fileError) {
-      console.error(`[doc/[id]] Error loading references.json:`, fileError);
-      return new Response(`Could not load references data: ${fileError.message}`, { 
+    } catch (fileError: unknown) {
+      const errorWithMessage = toErrorWithMessage(fileError);
+      console.error(`[doc/[id]] Error loading references.json:`, errorWithMessage);
+      return new Response(`Could not load references data: ${errorWithMessage.message}`, { 
         status: 500,
         headers: {
           'Content-Type': 'text/plain'
@@ -79,9 +98,10 @@ export async function GET(
       console.log(`[doc/[id]] Redirecting to internal URL: ${fullUrl.toString()}`);
       return NextResponse.redirect(fullUrl);
     }
-  } catch (error) {
-    console.error('[doc/[id]] Unhandled error:', error);
-    return new Response(`Error processing request: ${error.message}\n\n${error.stack}`, { 
+  } catch (error: unknown) {
+    const errorWithMessage = toErrorWithMessage(error);
+    console.error('[doc/[id]] Unhandled error:', errorWithMessage);
+    return new Response(`Error processing request: ${errorWithMessage.message}\n\n${errorWithMessage.stack}`, { 
       status: 500,
       headers: {
         'Content-Type': 'text/plain'

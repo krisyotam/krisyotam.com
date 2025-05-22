@@ -71,7 +71,7 @@ export default function ResourcesPage() {
           title="Resources"
           subtitle="Curated collection of valuable research and learning resources"
           date={new Date().toISOString()}
-          status="Updated"
+          status="In Progress"
           confidence="certain"
           importance={8}
           preview="A comprehensive collection of academic resources, research tools, learning platforms, and reference materials to support scholarly pursuits and intellectual exploration."

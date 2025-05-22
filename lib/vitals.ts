@@ -2,9 +2,19 @@ import type { NextWebVitalsMetric } from "next/app"
 
 const vitalsUrl = "https://vitals.vercel-analytics.com/v1/vitals"
 
-function getConnectionSpeed() {
-  return "connection" in navigator && navigator["connection"] && "effectiveType" in navigator["connection"]
-    ? navigator["connection"]["effectiveType"]
+interface NetworkInformation {
+  effectiveType?: string;
+}
+
+declare global {
+  interface Navigator {
+    connection?: NetworkInformation;
+  }
+}
+
+function getConnectionSpeed(): string {
+  return "connection" in navigator && navigator.connection && "effectiveType" in navigator.connection
+    ? navigator.connection.effectiveType || ""
     : ""
 }
 
@@ -14,7 +24,7 @@ export function sendToVercelAnalytics(metric: NextWebVitalsMetric) {
     return
   }
 
-  const body = {
+  const body: Record<string, string> = {
     dsn: analyticsId,
     id: metric.id,
     page: window.location.pathname,

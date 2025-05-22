@@ -14,8 +14,8 @@ export interface SeriesData {
   preview?: string
   date: string
   "show-status": "active" | "hidden"
-  status: string
-  confidence?: string
+  status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
+  confidence?: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"
   importance?: number
   posts: SeriesPost[]
 }

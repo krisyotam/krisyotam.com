@@ -1,121 +1,295 @@
-# TypeScript Fixes Agenda
+# TypeScript Errors to Fix
 
-## 1. Import/Export Issues
-- [ ] Fix default vs named exports in components/index.ts
-  - Convert all default exports to named exports
-  - Update all import statements accordingly
-- [ ] Add missing type declarations
-  - [ ] Install @types/escodegen
-  - [ ] Create type declarations for missing modules
-- [ ] Fix incorrect import paths
-- [ ] Resolve missing module declarations
+## Missing Imports
+- [ ] Add missing imports for `cn` from "@/lib/utils" in:
+  - [ ] components/tag-cloud.tsx
+  - [ ] components/tag-filter.tsx
+  - [ ] components/tag-input.tsx
+  - [ ] components/tag-list-item.tsx
+  - [ ] components/tag-list.tsx
+  - [ ] components/tag-page-about.tsx
+  - [ ] components/tag-page-content.tsx
+  - [ ] components/tag-page-empty.tsx
+  - [ ] components/tag-page-error.tsx
+  - [ ] components/tag-page-filter.tsx
+  - [ ] components/tag-page-footer.tsx
+  - [ ] components/tag-page-header.tsx
+  - [ ] components/tag-page-layout.tsx
+  - [ ] components/tag-page-loading.tsx
+  - [ ] components/tag-page-navigation.tsx
+  - [ ] components/tag-page-not-found.tsx
+  - [ ] components/tag-page-pagination.tsx
+  - [ ] components/tag-page-posts.tsx
+  - [ ] components/tag-page-sidebar.tsx
+  - [ ] components/tag-page-sort.tsx
+  - [ ] components/tag-page-tabs.tsx
+  - [ ] components/tag.tsx
+  - [ ] components/tag-suggestions.tsx
 
-## 2. Type Mismatches
-### CSS Properties
-- [ ] Fix textAlign type issues in components/archive.tsx
-- [ ] Fix textTransform type issues in components/archive.tsx
-- [ ] Fix WebkitBoxOrient type issues in components/archive.tsx
-- [ ] Fix boxSizing type issues in character display components
-- [ ] Fix position type issues in character display components
-- [ ] Fix objectFit type issues in character display components
-- [ ] Fix flexDirection type issues in components/nuggets.tsx
-- [ ] Fix !important style properties
-- [ ] Update CSS-in-JS type definitions
-- [ ] Resolve style property type conflicts
+- [ ] Add missing imports for `Link` from "next/link" in:
+  - [ ] components/tag-cloud.tsx
+  - [ ] components/tag-list-item.tsx
+  - [ ] components/tag-list.tsx
+  - [ ] components/tag-page-content.tsx
+  - [ ] components/tag-page-navigation.tsx
+  - [ ] components/tag-page-not-found.tsx
+  - [ ] components/tag-page-pagination.tsx
+  - [ ] components/tag-page-posts.tsx
+  - [ ] components/tag-page-sidebar.tsx
+  - [ ] components/tag-page.tsx
+  - [ ] components/tag.tsx
 
-### Date Handling
-- [ ] Fix Date type issues in components/category-header.tsx
-- [ ] Fix Date type issues in components/directory-category-header.tsx
-- [ ] Fix Date type issues in components/directory-page-header.tsx
-- [ ] Fix Date type issues in components/docs/docs-header.tsx
-- [ ] Fix Date type issues in components/home-client.tsx
-- [ ] Fix Date type issues in components/library-notes-content.tsx
-- [ ] Fix Date type issues in components/page-header.tsx
-- [ ] Fix Date type issues in components/playlist-card.tsx
-- [ ] Fix Date type issues in components/post-header.tsx
-- [ ] Fix Date type issues in components/tag-header.tsx
-- [ ] Fix Date type issues in components/verse-header.tsx
-- [ ] Fix Date type issues in utils/markdown.ts
-- [ ] Fix Date to string conversions
-- [ ] Update date formatting functions
-- [ ] Resolve date type mismatches
+- [ ] Add missing imports for `useState` from "react" in:
+  - [ ] components/tag-input.tsx
+  - [ ] components/tag-search.tsx
+  - [ ] components/tag-select.tsx
 
-### Props Type Mismatches
-- [ ] Fix BookCard props in components/book-list.tsx
-- [ ] Fix CategoryData props in app/category/[slug]/page.tsx
-- [ ] Fix MyBookCard props in components/my-book-list.tsx
-- [ ] Fix ProjectCard props in components/project-modal.tsx
-- [ ] Fix FavoriteCard props in trakt components
-- [ ] Fix DialogPortal props in components/ui/dialog-alt.tsx
-- [ ] Fix AProps in components/mdx/link-types.tsx
-- [ ] Fix FootNote props in components/typography/footnotes.tsx
-- [ ] Fix component prop type definitions
-- [ ] Update interface definitions
-- [ ] Resolve union type conflicts
+- [ ] Add missing imports for `formatDate` from "@/lib/utils" in:
+  - [ ] components/tag-page-content.tsx
+  - [ ] components/tag-page-posts.tsx
+  - [ ] components/tag-page.tsx
 
-## 3. React/TypeScript Configuration
-- [ ] Update tsconfig.json to target ES2015 or higher
-- [ ] Add --downlevelIteration flag
-- [ ] Fix Set iteration issues in components/catalog-content.tsx
-- [ ] Fix Set iteration issues in components/home-client.tsx
-- [ ] Fix Map iteration issues in utils/posts.ts
-- [ ] Update tsconfig.json settings
-- [ ] Enable downlevelIteration
-- [ ] Set appropriate target version
-- [ ] Add missing type declarations
+- [ ] Add missing imports for `Image` from "next/image" in:
+  - [ ] components/tag-page-content.tsx
+  - [ ] components/tag-page-posts.tsx
+  - [ ] components/tag-page.tsx
 
-## 4. Error Handling
-- [ ] Fix error handling in components/CodeGenerator.tsx
-- [ ] Fix error handling in components/universal-link-modal.tsx
-- [ ] Fix null checks in components/universal-link-modal.tsx
-- [ ] Add proper error type checking
-- [ ] Implement null checks
-- [ ] Add type guards where needed
-- [ ] Fix undefined property access
+## Type Mismatches
+- [x] Fix `access` property type mismatch in my-book-list.tsx
+- [x] Fix property access issues in resume-section.tsx:
+  - type property access
+  - title property access
+  - organization property access
+  - location property access
+  - startDate property access
+  - endDate property access
+  - description property access
+  - highlights property access
+  - category property access
+  - skills property access
+  - technologies property access
+  - date property access
+  - issuer property access
 
-## 5. Regular Expression Issues
-- [ ] Fix regex flag in lib/getDefinitionFromOED.ts
-- [ ] Update regex flags for ES6 compatibility
-- [ ] Fix string manipulation functions
-- [ ] Update text processing utilities
+- [x] Fix theme and color property access in chart.tsx:
+  - theme property access
+  - color property access
+  - label property access
+  - payload type issues
 
-## 6. Navigation/API Issues
-- [ ] Fix navigation type issues in lib/vitals.ts
-- [ ] Fix URLSearchParams type issues in lib/vitals.ts
-- [ ] Fix route parameter types
-- [ ] Update API response types
-- [ ] Resolve navigation type conflicts
+- [x] Fix type mismatches in trakt components:
+  - trakt-episode-card.tsx: type "episode" not assignable
+  - trakt-fav-company-card.tsx: description property
+  - trakt-movie-card.tsx: type "movie" not assignable
+  - trakt-show-card.tsx: type "show" not assignable
 
-## 7. Component-Specific Issues
-- [ ] Fix post-map.tsx type issues
-- [ ] Fix content-table.tsx type issues
-- [ ] Fix simple-animated-tag.tsx type issues
-- [ ] Fix universal-link-modal.tsx type issues
-- [ ] Fix individual component type errors
-- [ ] Update component interfaces
-- [ ] Resolve prop type conflicts
+## Style-related Issues
+- [x] Fix invalid style object properties in nuggets.tsx:
+  - mediaQuery style object
+  - flexDirection style property
 
-## Priority Order:
-1. Fix Import/Export Issues
-2. Update TypeScript Configuration
-3. Resolve Type Mismatches
-4. Fix Error Handling
-5. Update Regular Expressions
-6. Fix Navigation/API Issues
-7. Address Component-Specific Issues
+## Date Handling Issues
+- [x] Fix date type mismatches in:
+  - components/post-header.tsx
+  - components/verse-header.tsx
+  - components/progymnasmata/progymnasmata-entry-page.tsx
+  - utils/markdown.ts
 
-## Notes:
-- Each fix should be tested after implementation
-- Keep track of any new issues that arise during fixes
-- Update this agenda as we progress
-- Keep track of breaking changes
-- Document type changes
-- Update related components
-- Maintain backward compatibility
+## Other Issues
+- [x] Fix dialog-alt.tsx className prop issues
+- [x] Fix universal-link-modal.tsx:
+  - prevIndex null checks
+  - useEffect return type
+  - referrerpolicy vs referrerPolicy
+- [x] Fix vitals.ts:
+  - navigator.connection type check
+  - URLSearchParams type issues
+- [x] Fix footnotes.tsx id prop issue
+- [x] Fix post-map.tsx:
+  - block.id property access
+  - block.type property access
 
-## Testing Strategy:
-- Test each fix individually
-- Run TypeScript checks after each category
-- Verify build process
-- Test affected components
-- Update documentation as needed
+### Critical Type Issues
+- [x] Fix universal-link-modal.tsx:
+  - SetStateAction type issues with prevIndex
+  - useEffect return type
+  - referrerpolicy vs referrerPolicy
+- [x] Fix chart.tsx type issues:
+  - theme and color property access
+  - Payload type mismatches
+  - ChartConfig indexing
+- [x] Fix directory-client.tsx:
+  - status type mismatches
+  - confidence type mismatches
+
+### Component Type Issues
+- [x] Fix dialog-alt.tsx className prop
+- [x] Fix link-types.tsx title prop
+- [x] Fix footnotes.tsx id prop
+- [x] Fix trakt card components subtitle prop
+- [x] Fix book-list.tsx BookCard props
+
+### Data Type Issues
+- [ ] Fix date handling type issues
+
+### Import/Export Issues
+- [x] Fix missing module imports:
+  - @/config/site
+  - @/data/cv
+- [x] Fix export conflicts:
+  - Poetry export
+  - Pagination export
+  - FavoriteCard export
+
+### Utility Type Issues
+- [x] Fix formatDate utility exports
+- [x] Fix cn utility imports
+- [x] Fix Input component imports
+
+### Error Handling
+- [x] Fix unknown error type handling in route handlers
+- [x] Fix error message property access
+
+# TypeScript Errors To Fix (from last tsc run)
+
+## app/cv/page.tsx
+- [x] Property 'contact' does not exist on type 'cv'.
+- [x] Property 'projects' does not exist on type 'cv'.
+- [x] Property 'certifications' does not exist on type 'cv'.
+- [x] Readonly array type mismatch for 'cv.experience', 'cv.education', and 'cv.skills'.
+
+## app/directory/page.tsx
+- [x] Type '"Complete"' is not assignable to type 'Status'.
+
+## app/doc/[...slug]/route.ts
+- [x] 'fileError' is of type 'unknown'.
+
+## app/doc/[id]/route.ts
+- [x] 'fileError' and 'error' are of type 'unknown'.
+
+## app/doc/debug/route.ts
+- [x] 'fileError' and 'error' are of type 'unknown'.
+
+## app/doc/test/page.tsx
+- [x] 'parseError' and 'err' are of type 'unknown'.
+
+## app/docs/docs-client.tsx
+- [x] Property 'subtitle' does not exist on type 'docsPageData'.
+
+## app/essays/[category]/[year]/[slug]/page.tsx
+- [x] EssayData type assertion mismatch (missing properties: abstract, confidence, subject, keywords).
+- [x] Essay type mismatch for EssaysDetail (missing: status, pdfLink, sourceLink, category).
+
+## app/essays/[category]/page.tsx
+- [x] Property 'img' does not exist on type 'Essay'.
+
+## app/faq/page.tsx
+- [x] Property 'description' does not exist on type 'PageHeaderProps'.
+
+## app/favs/[category]/page.tsx, app/favs/favs-client.tsx, components/bento/bento-card.tsx, components/bento/bento-grid.tsx
+- [x] Module './types' declares 'Item' locally, but it is not exported.
+
+## app/lecture-notes/[category]/[year]/[slug]/page.tsx
+- [ ] Cannot find module '@/types/lecture-note'.
+- [ ] Cannot find name 'lectureNotesData'.
+- [ ] Cannot find name 'ResolvingMetadata' or 'Metadata'.
+
+## app/lecture-notes/[category]/page.tsx, app/lecture-notes/lecture-notes-client.tsx
+- [x] Property 'bibliography' is missing in type but required in 'LectureNote'.
+
+## app/newsletter/articles/[slug]/page.tsx
+- [x] Argument of type 'string' is not assignable to parameter of type 'number'.
+
+## app/notes/[year]/[slug]/MdxRenderer.tsx
+- [x] Cannot find name 'MyComponent'.
+
+## app/resources/page.tsx
+- [x] Type '"Updated"' is not assignable to type 'Status'.
+
+## app/series/[slug]/page.tsx
+- [x] Type 'string' is not assignable to type 'Status' or 'Confidence'.
+
+## app/sources/page.tsx
+- [x] Type 'string' is not assignable to type 'Status' or 'Confidence'.
+
+## app/tag/[slug]/page.tsx
+- [x] Type 'string' is not assignable to type 'Status' or 'Confidence'.
+
+## app/type/page.tsx
+- [x] Parameter 'count', 'index', 'd', 'result' implicitly has an 'any' type.
+
+## app/verse/verse-client.tsx
+- [x] 'poem.content' is possibly 'undefined'.
+
+## components/about/Companies.tsx
+- [x] Parameter 'project', 'index' implicitly has an 'any' type.
+
+## components/animated-tag-v2.tsx
+- [x] Type for TagComponent props is not assignable to InternalLinkProps.
+
+## components/anime/anime-cards.tsx
+- [x] Element implicitly has an 'any' type because expression of type '"num_episodes" | "num_chapters"' can't be used to index type 'AnimeItem | AnimeNode'.
+
+## components/anime/index.ts
+- [x] Module './anime-cards' has already exported a member named 'FavoriteCard'.
+
+## components/archive.tsx
+- [x] Import 'Tool' from 'lucide-react' does not exist.
+- [x] Cannot find name 'Book'.
+- [x] Type '"dataset"' or '"manuscript"' is not comparable to type 'ArchiveType'.
+- [x] JSX elements cannot have multiple attributes with the same name.
+- [x] Argument of type '"video" | "pdf" | "dataset" | "manuscript"' is not assignable to parameter of type 'ArchiveType'.
+
+## components/category-header.tsx, components/post-header.tsx, components/tag-header.tsx, components/verse-header.tsx
+- [x] Property 'toString' does not exist on type 'never'.
+
+## components/CodeGenerator.tsx
+- [x] Property 'toString' does not exist on type 'never'.
+
+## components/commento.tsx
+- [ ] Subsequent property declarations must have the same type for 'MathJax'.
+- [ ] window.MathJax.typeset() missing argument.
+
+## components/contact-form.tsx
+- [ ] 'reason' is specified more than once, so this usage will be overwritten.
+- [ ] Type 'File | undefined' is not assignable to type 'string | number | readonly string[] | undefined'.
+
+## components/directory-category-header.tsx, components/directory-page-header.tsx, components/docs/docs-header.tsx
+- [ ] Argument of type 'Date' is not assignable to parameter of type 'string'.
+
+## components/index.ts
+- [ ] Module './poetry' has no exported member 'PoetryComponent'.
+- [ ] Module './ui' has already exported a member named 'Pagination'.
+
+## components/my-book-list.tsx
+- [ ] Type 'string' is not assignable to type '"free" | "paid"' for 'access'.
+
+## components/poetry/index.ts
+- [ ] Cannot find module './poetry'.
+
+## components/post-map.tsx
+- [ ] Property 'id' does not exist on type 'TextContentBlock'.
+- [ ] Property 'type' does not exist on type 'never'.
+
+## components/project-modal.tsx
+- [ ] 'ProjectCard' refers to a value, but is being used as a type here.
+
+## components/trakt/trakt-episode-card.tsx, components/trakt/trakt-movie-card.tsx, components/trakt/trakt-show-card.tsx
+- [ ] Property 'subtitle' does not exist on type 'FavoriteCardProps'.
+
+## components/ui/chart.tsx
+- [ ] Property 'label' and 'icon' do not exist on type 'PayloadConfig'.
+- [ ] Argument of type 'Payload' is not assignable to parameter of type 'Payload<any, any>'.
+
+## components/ui/dialog-alt.tsx
+- [ ] Property 'className' does not exist on type 'DialogPortalProps'.
+
+## components/universal-link-modal.tsx
+- [ ] useEffect return type is not assignable.
+- [ ] Property 'referrerpolicy' does not exist on type 'IframeHTMLAttributes'.
+
+## components/verse-header.tsx
+- [ ] Property 'toString' does not exist on type 'never'.
+
+---
+# Start fixing these errors one by one and check them off as you go.

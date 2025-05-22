@@ -43,8 +43,8 @@ export default async function TagPage({
               subtitle={tagData.subtitle}
               date={tagData.date}
               preview={tagData.preview}
-              status={tagData.status || "Draft"}
-              confidence={tagData.confidence || "possible"}
+              status={(tagData.status || "Draft") as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"}
+              confidence={(tagData.confidence || "possible") as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"}
               importance={tagData.importance || 5}
               className="mb-12"
             />

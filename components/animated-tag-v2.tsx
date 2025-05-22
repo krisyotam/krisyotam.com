@@ -76,7 +76,7 @@ export function AnimatedTagV2({ text, href, className }: AnimatedTagV2Props) {
   }, [])
 
   const TagComponent = href ? Link : "span"
-  const tagProps = href ? { href, target: "_blank", rel: "noopener noreferrer" } : {}
+  const tagProps = href ? { href } : {}
 
   return (
     <TagComponent

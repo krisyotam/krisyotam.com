@@ -18,7 +18,6 @@ const reasonSchema = z.object({
 const collaborateSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
-  reason: z.literal("collaborate"),
   message: z.string().min(10, "Message must be at least 10 characters"),
   cvUpload: z.instanceof(File).optional(),
   projectDetails: z.string().min(10, "Please provide some details about your project"),
@@ -163,11 +162,18 @@ export function ContactForm() {
             <FormField
               control={form.control}
               name="cvUpload"
-              render={({ field }) => (
+              render={({ field: { value, onChange, ...field } }) => (
                 <FormItem>
                   <FormLabel>CV Upload (Optional)</FormLabel>
                   <FormControl>
-                    <Input {...field} type="file" />
+                    <Input
+                      type="file"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        onChange(file);
+                      }}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

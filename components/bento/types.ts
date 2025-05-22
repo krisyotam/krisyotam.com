@@ -80,4 +80,4 @@ interface ArticleItem extends BaseItem {
   readingTime?: string
 }
 
-type Item = LinkItem | ProjectItem | SocialItem | ToolItem | BookItem | ArticleItem | PaintingItem | PoemItem | QuoteItem | MovieItem | BaseItem 
+export type Item = LinkItem | ProjectItem | SocialItem | ToolItem | BookItem | ArticleItem | PaintingItem | PoemItem | QuoteItem | MovieItem | BaseItem 

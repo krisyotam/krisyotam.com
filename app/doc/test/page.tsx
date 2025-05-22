@@ -5,6 +5,24 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
+function isErrorWithMessage(error: unknown): error is { message: string } {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "message" in error &&
+    typeof (error as Record<string, unknown>).message === "string"
+  )
+}
+
+function toErrorWithMessage(maybeError: unknown): { message: string } {
+  if (isErrorWithMessage(maybeError)) return maybeError
+  try {
+    return new Error(JSON.stringify(maybeError))
+  } catch {
+    return new Error(String(maybeError))
+  }
+}
+
 export default function DocTestPage() {
   const [references, setReferences] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -35,14 +53,16 @@ export default function DocTestPage() {
             const modifiedJson = dataStr.substring(startBracket) + '...]'
             const data = JSON.parse(modifiedJson)
             setReferences(Array.isArray(data) ? data : [])
-          } catch (parseError) {
-            setError(`Failed to parse references JSON: ${parseError.message}`)
+          } catch (parseError: unknown) {
+            const errorWithMessage = toErrorWithMessage(parseError)
+            setError(`Failed to parse references JSON: ${errorWithMessage.message}`)
           }
         } else {
           setError(`references.json does not exist: ${debugData.file?.path}`)
         }
-      } catch (err) {
-        setError(`Failed to load references: ${err.message}`)
+      } catch (err: unknown) {
+        const errorWithMessage = toErrorWithMessage(err)
+        setError(`Failed to load references: ${errorWithMessage.message}`)
       } finally {
         setLoading(false)
       }

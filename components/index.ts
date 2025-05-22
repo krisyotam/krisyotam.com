@@ -32,7 +32,7 @@ export { MyBookList } from './my-book-list';
 // Typography Components
 export { default as Dropcap } from './dropcap';
 export { default as Inflation } from './inflation';
-export { Poetry } from './poetry';
+export { PoetryComponent as Poetry } from './poetry';
 // MarginNote already exported above
 // Footnotes already exported above
 
@@ -94,4 +94,7 @@ export * from './art';
 export * from './anime';
 export * from './trakt';
 export * from './predictions';
-export * from './progymnasmata'; 
+export * from './progymnasmata';
+
+export { Pagination as PaginationComponent } from './ui';
+export { FavoriteCard as FavoriteCardComponent } from './anime'; 

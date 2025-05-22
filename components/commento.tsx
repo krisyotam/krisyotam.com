@@ -132,7 +132,8 @@ export function Commento() {
 
       // Render LaTeX in comments
       if (window.MathJax) {
-        window.MathJax.typeset()
+        const elements = document.querySelectorAll('.commento-comment-text');
+        window.MathJax.typeset(Array.from(elements));
       }
     }, 1000) // Wait 1 second for Commento to load comments
   }

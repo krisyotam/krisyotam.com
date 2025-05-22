@@ -22,6 +22,7 @@ import { PageDescription } from "@/components/posts/typography/page-description"
 // Add docs page metadata
 const docsPageData = {
   title: "Docs",
+  subtitle: "AI Research Documents",
   date: new Date().toISOString(),
   preview:
     "archived collection of my deep research docs from various models",

@@ -3,6 +3,24 @@ import { promises as fs } from 'fs';
 import path from 'path';
 
 // Debug route to check if routes are working and test file access
+function isErrorWithMessage(error: unknown): error is { message: string; stack?: string; name?: string } {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "message" in error &&
+    typeof (error as Record<string, unknown>).message === "string"
+  )
+}
+
+function toErrorWithMessage(maybeError: unknown): { message: string; stack?: string; name?: string } {
+  if (isErrorWithMessage(maybeError)) return maybeError
+  try {
+    return new Error(JSON.stringify(maybeError))
+  } catch {
+    return new Error(String(maybeError))
+  }
+}
+
 export async function GET(request: NextRequest) {
   try {
     // Try to load references.json
@@ -13,8 +31,9 @@ export async function GET(request: NextRequest) {
     try {
       fileContent = await fs.readFile(dataPath, 'utf8');
       fileExists = true;
-    } catch (fileError) {
-      fileContent = `Error reading file: ${fileError.message}`;
+    } catch (fileError: unknown) {
+      const errorWithMessage = toErrorWithMessage(fileError);
+      fileContent = `Error reading file: ${errorWithMessage.message}`;
     }
 
     // Return a JSON response with debugging info
@@ -35,14 +54,15 @@ export async function GET(request: NextRequest) {
         nextPublicEnv: process.env.NEXT_PUBLIC_ENV || 'not set'
       }
     });
-  } catch (error) {
+  } catch (error: unknown) {
+    const errorWithMessage = toErrorWithMessage(error);
     // Return detailed error information
     return NextResponse.json({
       success: false,
       error: {
-        message: error.message,
-        stack: error.stack,
-        name: error.name
+        message: errorWithMessage.message,
+        stack: errorWithMessage.stack,
+        name: errorWithMessage.name
       }
     }, { status: 500 });
   }

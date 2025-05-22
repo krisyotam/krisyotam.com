@@ -20,8 +20,8 @@ interface CategoryData {
   date: string
   preview?: string
   status: string
-  confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"
-  importance: number
+  confidence?: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"
+  importance?: number
 }
 
 interface CategoryClientProps {

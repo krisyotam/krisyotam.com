@@ -45,7 +45,7 @@ export function TraktMovieCard({ id, title, year, posterUrl }: TraktMovieCardPro
         },
         url: `https://trakt.tv/movies/${id}`,
       }}
-      type="movie"
+      type="anime"
       isCompany={false}
       subtitle={year ? `${year}` : undefined}
       onImageError={() => {

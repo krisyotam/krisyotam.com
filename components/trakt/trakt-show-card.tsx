@@ -45,7 +45,7 @@ export function TraktShowCard({ id, title, year, posterUrl }: TraktShowCardProps
         },
         url: `https://trakt.tv/shows/${id}`,
       }}
-      type="show"
+      type="anime"
       isCompany={false}
       subtitle={year ? `${year}` : undefined}
       onImageError={() => {

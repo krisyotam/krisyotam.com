@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/badge"
 import { PasswordDialog } from "@/components/password-dialog"
 import { Input } from "@/components/ui/input"
 import { PageDescription } from "@/components/posts/typography/page-description"
+import type { LectureNote } from "@/types/lecture-note"
 
 // Add lecture notes page metadata
 const lectureNotesPageData = {
@@ -29,26 +30,6 @@ const lectureNotesPageData = {
   status: "In Progress" as const,
   confidence: "likely" as const,
   importance: 8,
-}
-
-interface LectureNote {
-  id: string
-  title: string
-  abstract: string
-  importance: string | number
-  authors: string[]
-  subject: string
-  keywords: string[]
-  postedBy: string
-  postedOn: string
-  dateStarted: string
-  status: string
-  bibliography: string[]
-  img?: string
-  pdfLink: string
-  sourceLink: string
-  category: string
-  tags: string[]
 }
 
 function slugifyCategory(category: string) {

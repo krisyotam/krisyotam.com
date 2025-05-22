@@ -102,7 +102,7 @@ export async function getArchivedNowPosts(): Promise<NowPost[]> {
 export function formatNowDate(dateString: string): string {
   try {
     const date = new Date(dateString)
-    return formatDate(date)
+    return formatDate(date.toString())
   } catch (error) {
     return dateString
   }

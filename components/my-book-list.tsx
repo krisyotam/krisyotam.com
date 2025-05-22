@@ -19,6 +19,7 @@ interface Book {
   classification: string
   category: string
   tags: string[]
+  status?: string
 }
 
 export function MyBookList() {

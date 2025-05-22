@@ -53,7 +53,7 @@ export default function Footnotes({ notes = [], className }: FootnotesProps) {
         <div className="space-y-2">
           {currentEntries.map((note) => (
             <button
-              key={note.id}
+              key={String(note.id)}
               className="w-full text-left py-1.5 px-2 hover:bg-secondary transition-colors flex items-start gap-2 text-xs"
               onClick={() => openNote(note)}
             >

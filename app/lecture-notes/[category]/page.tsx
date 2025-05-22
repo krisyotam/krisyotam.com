@@ -1,25 +1,7 @@
 import { LectureNotesClient } from "../lecture-notes-client"
 import lectureNotesData from "@/data/lecture-notes.json"
 import type { Metadata } from "next"
-
-interface LectureNote {
-  id: string
-  title: string
-  abstract: string
-  importance: string | number
-  authors: string[]
-  subject: string
-  keywords: string[]
-  postedBy: string
-  postedOn: string
-  dateStarted: string
-  status: string
-  bibliography: string[]
-  pdfLink: string
-  sourceLink: string
-  category: string
-  tags: string[]
-}
+import type { LectureNote } from "@/types/lecture-note"
 
 function slugifyCategory(category: string) {
   return category.toLowerCase().replace(/\s+/g, "-")

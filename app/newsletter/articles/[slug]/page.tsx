@@ -52,7 +52,7 @@ export default async function NewsletterArticlePage({ params }: NewsletterPagePr
   // Format date from MM-DD-YY to Month DD, YYYY
   const formatDate = (dateStr: string) => {
     const [month, day, year] = dateStr.split("-")
-    const date = new Date(`20${year}`, Number.parseInt(month) - 1, Number.parseInt(day))
+    const date = new Date(2000 + Number.parseInt(year), Number.parseInt(month) - 1, Number.parseInt(day))
     return date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
   }
 

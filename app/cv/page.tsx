@@ -7,8 +7,42 @@ import { Button } from "@/components/ui/button"
 import { Download } from "lucide-react"
 import cv from "@/data/cv" // Ensure this is the correct import path
 import { useRef } from "react"
+import type { Metadata } from "next"
 
-export default function ResumePage() {
+interface CV {
+  name: string
+  title: string
+  email: string
+  phone: string
+  location: string
+  summary: string
+  experience: Array<{
+    company: string
+    title: string
+    startDate: string
+    endDate: string
+    description: string
+  }>
+  education: Array<{
+    school: string
+    degree: string
+    startDate: string
+    endDate: string
+  }>
+  skills: string[]
+  contact: {
+    email: string
+    phone: string
+    location: string
+  }
+}
+
+export const metadata: Metadata = {
+  title: `${cv.name} - ${cv.title}`,
+  description: cv.summary,
+}
+
+export default function CVPage() {
   const resumeRef = useRef<HTMLDivElement>(null)
 
   const handlePrint = () => {

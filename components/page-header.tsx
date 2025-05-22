@@ -9,6 +9,7 @@ interface PageHeaderProps {
   subtitle?: string
   date: string
   preview?: string
+  description?: string
   status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
   confidence?:
     | "impossible"
@@ -93,6 +94,7 @@ export function PageHeader({
   subtitle,
   date,
   preview,
+  description,
   status = "Draft",
   confidence = "possible",
   importance = 5,

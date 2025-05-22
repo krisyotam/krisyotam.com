@@ -6,13 +6,16 @@ import { DirectoryPageHeader } from "@/components/directory-page-header"
 import { DirectoryCategoryHeader } from "@/components/directory-category-header"
 import "./directory.css"
 
+type Status = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
+type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"
+
 interface DirectoryItem {
   title: string
   subtitle: string
   date: string
   preview: string
-  status: string
-  confidence: string
+  status: Status
+  confidence: Confidence
   importance: number
   path: string
   type: "page" | "category"
@@ -107,8 +110,8 @@ export default function DirectoryClient() {
                   subtitle={item.subtitle}
                   date={item.date}
                   preview={item.preview}
-                  status={item.status}
-                  confidence={item.confidence}
+                  status={item.status as Status}
+                  confidence={item.confidence as Confidence}
                   importance={item.importance}
                   path={item.path}
                 />
@@ -118,8 +121,8 @@ export default function DirectoryClient() {
                   subtitle={item.subtitle}
                   date={item.date}
                   preview={item.preview}
-                  status={item.status}
-                  confidence={item.confidence}
+                  status={item.status as Status}
+                  confidence={item.confidence as Confidence}
                   importance={item.importance}
                   path={item.path}
                   slug={item.slug || ""}

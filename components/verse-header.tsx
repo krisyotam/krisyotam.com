@@ -141,10 +141,10 @@ export function VerseHeader({
         {/* Date above other metadata */}
         <div className="text-center mb-4">
           <time
-            dateTime={typeof date === "string" ? date : undefined}
+            dateTime={date}
             className="font-mono text-sm text-muted-foreground"
           >
-            {typeof date === "string" ? formatDate(new Date(date)) : date}
+            {formatDate(date)}
           </time>
         </div>
 

@@ -2,20 +2,26 @@ import essaysData from "@/data/essays.json";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { EssaysDetail } from "./essays-detail";
+import type { Essay } from "@/types/essay"
 
-interface Essay {
+interface EssayData {
   id: string;
   title: string;
-  importance: string | number;
+  abstract: string;
+  importance: number;
+  confidence: string;
   authors: string[];
+  subject: string;
+  keywords: string[];
   postedBy: string;
   postedOn: string;
   dateStarted: string;
-  status: string;
-  pdfLink: string;
-  sourceLink: string;
-  category: string;
   tags: string[];
+  img?: string;
+  status: string;
+  pdfLink?: string;
+  sourceLink?: string;
+  category: string;
 }
 
 function slugifyTitle(title: string) {
@@ -27,9 +33,9 @@ function slugifyCategory(category: string) {
 }
 
 export async function generateStaticParams() {
-  const essays = essaysData as Essay[];
+  const essays = essaysData as EssayData[];
   return essays.map((item) => ({
-    category: slugifyCategory(item.category),
+    category: slugifyCategory(item.subject),
     year: new Date(item.dateStarted).getFullYear().toString(),
     slug: slugifyTitle(item.title),
   }));
@@ -42,9 +48,9 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   // Find the essay item by category, year, and slug
   const y = parseInt(params.year, 10);
-  const essays = essaysData as Essay[];
+  const essays = essaysData as EssayData[];
   const item = essays.find((r) => {
-    const categorySlug = slugifyCategory(r.category);
+    const categorySlug = slugifyCategory(r.subject);
     const itemYear = new Date(r.dateStarted).getFullYear();
     const titleSlug = slugifyTitle(r.title);
     return categorySlug === params.category && itemYear === y && titleSlug === params.slug;
@@ -62,7 +68,7 @@ export async function generateMetadata(
 
   // Construct metadata with OpenGraph properties
   return {
-    title: `${item.title} | ${item.category} | Kris Yotam`,
+    title: `${item.title} | ${item.subject} | Kris Yotam`,
     description: item.abstract,
     openGraph: {
       title: item.title,
@@ -70,7 +76,7 @@ export async function generateMetadata(
       type: "article",
       publishedTime: item.postedOn,
       authors: item.authors,
-      tags: item.tags || [],
+      tags: item.keywords || [],
       images: [
         {
           url: "https://i.postimg.cc/jSDMT1Sn/research.png",
@@ -98,9 +104,9 @@ export default function EssayPage({
   if (isNaN(y)) notFound();
 
   // Find the essay item
-  const essays = essaysData as Essay[];
+  const essays = essaysData as EssayData[];
   const item = essays.find((r) => {
-    const categorySlug = slugifyCategory(r.category);
+    const categorySlug = slugifyCategory(r.subject);
     const itemYear = new Date(r.dateStarted).getFullYear();
     const titleSlug = slugifyTitle(r.title);
     return categorySlug === params.category && itemYear === y && titleSlug === params.slug;
@@ -108,5 +114,10 @@ export default function EssayPage({
 
   if (!item) notFound();
 
-  return <EssaysDetail essay={item} />;
+  const essay: Essay = {
+    ...item,
+    img: item.img || ""
+  };
+
+  return <EssaysDetail essay={essay} />;
 } 

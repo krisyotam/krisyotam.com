@@ -1,3 +1,6 @@
+import { cn } from "@/lib/utils"
+import Link from "next/link"
+
 interface Tag {
   id: string;
   name: string;

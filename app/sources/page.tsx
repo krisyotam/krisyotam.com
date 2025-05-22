@@ -16,8 +16,8 @@ export default function SourcesPage() {
         subtitle="Messages and communications that have inspired content"
         date="2025-03-30"
         preview="A collection of emails, messages, and other communications that have inspired content on this site."
-        status="In Progress"
-        confidence="likely"
+        status={"In Progress" as const}
+        confidence={"likely" as const}
         importance={6}
         className="mb-8"
       />

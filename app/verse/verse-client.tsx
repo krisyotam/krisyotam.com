@@ -24,7 +24,7 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
     const matchesType = currentType === "All" || poem.type === currentType;
     const matchesSearch = !searchQuery || 
       poem.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-      poem.content.toLowerCase().includes(searchQuery.toLowerCase());
+      (poem.content?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false);
     return matchesType && matchesSearch;
   });
 

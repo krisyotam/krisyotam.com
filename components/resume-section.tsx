@@ -42,7 +42,7 @@ export function ResumeSection({ title, items }: ResumeSectionProps) {
       case "Experience":
       case "Education":
         return items.map((item) => {
-          if (item.type === "experience") {
+          if ('organization' in item && 'location' in item && 'startDate' in item && 'endDate' in item) {
             return (
               <ResumeItem
                 key={item.title}
@@ -57,7 +57,7 @@ export function ResumeSection({ title, items }: ResumeSectionProps) {
             )
           }
 
-          if (item.type === "skill") {
+          if ('category' in item && 'skills' in item) {
             return (
               <div key={item.category}>
                 <h4 className="font-medium">{item.category}</h4>
@@ -66,7 +66,7 @@ export function ResumeSection({ title, items }: ResumeSectionProps) {
             )
           }
 
-          if (item.type === "technology") {
+          if ('technologies' in item && 'date' in item) {
             return (
               <ResumeItem
                 key={item.title}
@@ -79,7 +79,7 @@ export function ResumeSection({ title, items }: ResumeSectionProps) {
             )
           }
 
-          if (item.type === "certification") {
+          if ('issuer' in item && 'date' in item) {
             return (
               <ResumeItem
                 key={item.title}
@@ -95,26 +95,36 @@ export function ResumeSection({ title, items }: ResumeSectionProps) {
           return null
         })
       case "Projects":
-        return items.map((item, index) => (
-          <ResumeItem
-            key={index}
-            title={item.title}
-            organization={item.technologies}
-            startDate={item.date}
-            description={item.description}
-            highlights={item.highlights}
-          />
-        ))
+        return items.map((item, index) => {
+          if ('technologies' in item && 'date' in item) {
+            return (
+              <ResumeItem
+                key={index}
+                title={item.title}
+                organization={item.technologies}
+                startDate={item.date}
+                description={item.description}
+                highlights={item.highlights}
+              />
+            )
+          }
+          return null
+        })
       case "Certifications":
-        return items.map((item, index) => (
-          <ResumeItem
-            key={index}
-            title={item.title}
-            organization={item.issuer}
-            startDate={item.date}
-            description={item.description}
-          />
-        ))
+        return items.map((item, index) => {
+          if ('issuer' in item && 'date' in item) {
+            return (
+              <ResumeItem
+                key={index}
+                title={item.title}
+                organization={item.issuer}
+                startDate={item.date}
+                description={item.description}
+              />
+            )
+          }
+          return null
+        })
       default:
         return null
     }

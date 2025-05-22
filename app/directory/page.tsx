@@ -15,7 +15,7 @@ export default async function DirectoryPage() {
         subtitle="Complete Index of Pages & Categories"
         date={new Date().toISOString()}
         preview="A comprehensive listing of all pages and content categories available on this website, organized for easy navigation and discovery."
-        status="Complete"
+        status="Finished"
         confidence="certain"
         importance={8}
       />

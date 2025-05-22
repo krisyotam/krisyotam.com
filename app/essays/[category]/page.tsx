@@ -2,21 +2,7 @@ import type { Metadata } from "next"
 import { EssaysClient } from "../essays-client"
 import essaysData from "@/data/essays.json"
 import { notFound } from "next/navigation"
-
-interface Essay {
-  id: string
-  title: string
-  importance: string | number
-  authors: string[]
-  postedBy: string
-  postedOn: string
-  dateStarted: string
-  status: string
-  pdfLink: string
-  sourceLink: string
-  category: string
-  tags: string[]
-}
+import type { Essay } from "@/types/essay"
 
 // Generate metadata dynamically based on the essay category
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {

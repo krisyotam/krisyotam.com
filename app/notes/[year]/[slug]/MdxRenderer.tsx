@@ -9,8 +9,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 
 const components = {
-  MyComponent, // Allow <MyComponent /> inside mdx
-  // Add more components if you want
+  // Add components here if needed
 };
 
 export default function MdxRenderer({ source }: { source: MDXRemoteSerializeResult }) {

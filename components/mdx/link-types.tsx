@@ -1,6 +1,6 @@
 import type React from "react"
 import { Book, FileText, ShoppingBag } from "lucide-react"
-import { A } from "@/components/typography/a"
+import { A } from "@/components/mdx/a"
 
 interface LinkProps {
   href: string
@@ -44,6 +44,30 @@ export function ItemLink({ href, children, title }: LinkProps) {
         {children}
       </A>
     </span>
+  )
+}
+
+export function ExternalLink({ href, title, children }: AProps) {
+  return (
+    <A href={href} title={title}>
+      {children}
+    </A>
+  )
+}
+
+export function InternalLink({ href, title, children }: AProps) {
+  return (
+    <A href={href} title={title}>
+      {children}
+    </A>
+  )
+}
+
+export function AnchorLink({ href, title, children }: AProps) {
+  return (
+    <A href={href} title={title}>
+      {children}
+    </A>
   )
 }
 

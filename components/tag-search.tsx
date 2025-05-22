@@ -1,3 +1,7 @@
+import { useState } from "react"
+import { cn } from "@/lib/utils"
+import { Input } from "@/components/ui/input"
+
 interface Tag {
   id: string;
   name: string;
@@ -10,9 +14,10 @@ interface TagSearchProps {
   tags: Tag[];
   onSelect: (tag: Tag) => void;
   className?: string;
+  onSearch: (query: string) => void;
 }
 
-export function TagSearch({ tags, onSelect, className }: TagSearchProps) {
+export function TagSearch({ tags, onSelect, className, onSearch }: TagSearchProps) {
   const [search, setSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,7 +31,10 @@ export function TagSearch({ tags, onSelect, className }: TagSearchProps) {
         type="text"
         placeholder="Search tags..."
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => {
+          setSearch(e.target.value)
+          onSearch(e.target.value)
+        }}
         onFocus={() => setIsOpen(true)}
         className="w-full"
       />

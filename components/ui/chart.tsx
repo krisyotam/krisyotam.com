@@ -2,53 +2,50 @@
 
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
+import type { Payload } from "recharts/types/component/DefaultTooltipContent"
 
 import { cn } from "@/lib/utils"
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const
 
-export type ChartConfig = {
-  type: "line" | "bar" | "pie" | "doughnut"
-  data: {
-    labels: string[]
-    datasets: {
-      label: string
-      data: number[]
-      backgroundColor?: string | string[]
-      borderColor?: string | string[]
-      borderWidth?: number
-      fill?: boolean
-      tension?: number
-    }[]
-  }
-  options?: {
-    responsive?: boolean
-    maintainAspectRatio?: boolean
-    plugins?: {
-      legend?: {
-        display?: boolean
-        position?: "top" | "bottom" | "left" | "right"
-      }
-      tooltip?: {
-        enabled?: boolean
-      }
+interface ChartConfig {
+  [key: string]: {
+    theme?: {
+      [key: string]: string
     }
-    scales?: {
-      x?: {
-        display?: boolean
-        grid?: {
-          display?: boolean
-        }
-      }
-      y?: {
-        display?: boolean
-        grid?: {
-          display?: boolean
-        }
-      }
-    }
+    color?: string
+    label?: string
   }
+}
+
+interface PayloadConfig {
+  dataKey?: string
+  name?: string
+  value?: number
+  payload?: {
+    fill?: string
+  }
+  color?: string
+}
+
+const getPayloadConfigFromPayload = (
+  config: ChartConfig,
+  item: Payload<any, any>,
+  key: string
+): PayloadConfig => {
+  const itemConfig = config[key] || {}
+  return {
+    dataKey: typeof item.dataKey === 'string' ? item.dataKey : undefined,
+    name: item.name,
+    value: item.value,
+    payload: item.payload,
+    color: itemConfig.theme?.[key] || itemConfig.color
+  }
+}
+
+const getConfigFromKey = (config: ChartConfig, key: string) => {
+  return config[key] || {}
 }
 
 type ChartContextProps = {
@@ -348,23 +345,6 @@ const ChartLegendContent = React.forwardRef<
   }
 )
 ChartLegendContent.displayName = "ChartLegend"
-
-// Helper to extract item config from a payload.
-function getPayloadConfigFromPayload(
-  config: ChartConfig,
-  payload: {
-    dataKey?: string;
-    name?: string;
-    value?: number;
-    payload?: {
-      fill?: string;
-    };
-    color?: string;
-  },
-  key: string
-) {
-  return config[key]
-}
 
 export {
   ChartContainer,

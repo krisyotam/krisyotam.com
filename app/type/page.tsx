@@ -222,7 +222,7 @@ async function ActivityCard() {
     const { testsByDays } = activity
 
     // Prepare data for heatmap
-    const heatmapData = testsByDays.map((count, index) => {
+    const heatmapData = testsByDays.map((count: number, index: number) => {
       const date = new Date()
       date.setDate(date.getDate() - (testsByDays.length - 1 - index))
       return {
@@ -287,7 +287,16 @@ async function RecentResultsCard() {
               </tr>
             </thead>
             <tbody>
-              {results.map((result, index) => (
+              {results.map((result: {
+                timestamp: string;
+                mode: string;
+                mode2: string;
+                isPb: boolean;
+                wpm: number;
+                acc: number;
+                consistency?: number;
+                testDuration: number;
+              }, index: number) => (
                 <tr key={index} className="border-b hover:bg-muted/50">
                   <td className="py-2">{new Date(result.timestamp).toLocaleDateString()}</td>
                   <td className="py-2">

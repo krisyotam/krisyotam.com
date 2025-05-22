@@ -115,7 +115,7 @@ export default function Companies() {
                 <CardContent className="p-4">
                   <h3 className="text-lg font-semibold mb-2">Projects</h3>
                   <ul className="list-disc list-inside">
-                    {selectedCompany?.projects.map((project, index) => (
+                    {selectedCompany?.projects.map((project: string, index: number) => (
                       <li key={index}>{project}</li>
                     ))}
                   </ul>

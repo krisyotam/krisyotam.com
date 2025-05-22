@@ -34,11 +34,6 @@ const styles = {
     display: "flex",
     flexDirection: "column" as const,
   },
-  mediaQuery: {
-    "@media (min-width: 768px)": {
-      flexDirection: "row" as const,
-    },
-  },
 }
 
 // Function to process LaTeX in text
@@ -92,7 +87,6 @@ export function Nugget({ nugget, className }: { nugget: NuggetData; className?: 
       >
         <div
           className="nugget-header md:w-1/4 flex flex-col"
-          style={styles.mediaQuery}
         >
           <h3
             className="nugget-title text-base font-normal mb-1"
@@ -148,7 +142,6 @@ export function Nugget({ nugget, className }: { nugget: NuggetData; className?: 
 
         <div
           className="nugget-content md:w-3/4"
-          style={styles.mediaQuery}
         >
           <div
             className="nugget-text prose prose-sm text-gray-800 mb-2"

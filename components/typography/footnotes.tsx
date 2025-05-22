@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import { A } from "./a"
+import { A } from "@/components/mdx/a"
 import { P } from "./p"
 
 export const FootNotes = ({ children }: { children: ReactNode }) => (
@@ -13,6 +13,21 @@ export const Ref = ({ id }: { id: string }) => (
     [{id}]
   </a>
 )
+
+interface AProps {
+  href: string
+  id?: string
+  className?: string
+  children: React.ReactNode
+}
+
+export function Footnote({ id, children }: { id: string; children: string }) {
+  return (
+    <A href={`#s${id}`} id={`f${id}`} className="no-underline">
+      {children}
+    </A>
+  )
+}
 
 export const FootNote = ({ id, children }: { id: string; children: ReactNode }) => (
   <P>

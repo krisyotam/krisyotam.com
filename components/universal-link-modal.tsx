@@ -6,6 +6,7 @@ import { X, Maximize2, ChevronLeft, ChevronRight, Copy, ExternalLink, Check, Min
 import { linkEvents } from "@/components/typography/a"
 import { usePathname } from "next/navigation"
 import bannedDomains from "@/data/banned-domains.json"
+import { cn } from "@/lib/utils"
 
 // Configuration
 const CONFIG = {
@@ -184,18 +185,24 @@ export function UniversalLinkModal() {
   }, [])
 
   const openInNewTab = useCallback((url: string) => {
-    window.open(url, "_blank", "noopener,noreferrer")
+    window.open(url, "_blank", "noopener,noreferrer,referrerPolicy=no-referrer")
   }, [])
 
   // Navigation
   const goToNextModal = useCallback(() => {
     if (focusedModalIndex === null || modals.length <= 1) return
-    setFocusedModalIndex((prevIndex) => (prevIndex + 1) % modals.length)
+    setFocusedModalIndex((prevIndex) => {
+      if (prevIndex === null) return 0
+      return (prevIndex + 1) % modals.length
+    })
   }, [focusedModalIndex, modals.length])
 
   const goToPrevModal = useCallback(() => {
     if (focusedModalIndex === null || modals.length <= 1) return
-    setFocusedModalIndex((prevIndex) => (prevIndex - 1 + modals.length) % modals.length)
+    setFocusedModalIndex((prevIndex) => {
+      if (prevIndex === null) return 0
+      return (prevIndex - 1 + modals.length) % modals.length
+    })
   }, [focusedModalIndex, modals.length])
 
   // Modal styles
@@ -386,20 +393,20 @@ export function UniversalLinkModal() {
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (focusedModalIndex === null) return
-
-      if (e.key === "ArrowLeft") {
-        goToPrevModal()
+      if (e.key === "Escape") {
+        setFocusedModalIndex(null)
       } else if (e.key === "ArrowRight") {
         goToNextModal()
-      } else if (e.key === "Escape") {
-        setFocusedModalIndex(null)
+      } else if (e.key === "ArrowLeft") {
+        goToPrevModal()
       }
     }
 
     window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [focusedModalIndex, goToPrevModal, goToNextModal])
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [setFocusedModalIndex, goToNextModal, goToPrevModal])
 
   // Handle custom event from settings menu for Bible search
   useEffect(() => {

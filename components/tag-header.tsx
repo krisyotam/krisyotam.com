@@ -139,10 +139,10 @@ export function TagHeader({
         {/* Date above other metadata */}
         <div className="text-center mb-4">
           <time
-            dateTime={typeof date === "string" ? date : undefined}
+            dateTime={date}
             className="font-mono text-sm text-muted-foreground"
           >
-            {typeof date === "string" ? formatDate(date) : date ? formatDate(date.toString()) : ""}
+            {formatDate(date)}
           </time>
         </div>
 

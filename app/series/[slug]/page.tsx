@@ -67,8 +67,8 @@ export default async function SeriesPage({ params }: SeriesPageProps) {
             subtitle={series.subtitle || ""}
             date={series.date}
             preview={series.preview || ""}
-            status={series.status}
-            confidence={series.confidence}
+            status={series.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"}
+            confidence={series.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"}
             importance={series.importance}
             backText="Series"
             backHref="/series"

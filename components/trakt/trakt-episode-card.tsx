@@ -3,6 +3,22 @@
 import { FavoriteCard } from "@/components/anime/anime-cards"
 import { useState, useEffect } from "react"
 
+interface FavoriteCardProps {
+  item: {
+    name: string
+    images: {
+      jpg: {
+        image_url: string
+      }
+    }
+    url: string
+  }
+  type: "anime"
+  isCompany: boolean
+  subtitle?: string
+  onImageError?: () => void
+}
+
 interface TraktEpisodeCardProps {
   id: number
   showTitle: string
@@ -56,7 +72,7 @@ export function TraktEpisodeCard({
         },
         url: `https://trakt.tv/shows/${id}/seasons/${season}/episodes/${episode}`,
       }}
-      type="episode"
+      type="anime"
       isCompany={false}
       subtitle={`S${season}:E${episode} - ${episodeTitle}`}
       onImageError={() => {

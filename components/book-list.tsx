@@ -1,7 +1,7 @@
 // components/book-list.tsx
 
 import { useMemo, useState } from "react";
-import { BookCard } from "./book-card"; // Import the new BookCard component
+import { BookCard } from "@/components/book-card"; // Import the new BookCard component
 import { Button } from "@/components/ui/button";
 
 // Define types for the books prop
@@ -21,6 +21,14 @@ interface BookListProps {
     category: string;
     tags: string[];
   }[]; // Book list from the JSON
+}
+
+interface BookCardProps {
+  key: string;
+  isbn: string;
+  title: string;
+  authors: string[];
+  rating: number;
 }
 
 export function BookList({ books }: BookListProps) {
@@ -88,7 +96,13 @@ export function BookList({ books }: BookListProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {filteredBooks.length > 0 ? (
           filteredBooks.map((book) => (
-            <BookCard key={book.isbn} isbn={book.isbn} />
+            <BookCard
+              key={book.isbn}
+              isbn={book.isbn}
+              title={book.title}
+              authors={book.authors}
+              rating={0}
+            />
           ))
         ) : (
           <p className="text-center text-muted-foreground py-8 col-span-2">No books found matching your criteria.</p>
