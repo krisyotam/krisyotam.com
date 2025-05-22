@@ -17,9 +17,8 @@ export async function GET() {
     
     const othersData = JSON.parse(fileContent)
 
-    return NextResponse.json(othersData)
-  } catch (error) {
-    console.error("Error reading others data:", error)
+    return NextResponse.json(othersData)  } catch (error) {
+    console.error("Error reading others data:", error instanceof Error ? error.message : String(error))
     return NextResponse.json({ error: "Failed to fetch others data" }, { status: 500 })
   }
 } 

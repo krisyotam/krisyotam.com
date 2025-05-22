@@ -39,9 +39,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Entry not found" }, { status: 404 })
     }
 
-    return NextResponse.json(entry)
-  } catch (error) {
-    console.error("Error fetching others entry:", error)
+    return NextResponse.json(entry)  } catch (error) {
+    console.error("Error fetching others entry:", error instanceof Error ? error.message : String(error))
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 } 

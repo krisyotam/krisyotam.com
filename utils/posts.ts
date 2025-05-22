@@ -78,8 +78,7 @@ async function readDataFile<T>(filename: string): Promise<T | null> {
     path.join(process.cwd(), "..", "data", filename),
     path.join(process.cwd(), "public", "data", filename)
   ]
-  
-  console.log(`Attempting to read data file: ${filename}`)
+    console.log(`Attempting to read data file: ${filename}`)
   console.log(`Current working directory: ${process.cwd()}`)
   
   // Try each path until one works
@@ -99,12 +98,12 @@ async function readDataFile<T>(filename: string): Promise<T | null> {
       try {
         return JSON.parse(contents) as T
       } catch (parseError) {
-        console.error(`Error parsing JSON from ${filename}:`, parseError)
+        console.error(`Error parsing JSON from ${filename}:`, parseError instanceof Error ? parseError.message : String(parseError))
         console.error(`Content sample: ${contents.substring(0, 100)}...`)
         break
       }
     } catch (e) {
-      console.log(`Error reading from ${fullPath}:`, e)
+      console.log(`Error reading from ${fullPath}:`, e instanceof Error ? e.message : String(e))
       continue
     }
   }
@@ -244,15 +243,14 @@ export async function getPostContent(year: string, slug: string) {
   
   console.log(`Attempting to load MDX for ${year}/${slug}`)
   console.log(`CWD: ${process.cwd()}`)
-  
-  for (const mdxPath of possiblePaths) {
+    for (const mdxPath of possiblePaths) {
     try {
       console.log(`Trying path: ${mdxPath}`)
       const mdxData = await fs.readFile(mdxPath, "utf-8")
       console.log(`Successfully loaded MDX from ${mdxPath}`)
       return { isMDX: true, mdxData, blogPostExists: true }
     } catch (err) {
-      console.log(`Failed to load from ${mdxPath}: ${(err as Error).message}`)
+      console.log(`Failed to load from ${mdxPath}: ${err instanceof Error ? err.message : String(err)}`)
       // Continue to next path
     }
   }

@@ -28,15 +28,14 @@ export function middleware(request: NextRequest) {
       console.log(`feed.json exists: ${fs.existsSync(feedFile)}`);
       
       // List files in data directory
-      const dataDir = path.join(process.cwd(), 'data');
-      try {
+      const dataDir = path.join(process.cwd(), 'data');      try {
         const files = fs.readdirSync(dataDir);
         console.log(`Files in data directory: ${files.join(', ')}`);
       } catch (e) {
-        console.error(`Error listing data directory: ${e.message}`);
+        console.error(`Error listing data directory: ${e instanceof Error ? e.message : String(e)}`);
       }
     } catch (e) {
-      console.error(`Error in middleware file checks: ${e.message}`);
+      console.error(`Error in middleware file checks: ${e instanceof Error ? e.message : String(e)}`);
     }
     console.log('---------------');
   }
