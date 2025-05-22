@@ -22,9 +22,9 @@ interface LectureNote {
   postedOn: string;
   dateStarted: string;
   status: string;
-  bibliography: string[];
-  pdfLink: string;
-  sourceLink: string;
+  bibliography?: string[];
+  pdfLink?: string;
+  sourceLink?: string;
   category: string;
   tags: string[];
 }
@@ -77,7 +77,7 @@ export function LectureNoteDetail({ lectureNote }: { lectureNote: LectureNote })
               title={lectureNote.title}
               date={formattedDate}
               author={lectureNote.authors.join(", ")}
-              pdfUrl={lectureNote.pdfLink}
+              pdfUrl={lectureNote.pdfLink!} // Asserting pdfLink is non-null due to isPdfAvailable check
             />
           ) : (
             <>
@@ -103,7 +103,7 @@ export function LectureNoteDetail({ lectureNote }: { lectureNote: LectureNote })
               <Button
                 variant="outline"
                 className="flex items-center gap-2"
-                onClick={() => handleDownloadClick(lectureNote.pdfLink)}
+                onClick={() => handleDownloadClick(lectureNote.pdfLink!)} // Asserting pdfLink is non-null
               >
                 <Download className="h-4 w-4" />
                 Download PDF
@@ -122,7 +122,8 @@ export function LectureNoteDetail({ lectureNote }: { lectureNote: LectureNote })
             <Button
               variant="outline"
               className="flex items-center gap-2"
-              onClick={() => window.open(lectureNote.sourceLink, "_blank")}
+              onClick={() => lectureNote.sourceLink && window.open(lectureNote.sourceLink, "_blank")}
+              disabled={!lectureNote.sourceLink}
             >
               <ExternalLink className="h-4 w-4" />
               View Source

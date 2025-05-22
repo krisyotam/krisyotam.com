@@ -4,9 +4,12 @@ import { useRef, useEffect, useState } from "react"
 import Script from "next/script"
 import { RefreshCw } from "lucide-react"
 
+// Assuming MathJax types are handled by another global declaration or specific script imports.
+// This file will not redeclare window.MathJax.
+
 declare global {
   interface Window {
-    MathJax: MathJax;
+    // MathJax?: any; // Example if it were optional and potentially added by other scripts
   }
 }
 
@@ -125,7 +128,10 @@ export function Commento() {
       // Render LaTeX in comments
       if (window.MathJax) {
         const elements = document.querySelectorAll('.commento-comment-text');
-        window.MathJax.typeset(Array.from(elements));
+        const htmlElements = Array.from(elements).filter((el): el is HTMLElement => el instanceof HTMLElement);
+        if (htmlElements.length > 0) {
+          window.MathJax.typeset(htmlElements);
+        }
       }
     }, 1000) // Wait 1 second for Commento to load comments
   }

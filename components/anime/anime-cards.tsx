@@ -48,6 +48,8 @@ interface AnimeItem {
   link?: string;
   photolink?: string;
   description?: string;
+  num_episodes?: number; // Added to align with AnimeNode and usage in getTotal
+  num_chapters?: number; // Added to align with AnimeNode and usage in getTotal
 }
 
 // Helper function to get image URL with fallback

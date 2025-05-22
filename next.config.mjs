@@ -8,9 +8,15 @@ const baseConfig = {
   reactStrictMode: true,
   swcMinify: true,
 
-  // No build-time ignores for stability:
-  // eslint: { ignoreDuringBuilds: true },
-  // typescript: { ignoreBuildErrors: true },
+  // Ensure build-time error reporting is enabled
+  eslint: { ignoreDuringBuilds: false },
+  typescript: { ignoreBuildErrors: false },
+
+  // Static optimization and timeouts
+  staticPageGenerationTimeout: 120,
+
+  // Don't generate source maps in production
+  productionBrowserSourceMaps: false,
 
   images: {
     unoptimized: true,

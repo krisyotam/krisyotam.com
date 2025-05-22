@@ -25,20 +25,27 @@ interface EssayData {
 }
 
 function slugifyTitle(title: string) {
-  return title.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
+  return (title || "").toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
 }
 
 function slugifyCategory(category: string) {
-  return category.toLowerCase().replace(/\s+/g, "-");
+  return (category || "").toLowerCase().replace(/\s+/g, "-");
 }
 
 export async function generateStaticParams() {
   const essays = essaysData as EssayData[];
-  return essays.map((item) => ({
-    category: slugifyCategory(item.subject),
-    year: new Date(item.dateStarted).getFullYear().toString(),
-    slug: slugifyTitle(item.title),
-  }));
+  return essays
+    .filter(item => {
+      const categorySlug = slugifyCategory(item.subject);
+      const titleSlug = slugifyTitle(item.title);
+      // Ensure all parts of the slug are non-empty and date is valid
+      return categorySlug && titleSlug && item.dateStarted && !isNaN(new Date(item.dateStarted).getFullYear());
+    })
+    .map((item) => ({
+      category: slugifyCategory(item.subject),
+      year: new Date(item.dateStarted).getFullYear().toString(),
+      slug: slugifyTitle(item.title),
+    }));
 }
 
 // Generate metadata for each essay page

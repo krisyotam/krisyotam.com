@@ -387,7 +387,9 @@ export function UniversalLinkModal() {
     }
 
     const unsubscribe = linkEvents.addListener(handleLinkHover)
-    return unsubscribe
+    return () => {
+      unsubscribe() // Ensure the cleanup function returns void
+    }
   }, [isDomainBanned, shouldShowPreview, createModal])
 
   // Keyboard navigation

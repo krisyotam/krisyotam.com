@@ -19,7 +19,7 @@ interface SkillCategory {
 }
 
 interface ProjectItem extends BaseResumeItem {
-  technologies: string;
+  technologies: string[];
   date: string;
 }
 
@@ -71,7 +71,7 @@ export function ResumeSection({ title, items }: ResumeSectionProps) {
               <ResumeItem
                 key={item.title}
                 title={item.title}
-                organization={item.technologies}
+                organization={item.technologies.join(", ")}
                 startDate={item.date}
                 description={item.description}
                 highlights={item.highlights}
@@ -101,7 +101,7 @@ export function ResumeSection({ title, items }: ResumeSectionProps) {
               <ResumeItem
                 key={index}
                 title={item.title}
-                organization={item.technologies}
+                organization={item.technologies.join(", ")}
                 startDate={item.date}
                 description={item.description}
                 highlights={item.highlights}

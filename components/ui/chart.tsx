@@ -322,7 +322,16 @@ const ChartLegendContent = React.forwardRef<
       >
         {payload.map((item) => {
           const key = `${nameKey || item.dataKey || "value"}`
-          const itemConfig = getPayloadConfigFromPayload(config, item, key)
+          // Adjust item.type, formatter, and dataKey to satisfy getPayloadConfigFromPayload's expected type
+          const originalDataKey = item.dataKey;
+          const compatibleDataKey = typeof originalDataKey === 'function' ? undefined : originalDataKey;
+          const itemForConfig = { 
+            ...item, 
+            type: undefined as ("none" | undefined),
+            formatter: item.formatter as any, // Temporarily cast formatter
+            dataKey: compatibleDataKey, 
+          };
+          const itemConfig = getPayloadConfigFromPayload(config, itemForConfig, key)
 
           return (
             <div

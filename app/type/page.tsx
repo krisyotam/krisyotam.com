@@ -234,11 +234,11 @@ async function ActivityCard() {
     // Prepare data for line chart - limit to last 30 days for better performance
     const last30Days = heatmapData.slice(-30)
     const chartData = {
-      labels: last30Days.map((d) => d.date.split("-")[2]), // Just the day
+      labels: last30Days.map((d: { date: string; count: number }) => d.date.split("-")[2]), // Just the day
       datasets: [
         {
           label: "Tests",
-          data: last30Days.map((d) => d.count),
+          data: last30Days.map((d: { date: string; count: number }) => d.count),
         },
       ],
     }

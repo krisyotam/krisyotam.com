@@ -13,7 +13,11 @@ export function CodeGenerator() {
       const generatedCode = generateCode(ast)
       setOutput(generatedCode)
     } catch (error) {
-      setOutput(`Error: ${error.message}`)
+      if (error instanceof Error) {
+        setOutput(`Error: ${error.message}`)
+      } else {
+        setOutput(`An unknown error occurred: ${String(error)}`)
+      }
     }
   }
 
