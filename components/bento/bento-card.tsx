@@ -67,7 +67,8 @@ export default function BentoCard({ item }: { item: Item }) {
 // Preview Components
 function PaintingPreview({ item }: { item: PaintingItem }) {
   return (
-    <>      <div className="relative w-full h-48">
+    <>
+      <div className="relative w-full h-48">
         <Image
           src={item.imageUrl || "/placeholder.svg"}
           alt={item.title}
