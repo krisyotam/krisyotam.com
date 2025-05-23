@@ -20,6 +20,15 @@ import Movie from "@/components/posts/media/movie"
 export default function BentoCard({ item }: { item: Item }) {
   const [isOpen, setIsOpen] = useState(false)
 
+  // Prevent outline flash during view transitions
+  const noOutlineStyle = {
+    outline: 'none',
+    backfaceVisibility: 'hidden', 
+    WebkitBackfaceVisibility: 'hidden',
+    transform: 'translateZ(0)',
+    WebkitTransform: 'translateZ(0)'
+  } as React.CSSProperties
+
   const renderItemPreview = () => {
     switch (item.blockType) {
       case 'painting':
@@ -36,12 +45,12 @@ export default function BentoCard({ item }: { item: Item }) {
         return <DefaultPreview item={item} />
     }
   }
-
   return (
     <>
       <div 
-        className="group relative bg-card text-card-foreground shadow-sm transition-all cursor-pointer h-full flex flex-col overflow-hidden hover:shadow-md"
+        className="group relative bg-card text-card-foreground shadow-sm transition-transform cursor-pointer h-full flex flex-col overflow-hidden hover:shadow-md"
         onClick={() => setIsOpen(true)}
+        style={noOutlineStyle}
       >
         {renderItemPreview()}
       </div>
@@ -66,7 +75,7 @@ function PaintingPreview({ item }: { item: PaintingItem }) {
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        />
+          style={{ outline: 'none' }}
       </div>
       <div className="p-4 flex-grow flex flex-col">
         <h3 className="text-lg font-semibold mb-1">{item.title}</h3>

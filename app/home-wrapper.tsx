@@ -3,6 +3,7 @@
 import { getActivePosts, getAllPosts } from "../utils/posts"
 import quotesData from "../data/header-quotes.json"
 import { HomeClient } from "@/components/home-client"
+import FixOutlineIssue from "@/components/fix-outline-issue"
 
 function getRandomQuote() {
   const quotes = quotesData.quotes
@@ -59,7 +60,12 @@ export default async function HomeWrapper({ initialView = 'list' }: HomeWrapperP
     const randomQuote = getRandomQuote()
 
     // Use the HomeClient component which includes the toggle button
-    return <HomeClient posts={posts} randomQuote={randomQuote} initialView={initialView} />
+    return (
+      <>
+        <FixOutlineIssue />
+        <HomeClient posts={posts} randomQuote={randomQuote} initialView={initialView} />
+      </>
+    )
   } catch (error) {
     console.error("Critical error loading home page:", error)
     // Return a minimal error page

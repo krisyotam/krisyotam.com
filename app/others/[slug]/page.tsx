@@ -1,27 +1,36 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import Link from "next/link"
+import othersData from "@/data/others.json"
+import { UrlControls, IframeWithUrlBar } from "./client-components"
+import { PostHeader } from "@/components/post-header"
+
+// Define the interface for Others data - using a type assertion to handle any fields in data
+interface OtherEntry {
+  title: string;
+  url: string;
+  description: string;
+  category: string;
+  tags: string[];
+  slug: string;
+  publishDate?: string;
+  status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
+  confidence?: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
+  importance?: number;
+}
 
 interface PageProps {
   params: { slug: string }
 }
 
-async function getOtherEntry(slug: string) {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/others/entry?slug=${encodeURIComponent(slug)}`,
-      { next: { revalidate: 3600 } }
-    )
-    if (!res.ok) return null
-    return await res.json()
-  } catch (err) {
-    console.error("Error fetching other entry:", err)
-    return null
-  }
+function getOtherEntry(slug: string): OtherEntry | null {
+  // Find the entry directly from the imported data and cast to OtherEntry type
+  const entry = othersData.find((entry: any) => entry.slug === slug)
+  return entry ? entry as OtherEntry : null
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const entry = await getOtherEntry(params.slug)
+export function generateMetadata({ params }: PageProps): Metadata {
+  const entry = getOtherEntry(params.slug)
   if (!entry) {
     return { title: "Entry Not Found | Others" }
   }
@@ -31,69 +40,75 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-export default async function OtherEntryPage({ params }: PageProps) {
-  const entry = await getOtherEntry(params.slug)
+export default function OtherEntryPage({ params }: PageProps) {
+  const entry = getOtherEntry(params.slug)
   if (!entry) notFound()
 
+  // Extract domain name for display
+  const domainName = new URL(entry.url).hostname.replace(/^www\./, '')
+  
+  // Default values for if they don't exist in the JSON yet
+  const publishDate = entry.publishDate || "2023-04-01";
+  const status = (entry.status || "Finished") as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
+  const confidence = (entry.confidence || "likely") as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
+  const importance = entry.importance || 7;
   return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
-      <nav className="mb-8">
-        <Link href="/others" className="text-sm text-primary hover:underline">
-          ← Back to Others
-        </Link>
-      </nav>
-      
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">{entry.title}</h1>
-          <div className="mt-2 flex items-center gap-2">
-            <span className="px-2 py-1 text-xs rounded-md bg-muted/30">
-              {entry.category}
-            </span>
-          </div>
+    <div className="min-h-screen py-4 px-4 sm:px-6">      
+      <div className="max-w-4xl mx-auto">
+        {/* Post Header */}        <PostHeader
+          title={entry.title}
+          subtitle={domainName}
+          date={publishDate}
+          tags={entry.tags}
+          category={entry.category}
+          status={status as any}
+          confidence={confidence as any}
+          importance={importance}
+          backText="Others"
+          backHref="/others"
+        />
+        
+        {/* Iframe with URL bar */}
+        <div className="my-8">
+          <IframeWithUrlBar url={entry.url} title={entry.title} height={550} />
         </div>
-
-        <p className="text-muted-foreground">{entry.description}</p>
-
-        <div>
-          <a 
-            href={entry.url} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-          >
-            Visit Website
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="16" 
-              height="16" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-            >
-              <path d="M7 7h10v10" />
-              <path d="M7 17 17 7" />
-            </svg>
-          </a>
-        </div>
-
-        <div className="pt-4">
-          <h2 className="text-lg font-medium mb-2">Tags</h2>
-          <div className="flex flex-wrap gap-2">
-            {entry.tags.map((tag: string) => (
-              <span 
-                key={tag} 
-                className="px-2.5 py-1 text-sm rounded-md bg-muted/30"
-              >
-                {tag}
-              </span>
-            ))}
+        
+        {/* Site information below the iframe */}
+        <div className="mt-8 border border-border p-4 bg-card">
+          <div className="flex flex-col md:flex-row gap-4">
+            {/* Site info */}
+            <div className="flex-grow space-y-2">
+              <div className="flex items-center gap-2">
+                <h2 className="text-xl font-bold">{entry.title}</h2>
+                <span className="px-2 py-0.5 text-xs font-medium bg-primary/10 text-primary">
+                  {entry.category}
+                </span>
+              </div>
+              
+              <p className="text-sm text-muted-foreground">{entry.description}</p>
+              
+              <div className="flex flex-wrap gap-2 pt-2">
+                {entry.tags.map((tag: string) => (
+                  <span 
+                    key={tag} 
+                    className="px-2 py-0.5 text-xs font-medium bg-muted/30"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+            
+            {/* URL and controls */}
+            <div className="flex flex-col gap-2 md:items-end">
+              <div className="flex items-center bg-background border border-border px-3 py-2 text-sm font-mono text-muted-foreground">
+                <span className="truncate max-w-[200px] md:max-w-[300px]">{domainName}</span>
+              </div>
+              <UrlControls url={entry.url} />
+            </div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
   )
-} 
+}

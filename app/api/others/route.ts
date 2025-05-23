@@ -1,23 +1,13 @@
 import { NextResponse } from "next/server"
-import fs from "fs"
-import path from "path"
+import othersData from "@/data/others.json"
 
 export async function GET() {
   try {
-    // Try different path resolutions to handle both local and deployment environments
-    let fileContent;
-    try {
-      const filePath = path.join(process.cwd(), "data", "others.json")
-      fileContent = fs.readFileSync(filePath, "utf8")
-    } catch (e) {
-      // Fallback path for deployment
-      const altPath = path.join(process.cwd(), "..", "data", "others.json")
-      fileContent = fs.readFileSync(altPath, "utf8")
-    }
-    
-    const othersData = JSON.parse(fileContent)
+    // Use imported data directly instead of reading from file system
+    // This makes it more reliable in production environments
 
-    return NextResponse.json(othersData)  } catch (error) {
+    return NextResponse.json(othersData)
+  } catch (error) {
     console.error("Error reading others data:", error instanceof Error ? error.message : String(error))
     return NextResponse.json({ error: "Failed to fetch others data" }, { status: 500 })
   }

@@ -5,47 +5,66 @@
     "description": "Home of the author of 'Mr. Penumbra's 24-Hour Bookstore' and 'Sourdough.' Features essays on technology, books, and other media.",
     "category": "Fiction Authors",
     "tags": ["novels", "technology", "newsletters", "media", "digital"],
-    "slug": "robin-sloan"
-  },
-  {
+    "slug": "robin-sloan",
+    "publishDate": "2023-05-15",
+    "status": "Finished",
+    "confidence": "highly likely",
+    "importance": 8
+  },  {
     "title": "Gwern Branwen",
     "url": "https://www.gwern.net",
     "description": "A collection of essays and research on a variety of topics including statistics, technology, self-experimentation, and psychology.",
     "category": "Researchers",
     "tags": ["research", "statistics", "psychology", "AI", "long-form"],
-    "slug": "gwern-branwen"
-  },
-  {
+    "slug": "gwern-branwen",
+    "publishDate": "2023-06-12",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 9
+  },  {
     "title": "Maggie Appleton",
     "url": "https://maggieappleton.com",
     "description": "Digital garden featuring essays and illustrations on design, anthropology, and technology.",
     "category": "Designers",
     "tags": ["design", "anthropology", "illustrations", "programming", "digital garden"],
-    "slug": "maggie-appleton"
-  },
-  {
+    "slug": "maggie-appleton",
+    "publishDate": "2023-07-03",
+    "status": "Finished",
+    "confidence": "highly likely",
+    "importance": 8
+  },  {
     "title": "Andy Matuschak",
     "url": "https://andymatuschak.org",
     "description": "Software engineer, designer, and researcher focusing on tools for thought and knowledge work.",
     "category": "Researchers",
     "tags": ["tools for thought", "note-taking", "spaced repetition", "learning", "memory"],
-    "slug": "andy-matuschak"
-  },
-  {
+    "slug": "andy-matuschak",
+    "publishDate": "2023-05-20",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 9
+  },  {
     "title": "Craig Mod",
     "url": "https://craigmod.com",
     "description": "Writer and photographer exploring the intersection of technology, media, and photography.",
     "category": "Writers",
     "tags": ["photography", "japan", "walking", "books", "publishing"],
-    "slug": "craig-mod"
-  },
-  {
+    "slug": "craig-mod",
+    "publishDate": "2023-09-10",
+    "status": "Finished",
+    "confidence": "likely",
+    "importance": 7
+  },  {
     "title": "Anne-Laure Le Cunff",
     "url": "https://nesslabs.com",
     "description": "Founder of Ness Labs, writing about mindful productivity, metacognition, and mental models.",
     "category": "Researchers",
     "tags": ["productivity", "mental models", "metacognition", "neuroscience", "learning"],
-    "slug": "anne-laure-le-cunff"
+    "slug": "anne-laure-le-cunff",
+    "publishDate": "2023-08-22",
+    "status": "Finished",
+    "confidence": "highly likely",
+    "importance": 8
   },
   {
     "title": "Frank Chimero",

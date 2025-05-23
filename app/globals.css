@@ -102,6 +102,15 @@
      max-width: 65ch;
      margin: 0 auto;
    }
+
+   /* Fix for bento card white outlines during view transitions */
+   .no-outline {
+     outline: none !important;
+     border-style: solid;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+     -webkit-backface-visibility: hidden;
+     backface-visibility: hidden;
+   }
    
    .book-content h1,
    .book-content h2,
@@ -1011,6 +1020,6 @@
      word-break: break-word;
      overflow-wrap: anywhere;
    }
-   
+
 
 

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 interface PageHeaderProps {
   title: string
   subtitle?: string
-  date: string
+  date?: string
   preview?: string
   description?: string
   status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
@@ -130,14 +130,16 @@ export function PageHeader({
         )}
 
         {/* Date above other metadata */}
-        <div className="text-center mb-4">
-          <time
-            dateTime={typeof date === "string" ? date : undefined}
-            className="font-mono text-sm text-muted-foreground"
-          >
-            {formatDate(date?.toString() || "")}
-          </time>
-        </div>
+        {date && (
+          <div className="text-center mb-4">
+            <time
+              dateTime={typeof date === "string" ? date : undefined}
+              className="font-mono text-sm text-muted-foreground"
+            >
+              {formatDate(date?.toString() || "")}
+            </time>
+          </div>
+        )}
 
         {/* Metadata section with academic styling */}
         <div className="flex flex-wrap justify-center items-center gap-x-3 text-sm font-mono mb-6">

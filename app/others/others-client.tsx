@@ -15,6 +15,10 @@ interface OtherEntry {
   category: string
   tags: string[]
   slug: string
+  publishDate?: string
+  status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
+  confidence?: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"
+  importance?: number
 }
 
 export function OthersClient({ initialCategoryFilter = "All" }: OthersClientProps) {
@@ -85,17 +89,12 @@ export function OthersClient({ initialCategoryFilter = "All" }: OthersClientProp
 
   function getEntryUrl(entry: OtherEntry) {
     return `/others/${entry.slug}`
-  }
-
-  return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
-      <PageHeader
+  }  return (
+    <main className="max-w-2xl mx-auto px-4 py-12">      <PageHeader
         title="Others"
-        date="2025-01-01"
-        preview="a curated collection of novel, and obscure blogs I read"
-        status="In Progress"
-        confidence="likely"
-        importance={7}
+        subtitle="Curated Blog Collection"
+        date="2023-09-15"
+        preview="a curated collection of novel and obscure blogs I read"
       />
       <div className="mt-8">
         <div className="mb-6 flex flex-col sm:flex-row gap-4">
@@ -124,8 +123,7 @@ export function OthersClient({ initialCategoryFilter = "All" }: OthersClientProp
               ))}
             </select>
           </div>
-        </div>
-        {loading ? (
+        </div>        {loading ? (
           <div className="flex justify-center items-center py-24">
             <svg className="animate-spin h-8 w-8 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -133,32 +131,26 @@ export function OthersClient({ initialCategoryFilter = "All" }: OthersClientProp
             </svg>
           </div>
         ) : (
-          <>
-            <table className="w-full text-sm border border-muted/40 rounded-md overflow-hidden">
+          <>            <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
               <thead>
-                <tr className="text-muted-foreground border-b border-muted/40 bg-muted/10">
-                  <th className="py-2 text-left font-normal px-3">Title</th>
-                  <th className="py-2 text-left font-normal px-3">Category</th>
-                  <th className="py-2 text-left font-normal px-3 hidden md:table-cell">Tags</th>
+                <tr className="border-b border-border bg-muted/50 text-foreground">
+                  <th className="py-2 text-left font-medium px-3">Title</th>
+                  <th className="py-2 text-left font-medium px-3">Tags</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredEntries.map(entry => (
+                {filteredEntries.map((entry, index) => (
                   <tr
                     key={entry.slug}
-                    className="border-b border-muted/30 hover:bg-muted/40 dark:hover:bg-muted/50 cursor-pointer transition-colors"
+                    className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
                     onClick={() => router.push(getEntryUrl(entry))}
                   >
-                    <td className="py-2 pr-4 px-3 font-medium">{entry.title}</td>
-                    <td className="py-2 pr-4 px-3">{entry.category}</td>
-                    <td className="py-2 pr-4 px-3 hidden md:table-cell">
+                    <td className="py-2 px-3 font-medium">{entry.title}</td>
+                    <td className="py-2 px-3">
                       <div className="flex flex-wrap gap-1">
-                        {entry.tags.slice(0, 3).map(tag => (
-                          <span key={tag} className="px-1.5 py-0.5 text-xs bg-muted/30 rounded">
-                            {tag}
-                          </span>
+                        {entry.tags.slice(0, 3).map((tag, i) => (
+                          <span key={i} className="px-1.5 py-0.5 text-xs bg-muted/50 rounded-sm">{tag}</span>
                         ))}
-                        {entry.tags.length > 3 && <span className="px-1.5 py-0.5 text-xs bg-muted/20 rounded">+{entry.tags.length - 3}</span>}
                       </div>
                     </td>
                   </tr>

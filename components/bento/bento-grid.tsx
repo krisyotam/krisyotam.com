@@ -41,12 +41,27 @@ export default function BentoGrid({ items, filter, searchQuery }: BentoGridProps
         <p className="text-muted-foreground">No items found matching your criteria.</p>
       </div>
     )
-  }
-
-  return (
-    <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+  }  return (
+    <div 
+      className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4"
+      style={{ 
+        contain: 'paint',
+        perspective: '1000px',
+        WebkitPerspective: '1000px'
+      }}
+    >
       {filteredItems.map((item) => (
-        <div key={item.id} className="w-full">
+        <div 
+          key={item.id} 
+          className="w-full" 
+          style={{ 
+            outline: 'none',
+            transform: 'translateZ(0)',
+            WebkitTransform: 'translateZ(0)',
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden'
+          }}
+        >
           <BentoCard item={item} />
         </div>
       ))}

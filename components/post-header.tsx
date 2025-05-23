@@ -23,6 +23,8 @@ interface PostHeaderProps {
     | "highly likely"
     | "certain"
   importance?: number
+  backText?: string
+  backHref?: string
 }
 
 const confidenceExplanation = `The confidence tag expresses how well-supported the essay is, or how likely its overall ideas are right. This uses a scale from "impossible" to "certain", based on the Kesselman List of Estimative Words:
@@ -100,16 +102,18 @@ export function PostHeader({
   status = "Draft",
   confidence = "possible",
   importance = 5,
+  backText,
+  backHref,
 }: PostHeaderProps) {
   return (
     <header className={cn("mb-4 relative", className)}>
-      {/* Back to home link */}
+      {/* Back link */}
       <Link
-        href="/"
+        href={backHref || "/"}
         className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 group font-serif italic"
       >
         <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-        Return to Index
+        {backText ? `Return to ${backText}` : "Return to Index"}
       </Link>
 
       {/* Academic bento container */}
