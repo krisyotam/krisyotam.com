@@ -67,8 +67,7 @@ export default function BentoCard({ item }: { item: Item }) {
 // Preview Components
 function PaintingPreview({ item }: { item: PaintingItem }) {
   return (
-    <>
-      <div className="relative w-full h-48">
+    <>      <div className="relative w-full h-48">
         <Image
           src={item.imageUrl || "/placeholder.svg"}
           alt={item.title}
@@ -76,6 +75,7 @@ function PaintingPreview({ item }: { item: PaintingItem }) {
           className="object-cover transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           style={{ outline: 'none' }}
+        />
       </div>
       <div className="p-4 flex-grow flex flex-col">
         <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
