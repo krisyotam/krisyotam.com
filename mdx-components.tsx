@@ -34,6 +34,7 @@ import MangaDisplay from "@/components/posts/content/manga-display"
 import MovieDisplay from "@/components/posts/content/movie-display"
 import Movie from "@/components/posts/media/movie"
 import HauteCouture from "@/components/posts/fashion/haute-couture"
+import PoemDisplay from "@/components/posts/poetry/poem-display"
 import HauteCoutureCollection from "@/components/posts/fashion/haute-couture-collection"
 import MangaPanelDisplay from "@/components/posts/content/manga-panel-display"
 import MangaPanelDisplayCollection from "@/components/posts/content/manga-panel-display-collection"
@@ -48,6 +49,8 @@ import { WikiPerson } from "@/components/posts/wikipedia/wiki-person"
 import Product from "@/components/posts/basic/product"
 import { RedditEmbed } from "@/components/typography/reddit-embed"
 import AnimeCharacterDisplay from "@/components/posts/content/anime-character-display"
+import { Art7x4 } from "@/components/posts/art/art-7x4"
+import RatingDisplay from "@/components/posts/content/rating"
 
 // Define components for MDX
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -151,8 +154,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // Books and reading components
     Book,
     BookCard,
-    
-    // Content display components
+      // Content display components
     AnimeDisplay,
     AnimeCharacterDisplay,
     MangaDisplay,
@@ -160,6 +162,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Movie,
     MangaPanelDisplay,
     MangaPanelDisplayCollection,
+    PoemDisplay,
     
     // Fashion and architecture components
     HauteCouture,
@@ -173,9 +176,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     
     // Special content components
     TryHackMe,
-    
-    // Website embedding component
+      // Website embedding component
     WebsiteDemo,
+      // Art components
+    Art7x4,
+    
+    // Rating components
+    RatingDisplay,
     
     // Pass through any provided components (for overrides)
     ...components,
