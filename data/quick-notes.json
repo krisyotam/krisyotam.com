@@ -78,5 +78,15 @@
     "status": "Notes",
     "confidence": "likely",
     "importance": 6
+  },
+    {
+    "title": "Haiku Form Guide",
+    "date": "2025-05-24",
+    "slug": "haiku-form-guide",
+    "tags": ["Haiku", "Verse", "Form Guide"],
+    "category": "Verse",
+    "status": "Notes",
+    "confidence": "likely",
+    "importance": 6
   }
 ]

@@ -57,8 +57,7 @@ export function LectureNoteDetail({ lectureNote }: { lectureNote: LectureNote })
         {/* Use the ResearchHeader component for lecture notes too */}
         <ResearchHeader
           title={lectureNote.title}
-          dateStarted={lectureNote.dateStarted}
-          tags={lectureNote.tags}
+          dateStarted={lectureNote.dateStarted}          tags={lectureNote.tags.slice(0, 3)}
           category={lectureNote.category}
           status={lectureNote.status === "active" ? "active" : 
                  lectureNote.status === "completed" ? "completed" : 
@@ -128,26 +127,6 @@ export function LectureNoteDetail({ lectureNote }: { lectureNote: LectureNote })
               <ExternalLink className="h-4 w-4" />
               View Source
             </Button>
-          </div>
-
-          <div className="text-center pt-8">
-            <Link href="/lecture-notes">
-              <Button variant="ghost" className="flex items-center gap-2">
-                <ArrowLeft className="h-4 w-4" />
-                Back to all lecture notes
-              </Button>
-            </Link>
-          </div>
-
-          <div className="text-sm text-muted-foreground flex justify-between pt-8 border-t border-border">
-            <div>
-              Posted by: {lectureNote.postedBy}<br />
-              Posted on: {new Date(lectureNote.postedOn).toLocaleDateString()}
-            </div>
-            <div className="text-right">
-              Notes taken:<br />
-              {new Date(lectureNote.dateStarted).toLocaleDateString()}
-            </div>
           </div>
         </div>
         

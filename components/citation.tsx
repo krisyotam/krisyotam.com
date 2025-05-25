@@ -23,10 +23,13 @@ export function Citation({ title, slug, date, url }: CitationProps) {
 
   const author = "Yotam, Kris";
   const journal = "krisyotam.com";
+  
+  // Ensure URL always uses krisyotam.com as base, regardless of environment
+  const normalizedUrl = url.replace(/http:\/\/localhost:3000/g, "https://krisyotam.com")
+                           .replace(/http:\/\/127.0.0.1:3000/g, "https://krisyotam.com");
 
   // Human-readable citation
-  const humanCitation = `${author}. (${month} ${year}). ${title}. ${journal}. ${url}`;
-
+  const humanCitation = `${author}. (${month} ${year}). ${title}. ${journal}. ${normalizedUrl}`;
   // BibTeX key & entry
   const key = `yotam${year}${slug}`;
   const bibtex = [
@@ -36,7 +39,7 @@ export function Citation({ title, slug, date, url }: CitationProps) {
     `  journal = "${journal}",`,
     `  year    = "${year}",`,
     `  month   = "${month}",`,
-    `  url     = "${url}"`,
+    `  url     = "${normalizedUrl}"`,
     `}`,
   ].join("\n");
 

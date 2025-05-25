@@ -7,6 +7,7 @@ import poemsData from "@/data/poems.json";
 import type { Poem } from "@/utils/poems";
 import { notFound } from "next/navigation";
 import { Footer } from "@/app/blog/(post)/components/footer";
+import { Citation } from "@/components/citation";
 
 export default function PoemPageClient({
   params: { type, year, slug },
@@ -61,6 +62,16 @@ export default function PoemPageClient({
             "No content available for this poem."
           )}
         </PoemBox>
+        
+        {/* Citation component for this poem */}
+        <div className="my-8">
+          <Citation 
+            title={poem.title}
+            slug={`verse/${type}/${year}/${slug}`}
+            date={poem.dateCreated}
+            url={`https://krisyotam.com/verse/${type}/${year}/${slug}`}
+          />
+        </div>
         
         <Footer />
       </div>

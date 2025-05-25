@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { LiveClock } from "@/components/live-clock";
 import { PostHeader } from "@/components/post-header";
 import { Footer } from "@/app/blog/(post)/components/footer";
+import { Citation } from "@/components/citation";
 
 interface NoteMeta {
   title: string;
@@ -39,57 +40,33 @@ export default function NotePageClient({ note, allNotes, children }: Props) {
   const idx  = sorted.findIndex(n => n.slug === note.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
   const next = idx > 0                 ? sorted[idx - 1] : null;
-
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
-      {/* breadcrumb ------------------------------------------------------ */}
-      <nav className="flex items-center text-sm text-muted-foreground mb-6">
-        <Link href="/"        className="hover:underline">home</Link>
-        <span className="mx-2">›</span>
-        <Link href="/notes"   className="hover:underline">notes</Link>
-        <span className="mx-2">›</span>
-        <span>{note.title}</span>
-      </nav>
-
-      {/* clean page header (outside .note-content) ----------------------- */}
-      <PostHeader 
-        className="text-center"     
+      {/* clean page header (outside .note-content) ----------------------- */}      <PostHeader 
+        className=""     
         title={note.title}
         subtitle={note.subtitle}
         date={note.date}
         tags={note.tags}
         category={note.category}
+        backHref="/notes"
+        backText="Notes"
         preview={note.preview}
         status={note.status ?? "Notes"}
         confidence={note.confidence ?? "possible"}
         importance={note.importance ?? 5}
-      />
-
-      {/* MDX body -------------------------------------------------------- */}
+      />      {/* MDX body -------------------------------------------------------- */}
       <div className="note-content">{children}</div>
-
-      {/* prev / next nav ------------------------------------------------- */}
-      <div className="border-t border-border pt-6 mt-12 flex justify-between">
-        {prev && (
-          <div>
-            <div className="text-sm text-muted-foreground mb-1">Previous</div>
-            <Link
-              href={`/notes/${prev.date.slice(0,4)}/${prev.slug}`}
-              className="hover:underline"
-            >{prev.title}</Link>
-          </div>
-        )}
-        {next && (
-          <div className="text-right">
-            <div className="text-sm text-muted-foreground mb-1">Next</div>
-            <Link
-              href={`/notes/${next.date.slice(0,4)}/${next.slug}`}
-              className="hover:underline"
-            >{next.title}</Link>
-          </div>
-        )}
+      
+      <div className="mt-8">
+        <Citation 
+          title={note.title}
+          slug={note.slug}
+          date={note.date}
+          url={`https://krisyotam.com/notes/${note.date.slice(0,4)}/${note.slug}`}
+        />
       </div>
-
+      
       <LiveClock />
       <Footer />
     </div>

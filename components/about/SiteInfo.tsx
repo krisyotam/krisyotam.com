@@ -12,10 +12,9 @@ export default function SiteInfo() {
         <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
           <CardContent className="p-4">
             <div className="flex justify-center">
-              <div className="relative w-full h-[200px]">
-                <div className="dark:block hidden w-full h-full relative">
+              <div className="relative w-full h-[200px]">                <div className="dark:block hidden w-full h-full relative">
                   <Image
-                    src={themeSongData.stickerUrl || "/placeholder.svg"}
+                    src="https://i.postimg.cc/fWmTLRY4/krisyotam-site-sticker-darkmode.gif"
                     alt="Site Sticker Dark Mode"
                     fill
                     style={{ objectFit: "contain" }}
@@ -24,7 +23,7 @@ export default function SiteInfo() {
                 </div>
                 <div className="dark:hidden block w-full h-full relative">
                   <Image
-                    src="https://i.postimg.cc/Xv4mDd4N/old-web-stamp-by-vtge-dcgi6h4.png"
+                    src="https://i.postimg.cc/CL0Mfp4R/krisyotam-site-sticker-lightmode.gif"
                     alt="Site Sticker Light Mode"
                     fill
                     style={{ objectFit: "contain" }}

@@ -19,7 +19,7 @@
 .note-content h4 {
   font: 600 1rem/1.2 inherit;
   letter-spacing: -0.01em;
-  margin: 1.25rem 0 0.75rem;
+  margin: 0.75rem 0 0.25rem;
   padding-bottom: 0.3rem;
   border-bottom: 1px dotted rgba(0, 0, 0, 0.6);
   color: #333;
@@ -28,17 +28,26 @@
 .note-content h1 { font-size: 22px; }
 .note-content h2 { font-size: 18px; }
 .note-content h3 { font-size: 16px; border-bottom-color: rgba(0,0,0,.4); }
-.note-content h4 { font-size: 15px; border: none; }
+.note-content h4 { 
+  font-size: 15px; 
+  border: none; 
+  margin-top: 0.5rem; 
+  margin-bottom: 0.1rem; /* Tighter bottom margin */
+}
 
 .note-content h1:first-child,
 .note-content h2:first-child,
 .note-content h3:first-child,
-.note-content p:first-of-type { margin-top: 0.5rem; }
+.note-content p:first-of-type { margin-top: 0.25rem; }
 
 /* prose blocks ----------------------------------------------------------- */
-.note-content p           { margin-bottom: 0.75rem; text-align: justify; }
+.note-content p           { margin: 0 0 0.20rem 0; text-align: justify; }
+/* Fix the spacing after paragraphs followed by headings */
+.note-content p + h4      { margin-top: 0.5rem; }
+/* Fix for empty paragraphs used for spacing in markdown */
+.note-content p:empty     { margin: 0; padding: 0; height: 0.5rem; }
 .note-content blockquote  {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   padding: 0.5rem 1.5rem;
   font-style: italic;
   border-left: 3px solid rgba(0,0,0,.15);
@@ -56,8 +65,19 @@
 
 /* lists ------------------------------------------------------------------ */
 .note-content ul,
-.note-content ol { margin: .5rem 0 .75rem 1.25rem; }
-.note-content li { margin: .25rem 0; }
+.note-content ol { margin: 0 0 0.25rem 1.25rem; padding-top: 0; }
+.note-content li { margin: 0; padding: 0; line-height: 1.4; }
+/* Fix for spacing under h4 followed by list */
+.note-content h4 + ul,
+.note-content h4 + ol { margin-top: 0; padding-top: 0; }
+/* Extra specific fix for the h4 + paragraph + list issue */
+.note-content h4 + p + ul,
+.note-content h4 + p + ol { margin-top: 0; padding-top: 0; }
+/* Ensure proper spacing between list items */
+.note-content li + li { margin-top: 0.05rem; }
+/* Ensure lists inside list items have proper spacing */
+.note-content li > ul,
+.note-content li > ol { margin-top: 0.05rem; margin-bottom: 0.05rem; }
 
 /* code ------------------------------------------------------------------- */
 .note-content code {
@@ -68,7 +88,7 @@
   border-radius: 3px;
 }
 .note-content pre {
-  margin: .75rem 0;
+  margin: 0.25rem 0;
   padding: .75rem;
   overflow-x: auto;
   border: 1px solid rgba(0,0,0,.1);
@@ -78,16 +98,109 @@
 .note-content pre>code { background: transparent; padding: 0; }
 
 /* tables ----------------------------------------------------------------- */
-.note-content table { width:100%; border-collapse:collapse; margin:.75rem 0; }
+.note-content table { 
+  width: 100% !important; 
+  border-collapse: collapse !important; 
+  margin: 0.5rem 0 0.75rem !important; 
+  font-size: 0.9em !important;
+  line-height: 1.4 !important;
+  table-layout: fixed !important;
+}
+.note-content thead { border-bottom: 2px solid rgba(0,0,0,.15) !important; }
 .note-content th,
 .note-content td {
-  padding:.5rem;
-  border:1px solid rgba(0,0,0,.1);
+  padding: 0.4rem 0.5rem !important;
+  border: 1px solid rgba(0,0,0,.1) !important;
+  vertical-align: top !important;
+  word-wrap: break-word !important;
 }
-.note-content th { background:rgba(0,0,0,.05); font-weight:600; }
+.note-content th { 
+  background: rgba(0,0,0,.05) !important; 
+  font-weight: 600 !important; 
+  text-align: left !important; 
+}
+.note-content tr:nth-child(even) { background: rgba(0,0,0,.02) !important; }
+/* table wrapper for responsive tables */
+.note-content .table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0.5rem 0 0.75rem;
+  border: 1px solid rgba(0,0,0,.05);
+  border-radius: 4px;
+}
 
 /* images ----------------------------------------------------------------- */
-.note-content img { display:block; max-width:100%; margin:.75rem auto; }
+.note-content img { display:block; max-width:100%; margin:.5rem auto; }
+.note-content figure { margin: 0.5rem 0; }
+.note-content figcaption { 
+  font-size: 0.85em; 
+  text-align: center;
+  color: rgba(0,0,0,.7);
+  margin-top: 0.25rem;
+}
+
+/* horizontal rule -------------------------------------------------------- */
+.note-content hr {
+  border: none;
+  border-top: 1px solid rgba(0,0,0,.15);
+  margin: 1rem 0;
+}
+
+/* definition lists ------------------------------------------------------- */
+.note-content dl { margin: 0.5rem 0 0.75rem; }
+.note-content dt { 
+  font-weight: 600; 
+  margin-top: 0.25rem;
+}
+.note-content dd { 
+  margin-left: 1.25rem;
+  margin-bottom: 0.25rem; 
+}
+
+/* task lists ------------------------------------------------------------- */
+.note-content input[type="checkbox"] {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+/* footnotes -------------------------------------------------------------- */
+.note-content .footnotes { 
+  border-top: 1px solid rgba(0,0,0,.1); 
+  margin-top: 1.5rem;
+  padding-top: 0.75rem;
+  font-size: 0.9em;
+}
+.note-content .footnotes ol { margin-left: 1rem; }
+.note-content .footnotes li { margin-bottom: 0.25rem; }
+.note-content .footnote-ref { 
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+  text-decoration: none;
+}
+.note-content .footnote-backref {
+  font-size: 0.8em;
+  text-decoration: none;
+}
+
+/* abbreviations ---------------------------------------------------------- */
+.note-content abbr { 
+  border-bottom: 1px dotted rgba(0,0,0,.3);
+  cursor: help;
+}
+
+/* keyboard keys ---------------------------------------------------------- */
+.note-content kbd {
+  display: inline-block;
+  padding: 0.2em 0.4em;
+  font-size: 0.85em;
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  background: #f8f8f8;
+  margin: 0 0.1em;
+}
 
 /* dark-mode tweaks ------------------------------------------------------- */
 .dark .note-content            { color:rgba(255,255,255,.9); }
@@ -105,4 +218,19 @@
   color:rgba(255,255,255,.8);
   border-left-color:rgba(255,255,255,.3);
   background:rgba(255,255,255,.05);
+}
+/* Dark mode for tables */
+.dark .note-content table     { border-color: rgba(255,255,255,.2) !important; }
+.dark .note-content th,
+.dark .note-content td        { border-color: rgba(255,255,255,.2) !important; }
+.dark .note-content th        { background: rgba(255,255,255,.07) !important; }
+.dark .note-content tr:nth-child(even) { background: rgba(255,255,255,.03) !important; }
+/* Dark mode for other elements */
+.dark .note-content hr        { border-color:rgba(255,255,255,.2); }
+.dark .note-content figcaption { color:rgba(255,255,255,.7); }
+.dark .note-content abbr      { border-color:rgba(255,255,255,.4); }
+.dark .note-content kbd       { 
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.3);
+  box-shadow: 0 1px 1px rgba(0,0,0,.3);
 }

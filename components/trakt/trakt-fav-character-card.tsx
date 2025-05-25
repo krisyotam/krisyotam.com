@@ -12,7 +12,7 @@ export function TraktFavCharacterCard({ id, name, image, actor }: TraktFavCharac
   // If we have an actor name, use our custom card with actor display
   if (actor) {
     return (
-      <Card className="w-full overflow-hidden border dark:border-gray-800 dark:bg-[#1a1a1a] flex flex-col h-full transition-all duration-200 hover:scale-[1.02] hover:shadow-md">
+      <Card className="w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#1a1a1a] flex flex-col h-full transition-all duration-200 hover:scale-[1.02] hover:shadow-md">
         <div className="relative aspect-[2/3] overflow-hidden">
           <img
             src={image || "/placeholder.svg?height=270&width=180"}

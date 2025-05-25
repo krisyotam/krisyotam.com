@@ -1020,6 +1020,26 @@
      word-break: break-word;
      overflow-wrap: anywhere;
    }
+   
+   /* =============================================================================
+   LOGO THEME SWITCHING
+   ========================================================================== */
+/* Force logo visibility states with !important to override any conflicting styles */
+.logo-light {
+  display: block !important;
+}
+
+.dark .logo-light {
+  display: none !important;
+}
+
+.logo-dark {
+  display: none !important;
+}
+
+.dark .logo-dark {
+  display: block !important;
+}
 
 
 

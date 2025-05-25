@@ -8,6 +8,7 @@ import { Download, ExternalLink, ArrowLeft, XCircle } from "lucide-react";
 import { ResearchHeader } from "@/components/research-header";
 import { Footer } from "@/app/blog/(post)/components/footer";
 import Essay from "@/components/posts/typography/essay";
+import { Citation } from "@/components/citation";
 
 interface Essay {
   id: string;
@@ -23,6 +24,11 @@ interface Essay {
   category: string;
   tags: string[];
   subject?: string;
+}
+
+// Function to slugify titles for URL construction
+function slugify(text: string) {
+  return text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
 }
 
 export function EssaysDetail({ essay }: { essay: Essay }) {
@@ -122,30 +128,18 @@ export function EssaysDetail({ essay }: { essay: Essay }) {
               className="flex items-center gap-2"
               onClick={() => window.open(essay.sourceLink, "_blank")}
             >
-              <ExternalLink className="h-4 w-4" />
-              View Source
+              <ExternalLink className="h-4 w-4" />              View Source
             </Button>
           </div>
-
-          <div className="text-center pt-8">
-            <Link href="/essays">
-              <Button variant="ghost" className="flex items-center gap-2">
-                <ArrowLeft className="h-4 w-4" />
-                Back to all essays
-              </Button>
-            </Link>
-          </div>
-
-          <div className="text-sm text-muted-foreground flex justify-between pt-8 border-t border-border">
-            <div>
-              Posted by: {essay.postedBy}<br />
-              Posted on: {new Date(essay.postedOn).toLocaleDateString()}
-            </div>
-            <div className="text-right">
-              Essay started:<br />
-              {new Date(essay.dateStarted).toLocaleDateString()}
-            </div>
-          </div>
+        </div>
+        
+        {/* Citation component for this essay */}
+        <div className="my-8">          <Citation 
+            title={essay.title}
+            slug={`essays/${essay.category}/${yearCreated}/${slugify(essay.title)}`}
+            date={essay.dateStarted}
+            url={`https://krisyotam.com/essays/${essay.category}/${yearCreated}/${slugify(essay.title)}`}
+          />
         </div>
         
         <Footer />
@@ -159,4 +153,4 @@ export function EssaysDetail({ essay }: { essay: Essay }) {
       />
     </div>
   );
-} 
+}

@@ -250,7 +250,7 @@ function PostTableRow({ post }: { post: Post }) {
         </Link>
       </td>
       <td className="py-2 text-sm text-right">
-        <span className="px-2 py-0.5 text-xs rounded-full bg-muted text-muted-foreground">{post.category}</span>
+        <span className="px-2 py-0.5 text-xs rounded-md bg-muted text-muted-foreground">{post.category}</span>
       </td>
     </tr>
   )
@@ -318,7 +318,9 @@ function PostsTable({ posts }: { posts: Post[] }) {
               onClick={goToNextPage}
               disabled={currentPage === totalPages}
               className="h-8 w-8 p-0"
-            />
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
           </div>
         </div>
       )}
@@ -582,20 +584,30 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               <Card className="bg-muted/50 hover:bg-muted/70 transition-colors border-0">
                 <CardContent className="p-4 flex items-center justify-center h-full">
-                  <div className="relative w-[250px] h-[250px]">
+                  <div className="relative w-[320px] h-[320px]">
                     <Image
-                      src="https://i.postimg.cc/xTdhKB3b/krisyotam-aristocratic-logo.png"
+                      src="https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png"
                       alt="Kris Yotam Logo"
                       fill
                       style={{ objectFit: "contain" }}
-                      className="rounded-md dark:invert dark:brightness-0 dark:contrast-100 select-none pointer-events-none"
+                      className="rounded-md logo-light select-none pointer-events-none"
                       onContextMenu={(e) => e.preventDefault()}
+                      priority
+                    />
+                    <Image
+                      src="https://i.postimg.cc/h485Ck9W/krisyotam-personal-crest-darkmode.png"
+                      alt="Kris Yotam Logo (Dark Mode)"
+                      fill
+                      style={{ objectFit: "contain" }}
+                      className="rounded-md logo-dark select-none pointer-events-none"
+                      onContextMenu={(e) => e.preventDefault()}
+                      priority
                     />
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
+              <Card className="bg-muted/50 hover:bg-muted/70 transition-colors border-0">
                 <CardContent className="p-4 flex flex-col items-center justify-center h-full">
                   <div className="relative w-[250px] h-[250px]">
                     <Image

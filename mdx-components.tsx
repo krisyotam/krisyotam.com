@@ -20,6 +20,7 @@ import { PoemBox } from "@/components/posts/typography/poem"
 import Collapse from "@/components/posts/typography/collapse"
 import FileViewer from "@/components/posts/typography/file-viewer"
 import Essay from "@/components/posts/typography/essay"
+import Notice from "@/components/posts/typography/notice"
 import OcCharacterDisplay from "@/components/posts/characters/oc-character-display"
 import Inflation from "@/components/inflation"
 import { EnhancedImageDisplay } from "@/components/posts/images/enhanced-image-display"
@@ -125,8 +126,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Collapse,
     FileViewer,
     Age,
-    RedditEmbed,
-    Essay,
+    RedditEmbed,    Essay,
+    Notice,
     
     // References and specialized components
     Bible,

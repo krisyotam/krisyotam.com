@@ -9,6 +9,7 @@ import { Footer } from "@/app/blog/(post)/components/footer";
 import Essay from "@/components/posts/typography/essay";
 import { Badge } from "@/components/ui/badge";
 import { DocsHeader } from "@/components/docs/docs-header";
+import { Citation } from "@/components/citation";
 
 interface DocItem {
   id: string
@@ -22,6 +23,11 @@ interface DocItem {
   sourceUrl: string
   aiModel: string
   version: string
+}
+
+// Function to slugify titles for URL construction (used for citation URLs)
+function slugify(text: string) {
+  return text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
 }
 
 export function DocDetail({ doc }: { doc: DocItem }) {
@@ -53,8 +59,7 @@ export function DocDetail({ doc }: { doc: DocItem }) {
           title={doc.title}
           subtitle={`Generated with ${doc.aiModel} ${doc.version}`}
           date={doc.date}
-          preview={doc.description}
-          tags={doc.tags}
+          preview={doc.description}          tags={doc.tags.slice(0, 3)}
           category={doc.category}
         />
 
@@ -102,39 +107,25 @@ export function DocDetail({ doc }: { doc: DocItem }) {
               <ExternalLink className="h-4 w-4" />
               View Source
             </Button>
-          </div>
-
-          <div className="text-center pt-6">
-            <Link href="/docs">
-              <Button variant="ghost" className="flex items-center gap-2">
-                <ArrowLeft className="h-4 w-4" />
-                Back to all documents
-              </Button>
-            </Link>
-          </div>
-
-          <div className="text-sm text-muted-foreground flex justify-between pt-6 border-t border-border">
-            <div>
-              <span className="font-medium">AI Model:</span> {doc.aiModel}
-            </div>
-            <div className="text-right">
-              <span className="font-medium">Version:</span> {doc.version}
-            </div>
-          </div>
+          </div></div>
+        
+        {/* Citation component for this document */}
+        <div className="my-8">          <Citation 
+            title={doc.title}
+            slug={`docs/${doc.category}/${new Date(doc.date).getFullYear()}/${doc.slug}`}
+            date={doc.date}
+            url={`https://krisyotam.com/docs/${doc.category}/${new Date(doc.date).getFullYear()}/${doc.slug}`}
+          />
         </div>
         
         <Footer />
-      </div>
-
-      {/* Password Dialog for protected downloads */}
+      </div>      {/* Password Dialog for protected downloads */}
       <PasswordDialog
-        isOpen={showPasswordDialog}
-        onClose={() => setShowPasswordDialog(false)}
+        open={showPasswordDialog}
+        onOpenChange={setShowPasswordDialog}
         onSuccess={handlePasswordSuccess}
-        researchId={doc.id}
-        title={doc.title}
         status="active"
       />
     </div>
   );
-} 
+}

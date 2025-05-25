@@ -102,7 +102,7 @@ export function WatchingAnimeCard({ anime, type = "anime" }: AnimeCardProps) {
   const progressText = total ? `${progress}/${total}` : `${progress}`
 
   return (
-    <Card className="w-full overflow-hidden border dark:border-gray-800 dark:bg-[#1a1a1a] flex flex-col h-full transition-all duration-200 hover:scale-[1.02] hover:shadow-md">
+    <Card className="w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#1a1a1a] flex flex-col h-full transition-all duration-200 hover:scale-[1.02] hover:shadow-md">
       <div className="relative aspect-[2/3] overflow-hidden">
         <img
           src={imageUrl || "/placeholder.svg"}
@@ -148,7 +148,7 @@ export function CompletedAnimeCard({ anime, type = "anime" }: AnimeCardProps) {
   const totalLabel = type === "anime" ? "Episodes" : "Chapters"
 
   return (
-    <Card className="w-full overflow-hidden border dark:border-gray-800 dark:bg-[#1a1a1a] flex flex-col h-full transition-all duration-200 hover:scale-[1.02] hover:shadow-md">
+    <Card className="w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#1a1a1a] flex flex-col h-full transition-all duration-200 hover:scale-[1.02] hover:shadow-md">
       <div className="relative aspect-[2/3] overflow-hidden">
         <img
           src={imageUrl || "/placeholder.svg"}
@@ -201,9 +201,8 @@ export function AnimeFavoriteCard({ item, type, isCompany = false, subtitle, onI
   const url = item?.url || item?.link || `https://myanimelist.net/${type}/${item?.id || item?.mal_id}`
 
   const aspectRatioClass = isCompany ? "aspect-square" : "aspect-[2/3]"
-
   return (
-    <Card className="w-full overflow-hidden border dark:border-gray-800 dark:bg-[#1a1a1a] flex flex-col h-full transition-all duration-200 hover:scale-[1.02] hover:shadow-md">
+    <Card className="w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#1a1a1a] flex flex-col h-full transition-all duration-200 hover:scale-[1.02] hover:shadow-md">
       <div className={`relative ${aspectRatioClass} overflow-hidden`}>
         <img
           src={imageUrl || "/placeholder.svg"}
