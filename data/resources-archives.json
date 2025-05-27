@@ -124,7 +124,7 @@
     "title": "Internet Archive",
     "url": "https://archive.org/",
     "description": "Non-profit library of millions of free books, movies, software, music, and more.",
-    "category": "References",
+    "category": "Internet Archive",
     "tags": ["archive", "digital library", "books", "multimedia"]
   },
   {
@@ -142,5 +142,13 @@
     "description": "Reference manager and academic social network that helps organize research.",
     "category": "Tools",
     "tags": ["reference management", "academic network", "research", "citations"]
+  },
+  {
+    "id": "18",
+    "title": "wiby",
+    "url": "https://wiby.me/",
+    "description": "a search engine for the old web, does not index sites with js.",
+    "category": "Internet Archive",
+    "tags": ["Old Internet", "Web 1.0", "Indie Web"]
   }
 ]

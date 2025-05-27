@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { PageHeader } from "@/components/page-header"
+import { PageDescription } from "@/components/posts/typography/page-description"
 import ResourcesTable from "@/components/resources-table"
 
 interface Resource {
@@ -74,10 +75,8 @@ export default function ResourcesPage() {
           status="In Progress"
           confidence="certain"
           importance={8}
-          preview="A comprehensive collection of academic resources, research tools, learning platforms, and reference materials to support scholarly pursuits and intellectual exploration."
-        />
-
-        <div className="mt-8">
+          preview="A collection of academic resources, research tools, learning platforms, and reference materials."
+        />        <div className="mt-8">
           {resources.length > 0 ? (
             <ResourcesTable resources={resources} />
           ) : (
@@ -85,6 +84,11 @@ export default function ResourcesPage() {
           )}
         </div>
       </div>
+
+      <PageDescription
+        title="About This Resources Page"
+        description="This curated collection brings together valuable academic resources, research tools, learning platforms, and reference materials to support scholarly pursuits and intellectual exploration. Each resource has been carefully selected and categorized to help facilitate discovery and learning across various domains of knowledge."
+      />
     </div>
   )
 }
