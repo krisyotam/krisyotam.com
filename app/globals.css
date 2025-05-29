@@ -1041,5 +1041,28 @@
   display: block !important;
 }
 
+/* =============================================================================
+   MARGIN NOTES DARK MODE IMPROVEMENTS
+   ========================================================================== */
+/* Override Card component's default border for margin notes in dark mode */
+.dark [data-note-index] {
+  border-color: hsl(0 0% 20%) !important;
+}
+
+/* Improve margin notes outline colors in dark mode */
+.dark [data-note-index] .border,
+.dark [data-note-index] .bg-border {
+  border-color: hsl(0 0% 20%) !important;
+  background-color: hsl(0 0% 20%) !important;
+}
+
+.dark [data-note-index] .border-t {
+  border-top-color: hsl(0 0% 20%) !important;
+}
+
+.dark [data-note-index] .border-dotted {
+  border-color: hsl(0 0% 35%) !important;
+}
+
 
 

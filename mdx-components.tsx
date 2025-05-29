@@ -22,6 +22,7 @@ import FileViewer from "@/components/posts/typography/file-viewer"
 import Essay from "@/components/posts/typography/essay"
 import Notice from "@/components/posts/typography/notice"
 import OcCharacterDisplay from "@/components/posts/characters/oc-character-display"
+import CharacterDisplay from "@/components/posts/characters/character-display"
 import Inflation from "@/components/inflation"
 import { EnhancedImageDisplay } from "@/components/posts/images/enhanced-image-display"
 import { Image as BasicImage } from "@/components/posts/images/basic-image-display"
@@ -134,10 +135,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Define,
     LinkTags,
     Inflation,
-    
-    // Character and people components
+      // Character and people components
     MiniBio,
     OcCharacterDisplay,
+    CharacterDisplay,
     Human,
     Company,
     Tree,

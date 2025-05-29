@@ -29,8 +29,8 @@
       "state": "hidden"
     },
     {
-      "title": "Susanna Kaysen",
-      "subtitle": "A Critical Character Analysis",
+      "title": "Analysis of Susanna Kaysen",
+      "subtitle": "Character Analysis",
       "preview": "a in-depth analysis of susanna kaysen, girl, interrupted",
       "date": "2025-03-01",
       "tags": ["Girl, Interrupted", "Character Analysis", "Susanna Kaysen"],
@@ -39,8 +39,8 @@
       "status": "In Progress",
       "confidence": "unlikely",
       "importance": 2,
-      "state": "hidden",
-      "cover_image": ""
+      "state": "active",
+      "cover_image": "https://i.postimg.cc/fTV0qV9k/susanna-kaysen-character-analysis.png"
     },
     {
       "title": "The Bell Jar",
@@ -768,6 +768,20 @@
       "confidence": "certain",
       "importance": 8,
       "state": "active"
+    },
+    {
+      "title": "My dady loves me",
+      "subtitle": "Thoughts on girl, interrupted and sexual abuse",
+      "preview": "An exent generation and scientific research.",
+      "date": "2025-05-20",
+      "tags": ["Girl, Interrupted", "Sexual Abuse", "Childhood Trauma", "Mental Health", "Psychology"],
+      "category": "Thoughts",
+      "slug": "my-daddy-loves-me",
+      "cover_image": "https://i.postimg.cc/ZKGgPQ4R/krisctf-oak-tree-roman-empire-period-black-and-white-child-anim-df5113ad-426c-4ff5-bfc3-88fc0c25f3cb.webp",
+      "status": "Published",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "hidden"
     }
   ]
 }

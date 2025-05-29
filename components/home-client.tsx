@@ -40,6 +40,7 @@ import Companies from "@/components/about/Companies"
 import MySites from "@/components/about/MySites"
 import OtherSites from "@/components/about/OtherSites"
 import SiteInfo from "@/components/about/SiteInfo"
+import { FeaturedPost } from "@/components/featured-post"
 
 // Type definitions for props
 interface Post {
@@ -729,6 +730,11 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                 isOpen={openSections.includes(16)}
                 onToggle={() => toggleSection(16)}
               />
+            </div>
+
+            {/* Featured Post Section */}
+            <div className="mb-8">
+              <FeaturedPost posts={posts} />
             </div>
 
             {/* Posts Table with Feed Data */}

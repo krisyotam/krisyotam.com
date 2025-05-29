@@ -1,31 +1,48 @@
 "use client"
 
 import { useState } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CatalogContent } from "./catalog-content"
-import { OwnedCollectionsContent } from "./owned-collections-content"
+import { LibrarySeriesContent } from "./library-series-content"
 import { LibraryNotesContent } from "./library-notes-content"
 
 export function LibraryTabs() {
   const [activeTab, setActiveTab] = useState("catalog")
 
+  const tabs = [
+    { id: "catalog", label: "Catalog" },
+    { id: "collections", label: "Collections" },
+    { id: "notes", label: "Notes" }
+  ]
+
   return (
-    <Tabs value={activeTab} onValueChange={setActiveTab}>
-      <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="catalog">Catalog</TabsTrigger>
-        <TabsTrigger value="collections">Collections</TabsTrigger>
-        <TabsTrigger value="notes">Notes</TabsTrigger>
-      </TabsList>
-      <TabsContent value="catalog">
-        <CatalogContent />
-      </TabsContent>
-      <TabsContent value="collections">
-        <OwnedCollectionsContent />
-      </TabsContent>
-      <TabsContent value="notes">
-        <LibraryNotesContent />
-      </TabsContent>
-    </Tabs>
+    <div>
+      <div className="relative">
+        <div className="flex border-b border-border">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2 text-sm font-medium relative transition-colors ${
+                activeTab === tab.id
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {tab.label}
+              {activeTab === tab.id && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black" />
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+      
+      <div className="mt-6">
+        {activeTab === "catalog" && <CatalogContent />}
+        {activeTab === "collections" && <LibrarySeriesContent />}
+        {activeTab === "notes" && <LibraryNotesContent />}
+      </div>
+    </div>
   )
 }
 

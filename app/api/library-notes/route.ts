@@ -4,7 +4,8 @@ import path from "path"
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), "data", "library-notes.json")
+    // Read from library-notes.json file
+    const filePath = path.join(process.cwd(), "data", "library", "library-notes.json")
     const fileData = fs.readFileSync(filePath, "utf8")
     const notesData = JSON.parse(fileData)
 

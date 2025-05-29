@@ -161,9 +161,8 @@ export function Commento() {
       clearInterval(waitForCommento)
     }
   }, [])
-
   return (
-    <div className="my-8 border border-border bg-card p-6 shadow-sm rounded-sm">
+    <div className="my-8 border border-border bg-card p-6 shadow-sm">
       {/* Header */}
       <div className="mb-6 flex items-center justify-center">
         <div className="h-px w-16 bg-primary/30"></div>
@@ -172,19 +171,17 @@ export function Commento() {
       </div>
 
       {/* LaTeX disclaimer */}
-      <div className="mb-6 text-center">
-        <p className="text-sm text-muted-foreground italic">
-          You can use LaTeX in your comments. Use <code className="px-1 py-0.5 bg-muted rounded">$...$</code> for inline
-          math and <code className="px-1 py-0.5 bg-muted rounded">$$...$$</code> for block equations.
+      <div className="mb-6 text-center">        <p className="text-sm text-muted-foreground italic">
+          You can use LaTeX in your comments. Use <code className="px-1 py-0.5 bg-muted">$...$</code> for inline
+          math and <code className="px-1 py-0.5 bg-muted">$$...$$</code> for block equations.
         </p>
       </div>
 
       {/* Reload button */}
-      <div className="mb-6 text-center">
-        <button
+      <div className="mb-6 text-center">        <button
           onClick={reloadCommento}
           disabled={isReloading}
-          className="inline-flex items-center px-3 py-1.5 border border-border rounded-sm bg-secondary hover:bg-secondary/80 transition-colors text-xs text-muted-foreground hover:text-foreground"
+          className="inline-flex items-center px-3 py-1.5 border border-border bg-secondary hover:bg-secondary/80 transition-colors text-xs text-muted-foreground hover:text-foreground"
         >
           <RefreshCw className={`h-3 w-3 mr-2 ${isReloading ? "animate-spin" : ""}`} />
           {isReloading ? "Loading comments..." : "Click here if comments have not loaded"}
@@ -266,10 +263,7 @@ export function Commento() {
         /* Commento styling to match site theme */
         .commento-root * {
           font-family: inherit;
-        }
-
-        .commento-root .commento-card {
-          border-radius: 0.25rem;
+        }        .commento-root .commento-card {
           border: 1px solid hsl(var(--border));
           background-color: hsl(var(--background));
         }
@@ -280,29 +274,20 @@ export function Commento() {
 
         .commento-root .commento-name {
           color: hsl(var(--foreground));
-        }
-
-        .commento-root .commento-submit-button {
+        }        .commento-root .commento-submit-button {
           background-color: hsl(var(--primary));
           color: hsl(var(--primary-foreground));
-          border-radius: 0.25rem;
           transition: opacity 0.2s ease;
         }
 
         .commento-root .commento-submit-button:hover {
           opacity: 0.9;
-        }
-
-        .commento-root textarea {
+        }        .commento-root textarea {
           border: 1px solid hsl(var(--border));
-          border-radius: 0.25rem;
           background-color: hsl(var(--background));
           color: hsl(var(--foreground));
-        }
-
-        .commento-root .commento-markdown-help {
+        }        .commento-root .commento-markdown-help {
           border: 1px solid hsl(var(--border));
-          border-radius: 0.25rem;
           background-color: hsl(var(--background));
         }
       `}</style>
