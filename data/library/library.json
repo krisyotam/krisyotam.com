@@ -2,6 +2,7 @@
   "books": [
     {
       "id": "1",
+      "slug": "linear-algebra-done-right",
       "title": "Linear Algebra Done Right",
       "author": "sheldon-axler",
       "series": "Undergraduate Texts in Mathematics",
@@ -16,6 +17,7 @@
     },
     {
       "id": "2",
+      "slug": "understanding-analysis",
       "title": "Understanding Analysis",
       "author": "stephen-abbott",
       "editors": "Sheldon Axler, Kenneth Ribet",
@@ -31,6 +33,7 @@
     },
     {
       "id": "3",
+      "slug": "elementary-analysis-theory-of-calculus",
       "title": "Elementary Analysis: The Theory of Calculus",
       "author": "kenneth-ross",
       "editors": "Sheldon Axler, Frederick Gehring, Ken Ribet",
@@ -46,6 +49,7 @@
     },
     {
       "id": "4",
+      "slug": "principles-of-mathematical-analysis",
       "title": "Principles of Mathematical Analysis",
       "author": "walter-rudin",
       "series": "International Series in Pure and Applied Mathematics",
@@ -61,6 +65,7 @@
     },
     {
       "id": "5",
+      "slug": "complex-variables-for-scientists-and-engineers",
       "title": "Complex Variables for Scientists and Engineers",
       "author": "john-paliouras",
       "series": "",
@@ -75,6 +80,7 @@
     },
     {
       "id": "6",
+      "slug": "elementary-number-theory",
       "title": "Elementary Number Theory",
       "author": "underwood-dudley",
       "editor": "Victor Klee",
@@ -90,6 +96,7 @@
     },
     {
       "id": "7",
+      "slug": "the-structure-of-abstract-algebra",
       "title": "The Structure of Abstract Algebra",
       "authors": ["ralph-crouch", "david-beckman"],
       "series": "",
@@ -105,6 +112,7 @@
     },
     {
       "id": "8",
+      "slug": "plane-trigonometry-with-tables",
       "title": "Plane Trigonometry with Tables",
       "author": "gordon-fuller",
       "series": "",

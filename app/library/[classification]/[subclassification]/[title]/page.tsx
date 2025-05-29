@@ -1,73 +1,148 @@
-export default async function Page({ params }: { params: { title: string } }) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/library/book/${params.title}`, {
-    cache: 'force-cache'
-  })
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { BookDetailClient } from './book-detail-client'
+import libraryData from '@/data/library/library.json'
+import authorsData from '@/data/library/authors.json'
+
+type Props = {
+  params: { 
+    classification: string
+    subclassification: string
+    title: string 
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const book = libraryData.books.find(b => b.slug === params.title)
   
-  if (!response.ok) {
-    return <p>Book not found</p>
+  if (!book) {
+    return {
+      title: 'Book Not Found',
+      description: 'The requested book could not be found.',
+    }
   }
 
-  const book = await response.json()
+  // Get author name - handle both single author and multiple authors
+  let authorName = 'Unknown'
+  if (book.author) {
+    const author = authorsData.authors.find(a => a.slug === book.author)
+    authorName = author?.name || book.author
+  } else if ('authors' in book && book.authors && book.authors.length > 0) {
+    const authorNames = book.authors.map(authorSlug => {
+      const author = authorsData.authors.find(a => a.slug === authorSlug)
+      return author?.name || authorSlug
+    })
+    authorName = authorNames.join(', ')
+  }
 
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">{book.title}</h1>
-      <div className="mb-6">
-        <img src={book.coverUrl} alt={book.title} className="w-48 h-auto mb-4" />
-        <p><strong>Classification:</strong> {book.classification} - {book.subClassification}</p>
-        <p><strong>Publisher:</strong> {book.publisher}</p>
-        <p><strong>Year:</strong> {book.yearPublished}</p>
-        {book.isbn && <p><strong>ISBN:</strong> {book.isbn}</p>}
-        {book.series && <p><strong>Series:</strong> {book.series}</p>}
-      </div>      {book.authors && book.authors.length > 0 && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-semibold mb-4">About the Author(s)</h2>
-          {book.authors.map((author: any) => (
-            <div key={author.slug} className="mb-6 p-4 border rounded-lg shadow-sm">
-              <h3 className="text-xl font-medium">{author.name}</h3>
-              {author.fullName && author.fullName !== author.name && (
-                <p className="text-sm text-gray-600 mb-2"><strong>Full Name:</strong> {author.fullName}</p>
-              )}
-              {author.degrees && author.degrees.length > 0 && (
-                <p className="text-sm text-gray-600 mb-2"><strong>Education:</strong> {author.degrees.join(", ")}</p>
-              )}
-              {author.currentAffiliation && (
-                <p className="text-sm text-gray-600 mb-2"><strong>Current Affiliation:</strong> {author.currentAffiliation}</p>
-              )}
-              {author.previousAffiliations && author.previousAffiliations.length > 0 && (
-                <p className="text-sm text-gray-600 mb-2"><strong>Previous Affiliations:</strong> {author.previousAffiliations.join(", ")}</p>
-              )}
-              {author.fieldOfExpertise && author.fieldOfExpertise.length > 0 && (
-                <p className="text-sm text-gray-600 mb-2"><strong>Fields of Expertise:</strong> {author.fieldOfExpertise.join(", ")}</p>
-              )}
-              {author.notableAchievements && author.notableAchievements.length > 0 && (
-                <div className="text-sm text-gray-600 mb-2">
-                  <strong>Notable Achievements:</strong>
-                  <ul className="list-disc list-inside ml-4">
-                    {author.notableAchievements.map((achievement: string, index: number) => (
-                      <li key={index}>{achievement}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              {author.bio && (
-                <p className="text-sm text-gray-700 mt-3">{author.bio}</p>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  )
+  return {
+    title: `${book.title} | Library`,
+    description: `${book.title} ${authorName ? `by ${authorName}` : ''}. Published by ${book.publisher} in ${book.yearPublished}. ${book.series ? `Part of ${book.series} series.` : ''}`,
+    keywords: `${book.title}, ${authorName || ''}, ${book.publisher}, ${book.series || ''}, ${book.classification}, mathematics, textbook`,
+    openGraph: {
+      title: `${book.title} | Library`,
+      description: `${book.title} ${authorName ? `by ${authorName}` : ''}`,
+      type: 'article',
+      images: book.coverUrl ? [{ url: book.coverUrl }] : [],
+    },  }
 }
 
 export async function generateStaticParams() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/library-catalog`, {
-    cache: 'force-cache'
-  })
-  const books = await response.json()
-  
-  return books.map((book: any) => ({
-    title: book.slug || book.title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim()
+  return libraryData.books.map((book) => ({
+    classification: book.classification,
+    subclassification: book.subClassification,
+    title: book.slug,
   }))
+}
+
+export default function BookDetailPage({ params }: Props) {
+  const book = libraryData.books.find(b => b.slug === params.title)
+  
+  if (!book) {
+    notFound()
+  }
+  // Process book data similar to the API route
+  const processedBook = {
+    ...book,
+    // Add required fields that aren't in the JSON
+    language: 'English',
+    description: `${book.title} is a comprehensive textbook in ${book.classification} published by ${book.publisher}.`,
+    
+    // Handle author information
+    authorName: (() => {
+      if (book.author) {
+        const author = authorsData.authors.find(a => a.slug === book.author)
+        return author?.name || book.author
+      } else if ('authors' in book && book.authors && book.authors.length > 0) {
+        const authorNames = book.authors.map(authorSlug => {
+          const author = authorsData.authors.find(a => a.slug === authorSlug)
+          return author?.name || authorSlug
+        })
+        return authorNames.join(', ')
+      }
+      return 'Unknown'
+    })(),
+    
+    // Add author details for the authors tab
+    authors: (() => {
+      if (book.author) {
+        const author = authorsData.authors.find(a => a.slug === book.author)
+        return author ? [{
+          id: author.slug,
+          name: author.name,
+          bio: author.bio,
+          affiliations: [author.currentAffiliation, ...author.previousAffiliations].filter(Boolean),
+          specializations: author.fieldOfExpertise,
+          // Remove non-existent properties
+        }] : []
+      } else if ('authors' in book && book.authors && book.authors.length > 0) {
+        return book.authors.map(authorSlug => {
+          const author = authorsData.authors.find(a => a.slug === authorSlug)
+          return author ? {
+            id: author.slug,
+            name: author.name,
+            bio: author.bio,
+            affiliations: [author.currentAffiliation, ...author.previousAffiliations].filter(Boolean),
+            specializations: author.fieldOfExpertise,
+          } : {
+            id: authorSlug,
+            name: authorSlug,
+          }
+        })
+      }
+      return []
+    })(),
+    
+    // Generate citation
+    citation: (() => {
+      let authorText = ''
+      if (book.author) {
+        const author = authorsData.authors.find(a => a.slug === book.author)
+        authorText = author?.name || book.author
+      } else if ('authors' in book && book.authors && book.authors.length > 0) {
+        const authorNames = book.authors.map(authorSlug => {
+          const author = authorsData.authors.find(a => a.slug === authorSlug)
+          return author?.name || authorSlug
+        })
+        authorText = authorNames.join(', ')
+      }
+
+      const year = book.yearPublished.match(/\d{4}/)?.[0] || book.yearPublished
+      const isbn = book.isbn || book.isbn13 || book.isbn10 || ''
+      
+      let citation = `${authorText}. (${year}). *${book.title}*`
+      if (book.edition && book.edition !== '1st') {
+        citation += ` (${book.edition} ed.)`
+      }
+      citation += `. ${book.publisher}`
+      if (isbn) {
+        citation += `. ISBN: ${isbn}`
+      }
+      citation += '.'
+      
+      return citation
+    })(),
+  }
+
+  return <BookDetailClient book={processedBook} />
 }

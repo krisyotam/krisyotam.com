@@ -35,7 +35,7 @@ const researchPageData: ResearchPageData = {
   subtitle: "Academic Papers and Projects",
   date: new Date().toISOString(),
   preview:
-    "a collection of my more formal writings on diverse topics",
+    "a collection of my published research papers",
   status: "In Progress" as const,
   confidence: "likely" as const,
   importance: 8,
