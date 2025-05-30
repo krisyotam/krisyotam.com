@@ -83,11 +83,10 @@ import { useTheme } from "next-themes"
 const menuItems = [
   // Primary navigation - most commonly used pages
   { icon: Home, label: "Home", path: "/" },
-  { icon: BookOpen, label: "Blog", path: "/blog" },
   { icon: List, label: "Categories", path: "/categories" },
   { icon: Layers, label: "Series", path: "/series" },
   { icon: HeartHandshake, label: "Supporters", path: "/supporters" },
-  { icon: User, label: "About", path: "/about" },
+  { icon: User, label: "About", path: "/blog/2025/on-myself" },
   
   // Content sections - main site areas
   { icon: StickyNote, label: "Notes", path: "/notes" },

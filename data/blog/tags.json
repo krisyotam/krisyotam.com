@@ -1,0 +1,64 @@
+{
+  "tags": [
+    {
+      "slug": "design",
+      "title": "Design",
+      "preview": "Articles about design principles, visual aesthetics, and creating meaningful user experiences.",
+      "date": "2025-01-25",
+      "show-status": "active",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "documentation",
+      "title": "Documentation",
+      "preview": "Best practices and examples for documenting projects.",
+      "date": "2025-01-25",
+      "show-status": "active",
+      "status": "Finished",
+      "confidence": "likely",
+      "importance": 6
+    },
+    {
+      "slug": "web-development",
+      "title": "Web Development",
+      "preview": "Insights into frameworks, tools, and techniques for web development.",
+      "date": "2025-01-25",
+      "show-status": "active",
+      "status": "Finished",
+      "confidence": "likely",
+      "importance": 8
+    },
+    {
+      "slug": "programming",
+      "title": "Programming",
+      "preview": "Deep dives into programming concepts and mindset.",
+      "date": "2025-01-20",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "likely",
+      "importance": 7
+    },
+    {
+      "slug": "mindfulness",
+      "title": "Mindfulness",
+      "preview": "Techniques for cultivating presence and focus in daily tasks.",
+      "date": "2025-01-20",
+      "show-status": "active",
+      "status": "Draft",
+      "confidence": "possible",
+      "importance": 5
+    },
+    {
+      "slug": "productivity",
+      "title": "Productivity",
+      "preview": "Tips and frameworks to boost productivity.",
+      "date": "2025-01-20",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "likely",
+      "importance": 6
+    }
+  ]
+}

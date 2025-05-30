@@ -1,4 +1,4 @@
-import feedData from '@/data/feed.json';
+import feedData from '@/data/blog/feed.json';
 
 interface Post {
   title: string;

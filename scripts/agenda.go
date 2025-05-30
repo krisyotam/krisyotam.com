@@ -2,33 +2,37 @@
 // Module:        AgendaSchedulerV1
 // File:          agenda.go
 // Description:   Generate a daily writing agenda from feed.json using weighted scores
-//                and output a PDF in /public/agenda with the current date.
+//
+//	and output a PDF in /public/agenda with the current date.
+//
 // Author:        Kris Yotam
 // Created:       2025-04-30
 // Last Modified: 2025-04-30 10:00:00 (America/Chicago)
 // License:       CC-0
-// 
+//
 // Dependencies:
-//   • Standard library:
-//       – encoding/json
-//       – flag
-//       – fmt
-//       – math
-//       – os
-//       – path/filepath
-//       – sort
-//       – time
-//   • Third-party modules:
-//       – github.com/jung-kurt/gofpdf            // PDF generation
-// 
+//   - Standard library:
+//     – encoding/json
+//     – flag
+//     – fmt
+//     – math
+//     – os
+//     – path/filepath
+//     – sort
+//     – time
+//   - Third-party modules:
+//     – github.com/jung-kurt/gofpdf            // PDF generation
+//
 // Usage:
-//   $ go build -o bin/agenda ./cmd/agenda
-//   $ ./bin/agenda \
-//       -feed=./data/feed.json \
-//       -dailyMinutes=240 \
-//       -minSlot=15 \
-//       -timeConstant=30
-// ----------------------------------------------------------------------------- 
+//
+//	$ go build -o bin/agenda ./cmd/agenda
+//	$ ./bin/agenda \
+//	    -feed=./data/feed.json \
+//	    -dailyMinutes=240 \
+//	    -minSlot=15 \
+//	    -timeConstant=30
+//
+// -----------------------------------------------------------------------------
 package main
 
 import (
@@ -60,7 +64,7 @@ func init() {
 		os.Exit(1)
 	}
 
-	flag.StringVar(&feedPath, "feed", filepath.Join(baseDir, "data", "feed.json"), "absolute path to feed.json")
+	flag.StringVar(&feedPath, "feed", filepath.Join(baseDir, "data", "blog", "feed.json"), "absolute path to feed.json")
 	flag.IntVar(&dailyMinutes, "dailyMinutes", 240, "total minutes available for today")
 	flag.IntVar(&minSlot, "minSlot", 15, "minimum minutes per post")
 	flag.IntVar(&timeConstant, "timeConstant", 30, "age time constant in days")

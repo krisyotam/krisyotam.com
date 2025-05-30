@@ -11,9 +11,17 @@ export async function GET(request: Request) {
   if (!fileName) {
     return new NextResponse("File parameter is required", { status: 400 });
   }
-
   try {
-    const filePath = path.join(process.cwd(), "data", fileName);
+    // List of files that have been moved to the blog subdirectory
+    const blogFiles = ["feed.json", "tags.json", "series.json", "category-data.json"];
+    
+    let filePath;
+    if (blogFiles.includes(fileName)) {
+      filePath = path.join(process.cwd(), "data", "blog", fileName);
+    } else {
+      filePath = path.join(process.cwd(), "data", fileName);
+    }
+    
     const fileContent = await fs.readFile(filePath, "utf-8");
 
     return new NextResponse(fileContent, {

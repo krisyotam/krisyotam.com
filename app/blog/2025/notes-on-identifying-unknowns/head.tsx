@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import feedData from '@/data/feed.json'
+import feedData from '@/data/blog/feed.json'
 
 export async function generateMetadata(): Promise<Metadata> {
   const post = (feedData.posts || []).find((p: any) => p.slug === 'notes-on-identifying-unknowns')

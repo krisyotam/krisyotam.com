@@ -3,7 +3,6 @@
     {
       "slug": "design",
       "title": "Design",
-      "subtitle": "Exploring visual and user experience principles",
       "preview": "Articles about design principles, visual aesthetics, and creating meaningful user experiences.",
       "date": "2025-01-01",
       "show-status": "active",
@@ -14,7 +13,6 @@
     {
       "slug": "technology",
       "title": "Technology",
-      "subtitle": "Exploring the digital frontier",
       "preview": "Deep dives into programming languages, frameworks, and the evolving landscape of technology.",
       "date": "2025-01-02",
       "show-status": "active",
@@ -25,7 +23,6 @@
     {
       "slug": "on-building-a-personal-library",
       "title": "On Building a Personal Library",
-      "subtitle": "Curating knowledge through books",
       "preview": "Thoughts on collecting, organizing, and engaging with books as a means of personal growth and intellectual development.",
       "date": "2025-01-03",
       "show-status": "active",
@@ -36,7 +33,6 @@
     {
       "slug": "philosophy",
       "title": "Philosophy",
-      "subtitle": "Exploring fundamental questions",
       "preview": "Examinations of philosophical concepts, ethical frameworks, and the pursuit of wisdom in everyday life.",
       "date": "2025-01-04",
       "show-status": "active",
@@ -47,7 +43,6 @@
     {
       "slug": "art",
       "title": "Art",
-      "subtitle": "Visual expressions and interpretations",
       "preview": "Analysis and appreciation of artistic works, movements, and the cultural significance of visual expression.",
       "date": "2025-01-05",
       "show-status": "active",
@@ -58,7 +53,6 @@
     {
       "slug": "examples",
       "title": "Examples",
-      "subtitle": "Demonstration and reference materials",
       "preview": "Sample posts and demonstrations of various content formats and features available on this site.",
       "date": "2025-01-06",
       "show-status": "hidden",
@@ -69,7 +63,6 @@
     {
       "slug": "poetic-analysis",
       "title": "Poetic Analysis",
-      "subtitle": "Demonstration and reference materials",
       "preview": "Sample posts and demonstrations of various content formats and features available on this site.",
       "date": "2025-01-06",
       "show-status": "active",
@@ -80,7 +73,6 @@
     {
       "slug": "character-analysis",
       "title": "Character Analysis",
-      "subtitle": "Demonstration and reference materials",
       "preview": "Sample posts and demonstrations of various content formats and features available on this site.",
       "date": "2025-01-06",
       "show-status": "active",
@@ -91,7 +83,6 @@
     {
       "slug": "anime-analysis",
       "title": "Anime Analysis",
-      "subtitle": "Critical Analysis Essays of Anime",
       "preview": "A compilation of anime reviews.",
       "date": "2025-01-06",
       "show-status": "active",
@@ -102,7 +93,6 @@
     {
       "slug": "powerscaling",
       "title": "Powerscaling",
-      "subtitle": "",
       "preview": "Powerscaling of anime, manga, comics, & film.",
       "date": "2025-01-06",
       "show-status": "active",
@@ -113,7 +103,6 @@
     {
       "slug": "anime-recommendations",
       "title": "Anime Recommendations",
-      "subtitle": "",
       "preview": "various lists of anime recs from all types of genres.",
       "date": "2025-01-06",
       "show-status": "active",
@@ -124,7 +113,6 @@
     {
       "slug": "case-files-of-k",
       "title": "Case Files of K",
-      "subtitle": "",
       "preview": "a series of investigations, mysteries, and analytical entries under the guise of 'K'.",
       "date": "2025-04-09",
       "show-status": "active",
@@ -135,7 +123,6 @@
     {
       "slug": "dreams",
       "title": "Dreams",
-      "subtitle": "",
       "preview": "a collection or log of personal dreams, symbolic interpretations, or subconscious narratives.",
       "date": "2025-04-09",
       "show-status": "active",
@@ -146,7 +133,6 @@
     {
       "slug": "frameworks",
       "title": "Frameworks",
-      "subtitle": "systems & frameworks",
       "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
       "date": "2025-04-09",
       "show-status": "active",
@@ -157,7 +143,6 @@
     {
       "slug": "anime-reviews",
       "title": "Anime Reviews",
-      "subtitle": "systems & frameworks",
       "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
       "date": "2025-04-09",
       "show-status": "active",
@@ -168,7 +153,6 @@
     {
       "slug": "film-reviews",
       "title": "Film Reviews",
-      "subtitle": "systems & frameworks",
       "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
       "date": "2025-04-09",
       "show-status": "active",
@@ -179,7 +163,6 @@
     {
       "slug": "opera-reviews",
       "title": "Opera Reviews",
-      "subtitle": "systems & frameworks",
       "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
       "date": "2025-04-09",
       "show-status": "active",
@@ -190,7 +173,6 @@
     {
       "slug": "play-reviews",
       "title": "Play Reviews",
-      "subtitle": "systems & frameworks",
       "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
       "date": "2025-04-09",
       "show-status": "active",
@@ -201,7 +183,6 @@
     {
       "slug": "project-euler",
       "title": "Project Euler",
-      "subtitle": "mathematical coding challenges",
       "preview": "a archive of my evolving solutions to problems on projecteuler.net in various languages",
       "date": "2025-04-09",
       "show-status": "active",
@@ -212,7 +193,6 @@
     {
       "slug": "verse",
       "title": "Verse",
-      "subtitle": "Poetic Forms",
       "preview": "A curated collection of my poetic explorations—from structured forms like sonnets and haiku to free‐verse innovations.",
       "date": "2025-04-21",
       "show-status": "active",
@@ -223,7 +203,6 @@
     {
       "slug": "on-myself",
       "title": "On Myself",
-      "subtitle": "Personal Reflections",
       "preview": "Personal reflections on my identity, growth, and guiding philosophies.",
       "date": "2025-04-27",
       "show-status": "active",
@@ -234,7 +213,6 @@
     {
       "slug": "on-website",
       "title": "On Website",
-      "subtitle": "Site Architecture & Evolution",
       "preview": "Insights into the design, architecture, and ongoing evolution of my personal website.",
       "date": "2025-04-27",
       "show-status": "active",
@@ -245,7 +223,6 @@
     {
       "slug": "on-learning",
       "title": "On Learning",
-      "subtitle": "Educational Frameworks",
       "preview": "Documenting my learning pathways—methods, resources, and progress across various disciplines.",
       "date": "2025-04-27",
       "show-status": "active",
@@ -256,7 +233,6 @@
     {
       "slug": "on-writing",
       "title": "On Writing",
-      "subtitle": "Composition Techniques",
       "preview": "my writing processes, stylistic evolutions, and compositional approaches.",
       "date": "2025-04-27",
       "show-status": "active",
@@ -267,7 +243,6 @@
     {
       "slug": "on-method",
       "title": "On Method",
-      "subtitle": "Methodological Frameworks",
       "preview": "Analyses of the methodologies and frameworks underpinning my research",
       "date": "2025-04-27",
       "show-status": "active",
@@ -278,7 +253,6 @@
     {
       "slug": "short-stories",
       "title": "Short Stories",
-      "subtitle": "Narrative Fiction",
       "preview": "A curated collection of my original short fiction",
       "date": "2025-04-27",
       "show-status": "active",
@@ -289,7 +263,6 @@
     {
       "slug": "book-notes",
       "title": "Book Notes",
-      "subtitle": "Reading Summaries and Insights",
       "preview": "A curated repository of notes, and reflections on books as I read.",
       "date": "2025-04-28",
       "show-status": "active",
@@ -297,10 +270,5 @@
       "confidence": "medium",
       "importance": 1
     }
-    
-    
   ]
 }
-
-
-

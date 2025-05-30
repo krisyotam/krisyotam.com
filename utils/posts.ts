@@ -122,7 +122,7 @@ export async function getAllPosts(): Promise<Post[]> {
     return cachedPosts;
   }
   
-  const data = await readDataFile<PostsData>("feed.json")
+  const data = await readDataFile<PostsData>("blog/feed.json")
   const posts = data?.posts || []
   const sortedPosts = posts.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -150,7 +150,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
 // Load category metadata
 export async function getAllCategoryData(): Promise<CategoryData[]> {
-  const data = await readDataFile<CategoriesData>("category-data.json")
+  const data = await readDataFile<CategoriesData>("blog/category-data.json")
   return data?.categories || []
 }
 

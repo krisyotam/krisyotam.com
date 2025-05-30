@@ -73,7 +73,7 @@ export async function getAllSeriesData(): Promise<SeriesData[]> {
     return cachedSeriesData;
   }
   
-  const data = await readDataFile<SeriesListData>("series.json")
+  const data = await readDataFile<SeriesListData>("blog/series.json")
   const seriesData = data?.series || [];
   
   // Cache the data in production

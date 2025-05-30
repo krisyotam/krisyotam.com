@@ -23,10 +23,14 @@ const httpLink = new HttpLink({
 // Authentication link
 const authLink = new ApolloLink((operation, forward) => {
   // Get the token from environment variable
-  const token = process.env.NEXT_PUBLIC_LITERAL_API_TOKEN
+  const token = process.env.NEXT_PUBLIC_LITERAL_TOKEN
 
-  // Log the operation being performed
+  // Log the operation being performed and token status
   console.log(`Executing GraphQL operation: ${operation.operationName}`)
+  console.log(`Token available: ${token ? 'Yes' : 'No'}`)
+  if (token) {
+    console.log(`Token preview: ${token.substring(0, 20)}...`)
+  }
 
   // Add the token to the headers
   operation.setContext(({ headers = {} }) => ({

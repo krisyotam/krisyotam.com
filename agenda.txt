@@ -1,7 +1,25 @@
-I want more comprehensive information available for authors of the books in my library so here is what we are going to do. 
 
-move the library.json to data/library, and then create authors.json that way we now have library.json, and authors.json 
 
-Then take all the authors in library.json and give them each a slug for example "scott-young" and add all the information like their university
-degree or degrees, affiliations, ect. then in library you can remove author credentials and replace the author names with that authors slug instead 
-and update the library book slug pages to have a section with information on the author or authors that it pulls from the authors.json
+You are going to overhaul the app/reading page. To get a feel for the design first go look at the app/library page and all its contents. 
+You are going to change the width of /reading to the same width as /library, and you are going to give it tabs just like how library has
+"catalog, collections, notes" /reading will have "reading, read, to-be-read, lists, stats"
+on the reading tab which is currently reading there should be two drop down filters just like /library has "Classification, and Sub-classification"
+/reading will have "genre, sub-genre"
+
+for the tabs: reading, read, will be pulled from all the files in data/reading/reading into a unified feed with exception off to-be-read.json
+to-be-read will now be pulled from data/reading/to-be-read.json
+lists will be pulled from data/reading/lists.json, and charts will be charts vertically stacked that you create based on all the data available for my reading 
+go crazy with this section i want tons of charts finding common and hidden patterns, ect. 
+
+Things to be noted, for authors and books slugs are referenced instead of data this is because of data/reading/books.json, and data/reading/authors.json holding all of that data 
+so when you see a slug that means it should search those files for the data to use whether it be just name or all the information. 
+
+You are completely scraping the literal api integration. You are still using the same components for books that the old version used and passing it the same data like title, cover url, author name 
+just doing it from different sources now. 
+
+also forgot to mention for the read tab, remember any book in any of the files in data/reading/reading that has at least 1 read will be listed there chronologically with the last read at the top of the list. 
+
+for books with no cover to fetch currently use the fall back image here: https://i.postimg.cc/Jh2wT6TZ/default-book-cover.png
+
+Write your checklist under this. 
+

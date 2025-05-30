@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
-import feedData from "./data/feed.json"
+import feedData from "./data/blog/feed.json"
 
 // Dynamically create route mappings from feed.json
 // This creates a map where key is the custom path and value contains target slug and year info

@@ -3,7 +3,6 @@
     {
       "slug": "wisdom-ai",
       "title": "Wisdom AI",
-      "subtitle": "Building a custom AI assistant",
       "preview": "A series documenting the development of a custom AI assistant using OpenAI Whisper, Deepseek, CLI functionality and various other tools.",
       "date": "2023-05-24",
       "show-status": "active",
@@ -20,7 +19,6 @@
     {
       "slug": "frieren-character-studies",
       "title": "Frieren Character Studies",
-      "subtitle": "Character analyses from Frieren: Beyond Journey's End",
       "preview": "In-depth exploration of the rich characters from the acclaimed anime that dethroned FMA.",
       "date": "2025-04-10",
       "show-status": "active",
@@ -41,7 +39,6 @@
     {
       "slug": "literary-character-analyses",
       "title": "Literary Character Analyses",
-      "subtitle": "Deep dives into complex literary figures",
       "preview": "Examinations of notable characters from classic literature, exploring their psychology and narrative significance.",
       "date": "2025-03-05",
       "show-status": "active",
@@ -66,7 +63,6 @@
     {
       "slug": "anime-season-guides",
       "title": "Anime Season Guides",
-      "subtitle": "Seasonal anime recommendations and analyses",
       "preview": "Curated lists of must-watch anime for each season, with thoughtful commentary on standout series.",
       "date": "2025-04-15",
       "show-status": "active",
@@ -87,7 +83,6 @@
     {
       "slug": "powerscaling-deep-dives",
       "title": "Powerscaling Deep Dives",
-      "subtitle": "Analytical comparisons of fictional power levels",
       "preview": "Detailed examinations of power dynamics between iconic characters from anime, manga, and other media.",
       "date": "2025-04-20",
       "show-status": "active",
@@ -104,7 +99,6 @@
     {
       "slug": "art-critique-collection",
       "title": "Art Critique Collection",
-      "subtitle": "Analytical perspectives on visual masterpieces",
       "preview": "Detailed examinations of significant works of art, exploring technique, symbolism, and historical context.",
       "date": "2025-02-10",
       "show-status": "active",
@@ -121,7 +115,6 @@
     {
       "slug": "poetic-analyses",
       "title": "Poetic Analyses",
-      "subtitle": "Explorations of poetic form and meaning",
       "preview": "Critical examinations of poems, focusing on structure, language, and thematic elements.",
       "date": "2025-04-10",
       "show-status": "active",
@@ -138,7 +131,6 @@
     {
       "slug": "lifestyle-philosophy",
       "title": "Lifestyle Philosophy",
-      "subtitle": "Approaches to intentional living",
       "preview": "Essays exploring different philosophical approaches to lifestyle design and personal development.",
       "date": "2025-02-20",
       "show-status": "active",
@@ -153,4 +145,4 @@
       ]
     }
   ]
-} 
+}

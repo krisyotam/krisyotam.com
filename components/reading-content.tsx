@@ -4,11 +4,13 @@ import { useState, useEffect, Key } from "react"
 import { useQuery } from "@apollo/client"
 import { GET_READING_STATES } from "@/lib/queries"
 import { ReadingBookCard } from "@/components/reading-book-card"
+import { ReadingLists } from "@/components/reading/reading-lists"
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
 
 type ReadingStatus = "IS_READING" | "FINISHED" | "WANTS_TO_READ"
+type TabType = ReadingStatus | "LISTS"
 
 interface Author {
   name: string
@@ -29,7 +31,7 @@ interface ReadingState {
 }
 
 export function ReadingContent() {
-  const [activeStatus, setActiveStatus] = useState<ReadingStatus>("IS_READING")
+  const [activeTab, setActiveTab] = useState<TabType>("IS_READING")
   const { data, loading, error } = useQuery(GET_READING_STATES, {
     onError: (error) => {
       console.error("GraphQL query error:", error)
@@ -69,48 +71,65 @@ export function ReadingContent() {
   }
 
   const readingStates = data?.myReadingStates || []
-  const filteredBooks = readingStates.filter((state: ReadingState) => state.status === activeStatus)
+  const filteredBooks = readingStates.filter((state: ReadingState) => state.status === activeTab)
 
-  const statusLabels: Record<ReadingStatus, string> = {
+  const tabLabels: Record<TabType, string> = {
     IS_READING: "Reading",
     FINISHED: "Read",
     WANTS_TO_READ: "Want to Read",
+    LISTS: "Lists",
   }
 
   return (
     <div className="space-y-8">
-      <div className="flex space-x-4 mb-8">
-        {Object.entries(statusLabels).map(([status, label]) => (
-          <Button
-            key={status}
-            variant={activeStatus === status ? "default" : "outline"}
-            onClick={() => setActiveStatus(status as ReadingStatus)}
-            className="flex-1"
-          >
-            {label}
-          </Button>
-        ))}
-      </div>
-
-      {filteredBooks.length > 0 ? (
-        <div className="space-y-6">
-          {filteredBooks.map((state: ReadingState) => (
-            <ReadingBookCard
-              key={state.book.id}
-              coverUrl={state.book.cover || "/placeholder.svg?height=100&width=100"}
-              title={state.book.title}
-              subtitle={state.book.subtitle || ""}
-              author={state.book.authors.map((a: Author) => a.name).join(", ")}
-              rating={0}
-              onClick={() => window.open(`https://literal.club/book/${state.book.slug}`, "_blank")}
-            />
+      <div className="relative">
+        <div className="flex border-b border-border">
+          {Object.entries(tabLabels).map(([tab, label]) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab as TabType)}
+              className={`px-4 py-2 text-sm font-medium relative transition-colors ${
+                activeTab === tab
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {label}
+              {activeTab === tab && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black" />
+              )}
+            </button>
           ))}
         </div>
-      ) : (
-        <div className="text-center py-8">
-          <p className="text-muted-foreground">No books in this category yet.</p>
-        </div>
-      )}
+      </div>
+      
+      <div className="mt-6">
+        {activeTab === "LISTS" ? (
+          <ReadingLists />
+        ) : (
+          <>
+            {filteredBooks.length > 0 ? (
+              <div className="space-y-6">
+                {filteredBooks.map((state: ReadingState) => (
+                  <ReadingBookCard
+                    key={state.book.id}
+                    coverUrl={state.book.cover || "/placeholder.svg?height=100&width=100"}
+                    title={state.book.title}
+                    subtitle={state.book.subtitle || ""}
+                    author={state.book.authors.map((a: Author) => a.name).join(", ")}
+                    rating={0}
+                    onClick={() => window.open(`https://literal.club/book/${state.book.slug}`, "_blank")}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">No books in this category yet.</p>
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   )
 }

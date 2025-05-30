@@ -6,7 +6,6 @@ export const GET_READING_STATES = gql`
       id
       status
       createdAt
-      updatedAt
       book {
         id
         slug
@@ -28,10 +27,25 @@ export const GET_SHELVES = gql`
       slug
       title
       description
+      profileId
       books(take: 3) {
         id
-        cover
+        slug
         title
+        subtitle
+        description
+        isbn10
+        isbn13
+        language
+        pageCount
+        publishedDate
+        publisher
+        cover
+        authors {
+          id
+          name
+        }
+        gradientColors
       }
     }
   }
@@ -68,6 +82,27 @@ export const GET_BOOK_NOTES = gql`
       logic
       rhetoric
       review
+    }
+  }
+`
+
+export const GET_SHELF_BY_SLUG = gql`
+  query getShelfBySlug($shelfSlug: String!) {
+    shelf(where: { slug: $shelfSlug }) {
+      id
+      slug
+      title
+      description
+      books {
+        id
+        slug
+        title
+        subtitle
+        authors {
+          name
+        }
+        cover
+      }
     }
   }
 `

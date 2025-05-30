@@ -22,7 +22,7 @@ export function middleware(request: NextRequest) {
       const path = require('path');
       
       const othersFile = path.join(process.cwd(), 'data', 'others.json');
-      const feedFile = path.join(process.cwd(), 'data', 'feed.json');
+      const feedFile = path.join(process.cwd(), 'data', 'blog', 'feed.json');
       
       console.log(`others.json exists: ${fs.existsSync(othersFile)}`);
       console.log(`feed.json exists: ${fs.existsSync(feedFile)}`);
