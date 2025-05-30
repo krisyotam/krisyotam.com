@@ -4,7 +4,7 @@ import { useState, useEffect, Key } from "react"
 import { useQuery } from "@apollo/client"
 import { GET_READING_STATES } from "@/lib/queries"
 import { ReadingBookCard } from "@/components/reading-book-card"
-import { ReadingLists } from "@/components/reading/reading-lists"
+import { ReadingLists } from "@/components/reading-lists"
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
@@ -133,4 +133,3 @@ export function ReadingContent() {
     </div>
   )
 }
-
