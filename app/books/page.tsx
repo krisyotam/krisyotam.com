@@ -7,7 +7,7 @@ import { BookSearch } from "../../components/book-search"
 import { Button } from "@/components/ui/button"
 import { PageHeader } from "@/components/page-header"
 import { PageDescription } from "@/components/posts/typography/page-description"
-import booksData from "../../data/library/books.json"
+import libraryData from "../../data/library/library.json"
 
 // Add Books page metadata after other imports
 const booksPageData = {
@@ -58,17 +58,17 @@ function BookList() {
   const [searchQuery, setSearchQuery] = useState("")
   const [activeCategory, setActiveCategory] = useState<string>("All")
 
-  const categories = Array.from(new Set(booksData.books.map((book) => book.category)))
+  const categories = Array.from(new Set(libraryData.books.map((book) => book.classification || "Uncategorized")))
 
-  const filteredBooks = booksData.books.filter((book) => {
+  const filteredBooks = libraryData.books.filter((book) => {
     const matchesSearch =
       searchQuery === "" ||
       book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      book.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      book.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      book.authors.some((author) => author.toLowerCase().includes(searchQuery.toLowerCase()))
+      (book.classification && book.classification.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (book.author && book.author.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (book.series && book.series.toLowerCase().includes(searchQuery.toLowerCase()))
 
-    const matchesCategory = activeCategory === "All" || book.category === activeCategory
+    const matchesCategory = activeCategory === "All" || book.classification === activeCategory
 
     return matchesSearch && matchesCategory
   })
@@ -97,10 +97,10 @@ function BookList() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {filteredBooks.map((book) => (
           <BookCard
-            key={book.isbn13}
-            isbn={book.isbn13}
+            key={book.isbn || book.id}
+            isbn={book.isbn || ""}
             title={book.title}
-            authors={book.authors}
+            authors={book.author ? [book.author] : []}
             rating={0}
             isInteractive={false}
           />
