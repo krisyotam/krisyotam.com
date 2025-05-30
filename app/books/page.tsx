@@ -7,7 +7,7 @@ import { BookSearch } from "../../components/book-search"
 import { Button } from "@/components/ui/button"
 import { PageHeader } from "@/components/page-header"
 import { PageDescription } from "@/components/posts/typography/page-description"
-import booksData from "../../data/library/books.json"
+import booksData from "../../data/books.json"
 
 // Add Books page metadata after other imports
 const booksPageData = {
