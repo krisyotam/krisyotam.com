@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { PageHeader } from "@/components/page-header"
 import { useRouter, usePathname } from "next/navigation"
 import { PageDescription } from "@/components/posts/typography/page-description"
+import { CustomSelect, SelectOption } from "@/components/ui/custom-select"
 
 interface ProgymnasmataClientProps {
   initialTypeFilter?: string
@@ -53,6 +54,12 @@ export function ProgymnasmataClient({ initialTypeFilter = "All" }: Progymnasmata
   // Get all unique types for the filter
   const types = Array.from(new Set(entries.map(e => e.type))).sort()
 
+  // Convert types to SelectOption format
+  const typeOptions: SelectOption[] = [
+    { value: "All", label: "All" },
+    ...types.map(type => ({ value: type, label: type }))
+  ]
+
   // Sort by date descending (assuming date is ISO string or similar)
   const sortedEntries = [...entries].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   const filteredEntries = sortedEntries.filter(entry => {
@@ -65,15 +72,14 @@ export function ProgymnasmataClient({ initialTypeFilter = "All" }: Progymnasmata
     return matchesType && matchesSearch;
   });
 
-  function handleTypeChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const newType = e.target.value;
-    setTypeFilter(newType)
+  function handleTypeChange(selectedValue: string) {
+    setTypeFilter(selectedValue)
     
     // Update URL based on selected filter
-    if (newType === "All") {
+    if (selectedValue === "All") {
       router.push("/progymnasmata")
     } else {
-      router.push(`/progymnasmata/${newType.toLowerCase()}`)
+      router.push(`/progymnasmata/${selectedValue.toLowerCase()}`)
     }
   }
 
@@ -97,24 +103,19 @@ export function ProgymnasmataClient({ initialTypeFilter = "All" }: Progymnasmata
         <div className="mb-6 flex items-center gap-4">
           <div className="flex items-center gap-2 whitespace-nowrap">
             <label htmlFor="type-filter" className="text-sm text-muted-foreground">Filter by type:</label>
-            <select
-              id="type-filter"
-              className="border rounded px-2 py-1 text-sm bg-background"
+            <CustomSelect
               value={typeFilter}
-              onChange={handleTypeChange}
-            >
-              <option value="All">All</option>
-              {types.map(type => (
-                <option key={type} value={type}>{type}</option>
-              ))}
-            </select>
+              onValueChange={handleTypeChange}
+              options={typeOptions}
+              className="text-sm min-w-[140px]"
+            />
           </div>
           
           <div className="relative flex-1">
             <input 
               type="text" 
               placeholder="Search exercises..." 
-              className="w-full px-3 py-1 border rounded text-sm bg-background"
+              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
               onChange={(e) => setSearchQuery(e.target.value)}
               value={searchQuery}
             />

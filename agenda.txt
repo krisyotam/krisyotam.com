@@ -1,71 +1,20 @@
+You need to listen and follow each of these instructions exactly like i tell you to. 
+
+- you have poorly designed my dropdowns on every page. they all use default browser styling, so you need to replace ALL of them with a custom component that should probably be in components/ui 
+- replace every single default dropdown with the custom one. As for styles you are looking for the dark mode and light mode hover styles that the table on the verse page has, those should be the hvoer styles for the dropdown 
+- Also do not use round corners if you are creating a component it is required to have square corners. 
+- You need to make a index of every single page and check them all, they will all be top level pages since clearly slug pages won't have filters. 
+- start with the notes page regardless of it's place in the menu after you have mapped out all the pages, just so i can see how it looks. 
+
+after you finish reading create a checklist of everything that needs to be done below this, and return to mark off each thing as you do it.
 
 
-create a rules-of-the-internet.json in the data directory with rule #, rule, and explanation for those with no explanation it should still have the explanation key
-it should just be blank
+## These Pages need the drowpdown upgrade --> including the square corners, and the searchbar height match (search bars should have square corners to)
+ [✅] /verse
+ [✅] /progymnasmata 
+ [✅] /library  [✅] /reading --> the lists part
+ [✅] /notes
 
-
-Rule 0: Don't fuck with cats.Explanation Riffing on humans is okay because a human knows what they're getting into when they log on. Abusing animals for clout, on the other hand, will get you in a lot of trouble.
-Rule 1: You don't talk about /b/. Explanation There are some places you have to be part of to really appreciate. /b/ is one of them.
-Rule 2: You DON'T talk about /b/.
-Rule 3: We are Anonymous. ExplanationOn the internet everyone is anonymous. It's part of being on the internet! Thus I'm anonymous, you're anonymous...
-Rule 4: We are legion. Explanation It sounds threatening, but in actuality it refers to the "many stones make a mountain" principle; if we each do our part, we can make a larger impact than you can imagine!
-Rule 5: We do not forgive, we do not forget. Explanation Originally, this meant "the internet is forever. nothing is ever really deleted so don't be stupid unless you want to be remembered as stupid." But hacktivists hijacked it, turning it into a meme.
-Rule 6: Anonymous can be a horrible, senseless, uncaring monster. Explanation Once again, remember G.I.F.T., but more so, the dreaded Internet troll — someone who deliberately sabotages a forum with anger-inducing comments just to watch its occupants go ballistic, and/or derail a whole discussion.
-Rule 7: Anonymous is still able to deliver. Explanation "Deliver" means to do what you promised you would. This means that if we all pitch in we can do amazing things together! Sometimes all it takes is one person doing something right to make a difference.
-Rule 8: There are no real rules about posting. Explanation Site rules vary and nobody can force you to post or not post anything.
-Rule 9: There are no real rules about moderation either — enjoy your ban. Explanation Caveat to rule 8: If you act stupid or break the site rules, remember that the ban hammer is always stronger than you.
-Rule 10: /b/ is not your personal army. Explanation People tend to go on 4Chan, especially /b/, expecting others to solve their problems or get back at their personal "enemies" for them. The posters of 4Chan have better things to do with their time than dealing with petty things the person posting really should be dealing with on their own.
-Rule 11: No matter how much you love debating, keep in mind that no one on the internet debates. Instead they mock your intelligence as well as your parents. Explanation
-Rule 12: Anything you say can and will be used against you. Explanation Remember: the internet is forever. All it takes is one person with an incriminating copy.
-Rule 13: Anything you say can and will be turned into something else. Explanation Also remember the G.I.F.T. which can be compounded with the other rules.
-Rule 14: Do not argue with trolls—it means they win. Explanation Trolls are not interested in genuine debate; they just want attention and will never argue in good faith. The only way to defeat a troll is to ignore them, thus denying them attention and any entertainment they can get from provoking angry responses out of you.
-Rule 15: The harder you try, the harder you will fail. Explanation Which is more amazing: failing at making a LEGO elephant or failing at making a elephant-shaped house?
-Rule 16: If you fail in epic proportions, it may just become a winning failure. Explanation
-Rule 17: Every win fails eventually. Explanation Statistics have not exactly proven the statement "nothing lasts forever" wrong. Enjoy your successes but don't dwell on them.
-Rule 18: Everything that can be labelled can be hated. Explanation No matter what you love there's bound to be someone who doesn't love it. Labels also create judgment. Learn to live and let live.
-Rule 19: The more you hate it, the stronger it gets. Explanation Hate is pointless. Don't waste your time on it.
-Rule 20: Nothing is to be taken seriously.
-Rules 21–24: Original content is original only for a few seconds before it's no longer original. Copypasta is made to ruin every last bit of originality. Copypasta is made to ruin every last bit of originality. Every post is always a repost of a repost. Explanation This is because people tend to save and repost things they like. Some even think every idea is a mutation of another idea: in short original content doesn't exist.
-Rule 25: Relation to the original topic decreases with every single post. Explanation People would add or subtract content from the original post as the conversation carries on, to the point where the discussion deviates widely from the original post.
-Rule 26: Any topic can be easily turned into something totally unrelated. Explanation As per rules 13 and 25, this can easily be the result of any conversation.
-Rule 27: Always question a person's sexual preferences without any real reason. Explanation
-Rule 28: Always question a person's gender - just in case it's really a man. Explanation
-Rule 29: On the internet men are men, women are also men, and kids are undercover FBI agents. Explanation Remember: we are all anonymous which makes gender a moot point. The few people who point out their genders in an anonymous setting usually have ulterior motives.
-Rule 30: Girls do not exist on the internet. Explanation Due to being anonymous and gender being a moot point, saying you are a "girl" usually denotes the poster is not a girl and just saying this to get attention, or really is a girl but is still just trying to get attention. Either way, trying to get everyone's attention is a trolling tactic. Ignore them. Girl? What girl? We're all anons!
-Rule 31: Tits or GTFO—the choice is yours. Explanation Any anon claiming to be a girl has to post a picture of her breasts in order to prove that she's telling the truth. If she refuses, she's considered a liar and has to leave.
-Rule 32: You must have pictures to prove your statements/Anything can be explained with a picture. Explanation
-Rule 33: Lurk more—it's never enough. Explanation When in doubt, don't post: read. Chances are your answer is already somewhere. It also prevents you from ruining "good things" and looking really dumb. Think you know enough to post? That means you probably don't.
-Rule 34: If it exists, there is porn of it. No exceptions.
-Rule 35: If there is no porn of it, porn will be made of it.
-Rule 36: No matter how fucked up it is, there is always worse than what you just saw.
-Rule 37: You cannot divide by zero (just because the calculator says so).Explanation Nothing will never become something. You have to create things for others to be able to come enjoy them. Also don't try to wrangle the site rules to your favor—it won't work.
-Rule 38: No real limits of any kind apply here—not even the sky. Explanation The internet is all the world, both good and bad, in one place. What you make of it is up to you!
-Rule 39: CAPS LOCK IS CRUISE CONTROL FOR COOL. Explanation A classic meme...
-Rule 40: EVEN WITH CRUISE CONTROL YOU STILL HAVE TO STEER Explanation ...but please note that it's very easy to overdo memes and look like an unfunny idiot in the process. Please use your internet wit (and caps lock as well) sparingly and with common sense.
-Rule 41: Desu isn't funny. Seriously guys. It's worse than Chuck Norris jokes.note  Explanation The more you post a meme, the less funny it gets. Also, some things never were very funny to start with even though people keep posting them. Posting something over and over doesn't make a meme. These sorts of things are called "forced memes".
-Rule 42: Nothing Is Sacred. Explanation No matter what you hold dear, prepare for others who don't get it or don't care about it. Just as you would expect others to respect your liking something, please respect that others may not agree. Learn to let go, ignore, and move on. Also an anti-shout out to the "meaning of life" from The Hitchhiker's Guide.
-Rule 43: The more beautiful and pure a thing is—the more satisfying it is to corrupt it.
-Rule 44: If it exists, there is a version of it for your fandom... and it has a wiki and possibly a tabletop version with a theme song performed by a Vocaloid.
-Rule 45: When one sees a lion, one must get in the car. Explanation JESUS CHRIST IT'S A LION GET IN THE CAR! >:3
-Rule 46: The internet is SERIOUS FUCKING BUSINESS. Explanation Remember the MST3K Mantra: "It's really just a show, I should try to relax..."
-Rule 47: The pool is always closed. Explanation Slang for when jerks ruin something good—"Pool is closed". It's a reference to a series of raids /b/ carried out on Habbo Hotel, where they would block the entrance of popular hangouts with their black avatars dressed in an afro and business suit; one of the phrases they repeatedly used in chat was "Pool's closed due to AIDS". The raids were in response to rumors that Habbo moderators had a tendency to ban users based on the color of their skin.
-Rule 48: The only good hentai is Yuri, that's how the internet works. Only exception may be Vanilla. note 
-Rule 49: No matter what it is, it is somebody's fetish.
-Rule 50: A Crossover, no matter how improbable, will eventually happen in Fan Art, Fan Fiction, or official release material, often through fanfiction of it.
-Rule 61: Chuck Norris is the exception, no exceptions.
-Rule 62: It has been cracked and pirated. You can find anything if you look long enough.
-Rule 63: For every given male character, there is a female version of that character (and vice-versa). And there is always porn of that character.
-Rule 64: If it exists, it has “LOOOOORRRREE!” Explanation People on the internet love to interpret things as narratives and stories, so as an extension of Rule 13, if something exists, like a picture of a yellowed empty room, a picture of a peanut shaped sculpture, or the alphabet, an entire history of legends, heroes, villains and entire universes will come into existence around that thing.
-Rule 65: If it doesn't, there will be.
-Rule 66: The longer the LORE around something is, the weirder it gets.
-Rule 67: If it has lore, it also has lore from alternate timelines, especially if the main lore is copyrighted by a big power hungry corporation.
-Rule 67/2: 90% of fanfiction is the stuff of nightmares.
-Rule 68: Everything has a fandom, everything.
-Rule 69: Nice!
-Rule 70: Do not talk about the 100M GET failure. Explanation
-Rule 72: If a song exists, there's a Megalovania version of it.
-Rule 77: The Internet makes you stupid.
-Rule 78: If something is popular, there's brainrot of it
-Rule 79: If something is popular, and there's no brainrot of it, it's coming soon
-Rule 80: Gore is always present on the internet.
-Rule 86: If something has two colors, it can play "Bad Apple!"
+## Additional Task Completed:
+ [✅] Convert notes page from grouped list format to table format (like verse page)
+ [✅] Use more exact dates (full date format instead of just years) in notes table

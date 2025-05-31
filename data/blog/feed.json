@@ -620,22 +620,9 @@
       "cover_image": ""
     },
     {
-      "title": "Uses This",
-      "subtitle": "My setup and tools",
-      "preview": "A detailed overview of my hardware, software, and tools I use daily for work and personal projects.",
-      "date": "2025-05-07",
-      "tags": ["Hardware", "Software", "Setup", "Keyboard", "Mouse", "Development", "Productivity", "Tools"],
-      "category": "On Myself",
-      "slug": "uses-this",
-      "cover_image": "https://i.postimg.cc/9F88sWXP/minimalism.jpg",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 5,
-      "state": "active"
-    },
-    {
       "title": "On Living Simply",
-      "preview": "a overview of the simplifications I make to life",
+      "subtitle": "a overview of the simplifications I make to life",
+      "preview": "",
       "date": "2025-05-07",
       "tags": ["Minimalism", "Quality Of Life", "History"],
       "category": "On Myself",
@@ -648,7 +635,8 @@
     },
     {
       "title": "On Life Improvement",
-      "preview": "list of improvements to my quality-of-life in all areas.",
+      "subtitle": "list of improvements to my quality-of-life in all areas.",
+      "preview": "",
       "date": "2025-05-07",
       "tags": ["Quality of Life", "History", "Technology", "Economics"],
       "category": "On Myself",
@@ -661,7 +649,8 @@
     },
     {
       "title": "On Types of Content",
-      "preview": "a discussion on the various types of long-form content one can create.",
+      "subtitle": "a discussion on the various types of long-form content one can create.",
+      "preview": "",
       "date": "2025-05-08",
       "tags": ["Essays", "Articles", "Inspiration", "Writing"],
       "category": "On Writing",
@@ -741,7 +730,8 @@
       "importance": 6,
       "state": "active",
       "cover_image": ""
-    },    {
+    },
+    {
       "title": "Release of OpenAI Deep Learning",
       "subtitle": "Tech Review",
       "preview": "OpenAI releases its latest deep learning architecture, promising significant advancements in natural language processing and computer vision tasks.",

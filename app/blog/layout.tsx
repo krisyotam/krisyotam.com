@@ -59,7 +59,8 @@ interface Post {
   category: string;
   slug: string;
   status: "active" | "hidden";
-  preview: string;
+  preview: string; // Ensure preview is part of the Post interface
+  subtitle?: string; // Add subtitle as optional
   headings: { id: string; text: string; level: number; children?: any[] }[];
   marginNotes: MarginNote[];
   bibliography?: { id: string; author: string; title: string; year: number; publisher: string; url: string; type: string }[];
@@ -164,6 +165,7 @@ export default function PostsLayout({ children }: { children: React.ReactNode })
                 date={postData.date}
                 tags={postData.tags}
                 category={postData.category}
+                preview={postData.preview} // Pass the preview prop
                 className="post-header"
               />
             )}

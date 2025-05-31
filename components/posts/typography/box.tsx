@@ -16,6 +16,7 @@ export function Box({ children, className }: BoxProps) {
     "bg-muted/50",
     // keep your perfect 9% black in dark
     "dark:bg-[hsl(var(--popover))]",
+    "w-full",
   ].join(" ")
 
   return <div className={cn(base, className)}>{children}</div>

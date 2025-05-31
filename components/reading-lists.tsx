@@ -6,6 +6,7 @@ import { GET_BOOK_BY_ISBN } from "@/lib/queries"
 import { ReadingBookCard } from "@/components/reading-book-card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
+import { CustomSelect } from "@/components/ui/custom-select"
 
 interface Author {
   name: string
@@ -157,16 +158,16 @@ export function ReadingLists() {
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2">
           <label htmlFor="list-filter" className="text-sm text-muted-foreground">List:</label>
-          <select
-            id="list-filter"
-            className="border rounded px-2 py-1 text-sm bg-background"
+          <CustomSelect
             value={selectedList}
-            onChange={(e) => setSelectedList(e.target.value)}
-          >
-            {listsData.lists.map(list => (
-              <option key={list.id} value={list.id}>{list.title}</option>
-            ))}
-          </select>
+            onValueChange={setSelectedList}
+            options={listsData.lists.map(list => ({
+              value: list.id,
+              label: list.title
+            }))}
+            placeholder="Select a list"
+            className="min-w-[200px]"
+          />
         </div>
       </div>
 

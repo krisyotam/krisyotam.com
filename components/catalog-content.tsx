@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { LibraryBookCard } from "./library-book-card"
 import { Book } from "@/types/library"
+import { CustomSelect, SelectOption } from "@/components/ui/custom-select"
 
 // Map of Library of Congress classifications to human-readable names
 const locClassifications: Record<string, string> = {
@@ -48,9 +49,7 @@ export function CatalogContent() {
         const data = await response.json()
 
         if (Array.isArray(data)) {
-          setBooks(data)
-
-          // Extract unique classifications and subclassifications
+          setBooks(data)          // Extract unique classifications and subclassifications
           const classifications = [...new Set(data.map((book) => book.classification))].sort()
           setAvailableClassifications(classifications)
           
@@ -96,9 +95,26 @@ export function CatalogContent() {
       book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (book.authorName?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false) ||
       (book.authorNames?.some(name => name.toLowerCase().includes(searchQuery.toLowerCase())) ?? false)
-    
-    return matchesClassification && matchesSubClassification && matchesSearch
+      return matchesClassification && matchesSubClassification && matchesSearch
   })
+
+  // Convert classifications to SelectOption format
+  const classificationOptions: SelectOption[] = [
+    { value: "all", label: "All" },
+    ...availableClassifications.map(code => ({
+      value: code,
+      label: `${code} - ${locClassifications[code] || code}`
+    }))
+  ]
+
+  // Convert subclassifications to SelectOption format
+  const subClassificationOptions: SelectOption[] = [
+    { value: "all", label: "All" },
+    ...availableSubClassifications.map(code => ({
+      value: code,
+      label: code
+    }))
+  ]
 
   if (loading) {
     return (
@@ -120,37 +136,26 @@ export function CatalogContent() {
   }
 
   return (
-    <div>
-      <div className="mb-6 space-y-4">
+    <div>      <div className="mb-6 space-y-4">
         <div className="flex items-center gap-4 flex-wrap">
           <div className="flex items-center gap-2 whitespace-nowrap">
             <label htmlFor="classification-filter" className="text-sm text-muted-foreground">Classification:</label>
-            <select
-              id="classification-filter"
-              className="border rounded px-2 py-1 text-sm bg-background"
+            <CustomSelect
               value={selectedClassification}
-              onChange={(e) => setSelectedClassification(e.target.value)}
-            >
-              <option value="all">All</option>
-              {availableClassifications.map(code => (
-                <option key={code} value={code}>{code} - {locClassifications[code] || code}</option>
-              ))}
-            </select>
+              onValueChange={setSelectedClassification}
+              options={classificationOptions}
+              className="text-sm min-w-[180px]"
+            />
           </div>
           
           <div className="flex items-center gap-2 whitespace-nowrap">
             <label htmlFor="subclassification-filter" className="text-sm text-muted-foreground">Subclassification:</label>
-            <select
-              id="subclassification-filter"
-              className="border rounded px-2 py-1 text-sm bg-background"
+            <CustomSelect
               value={selectedSubClassification}
-              onChange={(e) => setSelectedSubClassification(e.target.value)}
-            >
-              <option value="all">All</option>
-              {availableSubClassifications.map(code => (
-                <option key={code} value={code}>{code}</option>
-              ))}
-            </select>
+              onValueChange={setSelectedSubClassification}
+              options={subClassificationOptions}
+              className="text-sm min-w-[120px]"
+            />
           </div>
         </div>
         
@@ -158,7 +163,7 @@ export function CatalogContent() {
           <input 
             type="text" 
             placeholder="Search books..." 
-            className="w-full px-3 py-2 border rounded text-sm bg-background"
+            className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
             onChange={(e) => setSearchQuery(e.target.value)}
             value={searchQuery}
           />

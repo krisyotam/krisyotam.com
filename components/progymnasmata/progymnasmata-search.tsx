@@ -25,7 +25,7 @@ export function ProgymnasmataSearch({ onSearch }: ProgymnasmataSearchProps) {
       </div>
       <input
         type="text"
-        className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md leading-5 bg-white dark:bg-[#1A1A1A] placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-[#1A1A1A] focus:border-gray-500 dark:focus:border-gray-400 text-gray-900 dark:text-gray-100"
+        className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md leading-5 bg-white dark:bg-[#1A1A1A] placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:border-gray-500 dark:focus:border-gray-400 text-gray-900 dark:text-gray-100"
         placeholder="Search by title or description..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}

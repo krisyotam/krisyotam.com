@@ -26,7 +26,7 @@ export function SearchBar({ onSearch, placeholder = "Search by title, author, ta
       </div>
       <input
         type="text"
-        className="block w-full pl-10 pr-3 py-2 border border-input bg-background placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+        className="block w-full pl-10 pr-3 py-2 border border-input bg-background placeholder-muted-foreground hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
         placeholder={placeholder}
         value={query}
         onChange={(e) => setQuery(e.target.value)}

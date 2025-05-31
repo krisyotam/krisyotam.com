@@ -19,7 +19,7 @@ export default function Collapse({ title, children, className }: CollapseProps) 
   return (
     <div
       className={cn(
-        "my-2 bg-muted/50 dark:bg-[hsl(var(--popover))]",
+        "my-2 bg-muted/50 dark:bg-[hsl(var(--popover))] w-full",
         className
       )}
     >

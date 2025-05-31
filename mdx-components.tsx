@@ -44,7 +44,7 @@ import Chateau from "@/components/posts/architecture/chateau"
 import ChateauCollection from "@/components/posts/architecture/chateau-collection"
 import Human from "@/components/posts/basic/human"
 import Company from "@/components/posts/basic/company"
-import CppCodeBlock from "@/components/posts/code/cplusplus"
+import { QuotesFeed } from "@/components/quotes-feed"; // Add this import
 import { Tree } from "@/components/family-tree"
 import WebsiteDemo from "@/components/posts/website/website"
 import { WikiPerson } from "@/components/posts/wikipedia/wiki-person"
@@ -173,7 +173,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ChateauCollection,
     
     // Code components
-    CppCodeBlock,
     CodeBlock,
     
     // Special content components
@@ -185,6 +184,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     
     // Rating components
     RatingDisplay,
+
+    // Custom quotes feed component
+    QuotesFeed, // Add this component
     
     // Pass through any provided components (for overrides)
     ...components,

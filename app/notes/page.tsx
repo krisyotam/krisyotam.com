@@ -1,5 +1,5 @@
 import NotesClientPage from "./NotesClientPage";
-import notesData from "@/data/quick-notes.json";
+import notesData from "@/data/notes/quick-notes.json";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default function NotesPage() {
 
   return (
     <div className="notes-container">
-      <NotesClientPage notes={notes} />
+      <NotesClientPage notes={notes} initialCategory="all" />
     </div>
   );
 }

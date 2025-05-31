@@ -1,0 +1,270 @@
+[
+  {
+    "title": "mathematics and beauty",
+    "date": "2024-07-15",
+    "slug": "mathematics-and-beauty",
+    "tags": ["math", "beauty", "philosophy"],
+    "category": "mathematics",
+    "status": "In Progress",
+    "confidence": "possible",
+    "importance": 7
+  },
+  {
+    "title": "running ideas",
+    "date": "2024-05-29",
+    "slug": "running-ideas",
+    "tags": ["running", "fitness", "ideas"],
+    "category": "health",
+    "status": "Notes",
+    "confidence": "likely",
+    "importance": 5
+  },
+  {
+    "title": "how do you grow?",
+    "date": "2024-05-07",
+    "slug": "how-do-you-grow",
+    "tags": ["growth", "learning", "reflection"],
+    "category": "personal",
+    "status": "Draft",
+    "confidence": "possible",
+    "importance": 6
+  },
+  {
+    "title": "keeping it simple",
+    "date": "2024-05-04",
+    "slug": "keeping-it-simple",
+    "tags": ["simplicity", "design", "philosophy"],
+    "category": "design",
+    "status": "Draft",
+    "confidence": "likely",
+    "importance": 7
+  },
+  {
+    "title": "drink some hot cocoa",
+    "date": "2024-06-06",
+    "slug": "drink-some-hot-cocoa",
+    "tags": ["comfort", "relaxation", "simple-pleasures"],
+    "category": "lifestyle",
+    "status": "Finished",
+    "confidence": "highly likely",
+    "importance": 4
+  },
+  {
+    "title": "walk to ikea",
+    "date": "2024-08-13",
+    "slug": "walk-to-ikea",
+    "tags": ["walking", "urban-exploration", "furniture"],
+    "category": "lifestyle",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 3
+  },
+  {
+    "title": "a parasite",
+    "date": "2025-03-08",
+    "slug": "a-parasite",
+    "tags": ["movies", "storytelling", "society"],
+    "category": "culture",
+    "status": "Notes",
+    "confidence": "likely",
+    "importance": 6
+  },
+  {
+    "title": "On Suicide",
+    "date": "2025-04-26",
+    "slug": "on-suicide",
+    "tags": ["Suicide", "Philosophy", "Powerlessness"],
+    "category": "Philosophy",
+    "status": "Notes",
+    "confidence": "likely",
+    "importance": 6
+  },
+  {
+    "title": "Haiku Form Guide",
+    "date": "2025-05-24",
+    "slug": "haiku-form-guide",
+    "tags": ["Haiku", "Verse", "Form Guide"],
+    "category": "Verse",
+    "status": "Notes",
+    "confidence": "likely",
+    "importance": 6
+  },
+  {
+    "title": "Open Questions",
+    "date": "2025-05-30",
+    "slug": "open-questions",
+    "tags": ["Questions", "Curiosities", "Intellectual Puzzles"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 6,
+    "preview": "Some anomalies/questions which are not necessarily important, but do puzzle me or where I find existing explanations to be unsatisfying."
+  },
+  {
+    "title": "Research Ideas",
+    "date": "2025-05-30",
+    "slug": "research-ideas",
+    "tags": ["Research", "Wishlist", "Projects"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 5,
+    "preview": "Someone (who is not me) should do something: a wishlist of miscellaneous research or project ideas—free to a good home."
+  },
+  {
+    "title": "Startup Ideas",
+    "date": "2025-05-30",
+    "slug": "startup-ideas",
+    "tags": ["Startups", "Ideas", "Entrepreneurship"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 4,
+    "preview": "Proposals for new technologies, businesses, startups, satirical or serious."
+  },
+  {
+    "title": "What I No Longer Track",
+    "date": "2025-05-30",
+    "slug": "what-i-no-longer-track",
+    "tags": ["Tracking", "Systems", "Productivity"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 4,
+    "preview": "Systems, frameworks, etc. that I no longer use."
+  },
+  {
+    "title": "Open Hypotheses",
+    "date": "2025-05-30",
+    "slug": "open-hypotheses",
+    "tags": ["Mental Models", "Hypotheses", "Thinking"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 6,
+    "preview": "Mental models, frameworks, etc. I am tampering with."
+  },
+  {
+    "title": "Unwritten Prose",
+    "date": "2025-05-30",
+    "slug": "unwritten-prose",
+    "tags": ["Writing", "Prose", "Ideas"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 5,
+    "preview": "A list of ideas for short stories, novels, essays that I don't have time to write."
+  },
+  {
+    "title": "Words That Changed Me",
+    "date": "2025-05-30",
+    "slug": "words-that-changed-me",
+    "tags": ["Quotes", "Wisdom", "Personal Growth"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 7,
+    "preview": "A personal lexicon—quotes, phrases, or passages that permanently altered how I think or live."
+  },
+  {
+    "title": "Anomalies",
+    "date": "2025-05-30",
+    "slug": "anomalies",
+    "tags": ["Anomalies", "Strangeness", "Observations"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 5,
+    "preview": "Outliers, glitches, and strange patterns that resist easy explanation—observations I can't unsee."
+  },
+  {
+    "title": "Conspiracies",
+    "date": "2025-05-30",
+    "slug": "conspiracies",
+    "tags": ["Conspiracies", "Theory", "Speculation"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "speculative",
+    "importance": 4,
+    "preview": "Theories, documents, or claims I find intriguing—not necessarily because they're true, but because they're hard to ignore."
+  },
+  {
+    "title": "Retired Beliefs",
+    "date": "2025-05-30",
+    "slug": "retired-beliefs",
+    "tags": ["Beliefs", "Change", "Growth"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 6,
+    "preview": "Things I used to believe (and why I don't anymore)."
+  },
+  {
+    "title": "Personal Axioms",
+    "date": "2025-05-30",
+    "slug": "personal-axioms",
+    "tags": ["Axioms", "Principles", "Reasoning"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 7,
+    "preview": "Self-defined \"first principles\" I try to live or reason by."
+  },
+  {
+    "title": "Cursed Knowledge",
+    "date": "2025-05-30",
+    "slug": "cursed-knowledge",
+    "tags": ["Cursed Knowledge", "Awareness", "Consequences"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 6,
+    "preview": "Insights that made my life harder after learning them."
+  },
+  {
+    "title": "Beliefs I Don't Have the Courage to Test",
+    "date": "2025-05-30",
+    "slug": "beliefs-i-dont-have-the-courage-to-test",
+    "tags": ["Beliefs", "Courage", "Truth"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "uncertain",
+    "importance": 5,
+    "preview": "Ideas I hold that I'm too afraid to verify—or falsify."
+  },
+  {
+    "title": "Platitudes That Need to Die",
+    "date": "2025-05-30",
+    "slug": "platitudes-that-need-to-die",
+    "tags": ["Platitudes", "Language", "Critical Thinking"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 6,
+    "preview": "Things people say that sound smart but are actually dumb."
+  },
+  {
+    "title": "Personal Questions",
+    "date": "2025-05-30",
+    "slug": "personal-questions",
+    "tags": ["Philosophy", "Existence", "Self"],
+    "category": "On Myself",
+    "status": "Published",
+    "confidence": "uncertain",
+    "importance": 8,
+    "preview": "A list of moral, philosophical, spiritual, social, and existential questions I want satisfying answers to."
+  },
+      {
+      "title": "Uses This",
+      "date": "2025-05-07",
+      "tags": ["Hardware", "Software", "Setup", "Keyboard", "Mouse", "Development", "Productivity", "Tools"],
+      "category": "On Myself",
+      "slug": "uses-this",
+      "cover_image": "https://i.postimg.cc/9F88sWXP/minimalism.jpg",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 5,
+      "preview": "A detailed overview of my hardware, software, and tools I use daily for work and personal projects."
+    }
+
+]
