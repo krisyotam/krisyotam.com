@@ -1,75 +1,5 @@
 [
   {
-    "title": "mathematics and beauty",
-    "date": "2024-07-15",
-    "slug": "mathematics-and-beauty",
-    "tags": ["math", "beauty", "philosophy"],
-    "category": "mathematics",
-    "status": "In Progress",
-    "confidence": "possible",
-    "importance": 7
-  },
-  {
-    "title": "running ideas",
-    "date": "2024-05-29",
-    "slug": "running-ideas",
-    "tags": ["running", "fitness", "ideas"],
-    "category": "health",
-    "status": "Notes",
-    "confidence": "likely",
-    "importance": 5
-  },
-  {
-    "title": "how do you grow?",
-    "date": "2024-05-07",
-    "slug": "how-do-you-grow",
-    "tags": ["growth", "learning", "reflection"],
-    "category": "personal",
-    "status": "Draft",
-    "confidence": "possible",
-    "importance": 6
-  },
-  {
-    "title": "keeping it simple",
-    "date": "2024-05-04",
-    "slug": "keeping-it-simple",
-    "tags": ["simplicity", "design", "philosophy"],
-    "category": "design",
-    "status": "Draft",
-    "confidence": "likely",
-    "importance": 7
-  },
-  {
-    "title": "drink some hot cocoa",
-    "date": "2024-06-06",
-    "slug": "drink-some-hot-cocoa",
-    "tags": ["comfort", "relaxation", "simple-pleasures"],
-    "category": "lifestyle",
-    "status": "Finished",
-    "confidence": "highly likely",
-    "importance": 4
-  },
-  {
-    "title": "walk to ikea",
-    "date": "2024-08-13",
-    "slug": "walk-to-ikea",
-    "tags": ["walking", "urban-exploration", "furniture"],
-    "category": "lifestyle",
-    "status": "Finished",
-    "confidence": "certain",
-    "importance": 3
-  },
-  {
-    "title": "a parasite",
-    "date": "2025-03-08",
-    "slug": "a-parasite",
-    "tags": ["movies", "storytelling", "society"],
-    "category": "culture",
-    "status": "Notes",
-    "confidence": "likely",
-    "importance": 6
-  },
-  {
     "title": "On Suicide",
     "date": "2025-04-26",
     "slug": "on-suicide",
@@ -265,6 +195,17 @@
       "confidence": "certain",
       "importance": 5,
       "preview": "A detailed overview of my hardware, software, and tools I use daily for work and personal projects."
+    },
+    {
+      "title": "Luke Smith Library",
+      "date": "2025-05-31",
+      "slug": "luke-smith-library",
+      "tags": ["Books", "Library", "Reading", "Reference"],
+      "category": "culture",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 4,
+      "preview": "A comprehensive list of books from Luke Smith's Library organized by the Library of Congress System."
     }
 
 ]

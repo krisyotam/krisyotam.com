@@ -72,12 +72,8 @@ export default async function NotePage({ params }: NotePageProps) {
     status: note.status as Status,
     confidence: note.confidence as Confidence
   }));
-
-  // Get the year from the note's date to locate the correct MDX file
-  const year = noteData.date.split('-')[0];
-  
-  // Dynamically import the MDX file based on year/slug
-  const Note = (await import(`@/app/notes/content/${year}/${params.slug}.mdx`)).default;
+  // Dynamically import the MDX file based on slug
+  const Note = (await import(`@/app/notes/content/${params.slug}.mdx`)).default;
 
   return (
     <NotePageClient note={note} allNotes={notes}>
