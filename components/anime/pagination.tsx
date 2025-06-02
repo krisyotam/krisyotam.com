@@ -1,7 +1,6 @@
 "use client"
 
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
 
 interface PaginationProps {
   currentPage: number
@@ -11,30 +10,26 @@ interface PaginationProps {
 
 export function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
   return (
-    <div className="flex items-center justify-center gap-2 mt-2">
-      <Button
-        variant="outline"
-        size="sm"
-        className="h-7 w-7 p-0"
+    <div className="flex items-center justify-center gap-4 mt-2">
+      <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage <= 1}
+        className="p-2 rounded-none bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-gray-700 disabled:opacity-50"
+        aria-label="Previous page"
       >
-        <ChevronLeft className="h-4 w-4" />
-        <span className="sr-only">Previous page</span>
-      </Button>
-      <span className="text-xs">
-        {currentPage} / {totalPages}
-      </span>
-      <Button
-        variant="outline"
-        size="sm"
-        className="h-7 w-7 p-0"
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <div className="text-sm">
+        Page {currentPage} of {totalPages}
+      </div>
+      <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage >= totalPages}
+        className="p-2 rounded-none bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-gray-700 disabled:opacity-50"
+        aria-label="Next page"
       >
-        <ChevronRight className="h-4 w-4" />
-        <span className="sr-only">Next page</span>
-      </Button>
+        <ChevronRight className="h-5 w-5" />
+      </button>
     </div>
   )
 }

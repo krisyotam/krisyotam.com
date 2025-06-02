@@ -1,20 +1,38 @@
-You need to listen and follow each of these instructions exactly like i tell you to. 
+Below is a minimal unified‑diff that only touches the Favorite Characters section.
+It converts the multi‑row responsive grid into a single‑row, horizontally flowing grid that still shows exactly five cards per page at full width and never wraps on narrower screens.
 
-- you have poorly designed my dropdowns on every page. they all use default browser styling, so you need to replace ALL of them with a custom component that should probably be in components/ui 
-- replace every single default dropdown with the custom one. As for styles you are looking for the dark mode and light mode hover styles that the table on the verse page has, those should be the hvoer styles for the dropdown 
-- Also do not use round corners if you are creating a component it is required to have square corners. 
-- You need to make a index of every single page and check them all, they will all be top level pages since clearly slug pages won't have filters. 
-- start with the notes page regardless of it's place in the menu after you have mapped out all the pages, just so i can see how it looks. 
+@@
+-          <div className="mt-4">
+-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
++          <div className="mt-4 overflow-x-auto">
++            {/* one‑row, 5‑up grid – items flow left→right and never wrap */}
++            <div className="grid grid-flow-col auto-cols-[minmax(0,1fr)] lg:[grid-template-columns:repeat(5,minmax(0,1fr))] gap-4">
+@@
+-              {paginatedCharacters.map((character, index) => (
+-                <div key={character.name || index} className="w-full">
++              {paginatedCharacters.map((character, index) => (
++                {/* keep each card from shrinking below 0 while still filling its column */}
++                <div key={character.name || index} className="w-full min-w-0">
+@@
+-            </div>
++            </div>
+           </div>
 
-after you finish reading create a checklist of everything that needs to be done below this, and return to mark off each thing as you do it.
+Apply this diff (or copy‑paste the updated class string) and the “Favorite Characters” list will always render as a single, five‑item row across all break‑points.
 
+Only the sections that still use the classic “ grid‑cols‑2 … lg:grid‑cols‑5 ” pattern can wrap onto additional rows. In your file, those are:
 
-## These Pages need the drowpdown upgrade --> including the square corners, and the searchbar height match (search bars should have square corners to)
- [✅] /verse
- [✅] /progymnasmata 
- [✅] /library  [✅] /reading --> the lists part
- [✅] /notes
+Section	Current grid classes	Resulting behavior
+Currently Reading	grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5	Multi‑row by design (that’s how shelf‑style lists normally work).
+Completed Manga	same as above	Multi‑row.
+Favorite Manga	same as above	Multi‑row.
+Favorite Characters	now uses grid-flow-col … (after the diff)	One row, never wraps.
+Favorite People	grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5	Will wrap unless you apply the same fix.
+Favorite Companies	same as above	Will wrap unless you apply the same fix.
 
-## Additional Task Completed:
- [✅] Convert notes page from grouped list format to table format (like verse page)
- [✅] Use more exact dates (full date format instead of just years) in notes table
+-<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
++<div className="grid grid-flow-col auto-cols-[minmax(0,1fr)] lg:[grid-template-columns:repeat(5,minmax(0,1fr))] gap-4">
+
+and wrap it in overflow-x-auto.
+
+That one‑liner is all you need anywhere you want a single, horizontally scrollable row with exactly five items visible at full width.

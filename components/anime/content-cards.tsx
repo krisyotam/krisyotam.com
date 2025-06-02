@@ -21,7 +21,7 @@ export function WatchingCard({ item, type = "anime" }: { item: any; type?: "anim
   const meanScore = content.mean ? content.mean.toFixed(2) : "N/A"
 
   return (
-    <Card className="h-full overflow-hidden border dark:border-gray-800 dark:bg-[#1a1a1a] hover:shadow-md transition-shadow">
+    <Card className="h-full overflow-hidden border dark:border-gray-800 dark:bg-[#1a1a1a]">
       <div className="aspect-[3/4] relative overflow-hidden">
         <img src={imageUrl || "/placeholder.svg"} alt={title} className="object-cover w-full h-full" />
         {score > 0 && (
@@ -64,7 +64,7 @@ export function CompletedCard({ item, type = "anime" }: { item: any; type?: "ani
   const totalCount = type === "anime" ? `${content.num_episodes || "?"} eps` : `${content.num_chapters || "?"} ch`
 
   return (
-    <Card className="h-full overflow-hidden border dark:border-gray-800 dark:bg-[#1a1a1a] hover:shadow-md transition-shadow">
+    <Card className="h-full overflow-hidden border dark:border-gray-800 dark:bg-[#1a1a1a]">
       <div className="aspect-[3/4] relative overflow-hidden">
         <img src={imageUrl || "/placeholder.svg"} alt={title} className="object-cover w-full h-full" />
         {score > 0 && (
@@ -120,7 +120,7 @@ export function FavoriteCard({ item, type }: { item: any; type: string }) {
 
   return (
     <a href={url} target="_blank" rel="noopener noreferrer" className="block h-full">
-      <Card className="h-full overflow-hidden border dark:border-gray-800 dark:bg-[#1a1a1a] hover:shadow-md transition-shadow">
+      <Card className="h-full overflow-hidden border dark:border-gray-800 dark:bg-[#1a1a1a]">
         <div className="aspect-[3/4] relative overflow-hidden">
           <img src={imageUrl || "/placeholder.svg"} alt={title} className="object-cover w-full h-full" />
         </div>

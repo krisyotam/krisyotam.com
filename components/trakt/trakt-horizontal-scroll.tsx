@@ -8,9 +8,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 interface TraktHorizontalScrollProps {
   children: React.ReactNode[]
   itemsPerPage?: number
+  squareButtons?: boolean
 }
 
-export function TraktHorizontalScroll({ children, itemsPerPage = 4 }: TraktHorizontalScrollProps) {
+export function TraktHorizontalScroll({ children, itemsPerPage = 4, squareButtons = false }: TraktHorizontalScrollProps) {
   const [currentPage, setCurrentPage] = useState(0)
 
   const totalItems = children.length
@@ -27,6 +28,8 @@ export function TraktHorizontalScroll({ children, itemsPerPage = 4 }: TraktHoriz
     setCurrentPage((prev) => (prev < totalPages - 1 ? prev + 1 : prev))
   }
 
+  const buttonRounding = squareButtons ? "rounded-none" : "rounded-full"
+
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">{visibleItems}</div>
@@ -36,7 +39,7 @@ export function TraktHorizontalScroll({ children, itemsPerPage = 4 }: TraktHoriz
           <button
             onClick={goToPreviousPage}
             disabled={currentPage === 0}
-            className="p-2 rounded-full bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-gray-700 disabled:opacity-50"
+            className={`p-2 ${buttonRounding} bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-gray-700 disabled:opacity-50`}
             aria-label="Previous page"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -49,7 +52,7 @@ export function TraktHorizontalScroll({ children, itemsPerPage = 4 }: TraktHoriz
           <button
             onClick={goToNextPage}
             disabled={currentPage === totalPages - 1}
-            className="p-2 rounded-full bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-gray-700 disabled:opacity-50"
+            className={`p-2 ${buttonRounding} bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-gray-700 disabled:opacity-50`}
             aria-label="Next page"
           >
             <ChevronRight className="h-5 w-5" />

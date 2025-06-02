@@ -6,8 +6,7 @@
       "date": "2025-05-31",
       "status": "Finished",
       "confidence": "certain",
-      "importance": 8,
-      "description": "A collection of notes about my personal beliefs, hypotheses, questions, and self-observations. This category contains my most introspective writing."
+      "importance": 8
     },    {
       "slug": "philosophy",
       "title": "Philosophy",
@@ -15,78 +14,80 @@
       "date": "2025-05-31",
       "status": "Finished",
       "confidence": "certain",
-      "importance": 9,
-      "description": "Notes on philosophical topics, ethical dilemmas, and deep questions about life, death, meaning, and existence."
-    },
-    {
+      "importance": 9
+    },    {
       "slug": "verse",
       "title": "Verse",
       "preview": "Poetry, haiku, and verse forms - explorations in rhythm, meter, and poetic expression.",
       "date": "2025-05-31",
       "status": "Finished",
       "confidence": "certain",
-      "importance": 6,
-      "description": "Poetry and verse-related notes, including form guides, techniques, and poetic observations."
-    },
-    {
+      "importance": 6
+    },    {
       "slug": "culture",
       "title": "Culture",
       "preview": "Cultural observations, critiques, and analyses of society, media, and social phenomena.",
       "date": "2025-05-31",
       "status": "Finished",
       "confidence": "certain",
-      "importance": 7,
-      "description": "Notes on cultural phenomena, media analysis, social observations, and cultural criticism."
-    },
-    {
+      "importance": 7
+    },    {
       "slug": "design",
       "title": "Design",
       "preview": "Design principles, aesthetic considerations, and thoughts on simplicity and visual communication.",
       "date": "2025-05-31",
       "status": "Finished",
       "confidence": "certain",
-      "importance": 7,
-      "description": "Design philosophy, principles of simplicity, aesthetic considerations, and visual design thinking."
-    },
-    {
+      "importance": 7
+    },    {
       "slug": "health",
       "title": "Health",
       "preview": "Health, fitness, and wellness observations - both physical and mental wellbeing considerations.",
       "date": "2025-05-31",
       "status": "Finished",
       "confidence": "certain",
-      "importance": 8,
-      "description": "Notes on health, fitness, running, and general wellness practices and observations."
-    },
-    {
+      "importance": 8
+    },    {
       "slug": "lifestyle",
       "title": "Lifestyle",
       "preview": "Daily life observations, routines, and reflections on simple pleasures and lifestyle choices.",
       "date": "2025-05-31",
       "status": "Finished",
       "confidence": "certain",
-      "importance": 5,
-      "description": "Lifestyle notes covering daily activities, simple pleasures, routines, and life observations."
-    },
-    {
+      "importance": 5
+    },    {
       "slug": "mathematics",
       "title": "Mathematics",
       "preview": "Mathematical concepts, beauty in mathematics, and explorations of mathematical thinking.",
       "date": "2025-05-31",
       "status": "Finished",
       "confidence": "certain",
-      "importance": 8,
-      "description": "Mathematical observations, the beauty of mathematics, and mathematical thinking and concepts."
-    },
-    {
+      "importance": 8
+    },    {
       "slug": "personal",
       "title": "Personal",
       "preview": "Personal growth, learning, and development - reflections on self-improvement and growth.",
       "date": "2025-05-31",
       "status": "Finished",
       "confidence": "certain",
-      "importance": 7,
-      "description": "Personal development notes, growth observations, learning reflections, and self-improvement thoughts."
+      "importance": 7
+    },    {
+      "slug": "libraries",
+      "title": "Libraries",
+      "preview": "An archive of other people's book collections, reading lists, and personal libraries.",
+      "date": "2025-06-01",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 10
+    },    {
+      "slug": "film-reviews",
+      "title": "Film Reviews",
+      "preview": "a compilation of my film reviews",
+      "date": "2025-06-01",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
     }
+
   ]
 }

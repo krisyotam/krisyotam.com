@@ -1,4 +1,6 @@
 import FilmClientPage from "./film-client-page"
+import { FilmTabs } from "@/components/film/film-tabs"
+import { PageHeader } from "@/components/page-header"
 import "./film.css"
 
 export const metadata = {
@@ -7,6 +9,19 @@ export const metadata = {
 }
 
 export default function FilmPage() {
-  return <FilmClientPage />
+  return (
+    <div className="py-12">
+      <div className="film-page">
+        <PageHeader 
+          title="Film" 
+          preview="My film and TV watching activity, stats, and curated collections"
+        />
+        
+        <FilmTabs>
+          <FilmClientPage />
+        </FilmTabs>
+      </div>
+    </div>
+  )
 }
 

@@ -2,11 +2,10 @@ import { NextResponse } from "next/server"
 import fs from "fs"
 import path from "path"
 
-export async function GET() {
-  try {
+export async function GET() {  try {
     // Read the JSON files
     const pagesPath = path.join(process.cwd(), "data", "page-directory.json")
-    const categoriesPath = path.join(process.cwd(), "data", "category-data.json")
+    const categoriesPath = path.join(process.cwd(), "data", "blog", "category-data.json")
 
     const pagesData = JSON.parse(fs.readFileSync(pagesPath, "utf8"))
     const categoriesData = JSON.parse(fs.readFileSync(categoriesPath, "utf8"))

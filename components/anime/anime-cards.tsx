@@ -102,7 +102,7 @@ export function WatchingAnimeCard({ anime, type = "anime" }: AnimeCardProps) {
   const progressText = total ? `${progress}/${total}` : `${progress}`
 
   return (
-    <Card className="w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#1a1a1a] flex flex-col h-full transition-all duration-200 hover:scale-[1.02] hover:shadow-md">
+    <Card className="w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#1a1a1a] flex flex-col h-full">
       <div className="relative aspect-[2/3] overflow-hidden">
         <img
           src={imageUrl || "/placeholder.svg"}
@@ -120,11 +120,10 @@ export function WatchingAnimeCard({ anime, type = "anime" }: AnimeCardProps) {
         )}
       </div>
       <CardContent className="p-3 flex-1 flex flex-col">
-        <h3 className="font-medium text-sm line-clamp-2 mb-1">{title}</h3>
-        <div className="mt-auto">
+        <h3 className="font-medium text-sm line-clamp-2 mb-1">{title}</h3>        <div className="mt-auto">
           <div className="w-full bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
             <div
-              className="bg-blue-600 h-full rounded-full"
+              className="bg-gray-500 dark:bg-gray-400 h-full rounded-full"
               style={{
                 width: total ? `${(progress / total) * 100}%` : "100%",
               }}
@@ -148,7 +147,7 @@ export function CompletedAnimeCard({ anime, type = "anime" }: AnimeCardProps) {
   const totalLabel = type === "anime" ? "Episodes" : "Chapters"
 
   return (
-    <Card className="w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#1a1a1a] flex flex-col h-full transition-all duration-200 hover:scale-[1.02] hover:shadow-md">
+    <Card className="w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#1a1a1a] flex flex-col h-full">
       <div className="relative aspect-[2/3] overflow-hidden">
         <img
           src={imageUrl || "/placeholder.svg"}
@@ -196,13 +195,11 @@ export function AnimeFavoriteCard({ item, type, isCompany = false, subtitle, onI
     item?.main_picture?.large ||
     item?.photolink ||
     "/placeholder.svg?height=180&width=120"
-
   const title = item?.name || item?.title || "Unknown"
   const url = item?.url || item?.link || `https://myanimelist.net/${type}/${item?.id || item?.mal_id}`
-
   const aspectRatioClass = isCompany ? "aspect-square" : "aspect-[2/3]"
   return (
-    <Card className="w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#1a1a1a] flex flex-col h-full transition-all duration-200 hover:scale-[1.02] hover:shadow-md">
+    <Card className="w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#1a1a1a] flex flex-col h-full">
       <div className={`relative ${aspectRatioClass} overflow-hidden`}>
         <img
           src={imageUrl || "/placeholder.svg"}
@@ -216,7 +213,7 @@ export function AnimeFavoriteCard({ item, type, isCompany = false, subtitle, onI
       </div>
       <CardContent className="p-3">
         <h3 className="font-medium text-sm line-clamp-2">
-          <a href={url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+          <a href={url} target="_blank" rel="noopener noreferrer">
             {title}
           </a>
         </h3>
