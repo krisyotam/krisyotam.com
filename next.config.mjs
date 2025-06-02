@@ -18,6 +18,17 @@ const baseConfig = {
   // Don't generate source maps in production
   productionBrowserSourceMaps: false,
 
+  // Redirects configuration
+  async redirects() {
+    return [
+      {
+        source: '/music',
+        destination: 'https://www.last.fm/user/krisyotam',
+        permanent: true,
+      },
+    ];
+  },
+
   images: {
     unoptimized: true,
     remotePatterns: [

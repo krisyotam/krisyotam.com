@@ -76,7 +76,7 @@ export function ListsPage() {
                 </td>
                 <td className="p-4 align-middle">
                   <a
-                    href={list.link}
+                    href={list.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-sm text-primary hover:underline"

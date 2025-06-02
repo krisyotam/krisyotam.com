@@ -13,8 +13,12 @@ export default function FilmPage() {
     <div className="py-12">
       <div className="film-page">
         <PageHeader 
-          title="Film" 
+          title="Film"
+          date="2025-01-01"
           preview="My film and TV watching activity, stats, and curated collections"
+          status="Finished"
+          confidence="certain"
+          importance={7}
         />
         
         <FilmTabs>

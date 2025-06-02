@@ -10,7 +10,7 @@ import { List, Clock, Lock, Globe } from "lucide-react"
 interface ListItem {
   id: number
   title: string
-  year: number | null
+  year?: number
   type: 'movie' | 'show'
   posterUrl: string | null
   traktId?: number
@@ -168,15 +168,6 @@ export function FilmListsSection() {
                       title={item.title}
                       year={item.year}
                       posterUrl={item.posterUrl}
-                      rating={null}
-                      plays={undefined}
-                      lastWatchedAt={item.addedAt}
-                      genres={[]}
-                      runtime={null}
-                      overview={null}
-                      traktId={item.traktId}
-                      imdbId={item.imdbId}
-                      tmdbId={item.tmdbId}
                     />
                   )
                 } else if (item.type === 'show') {
@@ -187,16 +178,6 @@ export function FilmListsSection() {
                       title={item.title}
                       year={item.year}
                       posterUrl={item.posterUrl}
-                      rating={null}
-                      plays={undefined}
-                      lastWatchedAt={item.addedAt}
-                      genres={[]}
-                      overview={null}
-                      traktId={item.traktId}
-                      imdbId={item.imdbId}
-                      tmdbId={item.tmdbId}
-                      episodes={null}
-                      seasons={null}
                     />
                   )
                 }
