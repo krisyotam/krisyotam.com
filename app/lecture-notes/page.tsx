@@ -38,7 +38,10 @@ export default function LectureNotesPage({
       redirect(`/lecture-notes/${categoryParam.toLowerCase().replace(/\s+/g, '-')}`)
     }
   }
-  
-  // If no category filter or "All" is selected, show all lecture notes
-  return <LectureNotesClient initialCategory="All" />
+    // If no category filter or "All" is selected, show all lecture notes
+  return (
+    <div className="lecture-notes-container">
+      <LectureNotesClient initialCategory="All" />
+    </div>
+  )
 } 

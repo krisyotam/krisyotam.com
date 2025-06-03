@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/badge"
 import { PasswordDialog } from "@/components/password-dialog"
 import { Input } from "@/components/ui/input"
 import { PageDescription } from "@/components/posts/typography/page-description"
+import { CustomSelect, SelectOption } from "@/components/ui/custom-select"
 import type { LectureNote } from "@/types/lecture-note"
 
 // Add lecture notes page metadata
@@ -72,15 +73,7 @@ export function LectureNotesClient({ initialCategory = "All" }: { initialCategor
     const titleSlug = slugifyTitle(item.title);
     return `/lecture-notes/${encodeURIComponent(categorySlug)}/${year}/${encodeURIComponent(titleSlug)}`
   }
-
-  function handleCategoryChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const selectedCategory = e.target.value;
-    if (selectedCategory === "All") {
-      router.push("/lecture-notes");
-    } else {
-      router.push(`/lecture-notes/${slugifyCategory(selectedCategory)}`);
-    }
-  }
+  // The category change is now handled directly in the CustomSelect onValueChange
 
   // Filter lecture notes based on search and category
   const filteredLectureNotes = lectureNotes.filter((item) => {
@@ -108,41 +101,52 @@ export function LectureNotesClient({ initialCategory = "All" }: { initialCategor
   const handlePasswordSuccess = () => {
     window.open(selectedLink, "_blank")
   }
-
   return (
-    <main className="max-w-2xl mx-auto px-4 py-12">
-      <PageHeader
-        title={lectureNotesPageData.title}
-        subtitle={lectureNotesPageData.subtitle}
-        date={lectureNotesPageData.date}
-        preview={lectureNotesPageData.preview}
-        status={lectureNotesPageData.status}
-        confidence={lectureNotesPageData.confidence}
-        importance={lectureNotesPageData.importance}
-      />
+    <>
+      <style jsx global>{`
+        .lecture-notes-container {
+          font-family: 'Geist', sans-serif;
+        }
+      `}</style>
+      <div className="lecture-notes-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
+        <PageHeader
+          title={lectureNotesPageData.title}
+          subtitle={lectureNotesPageData.subtitle}
+          date={lectureNotesPageData.date}
+          preview={lectureNotesPageData.preview}
+          status={lectureNotesPageData.status}
+          confidence={lectureNotesPageData.confidence}
+          importance={lectureNotesPageData.importance}
+        />
 
-      <div className="mt-8">
-        <div className="mb-6 space-y-4">
-          <Input
-            placeholder="Search lecture notes..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full"
-          />
-          
-          <div className="flex items-center gap-2">
+      <div className="mt-8">      <div className="mb-6 flex items-center gap-4">
+          <div className="flex items-center gap-2 whitespace-nowrap">
             <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
-            <select
+            <CustomSelect
               id="category-filter"
-              className="border rounded px-2 py-1 text-sm bg-background"
               value={currentCategory}
-              onChange={handleCategoryChange}
-            >
-              <option value="All">All</option>
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
+              onValueChange={(value) => {
+                if (value === "All") {
+                  router.push("/lecture-notes");
+                } else {
+                  router.push(`/lecture-notes/${slugifyCategory(value)}`);
+                }
+              }}
+              options={[
+                { value: "All", label: "All Categories" },
+                ...categories.map(category => ({ value: category, label: category }))
+              ]}
+              className="text-sm min-w-[140px]"
+            />
+          </div>
+          <div className="relative flex-1">
+            <Input 
+              type="text" 
+              placeholder="Search lecture notes..." 
+              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+            />
           </div>
         </div>
 
@@ -154,38 +158,40 @@ export function LectureNotesClient({ initialCategory = "All" }: { initialCategor
             </svg>
           </div>
         ) : (
-          <>
-            <table className="w-full text-sm border border-muted/40 rounded-md overflow-hidden">
-              <thead>
-                <tr className="text-muted-foreground border-b border-muted/40 bg-muted/10">
-                  <th className="py-2 text-left font-normal px-3">Title</th>
-                  <th className="py-2 text-left font-normal px-3">Category</th>
-                  <th className="py-2 text-left font-normal px-3">Year</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredLectureNotes.map(item => (
-                  <tr
-                    key={item.id}
-                    className="border-b border-muted/30 hover:bg-muted/20 cursor-pointer transition-colors"
-                    onClick={() => handleItemClick(item)}
-                  >
-                    <td className="py-2 pr-4 px-3 font-medium">{item.title}</td>
-                    <td className="py-2 pr-4 px-3">{item.category}</td>
-                    <td className="py-2 pr-4 px-3">{new Date(item.dateStarted).getFullYear()}</td>
+          <>            <div className="mt-8">
+              <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
+                <thead>
+                  <tr className="border-b border-border bg-muted/50 text-foreground">
+                    <th className="py-2 text-left font-medium px-3">Title</th>
+                    <th className="py-2 text-left font-medium px-3">Category</th>
+                    <th className="py-2 text-left font-medium px-3">Year</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-            {filteredLectureNotes.length === 0 && !loading && (
-              <div className="text-muted-foreground text-sm mt-6">No lecture notes found for this category.</div>
-            )}
+                </thead>
+                <tbody>
+                  {filteredLectureNotes.map((item, index) => (
+                    <tr
+                      key={item.id}
+                      className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
+                        index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
+                      }`}
+                      onClick={() => handleItemClick(item)}
+                    >
+                      <td className="py-2 px-3 font-medium">{item.title}</td>
+                      <td className="py-2 px-3">{item.category}</td>
+                      <td className="py-2 px-3">{new Date(item.dateStarted).getFullYear()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {filteredLectureNotes.length === 0 && !loading && (
+                <div className="text-muted-foreground text-sm mt-6">No lecture notes found matching your criteria.</div>
+              )}
+            </div>
           </>
         )}
       </div>
       
-      {/* Help Information using PageDescription component */}
-      <PageDescription 
+      {/* Help Information using PageDescription component */}      <PageDescription 
         title="About Lecture Notes"
         description="This page showcases my lecture notes from various academic courses. There are notes from my time at University of Indiana Bloomington, as well MIT OpenCourseWare, Moocs, Udemy, Youtube Lectures, various University Guest Lectures and in the future some IAS Lectures."
       />
@@ -198,6 +204,7 @@ export function LectureNotesClient({ initialCategory = "All" }: { initialCategor
         title="Lecture Notes"
         status="active"
       />
-    </main>
+      </div>
+    </>
   );
 } 

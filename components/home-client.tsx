@@ -40,6 +40,7 @@ import Companies from "@/components/about/Companies"
 import MySites from "@/components/about/MySites"
 import OtherSites from "@/components/about/OtherSites"
 import SiteInfo from "@/components/about/SiteInfo"
+import AboutThisSite from "@/components/about/AboutThisSite"
 import { FeaturedPost } from "@/components/featured-post"
 
 // Type definitions for props
@@ -625,6 +626,11 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                   </p>
                 </CardContent>
               </Card>
+            </div>
+
+            {/* About This Site Collapse */}
+            <div className="mb-6">
+              <AboutThisSite />
             </div>
 
             {/* About Accordion */}
