@@ -103,6 +103,11 @@
      margin: 0 auto;
    }
 
+   .book-content p {
+     margin: 0;
+     padding: 0;
+   }
+   
    /* Fix for bento card white outlines during view transitions */
    .no-outline {
      outline: none !important;
@@ -123,10 +128,6 @@
      margin-top: 2em;
      margin-bottom: 1em;
      letter-spacing: -0.015em;
-   }
-   
-   .book-content p {
-     margin-bottom: 1.5em;
    }
    
    .book-content a {
@@ -203,7 +204,7 @@
    
      /* Paragraphs and Links */
      .prose p {
-       @apply mb-4 leading-relaxed;
+       @apply m-0 p-0 leading-relaxed;
      }
    
      .prose a {
@@ -845,6 +846,8 @@
      hyphens: auto;
      -webkit-hyphens: auto;
      -ms-hyphens: auto;
+     margin: 0 !important;
+     padding: 0 !important;
    }
    
    /* Constrain FileViewer and its <pre> to 100% of whatever parent they live in */

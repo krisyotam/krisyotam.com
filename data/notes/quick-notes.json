@@ -195,29 +195,49 @@
     "confidence": "certain",
     "importance": 5,
     "preview": "A detailed overview of my hardware, software, and tools I use daily for work and personal projects."
- },
- {
-  "title": "Luke Smith Library",
-  "date": "2025-05-31",
-  "slug": "luke-smith-library",
-  "tags": ["Books", "Library", "Reading", "Reference"],
-  "category": "Libraries",
-  "status": "Finished",
-  "confidence": "certain",
-  "importance": 4,
-  "preview": "A comprehensive list of books from Luke Smith's Library organized by the Library of Congress System."
- },
- {
-  "title": "Review of Mermaids",
-  "date": "2025-06-01",
-  "slug": "review-of-mermaids",
-  "tags": ["Film", "Review", "Drama", "Winona Ryder", "1990s Cinema"],
-  "category": "Film Reviews",
-  "status": "Finished",
-  "confidence": "certain",
-  "importance": 5,
-  "preview": "A review of the 1990 film 'Mermaids' starring Winona Ryder"
- }
-
-
+  },
+  {
+    "title": "Luke Smith Library",
+    "date": "2025-05-31",
+    "slug": "luke-smith-library",
+    "tags": ["Books", "Library", "Reading", "Reference"],
+    "category": "Libraries",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 4,
+    "preview": "A comprehensive list of books from Luke Smith's Library organized by the Library of Congress System."
+  },
+  {
+    "title": "Review of Mermaids",
+    "date": "2025-06-01",
+    "slug": "review-of-mermaids",
+    "tags": ["Film", "Review", "Drama", "Winona Ryder", "1990s Cinema"],
+    "category": "Film Reviews",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 5,
+    "preview": "A review of the 1990 film 'Mermaids' starring Winona Ryder"
+  },
+  {
+    "title": "Review of Girl, Interrupted",
+    "date": "2025-06-02",
+    "slug": "review-of-girl-interrupted",
+    "tags": ["Film", "Review", "Psychological Drama", "Winona Ryder", "1990s Cinema"],
+    "category": "Film Reviews",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 5,
+    "preview": "A review of the 1999 psychological drama 'Girl, Interrupted' starring Winona Ryder and Angelina Jolie."
+  },
+  {
+    "title": "Review of Heathers",
+    "date": "2025-06-02",
+    "slug": "review-of-heathers",
+    "tags": ["Film", "Review", "Dark Comedy", "Winona Ryder", "1980s Cinema", "Cult Classic"],
+    "category": "Film Reviews",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 5,
+    "preview": "A review of the 1989 cult classic dark comedy 'Heathers' starring Winona Ryder and Christian Slater."
+  }
 ]

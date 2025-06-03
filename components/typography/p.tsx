@@ -9,7 +9,7 @@ interface PProps extends React.HTMLAttributes<HTMLParagraphElement> {
 
 export function P({ children, className, startArticle, ...props }: PProps) {
   return (
-    <p className={cn("leading-7 [&:not(:first-child)]:mt-6", startArticle && "article-start", className)} {...props}>
+    <p className={cn("leading-7 m-0 p-0", startArticle && "article-start", className)} {...props}>
       {children}
     </p>
   )

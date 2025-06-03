@@ -1,10 +1,10 @@
 name: Auto Update Changelog
 
 on:
-  push:
-    branches:
-      - main  # or your default branch
-  workflow_dispatch: # Also allow manual run
+  # push:
+  #   branches:
+  #     - main  # or your default branch
+  workflow_dispatch: false # Disabled manual run
 
 permissions:
   contents: write
