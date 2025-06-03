@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 import { PageHeader } from "@/components/page-header"
 import DonateContent from "./donate-content.mdx"
-import { Footer } from "@/app/blog/(post)/components/footer"
+import { Footer } from "@/app/essays/components/footer"
 
 export const metadata: Metadata = {
   title: "Donate | Kris Yotam",

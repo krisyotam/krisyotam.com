@@ -54,15 +54,12 @@ export default async function SeriesPage({ params }: SeriesPageProps) {
     const series = await getSeriesBySlug(params.slug)
     if (!series) {
       notFound()
-    }
-
-    const allPosts = await getAllPosts()
+    }    const allPosts = await getAllPosts()
     const posts = await getPostsForSeries(params.slug, allPosts)
 
     return (
       <div className="relative min-h-screen bg-background text-foreground">
-        <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-          <PageHeader
+        <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">          <PageHeader
             title={series.title}
             subtitle={series.subtitle || ""}
             date={series.date}
@@ -73,27 +70,33 @@ export default async function SeriesPage({ params }: SeriesPageProps) {
             backText="Series"
             backHref="/series"
           />
-
+          
           <main>
             <div className="mt-8">
               {posts.length === 0 ? (
                 <p className="text-muted-foreground">No posts found in this series.</p>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full border-collapse">
+                  <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
+                    <thead>
+                      <tr className="border-b border-border bg-muted/50 text-foreground">
+                        <th className="py-2 text-center font-medium px-3 w-8">#</th>
+                        <th className="py-2 text-left font-medium px-3">Title</th>
+                        <th className="py-2 text-right font-medium px-3">Date</th>
+                      </tr>
+                    </thead>
                     <tbody>
                       {posts.map((post, index) => (
-                        <tr key={post.slug} className="border-b border-border hover:bg-secondary/50 transition-colors">
-                          <td className="py-4 px-2 w-8 text-center text-muted-foreground">
+                        <tr key={post.slug} className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}>
+                          <td className="py-2 px-3 text-center w-8 text-muted-foreground">
                             {index + 1}
-                          </td>
-                          <td className="py-4 px-2">
-                            <Link href={`/blog/${getPostYear(post.date)}/${post.slug}`} className="text-foreground">
+                          </td>                          <td className="py-2 px-3">
+                            <Link href={`/essays/${getPostYear(post.date)}/${post.slug}`} className="text-foreground">
                               {post.title}
                             </Link>
                             <p className="text-sm text-muted-foreground mt-1">{post.preview}</p>
                           </td>
-                          <td className="py-4 px-2 text-right text-muted-foreground">
+                          <td className="py-2 px-3 text-right text-muted-foreground">
                             {formatDate(post.date)}
                           </td>
                         </tr>

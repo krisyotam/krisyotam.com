@@ -5,9 +5,9 @@ const path = require('path');
 
 // File paths to process
 const filesToProcess = [
-  './data/blog/category-data.json',
-  './data/blog/series.json',
-  './data/blog/tags.json'
+  './data/essays/category-data.json',
+  './data/essays/series.json',
+  './data/essays/tags.json'
 ];
 
 function removeSubtitles(filePath) {

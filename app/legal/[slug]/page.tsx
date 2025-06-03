@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { PageHeader } from '@/components/page-header';
 import { PDFViewer } from '../components/pdf-viewer';
 import { Citation } from '@/components/citation';
-import { Footer } from '@/app/blog/(post)/components/footer';
+import { Footer } from '@/app/essays/components/footer';
 
 // Import legal data
 import legalData from '../legal.json';

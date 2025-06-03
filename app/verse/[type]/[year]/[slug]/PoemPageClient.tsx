@@ -6,7 +6,7 @@ import { PoemBox } from "@/components/posts/typography/poem";
 import poemsData from "@/data/poems.json";
 import type { Poem } from "@/utils/poems";
 import { notFound } from "next/navigation";
-import { Footer } from "@/app/blog/(post)/components/footer";
+import { Footer } from "@/app/essays/components/footer";
 import { Citation } from "@/components/citation";
 
 export default function PoemPageClient({

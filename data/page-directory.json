@@ -23,15 +23,15 @@
       "path": "/about"
     },
     {
-      "title": "Index",
-      "subtitle": "Collection of articles and essays",
-      "preview": "A chronological archive of all published articles, essays, and thought pieces.",
+      "title": "Essays",
+      "subtitle": "Collection of essays and articles",
+      "preview": "A chronological archive of all published essays, articles, and thought pieces.",
       "date": "2023-01-03T00:00:00Z",
       "show-status": "active",
       "status": "In Progress",
       "confidence": "certain",
       "importance": 9,
-      "path": "/blog"
+      "path": "/essays"
     },
     {
       "title": "Anime & Manga",

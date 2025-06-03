@@ -1,4 +1,4 @@
-import "@/app/blog/posts.css"
+import "@/app/essays/posts.css"
 // File: /components/typography/index.ts
 export { H1 } from "./h1";
 export { H2 } from "./h2";

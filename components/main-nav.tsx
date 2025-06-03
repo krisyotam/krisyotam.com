@@ -16,13 +16,13 @@ export function MainNav() {
       </Link>
       <nav className="flex items-center space-x-6 text-sm font-medium">
         <Link
-          href="/blog"
+          href="/essays"
           className={cn(
             "transition-colors hover:text-foreground/80",
-            pathname === "/blog" ? "text-foreground" : "text-foreground/60"
+            pathname === "/essays" ? "text-foreground" : "text-foreground/60"
           )}
         >
-          Blog
+          Essays
         </Link>
         <Link
           href="/categories"

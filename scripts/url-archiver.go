@@ -57,7 +57,7 @@ func main() {
 	var contentDir, feedPath, reportPath string
 	var concurrency int
 	flag.StringVar(&contentDir, "contentDir", "app/blog", "root directory of MDX/JSON files")
-	flag.StringVar(&feedPath, "dataFeed", "data/blog/feed.json", "path to feed.json containing slugs")
+	flag.StringVar(&feedPath, "dataFeed", "data/essays/feed.json", "path to feed.json containing slugs")
 	flag.StringVar(&reportPath, "report", "archives_report.txt", "output report file")
 	flag.IntVar(&concurrency, "concurrency", 20, "max parallel requests")
 	flag.Parse()

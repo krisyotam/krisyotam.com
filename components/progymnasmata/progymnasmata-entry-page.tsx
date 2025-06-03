@@ -6,7 +6,7 @@ import Image from "next/image";
 import { formatDate } from "@/utils/date-formatter";
 import { LiveClock } from "@/components/live-clock";
 import type { ProgymnasmataEntry } from "@/types/progymnasmata";
-import { Footer } from "@/app/blog/(post)/components/footer";
+import { Footer } from "@/app/essays/components/footer";
 
 interface ProgymnasmataEntryPageProps {
   entry: ProgymnasmataEntry;

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
-import feedData from "./data/blog/feed.json"
+import feedData from "./data/essays/feed.json"
 
 // Dynamically create route mappings from feed.json
 // This creates a map where key is the custom path and value contains target slug and year info
@@ -14,7 +14,7 @@ feedData.posts.forEach(post => {
       slug: post.slug,
       year 
     };
-    console.log(`Registered custom route: ${post.customPath} → blog/${year}/${post.slug}`);
+    console.log(`Registered custom route: ${post.customPath} → essays/${year}/${post.slug}`);
   }
 });
 
@@ -22,12 +22,12 @@ feedData.posts.forEach(post => {
 // Each entry uses a regular expression pattern and a resolver function
 const PATTERN_ROUTES = [
   {
-    // Example: /research/2025/research-title -> blog/2025/research-title
+    // Example: /research/2025/research-title -> essays/2025/research-title
     pattern: /^\/research\/(\d{4})\/([^/]+)$/,
     resolver: (matches: string[]) => {
       const [, year, slug] = matches;
       return { 
-        targetPath: `/blog/${year}/${slug}`,
+        targetPath: `/essays/${year}/${slug}`,
         slug,
         year
       };
@@ -54,7 +54,7 @@ export function middleware(request: NextRequest) {
   // Check if this is a custom route (based on feed.json customPath)
   if (CUSTOM_ROUTES_MAP[normalizedPath]) {
     const { slug, year } = CUSTOM_ROUTES_MAP[normalizedPath];
-    const targetPath = `/blog/${year}/${slug}`;
+    const targetPath = `/essays/${year}/${slug}`;
     
     console.log(`🔄 MIDDLEWARE: Custom route matched. Rewriting ${normalizedPath} to ${targetPath}`);
     url.pathname = targetPath;
@@ -99,8 +99,8 @@ export function middleware(request: NextRequest) {
     // If post exists, redirect to the correct path
     if (post) {
       const year = new Date(post.date).getFullYear().toString()
-      // Update to use the new blog path structure
-      return NextResponse.redirect(new URL(`/blog/${year}/${post.slug}`, request.url))
+      // Update to use the new essays path structure
+      return NextResponse.redirect(new URL(`/essays/${year}/${post.slug}`, request.url))
     }
   }
   
@@ -116,11 +116,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect('https://www.are.na/kris-yotam/channels')
   }
 
-  // Handle direct access to blog post files (new functionality)
-  const blogPostMatch = normalizedPath.match(/^\/blog\/(\d{4})\/([^/]+)$/)
-  if (blogPostMatch) {
-    const [, year, slug] = blogPostMatch
-    console.log(`🔍 MIDDLEWARE: Detected blog post URL: ${normalizedPath} with year: ${year}, slug: ${slug}`)
+  // Handle direct access to essays post files (new functionality)
+  const essayPostMatch = normalizedPath.match(/^\/essays\/(\d{4})\/([^/]+)$/)
+  if (essayPostMatch) {
+    const [, year, slug] = essayPostMatch
+    console.log(`🔍 MIDDLEWARE: Detected essays post URL: ${normalizedPath} with year: ${year}, slug: ${slug}`)
 
     // Check if this post exists in our feed data
     const postExists = feedData.posts.some((p) => p.slug === slug)

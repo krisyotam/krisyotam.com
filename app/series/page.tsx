@@ -47,16 +47,31 @@ export default async function SeriesPage() {
 
           <main>
             <div className="overflow-x-auto">
-              <table className="w-full border-collapse">
+              <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
+                <thead>
+                  <tr className="border-b border-border bg-muted/50 text-foreground">
+                    <th className="py-2 text-left font-medium px-3">
+                      Series
+                    </th>
+                    <th className="py-2 text-right font-medium px-3">
+                      # of Posts
+                    </th>
+                  </tr>
+                </thead>
                 <tbody>
-                  {seriesList.map((series) => (
-                    <tr key={series.slug} className="border-b border-border hover:bg-secondary/50 transition-colors">
-                      <td className="py-4 px-2">
+                  {seriesList.map((series, index) => (
+                    <tr
+                      key={series.slug}
+                      className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
+                    >
+                      <td className="py-2 px-3">
                         <Link href={`/series/${series.slug}`} className="text-foreground">
                           {series.name}
                         </Link>
                       </td>
-                      <td className="py-4 px-2 text-right text-muted-foreground">{series.count}</td>
+                      <td className="py-2 px-3 text-right text-muted-foreground">
+                        {series.count}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

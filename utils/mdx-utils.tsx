@@ -153,7 +153,7 @@ export async function getPostMetadata(
   marginNotes: MarginNote[]
   bibliography: BibliographyEntry[]
 }> {
-  const postDir = path.join(process.cwd(), "app/blog", year, slug)
+  const postDir = path.join(process.cwd(), "app/essays", year, slug)
   const mdxPath = path.join(postDir, "page.mdx")
 
   console.log(`\n📄 POST METADATA: Getting metadata for post: ${year}/${slug}`)

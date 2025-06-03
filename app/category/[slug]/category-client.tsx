@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { CategoryHeader } from "@/components/category-header"
 import { PageDescription } from "@/components/posts/typography/page-description"
+import { Table } from "@/components/shared/table"
 
 interface Post {
   title: string
@@ -42,6 +43,36 @@ export function CategoryClient({ posts, categoryData, categoryName, slug }: Cate
   function getPostYear(date: string) {
     return new Date(date).getFullYear().toString()
   }
+
+  const columns = [
+    {
+      header: "Title",
+      key: "title",
+      render: (post: Post) => {
+        const year = getPostYear(post.date)
+        const postUrl = `/essays/${year}/${post.slug}`
+        return (
+          <Link href={postUrl} className="text-foreground">
+            {post.title}
+          </Link>
+        )
+      }
+    },
+    {
+      header: "Date",
+      key: "date",
+      align: "right" as const,
+      render: (post: Post) => (
+        <span className="text-muted-foreground">
+          {new Date(post.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </span>
+      )
+    }
+  ]
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
@@ -89,43 +120,11 @@ export function CategoryClient({ posts, categoryData, categoryName, slug }: Cate
             </div>
           </div>
 
-          <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
-            <thead>
-              <tr className="border-b border-border bg-muted/50 text-foreground">
-                <th className="py-2 text-left font-medium px-3">Title</th>
-                <th className="py-2 text-right font-medium px-3">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredPosts.map((post, index) => {
-                const year = getPostYear(post.date)
-                const postUrl = `/blog/${year}/${post.slug}`
-                
-                return (
-                  <tr
-                    key={post.slug}
-                    className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
-                  >
-                    <td className="py-2 px-3 font-medium">
-                      <Link href={postUrl} className="text-foreground">
-                        {post.title}
-                      </Link>
-                    </td>
-                    <td className="py-2 px-3 text-right text-muted-foreground">
-                      {new Date(post.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-          {filteredPosts.length === 0 && (
-            <div className="text-muted-foreground text-sm mt-6">No posts found.</div>
-          )}
+          <Table 
+            columns={columns}
+            data={filteredPosts}
+            emptyMessage="No posts found."
+          />
         </div>
         
         <PageDescription 

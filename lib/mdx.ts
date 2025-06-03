@@ -60,7 +60,7 @@ export interface MDXPost {
 
 // Function to get an MDX post by slug
 export async function getMDXPost(year: string, slug: string): Promise<MDXPost | null> {
-  const filePath = path.join(process.cwd(), "app/blog", year, slug, "page.mdx")
+  const filePath = path.join(process.cwd(), "app/essays", year, slug, "page.mdx")
 
   // Check if the MDX file exists
   if (!fs.existsSync(filePath)) {
@@ -96,7 +96,7 @@ export async function getMDXPost(year: string, slug: string): Promise<MDXPost | 
 
 // Function to check if an MDX post exists
 export function mdxPostExists(year: string, slug: string): boolean {
-  const filePath = path.join(process.cwd(), "app/blog", year, slug, "page.mdx")
+  const filePath = path.join(process.cwd(), "app/essays", year, slug, "page.mdx")
   return fs.existsSync(filePath)
 }
 

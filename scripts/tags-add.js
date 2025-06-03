@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 // File paths
-const feedPath = path.join(__dirname, '..', 'data', 'blog', 'feed.json');
+const feedPath = path.join(process.cwd(), "data", "essays", "feed.json");
 const tagsPath = path.join(__dirname, '..', 'data', 'blog', 'tags.json');
 
 // Default values for new tags

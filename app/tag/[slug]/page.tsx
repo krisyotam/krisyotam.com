@@ -1,72 +1,49 @@
-// app/tag/[slug]/page.tsx
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { getTags, getTagDataBySlug, getPostsByTag } from "@/utils/tags";
-import { TagHeader } from "@/components/tag-header";
-import { ArrowLeft } from "lucide-react";
+import Link from "next/link"
+import { notFound } from "next/navigation"
+import { getPostsByTag, Post } from "@/utils/posts"
+import { PageHeader } from "@/components/page-header"
+import { ArrowLeft } from "lucide-react"
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
-export async function generateStaticParams() {
-  const tags = await getTags();
-  return tags.map((tag) => ({ slug: tag.slug }));
-}
+export const dynamic = "force-dynamic"
 
 export default async function TagPage({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }) {
   try {
-    const posts = await getPostsByTag(params.slug);
-    const tagData = await getTagDataBySlug(params.slug);
+    const posts = await getPostsByTag(params.slug)
 
     if (posts.length === 0) {
-      notFound();
+      notFound()
     }
 
     // Fallback title if no metadata provided
-    const tagTitle =
-      tagData?.title ||
-      params.slug
-        .split("-")
-        .map((w) => w[0].toUpperCase() + w.slice(1))
-        .join(" ");
+    const tagTitle = params.slug
+      .split("-")
+      .map((w) => w[0].toUpperCase() + w.slice(1))
+      .join(" ")
 
     return (
       <div className="relative min-h-screen bg-background text-foreground">
         <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-          {tagData ? (
-            <TagHeader
-              title={tagData.title}
-              subtitle={tagData.subtitle}
-              date={tagData.date}
-              preview={tagData.preview}
-              status={(tagData.status || "Draft") as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"}
-              confidence={(tagData.confidence || "possible") as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"}
-              importance={tagData.importance || 5}
-              className="mb-12"
-            />
-          ) : (
-            <header className="mb-16">
-              <div className="mb-4">
-                <Link
-                  href="/tags"
-                  className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <ArrowLeft className="mr-1 h-4 w-4" />
-                  Back to Tags
-                </Link>
-              </div>
-              <h1 className="text-xl font-medium mb-1 text-foreground">
-                {tagTitle}
-              </h1>
-              <p className="text-muted-foreground">
-                {posts.length} {posts.length === 1 ? "post" : "posts"}
-              </p>
-            </header>
-          )}
+          <header className="mb-16">
+            <div className="mb-4">
+              <Link
+                href="/tags"
+                className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <ArrowLeft className="mr-1 h-4 w-4" />
+                Back to Tags
+              </Link>
+            </div>
+            <h1 className="text-xl font-medium mb-1 text-foreground">
+              {tagTitle}
+            </h1>
+            <p className="text-muted-foreground">
+              {posts.length} {posts.length === 1 ? "post" : "posts"}
+            </p>
+          </header>
 
           <main>
             <div className="overflow-x-auto">
@@ -83,8 +60,8 @@ export default async function TagPage({
                 </thead>
                 <tbody>
                   {posts.map((post) => {
-                    const year = new Date(post.date).getFullYear().toString();
-                    const postUrl = `/blog/${year}/${post.slug}`;
+                    const year = new Date(post.date).getFullYear().toString()
+                    const postUrl = `/${post.path || 'essays'}/${year}/${post.slug}`
                     return (
                       <tr
                         key={post.slug}
@@ -103,7 +80,7 @@ export default async function TagPage({
                           })}
                         </td>
                       </tr>
-                    );
+                    )
                   })}
                 </tbody>
               </table>
@@ -111,15 +88,15 @@ export default async function TagPage({
           </main>
         </div>
       </div>
-    );
+    )
   } catch (error) {
-    console.error("Failed to fetch tag posts:", error);
+    console.error("Failed to fetch tag posts:", error)
     return (
       <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
         <p className="text-xl text-muted-foreground">
           Failed to load tag posts. Please try again later.
         </p>
       </div>
-    );
+    )
   }
 }

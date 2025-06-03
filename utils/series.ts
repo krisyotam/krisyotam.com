@@ -24,6 +24,12 @@ export interface SeriesListData {
   series: SeriesData[]
 }
 
+export interface Series {
+  slug: string
+  name: string
+  count: number
+}
+
 // Helper to guard server‑only code
 function assertServer() {
   if (typeof window !== "undefined") {
@@ -73,7 +79,7 @@ export async function getAllSeriesData(): Promise<SeriesData[]> {
     return cachedSeriesData;
   }
   
-  const data = await readDataFile<SeriesListData>("blog/series.json")
+  const data = await readDataFile<SeriesListData>("essays/series.json")
   const seriesData = data?.series || [];
   
   // Cache the data in production
@@ -91,19 +97,20 @@ export async function getSeriesBySlug(slug: string): Promise<SeriesData | null> 
 }
 
 // Get all active series with post counts
-export async function getSeries(): Promise<
-  { slug: string; name: string; count: number }[]
-> {
-  const seriesData = await getAllSeriesData()
+export async function getSeries(): Promise<Series[]> {
+  const seriesData = await readDataFile<SeriesListData>("essays/series.json")
   
-  return seriesData
-    .filter(series => series["show-status"] === "active")
-    .map(series => ({
+  if (!seriesData?.series) {
+    return []
+  }
+
+  return seriesData.series
+    .filter((series: SeriesData) => series["show-status"] === "active")
+    .map((series: SeriesData) => ({
       slug: series.slug,
       name: series.title,
       count: series.posts.length
-    }))
-    .sort((a, b) => b.count - a.count)
+    })).sort((a: Series, b: Series) => a.name.localeCompare(b.name))
 }
 
 // Get posts for a specific series

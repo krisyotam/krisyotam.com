@@ -17,6 +17,7 @@ export interface Post {
   cover_image?: string
   cover?: string
   path?: string // Custom URL path for the post
+  series?: string
 }
 
 export interface PostsData {
@@ -122,9 +123,24 @@ export async function getAllPosts(): Promise<Post[]> {
     return cachedPosts;
   }
   
-  const data = await readDataFile<PostsData>("blog/feed.json")
-  const posts = data?.posts || []
-  const sortedPosts = posts.sort(
+  // Load essays
+  const essaysData = await readDataFile<PostsData>("essays/feed.json")
+  const essays = (essaysData?.posts || []).map(post => ({
+    ...post,
+    path: 'essays'
+  }))
+  
+  // Load blog posts
+  const blogData = await readDataFile<PostsData>("blog/feed.json")
+  const blogPosts = (blogData?.posts || []).map(post => ({
+    ...post,
+    path: 'blog'
+  }))
+  
+  // Combine and sort all posts
+  const allPosts = [...essays, ...blogPosts]
+  
+  const sortedPosts = allPosts.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
   
@@ -166,7 +182,8 @@ export async function getCategories(): Promise<
   { slug: string; name: string; count: number }[]
 > {
   const posts = await getActivePosts()
-  const meta = await getAllCategoryData()
+  const essaysMeta = await readDataFile<CategoriesData>("essays/category-data.json")
+  const meta = essaysMeta?.categories || []
 
   // tally up posts per slugified category
   const counts = new Map<string, number>()
@@ -193,7 +210,7 @@ export async function getCategories(): Promise<
     result.push({ slug, name, count })
   }
 
-  return result
+  return result.sort((a, b) => a.name.localeCompare(b.name))
 }
 
 // Get posts by category slug
@@ -232,8 +249,8 @@ export async function getPostContent(year: string, slug: string) {
     import("path"),
   ])
   
-  // Only use the app/blog structure which is the canonical location for MDX content
-  const mdxPath = path.join(process.cwd(), "app", "blog", year, slug, "page.mdx")
+  // Only use the app/essays structure which is the canonical location for MDX content
+  const mdxPath = path.join(process.cwd(), "app", "essays", year, slug, "page.mdx")
   
   console.log(`Attempting to load MDX for ${year}/${slug}`)
   console.log(`CWD: ${process.cwd()}`)
@@ -245,7 +262,53 @@ export async function getPostContent(year: string, slug: string) {
     return { isMDX: true, mdxData, blogPostExists: true }
   } catch (err) {
     console.log(`Failed to load from ${mdxPath}: ${err instanceof Error ? err.message : String(err)}`)
-    console.log(`Could not find MDX for ${year}/${slug} at app/blog/${year}/${slug}/page.mdx`)
+    console.log(`Could not find MDX for ${year}/${slug} at app/essays/${year}/${slug}/page.mdx`)
     return { isMDX: false, mdxData: null, blogPostExists: false }
   }
+}
+
+// Get posts by tag
+export async function getPostsByTag(tag: string): Promise<Post[]> {
+  const all = await getAllPosts()
+  return all.filter((post) => post.tags.includes(tag))
+}
+
+// Get all unique tags with post counts
+export async function getTags(): Promise<{ name: string; count: number }[]> {
+  const posts = await getAllPosts()
+  const tagCounts = new Map<string, number>()
+
+  // Count posts per tag
+  posts.forEach((post) => {
+    post.tags.forEach((tag) => {
+      tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1)
+    })
+  })
+
+  // Convert to array and sort alphabetically
+  return Array.from(tagCounts.entries())
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => a.name.localeCompare(b.name))
+}
+
+// Get all series with post counts
+export async function getSeries(): Promise<{ name: string; count: number }[]> {
+  const seriesData = await readDataFile<{ series: { name: string; posts: string[] }[] }>("essays/series.json")
+  
+  if (!seriesData?.series) {
+    return []
+  }
+
+  // Filter out any invalid entries and map to the required format
+  const validSeries = seriesData.series
+    .filter(series => series && series.name && Array.isArray(series.posts))
+    .map(series => ({
+      name: series.name,
+      count: series.posts.length
+    }))
+
+  // Sort only if we have valid entries
+  return validSeries.length > 0 
+    ? validSeries.sort((a, b) => a.name.localeCompare(b.name))
+    : []
 }

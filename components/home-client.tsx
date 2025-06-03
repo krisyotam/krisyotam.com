@@ -55,6 +55,7 @@ interface Post {
   status?: string
   confidence?: string
   importance?: number
+  path?: string
 }
 
 interface Poem {
@@ -121,7 +122,7 @@ function BlogPostCard({ post }: { post: Post }) {
   })
 
   const year = new Date(post.date).getFullYear().toString()
-  const slugPath = `blog/${year}/${post.slug}`
+  const slugPath = `${post.path}/${year}/${post.slug}`
 
   // Get first 3 tags if there are many
   const displayTags = post.tags.slice(0, 3)
@@ -240,7 +241,7 @@ function PostTableRow({ post }: { post: Post }) {
   })
   
   const year = new Date(post.date).getFullYear().toString()
-  const slugPath = `blog/${year}/${post.slug}`
+  const slugPath = `${post.path}/${year}/${post.slug}`
   
   return (
     <tr className="border-t border-border hover:bg-muted/30 transition-colors">
@@ -544,12 +545,12 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
             </header>
             <main>
               <div className="space-y-8">
-                 {posts
+                {posts
                   .filter(post => !["On Myself", "On Website", "On Learning", "On Writing", "On Method"].includes(post.category))
                   .filter(post => post.slug && post.date && post.preview)
                   .map((post) => {
                     const year = getPostYear(post.date)
-                    const slugPath = `blog/${year}/${post.slug}`
+                    const slugPath = `${post.path}/${year}/${post.slug}`
 
                     return (
                       <BlogPost

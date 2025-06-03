@@ -2,7 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import { Post } from "./posts";
 
-const feedPath = path.join(process.cwd(), "data", "blog", "feed.json");
+const feedPath = path.join(process.cwd(), "data", "essays", "feed.json");
 const tagsDataPath = path.join(process.cwd(), "data", "blog", "tags.json");
 
 export interface TagSummary {

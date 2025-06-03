@@ -37,10 +37,10 @@ export function MobileNav() {
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
           <div className="flex flex-col space-y-3">
             <Link
-              href="/blog"
+              href="/essays"
               className={cn(
                 "transition-colors hover:text-foreground/80",
-                pathname === "/blog" ? "text-foreground" : "text-foreground/60"
+                pathname === "/essays" ? "text-foreground" : "text-foreground/60"
               )}
               onClick={(e) => {
                 // Close the mobile menu
@@ -48,7 +48,7 @@ export function MobileNav() {
                 document.querySelector('[data-radix-popper-content-wrapper]')?.remove()
               }}
             >
-              Blog
+              Essays
             </Link>
             <Link
               href="/categories"
