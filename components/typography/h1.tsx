@@ -9,7 +9,7 @@ interface H1Props extends React.HTMLAttributes<HTMLHeadingElement> {
 
 export function H1({ children, className, id, ...props }: H1Props) {
   return (
-    <h1 id={id} className={cn("scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl", className)} {...props}>
+    <h1 id={id} className={cn("scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl mt-8", className)} {...props}>
       {children}
     </h1>
   )

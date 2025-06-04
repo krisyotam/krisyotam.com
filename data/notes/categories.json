@@ -1,5 +1,6 @@
 {
-  "categories": [    {
+  "categories": [
+    {
       "slug": "on-myself",
       "title": "On Myself",
       "preview": "Personal reflections, introspections, and observations about my thoughts, beliefs, and experiences.",
@@ -7,7 +8,8 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 8
-    },    {
+    },
+    {
       "slug": "philosophy",
       "title": "Philosophy",
       "preview": "Philosophical musings, ethical considerations, and explorations of fundamental questions about existence and meaning.",
@@ -15,7 +17,8 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 9
-    },    {
+    },
+    {
       "slug": "verse",
       "title": "Verse",
       "preview": "Poetry, haiku, and verse forms - explorations in rhythm, meter, and poetic expression.",
@@ -23,7 +26,8 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 6
-    },    {
+    },
+    {
       "slug": "culture",
       "title": "Culture",
       "preview": "Cultural observations, critiques, and analyses of society, media, and social phenomena.",
@@ -31,7 +35,8 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 7
-    },    {
+    },
+    {
       "slug": "design",
       "title": "Design",
       "preview": "Design principles, aesthetic considerations, and thoughts on simplicity and visual communication.",
@@ -39,7 +44,8 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 7
-    },    {
+    },
+    {
       "slug": "health",
       "title": "Health",
       "preview": "Health, fitness, and wellness observations - both physical and mental wellbeing considerations.",
@@ -47,7 +53,8 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 8
-    },    {
+    },
+    {
       "slug": "lifestyle",
       "title": "Lifestyle",
       "preview": "Daily life observations, routines, and reflections on simple pleasures and lifestyle choices.",
@@ -55,7 +62,8 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 5
-    },    {
+    },
+    {
       "slug": "mathematics",
       "title": "Mathematics",
       "preview": "Mathematical concepts, beauty in mathematics, and explorations of mathematical thinking.",
@@ -63,7 +71,8 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 8
-    },    {
+    },
+    {
       "slug": "personal",
       "title": "Personal",
       "preview": "Personal growth, learning, and development - reflections on self-improvement and growth.",
@@ -71,7 +80,8 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 7
-    },    {
+    },
+    {
       "slug": "libraries",
       "title": "Libraries",
       "preview": "An archive of other people's book collections, reading lists, and personal libraries.",
@@ -79,15 +89,42 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 10
-    },    {
+    },
+    {
       "slug": "film-reviews",
       "title": "Film Reviews",
-      "preview": "a compilation of my film reviews",
+      "preview": "A compilation of my film reviews.",
       "date": "2025-06-01",
       "status": "Finished",
       "confidence": "certain",
       "importance": 7
+    },
+    {
+      "slug": "bounties",
+      "title": "Bounties",
+      "preview": "Things I pay people for if they find—bugs, issues, rare books, vulnerabilities, or helpful content.",
+      "date": "2025-06-03",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 6
+    },
+    {
+      "slug": "website",
+      "title": "Website",
+      "preview": "site ideals, design, architecture, and other technical details about this website",
+      "date": "2025-06-03",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 6
+    },
+    {
+      "slug": "random",
+      "title": "Random",
+      "preview": "a cabinet of anomalies, axioms, open questions, failed frameworks, cursed knowledge, conspiracies, and fragments of thought I don't know where else to put",
+      "date": "2025-06-04",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8
     }
-
   ]
 }

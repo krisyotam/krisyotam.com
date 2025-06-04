@@ -89,7 +89,7 @@ export function ProgymnasmataClient({ initialTypeFilter = "All" }: Progymnasmata
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
+    <main className="max-w-[672px] mx-auto px-4 py-12">
       <PageHeader
         title="Progymnasmata"
         subtitle="Classical Rhetorical Exercises"

@@ -113,5 +113,54 @@
     "category": "Writers",
     "tags": ["literature", "philosophy", "art", "science", "history"],
     "slug": "maria-popova"
-  }
+  },
+  {
+  "title": "Michael Nielsen",
+  "url": "https://michaelnotebook.com/index.html",
+  "description": "The online notebook of Michael Nielsen. Aims to help create systems which support creativity and discovery. Focuses on metascience, programmable matter, and tools for thought. Past work includes quantum computing, open science, and artificial intelligence.",
+  "category": "Researchers",
+  "tags": ["tools for thought", "metascience", "quantum computing", "open science", "AI", "creativity", "discovery", "memory", "publishing"],
+  "slug": "michael-nielsen",
+  "publishDate": "2025-06-03",
+  "status": "Finished",
+  "confidence": "certain",
+  "importance": 9
+ },
+ {
+  "title": "Cosma Shalizi",
+  "url": "http://bactra.org/",
+  "description": "Home page of Cosma Shalizi — scientist, professor, writer, and polymath. Contains research, lecture notes, book reviews, essays, and personal notebooks across over 400 topics, often presented with dry wit and cryptic references.",
+  "category": "Researchers",
+  "tags": ["statistics", "complex systems", "book reviews", "science writing", "teaching", "notebooks", "quantitative finance", "social science", "mathematics"],
+  "slug": "cosma-shalizi",
+  "publishDate": "2025-06-03",
+  "status": "Finished",
+  "confidence": "highly likely",
+  "importance": 8
+ },
+ {
+  "title": "Bret Victor",
+  "url": "https://worrydream.com/",
+  "description": "Inventor, designer, and founder of Dynamicland. Dedicated to creating a humane dynamic medium and reimagining computing as a communal, real-world experience. His work spans programming interfaces, spatial computing, and visual communication.",
+  "category": "Designers",
+  "tags": ["dynamic media", "interface design", "spatial computing", "tools for thought", "education", "visualization", "programming", "climate", "design theory"],
+  "slug": "bret-victor",
+  "publishDate": "2025-06-03",
+  "status": "Finished",
+  "confidence": "certain",
+  "importance": 10
+},
+{
+  "title": "Piero Scaruffi",
+  "url": "https://www.scaruffi.com/",
+  "description": "Mathematician, cognitive scientist, and prolific writer. Founder of one of the earliest personal websites and the LASER lecture series, Scaruffi is known for his work in AI, music criticism, cognitive science, and interdisciplinary cultural history. He has published extensively on science, art, literature, and technology.",
+  "category": "Polymaths",
+  "tags": ["AI", "cognitive science", "music history", "poetry", "visual arts", "internet culture", "philosophy", "Silicon Valley", "knowledge systems", "interdisciplinary"],
+  "slug": "piero-scaruffi",
+  "publishDate": "2025-06-03",
+  "status": "Finished",
+  "confidence": "certain",
+  "importance": 10
+}
+
 ] 

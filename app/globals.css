@@ -754,6 +754,7 @@
      background: transparent;
      display: none;
    }
+
    
    /* =============================================================================
       BASE ELEMENT STYLES
@@ -890,7 +891,7 @@
      background: hsl(var(--muted-foreground) / 0.3) !important;
      border-radius: 0 !important;
    }
-   
+
    ::-webkit-scrollbar-thumb:hover {
      background: hsl(var(--muted-foreground) / 0.5) !important;
    }

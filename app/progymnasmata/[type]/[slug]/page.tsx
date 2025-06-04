@@ -15,7 +15,7 @@ async function getProgymnasmataEntry(type: string, slug: string) {
       `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/progymnasmata/entry?type=${encodeURIComponent(
         type.toLowerCase()
       )}&slug=${encodeURIComponent(slug)}`,
-      { next: { revalidate: 3600 } }
+      { cache: "no-store" } // Disable caching
     );
     if (!res.ok) return null;
     return await res.json();
@@ -43,6 +43,13 @@ export default async function Page({ params }: PageProps) {
 
   // ⚡️ Inject the `type` back onto the entry
   const entry = { ...(raw as any), type };
+  
+  // Debug log to verify the data we're passing to the component
+  console.log("Server component passing to client:", {
+    status: entry.status,
+    certainty: entry.certainty,
+    importance: entry.importance
+  });
 
   return <ProgymnasmataEntryPage entry={entry} />;
 }

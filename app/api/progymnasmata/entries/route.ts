@@ -16,12 +16,16 @@ export async function GET() {
       const filePath = path.join(progymnasmataDir, file)
       const fileContent = fs.readFileSync(filePath, "utf8")
       const entries = JSON.parse(fileContent)
-
-      // Add the type based on the filename
+        // Add the type based on the filename
       const type = file.replace(".json", "")
+        // Make sure to explicitly include these fields so they override PostHeader defaults
       const entriesWithType = entries.map((entry: any) => ({
         ...entry,
         type: formatType(type),
+        tags: entry.tags ?? [],
+        status: entry.status, // Explicitly include to override PostHeader defaults
+        certainty: entry.certainty, // Explicitly include to override PostHeader defaults
+        importance: entry.importance // Explicitly include to override PostHeader defaults
       }))
 
       allEntries = [...allEntries, ...entriesWithType]

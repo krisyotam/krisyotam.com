@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react"
 import { PageHeader } from "@/components/page-header"
 import { useRouter, usePathname } from "next/navigation"
+import { CustomSelect } from "@/components/ui/custom-select"
+import type { SelectOption } from "@/components/ui/custom-select"
+import { Input } from "@/components/ui/input"
 
 interface OthersClientProps {
   initialCategoryFilter?: string
@@ -74,9 +77,7 @@ export function OthersClient({ initialCategoryFilter = "All" }: OthersClientProp
     
     return matchesCategory && matchesSearch
   })
-
-  function handleCategoryChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const newCategory = e.target.value;
+  function handleCategoryChange(newCategory: string) {
     setCategoryFilter(newCategory)
     
     // Update URL based on selected filter
@@ -95,35 +96,33 @@ export function OthersClient({ initialCategoryFilter = "All" }: OthersClientProp
         subtitle="Curated Blog Collection"
         date="2023-09-15"
         preview="a curated collection of novel and obscure blogs I read"
-      />
-      <div className="mt-8">
-        <div className="mb-6 flex flex-col sm:flex-row gap-4">
-          <div className="flex-1">
-            <label htmlFor="search" className="text-sm text-muted-foreground mb-1 block">Search:</label>
-            <input
-              type="text"
-              id="search"
-              className="w-full border rounded px-3 py-2 text-sm bg-background"
-              placeholder="Search by title, description, category, or tag..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+      />      <div className="mt-8">        <div className="mb-6 flex items-center gap-4">
+          <div className="flex items-center gap-2 whitespace-nowrap">
+            <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
+            <CustomSelect
+              id="category-filter"
+              value={categoryFilter}
+              onValueChange={handleCategoryChange}
+              options={[
+                { value: "All", label: "All Categories" },
+                ...categories.map(category => ({
+                  value: category,
+                  label: category
+                }))
+              ]}
+              className="text-sm min-w-[140px]"
             />
           </div>
-          <div className="w-full sm:w-48">
-            <label htmlFor="category-filter" className="text-sm text-muted-foreground mb-1 block">Filter by category:</label>
-            <select
-              id="category-filter"
-              className="w-full border rounded px-3 py-2 text-sm bg-background"
-              value={categoryFilter}
-              onChange={handleCategoryChange}
-            >
-              <option value="All">All Categories</option>
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
+          <div className="relative flex-1">
+            <Input 
+              type="text" 
+              placeholder="Search others..." 
+              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+            />
           </div>
-        </div>        {loading ? (
+        </div>{loading ? (
           <div className="flex justify-center items-center py-24">
             <svg className="animate-spin h-8 w-8 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -165,4 +164,4 @@ export function OthersClient({ initialCategoryFilter = "All" }: OthersClientProp
       </div>
     </main>
   )
-} 
+}

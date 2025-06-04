@@ -3,150 +3,97 @@
 import { useState, useEffect } from "react"
 import { Command } from "cmdk"
 import { useRouter } from "next/navigation"
-import { 
-  Home, 
-  User, 
-  BookOpen, 
-  FileText, 
-  Sun, 
-  Moon, 
-  List, 
-  Quote, 
-  Heart, 
-  Presentation, 
-  Users, 
-  School, 
-  Gift, 
-  Mail, 
-  Scroll, 
-  Earth, 
-  Clock, 
-  Brain, 
-  Waypoints, 
-  Notebook, 
-  HandCoins, 
-  Bitcoin, 
-  Archive, 
-  Music, 
-  Origami, 
-  Film, 
-  Newspaper, 
-  StickyNote, 
-  SquareLibrary, 
-  Feather, 
-  PenLine, 
-  CircleHelp, 
-  PencilRuler, 
-  Tags, 
-  Layers, 
-  Building, 
-  GraduationCap, 
-  Contact, 
-  CalendarDays, 
-  BookMarked, 
-  BookCopy, 
-  Briefcase, 
-  Flame, 
-  Video, 
-  Lightbulb, 
-  Sparkles, 
-  Rocket, 
-  FlaskConical, 
-  Landmark, 
-  GalleryHorizontal, 
-  HeartHandshake, 
-  ShoppingCart, 
-  Pencil, 
-  Code, 
-  HelpCircle, 
-  LifeBuoy, 
-  FlipHorizontal, 
-  Server, 
-  Paperclip,
-  MonitorPlay,
-  BookText,
-  Coins,
-  Upload,
-  Laptop,
-  FolderKanban,
-  ClipboardEdit,
-  AreaChart,
-  MessageSquare,
-  Link,
-  Grid,
-  Receipt,
-  MessageSquareText
-} from "lucide-react"
+import {
+  Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll,
+  Earth, Clock, Brain, Waypoints, Notebook, HandCoins, Bitcoin, Archive, Music, Origami, Film, Newspaper, StickyNote,
+  SquareLibrary, Feather, PenLine, CircleHelp, PencilRuler, Tags, Layers, Building, GraduationCap, Contact,
+  CalendarDays, BookMarked, BookCopy, Briefcase, Flame, Video, Lightbulb, Sparkles, Rocket, FlaskConical, Landmark,
+  GalleryHorizontal, HeartHandshake, ShoppingCart, Pencil, Code, HelpCircle, LifeBuoy, FlipHorizontal, Server,
+  Paperclip, MonitorPlay, BookText, Coins, Upload, Laptop, FolderKanban, ClipboardEdit, AreaChart, MessageSquare,
+  Link, Grid, Receipt, MessageSquareText, Tag, Gamepad2, Clapperboard, Gavel, Star, Hammer, Footprints, PenBox, BookDashed, Shapes, UserSquare, BrainCircuit,
+  GlobeLock, BoxSelect, TestTube2, FileBarChart2, Files, Megaphone, BookOpenCheck, ScrollText, BookOpenText, FileEdit, PencilLine, Wrench, Pen, HelpingHand, Keyboard, Palette
+} from "lucide-react";
+
+
 import { SnowEffect } from "./snow-effect"
 import { useTheme } from "next-themes"
 
 const menuItems = [
   // Primary navigation - most commonly used pages
   { icon: Home, label: "Home", path: "/" },
+  { icon: PenBox, label: "Essays", path: "/essays" },
+  { icon: PenBox, label: "Blog", path: "/blog" },
+  { icon: StickyNote, label: "Notes", path: "/notes" },
+  { icon: Quote, label: "Quotes", path: "/quotes" },
   { icon: List, label: "Categories", path: "/categories" },
+  { icon: Tag, label: "Tags", path: "/tags" },
   { icon: Layers, label: "Series", path: "/series" },
   { icon: HeartHandshake, label: "Supporters", path: "/supporters" },
   { icon: User, label: "About", path: "/blog/2025/on-myself" },
-  
+
   // Content sections - main site areas
-  { icon: StickyNote, label: "Notes", path: "/notes" },
-  { icon: Tags, label: "Tags", path: "/tags" },
-  { icon: Quote, label: "Quotes", path: "/quotes" },
   { icon: Feather, label: "Verse", path: "/verse" },
   { icon: MessageSquareText, label: "Social", path: "/social" },
   { icon: BookMarked, label: "Reading", path: "/reading" },
   { icon: Clock, label: "Now", path: "/now" },
-  
+
   // Research and knowledge
   { icon: School, label: "Research", path: "/research" },
   { icon: Brain, label: "Today I Learned", path: "/til" },
   { icon: SquareLibrary, label: "Library", path: "/library" },
   { icon: Earth, label: "Globe", path: "/globe" },
   { icon: Archive, label: "Archive", path: "/archive" },
-  
+  { icon: FlaskConical, label: "Research Bounties", path: "/researchbounties" },
+  { icon: FileBarChart2, label: "Reports", path: "/reports" },
+  { icon: Files, label: "Docs", path: "/docs" },
+  { icon: BookOpenCheck, label: "Lecture Notes", path: "/lecture-notes" },
+  { icon: ScrollText, label: "Flashcards", path: "/flashcards" },
+  { icon: TestTube2, label: "Prompts", path: "/prompts" },
+
+  // Media and entertainment
+  { icon: Film, label: "Film", path: "/film" },
+  { icon: BookOpenText, label: "Manga", path: "/manga" },
+  { icon: Clapperboard, label: "Anime", path: "/anime" },
+  { icon: Gamepad2, label: "Games", path: "/games" },
+  { icon: Music, label: "Playlists", path: "/playlists" },
+  { icon: Video, label: "Videos", path: "/videos" },
+
+  // Personal projects & documents
+  { icon: Hammer, label: "Projects", path: "/projects" },
+  { icon: GraduationCap, label: "CV", path: "/cv" },
+  { icon: HelpCircle, label: "FAQ", path: "/faq" },
+  { icon: BookText, label: "Docs", path: "/doc" }, // if "doc" is distinct from "docs"
+  { icon: FileEdit, label: "Changelog", path: "/changelog" },
+  { icon: Footprints, label: "Colophon", path: "/colophon" },
+  { icon: Users, label: "Profile", path: "/profile" },
+  { icon: Gavel, label: "Auction", path: "/auction" },
+  { icon: Star, label: "Favs", path: "/favs" },
+
+  // Creation and expression
+  { icon: PencilLine, label: "Progymnasmata", path: "/progymnasmata" },
+  { icon: Palette, label: "Art", path: "/art" },
+  { icon: UserSquare, label: "OCs", path: "/ocs" },
+  { icon: BrainCircuit, label: "Memory", path: "/memory" },
+  { icon: GlobeLock, label: "Directory", path: "/directory" },
+  { icon: Keyboard, label: "Type", path: "/type" },
+
   // Engagement and contact
   { icon: Gift, label: "Wishlist", path: "/wishlist" },
+  { icon: Gift, label: "Wants", path: "/wants" },
   { icon: Bitcoin, label: "Donate", path: "/donate" },
   { icon: Mail, label: "Contact", path: "/contact" },
-  
-  // Currently commented sections - activate as needed
-  // { icon: Newspaper, label: "Newsletter", path: "/newsletter" },
-  // { icon: PenLine, label: "My Books", path: "/mybooks" },
-  // { icon: Users, label: "OCs", path: "/ocs" },
-  // { icon: Presentation, label: "Keynotes", path: "/keynotes" },
-  // { icon: FileText, label: "Speeches", path: "/speeches" },
-  // { icon: Music, label: "Playlists", path: "/playlists" },
-  // { icon: Origami, label: "Anime", path: "/anime" },
-  // { icon: Film, label: "Film", path: "/film" },
-  // { icon: Notebook, label: "Projects", path: "/projects" },
-  // { icon: Waypoints, label: "Memory", path: "/memory" },
-  // { icon: Heart, label: "Colophon", path: "/colophon" },
-  
-  // Additional sections found in app directory
-  // { icon: CircleHelp, label: "FAQ", path: "/faq" },
-  // { icon: FlaskConical, label: "Prompts", path: "/prompts" },
-  // { icon: Code, label: "Scripts", path: "/scripts" },
-  // { icon: GraduationCap, label: "Progymnasmata", path: "/progymnasmata" },
-  // { icon: Paperclip, label: "Resources", path: "/resources" },
-  // { icon: Coins, label: "Research Bounties", path: "/researchbounties" },
-  // { icon: AreaChart, label: "Predictions", path: "/predictions" },
-  // { icon: User, label: "Profile", path: "/profile" },
-  // { icon: Landmark, label: "Companies", path: "/companies" },
-  // { icon: Link, label: "Sources", path: "/sources" },
-  // { icon: Sparkles, label: "Auction", path: "/auction" },
-  // { icon: BookCopy, label: "Books", path: "/books" },
-  // { icon: GalleryHorizontal, label: "Art", path: "/art" },
-  // { icon: FileText, label: "CV", path: "/cv" },
-  // { icon: Grid, label: "Grid", path: "/grid" },
-  // { icon: MonitorPlay, label: "Videos", path: "/videos" },
-  // { icon: Receipt, label: "Changelog", path: "/changelog" },
-  // { icon: Briefcase, label: "Directory", path: "/directory" },
-  // { icon: BookText, label: "Reading Log", path: "/readinglog" },
-  // { icon: FolderKanban, label: "Flashcards", path: "/flashcards" },
-  // { icon: MessageSquare, label: "Category", path: "/category" },
-  // { icon: Upload, label: "RSS", path: "/rss.xml" },
-  // { icon: Laptop, label: "Website", path: "/website" },
-]
+  { icon: Newspaper, label: "Newsletter", path: "/newsletter" },
+
+  // Infrastructure
+  { icon: FileText, label: "RSS", path: "/rss.xml" },
+  { icon: Wrench, label: "Scripts", path: "/scripts" },
+  { icon: Building, label: "Companies", path: "/companies" },
+  { icon: HelpingHand, label: "Philanthropy", path: "/philanthropy" },
+  { icon: Users, label: "Sources", path: "/sources" },
+  { icon: Megaphone, label: "Speeches", path: "/speeches" },
+
+];
+
 
 export function CommandMenu() {
   const [open, setOpen] = useState(false)
