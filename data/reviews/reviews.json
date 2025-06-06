@@ -37,12 +37,11 @@
   },
   {
     "title": "Review of Wistoria Wand & Sword",
-    "subtitle": "Wand meets Sword",
     "preview": "A critical deep dive into Wistoria's blend of spellcasting mechanics and swordplay, evaluating its narrative, gameplay balance, and world-building.",
     "date": "2025-04-22",
     "tags": ["Fantasy", "Anime", "Action", "Wistoria Wand & Sword"],
     "category": "anime",
-    "slug": "wistoria-wand-and-sword-review",
+    "slug": "review-of-wistoria-wand-and-sword",
     "status": "Draft",
     "confidence": "unlikely",
     "importance": 1,
@@ -50,7 +49,6 @@
    },
    {
     "title": "Review of Evangelion",
-    "subtitle": "A Critical Analysis of Mecha and Existentialism",
     "preview": "An in-depth exploration of Neon Genesis Evangelion, examining its psychological themes, visual storytelling, and cultural impact.",
     "date": "2025-05-05",
     "tags": ["Anime", "Analysis", "Mecha", "Psychological", "Hideaki Anno"],

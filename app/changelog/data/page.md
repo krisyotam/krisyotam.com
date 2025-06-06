@@ -1,5 +1,19 @@
 # Changelog
 
+## June 2025
+
+### June 6, 2025
+- New Structured Top-Level Hierarchies
+  - [Essays](/essays)
+  - [Blog Posts](/blog)
+  - [Fiction](/fiction)
+  - [Notes](/notes)
+  - [Reviews](/review)
+- Slug Pages now client pages
+  - active for fiction, notes, reviews, blog posts
+  - removed /accredidations and opted for /notes/on-myself/certifications for the same information in mdx
+  - Poetry content now held in mdx instead of .json allowing for more seamless workflow
+
 ## April 2025
 
 ### April 29, 2025
