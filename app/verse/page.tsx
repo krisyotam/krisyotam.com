@@ -2,10 +2,11 @@
 import type { Metadata } from "next"
 import { VerseClient } from "./verse-client"
 import { redirect } from "next/navigation"
+import categoriesData from "@/data/verse/categories.json"
 
 export const metadata: Metadata = {
   title: "Verse | Kris Yotam",
-  description: "A collection of poems, haikus, and other verse forms.",
+  description: "A collection of original verse exploring themes of existence, nature, and the human experience",
   openGraph: {
     title: "Poetry Collection | Kris Yotam",
     description: "Explore a diverse collection of original poems, haikus, and other verse forms by Kris Yotam.",

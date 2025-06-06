@@ -9,7 +9,7 @@ interface H3Props extends React.HTMLAttributes<HTMLHeadingElement> {
 
 export function H3({ children, className, id, ...props }: H3Props) {
   return (
-    <h3 id={id} className={cn("scroll-m-20 text-2xl font-semibold tracking-tight mt-5", className)} {...props}>
+    <h3 id={id} className={cn("scroll-m-20 text-2xl font-semibold tracking-tight mt-8", className)} {...props}>
       {children}
     </h3>
   )

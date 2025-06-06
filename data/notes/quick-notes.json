@@ -208,39 +208,6 @@
     "preview": "A comprehensive list of books from Luke Smith's Library organized by the Library of Congress System."
   },
   {
-    "title": "Review of Mermaids",
-    "date": "2025-06-01",
-    "slug": "review-of-mermaids",
-    "tags": ["Film", "Review", "Drama", "Winona Ryder", "1990s Cinema"],
-    "category": "Film Reviews",
-    "status": "Finished",
-    "confidence": "certain",
-    "importance": 5,
-    "preview": "A review of the 1990 film 'Mermaids' starring Winona Ryder"
-  },
-  {
-    "title": "Review of Girl, Interrupted",
-    "date": "2025-06-02",
-    "slug": "review-of-girl-interrupted",
-    "tags": ["Film", "Review", "Psychological Drama", "Winona Ryder", "1990s Cinema"],
-    "category": "Film Reviews",
-    "status": "Finished",
-    "confidence": "certain",
-    "importance": 5,
-    "preview": "A review of the 1999 psychological drama 'Girl, Interrupted' starring Winona Ryder and Angelina Jolie."
-  },
-  {
-    "title": "Review of Heathers",
-    "date": "2025-06-02",
-    "slug": "review-of-heathers",
-    "tags": ["Film", "Review", "Dark Comedy", "Winona Ryder", "1980s Cinema", "Cult Classic"],
-    "category": "Film Reviews",
-    "status": "Finished",
-    "confidence": "certain",
-    "importance": 5,
-    "preview": "A review of the 1989 cult classic dark comedy 'Heathers' starring Winona Ryder and Christian Slater."
-  },
-  {
     "title": "About Kris",
     "date": "2025-06-03",
     "tags": ["Kris Yotam", "Psychological Profile", "Interests", "Background"],
@@ -335,6 +302,42 @@
   "confidence": "certain",
   "importance": 8,
   "preview": "an evolving list of hobbies around the world, from traditional crafts to modern pastimes"
+  },
+  {
+  "title": "Watchlist",
+  "date": "2025-06-04",
+  "tags": ["Film", "Literature", "Verse", "Music"],
+  "category": "On Myself",
+  "slug": "watchlist",
+  "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+  "status": "In Progress",
+  "confidence": "certain",
+  "importance": 2,
+  "preview": "a more raw list of things I want to watch, read, or listen to in the near future"
+  },
+  {
+  "title": "Basic Mathematics",
+  "date": "2025-06-04",
+  "tags": ["Algebra", "Calculus", "Analysis", "Pure Mathematics"],
+  "category": "Stable Syllabi",
+  "slug": "basic-mathematics",
+  "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+  "status": "In Progress",
+  "confidence": "certain",
+  "importance": 6,
+  "preview": "a roadmap for a firm foundation in basic principles of mathematics"
+  },
+    {
+  "title": "Jobs for krisyotam.com",
+  "date": "2025-06-06",
+  "tags": ["Hiring", "Editing", "Research", "Design", "Development"],
+  "category": "Website",
+  "slug": "jobs",
+  "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+  "status": "In Progress",
+  "confidence": "certain",
+  "importance": 8,
+  "preview": "a set of job listings for krisyotam.com, including roles in research, editing, design, and development"
   }
 
 ]

@@ -1,34 +1,103 @@
 "use client"
 
-import poemsData from "@/data/poems.json"
+import poemsData from "@/data/verse/poems.json"
+import categoriesData from "@/data/verse/categories.json"
 import type { Poem } from "@/utils/poems"
 import { PageHeader } from "@/components/page-header"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select"
+import { cn } from "@/lib/utils"
+
+interface VerseType {
+  slug: string;
+  title: string;
+  preview: string;
+  date: string;
+  status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
+  confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
+  importance: number;
+}
 
 function slugifyType(type: string) {
   return type.toLowerCase().replace(/\s+/g, "-");
 }
 
-export function VerseClient({ initialType = "All" }: { initialType?: string }) {
-  const [loading, setLoading] = useState(true)
-  const [currentType, setCurrentType] = useState(initialType)
-  const poems = poemsData as Poem[]
-  const poemTypes = Array.from(new Set(poems.map(poem => poem.type))).sort()
-  const router = useRouter()
-  const [searchQuery, setSearchQuery] = useState("")
+function unslugifyType(slug: string, allTypes: VerseType[]): string {
+  const typeData = allTypes.find(t => t.slug === slug);
+  return typeData ? typeData.title : "All";
+}
 
-  // Convert poem types to SelectOption format
+export function VerseClient({ initialType = "All" }: { initialType?: string }) {
+  const [loading, setLoading] = useState(true)  
+  const [currentType, setCurrentType] = useState(initialType)  
+  const [searchQuery, setSearchQuery] = useState("")
+  const router = useRouter()
+  
+  const poems = poemsData as Poem[]  
+  const verseTypes = categoriesData.types as VerseType[]
+
+  // Get proper type title from slug or raw type
+  const getTypeTitle = (type: string) => {
+    const typeData = verseTypes.find(t => t.slug === slugifyType(type) || t.title === type);
+    return typeData ? typeData.title : type;
+  }
+
+  // Get current category metadata for header
+  const getHeaderData = () => {
+    if (currentType === "All") {
+      return {
+        title: "Verse",
+        subtitle: "Poems, Haikus, and Other Forms", 
+        date: "2025-01-01",
+        preview: "An anthology of original verse",
+        status: "In Progress" as const,
+        confidence: "likely" as const,
+        importance: 7
+      }
+    }
+
+    // Find type data
+    const typeSlug = slugifyType(currentType)
+    const typeData = verseTypes.find(type => type.slug === typeSlug)
+
+    if (typeData) {
+      return {
+        title: typeData.title,
+        subtitle: "",
+        date: typeData.date,
+        preview: typeData.preview,
+        status: typeData.status,
+        confidence: typeData.confidence,
+        importance: typeData.importance
+      }
+    }
+
+    // Fallback to default if not found 
+    return {
+      title: currentType,
+      subtitle: "",
+      date: "2025-01-01",
+      preview: `A collection of ${currentType.toLowerCase()} poems`,
+      status: "In Progress" as const,
+      confidence: "likely" as const,
+      importance: 7
+    }
+  }
+
+  // Get type options for the dropdown
   const typeOptions: SelectOption[] = [
-    { value: "All", label: "All" },
-    ...poemTypes.map(type => ({ value: type, label: type }))
+    { value: "All", label: "All Types" },
+    ...verseTypes.map(type => ({ 
+      value: type.slug,
+      label: type.title
+    }))
   ]
 
-  // Sort poems by date descending
+  // Get poems filtered by type and search
   const sortedPoems = [...poems].sort((a, b) => new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime());
   const filteredPoems = sortedPoems.filter(poem => {
-    const matchesType = currentType === "All" || poem.type === currentType;
+    const matchesType = currentType === "All" || slugifyType(poem.type) === slugifyType(currentType);
     const matchesSearch = !searchQuery || 
       poem.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
       (poem.content?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false);
@@ -50,27 +119,26 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
     const typeSlug = slugifyType(poem.type);
     return `/verse/${encodeURIComponent(typeSlug)}/${String(poem.year)}/${encodeURIComponent(poem.slug)}`
   }
+
   function handleTypeChange(selectedValue: string) {
-    if (selectedValue === "All") {
+    const selectedType = typeOptions.find(opt => opt.value === selectedValue)
+    if (!selectedType) return
+
+    if (selectedType.value === "All") {
       router.push("/verse");
     } else {
-      router.push(`/verse/${slugifyType(selectedValue)}`);
+      router.push(`/verse/${encodeURIComponent(selectedType.value)}`);
     }
   }
 
+  const headerData = getHeaderData();
+
   return (
     <main className="max-w-2xl mx-auto px-4 py-12">
-      <PageHeader
-        title="Verse"
-        subtitle="Poems, Haikus, and Other Forms"
-        date="2025-01-01"
-        preview="an anthology of original verse"
-        status="In Progress"
-        confidence="likely"
-        importance={7}
-      />
+      <PageHeader {...headerData} />
 
-      <div className="mt-8">        <div className="mb-6 flex items-center gap-4">
+      <div className="mt-8">        
+        <div className="mb-6 flex items-center gap-4">
           <div className="flex items-center gap-2 whitespace-nowrap">
             <label htmlFor="type-filter" className="text-sm text-muted-foreground">Filter by type:</label>
             <CustomSelect
@@ -116,8 +184,8 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
                     onClick={() => router.push(getPoemUrl(poem))}
                   >
                     <td className="py-2 px-3 font-medium">{poem.title}</td>
-                    <td className="py-2 px-3">{poem.type}</td>
-                    <td className="py-2 px-3">{poem.year}</td>
+                    <td className="py-2 px-3">{getTypeTitle(poem.type)}</td>
+                    <td className="py-2 px-3">{String(poem.year)}</td>
                   </tr>
                 ))}
               </tbody>

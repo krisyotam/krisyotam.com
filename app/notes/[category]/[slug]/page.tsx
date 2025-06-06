@@ -1,3 +1,5 @@
+export const dynamic = 'force-static';
+export const revalidate = false;
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import notesData from "@/data/notes/quick-notes.json";

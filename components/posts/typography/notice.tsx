@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { AlertTriangle, Bot, Info, AlertCircle, ChevronRight, BrainCog } from 'lucide-react';
 
 interface NoticeProps {
-  type: 'deprecated' | 'ai' | 'warning' | 'info';
+  type: 'deprecated' | 'ai' | 'warning' | 'info' | 'pending';
   children?: React.ReactNode;
 }
 
@@ -16,6 +16,12 @@ const noticeContents = {
     message: 'The code or features discussed in this post are no longer up to date or available.',
     icon: AlertTriangle,
     className: 'bg-amber-50 border-amber-200 text-amber-900 dark:bg-amber-950/30 dark:border-amber-800/50 dark:text-amber-300'
+  },
+  pending: {
+    title: 'Pending Activation',
+    message: 'This opportunity is not currently active but will be available in the future. You can bookmark this page, and check back periodically.',
+    icon: AlertCircle,
+    className: 'bg-purple-50 border-purple-200 text-purple-900 dark:bg-purple-950/30 dark:border-purple-800/50 dark:text-purple-300'
   },
   ai: {
     title: 'AI-Generated Content',

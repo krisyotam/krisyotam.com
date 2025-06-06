@@ -1,29 +1,46 @@
 "use client"
 
-import poemsData from "@/data/poems.json"
+import poemsData from "@/data/verse/poems.json"
+import categoriesData from "@/data/verse/categories.json"
 import type { Poem } from "@/utils/poems"
 import { PageHeader } from "@/components/page-header"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
+interface VerseType {
+  slug: string;
+  title: string;
+  preview: string;
+  date: string;
+  status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
+  confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
+  importance: number;
+}
+
 function slugifyType(type: string) {
   return type.toLowerCase().replace(/\s+/g, "-");
 }
 
-function unslugifyType(slug: string, allTypes: string[]) {
-  return allTypes.find(t => slugifyType(t) === slug) || "All";
+function unslugifyType(slug: string, verseTypes: VerseType[]): string {
+  const typeData = verseTypes.find(t => t.slug === slug);
+  return typeData ? typeData.title : "All";
 }
 
 export default function VerseTypeClient({ params }: { params: { type: string } }) {
   const [loading, setLoading] = useState(true)
   const poems = poemsData as Poem[]
-  const poemTypes = Array.from(new Set(poems.map(poem => poem.type))).sort()
+  const verseTypes = categoriesData.types as VerseType[]
   const router = useRouter()
-  const currentType = unslugifyType(params.type, poemTypes)
-  const filteredPoems = currentType === "All" ? poems : poems.filter(poem => poem.type === currentType)
+
+  const typeData = verseTypes.find(t => t.slug === params.type)
+  const currentType = typeData ? typeData.title : "All"
+  
+  const filteredPoems = currentType === "All" 
+    ? poems 
+    : poems.filter(poem => slugifyType(poem.type) === params.type)
 
   useEffect(() => {
-    // Simulate loading for a short time for demo; replace with real async if needed
+    // Show loading state briefly for better UX during type changes
     const timeout = setTimeout(() => setLoading(false), 400)
     return () => clearTimeout(timeout)
   }, [params.type])
@@ -33,25 +50,37 @@ export default function VerseTypeClient({ params }: { params: { type: string } }
     return `/verse/${encodeURIComponent(typeSlug)}/${String(poem.year)}/${encodeURIComponent(poem.slug)}`
   }
 
-  function handleTypeChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const selectedType = e.target.value;
-    if (selectedType === "All") {
-      router.push("/verse");
+  function handleTypeChange(selectedValue: string) {
+    if (selectedValue === "All") {
+      router.push("/verse")
     } else {
-      router.push(`/verse/${slugifyType(selectedType)}`);
+      const typeData = verseTypes.find(t => t.title === selectedValue)
+      if (typeData) {
+        router.push(`/verse/${encodeURIComponent(typeData.slug)}`)
+      }
     }
   }
 
+  // Get header data from type metadata
+  const headerData = typeData ? {
+    title: typeData.title,
+    date: typeData.date,
+    preview: typeData.preview,
+    status: typeData.status,
+    confidence: typeData.confidence,
+    importance: typeData.importance
+  } : {
+    title: "Verse",
+    date: "2025-01-01",
+    preview: "A collection of original verse",
+    status: "In Progress" as const,
+    confidence: "likely" as const,
+    importance: 7
+  }
+
   return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
-      <PageHeader
-        title="Verse"
-        date="2025-01-01"
-        preview="a anthology of original verse"
-        status="In Progress"
-        confidence="likely"
-        importance={7}
-      />
+    <main className="max-w-2xl mx-auto px-4 py-12">
+      <PageHeader {...headerData} />
       <div className="mt-8">
         <div className="mb-4 flex items-center gap-2">
           <label htmlFor="type-filter" className="text-sm text-muted-foreground">Filter by type:</label>
@@ -59,11 +88,11 @@ export default function VerseTypeClient({ params }: { params: { type: string } }
             id="type-filter"
             className="border rounded px-2 py-1 text-sm bg-background"
             value={currentType}
-            onChange={handleTypeChange}
+            onChange={(e) => handleTypeChange(e.target.value)}
           >
             <option value="All">All</option>
-            {poemTypes.map(type => (
-              <option key={type} value={type}>{type}</option>
+            {verseTypes.map(type => (
+              <option key={type.slug} value={type.title}>{type.title}</option>
             ))}
           </select>
         </div>
@@ -89,7 +118,7 @@ export default function VerseTypeClient({ params }: { params: { type: string } }
                   <tr
                     key={poem.slug}
                     className="border-b border-muted/30 hover:bg-muted/20 cursor-pointer transition-colors"
-                    onClick={() => window.location.href = getPoemUrl(poem)}
+                    onClick={() => router.push(getPoemUrl(poem))}
                   >
                     <td className="py-2 pr-4 px-3 font-medium">{poem.title}</td>
                     <td className="py-2 pr-4 px-3">{poem.type}</td>
@@ -106,4 +135,4 @@ export default function VerseTypeClient({ params }: { params: { type: string } }
       </div>
     </main>
   )
-} 
+}

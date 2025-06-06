@@ -1,0 +1,56 @@
+[
+  {
+    "title": "The Clockmaker's Daughter",
+    "date": "2025-06-05", 
+    "slug": "clockmakers-daughter",
+    "tags": ["Fiction", "Mystery", "Novel"],
+    "category": "Short Stories",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 8,
+    "preview": "A novel exploring mysteries and revelations in an old clockmaker's workshop."
+  },
+  {
+    "title": "A Theory of Rooms",
+    "date": "2025-06-05",
+    "slug": "a-theory-of-rooms", 
+    "tags": ["Poetry", "Sonnets", "Elizabethan", "Structure"],
+    "category": "Short Stories",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 7,
+    "preview": "An Elizabethan sonnet exploring the meaning and metaphor of rooms."
+  },
+  {
+    "title": "How They Fall",
+    "date": "2025-06-05",
+    "slug": "how-they-fall",
+    "tags": ["Fiction", "Character Study", "Original Characters"],
+    "category": "Short Stories",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 7,
+    "preview": "Two siblings arrive at the illustrious Château de Noya enduring a series of misfortunes"
+  },
+  {
+    "title": "What the Faculty Forgot",
+    "date": "2025-06-05",
+    "slug": "what-the-faculty-forgot",
+    "tags": ["Poetry", "Sonnets", "Academic"],
+    "category": "Flash Fiction",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6,
+    "preview": "An Elizabethan sonnet about memory and academia."
+  },
+  {
+    "title": "When the Bell Tolls Twice",
+    "date": "2025-06-05",
+    "slug": "when-the-bell-tolls-twice",
+    "tags": ["Poetry", "Sonnets", "Time"],
+    "category": "Flash Fiction",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6,
+    "preview": "An Elizabethan sonnet meditating on the passage of time."
+  }]

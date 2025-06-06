@@ -1,9 +1,17 @@
 import type { MDXComponents } from "mdx/types"
 import Image, { type ImageProps } from "next/image"
 import * as Typography from "@/components/typography"
+import { Spoiler } from "spoiled"
 import { InternalLink } from "@/components/internal-link"
+import SimpleBib from "@/components/simplebib"
 import { EnhancedLink } from "@/components/enhanced-link"
 import { CodeBlock } from "@/components/ui/code-block"
+import Books from "@/components/posts/books/books"
+import { Tweet } from "@/components/typography/tweet"
+import Math from "@/components/typography/math"
+import dynamic from 'next/dynamic'
+// Import TikZ with no SSR to avoid hydration issues
+const TikZ = dynamic(() => import('@/components/typography/tikz'), { ssr: false })
 
 // Import all post-related components
 import MiniBio from '@/components/posts/people/mini-bio'
@@ -15,7 +23,6 @@ import { Age } from "@/components/posts/typography/age"
 import { Excerpt } from "@/components/posts/typography/excerpt"
 import { Quote } from "@/components/posts/typography/quote"
 import Define from "@/components/references/language/oed"
-import { Spoiler } from "@/components/posts/typography/spoiler"
 import { PoemBox } from "@/components/posts/typography/poem"
 import Collapse from "@/components/posts/typography/collapse"
 import FileViewer from "@/components/posts/typography/file-viewer"
@@ -110,6 +117,25 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </div>
     ),
 
+    // Custom components
+    Math,
+    Tikz: TikZ,
+    Tweet,
+    SimpleBib,
+    Books,
+    Box,
+    Collapse,
+    Quote,
+    MiniBio,
+    Bible,
+    Define,
+    Book,
+    AnimeDisplay,
+    MangaDisplay,
+    MangaPanel: MangaPanelDisplay,
+    Dropcap,
+    LinkTags,
+
     // Typography components
     Lead: Typography.Lead,
     Large: Typography.Large,
@@ -118,25 +144,18 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     
     // Text formatting and layout components
     InternalLink,
-    Dropcap,
-    Box,
     Excerpt,
-    Quote,
     Spoiler,
     PoemBox,
-    Collapse,
     FileViewer,
     Age,
-    RedditEmbed,    Essay,
+    RedditEmbed,
+    Essay,
     Notice,
     
     // References and specialized components
-    Bible,
-    Define,
-    LinkTags,
     Inflation,
-      // Character and people components
-    MiniBio,
+    // Character and people components
     OcCharacterDisplay,
     CharacterDisplay,
     Human,
@@ -154,12 +173,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     EnhancedVideoDisplay,
     
     // Books and reading components
-    Book,
     BookCard,
-      // Content display components
-    AnimeDisplay,
+    // Content display components
     AnimeCharacterDisplay,
-    MangaDisplay,
     MovieDisplay,
     Movie,
     MangaPanelDisplay,

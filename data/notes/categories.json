@@ -125,6 +125,33 @@
       "status": "In Progress",
       "confidence": "certain",
       "importance": 8
-    }
+    },
+      {
+    "slug": "stable-syllabi",
+    "title": "Stable Syllabi",
+    "preview": "long-term stable syllabi for learning complex fields",
+    "date": "2025-06-04",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 9
+  },
+  {
+    "slug": "simple-syllabi",
+    "title": "Simple Syllabi",
+    "preview": "lists of things you ought to know",
+    "date": "2025-06-04",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 7
+  },
+  {
+    "slug": "laels-systems",
+    "title": "Lael’s Systems",
+    "preview": "I like to create frameworks, I list them here",
+    "date": "2025-06-04",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 4
+  }
   ]
 }

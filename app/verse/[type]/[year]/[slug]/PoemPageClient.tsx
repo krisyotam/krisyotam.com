@@ -3,11 +3,12 @@
 
 import { VerseHeader } from "@/components/verse-header";
 import { PoemBox } from "@/components/posts/typography/poem";
-import poemsData from "@/data/poems.json";
+import poemsData from "@/data/verse/poems.json";
 import type { Poem } from "@/utils/poems";
 import { notFound } from "next/navigation";
 import { Footer } from "@/app/essays/components/footer";
 import { Citation } from "@/components/citation";
+import { useEffect, useState } from "react";
 
 export default function PoemPageClient({
   params: { type, year, slug },
@@ -24,46 +25,45 @@ export default function PoemPageClient({
   });
   if (!poem) notFound();
 
-  // collect stanzas
-  const stanzas: string[] = [];
-  let idx = 1;
-  while ((poem as any)[`stanza${idx}`]) {
-    stanzas.push((poem as any)[`stanza${idx}`]);
-    idx++;
-  }
+  // State for poem content
+  const [poemContent, setPoemContent] = useState<string>("");
 
-  // Default values for new fields if they don't exist in the data
-  const status = poem.status || "Finished";
-  const confidence = poem.confidence || "likely";
-  const importance = poem.importance || 5;
+  // Fetch poem content when component mounts
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const response = await fetch(`/api/verse/content?type=${type}&slug=${slug}`);
+        if (!response.ok) throw new Error('Failed to fetch poem content');
+        const data = await response.json();
+        setPoemContent(data.content);
+      } catch (error) {
+        console.error('Error fetching poem content:', error);
+      }
+    };
+    fetchContent();
+  }, [type, slug]);
+
   const tags = poem.tags || [];
 
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-8">
       <div className="max-w-2xl mx-auto px-4 md:px-8">
-        {/* Use the VerseHeader component with headerDescription */}
         <VerseHeader
           title={poem.title}
           date={poem.dateCreated}
           type={poem.type}
           collection={poem.collection}
-          preview={poem.headerDescription}
-          status={status}
-          confidence={confidence}
-          importance={importance}
+          preview={poem.description}
+          status={poem.status}
+          confidence={poem.confidence}
+          importance={poem.importance}
           tags={tags}
         />
 
-        {/* Use PoemBox for the poem content without the title */}
         <PoemBox>
-          {stanzas.length > 0 ? (
-            stanzas.map((stanza) => stanza).join("\n\n")
-          ) : (
-            "No content available for this poem."
-          )}
+          {poemContent || "No content available for this poem."}
         </PoemBox>
         
-        {/* Citation component for this poem */}
         <div className="my-8">
           <Citation 
             title={poem.title}
@@ -72,7 +72,7 @@ export default function PoemPageClient({
             url={`https://krisyotam.com/verse/${type}/${year}/${slug}`}
           />
         </div>
-        
+
         <Footer />
       </div>
     </div>

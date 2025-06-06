@@ -1,0 +1,64 @@
+[
+{
+    "title": "Review of Mermaids",
+    "date": "2025-06-01",
+    "slug": "review-of-mermaids",
+    "tags": ["Film", "Review", "Drama", "Winona Ryder", "1990s Cinema"],
+    "category": "film",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 5,
+    "preview": "A review of the 1990 film 'Mermaids' starring Winona Ryder",
+    "cover_image": "https://i.postimg.cc/BnTLtrB7/Mermaids.jpg"
+  },
+  {
+    "title": "Review of Girl, Interrupted",
+    "date": "2025-06-02",
+    "slug": "review-of-girl-interrupted",
+    "tags": ["Film", "Review", "Psychological Drama", "Winona Ryder", "1990s Cinema"],
+    "category": "film",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 5,
+    "preview": "A review of the 1999 psychological drama 'Girl, Interrupted' starring Winona Ryder and Angelina Jolie.",
+    "cover_image": "https://i.postimg.cc/QxzYC6rv/girl-interrupted.png"
+  },
+  {
+    "title": "Review of Heathers",
+    "date": "2025-06-02",
+    "slug": "review-of-heathers",
+    "tags": ["Film", "Review", "Dark Comedy", "Winona Ryder", "1980s Cinema", "Cult Classic"],
+    "category": "film",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 5,
+    "preview": "A review of the 1989 cult classic dark comedy 'Heathers' starring Winona Ryder and Christian Slater.",
+    "cover_image": "https://i.postimg.cc/50mktbxm/heathers.jpg"
+  },
+  {
+    "title": "Review of Wistoria Wand & Sword",
+    "subtitle": "Wand meets Sword",
+    "preview": "A critical deep dive into Wistoria's blend of spellcasting mechanics and swordplay, evaluating its narrative, gameplay balance, and world-building.",
+    "date": "2025-04-22",
+    "tags": ["Fantasy", "Anime", "Action", "Wistoria Wand & Sword"],
+    "category": "anime",
+    "slug": "wistoria-wand-and-sword-review",
+    "status": "Draft",
+    "confidence": "unlikely",
+    "importance": 1,
+    "cover_image": "https://i.postimg.cc/W4KZq98J/wistoria-wand-and-sword.jpg"
+   },
+   {
+    "title": "Review of Evangelion",
+    "subtitle": "A Critical Analysis of Mecha and Existentialism",
+    "preview": "An in-depth exploration of Neon Genesis Evangelion, examining its psychological themes, visual storytelling, and cultural impact.",
+    "date": "2025-05-05",
+    "tags": ["Anime", "Analysis", "Mecha", "Psychological", "Hideaki Anno"],
+    "category": "anime",
+    "slug": "review-of-evangelion",
+    "status": "In Progress",
+    "confidence": "likely",
+    "importance": 8,
+    "cover_image": "https://i.postimg.cc/P5bYzRp2/neon-genesis-evanglion.jpg"
+    }
+]

@@ -27,10 +27,9 @@ export const metadata: Metadata = {
     title: "Kris Yotam",
     description: "Ideas, works, and reflections of a contemporary polymath",
     url: "https://krisyotam.com",
-    siteName: "Kris Yotam",
-    images: [
+    siteName: "Kris Yotam",    images: [
       {
-        url: "https://krisyotam.com/social.png", // Update this with your default image
+        url: "https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png",
         width: 1200,
         height: 630,
         alt: "Kris Yotam",
@@ -44,7 +43,7 @@ export const metadata: Metadata = {
     title: "Kris Yotam",
     description: "Ideas, works, and reflections of a contemporary polymath",
     creator: "@krisyotam",
-    images: ["https://krisyotam.com/social.png"], // Update this with your default image
+    images: ["https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png"]
   },
   metadataBase: new URL("https://krisyotam.com"),
 }

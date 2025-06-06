@@ -161,6 +161,71 @@
   "status": "Finished",
   "confidence": "certain",
   "importance": 10
+},
+{
+  "title": "Evgeny Zinoviev",
+  "url": "https://ch1p.io/",
+  "description": "Evgeny Zinoviev is a systems-level hacker, Linux/BSD enthusiast, and minimalist programmer focused on practical self-hosting, embedded systems, and secure, free software workflows. Through his meticulously documented blog, he shares deep technical tutorials on FreeBSD, Void Linux, coreboot firmware flashing, privacy-respecting Android setups, and clever Unix scripting. A self-reliant hacker ethos defines his work, which spans open-source tooling, decentralized software engineering, and alternative infrastructure.",
+  "category": "Hackers & Engineers",
+  "tags": ["Linux", "FreeBSD", "coreboot", "embedded systems", "self-hosting", "privacy", "networking", "software minimalism", "open source", "cyberpunk infrastructure"],
+  "slug": "evgeny-zinoviev",
+  "publishDate": "2025-06-05",
+  "status": "Finished",
+  "confidence": "certain",
+  "importance": 9
+},
+{
+  "title": "Guillermo Rauch",
+  "url": "https://rauchg.com/",
+  "description": "Guillermo Rauch is the CEO of Vercel and co-creator of Next.js.",
+  "category": "Tech Founders",
+  "tags": ["JavaScript", "Next.js", "Node.js", "real-time systems", "open source", "developer tools", "web infrastructure", "Vercel", "DX", "startups"],
+  "slug": "guillermo-rauch",
+  "publishDate": "2025-06-05",
+  "status": "Finished",
+  "confidence": "certain",
+  "importance": 10
+},
+{
+  "title": "Matteo Cosentino",
+  "url": "https://lessonsec.com/",
+  "description": "Matteo Cosentino, also known as 0xless, is a penetration tester and security researcher. He documents his experiments in software, hardware, and physical security on lessonsec.com.",
+  "category": "Cybersecurity",
+  "tags": ["hacking", "penetration testing", "security research", "hardware hacking", "infosec", "reverse engineering", "CTF", "vulnerability research", "cybersecurity", "bug hunting"],
+  "slug": "matteo-cosentino",
+  "publishDate": "2025-06-05",
+  "status": "Finished",
+  "confidence": "certain",
+  "importance": 9
+},
+{
+  "title": "IppSec",
+  "url": "https://ippsec.rocks/contributions/",
+  "description": "IppSec is a cybersecurity educator known for his in-depth Hack The Box walkthroughs and contributions to the infosec community.",
+  "category": "Cybersecurity",
+  "tags": ["HackTheBox", "penetration testing", "CTF", "infosec", "red teaming", "reconnaissance", "privilege escalation", "OSCP", "cybersecurity education", "YouTube"],
+  "slug": "ippsec",
+  "publishDate": "2025-06-05",
+  "status": "Finished",
+  "confidence": "certain",
+  "importance": 10
+},
+{
+  "title": "Kashmir54",
+  "url": "https://kashmir54.github.io/",
+  "description": "Kashmir54 is a cybersecurity enthusiast and blogger who shares CTF writeups, HackTheBox walkthroughs, and hardware hacking projects, including Flipper Zero development boards.",
+  "category": "Cybersecurity",
+  "tags": ["HackTheBox", "CTFtime", "NahamCon", "Flipper Zero", "hardware hacking", "OSINT", "reverse engineering", "electronics", "radio", "infosec"],
+  "slug": "kashmir54",
+  "publishDate": "2025-06-05",
+  "status": "Finished",
+  "confidence": "certain",
+  "importance": 8
 }
+
+
+
+
+
 
 ] 

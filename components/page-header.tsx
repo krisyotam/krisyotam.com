@@ -4,7 +4,7 @@ import { ArrowLeft, Info } from "lucide-react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 import { cn } from "@/lib/utils"
 
-interface PageHeaderProps {
+export interface PageHeaderProps {
   title: string
   subtitle?: string
   date?: string
