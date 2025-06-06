@@ -7,6 +7,7 @@ import { BlogPost } from "./blog-post"
 import { LayoutGrid, Text, BookOpen, Calendar, Hash, Github, BookMarked, Tag, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { HeartButton } from "@/components/heart-button"
 import { PageHeader } from "@/components/page-header"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ReactMarkdown from "react-markdown"
@@ -586,10 +587,10 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
             {/* Logo and QR Code Bento Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               <Card className="bg-muted/50 hover:bg-muted/70 transition-colors border-0">
-                <CardContent className="p-4 flex items-center justify-center h-full">
-                  <div className="relative w-[320px] h-[320px]">
+                <CardContent className="p-0 flex flex-col items-center justify-between h-full">
+                  <div className="relative w-[360px] h-[360px] mt-8 -mb-8">
                     <Image
-                      src="https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png"
+                      src="https://i.postimg.cc/TwdHYCWw/krisyotam-personal-crest.png"
                       alt="Kris Yotam Logo"
                       fill
                       style={{ objectFit: "contain" }}
@@ -598,7 +599,7 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                       priority
                     />
                     <Image
-                      src="https://i.postimg.cc/h485Ck9W/krisyotam-personal-crest-darkmode.png"
+                      src="https://i.postimg.cc/CKHQgW5X/krisyotam-personal-crest-darkmode.png"
                       alt="Kris Yotam Logo (Dark Mode)"
                       fill
                       style={{ objectFit: "contain" }}
@@ -607,23 +608,71 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                       priority
                     />
                   </div>
+                  <div className="flex flex-col items-center gap-1 mt-0">
+                    <p className="text-center text-sm text-muted-foreground">
+                      toward a examined life
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
+                        <a href="/notes/on-myself/about-kris" target="_blank" rel="noopener noreferrer">
+                          About Me
+                        </a>
+                      </Button>
+                      <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
+                        <a href="/notes/website/about-this-website" target="_blank" rel="noopener noreferrer">
+                          About Website
+                        </a>
+                      </Button>
+                      <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
+                        <a href="/notes/on-myself/about-my-logo" target="_blank" rel="noopener noreferrer">
+                          About Logo
+                        </a>
+                      </Button>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
 
               <Card className="bg-muted/50 hover:bg-muted/70 transition-colors border-0">
-                <CardContent className="p-4 flex flex-col items-center justify-center h-full">
-                  <div className="relative w-[250px] h-[250px]">
+                <CardContent className="p-0 flex flex-col items-center justify-between h-full">
+                  <div className="relative w-[340px] h-[340px] mt-8">
                     <Image
-                      src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://orcid.org/0000-0003-0632-8894`}
-                      alt="ORCID QR Code"
+                      src="https://i.postimg.cc/gkLBF7fK/krisyotam-light.png"
+                      alt="Kris Yotam Logo"
                       fill
                       style={{ objectFit: "contain" }}
-                      className="rounded-md"
+                      className="rounded-md logo-light select-none pointer-events-none"
+                      onContextMenu={(e) => e.preventDefault()}
+                      priority
+                    />
+                    <Image
+                      src="https://i.postimg.cc/9XnNk2NM/krisyotam-dark.png"
+                      alt="Kris Yotam Logo"
+                      fill
+                      style={{ objectFit: "contain" }}
+                      className="rounded-md logo-dark select-none pointer-events-none"
+                      onContextMenu={(e) => e.preventDefault()}
+                      priority
                     />
                   </div>
-                  <p className="text-center text-sm text-muted-foreground mt-4">
-                    Scan to view my ORCID profile
-                  </p>
+                  <div className="flex flex-col items-center gap-2 mt-6">
+                    <p className="text-center text-sm text-muted-foreground">
+                      💡 If you find something here worth preserving...
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <HeartButton />
+                      <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
+                        <a href="https://coff.ee/krisyotam" target="_blank" rel="noopener noreferrer">
+                          ☕ Buy Me Tea
+                        </a>
+                      </Button>
+                      <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
+                        <a href="https://krisyotam.substack.com/" target="_blank" rel="noopener noreferrer">
+                          📩 Join the List
+                        </a>
+                      </Button>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>

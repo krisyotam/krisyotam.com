@@ -52,10 +52,9 @@ export async function generateMetadata({ params }: ReviewPageProps, parent: Reso
   const previousImages = (await parent).openGraph?.images || [];
   // Use cover image if available, otherwise use Kris Yotam's logo
   const images = [
-    {
-      url: reviewData.cover_image || 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
+    {      url: reviewData.cover_image || 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
       width: 1200,
-      height: 630,
+      height: 2100,
       alt: reviewData.title
     }
   ];

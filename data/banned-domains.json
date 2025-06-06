@@ -26,6 +26,10 @@
   {
     "name": "Hetzner",
     "domain": "hetzner.com"
+  },
+  {
+    "name": "Substack",
+    "domain": "substack.com"
   }
 ]
 

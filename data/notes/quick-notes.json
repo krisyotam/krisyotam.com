@@ -338,7 +338,138 @@
   "confidence": "certain",
   "importance": 8,
   "preview": "a set of job listings for krisyotam.com, including roles in research, editing, design, and development"
+  },
+  {
+    "title": "Internet Search Methods",
+    "date": "2025-06-06",
+    "tags": ["Search", "Internet", "Research", "Methodology"],
+    "category": "Research",
+    "slug": "internet-search-methods",
+    "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 7,
+    "preview": "A comprehensive guide to effective internet search techniques and strategies"
+  },
+  {
+    "title": "Modern Search Methods",
+    "date": "2025-06-06",
+    "tags": ["Search", "Research", "Methodology", "Digital"],
+    "category": "Research",
+    "slug": "modern-search-methods",
+    "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 7,
+    "preview": "Contemporary approaches to digital research and information retrieval"
+  },
+  {
+    "title": "Large File Storage",
+    "date": "2025-06-06",
+    "tags": ["Storage", "Infrastructure", "Data Management"],
+    "category": "Website",
+    "slug": "large-file-storage",
+    "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 8,
+    "preview": "Implementation details of large file storage solutions for the website"
+  },
+  {
+    "title": "On an Eclectic Personal Library",
+    "date": "2025-06-06",
+    "tags": ["Library", "Books", "Reading", "Personal Development"],
+    "category": "Libraries",
+    "slug": "on-a-eclectic-personal-library",
+    "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 7,
+    "preview": "Thoughts on building and maintaining a diverse personal library"
+  },
+  {
+    "title": "On Haiku",
+    "date": "2025-06-06",
+    "tags": ["Poetry", "Haiku", "Japanese Literature", "Form"],
+    "category": "Verse",
+    "slug": "on-haiku",
+    "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6,
+    "preview": "An exploration of haiku form, history, and contemporary practice"
+  },
+  {
+    "title": "Gojo vs Sukuna: Powerscaled",
+    "date": "2025-06-06",
+    "tags": ["Anime", "Jujutsu Kaisen", "Analysis", "Power Scaling"],
+    "category": "Anime Analysis",
+    "slug": "gojo-sukuna-powerscaled",
+    "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 5,
+    "preview": "A detailed power scaling analysis of Gojo and Sukuna from Jujutsu Kaisen"
+  },
+  {
+    "title": "On Limericks",
+    "date": "2025-06-06",
+    "tags": ["Poetry", "Limericks", "Form", "Verse"],
+    "category": "Verse",
+    "slug": "on-limericks",
+    "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6,
+    "preview": "A study of the limerick form, its history, and notable examples"
+  },
+  {
+    "title": "Miseducation of the Negro: Book Notes",
+    "date": "2025-06-06",
+    "tags": ["Education", "History", "Race", "Book Notes"],
+    "category": "Book Notes",
+    "slug": "miseducation-of-the-negro-book-notes",
+    "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 8,
+    "preview": "Notes and analysis on Carter G. Woodson's seminal work"
+  },
+  {
+    "title": "Myths from Mesopotamia: Book Notes",
+    "date": "2025-06-06",
+    "tags": ["Mythology", "Ancient History", "Literature", "Book Notes"],
+    "category": "Book Notes",
+    "slug": "myths-from-mesopotamia-book-notes",
+    "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 7,
+    "preview": "Analysis of ancient Mesopotamian mythological texts"
+  },
+  {
+    "title": "Kristoo",
+    "date": "2025-06-06",
+    "tags": ["Linux", "Gentoo", "Operating Systems", "Customization"],
+    "category": "Technology",
+    "slug": "kristoo",
+    "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 8,
+    "preview": "Documentation of my custom Gentoo Linux distribution"
+  },
+  {
+    "title": "About My Logo",
+    "date": "2025-06-06",
+    "tags": ["Logo", "Symbolism", "Design", "Identity"],
+    "category": "On Myself",
+    "slug": "about-my-logo",
+    "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 8,
+    "preview": "about my logo, its design, symbolism, and personal significance"
   }
-
 ]
 
