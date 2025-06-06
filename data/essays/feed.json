@@ -634,48 +634,6 @@
       "cover_image": ""
     },
     {
-      "title": "Thoughts on Simple Systems",
-      "subtitle": "Embracing minimalism in my desktop setup",
-      "preview": "My journey towards a simpler desktop setup and plans for the future.",
-      "date": "2025-05-24",
-      "tags": ["Minimalism", "Productivity", "Desktop Setup", "Simplicity"],
-      "category": "On Website",
-      "slug": "thoughts-on-simple-systems",
-      "status": "Published",
-      "confidence": "certain",
-      "importance": 7,
-      "state": "active",
-      "cover_image": ""
-    },
-    {
-      "title": "A Prelude to Wisdom",
-      "subtitle": "Building my custom AI assistant",
-      "preview": "Creating an AI assistant using OpenAI Whisper, Deepseek, CLI functionality and various other tools.",
-      "date": "2023-05-24",
-      "tags": ["AI", "OpenAI", "Whisper", "Deepseek", "CLI", "Assistant", "C"],
-      "category": "Wisdom AI",
-      "slug": "a-prelude-to-wisdom",
-      "status": "Published",
-      "confidence": "certain",
-      "importance": 8,
-      "state": "active",
-      "cover_image": ""
-    },
-    {
-      "title": "Notes on Old ThinkPads",
-      "subtitle": "Laptop Review",
-      "preview": "an appreciation of IBM/Lenovo's classic laptops",
-      "date": "2025-05-11",
-      "tags": ["Technology", "Hardware", "ThinkPad", "Vintage Computing", "IBM", "Lenovo"],
-      "category": "ThinkPads",
-      "slug": "notes-on-old-thinkpads",
-      "status": "Draft",
-      "confidence": "certain",
-      "importance": 4,
-      "state": "active",
-      "cover_image": ""
-    },
-    {
       "title": "Villa Ephrussi de Rothschild",
       "subtitle": "Case Study",
       "preview": "Exploring the stunning Belle Époque villa and its magnificent gardens on the French Riviera, showcasing the elegance of early 20th century architecture.",
@@ -690,20 +648,6 @@
       "state": "active"
     },
     {
-      "title": "Notes on Identifying Unknowns",
-      "subtitle": "Musings",
-      "preview": "Investing in what you don't know",
-      "date": "2025-05-15",
-      "tags": ["Research", "Unknowns", "Inquiry", "Methodology"],
-      "category": "Research",
-      "slug": "notes-on-identifying-unknowns",
-      "status": "Notes",
-      "confidence": "likely",
-      "importance": 6,
-      "state": "active",
-      "cover_image": ""
-    },
-    {
       "title": "Release of OpenAI Deep Learning",
       "subtitle": "Tech Review",
       "preview": "OpenAI releases its latest deep learning architecture, promising significant advancements in natural language processing and computer vision tasks.",
@@ -716,34 +660,6 @@
       "confidence": "certain",
       "importance": 9,
       "state": "active"
-    },
-    {
-      "title": "AI Use Cases",
-      "subtitle": "how krisyotam.com uses AI",
-      "preview": "An exploration of practical AI applications across industries, from healthcare diagnostics to creative content generation and scientific research.",
-      "date": "2025-05-20",
-      "tags": ["AI", "Machine Learning", "Technology", "Innovation", "Practical Applications"],
-      "category": "AI",
-      "slug": "ai-use-cases",
-      "cover_image": "https://i.postimg.cc/ZKGgPQ4R/krisctf-oak-tree-roman-empire-period-black-and-white-child-anim-df5113ad-426c-4ff5-bfc3-88fc0c25f3cb.webp",
-      "status": "Published",
-      "confidence": "certain",
-      "importance": 8,
-      "state": "active"
-    },
-    {
-      "title": "My dady loves me",
-      "subtitle": "Thoughts on girl, interrupted and sexual abuse",
-      "preview": "An exent generation and scientific research.",
-      "date": "2025-05-20",
-      "tags": ["Girl, Interrupted", "Sexual Abuse", "Childhood Trauma", "Mental Health", "Psychology"],
-      "category": "Thoughts",
-      "slug": "my-daddy-loves-me",
-      "cover_image": "https://i.postimg.cc/ZKGgPQ4R/krisctf-oak-tree-roman-empire-period-black-and-white-child-anim-df5113ad-426c-4ff5-bfc3-88fc0c25f3cb.webp",
-      "status": "Published",
-      "confidence": "certain",
-      "importance": 8,
-      "state": "hidden"
     }
   ]
 }

@@ -1,41 +1,23 @@
+ERRORS TO FIX:
+
+1. API Endpoints to Fix:
+   - /api/directory route (failing due to missing category data) --> delete this api route it is no longer needed
+   - /api/method-content route (failing due to missing data file) --> no longer needed delete this too
+
+2. Missing MDX Files: --> all of these were turned into other types of content, so go ahead and remove the entries for these from the feed.json in data/essays
+   - app/essays/2025/thoughts-on-simple-systems/page.mdx
+   - app/essays/2023/a-prelude-to-wisdom/page.mdx
+   - app/essays/2025/notes-on-old-thinkpads/page.mdx
+   - app/essays/2025/notes-on-identifying-unknowns/page.mdx
+   - app/essays/2025/ai-use-cases/page.mdx
+   - app/essays/2025/my-daddy-loves-me/page.mdx
+
+3. Environment Variable Issues: --> ignore this and check completed i have to do this on vercel
+   - MONKEY_TYPE_API_KEY not set (causing multiple warnings)
+
+4. Static Export Error:
+   - Failed path: /fiction/[category]/[slug]/page: /fiction/short-stories/clockmakers-daughter --> i fixed this by updated the slug to the proper a-clockmakers-daughter
 
 
-I just created data/reviews which holds reviews.json, and categories.json, this is going to be designed heavily off of data/verse go look at both 
-poems.json, and categories.json inside off data/verse you will notice it passes all the normal things in addition to: status, certainty and importance 
-for both categories and the post (poems in poems.json, and reviews in reviews.json). So you will design reviews.json after poems.json and categories.json 
-will obviously be designed after categories.json 
-
-I have provided you below with the category names, and preview fill the rest of the information for them in, if i want to modify it i can do that later 
-
-then for the reviews.json, and some sample entries, and remember for categories you will use the category slug for example Book Reviews is book-reviews, you don't need 
-to make a sample for every single category just around 5-6 same entries in the reviews.json is fine
-
-For the categories 
-
-- [ ]  Book Reviews: A compilation of book reviews of books I have read since 2010
-- [ ]  Anime Reviews: A compilation of my anime reviews
-- [ ]  Light Novel Reviews: a compilation of my ln, wn & wattpad reviews
-- [ ]  Manga Reviews: A compilation of my manga, manhwa, manhua reviews
-- [ ]  Opera Reviews: A compilation of my opera reviews
-- [ ]  Ballet Reviews: A compilation of my ballet reviews
-- [ ]  Play Reviews: A compilation of my play reviews
-- [ ]  Film Reviews: A compilation of my film reviews
-- [ ]  Television Reviews: A compilation of my series reviews
-- [ ]  Fashion Reviews: reviews for fashion weeks, and other notable events
-- [ ]  Oscars Reviews: reviews of oscars ceremonies, winners, and controversies since 1929.
-- [ ]  Game Reviews: A compilation of my game reviews
-- [ ]  Exhibition Reviews: museum/gallery exhibitions of those I have visited in-person & online
-- [ ]  Course Reviews: reviews MOOCs, university courses, or private study programs I’ve completed
-- [ ]  Hardware Reviews: hardware reviews since my iphone 4s
-- [ ]  Software Reviews: reviews of distros, and free software
-- [ ]  Architecture Reviews: Reviews of architectural works, buildings, and design movements
-- [ ]  Fashion Reviews: Reviews of fashion weeks and other notable sartorial events
-- [ ]  Culinary Reviews: Reviews of restaurants, recipes, and culinary experiences
-- [ ]  Tea Reviews: Reviews and tasting notes of teas from around the world
-- [ ]  Coffee Reviews: Reviews and tasting notes of coffee blends and brewing methods
-- [ ]  Wine Reviews: Reviews of wines, wineries, and tasting experiences
-
-Next you are going to review the entire notes directory as you are going to copy it entirely for the review directory for which i already created every file you will need 
-with the exception of a api file if you need one. As for the design off the content directory it will differ from the content directory in notes. For review/content look at 
-verse/content instead. Once you are done with reviews.json, and categories.json you will create a script to create a directory with the name of every category slug 
-inside of app/review/conent for ex. a directory name would be play-reviews. 
+5. Data Issues:
+   - Personal bests data returning null (likely related to MONKEY_TYPE_API_KEY issue) --> yes ignore this as well. 
