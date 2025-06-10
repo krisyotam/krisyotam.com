@@ -16,4 +16,5 @@ export interface Essay {
   pdfLink?: string
   sourceLink?: string
   category: string
+  customPath?: string
 }

@@ -137,7 +137,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     MangaPanel: MangaPanelDisplay,
     Dropcap,
     LinkTags,
-    NameBreakdown,
 
     // Typography components
     Lead: Typography.Lead,

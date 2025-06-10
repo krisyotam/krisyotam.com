@@ -506,5 +506,17 @@
     "confidence": "certain",
     "importance": 8,
     "preview": "How do I plan to contribute to free software? what languages do/will I use? what projects do I want to contribute to? what is my philosophy on coding contributions?"
+  },
+  {
+    "title": "Suggested Readings",
+    "date": "2025-06-09",
+    "tags": ["Essays", "Papers", "Blog Posts", "Notes"],
+    "category": "On Myself",
+    "slug": "suggested-readings",
+    "cover_image": "https://i.postimg.cc/1tTyM6hF/hobbies.jpg",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 8,
+    "preview": "a list of my suggested readings, including essays, papers, and blog posts penned by myself"
   }
 ]
