@@ -1,0 +1,47 @@
+BUILD SUMMARY
+=============
+Build Environment:
+- Location: Washington, D.C., USA (East) – iad1
+- Machine: 2 cores, 8 GB
+- Project: github.com/krisyotam/krisyotam.com
+- Branch: main (Commit: 7505198)
+- Next.js Version: 14.2.26
+
+Build Timeline:
+03:57:56 - Build started
+03:58:02 - Repository cloning completed (5.315s)
+03:58:11 - Build cache restored
+03:58:13 - Dependencies installed
+03:59:07 - Compilation successful
+04:00:20 - Page data collection started
+
+ERRORS DETECTED
+==============
+1. Missing Data Files:
+   - /data/feed.json
+   - /data/reading/authors.json
+   - /data/reading/books.json
+   - /data/reading/genres.json
+   - /data/reading/to-be-read.json
+   - Directory: /data/reading/reading
+
+2. API Integration Issues:
+   - Trakt API Authentication Failed (Status 400)
+   - Failed to fetch: genres, user lists, and stats
+   - Token refresh attempts unsuccessful
+
+3. Content Loading Results:
+   Success:
+   ✓ Categories loaded (13 categories)
+   ✓ Favorite actors loaded (15)
+   ✓ Favorite characters loaded (27)
+   ✓ Favorite film companies loaded (12)
+   ✓ Favorite directors loaded (13)
+
+   Failed:
+   ✗ Posts loading failed
+   ✗ Authors data loading failed
+   ✗ Books data loading failed
+   ✗ Genres loading failed
+   ✗ Reading sessions loading failed
+   ✗ To-be-read list loading failed
