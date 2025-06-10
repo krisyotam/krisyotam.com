@@ -19,6 +19,7 @@ import Dropcap from '@/components/dropcap'
 import Bible from "@/components/references/christianity/1611bible"
 import LinkTags from "@/components/link-tags"
 import { Box } from "@/components/posts/typography/box"
+import NameBreakdown from '@/components/name-breakdown'
 import { Age } from "@/components/posts/typography/age"
 import { Excerpt } from "@/components/posts/typography/excerpt"
 import { Quote } from "@/components/posts/typography/quote"
@@ -128,6 +129,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Quote,
     MiniBio,
     Bible,
+    NameBreakdown,
     Define,
     Book,
     AnimeDisplay,
@@ -135,6 +137,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     MangaPanel: MangaPanelDisplay,
     Dropcap,
     LinkTags,
+    NameBreakdown,
 
     // Typography components
     Lead: Typography.Lead,

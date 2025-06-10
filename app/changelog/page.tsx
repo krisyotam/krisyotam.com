@@ -19,7 +19,7 @@ export default async function ChangelogPage() {
     subtitle: "Site Updates & Changes",
     date: new Date().toISOString(),
     preview:
-      "A chronological record of all notable changes and updates to this website. The newest changes are at the top.",
+      "Monthly chronological list of recent major writings/changes/additions to krisyotam.com (see also the monthly newsletter)",
     status: "Finished" as const,
     confidence: "certain" as const,
     importance: 7,

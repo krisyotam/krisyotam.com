@@ -952,6 +952,10 @@
      border: 0 !important;
      vertical-align: top !important;
    }
+
+   /* =============================================================================
+      DROP CAP IMAGE STYLES
+   ========================================================================== */
    
    .dropcap-image-wrapper {
      float: left;
@@ -985,6 +989,10 @@
      /* keep it perfectly square */
      object-fit: contain;
    }
+
+   /* =============================================================================
+     POST CONTENT STYLES
+   ========================================================================== */
    
    /* ensure the browser can hyphenate text in English */
    .post-content {

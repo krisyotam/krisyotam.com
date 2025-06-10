@@ -79,7 +79,6 @@ const menuItems = [
 
   // Engagement and contact
   { icon: Gift, label: "Wishlist", path: "/wishlist" },
-  { icon: Gift, label: "Wants", path: "/wants" },
   { icon: Bitcoin, label: "Donate", path: "/donate" },
   { icon: Mail, label: "Contact", path: "/contact" },
   { icon: Newspaper, label: "Newsletter", path: "/newsletter" },

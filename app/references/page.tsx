@@ -7,17 +7,16 @@ export const metadata = {
 }
 
 export default function ReferencesPage() {
-  return (
-    <main className="max-w-[650px] mx-auto px-4 py-12">
+  return (    <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       <PageHeader 
         title="References"
         date={new Date().toISOString()}
-        preview="references used for krisyotam.com & krisyotam.net"
+        preview="A curated collection of research papers, books, and reference materials used across krisyotam.com"
         status="In Progress"
         confidence="certain"
         importance={8}
       />
       <ReferencesClient />
-    </main>
+    </div>
   )
 } 
