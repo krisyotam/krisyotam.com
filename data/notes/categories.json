@@ -152,6 +152,24 @@
     "status": "In Progress",
     "confidence": "certain",
     "importance": 4
+  },
+  {
+    "slug": "virtual-worlds",
+    "title": "Virtual Worlds",
+    "preview": "notes on avatar-based social spaces like Gaia Online and WorldsChat",
+    "date": "2025-06-10",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 5
+  },
+  {
+    "slug": "hypertext-games",
+    "title": "Hypertext Games",
+    "preview": "notes on nonlinear, choice-driven browser games and interactive fiction",
+    "date": "2025-06-10",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6
   }
 ]
 }

@@ -518,5 +518,27 @@
     "confidence": "certain",
     "importance": 8,
     "preview": "a list of my suggested readings, including essays, papers, and blog posts penned by myself"
+  },
+  {
+    "title": "Gaia Online",
+    "date": "2025-06-10",
+    "slug": "gaia-online",
+    "tags": ["Virtual Worlds", "Internet History", "Digital Culture"],
+    "category": "Virtual Worlds",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 7,
+    "preview": "notes on Gaia Online as a formative virtual world — avatars, forums, currency, and early-2000s internet culture"
+  },
+  {
+    "title": "WorldsChat (1995)",
+    "date": "2025-06-10",
+    "slug": "worlds-chat",
+    "tags": ["Virtual Worlds", "Retro Tech", "Digital Culture"],
+    "category": "Virtual Worlds",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6,
+    "preview": "notes on WorldsChat, one of the earliest 3D avatar chatrooms on the internet — exploring its design and historical significance"
   }
 ]

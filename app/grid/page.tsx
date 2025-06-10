@@ -9,7 +9,9 @@ const HomeWrapper = dynamicImport(() => import('../home-wrapper'), {
   ),
 })
 
-export const dynamic = "force-dynamic"
+// Enable static generation with revalidation
+export const revalidate = 3600 // Revalidate every hour
+export const fetchCache = 'force-cache'
 
 export default function GridPage() {
   return <HomeWrapper initialView="grid" />

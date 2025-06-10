@@ -1,9 +1,8 @@
-'use server'
-
 import { getActivePosts, getAllPosts } from "../utils/posts"
 import quotesData from "../data/header-quotes.json"
 import { HomeClient } from "@/components/home-client"
 import FixOutlineIssue from "@/components/fix-outline-issue"
+import { cache } from 'react'
 
 function getRandomQuote() {
   const quotes = quotesData.quotes
@@ -14,28 +13,20 @@ interface HomeWrapperProps {
   initialView?: 'list' | 'grid'
 }
 
+// Set the revalidation period to 1 hour
+export const revalidate = 3600
+
+// Add revalidation for static generation
+export const fetchCache = 'force-cache'
+
 export default async function HomeWrapper({ initialView = 'list' }: HomeWrapperProps) {
   try {
-    // Try to load posts from feed.json first
-    console.log("Attempting to load posts...")
-    
-    let posts;
-    try {
-      // Try to get active posts first (filtered for state==="active")
-      posts = await getActivePosts()
-      console.log(`Successfully loaded ${posts.length} active posts`)
-    } catch (postError) {
-      console.error("Error loading active posts:", postError)
-      
-      // Fallback: try to get all posts unfiltered
-      try {
-        console.log("Falling back to loading all posts...")
-        posts = await getAllPosts()
-        console.log(`Successfully loaded ${posts.length} unfiltered posts`)
-      } catch (allPostsError) {
-        console.error("Error loading all posts:", allPostsError)
-        throw new Error("Failed to load any posts from feed.json")
-      }
+    // Load posts with caching
+    let posts = await getActivePosts()
+
+    // Fallback: try to get all posts unfiltered
+    if (!posts || !Array.isArray(posts) || posts.length === 0) {
+      posts = await getAllPosts()
     }
 
     // Even if posts exist but are empty array or not an array, use a fallback
