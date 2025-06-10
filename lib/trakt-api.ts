@@ -56,8 +56,35 @@ async function refreshAccessToken(): Promise<TraktTokens | null> {
     const newTokens = await response.json();
     newTokens.created_at = Math.floor(Date.now() / 1000);
     
-    // Note: In a production app, you'd want to update the environment variables
-    // or store tokens in a database. For now, we'll use the current tokens.
+    // Update the environment variables with the new tokens
+    process.env.TRAKT_ACCESS_TOKEN = newTokens.access_token;
+    process.env.TRAKT_REFRESH_TOKEN = newTokens.refresh_token;
+    process.env.TRAKT_EXPIRES_IN = newTokens.expires_in.toString();
+    process.env.TRAKT_CREATED_AT = newTokens.created_at.toString();
+
+    // Create a new .env.local file with updated tokens
+    const fs = require('fs');
+    const path = require('path');
+    const envPath = path.join(process.cwd(), '.env.local');
+    let envContent = '';
+    
+    try {
+      // Read existing content
+      envContent = fs.readFileSync(envPath, 'utf8');
+      
+      // Update the token values
+      envContent = envContent
+        .replace(/^TRAKT_ACCESS_TOKEN=.*$/m, `TRAKT_ACCESS_TOKEN=${newTokens.access_token}`)
+        .replace(/^TRAKT_REFRESH_TOKEN=.*$/m, `TRAKT_REFRESH_TOKEN=${newTokens.refresh_token}`)
+        .replace(/^TRAKT_EXPIRES_IN=.*$/m, `TRAKT_EXPIRES_IN=${newTokens.expires_in}`)
+        .replace(/^TRAKT_CREATED_AT=.*$/m, `TRAKT_CREATED_AT=${newTokens.created_at}`);
+      
+      // Write back the updated content
+      fs.writeFileSync(envPath, envContent, 'utf8');
+    } catch (err) {
+      console.error('Error updating .env.local file:', err);
+      // Even if saving to file fails, we can continue with the in-memory tokens
+    }
     
     return newTokens;
   } catch (error) {
