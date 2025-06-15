@@ -1,4 +1,5 @@
 import Dropcap from "@/components/dropcap";
+import { Pfp } from "@/components/typography/pfp";
 import type { MDXComponents } from "mdx/types";
 
 // Define any components that will be available to MDX content
@@ -8,5 +9,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ...components,
     // Override specific components with custom implementations
     Dropcap,
+    Pfp,
   };
-} 
+}

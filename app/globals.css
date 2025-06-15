@@ -799,15 +799,19 @@
    
    .dropcap-image-wrapper {
      float: left;
-     margin-right: 0.5em;    /* tweak for text wrap */
+     margin-right: 0.25em !important;    /* force smaller right margin */
      margin-top: 0.1em;      /* align to baseline */
+     margin-bottom: 0 !important;   /* force remove bottom margin */
      line-height: 0;
+     padding: 0 !important;  /* force remove any padding */
    }
    
    .dropcap-image {
      background: transparent;
      border: none;
      user-select: none;
+     margin: 0 !important;   /* force remove all margins */
+     padding: 0 !important;  /* force remove all padding */
      /* you can also set width/height via CSS if you prefer: */
      /* width: 3em; */
      /* height: auto; */
@@ -959,15 +963,19 @@
    
    .dropcap-image-wrapper {
      float: left;
-     margin-right: 0.5em;    /* tweak for text wrap */
+     margin-right: 0.25em !important;    /* force smaller right margin */
      margin-top: 0.1em;      /* align to baseline */
+     margin-bottom: 0 !important;   /* force remove bottom margin */
      line-height: 0;
+     padding: 0 !important;  /* force remove any padding */
    }
    
    .dropcap-image {
      background: transparent;
      border: none;
      user-select: none;
+     margin: 0 !important;   /* force remove all margins */
+     padding: 0 !important;  /* force remove all padding */
      /* you can also set width/height via CSS if you prefer: */
      /* width: 3em; */
      /* height: auto; */
@@ -980,6 +988,8 @@
      filter: none !important;
      opacity: 1 !important;
      background: transparent !important;
+     margin: 0 !important;   /* force remove all margins again */
+     padding: 0 !important;  /* force remove all padding again */
    }
    
    .dropcap-image {
@@ -988,6 +998,8 @@
      height: 10em !important;
      /* keep it perfectly square */
      object-fit: contain;
+     margin: 0 !important;   /* triple force remove margins */
+     padding: 0 !important;  /* triple force remove padding */
    }
 
    /* =============================================================================

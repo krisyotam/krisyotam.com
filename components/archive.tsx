@@ -95,112 +95,57 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
       </div>
 
       {/* Filters and search */}
-      <div className="flex flex-col md:flex-row gap-4 mb-8" style={{ marginBottom: "2rem" }}>
+      <div className="flex flex-col md:flex-row gap-4 mb-8">
         <div className="flex-1 relative">
-          <div
-            className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-            style={{
-              position: "absolute",
-              left: "0",
-              paddingLeft: "0.75rem",
-            }}
-          >
-            <Search className="h-4 w-4 text-gray-400 dark:text-gray-500" />
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <Search className="h-4 w-4 text-muted-foreground" />
           </div>
           <Input
             placeholder="Search archives by title, description, or tags..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 bg-white dark:bg-[#1a1a1a] border-gray-300 dark:border-gray-700 rounded-none focus:ring-0 focus:border-black dark:focus:border-gray-500 text-sm dark:text-gray-300"
-            style={{
-              width: "100%",
-              paddingLeft: "2.5rem",
-              borderRadius: "0",
-              fontSize: "0.875rem",
-              boxShadow: "none",
-            }}
+            className={cn(
+              "w-full pl-10 bg-background rounded-none",
+              "border-border focus:ring-0 focus:ring-offset-0 focus:border-border",
+              "dark:border-border dark:focus:border-border"
+            )}
           />
         </div>
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-gray-600 dark:text-gray-400" />
+            <Filter className="h-4 w-4 text-muted-foreground" />
             <Select value={typeFilter} onValueChange={setTypeFilter}>
-              <SelectTrigger
-                className="w-[180px] rounded-none border-gray-300 dark:border-gray-700 focus:ring-0 focus:border-black dark:focus:border-gray-500 text-sm bg-white dark:bg-[#1a1a1a] dark:text-gray-300"
-                style={{
-                  width: "180px",
-                  borderRadius: "0",
-                  fontSize: "0.875rem",
-                  boxShadow: "none",
-                }}
-              >
+              <SelectTrigger className={cn(
+                "w-[180px] rounded-none border-border",
+                "focus:ring-0 focus:ring-offset-0 focus:border-border",
+                "dark:border-border dark:focus:border-border"
+              )}>
                 <SelectValue placeholder="Filter by type" />
               </SelectTrigger>
-              <SelectContent
-                className="rounded-none border-gray-300 dark:border-gray-700 dark:bg-[#1a1a1a]"
-                style={{
-                  borderRadius: "0",
-                }}
-              >
-                <SelectItem
-                  value="all"
-                  className="dark:text-gray-300 dark:focus:bg-[#1a1a1a] dark:hover:bg-[#1a1a1a] dark:focus:text-gray-100"
-                >
-                  All Types
-                </SelectItem>
-                <SelectItem
-                  value="pdf"
-                  className="dark:text-gray-300 dark:focus:bg-[#1a1a1a] dark:hover:bg-[#1a1a1a] dark:focus:text-gray-100"
-                >
-                  PDF
-                </SelectItem>
-                <SelectItem
-                  value="video"
-                  className="dark:text-gray-300 dark:focus:bg-[#1a1a1a] dark:hover:bg-[#1a1a1a] dark:focus:text-gray-100"
-                >
-                  Video
-                </SelectItem>
-                <SelectItem
-                  value="dataset"
-                  className="dark:text-gray-300 dark:focus:bg-[#1a1a1a] dark:hover:bg-[#1a1a1a] dark:focus:text-gray-100"
-                >
-                  Dataset
-                </SelectItem>
-                <SelectItem
-                  value="manuscript"
-                  className="dark:text-gray-300 dark:focus:bg-[#1a1a1a] dark:hover:bg-[#1a1a1a] dark:focus:text-gray-100"
-                >
-                  Manuscript
-                </SelectItem>
+              <SelectContent className="rounded-none border-border">
+                <SelectItem value="all">All Types</SelectItem>
+                <SelectItem value="pdf">PDF</SelectItem>
+                <SelectItem value="video">Video</SelectItem>
+                <SelectItem value="dataset">Dataset</SelectItem>
+                <SelectItem value="manuscript">Manuscript</SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div className="flex items-center gap-2">
-            <Tag className="h-4 w-4 text-gray-600 dark:text-gray-400" />
+            <Tag className="h-4 w-4 text-muted-foreground" />
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger
-                className="w-[180px] rounded-none border-gray-300 dark:border-gray-700 focus:ring-0 focus:border-black dark:focus:border-gray-500 text-sm bg-white dark:bg-[#1a1a1a] dark:text-gray-300"
-                style={{
-                  width: "180px",
-                  borderRadius: "0",
-                  fontSize: "0.875rem",
-                  boxShadow: "none",
-                }}
+              <SelectTrigger 
+                className={cn(
+                  "w-[180px] rounded-none border-border",
+                  "focus:ring-0 focus:ring-offset-0 focus:border-border",
+                  "dark:border-border dark:focus:border-border"
+                )}
               >
                 <SelectValue placeholder="Filter by category" />
               </SelectTrigger>
-              <SelectContent
-                className="rounded-none border-gray-300 dark:border-gray-700 dark:bg-[#1a1a1a]"
-                style={{
-                  borderRadius: "0",
-                }}
-              >
+              <SelectContent className="rounded-none border-border">
                 {categories.map((category) => (
-                  <SelectItem
-                    key={category}
-                    value={category}
-                    className="dark:text-gray-300 dark:focus:bg-[#1a1a1a] dark:hover:bg-[#1a1a1a] dark:focus:text-gray-100"
-                  >
+                  <SelectItem key={category} value={category}>
                     {category === "all" ? "All Categories" : category}
                   </SelectItem>
                 ))}
@@ -211,219 +156,110 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
       </div>
 
       {/* Archives table */}
-      <div
-        className="border border-gray-200 dark:border-gray-800 hidden md:block"
-        style={{
-          border: "1px solid var(--border)",
-        }}
-      >
-        <table
-          className="min-w-full divide-y divide-gray-200 dark:divide-gray-800"
-          style={{
-            width: "100%",
-            borderCollapse: "collapse",
-          }}
-        >
-          <thead className="bg-gray-50 dark:bg-[#1a1a1a]">
+      <div className="border border-border hidden md:block">
+        <table className="min-w-full divide-y divide-border">
+          <thead className="bg-muted/50 dark:bg-[hsl(var(--popover))]">
             <tr>
               <th
                 scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
-                style={{
-                  padding: "0.75rem 1rem",
-                  textAlign: "left",
-                  fontSize: "0.75rem",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                }}
+                className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
               >
                 Title & Description
               </th>
               <th
                 scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
-                style={{
-                  padding: "0.75rem 1rem",
-                  textAlign: "left",
-                  fontSize: "0.75rem",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                }}
+                className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
               >
                 Type & Category
               </th>
               <th
                 scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
-                style={{
-                  padding: "0.75rem 1rem",
-                  textAlign: "left",
-                  fontSize: "0.75rem",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                }}
+                className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
               >
                 Details
               </th>
               <th
                 scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
-                style={{
-                  padding: "0.75rem 1rem",
-                  textAlign: "left",
-                  fontSize: "0.75rem",
-                  fontWeight: "500",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                }}
+                className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
               >
-                Download
+                Actions
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white dark:bg-[#121212] divide-y divide-gray-200 dark:divide-gray-800">
+          <tbody className="bg-background dark:bg-[hsl(var(--popover))] divide-y divide-border">
             {filteredArchives.length > 0 ? (
               filteredArchives.map((archive) => (
-                <tr key={archive.id} className="hover:bg-gray-50 dark:hover:bg-[#1a1a1a]">
-                  <td className="px-4 py-4" style={{ padding: "1rem" }}>
-                    <div
-                      className="text-sm font-medium text-gray-900 dark:text-gray-100"
-                      style={{
-                        fontSize: "0.875rem",
-                        fontWeight: "500",
-                      }}
-                    >
+                <tr key={archive.id} className="hover:bg-muted/50 dark:hover:bg-muted/5">
+                  <td className="px-4 py-4">
+                    <div className="text-sm font-medium text-foreground">
                       {archive.title}
                     </div>
-                    <div
-                      className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2"
-                      style={{
-                        fontSize: "0.75rem",
-                        marginTop: "0.25rem",
-                        display: "-webkit-box",
-                        WebkitLineClamp: "2",
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                      }}
-                    >
+                    <div className="text-xs text-muted-foreground mt-1 line-clamp-2">
                       {archive.description}
                     </div>
-                    <div className="mt-2 flex flex-wrap gap-1" style={{ marginTop: "0.5rem" }}>
+                    <div className="mt-2 flex flex-wrap gap-1">
                       {archive.tags.slice(0, 3).map((tag, index) => (
                         <Badge
                           key={index}
                           variant="outline"
-                          className="text-[10px] px-1.5 py-0 rounded-sm bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#1a1a1a] dark:text-gray-400 dark:border-gray-700"
-                          style={{
-                            fontSize: "10px",
-                            padding: "0 0.375rem",
-                            borderRadius: "0.125rem",
-                          }}
+                          className="rounded-none text-[10px] px-1.5 py-0 bg-muted/50 dark:bg-[hsl(var(--popover))]"
                         >
                           {tag}
                         </Badge>
                       ))}
                       {archive.tags.length > 3 && (
-                        <Badge
+                        <Badge 
                           variant="outline"
-                          className="text-[10px] px-1.5 py-0 rounded-sm bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#1a1a1a] dark:text-gray-400 dark:border-gray-700"
-                          style={{
-                            fontSize: "10px",
-                            padding: "0 0.375rem",
-                            borderRadius: "0.125rem",
-                          }}
+                          className="text-[10px] px-1.5 py-0 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))]"
                         >
                           +{archive.tags.length - 3} more
                         </Badge>
                       )}
                     </div>
                   </td>
-                  <td className="px-4 py-4" style={{ padding: "1rem" }}>
+                  <td className="px-4 py-4">
                     <div className="flex items-center">
-                      <span
-                        className="flex-shrink-0 mr-2 dark:text-gray-300"
-                        style={{ marginRight: "0.5rem" }}
-                      >
+                      <span className="flex-shrink-0 mr-2 text-muted-foreground">
                         {getTypeIcon(archive.type)}
                       </span>
-                      <span
-                        className="text-xs uppercase tracking-wide text-gray-700 dark:text-gray-300"
-                        style={{
-                          fontSize: "0.75rem",
-                          textTransform: "uppercase",
-                          letterSpacing: "0.025em",
-                        }}
-                      >
+                      <span className="text-xs uppercase tracking-wide text-foreground">
                         {archive.type}
                       </span>
                     </div>
-                    <div
-                      className="text-xs text-gray-500 dark:text-gray-400 mt-2"
-                      style={{
-                        fontSize: "0.75rem",
-                        marginTop: "0.5rem",
-                      }}
-                    >
-                      Category:{" "}
-                      <span
-                        className="text-gray-700 dark:text-gray-300 font-medium"
-                        style={{
-                          fontWeight: "500",
-                        }}
-                      >
-                        {archive.category}
-                      </span>
+                    <div className="text-xs text-muted-foreground mt-2">
+                      Category: <span className="text-foreground">{archive.category}</span>
                     </div>
                   </td>
-                  <td className="px-4 py-4" style={{ padding: "1rem" }}>
-                    <div
-                      className="text-xs text-gray-500 dark:text-gray-400"
-                      style={{ fontSize: "0.75rem" }}
-                    >
-                      <div className="mb-1" style={{ marginBottom: "0.25rem" }}>
-                        Size: <span className="text-gray-700 dark:text-gray-300">{archive.size}</span>
+                  <td className="px-4 py-4">
+                    <div className="text-xs text-muted-foreground">
+                      <div className="mb-1">
+                        Size: <span className="text-foreground">{archive.size}</span>
                       </div>
-                      <div className="mb-1" style={{ marginBottom: "0.25rem" }}>
-                        Format: <span className="text-gray-700 dark:text-gray-300">{archive.format}</span>
+                      <div className="mb-1">
+                        Format: <span className="text-foreground">{archive.format}</span>
                       </div>
                       {archive.duration && (
-                        <div className="mb-1" style={{ marginBottom: "0.25rem" }}>
-                          Duration: <span className="text-gray-700 dark:text-gray-300">{archive.duration}</span>
+                        <div className="mb-1">
+                          Duration: <span className="text-foreground">{archive.duration}</span>
                         </div>
                       )}
                       <div>
-                        Added: <span className="text-gray-700 dark:text-gray-300">{archive.dateAdded}</span>
+                        Added: <span className="text-foreground">{archive.dateAdded}</span>
                       </div>
                     </div>
-                  </td>
-                  <td
-                    className="px-4 py-4 text-sm"
-                    style={{ padding: "1rem", fontSize: "0.875rem" }}
-                  >
+                  </td>                  <td className="px-4 py-4">
                     <Button
                       asChild
                       variant="outline"
-                      className="rounded-none border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#1a1a1a] hover:text-gray-900 dark:hover:text-gray-100 text-xs h-8 px-3 dark:text-gray-300"
-                      style={{
-                        borderRadius: "0",
-                        fontSize: "0.75rem",
-                        height: "2rem",
-                        padding: "0 0.75rem",
-                      }}
+                      className="rounded-none w-full text-xs"
                     >
-                      <Link href={archive.downloadUrl} target="_blank" rel="noopener noreferrer">
-                        <Download
-                          className="h-3 w-3 mr-1"
-                          style={{
-                            height: "0.75rem",
-                            width: "0.75rem",
-                            marginRight: "0.25rem",
-                          }}
-                        />
-                        Download
+                      <Link 
+                        href={archive.downloadUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex w-full items-center justify-center"
+                      >
+                        Open Archive
                       </Link>
                     </Button>
                   </td>
@@ -431,24 +267,11 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
               ))
             ) : (
               <tr>
-                <td
-                  colSpan={4}
-                  className="px-4 py-8 text-center text-sm text-gray-500 dark:text-gray-400"
-                  style={{
-                    padding: "2rem 1rem",
-                    textAlign: "center",
-                    fontSize: "0.875rem",
-                  }}
-                >
-                  <div>No archives found matching your criteria.</div>
+                <td colSpan={4} className="px-4 py-4 text-center text-muted-foreground">
+                  <div className="text-sm">No archives found matching your criteria.</div>
                   <Button
                     variant="outline"
-                    className="mt-4 rounded-none border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#1a1a1a] text-xs dark:text-gray-300"
-                    style={{
-                      marginTop: "1rem",
-                      borderRadius: "0",
-                      fontSize: "0.75rem",
-                    }}
+                    className="mt-4 rounded-none text-xs"
                     onClick={() => {
                       setSearchQuery("")
                       setTypeFilter("all")
@@ -465,177 +288,84 @@ export default function ArchivesComponent({ archivesData }: ArchivesComponentPro
       </div>
 
       {/* Alternative card view for mobile */}
-      <div className="md:hidden mt-8 space-y-4" style={{ marginTop: "2rem" }}>
+      <div className="md:hidden mt-8 space-y-4">
         {filteredArchives.length > 0 ? (
           filteredArchives.map((archive) => (
             <Card
               key={archive.id}
-              className="rounded-none border-gray-200 dark:border-gray-800 dark:bg-[#121212]"
-              style={{
-                borderRadius: "0",
-                boxShadow: "none",
-              }}
+              className="rounded-none border-border bg-muted/50 dark:bg-[hsl(var(--popover))]"
             >
-              <CardHeader
-                className="p-4 pb-2 border-b border-gray-100 dark:border-gray-800"
-                style={{
-                  padding: "1rem",
-                  paddingBottom: "0.5rem",
-                }}
-              >
+              <CardHeader className="p-4 pb-2 border-b border-border">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="dark:text-gray-300">{getTypeIcon(archive.type)}</span>
-                    <span
-                      className="text-xs uppercase tracking-wide text-gray-700 dark:text-gray-300"
-                      style={{
-                        fontSize: "0.75rem",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.025em",
-                      }}
-                    >
+                    <span className="text-muted-foreground">{getTypeIcon(archive.type)}</span>
+                    <span className="text-xs uppercase tracking-wide text-foreground">
                       {archive.type}
                     </span>
                   </div>
-                  <span className="text-xs text-gray-500 dark:text-gray-400" style={{ fontSize: "0.75rem" }}>
+                  <span className="text-xs text-muted-foreground">
                     {archive.dateAdded}
                   </span>
                 </div>
-                <h3
-                  className="text-sm font-medium mt-2 dark:text-gray-100"
-                  style={{
-                    fontSize: "0.875rem",
-                    fontWeight: "500",
-                    marginTop: "0.5rem",
-                  }}
-                >
+                <h3 className="text-sm font-medium mt-2 text-foreground">
                   {archive.title}
                 </h3>
-                <div
-                  className="text-xs text-gray-600 dark:text-gray-400 mt-1"
-                  style={{
-                    fontSize: "0.75rem",
-                    marginTop: "0.25rem",
-                  }}
-                >
+                <div className="text-xs text-muted-foreground mt-1">
                   Category: {archive.category}
                 </div>
               </CardHeader>
-              <CardContent
-                className="p-4 pt-3 text-xs text-gray-500 dark:text-gray-400"
-                style={{
-                  padding: "1rem",
-                  paddingTop: "0.75rem",
-                  fontSize: "0.75rem",
-                }}
-              >
-                <p
-                  className="mb-3 line-clamp-2"
-                  style={{
-                    marginBottom: "0.75rem",
-                    display: "-webkit-box",
-                    WebkitLineClamp: "2",
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                  }}
-                >
+              <CardContent className="p-4 pt-3 text-xs text-muted-foreground">
+                <p className="mb-3 line-clamp-2">
                   {archive.description}
                 </p>
-                <div className="mb-3 flex flex-wrap gap-1" style={{ marginBottom: "0.75rem" }}>
-                  {archive.tags.slice(0, 3).map((tag, index) => (
+                <div className="flex flex-wrap gap-1 mb-3">
+                  {archive.tags.map((tag, index) => (
                     <Badge
                       key={index}
                       variant="outline"
-                      className="text-[10px] px-1.5 py-0 rounded-sm bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#1a1a1a] dark:text-gray-400 dark:border-gray-700"
-                      style={{
-                        fontSize: "10px",
-                        padding: "0 0.375rem",
-                        borderRadius: "0.125rem",
-                      }}
+                      className="rounded-none text-[10px] px-1.5 py-0 bg-muted/50 dark:bg-[hsl(var(--popover))]"
                     >
                       {tag}
                     </Badge>
                   ))}
-                  {archive.tags.length > 3 && (
-                    <Badge
-                      variant="outline"
-                      className="text-[10px] px-1.5 py-0 rounded-sm bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#1a1a1a] dark:text-gray-400 dark:border-gray-700"
-                      style={{
-                        fontSize: "10px",
-                        padding: "0 0.375rem",
-                        borderRadius: "0.125rem",
-                      }}
-                    >
-                      +{archive.tags.length - 3} more
-                    </Badge>
-                  )}
                 </div>
-                <div
-                  className="grid grid-cols-2 gap-2"
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-                    gap: "0.5rem",
-                  }}
-                >
+                <div className="grid grid-cols-2 gap-2">
                   <div>
-                    Size: <span className="text-gray-700 dark:text-gray-300">{archive.size}</span>
+                    Size: <span className="text-foreground">{archive.size}</span>
                   </div>
                   <div>
-                    Format: <span className="text-gray-700 dark:text-gray-300">{archive.format}</span>
+                    Format: <span className="text-foreground">{archive.format}</span>
                   </div>
                   {archive.duration && (
-                    <div className="col-span-2" style={{ gridColumn: "span 2 / span 2" }}>
-                      Duration: <span className="text-gray-700 dark:text-gray-300">{archive.duration}</span>
+                    <div className="col-span-2">
+                      Duration: <span className="text-foreground">{archive.duration}</span>
                     </div>
                   )}
                 </div>
               </CardContent>
-              <CardFooter className="p-4 pt-0" style={{ padding: "1rem", paddingTop: "0" }}>
-                <Button
+              <CardFooter className="p-4 pt-0">                <Button
                   asChild
                   variant="outline"
-                  className="w-full rounded-none border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#1a1a1a] hover:text-gray-900 dark:hover:text-gray-100 text-xs h-8 dark:text-gray-300"
-                  style={{
-                    width: "100%",
-                    borderRadius: "0",
-                    fontSize: "0.75rem",
-                    height: "2rem",
-                  }}
+                  className="w-full rounded-none text-xs"
                 >
-                  <Link href={archive.downloadUrl} target="_blank" rel="noopener noreferrer">
-                    <Download
-                      className="h-3 w-3 mr-1"
-                      style={{
-                        height: "0.75rem",
-                        width: "0.75rem",
-                        marginRight: "0.25rem",
-                      }}
-                    />
-                    Download
+                  <Link 
+                    href={archive.downloadUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex w-full items-center justify-center"
+                  >
+                    Open Archive
                   </Link>
                 </Button>
               </CardFooter>
             </Card>
           ))
         ) : (
-          <div
-            className="text-center py-8 text-sm text-gray-500 dark:text-gray-400"
-            style={{
-              textAlign: "center",
-              padding: "2rem 0",
-              fontSize: "0.875rem",
-            }}
-          >
-            <div>No archives found matching your criteria.</div>
+          <div className="text-center">
+            <div className="text-sm text-muted-foreground">No archives found matching your criteria.</div>
             <Button
-              variant="outline"
-              className="mt-4 rounded-none border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#1a1a1a] text-xs dark:text-gray-300"
-              style={{
-                marginTop: "1rem",
-                borderRadius: "0",
-                fontSize: "0.75rem",
-              }}
+              variant="outline" 
+              className="mt-4 rounded-none text-xs"
               onClick={() => {
                 setSearchQuery("")
                 setTypeFilter("all")

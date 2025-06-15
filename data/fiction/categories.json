@@ -35,6 +35,24 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 6
+    },
+    {
+      "slug": "creepypasta",
+      "title": "Creepypasta",
+      "preview": "Internet-native horror stories and modern urban legends",
+      "date": "2025-06-10",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 6
+    },
+    {
+      "slug": "tragedies",
+      "title": "Tragedies",
+      "preview": "Narratives centered on human suffering, fate, and catharsis—classical to modern",
+      "date": "2025-06-10",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 8
     }
   ]
 }

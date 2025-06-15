@@ -73,8 +73,6 @@ const menuItems = [
   { icon: PencilLine, label: "Progymnasmata", path: "/progymnasmata" },
   { icon: Palette, label: "Art", path: "/art" },
   { icon: UserSquare, label: "OCs", path: "/ocs" },
-  { icon: BrainCircuit, label: "Memory", path: "/memory" },
-  { icon: GlobeLock, label: "Directory", path: "/directory" },
   { icon: Keyboard, label: "Type", path: "/type" },
 
   // Engagement and contact

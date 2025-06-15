@@ -7,7 +7,7 @@ import contactData from "@/data/contact.json"
 import pgpData from "@/data/pgp.json"
 import contactFormInfo from "@/data/contact-form-info.json"
 import { Card } from "@/components/ui/card"
-import { MessageSquare } from 'lucide-react'
+import { MessageSquare, Users, Hash } from 'lucide-react'
 import { PageHeader } from "@/components/page-header"
 
 // Dynamically import ContactForm with no SSR
@@ -39,13 +39,34 @@ export default function ContactPage() {
           confidence={contactPageData.confidence}
           importance={contactPageData.importance}
         />
-        
-        {/* Contact Info Component */}
+          {/* Contact Info Component */}
         <ContactInfo
           notice={contactData.Notice}
           rules={contactData.Rules}
           blacklistNotes={contactData["Blacklist"]}
         />
+
+        {/* Alternative Contact Methods Bento */}
+        <Card className="!p-4 !bg-card dark:bg-[#1A1A1A] !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800 !mb-6">
+          <div className="!flex !items-start !gap-3">
+            <Users className="!h-5 !w-5 !text-muted-foreground dark:!text-zinc-400 !mt-0.5 !flex-shrink-0" />
+            <div>
+              <h3 className="!text-sm !font-medium !text-foreground dark:!text-zinc-300 !mb-2">Alternative Contact Methods</h3>
+              <div className="!text-sm !text-foreground dark:!text-zinc-300 !space-y-2">
+                <div className="!flex !items-center !gap-2">
+                  <Hash className="!h-4 !w-4 !text-muted-foreground dark:!text-zinc-400" />
+                  <span className="!font-medium">Matrix:</span>
+                  <code className="!bg-muted dark:!bg-zinc-800 !px-2 !py-1 !rounded !text-xs">@krisyotam:matrix.org</code>
+                </div>
+                <div className="!flex !items-center !gap-2">
+                  <Hash className="!h-4 !w-4 !text-muted-foreground dark:!text-zinc-400" />
+                  <span className="!font-medium">Discord:</span>
+                  <code className="!bg-muted dark:!bg-zinc-800 !px-2 !py-1 !rounded !text-xs">krisyotam</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
 
         {/* PGP Component */}
         <div className="mb-6">
@@ -55,9 +76,7 @@ export default function ContactPage() {
             publicKey={pgpData.publicKey}
             mirror={pgpData.mirror}
           />
-        </div>
-
-        {/* Contact Form Info Bento */}
+        </div>        {/* Contact Form Info Bento */}
         <Card className="!p-4 !bg-card dark:bg-[#1A1A1A] !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800 !mb-6">
           <div className="!flex !items-start !gap-3">
             <MessageSquare className="!h-5 !w-5 !text-muted-foreground dark:!text-zinc-400 !mt-0.5 !flex-shrink-0" />

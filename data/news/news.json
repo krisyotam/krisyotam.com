@@ -1,0 +1,112 @@
+[
+  {
+    "title": "GPT-1",
+    "date": "2018-06-11",
+    "slug": "gpt-1",
+    "tags": ["OpenAI", "GPT", "LLM"],
+    "category": "openai",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 7,
+    "preview": "OpenAI's first generative pre-trained transformer model, laying the foundation for large language models."
+  },
+  {
+    "title": "GPT-2",
+    "date": "2019-02-14",
+    "slug": "gpt-2",
+    "tags": ["OpenAI", "GPT-2", "Text Generation"],
+    "category": "openai",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 8,
+    "preview": "GPT-2 demonstrated surprisingly coherent text generation, sparking debate over AI safety and open-sourcing."
+  },
+  {
+    "title": "GPT-3",
+    "date": "2020-06-11",
+    "slug": "gpt-3",
+    "tags": ["OpenAI", "GPT-3", "API"],
+    "category": "openai",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 9,
+    "preview": "The 175B parameter model that revolutionized natural language interfaces and powered the first wave of AI API tools."
+  },
+  {
+    "title": "GPT-4",
+    "date": "2023-03-14",
+    "slug": "gpt-4",
+    "tags": ["OpenAI", "GPT-4", "Multimodal"],
+    "category": "openai",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 10,
+    "preview": "A multimodal leap forward for OpenAI, capable of reasoning over images and text with more nuanced capabilities."
+  },
+  {
+    "title": "GPT-4 Turbo",
+    "date": "2023-11-06",
+    "slug": "gpt-4-turbo",
+    "tags": ["OpenAI", "GPT-4 Turbo", "ChatGPT"],
+    "category": "openai",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 9,
+    "preview": "An optimized and cost-efficient variant of GPT-4 powering ChatGPT with custom GPTs, tools, and longer context."
+  },
+  {
+    "title": "Claude 1",
+    "date": "2023-03-14",
+    "slug": "claude-1",
+    "tags": ["Anthropic", "Claude", "Constitutional AI"],
+    "category": "anthropic",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 8,
+    "preview": "Anthropic’s first Claude model, focused on safety through Constitutional AI, emphasizing harmlessness and transparency."
+  },
+  {
+    "title": "Claude 2",
+    "date": "2023-07-11",
+    "slug": "claude-2",
+    "tags": ["Anthropic", "Claude 2", "LLM"],
+    "category": "anthropic",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 9,
+    "preview": "An improved Claude model with stronger reasoning, fewer hallucinations, and increased openness for public use."
+  },
+  {
+    "title": "Claude 3 Family",
+    "date": "2024-03-04",
+    "slug": "claude-3",
+    "tags": ["Anthropic", "Claude 3", "Sonnet", "Opus", "Haiku"],
+    "category": "anthropic",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 10,
+    "preview": "Anthropic launched Haiku, Sonnet, and Opus under the Claude 3 family, offering powerful capabilities across tasks."
+  },
+  {
+    "title": "Gemini 1",
+    "date": "2023-12-06",
+    "slug": "gemini-1",
+    "tags": ["Google", "DeepMind", "Gemini 1"],
+    "category": "google",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 8,
+    "preview": "The first Gemini model from Google DeepMind, merging strengths from AlphaCode, Pathways, and large-scale training."
+  },
+  {
+    "title": "Gemini 1.5",
+    "date": "2024-02-15",
+    "slug": "gemini-1-5",
+    "tags": ["Google", "DeepMind", "Gemini 1.5 Pro", "Long Context"],
+    "category": "google",
+    "status": "Published",
+    "confidence": "certain",
+    "importance": 9,
+    "preview": "Gemini 1.5 Pro featured industry-leading long-context capabilities, enabling advanced reasoning over vast documents."
+  }
+]

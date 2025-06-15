@@ -73,9 +73,9 @@
       "importance": 8
     },
     {
-      "slug": "personal",
-      "title": "Personal",
-      "preview": "Personal growth, learning, and development - reflections on self-improvement and growth.",
+      "slug": "physics",
+      "title": "Physics",
+      "preview": "Fundamental principles, theories, and concepts in physics.",
       "date": "2025-05-31",
       "status": "Finished",
       "confidence": "certain",
@@ -166,6 +166,60 @@
     "slug": "hypertext-games",
     "title": "Hypertext Games",
     "preview": "notes on nonlinear, choice-driven browser games and interactive fiction",
+    "date": "2025-06-10",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6
+  },
+  {
+    "slug": "mathematics",
+    "title": "Mathematics",
+    "preview": "general notes on mathematics, formulas, concepts, puzzles",
+    "date": "2025-06-10",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6
+  },
+  {
+    "slug": "hack-the-box",
+    "title": "HackTheBox",
+    "preview": "write ups for HackTheBox CTFs, Machines, and CERTs",
+    "date": "2025-06-10",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6
+  },
+  {
+    "slug": "try-hack-me",
+    "title": "TryHackMe",
+    "preview": "write ups for TryHackMe CTFs, Rooms, and CERTs",
+    "date": "2025-06-10",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6
+  },
+  {
+    "slug": "gaming",
+    "title": "Gaming",
+    "preview": "notes on my personal gaming experiences, strategies, and stats",
+    "date": "2025-06-10",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6
+  },
+  {
+    "slug": "fraternities",
+    "title": "Fraternities",
+    "preview": "notes on fraternities, their contributions, culture, and impact",
+    "date": "2025-06-10",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6
+  },
+    {
+    "slug": "sororities",
+    "title": "Sororities",
+    "preview": "notes on sororities, their contributions, culture, and impact",
     "date": "2025-06-10",
     "status": "In Progress",
     "confidence": "certain",

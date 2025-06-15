@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { PredictionCard } from "@/components/predictions/prediction-card";
-import { PredictionsCategoryFilter } from "@/components/predictions/predictions-category-filter";
-import { PredictionsSearch } from "@/components/predictions/predictions-search";
+import { CustomSelect } from "@/components/ui/custom-select";
+import type { SelectOption } from "@/components/ui/custom-select";
 
 interface Prediction {
   statement: string;
@@ -66,22 +66,39 @@ export function PredictionsClientPage() {
     setSearchTerm(term);
   };
 
+  // Convert categories to SelectOption format
+  const categoryOptions: SelectOption[] = ["All", ...categories].map(category => ({
+    value: category,
+    label: category === "All" ? "All Categories" : category
+  }));
+
   return (
-    <div className="bg-background">
-      <div className="mb-8">
-        <div className="w-full mb-6">
-          <PredictionsSearch onSearch={handleSearch} />
+    <div className="space-y-6">
+      {/* Filter row */}
+      <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 whitespace-nowrap">
+          <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
+          <CustomSelect
+            value={activeCategory}
+            onValueChange={handleCategorySelect}
+            options={categoryOptions}
+            className="text-sm min-w-[140px]"
+          />
         </div>
-        <div className="w-full">
-          <PredictionsCategoryFilter
-            categories={categories}
-            activeCategory={activeCategory}
-            onCategorySelect={handleCategorySelect}
+        
+        <div className="relative flex-1">
+          <input 
+            type="text" 
+            placeholder="Search predictions..."
+            className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
+            value={searchTerm}
+            onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
       </div>
 
-      <div className="space-y-4 mt-8">
+      {/* Predictions grid */}
+      <div className="grid grid-cols-1 gap-4">
         {filteredPredictions.length > 0 ? (
           filteredPredictions.map((prediction, index) => (
             <PredictionCard
@@ -95,7 +112,9 @@ export function PredictionsClientPage() {
             />
           ))
         ) : (
-          <div className="text-center py-8 text-muted-foreground">No predictions found matching your criteria.</div>
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No predictions found matching your criteria.</p>
+          </div>
         )}
       </div>
     </div>

@@ -10,6 +10,7 @@ import Books from "@/components/posts/books/books"
 import { Tweet } from "@/components/typography/tweet"
 import Math from "@/components/typography/math"
 import dynamic from 'next/dynamic'
+import { Pfp } from "@/components/typography/pfp"
 // Import TikZ with no SSR to avoid hydration issues
 const TikZ = dynamic(() => import('@/components/typography/tikz'), { ssr: false })
 
@@ -61,6 +62,7 @@ import { RedditEmbed } from "@/components/typography/reddit-embed"
 import AnimeCharacterDisplay from "@/components/posts/content/anime-character-display"
 import { Art7x4 } from "@/components/posts/art/art-7x4"
 import RatingDisplay from "@/components/posts/content/rating"
+import Paper from "@/components/typography/paper"
 
 // Define components for MDX
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -137,7 +139,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     MangaPanel: MangaPanelDisplay,
     Dropcap,
     LinkTags,
-
+    Paper,
+    Pfp,
+    
     // Typography components
     Lead: Typography.Lead,
     Large: Typography.Large,
