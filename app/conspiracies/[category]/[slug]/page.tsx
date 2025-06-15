@@ -2,12 +2,8 @@ export const dynamic = 'force-static';
 export const revalidate = false;
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import conspiraciesData from "@/data/conspiracies/conspiracies.json";
 import ConspiraciesPageClient from "./ConspiraciesPageClient";
-import type { ConspiracyMeta } from "@/types/conspiracies";
-
-type Status = "Draft" | "Published" | "Archived" | "Active" | "Speculative";
-type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain" | "ambiguous" | "uncertain" | "developing" | "moderate";
+import type { ConspiracyMeta, ConspiracyStatus, ConspiracyConfidence } from "@/types/conspiracies";
 
 interface ConspiracyData {
   title: string;
@@ -30,7 +26,23 @@ function slugifyCategory(category: string) {
   return category.toLowerCase().replace(/\s+/g, "-");
 }
 
+// Function to fetch conspiracies data
+async function getConspiraciesData(): Promise<ConspiracyData[]> {
+  try {
+    // During build time, we can access the file system directly for better performance
+    const fs = await import('fs/promises');
+    const path = await import('path');
+    const filePath = path.join(process.cwd(), "data", "conspiracies", "conspiracies.json");
+    const fileContents = await fs.readFile(filePath, "utf8");
+    return JSON.parse(fileContents);
+  } catch (error) {
+    console.error('Error fetching conspiracies data:', error);
+    return [];
+  }
+}
+
 export async function generateStaticParams() {
+  const conspiraciesData = await getConspiraciesData();
   // Generate all category/slug combinations
   return conspiraciesData.map(conspiracy => ({
     category: slugifyCategory(conspiracy.category),
@@ -39,6 +51,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: ConspiracyPageProps): Promise<Metadata> {
+  const conspiraciesData = await getConspiraciesData();
   const conspiracy = conspiraciesData.find(n => 
     slugifyCategory(n.category) === params.category && n.slug === params.slug
   );
@@ -56,6 +69,7 @@ export async function generateMetadata({ params }: ConspiracyPageProps): Promise
 }
 
 export default async function ConspiracyPage({ params }: ConspiracyPageProps) {
+  const conspiraciesData = await getConspiraciesData();
   const conspiracyData = conspiraciesData.find(n => 
     slugifyCategory(n.category) === params.category && n.slug === params.slug
   );
@@ -63,17 +77,16 @@ export default async function ConspiracyPage({ params }: ConspiracyPageProps) {
   if (!conspiracyData) {
     notFound();
   }
-
   const conspiracy: ConspiracyMeta = {
     ...conspiracyData,
-    status: conspiracyData.status as Status,
-    confidence: conspiracyData.confidence as Confidence
+    status: conspiracyData.status as ConspiracyStatus,
+    confidence: conspiracyData.confidence as ConspiracyConfidence
   };
 
   const conspiracies: ConspiracyMeta[] = conspiraciesData.map((conspiracy: ConspiracyData) => ({
     ...conspiracy,
-    status: conspiracy.status as Status,
-    confidence: conspiracy.confidence as Confidence  }));
+    status: conspiracy.status as ConspiracyStatus,
+    confidence: conspiracy.confidence as ConspiracyConfidence}));
   // Dynamically import the MDX file based on category and slug
   const Conspiracy = (await import(`@/app/conspiracies/content/${params.category}/${params.slug}.mdx`)).default;
 

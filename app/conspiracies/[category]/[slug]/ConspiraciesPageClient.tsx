@@ -8,26 +8,43 @@ import { LiveClock } from "@/components/live-clock";
 import { PostHeader } from "@/components/post-header";
 import { Footer } from "@/app/essays/components/footer";
 import { Citation } from "@/components/citation";
-
-interface ConspiracyMeta {
-  title: string;
-  subtitle?: string;
-  preview?: string;
-  date: string;
-  slug: string;
-  tags: string[];
-  category: string;
-  status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
-  confidence?:
-    | "impossible" | "remote" | "highly unlikely" | "unlikely"
-    | "possible"  | "likely"  | "highly likely"   | "certain";
-  importance?: number;
-}
+import type { ConspiracyMeta, ConspiracyStatus, ConspiracyConfidence } from "@/types/conspiracies";
 
 interface Props {
   conspiracy: ConspiracyMeta;
   allConspiracies: ConspiracyMeta[];
   children: React.ReactNode;
+}
+
+// Utility functions to map conspiracy types to PostHeader compatible types
+function mapConspiracyStatusToPostHeader(status?: ConspiracyStatus): "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" {
+  const statusMap: Record<ConspiracyStatus, "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"> = {
+    "Draft": "Draft",
+    "Published": "Finished",
+    "Archived": "Abandoned", 
+    "Active": "In Progress",
+    "Speculative": "Notes"
+  };
+  return status ? statusMap[status] : "Notes";
+}
+
+function mapConspiracyConfidenceToPostHeader(confidence?: ConspiracyConfidence): "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain" {
+  // Map the extended conspiracy confidence values to the core PostHeader values
+  const confidenceMap: Record<ConspiracyConfidence, "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"> = {
+    "impossible": "impossible",
+    "remote": "remote", 
+    "highly unlikely": "highly unlikely",
+    "unlikely": "unlikely",
+    "possible": "possible",
+    "likely": "likely",
+    "highly likely": "highly likely",
+    "certain": "certain",
+    "ambiguous": "possible", // Map ambiguous to possible
+    "uncertain": "possible", // Map uncertain to possible  
+    "developing": "possible", // Map developing to possible
+    "moderate": "likely" // Map moderate to likely
+  };
+  return confidence ? confidenceMap[confidence] : "possible";
 }
 
 export default function ConspiraciesPageClient({ conspiracy, allConspiracies, children }: Props) {
@@ -47,8 +64,7 @@ export default function ConspiraciesPageClient({ conspiracy, allConspiracies, ch
   }
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
-      {/* clean page header (outside .conspiracy-content) ----------------------- */}
-      <PostHeader 
+      {/* clean page header (outside .conspiracy-content) ----------------------- */}      <PostHeader 
         className=""     
         title={conspiracy.title}
         subtitle={conspiracy.subtitle}
@@ -58,8 +74,8 @@ export default function ConspiraciesPageClient({ conspiracy, allConspiracies, ch
         backHref="/conspiracies"
         backText="Conspiracies"
         preview={conspiracy.preview}
-        status={conspiracy.status ?? "Notes"}
-        confidence={conspiracy.confidence ?? "possible"}
+        status={mapConspiracyStatusToPostHeader(conspiracy.status)}
+        confidence={mapConspiracyConfidenceToPostHeader(conspiracy.confidence)}
         importance={conspiracy.importance ?? 5}
       />
       
