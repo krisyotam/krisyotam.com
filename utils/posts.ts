@@ -122,25 +122,15 @@ export async function getAllPosts(): Promise<Post[]> {
   if (process.env.NODE_ENV === 'production' && cachedPosts) {
     return cachedPosts;
   }
-  
-  // Load essays
+  // Load essays (primary content for home page)
   const essaysData = await readDataFile<PostsData>("essays/feed.json")
   const essays = (essaysData?.posts || []).map(post => ({
     ...post,
     path: 'essays'
   }))
   
-  // Load blog posts
-  const blogData = await readDataFile<PostsData>("blog/feed.json")
-  const blogPosts = (blogData?.posts || []).map(post => ({
-    ...post,
-    path: 'blog'
-  }))
-  
-  // Combine and sort all posts
-  const allPosts = [...essays, ...blogPosts]
-  
-  const sortedPosts = allPosts.sort(
+  // Return essays as the main posts
+  const sortedPosts = essays.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
   
@@ -152,10 +142,14 @@ export async function getAllPosts(): Promise<Post[]> {
   return sortedPosts
 }
 
-// Only active posts (state === "active")
+// Only active posts (state === "active" OR posts without state property)
 export async function getActivePosts(): Promise<Post[]> {
   const all = await getAllPosts()
-  return all.filter((post) => post.state === "active")
+  return all.filter((post) => {
+    // Include posts that either have state === "active" or don't have a state property at all
+    // This handles different data structures between essays and blog feeds
+    return !post.state || post.state === "active"
+  })
 }
 
 // Find post by slug
