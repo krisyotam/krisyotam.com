@@ -166,7 +166,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
 // Load category metadata
 export async function getAllCategoryData(): Promise<CategoryData[]> {
-  const data = await readDataFile<CategoriesData>("blog/category-data.json")
+  const data = await readDataFile<CategoriesData>("blog/categories.json")
   return data?.categories || []
 }
 
