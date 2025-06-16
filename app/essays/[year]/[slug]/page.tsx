@@ -21,7 +21,7 @@ export async function generateMetadata({
 }, parent: ResolvingMetadata): Promise<Metadata> {
   const { year, slug } = params
     // Fetch essay data from feed.json
-  const essayData = getPostByYearAndSlug(year, slug)
+  const essayData = await getPostByYearAndSlug(year, slug)
   if (!essayData) return { title: 'Essay Not Found' }
     // Get cover image URL - prioritize cover_image field
   const coverUrl = essayData.cover_image || 
@@ -70,9 +70,9 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   // Generate static routes for all essays in feed.json
-  const essays = getAllPosts();
+  const essays = await getAllPosts();
   
-  return essays.map(essay => {
+  return essays.map((essay: any) => {
     const year = new Date(essay.date).getFullYear().toString();
     return {
       year,
@@ -87,9 +87,8 @@ export default async function EssayPage({
   params: { year: string; slug: string }
 }) {
   const { year, slug } = params
-
   // 1) Fetch essay data from feed.json
-  const essayData = getPostByYearAndSlug(year, slug)
+  const essayData = await getPostByYearAndSlug(year, slug)
   if (!essayData) notFound()
 
   // 2) Load the raw MDX data
