@@ -1,0 +1,1403 @@
+You said:
+any errors with essays here: [16:38:37.613] Running build in Washington, D.C., USA (East) – iad1
+[16:38:37.618] Build machine configuration: 2 cores, 8 GB
+[16:38:37.707] Cloning github.com/krisyotam/krisyotam.com (Branch: main, Commit: 0f5ca58)
+[16:38:48.736] Cloning completed: 11.028s
+[16:38:50.388] Restored build cache from previous deployment (nqv57ThwgKfPPGsP5TuM7BdCT3iT)
+[16:38:52.615] Running "vercel build"
+[16:38:54.049] Vercel CLI 42.2.0
+[16:38:54.269] WARN! Due to builds existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+[16:38:54.513] Installing dependencies...
+[16:38:56.134] npm warn deprecated topojson@3.0.2: Use topojson-client, topojson-server or topojson-simplify directly.
+[16:38:56.474] 
+[16:38:56.476] changed 4 packages in 2s
+[16:38:56.476] 
+[16:38:56.476] 232 packages are looking for funding
+[16:38:56.477]   run npm fund for details
+[16:38:56.510] Detected Next.js version: 14.2.26
+[16:38:56.519] Running "npm run build"
+[16:38:56.637] 
+[16:38:56.637] > kris-yotam@0.1.0 build
+[16:38:56.637] > next build
+[16:38:56.637] 
+[16:38:57.451]   ▲ Next.js 14.2.26
+[16:38:57.452]   - Experiments (use with caution):
+[16:38:57.452]     · webpackBuildWorker
+[16:38:57.452] 
+[16:38:57.551]    Creating an optimized production build ...
+[16:39:31.939]  ✓ Compiled successfully
+[16:39:31.940]    Linting and checking validity of types ...
+[16:40:49.286]    Collecting page data ...
+[16:40:52.429] Available categories: [
+[16:40:52.429]   'illuminati',
+[16:40:52.429]   'new-world-order',
+[16:40:52.429]   'cia-projects',
+[16:40:52.429]   'bohemian-grove',
+[16:40:52.429]   'bilderberg-group',
+[16:40:52.429]   'qanon',
+[16:40:52.429]   'roswell-and-ufo-coverups',
+[16:40:52.429]   'flat-earth',
+[16:40:52.429]   'secret-space-programs'
+[16:40:52.430] ]
+[16:40:52.430] Slugified categories: [
+[16:40:52.430]   'illuminati',
+[16:40:52.430]   'new-world-order',
+[16:40:52.430]   'cia-projects',
+[16:40:52.431]   'bohemian-grove',
+[16:40:52.431]   'bilderberg-group',
+[16:40:52.431]   'qanon',
+[16:40:52.431]   'roswell-and-ufo-coverups',
+[16:40:52.431]   'flat-earth',
+[16:40:52.431]   'secret-space-programs'
+[16:40:52.431] ]
+[16:40:52.549] Available categories: [
+[16:40:52.550]   'liber-necrophilia',
+[16:40:52.550]   'liber-zoophilia',
+[16:40:52.550]   'liber-sodomorum',
+[16:40:52.551]   'liber-experimentorum',
+[16:40:52.551]   'liber-mortis',
+[16:40:52.551]   'liber-incubi',
+[16:40:52.551]   'liber-hysterica',
+[16:40:52.551]   'malleus-innocentium',
+[16:40:52.551]   'fabrica-excruciationis'
+[16:40:52.552] ]
+[16:40:52.552] Slugified categories: [
+[16:40:52.552]   'liber-necrophilia',
+[16:40:52.552]   'liber-zoophilia',
+[16:40:52.552]   'liber-sodomorum',
+[16:40:52.552]   'liber-experimentorum',
+[16:40:52.553]   'liber-mortis',
+[16:40:52.553]   'liber-incubi',
+[16:40:52.553]   'liber-hysterica',
+[16:40:52.553]   'malleus-innocentium',
+[16:40:52.554]   'fabrica-excruciationis'
+[16:40:52.554] ]
+[16:40:52.611] Available categories: [
+[16:40:52.612]   'Philosophy',     'Verse',
+[16:40:52.612]   'Random',         'On Myself',
+[16:40:52.612]   'Libraries',      'Bounties',
+[16:40:52.613]   'News',           'Website',
+[16:40:52.613]   'Stable Syllabi', 'Research',
+[16:40:52.613]   'Anime Analysis', 'Book Notes',
+[16:40:52.613]   'Technology',     'Virtual Worlds',
+[16:40:52.613]   'Mathematics',    'Internet Archive',
+[16:40:52.614]   'Indie Web',      'Learning',
+[16:40:52.614]   'Gaming',         'Physics',
+[16:40:52.614]   'TryHackMe',      'HackTheBox',
+[16:40:52.614]   'Twitch',         'Youtube',
+[16:40:52.614]   'Fraternities'
+[16:40:52.614] ]
+[16:40:52.615] Slugified categories: [
+[16:40:52.615]   'philosophy',     'verse',
+[16:40:52.615]   'random',         'on-myself',
+[16:40:52.615]   'libraries',      'bounties',
+[16:40:52.615]   'news',           'website',
+[16:40:52.616]   'stable-syllabi', 'research',
+[16:40:52.616]   'anime-analysis', 'book-notes',
+[16:40:52.616]   'technology',     'virtual-worlds',
+[16:40:52.620]   'mathematics',    'internet-archive',
+[16:40:52.620]   'indie-web',      'learning',
+[16:40:52.623]   'gaming',         'physics',
+[16:40:52.623]   'tryhackme',      'hackthebox',
+[16:40:52.623]   'twitch',         'youtube',
+[16:40:52.623]   'fraternities'
+[16:40:52.624] ]
+[16:40:56.467]    Generating static pages (0/779) ...
+[16:41:00.276] Fetching favorite actors from JSON
+[16:41:00.276] Retrieved 15 favorite actors
+[16:41:00.458] Fetching favorite characters from JSON
+[16:41:00.458] Retrieved 27 favorite characters
+[16:41:00.496] Fetching favorite film companies from JSON
+[16:41:00.497] Retrieved 12 favorite film companies
+[16:41:00.569] Fetching favorite directors from JSON
+[16:41:00.569] Retrieved 13 favorite directors
+[16:41:02.063] Fetching user watched content from Trakt...
+[16:41:02.107] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
+[16:41:02.107] Error fetching Trakt genres: Error: Unable to get valid Trakt access token
+[16:41:02.107]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4332)
+[16:41:02.107]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[16:41:02.107]     at async d (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4888)
+[16:41:02.108]     at async l (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:664)
+[16:41:02.108]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[16:41:02.109]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[16:41:02.109]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[16:41:02.110]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[16:41:02.110]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[16:41:02.110]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[16:41:02.149] Fetching user lists from Trakt
+[16:41:02.247] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
+[16:41:02.247] Error fetching Trakt lists: Error: Unable to get valid Trakt access token
+[16:41:02.247]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4332)
+[16:41:02.247]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[16:41:02.248]     at async u (/vercel/path0/.next/server/app/api/trakt/lists/route.js:1:662)
+[16:41:02.248]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[16:41:02.250]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[16:41:02.250]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[16:41:02.250]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[16:41:02.251]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[16:41:02.251]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[16:41:02.251]     at async Object.exportPage (/vercel/path0/node_modules/next/dist/export/worker.js:237:20)
+[16:41:02.403] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
+[16:41:02.404] Error fetching Trakt stats: Error: Unable to get valid Trakt access token
+[16:41:02.404]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4332)
+[16:41:02.404]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[16:41:02.404]     at async d (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4888)
+[16:41:02.405]     at async l (/vercel/path0/.next/server/app/api/trakt/stats/route.js:1:604)
+[16:41:02.405]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[16:41:02.405]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[16:41:02.405]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[16:41:02.405]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[16:41:02.406]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[16:41:02.406]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[16:41:02.718] RSS feed generation failed: Error: ENOENT: no such file or directory, open '/vercel/path0/data/feed.json'
+[16:41:02.718]     at async open (node:internal/fs/promises:633:25)
+[16:41:02.718]     at async Object.readFile (node:internal/fs/promises:1237:14)
+[16:41:02.718]     at async c (/vercel/path0/.next/server/app/rss.xml/route.js:1:667)
+[16:41:02.719]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[16:41:02.719]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[16:41:02.719]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[16:41:02.719]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[16:41:02.719]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[16:41:02.719]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[16:41:02.719]     at async Object.exportPage (/vercel/path0/node_modules/next/dist/export/worker.js:237:20) {
+[16:41:02.719]   errno: -2,
+[16:41:02.719]   code: 'ENOENT',
+[16:41:02.720]   syscall: 'open',
+[16:41:02.720]   path: '/vercel/path0/data/feed.json'
+[16:41:02.720] }
+[16:41:04.104] Generating metadata for release-of-openai-deep-learning: {
+[16:41:04.105]   title: 'Release of OpenAI Deep Learning',
+[16:41:04.105]   coverUrl: 'https://i.postimg.cc/ZKGgPQ4R/krisctf-oak-tree-roman-empire-period-black-and-white-child-anim-df5113ad-426c-4ff5-bfc3-88fc0c25f3cb.webp',
+[16:41:04.105]   description: 'OpenAI releases its latest deep learning architecture, promising significant advancements in natural language processing and computer vision tasks.'
+[16:41:04.105] }
+[16:41:04.105] Generating metadata for release-of-openai-deep-learning: {
+[16:41:04.105]   title: 'Release of OpenAI Deep Learning',
+[16:41:04.105]   coverUrl: 'https://i.postimg.cc/ZKGgPQ4R/krisctf-oak-tree-roman-empire-period-black-and-white-child-anim-df5113ad-426c-4ff5-bfc3-88fc0c25f3cb.webp',
+[16:41:04.105]   description: 'OpenAI releases its latest deep learning architecture, promising significant advancements in natural language processing and computer vision tasks.'
+[16:41:04.105] }
+[16:41:05.628] Generating metadata for villa-ephrussi-de-rothschild: {
+[16:41:05.629]   title: 'Villa Ephrussi de Rothschild',
+[16:41:05.630]   coverUrl: 'https://i.postimg.cc/3JQzFxcr/villa-ephrussi.jpg',
+[16:41:05.630]   description: 'Exploring the stunning Belle Époque villa and its magnificent gardens on the French Riviera, showcasing the elegance of early 20th century architecture.'
+[16:41:05.630] }
+[16:41:05.630] Generating metadata for villa-ephrussi-de-rothschild: {
+[16:41:05.630]   title: 'Villa Ephrussi de Rothschild',
+[16:41:05.631]   coverUrl: 'https://i.postimg.cc/3JQzFxcr/villa-ephrussi.jpg',
+[16:41:05.631]   description: 'Exploring the stunning Belle Époque villa and its magnificent gardens on the French Riviera, showcasing the elegance of early 20th century architecture.'
+[16:41:05.631] }
+[16:41:07.664] Error fetching Trakt most watched movies: B [Error]: Dynamic server usage: Route /api/trakt/most-watched-movies couldn't be rendered statically because it used request.url. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[16:41:07.664]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[16:41:07.665]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29465)
+[16:41:07.665]     at u (/vercel/path0/.next/server/app/api/trakt/most-watched-movies/route.js:1:640)
+[16:41:07.665]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[16:41:07.665]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[16:41:07.665]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[16:41:07.665]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[16:41:07.665]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[16:41:07.665]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[16:41:07.666]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[16:41:07.666]   description: "Route /api/trakt/most-watched-movies couldn't be rendered statically because it used request.url. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[16:41:07.666]   digest: 'DYNAMIC_SERVER_USAGE'
+[16:41:07.666] }
+[16:41:07.844] Error fetching Trakt most watched shows: B [Error]: Dynamic server usage: Route /api/trakt/most-watched-shows couldn't be rendered statically because it used request.url. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[16:41:07.845]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[16:41:07.845]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29465)
+[16:41:07.845]     at u (/vercel/path0/.next/server/app/api/trakt/most-watched-shows/route.js:1:640)
+[16:41:07.845]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[16:41:07.847]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[16:41:07.847]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[16:41:07.847]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[16:41:07.847]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[16:41:07.847]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[16:41:07.847]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[16:41:07.847]   description: "Route /api/trakt/most-watched-shows couldn't be rendered statically because it used request.url. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[16:41:07.847]   digest: 'DYNAMIC_SERVER_USAGE'
+[16:41:07.848] }
+[16:41:08.015] Error fetching Trakt recently watched movies: B [Error]: Dynamic server usage: Route /api/trakt/recent-movies couldn't be rendered statically because it used request.url. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[16:41:08.016]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[16:41:08.016]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29465)
+[16:41:08.016]     at u (/vercel/path0/.next/server/app/api/trakt/recent-movies/route.js:1:640)
+[16:41:08.018]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[16:41:08.018]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[16:41:08.018]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[16:41:08.018]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[16:41:08.018]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[16:41:08.018]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[16:41:08.018]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[16:41:08.019]   description: "Route /api/trakt/recent-movies couldn't be rendered statically because it used request.url. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[16:41:08.019]   digest: 'DYNAMIC_SERVER_USAGE'
+[16:41:08.019] }
+[16:41:08.037] Error fetching Trakt recently watched shows: B [Error]: Dynamic server usage: Route /api/trakt/recent-shows couldn't be rendered statically because it used request.url. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+[16:41:08.038]     at V (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:21778)
+[16:41:08.038]     at Object.get (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:29465)
+[16:41:08.038]     at u (/vercel/path0/.next/server/app/api/trakt/recent-shows/route.js:1:640)
+[16:41:08.038]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[16:41:08.039]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[16:41:08.039]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[16:41:08.039]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[16:41:08.039]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[16:41:08.039]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[16:41:08.039]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103 {
+[16:41:08.040]   description: "Route /api/trakt/recent-shows couldn't be rendered statically because it used request.url. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+[16:41:08.040]   digest: 'DYNAMIC_SERVER_USAGE'
+[16:41:08.040] }
+[16:41:15.047]    Generating static pages (194/779) 
+[16:41:16.216] BookDetailClient - Received book: Linear Algebra Done Right
+[16:41:16.216] BookDetailClient - Book slug: linear-algebra-done-right
+[16:41:16.236] BookDetailClient - Received book: Understanding Analysis
+[16:41:16.236] BookDetailClient - Book slug: understanding-analysis
+[16:41:16.255] BookDetailClient - Received book: Elementary Analysis: The Theory of Calculus
+[16:41:16.256] BookDetailClient - Book slug: elementary-analysis-theory-of-calculus
+[16:41:16.274] BookDetailClient - Received book: Principles of Mathematical Analysis
+[16:41:16.274] BookDetailClient - Book slug: principles-of-mathematical-analysis
+[16:41:16.291] BookDetailClient - Received book: Complex Variables for Scientists and Engineers
+[16:41:16.292] BookDetailClient - Book slug: complex-variables-for-scientists-and-engineers
+[16:41:16.313] BookDetailClient - Received book: Elementary Number Theory
+[16:41:16.314] BookDetailClient - Book slug: elementary-number-theory
+[16:41:16.332] BookDetailClient - Received book: The Structure of Abstract Algebra
+[16:41:16.332] BookDetailClient - Book slug: the-structure-of-abstract-algebra
+[16:41:16.347] BookDetailClient - Received book: Plane Trigonometry with Tables
+[16:41:16.347] BookDetailClient - Book slug: plane-trigonometry-with-tables
+[16:41:19.046]    Generating static pages (389/779) 
+[16:41:19.723] Attempting to read file from: /vercel/path0/data/research-bounties.json
+[16:41:19.724] Attempting to read file from: /vercel/path0/data/research-bounties.json
+[16:41:21.493]    Generating static pages (584/779) 
+[16:41:23.746] Fetching from Monkeytype API: https://api.monkeytype.com/users/stats
+[16:41:23.747] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[16:41:23.747] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=30
+[16:41:23.748] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
+[16:41:23.748] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[16:41:23.748] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=10
+[16:41:23.749] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=25
+[16:41:23.749] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[16:41:23.749] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=100
+[16:41:23.750] Fetching from Monkeytype API: https://api.monkeytype.com/users/streak
+[16:41:23.750] Fetching from Monkeytype API: https://api.monkeytype.com/users/currentTestActivity
+[16:41:23.751] Fetching from Monkeytype API: https://api.monkeytype.com/results?limit=10
+[16:41:23.752] Fetching from Monkeytype API: https://api.monkeytype.com/users/stats
+[16:41:23.753] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[16:41:23.753] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=30
+[16:41:23.755] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
+[16:41:23.755] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[16:41:23.755] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=10
+[16:41:23.755] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=25
+[16:41:23.756] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[16:41:23.756] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=100
+[16:41:23.756] Fetching from Monkeytype API: https://api.monkeytype.com/users/streak
+[16:41:23.758] Fetching from Monkeytype API: https://api.monkeytype.com/users/currentTestActivity
+[16:41:23.758] Fetching from Monkeytype API: https://api.monkeytype.com/results?limit=10
+[16:41:23.825] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[16:41:23.825] Personal bests data: null
+[16:41:23.825] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[16:41:23.825] Personal bests data: null
+[16:41:23.878] Monkeytype API error (503): {}
+[16:41:23.878] Personal bests data: null
+[16:41:23.904] Monkeytype API error (503): {}
+[16:41:23.904] Personal bests data: null
+[16:41:24.021] API response for /users/streak: {
+[16:41:24.022]   message: 'Streak data retrieved',
+[16:41:24.023]   data: {
+[16:41:24.023]     lastResultTimestamp: 1747121765000,
+[16:41:24.023]     length: 1,
+[16:41:24.023]     maxLength: 6,
+[16:41:24.023]     hourOffset: null
+[16:41:24.023]   }
+[16:41:24.023] }
+[16:41:24.023] API response for /users/streak: {
+[16:41:24.023]   message: 'Streak data retrieved',
+[16:41:24.023]   data: {
+[16:41:24.023]     lastResultTimestamp: 1747121765000,
+[16:41:24.023]     length: 1,
+[16:41:24.023]     maxLength: 6,
+[16:41:24.023]     hourOffset: null
+[16:41:24.023]   }
+[16:41:24.023] }
+[16:41:24.225] API response for /users/personalBests: {
+[16:41:24.225]   message: 'Personal bests retrieved',
+[16:41:24.225]   data: [
+[16:41:24.225]     {
+[16:41:24.225]       acc: 95.73,
+[16:41:24.225]       consistency: 69.5,
+[16:41:24.225]       difficulty: 'normal',
+[16:41:24.225]       lazyMode: false,
+[16:41:24.225]       language: 'english',
+[16:41:24.225]       punctuation: false,
+[16:41:24.225]       raw: 110,
+[16:41:24.225]       wpm: 102,
+[16:41:24.225]       timestamp: 1741147359513,
+[16:41:24.225]       numbers: false
+[16:41:24.225]     }
+[16:41:24.225]   ]
+[16:41:24.225] }
+[16:41:24.226] Personal bests data: [
+[16:41:24.226]   {
+[16:41:24.226]     "acc": 95.73,
+[16:41:24.226]     "consistency": 69.5,
+[16:41:24.226]     "difficulty": "normal",
+[16:41:24.226]     "lazyMode": false,
+[16:41:24.226]     "language": "english",
+[16:41:24.226]     "punctuation": false,
+[16:41:24.226]     "raw": 110,
+[16:41:24.226]     "wpm": 102,
+[16:41:24.226]     "timestamp": 1741147359513,
+[16:41:24.226]     "numbers": false
+[16:41:24.226]   }
+[16:41:24.226] ]
+[16:41:24.226] API response for /users/personalBests: {
+[16:41:24.226]   message: 'Personal bests retrieved',
+[16:41:24.226]   data: [
+[16:41:24.226]     {
+[16:41:24.226]       acc: 95.73,
+[16:41:24.226]       consistency: 69.5,
+[16:41:24.226]       difficulty: 'normal',
+[16:41:24.226]       lazyMode: false,
+[16:41:24.226]       language: 'english',
+[16:41:24.226]       punctuation: false,
+[16:41:24.226]       raw: 110,
+[16:41:24.227]       wpm: 102,
+[16:41:24.227]       timestamp: 1741147359513,
+[16:41:24.227]       numbers: false
+[16:41:24.227]     }
+[16:41:24.227]   ]
+[16:41:24.227] }
+[16:41:24.227] Personal bests data: [
+[16:41:24.227]   {
+[16:41:24.227]     "acc": 95.73,
+[16:41:24.227]     "consistency": 69.5,
+[16:41:24.227]     "difficulty": "normal",
+[16:41:24.227]     "lazyMode": false,
+[16:41:24.227]     "language": "english",
+[16:41:24.227]     "punctuation": false,
+[16:41:24.230]     "raw": 110,
+[16:41:24.230]     "wpm": 102,
+[16:41:24.230]     "timestamp": 1741147359513,
+[16:41:24.230]     "numbers": false
+[16:41:24.231]   }
+[16:41:24.231] ]
+[16:41:24.431] API response for /users/personalBests: {
+[16:41:24.431]   message: 'Personal bests retrieved',
+[16:41:24.432]   data: [
+[16:41:24.432]     {
+[16:41:24.432]       acc: 87.73,
+[16:41:24.433]       consistency: 84.65,
+[16:41:24.433]       difficulty: 'normal',
+[16:41:24.436]       lazyMode: false,
+[16:41:24.436]       language: 'english',
+[16:41:24.436]       punctuation: false,
+[16:41:24.436]       raw: 130.38,
+[16:41:24.436]       wpm: 104.79,
+[16:41:24.436]       numbers: false,
+[16:41:24.436]       timestamp: 1741147466281
+[16:41:24.436]     }
+[16:41:24.436]   ]
+[16:41:24.436] }
+[16:41:24.436] Personal bests data: [
+[16:41:24.436]   {
+[16:41:24.436]     "acc": 87.73,
+[16:41:24.436]     "consistency": 84.65,
+[16:41:24.438]     "difficulty": "normal",
+[16:41:24.438]     "lazyMode": false,
+[16:41:24.438]     "language": "english",
+[16:41:24.438]     "punctuation": false,
+[16:41:24.438]     "raw": 130.38,
+[16:41:24.438]     "wpm": 104.79,
+[16:41:24.438]     "numbers": false,
+[16:41:24.438]     "timestamp": 1741147466281
+[16:41:24.438]   }
+[16:41:24.438] ]
+[16:41:24.438] API response for /users/personalBests: {
+[16:41:24.438]   message: 'Personal bests retrieved',
+[16:41:24.438]   data: [
+[16:41:24.438]     {
+[16:41:24.438]       acc: 87.73,
+[16:41:24.438]       consistency: 84.65,
+[16:41:24.438]       difficulty: 'normal',
+[16:41:24.438]       lazyMode: false,
+[16:41:24.438]       language: 'english',
+[16:41:24.438]       punctuation: false,
+[16:41:24.438]       raw: 130.38,
+[16:41:24.438]       wpm: 104.79,
+[16:41:24.438]       numbers: false,
+[16:41:24.438]       timestamp: 1741147466281
+[16:41:24.438]     }
+[16:41:24.439]   ]
+[16:41:24.439] }
+[16:41:24.439] Personal bests data: [
+[16:41:24.439]   {
+[16:41:24.439]     "acc": 87.73,
+[16:41:24.439]     "consistency": 84.65,
+[16:41:24.439]     "difficulty": "normal",
+[16:41:24.439]     "lazyMode": false,
+[16:41:24.439]     "language": "english",
+[16:41:24.439]     "punctuation": false,
+[16:41:24.439]     "raw": 130.38,
+[16:41:24.439]     "wpm": 104.79,
+[16:41:24.439]     "numbers": false,
+[16:41:24.439]     "timestamp": 1741147466281
+[16:41:24.439]   }
+[16:41:24.439] ]
+[16:41:24.628] API response for /results: {
+[16:41:24.628]   message: 'Results retrieved',
+[16:41:24.628]   data: [
+[16:41:24.628]     {
+[16:41:24.628]       _id: '6822f665df21a5c1da374b59',
+[16:41:24.628]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.628]       wpm: 74.13,
+[16:41:24.628]       rawWpm: 79.45,
+[16:41:24.629]       charStats: [Array],
+[16:41:24.629]       acc: 89.27,
+[16:41:24.629]       mode: 'words',
+[16:41:24.629]       mode2: '50',
+[16:41:24.629]       timestamp: 1747121765000,
+[16:41:24.629]       restartCount: 4,
+[16:41:24.629]       incompleteTestSeconds: 26.77,
+[16:41:24.629]       testDuration: 38.36,
+[16:41:24.629]       consistency: 57.28,
+[16:41:24.629]       keyConsistency: 0.02
+[16:41:24.629]     },
+[16:41:24.629]     {
+[16:41:24.629]       _id: '6822f617df21a5c1da37484a',
+[16:41:24.629]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.629]       wpm: 94.2,
+[16:41:24.629]       rawWpm: 94.2,
+[16:41:24.629]       charStats: [Array],
+[16:41:24.629]       acc: 95.83,
+[16:41:24.629]       mode: 'words',
+[16:41:24.629]       mode2: '50',
+[16:41:24.629]       timestamp: 1747121687000,
+[16:41:24.629]       testDuration: 34.52,
+[16:41:24.629]       consistency: 60.29,
+[16:41:24.629]       keyConsistency: 1.96
+[16:41:24.630]     },
+[16:41:24.630]     {
+[16:41:24.630]       _id: '6822d447df21a5c1da35f42c',
+[16:41:24.630]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.630]       wpm: 96.52,
+[16:41:24.630]       rawWpm: 102.98,
+[16:41:24.630]       charStats: [Array],
+[16:41:24.630]       acc: 90.41,
+[16:41:24.630]       mode: 'words',
+[16:41:24.630]       mode2: '50',
+[16:41:24.630]       timestamp: 1747113031000,
+[16:41:24.630]       restartCount: 6,
+[16:41:24.630]       incompleteTestSeconds: 27.88,
+[16:41:24.630]       testDuration: 31.58,
+[16:41:24.630]       consistency: 63.38,
+[16:41:24.630]       keyConsistency: 2.07
+[16:41:24.630]     },
+[16:41:24.630]     {
+[16:41:24.630]       _id: '6822d3d5df21a5c1da35f014',
+[16:41:24.630]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.630]       wpm: 97.8,
+[16:41:24.630]       rawWpm: 111.45,
+[16:41:24.631]       charStats: [Array],
+[16:41:24.631]       acc: 90.57,
+[16:41:24.631]       mode: 'words',
+[16:41:24.631]       mode2: '10',
+[16:41:24.631]       timestamp: 1747112917000,
+[16:41:24.631]       restartCount: 1,
+[16:41:24.631]       incompleteTestSeconds: 1.81,
+[16:41:24.631]       testDuration: 5.28,
+[16:41:24.631]       consistency: 47.29,
+[16:41:24.631]       keyConsistency: 8.22,
+[16:41:24.631]       isPb: true
+[16:41:24.632]     },
+[16:41:24.632]     {
+[16:41:24.632]       _id: '6822d3bedf21a5c1da35ef2c',
+[16:41:24.632]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.632]       wpm: 105.53,
+[16:41:24.632]       rawWpm: 105.53,
+[16:41:24.632]       charStats: [Array],
+[16:41:24.632]       acc: 98.48,
+[16:41:24.632]       mode: 'words',
+[16:41:24.632]       mode2: '50',
+[16:41:24.632]       timestamp: 1747112894000,
+[16:41:24.632]       restartCount: 1,
+[16:41:24.633]       incompleteTestSeconds: 2.46,
+[16:41:24.633]       testDuration: 29.45,
+[16:41:24.633]       consistency: 72.1,
+[16:41:24.633]       keyConsistency: 15.77
+[16:41:24.633]     },
+[16:41:24.634]     {
+[16:41:24.634]       _id: '6822d347df21a5c1da35eabb',
+[16:41:24.634]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.634]       wpm: 113.25,
+[16:41:24.634]       rawWpm: 118.04,
+[16:41:24.634]       charStats: [Array],
+[16:41:24.634]       acc: 96.79,
+[16:41:24.634]       mode: 'words',
+[16:41:24.634]       mode2: '50',
+[16:41:24.634]       timestamp: 1747112775000,
+[16:41:24.634]       restartCount: 5,
+[16:41:24.634]       incompleteTestSeconds: 31.85,
+[16:41:24.634]       testDuration: 27.55,
+[16:41:24.634]       consistency: 75.48,
+[16:41:24.634]       keyConsistency: 9.83
+[16:41:24.634]     },
+[16:41:24.634]     {
+[16:41:24.634]       _id: '6822d2a6df21a5c1da35e476',
+[16:41:24.635]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.635]       wpm: 120.15,
+[16:41:24.635]       rawWpm: 120.15,
+[16:41:24.635]       charStats: [Array],
+[16:41:24.635]       acc: 99.27,
+[16:41:24.635]       mode: 'words',
+[16:41:24.635]       mode2: '50',
+[16:41:24.635]       timestamp: 1747112614000,
+[16:41:24.635]       restartCount: 1,
+[16:41:24.635]       incompleteTestSeconds: 25.16,
+[16:41:24.635]       testDuration: 27.07,
+[16:41:24.635]       consistency: 71.97,
+[16:41:24.635]       keyConsistency: 29.89,
+[16:41:24.635]       isPb: true
+[16:41:24.635]     },
+[16:41:24.635]     {
+[16:41:24.635]       _id: '6822d25fdf21a5c1da35e19c',
+[16:41:24.635]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.635]       wpm: 78.98,
+[16:41:24.636]       rawWpm: 81.49,
+[16:41:24.636]       charStats: [Array],
+[16:41:24.636]       acc: 93.31,
+[16:41:24.636]       mode: 'custom',
+[16:41:24.636]       mode2: 'custom',
+[16:41:24.636]       timestamp: 1747112543000,
+[16:41:24.636]       restartCount: 2,
+[16:41:24.636]       incompleteTestSeconds: 29.08,
+[16:41:24.636]       testDuration: 33.43,
+[16:41:24.636]       consistency: 58.3,
+[16:41:24.636]       keyConsistency: 1.04,
+[16:41:24.636]       isPb: true
+[16:41:24.636]     },
+[16:41:24.636]     {
+[16:41:24.636]       _id: '6822ce95df21a5c1da35bce5',
+[16:41:24.636]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.636]       wpm: 113.66,
+[16:41:24.636]       rawWpm: 113.66,
+[16:41:24.636]       charStats: [Array],
+[16:41:24.636]       acc: 98.15,
+[16:41:24.637]       mode: 'words',
+[16:41:24.637]       mode2: '50',
+[16:41:24.637]       timestamp: 1747111573000,
+[16:41:24.637]       testDuration: 27.98,
+[16:41:24.637]       consistency: 76.97,
+[16:41:24.637]       keyConsistency: 21.07,
+[16:41:24.637]       isPb: true
+[16:41:24.637]     },
+[16:41:24.637]     {
+[16:41:24.637]       _id: '682008a1df21a5c1da19c9cf',
+[16:41:24.637]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.637]       wpm: 79.76,
+[16:41:24.637]       rawWpm: 89.6,
+[16:41:24.637]       charStats: [Array],
+[16:41:24.637]       acc: 84.06,
+[16:41:24.637]       mode: 'words',
+[16:41:24.637]       mode2: '50',
+[16:41:24.638]       timestamp: 1746929825000,
+[16:41:24.638]       restartCount: 3,
+[16:41:24.638]       incompleteTestSeconds: 88.11,
+[16:41:24.638]       testDuration: 32.95,
+[16:41:24.638]       consistency: 59.82,
+[16:41:24.638]       keyConsistency: 0.75
+[16:41:24.638]     }
+[16:41:24.638]   ]
+[16:41:24.638] }
+[16:41:24.638] API response for /results: {
+[16:41:24.638]   message: 'Results retrieved',
+[16:41:24.638]   data: [
+[16:41:24.638]     {
+[16:41:24.638]       _id: '6822f665df21a5c1da374b59',
+[16:41:24.639]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.639]       wpm: 74.13,
+[16:41:24.639]       rawWpm: 79.45,
+[16:41:24.639]       charStats: [Array],
+[16:41:24.640]       acc: 89.27,
+[16:41:24.640]       mode: 'words',
+[16:41:24.640]       mode2: '50',
+[16:41:24.640]       timestamp: 1747121765000,
+[16:41:24.640]       restartCount: 4,
+[16:41:24.640]       incompleteTestSeconds: 26.77,
+[16:41:24.640]       testDuration: 38.36,
+[16:41:24.640]       consistency: 57.28,
+[16:41:24.640]       keyConsistency: 0.02
+[16:41:24.640]     },
+[16:41:24.640]     {
+[16:41:24.640]       _id: '6822f617df21a5c1da37484a',
+[16:41:24.640]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.640]       wpm: 94.2,
+[16:41:24.641]       rawWpm: 94.2,
+[16:41:24.641]       charStats: [Array],
+[16:41:24.641]       acc: 95.83,
+[16:41:24.641]       mode: 'words',
+[16:41:24.641]       mode2: '50',
+[16:41:24.641]       timestamp: 1747121687000,
+[16:41:24.641]       testDuration: 34.52,
+[16:41:24.641]       consistency: 60.29,
+[16:41:24.641]       keyConsistency: 1.96
+[16:41:24.641]     },
+[16:41:24.641]     {
+[16:41:24.641]       _id: '6822d447df21a5c1da35f42c',
+[16:41:24.641]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.641]       wpm: 96.52,
+[16:41:24.641]       rawWpm: 102.98,
+[16:41:24.641]       charStats: [Array],
+[16:41:24.642]       acc: 90.41,
+[16:41:24.642]       mode: 'words',
+[16:41:24.642]       mode2: '50',
+[16:41:24.642]       timestamp: 1747113031000,
+[16:41:24.642]       restartCount: 6,
+[16:41:24.642]       incompleteTestSeconds: 27.88,
+[16:41:24.642]       testDuration: 31.58,
+[16:41:24.642]       consistency: 63.38,
+[16:41:24.642]       keyConsistency: 2.07
+[16:41:24.642]     },
+[16:41:24.642]     {
+[16:41:24.642]       _id: '6822d3d5df21a5c1da35f014',
+[16:41:24.642]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.642]       wpm: 97.8,
+[16:41:24.642]       rawWpm: 111.45,
+[16:41:24.642]       charStats: [Array],
+[16:41:24.642]       acc: 90.57,
+[16:41:24.642]       mode: 'words',
+[16:41:24.642]       mode2: '10',
+[16:41:24.642]       timestamp: 1747112917000,
+[16:41:24.642]       restartCount: 1,
+[16:41:24.642]       incompleteTestSeconds: 1.81,
+[16:41:24.642]       testDuration: 5.28,
+[16:41:24.642]       consistency: 47.29,
+[16:41:24.643]       keyConsistency: 8.22,
+[16:41:24.643]       isPb: true
+[16:41:24.643]     },
+[16:41:24.643]     {
+[16:41:24.643]       _id: '6822d3bedf21a5c1da35ef2c',
+[16:41:24.643]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.643]       wpm: 105.53,
+[16:41:24.643]       rawWpm: 105.53,
+[16:41:24.643]       charStats: [Array],
+[16:41:24.643]       acc: 98.48,
+[16:41:24.643]       mode: 'words',
+[16:41:24.643]       mode2: '50',
+[16:41:24.643]       timestamp: 1747112894000,
+[16:41:24.643]       restartCount: 1,
+[16:41:24.643]       incompleteTestSeconds: 2.46,
+[16:41:24.643]       testDuration: 29.45,
+[16:41:24.643]       consistency: 72.1,
+[16:41:24.643]       keyConsistency: 15.77
+[16:41:24.643]     },
+[16:41:24.643]     {
+[16:41:24.643]       _id: '6822d347df21a5c1da35eabb',
+[16:41:24.643]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.643]       wpm: 113.25,
+[16:41:24.643]       rawWpm: 118.04,
+[16:41:24.643]       charStats: [Array],
+[16:41:24.643]       acc: 96.79,
+[16:41:24.643]       mode: 'words',
+[16:41:24.643]       mode2: '50',
+[16:41:24.643]       timestamp: 1747112775000,
+[16:41:24.644]       restartCount: 5,
+[16:41:24.644]       incompleteTestSeconds: 31.85,
+[16:41:24.644]       testDuration: 27.55,
+[16:41:24.644]       consistency: 75.48,
+[16:41:24.644]       keyConsistency: 9.83
+[16:41:24.644]     },
+[16:41:24.644]     {
+[16:41:24.644]       _id: '6822d2a6df21a5c1da35e476',
+[16:41:24.644]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.644]       wpm: 120.15,
+[16:41:24.644]       rawWpm: 120.15,
+[16:41:24.644]       charStats: [Array],
+[16:41:24.644]       acc: 99.27,
+[16:41:24.644]       mode: 'words',
+[16:41:24.644]       mode2: '50',
+[16:41:24.644]       timestamp: 1747112614000,
+[16:41:24.644]       restartCount: 1,
+[16:41:24.644]       incompleteTestSeconds: 25.16,
+[16:41:24.644]       testDuration: 27.07,
+[16:41:24.644]       consistency: 71.97,
+[16:41:24.644]       keyConsistency: 29.89,
+[16:41:24.644]       isPb: true
+[16:41:24.644]     },
+[16:41:24.644]     {
+[16:41:24.644]       _id: '6822d25fdf21a5c1da35e19c',
+[16:41:24.644]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.644]       wpm: 78.98,
+[16:41:24.645]       rawWpm: 81.49,
+[16:41:24.645]       charStats: [Array],
+[16:41:24.645]       acc: 93.31,
+[16:41:24.645]       mode: 'custom',
+[16:41:24.645]       mode2: 'custom',
+[16:41:24.645]       timestamp: 1747112543000,
+[16:41:24.645]       restartCount: 2,
+[16:41:24.645]       incompleteTestSeconds: 29.08,
+[16:41:24.645]       testDuration: 33.43,
+[16:41:24.645]       consistency: 58.3,
+[16:41:24.645]       keyConsistency: 1.04,
+[16:41:24.645]       isPb: true
+[16:41:24.645]     },
+[16:41:24.646]     {
+[16:41:24.646]       _id: '6822ce95df21a5c1da35bce5',
+[16:41:24.646]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.646]       wpm: 113.66,
+[16:41:24.646]       rawWpm: 113.66,
+[16:41:24.646]       charStats: [Array],
+[16:41:24.646]       acc: 98.15,
+[16:41:24.646]       mode: 'words',
+[16:41:24.646]       mode2: '50',
+[16:41:24.646]       timestamp: 1747111573000,
+[16:41:24.646]       testDuration: 27.98,
+[16:41:24.646]       consistency: 76.97,
+[16:41:24.646]       keyConsistency: 21.07,
+[16:41:24.646]       isPb: true
+[16:41:24.646]     },
+[16:41:24.646]     {
+[16:41:24.646]       _id: '682008a1df21a5c1da19c9cf',
+[16:41:24.646]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[16:41:24.646]       wpm: 79.76,
+[16:41:24.646]       rawWpm: 89.6,
+[16:41:24.646]       charStats: [Array],
+[16:41:24.646]       acc: 84.06,
+[16:41:24.646]       mode: 'words',
+[16:41:24.646]       mode2: '50',
+[16:41:24.646]       timestamp: 1746929825000,
+[16:41:24.646]       restartCount: 3,
+[16:41:24.646]       incompleteTestSeconds: 88.11,
+[16:41:24.646]       testDuration: 32.95,
+[16:41:24.646]       consistency: 59.82,
+[16:41:24.646]       keyConsistency: 0.75
+[16:41:24.646]     }
+[16:41:24.647]   ]
+[16:41:24.647] }
+[16:41:24.824] API response for /users/personalBests: {
+[16:41:24.825]   message: 'Personal bests retrieved',
+[16:41:24.825]   data: [
+[16:41:24.825]     {
+[16:41:24.825]       acc: 99.27,
+[16:41:24.825]       consistency: 71.97,
+[16:41:24.825]       difficulty: 'normal',
+[16:41:24.825]       lazyMode: false,
+[16:41:24.825]       language: 'english',
+[16:41:24.825]       punctuation: false,
+[16:41:24.825]       raw: 120.15,
+[16:41:24.825]       wpm: 120.15,
+[16:41:24.825]       timestamp: 1747112614042,
+[16:41:24.825]       numbers: false
+[16:41:24.825]     }
+[16:41:24.825]   ]
+[16:41:24.825] }
+[16:41:24.825] Personal bests data: [
+[16:41:24.825]   {
+[16:41:24.825]     "acc": 99.27,
+[16:41:24.825]     "consistency": 71.97,
+[16:41:24.825]     "difficulty": "normal",
+[16:41:24.825]     "lazyMode": false,
+[16:41:24.825]     "language": "english",
+[16:41:24.826]     "punctuation": false,
+[16:41:24.826]     "raw": 120.15,
+[16:41:24.826]     "wpm": 120.15,
+[16:41:24.826]     "timestamp": 1747112614042,
+[16:41:24.826]     "numbers": false
+[16:41:24.826]   }
+[16:41:24.826] ]
+[16:41:24.826] API response for /users/personalBests: {
+[16:41:24.826]   message: 'Personal bests retrieved',
+[16:41:24.826]   data: [
+[16:41:24.826]     {
+[16:41:24.826]       acc: 99.27,
+[16:41:24.826]       consistency: 71.97,
+[16:41:24.826]       difficulty: 'normal',
+[16:41:24.826]       lazyMode: false,
+[16:41:24.826]       language: 'english',
+[16:41:24.826]       punctuation: false,
+[16:41:24.826]       raw: 120.15,
+[16:41:24.826]       wpm: 120.15,
+[16:41:24.826]       timestamp: 1747112614042,
+[16:41:24.826]       numbers: false
+[16:41:24.826]     }
+[16:41:24.826]   ]
+[16:41:24.826] }
+[16:41:24.826] Personal bests data: [
+[16:41:24.826]   {
+[16:41:24.826]     "acc": 99.27,
+[16:41:24.826]     "consistency": 71.97,
+[16:41:24.826]     "difficulty": "normal",
+[16:41:24.826]     "lazyMode": false,
+[16:41:24.826]     "language": "english",
+[16:41:24.826]     "punctuation": false,
+[16:41:24.826]     "raw": 120.15,
+[16:41:24.827]     "wpm": 120.15,
+[16:41:24.827]     "timestamp": 1747112614042,
+[16:41:24.827]     "numbers": false
+[16:41:24.827]   }
+[16:41:24.827] ]
+[16:41:25.033] API response for /users/personalBests: {
+[16:41:25.033]   message: 'Personal bests retrieved',
+[16:41:25.033]   data: [
+[16:41:25.033]     {
+[16:41:25.033]       acc: 94.55,
+[16:41:25.033]       consistency: 66.53,
+[16:41:25.033]       difficulty: 'normal',
+[16:41:25.033]       lazyMode: false,
+[16:41:25.033]       language: 'english',
+[16:41:25.033]       punctuation: false,
+[16:41:25.033]       raw: 63.4,
+[16:41:25.033]       wpm: 61.46,
+[16:41:25.033]       timestamp: 1670133327519
+[16:41:25.033]     }
+[16:41:25.033]   ]
+[16:41:25.033] }
+[16:41:25.033] Personal bests data: [
+[16:41:25.033]   {
+[16:41:25.033]     "acc": 94.55,
+[16:41:25.034]     "consistency": 66.53,
+[16:41:25.034]     "difficulty": "normal",
+[16:41:25.034]     "lazyMode": false,
+[16:41:25.034]     "language": "english",
+[16:41:25.034]     "punctuation": false,
+[16:41:25.034]     "raw": 63.4,
+[16:41:25.034]     "wpm": 61.46,
+[16:41:25.034]     "timestamp": 1670133327519
+[16:41:25.034]   }
+[16:41:25.034] ]
+[16:41:25.034] API response for /users/personalBests: {
+[16:41:25.034]   message: 'Personal bests retrieved',
+[16:41:25.034]   data: [
+[16:41:25.034]     {
+[16:41:25.034]       acc: 94.55,
+[16:41:25.034]       consistency: 66.53,
+[16:41:25.034]       difficulty: 'normal',
+[16:41:25.035]       lazyMode: false,
+[16:41:25.035]       language: 'english',
+[16:41:25.035]       punctuation: false,
+[16:41:25.035]       raw: 63.4,
+[16:41:25.035]       wpm: 61.46,
+[16:41:25.035]       timestamp: 1670133327519
+[16:41:25.035]     }
+[16:41:25.035]   ]
+[16:41:25.035] }
+[16:41:25.035] Personal bests data: [
+[16:41:25.035]   {
+[16:41:25.035]     "acc": 94.55,
+[16:41:25.035]     "consistency": 66.53,
+[16:41:25.035]     "difficulty": "normal",
+[16:41:25.035]     "lazyMode": false,
+[16:41:25.035]     "language": "english",
+[16:41:25.035]     "punctuation": false,
+[16:41:25.035]     "raw": 63.4,
+[16:41:25.035]     "wpm": 61.46,
+[16:41:25.035]     "timestamp": 1670133327519
+[16:41:25.035]   }
+[16:41:25.035] ]
+[16:41:25.222] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[16:41:25.222] Personal bests data: null
+[16:41:25.222] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[16:41:25.222] Personal bests data: null
+[16:41:25.427] API response for /users/stats: {
+[16:41:25.427]   message: 'Personal stats retrieved',
+[16:41:25.427]   data: {
+[16:41:25.427]     _id: '638bd797bd098f2ba5dfa400',
+[16:41:25.427]     completedTests: 86,
+[16:41:25.427]     startedTests: 120,
+[16:41:25.427]     timeTyping: 16820.659999999996
+[16:41:25.427]   }
+[16:41:25.427] }
+[16:41:25.427] API response for /users/stats: {
+[16:41:25.427]   message: 'Personal stats retrieved',
+[16:41:25.427]   data: {
+[16:41:25.427]     _id: '638bd797bd098f2ba5dfa400',
+[16:41:25.427]     completedTests: 86,
+[16:41:25.427]     startedTests: 120,
+[16:41:25.427]     timeTyping: 16820.659999999996
+[16:41:25.427]   }
+[16:41:25.428] }
+[16:41:25.631] API response for /users/currentTestActivity: {
+[16:41:25.631]   message: 'Current test activity data retrieved',
+[16:41:25.631]   data: {
+[16:41:25.631]     testsByDays: [
+[16:41:25.631]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.631]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.631]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.631]       null, null, null, null, null, 1,    2,    null, null, null,
+[16:41:25.631]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.631]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.631]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.631]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.631]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.631]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.631]       ... 272 more items
+[16:41:25.631]     ],
+[16:41:25.631]     lastDay: 1747094400000
+[16:41:25.632]   }
+[16:41:25.632] }
+[16:41:25.632] API response for /users/currentTestActivity: {
+[16:41:25.632]   message: 'Current test activity data retrieved',
+[16:41:25.632]   data: {
+[16:41:25.632]     testsByDays: [
+[16:41:25.632]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.632]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.632]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.632]       null, null, null, null, null, 1,    2,    null, null, null,
+[16:41:25.632]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.632]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.632]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.632]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.632]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.632]       null, null, null, null, null, null, null, null, null, null,
+[16:41:25.632]       ... 272 more items
+[16:41:25.632]     ],
+[16:41:25.632]     lastDay: 1747094400000
+[16:41:25.632]   }
+[16:41:25.632] }
+[16:41:25.823] API response for /users/personalBests: {
+[16:41:25.823]   message: 'Personal bests retrieved',
+[16:41:25.823]   data: [
+[16:41:25.823]     {
+[16:41:25.823]       acc: 90.57,
+[16:41:25.823]       consistency: 47.29,
+[16:41:25.823]       difficulty: 'normal',
+[16:41:25.823]       lazyMode: false,
+[16:41:25.823]       language: 'english',
+[16:41:25.823]       punctuation: false,
+[16:41:25.823]       raw: 111.45,
+[16:41:25.823]       wpm: 97.8,
+[16:41:25.823]       numbers: false,
+[16:41:25.823]       timestamp: 1747112917927
+[16:41:25.823]     }
+[16:41:25.823]   ]
+[16:41:25.823] }
+[16:41:25.823] Personal bests data: [
+[16:41:25.823]   {
+[16:41:25.824]     "acc": 90.57,
+[16:41:25.824]     "consistency": 47.29,
+[16:41:25.824]     "difficulty": "normal",
+[16:41:25.824]     "lazyMode": false,
+[16:41:25.824]     "language": "english",
+[16:41:25.824]     "punctuation": false,
+[16:41:25.824]     "raw": 111.45,
+[16:41:25.824]     "wpm": 97.8,
+[16:41:25.824]     "numbers": false,
+[16:41:25.824]     "timestamp": 1747112917927
+[16:41:25.824]   }
+[16:41:25.824] ]
+[16:41:25.824] API response for /users/personalBests: {
+[16:41:25.824]   message: 'Personal bests retrieved',
+[16:41:25.824]   data: [
+[16:41:25.824]     {
+[16:41:25.824]       acc: 90.57,
+[16:41:25.824]       consistency: 47.29,
+[16:41:25.824]       difficulty: 'normal',
+[16:41:25.824]       lazyMode: false,
+[16:41:25.824]       language: 'english',
+[16:41:25.824]       punctuation: false,
+[16:41:25.824]       raw: 111.45,
+[16:41:25.824]       wpm: 97.8,
+[16:41:25.824]       numbers: false,
+[16:41:25.824]       timestamp: 1747112917927
+[16:41:25.824]     }
+[16:41:25.824]   ]
+[16:41:25.824] }
+[16:41:25.824] Personal bests data: [
+[16:41:25.824]   {
+[16:41:25.824]     "acc": 90.57,
+[16:41:25.824]     "consistency": 47.29,
+[16:41:25.824]     "difficulty": "normal",
+[16:41:25.824]     "lazyMode": false,
+[16:41:25.824]     "language": "english",
+[16:41:25.825]     "punctuation": false,
+[16:41:25.825]     "raw": 111.45,
+[16:41:25.825]     "wpm": 97.8,
+[16:41:25.825]     "numbers": false,
+[16:41:25.825]     "timestamp": 1747112917927
+[16:41:25.825]   }
+[16:41:25.825] ]
+[16:41:25.881]  ✓ Generating static pages (779/779)
+[16:41:25.939]    Finalizing page optimization ...
+[16:41:25.939]    Collecting build traces ...
+[16:41:26.588] 
+[16:41:26.603] Route (app)                                                                                          Size     First Load JS
+[16:41:26.604] ┌ ƒ /                                                                                                178 B           241 kB
+[16:41:26.604] ├ ○ /_not-found                                                                                      179 B          87.9 kB
+[16:41:26.604] ├ ○ /anime                                                                                           2.23 kB         166 kB
+[16:41:26.604] ├ ○ /anime/lists                                                                                     3.41 kB         164 kB
+[16:41:26.604] ├ ○ /api/anime-collections                                                                           0 B                0 B
+[16:41:26.604] ├ ○ /api/archives                                                                                    0 B                0 B
+[16:41:26.604] ├ ○ /api/bible                                                                                       0 B                0 B
+[16:41:26.604] ├ ƒ /api/blog-content                                                                                0 B                0 B
+[16:41:26.604] ├ ○ /api/books                                                                                       0 B                0 B
+[16:41:26.604] ├ ○ /api/books/current                                                                               0 B                0 B
+[16:41:26.604] ├ ○ /api/companies                                                                                   0 B                0 B
+[16:41:26.604] ├ ○ /api/content-stats                                                                               0 B                0 B
+[16:41:26.604] ├ ○ /api/essays/categories                                                                           0 B                0 B
+[16:41:26.604] ├ ○ /api/essays/essays                                                                               0 B                0 B
+[16:41:26.604] ├ ○ /api/essays/series                                                                               0 B                0 B
+[16:41:26.604] ├ ○ /api/essays/tags                                                                                 0 B                0 B
+[16:41:26.604] ├ ○ /api/family-trees                                                                                0 B                0 B
+[16:41:26.605] ├ ƒ /api/family-trees/[slug]                                                                         0 B                0 B
+[16:41:26.605] ├ ○ /api/film/fav-actors                                                                             0 B                0 B
+[16:41:26.605] ├ ○ /api/film/fav-characters                                                                         0 B                0 B
+[16:41:26.605] ├ ○ /api/film/fav-companies                                                                          0 B                0 B
+[16:41:26.605] ├ ○ /api/film/fav-directors                                                                          0 B                0 B
+[16:41:26.605] ├ ƒ /api/film/fav-producers                                                                          0 B                0 B
+[16:41:26.605] ├ ƒ /api/film/favorite-movies                                                                        0 B                0 B
+[16:41:26.605] ├ ƒ /api/film/favorite-shows                                                                         0 B                0 B
+[16:41:26.605] ├ ○ /api/film/genres                                                                                 0 B                0 B
+[16:41:26.605] ├ ƒ /api/film/most-watched-movies                                                                    0 B                0 B
+[16:41:26.605] ├ ƒ /api/film/most-watched-shows                                                                     0 B                0 B
+[16:41:26.605] ├ ƒ /api/film/recent-movies                                                                          0 B                0 B
+[16:41:26.605] ├ ƒ /api/film/recent-shows                                                                           0 B                0 B
+[16:41:26.605] ├ ○ /api/film/stats                                                                                  0 B                0 B
+[16:41:26.605] ├ ○ /api/flashcards                                                                                  0 B                0 B
+[16:41:26.605] ├ ○ /api/games/characters                                                                            0 B                0 B
+[16:41:26.605] ├ ○ /api/games/consoles                                                                              0 B                0 B
+[16:41:26.605] ├ ○ /api/games/games                                                                                 0 B                0 B
+[16:41:26.605] ├ ○ /api/games/platforms                                                                             0 B                0 B
+[16:41:26.605] ├ ○ /api/get-script                                                                                  0 B                0 B
+[16:41:26.605] ├ ƒ /api/github-file                                                                                 0 B                0 B
+[16:41:26.606] ├ ƒ /api/hearts/check                                                                                0 B                0 B
+[16:41:26.606] ├ ƒ /api/hearts/increment                                                                            0 B                0 B
+[16:41:26.606] ├ ○ /api/inspirations                                                                                0 B                0 B
+[16:41:26.606] ├ ○ /api/learning-content                                                                            0 B                0 B
+[16:41:26.606] ├ ○ /api/library-catalog                                                                             0 B                0 B
+[16:41:26.606] ├ ○ /api/library-notes                                                                               0 B                0 B
+[16:41:26.606] ├ ○ /api/library-series                                                                              0 B                0 B
+[16:41:26.606] ├ ƒ /api/library/book/[title]                                                                        0 B                0 B
+[16:41:26.606] ├ ƒ /api/local-collections                                                                           0 B                0 B
+[16:41:26.606] ├ ○ /api/locations                                                                                   0 B                0 B
+[16:41:26.607] ├ ƒ /api/mal/anime-by-id                                                                             0 B                0 B
+[16:41:26.607] ├ ƒ /api/mal/fav-chars                                                                               0 B                0 B
+[16:41:26.607] ├ ƒ /api/mal/fav-companies                                                                           0 B                0 B
+[16:41:26.607] ├ ƒ /api/mal/fav-people                                                                              0 B                0 B
+[16:41:26.607] ├ ƒ /api/mal/manga-by-id                                                                             0 B                0 B
+[16:41:26.607] ├ ƒ /api/mal/refresh-token                                                                           0 B                0 B
+[16:41:26.607] ├ ƒ /api/mal/user-data                                                                               0 B                0 B
+[16:41:26.607] ├ ○ /api/manga-collections                                                                           0 B                0 B
+[16:41:26.607] ├ ƒ /api/manga-entry                                                                                 0 B                0 B
+[16:41:26.607] ├ ƒ /api/newsletters                                                                                 0 B                0 B
+[16:41:26.607] ├ ƒ /api/now/update                                                                                  0 B                0 B
+[16:41:26.607] ├ ƒ /api/og-debug                                                                                    0 B                0 B
+[16:41:26.607] ├ ○ /api/others                                                                                      0 B                0 B
+[16:41:26.607] ├ ƒ /api/others/entry                                                                                0 B                0 B
+[16:41:26.607] ├ ○ /api/owned-collections                                                                           0 B                0 B
+[16:41:26.607] ├ ○ /api/poems                                                                                       0 B                0 B
+[16:41:26.607] ├ ƒ /api/post                                                                                        0 B                0 B
+[16:41:26.607] ├ ƒ /api/post-exists                                                                                 0 B                0 B
+[16:41:26.607] ├ ƒ /api/post-mdx                                                                                    0 B                0 B
+[16:41:26.607] ├ ○ /api/posts                                                                                       0 B                0 B
+[16:41:26.607] ├ ○ /api/posts/search                                                                                0 B                0 B
+[16:41:26.608] ├ ○ /api/predictions                                                                                 0 B                0 B
+[16:41:26.608] ├ ○ /api/progymnasmata-stats                                                                         0 B                0 B
+[16:41:26.608] ├ ○ /api/progymnasmata/entries                                                                       0 B                0 B
+[16:41:26.608] ├ ƒ /api/progymnasmata/entry                                                                         0 B                0 B
+[16:41:26.608] ├ ƒ /api/prompts                                                                                     0 B                0 B
+[16:41:26.608] ├ ○ /api/random-quote                                                                                0 B                0 B
+[16:41:26.608] ├ ƒ /api/references                                                                                  0 B                0 B
+[16:41:26.608] ├ ○ /api/resources                                                                                   0 B                0 B
+[16:41:26.608] ├ ƒ /api/scripts                                                                                     0 B                0 B
+[16:41:26.608] ├ ○ /api/sources                                                                                     0 B                0 B
+[16:41:26.608] ├ ƒ /api/tikz                                                                                        0 B                0 B
+[16:41:26.608] ├ ○ /api/trakt/genres                                                                                0 B                0 B
+[16:41:26.608] ├ ƒ /api/trakt/lists                                                                                 0 B                0 B
+[16:41:26.608] ├ ƒ /api/trakt/most-watched-movies                                                                   0 B                0 B
+[16:41:26.608] ├ ƒ /api/trakt/most-watched-shows                                                                    0 B                0 B
+[16:41:26.608] ├ ƒ /api/trakt/recent-movies                                                                         0 B                0 B
+[16:41:26.608] ├ ƒ /api/trakt/recent-shows                                                                          0 B                0 B
+[16:41:26.608] ├ ƒ /api/trakt/stats                                                                                 0 B                0 B
+[16:41:26.608] ├ ○ /api/updates                                                                                     0 B                0 B
+[16:41:26.608] ├ ƒ /api/verify-archives-password                                                                    0 B                0 B
+[16:41:26.608] ├ ƒ /api/verify-theory-password                                                                      0 B                0 B
+[16:41:26.608] ├ ƒ /api/verse/content                                                                               0 B                0 B
+[16:41:26.608] ├ ○ /archive                                                                                         5.28 kB         182 kB
+[16:41:26.608] ├ ○ /art                                                                                             7.59 kB         136 kB
+[16:41:26.608] ├ ○ /blog                                                                                            2 kB            167 kB
+[16:41:26.608] ├ ● /blog/[category]                                                                                 1.16 kB         163 kB
+[16:41:26.609] ├   ├ /blog/philosophy
+[16:41:26.609] ├   ├ /blog/verse
+[16:41:26.609] ├   ├ /blog/on-myself
+[16:41:26.609] ├   └ [+2 more paths]
+[16:41:26.609] ├ ● /blog/[category]/[slug]                                                                          1.18 kB        12.5 MB
+[16:41:26.609] ├   ├ /blog/philosophy/on-suicide
+[16:41:26.609] ├   ├ /blog/verse/haiku-form-guide
+[16:41:26.609] ├   ├ /blog/on-myself/open-questions
+[16:41:26.609] ├   └ [+19 more paths]
+[16:41:26.609] ├ ○ /cases                                                                                           164 B           167 kB
+[16:41:26.609] ├ ● /cases/[category]                                                                                164 B           167 kB
+[16:41:26.609] ├   ├ /cases/internet-mysteries
+[16:41:26.609] ├   ├ /cases/missing-persons
+[16:41:26.609] ├   ├ /cases/homicide
+[16:41:26.609] ├   └ [+7 more paths]
+[16:41:26.609] ├ ● /cases/[category]/[slug]                                                                         6.78 kB        12.5 MB
+[16:41:26.609] ├   ├ /cases/internet-mysteries/cicada-3301
+[16:41:26.609] ├   ├ /cases/internet-mysteries/markovian-parallax-denigrate
+[16:41:26.609] ├   ├ /cases/internet-mysteries/lake-city-quiet-pills
+[16:41:26.609] ├   └ [+6 more paths]
+[16:41:26.609] ├ ƒ /categories                                                                                      4.5 kB          161 kB
+[16:41:26.609] ├ ƒ /category                                                                                        196 B          94.8 kB
+[16:41:26.609] ├ ● /category/[slug]                                                                                 4.52 kB         161 kB
+[16:41:26.609] ├   ├ /category/architecture
+[16:41:26.609] ├   ├ /category/film-reviews
+[16:41:26.609] ├   ├ /category/libraries
+[16:41:26.609] ├   └ [+4 more paths]
+[16:41:26.612] ├ ○ /changelog                                                                                       2.35 kB         118 kB
+[16:41:26.612] ├ ○ /changelog/data                                                                                  1.25 kB        12.5 MB
+[16:41:26.612] ├ ○ /colophon                                                                                        9.65 kB         169 kB
+[16:41:26.612] ├ ○ /companies                                                                                       4.12 kB         125 kB
+[16:41:26.612] ├ ○ /conspiracies                                                                                    163 B           167 kB
+[16:41:26.612] ├ ● /conspiracies/[category]                                                                         163 B           167 kB
+[16:41:26.612] ├   ├ /conspiracies/illuminati
+[16:41:26.612] ├   ├ /conspiracies/new-world-order
+[16:41:26.612] ├   ├ /conspiracies/cia-projects
+[16:41:26.612] ├   └ [+6 more paths]
+[16:41:26.612] ├ ● /conspiracies/[category]/[slug]                                                                  6.68 kB        12.5 MB
+[16:41:26.612] ├   ├ /conspiracies/illuminati/13-bloodlines
+[16:41:26.612] ├   ├ /conspiracies/new-world-order/committee-of-300
+[16:41:26.612] ├   ├ /conspiracies/cia-projects/mk-ultra
+[16:41:26.612] ├   └ [+7 more paths]
+[16:41:26.613] ├ ○ /contact                                                                                         8.56 kB         127 kB
+[16:41:26.613] ├ ○ /cv                                                                                              6.45 kB         159 kB
+[16:41:26.613] ├ ○ /directory                                                                                       5.29 kB         121 kB
+[16:41:26.613] ├ ƒ /doc/[...slug]                                                                                   0 B                0 B
+[16:41:26.613] ├ ƒ /doc/[id]                                                                                        0 B                0 B
+[16:41:26.613] ├ ƒ /doc/debug                                                                                       0 B                0 B
+[16:41:26.613] ├ ○ /doc/test                                                                                        3.05 kB         105 kB
+[16:41:26.613] ├ ƒ /docs                                                                                            169 B           176 kB
+[16:41:26.613] ├ ● /docs/[category]                                                                                 169 B           176 kB
+[16:41:26.613] ├   ├ /docs/machine-learning
+[16:41:26.613] ├   ├ /docs/quantum-computing
+[16:41:26.613] ├   ├ /docs/ai-ethics
+[16:41:26.613] ├   └ [+2 more paths]
+[16:41:26.613] ├ ● /docs/[category]/[year]/[slug]                                                                   4.69 kB         123 kB
+[16:41:26.613] ├   ├ /docs/machine-learning/2025/advanced-neural-network-architectures
+[16:41:26.613] ├   ├ /docs/quantum-computing/2025/quantum-computing-current-state
+[16:41:26.613] ├   ├ /docs/ai-ethics/2025/ethical-implications-agi
+[16:41:26.613] ├   └ [+2 more paths]
+[16:41:26.613] ├ ○ /dossiers                                                                                        164 B           167 kB
+[16:41:26.613] ├ ● /dossiers/[category]                                                                             163 B           167 kB
+[16:41:26.613] ├   ├ /dossiers/internet-mysteries
+[16:41:26.613] ├   ├ /dossiers/missing-persons
+[16:41:26.613] ├   ├ /dossiers/homicide
+[16:41:26.613] ├   └ [+7 more paths]
+[16:41:26.613] ├ ● /dossiers/[category]/[slug]                                                                      7.05 kB        12.5 MB
+[16:41:26.613] ├   ├ /dossiers/unsolved-crimes/elisa-lam
+[16:41:26.614] ├   ├ /dossiers/homicide/jill-dando
+[16:41:26.614] ├   ├ /dossiers/unidentified-persons/boy-in-the-box-1957
+[16:41:26.614] ├   └ [+2 more paths]
+[16:41:26.614] ├ ○ /essays                                                                                          4.48 kB         161 kB
+[16:41:26.614] ├ ● /essays/[year]/[slug]                                                                            211 kB         12.7 MB
+[16:41:26.614] ├   ├ /essays/2025/villa-ephrussi-de-rothschild
+[16:41:26.614] ├   └ /essays/2025/release-of-openai-deep-learning
+[16:41:26.616] ├ ○ /essays/2025/release-of-openai-deep-learning                                                     1.25 kB        12.5 MB
+[16:41:26.616] ├ ○ /essays/2025/villa-ephrussi-de-rothschild                                                        1.25 kB        12.5 MB
+[16:41:26.617] ├ ○ /faq                                                                                             4.94 kB         122 kB
+[16:41:26.617] ├ ƒ /favs                                                                                            170 B           145 kB
+[16:41:26.617] ├ ƒ /favs/[category]                                                                                 170 B           145 kB
+[16:41:26.617] ├ ○ /fiction                                                                                         159 B           163 kB
+[16:41:26.617] ├ ● /fiction/[category]                                                                              159 B           163 kB
+[16:41:26.617] ├   ├ /fiction/short-stories
+[16:41:26.617] ├   └ /fiction/flash-fiction
+[16:41:26.617] ├ ● /fiction/[category]/[slug]                                                                       4.18 kB        12.5 MB
+[16:41:26.617] ├   ├ /fiction/short-stories/the-clockmakers-daughter
+[16:41:26.617] ├   ├ /fiction/short-stories/a-theory-of-rooms
+[16:41:26.617] ├   ├ /fiction/short-stories/how-they-fall
+[16:41:26.617] ├   └ [+2 more paths]
+[16:41:26.618] ├ ○ /film                                                                                            6.21 kB         125 kB
+[16:41:26.618] ├ ○ /film/lists                                                                                      5.39 kB         124 kB
+[16:41:26.618] ├ ○ /film/socials                                                                                    3.54 kB         119 kB
+[16:41:26.618] ├ ○ /flashcards                                                                                      4.81 kB         121 kB
+[16:41:26.618] ├ ○ /games                                                                                           6.76 kB         163 kB
+[16:41:26.618] ├ ○ /globe                                                                                           418 kB          506 kB
+[16:41:26.618] ├ ○ /grid                                                                                            179 B           241 kB
+[16:41:26.618] ├ ƒ /lecture-notes                                                                                   173 B           180 kB
+[16:41:26.618] ├ ● /lecture-notes/[category]                                                                        173 B           180 kB
+[16:41:26.618] ├   ├ /lecture-notes/philosophy
+[16:41:26.618] ├   ├ /lecture-notes/computer-science
+[16:41:26.618] ├   ├ /lecture-notes/literature
+[16:41:26.619] ├   └ [+2 more paths]
+[16:41:26.619] ├ ● /lecture-notes/[category]/[year]/[slug]                                                          1.24 kB         136 kB
+[16:41:26.619] ├   ├ /lecture-notes/philosophy/2024/introduction-to-philosophy-of-mind
+[16:41:26.620] ├   ├ /lecture-notes/computer-science/2024/modern-cryptography-methods
+[16:41:26.620] ├   ├ /lecture-notes/literature/2024/literary-theory-structuralism-and-post-structuralism
+[16:41:26.620] ├   └ [+2 more paths]
+[16:41:26.620] ├ ○ /legal                                                                                           4.39 kB         126 kB
+[16:41:26.620] ├ ● /legal/[slug]                                                                                    5.77 kB         122 kB
+[16:41:26.620] ├   ├ /legal/terms-of-use
+[16:41:26.620] ├   ├ /legal/privacy-policy
+[16:41:26.620] ├   ├ /legal/cookie-tracking-notice
+[16:41:26.620] ├   └ [+7 more paths]
+[16:41:26.620] ├ ○ /libers                                                                                          164 B           168 kB
+[16:41:26.620] ├ ● /libers/[category]                                                                               164 B           168 kB
+[16:41:26.620] ├   ├ /libers/liber-necrophilia
+[16:41:26.620] ├   ├ /libers/liber-zoophilia
+[16:41:26.620] ├   ├ /libers/liber-sodomorum
+[16:41:26.621] ├   └ [+6 more paths]
+[16:41:26.621] ├ ● /libers/[category]/[slug]                                                                        7.8 kB         12.5 MB
+[16:41:26.621] ├   ├ /libers/liber-necrophilia/necrophilic-practices-ptolemaic-embalming
+[16:41:26.621] ├   ├ /libers/liber-zoophilia/bestiality-roman-law
+[16:41:26.621] ├   ├ /libers/liber-sodomorum/homosexuality-athenian-law
+[16:41:26.621] ├   └ [+6 more paths]
+[16:41:26.621] ├ ○ /library                                                                                         6.21 kB         168 kB
+[16:41:26.623] ├ ƒ /library/[classification]                                                                        179 B          87.9 kB
+[16:41:26.623] ├ ƒ /library/[classification]/[subclassification]                                                    179 B          87.9 kB
+[16:41:26.623] ├ ● /library/[classification]/[subclassification]/[title]                                            5.46 kB         137 kB
+[16:41:26.623] ├   ├ /library/Q/QA184/linear-algebra-done-right
+[16:41:26.623] ├   ├ /library/Q/QA300/understanding-analysis
+[16:41:26.623] ├   ├ /library/Q/QA300/elementary-analysis-theory-of-calculus
+[16:41:26.623] ├   └ [+5 more paths]
+[16:41:26.623] ├ ● /library/collections/[slug]                                                                      3.89 kB         125 kB
+[16:41:26.623] ├   ├ /library/collections/1
+[16:41:26.623] ├   ├ /library/collections/2
+[16:41:26.623] ├   └ /library/collections/3
+[16:41:26.623] ├ ○ /library/notes                                                                                   178 B          87.9 kB
+[16:41:26.624] ├ ○ /library/series                                                                                  179 B          87.9 kB
+[16:41:26.624] ├ ○ /manga                                                                                           2.4 kB          167 kB
+[16:41:26.624] ├ ○ /manga/lists                                                                                     3.42 kB         164 kB
+[16:41:26.624] ├ ○ /mitzvah                                                                                         19.1 kB         176 kB
+[16:41:26.624] ├ ○ /music                                                                                           409 B          88.2 kB
+[16:41:26.624] ├ ○ /news                                                                                            165 B           167 kB
+[16:41:26.624] ├ ● /news/[category]                                                                                 164 B           167 kB
+[16:41:26.624] ├   ├ /news/openai
+[16:41:26.624] ├   ├ /news/anthropic
+[16:41:26.624] ├   └ /news/google
+[16:41:26.624] ├ ● /news/[category]/[slug]                                                                          6.71 kB        12.5 MB
+[16:41:26.624] ├   ├ /news/openai/gpt-1
+[16:41:26.624] ├   ├ /news/openai/gpt-2
+[16:41:26.625] ├   ├ /news/openai/gpt-3
+[16:41:26.625] ├   └ [+7 more paths]
+[16:41:26.625] ├ ○ /newsletter                                                                                      3.56 kB         168 kB
+[16:41:26.625] ├ ● /newsletter/articles/[slug]                                                                      196 B          94.8 kB
+[16:41:26.625] ├   ├ /newsletter/articles/million-dollar-product
+[16:41:26.625] ├   ├ /newsletter/articles/escape-beginner-hell
+[16:41:26.625] ├   ├ /newsletter/articles/60-minutes-a-day
+[16:41:26.625] ├   └ [+7 more paths]
+[16:41:26.625] ├ ○ /notes                                                                                           163 B           167 kB
+[16:41:26.625] ├ ● /notes/[category]                                                                                163 B           167 kB
+[16:41:26.625] ├   ├ /notes/philosophy
+[16:41:26.625] ├   ├ /notes/verse
+[16:41:26.625] ├   ├ /notes/random
+[16:41:26.625] ├   └ [+22 more paths]
+[16:41:26.626] ├ ● /notes/[category]/[slug]                                                                         1.17 kB        12.5 MB
+[16:41:26.626] ├   ├ /notes/philosophy/on-suicide
+[16:41:26.626] ├   ├ /notes/verse/haiku-form-guide
+[16:41:26.626] ├   ├ /notes/random/open-questions
+[16:41:26.626] ├   └ [+56 more paths]
+[16:41:26.626] ├ ○ /now                                                                                             3.1 kB          119 kB
+[16:41:26.626] ├ ○ /ocs                                                                                             10.1 kB         173 kB
+[16:41:26.626] ├ ● /ocs/[slug]                                                                                      190 B          99.9 kB
+[16:41:26.626] ├   ├ /ocs/chloe-elyon
+[16:41:26.626] ├   ├ /ocs/sydney-lane
+[16:41:26.627] ├   ├ /ocs/yifah-kohen
+[16:41:26.627] ├   └ [+31 more paths]
+[16:41:26.627] ├ ○ /ocs/profiles/chloe-elyon                                                                        1.25 kB        12.5 MB
+[16:41:26.627] ├ ○ /ocs/profiles/lior-elyon                                                                         1.25 kB        12.5 MB
+[16:41:26.627] ├ ○ /ocs/worlds/eldoria                                                                              1.25 kB        12.5 MB
+[16:41:26.627] ├ ○ /ocs/worlds/nyxterra                                                                             1.25 kB        12.5 MB
+[16:41:26.627] ├ ○ /ocs/worlds/verdanthia                                                                           1.25 kB        12.5 MB
+[16:41:26.627] ├ ○ /ocs/worlds/zephyria                                                                             1.25 kB        12.5 MB
+[16:41:26.627] ├ ○ /others                                                                                          154 B           123 kB
+[16:41:26.627] ├ ƒ /others/[slug]                                                                                   3.94 kB         120 kB
+[16:41:26.628] ├ ƒ /others/category/[category]                                                                      155 B           123 kB
+[16:41:26.628] ├ ○ /playlists                                                                                       6.73 kB         169 kB
+[16:41:26.628] ├ ○ /predictions                                                                                     3.87 kB         161 kB
+[16:41:26.628] ├ ○ /profile                                                                                         301 B          93.2 kB
+[16:41:26.628] ├ ○ /progymnasmata                                                                                   160 B           163 kB
+[16:41:26.628] ├ ƒ /progymnasmata/[type]                                                                            160 B           163 kB
+[16:41:26.628] ├ ƒ /progymnasmata/[type]/[slug]                                                                     8.43 kB         133 kB
+[16:41:26.628] ├ ○ /projects                                                                                        10.1 kB         179 kB
+[16:41:26.628] ├ ○ /prompts                                                                                         5.63 kB         127 kB
+[16:41:26.628] ├ ● /prompts/[filename]                                                                              5.14 kB         121 kB
+[16:41:26.629] ├   ├ /prompts/authentic-essay-writer-gpt4.5.txt
+[16:41:26.629] ├   ├ /prompts/brainstorm-article-ideas-gpt4.5.txt
+[16:41:26.629] ├   ├ /prompts/brainstorm-article-titles-gpt4.5.txt
+[16:41:26.629] ├   └ [+9 more paths]
+[16:41:26.629] ├ ○ /quotes                                                                                          5.35 kB         162 kB
+[16:41:26.629] ├ ○ /reading                                                                                         65.6 kB         227 kB
+[16:41:26.629] ├ ○ /references                                                                                      4.66 kB         126 kB
+[16:41:26.629] ├ ● /references/[id]                                                                                 6.09 kB         127 kB
+[16:41:26.629] ├   ├ /references/digital-minimalism
+[16:41:26.629] ├   ├ /references/anatomy-of-discipline
+[16:41:26.630] ├   ├ /references/brave-new-world
+[16:41:26.630] ├   └ [+7 more paths]
+[16:41:26.630] ├ ƒ /reports                                                                                         9.52 kB         177 kB
+[16:41:26.630] ├ ● /reports/[year]/[slug]                                                                           10 kB           136 kB
+[16:41:26.630] ├   ├ /reports/2023/queen-of-mathematics
+[16:41:26.630] ├   ├ /reports/2023/select-problems-in-number-theory
+[16:41:26.630] ├   ├ /reports/2023/select-problems-in-algebraic-geometry
+[16:41:26.630] ├   └ [+2 more paths]
+[16:41:26.630] ├ ƒ /research                                                                                        169 B           178 kB
+[16:41:26.630] ├ ƒ /research/[category]                                                                             169 B           178 kB
+[16:41:26.631] ├ ● /research/[category]/[year]/[slug]                                                               2.48 kB         137 kB
+[16:41:26.631] ├   ├ /research/art-criticism/2025/composition-and-symbolism-in-van-goghs-the-starry-night
+[16:41:26.631] ├   ├ /research/art-history/2022/the-impact-of-renaissance-art-on-modern-visual-culture
+[16:41:26.631] ├   ├ /research/psychology/2023/the-psychological-effects-of-aesthetic-experience-on-human-behavior
+[16:41:26.631] ├   └ [+2 more paths]
+[16:41:26.631] ├ ○ /researchbounties                                                                                3.2 kB          160 kB
+[16:41:26.631] ├ ○ /resources                                                                                       2.58 kB         179 kB
+[16:41:26.631] ├ ○ /review                                                                                          163 B           167 kB
+[16:41:26.631] ├ ● /review/[category]                                                                               164 B           167 kB
+[16:41:26.631] ├   ├ /review/film
+[16:41:26.632] ├   └ /review/anime
+[16:41:26.632] ├ ● /review/[category]/[slug]                                                                        6.66 kB        12.5 MB
+[16:41:26.632] ├   ├ /review/film/mermaids
+[16:41:26.632] ├   ├ /review/film/girl-interrupted
+[16:41:26.632] ├   ├ /review/film/heathers
+[16:41:26.632] ├   └ [+2 more paths]
+[16:41:26.632] ├ ƒ /rss.xml                                                                                         0 B                0 B
+[16:41:26.632] ├ ○ /rules-of-the-internet                                                                           11.1 kB         168 kB
+[16:41:26.632] ├ ○ /scripts                                                                                         5.63 kB         127 kB
+[16:41:26.632] ├ ● /scripts/[filename]                                                                              5.14 kB         121 kB
+[16:41:26.633] ├   ├ /scripts/404-suggester.js
+[16:41:26.633] ├   ├ /scripts/agenda.go
+[16:41:26.633] ├   ├ /scripts/archive-org-site-downloader.go
+[16:41:26.633] ├   └ [+12 more paths]
+[16:41:26.633] ├ ƒ /series                                                                                          2.25 kB         118 kB
+[16:41:26.633] ├ ● /series/[slug]                                                                                   2.25 kB         118 kB
+[16:41:26.633] ├   ├ /series/wisdom-ai
+[16:41:26.633] ├   ├ /series/frieren-character-studies
+[16:41:26.633] ├   ├ /series/literary-character-analyses
+[16:41:26.634] ├   └ [+5 more paths]
+[16:41:26.634] ├ ○ /social                                                                                          158 B           143 kB
+[16:41:26.634] ├ ƒ /social/[type]                                                                                   158 B           143 kB
+[16:41:26.634] ├ ƒ /social/[type]/[id]                                                                              6.24 kB         183 kB
+[16:41:26.634] ├ ○ /sources                                                                                         3.87 kB         161 kB
+[16:41:26.634] ├ ○ /supporters                                                                                      6.32 kB         122 kB
+[16:41:26.634] ├ ○ /symbols                                                                                         4.04 kB         189 kB
+[16:41:26.634] ├ ● /symbols/[id]                                                                                    2.39 kB         139 kB
+[16:41:26.634] ├   ├ /symbols/alpha
+[16:41:26.654] ├   ├ /symbols/beta
+[16:41:26.654] ├   ├ /symbols/gamma
+[16:41:26.654] ├   └ [+69 more paths]
+[16:41:26.654] ├ ƒ /tag                                                                                             196 B          94.8 kB
+[16:41:26.654] ├ ƒ /tag/[slug]                                                                                      196 B          94.8 kB
+[16:41:26.654] ├ ƒ /tags                                                                                            2.25 kB         118 kB
+[16:41:26.655] ├ ○ /til                                                                                             5.62 kB         121 kB
+[16:41:26.655] ├ ● /til/[...slug]                                                                                   11.9 kB         107 kB
+[16:41:26.655] ├   ├ /til/118
+[16:41:26.655] ├   ├ /til/117
+[16:41:26.655] ├   ├ /til/116
+[16:41:26.655] ├   └ [+115 more paths]
+[16:41:26.655] ├ ○ /type                                                                                            6.94 kB         134 kB
+[16:41:26.655] ├ ƒ /verse                                                                                           156 B           127 kB
+[16:41:26.656] ├ ○ /verse/[type]                                                                                    157 B           127 kB
+[16:41:26.656] ├ ● /verse/[type]/[year]/[slug]                                                                      7.87 kB         131 kB
+[16:41:26.656] ├   ├ /verse/haiku/2024/afternoon-retreat
+[16:41:26.656] ├   ├ /verse/haiku/2024/fission
+[16:41:26.656] ├   ├ /verse/haiku/2024/tachyon
+[16:41:26.656] ├   └ [+84 more paths]
+[16:41:26.656] ├ ○ /videos                                                                                          7.03 kB         123 kB
+[16:41:26.656] └ ○ /wishlist                                                                                        6.77 kB         169 kB
+[16:41:26.656] + First Load JS shared by all                                                                        87.7 kB
+[16:41:26.657]   ├ chunks/2117-850c7fcf56a46979.js                                                                  31.8 kB
+[16:41:26.657]   ├ chunks/fd9d1056-555511e298b01351.js                                                              53.6 kB
+[16:41:26.657]   └ other shared chunks (total)                                                                      2.34 kB
+[16:41:26.657] 
+[16:41:26.657] 
+[16:41:26.659] ƒ Middleware                                                                                         27.9 kB
+[16:41:26.672] 
+[16:41:26.672] ○  (Static)   prerendered as static content
+[16:41:26.672] ●  (SSG)      prerendered as static HTML (uses getStaticProps)
+[16:41:26.672] ƒ  (Dynamic)  server-rendered on demand
+[16:41:26.672] 
+[16:41:27.452] Traced Next.js server files in: 69.185ms
+[16:41:28.389] Created all serverless functions in: 936.714ms
+[16:41:28.522] Collected static files (public/, static/, .next/static): 60.097ms
+[16:41:30.009] Build Completed in /vercel/output [3m]
+[16:41:30.685] Deploying outputs...
+[16:41:55.782] 
+[16:41:55.922] Deployment completed

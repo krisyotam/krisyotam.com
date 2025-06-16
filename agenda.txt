@@ -1,0 +1,41 @@
+# Build Errors - Essay Section
+
+## Trakt API Errors
+
+### 1. Trakt Token Authentication Issues
+- **Error**: Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
+- **Location**: Multiple Trakt API routes (/api/trakt/genres, /api/trakt/lists, /api/trakt/stats)
+- **Fix Required**: Update Trakt OAuth token or refresh token mechanism
+
+### 2. RSS Feed Generation Error
+- **Error**: RSS feed generation failed: Error: ENOENT: no such file or directory, open '/vercel/path0/data/feed.json'
+- **Location**: /rss.xml route
+- **Fix Required**: Create missing feed.json file or update RSS generation logic
+
+## Dynamic Server Usage Errors
+
+### 3. Trakt API Routes - Static Rendering Issues
+- **Error**: Dynamic server usage: Route couldn't be rendered statically because it used request.url
+- **Affected Routes**:
+  - /api/trakt/most-watched-movies
+  - /api/trakt/most-watched-shows
+  - /api/trakt/recent-movies
+  - /api/trakt/recent-shows
+- **Fix Required**: Remove request.url usage or mark routes as dynamic
+
+## API Response Issues
+
+### 4. Monkeytype API Failures
+- **Error**: Monkeytype API error (503): {}
+- **Location**: Personal bests data retrieval
+- **Fix Required**: Add proper error handling for 503 responses
+
+### 5. Personal Bests Data Null Responses
+- **Error**: API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+- **Fix Required**: Handle null data responses gracefully
+
+## Priority Level
+- **High**: Trakt token authentication (blocks multiple features)
+- **Medium**: RSS feed generation (affects content syndication)
+- **Medium**: Dynamic server usage (affects static build optimization)
+- **Low**: Monkeytype API errors (affects typing statistics display)

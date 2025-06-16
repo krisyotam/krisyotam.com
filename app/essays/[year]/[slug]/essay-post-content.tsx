@@ -1,8 +1,6 @@
 "use client"
 
 import React, { useEffect } from "react"
-import { MDXRemote } from "next-mdx-remote/rsc"
-import { useMDXComponents } from "@/mdx-components"
 import { EssayModalProvider } from "./essay-modal-provider"
 import { MDXRenderer } from "./mdx-renderer"
 import { EssayPostMeta } from "./essay-post-meta"
@@ -41,7 +39,6 @@ export function EssayPostContent({ year, slug, mdxData, postData }: EssayPostCon
   }
 
   const { content, frontmatter } = mdxData
-  const mdxComponents = useMDXComponents({})
 
   // Scroll to top on mount
   useEffect(() => {
@@ -63,10 +60,8 @@ export function EssayPostContent({ year, slug, mdxData, postData }: EssayPostCon
         description={description}
         imageUrl={coverUrl}
         url={url}
-      />
-
-      <MDXRenderer frontmatter={frontmatter} slug={slug}>
-        <MDXRemote source={content} components={mdxComponents} />
+      />      <MDXRenderer frontmatter={frontmatter} slug={slug}>
+        {React.createElement(content)}
       </MDXRenderer>
     </EssayModalProvider>
   )
