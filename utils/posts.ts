@@ -88,10 +88,11 @@ export async function getAllPosts(): Promise<Post[]> {
   }
 
   const essaysData = await readDataFile<PostsData>("essays/essays.json")
-  const blogData = await readDataFile<PostsData>("blog/feed.json")
+  const blogData = await readDataFile<Post[]>("blog/feed.json")
 
   const essays = (essaysData?.posts || []).map(post => ({ ...post, path: 'essays' }))
-  const blogPosts = (blogData?.posts || []).map(post => ({ ...post, path: 'blog' }))
+  // blogData is already an array, not an object with posts property
+  const blogPosts = (blogData || []).map(post => ({ ...post, path: 'blog' }))
 
   const sortedPosts = [...essays, ...blogPosts].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -106,7 +107,8 @@ export async function getAllPosts(): Promise<Post[]> {
 
 export async function getActivePosts(): Promise<Post[]> {
   const all = await getAllPosts()
-  return all.filter((post) => post.state === "active")
+  // Include posts that either have state === "active" or don't have a state property (default to active)
+  return all.filter((post) => post.state === "active" || !post.state)
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
