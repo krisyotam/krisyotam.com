@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
-import rawFeedData from "./data/essays/feed.json"
+import rawFeedData from "./data/essays/essays.json"
 import type { Feed } from "./types/feed"
 
 const feedData = rawFeedData as Feed
