@@ -3,9 +3,22 @@ export const revalidate = false;
 
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import dossiersData from "@/data/dossiers/dossiers.json";
 import DossiersPageClient from "./DossiersPageClient";
 import type { DossierMeta, DossierStatus, DossierConfidence } from "@/types/dossiers";
+
+// Fetch dossiers data from API
+async function fetchDossiersData() {
+  try {
+    const response = await fetch('/api/data/dossiers');
+    if (!response.ok) {
+      throw new Error('Failed to fetch dossiers data');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching dossiers data:', error);
+    return [];
+  }
+}
 
 interface DossierData {
   title: string;
@@ -30,15 +43,21 @@ function slugifyCategory(category: string) {
 }
 
 export async function generateStaticParams() {
+  // Fetch dossiers data from API
+  const dossiersData = await fetchDossiersData();
+  
   // Generate all category/slug combinations
-  return dossiersData.map(dossierItem => ({
+  return dossiersData.map((dossierItem: DossierData) => ({
     category: slugifyCategory(dossierItem.category),
     slug: dossierItem.slug
   }));
 }
 
 export async function generateMetadata({ params }: DossierPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const dossierItem = dossiersData.find(d => 
+  // Fetch dossiers data from API
+  const dossiersData = await fetchDossiersData();
+  
+  const dossierItem = dossiersData.find((d: DossierData) => 
     slugifyCategory(d.category) === params.category && d.slug === params.slug
   );
 
@@ -84,7 +103,10 @@ export async function generateMetadata({ params }: DossierPageProps, parent: Res
 }
 
 export default async function DossierPage({ params }: DossierPageProps) {
-  const dossierItem = dossiersData.find(d => 
+  // Fetch dossiers data from API
+  const dossiersData = await fetchDossiersData();
+  
+  const dossierItem = dossiersData.find((d: DossierData) => 
     slugifyCategory(d.category) === params.category && d.slug === params.slug
   );
 
@@ -98,11 +120,11 @@ export default async function DossierPage({ params }: DossierPageProps) {
     confidence: dossierItem.confidence as DossierConfidence
   };
 
-  const dossiers: DossierMeta[] = (dossiersData as DossierData[]).map(dossierItem => ({
+  const dossiers: DossierMeta[] = (dossiersData as DossierData[]).map((dossierItem: DossierData) => ({
     ...dossierItem,
     status: dossierItem.status as DossierStatus,
     confidence: dossierItem.confidence as DossierConfidence
-  }));  // Dynamically import the MDX file based on category and slug
+  }));// Dynamically import the MDX file based on category and slug
   const DossierArticle = (await import(`@/app/dossiers/content/${params.category}/${params.slug}.mdx`)).default;
   
   return (

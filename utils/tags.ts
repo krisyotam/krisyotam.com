@@ -1,9 +1,31 @@
-import fs from "fs/promises";
-import path from "path";
 import { Post } from "./posts";
 
-const feedPath = path.join(process.cwd(), "data", "essays", "feed.json");
-const tagsDataPath = path.join(process.cwd(), "data", "blog", "tags.json");
+// API fetch functions
+async function fetchTagsData() {
+  try {
+    const response = await fetch('/api/data/blog/tags');
+    if (!response.ok) {
+      throw new Error('Failed to fetch tags data');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching tags data:', error);
+    return { tags: [] };
+  }
+}
+
+async function fetchFeedData() {
+  try {
+    const response = await fetch('/api/data/essays/feed');
+    if (!response.ok) {
+      throw new Error('Failed to fetch feed data');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching feed data:', error);
+    return { posts: [] };
+  }
+}
 
 export interface TagSummary {
   slug: string;
@@ -36,17 +58,15 @@ function slugify(name: string): string {
  * Read and parse feed.json (expects { posts: Post[] })
  */
 async function readFeed(): Promise<Post[]> {
-  const raw = await fs.readFile(feedPath, "utf-8");
-  const data = JSON.parse(raw) as { posts: Post[] };
-  return data.posts;
+  const feedData = await fetchFeedData();
+  return feedData.posts;
 }
 
 /**
  * Read and parse tags.json
  */
 async function readTagsData(): Promise<{ tags: TagData[] }> {
-  const raw = await fs.readFile(tagsDataPath, "utf-8");
-  return JSON.parse(raw) as { tags: TagData[] };
+  return await fetchTagsData();
 }
 
 /**

@@ -1,6 +1,3 @@
-import oed from '@/data/reference/oed.json';
-import merriam from '@/data/reference/merriam-webster.json';
-
 interface OEDEntry {
   _id?: { $oid: string };
   word: string;
@@ -17,25 +14,65 @@ function normalizeWord(word: string): string {
     .toUpperCase();
 }
 
-// Build OED map
-const definitionsMap: Map<string, string> = new Map(
-  (oed as OEDEntry[]).map(e => [normalizeWord(e.word), e.definition])
-);
+// Cache for loaded data
+let definitionsMap: Map<string, string> | null = null;
+let fallbackDefinitionsMap: Map<string, string> | null = null;
 
-// Build fallback Merriam map
-let fallbackDefinitionsMap: Map<string, string>;
+// Load OED data from API
+async function loadOEDData(): Promise<Map<string, string>> {
+  if (definitionsMap) {
+    return definitionsMap;
+  }
 
-if (Array.isArray(merriam)) {
-  fallbackDefinitionsMap = new Map(
-    (merriam as OEDEntry[]).map(e => [normalizeWord(e.word), e.definition])
-  );
-} else {
-  fallbackDefinitionsMap = new Map(
-    Object.entries(merriam).map(([word, definition]) => [
-      normalizeWord(word),
-      typeof definition === 'string' ? definition : (definition as any).definition
-    ])
-  );
+  try {
+    const response = await fetch('/api/data/reference/oed');
+    if (!response.ok) {
+      throw new Error(`Failed to fetch OED data: ${response.statusText}`);
+    }
+    const oed = await response.json() as OEDEntry[];
+    
+    definitionsMap = new Map(
+      oed.map(e => [normalizeWord(e.word), e.definition])
+    );
+    
+    return definitionsMap;
+  } catch (error) {
+    console.error('Error loading OED data:', error);
+    return new Map();
+  }
+}
+
+// Load Merriam-Webster data from API
+async function loadMerriamData(): Promise<Map<string, string>> {
+  if (fallbackDefinitionsMap) {
+    return fallbackDefinitionsMap;
+  }
+
+  try {
+    const response = await fetch('/api/data/reference/merriam-webster');
+    if (!response.ok) {
+      throw new Error(`Failed to fetch Merriam-Webster data: ${response.statusText}`);
+    }
+    const merriam = await response.json();
+
+    if (Array.isArray(merriam)) {
+      fallbackDefinitionsMap = new Map(
+        (merriam as OEDEntry[]).map(e => [normalizeWord(e.word), e.definition])
+      );
+    } else {
+      fallbackDefinitionsMap = new Map(
+        Object.entries(merriam).map(([word, definition]) => [
+          normalizeWord(word),
+          typeof definition === 'string' ? definition : (definition as any).definition
+        ])
+      );
+    }
+
+    return fallbackDefinitionsMap;
+  } catch (error) {
+    console.error('Error loading Merriam-Webster data:', error);
+    return new Map();
+  }
 }
 
 /**
@@ -47,13 +84,17 @@ export async function getDefinitionFromOED(
   const cleaned = normalizeWord(word);
   console.log(`[DEFINE] Looking up cleaned word: '${cleaned}'`);
 
-  const exactMatch = definitionsMap.get(cleaned);
+  // Load the data maps
+  const oedMap = await loadOEDData();
+  const merriamMap = await loadMerriamData();
+
+  const exactMatch = oedMap.get(cleaned);
   if (exactMatch) {
     console.log(`[DEFINE] ✅ Found in OED.`);
     return exactMatch;
   }
 
-  const fallbackMatch = fallbackDefinitionsMap.get(cleaned);
+  const fallbackMatch = merriamMap.get(cleaned);
   if (fallbackMatch) {
     console.log(`[DEFINE] ✅ Found in Merriam-Webster.`);
     return fallbackMatch;

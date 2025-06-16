@@ -1,4 +1,16 @@
-import feedData from '@/data/essays/feed.json';
+// API fetch function
+async function fetchFeedData() {
+  try {
+    const response = await fetch('/api/data/essays/feed');
+    if (!response.ok) {
+      throw new Error('Failed to fetch feed data');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching feed data:', error);
+    return { posts: [] };
+  }
+}
 
 interface Post {
   title: string;
@@ -21,10 +33,11 @@ interface Post {
  * @param slug The post slug to look up
  * @returns The post data or null if not found
  */
-export function getPostBySlug(slug: string): Post | null {
+export async function getPostBySlug(slug: string): Promise<Post | null> {
   if (!slug) return null;
   
-  const post = feedData.posts.find(post => post.slug === slug);
+  const feedData = await fetchFeedData();
+  const post = feedData.posts.find((post: Post) => post.slug === slug);
   return post || null;
 }
 
@@ -34,10 +47,11 @@ export function getPostBySlug(slug: string): Post | null {
  * @param slug The post slug
  * @returns The post data or null if not found
  */
-export function getPostByYearAndSlug(year: string, slug: string): Post | null {
+export async function getPostByYearAndSlug(year: string, slug: string): Promise<Post | null> {
   if (!year || !slug) return null;
   
-  const post = feedData.posts.find(post => {
+  const feedData = await fetchFeedData();
+  const post = feedData.posts.find((post: any) => {
     const postYear = new Date(post.date).getFullYear().toString();
     return post.slug === slug && postYear === year;
   });
@@ -49,6 +63,7 @@ export function getPostByYearAndSlug(year: string, slug: string): Post | null {
  * Get all posts from feed.json
  * @returns Array of all posts
  */
-export function getAllPosts(): Post[] {
+export async function getAllPosts(): Promise<Post[]> {
+  const feedData = await fetchFeedData();
   return feedData.posts;
-} 
+}

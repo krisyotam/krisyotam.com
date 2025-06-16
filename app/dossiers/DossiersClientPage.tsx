@@ -7,7 +7,6 @@ import type { PageHeaderProps } from "@/components/page-header";
 import { PageDescription } from "@/components/posts/typography/page-description";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
-import categoriesData from "@/data/dossiers/categories.json";
 
 /* default page-level metadata for the header */
 const defaultDossiersPageData = {
@@ -26,10 +25,43 @@ interface DossiersClientPageProps {
   initialCategory?: string;
 }
 
+interface Category {
+  slug: string;
+  title: string;
+  preview: string;
+  date: string;
+  status: string;
+  confidence: string;
+  importance: number;
+}
+
 export default function DossiersClientPage({ dossiers, initialCategory = "all" }: DossiersClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
+  const [categoriesData, setCategoriesData] = useState<{ categories: Category[] }>({ categories: [] });
+  const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const router = useRouter();
+
+  // Fetch categories data
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('/api/data/dossiers/categories');
+        if (response.ok) {
+          const data = await response.json();
+          setCategoriesData(data);
+        } else {
+          console.error('Failed to fetch categories data');
+        }
+      } catch (error) {
+        console.error('Error fetching categories data:', error);
+      } finally {
+        setIsLoadingCategories(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const categories = ["all", ...Array.from(new Set(dossiers.map(d => d.category)))];
 
@@ -49,14 +81,13 @@ export default function DossiersClientPage({ dossiers, initialCategory = "all" }
     };
     return statusMap[dossierStatus] || "Draft";
   };
-
   // Determine which header data to use
   const getHeaderData = () => {
-    if (initialCategory === "all" || !initialCategory) {
+    if (initialCategory === "all" || !initialCategory || isLoadingCategories) {
       return defaultDossiersPageData;
     }
     
-    // Find category data from categories.json
+    // Find category data from fetched categories
     const categorySlug = slugifyCategory(initialCategory);
     const categoryData = categoriesData.categories.find(cat => cat.slug === categorySlug);
     

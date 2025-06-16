@@ -6,7 +6,6 @@ import { PageHeader } from "@/components/page-header";
 import { PageDescription } from "@/components/posts/typography/page-description";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
-import categoriesData from "@/data/conspiracies/categories.json";
 import type { ConspiracyMeta } from "@/types/conspiracies";
 
 /* default page-level metadata for the header */
@@ -25,10 +24,43 @@ interface ConspiraciesClientPageProps {
   initialCategory?: string;
 }
 
+interface Category {
+  slug: string;
+  title: string;
+  preview: string;
+  date: string;
+  status: string;
+  confidence: string;
+  importance: number;
+}
+
 export default function ConspiraciesClientPage({ conspiracies, initialCategory = "all" }: ConspiraciesClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
+  const [categoriesData, setCategoriesData] = useState<{ categories: Category[] }>({ categories: [] });
+  const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const router = useRouter();
+
+  // Fetch categories data
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('/api/data/conspiracies/categories');
+        if (response.ok) {
+          const data = await response.json();
+          setCategoriesData(data);
+        } else {
+          console.error('Failed to fetch categories data');
+        }
+      } catch (error) {
+        console.error('Error fetching categories data:', error);
+      } finally {
+        setIsLoadingCategories(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const categories = ["all", ...Array.from(new Set(conspiracies.map(n => n.category)))];
 
@@ -36,14 +68,13 @@ export default function ConspiraciesClientPage({ conspiracies, initialCategory =
   const categoryOptions: SelectOption[] = categories.map(category => ({
     value: category,
     label: category === "all" ? "All Categories" : category
-  }));
-  // Determine which header data to use
+  }));  // Determine which header data to use
   const getHeaderData = () => {
-    if (initialCategory === "all" || !initialCategory) {
+    if (initialCategory === "all" || !initialCategory || isLoadingCategories) {
       return defaultConspiraciesPageData;
     }
     
-    // Find category data from categories.json
+    // Find category data from fetched categories
     const categorySlug = slugifyCategory(initialCategory);
     const categoryData = categoriesData.categories.find(cat => cat.slug === categorySlug);
     

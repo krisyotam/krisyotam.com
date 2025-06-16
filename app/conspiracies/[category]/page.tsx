@@ -1,29 +1,49 @@
 import ConspiraciesClientPage from "../ConspiraciesClientPage";
-import conspiraciesData from "@/data/conspiracies/conspiracies.json";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { ConspiracyMeta } from "@/types/conspiracies";
+
+async function getConspiraciesData() {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/data/conspiracies`, {
+      cache: 'no-store'
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch conspiracies data');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching conspiracies data:', error);
+    return [];
+  }
+}
 
 interface PageProps {
   params: { category: string };
 }
 
 export async function generateStaticParams() {
+  // Get conspiracies data from API
+  const conspiraciesData = await getConspiraciesData();
+  
   // Get all unique categories from conspiracies data
-  const categories = Array.from(new Set(conspiraciesData.map(conspiracy => conspiracy.category)));
+  const categories = Array.from(new Set(conspiraciesData.map((conspiracy: any) => conspiracy.category))) as string[];
   
   console.log('Available categories:', categories);
-  console.log('Slugified categories:', categories.map(cat => cat.toLowerCase().replace(/\s+/g, "-")));
+  console.log('Slugified categories:', categories.map((cat: string) => cat.toLowerCase().replace(/\s+/g, "-")));
   
-  return categories.map(category => ({
+  return categories.map((category: string) => ({
     category: category.toLowerCase().replace(/\s+/g, "-")
   }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  // Get conspiracies data from API
+  const conspiraciesData = await getConspiraciesData();
+  
   // Convert slug back to category name
   const categorySlug = params.category;
-  const originalCategory = conspiraciesData.find(conspiracy => 
+  const originalCategory = conspiraciesData.find((conspiracy: any) => 
     conspiracy.category.toLowerCase().replace(/\s+/g, "-") === categorySlug
   )?.category;
 
@@ -39,11 +59,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function ConspiraciesCategoryPage({ params }: PageProps) {
+export default async function ConspiraciesCategoryPage({ params }: PageProps) {
   const categorySlug = params.category;
   
+  // Get conspiracies data from API
+  const conspiraciesData = await getConspiraciesData();
+  
   // Find the original category name
-  const originalCategory = conspiraciesData.find(conspiracy => 
+  const originalCategory = conspiraciesData.find((conspiracy: any) => 
     conspiracy.category.toLowerCase().replace(/\s+/g, "-") === categorySlug
   )?.category;
 
@@ -52,8 +75,8 @@ export default function ConspiraciesCategoryPage({ params }: PageProps) {
   }
   // Sort conspiracies by date (newest first) and ensure proper typing
   const conspiracies: ConspiracyMeta[] = [...conspiraciesData]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .map(conspiracy => ({
+    .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .map((conspiracy: any) => ({
       ...conspiracy,
       status: conspiracy.status as any, // Type assertion for status
       confidence: conspiracy.confidence as any, // Type assertion for confidence

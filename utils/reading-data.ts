@@ -1,6 +1,31 @@
 // Reading data types and utilities
-import booksData from '@/data/books.json';
-import readingLogData from '@/data/reading/readinglog.json';
+
+// API fetch functions
+async function fetchBooksData() {
+  try {
+    const response = await fetch('/api/data/books');
+    if (!response.ok) {
+      throw new Error('Failed to fetch books data');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching books data:', error);
+    return { books: [] };
+  }
+}
+
+async function fetchReadingLogData() {
+  try {
+    const response = await fetch('/api/data/reading/readinglog');
+    if (!response.ok) {
+      throw new Error('Failed to fetch reading log data');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching reading log data:', error);
+    return [];
+  }
+}
 
 export interface Book {
   isbn13: string;
@@ -44,25 +69,26 @@ export interface ReadingEntry {
 }
 
 // Get book by slug (title)
-export function getBookBySlug(slug: string): Book | undefined {
-  return booksData.books.find(book => 
+export async function getBookBySlug(slug: string): Promise<Book | undefined> {
+  const booksData = await fetchBooksData();
+  return booksData.books.find((book: any) => 
     book.title.toLowerCase().replace(/\s+/g, '-') === slug.toLowerCase()
   );
 }
 
 // Get author by slug (name)
-export function getAuthorBySlug(slug: string): Author | undefined {
+export async function getAuthorBySlug(slug: string): Promise<Author | undefined> {
+  const booksData = await fetchBooksData();
   const authorName = slug.replace(/-/g, ' ');
-  const books = booksData.books.filter(book => 
-    book.authors.some(author => 
+  const books = booksData.books.filter((book: any) => 
+    book.authors.some((author: string) => 
       author.toLowerCase() === authorName.toLowerCase()
     )
   );
   
   if (books.length > 0) {
-    return {
-      name: authorName,
-      books: books.map(book => book.title),
+    return {      name: authorName,
+      books: books.map((book: any) => book.title),
       slug: slug
     };
   }
@@ -86,7 +112,8 @@ export function getTotalPagesRead(entry: ReadingEntry): number {
 }
 
 // Get all reading entries
-export function getReadingEntries(): ReadingEntry[] {
+export async function getReadingEntries(): Promise<ReadingEntry[]> {
+  const readingLogData = await fetchReadingLogData();
   return readingLogData.map((entry: any, index: number) => ({
     ...entry,
     book_slug: entry.title?.toLowerCase().replace(/\s+/g, '-'),
@@ -97,18 +124,20 @@ export function getReadingEntries(): ReadingEntry[] {
 }
 
 // Get all books
-export function getBooks(): Book[] {
+export async function getBooks(): Promise<Book[]> {
+  const booksData = await fetchBooksData();
   return booksData.books;
 }
 
 // Get all genres
-export function getGenres(): Genre[] {
+export async function getGenres(): Promise<Genre[]> {
+  const readingLogData = await fetchReadingLogData();
   const genreCounts: { [key: string]: number } = {};
   
   readingLogData.forEach((entry: ReadingEntry) => {
     genreCounts[entry.genre] = (genreCounts[entry.genre] || 0) + 1;
   });
-  
+
   return Object.entries(genreCounts).map(([name, count]) => ({
     name,
     count,
@@ -118,11 +147,12 @@ export function getGenres(): Genre[] {
 }
 
 // Get all authors
-export function getAuthors(): Author[] {
+export async function getAuthors(): Promise<Author[]> {
+  const booksData = await fetchBooksData();
   const authorMap: { [key: string]: string[] } = {};
   
-  booksData.books.forEach(book => {
-    book.authors.forEach(author => {
+  booksData.books.forEach((book: any) => {
+    book.authors.forEach((author: string) => {
       if (!authorMap[author]) {
         authorMap[author] = [];
       }

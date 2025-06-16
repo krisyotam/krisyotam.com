@@ -7,7 +7,6 @@ import { PageDescription } from "@/components/posts/typography/page-description"
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
 import { LibersContentWarning } from "@/components/libers-content-warning";
-import categoriesData from "@/data/libers/categories.json";
 
 /* default page-level metadata for the header */
 const defaultLibersPageData = {
@@ -34,11 +33,44 @@ interface LibersClientPageProps {
   initialCategory?: string;
 }
 
+interface Category {
+  slug: string;
+  title: string;
+  preview: string;
+  date: string;
+  status: string;
+  confidence: string;
+  importance: number;
+}
+
 export default function LibersClientPage({ libers, initialCategory = "all" }: LibersClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [showWarning, setShowWarning] = useState(false);
+  const [categoriesData, setCategoriesData] = useState<{ categories: Category[] }>({ categories: [] });
+  const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const router = useRouter();
+
+  // Fetch categories data
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('/api/data/libers/categories');
+        if (response.ok) {
+          const data = await response.json();
+          setCategoriesData(data);
+        } else {
+          console.error('Failed to fetch categories data');
+        }
+      } catch (error) {
+        console.error('Error fetching categories data:', error);
+      } finally {
+        setIsLoadingCategories(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   // Check if user has accepted terms on component mount
   useEffect(() => {
@@ -59,14 +91,13 @@ export default function LibersClientPage({ libers, initialCategory = "all" }: Li
     value: category,
     label: category === "all" ? "All Categories" : category
   }));
-  
-  // Determine which header data to use
+    // Determine which header data to use
   const getHeaderData = () => {
-    if (initialCategory === "all" || !initialCategory) {
+    if (initialCategory === "all" || !initialCategory || isLoadingCategories) {
       return defaultLibersPageData;
     }
     
-    // Find category data from categories.json
+    // Find category data from fetched categories
     const categorySlug = slugifyCategory(initialCategory);
     const categoryData = categoriesData.categories.find(cat => cat.slug === categorySlug);
     

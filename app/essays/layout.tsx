@@ -17,10 +17,11 @@ import Citation from "@/components/citation";
 import { Footer } from "./components/footer";
 import "./posts.css";
 import "./tailwind-dark.css";
-import rawFeedData from "@/data/essays/feed.json";
 import type { Feed } from "@/types/feed";
 
-const feedData = rawFeedData as Feed;
+// These will be populated after fetching feed data
+let CUSTOM_ROUTES_MAP: Record<string, { slug: string, year: string }> = {};
+let feedData: Feed | null = null;
 
 const fontImport = `
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
@@ -30,18 +31,24 @@ const fontImport = `
 `;
 
 // Dynamically create custom routes map from feed data
-const CUSTOM_ROUTES_MAP: Record<string, { slug: string, year: string }> = {};
+// This will be populated after fetching feed data
 
-// Build the custom routes map
-feedData.posts.forEach(post => {
-  if (post.customPath) {
-    const year = new Date(post.date).getFullYear().toString();
-    CUSTOM_ROUTES_MAP[post.customPath] = { 
-      slug: post.slug,
-      year 
-    };
-  }
-});
+// Function to build custom routes map
+function buildCustomRoutesMap(feed: Feed) {
+  const customRoutes: Record<string, { slug: string, year: string }> = {};
+  
+  feed.posts.forEach(post => {
+    if (post.customPath) {
+      const year = new Date(post.date).getFullYear().toString();
+      customRoutes[post.customPath] = { 
+        slug: post.slug,
+        year 
+      };
+    }
+  });
+  
+  return customRoutes;
+}
 
 // Pattern-based route mappings
 const PATTERN_ROUTES = [
@@ -78,10 +85,36 @@ export default function EssayLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const [essayData, setEssayData] = useState<Essay | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [feedDataLoaded, setFeedDataLoaded] = useState(false);
+
+  // Fetch feed data to build routes map
+  useEffect(() => {
+    async function loadFeedData() {
+      if (feedData) return; // Already loaded
+      
+      try {
+        const response = await fetch('/api/data/essays/feed');
+        if (response.ok) {
+          const data = await response.json();
+          feedData = data;
+          CUSTOM_ROUTES_MAP = buildCustomRoutesMap(data);
+          setFeedDataLoaded(true);
+        } else {
+          console.error('Failed to fetch feed data');
+        }
+      } catch (error) {
+        console.error('Error fetching feed data:', error);
+      }
+    }
+    
+    loadFeedData();
+  }, []);
 
   // Check if this is a year/slug route (individual essay page)
-  const isIndividualEssayPage = /^\/essays\/\d{4}\/[^/]+\/?$/.test(pathname) || 
-    Object.keys(CUSTOM_ROUTES_MAP).some(customPath => pathname === customPath || pathname === customPath + '/');
+  const isIndividualEssayPage = feedDataLoaded && (
+    /^\/essays\/\d{4}\/[^/]+\/?$/.test(pathname) || 
+    Object.keys(CUSTOM_ROUTES_MAP).some(customPath => pathname === customPath || pathname === customPath + '/')
+  );
 
   // Inject fonts - always run this hook
   useEffect(() => {
@@ -99,7 +132,7 @@ export default function EssayLayout({ children }: { children: React.ReactNode })
 
   // Fetch essay data using the current URL path - always run this hook
   useEffect(() => {
-    if (!isIndividualEssayPage) return;
+    if (!isIndividualEssayPage || !feedDataLoaded) return;
     
     async function fetchEssayData() {
       try {
@@ -152,7 +185,7 @@ export default function EssayLayout({ children }: { children: React.ReactNode })
     }
     
     fetchEssayData();
-  }, [pathname, isIndividualEssayPage]);
+  }, [pathname, isIndividualEssayPage, feedDataLoaded]);
 
   // Loading indicator - always run this hook
   useEffect(() => {
