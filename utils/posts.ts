@@ -124,7 +124,7 @@ export async function getAllPosts(): Promise<Post[]> {
   }
   
   // Load essays
-  const essaysData = await readDataFile<PostsData>("essays/feed.json")
+  const essaysData = await readDataFile<PostsData>("essays/essays.json")
   const essays = (essaysData?.posts || []).map(post => ({
     ...post,
     path: 'essays'
@@ -182,7 +182,7 @@ export async function getCategories(): Promise<
   { slug: string; name: string; count: number }[]
 > {
   const posts = await getActivePosts()
-  const essaysMeta = await readDataFile<CategoriesData>("essays/category-data.json")
+  const essaysMeta = await readDataFile<CategoriesData>("essays/categories.json")
   const meta = essaysMeta?.categories || []
 
   // tally up posts per slugified category
