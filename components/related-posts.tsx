@@ -14,6 +14,8 @@ interface PostPreview {
   subtitle?: string
   preview: string
   date: string
+  path?: string
+  category?: string
 }
 
 interface RelatedPostsClientProps {
@@ -74,10 +76,14 @@ export default function RelatedPostsClient({
               if (post.path === 'essays') {
                 const year = getYear(post.date)
                 return `/essays/${year}/${post.slug}`
-              } else {
+              } else if (post.category) {
                 // For blog posts, use category-based routing
                 const categorySlug = post.category.toLowerCase().replace(/\s+/g, "-")
                 return `/blog/${categorySlug}/${post.slug}`
+              } else {
+                // Fallback to year-based routing if category is not available
+                const year = getYear(post.date)
+                return `/blog/${year}/${post.slug}`
               }
             }
             
