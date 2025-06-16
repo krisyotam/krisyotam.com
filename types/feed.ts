@@ -10,7 +10,7 @@ export interface Post {
   status: string
   confidence?: string
   importance: number
-  state: string
+  state?: string // Make optional to match utils/posts.ts
   customPath?: string
 }
 

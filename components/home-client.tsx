@@ -43,23 +43,9 @@ import OtherSites from "@/components/about/OtherSites"
 import SiteInfo from "@/components/about/SiteInfo"
 import AboutThisSite from "@/components/about/AboutThisSite"
 import { FeaturedPost } from "@/components/featured-post"
+import { Post } from "@/utils/posts"
 
 // Type definitions for props
-interface Post {
-  title: string
-  subtitle?: string
-  preview: string
-  date: string
-  tags: string[]
-  category: string
-  slug: string
-  state: string
-  status?: string
-  confidence?: string
-  importance?: number
-  path?: string
-}
-
 interface Poem {
   id: string
   title: string

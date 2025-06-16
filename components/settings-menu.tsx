@@ -9,19 +9,7 @@ import { useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
 import { motion, useMotionValue } from "framer-motion"
 
-interface Post {
-  title: string
-  subtitle: string
-  preview: string
-  date: string
-  tags: string[]
-  category: string
-  slug: string
-  status: string
-  confidence: string
-  importance: number
-  state: string
-}
+import { Post } from "@/utils/posts"
 
 interface Page {
   title: string
@@ -203,7 +191,7 @@ export function SettingsMenu() {
           subtitle: post.subtitle,
           preview: post.preview,
           date: post.date,
-          status: post.status,
+          status: post.status || "Draft",
           category: post.category,
           path: `/blog/${new Date(post.date).getFullYear()}/${post.slug}`,
           resultType: "post" as const,

@@ -6,21 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
 import Link from "next/link"
-
-interface Post {
-  title: string
-  subtitle?: string
-  preview: string
-  date: string
-  tags: string[]
-  category: string
-  slug: string
-  state: string
-  status?: string
-  confidence?: string
-  importance?: number
-  cover_image?: string
-}
+import { Post } from "@/utils/posts"
 
 interface FeaturedPostProps {
   posts: Post[]
