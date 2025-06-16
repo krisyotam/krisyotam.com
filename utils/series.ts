@@ -1,6 +1,7 @@
 // utils/series.ts
 
 import { Post } from "./posts"
+import { getSeriesData } from "@/lib/data"
 
 export interface SeriesPost {
   slug: string
@@ -79,7 +80,7 @@ export async function getAllSeriesData(): Promise<SeriesData[]> {
     return cachedSeriesData;
   }
   
-  const data = await readDataFile<SeriesListData>("essays/series.json")
+  const data = await getSeriesData()
   const seriesData = data?.series || [];
   
   // Cache the data in production
@@ -98,7 +99,7 @@ export async function getSeriesBySlug(slug: string): Promise<SeriesData | null> 
 
 // Get all active series with post counts
 export async function getSeries(): Promise<Series[]> {
-  const seriesData = await readDataFile<SeriesListData>("essays/series.json")
+  const seriesData = await getSeriesData()
   
   if (!seriesData?.series) {
     return []

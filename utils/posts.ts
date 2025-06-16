@@ -1,4 +1,5 @@
 // utils/posts.ts
+import { getEssaysData, getBlogData, getCategoriesData, getSeriesData } from "@/lib/data"
 
 export interface Post {
   title: string
@@ -8,7 +9,7 @@ export interface Post {
   tags: string[]
   category: string
   slug: string
-  state: string
+  state?: string // Make state optional since blog posts don't have it
   status?: string
   confidence?: string
   importance?: number
@@ -59,7 +60,7 @@ export function getPostYear(dateString: string): string {
   }
 }
 
-// Read a JSON file from /data/blog or /data/essays
+// Read a JSON file from /data/blog or /data/essays (legacy - use lib/data.ts functions instead)
 async function readDataFile<T>(filename: string): Promise<T | null> {
   assertServer()
   const [{ promises: fs }, path] = await Promise.all([
@@ -87,8 +88,9 @@ export async function getAllPosts(): Promise<Post[]> {
     return cachedPosts
   }
 
-  const essaysData = await readDataFile<PostsData>("essays/essays.json")
-  const blogData = await readDataFile<Post[]>("blog/feed.json")
+  // Use the lib functions that ensure files are included in Vercel build
+  const essaysData = await getEssaysData()
+  const blogData = await getBlogData()
 
   const essays = (essaysData?.posts || []).map(post => ({ ...post, path: 'essays' }))
   // blogData is already an array, not an object with posts property
@@ -117,7 +119,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 }
 
 export async function getAllCategoryData(): Promise<CategoryData[]> {
-  const data = await readDataFile<CategoriesData>("blog/categories.json")
+  const data = await getCategoriesData()
   return data?.categories || []
 }
 
@@ -128,8 +130,8 @@ export async function getCategoryDataBySlug(slug: string): Promise<CategoryData 
 
 export async function getCategories(): Promise<{ slug: string; name: string; count: number }[]> {
   const posts = await getActivePosts()
-  const essaysMeta = await readDataFile<CategoriesData>("essays/categories.json")
-  const meta = essaysMeta?.categories || []
+  const essaysMeta = await getCategoriesData()
+  const meta = (essaysMeta?.categories || []) as CategoryData[]
 
   const counts = new Map<string, number>()
   posts.forEach((p) => {
@@ -139,7 +141,7 @@ export async function getCategories(): Promise<{ slug: string; name: string; cou
 
   const result: { slug: string; name: string; count: number }[] = []
   for (const [slug, count] of counts) {
-    const catMeta = meta.find((c) => c.slug === slug)
+    const catMeta = meta.find((c: CategoryData) => c.slug === slug)
     if (catMeta && catMeta["show-status"] === "hidden") continue
 
     const name = catMeta?.title || slug.split("-").map((w) => w[0].toUpperCase() + w.slice(1)).join(" ")
@@ -208,15 +210,15 @@ export async function getTags(): Promise<{ name: string; count: number }[]> {
 }
 
 export async function getSeries(): Promise<{ name: string; count: number }[]> {
-  const seriesData = await readDataFile<{ series: { name: string; posts: string[] }[] }>("essays/series.json")
+  const seriesData = await getSeriesData()
 
   if (!seriesData?.series) return []
 
   return seriesData.series
-    .filter(series => series && series.name && Array.isArray(series.posts))
-    .map(series => ({
+    .filter((series: any) => series && series.name && Array.isArray(series.posts))
+    .map((series: any) => ({
       name: series.name,
       count: series.posts.length
     }))
-    .sort((a, b) => a.name.localeCompare(b.name))
+    .sort((a: { name: string; count: number }, b: { name: string; count: number }) => a.name.localeCompare(b.name))
 }
