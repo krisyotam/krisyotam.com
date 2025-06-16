@@ -121,10 +121,15 @@ export function FeaturedPost({ posts, className = "" }: FeaturedPostProps) {
   const goToNext = () => {
     setCurrentIndex(prev => prev === processedPosts.length - 1 ? 0 : prev + 1)
   }
-
   const getPostUrl = (post: Post) => {
-    const year = new Date(post.date).getFullYear().toString()
-    return `/blog/${year}/${post.slug}`
+    if (post.path === 'essays') {
+      const year = new Date(post.date).getFullYear().toString()
+      return `/essays/${year}/${post.slug}`
+    } else {
+      // For blog posts, use category-based routing
+      const categorySlug = post.category.toLowerCase().replace(/\s+/g, "-")
+      return `/blog/${categorySlug}/${post.slug}`
+    }
   }
 
   const formatDate = (dateString: string) => {

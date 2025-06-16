@@ -68,21 +68,35 @@ export default function RelatedPostsClient({
       >
         <h3 className="text-sm font-medium">Related Posts</h3>
         <div className="space-y-2">
-          {currentEntries.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${getYear(post.date)}/${post.slug}`}
-              className="w-full text-left py-1.5 px-2 hover:bg-secondary transition-colors"
-            >
-              <div className="font-semibold">{post.title}</div>
-              {post.subtitle && (
-                <div className="text-xs text-muted-foreground mb-1">
-                  {post.subtitle}
-                </div>
-              )}
-              <div className="text-xs">{post.preview}</div>
-            </Link>
-          ))}
+          {currentEntries.map((post) => {
+            // Generate correct URL based on post type
+            const getPostUrl = () => {
+              if (post.path === 'essays') {
+                const year = getYear(post.date)
+                return `/essays/${year}/${post.slug}`
+              } else {
+                // For blog posts, use category-based routing
+                const categorySlug = post.category.toLowerCase().replace(/\s+/g, "-")
+                return `/blog/${categorySlug}/${post.slug}`
+              }
+            }
+            
+            return (
+              <Link
+                key={post.slug}
+                href={getPostUrl()}
+                className="w-full text-left py-1.5 px-2 hover:bg-secondary transition-colors"
+              >
+                <div className="font-semibold">{post.title}</div>
+                {post.subtitle && (
+                  <div className="text-xs text-muted-foreground mb-1">
+                    {post.subtitle}
+                  </div>
+                )}
+                <div className="text-xs">{post.preview}</div>
+              </Link>
+            )
+          })}
         </div>
 
         {totalPages > 1 && (

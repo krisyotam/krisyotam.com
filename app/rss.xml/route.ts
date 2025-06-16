@@ -26,7 +26,15 @@ export async function GET() {
       const title = escapeXML(post.title || '')
       const description = escapeXML(post.preview || post.subtitle || '')
 
-      const postUrl = `${siteUrl}/blog/${year}/${slug}`
+      // Use correct URL structure based on post path
+      let postUrl: string
+      if (post.path === 'essays') {
+        postUrl = `${siteUrl}/essays/${year}/${slug}`
+      } else {
+        // For blog posts, use category-based routing
+        const categorySlug = (post.category || '').toLowerCase().replace(/\s+/g, '-')
+        postUrl = `${siteUrl}/blog/${categorySlug}/${slug}`
+      }
 
       return `
         <item>
