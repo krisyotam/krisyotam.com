@@ -1,15 +1,9 @@
-// API fetch function
-async function fetchFeedData() {
-  try {
-    const response = await fetch('/api/data/essays/feed');
-    if (!response.ok) {
-      throw new Error('Failed to fetch feed data');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching feed data:', error);
-    return { posts: [] };
-  }
+// Use direct import for static generation
+import essaysFeedData from "@/data/essays/feed.json";
+
+// Use direct import instead of fetch for static generation
+function getFeedData() {
+  return essaysFeedData;
 }
 
 interface Post {
@@ -36,7 +30,7 @@ interface Post {
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   if (!slug) return null;
   
-  const feedData = await fetchFeedData();
+  const feedData = getFeedData();
   const post = feedData.posts.find((post: Post) => post.slug === slug);
   return post || null;
 }
@@ -50,7 +44,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 export async function getPostByYearAndSlug(year: string, slug: string): Promise<Post | null> {
   if (!year || !slug) return null;
   
-  const feedData = await fetchFeedData();
+  const feedData = getFeedData();
   const post = feedData.posts.find((post: any) => {
     const postYear = new Date(post.date).getFullYear().toString();
     return post.slug === slug && postYear === year;
@@ -64,6 +58,6 @@ export async function getPostByYearAndSlug(year: string, slug: string): Promise<
  * @returns Array of all posts
  */
 export async function getAllPosts(): Promise<Post[]> {
-  const feedData = await fetchFeedData();
+  const feedData = getFeedData();
   return feedData.posts;
 }

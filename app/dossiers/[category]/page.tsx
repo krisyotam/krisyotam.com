@@ -2,35 +2,15 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import DossiersClientPage from "../DossiersClientPage";
 import type { DossierMeta } from "@/types/dossiers";
+import dossiersData from "@/data/dossiers/dossiers.json";
+import categoriesData from "@/data/dossiers/categories.json";
 
-async function getDossiersData() {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/data/dossiers`, {
-      cache: 'no-store'
-    });
-    if (!response.ok) {
-      throw new Error('Failed to fetch dossiers data');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching dossiers data:', error);
-    return [];
-  }
+function getDossiersData() {
+  return dossiersData;
 }
 
-async function getCategoriesData() {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/data/dossiers/categories`, {
-      cache: 'no-store'
-    });
-    if (!response.ok) {
-      throw new Error('Failed to fetch categories data');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching categories data:', error);
-    return { categories: [] };
-  }
+function getCategoriesData() {
+  return categoriesData;
 }
 
 interface CategoryPageProps {
@@ -41,7 +21,7 @@ interface CategoryPageProps {
 
 // Generate static params for all categories
 export async function generateStaticParams() {
-  const categoriesData = await getCategoriesData();
+  const categoriesData = getCategoriesData();
   return categoriesData.categories.map((category: any) => ({
     category: category.slug,
   }));
@@ -49,7 +29,7 @@ export async function generateStaticParams() {
 
 // Generate metadata for each category
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-  const categoriesData = await getCategoriesData();
+  const categoriesData = getCategoriesData();
   const categoryData = categoriesData.categories.find((cat: any) => cat.slug === params.category);
   
   if (!categoryData) {
@@ -65,8 +45,8 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-  const dossiersData = await getDossiersData();
-  const categoriesData = await getCategoriesData();
+  const dossiersData = getDossiersData();
+  const categoriesData = getCategoriesData();
   
   const dossiers: DossierMeta[] = dossiersData as DossierMeta[];
   

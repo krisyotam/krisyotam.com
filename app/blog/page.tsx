@@ -1,6 +1,7 @@
 import BlogClientPage from "./BlogClientPage";
 import type { Metadata } from "next";
 import type { BlogMeta } from "@/types/blog";
+import blogData from "@/data/blog/feed.json";
 import "./blog.css";
 
 export const metadata: Metadata = {
@@ -8,28 +9,13 @@ export const metadata: Metadata = {
   description: "Short-form reflections, updates, and informal analysis",
 };
 
-// Fetch blog data from API
-async function fetchBlogData() {
-  try {
-    const baseUrl = process.env.NODE_ENV === 'production' 
-      ? 'https://krisyotam.com' 
-      : 'http://localhost:3000';
-    
-    const response = await fetch(`${baseUrl}/api/data/blog/feed`, {
-      cache: 'no-store' // Ensure fresh data
-    });
-    if (!response.ok) {
-      throw new Error('Failed to fetch blog data');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching blog data:', error);
-    return [];
-  }
+// Use direct import for static generation
+function getBlogData() {
+  return blogData;
 }
 
 export default async function BlogPage() {
-  const blogData = await fetchBlogData();
+  const blogData = getBlogData();
   
   // Sort notes by date (newest first)
   const posts: BlogMeta[] = [...blogData]

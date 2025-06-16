@@ -2,20 +2,10 @@ import ConspiraciesClientPage from "../ConspiraciesClientPage";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { ConspiracyMeta } from "@/types/conspiracies";
+import conspiraciesData from "@/data/conspiracies/conspiracies.json";
 
-async function getConspiraciesData() {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/data/conspiracies`, {
-      cache: 'no-store'
-    });
-    if (!response.ok) {
-      throw new Error('Failed to fetch conspiracies data');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching conspiracies data:', error);
-    return [];
-  }
+function getConspiraciesData() {
+  return conspiraciesData;
 }
 
 interface PageProps {
@@ -24,7 +14,7 @@ interface PageProps {
 
 export async function generateStaticParams() {
   // Get conspiracies data from API
-  const conspiraciesData = await getConspiraciesData();
+  const conspiraciesData = getConspiraciesData();
   
   // Get all unique categories from conspiracies data
   const categories = Array.from(new Set(conspiraciesData.map((conspiracy: any) => conspiracy.category))) as string[];
@@ -39,7 +29,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   // Get conspiracies data from API
-  const conspiraciesData = await getConspiraciesData();
+  const conspiraciesData = getConspiraciesData();
   
   // Convert slug back to category name
   const categorySlug = params.category;
@@ -63,7 +53,7 @@ export default async function ConspiraciesCategoryPage({ params }: PageProps) {
   const categorySlug = params.category;
   
   // Get conspiracies data from API
-  const conspiraciesData = await getConspiraciesData();
+  const conspiraciesData = getConspiraciesData();
   
   // Find the original category name
   const originalCategory = conspiraciesData.find((conspiracy: any) => 

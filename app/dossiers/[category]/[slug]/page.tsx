@@ -5,19 +5,11 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import DossiersPageClient from "./DossiersPageClient";
 import type { DossierMeta, DossierStatus, DossierConfidence } from "@/types/dossiers";
+import dossiersData from "@/data/dossiers/dossiers.json";
 
-// Fetch dossiers data from API
-async function fetchDossiersData() {
-  try {
-    const response = await fetch('/api/data/dossiers');
-    if (!response.ok) {
-      throw new Error('Failed to fetch dossiers data');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching dossiers data:', error);
-    return [];
-  }
+// Use direct import for static generation
+function getDossiersData() {
+  return dossiersData;
 }
 
 interface DossierData {
@@ -43,8 +35,8 @@ function slugifyCategory(category: string) {
 }
 
 export async function generateStaticParams() {
-  // Fetch dossiers data from API
-  const dossiersData = await fetchDossiersData();
+  // Use direct import for static generation
+  const dossiersData = getDossiersData();
   
   // Generate all category/slug combinations
   return dossiersData.map((dossierItem: DossierData) => ({
@@ -54,8 +46,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: DossierPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  // Fetch dossiers data from API
-  const dossiersData = await fetchDossiersData();
+  // Use direct import for static generation
+  const dossiersData = getDossiersData();
   
   const dossierItem = dossiersData.find((d: DossierData) => 
     slugifyCategory(d.category) === params.category && d.slug === params.slug
@@ -103,8 +95,8 @@ export async function generateMetadata({ params }: DossierPageProps, parent: Res
 }
 
 export default async function DossierPage({ params }: DossierPageProps) {
-  // Fetch dossiers data from API
-  const dossiersData = await fetchDossiersData();
+  // Use direct import for static generation
+  const dossiersData = getDossiersData();
   
   const dossierItem = dossiersData.find((d: DossierData) => 
     slugifyCategory(d.category) === params.category && d.slug === params.slug

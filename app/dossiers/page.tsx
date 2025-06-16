@@ -1,20 +1,10 @@
 import DossiersClientPage from "./DossiersClientPage";
 import type { Metadata } from "next";
 import type { DossierMeta, DossierStatus, DossierConfidence } from "@/types/dossiers";
+import dossiersData from "@/data/dossiers/dossiers.json";
 
-async function getDossiersData() {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/data/dossiers`, {
-      cache: 'no-store'
-    });
-    if (!response.ok) {
-      throw new Error('Failed to fetch dossiers data');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching dossiers data:', error);
-    return [];
-  }
+function getDossiersData() {
+  return dossiersData;
 }
 
 export const metadata: Metadata = {
@@ -24,7 +14,7 @@ export const metadata: Metadata = {
 
 export default async function DossiersPage() {
   // Fetch dossiers data from API
-  const dossiersData = await getDossiersData();
+  const dossiersData = getDossiersData();
   
   // Map and sort dossiers by date (newest first)
   const dossiers: DossierMeta[] = dossiersData.map((dossierItem: any) => ({

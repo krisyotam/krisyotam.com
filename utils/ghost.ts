@@ -21,7 +21,7 @@ export interface GhostPost {
 export async function getPosts(): Promise<GhostPost[]> {
   try {
     const res = await fetch(`${GHOST_URL}/ghost/api/v3/content/posts/?key=${GHOST_KEY}&include=tags&limit=500`, {
-      cache: "no-store",
+      next: { revalidate: 3600 }, // Revalidate every hour instead of no-store
     })
 
     if (!res.ok) {

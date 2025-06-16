@@ -4,7 +4,7 @@ import { getTMDBMovieDetails, searchTMDBMovie, getTMDBPosterUrl } from '@/lib/tm
 
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
+    const searchParams = request.nextUrl.searchParams;
     const limit = parseInt(searchParams.get('limit') || '20');
 
     console.log(`Fetching recently watched movies from Trakt (limit: ${limit})`);

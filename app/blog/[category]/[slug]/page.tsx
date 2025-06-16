@@ -4,6 +4,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import BlogPageClient from "./BlogPageClient";
 import type { BlogMeta } from "@/types/blog";
+import blogData from "@/data/blog/feed.json";
 
 type Status = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
 type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
@@ -28,28 +29,13 @@ function slugifyCategory(category: string) {
   return category.toLowerCase().replace(/\s+/g, "-");
 }
 
-// Fetch blog data from API
-async function fetchBlogData() {
-  try {
-    const baseUrl = process.env.NODE_ENV === 'production' 
-      ? 'https://krisyotam.com' 
-      : 'http://localhost:3000';
-    
-    const response = await fetch(`${baseUrl}/api/data/blog/feed`, {
-      cache: 'no-store'
-    });
-    if (!response.ok) {
-      throw new Error('Failed to fetch blog data');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching blog data:', error);
-    return [];
-  }
+// Use direct import for static generation
+function getBlogData() {
+  return blogData;
 }
 
 export async function generateStaticParams() {
-  const blogData = await fetchBlogData();
+  const blogData = getBlogData();
   
   // Generate all category/slug combinations
   return blogData.map((post: BlogData) => ({
@@ -59,7 +45,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
-  const blogData = await fetchBlogData();
+  const blogData = getBlogData();
   
   const post = blogData.find((p: BlogData) => 
     slugifyCategory(p.category) === params.category && p.slug === params.slug
@@ -78,7 +64,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
-  const blogData = await fetchBlogData();
+  const blogData = getBlogData();
   
   const postData = blogData.find((p: BlogData) => 
     slugifyCategory(p.category) === params.category && p.slug === params.slug

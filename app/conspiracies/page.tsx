@@ -1,20 +1,11 @@
 import ConspiraciesClientPage from "./ConspiraciesClientPage";
 import type { Metadata } from "next";
 import type { ConspiracyMeta } from "@/types/conspiracies";
+import conspiraciesData from "@/data/conspiracies/conspiracies.json";
 
-async function getConspiraciesData() {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/data/conspiracies`, {
-      cache: 'no-store'
-    });
-    if (!response.ok) {
-      throw new Error('Failed to fetch conspiracies data');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching conspiracies data:', error);
-    return [];
-  }
+// Use direct import for static generation
+function getConspiraciesData() {
+  return conspiraciesData;
 }
 
 export const metadata: Metadata = {
@@ -22,9 +13,9 @@ export const metadata: Metadata = {
   description: "Quick thoughts and ideas",
 };
 
-export default async function ConspiraciesPage() {
+export default function ConspiraciesPage() {
   // Fetch conspiracies data from API
-  const conspiraciesData = await getConspiraciesData();
+  const conspiraciesData = getConspiraciesData();
   
   // Sort conspiracies by date (newest first) and ensure proper typing
   const conspiracies: ConspiracyMeta[] = [...conspiraciesData]
