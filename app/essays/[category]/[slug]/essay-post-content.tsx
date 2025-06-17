@@ -6,7 +6,7 @@ import { MDXRenderer } from "./mdx-renderer"
 import { EssayPostMeta } from "./essay-post-meta"
 
 interface EssayPostContentProps {
-  year: string
+  category: string
   slug: string
   mdxData: {
     content: string
@@ -23,19 +23,19 @@ interface EssayPostContentProps {
   }
 }
 
-function EssayNotFound({ slug, year }: { slug: string; year: string }) {
+function EssayNotFound({ slug, category }: { slug: string; category: string }) {
   return (
     <div className="essay-content">
       <h1>Essay Content Not Found</h1>
-      <p>We couldn't find the content for the essay "{slug}" from {year}.</p>
+      <p>We couldn't find the content for the essay "{slug}" in category "{category}".</p>
     </div>
   )
 }
 
-export function EssayPostContent({ year, slug, mdxData, postData }: EssayPostContentProps) {
+export function EssayPostContent({ category, slug, mdxData, postData }: EssayPostContentProps) {
   // If there's no MDX data, show a fallback
   if (!mdxData) {
-    return <EssayNotFound slug={slug} year={year} />
+    return <EssayNotFound slug={slug} category={category} />
   }
 
   const { content, frontmatter } = mdxData
@@ -50,7 +50,7 @@ export function EssayPostContent({ year, slug, mdxData, postData }: EssayPostCon
   const subtitle = postData?.subtitle ? ` - ${postData.subtitle}` : ''
   const description = postData?.preview || "Read more on Kris Yotam's blog"
   const coverUrl = postData?.cover_image || `https://picsum.photos/1200/630?text=${encodeURIComponent(title)}`
-  const url = `https://krisyotam.com/essays/${year}/${slug}`
+  const url = `https://krisyotam.com/essays/${category}/${slug}`
 
   return (
     <EssayModalProvider>

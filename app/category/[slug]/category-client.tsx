@@ -47,10 +47,8 @@ export function CategoryClient({ posts, categoryData, categoryName, slug }: Cate
   const columns = [
     {
       header: "Title",
-      key: "title",
-      render: (post: Post) => {
-        const year = getPostYear(post.date)
-        const postUrl = `/essays/${year}/${post.slug}`
+      key: "title",      render: (post: Post) => {
+        const postUrl = `/essays/${post.category}/${post.slug}`
         return (
           <Link href={postUrl} className="text-foreground">
             {post.title}

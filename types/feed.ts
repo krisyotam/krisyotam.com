@@ -15,5 +15,5 @@ export interface Post {
 }
 
 export interface Feed {
-  posts: Post[]
+  essays: Post[]
 }

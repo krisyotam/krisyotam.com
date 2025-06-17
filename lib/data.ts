@@ -11,7 +11,9 @@ export async function getEssaysData(): Promise<PostsData> {
   const filePath = path.join(process.cwd(), "data/essays/essays.json")
   try {
     const json = await readFile(filePath, "utf-8")
-    return JSON.parse(json) as PostsData
+    const data = JSON.parse(json)
+    // Handle both old structure (posts) and new structure (essays)
+    return { posts: data.essays || data.posts || [] }
   } catch (error) {
     console.error("Error reading essays.json:", error)
     return { posts: [] }

@@ -74,8 +74,7 @@ export default function RelatedPostsClient({
             // Generate correct URL based on post type
             const getPostUrl = () => {
               if (post.path === 'essays') {
-                const year = getYear(post.date)
-                return `/essays/${year}/${post.slug}`
+                return `/essays/${post.category}/${post.slug}`
               } else if (post.category) {
                 // For blog posts, use category-based routing
                 const categorySlug = post.category.toLowerCase().replace(/\s+/g, "-")

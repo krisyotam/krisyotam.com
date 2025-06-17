@@ -1,274 +1,34 @@
 {
   "categories": [
     {
-      "slug": "design",
-      "title": "Design",
-      "preview": "Articles about design principles, visual aesthetics, and creating meaningful user experiences.",
-      "date": "2025-01-01",
+      "slug": "philosophy",
+      "title": "Philosophy",
+      "preview": "Inquiries into existence, ethics, pain, beauty, and the art of living well and wisely.",
+      "date": "2025-06-16",
       "show-status": "active",
       "status": "In Progress",
       "confidence": "certain",
-      "importance": 7
+      "importance": 9
     },
     {
-      "slug": "technology",
-      "title": "Technology",
-      "preview": "Deep dives into programming languages, frameworks, and the evolving landscape of technology.",
-      "date": "2025-01-02",
+      "slug": "pedagogy",
+      "title": "Pedagogy",
+      "preview": "Essays on the theory, trials, and transformative nature of teaching and learning.",
+      "date": "2025-06-16",
       "show-status": "active",
       "status": "In Progress",
-      "confidence": "highly likely",
+      "confidence": "certain",
       "importance": 8
     },
     {
-      "slug": "on-building-a-personal-library",
-      "title": "On Building a Personal Library",
-      "preview": "Thoughts on collecting, organizing, and engaging with books as a means of personal growth and intellectual development.",
-      "date": "2025-01-03",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "likely",
-      "importance": 6
-    },
-    {
-      "slug": "philosophy",
-      "title": "Philosophy",
-      "preview": "Examinations of philosophical concepts, ethical frameworks, and the pursuit of wisdom in everyday life.",
-      "date": "2025-01-04",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "possible",
-      "importance": 9
-    },
-    {
-      "slug": "art",
-      "title": "Art",
-      "preview": "Analysis and appreciation of artistic works, movements, and the cultural significance of visual expression.",
-      "date": "2025-01-05",
+      "slug": "letters",
+      "title": "Letters",
+      "preview": "Personal and philosophical letters written to the lost, the learning, and the longing.",
+      "date": "2025-06-16",
       "show-status": "active",
       "status": "In Progress",
       "confidence": "certain",
       "importance": 7
-    },
-    {
-      "slug": "examples",
-      "title": "Examples",
-      "preview": "Sample posts and demonstrations of various content formats and features available on this site.",
-      "date": "2025-01-06",
-      "show-status": "hidden",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 4
-    },
-    {
-      "slug": "poetic-analysis",
-      "title": "Poetic Analysis",
-      "preview": "Sample posts and demonstrations of various content formats and features available on this site.",
-      "date": "2025-01-06",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 4
-    },
-    {
-      "slug": "character-analysis",
-      "title": "Character Analysis",
-      "preview": "Sample posts and demonstrations of various content formats and features available on this site.",
-      "date": "2025-01-06",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 4
-    },
-    {
-      "slug": "anime-analysis",
-      "title": "Anime Analysis",
-      "preview": "A compilation of anime reviews.",
-      "date": "2025-01-06",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 3
-    },
-    {
-      "slug": "powerscaling",
-      "title": "Powerscaling",
-      "preview": "Powerscaling of anime, manga, comics, & film.",
-      "date": "2025-01-06",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 3
-    },
-    {
-      "slug": "anime-recommendations",
-      "title": "Anime Recommendations",
-      "preview": "various lists of anime recs from all types of genres.",
-      "date": "2025-01-06",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 3
-    },
-    {
-      "slug": "case-files-of-k",
-      "title": "Case Files of K",
-      "preview": "a series of investigations, mysteries, and analytical entries under the guise of 'K'.",
-      "date": "2025-04-09",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "high",
-      "importance": 9
-    },
-    {
-      "slug": "dreams",
-      "title": "Dreams",
-      "preview": "a collection or log of personal dreams, symbolic interpretations, or subconscious narratives.",
-      "date": "2025-04-09",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 7
-    },
-    {
-      "slug": "frameworks",
-      "title": "Frameworks",
-      "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
-      "date": "2025-04-09",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 7
-    },
-    {
-      "slug": "anime-reviews",
-      "title": "Anime Reviews",
-      "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
-      "date": "2025-04-09",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 7
-    },
-    {
-      "slug": "film-reviews",
-      "title": "Film Reviews",
-      "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
-      "date": "2025-04-09",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 7
-    },
-    {
-      "slug": "opera-reviews",
-      "title": "Opera Reviews",
-      "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
-      "date": "2025-04-09",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 7
-    },
-    {
-      "slug": "play-reviews",
-      "title": "Play Reviews",
-      "preview": "a collection of complex systems, and frameworks I have created to solve unique issues",
-      "date": "2025-04-09",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 7
-    },
-    {
-      "slug": "project-euler",
-      "title": "Project Euler",
-      "preview": "a archive of my evolving solutions to problems on projecteuler.net in various languages",
-      "date": "2025-04-09",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 7
-    },
-    {
-      "slug": "verse",
-      "title": "Verse",
-      "preview": "A curated collection of my poetic explorations—from structured forms like sonnets and haiku to free‐verse innovations.",
-      "date": "2025-04-21",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 1
-    },
-    {
-      "slug": "on-myself",
-      "title": "On Myself",
-      "preview": "Personal reflections on my identity, growth, and guiding philosophies.",
-      "date": "2025-04-27",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 1
-    },
-    {
-      "slug": "on-website",
-      "title": "On Website",
-      "preview": "Insights into the design, architecture, and ongoing evolution of my personal website.",
-      "date": "2025-04-27",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 1
-    },
-    {
-      "slug": "on-learning",
-      "title": "On Learning",
-      "preview": "Documenting my learning pathways—methods, resources, and progress across various disciplines.",
-      "date": "2025-04-27",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 1
-    },
-    {
-      "slug": "on-writing",
-      "title": "On Writing",
-      "preview": "my writing processes, stylistic evolutions, and compositional approaches.",
-      "date": "2025-04-27",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 1
-    },
-    {
-      "slug": "on-method",
-      "title": "On Method",
-      "preview": "Analyses of the methodologies and frameworks underpinning my research",
-      "date": "2025-04-27",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 1
-    },
-    {
-      "slug": "short-stories",
-      "title": "Short Stories",
-      "preview": "A curated collection of my original short fiction",
-      "date": "2025-04-27",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 1
-    },
-    {
-      "slug": "book-notes",
-      "title": "Book Notes",
-      "preview": "A curated repository of notes, and reflections on books as I read.",
-      "date": "2025-04-28",
-      "show-status": "active",
-      "status": "In Progress",
-      "confidence": "medium",
-      "importance": 1
     }
   ]
 }

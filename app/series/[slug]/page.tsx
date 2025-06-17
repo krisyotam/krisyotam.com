@@ -91,7 +91,7 @@ export default async function SeriesPage({ params }: SeriesPageProps) {
                           <td className="py-2 px-3 text-center w-8 text-muted-foreground">
                             {index + 1}
                           </td>                          <td className="py-2 px-3">
-                            <Link href={`/essays/${getPostYear(post.date)}/${post.slug}`} className="text-foreground">
+                            <Link href={`/essays/${post.category}/${post.slug}`} className="text-foreground">
                               {post.title}
                             </Link>
                             <p className="text-sm text-muted-foreground mt-1">{post.preview}</p>

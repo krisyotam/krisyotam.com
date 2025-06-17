@@ -45,6 +45,11 @@ import AboutThisSite from "@/components/about/AboutThisSite"
 import { FeaturedPost } from "@/components/featured-post"
 import { Post } from "@/utils/posts"
 
+// URL generation helper - copied from working essays-table.tsx
+function getPostUrl(post: Post): string {
+  return `essays/${post.category}/${post.slug}`;
+}
+
 // Type definitions for props
 interface Poem {
   id: string
@@ -109,8 +114,11 @@ function BlogPostCard({ post }: { post: Post }) {
     day: "numeric",
   })
 
-  const year = new Date(post.date).getFullYear().toString()
-  const slugPath = `${post.path}/${year}/${post.slug}`
+  // Generate correct URL - using same pattern as working essays-table.tsx
+  const slugPath = getPostUrl(post);
+
+  // Debug logging
+  console.log('BlogPostCard - Linking to:', slugPath);
 
   // Get first 3 tags if there are many
   const displayTags = post.tags.slice(0, 3)
@@ -228,8 +236,11 @@ function PostTableRow({ post }: { post: Post }) {
     day: "numeric",
   })
   
-  const year = new Date(post.date).getFullYear().toString()
-  const slugPath = `${post.path}/${year}/${post.slug}`
+  // Generate correct URL - using same pattern as working essays-table.tsx
+  const slugPath = getPostUrl(post);
+  
+  // Debug logging
+  console.log('PostTableRow - Linking to:', slugPath);
   
   return (
     <tr className="border-t border-border hover:bg-muted/30 transition-colors">
@@ -537,8 +548,8 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                   .filter(post => !["On Myself", "On Website", "On Learning", "On Writing", "On Method"].includes(post.category))
                   .filter(post => post.slug && post.date && post.preview)
                   .map((post) => {
-                    const year = getPostYear(post.date)
-                    const slugPath = `${post.path}/${year}/${post.slug}`
+                    // Generate correct URL - using same pattern as working essays-table.tsx
+                    const slugPath = getPostUrl(post);
 
                     return (
                       <BlogPost
@@ -623,7 +634,7 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                 <CardContent className="p-0 flex flex-col items-center justify-between h-full">
                   <div className="relative w-[340px] h-[340px] mt-8">
                     <Image
-                      src="https://i.postimg.cc/gkLBF7fK/krisyotam-light.png"
+                      src="https://i.postimg.cc/L4y8BvHs/krisyotam-l-pose.png"
                       alt="Kris Yotam Logo"
                       fill
                       style={{ objectFit: "contain" }}

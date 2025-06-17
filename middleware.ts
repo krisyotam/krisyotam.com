@@ -6,18 +6,17 @@ import type { Feed } from "./types/feed"
 const feedData = rawFeedData as Feed
 
 // Dynamically create route mappings from feed.json
-// This creates a map where key is the custom path and value contains target slug and year info
-const CUSTOM_ROUTES_MAP: Record<string, { slug: string, year: string }> = {};
+// This creates a map where key is the custom path and value contains target slug and category info
+const CUSTOM_ROUTES_MAP: Record<string, { slug: string, category: string }> = {};
 
 // Build the custom routes map from feed data
-feedData.posts.forEach(post => {
+feedData.essays.forEach(post => {
   if (post.customPath) {
-    const year = new Date(post.date).getFullYear().toString();
     CUSTOM_ROUTES_MAP[post.customPath] = { 
       slug: post.slug,
-      year 
+      category: post.category 
     };
-    console.log(`Registered custom route: ${post.customPath} → essays/${year}/${post.slug}`);
+    console.log(`Registered custom route: ${post.customPath} → essays/${post.category}/${post.slug}`);
   }
 });
 
@@ -25,14 +24,24 @@ feedData.posts.forEach(post => {
 // Each entry uses a regular expression pattern and a resolver function
 const PATTERN_ROUTES = [
   {
-    // Example: /research/2025/research-title -> essays/2025/research-title
-    pattern: /^\/research\/(\d{4})\/([^/]+)$/,
+    // Example: /research/research-title -> essays/philosophy/research-title (if such post exists)
+    pattern: /^\/research\/([^/]+)$/,
     resolver: (matches: string[]) => {
-      const [, year, slug] = matches;
-      return { 
-        targetPath: `/essays/${year}/${slug}`,
+      const [, slug] = matches;
+      // Find the post in essays to get its category
+      const post = feedData.essays.find(p => p.slug === slug);
+      if (post) {
+        return { 
+          targetPath: `/essays/${post.category}/${slug}`,
+          slug,
+          category: post.category
+        };
+      }
+      // Fallback if post not found
+      return {
+        targetPath: `/essays/philosophy/${slug}`,
         slug,
-        year
+        category: 'philosophy'
       };
     }
   },
@@ -53,11 +62,10 @@ export function middleware(request: NextRequest) {
     console.log(`[middleware] Skipping middleware processing for doc route: ${normalizedPath}`)
     return NextResponse.next()
   }
-
   // Check if this is a custom route (based on feed.json customPath)
   if (CUSTOM_ROUTES_MAP[normalizedPath]) {
-    const { slug, year } = CUSTOM_ROUTES_MAP[normalizedPath];
-    const targetPath = `/essays/${year}/${slug}`;
+    const { slug, category } = CUSTOM_ROUTES_MAP[normalizedPath];
+    const targetPath = `/essays/${category}/${slug}`;
     
     console.log(`🔄 MIDDLEWARE: Custom route matched. Rewriting ${normalizedPath} to ${targetPath}`);
     url.pathname = targetPath;
@@ -94,16 +102,13 @@ export function middleware(request: NextRequest) {
 
   // Check if the path is for a post (original functionality)
   if (normalizedPath.startsWith("/post/")) {
-    const slug = normalizedPath.replace("/post/", "")
-
-    // Find the post in the feed
-    const post = feedData.posts.find((p) => p.slug === slug)
+    const slug = normalizedPath.replace("/post/", "")    // Find the post in the feed
+    const post = feedData.essays.find((p) => p.slug === slug)
 
     // If post exists, redirect to the correct path
     if (post) {
-      const year = new Date(post.date).getFullYear().toString()
       // Update to use the new essays path structure
-      return NextResponse.redirect(new URL(`/essays/${year}/${post.slug}`, request.url))
+      return NextResponse.redirect(new URL(`/essays/${post.category}/${post.slug}`, request.url))
     }
   }
   
@@ -118,15 +123,14 @@ export function middleware(request: NextRequest) {
     console.log('🔄 MIDDLEWARE: Redirecting to Are.na')
     return NextResponse.redirect('https://www.are.na/kris-yotam/channels')
   }
-
   // Handle direct access to essays post files (new functionality)
-  const essayPostMatch = normalizedPath.match(/^\/essays\/(\d{4})\/([^/]+)$/)
+  const essayPostMatch = normalizedPath.match(/^\/essays\/([^/]+)\/([^/]+)$/)
   if (essayPostMatch) {
-    const [, year, slug] = essayPostMatch
-    console.log(`🔍 MIDDLEWARE: Detected essays post URL: ${normalizedPath} with year: ${year}, slug: ${slug}`)
+    const [, category, slug] = essayPostMatch
+    console.log(`🔍 MIDDLEWARE: Detected essays post URL: ${normalizedPath} with category: ${category}, slug: ${slug}`)
 
     // Check if this post exists in our feed data
-    const postExists = feedData.posts.some((p) => p.slug === slug)
+    const postExists = feedData.essays.some((p) => p.slug === slug && p.category === category)
 
     if (postExists) {
       // The URL is already in the correct format, ensure it's handled by the app router

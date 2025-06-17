@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { Post } from "@/utils/posts";
+import categoriesData from "@/data/essays/categories.json";
 
 interface EssaysTableProps {
   notes: Post[];
@@ -14,6 +15,12 @@ interface EssaysTableProps {
 export function EssaysTable({ notes, searchQuery, activeCategory }: EssaysTableProps) {
   const [filteredNotes, setFilteredNotes] = useState<Post[]>(notes);
   const router = useRouter();
+
+  // Helper to get category title from slug
+  function getCategoryTitle(categorySlug: string): string {
+    const category = categoriesData.categories.find(cat => cat.slug === categorySlug);
+    return category?.title || categorySlug.charAt(0).toUpperCase() + categorySlug.slice(1);
+  }
 
   useEffect(() => {
     const filtered = notes.filter((note) => {
@@ -42,11 +49,9 @@ export function EssaysTable({ notes, searchQuery, activeCategory }: EssaysTableP
       day: "numeric"
     });
   }
-
   // Helper to build the correct route for an essay
   function getEssayUrl(note: Post) {
-    const year = new Date(note.date).getFullYear();
-    return `/essays/${year}/${note.slug}`;
+    return `/essays/${note.category}/${note.slug}`;
   }
 
   if (!filteredNotes.length) {
@@ -71,9 +76,8 @@ export function EssaysTable({ notes, searchQuery, activeCategory }: EssaysTableP
                 index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
               }`}
               onClick={() => router.push(getEssayUrl(note))}
-            >
-              <td className="py-2 px-3 font-medium">{note.title}</td>
-              <td className="py-2 px-3">{note.category}</td>
+            >              <td className="py-2 px-3 font-medium">{note.title}</td>
+              <td className="py-2 px-3">{getCategoryTitle(note.category)}</td>
               <td className="py-2 px-3">{formatDate(note.date)}</td>
             </tr>
           ))}

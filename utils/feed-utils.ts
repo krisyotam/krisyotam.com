@@ -24,7 +24,7 @@ interface Post {
 export function getPostBySlug(slug: string): Post | null {
   if (!slug) return null;
   
-  const post = feedData.posts.find(post => post.slug === slug);
+  const post = feedData.essays.find(post => post.slug === slug);
   return post || null;
 }
 
@@ -37,7 +37,7 @@ export function getPostBySlug(slug: string): Post | null {
 export function getPostByYearAndSlug(year: string, slug: string): Post | null {
   if (!year || !slug) return null;
   
-  const post = feedData.posts.find(post => {
+  const post = feedData.essays.find(post => {
     const postYear = new Date(post.date).getFullYear().toString();
     return post.slug === slug && postYear === year;
   });
@@ -50,5 +50,5 @@ export function getPostByYearAndSlug(year: string, slug: string): Post | null {
  * @returns Array of all posts
  */
 export function getAllPosts(): Post[] {
-  return feedData.posts;
-} 
+  return feedData.essays;
+}
