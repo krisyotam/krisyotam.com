@@ -6,6 +6,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import essaysData from "@/data/essays/essays.json";
 import EssayPageClient from "./EssayPageClient";
+import { TableOfContents } from "@/components/typography/table-of-contents";
+import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
 import type { Post } from "@/utils/posts";
 
 interface EssayPageProps {
@@ -70,16 +72,31 @@ export default async function EssayPage({ params }: EssayPageProps) {
 
   if (!essayItem) {
     notFound();
-  }
+  }  // Extract headings from the essay MDX content
+  const headings = await extractHeadingsFromMDX('essays', params.slug, params.category);
 
   // Dynamically import the MDX file based on category and slug
-  const EssayArticle = (await import(`@/app/essays/content/${params.category}/${params.slug}.mdx`)).default;
-  
-  return (
-    <EssayPageClient essayData={essayItem} allEssays={essaysData.essays}>
-      <div className="essays-content">
-        <EssayArticle />
+  const EssayArticle = (await import(`@/app/essays/content/${params.category}/${params.slug}.mdx`)).default;  return (
+    <div className="relative min-h-screen bg-background text-foreground pt-16">
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Header section - full width */}
+        <div className="mb-8">
+          <EssayPageClient essayData={essayItem} allEssays={essaysData.essays} headerOnly={true} />
+        </div>
+        
+        {/* Main content */}
+        <main className="container max-w-[672px] mx-auto px-4">
+          {/* Table of Contents - at the top of content */}
+          {headings.length > 0 && (
+            <TableOfContents headings={headings} />
+          )}
+          
+          <div className="essays-content">
+            <EssayArticle />
+          </div>
+          <EssayPageClient essayData={essayItem} allEssays={essaysData.essays} contentOnly={true} />
+        </main>
       </div>
-    </EssayPageClient>
+    </div>
   );
 }

@@ -9,10 +9,12 @@ import type { NoteMeta } from "@/types/note";
 interface Props {
   note: NoteMeta;
   allNotes: NoteMeta[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  headerOnly?: boolean;
+  contentOnly?: boolean;
 }
 
-export default function NotePageClient({ note, allNotes, children }: Props) {
+export default function NotePageClient({ note, allNotes, children, headerOnly, contentOnly }: Props) {
   if (!note) notFound();
 
   /* prev / next */
@@ -26,6 +28,43 @@ export default function NotePageClient({ note, allNotes, children }: Props) {
   // Helper function to create category slug
   function slugifyCategory(category: string) {
     return category.toLowerCase().replace(/\s+/g, "-");
+  }
+
+  // Render only header
+  if (headerOnly) {
+    return (
+      <div className="container max-w-[672px] mx-auto px-4">
+        <PostHeader
+          title={note.title}
+          subtitle={note.subtitle}
+          date={note.date}
+          tags={note.tags}
+          category={note.category}
+          backHref="/fiction"
+          backText="Fiction"
+          preview={note.preview}
+          status={note.status ?? "Notes"}
+          confidence={note.confidence ?? "possible"}
+          importance={note.importance ?? 5}
+        />
+      </div>
+    );
+  }
+
+  // Render only content (citation, footer, etc.)
+  if (contentOnly) {
+    return (
+      <div className="mt-8">
+        <Citation
+          title={note.title}
+          slug={note.slug}
+          date={note.date}
+          url={`https://krisyotam.com/fiction/${slugifyCategory(note.category)}/${note.slug}`}
+        />
+        <LiveClock />
+        <Footer />
+      </div>
+    );
   }
 
   return (

@@ -4,6 +4,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import reviewsData from "@/data/reviews/reviews.json";
 import ReviewPageClient from "./ReviewPageClient";
+import { TableOfContents } from "@/components/typography/table-of-contents";
+import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
 import type { ReviewMeta, ReviewStatus, ReviewConfidence } from "@/types/review";
 
 interface ReviewData {
@@ -90,23 +92,46 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
   if (!reviewData) {
     notFound();
   }
+  
   const review: ReviewMeta = {
     ...reviewData,
     status: reviewData.status as ReviewStatus,
     confidence: reviewData.confidence as ReviewConfidence
   };
+  
   const reviews: ReviewMeta[] = (reviewsData as ReviewData[]).map(review => ({
     ...review,
     status: review.status as ReviewStatus,
     confidence: review.confidence as ReviewConfidence
-  }));  // Dynamically import the MDX file based on category and slug
+  }));
+
+  // Extract headings from the review MDX content
+  const headings = await extractHeadingsFromMDX('reviews', params.slug, params.category);
+
+  // Dynamically import the MDX file based on category and slug
   const Review = (await import(`@/app/reviews/content/${params.category}/${params.slug}.mdx`)).default;
 
   return (
-    <ReviewPageClient review={review} allReviews={reviews}>
-      <div className="review-content">
-        <Review />
+    <div className="relative min-h-screen bg-background text-foreground pt-16">
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Header section - full width */}
+        <div className="mb-8">
+          <ReviewPageClient review={review} allReviews={reviews} headerOnly={true} />
+        </div>
+        
+        {/* Main content */}
+        <main className="container max-w-[672px] mx-auto px-4">
+          {/* Table of Contents - at the top of content */}
+          {headings.length > 0 && (
+            <TableOfContents headings={headings} />
+          )}
+          
+          <div className="review-content">
+            <Review />
+          </div>
+          <ReviewPageClient review={review} allReviews={reviews} contentOnly={true} />
+        </main>
       </div>
-    </ReviewPageClient>
+    </div>
   );
 }

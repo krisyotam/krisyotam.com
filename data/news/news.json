@@ -108,5 +108,16 @@
     "confidence": "certain",
     "importance": 9,
     "preview": "Gemini 1.5 Pro featured industry-leading long-context capabilities, enabling advanced reasoning over vast documents."
-  }
+  },
+  {
+  "title": "The Illusion of Thinking",
+  "date": "2025-06-01",
+  "slug": "illusion-of-thinking",
+  "tags": ["Apple", "Reasoning", "Complexity", "LLM", "Evaluation"],
+  "category": "apple",
+  "status": "Published",
+  "confidence": "certain",
+  "importance": 8,
+  "preview": "A close look at apple's analysis of reasoning in LLMs through problem complexity reveals limitations in current benchmark design and model interpretability."
+}
 ]

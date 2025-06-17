@@ -683,5 +683,16 @@
     "confidence": "certain",
     "importance": 9,
     "preview": "a list of all the notable members and activities of Sigma Pi Phi, also known as the Black Boulé"
+  },
+  {
+    "title": "Mathematics Workflow",
+    "date": "2025-06-14",
+    "slug": "mathematics-workflow",
+    "tags": ["Mathematics", "Workflow", "Research"],
+    "category": "Mathematics",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 9,
+    "preview": "my personal mathematics workflow, how I manage pdfs, notes, and references for mathematical research and study"
   }
 ]

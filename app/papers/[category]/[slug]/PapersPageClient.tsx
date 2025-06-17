@@ -9,14 +9,17 @@ import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/papers";
 interface Props {
   paperData: PaperMeta;
   allPapers: PaperMeta[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  headerOnly?: boolean;
+  contentOnly?: boolean;
 }
 
 function slugifyCategory(category: string) {
   return category.toLowerCase().replace(/\s+/g, "-");
 }
 
-export default function PaperPageClient({ paperData: paperItem, allPapers, children }: Props) {  // Function to map paper status to PageHeader compatible status
+export default function PaperPageClient({ paperData: paperItem, allPapers, children, headerOnly, contentOnly }: Props) {
+  // Function to map paper status to PageHeader compatible status
   const mapPaperStatusToPageHeaderStatus = (paperStatus: PaperStatus): "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" => {
     const statusMap: Record<PaperStatus, "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"> = {
       Draft: "Draft",
@@ -56,6 +59,45 @@ export default function PaperPageClient({ paperData: paperItem, allPapers, child
     return confidenceMap[paperConfidence] || "possible";
   };
 
+  // Render only header
+  if (headerOnly) {
+    return (
+      <div className="container max-w-[672px] mx-auto px-4">
+        <PageHeader
+          title={paperItem.title}
+          subtitle={paperItem.subtitle}
+          date={paperItem.date}
+          backHref="/papers"
+          backText="Papers"
+          preview={paperItem.preview}
+          status={mapPaperStatusToPageHeaderStatus(paperItem.status ?? "Notes")}
+          confidence={mapPaperConfidenceToPageHeaderConfidence(paperItem.confidence)}
+          importance={paperItem.importance ?? 5}
+        />
+      </div>
+    );
+  }
+  // Render only content (citation, footer, etc.)
+  if (contentOnly) {
+    return (
+      <div className="container max-w-[672px] mx-auto px-4">
+        {/* MDX body */}
+        <div className="papers-content">{children}</div>
+        
+        <div className="mt-8">
+          <Citation 
+            title={paperItem.title}
+            slug={paperItem.slug}
+            date={paperItem.date}
+            url={`https://krisyotam.com/papers/${slugifyCategory(paperItem.category)}/${paperItem.slug}`}
+          />
+          <LiveClock />
+          <Footer />
+        </div>
+      </div>
+    );
+  }
+  // Legacy layout - render everything together
   return (
     <div className="papers-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       <PageHeader
@@ -79,9 +121,10 @@ export default function PaperPageClient({ paperData: paperItem, allPapers, child
           slug={paperItem.slug}
           date={paperItem.date}
           url={`https://krisyotam.com/papers/${slugifyCategory(paperItem.category)}/${paperItem.slug}`}
-        />      </div>
+        />
         <LiveClock />
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 }

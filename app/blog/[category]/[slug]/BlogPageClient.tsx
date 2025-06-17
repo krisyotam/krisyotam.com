@@ -27,10 +27,12 @@ interface BlogMeta {
 interface Props {
   post: BlogMeta;
   allPosts: BlogMeta[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  headerOnly?: boolean;
+  contentOnly?: boolean;
 }
 
-export default function BlogPageClient({ post, allPosts, children }: Props) {
+export default function BlogPageClient({ post, allPosts, children, headerOnly, contentOnly }: Props) {
   if (!post) notFound();
 
   /* prev / next */
@@ -46,6 +48,45 @@ export default function BlogPageClient({ post, allPosts, children }: Props) {
     return category.toLowerCase().replace(/\s+/g, "-");
   }
 
+  // Render only header
+  if (headerOnly) {
+    return (
+      <div className="container max-w-[672px] mx-auto px-4">
+        <PostHeader 
+          className=""     
+          title={post.title}
+          subtitle={post.subtitle}
+          date={post.date}
+          tags={post.tags}
+          category={post.category}
+          backHref="/blog"
+          backText="Blog"
+          preview={post.preview}
+          status={post.status ?? "Notes"}
+          confidence={post.confidence ?? "possible"}
+          importance={post.importance ?? 5}
+        />
+      </div>
+    );
+  }
+
+  // Render only content (citation, footer, etc.)
+  if (contentOnly) {
+    return (
+      <div className="mt-8">
+        <Citation 
+          title={post.title}
+          slug={post.slug}
+          date={post.date}
+          url={`https://krisyotam.com/blog/${slugifyCategory(post.category)}/${post.slug}`}
+        />
+        <LiveClock />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Render full layout (legacy)
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       {/* clean page header (outside .note-content) ----------------------- */}

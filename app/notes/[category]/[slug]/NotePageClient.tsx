@@ -27,10 +27,12 @@ interface NoteMeta {
 interface Props {
   note: NoteMeta;
   allNotes: NoteMeta[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  headerOnly?: boolean;
+  contentOnly?: boolean;
 }
 
-export default function NotePageClient({ note, allNotes, children }: Props) {
+export default function NotePageClient({ note, allNotes, children, headerOnly, contentOnly }: Props) {
   if (!note) notFound();
 
   /* prev / next */
@@ -45,6 +47,46 @@ export default function NotePageClient({ note, allNotes, children }: Props) {
   function slugifyCategory(category: string) {
     return category.toLowerCase().replace(/\s+/g, "-");
   }
+
+  // Render only header
+  if (headerOnly) {
+    return (
+      <div className="container max-w-[672px] mx-auto px-4">
+        <PostHeader 
+          className=""     
+          title={note.title}
+          subtitle={note.subtitle}
+          date={note.date}
+          tags={note.tags}
+          category={note.category}
+          backHref="/notes"
+          backText="Notes"
+          preview={note.preview}
+          status={note.status ?? "Notes"}
+          confidence={note.confidence ?? "possible"}
+          importance={note.importance ?? 5}
+        />
+      </div>
+    );
+  }
+
+  // Render only content (citation, footer, etc.)
+  if (contentOnly) {
+    return (
+      <div className="mt-8">
+        <Citation 
+          title={note.title}
+          slug={note.slug}
+          date={note.date}
+          url={`https://krisyotam.com/notes/${slugifyCategory(note.category)}/${note.slug}`}
+        />
+        <LiveClock />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Render full layout (legacy)
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       {/* clean page header (outside .note-content) ----------------------- */}

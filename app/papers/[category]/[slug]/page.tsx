@@ -5,6 +5,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import papersData from "@/data/papers/papers.json";
 import PapersPageClient from "./PapersPageClient";
+import { TableOfContents } from "@/components/typography/table-of-contents";
+import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
 import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/papers";
 
 interface PaperData {
@@ -104,14 +106,34 @@ export default async function PaperPage({ params }: PaperPageProps) {
     ...paperItem,
     status: paperItem.status as PaperStatus,
     confidence: paperItem.confidence as PaperConfidence
-  }));  // Dynamically import the MDX file based on category and slug
+  }));
+
+  // Extract headings from the papers MDX content
+  const headings = await extractHeadingsFromMDX('papers', params.slug, params.category);
+
+  // Dynamically import the MDX file based on category and slug
   const PaperArticle = (await import(`@/app/papers/content/${params.category}/${params.slug}.mdx`)).default;
   
   return (
-    <PapersPageClient paperData={paperData} allPapers={papers}>
-      <div className="papers-content">
-        <PaperArticle />
+    <div className="relative min-h-screen bg-background text-foreground pt-16">
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Header section - full width */}
+        <div className="mb-8">        <PapersPageClient paperData={paperData} allPapers={papers} headerOnly={true} />
+        </div>
+        
+        {/* Main content */}
+        <main className="container max-w-[672px] mx-auto px-4">
+          {/* Table of Contents - at the top of content */}
+          {headings.length > 0 && (
+            <TableOfContents headings={headings} />
+          )}
+          
+          <div className="papers-content">
+            <PaperArticle />
+          </div>
+          <PapersPageClient paperData={paperData} allPapers={papers} contentOnly={true} />
+        </main>
       </div>
-    </PapersPageClient>
+    </div>
   );
 }

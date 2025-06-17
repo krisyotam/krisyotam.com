@@ -63,6 +63,7 @@ import AnimeCharacterDisplay from "@/components/posts/content/anime-character-di
 import { Art7x4 } from "@/components/posts/art/art-7x4"
 import RatingDisplay from "@/components/posts/content/rating"
 import Paper from "@/components/typography/paper"
+import { WebsitePreview } from "@/components/website-preview"
 
 // Define components for MDX
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -209,6 +210,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
     // Custom quotes feed component
     QuotesFeed, // Add this component
+    
+    // Website components
+    WebsitePreview,
     
     // Pass through any provided components (for overrides)
     ...components,

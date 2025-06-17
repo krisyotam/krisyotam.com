@@ -5,6 +5,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import conspiraciesData from "@/data/conspiracies/conspiracies.json";
 import ConspiraciesPageClient from "./ConspiraciesPageClient";
+import { TableOfContents } from "@/components/typography/table-of-contents";
+import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
 import type { ConspiracyMeta } from "@/types/conspiracies";
 
 type Status =
@@ -89,13 +91,31 @@ export default async function ConspiracyPage({ params }: ConspiracyPageProps) {
     confidence: c.confidence as Confidence,
   }));
 
+  // Extract headings from the conspiracy MDX content
+  const headings = await extractHeadingsFromMDX('conspiracies', `${params.category}/${params.slug}`);
+
   const Conspiracy = (await import(`@/app/conspiracies/content/${params.category}/${params.slug}.mdx`)).default;
 
   return (
-    <ConspiraciesPageClient conspiracy={conspiracy} allConspiracies={conspiracies}>
-      <div className="conspiracy-content">
-        <Conspiracy />
+    <div className="relative min-h-screen bg-background text-foreground pt-16">      <div className="max-w-6xl mx-auto px-4">
+        {/* Header section - full width */}
+        <div className="mb-8">
+          <ConspiraciesPageClient conspiracy={conspiracy} allConspiracies={conspiracies} headerOnly={true} />
+        </div>
+        
+        {/* Main content */}
+        <main className="container max-w-[672px] mx-auto px-4">
+          {/* Table of Contents - at the top of content */}
+          {headings.length > 0 && (
+            <TableOfContents headings={headings} />
+          )}
+          
+          <div className="conspiracy-content">
+            <Conspiracy />
+          </div>
+          <ConspiraciesPageClient conspiracy={conspiracy} allConspiracies={conspiracies} contentOnly={true} />
+        </main>
       </div>
-    </ConspiraciesPageClient>
+    </div>
   );
 }

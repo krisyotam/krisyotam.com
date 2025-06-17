@@ -27,10 +27,12 @@ interface NewsMeta {
 interface Props {
   article: NewsMeta;
   allNews: NewsMeta[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  headerOnly?: boolean;
+  contentOnly?: boolean;
 }
 
-export default function NewsPageClient({ article, allNews, children }: Props) {
+export default function NewsPageClient({ article, allNews, children, headerOnly, contentOnly }: Props) {
   if (!article) notFound();
 
   // Map news status to PostHeader compatible status
@@ -52,12 +54,50 @@ export default function NewsPageClient({ article, allNews, children }: Props) {
   const idx = sorted.findIndex(n => n.slug === article.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
   const next = idx > 0 ? sorted[idx - 1] : null;
-
   // Helper function to create category slug
   function slugifyCategory(category: string) {
     return category.toLowerCase().replace(/\s+/g, "-");
   }
 
+  // Render only header
+  if (headerOnly) {
+    return (
+      <div className="container max-w-[672px] mx-auto px-4">
+        <PostHeader 
+          className=""     
+          title={article.title}
+          subtitle={article.subtitle}
+          date={article.date}
+          tags={article.tags}
+          category={article.category}
+          backHref="/news"
+          backText="News"
+          preview={article.preview}
+          status={mapNewsStatus(article.status)}
+          confidence={article.confidence ?? "possible"}
+          importance={article.importance ?? 5}
+        />
+      </div>
+    );
+  }
+
+  // Render only content (citation, footer, etc.)
+  if (contentOnly) {
+    return (
+      <div className="mt-8">
+        <Citation 
+          title={article.title}
+          slug={article.slug}
+          date={article.date}
+          url={`https://krisyotam.com/news/${slugifyCategory(article.category)}/${article.slug}`}
+        />
+        <LiveClock />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Legacy layout - render everything together
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       {/* clean page header (outside .news-content) */}
@@ -86,10 +126,9 @@ export default function NewsPageClient({ article, allNews, children }: Props) {
           date={article.date}
           url={`https://krisyotam.com/news/${slugifyCategory(article.category)}/${article.slug}`}
         />
+        <LiveClock />
+        <Footer />
       </div>
-      
-      <LiveClock />
-      <Footer />
     </div>
   );
 }

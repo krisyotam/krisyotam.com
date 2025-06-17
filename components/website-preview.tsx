@@ -2,26 +2,28 @@
 
 import { useTheme } from "next-themes"
 import { Card, CardContent } from "@/components/ui/card"
-import Image from "next/image"
 import { useEffect, useState } from "react"
 
 interface WebsitePreviewProps {
   description: string
-  lightModeImage: string
-  darkModeImage: string
 }
 
-export function WebsitePreview({ description, lightModeImage, darkModeImage }: WebsitePreviewProps) {
+export function WebsitePreview({ description }: WebsitePreviewProps) {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const [iframeKey, setIframeKey] = useState(0)
 
   // Wait for component to mount to avoid hydration mismatch
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  // Determine which image to show based on theme
-  const imageSrc = mounted && resolvedTheme === "dark" ? darkModeImage : lightModeImage
+  // Force iframe reload when theme changes
+  useEffect(() => {
+    if (mounted) {
+      setIframeKey(prev => prev + 1)
+    }
+  }, [resolvedTheme, mounted])
 
   return (
     <Card className="mb-6 border border-border">
@@ -34,16 +36,15 @@ export function WebsitePreview({ description, lightModeImage, darkModeImage }: W
             </CardContent>
           </Card>
 
-          {/* Image below in its own container */}
+          {/* Iframe below in its own container */}
           <div className="border border-border rounded-sm overflow-hidden">
             <div className="relative w-full" style={{ aspectRatio: "7/4" }}>
               {mounted && (
-                <Image
-                  src={imageSrc || "/placeholder.svg"}
-                  alt="Website preview"
-                  fill
-                  className="object-cover"
-                  priority
+                <iframe
+                  key={iframeKey}
+                  src="/"
+                  className="w-full h-full border-0"
+                  title="Website preview"
                 />
               )}
             </div>

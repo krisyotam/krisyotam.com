@@ -27,10 +27,12 @@ interface ConspiracyMeta {
 interface Props {
   conspiracy: ConspiracyMeta;
   allConspiracies: ConspiracyMeta[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  headerOnly?: boolean;
+  contentOnly?: boolean;
 }
 
-export default function ConspiraciesPageClient({ conspiracy, allConspiracies, children }: Props) {
+export default function ConspiraciesPageClient({ conspiracy, allConspiracies, children, headerOnly, contentOnly }: Props) {
   if (!conspiracy) notFound();
 
   /* prev / next */
@@ -40,15 +42,54 @@ export default function ConspiraciesPageClient({ conspiracy, allConspiracies, ch
   const idx  = sorted.findIndex(n => n.slug === conspiracy.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
   const next = idx > 0                 ? sorted[idx - 1] : null;
-
   // Helper function to create category slug
   function slugifyCategory(category: string) {
     return category.toLowerCase().replace(/\s+/g, "-");
   }
+
+  // Render only header
+  if (headerOnly) {
+    return (
+      <div className="container max-w-[672px] mx-auto px-4">
+        <PostHeader
+          className=""     
+          title={conspiracy.title}
+          subtitle={conspiracy.subtitle}
+          date={conspiracy.date}
+          tags={conspiracy.tags}
+          category={conspiracy.category}
+          backHref="/conspiracies"
+          backText="Conspiracies"
+          preview={conspiracy.preview}
+          status={conspiracy.status ?? "Notes"}
+          confidence={conspiracy.confidence ?? "possible"}
+          importance={conspiracy.importance ?? 5}
+        />
+      </div>
+    );
+  }
+
+  // Render only content (citation, footer, etc.)
+  if (contentOnly) {
+    return (
+      <div className="mt-8">
+        <Citation 
+          title={conspiracy.title}
+          slug={conspiracy.slug}
+          date={conspiracy.date}
+          url={`https://krisyotam.com/conspiracies/${slugifyCategory(conspiracy.category)}/${conspiracy.slug}`}
+        />
+        <LiveClock />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Legacy layout - render everything together
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       {/* clean page header (outside .conspiracy-content) ----------------------- */}
-      <PostHeader 
+      <PostHeader
         className=""     
         title={conspiracy.title}
         subtitle={conspiracy.subtitle}
@@ -73,10 +114,9 @@ export default function ConspiraciesPageClient({ conspiracy, allConspiracies, ch
           date={conspiracy.date}
           url={`https://krisyotam.com/conspiracies/${slugifyCategory(conspiracy.category)}/${conspiracy.slug}`}
         />
+        <LiveClock />
+        <Footer />
       </div>
-      
-      <LiveClock />
-      <Footer />
     </div>
   );
 }

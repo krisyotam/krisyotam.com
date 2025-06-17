@@ -9,14 +9,16 @@ import type { DossierMeta, DossierStatus, DossierConfidence } from "@/types/doss
 interface Props {
   dossierData: DossierMeta;
   allDossiers: DossierMeta[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  headerOnly?: boolean;
+  contentOnly?: boolean;
 }
 
 function slugifyCategory(category: string) {
   return category.toLowerCase().replace(/\s+/g, "-");
 }
 
-export default function DossierPageClient({ dossierData: dossierItem, allDossiers, children }: Props) {  // Function to map dossier status to PageHeader compatible status
+export default function DossierPageClient({ dossierData: dossierItem, allDossiers, children, headerOnly, contentOnly }: Props) {  // Function to map dossier status to PageHeader compatible status
   const mapDossierStatusToPageHeaderStatus = (dossierStatus: DossierStatus): "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" => {
     const statusMap: Record<DossierStatus, "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"> = {
       Draft: "Draft",
@@ -46,9 +48,44 @@ export default function DossierPageClient({ dossierData: dossierItem, allDossier
       developing: "possible",
       moderate: "likely"
     };
-    return confidenceMap[dossierConfidence] || "possible";
-  };
+    return confidenceMap[dossierConfidence] || "possible";  };
 
+  // Render only header
+  if (headerOnly) {
+    return (
+      <div className="container max-w-[672px] mx-auto px-4">
+        <PageHeader
+          title={dossierItem.title}
+          subtitle={dossierItem.subtitle}
+          date={dossierItem.date}
+          backHref="/dossiers"
+          backText="Dossiers"
+          preview={dossierItem.preview}
+          status={mapDossierStatusToPageHeaderStatus(dossierItem.status ?? "Draft")}
+          confidence={mapDossierConfidenceToPageHeaderConfidence(dossierItem.confidence)}
+          importance={dossierItem.importance ?? 5}
+        />
+      </div>
+    );
+  }
+
+  // Render only content (citation, footer, etc.)
+  if (contentOnly) {
+    return (
+      <div className="mt-8">
+        <Citation 
+          title={dossierItem.title}
+          slug={dossierItem.slug}
+          date={dossierItem.date}
+          url={`https://krisyotam.com/dossiers/${slugifyCategory(dossierItem.category)}/${dossierItem.slug}`}
+        />
+        <LiveClock />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Legacy layout - render everything together
   return (
     <div className="dossiers-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       <PageHeader
@@ -72,9 +109,10 @@ export default function DossierPageClient({ dossierData: dossierItem, allDossier
           slug={dossierItem.slug}
           date={dossierItem.date}
           url={`https://krisyotam.com/dossiers/${slugifyCategory(dossierItem.category)}/${dossierItem.slug}`}
-        />      </div>
+        />
         <LiveClock />
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 }

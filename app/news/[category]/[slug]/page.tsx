@@ -4,6 +4,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import newsData from "@/data/news/news.json";
 import NewsPageClient from "./NewsPageClient";
+import { TableOfContents } from "@/components/typography/table-of-contents";
+import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
 import type { NewsMeta, NewsStatus, NewsConfidence } from "@/types/news";
 
 interface NewsData {
@@ -103,14 +105,32 @@ export default async function NewsPage({ params }: NewsPageProps) {
     confidence: article.confidence as NewsConfidence
   }));
 
+  // Extract headings from the news MDX content
+  const headings = await extractHeadingsFromMDX('news', `${params.category}/${params.slug}`);
+
   // Dynamically import the MDX file based on category and slug
   const NewsArticle = (await import(`@/app/news/content/${params.category}/${params.slug}.mdx`)).default;
-
   return (
-    <NewsPageClient article={article} allNews={news}>
-      <div className="news-content">
-        <NewsArticle />
+    <div className="relative min-h-screen bg-background text-foreground pt-16">
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Header section - full width */}
+        <div className="mb-8">
+          <NewsPageClient article={article} allNews={news} headerOnly={true} />
+        </div>
+        
+        {/* Main content */}
+        <main className="container max-w-[672px] mx-auto px-4">
+          {/* Table of Contents - at the top of content */}
+          {headings.length > 0 && (
+            <TableOfContents headings={headings} />
+          )}
+          
+          <div className="news-content">
+            <NewsArticle />
+          </div>
+          <NewsPageClient article={article} allNews={news} contentOnly={true} />
+        </main>
       </div>
-    </NewsPageClient>
+    </div>
   );
 }

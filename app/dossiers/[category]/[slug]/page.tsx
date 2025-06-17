@@ -5,6 +5,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import dossiersData from "@/data/dossiers/dossiers.json";
 import DossiersPageClient from "./DossiersPageClient";
+import { TableOfContents } from "@/components/typography/table-of-contents";
+import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
 import type { DossierMeta, DossierStatus, DossierConfidence } from "@/types/dossiers";
 
 interface DossierData {
@@ -102,14 +104,34 @@ export default async function DossierPage({ params }: DossierPageProps) {
     ...dossierItem,
     status: dossierItem.status as DossierStatus,
     confidence: dossierItem.confidence as DossierConfidence
-  }));  // Dynamically import the MDX file based on category and slug
+  }));
+
+  // Extract headings from the dossier MDX content
+  const headings = await extractHeadingsFromMDX('dossiers', `${params.category}/${params.slug}`);
+
+  // Dynamically import the MDX file based on category and slug
   const DossierArticle = (await import(`@/app/dossiers/content/${params.category}/${params.slug}.mdx`)).default;
-  
-  return (
-    <DossiersPageClient dossierData={dossierData} allDossiers={dossiers}>
-      <div className="dossiers-content">
-        <DossierArticle />
+    return (
+    <div className="relative min-h-screen bg-background text-foreground pt-16">
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Header section - full width */}
+        <div className="mb-8">
+          <DossiersPageClient dossierData={dossierData} allDossiers={dossiers} headerOnly={true} />
+        </div>
+        
+        {/* Main content */}
+        <main className="container max-w-[672px] mx-auto px-4">
+          {/* Table of Contents - at the top of content */}
+          {headings.length > 0 && (
+            <TableOfContents headings={headings} />
+          )}
+          
+          <div className="dossiers-content">
+            <DossierArticle />
+          </div>
+          <DossiersPageClient dossierData={dossierData} allDossiers={dossiers} contentOnly={true} />
+        </main>
       </div>
-    </DossiersPageClient>
+    </div>
   );
 }

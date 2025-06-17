@@ -4,6 +4,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import libersData from "@/data/libers/libers.json";
 import LiberPageClient from "./LiberPageClient";
+import { TableOfContents } from "@/components/typography/table-of-contents";
+import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
 import type { LiberMeta } from "@/types/liber";
 
 type Status = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
@@ -75,15 +77,32 @@ export default async function LiberPage({ params }: LiberPageProps) {
     confidence: liber.confidence as Confidence
   }));
   
+  // Extract headings from the liber MDX content
+  const headings = await extractHeadingsFromMDX('libers', `${params.category}/${params.slug}`);
+
   // Dynamically import the MDX file based on category and slug  
   const Liber = (await import(`@/app/libers/content/${params.category}/${params.slug}.mdx`)).default;
-
   return (
-    <LiberPageClient liber={liber} allLibers={libers}>
-      <div className="liber-content">
-        {/* MDX is now a real React component */}
-        <Liber />
+    <div className="relative min-h-screen bg-background text-foreground pt-16">
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Header section - full width */}
+        <div className="mb-8">
+          <LiberPageClient liber={liber} allLibers={libers} headerOnly={true} />
+        </div>
+        
+        {/* Main content */}
+        <main className="container max-w-[672px] mx-auto px-4">
+          {/* Table of Contents - at the top of content */}
+          {headings.length > 0 && (
+            <TableOfContents headings={headings} />
+          )}
+          
+          <div className="liber-content">
+            <Liber />
+          </div>
+          <LiberPageClient liber={liber} allLibers={libers} contentOnly={true} />
+        </main>
       </div>
-    </LiberPageClient>
+    </div>
   );
 }

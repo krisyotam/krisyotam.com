@@ -13,10 +13,12 @@ import type { CaseMeta } from "@/types/cases";
 interface Props {
   caseData: CaseMeta;
   allCases: CaseMeta[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  headerOnly?: boolean;
+  contentOnly?: boolean;
 }
 
-export default function CasePageClient({ caseData: caseItem, allCases, children }: Props) {
+export default function CasePageClient({ caseData: caseItem, allCases, children, headerOnly, contentOnly }: Props) {
   if (!caseItem) notFound();
 
   /* prev / next */
@@ -57,10 +59,48 @@ export default function CasePageClient({ caseData: caseItem, allCases, children 
       "uncertain": "possible",
       "developing": "possible", 
       "moderate": "likely"
-    };
-    return confidenceMap[confidence || "possible"] || "possible";
+    };    return confidenceMap[confidence || "possible"] || "possible";
   }
 
+  // Render only header
+  if (headerOnly) {
+    return (
+      <div className="container max-w-[672px] mx-auto px-4">
+        <PostHeader 
+          className=""     
+          title={caseItem.title}
+          subtitle={caseItem.subtitle}
+          date={caseItem.date}
+          tags={caseItem.tags}
+          category={caseItem.category}
+          backHref="/cases"
+          backText="Cases"
+          preview={caseItem.preview}
+          status={mapCaseStatus(caseItem.status)}
+          confidence={mapCaseConfidence(caseItem.confidence)}
+          importance={caseItem.importance ?? 5}
+        />
+      </div>
+    );
+  }
+
+  // Render only content (citation, footer, etc.)
+  if (contentOnly) {
+    return (
+      <div className="mt-8">
+        <Citation 
+          title={caseItem.title}
+          slug={caseItem.slug}
+          date={caseItem.date}
+          url={`https://krisyotam.com/cases/${slugifyCategory(caseItem.category)}/${caseItem.slug}`}
+        />
+        <LiveClock />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Legacy layout - render everything together
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       {/* clean page header (outside .cases-content) */}
@@ -89,10 +129,9 @@ export default function CasePageClient({ caseData: caseItem, allCases, children 
           date={caseItem.date}
           url={`https://krisyotam.com/cases/${slugifyCategory(caseItem.category)}/${caseItem.slug}`}
         />
+        <LiveClock />
+        <Footer />
       </div>
-      
-      <LiveClock />
-      <Footer />
     </div>
   );
 }

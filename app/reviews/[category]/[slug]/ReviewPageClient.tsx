@@ -27,10 +27,12 @@ interface ReviewMeta {
 interface Props {
   review: ReviewMeta;
   allReviews: ReviewMeta[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  headerOnly?: boolean;
+  contentOnly?: boolean;
 }
 
-export default function ReviewPageClient({ review, allReviews, children }: Props) {
+export default function ReviewPageClient({ review, allReviews, children, headerOnly, contentOnly }: Props) {
   if (!review) notFound();
 
   /* prev / next */
@@ -40,12 +42,50 @@ export default function ReviewPageClient({ review, allReviews, children }: Props
   const idx = sorted.findIndex(n => n.slug === review.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
   const next = idx > 0 ? sorted[idx - 1] : null;
-
   // Helper function to create category slug
   function slugifyCategory(category: string) {
     return category.toLowerCase().replace(/\s+/g, "-");
   }
 
+  // Render only header
+  if (headerOnly) {
+    return (
+      <div className="container max-w-[672px] mx-auto px-4">
+        <PostHeader 
+          className=""     
+          title={review.title}
+          subtitle={review.subtitle}
+          date={review.date}
+          tags={review.tags}
+          category={review.category}
+          backHref="/reviews"
+          backText="Reviews"
+          preview={review.preview}
+          status={review.status ?? "Draft"}
+          confidence={review.confidence ?? "possible"}
+          importance={review.importance ?? 5}
+        />
+      </div>
+    );
+  }
+
+  // Render only content (citation, footer, etc.)
+  if (contentOnly) {
+    return (
+      <div className="mt-8">
+        <Citation 
+          title={review.title}
+          slug={review.slug}
+          date={review.date}
+          url={`https://krisyotam.com/reviews/${slugifyCategory(review.category)}/${review.slug}`}
+        />
+        <LiveClock />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Legacy layout - render everything together
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       {/* clean page header (outside .review-content) */}
@@ -74,10 +114,9 @@ export default function ReviewPageClient({ review, allReviews, children }: Props
           date={review.date}
           url={`https://krisyotam.com/reviews/${slugifyCategory(review.category)}/${review.slug}`}
         />
+        <LiveClock />
+        <Footer />
       </div>
-      
-      <LiveClock />
-      <Footer />
     </div>
   );
 }

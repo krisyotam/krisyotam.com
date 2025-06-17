@@ -4,6 +4,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import blogData from "@/data/blog/feed.json";
 import BlogPageClient from "./BlogPageClient";
+import { TableOfContents } from "@/components/typography/table-of-contents";
+import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
 import type { BlogMeta } from "@/types/blog";
 
 type Status = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
@@ -75,15 +77,32 @@ export default async function BlogPage({ params }: BlogPageProps) {
     confidence: post.confidence as Confidence
   }));
 
+  // Extract headings from the blog MDX content
+  const headings = await extractHeadingsFromMDX('blog', params.slug);
+
   // Dynamically import the MDX file based on slug
   const Post = (await import(`@/app/blog/content/${params.slug}.mdx`)).default;
-
   return (
-    <BlogPageClient post={post} allPosts={posts}>
-      <div className="note-content">
-        {/* MDX is now a real React component */}
-        <Post />
+    <div className="relative min-h-screen bg-background text-foreground pt-16">
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Header section - full width */}
+        <div className="mb-8">
+          <BlogPageClient post={post} allPosts={posts} headerOnly={true} />
+        </div>
+        
+        {/* Main content */}
+        <main className="container max-w-[672px] mx-auto px-4">
+          {/* Table of Contents - at the top of content */}
+          {headings.length > 0 && (
+            <TableOfContents headings={headings} />
+          )}
+          
+          <div className="note-content">
+            <Post />
+          </div>
+          <BlogPageClient post={post} allPosts={posts} contentOnly={true} />
+        </main>
       </div>
-    </BlogPageClient>
+    </div>
   );
 }

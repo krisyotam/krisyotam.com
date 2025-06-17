@@ -7,7 +7,7 @@ export interface PaperProps {
   /** Title of the paper */
   title: string;
   /** Author(s) of the paper */
-  author: string;
+  author: string[];
   /** Publication date */
   date: string;
 }
@@ -31,9 +31,8 @@ export default function Paper({ pdfLink, title, author, date }: PaperProps) {
         </span>
       </a>
 
-      <span className="paper-title inline-block font-medium">{title}</span>
-      <span className="paper-author text-muted-foreground text-xs mt-1">
-        {author}
+      <span className="paper-title inline-block font-medium">{title}</span>      <span className="paper-author text-muted-foreground text-xs mt-1">
+        {author.join(", ")}
       </span>
       <span className="paper-date text-muted-foreground text-xs">
         {date}
