@@ -216,10 +216,19 @@
     "confidence": "certain",
     "importance": 6
   },
-    {
+  {
     "slug": "sororities",
     "title": "Sororities",
     "preview": "notes on sororities, their contributions, culture, and impact",
+    "date": "2025-06-10",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6
+  },
+  {
+    "slug": "social-media",
+    "title": "Social Media",
+    "preview": "notes on social media platforms, their history, my involvement",
     "date": "2025-06-10",
     "status": "In Progress",
     "confidence": "certain",
