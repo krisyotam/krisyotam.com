@@ -12,11 +12,22 @@ export async function extractHeadingsFromMDX(
   slug: string,
   category?: string
 ): Promise<TableOfContentsItem[]> {
+  // Validate required parameters
+  if (!contentType || !slug) {
+    console.error('Missing required parameters: contentType and slug are required')
+    return []
+  }
+
   let mdxPath: string
 
   // Determine the path based on content type
-  switch (contentType) {    case 'essays':
-      mdxPath = path.join(process.cwd(), "app/essays/content", category!, `${slug}.mdx`)
+  switch (contentType) {
+    case 'essays':
+      if (!category) {
+        console.error('Category is required for essays content type')
+        return []
+      }
+      mdxPath = path.join(process.cwd(), "app/essays/content", category, `${slug}.mdx`)
       break
     case 'notes':
       mdxPath = path.join(process.cwd(), "app/notes/content", `${slug}.mdx`)
@@ -25,28 +36,60 @@ export async function extractHeadingsFromMDX(
       mdxPath = path.join(process.cwd(), "app/blog/content", `${slug}.mdx`)
       break
     case 'fiction':
-      mdxPath = path.join(process.cwd(), "app/fiction/content", category!, `${slug}.mdx`)
+      if (!category) {
+        console.error('Category is required for fiction content type')
+        return []
+      }
+      mdxPath = path.join(process.cwd(), "app/fiction/content", category, `${slug}.mdx`)
       break
     case 'papers':
-      mdxPath = path.join(process.cwd(), "app/papers/content", category!, `${slug}.mdx`)
+      if (!category) {
+        console.error('Category is required for papers content type')
+        return []
+      }
+      mdxPath = path.join(process.cwd(), "app/papers/content", category, `${slug}.mdx`)
       break
     case 'dossiers':
-      mdxPath = path.join(process.cwd(), "app/dossiers/content", category!, `${slug}.mdx`)
+      if (!category) {
+        console.error('Category is required for dossiers content type')
+        return []
+      }
+      mdxPath = path.join(process.cwd(), "app/dossiers/content", category, `${slug}.mdx`)
       break
     case 'cases':
-      mdxPath = path.join(process.cwd(), "app/cases/content", category!, `${slug}.mdx`)
+      if (!category) {
+        console.error('Category is required for cases content type')
+        return []
+      }
+      mdxPath = path.join(process.cwd(), "app/cases/content", category, `${slug}.mdx`)
       break
     case 'conspiracies':
-      mdxPath = path.join(process.cwd(), "app/conspiracies/content", category!, `${slug}.mdx`)
+      if (!category) {
+        console.error('Category is required for conspiracies content type')
+        return []
+      }
+      mdxPath = path.join(process.cwd(), "app/conspiracies/content", category, `${slug}.mdx`)
       break
     case 'news':
-      mdxPath = path.join(process.cwd(), "app/news/content", category!, `${slug}.mdx`)
+      if (!category) {
+        console.error('Category is required for news content type')
+        return []
+      }
+      mdxPath = path.join(process.cwd(), "app/news/content", category, `${slug}.mdx`)
       break
     case 'libers':
-      mdxPath = path.join(process.cwd(), "app/libers/content", category!, `${slug}.mdx`)
+      if (!category) {
+        console.error('Category is required for libers content type')
+        return []
+      }
+      mdxPath = path.join(process.cwd(), "app/libers/content", category, `${slug}.mdx`)
       break
     case 'reviews':
-      mdxPath = path.join(process.cwd(), "app/reviews/content", category!, `${slug}.mdx`)
+      if (!category) {
+        console.error('Category is required for reviews content type')
+        return []
+      }
+      mdxPath = path.join(process.cwd(), "app/reviews/content", category, `${slug}.mdx`)
       break
     default:
       console.log(`Unknown content type: ${contentType}`)

@@ -107,7 +107,7 @@ export default async function DossierPage({ params }: DossierPageProps) {
   }));
 
   // Extract headings from the dossier MDX content
-  const headings = await extractHeadingsFromMDX('dossiers', `${params.category}/${params.slug}`);
+  const headings = await extractHeadingsFromMDX('dossiers', params.slug, params.category);
 
   // Dynamically import the MDX file based on category and slug
   const DossierArticle = (await import(`@/app/dossiers/content/${params.category}/${params.slug}.mdx`)).default;

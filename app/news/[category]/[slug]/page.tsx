@@ -106,7 +106,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
   }));
 
   // Extract headings from the news MDX content
-  const headings = await extractHeadingsFromMDX('news', `${params.category}/${params.slug}`);
+  const headings = await extractHeadingsFromMDX('news', params.slug, params.category);
 
   // Dynamically import the MDX file based on category and slug
   const NewsArticle = (await import(`@/app/news/content/${params.category}/${params.slug}.mdx`)).default;

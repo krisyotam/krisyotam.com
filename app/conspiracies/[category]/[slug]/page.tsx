@@ -90,9 +90,8 @@ export default async function ConspiracyPage({ params }: ConspiracyPageProps) {
     status: c.status as Status,
     confidence: c.confidence as Confidence,
   }));
-
   // Extract headings from the conspiracy MDX content
-  const headings = await extractHeadingsFromMDX('conspiracies', `${params.category}/${params.slug}`);
+  const headings = await extractHeadingsFromMDX('conspiracies', params.slug, params.category);
 
   const Conspiracy = (await import(`@/app/conspiracies/content/${params.category}/${params.slug}.mdx`)).default;
 

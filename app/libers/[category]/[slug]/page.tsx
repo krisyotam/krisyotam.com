@@ -78,7 +78,7 @@ export default async function LiberPage({ params }: LiberPageProps) {
   }));
   
   // Extract headings from the liber MDX content
-  const headings = await extractHeadingsFromMDX('libers', `${params.category}/${params.slug}`);
+  const headings = await extractHeadingsFromMDX('libers', params.slug, params.category);
 
   // Dynamically import the MDX file based on category and slug  
   const Liber = (await import(`@/app/libers/content/${params.category}/${params.slug}.mdx`)).default;

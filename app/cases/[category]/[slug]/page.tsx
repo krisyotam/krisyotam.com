@@ -107,7 +107,7 @@ export default async function CasePage({ params }: CasePageProps) {
   }));
 
   // Extract headings from the case MDX content
-  const headings = await extractHeadingsFromMDX('cases', `${params.category}/${params.slug}`);
+  const headings = await extractHeadingsFromMDX('cases', params.slug, params.category);
 
   // Dynamically import the MDX file based on category and slug
   const CaseArticle = (await import(`@/app/cases/content/${params.category}/${params.slug}.mdx`)).default;
