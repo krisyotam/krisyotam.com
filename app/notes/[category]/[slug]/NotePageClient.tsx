@@ -6,7 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LiveClock } from "@/components/live-clock";
 import { PostHeader } from "@/components/post-header";
-import { Footer } from "@/app/essays/components/footer";
+import { Footer } from "@/components/footer";
 import { Citation } from "@/components/citation";
 
 interface NoteMeta {

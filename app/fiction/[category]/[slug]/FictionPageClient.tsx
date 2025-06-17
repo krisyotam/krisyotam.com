@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { PostHeader } from "@/components/post-header";
 import { Citation } from "@/components/citation";
 import { LiveClock } from "@/components/live-clock";
-import { Footer } from "@/app/essays/components/footer";
+import { Footer } from "@/components/footer";
 import type { NoteMeta } from "@/types/note";
 
 interface Props {

@@ -1,0 +1,117 @@
+export const dynamic = 'force-static';
+export const revalidate = false;
+
+import type { Metadata, ResolvingMetadata } from "next";
+import { notFound } from "next/navigation";
+import papersData from "@/data/papers/papers.json";
+import PapersPageClient from "./PapersPageClient";
+import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/papers";
+
+interface PaperData {
+  title: string;
+  date: string;
+  slug: string;
+  tags: string[];
+  category: string;
+  status: string;
+  confidence: string;
+  importance: number;
+  preview: string;
+  subtitle?: string;
+  state?: string;
+  cover_image?: string;
+}
+
+interface PaperPageProps {
+  params: { category: string; slug: string };
+}
+
+// Helper function to slugify category
+function slugifyCategory(category: string) {
+  return category.toLowerCase().replace(/\s+/g, "-");
+}
+
+export async function generateStaticParams() {
+  // Generate all category/slug combinations
+  return papersData.papers.map(paperItem => ({
+    category: slugifyCategory(paperItem.category),
+    slug: paperItem.slug
+  }));
+}
+
+export async function generateMetadata({ params }: PaperPageProps, parent: ResolvingMetadata): Promise<Metadata> {
+  const paperItem = papersData.papers.find(p => 
+    slugifyCategory(p.category) === params.category && p.slug === params.slug
+  );
+
+  if (!paperItem) {
+    return {
+      title: "Paper Not Found",
+    };
+  }
+
+  // Get the default OpenGraph image from parent
+  const previousImages = (await parent).openGraph?.images || [];
+  // Use Kris Yotam's logo for paper articles
+  const images = [
+    {
+      url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
+      width: 1200,
+      height: 2100,
+      alt: paperItem.title
+    }
+  ];
+
+  const url = `https://krisyotam.com/papers/${params.category}/${params.slug}`;
+
+  return {
+    title: `${paperItem.title} | ${paperItem.category} Papers | Kris Yotam`,
+    description: paperItem.preview || `Research paper: ${paperItem.title}`,
+    openGraph: {
+      title: paperItem.title,
+      description: paperItem.preview || `Research paper: ${paperItem.title}`,
+      url,
+      type: "article",
+      images,
+      siteName: "Kris Yotam",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: paperItem.title,
+      description: paperItem.preview || `Research paper: ${paperItem.title}`,
+      images: images.map(img => img.url),
+      creator: "@krisyotam"
+    }
+  };
+}
+
+export default async function PaperPage({ params }: PaperPageProps) {
+  const paperItem = papersData.papers.find(p => 
+    slugifyCategory(p.category) === params.category && p.slug === params.slug
+  );
+
+  if (!paperItem) {
+    notFound();
+  }
+
+  const paperData: PaperMeta = {
+    ...paperItem,
+    status: paperItem.status as PaperStatus,
+    confidence: paperItem.confidence as PaperConfidence
+  };
+
+  const papers: PaperMeta[] = (papersData.papers as PaperData[]).map(paperItem => ({
+    ...paperItem,
+    status: paperItem.status as PaperStatus,
+    confidence: paperItem.confidence as PaperConfidence
+  }));  // Dynamically import the MDX file based on category and slug
+  const PaperArticle = (await import(`@/app/papers/content/${params.category}/${params.slug}.mdx`)).default;
+  
+  return (
+    <PapersPageClient paperData={paperData} allPapers={papers}>
+      <div className="papers-content">
+        <PaperArticle />
+      </div>
+    </PapersPageClient>
+  );
+}

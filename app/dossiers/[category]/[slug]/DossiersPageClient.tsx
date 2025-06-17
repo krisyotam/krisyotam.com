@@ -3,7 +3,7 @@
 import { PageHeader } from "@/components/page-header";
 import { Citation } from "@/components/citation";
 import { LiveClock } from "@/components/live-clock";
-import BentoFooter from "@/components/bento-footer";
+import { Footer } from "@/components/footer";
 import type { DossierMeta, DossierStatus, DossierConfidence } from "@/types/dossiers";
 
 interface Props {
@@ -72,10 +72,9 @@ export default function DossierPageClient({ dossierData: dossierItem, allDossier
           slug={dossierItem.slug}
           date={dossierItem.date}
           url={`https://krisyotam.com/dossiers/${slugifyCategory(dossierItem.category)}/${dossierItem.slug}`}
-        />
-      </div>
+        />      </div>
         <LiveClock />
-      <BentoFooter />
+      <Footer />
     </div>
   );
 }

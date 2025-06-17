@@ -6,7 +6,7 @@ import { PoemBox } from "@/components/posts/typography/poem";
 import poemsData from "@/data/verse/poems.json";
 import type { Poem } from "@/utils/poems";
 import { notFound } from "next/navigation";
-import { Footer } from "@/app/essays/components/footer";
+import { Footer } from "@/components/footer";
 import { Citation } from "@/components/citation";
 import { useEffect, useState } from "react";
 

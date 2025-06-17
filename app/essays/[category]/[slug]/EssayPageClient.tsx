@@ -3,7 +3,7 @@
 import { PageHeader } from "@/components/page-header";
 import { Citation } from "@/components/citation";
 import { LiveClock } from "@/components/live-clock";
-import { Footer } from "../../components/footer";
+import { Footer } from "@/components/footer";
 import type { Post } from "@/utils/posts";
 
 interface Props {
