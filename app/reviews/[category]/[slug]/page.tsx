@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: ReviewPageProps, parent: Reso
     }
   ];
 
-  const url = `https://krisyotam.com/review/${params.category}/${params.slug}`;
+  const url = `https://krisyotam.com/reviews/${params.category}/${params.slug}`;
 
   return {
     title: `${reviewData.title} | ${reviewData.category} Reviews | Kris Yotam`,
@@ -99,9 +99,8 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
     ...review,
     status: review.status as ReviewStatus,
     confidence: review.confidence as ReviewConfidence
-  }));
-  // Dynamically import the MDX file based on category and slug
-  const Review = (await import(`@/app/review/content/${params.category}/${params.slug}.mdx`)).default;
+  }));  // Dynamically import the MDX file based on category and slug
+  const Review = (await import(`@/app/reviews/content/${params.category}/${params.slug}.mdx`)).default;
 
   return (
     <ReviewPageClient review={review} allReviews={reviews}>

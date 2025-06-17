@@ -38,10 +38,9 @@ export function ReviewsTable({ reviews, searchQuery, activeCategory }: ReviewsTa
       month: "long", 
       day: "numeric"
     });
-  }
-  // Helper to build the correct route for a review
+  }  // Helper to build the correct route for a review
   function getReviewUrl(review: ReviewMeta) {
-    return `/review/${encodeURIComponent(review.category)}/${encodeURIComponent(review.slug)}`;
+    return `/reviews/${encodeURIComponent(review.category)}/${encodeURIComponent(review.slug)}`;
   }
 
   return (    <div className="mt-8">
@@ -59,10 +58,9 @@ export function ReviewsTable({ reviews, searchQuery, activeCategory }: ReviewsTa
               className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
                 index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
               }`}
-              onClick={() => router.push(getReviewUrl(review))}            >              <td className="py-2 px-3 font-medium">{review.title}</td>
-              <td className="py-2 px-3">
+              onClick={() => router.push(getReviewUrl(review))}            >              <td className="py-2 px-3 font-medium">{review.title}</td>              <td className="py-2 px-3">
                 <Link 
-                  href={`/review/${review.category}`}
+                  href={`/reviews/${review.category}`}
                   className="text-foreground hover:text-primary"
                   onClick={(e) => e.stopPropagation()}
                 >

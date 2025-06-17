@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
     };
   }
 
-  const url = `https://krisyotam.com/review/${categorySlug}`;
+  const url = `https://krisyotam.com/reviews/${categorySlug}`;
     // Use Kris Yotam's logo for category pages
   const images = [
     {

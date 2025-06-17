@@ -1,4 +1,4 @@
-/* app/review/[category]/[slug]/ReviewPageClient.tsx */
+/* app/reviews/[category]/[slug]/ReviewPageClient.tsx */
 
 "use client";
 
@@ -56,7 +56,7 @@ export default function ReviewPageClient({ review, allReviews, children }: Props
         date={review.date}
         tags={review.tags}
         category={review.category}
-        backHref="/review"
+        backHref="/reviews"
         backText="Reviews"
         preview={review.preview}
         status={review.status ?? "Draft"}
@@ -72,7 +72,7 @@ export default function ReviewPageClient({ review, allReviews, children }: Props
           title={review.title}
           slug={review.slug}
           date={review.date}
-          url={`https://krisyotam.com/review/${slugifyCategory(review.category)}/${review.slug}`}
+          url={`https://krisyotam.com/reviews/${slugifyCategory(review.category)}/${review.slug}`}
         />
       </div>
       

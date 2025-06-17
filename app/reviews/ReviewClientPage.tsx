@@ -74,13 +74,12 @@ export default function ReviewClientPage({ reviews, initialCategory = "all" }: R
   function slugifyCategory(category: string) {
     return category.toLowerCase().replace(/\s+/g, "-");
   }
-
   // Handle category change with URL routing
   function handleCategoryChange(selectedValue: string) {
     if (selectedValue === "all") {
-      router.push("/review");
+      router.push("/reviews");
     } else {
-      router.push(`/review/${slugifyCategory(selectedValue)}`);
+      router.push(`/reviews/${slugifyCategory(selectedValue)}`);
     }
   }
 
