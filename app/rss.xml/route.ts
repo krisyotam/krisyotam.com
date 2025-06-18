@@ -4,12 +4,28 @@ import path from 'path'
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), 'data/feed.json')
-    const file = await fs.readFile(filePath, 'utf-8')
-    const { posts } = JSON.parse(file)
+    // Read data from all three sources
+    const papersPath = path.join(process.cwd(), 'data/papers/papers.json')
+    const blogPath = path.join(process.cwd(), 'data/blog/feed.json')
+    const essaysPath = path.join(process.cwd(), 'data/essays/essays.json')
+
+    const [papersFile, blogFile, essaysFile] = await Promise.all([
+      fs.readFile(papersPath, 'utf-8'),
+      fs.readFile(blogPath, 'utf-8'),
+      fs.readFile(essaysPath, 'utf-8')
+    ])
+
+    const { papers } = JSON.parse(papersFile)
+    const blogPosts = JSON.parse(blogFile) // blog feed.json is an array
+    const { essays } = JSON.parse(essaysFile)    // Combine all posts and add path information
+    const allPosts = [
+      ...papers.map((post: any) => ({ ...post, path: 'papers' })),
+      ...blogPosts.map((post: any) => ({ ...post, path: 'blog' })),
+      ...essays.map((post: any) => ({ ...post, path: 'essays' }))
+    ]
 
     const siteUrl = 'https://krisyotam.com'
-    const activePosts = posts.filter((post: any) => post.state === 'active')
+    const activePosts = allPosts.filter((post: any) => post.state === 'active')
 
     const escapeXML = (str: string) =>
       str
@@ -24,9 +40,13 @@ export async function GET() {
       const year = safeDate.getFullYear()
       const slug = post.slug || ''
       const title = escapeXML(post.title || '')
-      const description = escapeXML(post.preview || post.subtitle || '')      // Use correct URL structure based on post path
+      const description = escapeXML(post.preview || post.subtitle || '')
+      
+      // Use correct URL structure based on post path
       let postUrl: string
-      if (post.path === 'essays') {
+      if (post.path === 'papers') {
+        postUrl = `${siteUrl}/papers/${post.category}/${slug}`
+      } else if (post.path === 'essays') {
         postUrl = `${siteUrl}/essays/${post.category}/${slug}`
       } else {
         // For blog posts, use category-based routing

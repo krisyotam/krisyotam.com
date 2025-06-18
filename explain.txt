@@ -1,0 +1,38 @@
+# Build Errors Explanation
+
+## Authentication & Token Issues
+• **Trakt API Token Expired** - All Trakt API calls are failing with "invalid_grant" error, token needs to be refreshed
+• **Trakt API failures across multiple endpoints**: genres, lists, stats, most-watched-movies, most-watched-shows, recent-movies, recent-shows
+
+## File System Issues  
+• **Missing feed.json file** - RSS feed generation failing because `/vercel/path0/data/feed.json` doesn't exist
+• **Missing MDX files** - 5 fiction short stories and flash fiction files are missing:
+  - the-clockmakers-daughter.mdx
+  - a-theory-of-rooms.mdx  
+  - how-they-fall.mdx
+  - what-the-faculty-forgot.mdx
+  - when-the-bell-tolls-twice.mdx
+
+## Next.js Rendering Issues
+• **useSearchParams not wrapped in Suspense** - /now page has React hook usage outside Suspense boundary
+• **Dynamic server usage errors** - Multiple Trakt API routes using `request.url` preventing static generation:
+  - /api/trakt/most-watched-movies
+  - /api/trakt/most-watched-shows  
+  - /api/trakt/recent-movies
+  - /api/trakt/recent-shows
+
+## API Service Issues
+• **Monkeytype API intermittent 503 errors** - Some personal bests endpoints returning server errors
+• **Mixed success/failure responses** - Some Monkeytype endpoints work while others fail
+
+## Build Process
+• **npm deprecated package warning** - topojson@3.0.2 is deprecated
+• **Export process partial failure** - Build completed but with errors on /now page path
+• **Static generation issues** - Some routes failing to render statically due to dynamic server usage
+
+## Root Causes Summary
+1. **Authentication tokens expired** (Trakt)
+2. **Missing static files** (feed.json, MDX files)  
+3. **Improper React hook usage** (useSearchParams without Suspense)
+4. **Dynamic routing in static context** (request.url usage)
+5. **External API reliability** (Monkeytype 503 errors)

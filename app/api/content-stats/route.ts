@@ -49,8 +49,10 @@ function countEntries(data: any, expectedKey: string): number {
 }
 
 export async function GET() {
-  // Read all the JSON files
-  const feed = readJsonFile("data/feed.json")
+  // Read all the JSON files  
+  const papers = readJsonFile("data/papers/papers.json")
+  const blog = readJsonFile("data/blog/feed.json")
+  const essays = readJsonFile("data/essays/essays.json")
   const newsletters = readJsonFile("data/newsletters.json")
   const nuggets = readJsonFile("data/nuggets.json")
   const notes = readJsonFile("data/quick-notes.json")
@@ -65,7 +67,7 @@ export async function GET() {
 
   // Count the entries in each file, handling different JSON structures
   const stats = {
-    posts: countEntries(feed, "post"),
+    posts: countEntries(papers, "paper") + countEntries(blog, "post") + countEntries(essays, "essay"),
     newsletters: countEntries(newsletters, "newsletter"),
     nuggets: countEntries(nuggets, "nugget"),
     notes: countEntries(notes, "note"),

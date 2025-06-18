@@ -1,0 +1,53 @@
+## BUILD FIX AGENDA - REVISED PRIORITY ORDER
+
+### PHASE 1: ACTUAL CRITICAL ISSUES
+
+**1. Fix /now Page Export Error** ⚠️ URGENT
+   - [ ] Investigate /now route dynamic content issues
+   - [ ] Fix static generation problems
+   - [ ] Ensure page exports successfully
+
+**2. Remove RSS Feed.json Dependencies** ⚠️ HIGH
+   - [ ] Find what's trying to fetch `/data/feed.json`
+   - [ ] Remove or update RSS generation code to not use feed.json
+   - [ ] Delete obsolete feed.json references
+Notes the .json used to be for one type of content, now their are several: /papers, /essays, /blog are the main ones that each have: essays.json, feed.json (blog), papers.json, respectively in data/papers, data/blog, and data/essays so those are the 3 you need to pull from for the rss feed
+
+**3. Fix Fiction Files Detection** 🔸 HIGH
+   - [ ] Investigate why existing MDX files aren't being detected:
+     - app/fiction/content/short-stories/the-clockmakers-daughter.mdx
+     - app/fiction/content/short-stories/a-theory-of-rooms.mdx
+     - app/fiction/content/short-stories/how-they-fall.mdx
+     - app/fiction/content/flash-fiction/what-the-faculty-forgot.mdx
+     - app/fiction/content/flash-fiction/when-the-bell-tolls-twice.mdx
+   - [ ] Check file paths and build process file resolution
+   - [ ] Verify fiction pages load correctly
+
+### PHASE 2: EXTERNAL API IMPROVEMENTS
+
+**4. Handle MonkeyType API Dependencies** 🔹 MEDIUM
+   - [ ] Add error handling for MonkeyType API failures
+   - [ ] Implement fallback data for typing statistics
+   - [ ] Add retry logic for 503 errors
+
+### IGNORED/DEFERRED ITEMS
+
+**SKIP: Next.js Static Generation Issues** (Not urgent)
+- Trakt API routes can stay as-is for now
+
+**SKIP: Trakt API Authentication** (Ignore)
+- Authentication issues can be addressed later
+
+**SKIP: Build Process Improvements** (Wait on this)
+- Error logging improvements deferred
+
+### SUCCESS CRITERIA
+- [ ] Build completes without errors (exit code 0)
+- [ ] /now page exports successfully
+- [ ] RSS generation works without feed.json
+- [ ] Fiction pages accessible and files detected
+- [ ] MonkeyType API failures handled gracefully
+
+### ESTIMATED TIME: 2-3 hours total
+- Phase 1: 1.5-2 hours (critical fixes)
+- Phase 2: 0.5-1 hour (API improvements)
