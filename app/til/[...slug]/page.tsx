@@ -1,95 +1,117 @@
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
-import { getGitHubTilRepo } from "@/lib/githubTil";
-import { Button } from "@/components/ui/button";
+export const dynamic = 'force-static';
+export const revalidate = false;
+import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import { MarkdownContent } from "@/components/markdown-content";
+import tilData from "@/data/til/til.json";
+import TilPageClient from "./TilPageClient";
+import { TableOfContents } from "@/components/typography/table-of-contents";
+import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
+import type { TilMeta } from "@/types/til";
 
-export const dynamic = "force-static";
+type Status = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
+type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
+type State = "active" | "hidden";
 
-export async function generateStaticParams() {
-  try {
-    const tilEntries = await getGitHubTilRepo();
-    
-    return tilEntries
-      .filter((entry) => entry.path) // Ensure valid paths
-      .map((entry) => ({
-        slug: entry.path.split("/"), // Generate only valid slugs
-      }));
-  } catch (error) {
-    console.error("Error generating static params:", error);
-    return [];
-  }
+interface TilData {
+  title: string;
+  date: string;
+  slug: string;
+  tags: string[];
+  category: string;
+  status: string;
+  confidence: string;
+  importance: number;
+  state: string;
+  preview?: string;
+  cover_image?: string;
 }
 
-export default async function TILEntryPage({ params }: { params: { slug?: string[] } }) {
-  try {
-    if (!params.slug) {
-      notFound();
-    }
+interface TilPageProps {
+  params: { slug?: string[] };
+}
 
-    const tilEntries = await getGitHubTilRepo();
-    const path = decodeURIComponent(params.slug.join("/")); // Ensure the slug is correctly decoded
-    const entry = tilEntries.find((e) => decodeURIComponent(e.path) === path);
+export async function generateStaticParams() {
+  // Generate all slug combinations from the til data
+  return tilData.til.map(entry => ({
+    slug: [entry.slug]
+  }));
+}
 
-    if (!entry) {
-      notFound();
-    }
-
-    return (
-      <div className="relative min-h-screen bg-background text-foreground">
-        <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-          <div className="mb-8">
-            <Button variant="outline" asChild>
-              <Link href="/til">
-                <ChevronLeft className="mr-2 h-4 w-4" /> Back to TIL
-              </Link>
-            </Button>
-          </div>
-
-          <article>
-            <header className="mb-8">
-              <h1 className="text-3xl font-semibold tracking-tight mb-2 text-foreground">
-                {entry.title}
-              </h1>
-              <div className="text-sm text-muted-foreground">
-                {new Date(entry.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </div>
-            </header>
-
-            {entry.content ? (
-              <MarkdownContent content={entry.content} />
-            ) : (
-              <div className="p-4 border border-red-300 bg-red-50 dark:bg-red-900/20 dark:border-red-800 rounded-md">
-                <p className="text-red-800 dark:text-red-300">
-                  Unable to load the content for this TIL entry. The content might not be available or there might be an
-                  issue with the GitHub repository.
-                </p>
-              </div>
-            )}
-          </article>
-        </div>
-      </div>
-    );
-  } catch (error) {
-    console.error("Failed to fetch TIL entry:", error);
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
-        <div className="max-w-md p-8 text-center">
-          <h2 className="text-2xl font-semibold mb-4 text-foreground">Error Loading Content</h2>
-          <p className="text-muted-foreground mb-6">
-            Failed to load TIL entry. The content might not be available or there might be an issue with the GitHub
-            repository.
-          </p>
-          <Button asChild>
-            <Link href="/til">Return to TIL List</Link>
-          </Button>
-        </div>
-      </div>
-    );
+export async function generateMetadata({ params }: TilPageProps): Promise<Metadata> {
+  if (!params.slug || params.slug.length === 0) {
+    return {
+      title: "TIL Not Found",
+    };
   }
+  
+  const slug = params.slug[0];
+  const til = tilData.til.find(t => t.slug === slug);
+
+  if (!til) {
+    return {
+      title: "TIL Not Found",
+    };
+  }
+
+  return {
+    title: `${til.title} | TIL | Kris Yotam`,
+    description: til.preview || `Today I Learned: ${til.title}`,
+  };
+}
+
+export default async function TilPage({ params }: TilPageProps) {
+  if (!params.slug || params.slug.length === 0) {
+    notFound();
+  }
+  
+  const slug = params.slug[0];
+  const tilEntry = tilData.til.find(t => t.slug === slug);
+
+  if (!tilEntry) {
+    notFound();
+  }
+
+  const til: TilMeta = {
+    ...tilEntry,
+    status: tilEntry.status as Status,
+    confidence: tilEntry.confidence as Confidence,
+    state: tilEntry.state as State
+  };
+
+  const allTils: TilMeta[] = tilData.til.map((entry: TilData) => ({
+    ...entry,
+    status: entry.status as Status,
+    confidence: entry.confidence as Confidence,
+    state: entry.state as State
+  }));
+
+  // Extract headings from the TIL MDX content
+  const headings = await extractHeadingsFromMDX('til', slug);
+
+  // Dynamically import the MDX file based on slug
+  const TilEntry = (await import(`@/app/til/content/${slug}.mdx`)).default;
+
+  return (
+    <div className="relative min-h-screen bg-background text-foreground pt-16">
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Header section - full width */}
+        <div className="mb-8">
+          <TilPageClient til={til} allTils={allTils} headerOnly={true} />
+        </div>
+        
+        {/* Main content */}
+        <main className="container max-w-[672px] mx-auto px-4">
+          {/* Table of Contents - at the top of content */}
+          {headings.length > 0 && (
+            <TableOfContents headings={headings} />
+          )}
+          
+          <div className="til-content">
+            <TilEntry />
+          </div>
+          <TilPageClient til={til} allTils={allTils} contentOnly={true} />
+        </main>
+      </div>
+    </div>
+  );
 }

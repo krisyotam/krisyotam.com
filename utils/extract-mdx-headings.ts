@@ -19,7 +19,6 @@ export async function extractHeadingsFromMDX(
   }
 
   let mdxPath: string
-
   // Determine the path based on content type
   switch (contentType) {
     case 'essays':
@@ -32,8 +31,14 @@ export async function extractHeadingsFromMDX(
     case 'notes':
       mdxPath = path.join(process.cwd(), "app/notes/content", `${slug}.mdx`)
       break
+    case 'til':
+      mdxPath = path.join(process.cwd(), "app/til/content", `${slug}.mdx`)
+      break
     case 'blog':
       mdxPath = path.join(process.cwd(), "app/blog/content", `${slug}.mdx`)
+      break
+    case 'now':
+      mdxPath = path.join(process.cwd(), "app/now/content", `${slug}.mdx`)
       break
     case 'fiction':
       if (!category) {

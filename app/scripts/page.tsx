@@ -1,24 +1,19 @@
-import { PageHeader } from "@/components/page-header"
-import { ScriptsClient } from "./scripts-client"
+import ScriptsClientPage from "./ScriptsClientPage";
+import scriptsData from "@/data/scripts/scripts.json";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Scripts | Kris Yotam",
+export const metadata: Metadata = {
+  title: "Scripts",
   description: "A collection of useful scripts and utilities",
-}
+};
 
 export default function ScriptsPage() {
+  // Sort scripts by date (newest first)
+  const scripts = [...scriptsData.scripts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   return (
-    <main className="max-w-[650px] mx-auto px-4 py-12">
-      <PageHeader 
-        title="Scripts"
-        subtitle="Utility Scripts Collection"
-        date={new Date().toISOString()}
-        preview="useful scripts created to manage krisyotam.com and krisyotam.net."
-        status="In Progress"
-        confidence="certain"
-        importance={7}
-      />
-      <ScriptsClient />
-    </main>
-  )
+    <div className="scripts-container">
+      <ScriptsClientPage scripts={scripts} initialCategory="all" />
+    </div>
+  );
 }

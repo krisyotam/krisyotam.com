@@ -1,72 +1,27 @@
-"use client"
-
-import Link from "next/link"
-import { getGitHubTilFeed } from "@/lib/githubTilFeed"
-import { PageHeader } from "@/components/page-header"
+import { getTilData } from "@/lib/data"
+import TilClientPage from "./TilClientPage"
+import type { Metadata } from "next"
 
 export const dynamic = "force-static"
 
-// TIL page metadata
-const tilPageData = {
+export const metadata: Metadata = {
   title: "Today I Learned",
-  subtitle: "Daily Learning Summaries",
-  date: new Date().toISOString(),
-  preview: "A collection of short notes from my cross-disciplinary studies, shared as I learn in public.",
-  status: "In Progress" as const,
-  confidence: "certain" as const,
-  importance: 7,
+  description: "A collection of short notes from my cross-disciplinary studies, shared as I learn in public.",
 }
 
 export default async function TILPage() {
   try {
-    const tilEntries = await getGitHubTilFeed()
+    const tilData = await getTilData()
+    const tilEntries = tilData.til
 
-    // Sort by date (assuming `date` is in a valid format for comparison, e.g., ISO string)
+    // Sort by date (newest first)
     const sortedEntries = tilEntries
       .slice() // Copy to avoid modifying the original array
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // Sort by date in descending order
 
     return (
-      <div className="relative min-h-screen bg-background text-foreground">
-        <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-          {/* Add the PageHeader component */}
-          <PageHeader
-            title={tilPageData.title}
-            subtitle={tilPageData.subtitle}
-            date={tilPageData.date}
-            preview={tilPageData.preview}
-            status={tilPageData.status}
-            confidence={tilPageData.confidence}
-            importance={tilPageData.importance}
-          />
-
-          <p className="text-muted-foreground mb-4">
-            <strong>{tilEntries.length}</strong> TILs and counting... Feeling lucky?
-          </p>
-          <p className="text-muted-foreground mb-8">
-            You can follow along by watching my{" "}
-            <a
-              href="https://github.com/krisyotam/til"
-              className="text-foreground underline hover:text-primary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub repository
-            </a>
-            .
-          </p>
-
-          <div className="space-y-0">
-            {sortedEntries.map(({ date, title, path }) => (
-              <div key={path} className="py-1 flex">
-                <span className="text-muted-foreground w-24 flex-shrink-0">{date.substring(0, 10)}</span>
-                <Link href={`/til/${path}`} className="text-foreground hover:text-primary hover:underline">
-                  {title}
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="til-container">
+        <TilClientPage tilEntries={sortedEntries} initialCategory="all" />
       </div>
     )
   } catch (error) {

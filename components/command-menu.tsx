@@ -21,9 +21,15 @@ import { useTheme } from "next-themes"
 const menuItems = [
   // Primary navigation - most commonly used pages
   { icon: Home, label: "Home", path: "/" },
+  { icon: PenBox, label: "Papers", path: "/papers" },
   { icon: PenBox, label: "Essays", path: "/essays" },
-  { icon: PenBox, label: "Blog", path: "/blog" },
-  { icon: StickyNote, label: "Notes", path: "/notes" },
+  { icon: PenBox, label: "Blog Posts", path: "/blog" },
+  { icon: PenBox, label: "Fiction", path: "/fiction" },
+    { icon: StickyNote, label: "Notes", path: "/notes" },
+  { icon: PenBox, label: "Cases", path: "/cases" },
+  { icon: PenBox, label: "Dossiers", path: "/dossiers" },
+    { icon: PenBox, label: "Conspiracies", path: "/conspiracies" },
+      { icon: PenBox, label: "Libers", path: "/libers" },
   { icon: Quote, label: "Quotes", path: "/quotes" },
   { icon: List, label: "Categories", path: "/categories" },
   { icon: Tag, label: "Tags", path: "/tags" },

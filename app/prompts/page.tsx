@@ -1,24 +1,19 @@
-import { PageHeader } from "@/components/page-header"
-import { PromptsClient } from "./prompts-client"
+import PromptsClientPage from "./PromptsClientPage";
+import promptsData from "@/data/prompts/prompts.json";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Prompts | Kris Yotam",
-  description: "A collection of useful prompts for AI models",
-}
+export const metadata: Metadata = {
+  title: "Prompts",
+  description: "A collection of useful prompts for various AI models and use cases",
+};
 
 export default function PromptsPage() {
+  // Sort prompts by date (newest first)
+  const prompts = [...promptsData.prompts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   return (
-    <main className="max-w-[650px] mx-auto px-4 py-12">
-      <PageHeader
-        title="Prompts"
-        subtitle="AI Prompt Collection"
-        date={new Date().toISOString()}
-        preview="A collection of useful prompts for various AI models and use cases."
-        status="In Progress"
-        confidence="certain"
-        importance={7}
-      />
-      <PromptsClient />
-    </main>
-  )
+    <div className="prompts-container">
+      <PromptsClientPage prompts={prompts} initialCategory="all" />
+    </div>
+  );
 }
