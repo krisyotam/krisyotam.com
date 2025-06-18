@@ -65,6 +65,14 @@ export function PromptsTable({ prompts, searchQuery, activeCategory }: PromptsTa
     return `/prompts/${categorySlug}/${encodeURIComponent(prompt.slug)}`;
   }
 
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
   if (!filteredPrompts.length) {
     return <p className="text-center py-10 text-muted-foreground">No prompts found.</p>;
   }
@@ -91,7 +99,7 @@ export function PromptsTable({ prompts, searchQuery, activeCategory }: PromptsTa
             >
               <td className="py-2 px-3 font-medium">{prompt.title}</td>
               <td className="py-2 px-3">{prompt.model || 'N/A'}</td>
-              <td className="py-2 px-3">{prompt.category}</td>
+              <td className="py-2 px-3">{formatCategoryDisplayName(prompt.category)}</td>
               <td className="py-2 px-3">{formatDate(prompt.date)}</td>
             </tr>
           ))}

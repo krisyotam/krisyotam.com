@@ -39,7 +39,6 @@ export function EssaysTable({ notes, searchQuery, activeCategory }: EssaysTableP
     filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     setFilteredNotes(filtered);
   }, [notes, searchQuery, activeCategory]);
-
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -48,6 +47,14 @@ export function EssaysTable({ notes, searchQuery, activeCategory }: EssaysTableP
       month: "long", 
       day: "numeric"
     });
+  }
+
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
   // Helper to build the correct route for an essay
   function getEssayUrl(note: Post) {
@@ -77,7 +84,7 @@ export function EssaysTable({ notes, searchQuery, activeCategory }: EssaysTableP
               }`}
               onClick={() => router.push(getEssayUrl(note))}
             >              <td className="py-2 px-3 font-medium">{note.title}</td>
-              <td className="py-2 px-3">{getCategoryTitle(note.category)}</td>
+              <td className="py-2 px-3">{formatCategoryDisplayName(note.category)}</td>
               <td className="py-2 px-3">{formatDate(note.date)}</td>
             </tr>
           ))}

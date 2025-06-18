@@ -48,6 +48,14 @@ export function CasesTable({ cases, searchQuery, activeCategory }: CasesTablePro
     return `/cases/${encodeURIComponent(caseItem.category)}/${encodeURIComponent(caseItem.slug)}`;
   }
 
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
   return (
     <div className="mt-8">
       <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
@@ -74,7 +82,7 @@ export function CasesTable({ cases, searchQuery, activeCategory }: CasesTablePro
                   className="text-foreground hover:text-primary"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {caseItem.category}
+                  {formatCategoryDisplayName(caseItem.category)}
                 </Link>
               </td>
               <td className="py-2 px-3">{formatDate(caseItem.date)}</td>

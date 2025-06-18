@@ -1,4 +1,5 @@
 import "../app/globals.css"
+import "katex/dist/katex.min.css"
 import { CommandMenu } from "../components/command-menu"
 import type { Metadata, Viewport } from "next"
 import { ThemeProvider } from "../components/theme-provider"

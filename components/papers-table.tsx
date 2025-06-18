@@ -33,7 +33,6 @@ export function PapersTable({ papers, searchQuery, activeCategory }: PapersTable
     filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     setFilteredPapers(filtered);
   }, [papers, searchQuery, activeCategory]);
-
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -42,6 +41,14 @@ export function PapersTable({ papers, searchQuery, activeCategory }: PapersTable
       month: "long", 
       day: "numeric"
     });
+  }
+
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
   // Helper to build the correct route for a paper
   function getPaperUrl(paper: PaperMeta) {
@@ -77,7 +84,7 @@ export function PapersTable({ papers, searchQuery, activeCategory }: PapersTable
                   className="text-foreground hover:text-primary"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {getCategoryTitle(paper.category)}
+                  {formatCategoryDisplayName(paper.category)}
                 </Link>
               </td>
               <td className="py-2 px-3">{formatDate(paper.date)}</td>

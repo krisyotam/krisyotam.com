@@ -86,7 +86,10 @@ const baseConfig = {
 /* ─── MDX wrapper (Math + KaTeX) ───────────────────────────── */
 const nextConfig = withMDX({
   extension: /\.mdx?$/,
-  options: { remarkPlugins: [remarkMath], rehypePlugins: [rehypeKatex] },
+  options: { 
+    remarkPlugins: [remarkMath], 
+    rehypePlugins: [rehypeKatex]
+  },
 })(baseConfig);
 
 export default nextConfig;

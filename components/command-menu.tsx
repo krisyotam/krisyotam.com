@@ -11,7 +11,14 @@ import {
   GalleryHorizontal, HeartHandshake, ShoppingCart, Pencil, Code, HelpCircle, LifeBuoy, FlipHorizontal, Server,
   Paperclip, MonitorPlay, BookText, Coins, Upload, Laptop, FolderKanban, ClipboardEdit, AreaChart, MessageSquare,
   Link, Grid, Receipt, MessageSquareText, Tag, Gamepad2, Clapperboard, Gavel, Star, Hammer, Footprints, PenBox, BookDashed, Shapes, UserSquare, BrainCircuit,
-  GlobeLock, BoxSelect, TestTube2, FileBarChart2, Files, Megaphone, BookOpenCheck, ScrollText, BookOpenText, FileEdit, PencilLine, Wrench, Pen, HelpingHand, Keyboard, Palette
+  GlobeLock, BoxSelect, TestTube2, FileBarChart2, Files, Megaphone, BookOpenCheck, ScrollText, BookOpenText, FileEdit, PencilLine, Wrench, Pen, HelpingHand, Keyboard, Palette,
+  Sigma,
+  DraftingCompass,
+  CassetteTape,
+  FileArchive,
+  ScanEye,
+  NotebookPen,
+  FilePen
 } from "lucide-react";
 
 
@@ -21,15 +28,17 @@ import { useTheme } from "next-themes"
 const menuItems = [
   // Primary navigation - most commonly used pages
   { icon: Home, label: "Home", path: "/" },
-  { icon: PenBox, label: "Papers", path: "/papers" },
-  { icon: PenBox, label: "Essays", path: "/essays" },
-  { icon: PenBox, label: "Blog Posts", path: "/blog" },
+  { icon: FileText, label: "Papers", path: "/papers" },
+  { icon: FilePen, label: "Essays", path: "/essays" },
+  { icon: NotebookPen, label: "Blog Posts", path: "/blog" },
   { icon: PenBox, label: "Fiction", path: "/fiction" },
-    { icon: StickyNote, label: "Notes", path: "/notes" },
-  { icon: PenBox, label: "Cases", path: "/cases" },
-  { icon: PenBox, label: "Dossiers", path: "/dossiers" },
-    { icon: PenBox, label: "Conspiracies", path: "/conspiracies" },
-      { icon: PenBox, label: "Libers", path: "/libers" },
+  { icon: StickyNote, label: "Notes", path: "/notes" },
+  { icon: CassetteTape, label: "Cases", path: "/cases" },
+  { icon: FileArchive, label: "Dossiers", path: "/dossiers" },
+  { icon: ScanEye, label: "Conspiracies", path: "/conspiracies" },
+  { icon: ScrollText, label: "Libers", path: "/libers" },
+  { icon: Sigma, label: "Proofs", path: "/proofs" },
+  { icon: DraftingCompass, label: "problems", path: "/problems" },
   { icon: Quote, label: "Quotes", path: "/quotes" },
   { icon: List, label: "Categories", path: "/categories" },
   { icon: Tag, label: "Tags", path: "/tags" },

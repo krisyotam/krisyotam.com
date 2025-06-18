@@ -49,6 +49,14 @@ export function BlogTable({ notes, searchQuery, activeCategory }: BlogTableProps
     return `/blog/${categorySlug}/${encodeURIComponent(note.slug)}`;
   }
 
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
   if (!filteredNotes.length) {
     return <p className="text-center py-10 text-muted-foreground">No posts found.</p>;
   }
@@ -79,7 +87,7 @@ export function BlogTable({ notes, searchQuery, activeCategory }: BlogTableProps
                   className="text-foreground hover:text-primary"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {note.category}
+                  {formatCategoryDisplayName(note.category)}
                 </Link>
               </td>
               <td className="py-2 px-3">{formatDate(note.date)}</td>
@@ -93,4 +101,4 @@ export function BlogTable({ notes, searchQuery, activeCategory }: BlogTableProps
       )}
     </div>
   );
-} 
+}

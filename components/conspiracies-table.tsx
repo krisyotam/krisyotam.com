@@ -30,7 +30,6 @@ export function ConspiraciesTable({ conspiracies, searchQuery, activeCategory }:
     filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     setFilteredConspiracies(filtered);
   }, [conspiracies, searchQuery, activeCategory]);
-
   // Format date
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -39,6 +38,14 @@ export function ConspiraciesTable({ conspiracies, searchQuery, activeCategory }:
       month: "long",
       day: "numeric"
     });
+  }
+
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 
   // Route to full conspiracy page
@@ -65,14 +72,13 @@ export function ConspiraciesTable({ conspiracies, searchQuery, activeCategory }:
               }`}
               onClick={() => router.push(getConspiracyUrl(item))}
             >
-              <td className="py-2 px-3 font-medium">{item.title}</td>
-              <td className="py-2 px-3">
+              <td className="py-2 px-3 font-medium">{item.title}</td>              <td className="py-2 px-3">
                 <Link
                   href={`/conspiracies/${item.category}`}
                   className="text-foreground hover:text-primary"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {item.category}
+                  {formatCategoryDisplayName(item.category)}
                 </Link>
               </td>
               <td className="py-2 px-3">{formatDate(item.date)}</td>

@@ -1,7 +1,7 @@
 {
   "scripts": [
     {
-      "title": "404 Error Page URL Suggester",
+      "title": "404 URL Suggester",
       "preview": "Enhances 404 error pages by suggesting similar URLs based on Levenshtein distance algorithm, helping users find the content they were looking for",
       "date": "2023-08-20",
       "tags": ["404", "url-suggestion", "javascript", "web-utility", "user-experience"],

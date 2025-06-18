@@ -35,11 +35,10 @@ export default function PapersClientPage({ papers, initialCategory = "all" }: Pa
     const category = categoriesData.categories.find(cat => cat.slug === categorySlug);
     return category ? category.title : categorySlug;
   }
-
   // Convert categories to SelectOption format
   const categoryOptions: SelectOption[] = categories.map(category => ({
     value: category,
-    label: category === "all" ? "All Categories" : getCategoryTitle(category)
+    label: category === "all" ? "All Categories" : formatCategoryDisplayName(category)
   }));
     // Function to map paper status to PageHeader compatible status
   const mapPaperStatusToPageHeaderStatus = (paperStatus: PaperStatus): "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" => {
@@ -82,10 +81,17 @@ export default function PapersClientPage({ papers, initialCategory = "all" }: Pa
   useEffect(() => {
     setActiveCategory(initialCategory);
   }, [initialCategory]);
-
   // Helper function to create category slug
   function slugifyCategory(category: string) {
     return category.toLowerCase().replace(/\s+/g, "-");
+  }
+
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 
   // Handle category change with URL routing

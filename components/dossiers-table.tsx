@@ -48,6 +48,14 @@ export function DossiersTable({ dossiers, searchQuery, activeCategory }: Dossier
     return `/dossiers/${encodeURIComponent(dossier.category)}/${encodeURIComponent(dossier.slug)}`;
   }
 
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
   return (
     <div className="mt-8">
       <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
@@ -74,7 +82,7 @@ export function DossiersTable({ dossiers, searchQuery, activeCategory }: Dossier
                   className="text-foreground hover:text-primary"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {dossier.category}
+                  {formatCategoryDisplayName(dossier.category)}
                 </Link>
               </td>
               <td className="py-2 px-3">{formatDate(dossier.date)}</td>

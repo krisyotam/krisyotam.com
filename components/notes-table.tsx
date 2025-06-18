@@ -42,7 +42,6 @@ export function NotesTable({ notes, searchQuery, activeCategory }: NotesTablePro
     filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     setFilteredNotes(filtered);
   }, [notes, searchQuery, activeCategory]);
-
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -51,6 +50,14 @@ export function NotesTable({ notes, searchQuery, activeCategory }: NotesTablePro
       month: "long", 
       day: "numeric"
     });
+  }
+
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
   // Helper to build the correct route for a note
   function getNoteUrl(note: Note) {
@@ -78,9 +85,8 @@ export function NotesTable({ notes, searchQuery, activeCategory }: NotesTablePro
                 index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
               }`}
               onClick={() => router.push(getNoteUrl(note))}
-            >
-              <td className="py-2 px-3 font-medium">{note.title}</td>
-              <td className="py-2 px-3">{note.category}</td>
+            >              <td className="py-2 px-3 font-medium">{note.title}</td>
+              <td className="py-2 px-3">{formatCategoryDisplayName(note.category)}</td>
               <td className="py-2 px-3">{formatDate(note.date)}</td>
             </tr>
           ))}

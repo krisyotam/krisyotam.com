@@ -59,6 +59,14 @@ export function LibersTable({ libers, searchQuery, activeCategory }: LibersTable
     return `/libers/${categorySlug}/${encodeURIComponent(liber.slug)}`;
   }
 
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
   if (!filteredLibers.length) {
     return <p className="text-center py-10 text-muted-foreground">No libers found.</p>;
   }
@@ -83,7 +91,7 @@ export function LibersTable({ libers, searchQuery, activeCategory }: LibersTable
               onClick={() => router.push(getLiberUrl(liber))}
             >
               <td className="py-2 px-3 font-medium">{liber.title}</td>
-              <td className="py-2 px-3">{liber.category}</td>
+              <td className="py-2 px-3">{formatCategoryDisplayName(liber.category)}</td>
               <td className="py-2 px-3">{formatDate(liber.date)}</td>
             </tr>
           ))}

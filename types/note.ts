@@ -13,4 +13,7 @@ export interface NoteMeta {
   preview?: string;
   cover_image?: string;
   subtitle?: string;
+  framework?: string;
+  author?: string;
+  license?: string;
 }

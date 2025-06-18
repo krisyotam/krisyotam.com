@@ -48,7 +48,6 @@ export function ScriptsTable({ scripts, searchQuery, activeCategory }: ScriptsTa
     filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     setFilteredScripts(filtered);
   }, [scripts, searchQuery, activeCategory]);
-
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -57,6 +56,14 @@ export function ScriptsTable({ scripts, searchQuery, activeCategory }: ScriptsTa
       month: "long", 
       day: "numeric"
     });
+  }
+
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
   // Helper to build the correct route for a script
   function getScriptUrl(script: Script) {
@@ -87,10 +94,9 @@ export function ScriptsTable({ scripts, searchQuery, activeCategory }: ScriptsTa
                 index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
               }`}
               onClick={() => router.push(getScriptUrl(script))}
-            >
-              <td className="py-2 px-3 font-medium">{script.title}</td>
+            >              <td className="py-2 px-3 font-medium">{script.title}</td>
               <td className="py-2 px-3">{script.language || 'N/A'}</td>
-              <td className="py-2 px-3">{script.category}</td>
+              <td className="py-2 px-3">{formatCategoryDisplayName(script.category)}</td>
               <td className="py-2 px-3">{formatDate(script.date)}</td>
             </tr>
           ))}

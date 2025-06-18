@@ -46,11 +46,10 @@ export default function ScriptsClientPage({ scripts, initialCategory = "all" }: 
   const router = useRouter();
 
   const categories = ["all", ...Array.from(new Set(scripts.map(s => s.category)))];
-
   // Convert categories to SelectOption format
   const categoryOptions: SelectOption[] = categories.map(category => ({
     value: category,
-    label: category === "all" ? "All Categories" : category
+    label: category === "all" ? "All Categories" : formatCategoryDisplayName(category)
   }));
 
   // Determine which header data to use
@@ -84,10 +83,17 @@ export default function ScriptsClientPage({ scripts, initialCategory = "all" }: 
   useEffect(() => {
     setActiveCategory(initialCategory);
   }, [initialCategory]);
-
   // Helper function to create category slug
   function slugifyCategory(category: string) {
     return category.toLowerCase().replace(/\s+/g, "-");
+  }
+
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 
   // Handle category change with URL routing
