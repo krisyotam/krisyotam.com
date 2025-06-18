@@ -68,14 +68,13 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
       </div>
     );
   }
-
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       {/* clean page header (outside .proof-content) */}
-      <PostHeader 
+      <ProofHeader 
         className=""     
         title={note.title}
-
+        subtitle={note.subtitle}
         date={note.date}
         tags={note.tags}
         category={note.category}
@@ -85,6 +84,9 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
         status={note.status ?? "Notes"}
         confidence={note.confidence ?? "possible"}
         importance={note.importance ?? 5}
+        framework={note.framework}
+        author={note.author}
+        license={note.license}
       />
       
       {/* MDX body */}
