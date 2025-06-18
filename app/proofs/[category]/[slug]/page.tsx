@@ -76,15 +76,16 @@ export default async function ProofPage({ params }: ProofPageProps) {
     ...proofData,
     status: proofData.status as Status,
     confidence: proofData.confidence as Confidence
-  };
-
-  const proofs: NoteMeta[] = proofsData.proofs.map((proof: ProofData) => ({
+  };  const proofs: NoteMeta[] = proofsData.proofs.map((proof: ProofData) => ({
     ...proof,
     status: proof.status as Status,
-    confidence: proof.confidence as Confidence  }));
+    confidence: proof.confidence as Confidence
+  }));
+
   // Extract headings from the proof MDX content
-  const headings = await extractHeadingsFromMDX('proofs', `${params.category}/${params.slug}`, params.category);
-    // Read the MDX file as raw content
+  const headings = await extractHeadingsFromMDX('proofs', params.slug, params.category);
+
+  // Read the MDX file as raw content
   const filePath = join(process.cwd(), 'app', 'proofs', 'content', params.category, `${params.slug}.mdx`);
   let mdxContent: string;
   
@@ -109,9 +110,7 @@ export default async function ProofPage({ params }: ProofPageProps) {
           {/* Table of Contents - at the top of content */}
           {headings.length > 0 && (
             <TableOfContents headings={headings} />
-          )}
-          
-          <div className="proof-content">
+          )}          <div className="proof-content">
             <MdxRenderer content={mdxContent} />
           </div>
           <NotePageClient note={proof} allNotes={proofs} contentOnly={true} />

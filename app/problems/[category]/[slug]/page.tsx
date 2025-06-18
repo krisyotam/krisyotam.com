@@ -76,15 +76,16 @@ export default async function ProblemPage({ params }: ProblemPageProps) {
     ...problemData,
     status: problemData.status as Status,
     confidence: problemData.confidence as Confidence
-  };
-
-  const problems: NoteMeta[] = problemsData.problems.map((problem: ProblemData) => ({
+  };  const problems: NoteMeta[] = problemsData.problems.map((problem: ProblemData) => ({
     ...problem,
     status: problem.status as Status,
     confidence: problem.confidence as Confidence
-  }));  // Extract headings from the problem MDX content
-  const headings = await extractHeadingsFromMDX('problems', `${params.category}/${params.slug}`, params.category);
-    // Read the MDX file as raw content
+  }));
+
+  // Extract headings from the problem MDX content
+  const headings = await extractHeadingsFromMDX('problems', params.slug, params.category);
+
+  // Read the MDX file as raw content
   const filePath = join(process.cwd(), 'app', 'problems', 'content', params.category, `${params.slug}.mdx`);
   let mdxContent: string;
   
@@ -109,9 +110,7 @@ export default async function ProblemPage({ params }: ProblemPageProps) {
           {/* Table of Contents - at the top of content */}
           {headings.length > 0 && (
             <TableOfContents headings={headings} />
-          )}
-          
-          <div className="problem-content">
+          )}          <div className="problem-content">
             <MdxRenderer content={mdxContent} />
           </div>
           <NotePageClient note={problem} allNotes={problems} contentOnly={true} />
