@@ -76,12 +76,11 @@ export default async function StoryPage({ params }: StoryPageProps) {
     status: story.status as Status,
     confidence: story.confidence as Confidence
   }));
-
   // Extract headings from the fiction MDX content
   const headings = await extractHeadingsFromMDX('fiction', params.slug, params.category);
 
-  // Dynamically import the MDX file based on slug
-  const Story = (await import(`@/app/fiction/content/${params.slug}.mdx`)).default;
+  // Dynamically import the MDX file based on category and slug
+  const Story = (await import(`@/app/fiction/content/${params.category}/${params.slug}.mdx`)).default;
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
       <div className="max-w-6xl mx-auto px-4">
