@@ -142,7 +142,7 @@ export default function ProofClientPage({ proofs, initialCategory = "all" }: Pro
         {/* PageDescription component */}
         <PageDescription
           title="About Proofs"
-          description="This is my proofs section where I share mathematical proofs, theorems, and demonstrations across various fields of mathematics. Use the search bar to find specific proofs by title, tag, or category. You can also filter proofs by category using the dropdown above."
+          description="This page serves as a growing archive of mathematical proofs I’ve written, studied, or reconstructed — spanning various branches such as number theory, real analysis, linear algebra, and more. It documents my growing understanding of proof techniques, and logical rigor. My aim is twofold: first, to sharpen my ability to construct clear, correct, and insightful proofs; and second, to reflect on the reasoning strategies behind them — how I approached each problem, where I struggled, what patterns I noticed, and how I learned from errors."
         />
       </div>
     </>

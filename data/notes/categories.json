@@ -233,6 +233,24 @@
     "status": "In Progress",
     "confidence": "certain",
     "importance": 6
+  },
+  {
+    "slug": "artificial-intelligence",
+    "title": "Artificial Intelligence",
+    "preview": "notes on ai projects that don't fit into a specific category such as llms, image generation, and other specific ai tools",
+    "date": "2025-06-10",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 10
+  },
+  {
+    "slug": "aops",
+    "title": "Art of Problem Solving",
+    "preview": "life updates, exposition, and notes on the art of problem solving",
+    "date": "2025-06-10",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6
   }
 ]
 }

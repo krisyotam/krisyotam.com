@@ -22,6 +22,8 @@ interface OtherEntry {
   status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
   confidence?: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"
   importance?: number
+  socials?: string[]
+  importantUrls?: string[]
 }
 
 export function OthersClient({ initialCategoryFilter = "All" }: OthersClientProps) {
