@@ -1,0 +1,305 @@
+{
+  "lists": [
+    {
+      "id": "essential-philosophy",
+      "title": "Essential Philosophy",
+      "description": "Foundational texts that shaped Western philosophical thought",
+      "author": "Kris Yotam",
+      "books": [
+        {
+          "title": "The Republic",
+          "isbn13": "9780140455113"
+        },
+        {
+          "title": "Meditations",
+          "isbn13": "9780140449334"
+        },
+        {
+          "title": "Critique of Pure Reason",
+          "isbn13": "9780140447477"
+        },
+        {
+          "title": "Being and Time",
+          "isbn13": "9780060638504"
+        },
+        {
+          "title": "The Ethics",
+          "isbn13": "9780140435719"
+        },
+        {
+          "title": "Nicomachean Ethics",
+          "isbn13": "9780140449495"
+        },
+        {
+          "title": "Beyond Good and Evil",
+          "isbn13": "9780140449235"
+        },
+        {
+          "title": "The Prince",
+          "isbn13": "9780140449150"
+        },
+        {
+          "title": "Leviathan",
+          "isbn13": "9780140431957"
+        },
+        {
+          "title": "An Essay Concerning Human Understanding",
+          "isbn13": "9780140434828"
+        },
+        {
+          "title": "A Treatise of Human Nature",
+          "isbn13": "9780140432442"
+        },
+        {
+          "title": "The Phenomenology of Spirit",
+          "isbn13": "9780198245971"
+        }
+      ]
+    },    {
+      "id": "modern-classics",
+      "title": "Modern Literary Classics",
+      "description": "Influential novels and works from the 20th century",
+      "author": "Kris Yotam",
+      "books": [
+        {
+          "title": "1984",
+          "isbn13": "9780451524935"
+        },
+        {
+          "title": "To Kill a Mockingbird",
+          "isbn13": "9780060935467"
+        },
+        {
+          "title": "The Catcher in the Rye",
+          "isbn13": "9780316769174"
+        },
+        {
+          "title": "One Hundred Years of Solitude",
+          "isbn13": "9780060883287"
+        },
+        {
+          "title": "Beloved",
+          "isbn13": "9781400033416"
+        },
+        {
+          "title": "The Great Gatsby",
+          "isbn13": "9780743273565"
+        },
+        {
+          "title": "Invisible Man",
+          "isbn13": "9780679732761"
+        },
+        {
+          "title": "The Sound and the Fury",
+          "isbn13": "9780679732242"
+        },
+        {
+          "title": "Ulysses",
+          "isbn13": "9780679722762"
+        },
+        {
+          "title": "Lolita",
+          "isbn13": "9780679723165"
+        },
+        {
+          "title": "On the Road",
+          "isbn13": "9780140283297"
+        },
+        {
+          "title": "The Stranger",
+          "isbn13": "9780679720201"
+        },
+        {
+          "title": "Brave New World",
+          "isbn13": "9780060850524"
+        },
+        {
+          "title": "Slaughterhouse-Five",
+          "isbn13": "9780385333849"
+        },
+        {
+          "title": "Catch-22",
+          "isbn13": "9781451626650"
+        }
+      ]
+    },    {
+      "id": "tech-innovation",
+      "title": "Technology & Innovation",
+      "description": "Books about technology, programming, and innovation",
+      "author": "Kris Yotam",
+      "books": [
+        {
+          "title": "The Innovator's Dilemma",
+          "isbn13": "9780062060242"
+        },
+        {
+          "title": "Clean Code",
+          "isbn13": "9780132350884"
+        },
+        {
+          "title": "The Design of Everyday Things",
+          "isbn13": "9780465050659"
+        },
+        {
+          "title": "Thinking, Fast and Slow",
+          "isbn13": "9780374533557"
+        },
+        {
+          "title": "The Lean Startup",
+          "isbn13": "9780307887894"
+        },
+        {
+          "title": "Code Complete",
+          "isbn13": "9780735619678"
+        },
+        {
+          "title": "The Pragmatic Programmer",
+          "isbn13": "9780201616224"
+        },
+        {
+          "title": "Design Patterns",
+          "isbn13": "9780201633610"
+        },
+        {
+          "title": "Refactoring",
+          "isbn13": "9780201485677"
+        },
+        {
+          "title": "The Art of Computer Programming",
+          "isbn13": "9780201896848"
+        },
+        {
+          "title": "Structure and Interpretation of Computer Programs",
+          "isbn13": "9780262510875"
+        },
+        {
+          "title": "The Cathedral and the Bazaar",
+          "isbn13": "9780596001087"
+        }
+      ]
+    },    {
+      "id": "science-understanding",
+      "title": "Understanding Science",
+      "description": "Accessible books that explain scientific concepts and discoveries",
+      "author": "Kris Yotam",
+      "books": [
+        {
+          "title": "A Brief History of Time",
+          "isbn13": "9780553380163"
+        },
+        {
+          "title": "The Selfish Gene",
+          "isbn13": "9780199291151"
+        },
+        {
+          "title": "Cosmos",
+          "isbn13": "9780345331359"
+        },
+        {
+          "title": "The Structure of Scientific Revolutions",
+          "isbn13": "9780226458120"
+        },
+        {
+          "title": "Gödel, Escher, Bach",
+          "isbn13": "9780465026562"
+        },
+        {
+          "title": "The Origin of Species",
+          "isbn13": "9780140436334"
+        },
+        {
+          "title": "The Double Helix",
+          "isbn13": "9780486681322"
+        },
+        {
+          "title": "Silent Spring",
+          "isbn13": "9780547928203"
+        },
+        {
+          "title": "The Feynman Lectures on Physics",
+          "isbn13": "9780465024933"
+        }
+      ]
+    },
+    {
+      "id": "business-strategy",
+      "title": "Business & Strategy",
+      "description": "Essential reads for understanding business and strategic thinking",
+      "author": "Kris Yotam",
+      "books": [
+        {
+          "title": "Good to Great",
+          "isbn13": "9780066620992"
+        },
+        {
+          "title": "Built to Last",
+          "isbn13": "9780060516406"
+        },
+        {
+          "title": "The Art of War",
+          "isbn13": "9780140439199"
+        },
+        {
+          "title": "Blue Ocean Strategy",
+          "isbn13": "9781591396192"
+        },
+        {
+          "title": "The Innovator's Solution",
+          "isbn13": "9781591396246"
+        },
+        {
+          "title": "Competitive Strategy",
+          "isbn13": "9780684841489"
+        },
+        {
+          "title": "The Effective Executive",
+          "isbn13": "9780060833459"
+        },
+        {
+          "title": "Zero to One",
+          "isbn13": "9780804139298"
+        }
+      ]
+    },
+    {
+      "id": "psychology-behavior",
+      "title": "Psychology & Human Behavior",
+      "description": "Insights into how the mind works and why we behave as we do",
+      "author": "Kris Yotam",
+      "books": [
+        {
+          "title": "Influence",
+          "isbn13": "9780061241895"
+        },
+        {
+          "title": "Predictably Irrational",
+          "isbn13": "9780061353246"
+        },
+        {
+          "title": "The Righteous Mind",
+          "isbn13": "9780307455772"
+        },
+        {
+          "title": "Flow",
+          "isbn13": "9780061339202"
+        },
+        {
+          "title": "Man's Search for Meaning",
+          "isbn13": "9780807014295"
+        },
+        {
+          "title": "The Power of Habit",
+          "isbn13": "9780812981605"
+        },
+        {
+          "title": "Mindset",
+          "isbn13": "9780345472328"
+        },
+        {
+          "title": "The Social Animal",
+          "isbn13": "9780812979374"
+        }
+      ]
+    }
+  ]
+}

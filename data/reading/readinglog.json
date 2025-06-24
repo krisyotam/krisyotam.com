@@ -1,0 +1,63 @@
+[
+    {
+      "id": 1,
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "type": "Book",
+      "genre": "Classic Literature",
+      "pages_read": 25,
+      "time_spent_minutes": 40,
+      "source": "Oxford World Classics",
+      "notes": "Focused on the first proposal scene.",
+      "date": "2025-04-25"
+    },
+    {
+      "id": 2,
+      "title": "How the Blockchain Could Save Journalism",
+      "author": "James Ball",
+      "type": "Blog Post",
+      "genre": "Technology",
+      "pages_read": 5,
+      "time_spent_minutes": 20,
+      "source": "The Guardian",
+      "notes": "Interesting arguments about decentralization but lacked technical depth.",
+      "date": "2025-04-26"
+    },
+    {
+      "id": 3,
+      "title": "On the Origin of Species",
+      "author": "Charles Darwin",
+      "type": "Book",
+      "genre": "Science",
+      "pages_read": 18,
+      "time_spent_minutes": 55,
+      "source": "Penguin Classics",
+      "notes": "Read about variations under domestication.",
+      "date": "2025-04-24"
+    },
+    {
+      "id": 4,
+      "title": "Toward a Theory of Cognitive Architecture",
+      "author": "John R. Anderson",
+      "type": "Academic Article",
+      "genre": "Psychology",
+      "pages_read": 7,
+      "time_spent_minutes": 30,
+      "source": "Psychological Review",
+      "notes": "Explored production systems and memory encoding.",
+      "date": "2025-04-23"
+    },
+    {
+      "id": 5,
+      "title": "The Cathedral and the Bazaar",
+      "author": "Eric S. Raymond",
+      "type": "Essay",
+      "genre": "Software Development",
+      "pages_read": 12,
+      "time_spent_minutes": 25,
+      "source": "ericsraymond.com",
+      "notes": "Covered early sections contrasting centralized and distributed software models.",
+      "date": "2025-04-22"
+    }
+  ]
+  

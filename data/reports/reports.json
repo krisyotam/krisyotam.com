@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1",
+    "title": "Queen Of Mathematics",
+    "importance": 8,
+    "authors": ["Kris Yotam"],
+    "postedBy": "Kris Yotam",
+    "postedOn": "2023-11-15",
+    "dateStarted": "2023-09-20",
+    "status": "published",
+    "pdfLink": "https://pdfobject.com/pdf/sample.pdf",
+    "sourceLink": "https://github.com/krisyotam",
+    "category": "Mathematics",
+    "tags": ["Mathematics", "Number Theory", "AI", "Ethics", "Technology", "Philosophy"]
+  },
+  {
+    "id": "2",
+    "title": "Select Problems in Number Theory",
+    "importance": 9,
+    "authors": ["Kris Yotam", "Eliza Chen"],
+    "postedBy": "Kris Yotam",
+    "postedOn": "2024-02-10",
+    "dateStarted": "2023-11-05",
+    "status": "published",
+    "pdfLink": "https://pdfobject.com/pdf/sample.pdf",
+    "sourceLink": "https://github.com/krisyotam/ai-ethics",
+    "category": "Mathematics",
+    "tags": ["Mathematics", "Number Theory", "AI", "Ethics", "Technology", "Philosophy"]
+  },
+  {
+    "id": "3",
+    "title": "Select Problems in Algebraic Geometry",
+    "importance": 7,
+    "authors": ["Kris Yotam"],
+    "postedBy": "Kris Yotam",
+    "postedOn": "2023-08-22",
+    "dateStarted": "2023-04-15",
+    "status": "published",
+    "pdfLink": "https://pdfobject.com/pdf/sample.pdf",
+    "sourceLink": "https://github.com/krisyotam/political-philosophy",
+    "category": "Mathematics",
+    "tags": ["Mathematics", "Algebraic Geometry", "Number Theory", "AI", "Ethics", "Technology", "Philosophy"]
+  },
+  {
+    "id": "4",
+    "title": "Climate Change and Environmental Justice",
+    "importance": 9,
+    "authors": ["Kris Yotam", "Maya Johnson"],
+    "postedBy": "Kris Yotam",
+    "postedOn": "2024-01-18",
+    "dateStarted": "2023-07-30",
+    "status": "published",
+    "pdfLink": "https://pdfobject.com/pdf/sample.pdf",
+    "sourceLink": "https://github.com/krisyotam/climate-justice",
+    "category": "Environmental Studies",
+    "tags": ["Climate", "Justice", "Environment", "Sustainability", "Policy"]
+  },
+  {
+    "id": "5",
+    "title": "The Neuroscience of Creativity",
+    "importance": 8,
+    "authors": ["Kris Yotam", "Dr. Sophia Rivera"],
+    "postedBy": "Kris Yotam",
+    "postedOn": "2023-10-05",
+    "dateStarted": "2023-05-12",
+    "status": "published",
+    "pdfLink": "https://pdfobject.com/pdf/sample.pdf",
+    "sourceLink": "https://github.com/krisyotam/creativity-neuroscience",
+    "category": "Neuroscience",
+    "tags": ["Brain", "Creativity", "Cognition", "Psychology", "Science"]
+  }
+] 

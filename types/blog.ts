@@ -1,0 +1,15 @@
+export type Status = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
+export type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
+
+export interface BlogMeta {
+  title: string;
+  subtitle?: string;
+  preview?: string;
+  date: string;
+  slug: string;
+  tags: string[];
+  category: string;
+  status?: Status;
+  confidence?: Confidence;
+  importance?: number;
+} 

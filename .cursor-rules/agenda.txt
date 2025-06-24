@@ -1,0 +1,154 @@
+The site stores each article as a page.mdx file (e.g. under app/blog/posts/2025/...).
+When a request is made for a post, the helper in utils/posts.ts reads that MDX file as plain text:
+
+36  // Try to read the MDX file associated with this post
+37  const year = new Date(meta.date).getFullYear().toString()
+38  const mdxPath = path.join(process.cwd(), "app", "blog", "posts", year, slug, "page.mdx")
+...
+41  if (fs.existsSync(mdxPath)) {
+42    content = fs.readFileSync(mdxPath, "utf8")
+
+The slug page component then renders this text using MarkdownRenderer:
+
+68            {/* Markdown content */}
+69            <div className="prose prose-lg mb-8">
+70              <MarkdownRenderer content={post.content} />
+71            </div>
+
+MarkdownRenderer converts the MDX/Markdown string to HTML with the Unified pipeline.
+It enables LaTeX syntax through remark-math and rehype-katex:
+
+ 4 import { unified } from "unified"
+ 5 import remarkParse from "remark-parse"
+ 6 import remarkMath from "remark-math"
+ 7 import remarkRehype from "remark-rehype"
+ 8 import rehypeRaw from "rehype-raw"
+ 9 import rehypeKatex from "rehype-katex"
+10 import rehypeHighlight from "rehype-highlight"
+11 import rehypeStringify from "rehype-stringify"
+...
+30       const file = await unified()
+31         .use(remarkParse)
+32         .use(remarkMath)
+33         .use(remarkRehype, { allowDangerousHtml: true })
+34         .use(rehypeRaw)
+35         .use(rehypeKatex)
+36         .use(rehypeHighlight)
+37         .use(rehypeStringify)
+
+The final HTML is inserted into the page via dangerouslySetInnerHTML, allowing KaTeX-generated markup to appear.
+
+KaTeX styles are loaded globally in app/layout.tsx:
+
+5 import "./globals.css";
+6 import "katex/dist/katex.min.css";
+...
+22          <ThemeProvider>
+23            <MDXProviderWrapper>
+
+MDX pages themselves may include LaTeX blocks using $...$ or $$...$$ syntax, which rehype-katex converts to HTML.
+Example snippet from an MDX post:
+
+12 $$I = \iiint_V \rho(x,y,z)\,\bigl(x^2 + y^2\bigr)\,dx\,dy\,dz$$
+...
+20 Finally, the divergence theorem connects volume integrals of divergences to surface integrals:
+21 $$\iiint_V \nabla\!\cdot\!\mathbf{F}\,dV = \iint_{\partial V} \mathbf{F}\!\cdot\!\mathbf{n}\,dS$$
+
+Additionally, the project’s next.config.mjs configures MDX globally with the same plugins, ensuring that any MDX compiled at build time also supports KaTeX:
+
+ 2 import mdx from '@next/mdx'
+ 3 import remarkMath from 'remark-math'
+ 4 import rehypeKatex from 'rehype-katex'
+...
+11 const mdxOptions = {
+12   remarkPlugins: [
+13     remarkFrontmatter,
+14     remarkMath,
+15     remarkGfm,
+16   ],
+17   rehypePlugins: [
+18     rehypeKatex,
+19     rehypeSlug,
+20     [rehypeAutolinkHeadings, { behavior: 'wrap', properties: { className: ['anchor'] } }],
+21     [rehypePrism, { ignoreMissing: true }],
+22   ],
+
+Together, these pieces allow the blog to read .mdx files, process them with remark-math/rehype-katex to convert LaTeX into HTML, and display the result using KaTeX styling.
+
+
+
+
+MarkdownRenderer.tsx 
+---
+"use client"
+
+import React from "react"
+import { unified } from "unified"
+import remarkParse from "remark-parse"
+import remarkMath from "remark-math"
+import remarkRehype from "remark-rehype"
+import rehypeRaw from "rehype-raw"
+import rehypeKatex from "rehype-katex"
+import rehypeHighlight from "rehype-highlight"
+import rehypeStringify from "rehype-stringify"
+import { ClientMDXContent } from "./ClientMDXContent"
+
+import "katex/dist/katex.min.css"
+import "highlight.js/styles/github-dark.css"
+
+interface MarkdownRendererProps {
+  content: string
+}
+
+export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
+  const [html, setHtml] = React.useState<string>("")
+
+  React.useEffect(() => {
+    const processMarkdown = async () => {
+      try {
+        // First, remove any direct component imports
+        const contentWithoutImports = content.replace(/import\s+.*?from\s+['"].*?['"]\s*;?/g, '');
+        
+        const file = await unified()
+          .use(remarkParse)
+          .use(remarkMath)
+          .use(remarkRehype, { allowDangerousHtml: true })
+          .use(rehypeRaw)
+          .use(rehypeKatex)
+          .use(rehypeHighlight)
+          .use(rehypeStringify)
+          .process(contentWithoutImports)
+
+        setHtml(String(file))
+      } catch (error) {
+        console.error("Error processing markdown:", error)
+      }
+    }
+
+    processMarkdown()
+  }, [content])
+
+  // Use the ClientMDXContent component to provide proper React context
+  return <ClientMDXContent content={html} />
+}
+
+and 
+
+
+ 2 import mdx from '@next/mdx'
+ 3 import remarkMath from 'remark-math'
+ 4 import rehypeKatex from 'rehype-katex'
+...
+11 const mdxOptions = {
+12   remarkPlugins: [
+13     remarkFrontmatter,
+14     remarkMath,
+15     remarkGfm,
+16   ],
+17   rehypePlugins: [
+18     rehypeKatex,
+19     rehypeSlug,
+20     [rehypeAutolinkHeadings, { behavior: 'wrap', properties: { className: ['anchor'] } }],
+21     [rehypePrism, { ignoreMissing: true }],
+22   ],
+

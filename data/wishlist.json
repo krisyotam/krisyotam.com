@@ -1,0 +1,181 @@
+{
+    "products": [
+      {
+        "name": "Calculus by Spivak, 4th Edition",
+        "imageUrl": "https://m.media-amazon.com/images/I/41AE0MPDWpL._SL1062_.jpg",
+        "link": "https://www.amazon.com/Calculus-4th-Michael-Spivak/dp/0914098918?crid=2DQGLP7GSCCU2&dib=eyJ2IjoiMSJ9.1AgCu1BKNqVbPhIip8SyBaHpbPAphMVTZIgNwTpw2XZcdWBrD1pWEKQHpEv3Cayw2xcpX2DgHZ1J99gfX4O1zDvqspQrl1YJg8MBQ9jKs7GvhAbmdzT6Os_LS3WFxr_sfM6Kdh1XRLqF7GW3mUbLlsDFV7m2f4l9KIXoKWO7_65thJ_IkWQyzP1jCsD5qiCfOZhTn_Ocudewu4i-jRlWjGi8TpGk0p8DpK8_1D67rkg.ao4lT8S9jfhPTsmTxiNzEOeG_whjny7xRwtpRnBaNdM&dib_tag=se&keywords=spivak+calculus&qid=1740216600&sprefix=spivak+calculus%2Caps%2C104&sr=8-1",
+        "tags": ["Calculus", "Mathematics", "Textbook", "Spivak", "Analysis", "Mathematical Education"],
+        "category": "Mathematics"
+      },
+      {
+        "name": "Topology by James R. Munkres",
+        "imageUrl": "https://m.media-amazon.com/images/I/714tC2-x6lL._SL1500_.jpg",
+        "link": "https://www.amazon.com/gp/product/0134689518?smid=ATVPDKIKX0DER&psc=1",
+        "tags": ["Topology", "Mathematics", "Textbook", "Munkres"],
+        "category": "Mathematics"
+      },
+      {
+        "name": "Topology & Geometry by Glen E. Bredon",
+        "imageUrl": "https://m.media-amazon.com/images/I/51OEJAQERxL._SL1307_.jpg",
+        "link": "https://www.amazon.com/gp/product/0387979263?smid=ATVPDKIKX0DER&psc=1",
+        "tags": ["Topology", "Geometry", "Mathematics", "Textbook", "Bredon"],
+        "category": "Mathematics"
+      },
+      {
+        "name": "Basic Topology by M.A. Armstrong",
+        "imageUrl": "https://m.media-amazon.com/images/I/61HG-iXsLOL._SL1343_.jpg",
+        "link": "https://www.amazon.com/gp/product/0387908390?smid=ATVPDKIKX0DER&psc=1",
+        "tags": ["Topology", "Mathematics", "Textbook", "Armstrong"],
+        "category": "Mathematics"
+      },
+      {
+        "name": "Analysis I by Terrance Tao",
+        "imageUrl": "https://m.media-amazon.com/images/I/31e7RDen2vL.jpg",
+        "link": "https://www.amazon.com/Analysis-Third-Texts-Readings-Mathematics/dp/9380250649",
+        "tags": ["Analysis", "Mathematics", "Textbook", "Tao"],
+        "category": "Mathematics"
+      },
+      {
+        "name": "Analysis II by Terrance Tao",
+        "imageUrl": "https://m.media-amazon.com/images/I/31wA7WUP6UL.jpg",
+        "link": "https://www.amazon.com/Analysis-II-Third-Readings-Mathematics/dp/9380250657/144-7785434-5943850?",
+        "tags": ["Analysis", "Mathematics", "Textbook", "Tao"],
+        "category": "Mathematics"
+      },
+      {
+        "name": "MacBook Pro 15, 2015",
+        "imageUrl": "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111941_sp776-mbp15touch-silver.jpeg",
+        "link": "https://support.apple.com/en-us/111941",
+        "tags": ["Laptop", "MacBook Pro", "Apple", "Technology"],
+        "category": "Electronics"
+      },
+      {
+        "name": "Calculus Vol. 1 by Apostol",
+        "imageUrl": "https://m.media-amazon.com/images/I/51XDjea79HL._SL1360_.jpg",
+        "link": "#",
+        "tags": ["Calculus", "Mathematics", "Textbook", "Apostol"],
+        "category": "Mathematics"
+      },
+      {
+        "name": "Calculus Vol 2. by Apostol",
+        "imageUrl": "https://m.media-amazon.com/images/I/61TDLWzrOEL._SL1500_.jpg",
+        "link": "https://a.co/d/a1tOdjD",
+        "tags": ["Calculus", "Mathematics", "Textbook", "Apostol"],
+        "category": "Mathematics"
+      },
+      {
+        "name": "Oxford English Dictionary Vol. 1-20",
+        "imageUrl": "https://m.media-amazon.com/images/I/71-vmoHqEeL._SL1224_.jpg",
+        "link": "https://a.co/d/cNhvwH0",
+        "tags": ["Dictionary", "English", "Language", "Oxford", "Reference"],
+        "category": "Reference"
+      },
+      {
+        "name": "150+ Book Apocrypha",
+        "imageUrl": "https://m.media-amazon.com/images/I/71HUOHEBaJL._SL1413_.jpg",
+        "link": "https://a.co/d/fBXbpgg",
+        "tags": ["Apocrypha", "Books", "Religious Studies", "History"],
+        "category": "Books"
+      },
+      {
+        "name": "Great Books of the Western World Vol. 2",
+        "imageUrl": "https://m.media-amazon.com/images/I/71CdqiFjJWL._SL1360_.jpg",
+        "link": "https://www.amazon.com/Great-Books-Western-World-Vol-2/dp/1975902629",
+        "tags": ["Great Books", "Western Civilization", "Philosophy", "Literature", "History"],
+        "category": "Books"
+      },
+      {
+        "name": "Mechanics by Landau & Lifshitz",
+        "imageUrl": "https://m.media-amazon.com/images/I/61apkEGuQ2L._SL1360_.jpg",
+        "link": "https://a.co/d/hCWDsaI",
+        "tags": ["Theory of Fields", "Theoretical Physics", "Landau", "Lifshitz"],
+        "category": "Physics"
+      },
+      {
+        "name": "Theory Of Fields by Landau & Lifshitz",
+        "imageUrl": "https://m.media-amazon.com/images/I/41vqA8Y+uFL.jpg",
+        "link": "https://a.co/d/cFSM1qN",
+        "tags": ["Theory of Fields", "Theoretical Physics", "Landau", "Lifshitz"],
+        "category": "Physics"
+      },
+      {
+        "name": "Quantum Mechanics by Landau & Lifshitz",
+        "imageUrl": "https://m.media-amazon.com/images/I/41j2zl3axKL.jpg",
+        "link": "https://a.co/d/2yPtj1V",
+        "tags": ["Theory of Fields", "Theoretical Physics", "Landau", "Lifshitz"],
+        "category": "Physics"
+      },
+      {
+        "name": "Statistical Physics by Landau & Lifshitz",
+        "imageUrl": "https://m.media-amazon.com/images/I/41jj6dOZzSL.jpg",
+        "link": "https://a.co/d/2JL7UmN",
+        "tags": ["Theory of Fields", "Theoretical Physics", "Landau", "Lifshitz"],
+        "category": "Physics"
+      },
+      {
+        "name": "Fluid Mechanics by Landau & Lifshitz",
+        "imageUrl": "https://m.media-amazon.com/images/I/71Fh+KJ7ctL._SL1500_.jpg",
+        "link": "https://a.co/d/1g4t7s3",
+        "tags": ["Theory of Fields", "Theoretical Physics", "Landau", "Lifshitz"],
+        "category": "Physics"
+      },
+      {
+        "name": "Theory of Elasticity",
+        "imageUrl": "https://m.media-amazon.com/images/I/61H4dqybLqL._SL1011_.jpg",
+        "link": "https://a.co/d/hYldmZY",
+        "tags": ["Theory of Fields", "Theoretical Physics", "Landau", "Lifshitz"],
+        "category": "Physics"
+      },
+      {
+        "name": "Mechanics & Electrodynamics by Landau & Lifshitz",
+        "imageUrl": "https://m.media-amazon.com/images/I/41HvFsL+vzL.jpg",
+        "link": "https://a.co/d/gueDDVA",
+        "tags": ["Theory of Fields", "Theoretical Physics", "Landau", "Lifshitz"],
+        "category": "Physics"
+      },
+      {
+        "name": "Electrodynamics of Continous Media by Landau & Lifshitz",
+        "imageUrl": "https://m.media-amazon.com/images/I/617RjnvQceL._SL1037_.jpg",
+        "link": "https://a.co/d/5Uqmtp1",
+        "tags": ["Theory of Fields", "Theoretical Physics", "Landau", "Lifshitz"],
+        "category": "Physics"
+      },
+      {
+        "name": "Ramanujan's Notebook: Part I",
+        "imageUrl": "https://m.media-amazon.com/images/I/51PSoovzBGL._SL1323_.jpg",
+        "link": "https://a.co/d/huEKQkb",
+        "tags": ["Ramanujan", "Number Theory"],
+        "category": "Mathematics"
+      },
+      {
+        "name": "Ramanujan's Notebook: Part II",
+        "imageUrl": "https://m.media-amazon.com/images/I/51Fnz1UjocL._SL1261_.jpg",
+        "link": "https://a.co/d/i9DGoxy",
+        "tags": ["Ramanujan", "Number Theory"],
+        "category": "Mathematics"
+      },
+      {
+        "name": "Ramanujan's Notebook: Part III",
+        "imageUrl": "https://m.media-amazon.com/images/I/61X3bqk0-UL._SL1197_.jpg",
+        "link": "https://a.co/d/emcoQP0",
+        "tags": ["Ramanujan", "Number Theory"],
+        "category": "Mathematics"
+      },
+      {
+        "name": "Ramanujan's Notebook: Part IV",
+        "imageUrl": "https://m.media-amazon.com/images/I/51cp4eyvTdL._SL1259_.jpg",
+        "link": "https://a.co/d/4ZRbyeO",
+        "tags": ["Ramanujan", "Number Theory"],
+        "category": "Mathematics"
+      },
+      {
+        "name": "Ramanujan's Notebook: Part V",
+        "imageUrl": "https://m.media-amazon.com/images/I/318GDu3BLtL.jpg",
+        "link": "https://a.co/d/8yn5kxJ",
+        "tags": ["Ramanujan", "Number Theory"],
+        "category": "Mathematics"
+      }
+                             
+    ]
+  }
+  

@@ -1,0 +1,49 @@
+[
+  {
+    "id": "psychological-thrillers",
+    "title": "Psychological Thrillers",
+    "description": "Anime that delve into the human psyche, featuring complex characters and mind-bending plots that challenge perception and reality.",
+    "tags": ["psychological", "thriller", "dark", "mystery"],
+    "image": "/placeholder.svg?height=200&width=300",
+    "entries": ["death-note", "monster", "psycho-pass", "perfect-blue", "paranoia-agent"]
+  },
+  {
+    "id": "sci-fi-masterpieces",
+    "title": "Sci-Fi Masterpieces",
+    "description": "Groundbreaking science fiction anime that explore futuristic concepts, technology, and their impact on humanity.",
+    "tags": ["sci-fi", "futuristic", "cyberpunk", "space"],
+    "image": "/placeholder.svg?height=200&width=300",
+    "entries": ["ghost-in-the-shell", "serial-experiments-lain", "steins-gate", "cowboy-bebop", "akira"]
+  },
+  {
+    "id": "coming-of-age",
+    "title": "Coming of Age Stories",
+    "description": "Anime that beautifully capture the journey from adolescence to adulthood, with all its challenges, growth, and self-discovery.",
+    "tags": ["coming-of-age", "drama", "slice-of-life", "growth"],
+    "image": "/placeholder.svg?height=200&width=300",
+    "entries": [
+      "a-silent-voice",
+      "march-comes-in-like-a-lion",
+      "your-lie-in-april",
+      "barakamon",
+      "ping-pong-the-animation"
+    ]
+  },
+  {
+    "id": "fantasy-worlds",
+    "title": "Immersive Fantasy Worlds",
+    "description": "Anime with richly developed fantasy worlds, intricate lore, and imaginative settings that transport viewers to another reality.",
+    "tags": ["fantasy", "adventure", "world-building", "magic"],
+    "image": "/placeholder.svg?height=200&width=300",
+    "entries": ["made-in-abyss", "mushishi", "fullmetal-alchemist-brotherhood", "mononoke", "spirited-away"]
+  },
+  {
+    "id": "hidden-gems",
+    "title": "Hidden Gems",
+    "description": "Lesser-known but exceptional anime that deserve more recognition for their unique stories, art, or concepts.",
+    "tags": ["underrated", "unique", "obscure", "quality"],
+    "image": "/placeholder.svg?height=200&width=300",
+    "entries": ["houseki-no-kuni", "shinsekai-yori", "haibane-renmei", "kaiba", "dennou-coil"]
+  }
+]
+

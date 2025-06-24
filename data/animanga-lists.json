@@ -1,0 +1,76 @@
+{
+  "lists": [
+    {
+      "name": "Top Action Anime Collection",
+      "type": "anime",
+      "description": "A curated list of the best action anime series featuring intense battles, compelling characters, and stunning animation.",
+      "count": 25,
+      "tags": ["Action", "Adventure", "Shounen", "Popular"],
+      "url": "https://myanimelist.net/animelist/KrisYotam?status=2&tag=Action",
+      "date": "2024-01-15"
+    },
+    {
+      "name": "Psychological Thriller Masterpieces",
+      "type": "anime",
+      "description": "Mind-bending anime that challenge perception and explore the depths of human psychology.",
+      "count": 18,
+      "tags": ["Psychological", "Thriller", "Mystery", "Drama"],
+      "url": "https://myanimelist.net/animelist/KrisYotam?status=2&tag=Psychological",
+      "date": "2024-01-10"
+    },
+    {
+      "name": "Hidden Slice of Life Gems",
+      "type": "anime",
+      "description": "Underrated slice of life anime that beautifully capture everyday moments and human connections.",
+      "count": 15,
+      "tags": ["Slice of Life", "Drama", "Hidden Gems", "Heartwarming"],
+      "url": "https://myanimelist.net/animelist/KrisYotam?status=2&tag=Slice%20of%20Life",
+      "date": "2023-12-20"
+    },
+    {
+      "name": "Studio Ghibli Complete Collection",
+      "type": "anime",
+      "description": "Every Studio Ghibli film ranked and reviewed, from classics to recent releases.",
+      "count": 12,
+      "tags": ["Studio Ghibli", "Movies", "Family", "Fantasy"],
+      "url": "https://myanimelist.net/animelist/KrisYotam?status=2&tag=Ghibli",
+      "date": "2024-01-20"
+    },
+    {
+      "name": "Best Romance Manga Series",
+      "type": "manga",
+      "description": "Heartwarming and captivating romance manga that explore love in all its forms.",
+      "count": 32,
+      "tags": ["Romance", "Shoujo", "Josei", "Drama"],
+      "url": "https://myanimelist.net/mangalist/KrisYotam?status=2&tag=Romance",
+      "date": "2024-01-05"
+    },
+    {
+      "name": "Classic Shounen Manga Collection",
+      "type": "manga",
+      "description": "Legendary shounen manga that defined generations and shaped the medium.",
+      "count": 28,
+      "tags": ["Shounen", "Action", "Adventure", "Classic"],
+      "url": "https://myanimelist.net/mangalist/KrisYotam?status=2&tag=Shounen",
+      "date": "2023-12-15"
+    },
+    {
+      "name": "Seinen Psychological Manga",
+      "type": "manga",
+      "description": "Mature and complex manga that delve into philosophical and psychological themes.",
+      "count": 22,
+      "tags": ["Seinen", "Psychological", "Philosophy", "Mature"],
+      "url": "https://myanimelist.net/mangalist/KrisYotam?status=2&tag=Seinen",
+      "date": "2024-01-12"
+    },
+    {
+      "name": "Horror Manga Masterworks",
+      "type": "manga",
+      "description": "Spine-chilling horror manga that push the boundaries of fear and suspense.",
+      "count": 16,
+      "tags": ["Horror", "Thriller", "Supernatural", "Dark"],
+      "url": "https://myanimelist.net/mangalist/KrisYotam?status=2&tag=Horror",
+      "date": "2023-12-28"
+    }
+  ]
+}

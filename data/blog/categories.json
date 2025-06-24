@@ -1,0 +1,114 @@
+{
+    "categories": [    {
+        "slug": "on-myself",
+        "title": "On Myself",
+        "preview": "Personal reflections, introspections, and observations about my thoughts, beliefs, and experiences.",
+        "date": "2025-05-31",
+        "status": "Finished",
+        "confidence": "certain",
+        "importance": 8
+      },    {
+        "slug": "philosophy",
+        "title": "Philosophy",
+        "preview": "Philosophical musings, ethical considerations, and explorations of fundamental questions about existence and meaning.",
+        "date": "2025-05-31",
+        "status": "Finished",
+        "confidence": "certain",
+        "importance": 9
+      },    {
+        "slug": "verse",
+        "title": "Verse",
+        "preview": "Poetry, haiku, and verse forms - explorations in rhythm, meter, and poetic expression.",
+        "date": "2025-05-31",
+        "status": "Finished",
+        "confidence": "certain",
+        "importance": 6
+      },    {
+        "slug": "culture",
+        "title": "Culture",
+        "preview": "Cultural observations, critiques, and analyses of society, media, and social phenomena.",
+        "date": "2025-05-31",
+        "status": "Finished",
+        "confidence": "certain",
+        "importance": 7
+      },    {
+        "slug": "design",
+        "title": "Design",
+        "preview": "Design principles, aesthetic considerations, and thoughts on simplicity and visual communication.",
+        "date": "2025-05-31",
+        "status": "Finished",
+        "confidence": "certain",
+        "importance": 7
+      },    {
+        "slug": "health",
+        "title": "Health",
+        "preview": "Health, fitness, and wellness observations - both physical and mental wellbeing considerations.",
+        "date": "2025-05-31",
+        "status": "Finished",
+        "confidence": "certain",
+        "importance": 8
+      },    {
+        "slug": "lifestyle",
+        "title": "Lifestyle",
+        "preview": "Daily life observations, routines, and reflections on simple pleasures and lifestyle choices.",
+        "date": "2025-05-31",
+        "status": "Finished",
+        "confidence": "certain",
+        "importance": 5
+      },    {
+        "slug": "mathematics",
+        "title": "Mathematics",
+        "preview": "Mathematical concepts, beauty in mathematics, and explorations of mathematical thinking.",
+        "date": "2025-05-31",
+        "status": "Finished",
+        "confidence": "certain",
+        "importance": 8
+      },    {
+        "slug": "personal",
+        "title": "Personal",
+        "preview": "Personal growth, learning, and development - reflections on self-improvement and growth.",
+        "date": "2025-05-31",
+        "status": "Finished",
+        "confidence": "certain",
+        "importance": 7
+      },    {
+        "slug": "libraries",
+        "title": "Libraries",
+        "preview": "An archive of other people's book collections, reading lists, and personal libraries.",
+        "date": "2025-06-01",
+        "status": "Finished",
+        "confidence": "certain",
+        "importance": 10
+      },    {
+        "slug": "film-reviews",
+        "title": "Film Reviews",
+        "preview": "a compilation of my film reviews",
+        "date": "2025-06-01",
+        "status": "Finished",
+        "confidence": "certain",
+        "importance": 7
+      },
+      {
+        "slug": "spiritual-warfare",
+        "title": "Spiritual Warfare",
+        "preview": "Reflections on temptation, internal battles, devils real and imagined, and the struggle for clarity and control.",
+        "date": "2025-06-23",
+        "status": "Finished",
+        "confidence": "certain",
+        "importance": 9
+      },
+      {
+  "slug": "psychology",
+  "title": "Psychology",
+  "preview": "Mental models, emotional mechanisms, and investigations into the human mind and behavior.",
+  "date": "2025-06-23",
+  "status": "Finished",
+  "confidence": "certain",
+  "importance": 9
+}
+
+
+  
+    ]
+  }
+  

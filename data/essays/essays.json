@@ -1,0 +1,107 @@
+{
+  "essays": [
+    {
+      "title": "A Letter to the Student in Shadow",
+      "preview": "A personal meditation on perseverance, solitude, and the quiet dignity of learning in darkness.",
+      "date": "2025-06-16",
+      "tags": ["Philosophy", "Depression", "Education", "Solitude"],
+      "category": "letters",
+      "slug": "a-letter-to-the-student-in-shadow",
+      "cover_image": "",
+      "status": "Notes",
+      "confidence": "certain",
+      "importance": 9,
+      "state": "active"
+    },    {
+      "title": "On the Learning of Difficult Things",
+      "preview": "A reflection on the mental and emotional labor of serious study, and why the hard things matter most.",
+      "date": "2025-06-16",
+      "tags": ["Learning", "Philosophy", "Endurance", "Education"],
+      "category": "pedagogy",
+      "slug": "on-the-learning-of-difficult-things",
+      "cover_image": "",
+      "status": "Notes",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
+    },
+    {
+      "title": "On Learning Serious Things",
+      "preview": "Examining the difference between passive knowledge and transformative learning.",
+      "date": "2025-06-16",
+      "tags": ["Education", "Philosophy", "Self-Cultivation", "Learning"],
+      "category": "pedagogy",
+      "slug": "on-learning-serious-things",
+      "cover_image": "",
+      "status": "Notes",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
+    },
+    {
+      "title": "Reflections on Lifelong Study",
+      "preview": "On the virtues, limits, and meaning of dedicating one’s life to continuous learning.",
+      "date": "2025-06-16",
+      "tags": ["Philosophy", "Lifelong Learning", "Self-Education", "Wisdom"],
+      "category": "pedagogy",
+      "slug": "reflections-on-lifelong-study",
+      "cover_image": "",
+      "status": "Notes",
+      "confidence": "certain",
+      "importance": 7,
+      "state": "active"
+    },
+    {
+      "title": "On Being Wounded",
+      "preview": "Considering what it means to be wounded, physically or emotionally, and how pain shapes perception.",
+      "date": "2025-06-16",
+      "tags": ["Trauma", "Pain", "Philosophy", "Resilience"],
+      "category": "philosophy",
+      "slug": "on-being-wounded",
+      "cover_image": "",
+      "status": "Notes",
+      "confidence": "certain",
+      "importance": 9,
+      "state": "active"
+    },
+    {
+      "title": "When the Body Keeps Score",
+      "preview": "Exploring the imprint of trauma on the body and the disconnection between healing and understanding.",
+      "date": "2025-06-16",
+      "tags": ["Trauma", "Body", "Psychology", "Philosophy"],
+      "category": "philosophy",
+      "slug": "when-the-body-keeps-score",
+      "cover_image": "",
+      "status": "Notes",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
+    },
+    {
+      "title": "Against the Fear of Passing",
+      "preview": "Arguing against the fear of death as irrational and counterproductive to meaningful living.",
+      "date": "2025-06-16",
+      "tags": ["Death", "Philosophy", "Fear", "Mortality"],
+      "category": "philosophy",
+      "slug": "against-the-fear-of-passing",
+      "cover_image": "",
+      "status": "Notes",
+      "confidence": "certain",
+      "importance": 9,
+      "state": "active"
+    },
+    {
+      "title": "The Logic of Beauty",
+      "preview": "An investigation into whether beauty can be reasoned with — and what logic, if any, it obeys.",
+      "date": "2025-06-16",
+      "tags": ["Aesthetics", "Beauty", "Philosophy", "Perception"],
+      "category": "philosophy",
+      "slug": "the-logic-of-beauty",
+      "cover_image": "",
+      "status": "Notes",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
+    }
+  ]
+}

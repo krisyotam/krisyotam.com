@@ -1,0 +1,34 @@
+{
+  "categories": [
+    {
+      "slug": "philosophy",
+      "title": "Philosophy",
+      "preview": "Inquiries into existence, ethics, pain, beauty, and the art of living well and wisely.",
+      "date": "2025-06-16",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "pedagogy",
+      "title": "Pedagogy",
+      "preview": "Essays on the theory, trials, and transformative nature of teaching and learning.",
+      "date": "2025-06-16",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "letters",
+      "title": "Letters",
+      "preview": "Personal and philosophical letters written to the lost, the learning, and the longing.",
+      "date": "2025-06-16",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 7
+    }
+  ]
+}
