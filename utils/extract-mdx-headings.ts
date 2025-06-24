@@ -103,13 +103,19 @@ export async function extractHeadingsFromMDX(
         return [];
       }
       mdxPath = path.join(process.cwd(), "app/proofs/content", category, `${slug}.mdx`);
-      break;
-    case 'problems':
+      break;    case 'problems':
       if (!category) {
         console.error('Category is required for problems content type');
         return [];
       }
       mdxPath = path.join(process.cwd(), "app/problems/content", category, `${slug}.mdx`);
+      break;
+    case 'lectures':
+      if (!category) {
+        console.error('Category is required for lectures content type');
+        return [];
+      }
+      mdxPath = path.join(process.cwd(), "app/lectures/content", category, `${slug}.mdx`);
       break;
     default:
       console.log(`Unknown content type: ${contentType}`);

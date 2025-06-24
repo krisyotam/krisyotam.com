@@ -1,0 +1,337 @@
+/* lectures.css ─ styles are applied ONLY inside `.lectures-content` */
+
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
+
+/* root wrapper ----------------------------------------------------------- */
+.lectures-content {
+  font-family: "Source Serif 4", Baskerville, "Libre Baskerville",
+    "Droid Serif", "Times New Roman", Times, serif, "Noto Emoji", Quivira;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #000;
+  hyphens: auto;
+}
+
+/* headings --------------------------------------------------------------- */
+/* NOTE: No margin or padding overrides, so default Markdown/browser spacing remains */
+.lectures-content h1,
+.lectures-content h2,
+.lectures-content h3 {
+  font: 600 1rem/1.2 inherit;
+  letter-spacing: -0.01em;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.6); /* dotted underline only */
+  color: #333;
+  scroll-margin-top: 5rem;
+}
+
+.lectures-content h1 {
+  font-size: 22px;
+}
+
+.lectures-content h2 {
+  font-size: 18px;
+}
+
+.lectures-content h3 {
+  font-size: 16px;
+  border-bottom-color: rgba(0, 0, 0, 0.4);
+}
+
+.lectures-content h4 {
+  font: 600 1rem/1.2 inherit;
+  letter-spacing: -0.01em;
+  font-size: 15px;
+  border: none;    /* no underline on h4 */
+  color: #333;
+  scroll-margin-top: 5rem;
+}
+
+/* prose blocks ----------------------------------------------------------- */
+/* Remove all paragraph margins and padding */
+.lectures-content p {
+  text-align: justify;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Fix for empty paragraphs used for intentional spacing in markdown */
+.lectures-content p:empty {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+}
+
+/* blockquote retains minimal spacing as defined */
+.lectures-content blockquote {
+  margin: 0.5rem 0;
+  padding: 0.5rem 1.5rem;
+  font-style: italic;
+  border-left: 3px solid rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* links ------------------------------------------------------------------ */
+.lectures-content a {
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px dotted #666;
+  transition: border-color 0.2s ease;
+}
+
+.lectures-content a:hover {
+  border-bottom-color: #000;
+}
+
+/* lists ------------------------------------------------------------------ */
+/* Allow default list indent and spacing; no margin reset */
+.lectures-content ul,
+.lectures-content ol {
+  padding-left: 1.25rem;
+}
+
+.lectures-content li {
+  line-height: 1.4;
+}
+
+/* Fix for h4 + list spacing */
+.lectures-content h4 + ul,
+.lectures-content h4 + ol {
+  margin-top: 0;   /* prevent extra top margin if browser applies any */
+}
+
+/* Fix for h4 + paragraph + list sequence */
+.lectures-content h4 + p + ul,
+.lectures-content h4 + p + ol {
+  margin-top: 0;
+}
+
+.lectures-content li + li {
+  margin-top: 0.05rem; /* minimal gap between items */
+}
+
+.lectures-content li > ul,
+.lectures-content li > ol {
+  margin-top: 0.05rem;
+  margin-bottom: 0.05rem;
+}
+
+/* code ------------------------------------------------------------------- */
+.lectures-content code {
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+.lectures-content pre {
+  margin: 0.5rem 0; /* small gap above/below code blocks */
+  padding: 0.75rem;
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.lectures-content pre > code {
+  background: transparent;
+  padding: 0;
+}
+
+/* tables ----------------------------------------------------------------- */
+/* Retain default table spacing around and inside; only adjust styling */
+.lectures-content table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-size: 0.9em !important;
+  line-height: 1.4 !important;
+  table-layout: fixed !important;
+  margin: 0.75rem 0; /* small gap above/below tables */
+}
+
+.lectures-content thead {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+.lectures-content th,
+.lectures-content td {
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  padding: 0.5rem !important;
+}
+
+.lectures-content th {
+  background: rgba(0, 0, 0, 0.03) !important;
+  font-weight: 600 !important;
+}
+
+/* table wrapper for responsive tables */
+.lectures-content .table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0.75rem 0; /* small gap above/below wrapper */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+/* images ----------------------------------------------------------------- */
+.lectures-content img {
+  display: block;
+  max-width: 100%;
+  margin: 0.5rem auto; /* small vertical gap around images */
+}
+
+.lectures-content figure {
+  margin: 0.5rem 0;    /* small gap above/below figures */
+}
+
+.lectures-content figcaption {
+  font-size: 0.85em;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.7);
+  margin-top: 0.25rem;
+}
+
+/* horizontal rule -------------------------------------------------------- */
+.lectures-content hr {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  margin: 1rem 0;      /* small gap above/below */
+}
+
+/* definition lists ------------------------------------------------------- */
+.lectures-content dl {
+  margin: 0.5rem 0 0.75rem; /* small gap around definitions */
+}
+
+.lectures-content dt {
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.lectures-content dd {
+  margin-left: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* task lists ------------------------------------------------------------- */
+.lectures-content input[type="checkbox"] {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+/* footnotes -------------------------------------------------------------- */
+.lectures-content .footnotes {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 1.5rem;
+  padding-top: 0.75rem;
+  font-size: 0.9em;
+}
+
+.lectures-content .footnotes ol {
+  margin-left: 1rem;
+}
+
+.lectures-content .footnotes li {
+  margin-bottom: 0.25rem;
+}
+
+.lectures-content .footnote-ref {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.lectures-content .footnote-backref {
+  font-size: 0.8em;
+  text-decoration: none;
+}
+
+/* abbreviations ---------------------------------------------------------- */
+.lectures-content abbr {
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.3);
+  cursor: help;
+}
+
+/* keyboard keys ---------------------------------------------------------- */
+.lectures-content kbd {
+  display: inline-block;
+  padding: 0.2em 0.4em;
+  font-size: 0.85em;
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  background: #f8f8f8;
+  margin: 0 0.1em;
+}
+
+/* dark-mode tweaks ------------------------------------------------------- */
+.dark .lectures-content {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark .lectures-content h1,
+.dark .lectures-content h2,
+.dark .lectures-content h3,
+.dark .lectures-content h4 {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.dark .lectures-content a {
+  color: rgba(255, 255, 255, 0.9);
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .lectures-content a:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .lectures-content code,
+.dark .lectures-content pre {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark .lectures-content blockquote {
+  color: rgba(255, 255, 255, 0.8);
+  border-left-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Dark mode for tables */
+.dark .lectures-content table {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark .lectures-content th,
+.dark .lectures-content td {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark .lectures-content th {
+  background: rgba(255, 255, 255, 0.07) !important;
+}
+
+.dark .lectures-content tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Dark mode for other elements */
+.dark .lectures-content hr {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark .lectures-content figcaption {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .lectures-content abbr {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .lectures-content kbd {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}

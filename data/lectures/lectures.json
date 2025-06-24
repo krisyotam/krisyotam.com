@@ -1,0 +1,57 @@
+[
+  {
+    "title": "Intro to the Sonnet",
+    "date": "2025-06-24",
+    "slug": "intro-sonnet",
+    "tags": ["Poetic Form", "Shakespearean", "Petrarchan", "Verse"],
+    "category": "verse",
+    "status": "Draft",
+    "confidence": "certain",
+    "importance": 9,
+    "preview": "Traces the origins and structure of the sonnet, distinguishing between Italian (Petrarchan) and English (Shakespearean) forms, and their enduring emotional intensity."
+  },
+  {
+    "title": "Intro to the Villanelle",
+    "date": "2025-06-24",
+    "slug": "intro-villanelle",
+    "tags": ["Poetic Form", "Refrain", "Repetition", "Verse"],
+    "category": "verse",
+    "status": "Draft",
+    "confidence": "certain",
+    "importance": 8,
+    "preview": "Explores the circular, obsessive qualities of the villanelle, a 19-line form known for its refrains and haunting psychological effect."
+  },
+  {
+    "title": "Intro to the Sestina",
+    "date": "2025-06-24",
+    "slug": "intro-sestina",
+    "tags": ["Poetic Form", "Oulipo", "Repetition", "Verse"],
+    "category": "verse",
+    "status": "Draft",
+    "confidence": "certain",
+    "importance": 8,
+    "preview": "Breaks down the complex structure of the sestina, a spiraling form built on lexical repetition and medieval constraint-based composition."
+  },
+  {
+    "title": "Intro to the Ghazal",
+    "date": "2025-06-24",
+    "slug": "intro-ghazal",
+    "tags": ["Poetic Form", "Arabic Poetry", "Love", "Verse"],
+    "category": "verse",
+    "status": "Draft",
+    "confidence": "certain",
+    "importance": 8,
+    "preview": "Introduces the ghazal, a lyrical form with roots in Arabic and Persian verse, emphasizing longing, spiritual love, and rhymed couplets."
+  },
+  {
+    "title": "Intro to the Haibun",
+    "date": "2025-06-24",
+    "slug": "intro-haibun",
+    "tags": ["Poetic Form", "Japanese", "Haiku", "Prose Poetry", "Verse"],
+    "category": "verse",
+    "status": "Draft",
+    "confidence": "certain",
+    "importance": 7,
+    "preview": "Examines the haibun, a Japanese poetic form combining prose and haiku, traditionally used for travel narratives and reflective memoir."
+  }
+]

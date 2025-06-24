@@ -1,0 +1,31 @@
+{
+  "types": [
+    {
+      "slug": "papers",
+      "title": "Papers",
+      "preview": "Academic and technical research documents on critical topics like AI, neuroscience, and economics.",
+      "date": "2025-06-24",
+      "status": "Active",
+      "confidence": "certain",
+      "importance": 10
+    },
+    {
+      "slug": "manuals",
+      "title": "Manuals",
+      "preview": "Instructional guides on systems, software, and hardware for practitioners and engineers.",
+      "date": "2025-06-24",
+      "status": "Active",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "style-guides",
+      "title": "Style Guides",
+      "preview": "Authoritative standards for writing, formatting, and visual design in various disciplines.",
+      "date": "2025-06-24",
+      "status": "Active",
+      "confidence": "certain",
+      "importance": 8
+    }
+  ]
+}
