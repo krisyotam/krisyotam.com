@@ -1,22 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import docsData from "@/data/docs.json"
 import { PageHeader } from "@/components/page-header"
+import { CustomSelect, SelectOption } from "@/components/ui/custom-select"
 import { useRouter } from "next/navigation"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogDescription,
-} from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { HelpCircle, Download, ExternalLink } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { PasswordDialog } from "@/components/password-dialog"
-import { Input } from "@/components/ui/input"
 import { PageDescription } from "@/components/posts/typography/page-description"
 
 // Add docs page metadata
@@ -37,12 +26,34 @@ interface DocItem {
   slug: string
   description: string
   category: string
+  type: string
   tags: string[]
   date: string
   pdfUrl: string
   sourceUrl: string
   aiModel: string
   version: string
+}
+
+interface DocType {
+  slug: string
+  title: string
+  preview: string
+  date: string
+  status: string
+  confidence: string
+  importance: number
+}
+
+interface DocCategory {
+  slug: string
+  title: string
+  preview: string
+  date: string
+  status: string
+  confidence: string
+  importance: number
+  type: string
 }
 
 function slugifyCategory(category: string) {
@@ -53,58 +64,131 @@ function slugifyTitle(title: string) {
   return title.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
 }
 
+async function fetchDocs(): Promise<DocItem[]> {
+  try {
+    const response = await fetch('/api/docs');
+    if (!response.ok) throw new Error('Failed to fetch docs');
+    const data = await response.json();
+    return data.docs;
+  } catch (error) {
+    console.error('Error fetching docs:', error);
+    return [];
+  }
+}
+
+async function fetchTypes(): Promise<DocType[]> {
+  try {
+    const response = await fetch('/api/docs/types');
+    if (!response.ok) throw new Error('Failed to fetch types');
+    const data = await response.json();
+    return data.types;
+  } catch (error) {
+    console.error('Error fetching types:', error);
+    return [];
+  }
+}
+
+async function fetchCategories(): Promise<DocCategory[]> {
+  try {
+    const response = await fetch('/api/docs/categories');
+    if (!response.ok) throw new Error('Failed to fetch categories');
+    const data = await response.json();
+    return data.categories;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
+}
+
 export function DocsClient({ initialCategory = "All" }: { initialCategory?: string }) {
   const [loading, setLoading] = useState(true)
-  const [currentCategory, setCurrentCategory] = useState(initialCategory)
+  const [currentType, setCurrentType] = useState("all")
+  const [currentCategory, setCurrentCategory] = useState("all")
   const [searchQuery, setSearchQuery] = useState("")
-  const [docs, setDocs] = useState<DocItem[]>(docsData)
-  const [categories, setCategories] = useState<string[]>([])
-  const [itemModalOpen, setItemModalOpen] = useState(false)
-  const [selectedDoc, setSelectedDoc] = useState<DocItem | null>(null)
+  const [docs, setDocs] = useState<DocItem[]>([])
+  const [types, setTypes] = useState<DocType[]>([])
+  const [categories, setCategories] = useState<DocCategory[]>([])
   const [showPasswordDialog, setShowPasswordDialog] = useState(false)
   const [selectedLink, setSelectedLink] = useState<string>("")
   const router = useRouter()
 
   useEffect(() => {
-    // Extract unique categories and sort them
-    setCategories(Array.from(new Set(docsData.map((item) => item.category))).sort())
+    async function loadData() {
+      setLoading(true);
+      try {
+        const [docsData, typesData, categoriesData] = await Promise.all([
+          fetchDocs(),
+          fetchTypes(),
+          fetchCategories()
+        ]);
+        
+        setDocs(docsData);
+        setTypes(typesData);
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
     
-    // Update current category when initialCategory changes
-    setCurrentCategory(initialCategory)
-    
-    // Show loading state briefly for better UX during category changes
-    setLoading(true)
-    const timeout = setTimeout(() => setLoading(false), 300)
-    return () => clearTimeout(timeout)
-  }, [initialCategory])
+    loadData();
+  }, [])
 
   // Helper to build the correct route for a document item
   function getDocUrl(item: DocItem) {
+    const typeSlug = slugifyCategory(item.type);
     const categorySlug = slugifyCategory(item.category);
-    const year = new Date(item.date).getFullYear();
     const titleSlug = item.slug;
-    return `/docs/${encodeURIComponent(categorySlug)}/${year}/${encodeURIComponent(titleSlug)}`
+    return `/docs/${encodeURIComponent(typeSlug)}/${encodeURIComponent(categorySlug)}/${encodeURIComponent(titleSlug)}`
   }
 
-  function handleCategoryChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const selectedCategory = e.target.value;
-    if (selectedCategory === "All") {
-      router.push("/docs");
-    } else {
-      router.push(`/docs/${slugifyCategory(selectedCategory)}`);
-    }
+  // Get categories for the selected type
+  const availableCategories = currentType === "all" 
+    ? categories 
+    : categories.filter(cat => cat.type === currentType);
+
+  // Create type options for dropdown
+  const typeOptions: SelectOption[] = [
+    { value: "all", label: "All Types" },
+    ...types.map(type => ({
+      value: type.slug,
+      label: type.title
+    }))
+  ];
+
+  // Create category options for dropdown (dependent on selected type)
+  const categoryOptions: SelectOption[] = [
+    { value: "all", label: "All Categories" },
+    ...availableCategories.map(category => ({
+      value: category.slug,
+      label: category.title
+    }))
+  ];
+
+  // Handle type change
+  function handleTypeChange(selectedValue: string) {
+    setCurrentType(selectedValue);
+    // Reset category when type changes
+    setCurrentCategory("all");
   }
 
-  // Filter docs based on search and category
+  // Handle category change
+  function handleCategoryChange(selectedValue: string) {
+    setCurrentCategory(selectedValue);
+  }
+
+  // Filter docs based on search, type, and category
   const filteredDocs = docs.filter((item) => {
     const matchesSearch = searchQuery === "" || 
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
 
-    const matchesCategory = currentCategory === "All" || item.category === currentCategory
+    const matchesType = currentType === "all" || item.type === currentType
+    const matchesCategory = currentCategory === "all" || item.category === currentCategory
 
-    return matchesSearch && matchesCategory
+    return matchesSearch && matchesType && matchesCategory
   }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const handleItemClick = (item: DocItem) => {
@@ -135,27 +219,36 @@ export function DocsClient({ initialCategory = "All" }: { initialCategory?: stri
       />
 
       <div className="mt-8">
-        <div className="mb-6 space-y-4">
-          <Input
-            placeholder="Search AI documents..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full"
-          />
+        {/* Search and filters */}
+        <div className="mb-6 flex items-center gap-4">
+          <div className="flex items-center gap-2 whitespace-nowrap">
+            <label htmlFor="type-filter" className="text-sm text-muted-foreground">Filter by type:</label>
+            <CustomSelect
+              value={currentType}
+              onValueChange={handleTypeChange}
+              options={typeOptions}
+              className="text-sm min-w-[140px]"
+            />
+          </div>
           
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 whitespace-nowrap">
             <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
-            <select
-              id="category-filter"
-              className="border rounded px-2 py-1 text-sm bg-background"
+            <CustomSelect
               value={currentCategory}
-              onChange={handleCategoryChange}
-            >
-              <option value="All">All</option>
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
+              onValueChange={handleCategoryChange}
+              options={categoryOptions}
+              className="text-sm min-w-[140px]"
+            />
+          </div>
+          
+          <div className="relative flex-1">
+            <input 
+              type="text" 
+              placeholder="Search documents..." 
+              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+            />
           </div>
         </div>
 
@@ -172,6 +265,8 @@ export function DocsClient({ initialCategory = "All" }: { initialCategory?: stri
               <thead>
                 <tr className="border-b border-border bg-muted/50 text-foreground">
                   <th className="py-2 text-left font-medium px-3">Title</th>
+                  <th className="py-2 text-left font-medium px-3">Type</th>
+                  <th className="py-2 text-left font-medium px-3">Category</th>
                   <th className="py-2 text-left font-medium px-3">Model</th>
                   <th className="py-2 text-left font-medium px-3">Year</th>
                 </tr>
@@ -184,6 +279,8 @@ export function DocsClient({ initialCategory = "All" }: { initialCategory?: stri
                     onClick={() => handleItemClick(item)}
                   >
                     <td className="py-2 px-3 font-medium">{item.title}</td>
+                    <td className="py-2 px-3">{item.type}</td>
+                    <td className="py-2 px-3">{item.category}</td>
                     <td className="py-2 px-3">{item.aiModel} {item.version}</td>
                     <td className="py-2 px-3">{new Date(item.date).getFullYear()}</td>
                   </tr>
@@ -191,7 +288,7 @@ export function DocsClient({ initialCategory = "All" }: { initialCategory?: stri
               </tbody>
             </table>
             {filteredDocs.length === 0 && !loading && (
-              <div className="text-muted-foreground text-sm mt-6">No documents found for this category.</div>
+              <div className="text-muted-foreground text-sm mt-6">No documents found matching your criteria.</div>
             )}
           </>
         )}
