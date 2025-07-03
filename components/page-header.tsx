@@ -10,7 +10,7 @@ export interface PageHeaderProps {
   date?: string
   preview?: string
   description?: string
-  status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
+  status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned"
   confidence?:
     | "impossible"
     | "remote"
@@ -20,6 +20,7 @@ export interface PageHeaderProps {
     | "likely"
     | "highly likely"
     | "certain"
+    | "speculative"
   importance?: number
   backText?: string
   backHref?: string

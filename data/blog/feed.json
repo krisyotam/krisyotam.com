@@ -11,11 +11,22 @@
 "preview": "A close reading of Edgar Allan Poe's 'Ulalume', exploring its themes, structure, and emotional depth."
 },
 {
+"title": "The Waste Land, a Close Reading",
+"date": "2025-04-26",
+"slug": "the-waste-land-close-reading",
+"tags": ["Poetry", "Analysis", "T.S. Eliot", "Close Reading", "Literary Criticism"],
+"category": "Close Reading Verse",
+"status": "Notes",
+"confidence": "likely",
+"importance": 6,
+"preview": "A close reading of T.S. Eliot's 'The Waste Land', analysis of its structure, themes, and references"
+},
+{
 "title": "Reply to Mephisto",
 "date": "2025-06-23",
 "slug": "reply-to-mephisto",
 "tags": ["Film", "Review", "Dark Comedy", "Winona Ryder", "1980s Cinema", "Cult Classic"],
-"category": "Film Reviews",
+"category": "Thought Experiments",
 "status": "Finished",
 "confidence": "certain",
 "importance": 5,

@@ -28,7 +28,7 @@ export async function generateStaticParams() {
   
   // Generate params for each category
   return categories.map(category => ({
-    category: slugifyCategory(category)
+    category: slugifyCategory(category as string)
   }));
 }
 
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: LabCategoryPageProps): Promis
   
   // Find the first lab in this category to get category name
   const categoryLab = labData.find((lab: any) => 
-    slugifyCategory(lab.category) === params.category
+    slugifyCategory(lab.category as string) === params.category
   );
 
   if (!categoryLab) {
@@ -73,7 +73,7 @@ export default async function LabCategoryPage({ params }: LabCategoryPageProps) 
   
   // Find the original category name
   const originalCategory = labData.find((lab: any) => 
-    slugifyCategory(lab.category) === params.category
+    slugifyCategory(lab.category as string) === params.category
   )?.category;
 
   if (!originalCategory) {

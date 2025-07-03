@@ -2,7 +2,11 @@
 
 import { useState, useEffect } from "react"
 
-export function LiveClock() {
+interface LiveClockProps {
+  className?: string;
+}
+
+export function LiveClock({ className = "" }: LiveClockProps) {
   const [time, setTime] = useState<string>("")
   const [date, setDate] = useState<string>("")
 
@@ -42,7 +46,7 @@ export function LiveClock() {
   }, [])
 
   return (
-    <div className="text-sm text-muted-foreground mt-12">
+    <div className={`text-sm text-muted-foreground mt-12 ${className}`}>
       <div>{time}</div>
       <div>{date}</div>
     </div>

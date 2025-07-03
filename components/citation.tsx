@@ -7,12 +7,13 @@ import { Clipboard, Check } from "lucide-react";
 
 interface CitationProps {
   title: string;
-  slug: string;
+  slug?: string;
   date: string; // ISO string ("YYYY-MM-DD")
   url: string;
+  author?: string;
 }
 
-export function Citation({ title, slug, date, url }: CitationProps) {
+export function Citation({ title, slug, date, url, author }: CitationProps) {
   const [copiedHuman, setCopiedHuman] = useState(false);
   const [copiedBib, setCopiedBib] = useState(false);
 
@@ -21,7 +22,7 @@ export function Citation({ title, slug, date, url }: CitationProps) {
   const year = d.getFullYear();
   const month = d.toLocaleString("default", { month: "short" });
 
-  const author = "Yotam, Kris";
+  const authorName = author || "Yotam, Kris";
   const journal = "krisyotam.com";
   
   // Ensure URL always uses krisyotam.com as base, regardless of environment
@@ -29,13 +30,13 @@ export function Citation({ title, slug, date, url }: CitationProps) {
                            .replace(/http:\/\/127.0.0.1:3000/g, "https://krisyotam.com");
 
   // Human-readable citation
-  const humanCitation = `${author}. (${month} ${year}). ${title}. ${journal}. ${normalizedUrl}`;
+  const humanCitation = `${authorName}. (${month} ${year}). ${title}. ${journal}. ${normalizedUrl}`;
   // BibTeX key & entry
-  const key = `yotam${year}${slug}`;
+  const key = slug ? `yotam${year}${slug}` : `yotam${year}${title.toLowerCase().replace(/\s+/g, '-')}`;
   const bibtex = [
     `@article{${key},`,
     `  title   = "${title}",`,
-    `  author  = "${author}",`,
+    `  author  = "${authorName}",`,
     `  journal = "${journal}",`,
     `  year    = "${year}",`,
     `  month   = "${month}",`,

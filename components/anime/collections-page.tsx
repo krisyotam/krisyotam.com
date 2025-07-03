@@ -170,25 +170,24 @@ interface CollectionCardProps {
 
 function CollectionCard({ collection, index, onClick }: CollectionCardProps) {
   // Animation variants for staggered appearance
-  const variants = {
+  // Use simpler animation instead to avoid type issues with framer-motion
+  const cardVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    }),
+    visible: { opacity: 1, y: 0 }
+  }
+  
+  // Calculate the animation delay based on index
+  const customTransition = {
+    delay: index * 0.1,
+    duration: 0.5
   }
 
   return (
     <motion.div
-      custom={index}
       initial="hidden"
       animate="visible"
-      variants={variants}
+      variants={cardVariants}
+      transition={customTransition}
       whileHover={{ scale: 1.02 }}
       className="bg-card dark:bg-[#1a1a1a] rounded-lg border dark:border-gray-800 overflow-hidden hover:shadow-md transition-all duration-300"
     >

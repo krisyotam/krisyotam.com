@@ -12,7 +12,7 @@ interface PostHeaderProps {
   category?: string
   preview?: string
   className?: string
-  status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
+  status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned"
   confidence?:
     | "impossible"
     | "remote"
@@ -22,6 +22,7 @@ interface PostHeaderProps {
     | "likely"
     | "highly likely"
     | "certain"
+    | "speculative"
   importance?: number
   backText?: string
   backHref?: string
