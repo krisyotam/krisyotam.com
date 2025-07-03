@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { format } from "date-fns"
+import format from "date-fns/format"
 
 // Helper function to determine Western Zodiac sign
 const getWesternZodiac = (month: number, day: number) => {

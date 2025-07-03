@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Download, FileText } from "lucide-react"
-import { format } from "date-fns"
+import format from "date-fns/format"
 import { useRouter } from "next/navigation"
 
 // Import legal data

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Download, Copy, Maximize2 } from "lucide-react"
 import { useTheme } from "next-themes"
-import { format } from "date-fns"
+import format from "date-fns/format"
 import { useRouter } from "next/navigation"
 
 interface PromptFile {

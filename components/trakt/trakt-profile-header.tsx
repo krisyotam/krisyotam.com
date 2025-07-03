@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { CalendarDays, MapPin, Star } from "lucide-react"
-import { formatDistanceToNow } from "date-fns"
+import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
 interface TraktProfileHeaderProps {
   username: string

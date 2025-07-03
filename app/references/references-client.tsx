@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Download, ExternalLink } from "lucide-react"
-import { format } from "date-fns"
+import format from "date-fns/format"
 import { useRouter } from "next/navigation"
 import { CustomSelect } from "@/components/ui/custom-select"
 

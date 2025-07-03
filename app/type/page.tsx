@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { CalendarHeatmap } from "@/components/calendar-heatmap"
 import { LineChart } from "@/components/line-chart"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { formatDistanceToNow } from "date-fns"
+import formatDistanceToNow from "date-fns/formatDistanceToNow"
 import { CommandMenu } from "@/components/command-menu"
 
 // Increase revalidation time to reduce API load
