@@ -47,7 +47,6 @@
     "@radix-ui/react-tooltip": "^1.1.6",
     "@tabler/icons-react": "^3.31.0",
     "@types/mdx": "^2.0.13",
-    "@types/next": "^14.0.0",
     "@upstash/redis": "^1.35.0",
     "acorn": "8.14.1",
     "bcryptjs": "^3.0.2",
