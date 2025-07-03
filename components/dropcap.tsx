@@ -38,11 +38,11 @@ const Dropcap: React.FC<DropcapProps> = ({
 
   const shouldInvert = darkModeInvertTypes.includes(type);  return (
     <span
-      className={`dropcap-image-wrapper mt-2 ${className}`}
+      className={`dropcap-image-wrapper ${className}`}
       style={{ 
         display: "inline-block", 
         lineHeight: 0,
-        margin: "0.5rem 0.25rem 0 0 !important", // mt-2 + force right/bottom margins
+        margin: "0.5rem 0.25rem 0 0 !important", // mt-2 + force right margin, 0 bottom margin
         padding: "0 !important" // force remove padding
       }}
       onContextMenu={(e) => e.preventDefault()}

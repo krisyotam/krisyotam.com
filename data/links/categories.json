@@ -1,0 +1,58 @@
+{
+  "categories": [
+    {
+      "slug": "poetry",
+      "title": "Poetry",
+      "preview": "Resources for exploring poetic works, forms, and traditions across cultures and periods.",
+      "date": "2025-05-31",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "research",
+      "title": "Research",
+      "preview": "Academic resources, journals, papers, and databases for scholarly research.",
+      "date": "2025-05-31",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "tools",
+      "title": "Tools",
+      "preview": "Software, platforms, and utilities for academic writing, data analysis, and knowledge management.",
+      "date": "2025-05-31",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "learning",
+      "title": "Learning",
+      "preview": "Educational platforms, courses, and resources for self-directed learning and skill development.",
+      "date": "2025-05-31",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "references",
+      "title": "References",
+      "preview": "Encyclopedias, dictionaries, and comprehensive reference resources across disciplines.",
+      "date": "2025-05-31",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "datasets",
+      "title": "Datasets",
+      "preview": "Collections of data, databases, and platforms for data discovery and analysis.",
+      "date": "2025-05-31",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
+    }
+  ]
+}

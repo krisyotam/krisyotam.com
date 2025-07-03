@@ -21,13 +21,20 @@ export default function CharacterDisplay({
   return (
     <div
       className={cn(
-        "max-w-md mx-auto p-8 bg-white dark:bg-[#1A1A1A] border border-gray-200 dark:border-zinc-800 shadow-sm",
+        "max-w-md mx-auto p-6 rounded-none my-6",
+        // Use the same background colors as Box.tsx
+        "bg-muted/50",
+        "dark:bg-[hsl(var(--popover))]",
+        "w-full",
         "font-sans antialiased",
         className
       )}
+      style={{
+        textDecoration: 'none !important'
+      }}
     >
       <div className="space-y-6">
-        <div className="aspect-[3/4] overflow-hidden rounded-md bg-gray-100 dark:bg-zinc-800 mx-auto relative">
+        <div className="aspect-[3/4] overflow-hidden bg-gray-100 dark:bg-zinc-800 mx-auto relative">
           <Image
             src={image || "/placeholder.svg"}
             alt={characterName}
@@ -39,18 +46,24 @@ export default function CharacterDisplay({
         </div>
 
         <div className="space-y-2 text-center">
-          <h2 className="text-2xl font-serif tracking-tight text-gray-900 dark:text-white">
+          <h2 
+            className="text-2xl font-serif tracking-tight text-gray-900 dark:text-white"
+            style={{ textDecoration: 'none !important', borderBottom: 'none !important' }}
+          >
             {characterName}
           </h2>
-          <div className="text-sm text-gray-600 dark:text-zinc-400 font-light">
+          <div 
+            className="text-sm text-gray-600 dark:text-zinc-400 font-light"
+            style={{ textDecoration: 'none !important' }}
+          >
             Portrayed by {actorName}
           </div>
         </div>
 
         <div className="pt-4 border-t border-gray-200 dark:border-zinc-800 text-xs text-gray-500 dark:text-zinc-500 font-light">
           <div className="grid grid-cols-2 gap-4">
-            <div>Film: {filmTitle}</div>
-            <div className="text-right">Year: {filmYear}</div>
+            <div style={{ textDecoration: 'none !important' }}>Film: {filmTitle}</div>
+            <div className="text-right" style={{ textDecoration: 'none !important' }}>Year: {filmYear}</div>
           </div>
         </div>
       </div>

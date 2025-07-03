@@ -782,7 +782,7 @@
    }
    
    /* globals.css */
-   span[data-nimg] {
+   span[data-nimg]:not(.dropcap-image-wrapper span) {
      display: block !important;      /* kill inline‑block spacing */
      margin: 0 !important;           /* no margins */
      padding: 0 !important;          /* no padding */
@@ -790,7 +790,7 @@
      /* leave border-radius & overflow alone */
    }
    
-   img {
+   img:not(.dropcap-image) {
      display: block !important;
      margin: 0 !important;
      padding: 0 !important;
@@ -801,10 +801,28 @@
    .dropcap-image-wrapper {
      float: left;
      margin-right: 0.25em !important;    /* force smaller right margin */
-     margin-top: 0.1em;      /* align to baseline */
-     margin-bottom: 0 !important;   /* force remove bottom margin */
+     margin-top: 0.1em !important;       /* align to baseline */
+     margin-bottom: -8px !important;        /* force remove bottom margin */
+     margin-left: 0 !important;          /* force remove left margin */
      line-height: 0;
      padding: 0 !important;  /* force remove any padding */
+     display: inline-block !important;   /* ensure proper float behavior */
+     clear: none !important;             /* don't clear other floats */
+   }
+
+   /* Ensure no extra space is created after the dropcap container */
+   .dropcap-image-wrapper::after {
+     content: none !important;
+     display: none !important;
+   }
+
+   /* Ensure dropcap Next.js Image wrapper spans stay inline */
+   .dropcap-image-wrapper span[data-nimg] {
+     display: inline-block !important;
+     margin: 0 !important;
+     padding: 0 !important;
+     vertical-align: top !important;
+     line-height: 0 !important;
    }
    
    .dropcap-image {
@@ -813,6 +831,8 @@
      user-select: none;
      margin: 0 !important;   /* force remove all margins */
      padding: 0 !important;  /* force remove all padding */
+     display: inline-block !important; /* override global img block display */
+     vertical-align: top !important;
      /* you can also set width/height via CSS if you prefer: */
      /* width: 3em; */
      /* height: auto; */
@@ -828,7 +848,7 @@
    }
    
    .dropcap-image {
-     /* make it big enough to admire — 5em is ~5× your 1em body text */
+     /* make it big enough to admire — 10em is the intended size */
      width: 10em !important;
      height: 10em !important;
      /* keep it perfectly square */
@@ -854,6 +874,19 @@
      -ms-hyphens: auto;
      margin: 0 !important;
      padding: 0 !important;
+   }
+
+   /* Ensure paragraphs containing dropcaps have no extra spacing */
+   .post-content p:has(.dropcap-image-wrapper),
+   .post-content p .dropcap-image-wrapper {
+     margin: 0 !important;
+     padding: 0 !important;
+   }
+
+   /* Ensure paragraphs after dropcaps don't add extra top margin */
+   .post-content .dropcap-image-wrapper + p,
+   .post-content p:has(.dropcap-image-wrapper) + p {
+     margin-top: 0 !important;
    }
    
    /* Constrain FileViewer and its <pre> to 100% of whatever parent they live in */
@@ -883,20 +916,33 @@
    LOGO THEME SWITCHING
    ========================================================================== */
 /* Force logo visibility states with !important to override any conflicting styles */
-.logo-light {
+/* Use higher specificity by targeting img elements directly */
+img.logo-light,
+span[data-nimg] img.logo-light {
   display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.dark .logo-light {
+.dark img.logo-light,
+.dark span[data-nimg] img.logo-light {
   display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
-.logo-dark {
+img.logo-dark,
+span[data-nimg] img.logo-dark {
   display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
-.dark .logo-dark {
+.dark img.logo-dark,
+.dark span[data-nimg] img.logo-dark {
   display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* =============================================================================

@@ -251,6 +251,42 @@
     "status": "In Progress",
     "confidence": "certain",
     "importance": 6
+  },
+  {
+    "slug": "manuals-of-style",
+    "title": "Manuals of Style",
+    "preview": "Documentation of krisyotam.com writing conventions for essays and code",
+    "date": "2025-06-10",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 0
+  },
+  {
+    "slug": "internet-archiving",
+    "title": "Internet Archiving",
+    "preview": "Notes on web archiving, preservation, search methods and related tools",
+    "date": "2025-06-30",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 0
+  },
+  {
+    "slug": "nursery-rhymes",
+    "title": "Nursery Rhymes",
+    "preview": "a collection of classic nursery rhymes, their history, and significance",
+    "date": "2025-06-30",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 0
+  },
+  {
+    "slug": "book-notes",
+    "title": "Book Notes",
+    "preview": "a collection of notes and summaries from my reading",
+    "date": "2025-07-01",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 0
   }
 ]
 }

@@ -51,27 +51,27 @@ export default function ResourcesTable({ resources }: ResourcesTableProps) {
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex-1 relative">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <Search className="h-4 w-4 text-gray-400 dark:text-gray-500" />
+            <Search className="h-4 w-4 text-muted-foreground" />
           </div>
           <Input
             placeholder="Search resources by title, description, or tags..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 bg-white dark:bg-[#1a1a1a] border-gray-300 dark:border-border rounded-none focus:ring-0 focus:border-black dark:focus:border-gray-500 text-sm dark:text-gray-300"
+            className="w-full pl-10 bg-background border-border rounded-none focus:ring-0 focus:border-primary text-sm text-foreground"
           />
         </div>
         <div className="flex items-center gap-2">
-          <Filter className="h-4 w-4 text-gray-600 dark:text-gray-400" />
+          <Filter className="h-4 w-4 text-muted-foreground" />
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-            <SelectTrigger className="w-[180px] rounded-none border-gray-300 dark:border-border focus:ring-0 focus:border-black dark:focus:border-gray-500 text-sm bg-white dark:bg-[#1a1a1a] dark:text-gray-300">
+            <SelectTrigger className="w-[180px] rounded-none border-border focus:ring-0 focus:border-primary text-sm bg-background text-foreground">
               <SelectValue placeholder="Filter by category" />
             </SelectTrigger>
-            <SelectContent className="rounded-none border-gray-300 dark:border-border dark:bg-[#1a1a1a]">
+            <SelectContent className="rounded-none border-border bg-background">
               {categories.map((category) => (
                 <SelectItem
                   key={category}
                   value={category}
-                  className="dark:text-gray-300 dark:focus:bg-[#1a1a1a] dark:hover:bg-[#1a1a1a] dark:focus:text-gray-100"
+                  className="text-foreground hover:bg-secondary focus:bg-secondary"
                 >
                   {category === "all" ? "All Categories" : category}
                 </SelectItem>
@@ -82,46 +82,46 @@ export default function ResourcesTable({ resources }: ResourcesTableProps) {
       </div>
 
       {/* Resources table */}
-      <div className="border border-gray-200 dark:border-border hidden md:block">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-border">
-          <thead className="bg-gray-50 dark:bg-[#1a1a1a]">
+      <div className="border border-border hidden md:block">
+        <table className="min-w-full divide-y divide-border">
+          <thead className="bg-muted/50">
             <tr>
               <th
                 scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+                className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
               >
                 Title & Description
               </th>
               <th
                 scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+                className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
               >
                 Category
               </th>
               <th
                 scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+                className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
               >
                 Tags
               </th>
               <th
                 scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+                className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
               >
                 Link
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white dark:bg-[#121212] divide-y divide-gray-200 dark:divide-border">
+          <tbody className="bg-background divide-y divide-border">
             {filteredResources.length > 0 ? (
               filteredResources.map((resource) => (
-                <tr key={resource.id} className="hover:bg-gray-50 dark:hover:bg-[#1a1a1a]">
+                <tr key={resource.id} className="hover:bg-secondary/50">
                   <td className="px-4 py-4">
-                    <div className="text-sm font-medium text-gray-900 dark:text-gray-100">{resource.title}</div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">{resource.description}</div>
+                    <div className="text-sm font-medium text-foreground">{resource.title}</div>
+                    <div className="text-xs text-muted-foreground mt-1">{resource.description}</div>
                   </td>
                   <td className="px-4 py-4">
-                    <span className="text-xs uppercase tracking-wide text-gray-700 dark:text-gray-300">
+                    <span className="text-xs uppercase tracking-wide text-foreground">
                       {resource.category}
                     </span>
                   </td>
@@ -131,7 +131,7 @@ export default function ResourcesTable({ resources }: ResourcesTableProps) {
                         <Badge
                           key={index}
                           variant="outline"
-                          className="text-[10px] px-1.5 py-0 rounded-sm bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#1a1a1a] dark:text-gray-400 dark:border-border"
+                          className="text-[10px] px-1.5 py-0 rounded-sm bg-muted text-muted-foreground border-border"
                         >
                           {tag}
                         </Badge>
@@ -142,7 +142,7 @@ export default function ResourcesTable({ resources }: ResourcesTableProps) {
                     <Button
                       asChild
                       variant="outline"
-                      className="rounded-none border-gray-300 dark:border-border hover:bg-gray-100 dark:hover:bg-[#1a1a1a] hover:text-gray-900 dark:hover:text-gray-100 text-xs h-8 px-3 dark:text-gray-300"
+                      className="rounded-none border-border hover:bg-secondary hover:text-foreground text-xs h-8 px-3 text-foreground"
                     >
                       <Link href={resource.url} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="h-3 w-3 mr-1" />
@@ -154,11 +154,11 @@ export default function ResourcesTable({ resources }: ResourcesTableProps) {
               ))
             ) : (
               <tr>
-                <td colSpan={4} className="px-4 py-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                <td colSpan={4} className="px-4 py-8 text-center text-sm text-muted-foreground">
                   <div>No resources found matching your criteria.</div>
                   <Button
                     variant="outline"
-                    className="mt-4 rounded-none border-gray-300 dark:border-border hover:bg-gray-100 dark:hover:bg-[#1a1a1a] text-xs dark:text-gray-300"
+                    className="mt-4 rounded-none border-border hover:bg-secondary text-xs text-foreground"
                     onClick={() => {
                       setSearchQuery("")
                       setCategoryFilter("all")
@@ -179,21 +179,21 @@ export default function ResourcesTable({ resources }: ResourcesTableProps) {
           filteredResources.map((resource) => (
             <div
               key={resource.id}
-              className="border border-gray-200 dark:border-border p-4 bg-white dark:bg-[#121212]"
+              className="border border-border p-4 bg-background"
             >
               <div className="flex justify-between items-start mb-2">
-                <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">{resource.title}</h3>
-                <span className="text-xs uppercase tracking-wide text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-[#1a1a1a] px-2 py-1">
+                <h3 className="text-sm font-medium text-foreground">{resource.title}</h3>
+                <span className="text-xs uppercase tracking-wide text-foreground bg-secondary px-2 py-1">
                   {resource.category}
                 </span>
               </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">{resource.description}</p>
+              <p className="text-xs text-muted-foreground mb-3">{resource.description}</p>
               <div className="flex flex-wrap gap-1 mb-3">
                 {resource.tags.map((tag, index) => (
                   <Badge
                     key={index}
                     variant="outline"
-                    className="text-[10px] px-1.5 py-0 rounded-sm bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#1a1a1a] dark:text-gray-400 dark:border-border"
+                    className="text-[10px] px-1.5 py-0 rounded-sm bg-muted text-muted-foreground border-border"
                   >
                     {tag}
                   </Badge>
@@ -202,7 +202,7 @@ export default function ResourcesTable({ resources }: ResourcesTableProps) {
               <Button
                 asChild
                 variant="outline"
-                className="w-full rounded-none border-gray-300 dark:border-border hover:bg-gray-100 dark:hover:bg-[#1a1a1a] hover:text-gray-900 dark:hover:text-gray-100 text-xs h-8 dark:text-gray-300"
+                className="w-full rounded-none border-border hover:bg-secondary hover:text-foreground text-xs h-8 text-foreground"
               >
                 <Link href={resource.url} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="h-3 w-3 mr-1" />
@@ -212,11 +212,11 @@ export default function ResourcesTable({ resources }: ResourcesTableProps) {
             </div>
           ))
         ) : (
-          <div className="text-center py-8 text-sm text-gray-500 dark:text-gray-400">
+          <div className="text-center py-8 text-sm text-muted-foreground">
             <div>No resources found matching your criteria.</div>
             <Button
               variant="outline"
-              className="mt-4 rounded-none border-gray-300 dark:border-border hover:bg-gray-100 dark:hover:bg-[#1a1a1a] text-xs dark:text-gray-300"
+              className="mt-4 rounded-none border-border hover:bg-secondary text-xs text-foreground"
               onClick={() => {
                 setSearchQuery("")
                 setCategoryFilter("all")

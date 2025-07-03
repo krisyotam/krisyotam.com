@@ -8,6 +8,8 @@ export interface PoemBoxProps {
   children: React.ReactNode
   className?: string
   disableHover?: boolean
+  author?: string
+  title?: string
 }
 
 type Item =
@@ -55,7 +57,7 @@ function extractItems(children: React.ReactNode): Item[] {
   return items
 }
 
-export function PoemBox({ children, className, disableHover = false }: PoemBoxProps) {
+export function PoemBox({ children, className, disableHover = false, author, title }: PoemBoxProps) {
   const items = extractItems(children)
   const base = cn(
     "p-6 my-6 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))] " +
@@ -70,6 +72,43 @@ export function PoemBox({ children, className, disableHover = false }: PoemBoxPr
 
   return (
     <div className={base}>
+      {/* Title and Author Header */}
+      {(title || author) && (
+        <div style={{ 
+          textAlign: 'center', 
+          marginBottom: '1.5rem', 
+          paddingBottom: '1rem', 
+          borderBottom: '1px solid hsl(var(--border))' 
+        }}>
+          {title && (
+            <h3 style={{ 
+              fontSize: '1.125rem', 
+              fontFamily: 'serif', 
+              fontWeight: '500', 
+              marginBottom: '0.5rem',
+              margin: '0 0 0.5rem 0',
+              padding: '0',
+              textAlign: 'center'
+            }}>
+              {title}
+            </h3>
+          )}
+          {author && (
+            <p style={{ 
+              fontSize: '0.875rem', 
+              color: 'hsl(var(--muted-foreground))', 
+              fontStyle: 'italic',
+              margin: '0',
+              padding: '0',
+              textAlign: 'center'
+            }}>
+              By {author}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Poem Content */}
       {items.map((item, idx) => {
         if (item.type === "stanza") {
           // Create 2 empty lines for stanza spacing, each with its own hover effect

@@ -7,6 +7,7 @@ import { PageDescription } from "@/components/posts/typography/page-description"
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
 import type { BlogMeta } from "@/types/blog";
+import categoriesData from "@/data/blog/categories.json";
 
 interface BlogCategoryClientProps {
   posts: BlogMeta[];
@@ -39,16 +40,40 @@ export default function BlogCategoryClient({ posts, allPosts, category }: BlogCa
     }
   };
 
+  // Get category data from categories.json
+  const getCategoryData = () => {
+    const categorySlug = slugifyCategory(category);
+    const categoryData = categoriesData.categories.find(cat => cat.slug === categorySlug);
+    
+    return categoryData ? {
+      title: categoryData.title,
+      preview: categoryData.preview,
+      status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
+      confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
+      importance: categoryData.importance,
+      date: categoryData.date
+    } : {
+      title: category,
+      preview: `Posts in the ${category} category`,
+      status: "Finished" as const,
+      confidence: "certain" as const,
+      importance: 8,
+      date: new Date().toISOString()
+    };
+  };
+
+  const categoryData = getCategoryData();
+
   return (
     <div className="blog-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       <PageHeader
-        title={category}
+        title={categoryData.title}
         subtitle="Blog Posts"
-        date={new Date().toISOString()}
-        preview={`Posts in the ${category} category`}
-        status="Finished"
-        confidence="certain"
-        importance={8}
+        date={categoryData.date}
+        preview={categoryData.preview}
+        status={categoryData.status}
+        confidence={categoryData.confidence}
+        importance={categoryData.importance}
       />
       
       <div className="mb-6 flex items-center gap-4">

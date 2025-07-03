@@ -203,6 +203,23 @@
       "model": "GPT 4o",
       "author": "Kris Yotam",
       "license": "CC-0"
+    },
+    {
+      "title": "Curricula Finder",
+      "preview": "Find curricula for a given topic from Ivy League, Cambridge and Oxford University. Returns comprehensive curriculum details including lectures, reading lists, homework, exams, and critical analysis with quality rankings.",
+      "date": "2025-05-16",
+      "tags": ["curricula", "university", "education", "ivy-league", "oxford", "cambridge", "academic-research"],
+      "category": "education",
+      "slug": "curricula-finder",
+      "cover_image": "",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active",
+      "filename": "curricula.xml",
+      "model": "Gemini 2.5 Pro (Deep Research)",
+      "author": "Kris Yotam",
+      "license": "CC-0"
     }
   ]
 }

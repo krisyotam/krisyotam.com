@@ -1,0 +1,164 @@
+{
+  "sequences": [
+    {
+      "slug": "metaethics",
+      "title": "Metaethics",
+      "preview": "Explorations into the foundations of moral philosophy, the nature of value, and the logic of ethical reasoning.",
+      "date": "2025-06-24",
+      "cover-url": "",
+      "show-status": "active",
+      "status": "Planned",
+      "confidence": "likely",
+      "importance": 9,
+      "posts": [
+        { "slug": "is-morality-objective", "order": 1 },
+        { "slug": "emotivism-vs-cognitivism", "order": 2 },
+        { "slug": "metaethics-of-effective-altruism", "order": 3 }
+      ]
+    },
+    {
+      "slug": "quantum-physics",
+      "title": "Quantum Physics",
+      "preview": "A deep dive into quantum mechanics, interpretation debates, and their philosophical and technological implications.",
+      "date": "2025-06-24",
+      "cover-url": "https://i.postimg.cc/pX5gHTzz/istockphoto-941413406-612x612.jpg",
+      "show-status": "active",
+      "status": "Planned",
+      "confidence": "likely",
+      "importance": 8,
+      "posts": [
+        { "slug": "many-worlds-and-rationality", "order": 1 },
+        { "slug": "quantum-computation-101", "order": 2 },
+        { "slug": "is-quantum-mechanics-local", "order": 3 }
+      ]
+    },
+    {
+      "slug": "mathematics",
+      "title": "Mathematics",
+      "preview": "From foundational arithmetic and logic to abstract algebra, analysis, and the philosophy of math.",
+      "date": "2025-06-24",
+      "cover-url": "https://i.postimg.cc/XX6ZDmKh/math.jpg",
+      "show-status": "active",
+      "status": "Planned",
+      "confidence": "certain",
+      "importance": 10,
+      "posts": [
+        { "slug": "what-is-a-function", "order": 1 },
+        { "slug": "set-theory-and-its-paradoxes", "order": 2 },
+        { "slug": "category-theory-as-language", "order": 3 }
+      ]
+    },
+    {
+      "slug": "three-body-problem",
+      "title": "3 Body Problem",
+      "preview": "Analyses and reflections on Liu Cixin’s trilogy, focusing on philosophical, scientific, and strategic themes.",
+      "date": "2025-06-24",
+      "cover-url": "",
+      "show-status": "active",
+      "status": "Planned",
+      "confidence": "certain",
+      "importance": 7,
+      "posts": [
+        { "slug": "trisolaran-psychology", "order": 1 },
+        { "slug": "dark-forest-theory-analysis", "order": 2 },
+        { "slug": "ye-wenjie-and-the-weight-of-trauma", "order": 3 }
+      ]
+    },
+    {
+      "slug": "higher-order-reason",
+      "title": "Higher Order Reason",
+      "preview": "Essays on advanced reasoning strategies, metacognition, and the architecture of rational thought.",
+      "date": "2025-06-24",
+      "cover-url": "https://i.postimg.cc/pX5gHTzz/istockphoto-941413406-612x612.jpg",
+      "show-status": "active",
+      "status": "Planned",
+      "confidence": "likely",
+      "importance": 9,
+      "posts": [
+        { "slug": "steelmanning-and-charity", "order": 1 },
+        { "slug": "epistemic-hygiene-in-the-modern-age", "order": 2 },
+        { "slug": "decision-theory-and-altruism", "order": 3 }
+      ]
+    },
+    {
+      "slug": "craft-of-community",
+      "title": "The Craft of Community",
+      "preview": "A study in social technologies, group dynamics, subculture formation, and intentional community-building.",
+      "date": "2025-06-24",
+      "cover-url": "",
+      "show-status": "active",
+      "status": "Planned",
+      "confidence": "uncertain",
+      "importance": 8,
+      "posts": [
+        { "slug": "rituals-as-psychotechnology", "order": 1 },
+        { "slug": "building-intellectual-subcultures", "order": 2 },
+        { "slug": "failure-modes-of-communities", "order": 3 }
+      ]
+    },
+    {
+  "slug": "demonology",
+  "title": "Demonology",
+  "preview": "A scholarly and esoteric examination of demonic archetypes, infernal hierarchies, and the role of demons in myth, theology, and the human psyche.",
+  "date": "2025-06-24",
+  "cover-url": "https://i.postimg.cc/BZrm2CPP/demonology.jpg",
+  "show-status": "active",
+  "status": "Planned",
+  "confidence": "likely",
+  "importance": 7,
+  "posts": [
+    { "slug": "goetia-and-the-72-spirits", "order": 1 },
+    { "slug": "theological-origins-of-lucifer", "order": 2 },
+    { "slug": "demons-as-psychological-metaphors", "order": 3 }
+  ]
+},
+{
+  "slug": "angelology",
+  "title": "Angelology",
+  "preview": "Explorations into angelic beings across religions, their metaphysical roles, and their symbolic significance in mysticism and art.",
+  "date": "2025-06-24",
+  "cover-url": "",
+  "show-status": "active",
+  "status": "Planned",
+  "confidence": "likely",
+  "importance": 7,
+  "posts": [
+    { "slug": "hierarchies-of-heaven", "order": 1 },
+    { "slug": "archangel-michael-in-war-and-wisdom", "order": 2 },
+    { "slug": "angelic-interventions-in-modern-mysticism", "order": 3 }
+  ]
+},
+{
+  "slug": "witchcraft",
+  "title": "Witchcraft",
+  "preview": "An interdisciplinary study of historical and contemporary witchcraft: spells, persecution, empowerment, and cultural symbolism.",
+  "date": "2025-06-24",
+  "cover-url": "https://i.postimg.cc/3NF047DB/witchcraft.jpg",
+  "show-status": "active",
+  "status": "Planned",
+  "confidence": "certain",
+  "importance": 8,
+  "posts": [
+    { "slug": "witches-in-medieval-europe", "order": 1 },
+    { "slug": "modern-wicca-and-ecofeminism", "order": 2 },
+    { "slug": "the-magic-circle-as-a-cognitive-frame", "order": 3 }
+  ]
+},
+{
+  "slug": "higher-order-alchemy",
+  "title": "Higher Order Alchemy",
+  "preview": "Beyond the Philosopher’s Stone—this series reinterprets alchemy as symbolic transformation, consciousness evolution, and spiritual refinement.",
+  "date": "2025-06-24",
+  "cover-url": "",
+  "show-status": "active",
+  "status": "Planned",
+  "confidence": "likely",
+  "importance": 9,
+  "posts": [
+    { "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
+    { "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
+    { "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+  ]
+}
+  ]
+}

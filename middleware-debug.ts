@@ -5,9 +5,9 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   // Only run on specific routes we want to debug
   if (
-    request.nextUrl.pathname.startsWith('/others') || 
+    request.nextUrl.pathname.startsWith('/blogroll') || 
     request.nextUrl.pathname.startsWith('/blog') ||
-    request.nextUrl.pathname.startsWith('/api/others') ||
+    request.nextUrl.pathname.startsWith('/api/blogroll') ||
     request.nextUrl.pathname.startsWith('/api/blog')
   ) {
     console.log('---DEBUG INFO---');
@@ -21,10 +21,10 @@ export function middleware(request: NextRequest) {
       const fs = require('fs');
       const path = require('path');
       
-      const othersFile = path.join(process.cwd(), 'data', 'others.json');
+      const blogrollFile = path.join(process.cwd(), 'data', 'blogroll', 'blogroll.json');
       const feedFile = path.join(process.cwd(), 'data', 'blog', 'feed.json');
       
-      console.log(`others.json exists: ${fs.existsSync(othersFile)}`);
+      console.log(`blogroll.json exists: ${fs.existsSync(blogrollFile)}`);
       console.log(`feed.json exists: ${fs.existsSync(feedFile)}`);
       
       // List files in data directory
@@ -45,5 +45,5 @@ export function middleware(request: NextRequest) {
 
 // Configure which paths should be processed by the middleware
 export const config = {
-  matcher: ['/others/:path*', '/blog/:path*', '/api/others/:path*', '/api/blog/:path*'],
+  matcher: ['/blogroll/:path*', '/blog/:path*', '/api/blogroll/:path*', '/api/blog/:path*'],
 };

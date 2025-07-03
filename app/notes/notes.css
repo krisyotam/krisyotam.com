@@ -174,10 +174,10 @@
 }
 
 /* images ----------------------------------------------------------------- */
-.note-content img {
+.note-content img:not([data-enhanced]) {
   display: block;
   max-width: 100%;
-  margin: 0.5rem auto; /* small vertical gap around images */
+  margin: auto; /* small vertical gap around images */
 }
 
 .note-content figure {

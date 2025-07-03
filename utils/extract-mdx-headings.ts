@@ -29,14 +29,35 @@ export async function extractHeadingsFromMDX(
       }
       mdxPath = path.join(process.cwd(), "app/essays/content", category, `${slug}.mdx`);
       break;
+    case 'links':
+      if (!category) {
+        console.error('Category is required for links content type');
+        return [];
+      }
+      mdxPath = path.join(process.cwd(), "app/links/content", category, `${slug}.mdx`);
+      break;
     case 'notes':
-      mdxPath = path.join(process.cwd(), "app/notes/content", `${slug}.mdx`);
+      if (category) {
+        mdxPath = path.join(process.cwd(), "app/notes/content", category, `${slug}.mdx`);
+      } else {
+        mdxPath = path.join(process.cwd(), "app/notes/content", `${slug}.mdx`);
+      }
       break;
     case 'til':
       mdxPath = path.join(process.cwd(), "app/til/content", `${slug}.mdx`);
       break;
     case 'blog':
-      mdxPath = path.join(process.cwd(), "app/blog/content", `${slug}.mdx`);
+      if (category) {
+        // Try nested structure first
+        mdxPath = path.join(process.cwd(), "app/blog/content", category, `${slug}.mdx`);
+        // Check if nested file exists, if not fallback to flat structure
+        if (!fs.existsSync(mdxPath)) {
+          mdxPath = path.join(process.cwd(), "app/blog/content", `${slug}.mdx`);
+        }
+      } else {
+        // Fallback to flat structure
+        mdxPath = path.join(process.cwd(), "app/blog/content", `${slug}.mdx`);
+      }
       break;
     case 'now':
       mdxPath = path.join(process.cwd(), "app/now/content", `${slug}.mdx`);

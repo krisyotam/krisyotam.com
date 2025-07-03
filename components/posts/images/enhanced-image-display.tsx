@@ -70,8 +70,9 @@ export function EnhancedImageDisplay({
     <>
       <div
         className={`${className} ${
-          isWrap ? "float-right ml-6 mb-4 w-[300px] max-w-full" : "mb-8"
+          isWrap ? "float-right ml-6 mb-0 w-[300px] max-w-full" : "mb-0"
         }`}
+        data-enhanced-container
       >
         <div className="relative group cursor-pointer" onClick={() => openModal(currentImageIndex)}>
           <div className={isWrap ? "relative w-full h-auto" : "relative aspect-[16/9]"}>
@@ -81,14 +82,16 @@ export function EnhancedImageDisplay({
                 alt={imagesArray[currentImageIndex].alt}
                 width={300}
                 height={200}
-                className="object-contain w-full h-auto"
+                className="object-contain w-full h-auto !m-0"
+                data-enhanced
               />
             ) : (
               <Image
                 src={getCurrentSrc(imagesArray[currentImageIndex]) || "/placeholder.svg"}
                 alt={imagesArray[currentImageIndex].alt}
                 fill
-                className="object-cover"
+                className="object-cover !m-0"
+                data-enhanced
               />
             )}
           </div>
@@ -124,7 +127,8 @@ export function EnhancedImageDisplay({
                 alt={imagesArray[currentImageIndex].alt}
                 width={1200}
                 height={675}
-                className="object-contain max-h-[80vh]"
+                className="object-contain max-h-[80vh] !m-0"
+                data-enhanced
                 priority
               />
             </div>

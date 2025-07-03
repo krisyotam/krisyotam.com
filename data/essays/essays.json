@@ -12,7 +12,8 @@
       "confidence": "certain",
       "importance": 9,
       "state": "active"
-    },    {
+    },    
+    {
       "title": "On the Learning of Difficult Things",
       "preview": "A reflection on the mental and emotional labor of serious study, and why the hard things matter most.",
       "date": "2025-06-16",
@@ -101,6 +102,45 @@
       "status": "Notes",
       "confidence": "certain",
       "importance": 8,
+      "state": "active"
+    },
+    {
+      "title": "Analysis of Susanna Kaysen",
+      "preview": "A psychological and narrative exploration of Susanna Kaysen’s fragmented identity, quiet rebellion, and ambiguous diagnosis.",
+      "date": "2025-06-25",
+      "tags": ["Girl, Interrupted", "Psychology", "Identity", "Mental Health"],
+      "category": "character-analysis",
+      "slug": "analysis-of-susanna-kaysen",
+      "cover_image": "",
+      "status": "Notes",
+      "confidence": "certain",
+      "importance": 9,
+      "state": "active"
+    },
+    {
+      "title": "Analysis of Daisy Randone",
+      "preview": "Dissecting Daisy Randone’s compulsions, her trauma-concealing rituals, and the unbearable fragility of her control.",
+      "date": "2025-06-25",
+      "tags": ["Girl, Interrupted", "Trauma", "Control", "Isolation"],
+      "category": "character-analysis",
+      "slug": "analysis-of-daisy-randone",
+      "cover_image": "",
+      "status": "Notes",
+      "confidence": "certain",
+      "importance": 8,
+      "state": "active"
+    },
+    {
+      "title": "Analysis of Lisa Rowe",
+      "preview": "A character study of Lisa Rowe’s seductive nihilism, charismatic cruelty, and the contradictions of the sociopath as hero.",
+      "date": "2025-06-25",
+      "tags": ["Girl, Interrupted", "Charisma", "Sociopathy", "Power"],
+      "category": "character-analysis",
+      "slug": "analysis-of-lisa-rowe",
+      "cover_image": "",
+      "status": "Notes",
+      "confidence": "certain",
+      "importance": 9,
       "state": "active"
     }
   ]

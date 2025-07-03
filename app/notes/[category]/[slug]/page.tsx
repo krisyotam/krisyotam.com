@@ -78,10 +78,10 @@ export default async function NotePage({ params }: NotePageProps) {
   }));
 
   // Extract headings from the note MDX content
-  const headings = await extractHeadingsFromMDX('notes', params.slug);
+  const headings = await extractHeadingsFromMDX('notes', params.slug, params.category);
 
-  // Dynamically import the MDX file based on slug
-  const Note = (await import(`@/app/notes/content/${params.slug}.mdx`)).default;
+  // Dynamically import the MDX file based on category and slug
+  const Note = (await import(`@/app/notes/content/${params.category}/${params.slug}.mdx`)).default;
 
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">

@@ -42,6 +42,7 @@ import MySites from "@/components/about/MySites"
 import OtherSites from "@/components/about/OtherSites"
 import SiteInfo from "@/components/about/SiteInfo"
 import AboutThisSite from "@/components/about/AboutThisSite"
+import SupportMe from "@/components/about/SupportMe"
 import { FeaturedPost } from "@/components/featured-post"
 import { Post } from "@/utils/posts"
 
@@ -677,6 +678,7 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
             {/* About This Site Collapse */}
             <div className="mb-6">
               <AboutThisSite />
+              <SupportMe />
             </div>
 
             {/* About Accordion */}

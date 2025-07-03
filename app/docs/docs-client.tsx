@@ -81,7 +81,7 @@ async function fetchTypes(): Promise<DocType[]> {
     const response = await fetch('/api/docs/types');
     if (!response.ok) throw new Error('Failed to fetch types');
     const data = await response.json();
-    return data.types;
+    return Array.isArray(data.types) ? data.types : [];
   } catch (error) {
     console.error('Error fetching types:', error);
     return [];
@@ -93,7 +93,7 @@ async function fetchCategories(): Promise<DocCategory[]> {
     const response = await fetch('/api/docs/categories');
     if (!response.ok) throw new Error('Failed to fetch categories');
     const data = await response.json();
-    return data.categories;
+    return Array.isArray(data.categories) ? data.categories : [];
   } catch (error) {
     console.error('Error fetching categories:', error);
     return [];
@@ -123,8 +123,8 @@ export function DocsClient({ initialCategory = "All" }: { initialCategory?: stri
         ]);
         
         setDocs(docsData);
-        setTypes(typesData);
-        setCategories(categoriesData);
+        setTypes(Array.isArray(typesData) ? typesData : []);
+        setCategories(Array.isArray(categoriesData) ? categoriesData : []);
       } catch (error) {
         console.error('Error loading data:', error);
       } finally {
@@ -145,13 +145,14 @@ export function DocsClient({ initialCategory = "All" }: { initialCategory?: stri
 
   // Get categories for the selected type
   const availableCategories = currentType === "all" 
-    ? categories 
-    : categories.filter(cat => cat.type === currentType);
+    ? (Array.isArray(categories) ? categories : [])
+    : (Array.isArray(categories) ? categories.filter(cat => cat.type === currentType) : []);
 
   // Create type options for dropdown
+  const safeTypes = Array.isArray(types) ? types : [];
   const typeOptions: SelectOption[] = [
     { value: "all", label: "All Types" },
-    ...types.map(type => ({
+    ...safeTypes.map(type => ({
       value: type.slug,
       label: type.title
     }))
@@ -219,7 +220,20 @@ export function DocsClient({ initialCategory = "All" }: { initialCategory?: stri
       />
 
       <div className="mt-8">
-        {/* Search and filters */}
+        {/* Search bar */}
+        <div className="mb-4">
+          <div className="relative">
+            <input 
+              type="text" 
+              placeholder="Search documents..." 
+              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+            />
+          </div>
+        </div>
+
+        {/* Filters */}
         <div className="mb-6 flex items-center gap-4">
           <div className="flex items-center gap-2 whitespace-nowrap">
             <label htmlFor="type-filter" className="text-sm text-muted-foreground">Filter by type:</label>
@@ -238,16 +252,6 @@ export function DocsClient({ initialCategory = "All" }: { initialCategory?: stri
               onValueChange={handleCategoryChange}
               options={categoryOptions}
               className="text-sm min-w-[140px]"
-            />
-          </div>
-          
-          <div className="relative flex-1">
-            <input 
-              type="text" 
-              placeholder="Search documents..." 
-              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
-              onChange={(e) => setSearchQuery(e.target.value)}
-              value={searchQuery}
             />
           </div>
         </div>

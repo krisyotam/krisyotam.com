@@ -13,6 +13,7 @@ export interface ReviewMeta {
   status?: ReviewStatus;
   confidence?: ReviewConfidence;
   importance?: number;
+  cover_image?: string;
 }
 
 export interface ReviewCategory {

@@ -78,10 +78,21 @@ export default async function BlogPage({ params }: BlogPageProps) {
   }));
 
   // Extract headings from the blog MDX content
-  const headings = await extractHeadingsFromMDX('blog', params.slug);
+  const headings = await extractHeadingsFromMDX('blog', params.slug, params.category);
 
-  // Dynamically import the MDX file based on slug
-  const Post = (await import(`@/app/blog/content/${params.slug}.mdx`)).default;
+  // Dynamically import the MDX file - try nested structure first, then fallback to flat
+  let Post;
+  try {
+    Post = (await import(`@/app/blog/content/${params.category}/${params.slug}.mdx`)).default;
+  } catch (error) {
+    // Fallback to flat structure for legacy posts
+    try {
+      Post = (await import(`@/app/blog/content/${params.slug}.mdx`)).default;
+    } catch (fallbackError) {
+      console.error(`Could not find MDX file for ${params.category}/${params.slug}`);
+      notFound();
+    }
+  }
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
       <div className="max-w-6xl mx-auto px-4">

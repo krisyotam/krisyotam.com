@@ -160,12 +160,12 @@
     "dateCreated": "2024-01-01"
   },
   {
-    "id": "yearly-2025",
-    "title": "2025",
+    "id": "select-tracks-of-lesley-gore",
+    "title": "Select Tracks of Lesley Gore",
     "genre": "Yearly",
     "artists": [],
-    "description": "A snapshot of my musical tastes in 2025—random, evolving, and defining the year.",
-    "coverImage": "https://i.postimg.cc/fTCy24Mg/2025.png",
+    "description": "select tracks of lesley gore",
+    "coverImage": "https://i.postimg.cc/HkMCYwv9/lesley-gore.webp",
     "link": "",
     "dateCreated": "2025-01-01"
   },
