@@ -1,81 +1,33 @@
-We are now going to create the app/lab page 
-for starters create a app/api/lab route for categories.json, and labs.json and make sure you use the api later when we need it. 
-You will then mirror the sturcutre of the /blog directory over changing the classes to the appropritae classes, and pulling from correct data 
-sources via the api. 
+BUILD ERRORS TO FIX:
 
-The below should summarize the files you need, and make sure you look at /blog, and /essays directory and how they are setup. 
+1. Syntax error in file: app/docs/[type]/[category]/[slug]/page.tsx
 
-Lab
-  - [category]
-    - [slug]
-      - LabPageClient.tsx
-      - layout.tsx
-      - MdxRenderer.tsx
-      - page.tsx
-    - LabCategoryClient.tsx
-    - page.tsx
-  - content --> ignore this for now, create the directory and leave it empty 
-  - lab.css --> copy over the notes.css and replace class names
-  - LabClientPage.tsx
-  - page.tsx
+   Error details:
+   - Expression expected at line 60
+   - Code appears to have misplaced code segments:
+     ```
+     }   description: item.description,
+        };
+     }
+     ```
+   
+   This suggests there's a function with improperly placed code inside it.
+   The error appears between lines 58-62:
+     58 |   if (!doc) return notFound();
+     59 |   return <DocDetail doc={doc} />;
+     60 | }   description: item.description,
+     61 |   };
+     62 | }
+   
+   The object property `description: item.description` is incorrectly placed after a function closing brace.
 
+2. Package manager inconsistency:
+   - Warning about both package-lock.json (npm) and yarn.lock files being present
+   - "Skipping build cache since Package Manager changed from "npm" to "yarn""
+   - Consider removing package-lock.json to avoid resolution inconsistencies
 
-
-
-Ignore Below This Line
----
-# Creation of New Lab Page 
-Important Notes: the lab page itself will not need a password to access, however some notebooks may have a password 
-some may not have a password. A category in categories.json is referred to as a notebook, so when changing notebook 
-via the category filter (when it changes the url) it will then ask for the password. 
-
-# Orphaned Notes Files (need categories added to categories.json or reassigned)
-The following .mdx files are still in notes/content root and need to be categorized:
-- a-manifesto-for-holistic-computing.mdx
-- a-prelude-to-wisdom.mdx
-- ai-use-cases.mdx
-- anatomy-of-verse.mdx
-- automated-url-archiving.mdx
-- bible-study-workflow.mdx
-- certifications.mdx
-- cplusplus-style-guide.mdx
-- donate.mdx
-- faq.mdx
-- gojo-sukuna-powerscaled.mdx
-- internet-archive.mdx
-- internet-search-methods.mdx
-- kristoo.mdx
-- miseducation-of-the-negro-book-notes.mdx
-- modern-search-methods.mdx
-- my-mathematics-workflow.mdx
-- myths-from-mesopotamia-book-notes.mdx
-- neocities-personal-sites.mdx
-- news.mdx
-- notes-on-old-thinkpads.mdx
-- on-life-improvement.mdx
-- on-living-simply.mdx
-- on-the-site-as-self.mdx
-- pride-and-prejudice-book-notes.mdx
-- the-first-philosophers-book-notes.mdx
-- things-i-ought-to-know.mdx
-- thoughts-of-simple-systems.mdx
-- trades-i-want-to-learn.mdx
-- twitch.mdx
-- vpns.mdx
-- youtube.mdx
-
-
-
-
-# Creation of Sequences Page 
-- create a unified feed of all post files 
-  - data/app/papers
-  - data/app/papers
-  - data/app/papers
-  - data/app/papers
-  - data/app/papers
-  - data/app/papers
-  - data/app/papers
-  - data/app/papers
-- create a feed of all category files 
-- create a unified feed of all tags files
+3. Dependency warnings:
+   - Multiple peer dependency warnings for:
+     - @types/next > @types/next-server > next-server@9.0.5
+     - react-day-picker@8.10.1
+   - Multiple "Workspaces can only be enabled in private projects" warnings

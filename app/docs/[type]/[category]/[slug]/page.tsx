@@ -57,13 +57,4 @@ export default async function DocSlugPage({ params }: { params: { type: string; 
   const doc = docs.find((d) => slugify(d.type) === params.type && slugify(d.category) === params.category && d.slug === params.slug);
   if (!doc) return notFound();
   return <DocDetail doc={doc} />;
-}   description: item.description,
-  };
-}
-
-export default function DocSlugPage({ params }: { params: { type: string; category: string; slug: string } }) {
-  const docs = docsData as DocItem[];
-  const doc = docs.find((d) => slugify(d.type) === params.type && slugify(d.category) === params.category && d.slug === params.slug);
-  if (!doc) return notFound();
-  return <DocDetail doc={doc} />;
 }
