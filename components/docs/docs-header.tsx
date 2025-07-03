@@ -14,6 +14,9 @@ interface DocsHeaderProps {
   tags?: string[]
   category?: string
   preview?: string
+  status?: string
+  confidence?: string
+  importance?: number
 }
 
 export function DocsHeader({
@@ -23,6 +26,9 @@ export function DocsHeader({
   tags,
   category,
   preview,
+  status,
+  confidence,
+  importance,
 }: DocsHeaderProps) {
   return (
     <header className="mb-2 relative">
@@ -95,6 +101,30 @@ export function DocsHeader({
             >
               Filed under: {category}
             </Link>
+          </div>
+        )}
+
+        {/* Document metadata */}
+        {(status || confidence || importance !== undefined) && (
+          <div className="flex justify-center items-center gap-4 mt-4 text-xs text-muted-foreground">
+            {status && (
+              <div className="flex items-center">
+                <span className="font-medium">Status:</span>
+                <span className="ml-1">{status}</span>
+              </div>
+            )}
+            {confidence && (
+              <div className="flex items-center">
+                <span className="font-medium">Confidence:</span>
+                <span className="ml-1">{confidence}</span>
+              </div>
+            )}
+            {importance !== undefined && (
+              <div className="flex items-center">
+                <span className="font-medium">Importance:</span>
+                <span className="ml-1">{importance}/10</span>
+              </div>
+            )}
           </div>
         )}
       </div>
