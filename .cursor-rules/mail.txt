@@ -1,1098 +1,1018 @@
-[20:56:46.334] Running build in Washington, D.C., USA (East) – iad1
-[20:56:46.334] Build machine configuration: 2 cores, 8 GB
-[20:56:46.366] Cloning github.com/krisyotam/krisyotam.com (Branch: main, Commit: e1d27eb)
-[20:56:52.592] Cloning completed: 6.225s
-[20:57:03.553] Restored build cache from previous deployment (7FczQC8UNvy2nhn4eV92wZnEsndE)
-[20:57:05.089] Running "vercel build"
-[20:57:05.537] Vercel CLI 44.2.10
-[20:57:05.812] WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
-[20:57:08.621] Installing dependencies...
-[20:57:11.284] npm warn deprecated topojson@3.0.2: Use topojson-client, topojson-server or topojson-simplify directly.
-[20:57:25.808] 
-[20:57:25.809] added 7 packages, removed 21 packages, and changed 49 packages in 17s
-[20:57:25.809] 
-[20:57:25.809] 233 packages are looking for funding
-[20:57:25.810]   run `npm fund` for details
-[20:57:25.849] Detected Next.js version: 14.2.30
-[20:57:25.856] Running "npm run build"
-[20:57:25.965] 
-[20:57:25.965] > kris-yotam@0.1.0 build
-[20:57:25.966] > next build
-[20:57:25.966] 
-[20:57:26.649]   ▲ Next.js 14.2.30
-[20:57:26.650]   - Experiments (use with caution):
-[20:57:26.650]     · webpackBuildWorker
-[20:57:26.650] 
-[20:57:26.748]    Creating an optimized production build ...
-[20:58:59.097]  ✓ Compiled successfully
-[20:58:59.098]    Linting and checking validity of types ...
-[21:00:20.316]    Collecting page data ...
-[21:00:23.663] Available categories: [
-[21:00:23.664]   'illuminati',
-[21:00:23.664]   'new-world-order',
-[21:00:23.665]   'cia-projects',
-[21:00:23.665]   'bohemian-grove',
-[21:00:23.665]   'bilderberg-group',
-[21:00:23.665]   'qanon',
-[21:00:23.665]   'roswell-and-ufo-coverups',
-[21:00:23.665]   'flat-earth',
-[21:00:23.666]   'secret-space-programs'
-[21:00:23.666] ]
-[21:00:23.666] Slugified categories: [
-[21:00:23.666]   'illuminati',
-[21:00:23.666]   'new-world-order',
-[21:00:23.667]   'cia-projects',
-[21:00:23.667]   'bohemian-grove',
-[21:00:23.667]   'bilderberg-group',
-[21:00:23.668]   'qanon',
-[21:00:23.668]   'roswell-and-ufo-coverups',
-[21:00:23.668]   'flat-earth',
-[21:00:23.669]   'secret-space-programs'
-[21:00:23.669] ]
-[21:00:23.820] Available categories: [
-[21:00:23.820]   'liber-necrophilia',
-[21:00:23.820]   'liber-zoophilia',
-[21:00:23.820]   'liber-sodomorum',
-[21:00:23.821]   'liber-experimentorum',
-[21:00:23.821]   'liber-mortis',
-[21:00:23.821]   'liber-incubi',
-[21:00:23.821]   'liber-hysterica',
-[21:00:23.821]   'malleus-innocentium',
-[21:00:23.821]   'fabrica-excruciationis'
-[21:00:23.821] ]
-[21:00:23.821] Slugified categories: [
-[21:00:23.822]   'liber-necrophilia',
-[21:00:23.822]   'liber-zoophilia',
-[21:00:23.822]   'liber-sodomorum',
-[21:00:23.822]   'liber-experimentorum',
-[21:00:23.822]   'liber-mortis',
-[21:00:23.823]   'liber-incubi',
-[21:00:23.823]   'liber-hysterica',
-[21:00:23.823]   'malleus-innocentium',
-[21:00:23.823]   'fabrica-excruciationis'
-[21:00:23.823] ]
-[21:00:23.904] Available categories: [
-[21:00:23.904]   'Philosophy',
-[21:00:23.904]   'Verse',
-[21:00:23.905]   'Random',
-[21:00:23.905]   'On Myself',
-[21:00:23.905]   'Libraries',
-[21:00:23.905]   'Bounties',
-[21:00:23.905]   'News',
-[21:00:23.905]   'Website',
-[21:00:23.905]   'Stable Syllabi',
-[21:00:23.906]   'Research',
-[21:00:23.906]   'Powerscaling',
-[21:00:23.906]   'Book Notes',
-[21:00:23.906]   'Technology',
-[21:00:23.906]   'Virtual Worlds',
-[21:00:23.906]   'Mathematics',
-[21:00:23.907]   'Internet Archive',
-[21:00:23.907]   'Indie Web',
-[21:00:23.907]   'Learning',
-[21:00:23.907]   'Physics',
-[21:00:23.907]   'social-media',
-[21:00:23.907]   'Fraternities',
-[21:00:23.907]   'Artificial Intelligence',
-[21:00:23.908]   'Manuals Of Style',
-[21:00:23.908]   'Internet Archiving'
-[21:00:23.908] ]
-[21:00:23.908] Slugified categories: [
-[21:00:23.908]   'philosophy',
-[21:00:23.908]   'verse',
-[21:00:23.909]   'random',
-[21:00:23.909]   'on-myself',
-[21:00:23.909]   'libraries',
-[21:00:23.909]   'bounties',
-[21:00:23.909]   'news',
-[21:00:23.909]   'website',
-[21:00:23.910]   'stable-syllabi',
-[21:00:23.910]   'research',
-[21:00:23.910]   'powerscaling',
-[21:00:23.910]   'book-notes',
-[21:00:23.910]   'technology',
-[21:00:23.910]   'virtual-worlds',
-[21:00:23.910]   'mathematics',
-[21:00:23.912]   'internet-archive',
-[21:00:23.912]   'indie-web',
-[21:00:23.912]   'learning',
-[21:00:23.912]   'physics',
-[21:00:23.912]   'social-media',
-[21:00:23.913]   'fraternities',
-[21:00:23.913]   'artificial-intelligence',
-[21:00:23.913]   'manuals-of-style',
-[21:00:23.913]   'internet-archiving'
-[21:00:23.913] ]
-[21:00:28.381]    Generating static pages (0/878) ...
-[21:00:32.703] Fetching favorite actors from JSON
-[21:00:32.704] Retrieved 15 favorite actors
-[21:00:32.771] Fetching favorite characters from JSON
-[21:00:32.771] Retrieved 27 favorite characters
-[21:00:32.789] Fetching favorite film companies from JSON
-[21:00:32.789] Retrieved 12 favorite film companies
-[21:00:32.857] Fetching favorite directors from JSON
-[21:00:32.857] Retrieved 13 favorite directors
-[21:00:35.348] Fetching user watched content from Trakt...
-[21:00:35.348] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
-[21:00:35.349] Error fetching Trakt genres: Error: Unable to get valid Trakt access token
-[21:00:35.349]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
-[21:00:35.349]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:35.349]     at async d (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4890)
-[21:00:35.349]     at async l (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:666)
-[21:00:35.349]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
-[21:00:35.349]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
-[21:00:35.350]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
-[21:00:35.350]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
-[21:00:35.350]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
-[21:00:35.350]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
-[21:00:35.382] Fetching user lists from Trakt
-[21:00:35.404] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
-[21:00:35.404] Error fetching Trakt lists: Error: Unable to get valid Trakt access token
-[21:00:35.404]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
-[21:00:35.405]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:35.405]     at async u (/vercel/path0/.next/server/app/api/trakt/lists/route.js:1:664)
-[21:00:35.405]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
-[21:00:35.405]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
-[21:00:35.405]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
-[21:00:35.405]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
-[21:00:35.405]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
-[21:00:35.405]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
-[21:00:35.405]     at async Object.exportPage (/vercel/path0/node_modules/next/dist/export/worker.js:237:20)
-[21:00:35.461] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
-[21:00:35.462] Error fetching Trakt stats: Error: Unable to get valid Trakt access token
-[21:00:35.462]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
-[21:00:35.462]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:35.462]     at async d (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4890)
-[21:00:35.462]     at async l (/vercel/path0/.next/server/app/api/trakt/stats/route.js:1:606)
-[21:00:35.462]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
-[21:00:35.462]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
-[21:00:35.462]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
-[21:00:35.463]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
-[21:00:35.463]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
-[21:00:35.463]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
-[21:00:39.074] MDX file not found: /vercel/path0/app/blog/content/reply-to-mephisto.mdx
-[21:00:39.074] MDX file not found: /vercel/path0/app/blog/content/reply-to-mephisto.mdx
-[21:00:39.075] Could not find MDX file for thought-experiments/reply-to-mephisto
-[21:00:39.075] Could not find MDX file for thought-experiments/reply-to-mephisto
-[21:00:46.021] PostTableRow - Linking to: essays/character-analysis/analysis-of-susanna-kaysen
-[21:00:46.022] PostTableRow - Linking to: essays/character-analysis/analysis-of-daisy-randone
-[21:00:46.022] PostTableRow - Linking to: essays/character-analysis/analysis-of-lisa-rowe
-[21:00:46.022] PostTableRow - Linking to: essays/Thought Experiments/reply-to-mephisto
-[21:00:46.023] PostTableRow - Linking to: essays/letters/a-letter-to-the-student-in-shadow
-[21:00:46.023] PostTableRow - Linking to: essays/pedagogy/on-the-learning-of-difficult-things
-[21:00:46.023] PostTableRow - Linking to: essays/pedagogy/on-learning-serious-things
-[21:00:46.023] PostTableRow - Linking to: essays/pedagogy/reflections-on-lifelong-study
-[21:00:46.024] PostTableRow - Linking to: essays/philosophy/on-being-wounded
-[21:00:46.024] PostTableRow - Linking to: essays/philosophy/when-the-body-keeps-score
-[21:00:46.419]    Generating static pages (219/878) 
-[21:00:46.894] BookDetailClient - Received book: Linear Algebra Done Right
-[21:00:46.894] BookDetailClient - Book slug: linear-algebra-done-right
-[21:00:46.909] BookDetailClient - Received book: Understanding Analysis
-[21:00:46.910] BookDetailClient - Book slug: understanding-analysis
-[21:00:46.925] BookDetailClient - Received book: Elementary Analysis: The Theory of Calculus
-[21:00:46.926] BookDetailClient - Book slug: elementary-analysis-theory-of-calculus
-[21:00:46.949] BookDetailClient - Received book: Principles of Mathematical Analysis
-[21:00:46.949] BookDetailClient - Book slug: principles-of-mathematical-analysis
-[21:00:46.967] BookDetailClient - Received book: Complex Variables for Scientists and Engineers
-[21:00:46.967] BookDetailClient - Book slug: complex-variables-for-scientists-and-engineers
-[21:00:46.982] BookDetailClient - Received book: Elementary Number Theory
-[21:00:46.983] BookDetailClient - Book slug: elementary-number-theory
-[21:00:46.997] BookDetailClient - Received book: The Structure of Abstract Algebra
-[21:00:46.997] BookDetailClient - Book slug: the-structure-of-abstract-algebra
-[21:00:47.012] BookDetailClient - Received book: Plane Trigonometry with Tables
-[21:00:47.013] BookDetailClient - Book slug: plane-trigonometry-with-tables
-[21:00:47.727] Unknown content type: lab
-[21:00:47.728] Could not find MDX file for verse/lab-surveys
-[21:00:47.731] Unknown content type: lab
-[21:00:47.731] Could not find MDX file for verse/lab-surveys
-[21:00:47.751] Unknown content type: lab
-[21:00:47.751] Could not find MDX file for notes/lab-methods
-[21:00:47.753] Unknown content type: lab
-[21:00:47.753] Could not find MDX file for notes/lab-methods
-[21:00:51.169] MDX file not found: /vercel/path0/app/notes/content/on-myself/clash-royale.mdx
-[21:00:51.171] MDX file not found: /vercel/path0/app/notes/content/on-myself/clash-royale.mdx
-[21:00:51.173] Error: Cannot find module './on-myself/clash-royale.mdx'
-[21:00:51.173]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
-[21:00:51.173]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:51.173]     at runNextTicks (node:internal/process/task_queues:69:3)
-[21:00:51.173]     at listOnTimeout (node:internal/timers:549:9)
-[21:00:51.173]     at process.processTimers (node:internal/timers:523:7)
-[21:00:51.173]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[21:00:51.173]   code: 'MODULE_NOT_FOUND',
-[21:00:51.173]   digest: '374583188'
-[21:00:51.173] }
-[21:00:51.174] Error: Cannot find module './on-myself/clash-royale.mdx'
-[21:00:51.174]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
-[21:00:51.174]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:51.174]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[21:00:51.175]   code: 'MODULE_NOT_FOUND',
-[21:00:51.175]   digest: '56425885'
-[21:00:51.175] }
-[21:00:51.176] Error: Cannot find module './on-myself/clash-royale.mdx'
-[21:00:51.176]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
-[21:00:51.176]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:51.176]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[21:00:51.176]   code: 'MODULE_NOT_FOUND',
-[21:00:51.176]   digest: '56425885'
-[21:00:51.176] }
-[21:00:51.189] 
-[21:00:51.190] Error occurred prerendering page "/notes/on-myself/clash-royale". Read more: https://nextjs.org/docs/messages/prerender-error
-[21:00:51.190] 
-[21:00:51.190] Error: Cannot find module './on-myself/clash-royale.mdx'
-[21:00:51.190]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
-[21:00:51.190]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:51.190]     at runNextTicks (node:internal/process/task_queues:69:3)
-[21:00:51.191]     at listOnTimeout (node:internal/timers:549:9)
-[21:00:51.191]     at process.processTimers (node:internal/timers:523:7)
-[21:00:51.191]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[21:00:51.261] MDX file not found: /vercel/path0/app/notes/content/on-myself/tryhackme.mdx
-[21:00:51.261] MDX file not found: /vercel/path0/app/notes/content/on-myself/tryhackme.mdx
-[21:00:51.263] Error: Cannot find module './on-myself/tryhackme.mdx'
-[21:00:51.263]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
-[21:00:51.263]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:51.263]     at runNextTicks (node:internal/process/task_queues:69:3)
-[21:00:51.263]     at listOnTimeout (node:internal/timers:549:9)
-[21:00:51.263]     at process.processTimers (node:internal/timers:523:7)
-[21:00:51.263]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[21:00:51.263]   code: 'MODULE_NOT_FOUND',
-[21:00:51.263]   digest: '2299827764'
-[21:00:51.263] }
-[21:00:51.264] Error: Cannot find module './on-myself/tryhackme.mdx'
-[21:00:51.264]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
-[21:00:51.264]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:51.264]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[21:00:51.264]   code: 'MODULE_NOT_FOUND',
-[21:00:51.264]   digest: '435762813'
-[21:00:51.264] }
-[21:00:51.266] Error: Cannot find module './on-myself/tryhackme.mdx'
-[21:00:51.266]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
-[21:00:51.266]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:51.266]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[21:00:51.266]   code: 'MODULE_NOT_FOUND',
-[21:00:51.266]   digest: '435762813'
-[21:00:51.266] }
-[21:00:51.275] 
-[21:00:51.275] Error occurred prerendering page "/notes/on-myself/tryhackme". Read more: https://nextjs.org/docs/messages/prerender-error
-[21:00:51.276] 
-[21:00:51.277] Error: Cannot find module './on-myself/tryhackme.mdx'
-[21:00:51.278]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
-[21:00:51.278]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:51.278]     at runNextTicks (node:internal/process/task_queues:69:3)
-[21:00:51.278]     at listOnTimeout (node:internal/timers:549:9)
-[21:00:51.278]     at process.processTimers (node:internal/timers:523:7)
-[21:00:51.278]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[21:00:51.280] MDX file not found: /vercel/path0/app/notes/content/on-myself/hackthebox.mdx
-[21:00:51.281] MDX file not found: /vercel/path0/app/notes/content/on-myself/hackthebox.mdx
-[21:00:51.283] Error: Cannot find module './on-myself/hackthebox.mdx'
-[21:00:51.283]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
-[21:00:51.283]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:51.283]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[21:00:51.283]   code: 'MODULE_NOT_FOUND',
-[21:00:51.283]   digest: '1752657565'
-[21:00:51.283] }
-[21:00:51.284] Error: Cannot find module './on-myself/hackthebox.mdx'
-[21:00:51.284]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
-[21:00:51.284]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:51.284]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[21:00:51.284]   code: 'MODULE_NOT_FOUND',
-[21:00:51.284]   digest: '1752657565'
-[21:00:51.284] }
-[21:00:51.290] Error: Cannot find module './on-myself/hackthebox.mdx'
-[21:00:51.291]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
-[21:00:51.291]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:51.291]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[21:00:51.291]   code: 'MODULE_NOT_FOUND',
-[21:00:51.291]   digest: '1752657565'
-[21:00:51.291] }
-[21:00:51.301] 
-[21:00:51.301] Error occurred prerendering page "/notes/on-myself/hackthebox". Read more: https://nextjs.org/docs/messages/prerender-error
-[21:00:51.301] 
-[21:00:51.301] Error: Cannot find module './on-myself/hackthebox.mdx'
-[21:00:51.301]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
-[21:00:51.301]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:51.301]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[21:00:52.711]    Generating static pages (438/878) 
-[21:00:53.150] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/select-elementary-improper-integrals-i.mdx
-[21:00:53.150] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/select-elementary-improper-integrals-i.mdx
-[21:00:53.201] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/cleos-integral.mdx
-[21:00:53.201] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/cleos-integral.mdx
-[21:00:53.421] Read proofs file successfully: /vercel/path0/app/proofs/content/number-theory/infinitely-many-primes.mdx
-[21:00:53.421] Read proofs file successfully: /vercel/path0/app/proofs/content/number-theory/infinitely-many-primes.mdx
-[21:00:53.766] Attempting to read file from: /vercel/path0/data/research-bounties.json
-[21:00:53.767] Attempting to read file from: /vercel/path0/data/research-bounties.json
-[21:00:54.096] MDX file not found: /vercel/path0/app/reviews/content/anime/koukaku-kidoutai.mdx
-[21:00:54.096] MDX file not found: /vercel/path0/app/reviews/content/anime/koukaku-kidoutai.mdx
-[21:00:54.101] Error: Cannot find module './anime/koukaku-kidoutai.mdx'
-[21:00:54.101]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
-[21:00:54.101]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:54.101]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[21:00:54.101]   code: 'MODULE_NOT_FOUND',
-[21:00:54.101]   digest: '2067449571'
-[21:00:54.101] }
-[21:00:54.101] Error: Cannot find module './anime/koukaku-kidoutai.mdx'
-[21:00:54.101]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
-[21:00:54.101]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:54.102]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[21:00:54.102]   code: 'MODULE_NOT_FOUND',
-[21:00:54.102]   digest: '2067449571'
-[21:00:54.102] }
-[21:00:54.102] Error: Cannot find module './anime/koukaku-kidoutai.mdx'
-[21:00:54.102]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
-[21:00:54.102]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:54.102]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[21:00:54.102]   code: 'MODULE_NOT_FOUND',
-[21:00:54.102]   digest: '2067449571'
-[21:00:54.102] }
-[21:00:54.112] 
-[21:00:54.112] Error occurred prerendering page "/reviews/anime/koukaku-kidoutai". Read more: https://nextjs.org/docs/messages/prerender-error
-[21:00:54.113] 
-[21:00:54.113] Error: Cannot find module './anime/koukaku-kidoutai.mdx'
-[21:00:54.113]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
-[21:00:54.113]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:54.113]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766)
-[21:00:54.117] MDX file not found: /vercel/path0/app/reviews/content/anime/sousou-no-frieren.mdx
-[21:00:54.118] MDX file not found: /vercel/path0/app/reviews/content/anime/sousou-no-frieren.mdx
-[21:00:54.120] Error: Cannot find module './anime/sousou-no-frieren.mdx'
-[21:00:54.120]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
-[21:00:54.120]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:54.121]     at runNextTicks (node:internal/process/task_queues:69:3)
-[21:00:54.122]     at listOnTimeout (node:internal/timers:549:9)
-[21:00:54.122]     at process.processTimers (node:internal/timers:523:7)
-[21:00:54.122]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[21:00:54.122]   code: 'MODULE_NOT_FOUND',
-[21:00:54.122]   digest: '1492812906'
-[21:00:54.123] }
-[21:00:54.123] Error: Cannot find module './anime/sousou-no-frieren.mdx'
-[21:00:54.123]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
-[21:00:54.123]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:54.123]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[21:00:54.123]   code: 'MODULE_NOT_FOUND',
-[21:00:54.123]   digest: '3788957187'
-[21:00:54.123] }
-[21:00:54.126] Error: Cannot find module './anime/sousou-no-frieren.mdx'
-[21:00:54.126]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
-[21:00:54.126]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:54.126]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[21:00:54.126]   code: 'MODULE_NOT_FOUND',
-[21:00:54.126]   digest: '3788957187'
-[21:00:54.126] }
-[21:00:54.135] 
-[21:00:54.135] Error occurred prerendering page "/reviews/anime/sousou-no-frieren". Read more: https://nextjs.org/docs/messages/prerender-error
-[21:00:54.136] 
-[21:00:54.136] Error: Cannot find module './anime/sousou-no-frieren.mdx'
-[21:00:54.136]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
-[21:00:54.136]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[21:00:54.136]     at runNextTicks (node:internal/process/task_queues:69:3)
-[21:00:54.136]     at listOnTimeout (node:internal/timers:549:9)
-[21:00:54.136]     at process.processTimers (node:internal/timers:523:7)
-[21:00:54.136]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766)
-[21:00:56.276]    Generating static pages (658/878) 
-[21:01:00.279] Fetching from Monkeytype API: https://api.monkeytype.com/users/stats
-[21:01:00.280] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
-[21:01:00.281] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=30
-[21:01:00.281] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
-[21:01:00.282] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
-[21:01:00.282] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=10
-[21:01:00.282] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=25
-[21:01:00.282] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
-[21:01:00.283] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=100
-[21:01:00.283] Fetching from Monkeytype API: https://api.monkeytype.com/users/streak
-[21:01:00.284] Fetching from Monkeytype API: https://api.monkeytype.com/users/currentTestActivity
-[21:01:00.284] Fetching from Monkeytype API: https://api.monkeytype.com/results?limit=10
-[21:01:00.285] Fetching from Monkeytype API: https://api.monkeytype.com/users/stats
-[21:01:00.286] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
-[21:01:00.286] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=30
-[21:01:00.287] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
-[21:01:00.287] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
-[21:01:00.287] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=10
-[21:01:00.287] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=25
-[21:01:00.288] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
-[21:01:00.288] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=100
-[21:01:00.288] Fetching from Monkeytype API: https://api.monkeytype.com/users/streak
-[21:01:00.289] Fetching from Monkeytype API: https://api.monkeytype.com/users/currentTestActivity
-[21:01:00.289] Fetching from Monkeytype API: https://api.monkeytype.com/results?limit=10
-[21:01:00.415] API response for /users/stats: {
-[21:01:00.415]   message: 'Personal stats retrieved',
-[21:01:00.415]   data: {
-[21:01:00.415]     _id: '638bd797bd098f2ba5dfa400',
-[21:01:00.417]     completedTests: 86,
-[21:01:00.417]     startedTests: 120,
-[21:01:00.417]     timeTyping: 16820.659999999996
-[21:01:00.418]   }
-[21:01:00.418] }
-[21:01:00.418] API response for /users/stats: {
-[21:01:00.418]   message: 'Personal stats retrieved',
-[21:01:00.419]   data: {
-[21:01:00.419]     _id: '638bd797bd098f2ba5dfa400',
-[21:01:00.419]     completedTests: 86,
-[21:01:00.419]     startedTests: 120,
-[21:01:00.419]     timeTyping: 16820.659999999996
-[21:01:00.419]   }
-[21:01:00.419] }
-[21:01:00.460] Monkeytype API error (503): {}
-[21:01:00.460] Retrying request (attempt 1/3)...
-[21:01:00.486] Monkeytype API error (503): {}
-[21:01:00.487] Retrying request (attempt 1/3)...
-[21:01:00.610] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
-[21:01:00.611] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
-[21:01:00.809] API response for /users/personalBests: {
-[21:01:00.809]   message: 'Personal bests retrieved',
-[21:01:00.810]   data: [
-[21:01:00.810]     {
-[21:01:00.810]       acc: 87.73,
-[21:01:00.810]       consistency: 84.65,
-[21:01:00.810]       difficulty: 'normal',
-[21:01:00.810]       lazyMode: false,
-[21:01:00.810]       language: 'english',
-[21:01:00.810]       punctuation: false,
-[21:01:00.810]       raw: 130.38,
-[21:01:00.810]       wpm: 104.79,
-[21:01:00.810]       numbers: false,
-[21:01:00.810]       timestamp: 1741147466281
-[21:01:00.810]     }
-[21:01:00.810]   ]
-[21:01:00.811] }
-[21:01:00.811] Personal bests data: [
-[21:01:00.811]   {
-[21:01:00.811]     "acc": 87.73,
-[21:01:00.811]     "consistency": 84.65,
-[21:01:00.811]     "difficulty": "normal",
-[21:01:00.811]     "lazyMode": false,
-[21:01:00.811]     "language": "english",
-[21:01:00.811]     "punctuation": false,
-[21:01:00.811]     "raw": 130.38,
-[21:01:00.811]     "wpm": 104.79,
-[21:01:00.811]     "numbers": false,
-[21:01:00.811]     "timestamp": 1741147466281
-[21:01:00.811]   }
-[21:01:00.812] ]
-[21:01:00.812] API response for /users/personalBests: {
-[21:01:00.812]   message: 'Personal bests retrieved',
-[21:01:00.812]   data: [
-[21:01:00.812]     {
-[21:01:00.812]       acc: 87.73,
-[21:01:00.812]       consistency: 84.65,
-[21:01:00.812]       difficulty: 'normal',
-[21:01:00.812]       lazyMode: false,
-[21:01:00.812]       language: 'english',
-[21:01:00.812]       punctuation: false,
-[21:01:00.813]       raw: 130.38,
-[21:01:00.813]       wpm: 104.79,
-[21:01:00.813]       numbers: false,
-[21:01:00.813]       timestamp: 1741147466281
-[21:01:00.813]     }
-[21:01:00.813]   ]
-[21:01:00.813] }
-[21:01:00.813] Personal bests data: [
-[21:01:00.813]   {
-[21:01:00.813]     "acc": 87.73,
-[21:01:00.813]     "consistency": 84.65,
-[21:01:00.813]     "difficulty": "normal",
-[21:01:00.814]     "lazyMode": false,
-[21:01:00.814]     "language": "english",
-[21:01:00.814]     "punctuation": false,
-[21:01:00.814]     "raw": 130.38,
-[21:01:00.814]     "wpm": 104.79,
-[21:01:00.814]     "numbers": false,
-[21:01:00.814]     "timestamp": 1741147466281
-[21:01:00.814]   }
-[21:01:00.814] ]
-[21:01:01.011] API response for /users/currentTestActivity: {
-[21:01:01.011]   message: 'Current test activity data retrieved',
-[21:01:01.011]   data: {
-[21:01:01.011]     testsByDays: [
-[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.011]       null, null, null, null, null, 1,    2,    null, null, null,
-[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.011]       ... 272 more items
-[21:01:01.011]     ],
-[21:01:01.011]     lastDay: 1747094400000
-[21:01:01.012]   }
-[21:01:01.012] }
-[21:01:01.012] API response for /users/currentTestActivity: {
-[21:01:01.012]   message: 'Current test activity data retrieved',
-[21:01:01.012]   data: {
-[21:01:01.012]     testsByDays: [
-[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.012]       null, null, null, null, null, 1,    2,    null, null, null,
-[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
-[21:01:01.012]       ... 272 more items
-[21:01:01.012]     ],
-[21:01:01.012]     lastDay: 1747094400000
-[21:01:01.012]   }
-[21:01:01.012] }
-[21:01:01.228] API response for /results: {
-[21:01:01.229]   message: 'Results retrieved',
-[21:01:01.229]   data: [
-[21:01:01.229]     {
-[21:01:01.229]       _id: '6822f665df21a5c1da374b59',
-[21:01:01.229]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.229]       wpm: 74.13,
-[21:01:01.229]       rawWpm: 79.45,
-[21:01:01.229]       charStats: [Array],
-[21:01:01.229]       acc: 89.27,
-[21:01:01.229]       mode: 'words',
-[21:01:01.229]       mode2: '50',
-[21:01:01.229]       timestamp: 1747121765000,
-[21:01:01.229]       restartCount: 4,
-[21:01:01.229]       incompleteTestSeconds: 26.77,
-[21:01:01.230]       testDuration: 38.36,
-[21:01:01.230]       consistency: 57.28,
-[21:01:01.230]       keyConsistency: 0.02
-[21:01:01.230]     },
-[21:01:01.230]     {
-[21:01:01.230]       _id: '6822f617df21a5c1da37484a',
-[21:01:01.230]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.230]       wpm: 94.2,
-[21:01:01.230]       rawWpm: 94.2,
-[21:01:01.230]       charStats: [Array],
-[21:01:01.230]       acc: 95.83,
-[21:01:01.230]       mode: 'words',
-[21:01:01.230]       mode2: '50',
-[21:01:01.231]       timestamp: 1747121687000,
-[21:01:01.231]       testDuration: 34.52,
-[21:01:01.231]       consistency: 60.29,
-[21:01:01.231]       keyConsistency: 1.96
-[21:01:01.231]     },
-[21:01:01.231]     {
-[21:01:01.231]       _id: '6822d447df21a5c1da35f42c',
-[21:01:01.231]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.231]       wpm: 96.52,
-[21:01:01.231]       rawWpm: 102.98,
-[21:01:01.231]       charStats: [Array],
-[21:01:01.231]       acc: 90.41,
-[21:01:01.231]       mode: 'words',
-[21:01:01.231]       mode2: '50',
-[21:01:01.232]       timestamp: 1747113031000,
-[21:01:01.232]       restartCount: 6,
-[21:01:01.232]       incompleteTestSeconds: 27.88,
-[21:01:01.232]       testDuration: 31.58,
-[21:01:01.232]       consistency: 63.38,
-[21:01:01.232]       keyConsistency: 2.07
-[21:01:01.232]     },
-[21:01:01.232]     {
-[21:01:01.232]       _id: '6822d3d5df21a5c1da35f014',
-[21:01:01.233]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.233]       wpm: 97.8,
-[21:01:01.233]       rawWpm: 111.45,
-[21:01:01.233]       charStats: [Array],
-[21:01:01.234]       acc: 90.57,
-[21:01:01.234]       mode: 'words',
-[21:01:01.234]       mode2: '10',
-[21:01:01.234]       timestamp: 1747112917000,
-[21:01:01.234]       restartCount: 1,
-[21:01:01.234]       incompleteTestSeconds: 1.81,
-[21:01:01.234]       testDuration: 5.28,
-[21:01:01.234]       consistency: 47.29,
-[21:01:01.234]       keyConsistency: 8.22,
-[21:01:01.234]       isPb: true
-[21:01:01.235]     },
-[21:01:01.235]     {
-[21:01:01.235]       _id: '6822d3bedf21a5c1da35ef2c',
-[21:01:01.235]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.235]       wpm: 105.53,
-[21:01:01.235]       rawWpm: 105.53,
-[21:01:01.235]       charStats: [Array],
-[21:01:01.235]       acc: 98.48,
-[21:01:01.235]       mode: 'words',
-[21:01:01.235]       mode2: '50',
-[21:01:01.235]       timestamp: 1747112894000,
-[21:01:01.235]       restartCount: 1,
-[21:01:01.236]       incompleteTestSeconds: 2.46,
-[21:01:01.236]       testDuration: 29.45,
-[21:01:01.236]       consistency: 72.1,
-[21:01:01.236]       keyConsistency: 15.77
-[21:01:01.236]     },
-[21:01:01.236]     {
-[21:01:01.236]       _id: '6822d347df21a5c1da35eabb',
-[21:01:01.236]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.236]       wpm: 113.25,
-[21:01:01.236]       rawWpm: 118.04,
-[21:01:01.236]       charStats: [Array],
-[21:01:01.237]       acc: 96.79,
-[21:01:01.237]       mode: 'words',
-[21:01:01.237]       mode2: '50',
-[21:01:01.237]       timestamp: 1747112775000,
-[21:01:01.237]       restartCount: 5,
-[21:01:01.237]       incompleteTestSeconds: 31.85,
-[21:01:01.237]       testDuration: 27.55,
-[21:01:01.237]       consistency: 75.48,
-[21:01:01.237]       keyConsistency: 9.83
-[21:01:01.237]     },
-[21:01:01.237]     {
-[21:01:01.237]       _id: '6822d2a6df21a5c1da35e476',
-[21:01:01.238]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.238]       wpm: 120.15,
-[21:01:01.238]       rawWpm: 120.15,
-[21:01:01.238]       charStats: [Array],
-[21:01:01.238]       acc: 99.27,
-[21:01:01.238]       mode: 'words',
-[21:01:01.238]       mode2: '50',
-[21:01:01.238]       timestamp: 1747112614000,
-[21:01:01.238]       restartCount: 1,
-[21:01:01.238]       incompleteTestSeconds: 25.16,
-[21:01:01.238]       testDuration: 27.07,
-[21:01:01.238]       consistency: 71.97,
-[21:01:01.238]       keyConsistency: 29.89,
-[21:01:01.239]       isPb: true
-[21:01:01.239]     },
-[21:01:01.239]     {
-[21:01:01.239]       _id: '6822d25fdf21a5c1da35e19c',
-[21:01:01.239]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.239]       wpm: 78.98,
-[21:01:01.239]       rawWpm: 81.49,
-[21:01:01.239]       charStats: [Array],
-[21:01:01.239]       acc: 93.31,
-[21:01:01.239]       mode: 'custom',
-[21:01:01.239]       mode2: 'custom',
-[21:01:01.240]       timestamp: 1747112543000,
-[21:01:01.240]       restartCount: 2,
-[21:01:01.240]       incompleteTestSeconds: 29.08,
-[21:01:01.240]       testDuration: 33.43,
-[21:01:01.240]       consistency: 58.3,
-[21:01:01.240]       keyConsistency: 1.04,
-[21:01:01.240]       isPb: true
-[21:01:01.240]     },
-[21:01:01.240]     {
-[21:01:01.240]       _id: '6822ce95df21a5c1da35bce5',
-[21:01:01.240]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.240]       wpm: 113.66,
-[21:01:01.241]       rawWpm: 113.66,
-[21:01:01.241]       charStats: [Array],
-[21:01:01.241]       acc: 98.15,
-[21:01:01.241]       mode: 'words',
-[21:01:01.241]       mode2: '50',
-[21:01:01.241]       timestamp: 1747111573000,
-[21:01:01.241]       testDuration: 27.98,
-[21:01:01.241]       consistency: 76.97,
-[21:01:01.241]       keyConsistency: 21.07,
-[21:01:01.241]       isPb: true
-[21:01:01.241]     },
-[21:01:01.242]     {
-[21:01:01.242]       _id: '682008a1df21a5c1da19c9cf',
-[21:01:01.242]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.242]       wpm: 79.76,
-[21:01:01.242]       rawWpm: 89.6,
-[21:01:01.242]       charStats: [Array],
-[21:01:01.242]       acc: 84.06,
-[21:01:01.242]       mode: 'words',
-[21:01:01.242]       mode2: '50',
-[21:01:01.242]       timestamp: 1746929825000,
-[21:01:01.242]       restartCount: 3,
-[21:01:01.242]       incompleteTestSeconds: 88.11,
-[21:01:01.243]       testDuration: 32.95,
-[21:01:01.243]       consistency: 59.82,
-[21:01:01.243]       keyConsistency: 0.75
-[21:01:01.243]     }
-[21:01:01.243]   ]
-[21:01:01.243] }
-[21:01:01.244] API response for /results: {
-[21:01:01.244]   message: 'Results retrieved',
-[21:01:01.244]   data: [
-[21:01:01.245]     {
-[21:01:01.245]       _id: '6822f665df21a5c1da374b59',
-[21:01:01.245]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.245]       wpm: 74.13,
-[21:01:01.245]       rawWpm: 79.45,
-[21:01:01.245]       charStats: [Array],
-[21:01:01.245]       acc: 89.27,
-[21:01:01.246]       mode: 'words',
-[21:01:01.246]       mode2: '50',
-[21:01:01.246]       timestamp: 1747121765000,
-[21:01:01.246]       restartCount: 4,
-[21:01:01.246]       incompleteTestSeconds: 26.77,
-[21:01:01.246]       testDuration: 38.36,
-[21:01:01.246]       consistency: 57.28,
-[21:01:01.246]       keyConsistency: 0.02
-[21:01:01.246]     },
-[21:01:01.246]     {
-[21:01:01.246]       _id: '6822f617df21a5c1da37484a',
-[21:01:01.246]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.247]       wpm: 94.2,
-[21:01:01.247]       rawWpm: 94.2,
-[21:01:01.247]       charStats: [Array],
-[21:01:01.247]       acc: 95.83,
-[21:01:01.247]       mode: 'words',
-[21:01:01.247]       mode2: '50',
-[21:01:01.247]       timestamp: 1747121687000,
-[21:01:01.247]       testDuration: 34.52,
-[21:01:01.247]       consistency: 60.29,
-[21:01:01.247]       keyConsistency: 1.96
-[21:01:01.247]     },
-[21:01:01.247]     {
-[21:01:01.248]       _id: '6822d447df21a5c1da35f42c',
-[21:01:01.248]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.248]       wpm: 96.52,
-[21:01:01.248]       rawWpm: 102.98,
-[21:01:01.248]       charStats: [Array],
-[21:01:01.248]       acc: 90.41,
-[21:01:01.248]       mode: 'words',
-[21:01:01.248]       mode2: '50',
-[21:01:01.248]       timestamp: 1747113031000,
-[21:01:01.248]       restartCount: 6,
-[21:01:01.248]       incompleteTestSeconds: 27.88,
-[21:01:01.248]       testDuration: 31.58,
-[21:01:01.248]       consistency: 63.38,
-[21:01:01.249]       keyConsistency: 2.07
-[21:01:01.249]     },
-[21:01:01.249]     {
-[21:01:01.249]       _id: '6822d3d5df21a5c1da35f014',
-[21:01:01.249]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.249]       wpm: 97.8,
-[21:01:01.249]       rawWpm: 111.45,
-[21:01:01.249]       charStats: [Array],
-[21:01:01.249]       acc: 90.57,
-[21:01:01.249]       mode: 'words',
-[21:01:01.249]       mode2: '10',
-[21:01:01.249]       timestamp: 1747112917000,
-[21:01:01.250]       restartCount: 1,
-[21:01:01.250]       incompleteTestSeconds: 1.81,
-[21:01:01.250]       testDuration: 5.28,
-[21:01:01.250]       consistency: 47.29,
-[21:01:01.250]       keyConsistency: 8.22,
-[21:01:01.250]       isPb: true
-[21:01:01.250]     },
-[21:01:01.250]     {
-[21:01:01.250]       _id: '6822d3bedf21a5c1da35ef2c',
-[21:01:01.250]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.250]       wpm: 105.53,
-[21:01:01.250]       rawWpm: 105.53,
-[21:01:01.251]       charStats: [Array],
-[21:01:01.251]       acc: 98.48,
-[21:01:01.251]       mode: 'words',
-[21:01:01.251]       mode2: '50',
-[21:01:01.251]       timestamp: 1747112894000,
-[21:01:01.251]       restartCount: 1,
-[21:01:01.251]       incompleteTestSeconds: 2.46,
-[21:01:01.251]       testDuration: 29.45,
-[21:01:01.251]       consistency: 72.1,
-[21:01:01.251]       keyConsistency: 15.77
-[21:01:01.251]     },
-[21:01:01.251]     {
-[21:01:01.251]       _id: '6822d347df21a5c1da35eabb',
-[21:01:01.252]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.252]       wpm: 113.25,
-[21:01:01.252]       rawWpm: 118.04,
-[21:01:01.252]       charStats: [Array],
-[21:01:01.252]       acc: 96.79,
-[21:01:01.252]       mode: 'words',
-[21:01:01.252]       mode2: '50',
-[21:01:01.252]       timestamp: 1747112775000,
-[21:01:01.252]       restartCount: 5,
-[21:01:01.252]       incompleteTestSeconds: 31.85,
-[21:01:01.252]       testDuration: 27.55,
-[21:01:01.252]       consistency: 75.48,
-[21:01:01.252]       keyConsistency: 9.83
-[21:01:01.253]     },
-[21:01:01.253]     {
-[21:01:01.253]       _id: '6822d2a6df21a5c1da35e476',
-[21:01:01.253]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.253]       wpm: 120.15,
-[21:01:01.253]       rawWpm: 120.15,
-[21:01:01.253]       charStats: [Array],
-[21:01:01.253]       acc: 99.27,
-[21:01:01.253]       mode: 'words',
-[21:01:01.253]       mode2: '50',
-[21:01:01.253]       timestamp: 1747112614000,
-[21:01:01.254]       restartCount: 1,
-[21:01:01.254]       incompleteTestSeconds: 25.16,
-[21:01:01.254]       testDuration: 27.07,
-[21:01:01.254]       consistency: 71.97,
-[21:01:01.255]       keyConsistency: 29.89,
-[21:01:01.255]       isPb: true
-[21:01:01.255]     },
-[21:01:01.255]     {
-[21:01:01.255]       _id: '6822d25fdf21a5c1da35e19c',
-[21:01:01.255]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.255]       wpm: 78.98,
-[21:01:01.255]       rawWpm: 81.49,
-[21:01:01.255]       charStats: [Array],
-[21:01:01.255]       acc: 93.31,
-[21:01:01.255]       mode: 'custom',
-[21:01:01.256]       mode2: 'custom',
-[21:01:01.256]       timestamp: 1747112543000,
-[21:01:01.256]       restartCount: 2,
-[21:01:01.256]       incompleteTestSeconds: 29.08,
-[21:01:01.256]       testDuration: 33.43,
-[21:01:01.256]       consistency: 58.3,
-[21:01:01.256]       keyConsistency: 1.04,
-[21:01:01.256]       isPb: true
-[21:01:01.256]     },
-[21:01:01.256]     {
-[21:01:01.257]       _id: '6822ce95df21a5c1da35bce5',
-[21:01:01.257]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.257]       wpm: 113.66,
-[21:01:01.257]       rawWpm: 113.66,
-[21:01:01.257]       charStats: [Array],
-[21:01:01.257]       acc: 98.15,
-[21:01:01.257]       mode: 'words',
-[21:01:01.257]       mode2: '50',
-[21:01:01.257]       timestamp: 1747111573000,
-[21:01:01.257]       testDuration: 27.98,
-[21:01:01.257]       consistency: 76.97,
-[21:01:01.258]       keyConsistency: 21.07,
-[21:01:01.258]       isPb: true
-[21:01:01.258]     },
-[21:01:01.258]     {
-[21:01:01.258]       _id: '682008a1df21a5c1da19c9cf',
-[21:01:01.258]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[21:01:01.258]       wpm: 79.76,
-[21:01:01.258]       rawWpm: 89.6,
-[21:01:01.258]       charStats: [Array],
-[21:01:01.258]       acc: 84.06,
-[21:01:01.258]       mode: 'words',
-[21:01:01.259]       mode2: '50',
-[21:01:01.259]       timestamp: 1746929825000,
-[21:01:01.259]       restartCount: 3,
-[21:01:01.259]       incompleteTestSeconds: 88.11,
-[21:01:01.259]       testDuration: 32.95,
-[21:01:01.259]       consistency: 59.82,
-[21:01:01.259]       keyConsistency: 0.75
-[21:01:01.259]     }
-[21:01:01.259]   ]
-[21:01:01.259] }
-[21:01:01.409] API response for /users/personalBests: {
-[21:01:01.409]   message: 'Personal bests retrieved',
-[21:01:01.409]   data: [
-[21:01:01.409]     {
-[21:01:01.409]       acc: 94.55,
-[21:01:01.409]       consistency: 66.53,
-[21:01:01.409]       difficulty: 'normal',
-[21:01:01.409]       lazyMode: false,
-[21:01:01.409]       language: 'english',
-[21:01:01.409]       punctuation: false,
-[21:01:01.409]       raw: 63.4,
-[21:01:01.409]       wpm: 61.46,
-[21:01:01.409]       timestamp: 1670133327519
-[21:01:01.410]     }
-[21:01:01.410]   ]
-[21:01:01.410] }
-[21:01:01.410] Personal bests data: [
-[21:01:01.410]   {
-[21:01:01.410]     "acc": 94.55,
-[21:01:01.410]     "consistency": 66.53,
-[21:01:01.410]     "difficulty": "normal",
-[21:01:01.410]     "lazyMode": false,
-[21:01:01.410]     "language": "english",
-[21:01:01.410]     "punctuation": false,
-[21:01:01.410]     "raw": 63.4,
-[21:01:01.410]     "wpm": 61.46,
-[21:01:01.410]     "timestamp": 1670133327519
-[21:01:01.410]   }
-[21:01:01.410] ]
-[21:01:01.410] API response for /users/personalBests: {
-[21:01:01.410]   message: 'Personal bests retrieved',
-[21:01:01.410]   data: [
-[21:01:01.410]     {
-[21:01:01.410]       acc: 94.55,
-[21:01:01.410]       consistency: 66.53,
-[21:01:01.410]       difficulty: 'normal',
-[21:01:01.410]       lazyMode: false,
-[21:01:01.410]       language: 'english',
-[21:01:01.410]       punctuation: false,
-[21:01:01.410]       raw: 63.4,
-[21:01:01.410]       wpm: 61.46,
-[21:01:01.410]       timestamp: 1670133327519
-[21:01:01.410]     }
-[21:01:01.410]   ]
-[21:01:01.410] }
-[21:01:01.410] Personal bests data: [
-[21:01:01.410]   {
-[21:01:01.411]     "acc": 94.55,
-[21:01:01.411]     "consistency": 66.53,
-[21:01:01.411]     "difficulty": "normal",
-[21:01:01.411]     "lazyMode": false,
-[21:01:01.411]     "language": "english",
-[21:01:01.411]     "punctuation": false,
-[21:01:01.411]     "raw": 63.4,
-[21:01:01.411]     "wpm": 61.46,
-[21:01:01.411]     "timestamp": 1670133327519
-[21:01:01.411]   }
-[21:01:01.411] ]
-[21:01:01.460] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
-[21:01:01.461] Monkeytype API error (503): {}
-[21:01:01.461] Retrying request (attempt 2/3)...
-[21:01:01.487] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
-[21:01:01.488] Monkeytype API error (503): {}
-[21:01:01.488] Retrying request (attempt 2/3)...
-[21:01:01.612] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
-[21:01:01.613] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
-[21:01:01.810] API response for /users/personalBests: {
-[21:01:01.810]   message: 'Personal bests retrieved',
-[21:01:01.810]   data: [
-[21:01:01.810]     {
-[21:01:01.810]       acc: 90.57,
-[21:01:01.810]       consistency: 47.29,
-[21:01:01.810]       difficulty: 'normal',
-[21:01:01.810]       lazyMode: false,
-[21:01:01.810]       language: 'english',
-[21:01:01.810]       punctuation: false,
-[21:01:01.811]       raw: 111.45,
-[21:01:01.811]       wpm: 97.8,
-[21:01:01.811]       numbers: false,
-[21:01:01.811]       timestamp: 1747112917927
-[21:01:01.811]     }
-[21:01:01.811]   ]
-[21:01:01.811] }
-[21:01:01.811] Personal bests data: [
-[21:01:01.811]   {
-[21:01:01.811]     "acc": 90.57,
-[21:01:01.811]     "consistency": 47.29,
-[21:01:01.811]     "difficulty": "normal",
-[21:01:01.811]     "lazyMode": false,
-[21:01:01.811]     "language": "english",
-[21:01:01.811]     "punctuation": false,
-[21:01:01.811]     "raw": 111.45,
-[21:01:01.811]     "wpm": 97.8,
-[21:01:01.811]     "numbers": false,
-[21:01:01.811]     "timestamp": 1747112917927
-[21:01:01.811]   }
-[21:01:01.811] ]
-[21:01:01.811] API response for /users/personalBests: {
-[21:01:01.812]   message: 'Personal bests retrieved',
-[21:01:01.812]   data: [
-[21:01:01.812]     {
-[21:01:01.812]       acc: 90.57,
-[21:01:01.812]       consistency: 47.29,
-[21:01:01.812]       difficulty: 'normal',
-[21:01:01.812]       lazyMode: false,
-[21:01:01.812]       language: 'english',
-[21:01:01.812]       punctuation: false,
-[21:01:01.812]       raw: 111.45,
-[21:01:01.812]       wpm: 97.8,
-[21:01:01.812]       numbers: false,
-[21:01:01.812]       timestamp: 1747112917927
-[21:01:01.812]     }
-[21:01:01.812]   ]
-[21:01:01.812] }
-[21:01:01.812] Personal bests data: [
-[21:01:01.812]   {
-[21:01:01.812]     "acc": 90.57,
-[21:01:01.813]     "consistency": 47.29,
-[21:01:01.813]     "difficulty": "normal",
-[21:01:01.813]     "lazyMode": false,
-[21:01:01.813]     "language": "english",
-[21:01:01.813]     "punctuation": false,
-[21:01:01.813]     "raw": 111.45,
-[21:01:01.813]     "wpm": 97.8,
-[21:01:01.813]     "numbers": false,
-[21:01:01.813]     "timestamp": 1747112917927
-[21:01:01.813]   }
-[21:01:01.813] ]
-[21:01:02.011] API response for /users/personalBests: {
-[21:01:02.011]   message: 'Personal bests retrieved',
-[21:01:02.011]   data: [
-[21:01:02.011]     {
-[21:01:02.011]       acc: 95.73,
-[21:01:02.011]       consistency: 69.5,
-[21:01:02.011]       difficulty: 'normal',
-[21:01:02.011]       lazyMode: false,
-[21:01:02.011]       language: 'english',
-[21:01:02.011]       punctuation: false,
-[21:01:02.011]       raw: 110,
-[21:01:02.011]       wpm: 102,
-[21:01:02.011]       timestamp: 1741147359513,
-[21:01:02.011]       numbers: false
-[21:01:02.011]     }
-[21:01:02.011]   ]
-[21:01:02.011] }
-[21:01:02.011] Personal bests data: [
-[21:01:02.011]   {
-[21:01:02.012]     "acc": 95.73,
-[21:01:02.012]     "consistency": 69.5,
-[21:01:02.012]     "difficulty": "normal",
-[21:01:02.012]     "lazyMode": false,
-[21:01:02.012]     "language": "english",
-[21:01:02.012]     "punctuation": false,
-[21:01:02.012]     "raw": 110,
-[21:01:02.012]     "wpm": 102,
-[21:01:02.012]     "timestamp": 1741147359513,
-[21:01:02.012]     "numbers": false
-[21:01:02.012]   }
-[21:01:02.012] ]
-[21:01:02.012] API response for /users/personalBests: {
-[21:01:02.012]   message: 'Personal bests retrieved',
-[21:01:02.012]   data: [
-[21:01:02.012]     {
-[21:01:02.012]       acc: 95.73,
-[21:01:02.012]       consistency: 69.5,
-[21:01:02.012]       difficulty: 'normal',
-[21:01:02.012]       lazyMode: false,
-[21:01:02.012]       language: 'english',
-[21:01:02.012]       punctuation: false,
-[21:01:02.012]       raw: 110,
-[21:01:02.012]       wpm: 102,
-[21:01:02.012]       timestamp: 1741147359513,
-[21:01:02.012]       numbers: false
-[21:01:02.012]     }
-[21:01:02.013]   ]
-[21:01:02.013] }
-[21:01:02.013] Personal bests data: [
-[21:01:02.013]   {
-[21:01:02.013]     "acc": 95.73,
-[21:01:02.013]     "consistency": 69.5,
-[21:01:02.013]     "difficulty": "normal",
-[21:01:02.013]     "lazyMode": false,
-[21:01:02.013]     "language": "english",
-[21:01:02.013]     "punctuation": false,
-[21:01:02.013]     "raw": 110,
-[21:01:02.013]     "wpm": 102,
-[21:01:02.013]     "timestamp": 1741147359513,
-[21:01:02.013]     "numbers": false
-[21:01:02.013]   }
-[21:01:02.013] ]
-[21:01:02.210] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
-[21:01:02.210] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
-[21:01:02.412] API response for /users/streak: {
-[21:01:02.412]   message: 'Streak data retrieved',
-[21:01:02.413]   data: {
-[21:01:02.413]     lastResultTimestamp: 1747121765000,
-[21:01:02.413]     length: 1,
-[21:01:02.414]     maxLength: 6,
-[21:01:02.414]     hourOffset: null
-[21:01:02.414]   }
-[21:01:02.414] }
-[21:01:02.414] API response for /users/streak: {
-[21:01:02.414]   message: 'Streak data retrieved',
-[21:01:02.414]   data: {
-[21:01:02.414]     lastResultTimestamp: 1747121765000,
-[21:01:02.414]     length: 1,
-[21:01:02.414]     maxLength: 6,
-[21:01:02.414]     hourOffset: null
-[21:01:02.414]   }
-[21:01:02.414] }
-[21:01:03.463] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
-[21:01:03.464] Monkeytype API error (503): {}
-[21:01:03.464] Retrying request (attempt 3/3)...
-[21:01:03.488] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
-[21:01:03.490] Monkeytype API error (503): {}
-[21:01:03.490] Retrying request (attempt 3/3)...
-[21:01:06.464] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
-[21:01:06.465] Monkeytype API error (503): {}
-[21:01:06.491] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
-[21:01:06.492] Monkeytype API error (503): {}
-[21:01:06.530]  ✓ Generating static pages (878/878)
-[21:01:06.535] 
-[21:01:06.535] > Export encountered errors on following paths:
-[21:01:06.535] 	/notes/[category]/[slug]/page: /notes/on-myself/clash-royale
-[21:01:06.535] 	/notes/[category]/[slug]/page: /notes/on-myself/hackthebox
-[21:01:06.535] 	/notes/[category]/[slug]/page: /notes/on-myself/tryhackme
-[21:01:06.535] 	/reviews/[category]/[slug]/page: /reviews/anime/koukaku-kidoutai
-[21:01:06.536] 	/reviews/[category]/[slug]/page: /reviews/anime/sousou-no-frieren
-[21:01:06.601] Error: Command "npm run build" exited with 1
-[21:01:07.259] 
-[21:01:10.674] Exiting build container
+[21:26:00.460] Running build in Washington, D.C., USA (East) – iad1
+[21:26:00.461] Build machine configuration: 2 cores, 8 GB
+[21:26:00.483] Cloning github.com/krisyotam/krisyotam.com (Branch: main, Commit: 3aacf10)
+[21:26:06.583] Cloning completed: 6.099s
+[21:26:21.949] Restored build cache from previous deployment (7FczQC8UNvy2nhn4eV92wZnEsndE)
+[21:26:24.503] Running "vercel build"
+[21:26:24.941] Vercel CLI 44.2.10
+[21:26:25.206] WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+[21:26:25.473] Installing dependencies...
+[21:26:28.071] npm warn deprecated topojson@3.0.2: Use topojson-client, topojson-server or topojson-simplify directly.
+[21:26:42.769] 
+[21:26:42.770] added 7 packages, removed 21 packages, and changed 49 packages in 17s
+[21:26:42.770] 
+[21:26:42.771] 233 packages are looking for funding
+[21:26:42.771]   run `npm fund` for details
+[21:26:42.807] Detected Next.js version: 14.2.30
+[21:26:42.815] Running "npm run build"
+[21:26:42.927] 
+[21:26:42.928] > kris-yotam@0.1.0 build
+[21:26:42.928] > next build
+[21:26:42.928] 
+[21:26:43.675]   ▲ Next.js 14.2.30
+[21:26:43.676]   - Experiments (use with caution):
+[21:26:43.676]     · webpackBuildWorker
+[21:26:43.676] 
+[21:26:43.773]    Creating an optimized production build ...
+[21:28:20.318]  ✓ Compiled successfully
+[21:28:20.319]    Linting and checking validity of types ...
+[21:29:43.520]    Collecting page data ...
+[21:29:46.787] Available categories: [
+[21:29:46.788]   'illuminati',
+[21:29:46.788]   'new-world-order',
+[21:29:46.788]   'cia-projects',
+[21:29:46.789]   'bohemian-grove',
+[21:29:46.789]   'bilderberg-group',
+[21:29:46.789]   'qanon',
+[21:29:46.789]   'roswell-and-ufo-coverups',
+[21:29:46.789]   'flat-earth',
+[21:29:46.790]   'secret-space-programs'
+[21:29:46.790] ]
+[21:29:46.790] Slugified categories: [
+[21:29:46.790]   'illuminati',
+[21:29:46.790]   'new-world-order',
+[21:29:46.791]   'cia-projects',
+[21:29:46.791]   'bohemian-grove',
+[21:29:46.791]   'bilderberg-group',
+[21:29:46.791]   'qanon',
+[21:29:46.791]   'roswell-and-ufo-coverups',
+[21:29:46.791]   'flat-earth',
+[21:29:46.791]   'secret-space-programs'
+[21:29:46.792] ]
+[21:29:46.934] Available categories: [
+[21:29:46.935]   'liber-necrophilia',
+[21:29:46.935]   'liber-zoophilia',
+[21:29:46.935]   'liber-sodomorum',
+[21:29:46.935]   'liber-experimentorum',
+[21:29:46.935]   'liber-mortis',
+[21:29:46.935]   'liber-incubi',
+[21:29:46.935]   'liber-hysterica',
+[21:29:46.935]   'malleus-innocentium',
+[21:29:46.935]   'fabrica-excruciationis'
+[21:29:46.935] ]
+[21:29:46.936] Slugified categories: [
+[21:29:46.936]   'liber-necrophilia',
+[21:29:46.936]   'liber-zoophilia',
+[21:29:46.936]   'liber-sodomorum',
+[21:29:46.941]   'liber-experimentorum',
+[21:29:46.941]   'liber-mortis',
+[21:29:46.941]   'liber-incubi',
+[21:29:46.942]   'liber-hysterica',
+[21:29:46.942]   'malleus-innocentium',
+[21:29:46.942]   'fabrica-excruciationis'
+[21:29:46.942] ]
+[21:29:47.011] Available categories: [
+[21:29:47.011]   'Philosophy',
+[21:29:47.011]   'Verse',
+[21:29:47.011]   'Random',
+[21:29:47.011]   'On Myself',
+[21:29:47.011]   'Libraries',
+[21:29:47.011]   'Bounties',
+[21:29:47.012]   'News',
+[21:29:47.012]   'Website',
+[21:29:47.012]   'Stable Syllabi',
+[21:29:47.012]   'Research',
+[21:29:47.012]   'Powerscaling',
+[21:29:47.012]   'Book Notes',
+[21:29:47.012]   'Technology',
+[21:29:47.012]   'Virtual Worlds',
+[21:29:47.012]   'Mathematics',
+[21:29:47.012]   'Internet Archive',
+[21:29:47.012]   'Indie Web',
+[21:29:47.012]   'Learning',
+[21:29:47.012]   'Physics',
+[21:29:47.013]   'social-media',
+[21:29:47.013]   'Fraternities',
+[21:29:47.013]   'Artificial Intelligence',
+[21:29:47.013]   'Manuals Of Style',
+[21:29:47.013]   'Internet Archiving'
+[21:29:47.013] ]
+[21:29:47.013] Slugified categories: [
+[21:29:47.014]   'philosophy',
+[21:29:47.014]   'verse',
+[21:29:47.014]   'random',
+[21:29:47.014]   'on-myself',
+[21:29:47.014]   'libraries',
+[21:29:47.015]   'bounties',
+[21:29:47.015]   'news',
+[21:29:47.015]   'website',
+[21:29:47.015]   'stable-syllabi',
+[21:29:47.015]   'research',
+[21:29:47.015]   'powerscaling',
+[21:29:47.016]   'book-notes',
+[21:29:47.016]   'technology',
+[21:29:47.016]   'virtual-worlds',
+[21:29:47.016]   'mathematics',
+[21:29:47.016]   'internet-archive',
+[21:29:47.016]   'indie-web',
+[21:29:47.017]   'learning',
+[21:29:47.017]   'physics',
+[21:29:47.017]   'social-media',
+[21:29:47.017]   'fraternities',
+[21:29:47.017]   'artificial-intelligence',
+[21:29:47.018]   'manuals-of-style',
+[21:29:47.018]   'internet-archiving'
+[21:29:47.018] ]
+[21:29:51.365]    Generating static pages (0/877) ...
+[21:29:55.743] Fetching favorite actors from JSON
+[21:29:55.743] Retrieved 15 favorite actors
+[21:29:55.773] Fetching favorite characters from JSON
+[21:29:55.774] Retrieved 27 favorite characters
+[21:29:55.838] Fetching favorite film companies from JSON
+[21:29:55.838] Retrieved 12 favorite film companies
+[21:29:56.141] Fetching favorite directors from JSON
+[21:29:56.141] Retrieved 13 favorite directors
+[21:29:58.147] Fetching user watched content from Trakt...
+[21:29:58.181] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
+[21:29:58.182] Error fetching Trakt genres: Error: Unable to get valid Trakt access token
+[21:29:58.182]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
+[21:29:58.182]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:29:58.183]     at async d (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4890)
+[21:29:58.183]     at async l (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:666)
+[21:29:58.183]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[21:29:58.184]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[21:29:58.184]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[21:29:58.185]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[21:29:58.185]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[21:29:58.185]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[21:29:58.198] Fetching user lists from Trakt
+[21:29:58.226] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
+[21:29:58.227] Error fetching Trakt lists: Error: Unable to get valid Trakt access token
+[21:29:58.227]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
+[21:29:58.227]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:29:58.227]     at async u (/vercel/path0/.next/server/app/api/trakt/lists/route.js:1:664)
+[21:29:58.227]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[21:29:58.227]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[21:29:58.227]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[21:29:58.227]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[21:29:58.227]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[21:29:58.227]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[21:29:58.227]     at async Object.exportPage (/vercel/path0/node_modules/next/dist/export/worker.js:237:20)
+[21:29:58.394] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
+[21:29:58.394] Error fetching Trakt stats: Error: Unable to get valid Trakt access token
+[21:29:58.394]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
+[21:29:58.394]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:29:58.394]     at async d (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4890)
+[21:29:58.394]     at async l (/vercel/path0/.next/server/app/api/trakt/stats/route.js:1:606)
+[21:29:58.394]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[21:29:58.394]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[21:29:58.394]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[21:29:58.394]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[21:29:58.395]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[21:29:58.395]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[21:30:08.532] PostTableRow - Linking to: essays/character-analysis/analysis-of-susanna-kaysen
+[21:30:08.533] PostTableRow - Linking to: essays/character-analysis/analysis-of-daisy-randone
+[21:30:08.533] PostTableRow - Linking to: essays/character-analysis/analysis-of-lisa-rowe
+[21:30:08.534] PostTableRow - Linking to: essays/thought-experiments/reply-to-mephisto
+[21:30:08.534] PostTableRow - Linking to: essays/letters/a-letter-to-the-student-in-shadow
+[21:30:08.534] PostTableRow - Linking to: essays/pedagogy/on-the-learning-of-difficult-things
+[21:30:08.534] PostTableRow - Linking to: essays/pedagogy/on-learning-serious-things
+[21:30:08.534] PostTableRow - Linking to: essays/pedagogy/reflections-on-lifelong-study
+[21:30:08.535] PostTableRow - Linking to: essays/philosophy/on-being-wounded
+[21:30:08.535] PostTableRow - Linking to: essays/philosophy/when-the-body-keeps-score
+[21:30:09.236]    Generating static pages (219/877) 
+[21:30:09.662] BookDetailClient - Received book: Linear Algebra Done Right
+[21:30:09.663] BookDetailClient - Book slug: linear-algebra-done-right
+[21:30:09.683] BookDetailClient - Received book: Understanding Analysis
+[21:30:09.683] BookDetailClient - Book slug: understanding-analysis
+[21:30:09.700] BookDetailClient - Received book: Elementary Analysis: The Theory of Calculus
+[21:30:09.700] BookDetailClient - Book slug: elementary-analysis-theory-of-calculus
+[21:30:09.715] BookDetailClient - Received book: Principles of Mathematical Analysis
+[21:30:09.715] BookDetailClient - Book slug: principles-of-mathematical-analysis
+[21:30:09.731] BookDetailClient - Received book: Complex Variables for Scientists and Engineers
+[21:30:09.732] BookDetailClient - Book slug: complex-variables-for-scientists-and-engineers
+[21:30:09.748] BookDetailClient - Received book: Elementary Number Theory
+[21:30:09.749] BookDetailClient - Book slug: elementary-number-theory
+[21:30:09.769] BookDetailClient - Received book: The Structure of Abstract Algebra
+[21:30:09.769] BookDetailClient - Book slug: the-structure-of-abstract-algebra
+[21:30:09.785] BookDetailClient - Received book: Plane Trigonometry with Tables
+[21:30:09.785] BookDetailClient - Book slug: plane-trigonometry-with-tables
+[21:30:12.286] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/select-elementary-improper-integrals-i.mdx
+[21:30:12.286] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/select-elementary-improper-integrals-i.mdx
+[21:30:12.333] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/cleos-integral.mdx
+[21:30:12.334] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/cleos-integral.mdx
+[21:30:12.960]    Generating static pages (438/877) 
+[21:30:16.476] MDX file not found: /vercel/path0/app/notes/content/on-myself/clash-royale.mdx
+[21:30:16.477] MDX file not found: /vercel/path0/app/notes/content/on-myself/clash-royale.mdx
+[21:30:16.480] Error: Cannot find module './on-myself/clash-royale.mdx'
+[21:30:16.480]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:30:16.480]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:30:16.481]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:30:16.481]   code: 'MODULE_NOT_FOUND',
+[21:30:16.481]   digest: '3530843781'
+[21:30:16.481] }
+[21:30:16.481] Error: Cannot find module './on-myself/clash-royale.mdx'
+[21:30:16.481]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:30:16.482]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:30:16.482]     at runNextTicks (node:internal/process/task_queues:69:3)
+[21:30:16.482]     at listOnTimeout (node:internal/timers:549:9)
+[21:30:16.482]     at process.processTimers (node:internal/timers:523:7)
+[21:30:16.482]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:30:16.482]   code: 'MODULE_NOT_FOUND',
+[21:30:16.482]   digest: '3468957580'
+[21:30:16.483] }
+[21:30:16.483] Error: Cannot find module './on-myself/clash-royale.mdx'
+[21:30:16.484]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:30:16.484]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:30:16.484]     at runNextTicks (node:internal/process/task_queues:69:3)
+[21:30:16.484]     at listOnTimeout (node:internal/timers:549:9)
+[21:30:16.484]     at process.processTimers (node:internal/timers:523:7)
+[21:30:16.484]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:30:16.484]   code: 'MODULE_NOT_FOUND',
+[21:30:16.484]   digest: '3468957580'
+[21:30:16.484] }
+[21:30:16.492] 
+[21:30:16.492] Error occurred prerendering page "/notes/on-myself/clash-royale". Read more: https://nextjs.org/docs/messages/prerender-error
+[21:30:16.492] 
+[21:30:16.492] Error: Cannot find module './on-myself/clash-royale.mdx'
+[21:30:16.492]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:30:16.492]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:30:16.492]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
+[21:30:16.566] MDX file not found: /vercel/path0/app/notes/content/on-myself/tryhackme.mdx
+[21:30:16.567] MDX file not found: /vercel/path0/app/notes/content/on-myself/tryhackme.mdx
+[21:30:16.571] Error: Cannot find module './on-myself/tryhackme.mdx'
+[21:30:16.572]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:30:16.572]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:30:16.572]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:30:16.573]   code: 'MODULE_NOT_FOUND',
+[21:30:16.573]   digest: '4184957285'
+[21:30:16.573] }
+[21:30:16.573] Error: Cannot find module './on-myself/tryhackme.mdx'
+[21:30:16.574]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:30:16.574]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:30:16.574]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:30:16.574]   code: 'MODULE_NOT_FOUND',
+[21:30:16.574]   digest: '4184957285'
+[21:30:16.574] }
+[21:30:16.574] Error: Cannot find module './on-myself/tryhackme.mdx'
+[21:30:16.575]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:30:16.575]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:30:16.575]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:30:16.575]   code: 'MODULE_NOT_FOUND',
+[21:30:16.575]   digest: '4184957285'
+[21:30:16.575] }
+[21:30:16.581] 
+[21:30:16.581] Error occurred prerendering page "/notes/on-myself/tryhackme". Read more: https://nextjs.org/docs/messages/prerender-error
+[21:30:16.581] 
+[21:30:16.582] Error: Cannot find module './on-myself/tryhackme.mdx'
+[21:30:16.582]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:30:16.582]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:30:16.582]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
+[21:30:16.585] MDX file not found: /vercel/path0/app/notes/content/on-myself/hackthebox.mdx
+[21:30:16.592] MDX file not found: /vercel/path0/app/notes/content/on-myself/hackthebox.mdx
+[21:30:16.593] Error: Cannot find module './on-myself/hackthebox.mdx'
+[21:30:16.593]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:30:16.593]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:30:16.593]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:30:16.593]   code: 'MODULE_NOT_FOUND',
+[21:30:16.593]   digest: '3890119557'
+[21:30:16.593] }
+[21:30:16.593] Error: Cannot find module './on-myself/hackthebox.mdx'
+[21:30:16.593]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:30:16.593]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:30:16.593]     at runNextTicks (node:internal/process/task_queues:69:3)
+[21:30:16.593]     at listOnTimeout (node:internal/timers:549:9)
+[21:30:16.593]     at process.processTimers (node:internal/timers:523:7)
+[21:30:16.593]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:30:16.593]   code: 'MODULE_NOT_FOUND',
+[21:30:16.593]   digest: '572441868'
+[21:30:16.593] }
+[21:30:16.593] Error: Cannot find module './on-myself/hackthebox.mdx'
+[21:30:16.593]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:30:16.594]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:30:16.594]     at runNextTicks (node:internal/process/task_queues:69:3)
+[21:30:16.594]     at listOnTimeout (node:internal/timers:549:9)
+[21:30:16.594]     at process.processTimers (node:internal/timers:523:7)
+[21:30:16.594]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:30:16.594]   code: 'MODULE_NOT_FOUND',
+[21:30:16.594]   digest: '572441868'
+[21:30:16.594] }
+[21:30:16.603] 
+[21:30:16.604] Error occurred prerendering page "/notes/on-myself/hackthebox". Read more: https://nextjs.org/docs/messages/prerender-error
+[21:30:16.604] 
+[21:30:16.604] Error: Cannot find module './on-myself/hackthebox.mdx'
+[21:30:16.604]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:30:16.604]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:30:16.604]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
+[21:30:17.172] Attempting to read file from: /vercel/path0/data/research-bounties.json
+[21:30:17.173] Attempting to read file from: /vercel/path0/data/research-bounties.json
+[21:30:19.202]    Generating static pages (657/877) 
+[21:30:19.246] Read proofs file successfully: /vercel/path0/app/proofs/content/number-theory/infinitely-many-primes.mdx
+[21:30:19.247] Read proofs file successfully: /vercel/path0/app/proofs/content/number-theory/infinitely-many-primes.mdx
+[21:30:19.264] Fetching from Monkeytype API: https://api.monkeytype.com/users/stats
+[21:30:19.265] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[21:30:19.265] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=30
+[21:30:19.266] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
+[21:30:19.266] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[21:30:19.268] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=10
+[21:30:19.268] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=25
+[21:30:19.268] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[21:30:19.269] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=100
+[21:30:19.269] Fetching from Monkeytype API: https://api.monkeytype.com/users/streak
+[21:30:19.269] Fetching from Monkeytype API: https://api.monkeytype.com/users/currentTestActivity
+[21:30:19.269] Fetching from Monkeytype API: https://api.monkeytype.com/results?limit=10
+[21:30:19.270] Fetching from Monkeytype API: https://api.monkeytype.com/users/stats
+[21:30:19.271] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[21:30:19.271] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=30
+[21:30:19.271] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
+[21:30:19.272] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[21:30:19.272] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=10
+[21:30:19.272] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=25
+[21:30:19.273] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[21:30:19.273] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=100
+[21:30:19.282] Fetching from Monkeytype API: https://api.monkeytype.com/users/streak
+[21:30:19.282] Fetching from Monkeytype API: https://api.monkeytype.com/users/currentTestActivity
+[21:30:19.282] Fetching from Monkeytype API: https://api.monkeytype.com/results?limit=10
+[21:30:19.415] API response for /users/personalBests: {
+[21:30:19.416]   message: 'Personal bests retrieved',
+[21:30:19.416]   data: [
+[21:30:19.416]     {
+[21:30:19.416]       acc: 95.73,
+[21:30:19.416]       consistency: 69.5,
+[21:30:19.417]       difficulty: 'normal',
+[21:30:19.417]       lazyMode: false,
+[21:30:19.417]       language: 'english',
+[21:30:19.417]       punctuation: false,
+[21:30:19.417]       raw: 110,
+[21:30:19.417]       wpm: 102,
+[21:30:19.417]       timestamp: 1741147359513,
+[21:30:19.417]       numbers: false
+[21:30:19.417]     }
+[21:30:19.417]   ]
+[21:30:19.417] }
+[21:30:19.417] Personal bests data: [
+[21:30:19.418]   {
+[21:30:19.418]     "acc": 95.73,
+[21:30:19.418]     "consistency": 69.5,
+[21:30:19.418]     "difficulty": "normal",
+[21:30:19.418]     "lazyMode": false,
+[21:30:19.418]     "language": "english",
+[21:30:19.418]     "punctuation": false,
+[21:30:19.419]     "raw": 110,
+[21:30:19.419]     "wpm": 102,
+[21:30:19.419]     "timestamp": 1741147359513,
+[21:30:19.419]     "numbers": false
+[21:30:19.419]   }
+[21:30:19.419] ]
+[21:30:19.419] API response for /users/personalBests: {
+[21:30:19.419]   message: 'Personal bests retrieved',
+[21:30:19.420]   data: [
+[21:30:19.420]     {
+[21:30:19.420]       acc: 95.73,
+[21:30:19.420]       consistency: 69.5,
+[21:30:19.420]       difficulty: 'normal',
+[21:30:19.420]       lazyMode: false,
+[21:30:19.420]       language: 'english',
+[21:30:19.420]       punctuation: false,
+[21:30:19.420]       raw: 110,
+[21:30:19.420]       wpm: 102,
+[21:30:19.420]       timestamp: 1741147359513,
+[21:30:19.420]       numbers: false
+[21:30:19.420]     }
+[21:30:19.420]   ]
+[21:30:19.420] }
+[21:30:19.420] Personal bests data: [
+[21:30:19.420]   {
+[21:30:19.421]     "acc": 95.73,
+[21:30:19.421]     "consistency": 69.5,
+[21:30:19.421]     "difficulty": "normal",
+[21:30:19.421]     "lazyMode": false,
+[21:30:19.421]     "language": "english",
+[21:30:19.421]     "punctuation": false,
+[21:30:19.421]     "raw": 110,
+[21:30:19.421]     "wpm": 102,
+[21:30:19.421]     "timestamp": 1741147359513,
+[21:30:19.421]     "numbers": false
+[21:30:19.421]   }
+[21:30:19.421] ]
+[21:30:19.447] Monkeytype API error (503): {}
+[21:30:19.447] Retrying request (attempt 1/3)...
+[21:30:19.476] Monkeytype API error (503): {}
+[21:30:19.476] Retrying request (attempt 1/3)...
+[21:30:19.613] API response for /users/streak: {
+[21:30:19.614]   message: 'Streak data retrieved',
+[21:30:19.615]   data: {
+[21:30:19.615]     lastResultTimestamp: 1747121765000,
+[21:30:19.615]     length: 1,
+[21:30:19.615]     maxLength: 6,
+[21:30:19.615]     hourOffset: null
+[21:30:19.615]   }
+[21:30:19.615] }
+[21:30:19.615] API response for /users/streak: {
+[21:30:19.615]   message: 'Streak data retrieved',
+[21:30:19.615]   data: {
+[21:30:19.615]     lastResultTimestamp: 1747121765000,
+[21:30:19.615]     length: 1,
+[21:30:19.615]     maxLength: 6,
+[21:30:19.615]     hourOffset: null
+[21:30:19.615]   }
+[21:30:19.615] }
+[21:30:19.815] API response for /users/personalBests: {
+[21:30:19.815]   message: 'Personal bests retrieved',
+[21:30:19.815]   data: [
+[21:30:19.815]     {
+[21:30:19.815]       acc: 99.27,
+[21:30:19.815]       consistency: 71.97,
+[21:30:19.815]       difficulty: 'normal',
+[21:30:19.815]       lazyMode: false,
+[21:30:19.815]       language: 'english',
+[21:30:19.815]       punctuation: false,
+[21:30:19.815]       raw: 120.15,
+[21:30:19.815]       wpm: 120.15,
+[21:30:19.815]       timestamp: 1747112614042,
+[21:30:19.815]       numbers: false
+[21:30:19.815]     }
+[21:30:19.816]   ]
+[21:30:19.816] }
+[21:30:19.816] Personal bests data: [
+[21:30:19.816]   {
+[21:30:19.816]     "acc": 99.27,
+[21:30:19.816]     "consistency": 71.97,
+[21:30:19.816]     "difficulty": "normal",
+[21:30:19.816]     "lazyMode": false,
+[21:30:19.816]     "language": "english",
+[21:30:19.816]     "punctuation": false,
+[21:30:19.816]     "raw": 120.15,
+[21:30:19.816]     "wpm": 120.15,
+[21:30:19.816]     "timestamp": 1747112614042,
+[21:30:19.816]     "numbers": false
+[21:30:19.816]   }
+[21:30:19.816] ]
+[21:30:19.816] API response for /users/personalBests: {
+[21:30:19.816]   message: 'Personal bests retrieved',
+[21:30:19.816]   data: [
+[21:30:19.816]     {
+[21:30:19.816]       acc: 99.27,
+[21:30:19.816]       consistency: 71.97,
+[21:30:19.817]       difficulty: 'normal',
+[21:30:19.817]       lazyMode: false,
+[21:30:19.817]       language: 'english',
+[21:30:19.817]       punctuation: false,
+[21:30:19.817]       raw: 120.15,
+[21:30:19.817]       wpm: 120.15,
+[21:30:19.817]       timestamp: 1747112614042,
+[21:30:19.817]       numbers: false
+[21:30:19.817]     }
+[21:30:19.817]   ]
+[21:30:19.817] }
+[21:30:19.817] Personal bests data: [
+[21:30:19.817]   {
+[21:30:19.817]     "acc": 99.27,
+[21:30:19.817]     "consistency": 71.97,
+[21:30:19.817]     "difficulty": "normal",
+[21:30:19.817]     "lazyMode": false,
+[21:30:19.817]     "language": "english",
+[21:30:19.817]     "punctuation": false,
+[21:30:19.817]     "raw": 120.15,
+[21:30:19.817]     "wpm": 120.15,
+[21:30:19.817]     "timestamp": 1747112614042,
+[21:30:19.817]     "numbers": false
+[21:30:19.817]   }
+[21:30:19.817] ]
+[21:30:20.016] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[21:30:20.016] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[21:30:20.214] API response for /users/stats: {
+[21:30:20.214]   message: 'Personal stats retrieved',
+[21:30:20.220]   data: {
+[21:30:20.220]     _id: '638bd797bd098f2ba5dfa400',
+[21:30:20.220]     completedTests: 86,
+[21:30:20.220]     startedTests: 120,
+[21:30:20.220]     timeTyping: 16820.659999999996
+[21:30:20.220]   }
+[21:30:20.220] }
+[21:30:20.221] API response for /users/stats: {
+[21:30:20.221]   message: 'Personal stats retrieved',
+[21:30:20.221]   data: {
+[21:30:20.221]     _id: '638bd797bd098f2ba5dfa400',
+[21:30:20.221]     completedTests: 86,
+[21:30:20.221]     startedTests: 120,
+[21:30:20.221]     timeTyping: 16820.659999999996
+[21:30:20.221]   }
+[21:30:20.221] }
+[21:30:20.447] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[21:30:20.449] Monkeytype API error (503): {}
+[21:30:20.449] Retrying request (attempt 2/3)...
+[21:30:20.476] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[21:30:20.478] Monkeytype API error (503): {}
+[21:30:20.479] Retrying request (attempt 2/3)...
+[21:30:20.610] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[21:30:20.610] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[21:30:20.628] API response for /users/currentTestActivity: {
+[21:30:20.628]   message: 'Current test activity data retrieved',
+[21:30:20.628]   data: {
+[21:30:20.629]     testsByDays: [
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, 1,    2,    null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       ... 272 more items
+[21:30:20.629]     ],
+[21:30:20.629]     lastDay: 1747094400000
+[21:30:20.629]   }
+[21:30:20.629] }
+[21:30:20.629] API response for /users/currentTestActivity: {
+[21:30:20.629]   message: 'Current test activity data retrieved',
+[21:30:20.629]   data: {
+[21:30:20.629]     testsByDays: [
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, 1,    2,    null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       null, null, null, null, null, null, null, null, null, null,
+[21:30:20.629]       ... 272 more items
+[21:30:20.630]     ],
+[21:30:20.630]     lastDay: 1747094400000
+[21:30:20.630]   }
+[21:30:20.630] }
+[21:30:20.812] API response for /users/personalBests: {
+[21:30:20.813]   message: 'Personal bests retrieved',
+[21:30:20.813]   data: [
+[21:30:20.813]     {
+[21:30:20.813]       acc: 94.55,
+[21:30:20.813]       consistency: 66.53,
+[21:30:20.813]       difficulty: 'normal',
+[21:30:20.813]       lazyMode: false,
+[21:30:20.813]       language: 'english',
+[21:30:20.813]       punctuation: false,
+[21:30:20.813]       raw: 63.4,
+[21:30:20.813]       wpm: 61.46,
+[21:30:20.813]       timestamp: 1670133327519
+[21:30:20.813]     }
+[21:30:20.813]   ]
+[21:30:20.813] }
+[21:30:20.813] Personal bests data: [
+[21:30:20.813]   {
+[21:30:20.813]     "acc": 94.55,
+[21:30:20.813]     "consistency": 66.53,
+[21:30:20.813]     "difficulty": "normal",
+[21:30:20.813]     "lazyMode": false,
+[21:30:20.813]     "language": "english",
+[21:30:20.813]     "punctuation": false,
+[21:30:20.813]     "raw": 63.4,
+[21:30:20.813]     "wpm": 61.46,
+[21:30:20.813]     "timestamp": 1670133327519
+[21:30:20.813]   }
+[21:30:20.814] ]
+[21:30:20.814] API response for /users/personalBests: {
+[21:30:20.814]   message: 'Personal bests retrieved',
+[21:30:20.814]   data: [
+[21:30:20.814]     {
+[21:30:20.814]       acc: 94.55,
+[21:30:20.814]       consistency: 66.53,
+[21:30:20.814]       difficulty: 'normal',
+[21:30:20.814]       lazyMode: false,
+[21:30:20.814]       language: 'english',
+[21:30:20.814]       punctuation: false,
+[21:30:20.814]       raw: 63.4,
+[21:30:20.814]       wpm: 61.46,
+[21:30:20.814]       timestamp: 1670133327519
+[21:30:20.814]     }
+[21:30:20.814]   ]
+[21:30:20.814] }
+[21:30:20.814] Personal bests data: [
+[21:30:20.814]   {
+[21:30:20.814]     "acc": 94.55,
+[21:30:20.814]     "consistency": 66.53,
+[21:30:20.814]     "difficulty": "normal",
+[21:30:20.814]     "lazyMode": false,
+[21:30:20.814]     "language": "english",
+[21:30:20.814]     "punctuation": false,
+[21:30:20.814]     "raw": 63.4,
+[21:30:20.814]     "wpm": 61.46,
+[21:30:20.814]     "timestamp": 1670133327519
+[21:30:20.814]   }
+[21:30:20.814] ]
+[21:30:21.016] API response for /users/personalBests: {
+[21:30:21.017]   message: 'Personal bests retrieved',
+[21:30:21.017]   data: [
+[21:30:21.017]     {
+[21:30:21.017]       acc: 90.57,
+[21:30:21.017]       consistency: 47.29,
+[21:30:21.017]       difficulty: 'normal',
+[21:30:21.017]       lazyMode: false,
+[21:30:21.017]       language: 'english',
+[21:30:21.017]       punctuation: false,
+[21:30:21.017]       raw: 111.45,
+[21:30:21.017]       wpm: 97.8,
+[21:30:21.017]       numbers: false,
+[21:30:21.017]       timestamp: 1747112917927
+[21:30:21.017]     }
+[21:30:21.017]   ]
+[21:30:21.017] }
+[21:30:21.017] Personal bests data: [
+[21:30:21.017]   {
+[21:30:21.017]     "acc": 90.57,
+[21:30:21.017]     "consistency": 47.29,
+[21:30:21.017]     "difficulty": "normal",
+[21:30:21.018]     "lazyMode": false,
+[21:30:21.018]     "language": "english",
+[21:30:21.018]     "punctuation": false,
+[21:30:21.018]     "raw": 111.45,
+[21:30:21.018]     "wpm": 97.8,
+[21:30:21.018]     "numbers": false,
+[21:30:21.018]     "timestamp": 1747112917927
+[21:30:21.018]   }
+[21:30:21.018] ]
+[21:30:21.018] API response for /users/personalBests: {
+[21:30:21.018]   message: 'Personal bests retrieved',
+[21:30:21.018]   data: [
+[21:30:21.018]     {
+[21:30:21.018]       acc: 90.57,
+[21:30:21.018]       consistency: 47.29,
+[21:30:21.018]       difficulty: 'normal',
+[21:30:21.018]       lazyMode: false,
+[21:30:21.018]       language: 'english',
+[21:30:21.018]       punctuation: false,
+[21:30:21.019]       raw: 111.45,
+[21:30:21.019]       wpm: 97.8,
+[21:30:21.019]       numbers: false,
+[21:30:21.019]       timestamp: 1747112917927
+[21:30:21.019]     }
+[21:30:21.019]   ]
+[21:30:21.019] }
+[21:30:21.019] Personal bests data: [
+[21:30:21.020]   {
+[21:30:21.020]     "acc": 90.57,
+[21:30:21.020]     "consistency": 47.29,
+[21:30:21.020]     "difficulty": "normal",
+[21:30:21.020]     "lazyMode": false,
+[21:30:21.020]     "language": "english",
+[21:30:21.020]     "punctuation": false,
+[21:30:21.020]     "raw": 111.45,
+[21:30:21.020]     "wpm": 97.8,
+[21:30:21.020]     "numbers": false,
+[21:30:21.021]     "timestamp": 1747112917927
+[21:30:21.021]   }
+[21:30:21.021] ]
+[21:30:21.214] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[21:30:21.215] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[21:30:21.419] API response for /results: {
+[21:30:21.419]   message: 'Results retrieved',
+[21:30:21.419]   data: [
+[21:30:21.420]     {
+[21:30:21.420]       _id: '6822f665df21a5c1da374b59',
+[21:30:21.420]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.420]       wpm: 74.13,
+[21:30:21.420]       rawWpm: 79.45,
+[21:30:21.420]       charStats: [Array],
+[21:30:21.420]       acc: 89.27,
+[21:30:21.420]       mode: 'words',
+[21:30:21.420]       mode2: '50',
+[21:30:21.420]       timestamp: 1747121765000,
+[21:30:21.420]       restartCount: 4,
+[21:30:21.420]       incompleteTestSeconds: 26.77,
+[21:30:21.421]       testDuration: 38.36,
+[21:30:21.421]       consistency: 57.28,
+[21:30:21.421]       keyConsistency: 0.02
+[21:30:21.421]     },
+[21:30:21.421]     {
+[21:30:21.421]       _id: '6822f617df21a5c1da37484a',
+[21:30:21.421]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.421]       wpm: 94.2,
+[21:30:21.421]       rawWpm: 94.2,
+[21:30:21.421]       charStats: [Array],
+[21:30:21.421]       acc: 95.83,
+[21:30:21.421]       mode: 'words',
+[21:30:21.421]       mode2: '50',
+[21:30:21.421]       timestamp: 1747121687000,
+[21:30:21.421]       testDuration: 34.52,
+[21:30:21.421]       consistency: 60.29,
+[21:30:21.422]       keyConsistency: 1.96
+[21:30:21.422]     },
+[21:30:21.422]     {
+[21:30:21.422]       _id: '6822d447df21a5c1da35f42c',
+[21:30:21.423]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.424]       wpm: 96.52,
+[21:30:21.425]       rawWpm: 102.98,
+[21:30:21.425]       charStats: [Array],
+[21:30:21.425]       acc: 90.41,
+[21:30:21.425]       mode: 'words',
+[21:30:21.425]       mode2: '50',
+[21:30:21.425]       timestamp: 1747113031000,
+[21:30:21.425]       restartCount: 6,
+[21:30:21.425]       incompleteTestSeconds: 27.88,
+[21:30:21.426]       testDuration: 31.58,
+[21:30:21.426]       consistency: 63.38,
+[21:30:21.426]       keyConsistency: 2.07
+[21:30:21.426]     },
+[21:30:21.426]     {
+[21:30:21.426]       _id: '6822d3d5df21a5c1da35f014',
+[21:30:21.426]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.426]       wpm: 97.8,
+[21:30:21.426]       rawWpm: 111.45,
+[21:30:21.427]       charStats: [Array],
+[21:30:21.427]       acc: 90.57,
+[21:30:21.427]       mode: 'words',
+[21:30:21.428]       mode2: '10',
+[21:30:21.428]       timestamp: 1747112917000,
+[21:30:21.428]       restartCount: 1,
+[21:30:21.428]       incompleteTestSeconds: 1.81,
+[21:30:21.428]       testDuration: 5.28,
+[21:30:21.428]       consistency: 47.29,
+[21:30:21.428]       keyConsistency: 8.22,
+[21:30:21.428]       isPb: true
+[21:30:21.428]     },
+[21:30:21.428]     {
+[21:30:21.429]       _id: '6822d3bedf21a5c1da35ef2c',
+[21:30:21.429]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.429]       wpm: 105.53,
+[21:30:21.429]       rawWpm: 105.53,
+[21:30:21.430]       charStats: [Array],
+[21:30:21.430]       acc: 98.48,
+[21:30:21.430]       mode: 'words',
+[21:30:21.430]       mode2: '50',
+[21:30:21.430]       timestamp: 1747112894000,
+[21:30:21.430]       restartCount: 1,
+[21:30:21.430]       incompleteTestSeconds: 2.46,
+[21:30:21.430]       testDuration: 29.45,
+[21:30:21.430]       consistency: 72.1,
+[21:30:21.431]       keyConsistency: 15.77
+[21:30:21.431]     },
+[21:30:21.431]     {
+[21:30:21.431]       _id: '6822d347df21a5c1da35eabb',
+[21:30:21.431]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.431]       wpm: 113.25,
+[21:30:21.431]       rawWpm: 118.04,
+[21:30:21.431]       charStats: [Array],
+[21:30:21.431]       acc: 96.79,
+[21:30:21.431]       mode: 'words',
+[21:30:21.432]       mode2: '50',
+[21:30:21.432]       timestamp: 1747112775000,
+[21:30:21.432]       restartCount: 5,
+[21:30:21.432]       incompleteTestSeconds: 31.85,
+[21:30:21.432]       testDuration: 27.55,
+[21:30:21.432]       consistency: 75.48,
+[21:30:21.432]       keyConsistency: 9.83
+[21:30:21.432]     },
+[21:30:21.432]     {
+[21:30:21.432]       _id: '6822d2a6df21a5c1da35e476',
+[21:30:21.433]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.433]       wpm: 120.15,
+[21:30:21.433]       rawWpm: 120.15,
+[21:30:21.433]       charStats: [Array],
+[21:30:21.433]       acc: 99.27,
+[21:30:21.433]       mode: 'words',
+[21:30:21.433]       mode2: '50',
+[21:30:21.433]       timestamp: 1747112614000,
+[21:30:21.433]       restartCount: 1,
+[21:30:21.433]       incompleteTestSeconds: 25.16,
+[21:30:21.434]       testDuration: 27.07,
+[21:30:21.434]       consistency: 71.97,
+[21:30:21.434]       keyConsistency: 29.89,
+[21:30:21.434]       isPb: true
+[21:30:21.434]     },
+[21:30:21.434]     {
+[21:30:21.434]       _id: '6822d25fdf21a5c1da35e19c',
+[21:30:21.434]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.434]       wpm: 78.98,
+[21:30:21.434]       rawWpm: 81.49,
+[21:30:21.435]       charStats: [Array],
+[21:30:21.435]       acc: 93.31,
+[21:30:21.435]       mode: 'custom',
+[21:30:21.435]       mode2: 'custom',
+[21:30:21.435]       timestamp: 1747112543000,
+[21:30:21.435]       restartCount: 2,
+[21:30:21.435]       incompleteTestSeconds: 29.08,
+[21:30:21.435]       testDuration: 33.43,
+[21:30:21.435]       consistency: 58.3,
+[21:30:21.436]       keyConsistency: 1.04,
+[21:30:21.436]       isPb: true
+[21:30:21.436]     },
+[21:30:21.436]     {
+[21:30:21.436]       _id: '6822ce95df21a5c1da35bce5',
+[21:30:21.436]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.436]       wpm: 113.66,
+[21:30:21.436]       rawWpm: 113.66,
+[21:30:21.436]       charStats: [Array],
+[21:30:21.436]       acc: 98.15,
+[21:30:21.437]       mode: 'words',
+[21:30:21.437]       mode2: '50',
+[21:30:21.437]       timestamp: 1747111573000,
+[21:30:21.437]       testDuration: 27.98,
+[21:30:21.437]       consistency: 76.97,
+[21:30:21.437]       keyConsistency: 21.07,
+[21:30:21.438]       isPb: true
+[21:30:21.438]     },
+[21:30:21.438]     {
+[21:30:21.438]       _id: '682008a1df21a5c1da19c9cf',
+[21:30:21.438]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.438]       wpm: 79.76,
+[21:30:21.439]       rawWpm: 89.6,
+[21:30:21.439]       charStats: [Array],
+[21:30:21.439]       acc: 84.06,
+[21:30:21.439]       mode: 'words',
+[21:30:21.439]       mode2: '50',
+[21:30:21.439]       timestamp: 1746929825000,
+[21:30:21.439]       restartCount: 3,
+[21:30:21.439]       incompleteTestSeconds: 88.11,
+[21:30:21.439]       testDuration: 32.95,
+[21:30:21.439]       consistency: 59.82,
+[21:30:21.439]       keyConsistency: 0.75
+[21:30:21.440]     }
+[21:30:21.440]   ]
+[21:30:21.440] }
+[21:30:21.441] API response for /results: {
+[21:30:21.441]   message: 'Results retrieved',
+[21:30:21.441]   data: [
+[21:30:21.442]     {
+[21:30:21.442]       _id: '6822f665df21a5c1da374b59',
+[21:30:21.442]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.442]       wpm: 74.13,
+[21:30:21.442]       rawWpm: 79.45,
+[21:30:21.442]       charStats: [Array],
+[21:30:21.442]       acc: 89.27,
+[21:30:21.442]       mode: 'words',
+[21:30:21.442]       mode2: '50',
+[21:30:21.442]       timestamp: 1747121765000,
+[21:30:21.442]       restartCount: 4,
+[21:30:21.442]       incompleteTestSeconds: 26.77,
+[21:30:21.442]       testDuration: 38.36,
+[21:30:21.442]       consistency: 57.28,
+[21:30:21.442]       keyConsistency: 0.02
+[21:30:21.442]     },
+[21:30:21.443]     {
+[21:30:21.443]       _id: '6822f617df21a5c1da37484a',
+[21:30:21.443]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.443]       wpm: 94.2,
+[21:30:21.443]       rawWpm: 94.2,
+[21:30:21.443]       charStats: [Array],
+[21:30:21.443]       acc: 95.83,
+[21:30:21.443]       mode: 'words',
+[21:30:21.443]       mode2: '50',
+[21:30:21.443]       timestamp: 1747121687000,
+[21:30:21.443]       testDuration: 34.52,
+[21:30:21.443]       consistency: 60.29,
+[21:30:21.443]       keyConsistency: 1.96
+[21:30:21.443]     },
+[21:30:21.443]     {
+[21:30:21.443]       _id: '6822d447df21a5c1da35f42c',
+[21:30:21.443]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.444]       wpm: 96.52,
+[21:30:21.444]       rawWpm: 102.98,
+[21:30:21.444]       charStats: [Array],
+[21:30:21.444]       acc: 90.41,
+[21:30:21.444]       mode: 'words',
+[21:30:21.444]       mode2: '50',
+[21:30:21.444]       timestamp: 1747113031000,
+[21:30:21.444]       restartCount: 6,
+[21:30:21.444]       incompleteTestSeconds: 27.88,
+[21:30:21.444]       testDuration: 31.58,
+[21:30:21.444]       consistency: 63.38,
+[21:30:21.444]       keyConsistency: 2.07
+[21:30:21.444]     },
+[21:30:21.444]     {
+[21:30:21.444]       _id: '6822d3d5df21a5c1da35f014',
+[21:30:21.444]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.445]       wpm: 97.8,
+[21:30:21.445]       rawWpm: 111.45,
+[21:30:21.445]       charStats: [Array],
+[21:30:21.445]       acc: 90.57,
+[21:30:21.445]       mode: 'words',
+[21:30:21.445]       mode2: '10',
+[21:30:21.445]       timestamp: 1747112917000,
+[21:30:21.445]       restartCount: 1,
+[21:30:21.445]       incompleteTestSeconds: 1.81,
+[21:30:21.445]       testDuration: 5.28,
+[21:30:21.445]       consistency: 47.29,
+[21:30:21.445]       keyConsistency: 8.22,
+[21:30:21.445]       isPb: true
+[21:30:21.445]     },
+[21:30:21.445]     {
+[21:30:21.445]       _id: '6822d3bedf21a5c1da35ef2c',
+[21:30:21.445]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.445]       wpm: 105.53,
+[21:30:21.445]       rawWpm: 105.53,
+[21:30:21.445]       charStats: [Array],
+[21:30:21.446]       acc: 98.48,
+[21:30:21.446]       mode: 'words',
+[21:30:21.446]       mode2: '50',
+[21:30:21.446]       timestamp: 1747112894000,
+[21:30:21.446]       restartCount: 1,
+[21:30:21.446]       incompleteTestSeconds: 2.46,
+[21:30:21.446]       testDuration: 29.45,
+[21:30:21.446]       consistency: 72.1,
+[21:30:21.446]       keyConsistency: 15.77
+[21:30:21.446]     },
+[21:30:21.446]     {
+[21:30:21.446]       _id: '6822d347df21a5c1da35eabb',
+[21:30:21.446]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.446]       wpm: 113.25,
+[21:30:21.446]       rawWpm: 118.04,
+[21:30:21.447]       charStats: [Array],
+[21:30:21.447]       acc: 96.79,
+[21:30:21.447]       mode: 'words',
+[21:30:21.447]       mode2: '50',
+[21:30:21.447]       timestamp: 1747112775000,
+[21:30:21.447]       restartCount: 5,
+[21:30:21.447]       incompleteTestSeconds: 31.85,
+[21:30:21.447]       testDuration: 27.55,
+[21:30:21.447]       consistency: 75.48,
+[21:30:21.447]       keyConsistency: 9.83
+[21:30:21.447]     },
+[21:30:21.447]     {
+[21:30:21.447]       _id: '6822d2a6df21a5c1da35e476',
+[21:30:21.447]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.447]       wpm: 120.15,
+[21:30:21.447]       rawWpm: 120.15,
+[21:30:21.447]       charStats: [Array],
+[21:30:21.447]       acc: 99.27,
+[21:30:21.447]       mode: 'words',
+[21:30:21.447]       mode2: '50',
+[21:30:21.447]       timestamp: 1747112614000,
+[21:30:21.447]       restartCount: 1,
+[21:30:21.447]       incompleteTestSeconds: 25.16,
+[21:30:21.447]       testDuration: 27.07,
+[21:30:21.447]       consistency: 71.97,
+[21:30:21.447]       keyConsistency: 29.89,
+[21:30:21.447]       isPb: true
+[21:30:21.447]     },
+[21:30:21.447]     {
+[21:30:21.447]       _id: '6822d25fdf21a5c1da35e19c',
+[21:30:21.447]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.447]       wpm: 78.98,
+[21:30:21.447]       rawWpm: 81.49,
+[21:30:21.447]       charStats: [Array],
+[21:30:21.448]       acc: 93.31,
+[21:30:21.448]       mode: 'custom',
+[21:30:21.448]       mode2: 'custom',
+[21:30:21.448]       timestamp: 1747112543000,
+[21:30:21.448]       restartCount: 2,
+[21:30:21.448]       incompleteTestSeconds: 29.08,
+[21:30:21.448]       testDuration: 33.43,
+[21:30:21.448]       consistency: 58.3,
+[21:30:21.448]       keyConsistency: 1.04,
+[21:30:21.448]       isPb: true
+[21:30:21.448]     },
+[21:30:21.448]     {
+[21:30:21.448]       _id: '6822ce95df21a5c1da35bce5',
+[21:30:21.448]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.448]       wpm: 113.66,
+[21:30:21.448]       rawWpm: 113.66,
+[21:30:21.448]       charStats: [Array],
+[21:30:21.448]       acc: 98.15,
+[21:30:21.448]       mode: 'words',
+[21:30:21.448]       mode2: '50',
+[21:30:21.448]       timestamp: 1747111573000,
+[21:30:21.448]       testDuration: 27.98,
+[21:30:21.448]       consistency: 76.97,
+[21:30:21.448]       keyConsistency: 21.07,
+[21:30:21.448]       isPb: true
+[21:30:21.448]     },
+[21:30:21.448]     {
+[21:30:21.448]       _id: '682008a1df21a5c1da19c9cf',
+[21:30:21.448]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:30:21.448]       wpm: 79.76,
+[21:30:21.448]       rawWpm: 89.6,
+[21:30:21.448]       charStats: [Array],
+[21:30:21.449]       acc: 84.06,
+[21:30:21.449]       mode: 'words',
+[21:30:21.449]       mode2: '50',
+[21:30:21.449]       timestamp: 1746929825000,
+[21:30:21.449]       restartCount: 3,
+[21:30:21.449]       incompleteTestSeconds: 88.11,
+[21:30:21.449]       testDuration: 32.95,
+[21:30:21.449]       consistency: 59.82,
+[21:30:21.449]       keyConsistency: 0.75
+[21:30:21.449]     }
+[21:30:21.449]   ]
+[21:30:21.449] }
+[21:30:22.450] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[21:30:22.451] Monkeytype API error (503): {}
+[21:30:22.452] Retrying request (attempt 3/3)...
+[21:30:22.479] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[21:30:22.481] Monkeytype API error (503): {}
+[21:30:22.481] Retrying request (attempt 3/3)...
+[21:30:25.452] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[21:30:25.454] Monkeytype API error (503): {}
+[21:30:25.481] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[21:30:25.482] Monkeytype API error (503): {}
+[21:30:29.693]  ✓ Generating static pages (877/877)
+[21:30:29.698] 
+[21:30:29.699] > Export encountered errors on following paths:
+[21:30:29.699] 	/notes/[category]/[slug]/page: /notes/on-myself/clash-royale
+[21:30:29.699] 	/notes/[category]/[slug]/page: /notes/on-myself/hackthebox
+[21:30:29.700] 	/notes/[category]/[slug]/page: /notes/on-myself/tryhackme
+[21:30:29.764] Error: Command "npm run build" exited with 1
+[21:30:30.373] 
+[21:30:33.710] Exiting build container

@@ -630,18 +630,18 @@
     "preview": "a list of textbooks, workbooks, and some notes on the math you ought to know"
   },
   {
-    "title": "TryHackMe",
+    "title": "Try Hack Me",
     "date": "2025-06-12",
     "slug": "tryhackme",
     "tags": ["TryHackMe", "CTF", "Pentesting"],
-    "category": "On Myself",
+    "category": "TryHackMe",
     "status": "In Progress",
     "confidence": "certain",
     "importance": 9,
     "preview": "a list of the tryhackme rooms I have completed, along with a list of write-ups"
   },
   {
-    "title": "HackTheBox",
+    "title": "Hack The Box",
     "date": "2025-06-12",
     "slug": "hackthebox",
     "tags": ["HackTheBox", "CTF", "Pentesting"],
