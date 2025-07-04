@@ -62,7 +62,7 @@ export default function PaperPageClient({ paperData: paperItem, allPapers, child
   // Render only header
   if (headerOnly) {
     return (
-      <div className="container max-w-[672px] mx-auto px-4">
+      <div>
         <PageHeader
           title={paperItem.title}
           subtitle={paperItem.subtitle}
@@ -80,7 +80,7 @@ export default function PaperPageClient({ paperData: paperItem, allPapers, child
   // Render only content (citation, footer, etc.)
   if (contentOnly) {
     return (
-      <div className="container max-w-[672px] mx-auto px-4">
+      <div>
         {/* MDX body */}
         <div className="papers-content">{children}</div>
         
@@ -99,7 +99,7 @@ export default function PaperPageClient({ paperData: paperItem, allPapers, child
   }
   // Legacy layout - render everything together
   return (
-    <div className="papers-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
+    <div className="papers-container pt-16 pb-8">
       <PageHeader
         title={paperItem.title}
         subtitle={paperItem.subtitle}

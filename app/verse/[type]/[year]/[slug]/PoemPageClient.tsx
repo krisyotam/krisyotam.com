@@ -25,21 +25,33 @@ export default function PoemPageClient({
   });
   if (!poem) notFound();
 
-  // State for poem content
+  // State for poem content and loading state
   const [poemContent, setPoemContent] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // Fetch poem content when component mounts
   useEffect(() => {
     const fetchContent = async () => {
       try {
+        setIsLoading(true);
+        setError(null);
         const response = await fetch(`/api/verse/content?type=${type}&slug=${slug}`);
-        if (!response.ok) throw new Error('Failed to fetch poem content');
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch poem content');
+        }
+        
         const data = await response.json();
-        setPoemContent(data.content);
+        setPoemContent(data.content || "No content available for this poem.");
       } catch (error) {
         console.error('Error fetching poem content:', error);
+        setError("Could not load poem content. Please try again later.");
+      } finally {
+        setIsLoading(false);
       }
     };
+    
     fetchContent();
   }, [type, slug]);
 
@@ -61,7 +73,15 @@ export default function PoemPageClient({
         />
 
         <PoemBox>
-          {poemContent || "No content available for this poem."}
+          {isLoading ? (
+            <div className="flex items-center justify-center py-8">
+              <div className="text-muted-foreground animate-pulse">Loading...</div>
+            </div>
+          ) : error ? (
+            <div className="text-red-500 py-4 text-center">{error}</div>
+          ) : (
+            poemContent
+          )}
         </PoemBox>
         
         <div className="my-8">

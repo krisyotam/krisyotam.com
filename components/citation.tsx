@@ -60,7 +60,7 @@ export function Citation({ title, slug, date, url, author }: CitationProps) {
   };
 
   return (
-    <Card className="relative max-w-2xl mx-auto p-4 bg-card text-card-foreground border-border rounded-none">
+    <Card className="relative w-full p-4 bg-card text-card-foreground border-border rounded-none">
       <h3 className="text-sm font-medium mb-4">Citation</h3>
 
       {/* Human-readable */}

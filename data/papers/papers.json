@@ -11,7 +11,7 @@
       "status": "Notes",
       "confidence": "speculative",
       "importance": 7,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Dreams vs. Daydreams: Mechanisms and Vividness Enhancement",
@@ -24,7 +24,7 @@
       "status": "Notes",
       "confidence": "uncertain",
       "importance": 6,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Nightmares and Exhaustion: Tiredness and the Roots of Fear",
@@ -37,7 +37,7 @@
       "status": "Notes",
       "confidence": "speculative",
       "importance": 7,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Which Kinds of Knowledge Decay the Fastest Without Use?",
@@ -50,7 +50,7 @@
       "status": "Notes",
       "confidence": "tentative",
       "importance": 8,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "What Sensory Inputs Most Affect Our Sense of Time?",
@@ -63,7 +63,7 @@
       "status": "Notes",
       "confidence": "speculative",
       "importance": 7,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "The Collapse Pattern: Sexual Deviancy and the Fall of Civilizations",
@@ -76,7 +76,7 @@
       "status": "Notes",
       "confidence": "controversial",
       "importance": 9,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Is History Circular? Recurrence, Collapse, and Civilizational Archetypes",
@@ -89,7 +89,7 @@
       "status": "Notes",
       "confidence": "theoretical",
       "importance": 8,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Do People Solve Moral Dilemmas Differently at Different Times of Day?",
@@ -102,7 +102,7 @@
       "status": "Notes",
       "confidence": "tentative",
       "importance": 7,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Do Learning Styles Reflect Intelligence? Correlation vs. Causation",
@@ -115,7 +115,7 @@
       "status": "Notes",
       "confidence": "debated",
       "importance": 6,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "What Study Methods Produce the Best Long-Term Retention by Discipline?",
@@ -128,7 +128,7 @@
       "status": "Notes",
       "confidence": "evidential",
       "importance": 9,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Does Reading Online Train a Different Form of Memory Than Reading Books?",
@@ -141,7 +141,7 @@
       "status": "Notes",
       "confidence": "tentative",
       "importance": 7,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Do Negative Emotions Outweigh Positive Ones?",
@@ -154,7 +154,7 @@
       "status": "Notes",
       "confidence": "speculative",
       "importance": 6,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Is Life a Gift or a Curse? A Quantified Point of View",
@@ -167,7 +167,46 @@
       "status": "Notes",
       "confidence": "philosophical",
       "importance": 9,
-      "state": "active"
-    }
+      "state": "hidden"
+    },
+    {
+    "title": "Simulating Human Moral Judgment in LLMs",
+    "preview": "Constructs a benchmark from human moral responses to evaluate how closely large language models align with real-world ethical intuitions.",
+    "date": "2025-07-04",
+    "tags": ["AI Alignment", "Ethics", "Language Models", "Benchmarking"],
+    "category": "ai",
+    "slug": "simulating-moral-judgment-llms",
+    "cover_image": "",
+    "status": "Notes",
+    "confidence": "technical-philosophical",
+    "importance": 10,
+    "state": "active"
+  },
+  {
+    "title": "Quantifying the Perceived and Measured Effects of Nootropics on Cognitive Performance",
+    "preview": "Uses self-tracking and online cognitive tests to compare subjective vs. objective effects of nootropics on memory, focus, and alertness.",
+    "date": "2025-07-04",
+    "tags": ["Nootropics", "Cognition", "Self-Experimentation", "Quantified Self"],
+    "category": "self-experiments",
+    "slug": "nootropics-performance-study",
+    "cover_image": "",
+    "status": "Notes",
+    "confidence": "experimental",
+    "importance": 8,
+    "state": "active"
+  },
+  {
+    "title": "Predicting Real-World Achievement from Open-Source Intelligence",
+    "preview": "Explores whether online public outputs (code, writing, competition rankings) can serve as better predictors of intelligence and talent than traditional IQ tests.",
+    "date": "2025-07-04",
+    "tags": ["Intelligence", "Predictive Modeling", "Open Data", "IQ Alternatives"],
+    "category": "psychology",
+    "slug": "achievement-open-source-iq",
+    "cover_image": "",
+    "status": "Notes",
+    "confidence": "data-driven",
+    "importance": 9,
+    "state": "active"
+  }
   ]
 }

@@ -6,14 +6,24 @@ import { PageHeader } from "@/components/page-header";
 import { PageDescription } from "@/components/posts/typography/page-description";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
 import type { BlogMeta } from "@/types/blog";
 import categoriesData from "@/data/blog/categories.json";
+import "./blog-grid.css";
+
+// Define the props interface for the BlogTable and GridView
+interface BlogTableProps {
+  notes: BlogMeta[];
+  searchQuery: string;
+  activeCategory: string;
+}
 
 /* default page-level metadata for the header */
 const defaultBlogPageData = {
   title: "Blog Posts",
   date: new Date().toISOString(),
-  preview: "Short-form thoughts, essays, and reflections",
+  preview: "informal ramblings, thought experiments, and idea play across topics and characters",
   status: "In Progress" as const,
   confidence: "likely" as const,
   importance: 6,
@@ -27,6 +37,7 @@ interface BlogClientPageProps {
 export default function BlogClientPage({ initialCategory = "all", notes }: BlogClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const router = useRouter();
 
   // Get unique categories and convert to SelectOption format
@@ -77,6 +88,82 @@ export default function BlogClientPage({ initialCategory = "all", notes }: BlogC
       router.push(`/blog/${slugifyCategory(category)}`);
     }
   };
+  
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
+  // Filter notes based on search query and category
+  const filteredNotes = notes.filter((note) => {
+    const q = searchQuery.toLowerCase();
+    const matchesSearch =
+      !q ||
+      note.title.toLowerCase().includes(q) ||
+      note.tags.some((tag) => tag.toLowerCase().includes(q)) ||
+      note.category.toLowerCase().includes(q);
+
+    const matchesCategory = activeCategory === "all" || note.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  // Helper to build the correct route for a blog post
+  function getBlogUrl(note: BlogMeta) {
+    const categorySlug = note.category.toLowerCase().replace(/\s+/g, "-");
+    return `/blog/${categorySlug}/${encodeURIComponent(note.slug)}`;
+  }
+
+  // Helper to format date as "Month DD, YYYY"
+  function formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long", 
+      day: "numeric"
+    });
+  }
+
+  // Grid view component
+  const GridView = ({ notes, searchQuery, activeCategory }: BlogTableProps) => (
+    <div className="blog-grid-container grid grid-cols-1 md:grid-cols-2 gap-6">
+      {filteredNotes.map((note) => (
+        <div
+          key={note.slug}
+          className="blog-card cursor-pointer"
+          onClick={() => router.push(getBlogUrl(note))}
+        >
+          {/* Cover Image Area - Using 16:9 aspect ratio */}
+          <div className="image-placeholder aspect-[16/9]">
+            {note.cover_image ? (
+              <img 
+                src={note.cover_image} 
+                alt={note.title}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="text-muted-foreground text-xs text-center p-4">
+                {note.title}
+              </div>
+            )}
+          </div>
+          
+          {/* Content Area */}
+          <div className="p-3">
+            <h3 className="blog-title">{note.title}</h3>
+            <p className="blog-category">{formatCategoryDisplayName(note.category)}</p>
+            
+            {/* Metadata */}
+            <div className="blog-metadata">
+              <span>{formatDate(note.date)}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <>
@@ -89,7 +176,20 @@ export default function BlogClientPage({ initialCategory = "all", notes }: BlogC
       <div className="blog-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
         <PageHeader {...headerData} />
         
-        <div className="mb-6 flex items-center gap-4">
+        <div className="mb-4">
+          <div className="relative">
+            <input 
+              type="text" 
+              placeholder="Search posts..." 
+              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+            />
+          </div>
+        </div>
+
+        {/* Filter and view toggle */}
+        <div className="mb-6 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2 whitespace-nowrap">
             <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
             <CustomSelect
@@ -99,22 +199,50 @@ export default function BlogClientPage({ initialCategory = "all", notes }: BlogC
               className="text-sm min-w-[140px]"
             />
           </div>
-          <div className="relative flex-1">
-            <input
-              type="text"
-              placeholder="Search posts..."
-              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+
+          {/* View Mode Toggle */}
+          <div className="flex items-center gap-1 border border-border rounded-none overflow-hidden">
+            <button
+              onClick={() => setViewMode("grid")}
+              className={`px-3 py-1 text-xs transition-colors ${
+                viewMode === "grid" 
+                  ? "bg-foreground text-background" 
+                  : "bg-background text-foreground hover:bg-secondary/50"
+              }`}
+            >
+              Grid
+            </button>
+            <button
+              onClick={() => setViewMode("list")}
+              className={`px-3 py-1 text-xs transition-colors ${
+                viewMode === "list" 
+                  ? "bg-foreground text-background" 
+                  : "bg-background text-foreground hover:bg-secondary/50"
+              }`}
+            >
+              List
+            </button>
           </div>
         </div>
 
-        <BlogTable
-          notes={notes}
-          searchQuery={searchQuery}
-          activeCategory={activeCategory}
-        />
+        {/* Filtered and view mode controlled content */}
+        {filteredNotes.length > 0 ? (
+          viewMode === "list" ? (
+            <BlogTable
+              notes={notes}
+              searchQuery={searchQuery}
+              activeCategory={activeCategory}
+            />
+          ) : (
+            <GridView 
+              notes={notes}
+              searchQuery={searchQuery}
+              activeCategory={activeCategory}
+            />
+          )
+        ) : (
+          <div className="text-muted-foreground text-sm mt-6 text-center">No posts found matching your criteria.</div>
+        )}
 
         <PageDescription
           title="About Blog Posts"

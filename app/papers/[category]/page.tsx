@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 }
 
 export default function CategoryPage({ params }: CategoryPageProps) {
-  const papers: PaperMeta[] = papersData.papers as PaperMeta[];
+  const allPapers: PaperMeta[] = papersData.papers as PaperMeta[];
   
   // Filter papers for this category
   const categoryData = categoriesData.categories.find(cat => cat.slug === params.category);
@@ -44,7 +44,10 @@ export default function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
-  const filteredPapers = papers.filter(paper => paper.category === params.category);
+  // Filter out hidden papers and only include those in the current category
+  const filteredPapers = allPapers.filter(paper => 
+    paper.category === params.category && paper.state !== "hidden"
+  );
 
   return <PapersClientPage papers={filteredPapers} initialCategory={params.category} />;
 }

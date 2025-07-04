@@ -8,7 +8,8 @@
 "status": "Notes",
 "confidence": "likely",
 "importance": 6,
-"preview": "A close reading of Edgar Allan Poe's 'Ulalume', exploring its themes, structure, and emotional depth."
+"preview": "A close reading of Edgar Allan Poe's 'Ulalume', exploring its themes, structure, and emotional depth.",
+"cover_image": "https://i.postimg.cc/50BcPg0H/ulalume-banner.jpg"
 },
 {
 "title": "The Waste Land, a Close Reading",
@@ -19,7 +20,8 @@
 "status": "Notes",
 "confidence": "likely",
 "importance": 6,
-"preview": "A close reading of T.S. Eliot's 'The Waste Land', analysis of its structure, themes, and references"
+"preview": "A close reading of T.S. Eliot's 'The Waste Land', analysis of its structure, themes, and references.",
+"cover_image": "https://i.postimg.cc/26pTKfbG/the-waste-land-banner.jpg"
 },
 {
 "title": "Reply to Mephisto",
@@ -30,7 +32,20 @@
 "status": "Finished",
 "confidence": "certain",
 "importance": 5,
-"preview": "the devil you don’t know is only a smoke screen for the devil you do"
+"preview": "the devil you don’t know is only a smoke screen for the devil you do",
+"cover_image": ""
+},
+{
+"title": "Marie Taglioni, the First to Float",
+"date": "2025-07-03",
+"slug": "marie-taglioni-first-to-float",
+"tags": ["Film", "Review", "Dance", "Marie Taglioni", "19th Century", "Ballet"],
+"category": "Ballet",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5,
+"preview": "A look at Marie Taglioni's groundbreaking role in dance and performance art.",
+"cover_image": "https://i.postimg.cc/13tWgB1G/marie-taglioni-banner.webp"
 }
 ]
   

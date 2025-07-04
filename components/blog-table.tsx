@@ -62,7 +62,7 @@ export function BlogTable({ notes, searchQuery, activeCategory }: BlogTableProps
   }
 
   return (
-    <div className="mt-8">
+    <div>
       <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
         <thead>
           <tr className="border-b border-border bg-muted/50 text-foreground">
@@ -95,10 +95,6 @@ export function BlogTable({ notes, searchQuery, activeCategory }: BlogTableProps
           ))}
         </tbody>
       </table>
-      
-      {filteredNotes.length === 0 && (
-        <div className="text-muted-foreground text-sm mt-6">No posts found matching your criteria.</div>
-      )}
     </div>
   );
 }

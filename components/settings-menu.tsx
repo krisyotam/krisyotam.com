@@ -3,11 +3,22 @@
 import type React from "react"
 
 import { useState, useRef, useEffect, useCallback } from "react"
-import { Search, Settings, Rss, X, Maximize, Move, CircleHelp, GitCompare, Code, Github, Link2, ExternalLink } from "lucide-react"
+import { Search, Settings, Rss, X, Maximize, Move, CircleHelp, GitCompare, Code, Github, Link2, ExternalLink, ChevronDown } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
 import { motion, useMotionValue } from "framer-motion"
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 import { Post } from "@/utils/posts"
 
@@ -32,7 +43,7 @@ interface SearchResult {
   status: string
   category?: string
   path: string
-  resultType: "post" | "page" | "category"
+  resultType: "post" | "page" | "category" | "essay" | "paper" | "fiction" | "news" | "conspiracy" | "note" | "problem" | "progymnasmata" | "prompt" | "script" | "lab" | "lecture" | "link"
 }
 
 export function SettingsMenu() {
@@ -42,7 +53,23 @@ export function SettingsMenu() {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
   const [posts, setPosts] = useState<Post[]>([])
   const [pages, setPages] = useState<Page[]>([])
-  const [searchFilter, setSearchFilter] = useState<"all" | "posts" | "pages" | "bible">("all")
+  const [essays, setEssays] = useState<any[]>([])
+  const [papers, setPapers] = useState<any[]>([])
+  const [fiction, setFiction] = useState<any[]>([])
+  const [news, setNews] = useState<any[]>([])
+  const [conspiracies, setConspiracies] = useState<any[]>([])
+  const [quickNotes, setQuickNotes] = useState<any[]>([])
+  const [problems, setProblems] = useState<any[]>([])
+  const [progymnasmata, setProgymnasmata] = useState<any[]>([])
+  const [prompts, setPrompts] = useState<any[]>([])
+  const [scripts, setScripts] = useState<any[]>([])
+  const [lab, setLab] = useState<any[]>([])
+  const [lectures, setLectures] = useState<any[]>([])
+  const [links, setLinks] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [searchFilter, setSearchFilter] = useState<
+    "all" | "posts" | "pages" | "bible" | "essays" | "papers" | "fiction" | "news" | "conspiracies" | "notes" | "problems" | "progymnasmata" | "prompts" | "scripts" | "lab" | "lectures" | "links"
+  >("all")
   const [bibleVersion, setBibleVersion] = useState<string>("NKJV")
   const [isMaximized, setIsMaximized] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
@@ -140,21 +167,82 @@ export function SettingsMenu() {
     }
   }, [isSearchOpen, isMaximized, x, y])
 
+  // Helper function to safely fetch data from an API endpoint
+  const safelyFetchData = async (url: string) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        console.warn(`Failed to fetch from ${url}: ${response.status}`);
+        return [];
+      }
+      return await response.json();
+    } catch (error) {
+      console.warn(`Error fetching data from ${url}:`, error);
+      return [];
+    }
+  };
+
   // Fetch posts and pages
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch posts
-        const postsResponse = await fetch("/api/posts/search")
-        const postsData = await postsResponse.json()
-        setPosts(postsData)
-
-        // Fetch pages
-        const directoryResponse = await fetch("/api/directory")
-        const directoryData = await directoryResponse.json()
-        setPages(directoryData.pages.filter((page: Page) => page["show-status"] === "active"))
+        setIsLoading(true);
+        
+        // Fetch data from all sources in parallel
+        const [
+          postsData,
+          directoryData,
+          essaysData,
+          papersData,
+          fictionData,
+          newsData,
+          conspiraciesData,
+          notesData,
+          problemsData,
+          progymnasmataData,
+          promptsData,
+          scriptsData,
+          labData,
+          lecturesData,
+          linksData,
+        ] = await Promise.all([
+          safelyFetchData("/api/posts/search"),
+          safelyFetchData("/api/directory"),
+          safelyFetchData("/api/essays/essays"),
+          safelyFetchData("/api/papers"),
+          safelyFetchData("/api/fiction/fiction"),
+          safelyFetchData("/api/news"),
+          safelyFetchData("/api/conspiracies"),
+          safelyFetchData("/api/notes"),
+          safelyFetchData("/api/problems"),
+          safelyFetchData("/api/progymnasmata"),
+          safelyFetchData("/api/prompts"),
+          safelyFetchData("/api/scripts"),
+          safelyFetchData("/api/lab/labs"),
+          safelyFetchData("/api/lectures"),
+          safelyFetchData("/api/links"),
+        ]);
+        
+        // Set state for each data type
+        setPosts(postsData || []);
+        setPages(directoryData?.pages?.filter((page: Page) => page["show-status"] === "active") || []);
+        setEssays(essaysData || []);
+        setPapers(papersData || []);
+        setFiction(fictionData || []);
+        setNews(newsData || []);
+        setConspiracies(conspiraciesData || []);
+        setQuickNotes(notesData || []);
+        setProblems(problemsData || []);
+        setProgymnasmata(progymnasmataData || []);
+        setPrompts(promptsData || []);
+        setScripts(scriptsData || []);
+        setLab(labData || []);
+        setLectures(lecturesData || []);
+        setLinks(linksData || []);
       } catch (error) {
         console.error("Error fetching data:", error)
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -222,11 +310,346 @@ export function SettingsMenu() {
 
       results = [...results, ...filteredPages]
     }
+    
+    // Search essays if filter is "all" or "essays"
+    if (searchFilter === "all" || searchFilter === "essays") {
+      const filteredEssays = essays
+        .filter((essay) => {
+          const matchesTitle = essay.title?.toLowerCase().includes(query)
+          const matchesSubtitle = essay.subtitle?.toLowerCase().includes(query)
+          const matchesPreview = essay.preview?.toLowerCase().includes(query)
+          const matchesTags = essay.tags?.some((tag) => tag.toLowerCase().includes(query))
+          const matchesCategory = essay.category?.toLowerCase().includes(query)
 
-    // Sort by date (newest first) and limit to 5 results
+          return matchesTitle || matchesSubtitle || matchesPreview || matchesTags || matchesCategory
+        })
+        .map((essay) => ({
+          title: essay.title,
+          subtitle: essay.subtitle,
+          preview: essay.preview,
+          date: essay.date,
+          status: essay.status || "Published",
+          category: essay.category,
+          path: `/essays/${essay.slug}`,
+          resultType: "essay" as const,
+        }))
+
+      results = [...results, ...filteredEssays]
+    }
+    
+    // Search papers if filter is "all" or "papers"
+    if (searchFilter === "all" || searchFilter === "papers") {
+      const filteredPapers = papers
+        .filter((paper) => {
+          // First filter out papers with state "hidden"
+          if (paper.state === "hidden") {
+            return false;
+          }
+          
+          const matchesTitle = paper.title?.toLowerCase().includes(query)
+          const matchesSubtitle = paper.subtitle?.toLowerCase().includes(query)
+          const matchesPreview = paper.preview?.toLowerCase().includes(query)
+          const matchesTags = paper.tags?.some((tag) => tag.toLowerCase().includes(query))
+
+          return matchesTitle || matchesSubtitle || matchesPreview || matchesTags
+        })
+        .map((paper) => ({
+          title: paper.title,
+          subtitle: paper.subtitle,
+          preview: paper.preview,
+          date: paper.date,
+          status: paper.status || "Published",
+          category: "Academic",
+          path: `/papers/${paper.slug}`,
+          resultType: "paper" as const,
+        }))
+
+      results = [...results, ...filteredPapers]
+    }
+    
+    // Search fiction if filter is "all" or "fiction"
+    if (searchFilter === "all" || searchFilter === "fiction") {
+      const filteredFiction = fiction
+        .filter((item) => {
+          const matchesTitle = item.title?.toLowerCase().includes(query)
+          const matchesSubtitle = item.subtitle?.toLowerCase().includes(query)
+          const matchesPreview = item.preview?.toLowerCase().includes(query)
+
+          return matchesTitle || matchesSubtitle || matchesPreview
+        })
+        .map((item) => ({
+          title: item.title,
+          subtitle: item.subtitle,
+          preview: item.preview,
+          date: item.date,
+          status: item.status || "Published",
+          category: "Fiction",
+          path: `/fiction/${item.slug}`,
+          resultType: "fiction" as const,
+        }))
+
+      results = [...results, ...filteredFiction]
+    }
+    
+    // Search news if filter is "all" or "news"
+    if (searchFilter === "all" || searchFilter === "news") {
+      const filteredNews = news
+        .filter((item) => {
+          const matchesTitle = item.title?.toLowerCase().includes(query)
+          const matchesSubtitle = item.subtitle?.toLowerCase().includes(query)
+          const matchesPreview = item.preview?.toLowerCase().includes(query)
+
+          return matchesTitle || matchesSubtitle || matchesPreview
+        })
+        .map((item) => ({
+          title: item.title,
+          subtitle: item.subtitle,
+          preview: item.preview,
+          date: item.date,
+          status: item.status || "Published",
+          category: "News",
+          path: `/news/${item.slug}`,
+          resultType: "news" as const,
+        }))
+
+      results = [...results, ...filteredNews]
+    }
+    
+    // Search conspiracies if filter is "all" or "conspiracies"
+    if (searchFilter === "all" || searchFilter === "conspiracies") {
+      const filteredConspiracies = conspiracies
+        .filter((item) => {
+          const matchesTitle = item.title?.toLowerCase().includes(query)
+          const matchesSubtitle = item.subtitle?.toLowerCase().includes(query)
+          const matchesPreview = item.preview?.toLowerCase().includes(query)
+
+          return matchesTitle || matchesSubtitle || matchesPreview
+        })
+        .map((item) => ({
+          title: item.title,
+          subtitle: item.subtitle,
+          preview: item.preview,
+          date: item.date,
+          status: item.status || "Published",
+          category: "Conspiracy",
+          path: `/conspiracies/${item.slug}`,
+          resultType: "conspiracy" as const,
+        }))
+
+      results = [...results, ...filteredConspiracies]
+    }
+    
+    // Search quick notes if filter is "all" or "notes"
+    if (searchFilter === "all" || searchFilter === "notes") {
+      const filteredNotes = quickNotes
+        .filter((item) => {
+          const matchesTitle = item.title?.toLowerCase().includes(query)
+          const matchesSubtitle = item.subtitle?.toLowerCase().includes(query)
+          const matchesPreview = item.preview?.toLowerCase().includes(query)
+          const matchesContent = item.content?.toLowerCase().includes(query)
+
+          return matchesTitle || matchesSubtitle || matchesPreview || matchesContent
+        })
+        .map((item) => ({
+          title: item.title,
+          subtitle: item.subtitle,
+          preview: item.preview || item.content?.substring(0, 100),
+          date: item.date,
+          status: item.status || "Published",
+          category: "Note",
+          path: `/notes/${item.slug}`,
+          resultType: "note" as const,
+        }))
+
+      results = [...results, ...filteredNotes]
+    }
+    
+    // Search problems if filter is "all" or "problems"
+    if (searchFilter === "all" || searchFilter === "problems") {
+      const filteredProblems = problems
+        .filter((item) => {
+          const matchesTitle = item.title?.toLowerCase().includes(query)
+          const matchesPreview = item.preview?.toLowerCase().includes(query)
+          const matchesTags = item.tags?.some((tag) => tag.toLowerCase().includes(query))
+
+          return matchesTitle || matchesPreview || matchesTags
+        })
+        .map((item) => ({
+          title: item.title,
+          subtitle: item.subtitle,
+          preview: item.preview,
+          date: item.date,
+          status: item.status || "Open",
+          category: "Problem",
+          path: `/problems/${item.slug}`,
+          resultType: "problem" as const,
+        }))
+
+      results = [...results, ...filteredProblems]
+    }
+    
+    // Search progymnasmata if filter is "all" or "progymnasmata"
+    if (searchFilter === "all" || searchFilter === "progymnasmata") {
+      const filteredProgymnasmata = progymnasmata
+        .filter((item) => {
+          const matchesTitle = item.title?.toLowerCase().includes(query)
+          const matchesPreview = item.preview?.toLowerCase().includes(query)
+
+          return matchesTitle || matchesPreview
+        })
+        .map((item) => ({
+          title: item.title,
+          subtitle: item.subtitle,
+          preview: item.preview,
+          date: item.date,
+          status: item.status || "Published",
+          category: "Progymnasmata",
+          path: `/progymnasmata/${item.slug}`,
+          resultType: "progymnasmata" as const,
+        }))
+
+      results = [...results, ...filteredProgymnasmata]
+    }
+    
+    // Search prompts if filter is "all" or "prompts"
+    if (searchFilter === "all" || searchFilter === "prompts") {
+      const filteredPrompts = prompts
+        .filter((item) => {
+          const matchesTitle = item.title?.toLowerCase().includes(query)
+          const matchesPreview = item.preview?.toLowerCase().includes(query)
+          const matchesContent = item.content?.toLowerCase().includes(query)
+
+          return matchesTitle || matchesPreview || matchesContent
+        })
+        .map((item) => ({
+          title: item.title,
+          subtitle: item.subtitle,
+          preview: item.preview || item.content?.substring(0, 100),
+          date: item.date,
+          status: item.status || "Published",
+          category: "Prompt",
+          path: `/prompts/${item.slug}`,
+          resultType: "prompt" as const,
+        }))
+
+      results = [...results, ...filteredPrompts]
+    }
+    
+    // Search scripts if filter is "all" or "scripts"
+    if (searchFilter === "all" || searchFilter === "scripts") {
+      const filteredScripts = scripts
+        .filter((item) => {
+          if (typeof item === 'string') {
+            return item.toLowerCase().includes(query);
+          }
+          
+          const matchesName = item.name?.toLowerCase().includes(query)
+          const matchesContent = item.content?.toLowerCase().includes(query)
+
+          return matchesName || matchesContent
+        })
+        .map((item) => {
+          if (typeof item === 'string') {
+            return {
+              title: item,
+              preview: "Script file",
+              date: new Date().toISOString(),
+              status: "Available",
+              category: "Script",
+              path: `/scripts?filename=${encodeURIComponent(item)}`,
+              resultType: "script" as const,
+            };
+          }
+          
+          return {
+            title: item.name,
+            preview: item.content?.substring(0, 100) || "Script file",
+            date: item.modified || new Date().toISOString(),
+            status: "Available",
+            category: "Script",
+            path: `/scripts?filename=${encodeURIComponent(item.name)}`,
+            resultType: "script" as const,
+          };
+        })
+
+      results = [...results, ...filteredScripts]
+    }
+    
+    // Search lab content if filter is "all" or "lab"
+    if (searchFilter === "all" || searchFilter === "lab") {
+      const filteredLab = lab
+        .filter((item) => {
+          const matchesTitle = item.title?.toLowerCase().includes(query)
+          const matchesDescription = item.description?.toLowerCase().includes(query)
+          const matchesTags = item.tags?.some((tag) => tag.toLowerCase().includes(query))
+
+          return matchesTitle || matchesDescription || matchesTags
+        })
+        .map((item) => ({
+          title: item.title,
+          preview: item.description,
+          date: item.date,
+          status: item.status || "Published",
+          category: "Lab",
+          path: `/lab/${item.slug}`,
+          resultType: "lab" as const,
+        }))
+
+      results = [...results, ...filteredLab]
+    }
+    
+    // Search lectures if filter is "all" or "academic"
+    if (searchFilter === "all" || searchFilter === "academic") {
+      const filteredLectures = lectures
+        .filter((item) => {
+          const matchesTitle = item.title?.toLowerCase().includes(query)
+          const matchesDescription = item.description?.toLowerCase().includes(query)
+          const matchesTags = item.tags?.some((tag) => tag.toLowerCase().includes(query))
+
+          return matchesTitle || matchesDescription || matchesTags
+        })
+        .map((item) => ({
+          title: item.title,
+          preview: item.description,
+          date: item.date,
+          status: item.status || "Published",
+          category: "Lecture",
+          path: `/lectures/${item.slug}`,
+          resultType: "lecture" as const,
+        }))
+
+      results = [...results, ...filteredLectures]
+    }
+    
+    // Search links if filter is "all" or "misc"
+    if (searchFilter === "all" || searchFilter === "misc") {
+      const filteredLinks = links
+        .filter((item) => {
+          const matchesTitle = item.title?.toLowerCase().includes(query)
+          const matchesDescription = item.description?.toLowerCase().includes(query)
+          const matchesUrl = item.url?.toLowerCase().includes(query)
+          const matchesTags = item.tags?.some((tag) => tag.toLowerCase().includes(query))
+
+          return matchesTitle || matchesDescription || matchesUrl || matchesTags
+        })
+        .map((item) => ({
+          title: item.title,
+          preview: item.description,
+          date: item.date || new Date().toISOString(),
+          status: "Link",
+          category: item.category || "External Link",
+          path: item.url,
+          resultType: "link" as const,
+        }))
+
+      results = [...results, ...filteredLinks]
+    }
+
+    // Sort by date (newest first) and limit to 10 results instead of 5 due to more sources
     results.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    setSearchResults(results.slice(0, 5))
-  }, [searchQuery, posts, pages, searchFilter])
+    setSearchResults(results.slice(0, 10))
+  }, [searchQuery, posts, pages, essays, papers, fiction, news, conspiracies, quickNotes, 
+      problems, progymnasmata, prompts, scripts, lab, lectures, links, searchFilter])
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -275,7 +698,16 @@ export function SettingsMenu() {
     
     if (searchResults.length > 0) {
       const firstResult = searchResults[0]
-      router.push(firstResult.path)
+      
+      // Check if it's an external link
+      if (firstResult.resultType === "link" && firstResult.path?.startsWith('http')) {
+        // Use the universal link modal for external links
+        createModal(firstResult.path, firstResult.title, window.innerWidth / 2, window.innerHeight / 2)
+      } else {
+        // Use the router for internal links
+        router.push(firstResult.path)
+      }
+      
       setIsSearchOpen(false)
       setIsOpen(false)
       setSearchQuery("")
@@ -670,72 +1102,82 @@ export function SettingsMenu() {
               </div>
 
               <div className="border-b border-border p-2">
-                <div className="text-xs text-muted-foreground">Search in:</div>
-                <div className="mt-1 flex items-center space-x-4">
-                  <label className="flex items-center space-x-1">
-                    <input
-                      type="radio"
-                      name="searchFilter"
-                      checked={searchFilter === "all"}
-                      onChange={() => setSearchFilter("all")}
-                      className="h-3.5 w-3.5 rounded-full border-muted-foreground"
-                    />
-                    <span className="text-sm">All</span>
-                  </label>
-                  <label className="flex items-center space-x-1">
-                    <input
-                      type="radio"
-                      name="searchFilter"
-                      checked={searchFilter === "posts"}
-                      onChange={() => setSearchFilter("posts")}
-                      className="h-3.5 w-3.5 rounded-full border-muted-foreground"
-                    />
-                    <span className="text-sm">Posts only</span>
-                  </label>
-                  <label className="flex items-center space-x-1">
-                    <input
-                      type="radio"
-                      name="searchFilter"
-                      checked={searchFilter === "pages"}
-                      onChange={() => setSearchFilter("pages")}
-                      className="h-3.5 w-3.5 rounded-full border-muted-foreground"
-                    />
-                    <span className="text-sm">Pages only</span>
-                  </label>
-                  <label className="flex items-center space-x-1">
-                    <input
-                      type="radio"
-                      name="searchFilter"
-                      checked={searchFilter === "bible"}
-                      onChange={() => setSearchFilter("bible")}
-                      className="h-3.5 w-3.5 rounded-full border-muted-foreground"
-                    />
-                    <span className="text-sm">Bible</span>
-                  </label>
+                <div className="flex items-center justify-between">
+                  <div className="text-xs text-muted-foreground">Search in:</div>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="flex items-center gap-1 text-sm px-2 py-1 rounded border border-input bg-transparent hover:bg-accent hover:text-accent-foreground">
+                      {searchFilter === "all" ? "All Content" : 
+                       searchFilter === "posts" ? "Posts" : 
+                       searchFilter === "pages" ? "Pages" :
+                       searchFilter === "essays" ? "Essays" :
+                       searchFilter === "papers" ? "Papers" :
+                       searchFilter === "fiction" ? "Fiction" :
+                       searchFilter === "news" ? "News" :
+                       searchFilter === "conspiracies" ? "Conspiracies" :
+                       searchFilter === "notes" ? "Notes" :
+                       searchFilter === "problems" ? "Problems" :
+                       searchFilter === "progymnasmata" ? "Progymnasmata" :
+                       searchFilter === "prompts" ? "Prompts" :
+                       searchFilter === "scripts" ? "Scripts" :
+                       searchFilter === "lab" ? "Lab" :
+                       searchFilter === "lectures" ? "Lectures" :
+                       searchFilter === "links" ? "Links" :
+                       searchFilter === "bible" ? "Bible" : "All Content"}
+                      <ChevronDown className="h-3 w-3" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-52">
+                      <DropdownMenuRadioGroup value={searchFilter} onValueChange={value => setSearchFilter(value as any)}>
+                        <DropdownMenuRadioItem value="all">All Content</DropdownMenuRadioItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuRadioItem value="posts">Posts</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="pages">Pages</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="essays">Essays</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="papers">Papers</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="fiction">Fiction</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="news">News</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="conspiracies">Conspiracies</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="notes">Notes</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="problems">Problems</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="progymnasmata">Progymnasmata</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="prompts">Prompts</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="scripts">Scripts</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="lab">Lab</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="lectures">Lectures</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="links">Links</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="bible">Bible</DropdownMenuRadioItem>
+                      </DropdownMenuRadioGroup>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
               </div>
-
+              
               {searchFilter === "bible" && (
                 <div className="border-b border-border p-2">
-                  <div className="text-xs text-muted-foreground mb-1">Bible version:</div>
-                  <select 
-                    value={bibleVersion}
-                    onChange={(e) => setBibleVersion(e.target.value)}
-                    className="w-full text-sm px-2 py-1 border border-border rounded bg-background"
-                  >
-                    <option value="KJV">KJV</option>
-                    <option value="NKJV">NKJV</option>
-                    <option value="NLT">NLT</option>
-                    <option value="NIV">NIV</option>
-                    <option value="ESV">ESV</option>
-                    <option value="CSB">CSB</option>
-                    <option value="NASB20">NASB20</option>
-                    <option value="NASB95">NASB95</option>
-                    <option value="LSB">LSB</option>
-                    <option value="AMP">AMP</option>
-                    <option value="NET">NET</option>
-                    <option value="RSV">RSV</option>
-                  </select>
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="text-xs text-muted-foreground">Bible version:</div>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger className="flex items-center gap-1 text-xs px-2 py-1 rounded border border-input bg-transparent hover:bg-accent hover:text-accent-foreground">
+                        {bibleVersion}
+                        <ChevronDown className="h-3 w-3" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="w-[120px] max-h-[200px] overflow-auto">
+                        <DropdownMenuRadioGroup value={bibleVersion} onValueChange={setBibleVersion}>
+                          <DropdownMenuRadioItem value="KJV">KJV</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="NKJV">NKJV</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="NLT">NLT</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="NIV">NIV</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="ESV">ESV</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="CSB">CSB</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="NASB20">NASB20</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="NASB95">NASB95</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="LSB">LSB</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="AMP">AMP</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="NET">NET</DropdownMenuRadioItem>
+                          <DropdownMenuRadioItem value="RSV">RSV</DropdownMenuRadioItem>
+                        </DropdownMenuRadioGroup>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
                   <div className="mt-1 text-xs text-muted-foreground">
                     Enter a Bible verse or search term and press Search
                   </div>
@@ -743,7 +1185,12 @@ export function SettingsMenu() {
               )}
 
               <div className={`${isMaximized ? "max-h-[calc(90vh-120px)]" : "max-h-[300px]"} overflow-y-auto`}>
-                {searchResults.length > 0 ? (
+                {isLoading ? (
+                  <div className="flex items-center justify-center p-8">
+                    <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+                    <span className="ml-2 text-sm text-muted-foreground">Searching...</span>
+                  </div>
+                ) : searchResults.length > 0 ? (
                   <div className="p-2">
                     {searchResults.map((result, index) => (
                       <Link

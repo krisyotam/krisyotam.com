@@ -83,7 +83,17 @@
     {
       "slug": "psychology",
       "title": "Psychology",
-      "preview": "Reflections on emotion, affect, and the cognitive weight of positivity and negativity.",
+      "preview": "cognitive, emotional, behavioral, and social mechanisms of the human mind",
+      "date": "2025-06-16",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "speculative",
+      "importance": 7
+    },
+        {
+      "slug": "ai",
+      "title": "AI",
+      "preview": "llms, diffusion models, and ai alignment",
       "date": "2025-06-16",
       "show-status": "active",
       "status": "In Progress",

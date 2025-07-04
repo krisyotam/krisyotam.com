@@ -322,6 +322,18 @@
 "confidence": "likely",
 "importance": 6,
 "cover_image": "https://i.postimg.cc/Y9WxwS9K/gilmore-girls.jpg"
+},
+{
+"title": "Legend of the Galactic Heroes",
+"preview": "A review of the epic space opera series that explores the conflict between the Galactic Empire and the Free Planets Alliance.",
+"date": "2025-07-04",
+"tags": ["Anime", "Review", "Science Fiction", "Space Opera", "Political Drama"],
+"category": "anime",
+"slug": "logh",
+"status": "Draft",
+"confidence": "likely",
+"importance": 6,
+"cover_image": "https://i.postimg.cc/Hxnf4mML/logh.jpg"
 }
 
 ]

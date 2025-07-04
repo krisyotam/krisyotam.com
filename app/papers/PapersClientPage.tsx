@@ -13,7 +13,7 @@ import categoriesData from "@/data/papers/categories.json";
 const defaultPapersPageData = {
   title: "Papers",
   date: new Date().toISOString(),
-  preview: "Research papers and academic inquiries across multiple disciplines",
+  preview: "stable long-form papers, studies, and self-experiments across various disciplines",
   status: "In Progress" as "In Progress",
   confidence: "likely" as "likely",
   importance: 9,

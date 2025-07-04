@@ -116,13 +116,14 @@ export default async function PaperPage({ params }: PaperPageProps) {
   
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
-      <div className="max-w-6xl mx-auto px-4">
-        {/* Header section - full width */}
-        <div className="mb-8">        <PapersPageClient paperData={paperData} allPapers={papers} headerOnly={true} />
+      <div className="container max-w-[672px] mx-auto px-4">
+        {/* Header section - same width as content */}
+        <div className="mb-8">
+          <PapersPageClient paperData={paperData} allPapers={papers} headerOnly={true} />
         </div>
         
         {/* Main content */}
-        <main className="container max-w-[672px] mx-auto px-4">
+        <main>
           {/* Table of Contents - at the top of content */}
           {headings.length > 0 && (
             <TableOfContents headings={headings} />

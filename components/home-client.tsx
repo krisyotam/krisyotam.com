@@ -43,6 +43,7 @@ import OtherSites from "@/components/about/OtherSites"
 import SiteInfo from "@/components/about/SiteInfo"
 import AboutThisSite from "@/components/about/AboutThisSite"
 import SupportMe from "@/components/about/SupportMe"
+import RecommendedContent from "@/components/about/RecommendedContent"
 import { FeaturedPost } from "@/components/featured-post"
 import { Post } from "@/utils/posts"
 
@@ -166,36 +167,32 @@ function BlogPostCard({ post }: { post: Post }) {
 
 // Poetry Card Component
 function PoetryCard({ poem }: { poem: Poem }) {
-  const stanzas = [
-    poem.stanza1,
-    poem.stanza2,
-    poem.stanza3,
-    poem.stanza4,
-    poem.stanza5,
-    poem.stanza6,
-    poem.stanza7,
-    poem.stanza8,
-  ].filter(Boolean)
-
-  const previewStanza = stanzas[0]
-
-  // Fixed poetry path to use /verse directly
-  const poetryPath = `/verse/${poem.slug}`
+  // Generate the correct URL for the poem using the same pattern as in verse-client.tsx
+  const typeSlug = poem.type.toLowerCase().replace(/\s+/g, "-");
+  const poetryPath = `/verse/${encodeURIComponent(typeSlug)}/${poem.year}/${encodeURIComponent(poem.slug)}`;
+  
+  // Format the date
+  const formattedDate = new Date(poem.dateCreated).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 
   return (
-    <Card className="p-4 bg-card border border-border hover:bg-accent/50 transition-colors">
+    <Card className="p-4 bg-card border border-border hover:bg-secondary/50 transition-colors">
       <Link href={poetryPath} className="no-underline">
         <h3 className="font-medium mb-1">{poem.title}</h3>
-        <p className="text-xs text-muted-foreground mb-2">
-          {poem.type} • {poem.year}
-        </p>
-        <div className="prose prose-sm prose-gray dark:prose-invert line-clamp-4 text-sm italic">
-          {previewStanza?.split("\n").map((line, i) => (
-            <p key={i} className="text-sm text-muted-foreground">
-              {line}
-            </p>
-          ))}
+        <div className="flex justify-between items-center mb-2">
+          <p className="text-xs text-muted-foreground">
+            {poem.type} • {poem.year}
+          </p>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground">
+            {formattedDate}
+          </span>
         </div>
+        <p className="text-sm text-muted-foreground line-clamp-2">
+          {poem.collection ? `Collection: ${poem.collection}` : "Standalone work"}
+        </p>
       </Link>
     </Card>
   )
@@ -246,10 +243,10 @@ function PostTableRow({ post }: { post: Post }) {
   console.log('PostTableRow - Linking to:', slugPath);
   
   return (
-    <tr className="border-t border-border hover:bg-muted/30 transition-colors">
+    <tr className="border-t border-border hover:bg-secondary/50 transition-colors">
       <td className="py-2 pr-4 text-sm text-muted-foreground font-mono">{formattedDate}</td>
       <td className="py-2 pr-4">
-        <Link href={slugPath} className="hover:underline">
+        <Link href={slugPath} className="no-underline">
           {post.title}
         </Link>
       </td>
@@ -265,10 +262,11 @@ function PostsTable({ posts }: { posts: Post[] }) {
   const [currentPage, setCurrentPage] = useState(1)
   const postsPerPage = 10
   
-  // Filter out excluded categories and sort by date (newest first)
+  // Filter out excluded categories, ensure posts are active, and sort by date (newest first)
   const filteredPosts = posts
     .filter(post => !["On Myself", "On Website", "On Learning", "On Writing", "On Method"].includes(post.category))
     .filter(post => post.slug && post.date && post.preview)
+    .filter(post => post.state === "active" || !post.state) // Only include posts with state "active" or without a state property
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   
   // Calculate pagination
@@ -681,6 +679,7 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
             <div className="mb-6">
               <AboutThisSite />
               <SupportMe />
+              <RecommendedContent />
             </div>
 
             {/* About Accordion */}

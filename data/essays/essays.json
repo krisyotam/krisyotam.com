@@ -11,7 +11,7 @@
       "status": "Notes",
       "confidence": "certain",
       "importance": 9,
-      "state": "active"
+      "state": "hidden"
     },    
     {
       "title": "On the Learning of Difficult Things",
@@ -76,7 +76,7 @@
       "status": "Notes",
       "confidence": "certain",
       "importance": 8,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Against the Fear of Passing",
@@ -89,7 +89,7 @@
       "status": "Notes",
       "confidence": "certain",
       "importance": 9,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "The Logic of Beauty",
@@ -102,7 +102,7 @@
       "status": "Notes",
       "confidence": "certain",
       "importance": 8,
-      "state": "active"
+      "state": "hidden"
     },
     {
       "title": "Analysis of Susanna Kaysen",
@@ -111,7 +111,7 @@
       "tags": ["Girl, Interrupted", "Psychology", "Identity", "Mental Health"],
       "category": "character-analysis",
       "slug": "analysis-of-susanna-kaysen",
-      "cover_image": "",
+      "cover_image": "https://i.postimg.cc/fLmrTrtg/susanna-kaysen.png",
       "status": "Notes",
       "confidence": "certain",
       "importance": 9,
@@ -124,7 +124,7 @@
       "tags": ["Girl, Interrupted", "Trauma", "Control", "Isolation"],
       "category": "character-analysis",
       "slug": "analysis-of-daisy-randone",
-      "cover_image": "",
+      "cover_image": "https://i.postimg.cc/RC1Dk2zW/daisy-randone.jpg",
       "status": "Notes",
       "confidence": "certain",
       "importance": 8,
@@ -137,7 +137,7 @@
       "tags": ["Girl, Interrupted", "Charisma", "Sociopathy", "Power"],
       "category": "character-analysis",
       "slug": "analysis-of-lisa-rowe",
-      "cover_image": "",
+      "cover_image": "https://i.postimg.cc/4y12pH16/lisa-rowe.jpg",
       "status": "Notes",
       "confidence": "certain",
       "importance": 9,
