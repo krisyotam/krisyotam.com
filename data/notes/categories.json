@@ -287,6 +287,51 @@
     "status": "In Progress",
     "confidence": "certain",
     "importance": 0
+  },
+  {
+    "slug": "technology",
+    "title": "Technology",
+    "preview": "notes on various technologies and personal projects",
+    "date": "2025-07-02",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 8
+  },
+  {
+    "slug": "research",
+    "title": "Research",
+    "preview": "research methods, tools, and approaches",
+    "date": "2025-07-02",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 7
+  },
+  {
+    "slug": "indie-web",
+    "title": "Indie Web",
+    "preview": "notes on the independent web, personal sites, and the web outside major platforms",
+    "date": "2025-07-02",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6
+  },
+  {
+    "slug": "learning",
+    "title": "Learning",
+    "preview": "notes on learning methods, resources, and personal education",
+    "date": "2025-07-02",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 8
+  },
+  {
+    "slug": "news",
+    "title": "News",
+    "preview": "notes on current events and personal news consumption",
+    "date": "2025-07-02",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 5
   }
 ]
 }
