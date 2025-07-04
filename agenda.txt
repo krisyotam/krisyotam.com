@@ -1,11 +1,2 @@
-Critical Errors from Deployment (July 3, 2025):
 
-1. Missing MDX Files:
-   - MDX file not found: /vercel/path0/app/notes/content/on-myself/clash-royale.mdx
-   - MDX file not found: /vercel/path0/app/notes/content/on-myself/tryhackme.mdx
-   - MDX file not found: /vercel/path0/app/notes/content/on-myself/hackthebox.mdx
 
-2. Prerender Errors:
-   - Error occurred prerendering page "/notes/on-myself/clash-royale"
-   - Error occurred prerendering page "/notes/on-myself/tryhackme"
-   - Error occurred prerendering page "/notes/on-myself/hackthebox"
