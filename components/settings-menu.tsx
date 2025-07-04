@@ -68,7 +68,7 @@ export function SettingsMenu() {
   const [links, setLinks] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [searchFilter, setSearchFilter] = useState<
-    "all" | "posts" | "pages" | "bible" | "essays" | "papers" | "fiction" | "news" | "conspiracies" | "notes" | "problems" | "progymnasmata" | "prompts" | "scripts" | "lab" | "lectures" | "links"
+    "all" | "posts" | "pages" | "bible" | "essays" | "papers" | "fiction" | "news" | "conspiracies" | "notes" | "problems" | "progymnasmata" | "prompts" | "scripts" | "lab" | "lectures" | "links" | "academic" | "misc"
   >("all")
   const [bibleVersion, setBibleVersion] = useState<string>("NKJV")
   const [isMaximized, setIsMaximized] = useState(false)
@@ -267,7 +267,7 @@ export function SettingsMenu() {
           const matchesSubtitle = post.subtitle?.toLowerCase().includes(query)
           const matchesPreview = post.preview?.toLowerCase().includes(query)
           const matchesCategory = post.category?.toLowerCase().includes(query)
-          const matchesTags = post.tags?.some((tag) => tag.toLowerCase().includes(query))
+          const matchesTags = post.tags?.some((tag: string) => tag.toLowerCase().includes(query))
 
           return (
             (matchesTitle || matchesSubtitle || matchesPreview || matchesCategory || matchesTags) &&
@@ -318,7 +318,7 @@ export function SettingsMenu() {
           const matchesTitle = essay.title?.toLowerCase().includes(query)
           const matchesSubtitle = essay.subtitle?.toLowerCase().includes(query)
           const matchesPreview = essay.preview?.toLowerCase().includes(query)
-          const matchesTags = essay.tags?.some((tag) => tag.toLowerCase().includes(query))
+          const matchesTags = essay.tags?.some((tag: string) => tag.toLowerCase().includes(query))
           const matchesCategory = essay.category?.toLowerCase().includes(query)
 
           return matchesTitle || matchesSubtitle || matchesPreview || matchesTags || matchesCategory
@@ -349,7 +349,7 @@ export function SettingsMenu() {
           const matchesTitle = paper.title?.toLowerCase().includes(query)
           const matchesSubtitle = paper.subtitle?.toLowerCase().includes(query)
           const matchesPreview = paper.preview?.toLowerCase().includes(query)
-          const matchesTags = paper.tags?.some((tag) => tag.toLowerCase().includes(query))
+          const matchesTags = paper.tags?.some((tag: string) => tag.toLowerCase().includes(query))
 
           return matchesTitle || matchesSubtitle || matchesPreview || matchesTags
         })
@@ -470,7 +470,7 @@ export function SettingsMenu() {
         .filter((item) => {
           const matchesTitle = item.title?.toLowerCase().includes(query)
           const matchesPreview = item.preview?.toLowerCase().includes(query)
-          const matchesTags = item.tags?.some((tag) => tag.toLowerCase().includes(query))
+          const matchesTags = item.tags?.some((tag: string) => tag.toLowerCase().includes(query))
 
           return matchesTitle || matchesPreview || matchesTags
         })
@@ -581,7 +581,7 @@ export function SettingsMenu() {
         .filter((item) => {
           const matchesTitle = item.title?.toLowerCase().includes(query)
           const matchesDescription = item.description?.toLowerCase().includes(query)
-          const matchesTags = item.tags?.some((tag) => tag.toLowerCase().includes(query))
+          const matchesTags = item.tags?.some((tag: string) => tag.toLowerCase().includes(query))
 
           return matchesTitle || matchesDescription || matchesTags
         })
@@ -604,7 +604,7 @@ export function SettingsMenu() {
         .filter((item) => {
           const matchesTitle = item.title?.toLowerCase().includes(query)
           const matchesDescription = item.description?.toLowerCase().includes(query)
-          const matchesTags = item.tags?.some((tag) => tag.toLowerCase().includes(query))
+          const matchesTags = item.tags?.some((tag: string) => tag.toLowerCase().includes(query))
 
           return matchesTitle || matchesDescription || matchesTags
         })
@@ -628,7 +628,7 @@ export function SettingsMenu() {
           const matchesTitle = item.title?.toLowerCase().includes(query)
           const matchesDescription = item.description?.toLowerCase().includes(query)
           const matchesUrl = item.url?.toLowerCase().includes(query)
-          const matchesTags = item.tags?.some((tag) => tag.toLowerCase().includes(query))
+          const matchesTags = item.tags?.some((tag: string) => tag.toLowerCase().includes(query))
 
           return matchesTitle || matchesDescription || matchesUrl || matchesTags
         })

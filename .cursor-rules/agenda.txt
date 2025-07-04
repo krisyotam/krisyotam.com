@@ -5,3 +5,14 @@
    - File: ./app/blog/BlogClientPage.tsx:140:19
    - Solution: Added cover_image?: string to the BlogMeta interface in types/blog.ts and in app/blog/[category]/[slug]/BlogPageClient.tsx
    - Fix: Added the missing property to the type definition rather than using optional chaining, to maintain consistent data structure
+
+2. ✅ [FIXED] Parameter 'tag' implicitly has an 'any' type
+   - File: ./components/settings-menu.tsx
+   - Solution: Added explicit (tag: string) type annotation to all .some() callbacks in settings-menu.tsx
+   - Fix: Found and fixed all 7 instances of .some((tag) => ...) to use .some((tag: string) => ...) to prevent implicit 'any' type errors
+
+3. ✅ [FIXED] Type errors in searchFilter comparison
+   - File: ./components/settings-menu.tsx:602:35 and 625:35
+   - Error: This comparison appears to be unintentional because the types [...] and '"academic"'/'misc' have no overlap
+   - Solution: Added "academic" and "misc" to the searchFilter type definition
+   - Fix: Updated the type definition to include all values used in comparisons
