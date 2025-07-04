@@ -1,1911 +1,1098 @@
-[18:55:46.362] Running build in Washington, D.C., USA (East) – iad1
-[18:55:46.363] Build machine configuration: 2 cores, 8 GB
-[18:55:46.397] Cloning github.com/krisyotam/krisyotam.com (Branch: main, Commit: 5f41e5e)
-[18:55:52.168] Cloning completed: 5.771s
-[18:56:06.835] Restored build cache from previous deployment (7FczQC8UNvy2nhn4eV92wZnEsndE)
-[18:56:08.888] Running "vercel build"
-[18:56:09.888] Vercel CLI 44.2.10
-[18:56:10.139] WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
-[18:56:10.439] Installing dependencies...
-[18:56:12.958] npm warn deprecated topojson@3.0.2: Use topojson-client, topojson-server or topojson-simplify directly.
-[18:56:27.163] 
-[18:56:27.164] added 7 packages, removed 21 packages, and changed 49 packages in 16s
-[18:56:27.164] 
-[18:56:27.164] 233 packages are looking for funding
-[18:56:27.165]   run `npm fund` for details
-[18:56:27.199] Detected Next.js version: 14.2.30
-[18:56:27.208] Running "npm run build"
-[18:56:27.317] 
-[18:56:27.317] > kris-yotam@0.1.0 build
-[18:56:27.317] > next build
-[18:56:27.318] 
-[18:56:27.970]   ▲ Next.js 14.2.30
-[18:56:27.971]   - Experiments (use with caution):
-[18:56:27.971]     · webpackBuildWorker
-[18:56:27.971] 
-[18:56:28.067]    Creating an optimized production build ...
-[18:58:05.309]  ✓ Compiled successfully
-[18:58:05.310]    Linting and checking validity of types ...
-[18:59:26.560]    Collecting page data ...
-[18:59:29.808] Available categories: [
-[18:59:29.809]   'illuminati',
-[18:59:29.809]   'new-world-order',
-[18:59:29.809]   'cia-projects',
-[18:59:29.810]   'bohemian-grove',
-[18:59:29.810]   'bilderberg-group',
-[18:59:29.810]   'qanon',
-[18:59:29.810]   'roswell-and-ufo-coverups',
-[18:59:29.810]   'flat-earth',
-[18:59:29.810]   'secret-space-programs'
-[18:59:29.811] ]
-[18:59:29.811] Slugified categories: [
-[18:59:29.811]   'illuminati',
-[18:59:29.811]   'new-world-order',
-[18:59:29.811]   'cia-projects',
-[18:59:29.812]   'bohemian-grove',
-[18:59:29.812]   'bilderberg-group',
-[18:59:29.812]   'qanon',
-[18:59:29.812]   'roswell-and-ufo-coverups',
-[18:59:29.812]   'flat-earth',
-[18:59:29.812]   'secret-space-programs'
-[18:59:29.813] ]
-[18:59:29.963] Available categories: [
-[18:59:29.963]   'liber-necrophilia',
-[18:59:29.963]   'liber-zoophilia',
-[18:59:29.963]   'liber-sodomorum',
-[18:59:29.963]   'liber-experimentorum',
-[18:59:29.963]   'liber-mortis',
-[18:59:29.963]   'liber-incubi',
-[18:59:29.964]   'liber-hysterica',
-[18:59:29.964]   'malleus-innocentium',
-[18:59:29.964]   'fabrica-excruciationis'
-[18:59:29.964] ]
-[18:59:29.965] Slugified categories: [
-[18:59:29.965]   'liber-necrophilia',
-[18:59:29.965]   'liber-zoophilia',
-[18:59:29.965]   'liber-sodomorum',
-[18:59:29.965]   'liber-experimentorum',
-[18:59:29.965]   'liber-mortis',
-[18:59:29.965]   'liber-incubi',
-[18:59:29.965]   'liber-hysterica',
-[18:59:29.965]   'malleus-innocentium',
-[18:59:29.965]   'fabrica-excruciationis'
-[18:59:29.965] ]
-[18:59:30.045] Available categories: [
-[18:59:30.045]   'Philosophy',
-[18:59:30.045]   'Verse',
-[18:59:30.045]   'Random',
-[18:59:30.045]   'On Myself',
-[18:59:30.045]   'Libraries',
-[18:59:30.045]   'Bounties',
-[18:59:30.045]   'News',
-[18:59:30.045]   'Website',
-[18:59:30.046]   'Stable Syllabi',
-[18:59:30.046]   'Research',
-[18:59:30.046]   'Powerscaling',
-[18:59:30.046]   'Book Notes',
-[18:59:30.046]   'Technology',
-[18:59:30.046]   'Virtual Worlds',
-[18:59:30.046]   'Mathematics',
-[18:59:30.046]   'Internet Archive',
-[18:59:30.046]   'Indie Web',
-[18:59:30.046]   'Learning',
-[18:59:30.046]   'Physics',
-[18:59:30.046]   'social-media',
-[18:59:30.046]   'Fraternities',
-[18:59:30.046]   'Artificial Intelligence',
-[18:59:30.046]   'Manuals Of Style',
-[18:59:30.046]   'Internet Archiving'
-[18:59:30.046] ]
-[18:59:30.046] Slugified categories: [
-[18:59:30.046]   'philosophy',
-[18:59:30.047]   'verse',
-[18:59:30.047]   'random',
-[18:59:30.047]   'on-myself',
-[18:59:30.047]   'libraries',
-[18:59:30.047]   'bounties',
-[18:59:30.047]   'news',
-[18:59:30.047]   'website',
-[18:59:30.047]   'stable-syllabi',
-[18:59:30.047]   'research',
-[18:59:30.047]   'powerscaling',
-[18:59:30.047]   'book-notes',
-[18:59:30.047]   'technology',
-[18:59:30.047]   'virtual-worlds',
-[18:59:30.047]   'mathematics',
-[18:59:30.047]   'internet-archive',
-[18:59:30.047]   'indie-web',
-[18:59:30.047]   'learning',
-[18:59:30.047]   'physics',
-[18:59:30.047]   'social-media',
-[18:59:30.047]   'fraternities',
-[18:59:30.047]   'artificial-intelligence',
-[18:59:30.048]   'manuals-of-style',
-[18:59:30.048]   'internet-archiving'
-[18:59:30.048] ]
-[18:59:34.279]    Generating static pages (0/878) ...
-[18:59:38.537] Fetching favorite actors from JSON
-[18:59:38.538] Retrieved 15 favorite actors
-[18:59:38.575] Fetching favorite characters from JSON
-[18:59:38.575] Retrieved 27 favorite characters
-[18:59:38.640] Fetching favorite film companies from JSON
-[18:59:38.641] Retrieved 12 favorite film companies
-[18:59:38.653] Fetching favorite directors from JSON
-[18:59:38.653] Retrieved 13 favorite directors
-[18:59:40.988] Fetching user watched content from Trakt...
-[18:59:41.046] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
-[18:59:41.046] Error fetching Trakt genres: Error: Unable to get valid Trakt access token
-[18:59:41.046]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
-[18:59:41.046]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:41.047]     at async d (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4890)
-[18:59:41.047]     at async l (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:666)
-[18:59:41.047]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
-[18:59:41.047]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
-[18:59:41.047]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
-[18:59:41.047]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
-[18:59:41.048]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
-[18:59:41.050]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
-[18:59:41.075] Fetching user lists from Trakt
-[18:59:41.219] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
-[18:59:41.220] Error fetching Trakt lists: Error: Unable to get valid Trakt access token
-[18:59:41.220]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
-[18:59:41.220]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:41.220]     at async u (/vercel/path0/.next/server/app/api/trakt/lists/route.js:1:664)
-[18:59:41.220]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
-[18:59:41.221]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
-[18:59:41.221]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
-[18:59:41.221]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
-[18:59:41.221]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
-[18:59:41.221]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
-[18:59:41.221]     at async Object.exportPage (/vercel/path0/node_modules/next/dist/export/worker.js:237:20)
-[18:59:41.296] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
-[18:59:41.297] Error fetching Trakt stats: Error: Unable to get valid Trakt access token
-[18:59:41.297]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
-[18:59:41.297]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:41.297]     at async d (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4890)
-[18:59:41.297]     at async l (/vercel/path0/.next/server/app/api/trakt/stats/route.js:1:606)
-[18:59:41.298]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
-[18:59:41.298]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
-[18:59:41.298]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
-[18:59:41.298]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
-[18:59:41.298]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
-[18:59:41.298]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
-[18:59:49.424] MDX file not found: /vercel/path0/app/essays/content/character-analysis/analysis-of-daisy-randone.mdx
-[18:59:49.424] MDX file not found: /vercel/path0/app/essays/content/character-analysis/analysis-of-daisy-randone.mdx
-[18:59:49.425] Error: Cannot find module './character-analysis/analysis-of-daisy-randone.mdx'
-[18:59:49.425]     at /vercel/path0/.next/server/app/essays/[category]/[slug]/page.js:1:1066
-[18:59:49.425]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:49.425]     at async u (/vercel/path0/.next/server/app/essays/[category]/[slug]/page.js:33:8020) {
-[18:59:49.425]   code: 'MODULE_NOT_FOUND',
-[18:59:49.425]   digest: '3389721825'
-[18:59:49.425] }
-[18:59:49.425] Error: Cannot find module './character-analysis/analysis-of-daisy-randone.mdx'
-[18:59:49.425]     at /vercel/path0/.next/server/app/essays/[category]/[slug]/page.js:1:1066
-[18:59:49.425]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:49.425]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:49.426]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:49.426]     at process.processTimers (node:internal/timers:523:7)
-[18:59:49.426]     at async u (/vercel/path0/.next/server/app/essays/[category]/[slug]/page.js:33:8020) {
-[18:59:49.426]   code: 'MODULE_NOT_FOUND',
-[18:59:49.426]   digest: '151246184'
-[18:59:49.426] }
-[18:59:49.428] Error: Cannot find module './character-analysis/analysis-of-daisy-randone.mdx'
-[18:59:49.428]     at /vercel/path0/.next/server/app/essays/[category]/[slug]/page.js:1:1066
-[18:59:49.428]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:49.428]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:49.428]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:49.429]     at process.processTimers (node:internal/timers:523:7)
-[18:59:49.429]     at async u (/vercel/path0/.next/server/app/essays/[category]/[slug]/page.js:33:8020) {
-[18:59:49.429]   code: 'MODULE_NOT_FOUND',
-[18:59:49.429]   digest: '151246184'
-[18:59:49.429] }
-[18:59:49.442] 
-[18:59:49.442] Error occurred prerendering page "/essays/character-analysis/analysis-of-daisy-randone". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:49.442] 
-[18:59:49.442] Error: Cannot find module './character-analysis/analysis-of-daisy-randone.mdx'
-[18:59:49.442]     at /vercel/path0/.next/server/app/essays/[category]/[slug]/page.js:1:1066
-[18:59:49.442]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:49.442]     at async u (/vercel/path0/.next/server/app/essays/[category]/[slug]/page.js:33:8020)
-[18:59:50.761] PostTableRow - Linking to: essays/character-analysis/analysis-of-susanna-kaysen
-[18:59:50.761] PostTableRow - Linking to: essays/character-analysis/analysis-of-daisy-randone
-[18:59:50.761] PostTableRow - Linking to: essays/character-analysis/analysis-of-lisa-rowe
-[18:59:50.761] PostTableRow - Linking to: essays/Thought Experiments/reply-to-mephisto
-[18:59:50.762] PostTableRow - Linking to: essays/letters/a-letter-to-the-student-in-shadow
-[18:59:50.762] PostTableRow - Linking to: essays/pedagogy/on-the-learning-of-difficult-things
-[18:59:50.762] PostTableRow - Linking to: essays/pedagogy/on-learning-serious-things
-[18:59:50.762] PostTableRow - Linking to: essays/pedagogy/reflections-on-lifelong-study
-[18:59:50.762] PostTableRow - Linking to: essays/philosophy/on-being-wounded
-[18:59:50.762] PostTableRow - Linking to: essays/philosophy/when-the-body-keeps-score
-[18:59:51.279] Unknown content type: lab
-[18:59:51.279] Could not find MDX file for verse/lab-surveys
-[18:59:51.282] Unknown content type: lab
-[18:59:51.283] Could not find MDX file for verse/lab-surveys
-[18:59:51.300] Unknown content type: lab
-[18:59:51.300] Could not find MDX file for notes/lab-methods
-[18:59:51.307] Unknown content type: lab
-[18:59:51.307] Could not find MDX file for notes/lab-methods
-[18:59:51.649]    Generating static pages (219/878) 
-[18:59:52.339] BookDetailClient - Received book: Linear Algebra Done Right
-[18:59:52.340] BookDetailClient - Book slug: linear-algebra-done-right
-[18:59:52.358] BookDetailClient - Received book: Understanding Analysis
-[18:59:52.358] BookDetailClient - Book slug: understanding-analysis
-[18:59:52.376] BookDetailClient - Received book: Elementary Analysis: The Theory of Calculus
-[18:59:52.377] BookDetailClient - Book slug: elementary-analysis-theory-of-calculus
-[18:59:52.394] BookDetailClient - Received book: Principles of Mathematical Analysis
-[18:59:52.395] BookDetailClient - Book slug: principles-of-mathematical-analysis
-[18:59:52.413] BookDetailClient - Received book: Complex Variables for Scientists and Engineers
-[18:59:52.413] BookDetailClient - Book slug: complex-variables-for-scientists-and-engineers
-[18:59:52.429] BookDetailClient - Received book: Elementary Number Theory
-[18:59:52.430] BookDetailClient - Book slug: elementary-number-theory
-[18:59:52.448] BookDetailClient - Received book: The Structure of Abstract Algebra
-[18:59:52.448] BookDetailClient - Book slug: the-structure-of-abstract-algebra
-[18:59:52.464] BookDetailClient - Received book: Plane Trigonometry with Tables
-[18:59:52.464] BookDetailClient - Book slug: plane-trigonometry-with-tables
-[18:59:52.521] MDX file not found: /vercel/path0/app/links/content/research/google-scholar.mdx
-[18:59:52.523] MDX file not found: /vercel/path0/app/links/content/research/google-scholar.mdx
-[18:59:52.525] Error: Cannot find module './research/google-scholar.mdx'
-[18:59:52.526]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.526]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.526]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.526]   code: 'MODULE_NOT_FOUND',
-[18:59:52.526]   digest: '634255336'
-[18:59:52.526] }
-[18:59:52.526] Error: Cannot find module './research/google-scholar.mdx'
-[18:59:52.527]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.527]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.527]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.527]   code: 'MODULE_NOT_FOUND',
-[18:59:52.527]   digest: '634255336'
-[18:59:52.527] }
-[18:59:52.528] Error: Cannot find module './research/google-scholar.mdx'
-[18:59:52.528]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.528]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.528]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.528]   code: 'MODULE_NOT_FOUND',
-[18:59:52.528]   digest: '634255336'
-[18:59:52.528] }
-[18:59:52.536] 
-[18:59:52.536] Error occurred prerendering page "/links/research/google-scholar". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:52.536] 
-[18:59:52.540] Error: Cannot find module './research/google-scholar.mdx'
-[18:59:52.540]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.540]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.541]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274)
-[18:59:52.567] MDX file not found: /vercel/path0/app/links/content/tools/overleaf.mdx
-[18:59:52.569] MDX file not found: /vercel/path0/app/links/content/tools/overleaf.mdx
-[18:59:52.571] Error: Cannot find module './tools/overleaf.mdx'
-[18:59:52.571]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.571]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.571]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.571]   code: 'MODULE_NOT_FOUND',
-[18:59:52.571]   digest: '2751646248'
-[18:59:52.571] }
-[18:59:52.572] Error: Cannot find module './tools/overleaf.mdx'
-[18:59:52.572]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.572]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.572]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.572]   code: 'MODULE_NOT_FOUND',
-[18:59:52.573]   digest: '2751646248'
-[18:59:52.573] }
-[18:59:52.574] Error: Cannot find module './tools/overleaf.mdx'
-[18:59:52.574]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.574]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.574]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.574]   code: 'MODULE_NOT_FOUND',
-[18:59:52.574]   digest: '2751646248'
-[18:59:52.574] }
-[18:59:52.585] 
-[18:59:52.586] Error occurred prerendering page "/links/tools/overleaf". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:52.586] 
-[18:59:52.586] Error: Cannot find module './tools/overleaf.mdx'
-[18:59:52.586]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.586]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.586]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274)
-[18:59:52.619] MDX file not found: /vercel/path0/app/links/content/learning/khan-academy.mdx
-[18:59:52.620] MDX file not found: /vercel/path0/app/links/content/learning/khan-academy.mdx
-[18:59:52.622] Error: Cannot find module './learning/khan-academy.mdx'
-[18:59:52.622]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.622]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.622]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.622]   code: 'MODULE_NOT_FOUND',
-[18:59:52.622]   digest: '4050959400'
-[18:59:52.622] }
-[18:59:52.623] Error: Cannot find module './learning/khan-academy.mdx'
-[18:59:52.623]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.623]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.623]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:52.623]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:52.623]     at process.processTimers (node:internal/timers:523:7)
-[18:59:52.623]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.623]   code: 'MODULE_NOT_FOUND',
-[18:59:52.623]   digest: '2937891713'
-[18:59:52.623] }
-[18:59:52.624] Error: Cannot find module './learning/khan-academy.mdx'
-[18:59:52.624]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.624]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.624]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:52.625]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:52.625]     at process.processTimers (node:internal/timers:523:7)
-[18:59:52.625]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.625]   code: 'MODULE_NOT_FOUND',
-[18:59:52.625]   digest: '2937891713'
-[18:59:52.625] }
-[18:59:52.632] 
-[18:59:52.633] Error occurred prerendering page "/links/learning/khan-academy". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:52.633] 
-[18:59:52.633] Error: Cannot find module './learning/khan-academy.mdx'
-[18:59:52.633]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.633]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.633]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274)
-[18:59:52.662] MDX file not found: /vercel/path0/app/links/content/references/project-gutenberg.mdx
-[18:59:52.663] MDX file not found: /vercel/path0/app/links/content/references/project-gutenberg.mdx
-[18:59:52.665] Error: Cannot find module './references/project-gutenberg.mdx'
-[18:59:52.666]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.666]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.666]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.667]   code: 'MODULE_NOT_FOUND',
-[18:59:52.667]   digest: '447320040'
-[18:59:52.667] }
-[18:59:52.667] Error: Cannot find module './references/project-gutenberg.mdx'
-[18:59:52.667]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.668]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.668]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.668]   code: 'MODULE_NOT_FOUND',
-[18:59:52.668]   digest: '447320040'
-[18:59:52.668] }
-[18:59:52.668] Error: Cannot find module './references/project-gutenberg.mdx'
-[18:59:52.668]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.668]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.668]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.668]   code: 'MODULE_NOT_FOUND',
-[18:59:52.668]   digest: '447320040'
-[18:59:52.669] }
-[18:59:52.675] 
-[18:59:52.676] Error occurred prerendering page "/links/references/project-gutenberg". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:52.676] 
-[18:59:52.676] Error: Cannot find module './references/project-gutenberg.mdx'
-[18:59:52.676]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.676]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.676]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274)
-[18:59:52.705] MDX file not found: /vercel/path0/app/links/content/datasets/google-dataset-search.mdx
-[18:59:52.706] MDX file not found: /vercel/path0/app/links/content/datasets/google-dataset-search.mdx
-[18:59:52.707] Error: Cannot find module './datasets/google-dataset-search.mdx'
-[18:59:52.707]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.708]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.708]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.708]   code: 'MODULE_NOT_FOUND',
-[18:59:52.708]   digest: '3200486824'
-[18:59:52.708] }
-[18:59:52.709] Error: Cannot find module './datasets/google-dataset-search.mdx'
-[18:59:52.709]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.709]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.709]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.709]   code: 'MODULE_NOT_FOUND',
-[18:59:52.710]   digest: '3200486824'
-[18:59:52.710] }
-[18:59:52.710] Error: Cannot find module './datasets/google-dataset-search.mdx'
-[18:59:52.710]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.710]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.710]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.710]   code: 'MODULE_NOT_FOUND',
-[18:59:52.710]   digest: '3200486824'
-[18:59:52.710] }
-[18:59:52.718] 
-[18:59:52.719] Error occurred prerendering page "/links/datasets/google-dataset-search". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:52.719] 
-[18:59:52.719] Error: Cannot find module './datasets/google-dataset-search.mdx'
-[18:59:52.719]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.719]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.719]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274)
-[18:59:52.726] MDX file not found: /vercel/path0/app/links/content/research/sci-hub.mdx
-[18:59:52.727] MDX file not found: /vercel/path0/app/links/content/research/sci-hub.mdx
-[18:59:52.730] Error: Cannot find module './research/sci-hub.mdx'
-[18:59:52.731]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.731]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.731]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.731]   code: 'MODULE_NOT_FOUND',
-[18:59:52.731]   digest: '1813670440'
-[18:59:52.731] }
-[18:59:52.731] Error: Cannot find module './research/sci-hub.mdx'
-[18:59:52.731]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.731]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.731]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.731]   code: 'MODULE_NOT_FOUND',
-[18:59:52.731]   digest: '1813670440'
-[18:59:52.732] }
-[18:59:52.732] Error: Cannot find module './research/sci-hub.mdx'
-[18:59:52.732]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.732]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.732]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.732]   code: 'MODULE_NOT_FOUND',
-[18:59:52.732]   digest: '1813670440'
-[18:59:52.733] }
-[18:59:52.740] 
-[18:59:52.740] Error occurred prerendering page "/links/research/sci-hub". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:52.740] 
-[18:59:52.740] Error: Cannot find module './research/sci-hub.mdx'
-[18:59:52.740]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.740]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.740]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274)
-[18:59:52.745] MDX file not found: /vercel/path0/app/links/content/research/library-genesis.mdx
-[18:59:52.746] MDX file not found: /vercel/path0/app/links/content/research/library-genesis.mdx
-[18:59:52.748] Error: Cannot find module './research/library-genesis.mdx'
-[18:59:52.748]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.748]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.748]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.748]   code: 'MODULE_NOT_FOUND',
-[18:59:52.748]   digest: '2060499496'
-[18:59:52.748] }
-[18:59:52.748] Error: Cannot find module './research/library-genesis.mdx'
-[18:59:52.748]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.748]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.749]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:52.749]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:52.749]     at process.processTimers (node:internal/timers:523:7)
-[18:59:52.749]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.749]   code: 'MODULE_NOT_FOUND',
-[18:59:52.749]   digest: '3219509249'
-[18:59:52.749] }
-[18:59:52.750] Error: Cannot find module './research/library-genesis.mdx'
-[18:59:52.750]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.751]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.751]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:52.751]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:52.751]     at process.processTimers (node:internal/timers:523:7)
-[18:59:52.751]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274) {
-[18:59:52.751]   code: 'MODULE_NOT_FOUND',
-[18:59:52.751]   digest: '3219509249'
-[18:59:52.751] }
-[18:59:52.759] 
-[18:59:52.760] Error occurred prerendering page "/links/research/library-genesis". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:52.760] 
-[18:59:52.760] Error: Cannot find module './research/library-genesis.mdx'
-[18:59:52.760]     at /vercel/path0/.next/server/app/links/[category]/[slug]/page.js:1:565
-[18:59:52.760]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:52.760]     at async h (/vercel/path0/.next/server/app/links/[category]/[slug]/page.js:33:8274)
-[18:59:53.128] MDX file not found: /vercel/path0/app/blog/content/reply-to-mephisto.mdx
-[18:59:53.129] Could not find MDX file for thought-experiments/reply-to-mephisto
-[18:59:53.130] MDX file not found: /vercel/path0/app/blog/content/reply-to-mephisto.mdx
-[18:59:53.131] Could not find MDX file for thought-experiments/reply-to-mephisto
-[18:59:55.710] MDX file not found: /vercel/path0/app/notes/content/news/news.mdx
-[18:59:55.712] MDX file not found: /vercel/path0/app/notes/content/news/news.mdx
-[18:59:55.714] Error: Cannot find module './news/news.mdx'
-[18:59:55.714]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:55.714]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:55.714]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:55.714]   code: 'MODULE_NOT_FOUND',
-[18:59:55.714]   digest: '202265445'
-[18:59:55.714] }
-[18:59:55.715] Error: Cannot find module './news/news.mdx'
-[18:59:55.715]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:55.715]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:55.715]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:55.715]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:55.715]     at process.processTimers (node:internal/timers:523:7)
-[18:59:55.715]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:55.715]   code: 'MODULE_NOT_FOUND',
-[18:59:55.715]   digest: '3080668332'
-[18:59:55.715] }
-[18:59:55.719] Error: Cannot find module './news/news.mdx'
-[18:59:55.719]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:55.719]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:55.719]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:55.719]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:55.719]     at process.processTimers (node:internal/timers:523:7)
-[18:59:55.719]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:55.719]   code: 'MODULE_NOT_FOUND',
-[18:59:55.719]   digest: '3080668332'
-[18:59:55.719] }
-[18:59:55.736] 
-[18:59:55.737] Error occurred prerendering page "/notes/news/news". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:55.737] 
-[18:59:55.737] Error: Cannot find module './news/news.mdx'
-[18:59:55.737]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:55.738]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:55.738]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[18:59:56.774] MDX file not found: /vercel/path0/app/notes/content/research/internet-search-methods.mdx
-[18:59:56.776] MDX file not found: /vercel/path0/app/notes/content/research/internet-search-methods.mdx
-[18:59:56.778] Error: Cannot find module './research/internet-search-methods.mdx'
-[18:59:56.778]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:56.778]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:56.778]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:56.778]   code: 'MODULE_NOT_FOUND',
-[18:59:56.778]   digest: '2563524037'
-[18:59:56.778] }
-[18:59:56.779] Error: Cannot find module './research/internet-search-methods.mdx'
-[18:59:56.779]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:56.779]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:56.779]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:56.779]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:56.779]     at process.processTimers (node:internal/timers:523:7)
-[18:59:56.779]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:56.779]   code: 'MODULE_NOT_FOUND',
-[18:59:56.779]   digest: '4169866700'
-[18:59:56.779] }
-[18:59:56.781] Error: Cannot find module './research/internet-search-methods.mdx'
-[18:59:56.781]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:56.781]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:56.781]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:56.781]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:56.781]     at process.processTimers (node:internal/timers:523:7)
-[18:59:56.781]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:56.781]   code: 'MODULE_NOT_FOUND',
-[18:59:56.782]   digest: '4169866700'
-[18:59:56.782] }
-[18:59:56.791] 
-[18:59:56.791] Error occurred prerendering page "/notes/research/internet-search-methods". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:56.791] 
-[18:59:56.791] Error: Cannot find module './research/internet-search-methods.mdx'
-[18:59:56.791]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:56.791]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:56.791]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[18:59:56.795] MDX file not found: /vercel/path0/app/notes/content/research/modern-search-methods.mdx
-[18:59:56.796] MDX file not found: /vercel/path0/app/notes/content/research/modern-search-methods.mdx
-[18:59:56.798] Error: Cannot find module './research/modern-search-methods.mdx'
-[18:59:56.798]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:56.798]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:56.798]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:56.798]   code: 'MODULE_NOT_FOUND',
-[18:59:56.798]   digest: '4294676421'
-[18:59:56.798] }
-[18:59:56.799] Error: Cannot find module './research/modern-search-methods.mdx'
-[18:59:56.799]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:56.799]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:56.799]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:56.799]   code: 'MODULE_NOT_FOUND',
-[18:59:56.799]   digest: '4294676421'
-[18:59:56.799] }
-[18:59:56.801] Error: Cannot find module './research/modern-search-methods.mdx'
-[18:59:56.801]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:56.801]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:56.801]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:56.801]   code: 'MODULE_NOT_FOUND',
-[18:59:56.801]   digest: '4294676421'
-[18:59:56.801] }
-[18:59:56.808] 
-[18:59:56.808] Error occurred prerendering page "/notes/research/modern-search-methods". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:56.809] 
-[18:59:56.809] Error: Cannot find module './research/modern-search-methods.mdx'
-[18:59:56.809]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:56.809]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:56.809]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[18:59:57.030] MDX file not found: /vercel/path0/app/notes/content/technology/kristoo.mdx
-[18:59:57.038] MDX file not found: /vercel/path0/app/notes/content/technology/kristoo.mdx
-[18:59:57.038] Error: Cannot find module './technology/kristoo.mdx'
-[18:59:57.038]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.038]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.038]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.038]   code: 'MODULE_NOT_FOUND',
-[18:59:57.038]   digest: '1699041221'
-[18:59:57.038] }
-[18:59:57.038] Error: Cannot find module './technology/kristoo.mdx'
-[18:59:57.038]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.038]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.038]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.038]   code: 'MODULE_NOT_FOUND',
-[18:59:57.039]   digest: '1699041221'
-[18:59:57.039] }
-[18:59:57.039] Error: Cannot find module './technology/kristoo.mdx'
-[18:59:57.039]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.039]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.039]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.039]   code: 'MODULE_NOT_FOUND',
-[18:59:57.039]   digest: '1699041221'
-[18:59:57.039] }
-[18:59:57.046] 
-[18:59:57.047] Error occurred prerendering page "/notes/technology/kristoo". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:57.047] 
-[18:59:57.047] Error: Cannot find module './technology/kristoo.mdx'
-[18:59:57.047]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.047]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.047]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[18:59:57.285] MDX file not found: /vercel/path0/app/notes/content/internet-archive/internet-archive.mdx
-[18:59:57.288] MDX file not found: /vercel/path0/app/notes/content/internet-archive/internet-archive.mdx
-[18:59:57.290] Error: Cannot find module './internet-archive/internet-archive.mdx'
-[18:59:57.291]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.291]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.291]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.291]   code: 'MODULE_NOT_FOUND',
-[18:59:57.291]   digest: '791224101'
-[18:59:57.291] }
-[18:59:57.292] Error: Cannot find module './internet-archive/internet-archive.mdx'
-[18:59:57.292]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.292]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.292]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.292]   code: 'MODULE_NOT_FOUND',
-[18:59:57.292]   digest: '791224101'
-[18:59:57.292] }
-[18:59:57.293] Error: Cannot find module './internet-archive/internet-archive.mdx'
-[18:59:57.293]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.293]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.294]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.294]   code: 'MODULE_NOT_FOUND',
-[18:59:57.294]   digest: '791224101'
-[18:59:57.294] }
-[18:59:57.301] 
-[18:59:57.301] Error occurred prerendering page "/notes/internet-archive/internet-archive". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:57.301] 
-[18:59:57.302] Error: Cannot find module './internet-archive/internet-archive.mdx'
-[18:59:57.302]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.302]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.302]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[18:59:57.306] MDX file not found: /vercel/path0/app/notes/content/indie-web/neocities-personal-sites.mdx
-[18:59:57.310] MDX file not found: /vercel/path0/app/notes/content/indie-web/neocities-personal-sites.mdx
-[18:59:57.310] Error: Cannot find module './indie-web/neocities-personal-sites.mdx'
-[18:59:57.310]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.310]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.310]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.311]   code: 'MODULE_NOT_FOUND',
-[18:59:57.311]   digest: '2855930501'
-[18:59:57.311] }
-[18:59:57.311] Error: Cannot find module './indie-web/neocities-personal-sites.mdx'
-[18:59:57.311]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.312]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.312]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.312]   code: 'MODULE_NOT_FOUND',
-[18:59:57.312]   digest: '2855930501'
-[18:59:57.312] }
-[18:59:57.314] Error: Cannot find module './indie-web/neocities-personal-sites.mdx'
-[18:59:57.314]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.314]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.314]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.315]   code: 'MODULE_NOT_FOUND',
-[18:59:57.316]   digest: '2855930501'
-[18:59:57.316] }
-[18:59:57.323] 
-[18:59:57.324] Error occurred prerendering page "/notes/indie-web/neocities-personal-sites". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:57.324] 
-[18:59:57.324] Error: Cannot find module './indie-web/neocities-personal-sites.mdx'
-[18:59:57.324]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.324]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.325]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[18:59:57.329] MDX file not found: /vercel/path0/app/notes/content/learning/things-i-ought-to-know.mdx
-[18:59:57.330] MDX file not found: /vercel/path0/app/notes/content/learning/things-i-ought-to-know.mdx
-[18:59:57.332] Error: Cannot find module './learning/things-i-ought-to-know.mdx'
-[18:59:57.332]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.332]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.333]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.333]   code: 'MODULE_NOT_FOUND',
-[18:59:57.333]   digest: '3967001989'
-[18:59:57.333] }
-[18:59:57.334] Error: Cannot find module './learning/things-i-ought-to-know.mdx'
-[18:59:57.334]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.334]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.334]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.334]   code: 'MODULE_NOT_FOUND',
-[18:59:57.334]   digest: '3967001989'
-[18:59:57.335] }
-[18:59:57.335] Error: Cannot find module './learning/things-i-ought-to-know.mdx'
-[18:59:57.335]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.335]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.335]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.335]   code: 'MODULE_NOT_FOUND',
-[18:59:57.335]   digest: '3967001989'
-[18:59:57.335] }
-[18:59:57.344] 
-[18:59:57.344] Error occurred prerendering page "/notes/learning/things-i-ought-to-know". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:57.344] 
-[18:59:57.345] Error: Cannot find module './learning/things-i-ought-to-know.mdx'
-[18:59:57.345]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.345]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.345]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[18:59:57.350] MDX file not found: /vercel/path0/app/notes/content/on-myself/clash-royale.mdx
-[18:59:57.351] MDX file not found: /vercel/path0/app/notes/content/on-myself/clash-royale.mdx
-[18:59:57.354] Error: Cannot find module './on-myself/clash-royale.mdx'
-[18:59:57.355]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.355]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.356]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.356]   code: 'MODULE_NOT_FOUND',
-[18:59:57.356]   digest: '4256444741'
-[18:59:57.356] }
-[18:59:57.356] Error: Cannot find module './on-myself/clash-royale.mdx'
-[18:59:57.356]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.356]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.357]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:57.357]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:57.357]     at process.processTimers (node:internal/timers:523:7)
-[18:59:57.357]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.357]   code: 'MODULE_NOT_FOUND',
-[18:59:57.357]   digest: '3933855948'
-[18:59:57.357] }
-[18:59:57.358] Error: Cannot find module './on-myself/clash-royale.mdx'
-[18:59:57.358]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.358]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.358]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:57.358]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:57.358]     at process.processTimers (node:internal/timers:523:7)
-[18:59:57.358]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.358]   code: 'MODULE_NOT_FOUND',
-[18:59:57.358]   digest: '3933855948'
-[18:59:57.358] }
-[18:59:57.365] 
-[18:59:57.365] Error occurred prerendering page "/notes/on-myself/clash-royale". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:57.366] 
-[18:59:57.366] Error: Cannot find module './on-myself/clash-royale.mdx'
-[18:59:57.366]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.367]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.367]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[18:59:57.434] MDX file not found: /vercel/path0/app/notes/content/on-myself/tryhackme.mdx
-[18:59:57.435] MDX file not found: /vercel/path0/app/notes/content/on-myself/tryhackme.mdx
-[18:59:57.436] Error: Cannot find module './on-myself/tryhackme.mdx'
-[18:59:57.436]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.437]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.437]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.437]   code: 'MODULE_NOT_FOUND',
-[18:59:57.437]   digest: '3940823077'
-[18:59:57.437] }
-[18:59:57.439] Error: Cannot find module './on-myself/tryhackme.mdx'
-[18:59:57.439]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.439]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.440]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.440]   code: 'MODULE_NOT_FOUND',
-[18:59:57.440]   digest: '3940823077'
-[18:59:57.440] }
-[18:59:57.440] Error: Cannot find module './on-myself/tryhackme.mdx'
-[18:59:57.440]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.440]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.440]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.440]   code: 'MODULE_NOT_FOUND',
-[18:59:57.440]   digest: '3940823077'
-[18:59:57.441] }
-[18:59:57.450] 
-[18:59:57.450] Error occurred prerendering page "/notes/on-myself/tryhackme". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:57.450] 
-[18:59:57.450] Error: Cannot find module './on-myself/tryhackme.mdx'
-[18:59:57.450]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.451]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.451]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[18:59:57.454] MDX file not found: /vercel/path0/app/notes/content/on-myself/hackthebox.mdx
-[18:59:57.455] MDX file not found: /vercel/path0/app/notes/content/on-myself/hackthebox.mdx
-[18:59:57.456] Error: Cannot find module './on-myself/hackthebox.mdx'
-[18:59:57.457]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.457]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.457]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:57.457]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:57.458]     at process.processTimers (node:internal/timers:523:7)
-[18:59:57.458]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.458]   code: 'MODULE_NOT_FOUND',
-[18:59:57.458]   digest: '1414974540'
-[18:59:57.458] }
-[18:59:57.458] Error: Cannot find module './on-myself/hackthebox.mdx'
-[18:59:57.459]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.459]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.459]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.459]   code: 'MODULE_NOT_FOUND',
-[18:59:57.459]   digest: '27232069'
-[18:59:57.459] }
-[18:59:57.460] Error: Cannot find module './on-myself/hackthebox.mdx'
-[18:59:57.460]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.460]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.460]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.460]   code: 'MODULE_NOT_FOUND',
-[18:59:57.460]   digest: '27232069'
-[18:59:57.460] }
-[18:59:57.468] 
-[18:59:57.468] Error occurred prerendering page "/notes/on-myself/hackthebox". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:57.468] 
-[18:59:57.468] Error: Cannot find module './on-myself/hackthebox.mdx'
-[18:59:57.469]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.469]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.469]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:57.469]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:57.469]     at process.processTimers (node:internal/timers:523:7)
-[18:59:57.469]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[18:59:57.473] MDX file not found: /vercel/path0/app/notes/content/on-myself/twitch.mdx
-[18:59:57.476] MDX file not found: /vercel/path0/app/notes/content/on-myself/twitch.mdx
-[18:59:57.480] Error: Cannot find module './on-myself/twitch.mdx'
-[18:59:57.480]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.481]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.481]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.481]   code: 'MODULE_NOT_FOUND',
-[18:59:57.481]   digest: '3278179845'
-[18:59:57.481] }
-[18:59:57.481] Error: Cannot find module './on-myself/twitch.mdx'
-[18:59:57.481]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.481]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.482]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:57.482]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:57.482]     at process.processTimers (node:internal/timers:523:7)
-[18:59:57.482]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.482]   code: 'MODULE_NOT_FOUND',
-[18:59:57.482]   digest: '109957260'
-[18:59:57.482] }
-[18:59:57.483] Error: Cannot find module './on-myself/twitch.mdx'
-[18:59:57.483]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.483]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.483]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:57.483]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:57.483]     at process.processTimers (node:internal/timers:523:7)
-[18:59:57.483]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.483]   code: 'MODULE_NOT_FOUND',
-[18:59:57.484]   digest: '109957260'
-[18:59:57.484] }
-[18:59:57.492] 
-[18:59:57.493] Error occurred prerendering page "/notes/on-myself/twitch". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:57.493] 
-[18:59:57.493] Error: Cannot find module './on-myself/twitch.mdx'
-[18:59:57.493]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.493]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.493]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[18:59:57.498] MDX file not found: /vercel/path0/app/notes/content/social-media/youtube.mdx
-[18:59:57.499] MDX file not found: /vercel/path0/app/notes/content/social-media/youtube.mdx
-[18:59:57.503] Error: Cannot find module './social-media/youtube.mdx'
-[18:59:57.503]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.503]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.503]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.503]   code: 'MODULE_NOT_FOUND',
-[18:59:57.503]   digest: '2615975813'
-[18:59:57.503] }
-[18:59:57.503] Error: Cannot find module './social-media/youtube.mdx'
-[18:59:57.503]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.504]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.504]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:57.504]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:57.504]     at process.processTimers (node:internal/timers:523:7)
-[18:59:57.504]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.504]   code: 'MODULE_NOT_FOUND',
-[18:59:57.504]   digest: '3955964428'
-[18:59:57.504] }
-[18:59:57.504] Error: Cannot find module './social-media/youtube.mdx'
-[18:59:57.504]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.504]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.504]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:57.504]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:57.504]     at process.processTimers (node:internal/timers:523:7)
-[18:59:57.504]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
-[18:59:57.504]   code: 'MODULE_NOT_FOUND',
-[18:59:57.504]   digest: '3955964428'
-[18:59:57.504] }
-[18:59:57.514] 
-[18:59:57.514] Error occurred prerendering page "/notes/social-media/youtube". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:57.514] 
-[18:59:57.514] Error: Cannot find module './social-media/youtube.mdx'
-[18:59:57.515]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6487
-[18:59:57.515]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:57.515]     at async p (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
-[18:59:57.863] Error: Expected component `CppCodeBlock` to be defined: you likely forgot to import, pass, or provide it.
-[18:59:57.863]     at s (/vercel/path0/.next/server/chunks/34206.js:43:1198)
-[18:59:57.863]     at o (/vercel/path0/.next/server/chunks/34206.js:1:1636)
-[18:59:57.863]     at a (/vercel/path0/.next/server/chunks/34206.js:43:1171)
-[18:59:57.863]     at eh (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:134660)
-[18:59:57.863]     at e (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:137545)
-[18:59:57.863]     at ek (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:138019)
-[18:59:57.863]     at Object.toJSON (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
-[18:59:57.863]     at stringify (<anonymous>)
-[18:59:57.863]     at eP (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
-[18:59:57.863]     at eE (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572) {
-[18:59:57.863]   digest: '3184449924'
-[18:59:57.863] }
-[18:59:57.866] Error: Expected component `CppCodeBlock` to be defined: you likely forgot to import, pass, or provide it.
-[18:59:57.866]     at s (/vercel/path0/.next/server/chunks/34206.js:43:1198)
-[18:59:57.867]     at o (/vercel/path0/.next/server/chunks/34206.js:1:1636)
-[18:59:57.867]     at a (/vercel/path0/.next/server/chunks/34206.js:43:1171)
-[18:59:57.867]     at eh (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:134660)
-[18:59:57.867]     at e (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:137545)
-[18:59:57.867]     at ek (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:138019)
-[18:59:57.867]     at Object.toJSON (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
-[18:59:57.868]     at stringify (<anonymous>)
-[18:59:57.868]     at eP (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
-[18:59:57.868]     at eE (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572) {
-[18:59:57.868]   digest: '3184449924'
-[18:59:57.868] }
-[18:59:57.879] Error: Expected component `CppCodeBlock` to be defined: you likely forgot to import, pass, or provide it.
-[18:59:57.879]     at s (/vercel/path0/.next/server/chunks/34206.js:43:1198)
-[18:59:57.879]     at o (/vercel/path0/.next/server/chunks/34206.js:1:1636)
-[18:59:57.879]     at a (/vercel/path0/.next/server/chunks/34206.js:43:1171)
-[18:59:57.879]     at eh (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:134660)
-[18:59:57.880]     at e (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:137545)
-[18:59:57.880]     at ek (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:138019)
-[18:59:57.880]     at Object.toJSON (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
-[18:59:57.880]     at stringify (<anonymous>)
-[18:59:57.880]     at eP (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
-[18:59:57.880]     at eE (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572) {
-[18:59:57.880]   digest: '3184449924'
-[18:59:57.880] }
-[18:59:57.889] 
-[18:59:57.890] Error occurred prerendering page "/notes/manuals-of-style/takes-on-cpp". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:57.890] 
-[18:59:57.890] Error: Expected component `CppCodeBlock` to be defined: you likely forgot to import, pass, or provide it.
-[18:59:57.890]     at s (/vercel/path0/.next/server/chunks/34206.js:43:1198)
-[18:59:57.890]     at o (/vercel/path0/.next/server/chunks/34206.js:1:1636)
-[18:59:57.890]     at a (/vercel/path0/.next/server/chunks/34206.js:43:1171)
-[18:59:57.890]     at eh (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:134660)
-[18:59:57.890]     at e (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:137545)
-[18:59:57.890]     at ek (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:138019)
-[18:59:57.890]     at Object.toJSON (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135629)
-[18:59:57.891]     at stringify (<anonymous>)
-[18:59:57.891]     at eP (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142093)
-[18:59:57.891]     at eE (/vercel/path0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572)
-[18:59:58.267]    Generating static pages (438/878) 
-[18:59:58.722] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/select-elementary-improper-integrals-i.mdx
-[18:59:58.726] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/select-elementary-improper-integrals-i.mdx
-[18:59:58.770] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/cleos-integral.mdx
-[18:59:58.773] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/cleos-integral.mdx
-[18:59:59.495] Attempting to read file from: /vercel/path0/data/research-bounties.json
-[18:59:59.496] Attempting to read file from: /vercel/path0/data/research-bounties.json
-[18:59:59.805] MDX file not found: /vercel/path0/app/reviews/content/anime/ghost-in-the-shell.mdx
-[18:59:59.807] MDX file not found: /vercel/path0/app/reviews/content/anime/ghost-in-the-shell.mdx
-[18:59:59.808] Error: Cannot find module './anime/ghost-in-the-shell.mdx'
-[18:59:59.808]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.808]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.809]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:59.809]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:59.809]     at process.processTimers (node:internal/timers:523:7)
-[18:59:59.809]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.809]   code: 'MODULE_NOT_FOUND',
-[18:59:59.809]   digest: '94249664'
-[18:59:59.810] }
-[18:59:59.810] Error: Cannot find module './anime/ghost-in-the-shell.mdx'
-[18:59:59.810]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.810]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.810]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.810]   code: 'MODULE_NOT_FOUND',
-[18:59:59.811]   digest: '3470113193'
-[18:59:59.811] }
-[18:59:59.811] Error: Cannot find module './anime/ghost-in-the-shell.mdx'
-[18:59:59.811]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.811]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.811]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.811]   code: 'MODULE_NOT_FOUND',
-[18:59:59.811]   digest: '3470113193'
-[18:59:59.811] }
-[18:59:59.819] 
-[18:59:59.819] Error occurred prerendering page "/reviews/anime/ghost-in-the-shell". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:59.819] 
-[18:59:59.819] Error: Cannot find module './anime/ghost-in-the-shell.mdx'
-[18:59:59.820]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.820]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.820]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:59.820]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:59.820]     at process.processTimers (node:internal/timers:523:7)
-[18:59:59.820]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766)
-[18:59:59.823] MDX file not found: /vercel/path0/app/reviews/content/anime/frieren-beyond-journeys-end.mdx
-[18:59:59.824] MDX file not found: /vercel/path0/app/reviews/content/anime/frieren-beyond-journeys-end.mdx
-[18:59:59.826] Error: Cannot find module './anime/frieren-beyond-journeys-end.mdx'
-[18:59:59.826]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.826]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.827]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.827]   code: 'MODULE_NOT_FOUND',
-[18:59:59.827]   digest: '2818391657'
-[18:59:59.827] }
-[18:59:59.827] Error: Cannot find module './anime/frieren-beyond-journeys-end.mdx'
-[18:59:59.827]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.828]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.828]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.828]   code: 'MODULE_NOT_FOUND',
-[18:59:59.828]   digest: '2818391657'
-[18:59:59.828] }
-[18:59:59.828] Error: Cannot find module './anime/frieren-beyond-journeys-end.mdx'
-[18:59:59.828]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.829]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.829]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.829]   code: 'MODULE_NOT_FOUND',
-[18:59:59.829]   digest: '2818391657'
-[18:59:59.829] }
-[18:59:59.836] 
-[18:59:59.837] Error occurred prerendering page "/reviews/anime/frieren-beyond-journeys-end". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:59.837] 
-[18:59:59.837] Error: Cannot find module './anime/frieren-beyond-journeys-end.mdx'
-[18:59:59.837]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.837]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.837]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766)
-[18:59:59.842] MDX file not found: /vercel/path0/app/reviews/content/anime/that-time-i-got-reincarnated-as-a-slime.mdx
-[18:59:59.849] MDX file not found: /vercel/path0/app/reviews/content/anime/that-time-i-got-reincarnated-as-a-slime.mdx
-[18:59:59.849] Error: Cannot find module './anime/that-time-i-got-reincarnated-as-a-slime.mdx'
-[18:59:59.850]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.850]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.850]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.850]   code: 'MODULE_NOT_FOUND',
-[18:59:59.850]   digest: '676931817'
-[18:59:59.850] }
-[18:59:59.851] Error: Cannot find module './anime/that-time-i-got-reincarnated-as-a-slime.mdx'
-[18:59:59.851]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.851]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.851]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.851]   code: 'MODULE_NOT_FOUND',
-[18:59:59.851]   digest: '676931817'
-[18:59:59.851] }
-[18:59:59.852] Error: Cannot find module './anime/that-time-i-got-reincarnated-as-a-slime.mdx'
-[18:59:59.852]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.852]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.852]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.852]   code: 'MODULE_NOT_FOUND',
-[18:59:59.852]   digest: '676931817'
-[18:59:59.853] }
-[18:59:59.860] 
-[18:59:59.860] Error occurred prerendering page "/reviews/anime/that-time-i-got-reincarnated-as-a-slime". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:59.860] 
-[18:59:59.860] Error: Cannot find module './anime/that-time-i-got-reincarnated-as-a-slime.mdx'
-[18:59:59.860]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.860]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.860]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766)
-[18:59:59.882] MDX file not found: /vercel/path0/app/reviews/content/manga/flowers-of-evil.mdx
-[18:59:59.882] MDX file not found: /vercel/path0/app/reviews/content/manga/flowers-of-evil.mdx
-[18:59:59.886] Error: Cannot find module './manga/flowers-of-evil.mdx'
-[18:59:59.886]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.886]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.887]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.887]   code: 'MODULE_NOT_FOUND',
-[18:59:59.887]   digest: '1242846697'
-[18:59:59.887] }
-[18:59:59.888] Error: Cannot find module './manga/flowers-of-evil.mdx'
-[18:59:59.888]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.888]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.888]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.889]   code: 'MODULE_NOT_FOUND',
-[18:59:59.889]   digest: '1242846697'
-[18:59:59.889] }
-[18:59:59.889] Error: Cannot find module './manga/flowers-of-evil.mdx'
-[18:59:59.889]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.890]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.890]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.890]   code: 'MODULE_NOT_FOUND',
-[18:59:59.890]   digest: '1242846697'
-[18:59:59.890] }
-[18:59:59.899] 
-[18:59:59.899] Error occurred prerendering page "/reviews/manga/flowers-of-evil". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:59.899] 
-[18:59:59.899] Error: Cannot find module './manga/flowers-of-evil.mdx'
-[18:59:59.899]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.899]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.900]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766)
-[18:59:59.905] MDX file not found: /vercel/path0/app/reviews/content/manga/blood-on-the-tracks.mdx
-[18:59:59.906] MDX file not found: /vercel/path0/app/reviews/content/manga/blood-on-the-tracks.mdx
-[18:59:59.908] Error: Cannot find module './manga/blood-on-the-tracks.mdx'
-[18:59:59.908]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.908]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.908]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:59.909]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:59.909]     at process.processTimers (node:internal/timers:523:7)
-[18:59:59.909]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.909]   code: 'MODULE_NOT_FOUND',
-[18:59:59.909]   digest: '3834871232'
-[18:59:59.910] }
-[18:59:59.910] Error: Cannot find module './manga/blood-on-the-tracks.mdx'
-[18:59:59.910]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.910]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.910]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.910]   code: 'MODULE_NOT_FOUND',
-[18:59:59.911]   digest: '1410585641'
-[18:59:59.911] }
-[18:59:59.912] Error: Cannot find module './manga/blood-on-the-tracks.mdx'
-[18:59:59.912]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.912]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.912]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.912]   code: 'MODULE_NOT_FOUND',
-[18:59:59.913]   digest: '1410585641'
-[18:59:59.913] }
-[18:59:59.921] 
-[18:59:59.921] Error occurred prerendering page "/reviews/manga/blood-on-the-tracks". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:59.921] 
-[18:59:59.921] Error: Cannot find module './manga/blood-on-the-tracks.mdx'
-[18:59:59.921]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.921]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.921]     at runNextTicks (node:internal/process/task_queues:69:3)
-[18:59:59.921]     at listOnTimeout (node:internal/timers:549:9)
-[18:59:59.921]     at process.processTimers (node:internal/timers:523:7)
-[18:59:59.921]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766)
-[18:59:59.927] MDX file not found: /vercel/path0/app/reviews/content/manga/ghost-in-the-shell-manga.mdx
-[18:59:59.928] MDX file not found: /vercel/path0/app/reviews/content/manga/ghost-in-the-shell-manga.mdx
-[18:59:59.930] Error: Cannot find module './manga/ghost-in-the-shell-manga.mdx'
-[18:59:59.930]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.930]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.930]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.930]   code: 'MODULE_NOT_FOUND',
-[18:59:59.931]   digest: '1221009001'
-[18:59:59.931] }
-[18:59:59.933] Error: Cannot find module './manga/ghost-in-the-shell-manga.mdx'
-[18:59:59.933]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.933]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.933]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.933]   code: 'MODULE_NOT_FOUND',
-[18:59:59.933]   digest: '1221009001'
-[18:59:59.933] }
-[18:59:59.933] Error: Cannot find module './manga/ghost-in-the-shell-manga.mdx'
-[18:59:59.933]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.933]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.933]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
-[18:59:59.933]   code: 'MODULE_NOT_FOUND',
-[18:59:59.933]   digest: '1221009001'
-[18:59:59.933] }
-[18:59:59.941] 
-[18:59:59.941] Error occurred prerendering page "/reviews/manga/ghost-in-the-shell-manga". Read more: https://nextjs.org/docs/messages/prerender-error
-[18:59:59.941] 
-[18:59:59.942] Error: Cannot find module './manga/ghost-in-the-shell-manga.mdx'
-[18:59:59.942]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2358
-[18:59:59.942]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-[18:59:59.942]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766)
-[19:00:00.156] Read proofs file successfully: /vercel/path0/app/proofs/content/number-theory/infinitely-many-primes.mdx
-[19:00:00.156] Read proofs file successfully: /vercel/path0/app/proofs/content/number-theory/infinitely-many-primes.mdx
-[19:00:01.479]    Generating static pages (658/878) 
-[19:00:05.442] Fetching from Monkeytype API: https://api.monkeytype.com/users/stats
-[19:00:05.443] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
-[19:00:05.444] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=30
-[19:00:05.444] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
-[19:00:05.445] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
-[19:00:05.445] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=10
-[19:00:05.445] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=25
-[19:00:05.445] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
-[19:00:05.446] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=100
-[19:00:05.446] Fetching from Monkeytype API: https://api.monkeytype.com/users/streak
-[19:00:05.447] Fetching from Monkeytype API: https://api.monkeytype.com/users/currentTestActivity
-[19:00:05.447] Fetching from Monkeytype API: https://api.monkeytype.com/results?limit=10
-[19:00:05.449] Fetching from Monkeytype API: https://api.monkeytype.com/users/stats
-[19:00:05.449] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
-[19:00:05.450] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=30
-[19:00:05.450] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
-[19:00:05.450] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
-[19:00:05.450] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=10
-[19:00:05.451] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=25
-[19:00:05.451] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
-[19:00:05.451] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=100
-[19:00:05.452] Fetching from Monkeytype API: https://api.monkeytype.com/users/streak
-[19:00:05.454] Fetching from Monkeytype API: https://api.monkeytype.com/users/currentTestActivity
-[19:00:05.454] Fetching from Monkeytype API: https://api.monkeytype.com/results?limit=10
-[19:00:05.586] Monkeytype API error (503): {}
-[19:00:05.586] Retrying request (attempt 1/3)...
-[19:00:05.608] API response for /users/personalBests: {
-[19:00:05.608]   message: 'Personal bests retrieved',
-[19:00:05.608]   data: [
-[19:00:05.608]     {
-[19:00:05.608]       acc: 99.27,
-[19:00:05.608]       consistency: 71.97,
-[19:00:05.608]       difficulty: 'normal',
-[19:00:05.608]       lazyMode: false,
-[19:00:05.608]       language: 'english',
-[19:00:05.608]       punctuation: false,
-[19:00:05.608]       raw: 120.15,
-[19:00:05.609]       wpm: 120.15,
-[19:00:05.609]       timestamp: 1747112614042,
-[19:00:05.609]       numbers: false
-[19:00:05.609]     }
-[19:00:05.609]   ]
-[19:00:05.609] }
-[19:00:05.609] Personal bests data: [
-[19:00:05.609]   {
-[19:00:05.609]     "acc": 99.27,
-[19:00:05.609]     "consistency": 71.97,
-[19:00:05.609]     "difficulty": "normal",
-[19:00:05.609]     "lazyMode": false,
-[19:00:05.609]     "language": "english",
-[19:00:05.609]     "punctuation": false,
-[19:00:05.609]     "raw": 120.15,
-[19:00:05.609]     "wpm": 120.15,
-[19:00:05.609]     "timestamp": 1747112614042,
-[19:00:05.609]     "numbers": false
-[19:00:05.609]   }
-[19:00:05.609] ]
-[19:00:05.610] API response for /users/personalBests: {
-[19:00:05.610]   message: 'Personal bests retrieved',
-[19:00:05.610]   data: [
-[19:00:05.610]     {
-[19:00:05.610]       acc: 99.27,
-[19:00:05.610]       consistency: 71.97,
-[19:00:05.610]       difficulty: 'normal',
-[19:00:05.610]       lazyMode: false,
-[19:00:05.610]       language: 'english',
-[19:00:05.610]       punctuation: false,
-[19:00:05.610]       raw: 120.15,
-[19:00:05.610]       wpm: 120.15,
-[19:00:05.610]       timestamp: 1747112614042,
-[19:00:05.610]       numbers: false
-[19:00:05.610]     }
-[19:00:05.611]   ]
-[19:00:05.611] }
-[19:00:05.611] Personal bests data: [
-[19:00:05.611]   {
-[19:00:05.611]     "acc": 99.27,
-[19:00:05.611]     "consistency": 71.97,
-[19:00:05.611]     "difficulty": "normal",
-[19:00:05.611]     "lazyMode": false,
-[19:00:05.611]     "language": "english",
-[19:00:05.611]     "punctuation": false,
-[19:00:05.611]     "raw": 120.15,
-[19:00:05.611]     "wpm": 120.15,
-[19:00:05.611]     "timestamp": 1747112614042,
-[19:00:05.611]     "numbers": false
-[19:00:05.611]   }
-[19:00:05.611] ]
-[19:00:05.614] Monkeytype API error (503): {}
-[19:00:05.614] Retrying request (attempt 1/3)...
-[19:00:05.725] API response for /users/personalBests: {
-[19:00:05.725]   message: 'Personal bests retrieved',
-[19:00:05.725]   data: [
-[19:00:05.725]     {
-[19:00:05.725]       acc: 95.73,
-[19:00:05.726]       consistency: 69.5,
-[19:00:05.726]       difficulty: 'normal',
-[19:00:05.726]       lazyMode: false,
-[19:00:05.726]       language: 'english',
-[19:00:05.726]       punctuation: false,
-[19:00:05.726]       raw: 110,
-[19:00:05.726]       wpm: 102,
-[19:00:05.726]       timestamp: 1741147359513,
-[19:00:05.726]       numbers: false
-[19:00:05.726]     }
-[19:00:05.726]   ]
-[19:00:05.726] }
-[19:00:05.726] Personal bests data: [
-[19:00:05.726]   {
-[19:00:05.727]     "acc": 95.73,
-[19:00:05.727]     "consistency": 69.5,
-[19:00:05.727]     "difficulty": "normal",
-[19:00:05.727]     "lazyMode": false,
-[19:00:05.727]     "language": "english",
-[19:00:05.727]     "punctuation": false,
-[19:00:05.727]     "raw": 110,
-[19:00:05.727]     "wpm": 102,
-[19:00:05.727]     "timestamp": 1741147359513,
-[19:00:05.727]     "numbers": false
-[19:00:05.727]   }
-[19:00:05.727] ]
-[19:00:05.727] API response for /users/personalBests: {
-[19:00:05.727]   message: 'Personal bests retrieved',
-[19:00:05.727]   data: [
-[19:00:05.727]     {
-[19:00:05.727]       acc: 95.73,
-[19:00:05.728]       consistency: 69.5,
-[19:00:05.728]       difficulty: 'normal',
-[19:00:05.728]       lazyMode: false,
-[19:00:05.728]       language: 'english',
-[19:00:05.728]       punctuation: false,
-[19:00:05.728]       raw: 110,
-[19:00:05.728]       wpm: 102,
-[19:00:05.728]       timestamp: 1741147359513,
-[19:00:05.728]       numbers: false
-[19:00:05.728]     }
-[19:00:05.728]   ]
-[19:00:05.728] }
-[19:00:05.728] Personal bests data: [
-[19:00:05.728]   {
-[19:00:05.728]     "acc": 95.73,
-[19:00:05.728]     "consistency": 69.5,
-[19:00:05.729]     "difficulty": "normal",
-[19:00:05.729]     "lazyMode": false,
-[19:00:05.729]     "language": "english",
-[19:00:05.729]     "punctuation": false,
-[19:00:05.729]     "raw": 110,
-[19:00:05.729]     "wpm": 102,
-[19:00:05.729]     "timestamp": 1741147359513,
-[19:00:05.737]     "numbers": false
-[19:00:05.737]   }
-[19:00:05.738] ]
-[19:00:05.932] API response for /users/personalBests: {
-[19:00:05.933]   message: 'Personal bests retrieved',
-[19:00:05.933]   data: [
-[19:00:05.933]     {
-[19:00:05.933]       acc: 87.73,
-[19:00:05.933]       consistency: 84.65,
-[19:00:05.933]       difficulty: 'normal',
-[19:00:05.933]       lazyMode: false,
-[19:00:05.933]       language: 'english',
-[19:00:05.933]       punctuation: false,
-[19:00:05.933]       raw: 130.38,
-[19:00:05.933]       wpm: 104.79,
-[19:00:05.933]       numbers: false,
-[19:00:05.933]       timestamp: 1741147466281
-[19:00:05.934]     }
-[19:00:05.934]   ]
-[19:00:05.934] }
-[19:00:05.934] Personal bests data: [
-[19:00:05.934]   {
-[19:00:05.934]     "acc": 87.73,
-[19:00:05.934]     "consistency": 84.65,
-[19:00:05.934]     "difficulty": "normal",
-[19:00:05.935]     "lazyMode": false,
-[19:00:05.935]     "language": "english",
-[19:00:05.935]     "punctuation": false,
-[19:00:05.935]     "raw": 130.38,
-[19:00:05.935]     "wpm": 104.79,
-[19:00:05.935]     "numbers": false,
-[19:00:05.935]     "timestamp": 1741147466281
-[19:00:05.935]   }
-[19:00:05.935] ]
-[19:00:05.935] API response for /users/personalBests: {
-[19:00:05.935]   message: 'Personal bests retrieved',
-[19:00:05.935]   data: [
-[19:00:05.935]     {
-[19:00:05.935]       acc: 87.73,
-[19:00:05.935]       consistency: 84.65,
-[19:00:05.935]       difficulty: 'normal',
-[19:00:05.935]       lazyMode: false,
-[19:00:05.935]       language: 'english',
-[19:00:05.935]       punctuation: false,
-[19:00:05.935]       raw: 130.38,
-[19:00:05.935]       wpm: 104.79,
-[19:00:05.935]       numbers: false,
-[19:00:05.935]       timestamp: 1741147466281
-[19:00:05.935]     }
-[19:00:05.935]   ]
-[19:00:05.936] }
-[19:00:05.936] Personal bests data: [
-[19:00:05.936]   {
-[19:00:05.936]     "acc": 87.73,
-[19:00:05.936]     "consistency": 84.65,
-[19:00:05.936]     "difficulty": "normal",
-[19:00:05.936]     "lazyMode": false,
-[19:00:05.936]     "language": "english",
-[19:00:05.936]     "punctuation": false,
-[19:00:05.936]     "raw": 130.38,
-[19:00:05.936]     "wpm": 104.79,
-[19:00:05.936]     "numbers": false,
-[19:00:05.936]     "timestamp": 1741147466281
-[19:00:05.936]   }
-[19:00:05.936] ]
-[19:00:06.127] API response for /users/currentTestActivity: {
-[19:00:06.127]   message: 'Current test activity data retrieved',
-[19:00:06.127]   data: {
-[19:00:06.127]     testsByDays: [
-[19:00:06.127]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.127]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.127]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.128]       null, null, null, null, null, 1,    2,    null, null, null,
-[19:00:06.128]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.128]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.133]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.133]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.133]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.133]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.134]       ... 272 more items
-[19:00:06.134]     ],
-[19:00:06.134]     lastDay: 1747094400000
-[19:00:06.134]   }
-[19:00:06.134] }
-[19:00:06.134] API response for /users/currentTestActivity: {
-[19:00:06.135]   message: 'Current test activity data retrieved',
-[19:00:06.135]   data: {
-[19:00:06.135]     testsByDays: [
-[19:00:06.135]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.135]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.138]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.139]       null, null, null, null, null, 1,    2,    null, null, null,
-[19:00:06.139]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.139]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.139]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.139]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.139]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.140]       null, null, null, null, null, null, null, null, null, null,
-[19:00:06.140]       ... 272 more items
-[19:00:06.140]     ],
-[19:00:06.140]     lastDay: 1747094400000
-[19:00:06.140]   }
-[19:00:06.141] }
-[19:00:06.331] API response for /users/personalBests: {
-[19:00:06.331]   message: 'Personal bests retrieved',
-[19:00:06.331]   data: [
-[19:00:06.331]     {
-[19:00:06.331]       acc: 94.55,
-[19:00:06.331]       consistency: 66.53,
-[19:00:06.331]       difficulty: 'normal',
-[19:00:06.331]       lazyMode: false,
-[19:00:06.331]       language: 'english',
-[19:00:06.331]       punctuation: false,
-[19:00:06.331]       raw: 63.4,
-[19:00:06.332]       wpm: 61.46,
-[19:00:06.332]       timestamp: 1670133327519
-[19:00:06.332]     }
-[19:00:06.332]   ]
-[19:00:06.332] }
-[19:00:06.332] Personal bests data: [
-[19:00:06.332]   {
-[19:00:06.332]     "acc": 94.55,
-[19:00:06.333]     "consistency": 66.53,
-[19:00:06.333]     "difficulty": "normal",
-[19:00:06.333]     "lazyMode": false,
-[19:00:06.333]     "language": "english",
-[19:00:06.334]     "punctuation": false,
-[19:00:06.334]     "raw": 63.4,
-[19:00:06.334]     "wpm": 61.46,
-[19:00:06.334]     "timestamp": 1670133327519
-[19:00:06.334]   }
-[19:00:06.334] ]
-[19:00:06.335] API response for /users/personalBests: {
-[19:00:06.335]   message: 'Personal bests retrieved',
-[19:00:06.335]   data: [
-[19:00:06.335]     {
-[19:00:06.335]       acc: 94.55,
-[19:00:06.335]       consistency: 66.53,
-[19:00:06.335]       difficulty: 'normal',
-[19:00:06.336]       lazyMode: false,
-[19:00:06.336]       language: 'english',
-[19:00:06.336]       punctuation: false,
-[19:00:06.336]       raw: 63.4,
-[19:00:06.336]       wpm: 61.46,
-[19:00:06.336]       timestamp: 1670133327519
-[19:00:06.336]     }
-[19:00:06.336]   ]
-[19:00:06.337] }
-[19:00:06.337] Personal bests data: [
-[19:00:06.337]   {
-[19:00:06.337]     "acc": 94.55,
-[19:00:06.337]     "consistency": 66.53,
-[19:00:06.337]     "difficulty": "normal",
-[19:00:06.337]     "lazyMode": false,
-[19:00:06.338]     "language": "english",
-[19:00:06.338]     "punctuation": false,
-[19:00:06.338]     "raw": 63.4,
-[19:00:06.338]     "wpm": 61.46,
-[19:00:06.338]     "timestamp": 1670133327519
-[19:00:06.338]   }
-[19:00:06.339] ]
-[19:00:06.528] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
-[19:00:06.528] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
-[19:00:06.590] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
-[19:00:06.591] Monkeytype API error (503): {}
-[19:00:06.592] Retrying request (attempt 2/3)...
-[19:00:06.614] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
-[19:00:06.615] Monkeytype API error (503): {}
-[19:00:06.615] Retrying request (attempt 2/3)...
-[19:00:06.728] API response for /users/streak: {
-[19:00:06.729]   message: 'Streak data retrieved',
-[19:00:06.729]   data: {
-[19:00:06.729]     lastResultTimestamp: 1747121765000,
-[19:00:06.729]     length: 1,
-[19:00:06.729]     maxLength: 6,
-[19:00:06.729]     hourOffset: null
-[19:00:06.729]   }
-[19:00:06.729] }
-[19:00:06.730] API response for /users/streak: {
-[19:00:06.730]   message: 'Streak data retrieved',
-[19:00:06.730]   data: {
-[19:00:06.730]     lastResultTimestamp: 1747121765000,
-[19:00:06.730]     length: 1,
-[19:00:06.731]     maxLength: 6,
-[19:00:06.731]     hourOffset: null
-[19:00:06.731]   }
-[19:00:06.731] }
-[19:00:06.929] API response for /users/stats: {
-[19:00:06.930]   message: 'Personal stats retrieved',
-[19:00:06.930]   data: {
-[19:00:06.930]     _id: '638bd797bd098f2ba5dfa400',
-[19:00:06.930]     completedTests: 86,
-[19:00:06.930]     startedTests: 120,
-[19:00:06.930]     timeTyping: 16820.659999999996
-[19:00:06.930]   }
-[19:00:06.930] }
-[19:00:06.930] API response for /users/stats: {
-[19:00:06.930]   message: 'Personal stats retrieved',
-[19:00:06.930]   data: {
-[19:00:06.930]     _id: '638bd797bd098f2ba5dfa400',
-[19:00:06.930]     completedTests: 86,
-[19:00:06.930]     startedTests: 120,
-[19:00:06.930]     timeTyping: 16820.659999999996
-[19:00:06.930]   }
-[19:00:06.930] }
-[19:00:07.142] API response for /results: {
-[19:00:07.142]   message: 'Results retrieved',
-[19:00:07.142]   data: [
-[19:00:07.142]     {
-[19:00:07.142]       _id: '6822f665df21a5c1da374b59',
-[19:00:07.142]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.142]       wpm: 74.13,
-[19:00:07.142]       rawWpm: 79.45,
-[19:00:07.142]       charStats: [Array],
-[19:00:07.142]       acc: 89.27,
-[19:00:07.142]       mode: 'words',
-[19:00:07.142]       mode2: '50',
-[19:00:07.142]       timestamp: 1747121765000,
-[19:00:07.142]       restartCount: 4,
-[19:00:07.142]       incompleteTestSeconds: 26.77,
-[19:00:07.142]       testDuration: 38.36,
-[19:00:07.142]       consistency: 57.28,
-[19:00:07.143]       keyConsistency: 0.02
-[19:00:07.143]     },
-[19:00:07.143]     {
-[19:00:07.143]       _id: '6822f617df21a5c1da37484a',
-[19:00:07.143]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.143]       wpm: 94.2,
-[19:00:07.143]       rawWpm: 94.2,
-[19:00:07.143]       charStats: [Array],
-[19:00:07.143]       acc: 95.83,
-[19:00:07.143]       mode: 'words',
-[19:00:07.143]       mode2: '50',
-[19:00:07.143]       timestamp: 1747121687000,
-[19:00:07.143]       testDuration: 34.52,
-[19:00:07.143]       consistency: 60.29,
-[19:00:07.143]       keyConsistency: 1.96
-[19:00:07.143]     },
-[19:00:07.143]     {
-[19:00:07.144]       _id: '6822d447df21a5c1da35f42c',
-[19:00:07.144]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.144]       wpm: 96.52,
-[19:00:07.144]       rawWpm: 102.98,
-[19:00:07.144]       charStats: [Array],
-[19:00:07.144]       acc: 90.41,
-[19:00:07.144]       mode: 'words',
-[19:00:07.144]       mode2: '50',
-[19:00:07.144]       timestamp: 1747113031000,
-[19:00:07.144]       restartCount: 6,
-[19:00:07.144]       incompleteTestSeconds: 27.88,
-[19:00:07.144]       testDuration: 31.58,
-[19:00:07.144]       consistency: 63.38,
-[19:00:07.144]       keyConsistency: 2.07
-[19:00:07.144]     },
-[19:00:07.144]     {
-[19:00:07.144]       _id: '6822d3d5df21a5c1da35f014',
-[19:00:07.144]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.144]       wpm: 97.8,
-[19:00:07.144]       rawWpm: 111.45,
-[19:00:07.144]       charStats: [Array],
-[19:00:07.144]       acc: 90.57,
-[19:00:07.144]       mode: 'words',
-[19:00:07.144]       mode2: '10',
-[19:00:07.144]       timestamp: 1747112917000,
-[19:00:07.144]       restartCount: 1,
-[19:00:07.144]       incompleteTestSeconds: 1.81,
-[19:00:07.144]       testDuration: 5.28,
-[19:00:07.144]       consistency: 47.29,
-[19:00:07.144]       keyConsistency: 8.22,
-[19:00:07.144]       isPb: true
-[19:00:07.144]     },
-[19:00:07.144]     {
-[19:00:07.144]       _id: '6822d3bedf21a5c1da35ef2c',
-[19:00:07.144]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.144]       wpm: 105.53,
-[19:00:07.144]       rawWpm: 105.53,
-[19:00:07.144]       charStats: [Array],
-[19:00:07.144]       acc: 98.48,
-[19:00:07.144]       mode: 'words',
-[19:00:07.144]       mode2: '50',
-[19:00:07.144]       timestamp: 1747112894000,
-[19:00:07.144]       restartCount: 1,
-[19:00:07.144]       incompleteTestSeconds: 2.46,
-[19:00:07.144]       testDuration: 29.45,
-[19:00:07.144]       consistency: 72.1,
-[19:00:07.144]       keyConsistency: 15.77
-[19:00:07.145]     },
-[19:00:07.145]     {
-[19:00:07.145]       _id: '6822d347df21a5c1da35eabb',
-[19:00:07.145]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.145]       wpm: 113.25,
-[19:00:07.145]       rawWpm: 118.04,
-[19:00:07.145]       charStats: [Array],
-[19:00:07.145]       acc: 96.79,
-[19:00:07.145]       mode: 'words',
-[19:00:07.145]       mode2: '50',
-[19:00:07.145]       timestamp: 1747112775000,
-[19:00:07.145]       restartCount: 5,
-[19:00:07.145]       incompleteTestSeconds: 31.85,
-[19:00:07.153]       testDuration: 27.55,
-[19:00:07.153]       consistency: 75.48,
-[19:00:07.153]       keyConsistency: 9.83
-[19:00:07.153]     },
-[19:00:07.153]     {
-[19:00:07.153]       _id: '6822d2a6df21a5c1da35e476',
-[19:00:07.153]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.153]       wpm: 120.15,
-[19:00:07.153]       rawWpm: 120.15,
-[19:00:07.153]       charStats: [Array],
-[19:00:07.153]       acc: 99.27,
-[19:00:07.153]       mode: 'words',
-[19:00:07.153]       mode2: '50',
-[19:00:07.153]       timestamp: 1747112614000,
-[19:00:07.153]       restartCount: 1,
-[19:00:07.153]       incompleteTestSeconds: 25.16,
-[19:00:07.154]       testDuration: 27.07,
-[19:00:07.154]       consistency: 71.97,
-[19:00:07.154]       keyConsistency: 29.89,
-[19:00:07.154]       isPb: true
-[19:00:07.154]     },
-[19:00:07.154]     {
-[19:00:07.154]       _id: '6822d25fdf21a5c1da35e19c',
-[19:00:07.154]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.154]       wpm: 78.98,
-[19:00:07.154]       rawWpm: 81.49,
-[19:00:07.154]       charStats: [Array],
-[19:00:07.154]       acc: 93.31,
-[19:00:07.154]       mode: 'custom',
-[19:00:07.154]       mode2: 'custom',
-[19:00:07.154]       timestamp: 1747112543000,
-[19:00:07.154]       restartCount: 2,
-[19:00:07.154]       incompleteTestSeconds: 29.08,
-[19:00:07.154]       testDuration: 33.43,
-[19:00:07.154]       consistency: 58.3,
-[19:00:07.154]       keyConsistency: 1.04,
-[19:00:07.154]       isPb: true
-[19:00:07.154]     },
-[19:00:07.154]     {
-[19:00:07.154]       _id: '6822ce95df21a5c1da35bce5',
-[19:00:07.154]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.154]       wpm: 113.66,
-[19:00:07.154]       rawWpm: 113.66,
-[19:00:07.154]       charStats: [Array],
-[19:00:07.154]       acc: 98.15,
-[19:00:07.154]       mode: 'words',
-[19:00:07.154]       mode2: '50',
-[19:00:07.154]       timestamp: 1747111573000,
-[19:00:07.154]       testDuration: 27.98,
-[19:00:07.156]       consistency: 76.97,
-[19:00:07.156]       keyConsistency: 21.07,
-[19:00:07.156]       isPb: true
-[19:00:07.156]     },
-[19:00:07.156]     {
-[19:00:07.156]       _id: '682008a1df21a5c1da19c9cf',
-[19:00:07.156]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.156]       wpm: 79.76,
-[19:00:07.156]       rawWpm: 89.6,
-[19:00:07.157]       charStats: [Array],
-[19:00:07.157]       acc: 84.06,
-[19:00:07.157]       mode: 'words',
-[19:00:07.157]       mode2: '50',
-[19:00:07.157]       timestamp: 1746929825000,
-[19:00:07.157]       restartCount: 3,
-[19:00:07.157]       incompleteTestSeconds: 88.11,
-[19:00:07.157]       testDuration: 32.95,
-[19:00:07.157]       consistency: 59.82,
-[19:00:07.157]       keyConsistency: 0.75
-[19:00:07.157]     }
-[19:00:07.157]   ]
-[19:00:07.157] }
-[19:00:07.157] API response for /results: {
-[19:00:07.157]   message: 'Results retrieved',
-[19:00:07.157]   data: [
-[19:00:07.157]     {
-[19:00:07.157]       _id: '6822f665df21a5c1da374b59',
-[19:00:07.157]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.157]       wpm: 74.13,
-[19:00:07.157]       rawWpm: 79.45,
-[19:00:07.157]       charStats: [Array],
-[19:00:07.157]       acc: 89.27,
-[19:00:07.157]       mode: 'words',
-[19:00:07.157]       mode2: '50',
-[19:00:07.157]       timestamp: 1747121765000,
-[19:00:07.157]       restartCount: 4,
-[19:00:07.157]       incompleteTestSeconds: 26.77,
-[19:00:07.157]       testDuration: 38.36,
-[19:00:07.158]       consistency: 57.28,
-[19:00:07.158]       keyConsistency: 0.02
-[19:00:07.158]     },
-[19:00:07.158]     {
-[19:00:07.158]       _id: '6822f617df21a5c1da37484a',
-[19:00:07.158]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.158]       wpm: 94.2,
-[19:00:07.158]       rawWpm: 94.2,
-[19:00:07.158]       charStats: [Array],
-[19:00:07.158]       acc: 95.83,
-[19:00:07.158]       mode: 'words',
-[19:00:07.158]       mode2: '50',
-[19:00:07.158]       timestamp: 1747121687000,
-[19:00:07.158]       testDuration: 34.52,
-[19:00:07.158]       consistency: 60.29,
-[19:00:07.158]       keyConsistency: 1.96
-[19:00:07.158]     },
-[19:00:07.158]     {
-[19:00:07.158]       _id: '6822d447df21a5c1da35f42c',
-[19:00:07.158]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.158]       wpm: 96.52,
-[19:00:07.158]       rawWpm: 102.98,
-[19:00:07.159]       charStats: [Array],
-[19:00:07.159]       acc: 90.41,
-[19:00:07.159]       mode: 'words',
-[19:00:07.159]       mode2: '50',
-[19:00:07.159]       timestamp: 1747113031000,
-[19:00:07.159]       restartCount: 6,
-[19:00:07.159]       incompleteTestSeconds: 27.88,
-[19:00:07.159]       testDuration: 31.58,
-[19:00:07.159]       consistency: 63.38,
-[19:00:07.159]       keyConsistency: 2.07
-[19:00:07.159]     },
-[19:00:07.159]     {
-[19:00:07.159]       _id: '6822d3d5df21a5c1da35f014',
-[19:00:07.159]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.159]       wpm: 97.8,
-[19:00:07.159]       rawWpm: 111.45,
-[19:00:07.159]       charStats: [Array],
-[19:00:07.159]       acc: 90.57,
-[19:00:07.159]       mode: 'words',
-[19:00:07.159]       mode2: '10',
-[19:00:07.159]       timestamp: 1747112917000,
-[19:00:07.159]       restartCount: 1,
-[19:00:07.159]       incompleteTestSeconds: 1.81,
-[19:00:07.159]       testDuration: 5.28,
-[19:00:07.160]       consistency: 47.29,
-[19:00:07.160]       keyConsistency: 8.22,
-[19:00:07.160]       isPb: true
-[19:00:07.160]     },
-[19:00:07.160]     {
-[19:00:07.160]       _id: '6822d3bedf21a5c1da35ef2c',
-[19:00:07.160]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.160]       wpm: 105.53,
-[19:00:07.160]       rawWpm: 105.53,
-[19:00:07.160]       charStats: [Array],
-[19:00:07.160]       acc: 98.48,
-[19:00:07.160]       mode: 'words',
-[19:00:07.160]       mode2: '50',
-[19:00:07.160]       timestamp: 1747112894000,
-[19:00:07.160]       restartCount: 1,
-[19:00:07.160]       incompleteTestSeconds: 2.46,
-[19:00:07.160]       testDuration: 29.45,
-[19:00:07.160]       consistency: 72.1,
-[19:00:07.160]       keyConsistency: 15.77
-[19:00:07.160]     },
-[19:00:07.160]     {
-[19:00:07.160]       _id: '6822d347df21a5c1da35eabb',
-[19:00:07.161]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.161]       wpm: 113.25,
-[19:00:07.161]       rawWpm: 118.04,
-[19:00:07.161]       charStats: [Array],
-[19:00:07.161]       acc: 96.79,
-[19:00:07.161]       mode: 'words',
-[19:00:07.161]       mode2: '50',
-[19:00:07.162]       timestamp: 1747112775000,
-[19:00:07.162]       restartCount: 5,
-[19:00:07.162]       incompleteTestSeconds: 31.85,
-[19:00:07.162]       testDuration: 27.55,
-[19:00:07.162]       consistency: 75.48,
-[19:00:07.162]       keyConsistency: 9.83
-[19:00:07.162]     },
-[19:00:07.162]     {
-[19:00:07.162]       _id: '6822d2a6df21a5c1da35e476',
-[19:00:07.162]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.163]       wpm: 120.15,
-[19:00:07.163]       rawWpm: 120.15,
-[19:00:07.163]       charStats: [Array],
-[19:00:07.163]       acc: 99.27,
-[19:00:07.163]       mode: 'words',
-[19:00:07.163]       mode2: '50',
-[19:00:07.163]       timestamp: 1747112614000,
-[19:00:07.163]       restartCount: 1,
-[19:00:07.163]       incompleteTestSeconds: 25.16,
-[19:00:07.163]       testDuration: 27.07,
-[19:00:07.163]       consistency: 71.97,
-[19:00:07.163]       keyConsistency: 29.89,
-[19:00:07.164]       isPb: true
-[19:00:07.164]     },
-[19:00:07.164]     {
-[19:00:07.164]       _id: '6822d25fdf21a5c1da35e19c',
-[19:00:07.164]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.164]       wpm: 78.98,
-[19:00:07.164]       rawWpm: 81.49,
-[19:00:07.164]       charStats: [Array],
-[19:00:07.164]       acc: 93.31,
-[19:00:07.164]       mode: 'custom',
-[19:00:07.164]       mode2: 'custom',
-[19:00:07.164]       timestamp: 1747112543000,
-[19:00:07.164]       restartCount: 2,
-[19:00:07.164]       incompleteTestSeconds: 29.08,
-[19:00:07.164]       testDuration: 33.43,
-[19:00:07.164]       consistency: 58.3,
-[19:00:07.164]       keyConsistency: 1.04,
-[19:00:07.164]       isPb: true
-[19:00:07.164]     },
-[19:00:07.164]     {
-[19:00:07.164]       _id: '6822ce95df21a5c1da35bce5',
-[19:00:07.164]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.164]       wpm: 113.66,
-[19:00:07.164]       rawWpm: 113.66,
-[19:00:07.164]       charStats: [Array],
-[19:00:07.165]       acc: 98.15,
-[19:00:07.165]       mode: 'words',
-[19:00:07.165]       mode2: '50',
-[19:00:07.165]       timestamp: 1747111573000,
-[19:00:07.165]       testDuration: 27.98,
-[19:00:07.165]       consistency: 76.97,
-[19:00:07.165]       keyConsistency: 21.07,
-[19:00:07.165]       isPb: true
-[19:00:07.165]     },
-[19:00:07.165]     {
-[19:00:07.165]       _id: '682008a1df21a5c1da19c9cf',
-[19:00:07.165]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
-[19:00:07.165]       wpm: 79.76,
-[19:00:07.165]       rawWpm: 89.6,
-[19:00:07.165]       charStats: [Array],
-[19:00:07.165]       acc: 84.06,
-[19:00:07.165]       mode: 'words',
-[19:00:07.165]       mode2: '50',
-[19:00:07.165]       timestamp: 1746929825000,
-[19:00:07.165]       restartCount: 3,
-[19:00:07.165]       incompleteTestSeconds: 88.11,
-[19:00:07.165]       testDuration: 32.95,
-[19:00:07.165]       consistency: 59.82,
-[19:00:07.165]       keyConsistency: 0.75
-[19:00:07.165]     }
-[19:00:07.165]   ]
-[19:00:07.165] }
-[19:00:07.331] API response for /users/personalBests: {
-[19:00:07.331]   message: 'Personal bests retrieved',
-[19:00:07.331]   data: [
-[19:00:07.331]     {
-[19:00:07.331]       acc: 90.57,
-[19:00:07.331]       consistency: 47.29,
-[19:00:07.331]       difficulty: 'normal',
-[19:00:07.331]       lazyMode: false,
-[19:00:07.331]       language: 'english',
-[19:00:07.331]       punctuation: false,
-[19:00:07.331]       raw: 111.45,
-[19:00:07.331]       wpm: 97.8,
-[19:00:07.331]       numbers: false,
-[19:00:07.331]       timestamp: 1747112917927
-[19:00:07.331]     }
-[19:00:07.331]   ]
-[19:00:07.331] }
-[19:00:07.331] Personal bests data: [
-[19:00:07.331]   {
-[19:00:07.331]     "acc": 90.57,
-[19:00:07.331]     "consistency": 47.29,
-[19:00:07.331]     "difficulty": "normal",
-[19:00:07.331]     "lazyMode": false,
-[19:00:07.331]     "language": "english",
-[19:00:07.331]     "punctuation": false,
-[19:00:07.331]     "raw": 111.45,
-[19:00:07.331]     "wpm": 97.8,
-[19:00:07.331]     "numbers": false,
-[19:00:07.331]     "timestamp": 1747112917927
-[19:00:07.331]   }
-[19:00:07.331] ]
-[19:00:07.332] API response for /users/personalBests: {
-[19:00:07.332]   message: 'Personal bests retrieved',
-[19:00:07.332]   data: [
-[19:00:07.332]     {
-[19:00:07.332]       acc: 90.57,
-[19:00:07.332]       consistency: 47.29,
-[19:00:07.332]       difficulty: 'normal',
-[19:00:07.332]       lazyMode: false,
-[19:00:07.332]       language: 'english',
-[19:00:07.332]       punctuation: false,
-[19:00:07.332]       raw: 111.45,
-[19:00:07.332]       wpm: 97.8,
-[19:00:07.332]       numbers: false,
-[19:00:07.332]       timestamp: 1747112917927
-[19:00:07.332]     }
-[19:00:07.332]   ]
-[19:00:07.332] }
-[19:00:07.332] Personal bests data: [
-[19:00:07.332]   {
-[19:00:07.332]     "acc": 90.57,
-[19:00:07.332]     "consistency": 47.29,
-[19:00:07.332]     "difficulty": "normal",
-[19:00:07.332]     "lazyMode": false,
-[19:00:07.332]     "language": "english",
-[19:00:07.332]     "punctuation": false,
-[19:00:07.332]     "raw": 111.45,
-[19:00:07.332]     "wpm": 97.8,
-[19:00:07.332]     "numbers": false,
-[19:00:07.332]     "timestamp": 1747112917927
-[19:00:07.332]   }
-[19:00:07.332] ]
-[19:00:07.527] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
-[19:00:07.527] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
-[19:00:08.592] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
-[19:00:08.594] Monkeytype API error (503): {}
-[19:00:08.594] Retrying request (attempt 3/3)...
-[19:00:08.616] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
-[19:00:08.618] Monkeytype API error (503): {}
-[19:00:08.618] Retrying request (attempt 3/3)...
-[19:00:11.593] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
-[19:00:11.595] Monkeytype API error (503): {}
-[19:00:11.619] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
-[19:00:11.620] Monkeytype API error (503): {}
-[19:00:11.684]  ✓ Generating static pages (878/878)
-[19:00:11.689] 
-[19:00:11.689] > Export encountered errors on following paths:
-[19:00:11.689] 	/essays/[category]/[slug]/page: /essays/character-analysis/analysis-of-daisy-randone
-[19:00:11.689] 	/links/[category]/[slug]/page: /links/datasets/google-dataset-search
-[19:00:11.689] 	/links/[category]/[slug]/page: /links/learning/khan-academy
-[19:00:11.689] 	/links/[category]/[slug]/page: /links/references/project-gutenberg
-[19:00:11.689] 	/links/[category]/[slug]/page: /links/research/google-scholar
-[19:00:11.689] 	/links/[category]/[slug]/page: /links/research/library-genesis
-[19:00:11.689] 	/links/[category]/[slug]/page: /links/research/sci-hub
-[19:00:11.689] 	/links/[category]/[slug]/page: /links/tools/overleaf
-[19:00:11.689] 	/notes/[category]/[slug]/page: /notes/indie-web/neocities-personal-sites
-[19:00:11.689] 	/notes/[category]/[slug]/page: /notes/internet-archive/internet-archive
-[19:00:11.690] 	/notes/[category]/[slug]/page: /notes/learning/things-i-ought-to-know
-[19:00:11.690] 	/notes/[category]/[slug]/page: /notes/manuals-of-style/takes-on-cpp
-[19:00:11.690] 	/notes/[category]/[slug]/page: /notes/news/news
-[19:00:11.690] 	/notes/[category]/[slug]/page: /notes/on-myself/clash-royale
-[19:00:11.690] 	/notes/[category]/[slug]/page: /notes/on-myself/hackthebox
-[19:00:11.690] 	/notes/[category]/[slug]/page: /notes/on-myself/tryhackme
-[19:00:11.690] 	/notes/[category]/[slug]/page: /notes/on-myself/twitch
-[19:00:11.690] 	/notes/[category]/[slug]/page: /notes/research/internet-search-methods
-[19:00:11.690] 	/notes/[category]/[slug]/page: /notes/research/modern-search-methods
-[19:00:11.690] 	/notes/[category]/[slug]/page: /notes/social-media/youtube
-[19:00:11.690] 	/notes/[category]/[slug]/page: /notes/technology/kristoo
-[19:00:11.690] 	/reviews/[category]/[slug]/page: /reviews/anime/frieren-beyond-journeys-end
-[19:00:11.690] 	/reviews/[category]/[slug]/page: /reviews/anime/ghost-in-the-shell
-[19:00:11.690] 	/reviews/[category]/[slug]/page: /reviews/anime/that-time-i-got-reincarnated-as-a-slime
-[19:00:11.690] 	/reviews/[category]/[slug]/page: /reviews/manga/blood-on-the-tracks
-[19:00:11.690] 	/reviews/[category]/[slug]/page: /reviews/manga/flowers-of-evil
-[19:00:11.690] 	/reviews/[category]/[slug]/page: /reviews/manga/ghost-in-the-shell-manga
-[19:00:11.755] Error: Command "npm run build" exited with 1
-[19:00:12.358] 
-[19:00:15.490] Exiting build container
+[20:56:46.334] Running build in Washington, D.C., USA (East) – iad1
+[20:56:46.334] Build machine configuration: 2 cores, 8 GB
+[20:56:46.366] Cloning github.com/krisyotam/krisyotam.com (Branch: main, Commit: e1d27eb)
+[20:56:52.592] Cloning completed: 6.225s
+[20:57:03.553] Restored build cache from previous deployment (7FczQC8UNvy2nhn4eV92wZnEsndE)
+[20:57:05.089] Running "vercel build"
+[20:57:05.537] Vercel CLI 44.2.10
+[20:57:05.812] WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+[20:57:08.621] Installing dependencies...
+[20:57:11.284] npm warn deprecated topojson@3.0.2: Use topojson-client, topojson-server or topojson-simplify directly.
+[20:57:25.808] 
+[20:57:25.809] added 7 packages, removed 21 packages, and changed 49 packages in 17s
+[20:57:25.809] 
+[20:57:25.809] 233 packages are looking for funding
+[20:57:25.810]   run `npm fund` for details
+[20:57:25.849] Detected Next.js version: 14.2.30
+[20:57:25.856] Running "npm run build"
+[20:57:25.965] 
+[20:57:25.965] > kris-yotam@0.1.0 build
+[20:57:25.966] > next build
+[20:57:25.966] 
+[20:57:26.649]   ▲ Next.js 14.2.30
+[20:57:26.650]   - Experiments (use with caution):
+[20:57:26.650]     · webpackBuildWorker
+[20:57:26.650] 
+[20:57:26.748]    Creating an optimized production build ...
+[20:58:59.097]  ✓ Compiled successfully
+[20:58:59.098]    Linting and checking validity of types ...
+[21:00:20.316]    Collecting page data ...
+[21:00:23.663] Available categories: [
+[21:00:23.664]   'illuminati',
+[21:00:23.664]   'new-world-order',
+[21:00:23.665]   'cia-projects',
+[21:00:23.665]   'bohemian-grove',
+[21:00:23.665]   'bilderberg-group',
+[21:00:23.665]   'qanon',
+[21:00:23.665]   'roswell-and-ufo-coverups',
+[21:00:23.665]   'flat-earth',
+[21:00:23.666]   'secret-space-programs'
+[21:00:23.666] ]
+[21:00:23.666] Slugified categories: [
+[21:00:23.666]   'illuminati',
+[21:00:23.666]   'new-world-order',
+[21:00:23.667]   'cia-projects',
+[21:00:23.667]   'bohemian-grove',
+[21:00:23.667]   'bilderberg-group',
+[21:00:23.668]   'qanon',
+[21:00:23.668]   'roswell-and-ufo-coverups',
+[21:00:23.668]   'flat-earth',
+[21:00:23.669]   'secret-space-programs'
+[21:00:23.669] ]
+[21:00:23.820] Available categories: [
+[21:00:23.820]   'liber-necrophilia',
+[21:00:23.820]   'liber-zoophilia',
+[21:00:23.820]   'liber-sodomorum',
+[21:00:23.821]   'liber-experimentorum',
+[21:00:23.821]   'liber-mortis',
+[21:00:23.821]   'liber-incubi',
+[21:00:23.821]   'liber-hysterica',
+[21:00:23.821]   'malleus-innocentium',
+[21:00:23.821]   'fabrica-excruciationis'
+[21:00:23.821] ]
+[21:00:23.821] Slugified categories: [
+[21:00:23.822]   'liber-necrophilia',
+[21:00:23.822]   'liber-zoophilia',
+[21:00:23.822]   'liber-sodomorum',
+[21:00:23.822]   'liber-experimentorum',
+[21:00:23.822]   'liber-mortis',
+[21:00:23.823]   'liber-incubi',
+[21:00:23.823]   'liber-hysterica',
+[21:00:23.823]   'malleus-innocentium',
+[21:00:23.823]   'fabrica-excruciationis'
+[21:00:23.823] ]
+[21:00:23.904] Available categories: [
+[21:00:23.904]   'Philosophy',
+[21:00:23.904]   'Verse',
+[21:00:23.905]   'Random',
+[21:00:23.905]   'On Myself',
+[21:00:23.905]   'Libraries',
+[21:00:23.905]   'Bounties',
+[21:00:23.905]   'News',
+[21:00:23.905]   'Website',
+[21:00:23.905]   'Stable Syllabi',
+[21:00:23.906]   'Research',
+[21:00:23.906]   'Powerscaling',
+[21:00:23.906]   'Book Notes',
+[21:00:23.906]   'Technology',
+[21:00:23.906]   'Virtual Worlds',
+[21:00:23.906]   'Mathematics',
+[21:00:23.907]   'Internet Archive',
+[21:00:23.907]   'Indie Web',
+[21:00:23.907]   'Learning',
+[21:00:23.907]   'Physics',
+[21:00:23.907]   'social-media',
+[21:00:23.907]   'Fraternities',
+[21:00:23.907]   'Artificial Intelligence',
+[21:00:23.908]   'Manuals Of Style',
+[21:00:23.908]   'Internet Archiving'
+[21:00:23.908] ]
+[21:00:23.908] Slugified categories: [
+[21:00:23.908]   'philosophy',
+[21:00:23.908]   'verse',
+[21:00:23.909]   'random',
+[21:00:23.909]   'on-myself',
+[21:00:23.909]   'libraries',
+[21:00:23.909]   'bounties',
+[21:00:23.909]   'news',
+[21:00:23.909]   'website',
+[21:00:23.910]   'stable-syllabi',
+[21:00:23.910]   'research',
+[21:00:23.910]   'powerscaling',
+[21:00:23.910]   'book-notes',
+[21:00:23.910]   'technology',
+[21:00:23.910]   'virtual-worlds',
+[21:00:23.910]   'mathematics',
+[21:00:23.912]   'internet-archive',
+[21:00:23.912]   'indie-web',
+[21:00:23.912]   'learning',
+[21:00:23.912]   'physics',
+[21:00:23.912]   'social-media',
+[21:00:23.913]   'fraternities',
+[21:00:23.913]   'artificial-intelligence',
+[21:00:23.913]   'manuals-of-style',
+[21:00:23.913]   'internet-archiving'
+[21:00:23.913] ]
+[21:00:28.381]    Generating static pages (0/878) ...
+[21:00:32.703] Fetching favorite actors from JSON
+[21:00:32.704] Retrieved 15 favorite actors
+[21:00:32.771] Fetching favorite characters from JSON
+[21:00:32.771] Retrieved 27 favorite characters
+[21:00:32.789] Fetching favorite film companies from JSON
+[21:00:32.789] Retrieved 12 favorite film companies
+[21:00:32.857] Fetching favorite directors from JSON
+[21:00:32.857] Retrieved 13 favorite directors
+[21:00:35.348] Fetching user watched content from Trakt...
+[21:00:35.348] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
+[21:00:35.349] Error fetching Trakt genres: Error: Unable to get valid Trakt access token
+[21:00:35.349]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
+[21:00:35.349]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:35.349]     at async d (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4890)
+[21:00:35.349]     at async l (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:666)
+[21:00:35.349]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[21:00:35.349]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[21:00:35.350]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[21:00:35.350]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[21:00:35.350]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[21:00:35.350]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[21:00:35.382] Fetching user lists from Trakt
+[21:00:35.404] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
+[21:00:35.404] Error fetching Trakt lists: Error: Unable to get valid Trakt access token
+[21:00:35.404]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
+[21:00:35.405]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:35.405]     at async u (/vercel/path0/.next/server/app/api/trakt/lists/route.js:1:664)
+[21:00:35.405]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[21:00:35.405]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[21:00:35.405]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[21:00:35.405]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[21:00:35.405]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[21:00:35.405]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[21:00:35.405]     at async Object.exportPage (/vercel/path0/node_modules/next/dist/export/worker.js:237:20)
+[21:00:35.461] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
+[21:00:35.462] Error fetching Trakt stats: Error: Unable to get valid Trakt access token
+[21:00:35.462]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
+[21:00:35.462]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:35.462]     at async d (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4890)
+[21:00:35.462]     at async l (/vercel/path0/.next/server/app/api/trakt/stats/route.js:1:606)
+[21:00:35.462]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[21:00:35.462]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[21:00:35.462]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[21:00:35.463]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[21:00:35.463]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[21:00:35.463]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[21:00:39.074] MDX file not found: /vercel/path0/app/blog/content/reply-to-mephisto.mdx
+[21:00:39.074] MDX file not found: /vercel/path0/app/blog/content/reply-to-mephisto.mdx
+[21:00:39.075] Could not find MDX file for thought-experiments/reply-to-mephisto
+[21:00:39.075] Could not find MDX file for thought-experiments/reply-to-mephisto
+[21:00:46.021] PostTableRow - Linking to: essays/character-analysis/analysis-of-susanna-kaysen
+[21:00:46.022] PostTableRow - Linking to: essays/character-analysis/analysis-of-daisy-randone
+[21:00:46.022] PostTableRow - Linking to: essays/character-analysis/analysis-of-lisa-rowe
+[21:00:46.022] PostTableRow - Linking to: essays/Thought Experiments/reply-to-mephisto
+[21:00:46.023] PostTableRow - Linking to: essays/letters/a-letter-to-the-student-in-shadow
+[21:00:46.023] PostTableRow - Linking to: essays/pedagogy/on-the-learning-of-difficult-things
+[21:00:46.023] PostTableRow - Linking to: essays/pedagogy/on-learning-serious-things
+[21:00:46.023] PostTableRow - Linking to: essays/pedagogy/reflections-on-lifelong-study
+[21:00:46.024] PostTableRow - Linking to: essays/philosophy/on-being-wounded
+[21:00:46.024] PostTableRow - Linking to: essays/philosophy/when-the-body-keeps-score
+[21:00:46.419]    Generating static pages (219/878) 
+[21:00:46.894] BookDetailClient - Received book: Linear Algebra Done Right
+[21:00:46.894] BookDetailClient - Book slug: linear-algebra-done-right
+[21:00:46.909] BookDetailClient - Received book: Understanding Analysis
+[21:00:46.910] BookDetailClient - Book slug: understanding-analysis
+[21:00:46.925] BookDetailClient - Received book: Elementary Analysis: The Theory of Calculus
+[21:00:46.926] BookDetailClient - Book slug: elementary-analysis-theory-of-calculus
+[21:00:46.949] BookDetailClient - Received book: Principles of Mathematical Analysis
+[21:00:46.949] BookDetailClient - Book slug: principles-of-mathematical-analysis
+[21:00:46.967] BookDetailClient - Received book: Complex Variables for Scientists and Engineers
+[21:00:46.967] BookDetailClient - Book slug: complex-variables-for-scientists-and-engineers
+[21:00:46.982] BookDetailClient - Received book: Elementary Number Theory
+[21:00:46.983] BookDetailClient - Book slug: elementary-number-theory
+[21:00:46.997] BookDetailClient - Received book: The Structure of Abstract Algebra
+[21:00:46.997] BookDetailClient - Book slug: the-structure-of-abstract-algebra
+[21:00:47.012] BookDetailClient - Received book: Plane Trigonometry with Tables
+[21:00:47.013] BookDetailClient - Book slug: plane-trigonometry-with-tables
+[21:00:47.727] Unknown content type: lab
+[21:00:47.728] Could not find MDX file for verse/lab-surveys
+[21:00:47.731] Unknown content type: lab
+[21:00:47.731] Could not find MDX file for verse/lab-surveys
+[21:00:47.751] Unknown content type: lab
+[21:00:47.751] Could not find MDX file for notes/lab-methods
+[21:00:47.753] Unknown content type: lab
+[21:00:47.753] Could not find MDX file for notes/lab-methods
+[21:00:51.169] MDX file not found: /vercel/path0/app/notes/content/on-myself/clash-royale.mdx
+[21:00:51.171] MDX file not found: /vercel/path0/app/notes/content/on-myself/clash-royale.mdx
+[21:00:51.173] Error: Cannot find module './on-myself/clash-royale.mdx'
+[21:00:51.173]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:00:51.173]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:51.173]     at runNextTicks (node:internal/process/task_queues:69:3)
+[21:00:51.173]     at listOnTimeout (node:internal/timers:549:9)
+[21:00:51.173]     at process.processTimers (node:internal/timers:523:7)
+[21:00:51.173]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:00:51.173]   code: 'MODULE_NOT_FOUND',
+[21:00:51.173]   digest: '374583188'
+[21:00:51.173] }
+[21:00:51.174] Error: Cannot find module './on-myself/clash-royale.mdx'
+[21:00:51.174]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:00:51.174]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:51.174]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:00:51.175]   code: 'MODULE_NOT_FOUND',
+[21:00:51.175]   digest: '56425885'
+[21:00:51.175] }
+[21:00:51.176] Error: Cannot find module './on-myself/clash-royale.mdx'
+[21:00:51.176]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:00:51.176]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:51.176]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:00:51.176]   code: 'MODULE_NOT_FOUND',
+[21:00:51.176]   digest: '56425885'
+[21:00:51.176] }
+[21:00:51.189] 
+[21:00:51.190] Error occurred prerendering page "/notes/on-myself/clash-royale". Read more: https://nextjs.org/docs/messages/prerender-error
+[21:00:51.190] 
+[21:00:51.190] Error: Cannot find module './on-myself/clash-royale.mdx'
+[21:00:51.190]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:00:51.190]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:51.190]     at runNextTicks (node:internal/process/task_queues:69:3)
+[21:00:51.191]     at listOnTimeout (node:internal/timers:549:9)
+[21:00:51.191]     at process.processTimers (node:internal/timers:523:7)
+[21:00:51.191]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
+[21:00:51.261] MDX file not found: /vercel/path0/app/notes/content/on-myself/tryhackme.mdx
+[21:00:51.261] MDX file not found: /vercel/path0/app/notes/content/on-myself/tryhackme.mdx
+[21:00:51.263] Error: Cannot find module './on-myself/tryhackme.mdx'
+[21:00:51.263]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:00:51.263]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:51.263]     at runNextTicks (node:internal/process/task_queues:69:3)
+[21:00:51.263]     at listOnTimeout (node:internal/timers:549:9)
+[21:00:51.263]     at process.processTimers (node:internal/timers:523:7)
+[21:00:51.263]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:00:51.263]   code: 'MODULE_NOT_FOUND',
+[21:00:51.263]   digest: '2299827764'
+[21:00:51.263] }
+[21:00:51.264] Error: Cannot find module './on-myself/tryhackme.mdx'
+[21:00:51.264]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:00:51.264]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:51.264]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:00:51.264]   code: 'MODULE_NOT_FOUND',
+[21:00:51.264]   digest: '435762813'
+[21:00:51.264] }
+[21:00:51.266] Error: Cannot find module './on-myself/tryhackme.mdx'
+[21:00:51.266]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:00:51.266]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:51.266]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:00:51.266]   code: 'MODULE_NOT_FOUND',
+[21:00:51.266]   digest: '435762813'
+[21:00:51.266] }
+[21:00:51.275] 
+[21:00:51.275] Error occurred prerendering page "/notes/on-myself/tryhackme". Read more: https://nextjs.org/docs/messages/prerender-error
+[21:00:51.276] 
+[21:00:51.277] Error: Cannot find module './on-myself/tryhackme.mdx'
+[21:00:51.278]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:00:51.278]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:51.278]     at runNextTicks (node:internal/process/task_queues:69:3)
+[21:00:51.278]     at listOnTimeout (node:internal/timers:549:9)
+[21:00:51.278]     at process.processTimers (node:internal/timers:523:7)
+[21:00:51.278]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
+[21:00:51.280] MDX file not found: /vercel/path0/app/notes/content/on-myself/hackthebox.mdx
+[21:00:51.281] MDX file not found: /vercel/path0/app/notes/content/on-myself/hackthebox.mdx
+[21:00:51.283] Error: Cannot find module './on-myself/hackthebox.mdx'
+[21:00:51.283]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:00:51.283]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:51.283]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:00:51.283]   code: 'MODULE_NOT_FOUND',
+[21:00:51.283]   digest: '1752657565'
+[21:00:51.283] }
+[21:00:51.284] Error: Cannot find module './on-myself/hackthebox.mdx'
+[21:00:51.284]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:00:51.284]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:51.284]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:00:51.284]   code: 'MODULE_NOT_FOUND',
+[21:00:51.284]   digest: '1752657565'
+[21:00:51.284] }
+[21:00:51.290] Error: Cannot find module './on-myself/hackthebox.mdx'
+[21:00:51.291]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:00:51.291]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:51.291]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312) {
+[21:00:51.291]   code: 'MODULE_NOT_FOUND',
+[21:00:51.291]   digest: '1752657565'
+[21:00:51.291] }
+[21:00:51.301] 
+[21:00:51.301] Error occurred prerendering page "/notes/on-myself/hackthebox". Read more: https://nextjs.org/docs/messages/prerender-error
+[21:00:51.301] 
+[21:00:51.301] Error: Cannot find module './on-myself/hackthebox.mdx'
+[21:00:51.301]     at /vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:1:6964
+[21:00:51.301]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:51.301]     at async h (/vercel/path0/.next/server/app/notes/[category]/[slug]/page.js:33:7312)
+[21:00:52.711]    Generating static pages (438/878) 
+[21:00:53.150] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/select-elementary-improper-integrals-i.mdx
+[21:00:53.150] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/select-elementary-improper-integrals-i.mdx
+[21:00:53.201] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/cleos-integral.mdx
+[21:00:53.201] Read problems file successfully: /vercel/path0/app/problems/content/real-analysis/cleos-integral.mdx
+[21:00:53.421] Read proofs file successfully: /vercel/path0/app/proofs/content/number-theory/infinitely-many-primes.mdx
+[21:00:53.421] Read proofs file successfully: /vercel/path0/app/proofs/content/number-theory/infinitely-many-primes.mdx
+[21:00:53.766] Attempting to read file from: /vercel/path0/data/research-bounties.json
+[21:00:53.767] Attempting to read file from: /vercel/path0/data/research-bounties.json
+[21:00:54.096] MDX file not found: /vercel/path0/app/reviews/content/anime/koukaku-kidoutai.mdx
+[21:00:54.096] MDX file not found: /vercel/path0/app/reviews/content/anime/koukaku-kidoutai.mdx
+[21:00:54.101] Error: Cannot find module './anime/koukaku-kidoutai.mdx'
+[21:00:54.101]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
+[21:00:54.101]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:54.101]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
+[21:00:54.101]   code: 'MODULE_NOT_FOUND',
+[21:00:54.101]   digest: '2067449571'
+[21:00:54.101] }
+[21:00:54.101] Error: Cannot find module './anime/koukaku-kidoutai.mdx'
+[21:00:54.101]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
+[21:00:54.101]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:54.102]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
+[21:00:54.102]   code: 'MODULE_NOT_FOUND',
+[21:00:54.102]   digest: '2067449571'
+[21:00:54.102] }
+[21:00:54.102] Error: Cannot find module './anime/koukaku-kidoutai.mdx'
+[21:00:54.102]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
+[21:00:54.102]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:54.102]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
+[21:00:54.102]   code: 'MODULE_NOT_FOUND',
+[21:00:54.102]   digest: '2067449571'
+[21:00:54.102] }
+[21:00:54.112] 
+[21:00:54.112] Error occurred prerendering page "/reviews/anime/koukaku-kidoutai". Read more: https://nextjs.org/docs/messages/prerender-error
+[21:00:54.113] 
+[21:00:54.113] Error: Cannot find module './anime/koukaku-kidoutai.mdx'
+[21:00:54.113]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
+[21:00:54.113]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:54.113]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766)
+[21:00:54.117] MDX file not found: /vercel/path0/app/reviews/content/anime/sousou-no-frieren.mdx
+[21:00:54.118] MDX file not found: /vercel/path0/app/reviews/content/anime/sousou-no-frieren.mdx
+[21:00:54.120] Error: Cannot find module './anime/sousou-no-frieren.mdx'
+[21:00:54.120]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
+[21:00:54.120]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:54.121]     at runNextTicks (node:internal/process/task_queues:69:3)
+[21:00:54.122]     at listOnTimeout (node:internal/timers:549:9)
+[21:00:54.122]     at process.processTimers (node:internal/timers:523:7)
+[21:00:54.122]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
+[21:00:54.122]   code: 'MODULE_NOT_FOUND',
+[21:00:54.122]   digest: '1492812906'
+[21:00:54.123] }
+[21:00:54.123] Error: Cannot find module './anime/sousou-no-frieren.mdx'
+[21:00:54.123]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
+[21:00:54.123]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:54.123]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
+[21:00:54.123]   code: 'MODULE_NOT_FOUND',
+[21:00:54.123]   digest: '3788957187'
+[21:00:54.123] }
+[21:00:54.126] Error: Cannot find module './anime/sousou-no-frieren.mdx'
+[21:00:54.126]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
+[21:00:54.126]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:54.126]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766) {
+[21:00:54.126]   code: 'MODULE_NOT_FOUND',
+[21:00:54.126]   digest: '3788957187'
+[21:00:54.126] }
+[21:00:54.135] 
+[21:00:54.135] Error occurred prerendering page "/reviews/anime/sousou-no-frieren". Read more: https://nextjs.org/docs/messages/prerender-error
+[21:00:54.136] 
+[21:00:54.136] Error: Cannot find module './anime/sousou-no-frieren.mdx'
+[21:00:54.136]     at /vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:1:2352
+[21:00:54.136]     at processTicksAndRejections (node:internal/process/task_queues:105:5)
+[21:00:54.136]     at runNextTicks (node:internal/process/task_queues:69:3)
+[21:00:54.136]     at listOnTimeout (node:internal/timers:549:9)
+[21:00:54.136]     at process.processTimers (node:internal/timers:523:7)
+[21:00:54.136]     at async u (/vercel/path0/.next/server/app/reviews/[category]/[slug]/page.js:33:8766)
+[21:00:56.276]    Generating static pages (658/878) 
+[21:01:00.279] Fetching from Monkeytype API: https://api.monkeytype.com/users/stats
+[21:01:00.280] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[21:01:00.281] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=30
+[21:01:00.281] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
+[21:01:00.282] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[21:01:00.282] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=10
+[21:01:00.282] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=25
+[21:01:00.282] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[21:01:00.283] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=100
+[21:01:00.283] Fetching from Monkeytype API: https://api.monkeytype.com/users/streak
+[21:01:00.284] Fetching from Monkeytype API: https://api.monkeytype.com/users/currentTestActivity
+[21:01:00.284] Fetching from Monkeytype API: https://api.monkeytype.com/results?limit=10
+[21:01:00.285] Fetching from Monkeytype API: https://api.monkeytype.com/users/stats
+[21:01:00.286] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[21:01:00.286] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=30
+[21:01:00.287] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
+[21:01:00.287] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[21:01:00.287] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=10
+[21:01:00.287] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=25
+[21:01:00.288] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[21:01:00.288] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=100
+[21:01:00.288] Fetching from Monkeytype API: https://api.monkeytype.com/users/streak
+[21:01:00.289] Fetching from Monkeytype API: https://api.monkeytype.com/users/currentTestActivity
+[21:01:00.289] Fetching from Monkeytype API: https://api.monkeytype.com/results?limit=10
+[21:01:00.415] API response for /users/stats: {
+[21:01:00.415]   message: 'Personal stats retrieved',
+[21:01:00.415]   data: {
+[21:01:00.415]     _id: '638bd797bd098f2ba5dfa400',
+[21:01:00.417]     completedTests: 86,
+[21:01:00.417]     startedTests: 120,
+[21:01:00.417]     timeTyping: 16820.659999999996
+[21:01:00.418]   }
+[21:01:00.418] }
+[21:01:00.418] API response for /users/stats: {
+[21:01:00.418]   message: 'Personal stats retrieved',
+[21:01:00.419]   data: {
+[21:01:00.419]     _id: '638bd797bd098f2ba5dfa400',
+[21:01:00.419]     completedTests: 86,
+[21:01:00.419]     startedTests: 120,
+[21:01:00.419]     timeTyping: 16820.659999999996
+[21:01:00.419]   }
+[21:01:00.419] }
+[21:01:00.460] Monkeytype API error (503): {}
+[21:01:00.460] Retrying request (attempt 1/3)...
+[21:01:00.486] Monkeytype API error (503): {}
+[21:01:00.487] Retrying request (attempt 1/3)...
+[21:01:00.610] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[21:01:00.611] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[21:01:00.809] API response for /users/personalBests: {
+[21:01:00.809]   message: 'Personal bests retrieved',
+[21:01:00.810]   data: [
+[21:01:00.810]     {
+[21:01:00.810]       acc: 87.73,
+[21:01:00.810]       consistency: 84.65,
+[21:01:00.810]       difficulty: 'normal',
+[21:01:00.810]       lazyMode: false,
+[21:01:00.810]       language: 'english',
+[21:01:00.810]       punctuation: false,
+[21:01:00.810]       raw: 130.38,
+[21:01:00.810]       wpm: 104.79,
+[21:01:00.810]       numbers: false,
+[21:01:00.810]       timestamp: 1741147466281
+[21:01:00.810]     }
+[21:01:00.810]   ]
+[21:01:00.811] }
+[21:01:00.811] Personal bests data: [
+[21:01:00.811]   {
+[21:01:00.811]     "acc": 87.73,
+[21:01:00.811]     "consistency": 84.65,
+[21:01:00.811]     "difficulty": "normal",
+[21:01:00.811]     "lazyMode": false,
+[21:01:00.811]     "language": "english",
+[21:01:00.811]     "punctuation": false,
+[21:01:00.811]     "raw": 130.38,
+[21:01:00.811]     "wpm": 104.79,
+[21:01:00.811]     "numbers": false,
+[21:01:00.811]     "timestamp": 1741147466281
+[21:01:00.811]   }
+[21:01:00.812] ]
+[21:01:00.812] API response for /users/personalBests: {
+[21:01:00.812]   message: 'Personal bests retrieved',
+[21:01:00.812]   data: [
+[21:01:00.812]     {
+[21:01:00.812]       acc: 87.73,
+[21:01:00.812]       consistency: 84.65,
+[21:01:00.812]       difficulty: 'normal',
+[21:01:00.812]       lazyMode: false,
+[21:01:00.812]       language: 'english',
+[21:01:00.812]       punctuation: false,
+[21:01:00.813]       raw: 130.38,
+[21:01:00.813]       wpm: 104.79,
+[21:01:00.813]       numbers: false,
+[21:01:00.813]       timestamp: 1741147466281
+[21:01:00.813]     }
+[21:01:00.813]   ]
+[21:01:00.813] }
+[21:01:00.813] Personal bests data: [
+[21:01:00.813]   {
+[21:01:00.813]     "acc": 87.73,
+[21:01:00.813]     "consistency": 84.65,
+[21:01:00.813]     "difficulty": "normal",
+[21:01:00.814]     "lazyMode": false,
+[21:01:00.814]     "language": "english",
+[21:01:00.814]     "punctuation": false,
+[21:01:00.814]     "raw": 130.38,
+[21:01:00.814]     "wpm": 104.79,
+[21:01:00.814]     "numbers": false,
+[21:01:00.814]     "timestamp": 1741147466281
+[21:01:00.814]   }
+[21:01:00.814] ]
+[21:01:01.011] API response for /users/currentTestActivity: {
+[21:01:01.011]   message: 'Current test activity data retrieved',
+[21:01:01.011]   data: {
+[21:01:01.011]     testsByDays: [
+[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.011]       null, null, null, null, null, 1,    2,    null, null, null,
+[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.011]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.011]       ... 272 more items
+[21:01:01.011]     ],
+[21:01:01.011]     lastDay: 1747094400000
+[21:01:01.012]   }
+[21:01:01.012] }
+[21:01:01.012] API response for /users/currentTestActivity: {
+[21:01:01.012]   message: 'Current test activity data retrieved',
+[21:01:01.012]   data: {
+[21:01:01.012]     testsByDays: [
+[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.012]       null, null, null, null, null, 1,    2,    null, null, null,
+[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.012]       null, null, null, null, null, null, null, null, null, null,
+[21:01:01.012]       ... 272 more items
+[21:01:01.012]     ],
+[21:01:01.012]     lastDay: 1747094400000
+[21:01:01.012]   }
+[21:01:01.012] }
+[21:01:01.228] API response for /results: {
+[21:01:01.229]   message: 'Results retrieved',
+[21:01:01.229]   data: [
+[21:01:01.229]     {
+[21:01:01.229]       _id: '6822f665df21a5c1da374b59',
+[21:01:01.229]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.229]       wpm: 74.13,
+[21:01:01.229]       rawWpm: 79.45,
+[21:01:01.229]       charStats: [Array],
+[21:01:01.229]       acc: 89.27,
+[21:01:01.229]       mode: 'words',
+[21:01:01.229]       mode2: '50',
+[21:01:01.229]       timestamp: 1747121765000,
+[21:01:01.229]       restartCount: 4,
+[21:01:01.229]       incompleteTestSeconds: 26.77,
+[21:01:01.230]       testDuration: 38.36,
+[21:01:01.230]       consistency: 57.28,
+[21:01:01.230]       keyConsistency: 0.02
+[21:01:01.230]     },
+[21:01:01.230]     {
+[21:01:01.230]       _id: '6822f617df21a5c1da37484a',
+[21:01:01.230]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.230]       wpm: 94.2,
+[21:01:01.230]       rawWpm: 94.2,
+[21:01:01.230]       charStats: [Array],
+[21:01:01.230]       acc: 95.83,
+[21:01:01.230]       mode: 'words',
+[21:01:01.230]       mode2: '50',
+[21:01:01.231]       timestamp: 1747121687000,
+[21:01:01.231]       testDuration: 34.52,
+[21:01:01.231]       consistency: 60.29,
+[21:01:01.231]       keyConsistency: 1.96
+[21:01:01.231]     },
+[21:01:01.231]     {
+[21:01:01.231]       _id: '6822d447df21a5c1da35f42c',
+[21:01:01.231]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.231]       wpm: 96.52,
+[21:01:01.231]       rawWpm: 102.98,
+[21:01:01.231]       charStats: [Array],
+[21:01:01.231]       acc: 90.41,
+[21:01:01.231]       mode: 'words',
+[21:01:01.231]       mode2: '50',
+[21:01:01.232]       timestamp: 1747113031000,
+[21:01:01.232]       restartCount: 6,
+[21:01:01.232]       incompleteTestSeconds: 27.88,
+[21:01:01.232]       testDuration: 31.58,
+[21:01:01.232]       consistency: 63.38,
+[21:01:01.232]       keyConsistency: 2.07
+[21:01:01.232]     },
+[21:01:01.232]     {
+[21:01:01.232]       _id: '6822d3d5df21a5c1da35f014',
+[21:01:01.233]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.233]       wpm: 97.8,
+[21:01:01.233]       rawWpm: 111.45,
+[21:01:01.233]       charStats: [Array],
+[21:01:01.234]       acc: 90.57,
+[21:01:01.234]       mode: 'words',
+[21:01:01.234]       mode2: '10',
+[21:01:01.234]       timestamp: 1747112917000,
+[21:01:01.234]       restartCount: 1,
+[21:01:01.234]       incompleteTestSeconds: 1.81,
+[21:01:01.234]       testDuration: 5.28,
+[21:01:01.234]       consistency: 47.29,
+[21:01:01.234]       keyConsistency: 8.22,
+[21:01:01.234]       isPb: true
+[21:01:01.235]     },
+[21:01:01.235]     {
+[21:01:01.235]       _id: '6822d3bedf21a5c1da35ef2c',
+[21:01:01.235]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.235]       wpm: 105.53,
+[21:01:01.235]       rawWpm: 105.53,
+[21:01:01.235]       charStats: [Array],
+[21:01:01.235]       acc: 98.48,
+[21:01:01.235]       mode: 'words',
+[21:01:01.235]       mode2: '50',
+[21:01:01.235]       timestamp: 1747112894000,
+[21:01:01.235]       restartCount: 1,
+[21:01:01.236]       incompleteTestSeconds: 2.46,
+[21:01:01.236]       testDuration: 29.45,
+[21:01:01.236]       consistency: 72.1,
+[21:01:01.236]       keyConsistency: 15.77
+[21:01:01.236]     },
+[21:01:01.236]     {
+[21:01:01.236]       _id: '6822d347df21a5c1da35eabb',
+[21:01:01.236]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.236]       wpm: 113.25,
+[21:01:01.236]       rawWpm: 118.04,
+[21:01:01.236]       charStats: [Array],
+[21:01:01.237]       acc: 96.79,
+[21:01:01.237]       mode: 'words',
+[21:01:01.237]       mode2: '50',
+[21:01:01.237]       timestamp: 1747112775000,
+[21:01:01.237]       restartCount: 5,
+[21:01:01.237]       incompleteTestSeconds: 31.85,
+[21:01:01.237]       testDuration: 27.55,
+[21:01:01.237]       consistency: 75.48,
+[21:01:01.237]       keyConsistency: 9.83
+[21:01:01.237]     },
+[21:01:01.237]     {
+[21:01:01.237]       _id: '6822d2a6df21a5c1da35e476',
+[21:01:01.238]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.238]       wpm: 120.15,
+[21:01:01.238]       rawWpm: 120.15,
+[21:01:01.238]       charStats: [Array],
+[21:01:01.238]       acc: 99.27,
+[21:01:01.238]       mode: 'words',
+[21:01:01.238]       mode2: '50',
+[21:01:01.238]       timestamp: 1747112614000,
+[21:01:01.238]       restartCount: 1,
+[21:01:01.238]       incompleteTestSeconds: 25.16,
+[21:01:01.238]       testDuration: 27.07,
+[21:01:01.238]       consistency: 71.97,
+[21:01:01.238]       keyConsistency: 29.89,
+[21:01:01.239]       isPb: true
+[21:01:01.239]     },
+[21:01:01.239]     {
+[21:01:01.239]       _id: '6822d25fdf21a5c1da35e19c',
+[21:01:01.239]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.239]       wpm: 78.98,
+[21:01:01.239]       rawWpm: 81.49,
+[21:01:01.239]       charStats: [Array],
+[21:01:01.239]       acc: 93.31,
+[21:01:01.239]       mode: 'custom',
+[21:01:01.239]       mode2: 'custom',
+[21:01:01.240]       timestamp: 1747112543000,
+[21:01:01.240]       restartCount: 2,
+[21:01:01.240]       incompleteTestSeconds: 29.08,
+[21:01:01.240]       testDuration: 33.43,
+[21:01:01.240]       consistency: 58.3,
+[21:01:01.240]       keyConsistency: 1.04,
+[21:01:01.240]       isPb: true
+[21:01:01.240]     },
+[21:01:01.240]     {
+[21:01:01.240]       _id: '6822ce95df21a5c1da35bce5',
+[21:01:01.240]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.240]       wpm: 113.66,
+[21:01:01.241]       rawWpm: 113.66,
+[21:01:01.241]       charStats: [Array],
+[21:01:01.241]       acc: 98.15,
+[21:01:01.241]       mode: 'words',
+[21:01:01.241]       mode2: '50',
+[21:01:01.241]       timestamp: 1747111573000,
+[21:01:01.241]       testDuration: 27.98,
+[21:01:01.241]       consistency: 76.97,
+[21:01:01.241]       keyConsistency: 21.07,
+[21:01:01.241]       isPb: true
+[21:01:01.241]     },
+[21:01:01.242]     {
+[21:01:01.242]       _id: '682008a1df21a5c1da19c9cf',
+[21:01:01.242]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.242]       wpm: 79.76,
+[21:01:01.242]       rawWpm: 89.6,
+[21:01:01.242]       charStats: [Array],
+[21:01:01.242]       acc: 84.06,
+[21:01:01.242]       mode: 'words',
+[21:01:01.242]       mode2: '50',
+[21:01:01.242]       timestamp: 1746929825000,
+[21:01:01.242]       restartCount: 3,
+[21:01:01.242]       incompleteTestSeconds: 88.11,
+[21:01:01.243]       testDuration: 32.95,
+[21:01:01.243]       consistency: 59.82,
+[21:01:01.243]       keyConsistency: 0.75
+[21:01:01.243]     }
+[21:01:01.243]   ]
+[21:01:01.243] }
+[21:01:01.244] API response for /results: {
+[21:01:01.244]   message: 'Results retrieved',
+[21:01:01.244]   data: [
+[21:01:01.245]     {
+[21:01:01.245]       _id: '6822f665df21a5c1da374b59',
+[21:01:01.245]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.245]       wpm: 74.13,
+[21:01:01.245]       rawWpm: 79.45,
+[21:01:01.245]       charStats: [Array],
+[21:01:01.245]       acc: 89.27,
+[21:01:01.246]       mode: 'words',
+[21:01:01.246]       mode2: '50',
+[21:01:01.246]       timestamp: 1747121765000,
+[21:01:01.246]       restartCount: 4,
+[21:01:01.246]       incompleteTestSeconds: 26.77,
+[21:01:01.246]       testDuration: 38.36,
+[21:01:01.246]       consistency: 57.28,
+[21:01:01.246]       keyConsistency: 0.02
+[21:01:01.246]     },
+[21:01:01.246]     {
+[21:01:01.246]       _id: '6822f617df21a5c1da37484a',
+[21:01:01.246]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.247]       wpm: 94.2,
+[21:01:01.247]       rawWpm: 94.2,
+[21:01:01.247]       charStats: [Array],
+[21:01:01.247]       acc: 95.83,
+[21:01:01.247]       mode: 'words',
+[21:01:01.247]       mode2: '50',
+[21:01:01.247]       timestamp: 1747121687000,
+[21:01:01.247]       testDuration: 34.52,
+[21:01:01.247]       consistency: 60.29,
+[21:01:01.247]       keyConsistency: 1.96
+[21:01:01.247]     },
+[21:01:01.247]     {
+[21:01:01.248]       _id: '6822d447df21a5c1da35f42c',
+[21:01:01.248]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.248]       wpm: 96.52,
+[21:01:01.248]       rawWpm: 102.98,
+[21:01:01.248]       charStats: [Array],
+[21:01:01.248]       acc: 90.41,
+[21:01:01.248]       mode: 'words',
+[21:01:01.248]       mode2: '50',
+[21:01:01.248]       timestamp: 1747113031000,
+[21:01:01.248]       restartCount: 6,
+[21:01:01.248]       incompleteTestSeconds: 27.88,
+[21:01:01.248]       testDuration: 31.58,
+[21:01:01.248]       consistency: 63.38,
+[21:01:01.249]       keyConsistency: 2.07
+[21:01:01.249]     },
+[21:01:01.249]     {
+[21:01:01.249]       _id: '6822d3d5df21a5c1da35f014',
+[21:01:01.249]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.249]       wpm: 97.8,
+[21:01:01.249]       rawWpm: 111.45,
+[21:01:01.249]       charStats: [Array],
+[21:01:01.249]       acc: 90.57,
+[21:01:01.249]       mode: 'words',
+[21:01:01.249]       mode2: '10',
+[21:01:01.249]       timestamp: 1747112917000,
+[21:01:01.250]       restartCount: 1,
+[21:01:01.250]       incompleteTestSeconds: 1.81,
+[21:01:01.250]       testDuration: 5.28,
+[21:01:01.250]       consistency: 47.29,
+[21:01:01.250]       keyConsistency: 8.22,
+[21:01:01.250]       isPb: true
+[21:01:01.250]     },
+[21:01:01.250]     {
+[21:01:01.250]       _id: '6822d3bedf21a5c1da35ef2c',
+[21:01:01.250]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.250]       wpm: 105.53,
+[21:01:01.250]       rawWpm: 105.53,
+[21:01:01.251]       charStats: [Array],
+[21:01:01.251]       acc: 98.48,
+[21:01:01.251]       mode: 'words',
+[21:01:01.251]       mode2: '50',
+[21:01:01.251]       timestamp: 1747112894000,
+[21:01:01.251]       restartCount: 1,
+[21:01:01.251]       incompleteTestSeconds: 2.46,
+[21:01:01.251]       testDuration: 29.45,
+[21:01:01.251]       consistency: 72.1,
+[21:01:01.251]       keyConsistency: 15.77
+[21:01:01.251]     },
+[21:01:01.251]     {
+[21:01:01.251]       _id: '6822d347df21a5c1da35eabb',
+[21:01:01.252]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.252]       wpm: 113.25,
+[21:01:01.252]       rawWpm: 118.04,
+[21:01:01.252]       charStats: [Array],
+[21:01:01.252]       acc: 96.79,
+[21:01:01.252]       mode: 'words',
+[21:01:01.252]       mode2: '50',
+[21:01:01.252]       timestamp: 1747112775000,
+[21:01:01.252]       restartCount: 5,
+[21:01:01.252]       incompleteTestSeconds: 31.85,
+[21:01:01.252]       testDuration: 27.55,
+[21:01:01.252]       consistency: 75.48,
+[21:01:01.252]       keyConsistency: 9.83
+[21:01:01.253]     },
+[21:01:01.253]     {
+[21:01:01.253]       _id: '6822d2a6df21a5c1da35e476',
+[21:01:01.253]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.253]       wpm: 120.15,
+[21:01:01.253]       rawWpm: 120.15,
+[21:01:01.253]       charStats: [Array],
+[21:01:01.253]       acc: 99.27,
+[21:01:01.253]       mode: 'words',
+[21:01:01.253]       mode2: '50',
+[21:01:01.253]       timestamp: 1747112614000,
+[21:01:01.254]       restartCount: 1,
+[21:01:01.254]       incompleteTestSeconds: 25.16,
+[21:01:01.254]       testDuration: 27.07,
+[21:01:01.254]       consistency: 71.97,
+[21:01:01.255]       keyConsistency: 29.89,
+[21:01:01.255]       isPb: true
+[21:01:01.255]     },
+[21:01:01.255]     {
+[21:01:01.255]       _id: '6822d25fdf21a5c1da35e19c',
+[21:01:01.255]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.255]       wpm: 78.98,
+[21:01:01.255]       rawWpm: 81.49,
+[21:01:01.255]       charStats: [Array],
+[21:01:01.255]       acc: 93.31,
+[21:01:01.255]       mode: 'custom',
+[21:01:01.256]       mode2: 'custom',
+[21:01:01.256]       timestamp: 1747112543000,
+[21:01:01.256]       restartCount: 2,
+[21:01:01.256]       incompleteTestSeconds: 29.08,
+[21:01:01.256]       testDuration: 33.43,
+[21:01:01.256]       consistency: 58.3,
+[21:01:01.256]       keyConsistency: 1.04,
+[21:01:01.256]       isPb: true
+[21:01:01.256]     },
+[21:01:01.256]     {
+[21:01:01.257]       _id: '6822ce95df21a5c1da35bce5',
+[21:01:01.257]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.257]       wpm: 113.66,
+[21:01:01.257]       rawWpm: 113.66,
+[21:01:01.257]       charStats: [Array],
+[21:01:01.257]       acc: 98.15,
+[21:01:01.257]       mode: 'words',
+[21:01:01.257]       mode2: '50',
+[21:01:01.257]       timestamp: 1747111573000,
+[21:01:01.257]       testDuration: 27.98,
+[21:01:01.257]       consistency: 76.97,
+[21:01:01.258]       keyConsistency: 21.07,
+[21:01:01.258]       isPb: true
+[21:01:01.258]     },
+[21:01:01.258]     {
+[21:01:01.258]       _id: '682008a1df21a5c1da19c9cf',
+[21:01:01.258]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[21:01:01.258]       wpm: 79.76,
+[21:01:01.258]       rawWpm: 89.6,
+[21:01:01.258]       charStats: [Array],
+[21:01:01.258]       acc: 84.06,
+[21:01:01.258]       mode: 'words',
+[21:01:01.259]       mode2: '50',
+[21:01:01.259]       timestamp: 1746929825000,
+[21:01:01.259]       restartCount: 3,
+[21:01:01.259]       incompleteTestSeconds: 88.11,
+[21:01:01.259]       testDuration: 32.95,
+[21:01:01.259]       consistency: 59.82,
+[21:01:01.259]       keyConsistency: 0.75
+[21:01:01.259]     }
+[21:01:01.259]   ]
+[21:01:01.259] }
+[21:01:01.409] API response for /users/personalBests: {
+[21:01:01.409]   message: 'Personal bests retrieved',
+[21:01:01.409]   data: [
+[21:01:01.409]     {
+[21:01:01.409]       acc: 94.55,
+[21:01:01.409]       consistency: 66.53,
+[21:01:01.409]       difficulty: 'normal',
+[21:01:01.409]       lazyMode: false,
+[21:01:01.409]       language: 'english',
+[21:01:01.409]       punctuation: false,
+[21:01:01.409]       raw: 63.4,
+[21:01:01.409]       wpm: 61.46,
+[21:01:01.409]       timestamp: 1670133327519
+[21:01:01.410]     }
+[21:01:01.410]   ]
+[21:01:01.410] }
+[21:01:01.410] Personal bests data: [
+[21:01:01.410]   {
+[21:01:01.410]     "acc": 94.55,
+[21:01:01.410]     "consistency": 66.53,
+[21:01:01.410]     "difficulty": "normal",
+[21:01:01.410]     "lazyMode": false,
+[21:01:01.410]     "language": "english",
+[21:01:01.410]     "punctuation": false,
+[21:01:01.410]     "raw": 63.4,
+[21:01:01.410]     "wpm": 61.46,
+[21:01:01.410]     "timestamp": 1670133327519
+[21:01:01.410]   }
+[21:01:01.410] ]
+[21:01:01.410] API response for /users/personalBests: {
+[21:01:01.410]   message: 'Personal bests retrieved',
+[21:01:01.410]   data: [
+[21:01:01.410]     {
+[21:01:01.410]       acc: 94.55,
+[21:01:01.410]       consistency: 66.53,
+[21:01:01.410]       difficulty: 'normal',
+[21:01:01.410]       lazyMode: false,
+[21:01:01.410]       language: 'english',
+[21:01:01.410]       punctuation: false,
+[21:01:01.410]       raw: 63.4,
+[21:01:01.410]       wpm: 61.46,
+[21:01:01.410]       timestamp: 1670133327519
+[21:01:01.410]     }
+[21:01:01.410]   ]
+[21:01:01.410] }
+[21:01:01.410] Personal bests data: [
+[21:01:01.410]   {
+[21:01:01.411]     "acc": 94.55,
+[21:01:01.411]     "consistency": 66.53,
+[21:01:01.411]     "difficulty": "normal",
+[21:01:01.411]     "lazyMode": false,
+[21:01:01.411]     "language": "english",
+[21:01:01.411]     "punctuation": false,
+[21:01:01.411]     "raw": 63.4,
+[21:01:01.411]     "wpm": 61.46,
+[21:01:01.411]     "timestamp": 1670133327519
+[21:01:01.411]   }
+[21:01:01.411] ]
+[21:01:01.460] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[21:01:01.461] Monkeytype API error (503): {}
+[21:01:01.461] Retrying request (attempt 2/3)...
+[21:01:01.487] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[21:01:01.488] Monkeytype API error (503): {}
+[21:01:01.488] Retrying request (attempt 2/3)...
+[21:01:01.612] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[21:01:01.613] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[21:01:01.810] API response for /users/personalBests: {
+[21:01:01.810]   message: 'Personal bests retrieved',
+[21:01:01.810]   data: [
+[21:01:01.810]     {
+[21:01:01.810]       acc: 90.57,
+[21:01:01.810]       consistency: 47.29,
+[21:01:01.810]       difficulty: 'normal',
+[21:01:01.810]       lazyMode: false,
+[21:01:01.810]       language: 'english',
+[21:01:01.810]       punctuation: false,
+[21:01:01.811]       raw: 111.45,
+[21:01:01.811]       wpm: 97.8,
+[21:01:01.811]       numbers: false,
+[21:01:01.811]       timestamp: 1747112917927
+[21:01:01.811]     }
+[21:01:01.811]   ]
+[21:01:01.811] }
+[21:01:01.811] Personal bests data: [
+[21:01:01.811]   {
+[21:01:01.811]     "acc": 90.57,
+[21:01:01.811]     "consistency": 47.29,
+[21:01:01.811]     "difficulty": "normal",
+[21:01:01.811]     "lazyMode": false,
+[21:01:01.811]     "language": "english",
+[21:01:01.811]     "punctuation": false,
+[21:01:01.811]     "raw": 111.45,
+[21:01:01.811]     "wpm": 97.8,
+[21:01:01.811]     "numbers": false,
+[21:01:01.811]     "timestamp": 1747112917927
+[21:01:01.811]   }
+[21:01:01.811] ]
+[21:01:01.811] API response for /users/personalBests: {
+[21:01:01.812]   message: 'Personal bests retrieved',
+[21:01:01.812]   data: [
+[21:01:01.812]     {
+[21:01:01.812]       acc: 90.57,
+[21:01:01.812]       consistency: 47.29,
+[21:01:01.812]       difficulty: 'normal',
+[21:01:01.812]       lazyMode: false,
+[21:01:01.812]       language: 'english',
+[21:01:01.812]       punctuation: false,
+[21:01:01.812]       raw: 111.45,
+[21:01:01.812]       wpm: 97.8,
+[21:01:01.812]       numbers: false,
+[21:01:01.812]       timestamp: 1747112917927
+[21:01:01.812]     }
+[21:01:01.812]   ]
+[21:01:01.812] }
+[21:01:01.812] Personal bests data: [
+[21:01:01.812]   {
+[21:01:01.812]     "acc": 90.57,
+[21:01:01.813]     "consistency": 47.29,
+[21:01:01.813]     "difficulty": "normal",
+[21:01:01.813]     "lazyMode": false,
+[21:01:01.813]     "language": "english",
+[21:01:01.813]     "punctuation": false,
+[21:01:01.813]     "raw": 111.45,
+[21:01:01.813]     "wpm": 97.8,
+[21:01:01.813]     "numbers": false,
+[21:01:01.813]     "timestamp": 1747112917927
+[21:01:01.813]   }
+[21:01:01.813] ]
+[21:01:02.011] API response for /users/personalBests: {
+[21:01:02.011]   message: 'Personal bests retrieved',
+[21:01:02.011]   data: [
+[21:01:02.011]     {
+[21:01:02.011]       acc: 95.73,
+[21:01:02.011]       consistency: 69.5,
+[21:01:02.011]       difficulty: 'normal',
+[21:01:02.011]       lazyMode: false,
+[21:01:02.011]       language: 'english',
+[21:01:02.011]       punctuation: false,
+[21:01:02.011]       raw: 110,
+[21:01:02.011]       wpm: 102,
+[21:01:02.011]       timestamp: 1741147359513,
+[21:01:02.011]       numbers: false
+[21:01:02.011]     }
+[21:01:02.011]   ]
+[21:01:02.011] }
+[21:01:02.011] Personal bests data: [
+[21:01:02.011]   {
+[21:01:02.012]     "acc": 95.73,
+[21:01:02.012]     "consistency": 69.5,
+[21:01:02.012]     "difficulty": "normal",
+[21:01:02.012]     "lazyMode": false,
+[21:01:02.012]     "language": "english",
+[21:01:02.012]     "punctuation": false,
+[21:01:02.012]     "raw": 110,
+[21:01:02.012]     "wpm": 102,
+[21:01:02.012]     "timestamp": 1741147359513,
+[21:01:02.012]     "numbers": false
+[21:01:02.012]   }
+[21:01:02.012] ]
+[21:01:02.012] API response for /users/personalBests: {
+[21:01:02.012]   message: 'Personal bests retrieved',
+[21:01:02.012]   data: [
+[21:01:02.012]     {
+[21:01:02.012]       acc: 95.73,
+[21:01:02.012]       consistency: 69.5,
+[21:01:02.012]       difficulty: 'normal',
+[21:01:02.012]       lazyMode: false,
+[21:01:02.012]       language: 'english',
+[21:01:02.012]       punctuation: false,
+[21:01:02.012]       raw: 110,
+[21:01:02.012]       wpm: 102,
+[21:01:02.012]       timestamp: 1741147359513,
+[21:01:02.012]       numbers: false
+[21:01:02.012]     }
+[21:01:02.013]   ]
+[21:01:02.013] }
+[21:01:02.013] Personal bests data: [
+[21:01:02.013]   {
+[21:01:02.013]     "acc": 95.73,
+[21:01:02.013]     "consistency": 69.5,
+[21:01:02.013]     "difficulty": "normal",
+[21:01:02.013]     "lazyMode": false,
+[21:01:02.013]     "language": "english",
+[21:01:02.013]     "punctuation": false,
+[21:01:02.013]     "raw": 110,
+[21:01:02.013]     "wpm": 102,
+[21:01:02.013]     "timestamp": 1741147359513,
+[21:01:02.013]     "numbers": false
+[21:01:02.013]   }
+[21:01:02.013] ]
+[21:01:02.210] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[21:01:02.210] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[21:01:02.412] API response for /users/streak: {
+[21:01:02.412]   message: 'Streak data retrieved',
+[21:01:02.413]   data: {
+[21:01:02.413]     lastResultTimestamp: 1747121765000,
+[21:01:02.413]     length: 1,
+[21:01:02.414]     maxLength: 6,
+[21:01:02.414]     hourOffset: null
+[21:01:02.414]   }
+[21:01:02.414] }
+[21:01:02.414] API response for /users/streak: {
+[21:01:02.414]   message: 'Streak data retrieved',
+[21:01:02.414]   data: {
+[21:01:02.414]     lastResultTimestamp: 1747121765000,
+[21:01:02.414]     length: 1,
+[21:01:02.414]     maxLength: 6,
+[21:01:02.414]     hourOffset: null
+[21:01:02.414]   }
+[21:01:02.414] }
+[21:01:03.463] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[21:01:03.464] Monkeytype API error (503): {}
+[21:01:03.464] Retrying request (attempt 3/3)...
+[21:01:03.488] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[21:01:03.490] Monkeytype API error (503): {}
+[21:01:03.490] Retrying request (attempt 3/3)...
+[21:01:06.464] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[21:01:06.465] Monkeytype API error (503): {}
+[21:01:06.491] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[21:01:06.492] Monkeytype API error (503): {}
+[21:01:06.530]  ✓ Generating static pages (878/878)
+[21:01:06.535] 
+[21:01:06.535] > Export encountered errors on following paths:
+[21:01:06.535] 	/notes/[category]/[slug]/page: /notes/on-myself/clash-royale
+[21:01:06.535] 	/notes/[category]/[slug]/page: /notes/on-myself/hackthebox
+[21:01:06.535] 	/notes/[category]/[slug]/page: /notes/on-myself/tryhackme
+[21:01:06.535] 	/reviews/[category]/[slug]/page: /reviews/anime/koukaku-kidoutai
+[21:01:06.536] 	/reviews/[category]/[slug]/page: /reviews/anime/sousou-no-frieren
+[21:01:06.601] Error: Command "npm run build" exited with 1
+[21:01:07.259] 
+[21:01:10.674] Exiting build container

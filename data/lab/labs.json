@@ -2,9 +2,9 @@
   {
     "title": "Surveys",
     "date": "2025-06-24",
-    "slug": "lab-surveys",
+    "slug": "surveys",
     "tags": ["Poetic Form", "Shakespearean", "Petrarchan", "Verse"],
-    "category": "verse",
+    "category": "notes",
     "status": "Draft",
     "confidence": "certain",
     "importance": 9,
@@ -13,7 +13,7 @@
   {
     "title": "Lab Methods",
     "date": "2025-06-24",
-    "slug": "lab-methods",
+    "slug": "methods",
     "tags": ["Lab", "Methods", "Analysis"],
     "category": "notes",
     "status": "Draft",

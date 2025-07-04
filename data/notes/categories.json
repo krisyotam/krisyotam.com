@@ -332,6 +332,33 @@
     "status": "In Progress",
     "confidence": "certain",
     "importance": 5
-  }
-]
+  },
+    {
+      "slug": "gaming",
+      "title": "Gaming",
+      "preview": "Notes on games, gaming experiences, and game analysis.",
+      "date": "2025-07-03",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 6
+    },
+    {
+      "slug": "hack-the-box",
+      "title": "Hack The Box",
+      "preview": "Notes and walkthroughs for Hack The Box challenges and machines.",
+      "date": "2025-07-03",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "try-hack-me",
+      "title": "Try Hack Me",
+      "preview": "Notes and walkthroughs for Try Hack Me challenges and rooms.",
+      "date": "2025-07-03",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
+    }
+  ]
 }

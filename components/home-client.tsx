@@ -48,7 +48,9 @@ import { Post } from "@/utils/posts"
 
 // URL generation helper - copied from working essays-table.tsx
 function getPostUrl(post: Post): string {
-  return `essays/${post.category}/${post.slug}`;
+  // Convert category to slug-friendly format (replace spaces with hyphens, lowercase)
+  const categorySlug = post.category.toLowerCase().replace(/\s+/g, '-');
+  return `essays/${categorySlug}/${post.slug}`;
 }
 
 // Type definitions for props
