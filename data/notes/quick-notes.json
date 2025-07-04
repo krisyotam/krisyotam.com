@@ -634,7 +634,7 @@
     "date": "2025-06-12",
     "slug": "tryhackme",
     "tags": ["TryHackMe", "CTF", "Pentesting"],
-    "category": "TryHackMe",
+    "category": "Try Hack Me",
     "status": "In Progress",
     "confidence": "certain",
     "importance": 9,
