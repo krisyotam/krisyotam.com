@@ -22,6 +22,7 @@ interface BlogMeta {
     | "impossible" | "remote" | "highly unlikely" | "unlikely"
     | "possible"  | "likely"  | "highly likely"   | "certain";
   importance?: number;
+  cover_image?: string; // Added for image support in blog posts
 }
 
 interface Props {

@@ -1,0 +1,7 @@
+# Website Build Errors - July 4, 2025
+
+## TypeScript Type Errors
+1. ✅ [FIXED] Property 'cover_image' does not exist on type 'BlogMeta'
+   - File: ./app/blog/BlogClientPage.tsx:140:19
+   - Solution: Added cover_image?: string to the BlogMeta interface in types/blog.ts and in app/blog/[category]/[slug]/BlogPageClient.tsx
+   - Fix: Added the missing property to the type definition rather than using optional chaining, to maintain consistent data structure
