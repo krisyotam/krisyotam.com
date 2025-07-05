@@ -58,6 +58,7 @@ const menuItems = [
   { icon: SquareLibrary, label: "Library", path: "/library" },
   { icon: Earth, label: "Globe", path: "/globe" },
   { icon: Archive, label: "Archive", path: "/archive" },
+  { icon: AreaChart, label: "Stats", path: "/stats" },
   { icon: FlaskConical, label: "Research Bounties", path: "/researchbounties" },
   { icon: FileBarChart2, label: "Reports", path: "/reports" },
   { icon: Files, label: "Docs", path: "/docs" },

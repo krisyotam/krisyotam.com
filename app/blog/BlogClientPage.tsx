@@ -128,15 +128,15 @@ export default function BlogClientPage({ initialCategory = "all", notes }: BlogC
 
   // Grid view component
   const GridView = ({ notes, searchQuery, activeCategory }: BlogTableProps) => (
-    <div className="blog-grid-container grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {filteredNotes.map((note) => (
         <div
           key={note.slug}
-          className="blog-card cursor-pointer"
+          className="border border-border bg-card hover:bg-secondary/50 transition-colors cursor-pointer"
           onClick={() => router.push(getBlogUrl(note))}
         >
           {/* Cover Image Area - Using 16:9 aspect ratio */}
-          <div className="image-placeholder aspect-[16/9]">
+          <div className="aspect-[16/9] bg-muted/30 border-b border-border flex items-center justify-center overflow-hidden">
             {note.cover_image ? (
               <img 
                 src={note.cover_image} 
@@ -152,12 +152,12 @@ export default function BlogClientPage({ initialCategory = "all", notes }: BlogC
           
           {/* Content Area */}
           <div className="p-3">
-            <h3 className="blog-title">{note.title}</h3>
-            <p className="blog-category">{formatCategoryDisplayName(note.category)}</p>
+            <h3 className="font-medium text-xs mb-1 line-clamp-2">{note.title}</h3>
+            <p className="text-xs text-muted-foreground mb-2 line-clamp-2">{formatCategoryDisplayName(note.category)}</p>
             
             {/* Metadata */}
-            <div className="blog-metadata">
-              <span>{formatDate(note.date)}</span>
+            <div className="flex items-center justify-between text-xs text-muted-foreground">
+              <span>{new Date(note.date).getFullYear()}</span>
             </div>
           </div>
         </div>

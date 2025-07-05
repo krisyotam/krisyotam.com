@@ -98,6 +98,16 @@ export default function RootLayout({
             </div>
           </MDXProviderWrapper>
         </ThemeProvider>
+        {/* Analytics Beacon */}
+        <Script id="kris-analytics" strategy="afterInteractive">{`
+          navigator.sendBeacon(
+            '/api/page-view',
+            JSON.stringify({
+              path: window.location.pathname,
+              referrer: document.referrer
+            })
+          );
+        `}</Script>
       </body>
     </html>
   )
