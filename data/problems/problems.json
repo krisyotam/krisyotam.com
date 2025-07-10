@@ -20,7 +20,7 @@
       "title": "Cleo’s Integral",
       "preview": "Known as the 'monster integral' from Math StackExchange, this infamous definite integral shocked the math community when Cleo posted its elegant answer with no steps: $4\\pi\\,\\arccot\\sqrt\\varphi$.",
       "date": "2025-06-18",
-      "tags": ["definite-integrals", "math-history", "golden-ratio", "advanced-calculus", "cleo"],
+      "tags": ["definite-integrals", "math-history", "golden-ratio", "advanced-calculus", "cleo", "Complex Analysis"],
       "category": "real-analysis",
       "slug": "cleos-integral",
       "cover_image": "",
@@ -30,6 +30,22 @@
       "state": "active",
       "framework": "Classical",
       "author": "Vladimir Reshetnikov",
+      "license": "CC-BY-SA"
+    },
+    {
+      "title": "Lasagna (C++)",
+      "preview": "Learn the basics of C++ by cooking lasagna",
+      "date": "2025-06-18",
+      "tags": ["c++", "programming", "coding-exercises", "exercism"],
+      "category": "exercism",
+      "slug": "lasagna-cpp",
+      "cover_image": "",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 10,
+      "state": "active",
+      "framework": "Classical",
+      "author": "Kris Yotam",
       "license": "CC-BY-SA"
     }
   ]

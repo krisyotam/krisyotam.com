@@ -164,6 +164,25 @@
   font-weight: 600 !important;
 }
 
+.problem-content td,
+.problem-content tbody td,
+.problem-content table tbody td,
+.problem-content > table > tbody > tr > td,
+td[data-mdx-td] {
+  font-weight: normal !important;
+  font-weight: 400 !important; 
+}
+
+/* Critical CSS override - this should take precedence over other styles */
+.problem-content [data-mdx-table] td {
+  font-weight: normal !important;
+}
+
+/* Apply normal font weight to all text inside table cells */
+.problem-content td * {
+  font-weight: inherit !important;
+}
+
 /* table wrapper for responsive tables */
 .problem-content .table-wrapper {
   max-width: 100%;

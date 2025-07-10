@@ -169,6 +169,16 @@
       "status": "In Progress",
       "confidence": "certain",
       "importance": 7
+    },
+    {
+      "slug": "exercism",
+      "title": "Exercism",
+      "preview": "Coding exercises and mentorship for various programming languages.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 7
     }
   ]
 }

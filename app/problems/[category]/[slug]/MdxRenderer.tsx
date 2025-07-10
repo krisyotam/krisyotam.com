@@ -1,15 +1,38 @@
 "use client";
 
-import MarkdownRenderer from "@/components/MarkdownRenderer";
+import { MDXRemote } from "next-mdx-remote";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import { useMDXComponents } from "@/mdx-components";
+import "katex/dist/katex.min.css";
 
 interface MdxRendererProps {
   content: string;
 }
 
 export default function MdxRenderer({ content }: MdxRendererProps) {
+  // Get MDX components defined in root mdx-components.tsx
+  const components = useMDXComponents({});
+  
   return (
     <div className="problem-content">
-      <MarkdownRenderer content={content} />
+      <MDXRemote 
+        source={content}
+        components={components}
+        options={{
+          mdxOptions: {
+            remarkPlugins: [remarkGfm, remarkMath],
+            rehypePlugins: [
+              rehypeKatex,
+              rehypeSlug,
+              [rehypeAutolinkHeadings, { behavior: 'wrap' }]
+            ],
+          },
+        }}
+      />
     </div>
   );
 }

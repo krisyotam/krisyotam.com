@@ -359,6 +359,15 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 7
+    },
+    {
+      "slug": "nursery-rhymes",
+      "title": "Nursery Rhymes",
+      "preview": "full-text of classic nursery rhymes.",
+      "date": "2025-07-03",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
     }
   ]
 }

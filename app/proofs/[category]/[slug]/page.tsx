@@ -4,12 +4,9 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import proofsData from "@/data/proofs/proofs.json";
 import NotePageClient from "./ProofPageClient";
-import MdxRenderer from "./MdxRenderer";
 import { TableOfContents } from "@/components/typography/table-of-contents";
 import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
 import type { NoteMeta } from "@/types/note";
-import { readFile } from "fs/promises";
-import { join } from "path";
 
 type Status = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
 type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
@@ -85,16 +82,21 @@ export default async function ProofPage({ params }: ProofPageProps) {
   // Extract headings from the proof MDX content
   const headings = await extractHeadingsFromMDX('proofs', params.slug, params.category);
 
-  // Read the MDX file as raw content
-  const filePath = join(process.cwd(), 'app', 'proofs', 'content', params.category, `${params.slug}.mdx`);
-  let mdxContent: string;
-  
+  // Import the MDX file directly
+  let ProofEntry;
   try {
-    mdxContent = await readFile(filePath, 'utf8');
-    console.log('Read proofs file successfully:', filePath);
+    // Dynamically import the MDX file based on slug
+    ProofEntry = (await import(`@/app/proofs/content/${params.category}/${params.slug}.mdx`)).default;
+    console.log('Imported proof MDX file successfully:', params.slug);
   } catch (error) {
-    console.error('Error reading proofs file:', filePath, error);
-    mdxContent = `# Error\n\nCould not load content for ${params.slug}.\n\nFile path: ${filePath}`;
+    console.error('Error importing proof MDX file:', params.slug, error);
+    // Create a placeholder component for error state
+    ProofEntry = () => (
+      <div className="p-4 bg-red-50 text-red-600 border border-red-200 rounded">
+        <h1>Error Loading Content</h1>
+        <p>Could not load content for {params.slug}.</p>
+      </div>
+    );
   }
 
   return (
@@ -110,8 +112,9 @@ export default async function ProofPage({ params }: ProofPageProps) {
           {/* Table of Contents - at the top of content */}
           {headings.length > 0 && (
             <TableOfContents headings={headings} />
-          )}          <div className="proof-content">
-            <MdxRenderer content={mdxContent} />
+          )}          
+          <div className="proof-content">
+            <ProofEntry />
           </div>
           <NotePageClient note={proof} allNotes={proofs} contentOnly={true} />
         </main>

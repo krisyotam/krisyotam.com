@@ -5,8 +5,10 @@ import { PageHeader } from "@/components/page-header";
 import { PageDescription } from "@/components/posts/typography/page-description";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import categoriesData from "@/data/sequences/categories.json";
 
-/* default page-level metadata for the header */
+/* Page-level metadata for the header */
 const defaultSequencesPageData = {
   title: "Sequences",
   subtitle: "Structured Learning Paths",
@@ -32,11 +34,13 @@ interface Sequence {
   status: string;
   confidence: string;
   importance: number;
+  category?: string;
   posts: SequencePost[];
 }
 
 interface SequencesClientPageProps {
   initialCategory?: string;
+  categoryName?: string;
 }
 
 async function fetchSequences(): Promise<Sequence[]> {
@@ -75,9 +79,10 @@ async function fetchTags(): Promise<any[]> {
   }
 }
 
-export default function SequencesClientPage({ initialCategory = "all" }: SequencesClientPageProps) {
+export default function SequencesClientPage({ initialCategory = "all", categoryName }: SequencesClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeSequence, setActiveSequence] = useState(initialCategory);
+  const [activeCategory, setActiveCategory] = useState<string | undefined>(initialCategory);
+  const [categoryDisplayName, setCategoryDisplayName] = useState<string | undefined>(categoryName);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [sequences, setSequences] = useState<Sequence[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
@@ -85,25 +90,42 @@ export default function SequencesClientPage({ initialCategory = "all" }: Sequenc
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  // Update activeSequence when initialCategory changes
+  // Update activeCategory when props change
   useEffect(() => {
-    setActiveSequence(initialCategory);
-  }, [initialCategory]);
+    setActiveCategory(initialCategory);
+    setCategoryDisplayName(categoryName);
+  }, [initialCategory, categoryName]);
 
-  // Get the current sequence if we're on a specific sequence page
-  const currentSequence = sequences.find(seq => seq.slug === activeSequence);
-
-  // Get header data - use sequence data if viewing a specific sequence
+  // Get header data based on category
   const getHeaderData = () => {
-    if (currentSequence) {
+    if (activeCategory !== "all" && categoryDisplayName) {
+      // Find category data from categories.json
+      const categorySlug = slugifyCategory(categoryDisplayName);
+      const categoryData = categoriesData.categories.find(cat => 
+        cat.slug === categorySlug || cat.title === categoryDisplayName
+      );
+      
+      if (categoryData) {
+        return {
+          title: categoryData.title,
+          subtitle: "Sequence Category",
+          date: categoryData.date,
+          preview: categoryData.preview,
+          status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Planned",
+          confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
+          importance: categoryData.importance
+        };
+      }
+      
+      // Fallback if category not found in data
       return {
-        title: currentSequence.title,
-        subtitle: "Sequence",
-        date: currentSequence.date,
-        preview: currentSequence.preview,
-        status: currentSequence.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Planned",
-        confidence: currentSequence.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-        importance: currentSequence.importance
+        title: categoryDisplayName,
+        subtitle: "Sequence Category",
+        date: new Date().toISOString(),
+        preview: `Sequences in the ${categoryDisplayName} category`,
+        status: "In Progress" as const,
+        confidence: "certain" as const,
+        importance: 8
       };
     }
     
@@ -134,16 +156,12 @@ export default function SequencesClientPage({ initialCategory = "all" }: Sequenc
     loadData();
   }, []);
 
-  // Create sequence options for dropdown
-  const sequenceOptions: SelectOption[] = [
-    { value: "all", label: "All Sequences" },
-    ...sequences.map(sequence => ({
-      value: sequence.slug,
-      label: sequence.title
-    }))
-  ];
+  // Helper function to slugify category
+  function slugifyCategory(category: string) {
+    return category.toLowerCase().replace(/\s+/g, "-");
+  }
 
-  // Filter sequences based on search query and active sequence
+  // Filter sequences based on search query and category
   const filteredSequences = sequences.filter((sequence) => {
     const q = searchQuery.toLowerCase();
     const matchesSearch =
@@ -151,46 +169,15 @@ export default function SequencesClientPage({ initialCategory = "all" }: Sequenc
       sequence.title.toLowerCase().includes(q) ||
       sequence.preview.toLowerCase().includes(q);
 
-    const matchesSequence = activeSequence === "all" || sequence.slug === activeSequence;
-    return matchesSearch && matchesSequence;
+    // Check if matches category
+    const matchesCategory = 
+      activeCategory === "all" || 
+      (sequence.category && sequence.category === categoryDisplayName);
+    
+    return matchesSearch && matchesCategory;
   }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  function handleSequenceChange(selectedValue: string) {
-    if (selectedValue === "all") {
-      router.push("/sequences");
-    } else {
-      router.push(`/sequences/${selectedValue}`);
-    }
-  }
 
-  // Component to show posts within a sequence
-  const PostsListView = () => {
-    if (!currentSequence) return null;
-    
-    const sortedPosts = [...currentSequence.posts].sort((a, b) => a.order - b.order);
-
-    return (
-      <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
-        <thead>
-          <tr className="border-b border-border bg-muted/50 text-foreground">
-            <th className="py-2 text-left font-medium px-3">Order</th>
-            <th className="py-2 text-left font-medium px-3">Post</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedPosts.map((post, index) => (
-            <tr
-              key={post.slug}
-              className={`border-b border-border hover:bg-secondary/50 transition-colors ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
-            >
-              <td className="py-2 px-3 font-medium">{post.order}</td>
-              <td className="py-2 px-3">{post.slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  };
 
   const GridView = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -221,7 +208,20 @@ export default function SequencesClientPage({ initialCategory = "all" }: Sequenc
             
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>{sequence.posts.length} posts</span>
+              <span className="flex items-center gap-2">
+                <span>{sequence.posts.length} posts</span>
+                {sequence.category && (
+                  <>
+                    <span className="text-muted-foreground">•</span>
+                    <Link 
+                      href={`/sequences/category/${slugifyCategory(sequence.category)}`}
+                      className="hover:text-foreground"
+                    >
+                      {sequence.category}
+                    </Link>
+                  </>
+                )}
+              </span>
               <span>{new Date(sequence.date).getFullYear()}</span>
             </div>
           </div>
@@ -235,6 +235,7 @@ export default function SequencesClientPage({ initialCategory = "all" }: Sequenc
       <thead>
         <tr className="border-b border-border bg-muted/50 text-foreground">
           <th className="py-2 text-left font-medium px-3">Title</th>
+          <th className="py-2 text-left font-medium px-3">Category</th>
           <th className="py-2 text-left font-medium px-3">Posts</th>
           <th className="py-2 text-left font-medium px-3">Year</th>
         </tr>
@@ -246,6 +247,16 @@ export default function SequencesClientPage({ initialCategory = "all" }: Sequenc
             className={`border-b border-border hover:bg-secondary/50 transition-colors ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
           >
             <td className="py-2 px-3 font-medium">{sequence.title}</td>
+            <td className="py-2 px-3">
+              {sequence.category && (
+                <Link 
+                  href={`/sequences/category/${slugifyCategory(sequence.category)}`}
+                  className="hover:text-blue-500"
+                >
+                  {sequence.category}
+                </Link>
+              )}
+            </td>
             <td className="py-2 px-3">{sequence.posts.length}</td>
             <td className="py-2 px-3">{new Date(sequence.date).getFullYear()}</td>
           </tr>
@@ -278,8 +289,8 @@ export default function SequencesClientPage({ initialCategory = "all" }: Sequenc
       <div className="sequences-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
         <PageHeader {...headerData} />
 
-        {/* Search bar - only show if viewing all sequences */}
-        {activeSequence === "all" && (
+        {/* Search bar - only show if viewing all categories */}
+        {activeCategory === "all" && (
           <div className="mb-4">
             <div className="relative">
               <input 
@@ -295,69 +306,86 @@ export default function SequencesClientPage({ initialCategory = "all" }: Sequenc
 
         {/* Filters and View Toggle */}
         <div className="mb-6 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap">
+            {/* Categories dropdown */}
             <div className="flex items-center gap-2 whitespace-nowrap">
-              <label htmlFor="sequence-filter" className="text-sm text-muted-foreground">Filter by sequence:</label>
+              <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
               <CustomSelect
-                value={activeSequence}
-                onValueChange={handleSequenceChange}
-                options={sequenceOptions}
-                className="text-sm min-w-[140px]"
+                value={activeCategory || "all"}
+                onValueChange={(value) => {
+                  if (value === "all") {
+                    router.push("/sequences");
+                  } else {
+                    // We need to slugify the category for the URL
+                    const categorySlug = slugifyCategory(value);
+                    router.push(`/sequences/category/${categorySlug}`);
+                  }
+                }}
+                options={[
+                  { value: "all", label: "All Categories" },
+                  ...categoriesData.categories
+                    .sort((a, b) => a.title.localeCompare(b.title))
+                    .map(category => ({
+                      value: category.title,
+                      label: category.title
+                    }))
+                ]}
+                className="text-sm min-w-[200px]"
               />
             </div>
           </div>
 
-          {/* View Mode Toggle - only show when viewing all sequences */}
-          {activeSequence === "all" && (
-            <div className="flex items-center gap-1 border border-border rounded-none overflow-hidden">
-              <button
-                onClick={() => setViewMode("grid")}
-                className={`px-3 py-1 text-xs transition-colors ${
-                  viewMode === "grid" 
-                    ? "bg-foreground text-background" 
-                    : "bg-background text-foreground hover:bg-secondary/50"
-                }`}
-              >
-                Grid
-              </button>
-              <button
-                onClick={() => setViewMode("list")}
-                className={`px-3 py-1 text-xs transition-colors ${
-                  viewMode === "list" 
-                    ? "bg-foreground text-background" 
-                    : "bg-background text-foreground hover:bg-secondary/50"
-                }`}
-              >
-                List
-              </button>
-            </div>
-          )}
+          {/* View Mode Toggle - always show */}
+          <div className="flex items-center gap-1 border border-border rounded-none overflow-hidden">
+            <button
+              onClick={() => setViewMode("grid")}
+              className={`px-3 py-1 text-xs transition-colors ${
+                viewMode === "grid" 
+                  ? "bg-foreground text-background" 
+                  : "bg-background text-foreground hover:bg-secondary/50"
+              }`}
+            >
+              Grid
+            </button>
+            <button
+              onClick={() => setViewMode("list")}
+              className={`px-3 py-1 text-xs transition-colors ${
+                viewMode === "list" 
+                  ? "bg-foreground text-background" 
+                  : "bg-background text-foreground hover:bg-secondary/50"
+              }`}
+            >
+              List
+            </button>
+          </div>
         </div>
 
-        {/* Content based on view mode and active sequence */}
-        {activeSequence === "all" ? (
-          // Show sequences grid/list view
-          viewMode === "grid" ? <GridView /> : <ListView />
-        ) : (
-          // Show posts in the selected sequence
-          <PostsListView />
+        {/* Content based on view mode */}
+        {viewMode === "grid" ? <GridView /> : <ListView />}
+
+        {filteredSequences.length === 0 && !loading && (
+          <div className="text-muted-foreground text-sm mt-6 text-center">
+            {activeCategory !== "all" ? 
+              `No sequences found in the ${categoryDisplayName} category.` :
+              "No sequences found matching your criteria."
+            }
+          </div>
         )}
 
-        {activeSequence === "all" && filteredSequences.length === 0 && !loading && (
-          <div className="text-muted-foreground text-sm mt-6 text-center">No sequences found matching your criteria.</div>
-        )}
-
-        {activeSequence !== "all" && currentSequence && currentSequence.posts.length === 0 && !loading && (
-          <div className="text-muted-foreground text-sm mt-6 text-center">No posts found in this sequence.</div>
-        )}
+        {/* Navigation space preserved for consistency */}
+        <div className="mb-6 mt-6"></div>
 
         {/* PageDescription component */}
         <PageDescription
-          title={activeSequence === "all" ? "About Sequences" : `About ${currentSequence?.title || "This Sequence"}`}
+          title={
+            activeCategory !== "all"
+              ? `About ${categoryDisplayName} Sequences` 
+              : "About Sequences"
+          }
           description={
-            activeSequence === "all" 
-              ? "Sequences are structured collections of posts designed to build understanding progressively. Each sequence covers a specific topic in depth, with posts ordered to maximize learning. Browse by grid or list view to find sequences that interest you."
-              : currentSequence?.preview || "This sequence contains a curated collection of posts on a specific topic."
+            activeCategory !== "all"
+              ? `This page shows all sequences in the ${categoryDisplayName} category. Each sequence is a structured collection of posts designed to build understanding progressively.`
+              : "Sequences are structured collections of posts designed to build understanding progressively. Each sequence covers a specific topic in depth, with posts ordered to maximize learning. Browse by grid or list view to find sequences that interest you."
           }
         />
       </div>

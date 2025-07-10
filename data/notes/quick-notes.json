@@ -29,6 +29,16 @@
     "confidence": "certain",
     "importance": 6,
     "preview": "Some anomalies/questions which are not necessarily important, but do puzzle me or where I find existing explanations to be unsatisfying."
+  },  {
+    "title": "The Crooked Man",
+    "date": "2025-07-09",
+    "slug": "nursery-rhymes/the-crooked-man",
+    "tags": ["Nursery Rhymes", "Verse", "Traditional", "English Folklore"],
+    "category": "Nursery Rhymes",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 3,
+    "preview": "Traditional nursery rhyme about a crooked man who walks a crooked mile and lives in a crooked house."
   },
   {
     "title": "Research Ideas",
@@ -892,6 +902,59 @@
   "confidence": "certain",
   "importance": 0,
   "preview": "how I avoid deprecated urls with magic urls, which automatically redirect to the latest version of a page"
-}
-
+},  {
+    "title": "Jack and Jill",
+    "date": "2025-07-09",
+    "slug": "jack-and-jill",
+    "tags": ["Nursery Rhymes", "Children", "Traditional", "Verse"],
+    "category": "Nursery Rhymes",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 3,
+    "preview": "Classic nursery rhyme about two children who went up a hill to fetch water and experienced a mishap."
+  },
+  {
+    "title": "London Bridge",
+    "date": "2025-07-09",
+    "slug": "london-bridge",
+    "tags": ["Nursery Rhymes", "Traditional", "Verse", "English Folklore"],
+    "category": "Nursery Rhymes",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 3,
+    "preview": "Traditional English nursery rhyme and singing game about the falling and rebuilding of London Bridge."
+  },
+  {
+    "title": "Monday's Child",
+    "date": "2025-07-09",
+    "slug": "mondays-child",
+    "tags": ["Nursery Rhymes", "Fortune-Telling", "Verse", "Traditional"],
+    "category": "Nursery Rhymes",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 3,
+    "preview": "Traditional fortune-telling nursery rhyme that predicts a child's character based on their day of birth."
+  },
+  {
+    "title": "Solomon Grundy",
+    "date": "2025-07-09",
+    "slug": "solomon-grundy",
+    "tags": ["Nursery Rhymes", "Verse", "Traditional", "Life Cycle"],
+    "category": "Nursery Rhymes",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 3,
+    "preview": "Nursery rhyme that traces the brief life of Solomon Grundy from birth to death within a single week."
+  },
+  {
+    "title": "The Crooked Man",
+    "date": "2025-07-09",
+    "slug": "the-crooked-man",
+    "tags": ["Nursery Rhymes", "Verse", "Traditional", "English Folklore"],
+    "category": "Nursery Rhymes",
+    "status": "Finished",
+    "confidence": "certain",
+    "importance": 3,
+    "preview": "Traditional nursery rhyme about a crooked man who walks a crooked mile and lives in a crooked house."
+  }
 ]

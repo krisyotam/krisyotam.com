@@ -1823,6 +1823,19 @@
       "confidence": "certain",
       "importance": 9,
       "state": "active"
+    },
+    {
+      "title": "Chinese Classics & Poetry — Vivien's Recommendations",
+      "preview": "I finally have time to dive into the deep lit world my friend Vivien introduced me to. Below is a complete tabled overview of the Chinese classics and poetry she recommended, complete with her thoughts and why they matter.",
+      "date": "2024-12-10",
+      "tags": ["Reading", "Literature", "Poetry", "Chinese"],
+      "category": "til",
+      "slug": "12-10-2024",
+      "cover_image": "",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 9,
+      "state": "active"
     }
   ]
 }

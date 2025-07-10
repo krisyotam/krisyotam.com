@@ -18,9 +18,33 @@ const components = {
   code: (props: any) => (
     <code className="bg-gray-100 rounded px-1 py-0.5" {...props} />
   ),
-  pre: (props: any) => (
-    <pre className="bg-gray-100 rounded p-4 overflow-x-auto" {...props} />
-  ),
+  pre: (props: any) => {
+    // Check if this is a code block with language
+    const child = props.children;
+    if (child && typeof child === 'object' && child.props && child.props.className && child.props.className.startsWith('language-')) {
+      // Extract language (e.g., from "language-javascript" to "javascript")
+      let language = child.props.className.replace('language-', '');
+      
+      // Extract filename if present in format ```lang(filename.ext)
+      let filename = null;
+      const filenameMatch = language.match(/^(.+?)\((.+?)\)$/);
+      if (filenameMatch) {
+        language = filenameMatch[1]; // Get the language part
+        filename = filenameMatch[2]; // Get the filename part
+      }
+      
+      // Use the CodeBlock component from UI with same styling as the Box component
+      const { CodeBlock } = require('@/components/ui/code-block');
+      return (
+        <div className="code-block-wrapper">
+          <CodeBlock language={language} filename={filename}>{child}</CodeBlock>
+        </div>
+      );
+    }
+    
+    // Default pre rendering for non-code blocks
+    return <pre className="p-6 rounded-none my-6 bg-muted/50 dark:bg-[hsl(var(--popover))] font-mono text-sm overflow-x-auto" {...props} />;
+  },
 }
 
 export function MDXProviderWrapper({ children }: { children: ReactNode }) {

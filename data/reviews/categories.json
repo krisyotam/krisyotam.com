@@ -91,6 +91,15 @@
 "importance": 8
 },
 {
+"slug": "art-house-cinema",
+"title": "Art House Cinema",
+"preview": "A compilation of my art house cinema reviews",
+"date": "2025-06-06",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8
+},
+{
 "slug": "television",
 "title": "Television Reviews",
 "preview": "A compilation of my series reviews",

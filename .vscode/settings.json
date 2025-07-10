@@ -19,5 +19,11 @@
     },
     "editor.suggest.showWords": false,
     "editor.wordBasedSuggestions": "off"
+  },
+  "typescript.tsserver.web.projectWideIntellisense.enabled": false,
+  "launch": {
+    
+    "configurations": [],
+    "compounds": []
   }
 }

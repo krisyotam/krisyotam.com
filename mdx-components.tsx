@@ -1,4 +1,5 @@
 import type { MDXComponents } from "mdx/types"
+import React from "react"
 import Image, { type ImageProps } from "next/image"
 import * as Typography from "@/components/typography"
 import { Spoiler } from "spoiled"
@@ -104,9 +105,62 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     li: ({ children }) => <Typography.LI>{children}</Typography.LI>,
     code: ({ children }) => <Typography.Code>{children}</Typography.Code>,
     hr: () => <Typography.HR />,
-    table: ({ children }) => <table className="w-full border-collapse my-6">{children}</table>,
-    th: ({ children }) => <th className="border border-border p-2 bg-muted text-left">{children}</th>,
-    td: ({ children }) => <td className="border border-border p-2">{children}</td>,
+    table: ({ children }) => <table className="w-full border-collapse my-6" data-mdx-table="true">{children}</table>,
+    
+    // Handle code blocks with proper styling
+    pre: ({ children, className }) => {
+      // Check if this is a code block with language
+      if (React.isValidElement(children) && 
+          children.props?.className && 
+          children.props.className.startsWith('language-')) {
+        
+        // Extract language from className (e.g., "language-javascript" -> "javascript")
+        let language = children.props.className.replace('language-', '');
+        
+        // Extract filename if present in format ```lang(filename.ext)
+        let filename = null;
+        const filenameMatch = language.match(/^(.+?)\((.+?)\)$/);
+        if (filenameMatch) {
+          language = filenameMatch[1]; // Get the language part
+          filename = filenameMatch[2]; // Get the filename part
+        }
+        
+        // Use CodeBlock for syntax highlighting with wrapper for proper styling
+        return (
+          <div className="code-block-wrapper">
+            <CodeBlock language={language} filename={filename}>{children}</CodeBlock>
+          </div>
+        );
+      }
+      
+      // Default styling for pre that matches Box component
+      return (
+        <pre className="p-6 rounded-none my-6 bg-muted/50 dark:bg-[hsl(var(--popover))] font-mono text-sm overflow-x-auto">
+          {children}
+        </pre>
+      );
+    },
+    // Custom table components with explicit styling to prevent boldness
+    th: ({ children, ...props }) => (
+      <th 
+        className="border border-border p-2 bg-muted text-left" 
+        style={{ fontWeight: 600 }} 
+        data-mdx-th="true" 
+        {...props}
+      >
+        {children}
+      </th>
+    ),
+    td: ({ children, ...props }) => (
+      <td 
+        className="border border-border p-2" 
+        style={{ fontWeight: 'normal !important' }} 
+        data-mdx-td="true" 
+        {...props}
+      >
+        {children}
+      </td>
+    ),
 
     // Custom image component with Next.js Image
     img: (props) => (

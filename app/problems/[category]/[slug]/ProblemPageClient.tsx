@@ -5,6 +5,7 @@ import { Citation } from "@/components/citation";
 import { LiveClock } from "@/components/live-clock";
 import { Footer } from "@/components/footer";
 import type { NoteMeta } from "@/types/note";
+import "@/components/problems-table.css"; // Import special table styles
 
 interface Props {
   note: NoteMeta;
@@ -90,7 +91,7 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
       />
       
       {/* MDX body */}
-      <div className="problem-content">{children}</div>
+      <div className="problem-content" data-problem-tables="true" style={{ "--problem-td-font-weight": "400" } as React.CSSProperties}>{children}</div>
       
       <div className="mt-8">
         <Citation 

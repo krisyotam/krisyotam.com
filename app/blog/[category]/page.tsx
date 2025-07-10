@@ -47,6 +47,35 @@ export async function generateMetadata({ params }: BlogCategoryPageProps): Promi
       title: "Category Not Found",
     };
   }
+  
+  const categoryTitle = categoryPost.category;
+  const url = `https://krisyotam.com/blog/${params.category}`;
+  const description = `Blog posts in the ${categoryTitle} category`;
+  
+  return {
+    title: `${categoryTitle} | Blog | Kris Yotam`,
+    description: description,
+    openGraph: {
+      title: `${categoryTitle} Blog Posts`,
+      description: description,
+      url,
+      type: "website",
+      images: [{
+        url: `https://krisyotam.com/images/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: `${categoryTitle} Blog Posts`
+      }],
+      siteName: "Kris Yotam",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${categoryTitle} Blog Posts`,
+      description: description,
+      images: [`https://krisyotam.com/images/og-image.jpg`],
+      creator: "@krisyotam"
+    }
+  };
 
   return {
     title: `${categoryPost.category} | Blog | Kris Yotam`,

@@ -20,6 +20,8 @@ interface BlogData {
   status: string;
   confidence: string;
   importance: number;
+  preview?: string;
+  cover_image?: string;
 }
 
 interface BlogPageProps {
@@ -39,7 +41,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogPageProps, parent: ResolvingMetadata): Promise<Metadata> {
   const post = blogData.find(p => 
     slugifyCategory(p.category) === params.category && p.slug === params.slug
   );
@@ -50,9 +52,35 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
     };
   }
 
+  // Get cover image URL - prioritize cover_image field
+  const coverUrl = post.cover_image || 
+    `https://picsum.photos/1200/630?text=${encodeURIComponent(post.title)}`
+
+  const url = `https://krisyotam.com/blog/${params.category}/${params.slug}`;
+
   return {
     title: `${post.title} | ${post.category} | Kris Yotam`,
-    description: `Blog Post: ${post.title} in ${post.category} category`,
+    description: post.preview || `Blog Post: ${post.title} in ${post.category} category`,
+    openGraph: {
+      title: post.title,
+      description: post.preview || `Read more on Kris Yotam's blog`,
+      url,
+      type: "article",
+      images: [{
+        url: coverUrl,
+        width: 1200,
+        height: 630,
+        alt: post.title
+      }],
+      siteName: "Kris Yotam",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.preview || `Read more on Kris Yotam's blog`,
+      images: [coverUrl],
+      creator: "@krisyotam"
+    }
   };
 }
 

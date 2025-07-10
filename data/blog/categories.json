@@ -162,6 +162,15 @@
 "status": "Finished",
 "confidence": "certain",
 "importance": 5
+},
+{
+"slug": "reddit",
+"title": "Reddit",
+"preview": "responses to interesting reddit posts, and expansions on my own comments",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
 }
 
 ]

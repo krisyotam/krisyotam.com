@@ -44,6 +44,15 @@
       "status": "Finished",
       "confidence": "certain",
       "importance": 8
+    },
+    {
+      "slug": "excerpts",
+      "title": "Excerpts",
+      "preview": "experiments in form, structure, and style",
+      "date": "2025-06-10",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 8
     }
   ]
 }
