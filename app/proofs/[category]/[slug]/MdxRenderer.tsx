@@ -20,18 +20,8 @@ export default function MdxRenderer({ content }: MdxRendererProps) {
   return (
     <div className="proof-content">
       <MDXRemote 
-        source={content}
+        {...content as any} // Using type assertion to resolve the type issue
         components={components}
-        options={{
-          mdxOptions: {
-            remarkPlugins: [remarkGfm, remarkMath],
-            rehypePlugins: [
-              rehypeKatex,
-              rehypeSlug,
-              [rehypeAutolinkHeadings, { behavior: 'wrap' }]
-            ],
-          },
-        }}
       />
     </div>
   );

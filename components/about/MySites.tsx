@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react"
 import mySitesData from "@/data/my-sites.json"
+import { CustomSelect, SelectOption } from "@/components/ui/custom-select"
 
 interface Site {
   name: string
@@ -19,6 +20,13 @@ export default function MySites() {
     const allCategories = mySitesData.sites.map((site) => site.category)
     return ["All", ...Array.from(new Set(allCategories))] // Changed to Array.from()
   }, [])
+  
+  const categoryOptions: SelectOption[] = useMemo(() => {
+    return categories.map(category => ({
+      value: category,
+      label: category === "All" ? "All Categories" : category
+    }))
+  }, [categories])
 
   const filteredSites = useMemo(() => {
     return mySitesData.sites.filter((site: Site) => {
@@ -37,25 +45,25 @@ export default function MySites() {
 
   return (
     <div className="py-4">
-      <div className="mb-4 flex flex-col sm:flex-row gap-4 w-full">
-        <select
-          className="px-4 py-2 border border-border rounded-md w-full sm:flex-1 focus:outline-none bg-background text-foreground"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          {categories.map((category) => (
-            <option key={category} value={category} className="bg-background text-foreground">
-              {category}
-            </option>
-          ))}
-        </select>
-        <input
-          type="text"
-          placeholder="Search socials..."
-          className="px-4 py-2 border border-border rounded-md w-full sm:flex-1 focus:outline-none bg-background text-foreground placeholder-muted-foreground"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+      <div className="mb-6 flex items-center gap-4">
+        <div className="flex items-center gap-2 whitespace-nowrap">
+          <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
+          <CustomSelect
+            value={selectedCategory}
+            onValueChange={setSelectedCategory}
+            options={categoryOptions}
+            className="text-sm min-w-[140px]"
+          />
+        </div>
+        <div className="relative flex-1">
+          <input 
+            type="text" 
+            placeholder="Search socials..." 
+            className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            value={searchTerm}
+          />
+        </div>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">

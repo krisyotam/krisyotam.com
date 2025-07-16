@@ -53,6 +53,7 @@ export default function SequencesCategoriesClientPage({ categories }: SequencesC
       <CategoriesTable
         categories={filteredCategories.map(category => ({
           ...category,
+          name: category.title, // Add name property that matches the Category interface in categories-table
           href: `/sequences/category/${category.slug}`,
           count: category.count || 0
         }))}

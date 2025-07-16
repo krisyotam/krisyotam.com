@@ -207,6 +207,19 @@
     "confidence": "data-driven",
     "importance": 9,
     "state": "active"
+  },
+  {
+    "title": "Do Learning Styles Reflect Intelligence? Correlation vs. Causation",
+    "preview": "Investigates the relationship between self-reported learning styles and traditional measures of intelligence.",
+    "date": "2025-07-14",
+    "tags": ["Intelligence", "Learning Styles", "Psychometrics", "Education"],
+    "category": "intelligence",
+    "slug": "learning-styles-intelligence",
+    "cover_image": "",
+    "status": "Notes",
+    "confidence": "possible",
+    "importance": 9,
+    "state": "active"
   }
-  ]
+]
 }

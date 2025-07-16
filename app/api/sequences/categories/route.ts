@@ -1,11 +1,14 @@
 import { NextResponse } from 'next/server';
 import sequencesData from '@/data/sequences/sequences.json';
+import { SequencesData } from '@/types/sequences';
 
 export async function GET() {
   try {
+    const data = sequencesData as SequencesData;
+    
     // Extract unique categories from sequences
     const categories = new Set<string>();
-    sequencesData.sequences.forEach(sequence => {
+    data.sequences.forEach(sequence => {
       if (sequence.category) {
         categories.add(sequence.category);
       }
@@ -15,7 +18,7 @@ export async function GET() {
     const formattedCategories = Array.from(categories).map(category => ({
       slug: category.toLowerCase().replace(/\s+/g, "-"),
       title: category,
-      count: sequencesData.sequences.filter(seq => seq.category === category).length
+      count: data.sequences.filter(seq => seq.category === category).length
     }));
     
     return NextResponse.json({ categories: formattedCategories });

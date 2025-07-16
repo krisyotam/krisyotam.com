@@ -51,6 +51,12 @@ function assertServer() {
 // Extract year from date
 export function getPostYear(dateString: string): string {
   try {
+    // Extract the year directly from the YYYY-MM-DD format
+    if (dateString && dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      return dateString.split('-')[0];
+    }
+    
+    // Fallback to parsing with Date
     const date = new Date(dateString)
     return isNaN(date.getTime())
       ? new Date().getFullYear().toString()
@@ -97,7 +103,7 @@ export async function getAllPosts(): Promise<Post[]> {
   const blogPosts = (blogData || []).map(post => ({ ...post, path: 'blog' }))
 
   const sortedPosts = [...essays, ...blogPosts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => b.date.localeCompare(a.date) // Directly compare YYYY-MM-DD strings
   )
 
   if (process.env.NODE_ENV === 'production') {

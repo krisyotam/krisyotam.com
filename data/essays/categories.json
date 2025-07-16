@@ -11,6 +11,16 @@
 "importance": 9
 },
 {
+"slug": "musings",
+"title": "Musings",
+"preview": "Reflections on life, learning, and the human condition, exploring the nature of existence and personal growth.",
+"date": "2025-06-16",
+"show-status": "active",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 9
+},
+{
 "slug": "pedagogy",
 "title": "Pedagogy",
 "preview": "Essays on the theory, trials, and transformative nature of teaching and learning.",

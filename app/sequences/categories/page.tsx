@@ -1,6 +1,7 @@
 import SequencesCategoriesClientPage from "./SequencesCategoriesClientPage";
 import sequencesData from "@/data/sequences/sequences.json";
 import type { Metadata } from "next";
+import { SequencesData } from "@/types/sequences";
 
 export const metadata: Metadata = {
   title: "Sequence Categories",
@@ -12,7 +13,8 @@ export default function SequencesCategoriesPage() {
   const categoryCounts = new Map<string, number>();
   const categoryPreviews = new Map<string, string[]>();
   
-  sequencesData.sequences.forEach(sequence => {
+  const data = sequencesData as SequencesData;
+  data.sequences.forEach(sequence => {
     if (sequence.category) {
       const count = categoryCounts.get(sequence.category) || 0;
       categoryCounts.set(sequence.category, count + 1);

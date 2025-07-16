@@ -92,9 +92,9 @@
 "importance": 10
 },    
 {
-"slug": "film-reviews",
-"title": "Film Reviews",
-"preview": "a compilation of my film reviews",
+"slug": "film",
+"title": "Film",
+"preview": "analyses, and reflections on cinema as an art form",
 "date": "2025-06-01",
 "status": "Finished",
 "confidence": "certain",
@@ -171,6 +171,24 @@
 "status": "Finished",
 "confidence": "certain",
 "importance": 5
+},
+{
+"slug": "biblical-theology",
+"title": "Biblical Theology",
+"preview": "Biblical studies, exegesis, theology, and reflections on the spiritual, historical, and moral dimensions of biblical texts",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
+},
+{
+"slug": "intelligence",
+"title": "Intelligence",
+"preview": "thoughts on intelligence, its nature, measurement, and implications for understanding the mind.",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 10
 }
 
 ]

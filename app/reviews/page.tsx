@@ -9,11 +9,16 @@ export const metadata: Metadata = {
 };
 
 export default function ReviewsPage() {  // Map and sort reviews by date (newest first)
-  const reviews: ReviewMeta[] = reviewsData.map(review => ({
-    ...review,
-    status: review.status as ReviewStatus,
-    confidence: review.confidence as ReviewConfidence
-  })).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const reviews: ReviewMeta[] = reviewsData
+    .map(review => ({
+      ...review,
+      status: review.status as ReviewStatus,
+      confidence: review.confidence as ReviewConfidence,
+      state: (review.state as "active" | "hidden" | undefined) || "active" // Default to "active" if state is not defined
+    }))
+    // Filter to only show reviews with state "active" or undefined state
+    .filter(review => review.state === "active" || review.state === undefined)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <div className="reviews-container">

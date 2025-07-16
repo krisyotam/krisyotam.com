@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { BlogPost } from "./blog-post"
 import { LayoutGrid, Text, BookOpen, Calendar, Hash, Github, BookMarked, Tag, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { CustomSelect, SelectOption } from "@/components/ui/custom-select"
 import { Card, CardContent } from "@/components/ui/card"
 import { HeartButton } from "@/components/heart-button"
 import { PageHeader } from "@/components/page-header"
@@ -27,6 +28,7 @@ import AboutMe from "@/components/about/AboutMe"
 import Profile from "@/components/about/Profile"
 import Personality from "@/components/about/Personality"
 import PersonalityMorals from "@/components/about/PersonalityMorals"
+import Intelligence from "@/components/about/Intelligence"
 import InterestingPeople from "@/components/about/InterestingPeople"
 import OnMyMethod from "@/components/about/OnMyMethod"
 import MyMission from "@/components/about/MyMission"
@@ -691,100 +693,107 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                 onToggle={() => toggleSection(0)}
               />
               <AccordionItem
-                title="Profile"
-                content={<Profile />}
+                title="Socials"
+                content={<MySites />}
                 isOpen={openSections.includes(1)}
                 onToggle={() => toggleSection(1)}
               />
               <AccordionItem
-                title="Personality"
-                content={<Personality />}
+                title="Profile"
+                content={<Profile />}
                 isOpen={openSections.includes(2)}
                 onToggle={() => toggleSection(2)}
               />
               <AccordionItem
-                title="Personality/Morals"
-                content={<PersonalityMorals />}
+                title="Intelligence"
+                content={<Intelligence />}
                 isOpen={openSections.includes(3)}
                 onToggle={() => toggleSection(3)}
               />
               <AccordionItem
-                title="On My Method"
-                content={<OnMyMethod />}
+                title="Personality"
+                content={<Personality />}
                 isOpen={openSections.includes(4)}
                 onToggle={() => toggleSection(4)}
               />
               <AccordionItem
-                title="My Mission"
-                content={<MyMission />}
+                title="Morals"
+                content={<PersonalityMorals />}
                 isOpen={openSections.includes(5)}
                 onToggle={() => toggleSection(5)}
               />
               <AccordionItem
-                title="Certifications"
-                content={<Certifications />}
+                title="On My Method"
+                content={<OnMyMethod />}
                 isOpen={openSections.includes(6)}
                 onToggle={() => toggleSection(6)}
               />
               <AccordionItem
-                title="Core Values"
-                content={<CoreValues />}
+                title="My Mission"
+                content={<MyMission />}
                 isOpen={openSections.includes(7)}
                 onToggle={() => toggleSection(7)}
               />
               <AccordionItem
-                title="Experience"
-                content={<ExperienceComponent />}
+                title="Certifications"
+                content={<Certifications />}
                 isOpen={openSections.includes(8)}
                 onToggle={() => toggleSection(8)}
               />
               <AccordionItem
-                title="Practice"
-                content={<Practice />}
+                title="Core Values"
+                content={<CoreValues />}
                 isOpen={openSections.includes(9)}
                 onToggle={() => toggleSection(9)}
               />
               <AccordionItem
-                title="Core Skills"
-                content={<CoreSkillsComponent />}
+                title="Experience"
+                content={<ExperienceComponent />}
                 isOpen={openSections.includes(10)}
                 onToggle={() => toggleSection(10)}
               />
               <AccordionItem
-                title="Personal Philosophy"
-                content={<PersonalPhilosophy />}
+                title="Practice"
+                content={<Practice />}
                 isOpen={openSections.includes(11)}
                 onToggle={() => toggleSection(11)}
               />
               <AccordionItem
-                title="Areas of Interest"
-                content={<AreasOfInterest />}
+                title="Core Skills"
+                content={<CoreSkillsComponent />}
                 isOpen={openSections.includes(12)}
                 onToggle={() => toggleSection(12)}
               />
               <AccordionItem
-                title="Companies"
-                content={<Companies />}
+                title="Personal Philosophy"
+                content={<PersonalPhilosophy />}
                 isOpen={openSections.includes(13)}
                 onToggle={() => toggleSection(13)}
               />
               <AccordionItem
-                title="Socials"
-                content={<MySites />}
+                title="Areas of Interest"
+                content={<AreasOfInterest />}
                 isOpen={openSections.includes(14)}
                 onToggle={() => toggleSection(14)}
               />
               <AccordionItem
-                title="Other Sites"
-                content={<OtherSites />}
+                title="Companies"
+                content={<Companies />}
                 isOpen={openSections.includes(15)}
                 onToggle={() => toggleSection(15)}
+              />
+
+              <AccordionItem
+                title="Other Sites"
+                content={<OtherSites />}
+                isOpen={openSections.includes(16)}
+                onToggle={() => toggleSection(16)}
               />
               <AccordionItem
                 title="Site Info"
                 content={<SiteInfo />}
-                isOpen={openSections.includes(16)}
-                onToggle={() => toggleSection(16)}
+                isOpen={openSections.includes(17)}
+                onToggle={() => toggleSection(17)}
               />
             </div>
 

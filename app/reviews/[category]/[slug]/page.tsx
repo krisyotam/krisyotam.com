@@ -20,6 +20,7 @@ interface ReviewData {
   preview: string;
   cover_image?: string;
   subtitle?: string;
+  state?: "active" | "hidden";
 }
 
 interface ReviewPageProps {
@@ -32,11 +33,13 @@ function slugifyCategory(category: string) {
 }
 
 export async function generateStaticParams() {
-  // Generate all category/slug combinations
-  return reviewsData.map(review => ({
-    category: slugifyCategory(review.category),
-    slug: review.slug
-  }));
+  // Generate all category/slug combinations, but only for active reviews
+  return reviewsData
+    .filter(review => review.state !== "hidden") // Only include active reviews
+    .map(review => ({
+      category: slugifyCategory(review.category),
+      slug: review.slug
+    }));
 }
 
 export async function generateMetadata({ params }: ReviewPageProps, parent: ResolvingMetadata): Promise<Metadata> {
@@ -93,17 +96,26 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
     notFound();
   }
   
+  // Check if the review is meant to be hidden
+  if (reviewData.state === "hidden") {
+    notFound();
+  }
+  
   const review: ReviewMeta = {
     ...reviewData,
     status: reviewData.status as ReviewStatus,
-    confidence: reviewData.confidence as ReviewConfidence
+    confidence: reviewData.confidence as ReviewConfidence,
+    state: (reviewData.state as "active" | "hidden" | undefined) || "active" // Default to "active" if state is not defined
   };
   
   const reviews: ReviewMeta[] = (reviewsData as ReviewData[]).map(review => ({
     ...review,
     status: review.status as ReviewStatus,
-    confidence: review.confidence as ReviewConfidence
-  }));
+    confidence: review.confidence as ReviewConfidence,
+    state: (review.state as "active" | "hidden" | undefined) || "active" // Default to "active" if state is not defined
+  }))
+  // Filter to only show reviews with state "active" or undefined state
+  .filter(review => review.state === "active" || review.state === undefined);
 
   // Extract headings from the review MDX content
   const headings = await extractHeadingsFromMDX('reviews', params.slug, params.category);

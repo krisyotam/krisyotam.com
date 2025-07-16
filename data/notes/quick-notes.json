@@ -563,20 +563,9 @@
     "preview": "a list of mathematical formulas, concepts, and theorems that are essential"
   },
   {
-    "title": "Internet Archive",
-    "date": "2025-06-10",
-    "slug": "internet-archive",
-    "tags": ["Internet Archive", "Wayback Machine", "Archive.org", "Digital Preservation"],
-    "category": "Internet Archive",
-    "status": "In Progress",
-    "confidence": "certain",
-    "importance": 9,
-    "preview": "an advanced users guide to archive.org, including how to use the Wayback Machine, and search for archived content effectively"
-  },
-  {
     "title": "Indie Web",
     "date": "2025-06-10",
-    "slug": "internet-archive",
+    "slug": "indie-web",
     "tags": ["Internet Archive", "Wayback Machine", "Archive.org", "Digital Preservation"],
     "category": "Internet Archive",
     "status": "In Progress",
@@ -956,5 +945,49 @@
     "confidence": "certain",
     "importance": 3,
     "preview": "Traditional nursery rhyme about a crooked man who walks a crooked mile and lives in a crooked house."
+  },
+  {
+    "title": "Internet Archive",
+    "date": "2025-06-10",
+    "slug": "internet-archive",
+    "tags": ["Internet Archive", "Wayback Machine", "Archive.org", "Digital Preservation"],
+    "category": "Internet Archive",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 9,
+    "preview": "an advanced users guide to archive.org, including how to use the Wayback Machine, and search for archived content effectively"
+  },
+  {
+    "title": "Cambridge Pure Mathematics (Syllabus)",
+    "date": "2025-07-11",
+    "slug": "cambridge-pure-mathematics",
+    "tags": ["Cambridge", "Pure Mathematics", "Syllabus", "Ultralearning"],
+    "category": "ultralearning",
+    "status": "Notes",
+    "confidence": "certain",
+    "importance": 9,
+    "preview": "A comprehensive syllabus for ultralearning pure mathematics, based on Cambridge's curriculum. This includes core topics, recommended textbooks, and resources for self-study."
+  },
+  {
+    "title": "Avant-Garde Cinema Watchlist",
+    "date": "2025-07-12",
+    "slug": "avant-garde-cinema-watchlist",
+    "tags": ["Avant-Garde", "Cinema", "Watchlist"],
+    "category": "Watchlist",
+    "status": "Notes",
+    "confidence": "certain",
+    "importance": 9,
+    "preview": "A curated watchlist of avant-garde films, exploring unconventional narratives and experimental techniques."
+  },
+  {
+    "title": "Film Studies Watchlist",
+    "date": "2025-07-12",
+    "slug": "film-studies-watchlist",
+    "tags": ["Film Studies", "Cinema", "Watchlist"],
+    "category": "Watchlist",
+    "status": "Notes",
+    "confidence": "certain",
+    "importance": 9,
+    "preview": "a thorough watchlist for film studies, including classic and contemporary films that are essential for understanding cinematic history and theory"
   }
 ]

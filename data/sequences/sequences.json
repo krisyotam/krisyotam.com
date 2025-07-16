@@ -260,7 +260,7 @@
 "title": "Catechesis (Milk for Babies)",
 "preview": "A comprehensive study of the basics of the Christian faith, designed for new believers and young children.",
 "date": "2025-07-07",
-"cover-url": "https://i.postimg.cc/pLgLmWSR/epidemics-pandemics.png",
+"cover-url": "https://i.postimg.cc/7Y0ndC7s/biblical-milk.jpg",
 "show-status": "active",
 "status": "Planned",
 "confidence": "likely",
@@ -294,7 +294,41 @@
 "title": "Theologia (Meat for Adults)",
 "preview": "A comprehensive study of the deeper theological concepts of the Christian faith, designed for mature believers.",
 "date": "2025-07-07",
-"cover-url": "https://i.postimg.cc/dVNwpRr5/Chat-GPT-Image-Jul-9-2025-03-23-06-AM-modified.png",
+"cover-url": "https://i.postimg.cc/8zYdCYwJ/biblical-meat.jpg",
+"show-status": "active",
+"status": "Planned",
+"confidence": "likely",
+"importance": 9,
+"category": "Biblical Studies",
+"posts": [
+{ "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
+{ "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
+{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+]
+},
+{
+"slug": "transatlantic-slave-trade",
+"title": "Transatlantic Slave Trade",
+"preview": "A comprehensive study of the transatlantic slave trade, its history, and its impact on society.",
+"date": "2025-07-07",
+"cover-url": "https://i.postimg.cc/26NJbMm1/transatlantic-slave-trade.webp",
+"show-status": "active",
+"status": "Planned",
+"confidence": "likely",
+"importance": 9,
+"category": "Biblical Studies",
+"posts": [
+{ "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
+{ "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
+{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+]
+},
+{
+"slug": "select-essays-of-kris-yotam",
+"title": "Select Essays of Kris Yotam",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"date": "2025-07-15",
+"cover-url": "https://i.postimg.cc/d3Dm5Rqt/select-essays-of-kris-yotam.jpg",
 "show-status": "active",
 "status": "Planned",
 "confidence": "likely",

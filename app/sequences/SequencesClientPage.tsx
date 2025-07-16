@@ -7,6 +7,7 @@ import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import categoriesData from "@/data/sequences/categories.json";
+import { Sequence, SequencePost } from "@/types/sequences";
 
 /* Page-level metadata for the header */
 const defaultSequencesPageData = {
@@ -19,24 +20,7 @@ const defaultSequencesPageData = {
   importance: 8,
 };
 
-interface SequencePost {
-  slug: string;
-  order: number;
-}
-
-interface Sequence {
-  slug: string;
-  title: string;
-  preview: string;
-  date: string;
-  "cover-url": string;
-  "show-status": string;
-  status: string;
-  confidence: string;
-  importance: number;
-  category?: string;
-  posts: SequencePost[];
-}
+// Using imported types from /types/sequences.ts
 
 interface SequencesClientPageProps {
   initialCategory?: string;

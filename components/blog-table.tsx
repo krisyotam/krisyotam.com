@@ -29,17 +29,24 @@ export function BlogTable({ notes, searchQuery, activeCategory }: BlogTableProps
     });
 
     // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    filtered.sort((a, b) => {
+      // Compare dates directly as strings in YYYY-MM-DD format (which sorts correctly)
+      return b.date.localeCompare(a.date);
+    });
     setFilteredNotes(filtered);
   }, [notes, searchQuery, activeCategory]);
 
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
-    const date = new Date(dateString);
+    // Parse the date parts from the string to avoid timezone issues
+    const [year, month, day] = dateString.split('-').map(num => parseInt(num, 10));
+    const date = new Date(year, month - 1, day);
+    
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long", 
-      day: "numeric"
+      day: "numeric",
+      timeZone: 'UTC' // Use UTC to preserve the exact date
     });
   }
 

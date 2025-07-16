@@ -9,7 +9,7 @@
 "confidence": "likely",
 "importance": 6,
 "preview": "A close reading of Edgar Allan Poe's 'Ulalume', exploring its themes, structure, and emotional depth.",
-"cover_image": "https://i.postimg.cc/50BcPg0H/ulalume-banner.jpg"
+"cover_image": "https://i.postimg.cc/wBNsSzw8/ulalume.jpg"
 },
 {
 "title": "The Waste Land, a Close Reading",
@@ -27,13 +27,13 @@
 "title": "Reply to Mephisto",
 "date": "2025-06-23",
 "slug": "reply-to-mephisto",
-"tags": ["Film", "Review", "Dark Comedy", "Winona Ryder", "1980s Cinema", "Cult Classic"],
+"tags": ["Philosophy", "Thought Experiments", "Mephistopheles", "Devil", "Ethics"],
 "category": "Thought Experiments",
 "status": "Finished",
 "confidence": "certain",
 "importance": 5,
 "preview": "the devil you don’t know is only a smoke screen for the devil you do",
-"cover_image": ""
+"cover_image": "https://i.postimg.cc/wjmvBVLD/mephistopheles.jpg"
 },
 {
 "title": "Marie Taglioni, the First to Float",
@@ -46,6 +46,103 @@
 "importance": 5,
 "preview": "A look at Marie Taglioni's groundbreaking role in dance and performance art.",
 "cover_image": "https://i.postimg.cc/13tWgB1G/marie-taglioni-banner.webp"
+},
+{
+"title": "I Learned to Lie by Listening to Clocks (villanelle)",
+"date": "2025-07-11",
+"slug": "i-learned-to-lie-by-listening-to-clocks-villanelle",
+"tags": ["Poetry", "Villanelle", "Time", "Perception", "LLM Poetry"],
+"category": "Verse",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5,
+"preview": "A villanelle exploring the relationship between time and perception.",
+"cover_image": "https://i.postimg.cc/KvwjfHn3/the-persistence-of-memory-1931-1140x867.jpg"
+},
+{
+"title": "Be not overly righteous, nor overly wise (Ecc 7:16-18)",
+"date": "2025-07-12",
+"slug": "be-not-overly-righteous",
+"tags": ["Righteousness", "Ecclesiastes", "Wisdom Literature", "Theology"],
+"category": "Biblical Theology",
+"status": "Notes",
+"confidence": "certain",
+"importance": 5,
+"preview": "a lesson on balance in righteousness and wisdom from solomon",
+"cover_image": ""
+},
+{
+"title": "God is not a tempter of man (James 1:13)",
+"date": "2025-07-12",
+"slug": "god-is-not-a-temptor-of-man",
+"tags": ["Temptation", "James", "Theology", "Biblical Studies"],
+"category": "Biblical Theology",
+"status": "Notes",
+"confidence": "certain",
+"importance": 5,
+"preview": "a lesson on the nature of temptation and God's role in it",
+"cover_image": ""
+},
+{
+"title": "God is not a respector of persons (James 2:1-9)",
+"date": "2025-07-12",
+"slug": "god-is-not-a-respector-of-persons",
+"tags": ["Righteousness", "James", "Theology", "Biblical Studies"],
+"category": "Biblical Theology",
+"status": "Notes",
+"confidence": "certain",
+"importance": 5,
+"preview": "a lesson on the nature of partiality and God's impartiality",
+"cover_image": ""
+},
+{
+"title": "Film Study as Background Noise",
+"date": "2025-07-13",
+"slug": "film-study-as-background-noise",
+"tags": ["Film Studies", "Cinema"],
+"category": "Film",
+"status": "Finished",
+"confidence": "certain",
+"importance": 9,
+"preview": "a thought on studying pre-seen films passively as background noise",
+"cover_image": "https://i.postimg.cc/DzCyjMTk/film-study-as-background-noise.webp"
+},
+{
+"title": "Remarks on Measured Intelligence",
+"date": "2025-07-13",
+"slug": "remarks-on-measured-intelligence",
+"tags": ["Intelligence", "Cognition", "Psychometrics", "IQ", "Cognitive Science"],
+"category": "Intelligence",
+"status": "Notes",
+"confidence": "certain",
+"importance": 9,
+"preview": "a thought on the nature of intelligence and its measurement.",
+"cover_image": "https://i.postimg.cc/PqnhcG39/remarks-on-measured-intelligence.jpg"
+},
+{
+"title": "Dialogue on Timed Cognition",
+"date": "2025-07-13",
+"slug": "dialogue-on-timed-cognition",
+"tags": ["Intelligence", "Cognition", "Psychometrics", "IQ", "Cognitive Science"],
+"category": "Intelligence",
+"status": "Notes",
+"confidence": "certain",
+"importance": 9,
+"preview": "a conversation on the implications of timed cognitive tests and their impact on understanding intelligence",
+"cover_image": ""
+},
+{
+"title": "Against High-Functioning Giftedness",
+"date": "2025-07-13",
+"slug": "against-high-functioning-giftedness",
+"tags": ["Intelligence", "Cognition", "Psychometrics", "IQ", "Cognitive Science"],
+"category": "Intelligence",
+"status": "Notes",
+"confidence": "certain",
+"importance": 9,
+"preview": "a critique of giftedness, and the implications of high-functioning giftedness on society and individuals",
+"cover_image": ""
 }
+
 ]
   

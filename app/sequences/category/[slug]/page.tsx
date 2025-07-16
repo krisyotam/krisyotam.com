@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import sequencesData from "@/data/sequences/sequences.json";
 import categoriesData from "@/data/sequences/categories.json";
+import { SequencesData } from "@/types/sequences";
 
 interface CategoryPageProps {
   params: { slug: string };
@@ -52,7 +53,8 @@ export default function CategoryPage({ params }: CategoryPageProps) {
   }
 
   // Find sequences for this category
-  const categorySequences = sequencesData.sequences.filter(seq => 
+  const data = sequencesData as SequencesData;
+  const categorySequences = data.sequences.filter(seq => 
     seq.category && slugifyCategory(seq.category) === slug
   );
   

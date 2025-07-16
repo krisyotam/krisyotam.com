@@ -9,7 +9,8 @@
 "confidence": "certain",
 "importance": 5,
 "preview": "A review of the 1990 film 'Mermaids' starring Winona Ryder",
-"cover_image": "https://i.postimg.cc/BnTLtrB7/Mermaids.jpg"
+"cover_image": "https://i.postimg.cc/BnTLtrB7/Mermaids.jpg",
+"state": "active"
 },
 {
 "title": "Girl, Interrupted",
@@ -21,7 +22,8 @@
 "confidence": "certain",
 "importance": 5,
 "preview": "A review of the 1999 psychological drama 'Girl, Interrupted' starring Winona Ryder and Angelina Jolie.",
-"cover_image": "https://i.postimg.cc/QxzYC6rv/girl-interrupted.png"
+"cover_image": "https://i.postimg.cc/QxzYC6rv/girl-interrupted.png",
+"state": "active"
 },
 {
 "title": "Heathers",
@@ -33,7 +35,8 @@
 "confidence": "certain",
 "importance": 5,
 "preview": "A review of the 1989 cult classic dark comedy 'Heathers' starring Winona Ryder and Christian Slater.",
-"cover_image": "https://i.postimg.cc/50mktbxm/heathers.jpg"
+"cover_image": "https://i.postimg.cc/50mktbxm/heathers.jpg",
+"state": "active"
 },
 {
 "title": "Wistoria Wand & Sword",
@@ -45,7 +48,8 @@
 "status": "Draft",
 "confidence": "unlikely",
 "importance": 1,
-"cover_image": "https://i.postimg.cc/W4KZq98J/wistoria-wand-and-sword.jpg"
+"cover_image": "https://i.postimg.cc/W4KZq98J/wistoria-wand-and-sword.jpg",
+"state": "active"
 },
 {
 "title": "Neon Genesis Evangelion",
@@ -57,7 +61,8 @@
 "status": "In Progress",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/P5bYzRp2/neon-genesis-evanglion.jpg"
+"cover_image": "https://i.postimg.cc/P5bYzRp2/neon-genesis-evanglion.jpg",
+"state": "active"
 },
 {
 "title": "The Village Booksmith",
@@ -69,7 +74,8 @@
 "status": "In Progress",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/c1fyrr2B/the-village-booksmith.jpg"
+"cover_image": "https://i.postimg.cc/c1fyrr2B/the-village-booksmith.jpg",
+"state": "active"
 },
 {
 "title": "Frugal Bookstore",
@@ -81,7 +87,8 @@
 "status": "In Progress",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/43H2q0TQ/frugal-muse.jpg"
+"cover_image": "https://i.postimg.cc/43H2q0TQ/frugal-muse.jpg",
+"state": "active"
 },
 {
 "title": "Pride and Prejudice",
@@ -93,7 +100,8 @@
 "status": "In Progress",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/ncWxzzZn/pride-and-prejudice-penguin-classics.jpg"
+"cover_image": "https://i.postimg.cc/ncWxzzZn/pride-and-prejudice-penguin-classics.jpg",
+"state": "active"
 },
 {
 "title": "Casablanca",
@@ -105,7 +113,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/XJYkpgQW/casablanca.jpg"
+"cover_image": "https://i.postimg.cc/XJYkpgQW/casablanca.jpg",
+"state": "active"
 },
 {
 "title": "Citizen Kane",
@@ -117,7 +126,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 9,
-"cover_image": "https://i.postimg.cc/pTF8Zb8D/citizen-kane.jpg"
+"cover_image": "https://i.postimg.cc/pTF8Zb8D/citizen-kane.jpg",
+"state": "active"
 },
 {
 "title": "Jeanne Dielman, 23, quai du Commerce, 1080 Bruxelles",
@@ -129,7 +139,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/8CGrngCG/Jeanne-Dielman.png"
+"cover_image": "https://i.postimg.cc/8CGrngCG/Jeanne-Dielman.png",
+"state": "active"
 },
 {
 "title": "Elfen Lied",
@@ -141,7 +152,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://i.postimg.cc/NGrrbVyV/elfen-lied.jpg"
+"cover_image": "https://i.postimg.cc/NGrrbVyV/elfen-lied.jpg",
+"state": "active"
 },
 {
 "title": "Ergo Proxy",
@@ -153,7 +165,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://i.postimg.cc/0NM9nqy5/ergo-proxy.jpg"
+"cover_image": "https://i.postimg.cc/0NM9nqy5/ergo-proxy.jpg",
+"state": "active"
 },
 {
 "title": "Haibane Renmei",
@@ -165,7 +178,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://i.postimg.cc/F1tkMP3t/haibane-renmei.jpg"
+"cover_image": "https://i.postimg.cc/F1tkMP3t/haibane-renmei.jpg",
+"state": "active"
 },
 {
 "title": "Koukaku Kidoutai (Ghost in the Shell)",
@@ -177,7 +191,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/NFy6Vvdw/ghsot-in-the-shell.jpg"
+"cover_image": "https://i.postimg.cc/NFy6Vvdw/ghsot-in-the-shell.jpg",
+"state": "active"
 },
 {
 "title": "Frieren: Beyond Journey's End",
@@ -189,7 +204,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://i.postimg.cc/pV3pxkz2/sousou-no-frieren.jpg"
+"cover_image": "https://i.postimg.cc/pV3pxkz2/sousou-no-frieren.jpg",
+"state": "active"
 },
 {
 "title": "That Time I Got Reincarnated as a Slime",
@@ -201,7 +217,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://i.postimg.cc/63bSnw7s/that-time-i-got-reincarnated-as-a-slime.jpg"
+"cover_image": "https://i.postimg.cc/63bSnw7s/that-time-i-got-reincarnated-as-a-slime.jpg",
+"state": "active"
 },
 {
 "title": "Texhnolyze",
@@ -213,7 +230,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://i.postimg.cc/25srXX1Q/texhnolyze.jpg"
+"cover_image": "https://i.postimg.cc/25srXX1Q/texhnolyze.jpg",
+"state": "active"
 },
 {
 "title": "Aku no Hana (Flowers of Evil)",
@@ -225,7 +243,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://i.postimg.cc/qqJwL9T0/aku-no-hana.png"
+"cover_image": "https://i.postimg.cc/qqJwL9T0/aku-no-hana.png",
+"state": "active"
 },
 {
 "title": "Chi no Wadachi (Blood on the Tracks)",
@@ -237,7 +256,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://i.postimg.cc/05wrsw0H/chi-no-wadachi.jpg"
+"cover_image": "https://i.postimg.cc/05wrsw0H/chi-no-wadachi.jpg",
+"state": "active"
 },
 {
 "title": "Koukaku Kidoutai (Ghost in the Shell) (Manga)",
@@ -249,7 +269,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/HxCBJrvr/ghost-in-the-shell.jpg"
+"cover_image": "https://i.postimg.cc/HxCBJrvr/ghost-in-the-shell.jpg",
+"state": "active"
 },
 {
 "title": "Tomie",
@@ -261,7 +282,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://i.postimg.cc/qMGJJXhQ/tomie.jpg"
+"cover_image": "https://i.postimg.cc/qMGJJXhQ/tomie.jpg",
+"state": "active"
 },
 {
 "title": "Bridgerton",
@@ -273,7 +295,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://i.postimg.cc/k5RPbx40/bridgerton.jpg"
+"cover_image": "https://i.postimg.cc/k5RPbx40/bridgerton.jpg",
+"state": "active"
 },
 {
 "title": "Charlie's Angels",
@@ -285,7 +308,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://i.postimg.cc/q7tMLmsr/charlies-angels.jpg"
+"cover_image": "https://i.postimg.cc/q7tMLmsr/charlies-angels.jpg",
+"state": "active"
 },
 {
 "title": "The Vampire Diaries",
@@ -297,7 +321,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://i.postimg.cc/W4nvw2jV/the-vampire-diaries.jpg"
+"cover_image": "https://i.postimg.cc/W4nvw2jV/the-vampire-diaries.jpg",
+"state": "active"
 },
 {
 "title": "Gossip Girl",
@@ -309,7 +334,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://i.postimg.cc/sg5y1YNv/gossip-girl.jpg"
+"cover_image": "https://i.postimg.cc/sg5y1YNv/gossip-girl.jpg",
+"state": "active"
 },
 {
 "title": "Gilmore Girls",
@@ -321,7 +347,8 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://i.postimg.cc/Y9WxwS9K/gilmore-girls.jpg"
+"cover_image": "https://i.postimg.cc/Y9WxwS9K/gilmore-girls.jpg",
+"state": "active"
 },
 {
 "title": "Legend of the Galactic Heroes",
@@ -333,7 +360,21 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://i.postimg.cc/Hxnf4mML/logh.jpg"
+"cover_image": "https://i.postimg.cc/Hxnf4mML/logh.jpg",
+"state": "active"
+},
+{
+"title": "Breakfast at Tiffany's",
+"preview": "A review of the classic romantic comedy film about a young woman in New York City who becomes involved with a struggling writer.",
+"date": "2025-07-12",
+"tags": ["Film", "Review", "Romantic Comedy", "Classic"],
+"category": "film",
+"slug": "breakfast-at-tiffanys",
+"status": "Draft",
+"confidence": "likely",
+"importance": 6,
+"cover_image": "https://i.postimg.cc/zBtt01Vm/breakfast-at-tiffanys.jpg",
+"state": "active"
 }
 
 ]

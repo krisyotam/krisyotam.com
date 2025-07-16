@@ -77,9 +77,11 @@ export async function generateMetadata({ params }: BlogCategoryPageProps): Promi
     }
   };
 
+  // Use safe navigation by checking if categoryPost exists before accessing properties
+  const category = categoryPost?.category || 'Blog';
   return {
-    title: `${categoryPost.category} | Blog | Kris Yotam`,
-    description: `Blog posts in the ${categoryPost.category} category`,
+    title: `${category} | Blog | Kris Yotam`,
+    description: `Blog posts in the ${category} category`,
   };
 }
 

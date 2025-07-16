@@ -14,6 +14,7 @@ export interface ReviewMeta {
   confidence?: ReviewConfidence;
   importance?: number;
   cover_image?: string;
+  state?: "active" | "hidden";
 }
 
 export interface ReviewCategory {

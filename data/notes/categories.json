@@ -262,7 +262,7 @@
     "importance": 0
   },
   {
-    "slug": "internet-archiving",
+    "slug": "internet-archive",
     "title": "Internet Archiving",
     "preview": "Notes on web archiving, preservation, search methods and related tools",
     "date": "2025-06-30",
@@ -364,6 +364,24 @@
       "slug": "nursery-rhymes",
       "title": "Nursery Rhymes",
       "preview": "full-text of classic nursery rhymes.",
+      "date": "2025-07-03",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "ultralearning",
+      "title": "Ultralearning",
+      "preview": "A collection of resources and notes on immersive self-directed learning",
+      "date": "2025-07-03",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "watchlist",
+      "title": "Watchlist",
+      "preview": "several watchlists for films, series, and documentaries",
       "date": "2025-07-03",
       "status": "Finished",
       "confidence": "certain",

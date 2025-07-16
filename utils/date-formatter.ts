@@ -4,7 +4,11 @@
  * @returns Formatted date string
  */
 export function formatDate(dateString: string): string {
-  const date = new Date(dateString)
+  // Parse the date parts from the string to avoid timezone issues
+  const [year, month, day] = dateString.split('-').map(num => parseInt(num, 10))
+  
+  // Create date with explicit year, month (0-indexed), and day
+  const date = new Date(year, month - 1, day)
   
   // Check if the date is valid
   if (isNaN(date.getTime())) {
@@ -15,7 +19,8 @@ export function formatDate(dateString: string): string {
   return date.toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
-    year: 'numeric'
+    year: 'numeric',
+    timeZone: 'UTC' // Use UTC to preserve the exact date
   })
 }
 
@@ -25,7 +30,11 @@ export function formatDate(dateString: string): string {
  * @returns Formatted date string (e.g., "Apr 30, 2025")
  */
 export function formatDateCompact(dateString: string): string {
-  const date = new Date(dateString)
+  // Parse the date parts from the string to avoid timezone issues
+  const [year, month, day] = dateString.split('-').map(num => parseInt(num, 10))
+  
+  // Create date with explicit year, month (0-indexed), and day
+  const date = new Date(year, month - 1, day)
   
   // Check if the date is valid
   if (isNaN(date.getTime())) {
@@ -35,7 +44,8 @@ export function formatDateCompact(dateString: string): string {
   return date.toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
-    year: 'numeric'
+    year: 'numeric',
+    timeZone: 'UTC' // Use UTC to preserve the exact date
   })
 }
 

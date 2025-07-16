@@ -73,7 +73,7 @@ export const CodeBlock = ({
         if (Array.isArray(childProps.children)) {
           // Combine all string children
           const stringParts = childProps.children
-            .filter(child => typeof child === 'string')
+            .filter((child: any) => typeof child === 'string')
             .join('');
           
           if (stringParts) {
@@ -82,8 +82,9 @@ export const CodeBlock = ({
           
           // Look for nested structure
           for (const child of childProps.children) {
-            if (React.isValidElement(child) && typeof child.props?.children === 'string') {
-              return child.props.children;
+            if (React.isValidElement(child) && child.props && 
+                typeof (child.props as { children?: string }).children === 'string') {
+              return (child.props as { children: string }).children;
             }
           }
         }
@@ -204,11 +205,6 @@ export const CodeBlock = ({
             className: "syntax-line"
           })}
           PreTag="div"
-          codeTagProps={{
-            style: {
-              whiteSpace: "pre",
-            },
-          }}
           className="react-syntax-highlighter-line-number"
           lineNumberContainerStyle={{
             float: 'left',
