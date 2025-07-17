@@ -34,6 +34,41 @@
       "link": "https://app.thestorygraph.com/profile/krisyotam",
       "category": "Literature",
       "tags": ["books", "reading", "tracking"]
+    },
+    {
+      "name": "substack",
+      "purpose": "exclusive essays and writings, and updates on this site",
+      "link": "https://substack.com/@krisyotam",
+      "category": "Literature",
+      "tags": ["writing", "essays", "updates"]
+    },
+    {
+      "name": "pinterest",
+      "purpose": "avant-garde art, lists, and other rare interesting things I find",
+      "link": "https://www.pinterest.com/krisyotam/",
+      "category": "Inspiration",
+      "tags": ["art", "inspiration", "curation"]
+    },
+    {
+      "name": "reddit",
+      "purpose": "discussions, updates, and social interactions",
+      "link": "https://www.reddit.com/user/krisyotam/",
+      "category": "Literature",
+      "tags": ["discussion", "updates", "social"]
+    },
+    {
+      "name": "quora",
+      "purpose": "answers to questions and knowledge on various topics",
+      "link": "https://www.quora.com/profile/Kris-Yotam",
+      "category": "Literature",
+      "tags": ["writing", "essays", "updates"]
+    },
+    {
+      "name": "medium",
+      "purpose": "occassional literature reviews",
+      "link": "https://www.medium.com/@krisyotam",
+      "category": "Literature",
+      "tags": ["writing", "reviews", "essays"]
     }
   ]
 }
