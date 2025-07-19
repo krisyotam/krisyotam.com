@@ -17,12 +17,13 @@ export const fetchCache = 'force-cache'
 
 export default async function HomeWrapper({ initialView = 'list' }: HomeWrapperProps) {
   try {
+    // Get all active posts from both essays.json and feed.json
     const posts = await getActivePosts()
-
+    
     if (!posts || !Array.isArray(posts) || posts.length === 0) {
       throw new Error("No active posts found.")
     }
-
+    
     const randomQuote = getRandomQuote()
 
     return (

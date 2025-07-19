@@ -48,6 +48,16 @@
 "status": "Finished",
 "confidence": "certain",
 "importance": 9
+},
+{
+"slug": "sexual-immorality",
+"title": "Sexual Immorality",
+"preview": "ethical, psychological, and societal dimensions of sexual behavior.",
+"date": "2025-07-18",
+"show-status": "active",
+"status": "In Progress",
+"confidence": "speculative",
+"importance": 9
 }
 ]
 }

@@ -49,11 +49,18 @@ import RecommendedContent from "@/components/about/RecommendedContent"
 import { FeaturedPost } from "@/components/featured-post"
 import { Post } from "@/utils/posts"
 
-// URL generation helper - copied from working essays-table.tsx
+// URL generation helper - based on correct route patterns for both content types
 function getPostUrl(post: Post): string {
-  // Convert category to slug-friendly format (replace spaces with hyphens, lowercase)
-  const categorySlug = post.category.toLowerCase().replace(/\s+/g, '-');
-  return `essays/${categorySlug}/${post.slug}`;
+  // Check if this is a blog post or an essay based on the path property
+  if (post.path === 'blog') {
+    // Blog posts are accessed by /blog/category-slug/slug
+    const categorySlug = post.category.toLowerCase().replace(/\s+/g, '-');
+    return `blog/${categorySlug}/${encodeURIComponent(post.slug)}`;
+  } else {
+    // Essays are accessed by /essays/category-slug/slug
+    const categorySlug = post.category.toLowerCase().replace(/\s+/g, '-');
+    return `essays/${categorySlug}/${post.slug}`;
+  }
 }
 
 // Type definitions for props
@@ -120,15 +127,15 @@ function BlogPostCard({ post }: { post: Post }) {
     day: "numeric",
   })
 
-  // Generate correct URL - using same pattern as working essays-table.tsx
+  // Generate correct URL based on whether it's an essay or blog post
   const slugPath = getPostUrl(post);
-
-  // Debug logging
-  console.log('BlogPostCard - Linking to:', slugPath);
-
+  
   // Get first 3 tags if there are many
   const displayTags = post.tags.slice(0, 3)
   const hasMoreTags = post.tags.length > 3
+  
+  // Determine content type for display (Essay or Blog Post)
+  const contentType = post.path === 'blog' ? 'Blog Post' : 'Essay'
 
   return (
     <Card className="p-4 bg-card border border-border hover:bg-accent/50 transition-colors">
@@ -136,12 +143,17 @@ function BlogPostCard({ post }: { post: Post }) {
         <h3 className="font-medium mb-1 line-clamp-1">{post.title}</h3>
         <p className="text-sm text-muted-foreground mb-2 line-clamp-2">{post.preview}</p>
 
-        {/* Date and Status row */}
+        {/* Date, Status, and Content Type row */}
         <div className="flex justify-between items-center mb-2">
           <span className="text-xs text-muted-foreground">{formattedDate}</span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground">
-            {post.status || "Draft"}
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground">
+              {post.status || "Draft"}
+            </span>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-primary/20 text-primary">
+              {contentType}
+            </span>
+          </div>
         </div>
 
         {/* Category */}
@@ -560,7 +572,7 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                         slug={slugPath}
                         type={"tsx"}
                         title={post.title}
-                        subtitle={post.subtitle}
+                        subtitle={`${post.path === 'blog' ? 'Blog Post' : 'Essay'}: ${post.subtitle || post.category}`}
                         date={formatDate(post.date)}
                         excerpt={post.preview}
                       />

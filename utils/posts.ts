@@ -115,8 +115,17 @@ export async function getAllPosts(): Promise<Post[]> {
 
 export async function getActivePosts(): Promise<Post[]> {
   const all = await getAllPosts()
-  // Include posts that either have state === "active" or don't have a state property (default to active)
-  return all.filter((post) => post.state === "active" || !post.state)
+  
+  // For essays: include those with state === "active"
+  // For blog posts: include all since they don't have state property (treated as active)
+  return all.filter((post) => {
+    if (post.path === 'essays') {
+      return post.state === "active";
+    } else {
+      // Blog posts - include all by default as they don't have state property
+      return true;
+    }
+  })
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
