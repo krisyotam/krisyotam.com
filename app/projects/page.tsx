@@ -18,11 +18,6 @@ const projectsPageData = {
   importance: 9,
 }
 
-import { staticMetadata } from "@/lib/staticMetadata"
-import type { Metadata } from "next"
-
-export const metadata: Metadata = staticMetadata.projects
-
 export const dynamic = "force-dynamic"
 
 export default function ProjectsPage() {
