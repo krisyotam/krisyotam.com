@@ -4,13 +4,6 @@ import { redirect } from "next/navigation"
 import { staticMetadata } from "@/lib/staticMetadata"
 
 export const metadata: Metadata = staticMetadata.lectureNotes
-  twitter: {
-    card: "summary_large_image",
-    title: "Lecture Notes Collection | Kris Yotam",
-    description: "Explore a diverse collection of academic lecture notes and course materials by Kris Yotam.",
-    images: ["https://i.postimg.cc/jSDMT1Sn/research.png"],
-  },
-}
 
 export default function LectureNotesPage({
   searchParams

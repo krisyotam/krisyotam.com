@@ -1,8 +1,10 @@
 import { FilmTabs } from "@/components/film/film-tabs"
 import { FilmListsSection } from "@/components/film/film-lists-section"
 import { PageHeader } from "@/components/page-header"
+import { Metadata } from "next"
+import { staticMetadata } from "@/lib/staticMetadata"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Film Lists | Kris Yotam",
   description: "My custom movie and TV show lists from Trakt.tv",
 }

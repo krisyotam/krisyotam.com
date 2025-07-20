@@ -4,13 +4,6 @@ import { redirect } from "next/navigation"
 import { staticMetadata } from "@/lib/staticMetadata"
 
 export const metadata: Metadata = staticMetadata.reports
-  twitter: {
-    card: "summary_large_image",
-    title: "Reports Collection | Kris Yotam",
-    description: "Explore a diverse collection of formal reports by Kris Yotam.",
-    images: ["https://i.postimg.cc/jSDMT1Sn/research.png"],
-  },
-}
 
 export default function ReportsPage({
   searchParams
