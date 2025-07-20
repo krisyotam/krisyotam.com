@@ -1,6 +1,10 @@
 // app/tag/page.tsx
 import Link from "next/link";
 import { getTags, getAllTagData } from "@/utils/tags";
+import { staticMetadata } from "@/lib/staticMetadata";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = staticMetadata.tag;
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;

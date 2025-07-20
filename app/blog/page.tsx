@@ -4,35 +4,9 @@ import type { Metadata } from "next";
 import type { BlogMeta } from "@/types/blog";
 import "./blog.css";
 import "./blog-grid.css";
-import { siteConfig } from "@/config/site";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "Blog Posts",
-  description: "Short-form reflections, updates, and informal analysis",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: `${siteConfig.url}/blog`,
-    title: "Blog Posts",
-    description: "Short-form reflections, updates, and informal analysis",
-    siteName: siteConfig.name,
-    images: [
-      {
-        url: siteConfig.ogImage,
-        width: 1200,
-        height: 630,
-        alt: "Blog Posts"
-      }
-    ]
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Blog Posts",
-    description: "Short-form reflections, updates, and informal analysis",
-    images: [siteConfig.ogImage],
-    creator: "@krisyotam"
-  }
-};
+export const metadata: Metadata = staticMetadata.blog;
 
 export default function BlogPage() {
   // Sort notes by date (newest first)

@@ -1105,7 +1105,27 @@
 "importance": 9,
 "socials": [],
 "importantUrls": ["https://www.stephanguyenet.com/", "mailto:s.guyenet@gmail.com"]
+},
+{
+  "title": "Sean Heelan",
+  "url": "https://sean.heelan.io/",
+  "description": "Sean Heelan is an independent security researcher focused on automating vulnerability discovery and exploit generation using large language models. With a background in program analysis, binary exploitation, and production profiling tools, Sean previously co-founded Optimyze and led the development of Prodfiler, later acquired by Elastic and integrated as the Elastic Universal Profiler. His work spans DARPA-funded model checkers, SMT-driven analysis tools, and academic contributions to automatic exploit generation, including a PhD from Oxford. He now pursues open-ended research at the intersection of AI and security.",
+  "category": "Security Research",
+  "tags": ["vulnerability research", "automatic exploit generation", "binary analysis", "reverse engineering", "LLMs", "profiling", "AI security", "Elastic", "Optimyze", "SMT solvers", "program analysis", "CNE", "CANVAS", "Immunity", "DARPA", "Oxford"],
+  "slug": "sean-heelan",
+  "publishDate": "2025-07-20",
+  "status": "Active",
+  "confidence": "certain",
+  "importance": 9,
+  "socials": ["https://x.com/seanhn", "mailto:sean@heelan.io"],
+  "importantUrls": [
+    "https://sean.heelan.io/about",
+    "https://sean.heelan.io/publications",
+    "https://sean.heelan.io/code",
+    "https://sean.heelan.io/phd"
+  ]
 }
+
 
 
 

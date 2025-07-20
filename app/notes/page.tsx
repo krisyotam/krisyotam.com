@@ -1,11 +1,9 @@
 import NotesClientPage from "./NotesClientPage";
 import notesData from "@/data/notes/quick-notes.json";
 import type { Metadata } from "next";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "Notes",
-  description: "Quick thoughts and ideas",
-};
+export const metadata: Metadata = staticMetadata.notes;
 
 export default function NotesPage() {
   // Sort notes by date (newest first)

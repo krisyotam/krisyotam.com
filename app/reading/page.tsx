@@ -1,11 +1,10 @@
 import { ReadingClientPage } from "./reading-client-page"
 import { PageHeader } from "@/components/page-header"
 import { PageDescription } from "@/components/posts/typography/page-description"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
 
-export const metadata = {
-  title: "Reading | Kris Yotam",
-  description: "books I am currently reading, have read, and want to read",
-}
+export const metadata: Metadata = staticMetadata.reading
 
 export default function ReadingPage() {
   // Reading page metadata

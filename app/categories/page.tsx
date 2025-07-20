@@ -3,6 +3,10 @@ import { getCategories } from "@/utils/posts"
 import { PageHeader } from "@/components/page-header"
 import { PageDescription } from "@/components/posts/typography/page-description"
 import { CategoriesClient } from "./categories-client"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = staticMetadata.categories
 
 export const dynamic = "force-dynamic"
 

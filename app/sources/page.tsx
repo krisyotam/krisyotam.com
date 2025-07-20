@@ -2,11 +2,9 @@ import { Suspense } from "react"
 import type { Metadata } from "next"
 import SourcesClientPage from "./sources-client-page"
 import { PageHeader } from "@/components/page-header"
+import { staticMetadata } from "@/lib/staticMetadata"
 
-export const metadata: Metadata = {
-  title: "Sources | Kris Yotam",
-  description: "Messages and communications that have inspired content on this site.",
-}
+export const metadata: Metadata = staticMetadata.sources
 
 export default function SourcesPage() {
   return (

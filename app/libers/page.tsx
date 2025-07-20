@@ -1,11 +1,9 @@
 import LibersClientPage from "./LibersClientPage";
 import libersData from "@/data/libers/libers.json";
 import type { Metadata } from "next";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "Libers",
-  description: "Dark historical studies, taboo subjects, and forbidden knowledge",
-};
+export const metadata: Metadata = staticMetadata.libers;
 
 export default function LibersPage() {
   // Sort libers by date (newest first)

@@ -1,13 +1,11 @@
 import { getTilData } from "@/lib/data"
 import TilClientPage from "./TilClientPage"
+import { staticMetadata } from "@/lib/staticMetadata"
 import type { Metadata } from "next"
 
 export const dynamic = "force-static"
 
-export const metadata: Metadata = {
-  title: "Today I Learned",
-  description: "A collection of short notes from my cross-disciplinary studies, shared as I learn in public.",
-}
+export const metadata: Metadata = staticMetadata.til
 
 export default async function TILPage() {
   try {

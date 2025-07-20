@@ -2,11 +2,9 @@ import DossiersClientPage from "./DossiersClientPage";
 import dossiersData from "@/data/dossiers/dossiers.json";
 import type { Metadata } from "next";
 import type { DossierMeta, DossierStatus, DossierConfidence } from "@/types/dossiers";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "Dossiers",
-  description: "Classified investigations and sensitive case files with detailed intelligence reports",
-};
+export const metadata: Metadata = staticMetadata.dossiers;
 
 export default function DossiersPage() {
   // Map and sort dossiers by date (newest first)

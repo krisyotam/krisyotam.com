@@ -2,12 +2,10 @@ import { getMarkdownContent } from "@/utils/markdown"
 import type { Metadata } from "next"
 import { ChangelogContent } from "./changelog-content"
 import { PageHeader } from "@/components/page-header"
+import { staticMetadata } from "@/lib/staticMetadata"
 import "./changelog.css"
 
-export const metadata: Metadata = {
-  title: "Changelog",
-  description: "A record of all changes and updates to the site",
-}
+export const metadata: Metadata = staticMetadata.changelog
 
 export default async function ChangelogPage() {
   // Read the changelog content from the Markdown file

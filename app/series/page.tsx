@@ -1,6 +1,10 @@
 import Link from "next/link"
 import { getSeries } from "@/utils/series"
 import { PageHeader } from "@/components/page-header"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = staticMetadata.series
 
 export const dynamic = "force-dynamic"
 
@@ -89,4 +93,4 @@ export default async function SeriesPage() {
       </div>
     )
   }
-} 
+}

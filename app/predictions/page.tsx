@@ -1,6 +1,10 @@
 import { PageHeader } from "@/components/page-header"
 import { PredictionsClientPage } from "./PredictionsClientPage"
 import { PageDescription } from "@/components/posts/typography/page-description"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = staticMetadata.predictions
 
 export default function PredictionsPage() {
   return (

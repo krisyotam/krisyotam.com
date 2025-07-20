@@ -2,11 +2,9 @@ import CasesClientPage from "./CasesClientPage";
 import casesData from "@/data/cases/cases.json";
 import type { Metadata } from "next";
 import type { CaseMeta, CaseStatus, CaseConfidence } from "@/types/cases";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "Cases",
-  description: "Case studies and investigations into mysteries, cold cases, and unresolved incidents",
-};
+export const metadata: Metadata = staticMetadata.cases;
 
 export default function CasesPage() {
   // Map and sort cases by date (newest first)

@@ -1,23 +1,9 @@
 import type { Metadata } from "next"
 import { ReportsClient } from "./reports-client"
 import { redirect } from "next/navigation"
+import { staticMetadata } from "@/lib/staticMetadata"
 
-export const metadata: Metadata = {
-  title: "Reports | Kris Yotam",
-  description: "A collection of formal reports on diverse topics.",
-  openGraph: {
-    title: "Reports Collection | Kris Yotam",
-    description: "Explore a diverse collection of formal reports by Kris Yotam.",
-    type: "website",
-    images: [
-      {
-        url: "https://i.postimg.cc/jSDMT1Sn/research.png", 
-        alt: "Kris Yotam's Reports Collection",
-        width: 1200,
-        height: 630,
-      },
-    ],
-  },
+export const metadata: Metadata = staticMetadata.reports
   twitter: {
     card: "summary_large_image",
     title: "Reports Collection | Kris Yotam",

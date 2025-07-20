@@ -1,11 +1,10 @@
 import { PageHeader } from "@/components/page-header"
 import { MitzvahClient } from "./mitzvah-client"
 import { PageDescription } from "@/components/posts/typography/page-description"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
 
-export const metadata = {
-  title: "Mitzvah | Kris Yotam",
-  description: "Mitzvah laws, commandments, and their scriptural references",
-}
+export const metadata: Metadata = staticMetadata.mitzvah
 
 export default function MitzvahPage() {
   return (

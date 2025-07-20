@@ -3,21 +3,9 @@ import type { Metadata } from "next"
 import { VerseClient } from "./verse-client"
 import { redirect } from "next/navigation"
 import categoriesData from "@/data/verse/categories.json"
+import { staticMetadata } from "@/lib/staticMetadata"
 
-export const metadata: Metadata = {
-  title: "Verse | Kris Yotam",
-  description: "A collection of original verse exploring themes of existence, nature, and the human experience",
-  openGraph: {
-    title: "Poetry Collection | Kris Yotam",
-    description: "Explore a diverse collection of original poems, haikus, and other verse forms by Kris Yotam.",
-    type: "website",
-    images: [
-      {
-        url: "https://i.postimg.cc/6p4X2MNX/shall-i-compare-thee-to-a-winters-night.png", // Using one of your poem images as a default
-        alt: "Kris Yotam's Poetry Collection",
-        width: 1200,
-        height: 630,
-      },
+export const metadata: Metadata = staticMetadata.verse
     ],
   },
   twitter: {

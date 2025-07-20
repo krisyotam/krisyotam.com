@@ -1,5 +1,9 @@
 import { QuestionsClientPage } from "./QuestionsClientPage"
 import { PageDescription } from "@/components/posts/typography/page-description"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = staticMetadata.questions
 
 export default function QuestionsPage() {
   return (

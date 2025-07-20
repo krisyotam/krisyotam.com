@@ -2,6 +2,10 @@ import { Suspense } from "react"
 import { PageHeader } from "@/components/page-header"
 import FavsClient from "@/app/favs/favs-client"
 import { redirect } from "next/navigation"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = staticMetadata.favs
 
 export default function FavsPage({
   searchParams
@@ -21,4 +25,4 @@ export default function FavsPage({
   
   // If no category filter is selected, show all items
   return <FavsClient initialCategory="All" />
-} 
+}

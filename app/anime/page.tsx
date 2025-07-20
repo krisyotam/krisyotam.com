@@ -1,10 +1,9 @@
 import AnimeClientPage from "./anime-client-page"
 import "./anime.css"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
 
-export const metadata = {
-  title: "Anime | Kris Yotam",
-  description: "My anime watching activity, favorites, and collections",
-}
+export const metadata: Metadata = staticMetadata.anime
 
 export default function AnimePage() {
   return <AnimeClientPage />

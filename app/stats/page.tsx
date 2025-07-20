@@ -1,11 +1,9 @@
+import { staticMetadata } from '@/lib/staticMetadata';
 import { Metadata } from 'next';
 import redis from '@/utils/redis';
 import dynamic from 'next/dynamic';
 
-export const metadata: Metadata = {
-  title: "Statistics | Kris Yotam",
-  description: "Visitor statistics and analytics for krisyotam.com",
-};
+export const metadata: Metadata = staticMetadata.stats;
 
 // Redis can return data in different formats, so we'll handle both possibilities
 type CountRowTuple = [member: string, score: string];

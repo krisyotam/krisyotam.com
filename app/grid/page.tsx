@@ -1,4 +1,8 @@
 import dynamicImport from 'next/dynamic'
+import { staticMetadata } from '@/lib/staticMetadata'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = staticMetadata.grid
 
 const HomeWrapper = dynamicImport(() => import('../home-wrapper'), {
   ssr: true,
@@ -15,4 +19,4 @@ export const fetchCache = 'force-cache'
 
 export default function GridPage() {
   return <HomeWrapper initialView="grid" />
-} 
+}

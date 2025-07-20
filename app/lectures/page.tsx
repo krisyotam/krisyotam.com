@@ -2,11 +2,9 @@ import LecturesClientPage from "./LecturesClientPage";
 import lecturesData from "@/data/lectures/lectures.json";
 import type { Metadata } from "next";
 import type { LectureMeta, LectureStatus, LectureConfidence } from "@/types/lectures";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "Lectures",
-  description: "Educational lectures across multiple disciplines and academic fields",
-};
+export const metadata: Metadata = staticMetadata.lectures;
 
 export default function LecturesPage() {
   // Map and sort lectures by date (newest first)

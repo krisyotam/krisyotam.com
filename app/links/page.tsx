@@ -1,11 +1,9 @@
 import LinksClientPage from "./LinksClientPage";
 import linksData from "@/data/links/links.json";
 import type { Metadata } from "next";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "Links",
-  description: "A curated collection of valuable links and resources",
-};
+export const metadata: Metadata = staticMetadata.links;
 
 export default function LinksPage() {
   // Sort links by date (newest first)

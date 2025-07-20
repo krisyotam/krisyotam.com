@@ -2,11 +2,9 @@ import NewsClientPage from "./NewsClientPage";
 import newsData from "@/data/news/news.json";
 import type { Metadata } from "next";
 import type { NewsMeta, NewsStatus, NewsConfidence } from "@/types/news";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "News",
-  description: "Latest news and developments in AI, technology, and innovation",
-};
+export const metadata: Metadata = staticMetadata.news;
 
 export default function NewsPage() {
   // Map and sort news by date (newest first)

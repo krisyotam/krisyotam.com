@@ -2,6 +2,10 @@ import Image from "next/image"
 import { Cake, User2, GraduationCap, Book, Home, Building2, Languages, Search } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import profileData from "@/data/profile.json"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = staticMetadata.profile
 
 interface ImageItem {
   src: string

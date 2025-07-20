@@ -2,11 +2,9 @@ import type { Metadata } from "next"
 import { PageHeader } from "@/components/page-header"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import faqData from "@/data/faq.json"
+import { staticMetadata } from "@/lib/staticMetadata"
 
-export const metadata: Metadata = {
-  title: "FAQ - KrisYotam",
-  description: "Frequently asked questions about KrisYotam.com and its content.",
-}
+export const metadata: Metadata = staticMetadata.faq
 
 export default function FAQPage() {
   const { metadata, faqs } = faqData

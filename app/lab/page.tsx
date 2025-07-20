@@ -1,12 +1,10 @@
 import LabClientPage from "./LabClientPage";
 import type { Metadata } from "next";
 import type { LabMeta } from "@/types/lab";
+import { staticMetadata } from "@/lib/staticMetadata";
 import "./lab.css";
 
-export const metadata: Metadata = {
-  title: "Lab",
-  description: "Research notebooks, experiments, and technical explorations",
-};
+export const metadata: Metadata = staticMetadata.lab;
 
 export default async function LabPage() {
   // For development, we'll use a simple data fetch approach

@@ -1,12 +1,11 @@
 import { PageHeader } from "@/components/page-header"
 import { LibraryTabs } from "@/components/library-tabs"
 import { PageDescription } from "@/components/posts/typography/page-description"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
 import "./library.css"
 
-export const metadata = {
-  title: "Personal Library | Kris Yotam",
-  description: "a catalog of my personal physical library",
-}
+export const metadata: Metadata = staticMetadata.library
 
 export default function LibraryPage() {
   return (

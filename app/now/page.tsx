@@ -2,11 +2,9 @@ import { getNowData } from "@/lib/data"
 import type { Metadata } from "next"
 import { Suspense } from "react"
 import NowClientPage from "./NowClientPage"
+import { staticMetadata } from "@/lib/staticMetadata"
 
-export const metadata: Metadata = {
-  title: "Now",
-  description: "What I'm focused on right now",
-}
+export const metadata: Metadata = staticMetadata.now
 
 export default async function NowPage() {
   const nowData = await getNowData()

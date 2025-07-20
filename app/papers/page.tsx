@@ -2,11 +2,9 @@ import PapersClientPage from "./PapersClientPage";
 import papersData from "@/data/papers/papers.json";
 import type { Metadata } from "next";
 import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/papers";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "Papers",
-  description: "Research papers and academic inquiries across multiple disciplines",
-};
+export const metadata: Metadata = staticMetadata.papers;
 
 export default function PapersPage() {
   // Filter out hidden papers, then map and sort by date (newest first)

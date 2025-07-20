@@ -1,11 +1,10 @@
 import { PageHeader } from "@/components/page-header"
 import { RulesOfTheInternetClient } from "./rules-of-the-internet-client"
 import { PageDescription } from "@/components/posts/typography/page-description"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
 
-export const metadata = {
-  title: "Rules of the Internet | Kris Yotam",
-  description: "Rules of the Internet - a loose collection of rules and aphorisms spawned by 4chan",
-}
+export const metadata: Metadata = staticMetadata.rulesOfTheInternet
 
 export default function RulesOfTheInternetPage() {
   return (

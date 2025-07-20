@@ -1,11 +1,9 @@
 import PromptsClientPage from "./PromptsClientPage";
 import promptsData from "@/data/prompts/prompts.json";
 import type { Metadata } from "next";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "Prompts",
-  description: "A collection of useful prompts for various AI models and use cases",
-};
+export const metadata: Metadata = staticMetadata.prompts;
 
 export default function PromptsPage() {
   // Sort prompts by date (newest first)

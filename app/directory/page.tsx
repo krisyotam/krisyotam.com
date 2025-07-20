@@ -1,11 +1,9 @@
 import type { Metadata } from "next"
 import { PageHeader } from "@/components/page-header"
 import DirectoryClient from "./directory-client"
+import { staticMetadata } from "@/lib/staticMetadata"
 
-export const metadata: Metadata = {
-  title: "Directory | Kris Yotam",
-  description: "A comprehensive directory of all pages on Kris Yotam's website.",
-}
+export const metadata: Metadata = staticMetadata.directory
 
 export default async function DirectoryPage() {
   return (

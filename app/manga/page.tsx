@@ -1,10 +1,9 @@
 import MangaClientPage from "./manga-client-page"
 import "../anime/anime.css"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
 
-export const metadata = {
-  title: "Manga | Kris Yotam",
-  description: "My manga reading activity, favorites, and collections",
-}
+export const metadata: Metadata = staticMetadata.manga
 
 export default function MangaPage() {
   return <MangaClientPage />

@@ -1,11 +1,9 @@
 import ProblemClientPage from "./ProblemClientPage";
 import problemsData from "@/data/problems/problems.json";
 import type { Metadata } from "next";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "Problems",
-  description: "A collection of mathematical problems, exercises, and challenging questions",
-};
+export const metadata: Metadata = staticMetadata.problems;
 
 export default function ProblemsPage() {
   // Sort problems by date (newest first)

@@ -7,6 +7,10 @@ import { LineChart } from "@/components/line-chart"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 import { CommandMenu } from "@/components/command-menu"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = staticMetadata.type
 
 // Increase revalidation time to reduce API load
 export const revalidate = 300 // Revalidate every 5 minutes

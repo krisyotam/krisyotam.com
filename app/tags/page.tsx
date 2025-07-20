@@ -3,6 +3,10 @@ import Link from "next/link";
 import { getTags } from "@/utils/posts";
 import { PageHeader } from "@/components/page-header";
 import { notFound } from "next/navigation";
+import { staticMetadata } from "@/lib/staticMetadata";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = staticMetadata.tags;
 
 export const dynamic = "force-dynamic";
 

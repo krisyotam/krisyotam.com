@@ -2,6 +2,10 @@ import { Suspense } from "react"
 import { PageHeader } from "@/components/page-header"
 import MasonryGrid from "@/components/art/masonry-grid"
 import artData from "@/data/art/art.json"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = staticMetadata.art
 
 export default function ArtPage() {
   return (
@@ -23,4 +27,4 @@ export default function ArtPage() {
       </main>
     </div>
   )
-} 
+}

@@ -4,12 +4,9 @@ import path from "path"
 import ResearchBountiesClient from "./ResearchBountiesClient"
 import { ExpandableSubsection } from "@/components/expandable-subsection"
 import { PageHeader } from "@/components/page-header"
+import { staticMetadata } from "@/lib/staticMetadata"
 
-export const metadata: Metadata = {
-  title: "Research Bounties | Kris Magnum Opus",
-  description:
-    "A list of papers, books, and materials I have failed to obtain, with financial bounties for anyone who can provide copies.",
-}
+export const metadata: Metadata = staticMetadata.researchBounties
 
 async function getBounties() {
   try {

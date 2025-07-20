@@ -1,23 +1,9 @@
 import type { Metadata } from "next"
 import { ResearchClient } from "./research-client"
 import { redirect } from "next/navigation"
+import { staticMetadata } from "@/lib/staticMetadata"
 
-export const metadata: Metadata = {
-  title: "Research | Kris Yotam",
-  description: "a collection of my published research papers",
-  openGraph: {
-    title: "Research Collection | Kris Yotam",
-    description: "a collection of my published research papers",
-    type: "website",
-    images: [
-      {
-        url: "https://i.postimg.cc/jSDMT1Sn/research.png", 
-        alt: "Kris Yotam's Research Collection",
-        width: 1200,
-        height: 630,
-      },
-    ],
-  },
+export const metadata: Metadata = staticMetadata.research
   twitter: {
     card: "summary_large_image",
     title: "Research Collection | Kris Yotam",

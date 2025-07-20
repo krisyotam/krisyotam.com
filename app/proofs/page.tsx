@@ -1,11 +1,9 @@
 import ProofClientPage from "./ProofClientPage";
 import proofsData from "@/data/proofs/proofs.json";
 import type { Metadata } from "next";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "Proofs",
-  description: "A collection of mathematical proofs, theorems, and demonstrations",
-};
+export const metadata: Metadata = staticMetadata.proofs;
 
 export default function ProofsPage() {
   // Sort proofs by date (newest first)

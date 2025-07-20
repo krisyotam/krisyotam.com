@@ -1,11 +1,9 @@
 import ScriptsClientPage from "./ScriptsClientPage";
 import scriptsData from "@/data/scripts/scripts.json";
 import type { Metadata } from "next";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "Scripts",
-  description: "A collection of useful scripts and utilities",
-};
+export const metadata: Metadata = staticMetadata.scripts;
 
 export default function ScriptsPage() {
   // Sort scripts by date (newest first)

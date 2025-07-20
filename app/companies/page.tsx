@@ -1,10 +1,9 @@
 import { PageHeader } from "@/components/page-header"
 import { CompaniesGrid } from "@/components/companies-grid"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
 
-export const metadata = {
-  title: "Companies | Kris Yotam",
-  description: "Track the performance of various indie companies and startups",
-}
+export const metadata: Metadata = staticMetadata.companies
 
 export default function CompaniesPage() {
   return (

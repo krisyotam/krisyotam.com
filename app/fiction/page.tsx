@@ -1,11 +1,9 @@
 import FictionClientPage from "./FictionClientPage";
 import fictionData from "@/data/fiction/fiction.json";
 import type { Metadata } from "next";
+import { staticMetadata } from "@/lib/staticMetadata";
 
-export const metadata: Metadata = {
-  title: "Fiction",
-  description: "A collection of short stories, flash fiction, and novel excerpts",
-};
+export const metadata: Metadata = staticMetadata.fiction;
 
 export default function FictionPage() {
   // Sort fiction by date (newest first)
