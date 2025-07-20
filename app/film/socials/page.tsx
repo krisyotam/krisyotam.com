@@ -4,10 +4,7 @@ import { PageHeader } from "@/components/page-header"
 import { Metadata } from "next"
 import { staticMetadata } from "@/lib/staticMetadata"
 
-export const metadata: Metadata = {
-  title: "Film Socials | Kris Yotam",
-  description: "My film and TV social media profiles and accounts",
-}
+export const metadata: Metadata = staticMetadata.film
 
 export default function FilmSocialsPage() {
   return (

@@ -4,10 +4,7 @@ import { PageHeader } from "@/components/page-header"
 import { Metadata } from "next"
 import { staticMetadata } from "@/lib/staticMetadata"
 
-export const metadata: Metadata = {
-  title: "Film Lists | Kris Yotam",
-  description: "My custom movie and TV show lists from Trakt.tv",
-}
+export const metadata: Metadata = staticMetadata.film
 
 export default function FilmListsPage() {
   return (

@@ -6,15 +6,6 @@ import categoriesData from "@/data/verse/categories.json"
 import { staticMetadata } from "@/lib/staticMetadata"
 
 export const metadata: Metadata = staticMetadata.verse
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Poetry Collection | Kris Yotam",
-    description: "Explore a diverse collection of original poems, haikus, and other verse forms by Kris Yotam.",
-    images: ["https://i.postimg.cc/6p4X2MNX/shall-i-compare-thee-to-a-winters-night.png"],
-  },
-}
 
 export default function VersePage({
   searchParams
