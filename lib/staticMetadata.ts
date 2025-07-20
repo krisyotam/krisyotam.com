@@ -80,54 +80,8 @@ export const staticMetadata: Record<string, Metadata> = {
       creator: '@krisyotam'
     }
   },
-  blog: {
-    title: 'Blog',
-    description: 'Short-form reflections, updates, and informal analysis.',
-    openGraph: {
-      title: 'Blog',
-      description: 'Short-form reflections, updates, and informal analysis.',
-      images: [
-        {
-          url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
-          width: 1200,
-          height: 630,
-          alt: 'Blog'
-        }
-      ],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Blog',
-      description: 'Short-form reflections, updates, and informal analysis.',
-      images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
-      creator: '@krisyotam'
-    }
-  },
-  blogroll: {
-    title: 'Blogroll',
-    description: 'A curated list of blogs and websites I recommend.',
-    openGraph: {
-      title: 'Blogroll',
-      description: 'A curated list of blogs and websites I recommend.',
-      images: [
-        {
-          url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
-          width: 1200,
-          height: 630,
-          alt: 'Blogroll'
-        }
-      ],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Blogroll',
-      description: 'A curated list of blogs and websites I recommend.',
-      images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
-      creator: '@krisyotam'
-    }
-  },
+
+
   cases: {
     title: 'Cases',
     description: 'Case studies and detailed examinations of specific topics.',
@@ -224,30 +178,7 @@ export const staticMetadata: Record<string, Metadata> = {
       creator: '@krisyotam'
     }
   },
-  colophon: {
-    title: 'Colophon',
-    description: 'Information about how this website was built and designed.',
-    openGraph: {
-      title: 'Colophon',
-      description: 'Information about how this website was built and designed.',
-      images: [
-        {
-          url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
-          width: 1200,
-          height: 630,
-          alt: 'Colophon'
-        }
-      ],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Colophon',
-      description: 'Information about how this website was built and designed.',
-      images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
-      creator: '@krisyotam'
-    }
-  },
+
   companies: {
     title: 'Companies',
     description: 'Companies and organizations I\'ve worked with or founded.',
@@ -392,30 +323,7 @@ export const staticMetadata: Record<string, Metadata> = {
       creator: '@krisyotam'
     }
   },
-  essays: {
-    title: 'Essays',
-    description: 'Long-term stable essays and reflections.',
-    openGraph: {
-      title: 'Essays',
-      description: 'Long-term stable essays and reflections.',
-      images: [
-        {
-          url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
-          width: 1200,
-          height: 630,
-          alt: 'Essays'
-        }
-      ],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Essays',
-      description: 'Long-term stable essays and reflections.',
-      images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
-      creator: '@krisyotam'
-    }
-  },
+
   faq: {
     title: 'FAQ',
     description: 'Frequently asked questions and answers.',
@@ -704,30 +612,7 @@ export const staticMetadata: Record<string, Metadata> = {
       creator: '@krisyotam'
     }
   },
-  library: {
-    title: 'Library',
-    description: 'Books and references in my collection.',
-    openGraph: {
-      title: 'Library',
-      description: 'Books and references in my collection.',
-      images: [
-        {
-          url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
-          width: 1200,
-          height: 630,
-          alt: 'Library'
-        }
-      ],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Library',
-      description: 'Books and references in my collection.',
-      images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
-      creator: '@krisyotam'
-    }
-  },
+
   links: {
     title: 'Links',
     description: 'Curated links to interesting resources around the web.',
@@ -896,30 +781,7 @@ export const staticMetadata: Record<string, Metadata> = {
       creator: '@krisyotam'
     }
   },
-  now: {
-    title: 'Now',
-    description: 'What I\'m currently focused on and working on.',
-    openGraph: {
-      title: 'Now',
-      description: 'What I\'m currently focused on and working on.',
-      images: [
-        {
-          url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
-          width: 1200,
-          height: 630,
-          alt: 'Now'
-        }
-      ],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Now',
-      description: 'What I\'m currently focused on and working on.',
-      images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
-      creator: '@krisyotam'
-    }
-  },
+
   ocs: {
     title: 'OCs',
     description: 'Original characters and creative concepts.',
@@ -1088,30 +950,7 @@ export const staticMetadata: Record<string, Metadata> = {
       creator: '@krisyotam'
     }
   },
-  projects: {
-    title: 'Projects',
-    description: 'A showcase of my development projects, design work, and creative endeavors.',
-    openGraph: {
-      title: 'Projects',
-      description: 'A showcase of my development projects, design work, and creative endeavors.',
-      images: [
-        {
-          url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
-          width: 1200,
-          height: 630,
-          alt: 'Projects'
-        }
-      ],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Projects',
-      description: 'A showcase of my development projects, design work, and creative endeavors.',
-      images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
-      creator: '@krisyotam'
-    }
-  },
+
   prompts: {
     title: 'Prompts',
     description: 'Writing prompts, AI prompts, and creative inspiration.',
