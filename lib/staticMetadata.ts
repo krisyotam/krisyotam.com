@@ -1736,35 +1736,11 @@ export const staticMetadata: Record<string, Metadata> = {
       creator: '@krisyotam'
     }
   },
-  contact: {
-    title: 'Contact – Kris Yotam',
-    description: 'Get in touch with Kris Yotam.',
-    openGraph: {
-      title: 'Contact – Kris Yotam',
-      description: 'Get in touch with Kris Yotam.',
-      images: [
-        {
-          url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
-          width: 1200,
-          height: 630,
-          alt: 'Contact Kris Yotam'
-        }
-      ],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Contact – Kris Yotam',
-      description: 'Get in touch with Kris Yotam.',
-      images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
-      creator: '@krisyotam'
-    }
-  },
   projects: {
-    title: 'Projects – Kris Yotam',
+    title: 'Projects',
     description: 'Explore the projects Kris is working on.',
     openGraph: {
-      title: 'Projects – Kris Yotam',
+      title: 'Projects',
       description: 'Explore the projects Kris is working on.',
       images: [
         {
@@ -1778,17 +1754,17 @@ export const staticMetadata: Record<string, Metadata> = {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Projects – Kris Yotam',
+      title: 'Projects',
       description: 'Explore the projects Kris is working on.',
       images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
       creator: '@krisyotam'
     }
   },
   essays: {
-    title: 'Essays – Kris Yotam',
+    title: 'Essays',
     description: 'Long-form essays and reflections on various topics.',
     openGraph: {
-      title: 'Essays – Kris Yotam',
+      title: 'Essays',
       description: 'Long-form essays and reflections on various topics.',
       images: [
         {
@@ -1802,17 +1778,17 @@ export const staticMetadata: Record<string, Metadata> = {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Essays – Kris Yotam',
+      title: 'Essays',
       description: 'Long-form essays and reflections on various topics.',
       images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
       creator: '@krisyotam'
     }
   },
   blog: {
-    title: 'Blog – Kris Yotam',
+    title: 'Blog',
     description: 'Short-form reflections, updates, and informal analysis.',
     openGraph: {
-      title: 'Blog – Kris Yotam',
+      title: 'Blog',
       description: 'Short-form reflections, updates, and informal analysis.',
       images: [
         {
@@ -1826,17 +1802,17 @@ export const staticMetadata: Record<string, Metadata> = {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Blog – Kris Yotam',
+      title: 'Blog',
       description: 'Short-form reflections, updates, and informal analysis.',
       images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
       creator: '@krisyotam'
     }
   },
   now: {
-    title: 'Now – Kris Yotam',
+    title: 'Now',
     description: 'What Kris is currently focused on and working on.',
     openGraph: {
-      title: 'Now – Kris Yotam',
+      title: 'Now',
       description: 'What Kris is currently focused on and working on.',
       images: [
         {
@@ -1850,17 +1826,17 @@ export const staticMetadata: Record<string, Metadata> = {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Now – Kris Yotam',
+      title: 'Now',
       description: 'What Kris is currently focused on and working on.',
       images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
       creator: '@krisyotam'
     }
   },
   blogroll: {
-    title: 'Blogroll – Kris Yotam',
+    title: 'Blogroll',
     description: 'A curated list of blogs and websites Kris recommends.',
     openGraph: {
-      title: 'Blogroll – Kris Yotam',
+      title: 'Blogroll',
       description: 'A curated list of blogs and websites Kris recommends.',
       images: [
         {
@@ -1874,17 +1850,17 @@ export const staticMetadata: Record<string, Metadata> = {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Blogroll – Kris Yotam',
+      title: 'Blogroll',
       description: 'A curated list of blogs and websites Kris recommends.',
       images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
       creator: '@krisyotam'
     }
   },
   library: {
-    title: 'Library – Kris Yotam',
+    title: 'Library',
     description: 'Books and references in Kris Yotam\'s collection.',
     openGraph: {
-      title: 'Library – Kris Yotam',
+      title: 'Library',
       description: 'Books and references in Kris Yotam\'s collection.',
       images: [
         {
@@ -1898,17 +1874,17 @@ export const staticMetadata: Record<string, Metadata> = {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Library – Kris Yotam',
+      title: 'Library',
       description: 'Books and references in Kris Yotam\'s collection.',
       images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
       creator: '@krisyotam'
     }
   },
   colophon: {
-    title: 'Colophon – Kris Yotam',
+    title: 'Colophon',
     description: 'Information about how this website was built and designed.',
     openGraph: {
-      title: 'Colophon – Kris Yotam',
+      title: 'Colophon',
       description: 'Information about how this website was built and designed.',
       images: [
         {
@@ -1922,7 +1898,7 @@ export const staticMetadata: Record<string, Metadata> = {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Colophon – Kris Yotam',
+      title: 'Colophon',
       description: 'Information about how this website was built and designed.',
       images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
       creator: '@krisyotam'
