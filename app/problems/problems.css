@@ -116,7 +116,8 @@
 }
 
 /* code ------------------------------------------------------------------- */
-.problem-content code {
+/* Only apply to inline code, not code blocks */
+.problem-content :not(pre) > code {
   font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
   font-size: 0.85em;
   background: rgba(0, 0, 0, 0.05);
@@ -124,7 +125,8 @@
   border-radius: 3px;
 }
 
-.problem-content pre {
+/* Only style regular pre blocks, not the syntax highlighter ones */
+.problem-content pre:not(.code-block):not(.react-syntax-highlighter-line-number) {
   margin: 0.5rem 0; /* small gap above/below code blocks */
   padding: 0.75rem;
   overflow-x: auto;
@@ -133,10 +135,122 @@
   background: rgba(0, 0, 0, 0.03);
 }
 
-.problem-content pre > code {
-  background: transparent;
-  padding: 0;
+/* Safe base styling for all pre/code elements regardless of specific classes */
+.problem-content pre,
+.problem-content code {
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.5;
 }
+
+/* Fallback for when the .code-block class isn't applied by the renderer */
+.problem-content pre:not(.code-block) > code {
+  background: rgba(0, 0, 0, 0.03);
+  display: block;
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 0.75rem;
+}
+
+/* Comprehensive fix for code blocks to address layering issues */
+
+/* Main code block container - exact match to Box component */
+.problem-content .code-block,
+.problem-content pre.code-block {
+  margin: 1.5rem 0; /* Match Box my-6 */
+  width: 100%;
+  padding: 1.5rem; /* Exact match to p-6 from Box component */
+  background-color: hsl(var(--muted)/50%); /* Exact match to bg-muted/50 */
+  border-radius: 0; /* Exact match to rounded-none */
+  overflow: auto;
+  position: relative;
+  border: none;
+  box-shadow: none;
+}
+
+/* Remove outline from code blocks */
+.problem-content .code-block,
+.problem-content pre.code-block {
+  outline: none;
+}
+
+/* Dark mode background override to match Box */
+.dark .problem-content .code-block,
+.dark .problem-content pre.code-block {
+  background-color: hsl(var(--popover)); /* Exact match to Box dark:bg-[hsl(var(--popover))] */
+}
+
+/* Code block wrapper (if used) */
+.problem-content .code-block-wrapper {
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+/* Reset all inner elements to prevent layering */
+.problem-content .code-block *,
+.problem-content pre.code-block *,
+.problem-content .code-block pre,
+.problem-content .code-block code,
+.problem-content .code-block .syntax-line {
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Target react-syntax-highlighter container */
+.problem-content .code-container {
+  max-height: none; /* Remove max-height limitation */
+  overflow: auto;
+  width: 100%;
+  display: block; /* Ensure proper block display */
+}
+
+/* Handle line numbers - removed vertical bars */
+.problem-content .react-syntax-highlighter-line-number,
+.problem-content span[class*="linenumber"] {
+  min-width: 3em;
+  padding-right: 1em;
+  margin-right: 1em;
+  text-align: right;
+  border-right: none !important; /* explicitly remove vertical bar */
+  color: rgba(127, 127, 127, 0.6);
+  user-select: none;
+  position: static !important; /* ensure position is static to scroll with code */
+  display: inline-block;
+  font-size: 0.8em;
+}
+
+/* Fix for line number scrolling with code */
+.problem-content .syntax-line {
+  display: flex !important; /* Ensure line is displayed as flex */
+  width: 100% !important;
+  align-items: flex-start !important;
+  min-height: 1.5em !important;
+}
+
+/* Ensure code blocks scroll correctly */
+.problem-content .code-block .code-container::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.problem-content .code-block .code-container::-webkit-scrollbar-thumb {
+  background: rgba(127, 127, 127, 0.3);
+  border-radius: 0;
+}
+
+/* Override any sticky positioning that might be applied elsewhere */
+.problem-content [style*="position: sticky"],
+.problem-content [style*="position:sticky"] {
+  position: static !important;
+}
+
+/* Dark mode styling is now explicitly defined with the code blocks */
 
 /* tables ----------------------------------------------------------------- */
 /* Retain default table spacing around and inside; only adjust styling */
@@ -306,11 +420,19 @@ td[data-mdx-td] {
   border-bottom-color: rgba(255, 255, 255, 0.8);
 }
 
-.dark .problem-content code,
-.dark .problem-content pre {
+/* Dark mode for inline code */
+.dark .problem-content :not(pre) > code {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.2);
 }
+
+/* Dark mode for all pre blocks */
+.dark .problem-content pre {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Dark mode styles are now explicitly defined with each selector */
 
 .dark .problem-content blockquote {
   color: rgba(255, 255, 255, 0.8);
@@ -353,4 +475,55 @@ td[data-mdx-td] {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+/* Catch code blocks from Markdown renderers that don't add .code-block class */
+.problem-content pre[class*="language-"],
+.problem-content pre[class*="hljs"],
+.problem-content pre.prism,
+.problem-content pre > code[class*="language-"] {
+  margin: 1.5rem 0;
+  padding: 1.5rem; /* Exact match to p-6 from Box component */
+  background-color: hsl(var(--muted)/50%); /* Exact match to bg-muted/50 */
+  border-radius: 0; /* Exact match to rounded-none */
+  overflow: auto;
+  border: none;
+  box-shadow: none;
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Dark mode for fallback code blocks */
+.dark .problem-content pre[class*="language-"],
+.dark .problem-content pre[class*="hljs"],
+.dark .problem-content pre.prism,
+.dark .problem-content pre > code[class*="language-"] {
+  background-color: hsl(var(--popover)); /* Exact match to Box dark:bg-[hsl(var(--popover))] */
+}
+
+/* Ensure rehype/remark/shiki token styling doesn't interfere */
+.problem-content .token,
+.problem-content [class*="token-"],
+.problem-content [data-rehype-pretty-code-fragment] * {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  background: transparent;
+}
+
+/* Fix for syntax highlighters that use spans for highlighting */
+.problem-content pre span[style*="background"] {
+  background: transparent !important;
+}
+
+/* Fix for specific highlighting lines in Markdown-based renderers */
+.problem-content pre [data-highlighted-line],
+.problem-content pre [data-line-highlighted] {
+  background: rgba(255, 255, 100, 0.1);
+}
+
+/* Add space below the file name in code blocks */
+.problem-content .code-block .file-name {
+  margin-bottom: 0.5rem; /* Add a small gap */
 }

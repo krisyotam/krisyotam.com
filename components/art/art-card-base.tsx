@@ -2,16 +2,23 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import Link from "next/link"
 import { getPhotoUrl } from "@/utils/flickr-api"
 
 export type ArtworkItem = {
   id: string
   title: string
-  type: string
+  type?: string
+  category?: string
   description: string
+  imageUrl?: string
   dimension: string
   date: string
+  tags?: string[]
+  status?: string
+  confidence?: string
+  importance?: number
+  bio?: string
 }
 
 export default function ArtCardBase({
@@ -23,18 +30,30 @@ export default function ArtCardBase({
 }) {
   const [imageUrl, setImageUrl] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
-  const [isOpen, setIsOpen] = useState(false)
+  
+  const slug = artwork.title.toLowerCase().replace(/\s+/g, '-')
 
   useEffect(() => {
     const loadImage = async () => {
       setIsLoading(true)
-      const url = await getPhotoUrl(artwork.id)
-      setImageUrl(url)
-      setIsLoading(false)
+      // Use imageUrl from the artwork data if available, otherwise fetch from Flickr
+      if (artwork.imageUrl) {
+        setImageUrl(artwork.imageUrl)
+        setIsLoading(false)
+      } else {
+        try {
+          const url = await getPhotoUrl(artwork.id)
+          setImageUrl(url)
+        } catch (error) {
+          console.error("Error loading image:", error)
+        } finally {
+          setIsLoading(false)
+        }
+      }
     }
 
     loadImage()
-  }, [artwork.id])
+  }, [artwork.id, artwork.imageUrl])
 
   // Format date while preserving the exact day
   let formattedDate = "";
@@ -57,10 +76,9 @@ export default function ArtCardBase({
   }
 
   return (
-    <>
+    <Link href={`/art/${slug}`}>
       <div
-        className={`group relative overflow-hidden rounded-sm bg-card text-card-foreground transition-all cursor-pointer ${className}`}
-        onClick={() => setIsOpen(true)}
+        className={`group relative overflow-hidden rounded-none bg-card text-card-foreground transition-all cursor-pointer ${className}`}
       >
         <div className="relative w-full h-full">
           {isLoading ? (
@@ -72,7 +90,7 @@ export default function ArtCardBase({
               src={imageUrl || "/placeholder.svg?height=600&width=600"}
               alt={artwork.title}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-none"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           )}
@@ -81,40 +99,14 @@ export default function ArtCardBase({
             <h3 className="text-lg font-semibold text-white">{artwork.title}</h3>
             <div className="flex items-center justify-between mt-1">
               <span className="text-xs text-white/80">{formattedDate}</span>
-              <span className="text-xs px-2 py-1 rounded-full bg-primary/80 text-primary-foreground">
-                {artwork.type}
+              <span className="text-xs px-2 py-1 rounded-none bg-primary/80 text-primary-foreground">
+                {artwork.category || artwork.type || "Art"}
               </span>
             </div>
           </div>
         </div>
       </div>
-
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-transparent border-none">
-          <div className="relative flex flex-col bg-card rounded-lg overflow-hidden">
-            <div className="relative w-full h-[70vh] max-h-[70vh]">
-              {imageUrl && (
-                <Image
-                  src={imageUrl || "/placeholder.svg"}
-                  alt={artwork.title}
-                  fill
-                  className="object-contain"
-                  sizes="100vw"
-                />
-              )}
-            </div>
-            <div className="p-6 bg-card">
-              <h2 className="text-2xl font-bold mb-2">{artwork.title}</h2>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-sm px-2 py-1 rounded-full bg-primary/10 text-primary">{artwork.type}</span>
-                <span className="text-sm text-muted-foreground">{formattedDate}</span>
-              </div>
-              <p className="text-card-foreground">{artwork.description}</p>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
-  )
+    </Link>
+  );
 }
 

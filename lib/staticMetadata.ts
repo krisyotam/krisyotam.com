@@ -518,10 +518,10 @@ export const staticMetadata: Record<string, Metadata> = {
   },
   'lecture-notes': {
     title: 'Lecture Notes',
-    description: 'Notes and summaries from lectures and presentations.',
+    description: 'Misc thoughts, proto-essays, reviews, musings, etc.',
     openGraph: {
       title: 'Lecture Notes',
-      description: 'Notes and summaries from lectures and presentations.',
+      description: 'Misc thoughts, proto-essays, reviews, musings, etc.',
       images: [
         {
           url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
@@ -759,10 +759,10 @@ export const staticMetadata: Record<string, Metadata> = {
   },
   notes: {
     title: 'Notes',
-    description: 'Short-form notes and quick thoughts on various topics.',
+    description: 'Misc thoughts, proto-essays, reviews, musings, etc.',
     openGraph: {
       title: 'Notes',
-      description: 'Short-form notes and quick thoughts on various topics.',
+      description: 'Misc thoughts, proto-essays, reviews, musings, etc.',
       images: [
         {
           url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
@@ -808,10 +808,10 @@ export const staticMetadata: Record<string, Metadata> = {
   },
   papers: {
     title: 'Papers',
-    description: 'Academic and research papers.',
+    description: 'stable long-form papers, studies, and self-experiments across various disciplines',
     openGraph: {
       title: 'Papers',
-      description: 'Academic and research papers.',
+      description: 'stable long-form papers, studies, and self-experiments across various disciplines',
       images: [
         {
           url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
@@ -880,10 +880,10 @@ export const staticMetadata: Record<string, Metadata> = {
   },
   problems: {
     title: 'Problems',
-    description: 'Interesting problems and puzzles to solve.',
+    description: 'A collection of mathematical problems ranging from elementary to advanced topics',
     openGraph: {
       title: 'Problems',
-      description: 'Interesting problems and puzzles to solve.',
+      description: 'A collection of mathematical problems ranging from elementary to advanced topics',
       images: [
         {
           url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
@@ -1601,10 +1601,10 @@ export const staticMetadata: Record<string, Metadata> = {
   },
   essays: {
     title: 'Essays',
-    description: 'Long-form essays and reflections on various topics.',
+    description: 'personal reflections, provocations, and open-ended thinking on life and mind',
     openGraph: {
       title: 'Essays',
-      description: 'Long-form essays and reflections on various topics.',
+      description: 'personal reflections, provocations, and open-ended thinking on life and mind',
       images: [
         {
           url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
@@ -1625,10 +1625,10 @@ export const staticMetadata: Record<string, Metadata> = {
   },
   blog: {
     title: 'Blog',
-    description: 'Short-form reflections, updates, and informal analysis.',
+    description: 'informal ramblings, thought experiments, and idea play across topics and characters',
     openGraph: {
       title: 'Blog',
-      description: 'Short-form reflections, updates, and informal analysis.',
+      description: 'informal ramblings, thought experiments, and idea play across topics and characters',
       images: [
         {
           url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
