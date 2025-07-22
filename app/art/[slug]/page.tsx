@@ -83,7 +83,7 @@ export default function ArtworkPage({ params }: ArtPageProps) {
         backHref="/art"
         backText="Art"
         preview={artwork.description}
-        status={artwork.status}
+        status={artwork.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned"}
         confidence={mapConfidence(artwork.confidence)}
         importance={artwork.importance}
       />

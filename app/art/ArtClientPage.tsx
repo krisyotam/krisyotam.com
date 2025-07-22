@@ -71,7 +71,7 @@ export default function ArtClientPage({ artworks, initialCategory = "all" }: Art
           <CustomSelect
             options={categoryOptions}
             value={activeCategory}
-            onChange={(value) => setActiveCategory(value as string)}
+            onValueChange={(value) => setActiveCategory(value)}
             placeholder="Filter by category"
             className="text-sm min-w-[140px]"
           />
