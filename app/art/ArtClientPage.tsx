@@ -27,8 +27,8 @@ export default function ArtClientPage({ artworks, initialCategory = "all" }: Art
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
 
-  // Get unique categories from artworks
-  const categories = ["all", ...Array.from(new Set(artworks.map(art => art.category)))];
+  // Get unique categories from artworks - filter out undefined values
+  const categories = ["all", ...Array.from(new Set(artworks.map(art => art.category).filter((category): category is string => !!category)))];
   
   // Convert categories to SelectOption format - exact implementation from NotesClientPage
   const categoryOptions: SelectOption[] = categories.map(category => ({
