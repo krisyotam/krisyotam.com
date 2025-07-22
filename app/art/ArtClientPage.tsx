@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/page-header";
 import { PageDescription } from "@/components/posts/typography/page-description";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import categoriesData from "@/data/art/categories.json";
+import { ArtworkItem } from "@/components/art/art-card-base";
 
 const defaultArtPageData = {
   title: "Art",
@@ -18,7 +19,7 @@ const defaultArtPageData = {
 };
 
 interface ArtClientPageProps {
-  artworks: any[];
+  artworks: ArtworkItem[];
   initialCategory?: string;
 }
 
@@ -46,7 +47,7 @@ export default function ArtClientPage({ artworks, initialCategory = "all" }: Art
     const matchesSearch = searchQuery.trim() === "" || 
       artwork.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (artwork.description && artwork.description.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (artwork.tags && artwork.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())));
+      (artwork.tags && artwork.tags.some((tag: string) => tag.toLowerCase().includes(searchQuery.toLowerCase())));
     
     const matchesCategory = activeCategory === "all" || artwork.category === activeCategory;
     
