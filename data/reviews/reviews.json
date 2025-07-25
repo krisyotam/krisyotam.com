@@ -3,39 +3,39 @@
 "title": "Mermaids",
 "date": "2025-06-01",
 "slug": "mermaids",
-"tags": ["Cinema", "Review", "Drama", "Winona Ryder", "1990s Cinema"],
-"category": "cinema",
+"tags": ["Film", "Review", "Drama", "Winona Ryder", "1990s Film"],
+"category": "film",
 "status": "Finished",
 "confidence": "certain",
 "importance": 5,
 "preview": "A review of the 1990 film 'Mermaids' starring Winona Ryder",
-"cover_image": "https://i.postimg.cc/BnTLtrB7/Mermaids.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/film/Mermaids.jpg",
 "state": "active"
 },
 {
 "title": "Girl, Interrupted",
 "date": "2025-06-02",
 "slug": "girl-interrupted",
-"tags": ["Cinema", "Review", "Psychological Drama", "Winona Ryder", "1990s Cinema"],
-"category": "cinema",
+"tags": ["Film", "Review", "Psychological Drama", "Winona Ryder", "1990s Film"],
+"category": "film",
 "status": "Finished",
 "confidence": "certain",
 "importance": 5,
 "preview": "A review of the 1999 psychological drama 'Girl, Interrupted' starring Winona Ryder and Angelina Jolie.",
-"cover_image": "https://i.postimg.cc/QxzYC6rv/girl-interrupted.png",
+"cover_image": "https://doc.krisyotam.com/imgs/film/girl-interrupted.png",
 "state": "active"
 },
 {
 "title": "Heathers",
 "date": "2025-06-02",
 "slug": "heathers",
-"tags": ["Cinema", "Review", "Dark Comedy", "Winona Ryder", "1980s Cinema", "Cult Classic"],
-"category": "cinema",
+"tags": ["Film", "Review", "Dark Comedy", "Winona Ryder", "1980s Film", "Cult Classic"],
+"category": "film",
 "status": "Finished",
 "confidence": "certain",
 "importance": 5,
 "preview": "A review of the 1989 cult classic dark comedy 'Heathers' starring Winona Ryder and Christian Slater.",
-"cover_image": "https://i.postimg.cc/50mktbxm/heathers.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/film/heathers.jpg",
 "state": "active"
 },
 {
@@ -48,7 +48,7 @@
 "status": "Draft",
 "confidence": "unlikely",
 "importance": 1,
-"cover_image": "https://i.postimg.cc/W4KZq98J/wistoria-wand-and-sword.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/anime/wistoria-wand-and-sw-ord.jpg",
 "state": "active"
 },
 {
@@ -61,7 +61,7 @@
 "status": "In Progress",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/P5bYzRp2/neon-genesis-evanglion.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/anime/neon-genesis-evanglion.jpg",
 "state": "active"
 },
 {
@@ -74,7 +74,7 @@
 "status": "In Progress",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/c1fyrr2B/the-village-booksmith.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/bookstores/the-village-booksmith.jpg",
 "state": "active"
 },
 {
@@ -87,7 +87,7 @@
 "status": "In Progress",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/43H2q0TQ/frugal-muse.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/bookstores/frugal-muse.jpg",
 "state": "active"
 },
 {
@@ -100,46 +100,46 @@
 "status": "In Progress",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/ncWxzzZn/pride-and-prejudice-penguin-classics.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/books/pride-and-prejudice-penguin-classics.jpg",
 "state": "active"
 },
 {
 "title": "Casablanca",
 "preview": "A review of the 1942 classic romantic drama starring Humphrey Bogart and Ingrid Bergman.",
 "date": "2025-07-02",
-"tags": ["Cinema", "Review", "Classic Cinema", "Romance", "Drama", "1940s Cinema"],
-"category": "cinema",
+"tags": ["Film", "Review", "Classic Film", "Romance", "Drama", "1940s Film"],
+"category": "film",
 "slug": "casablanca",
 "status": "Draft",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/XJYkpgQW/casablanca.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/film/casablanca.jpg",
 "state": "active"
 },
 {
 "title": "Citizen Kane",
 "preview": "A review of Orson Welles' 1941 masterpiece exploring power, ambition, and the American Dream.",
 "date": "2025-07-02",
-"tags": ["Cinema", "Review", "Classic Cinema", "Orson Welles", "Drama", "1940s Cinema"],
-"category": "cinema",
+"tags": ["Film", "Review", "Classic Film", "Orson Welles", "Drama", "1940s Film"],
+"category": "film",
 "slug": "citizen-kane",
 "status": "Draft",
 "confidence": "likely",
 "importance": 9,
-"cover_image": "https://i.postimg.cc/pTF8Zb8D/citizen-kane.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/film/citizen-kane.jpg",
 "state": "active"
 },
 {
 "title": "Jeanne Dielman, 23, quai du Commerce, 1080 Bruxelles",
 "preview": "A review of Chantal Akerman's groundbreaking 1975 film about domestic routine and female experience.",
 "date": "2025-07-02",
-"tags": ["Cinema", "Review", "Art Cinema", "Chantal Akerman", "Experimental", "1970s Cinema"],
-"category": "cinema",
+"tags": ["Film", "Review", "Art Film", "Chantal Akerman", "Experimental", "1970s Film"],
+"category": "film",
 "slug": "jeanne-dielman",
 "status": "Draft",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/8CGrngCG/Jeanne-Dielman.png",
+"cover_image": "https://doc.krisyotam.com/imgs/film/Jeanne-Dielman.png",
 "state": "active"
 },
 {
@@ -152,7 +152,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://i.postimg.cc/NGrrbVyV/elfen-lied.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/anime/elfen-lied.jpg",
 "state": "active"
 },
 {
@@ -165,7 +165,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://i.postimg.cc/0NM9nqy5/ergo-proxy.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/anime/ergo-proxy.jpg",
 "state": "active"
 },
 {
@@ -178,7 +178,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://i.postimg.cc/F1tkMP3t/haibane-renmei.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/anime/haibane-renmei.jpg",
 "state": "active"
 },
 {
@@ -191,7 +191,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/NFy6Vvdw/ghsot-in-the-shell.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/anime/ghsot-in-the-shell.jpg",
 "state": "active"
 },
 {
@@ -204,7 +204,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://i.postimg.cc/pV3pxkz2/sousou-no-frieren.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/anime/sousou-no-frieren.jpg",
 "state": "active"
 },
 {
@@ -217,7 +217,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://i.postimg.cc/63bSnw7s/that-time-i-got-reincarnated-as-a-slime.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/anime/that-time-i-got-reincarnated-as-a-slime.jpg",
 "state": "active"
 },
 {
@@ -230,7 +230,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://i.postimg.cc/25srXX1Q/texhnolyze.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/anime/texhnolyze.jpg",
 "state": "active"
 },
 {
@@ -243,7 +243,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://i.postimg.cc/qqJwL9T0/aku-no-hana.png",
+"cover_image": "https://doc.krisyotam.com/imgs/manga/aku-no-hana.png",
 "state": "active"
 },
 {
@@ -256,7 +256,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://i.postimg.cc/05wrsw0H/chi-no-wadachi.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/manga/chi-no-wadachi.jpg",
 "state": "active"
 },
 {
@@ -269,7 +269,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://i.postimg.cc/HxCBJrvr/ghost-in-the-shell.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/manga/ghost-in-the-shell.jpg",
 "state": "active"
 },
 {
@@ -282,7 +282,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://i.postimg.cc/qMGJJXhQ/tomie.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/manga/tomie.jpg",
 "state": "active"
 },
 {
@@ -295,7 +295,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://i.postimg.cc/k5RPbx40/bridgerton.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/film/bridgerton.jpg",
 "state": "active"
 },
 {
@@ -308,7 +308,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://i.postimg.cc/q7tMLmsr/charlies-angels.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/film/charlies-angels.jpg",
 "state": "active"
 },
 {
@@ -321,7 +321,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://i.postimg.cc/W4nvw2jV/the-vampire-diaries.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/film/the-vampire-diaries.jpg",
 "state": "active"
 },
 {
@@ -334,7 +334,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://i.postimg.cc/sg5y1YNv/gossip-girl.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/film/gossip-girl.jpg",
 "state": "active"
 },
 {
@@ -347,7 +347,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://i.postimg.cc/Y9WxwS9K/gilmore-girls.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/film/gilmore-girl.jpg",
 "state": "active"
 },
 {
@@ -360,20 +360,20 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://i.postimg.cc/Hxnf4mML/logh.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/anime/logh.jpg",
 "state": "active"
 },
 {
 "title": "Breakfast at Tiffany's",
 "preview": "A review of the classic romantic comedy film about a young woman in New York City who becomes involved with a struggling writer.",
 "date": "2025-07-12",
-"tags": ["Cinema", "Review", "Romantic Comedy", "Classic"],
-"category": "cinema",
+"tags": ["Film", "Review", "Romantic Comedy", "Classic"],
+"category": "film",
 "slug": "breakfast-at-tiffanys",
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://i.postimg.cc/zBtt01Vm/breakfast-at-tiffanys.jpg",
+"cover_image": "https://doc.krisyotam.com/imgs/film/breakfast-at-tiffanys.jpg",
 "state": "active"
 }
 
