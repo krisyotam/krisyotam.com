@@ -6,8 +6,9 @@ import { staticMetadata } from "@/lib/staticMetadata";
 export const metadata: Metadata = staticMetadata.notes;
 
 export default function NotesPage() {
-  // Sort notes by date (newest first)
-  const notes = [...notesData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  // Filter notes to only show active ones and sort by date (newest first)
+  const activeNotes = notesData.filter(note => note.state === "active");
+  const notes = [...activeNotes].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <div className="notes-container">

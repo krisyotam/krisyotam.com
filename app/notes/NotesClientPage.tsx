@@ -26,6 +26,12 @@ interface Note {
   slug: string;
   tags: string[];
   category: string;
+  status?: string;
+  confidence?: string;
+  importance?: number;
+  cover_image?: string;
+  preview?: string;
+  state?: string;
 }
 
 interface NotesClientPageProps {
@@ -36,6 +42,7 @@ interface NotesClientPageProps {
 export default function NotesClientPage({ notes, initialCategory = "all" }: NotesClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const router = useRouter();
 
   const categories = ["all", ...Array.from(new Set(notes.map(n => n.category)))];
@@ -97,6 +104,80 @@ export default function NotesClientPage({ notes, initialCategory = "all" }: Note
     }
   }
 
+  // Filter notes based on search query and category
+  const filteredNotes = notes.filter((note) => {
+    const q = searchQuery.toLowerCase();
+    const matchesSearch =
+      !q ||
+      note.title.toLowerCase().includes(q) ||
+      note.tags.some((tag) => tag.toLowerCase().includes(q)) ||
+      note.category.toLowerCase().includes(q);
+
+    const matchesCategory = activeCategory === "all" || note.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  // Helper to build the correct route for a note
+  function getNoteUrl(note: Note) {
+    return `/notes/${note.category}/${note.slug}`;
+  }
+
+  // Helper to format date as "Month DD, YYYY"
+  function formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long", 
+      day: "numeric"
+    });
+  }
+
+  const GridView = () => (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {filteredNotes.map((note) => (
+        <div
+          key={note.slug}
+          className="border border-border bg-card hover:bg-secondary/50 transition-colors cursor-pointer"
+          onClick={() => router.push(getNoteUrl(note))}
+        >
+          {/* Cover Image Area - Using 16:9 aspect ratio from sequences */}
+          <div className="aspect-[16/9] bg-muted/30 border-b border-border flex items-center justify-center overflow-hidden">
+            {note.cover_image ? (
+              <img 
+                src={note.cover_image} 
+                alt={note.title}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="text-muted-foreground text-xs text-center p-4">
+                {note.title}
+              </div>
+            )}
+          </div>
+          
+          {/* Content Area */}
+          <div className="p-3">
+            <h3 className="font-medium text-xs mb-1 line-clamp-2">{note.title}</h3>
+            <p className="text-xs text-muted-foreground mb-2 line-clamp-2">{formatCategoryDisplayName(note.category)}</p>
+            
+            {/* Metadata */}
+            <div className="flex items-center justify-between text-xs text-muted-foreground">
+              <span>{new Date(note.date).getFullYear()}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+  const ListView = () => (
+    <NotesTable
+      notes={filteredNotes}
+      searchQuery=""
+      activeCategory="all"
+    />
+  );
+
   return (
     <>
       <style jsx global>{`
@@ -106,16 +187,11 @@ export default function NotesClientPage({ notes, initialCategory = "all" }: Note
       `}</style>
 
       <div className="notes-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
-        <PageHeader {...headerData} />{/* Search and filter on same row */}
-        <div className="mb-6 flex items-center gap-4">
-          <div className="flex items-center gap-2 whitespace-nowrap">
-            <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>            <CustomSelect
-              value={activeCategory}
-              onValueChange={handleCategoryChange}
-              options={categoryOptions}
-              className="text-sm min-w-[140px]"
-            />
-          </div>          <div className="relative flex-1">
+        <PageHeader {...headerData} />
+
+        {/* Search bar */}
+        <div className="mb-4">
+          <div className="relative">
             <input 
               type="text" 
               placeholder="Search notes..." 
@@ -124,12 +200,51 @@ export default function NotesClientPage({ notes, initialCategory = "all" }: Note
               value={searchQuery}
             />
           </div>
-        </div>        {/* Notes table instead of grouped list */}
-        <NotesTable
-          notes={notes}
-          searchQuery={searchQuery}
-          activeCategory={activeCategory}
-        />
+        </div>
+
+        {/* Filter and view toggle */}
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2 whitespace-nowrap">
+            <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
+            <CustomSelect
+              value={activeCategory}
+              onValueChange={handleCategoryChange}
+              options={categoryOptions}
+              className="text-sm min-w-[140px]"
+            />
+          </div>
+
+          {/* View Mode Toggle */}
+          <div className="flex items-center gap-1 border border-border rounded-none overflow-hidden">
+            <button
+              onClick={() => setViewMode("grid")}
+              className={`px-3 py-1 text-xs transition-colors ${
+                viewMode === "grid" 
+                  ? "bg-foreground text-background" 
+                  : "bg-background text-foreground hover:bg-secondary/50"
+              }`}
+            >
+              Grid
+            </button>
+            <button
+              onClick={() => setViewMode("list")}
+              className={`px-3 py-1 text-xs transition-colors ${
+                viewMode === "list" 
+                  ? "bg-foreground text-background" 
+                  : "bg-background text-foreground hover:bg-secondary/50"
+              }`}
+            >
+              List
+            </button>
+          </div>
+        </div>
+
+        {/* Content based on view mode */}
+        {viewMode === "grid" ? <GridView /> : <ListView />}
+
+        {filteredNotes.length === 0 && (
+          <div className="text-muted-foreground text-sm mt-6 text-center">No notes found matching your criteria.</div>
+        )}
 
         {/* PageDescription component */}
         <PageDescription

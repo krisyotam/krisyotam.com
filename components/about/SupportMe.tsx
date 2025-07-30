@@ -16,7 +16,7 @@ export default function SupportMe() {
           I spend a lot of time learning. I also spend a lot of time writing about it. Through this process, I have found thousands of unique ideas, underseen content, and have created some gems myself. If you value any of this and would like to support this site, I have tried to make it as easy and profitable for you to do so.
         </p>
         
-        <h4 className="text-base font-medium mt-4">Patreon Tiers</h4>
+        <h5 className="text-sm font-medium mt-4">Patreon Tiers</h5>
         
         <ul className="space-y-4">
           <li>

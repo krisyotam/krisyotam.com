@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Card, CardContent } from "@/components/ui/card"
+import { Box } from "@/components/posts/typography/box"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import format from "date-fns/format"
 
@@ -540,93 +540,91 @@ export default function PersonalBio() {
   if (!ageInfo) return <div>Loading...</div>
 
   return (
-    <Card className="w-full max-w-3xl mx-auto">
-      <CardContent>
-        <Tabs defaultValue="age" className="mt-2">
-          <TabsList className="grid grid-cols-3">
-            <TabsTrigger value="age">Age</TabsTrigger>
-            <TabsTrigger value="zodiac">Zodiac</TabsTrigger>
-            <TabsTrigger value="numerology">Numerology</TabsTrigger>
-          </TabsList>
+    <Box className="w-full max-w-3xl mx-auto">
+      <Tabs defaultValue="age" className="mt-2">
+        <TabsList className="grid grid-cols-3 rounded-none">
+          <TabsTrigger value="age" className="rounded-none">Age</TabsTrigger>
+          <TabsTrigger value="zodiac" className="rounded-none">Zodiac</TabsTrigger>
+          <TabsTrigger value="numerology" className="rounded-none">Numerology</TabsTrigger>
+        </TabsList>
 
-          <TabsContent value="age" className="space-y-4">
-            <div className="rounded-lg bg-muted p-4">
-              <h3 className="font-medium mb-2">My Age</h3>
-              <p>
-                I was born on {format(ageInfo.birthDate, "MMMM d, yyyy")}, at {format(ageInfo.birthDate, "h:mm a")}.
-              </p>
-              <p className="mt-2">
-                As of <span className="font-mono">{ageInfo.now.toLocaleString()}</span>, I am:
-              </p>
-              <div className="grid grid-cols-2 gap-2 mt-2">
-                <div className="bg-background rounded p-2 text-center">
-                  <span className="text-2xl font-bold tabular-nums">{ageInfo.ageInYears}</span>
-                  <span className="block text-xs text-muted-foreground">years</span>
-                </div>
-                <div className="bg-background rounded p-2 text-center">
-                  <span className="text-2xl font-bold tabular-nums">{ageInfo.ageInMonths}</span>
-                  <span className="block text-xs text-muted-foreground">months</span>
-                </div>
-                <div className="bg-background rounded p-2 text-center">
-                  <span className="text-2xl font-bold tabular-nums">{ageInfo.ageInDays}</span>
-                  <span className="block text-xs text-muted-foreground">days</span>
-                </div>
-                <div className="bg-background rounded p-2 text-center">
-                  <span className="text-2xl font-bold tabular-nums">{ageInfo.ageInHours}</span>
-                  <span className="block text-xs text-muted-foreground">hours</span>
-                </div>
-                <div className="bg-background rounded p-2 text-center">
-                  <span className="text-2xl font-bold tabular-nums">{ageInfo.ageInMinutes}</span>
-                  <span className="block text-xs text-muted-foreground">minutes</span>
-                </div>
-                <div className="bg-background rounded p-2 text-center">
-                  <span className="text-2xl font-bold tabular-nums">{ageInfo.ageInSeconds}</span>
-                  <span className="block text-xs text-muted-foreground">seconds</span>
-                </div>
+        <TabsContent value="age" className="space-y-4">
+          <Box className="p-4">
+            <h3 className="font-medium mb-2">My Age</h3>
+            <p>
+              I was born on {format(ageInfo.birthDate, "MMMM d, yyyy")}, at {format(ageInfo.birthDate, "h:mm a")}.
+            </p>
+            <p className="mt-2">
+              As of <span className="font-mono">{ageInfo.now.toLocaleString()}</span>, I am:
+            </p>
+            <div className="grid grid-cols-2 gap-2 mt-2">
+              <div className="bg-background border border-border p-3 text-center">
+                <span className="text-2xl font-bold tabular-nums">{ageInfo.ageInYears}</span>
+                <span className="block text-xs text-muted-foreground">years</span>
               </div>
-              <p className="mt-4">
-                That's approximately{" "}
-                <span className="font-mono font-bold">{ageInfo.ageInTotalSeconds.toLocaleString()}</span> seconds since
-                my birth.
-              </p>
+              <div className="bg-background border border-border p-3 text-center">
+                <span className="text-2xl font-bold tabular-nums">{ageInfo.ageInMonths}</span>
+                <span className="block text-xs text-muted-foreground">months</span>
+              </div>
+              <div className="bg-background border border-border p-3 text-center">
+                <span className="text-2xl font-bold tabular-nums">{ageInfo.ageInDays}</span>
+                <span className="block text-xs text-muted-foreground">days</span>
+              </div>
+              <div className="bg-background border border-border p-3 text-center">
+                <span className="text-2xl font-bold tabular-nums">{ageInfo.ageInHours}</span>
+                <span className="block text-xs text-muted-foreground">hours</span>
+              </div>
+              <div className="bg-background border border-border p-3 text-center">
+                <span className="text-2xl font-bold tabular-nums">{ageInfo.ageInMinutes}</span>
+                <span className="block text-xs text-muted-foreground">minutes</span>
+              </div>
+              <div className="bg-background border border-border p-3 text-center">
+                <span className="text-2xl font-bold tabular-nums">{ageInfo.ageInSeconds}</span>
+                <span className="block text-xs text-muted-foreground">seconds</span>
+              </div>
             </div>
-          </TabsContent>
+            <p className="mt-4">
+              That's approximately{" "}
+              <span className="font-mono font-bold">{ageInfo.ageInTotalSeconds.toLocaleString()}</span> seconds since
+              my birth.
+            </p>
+          </Box>
+        </TabsContent>
 
-          <TabsContent value="zodiac" className="space-y-4">
-            <div className="rounded-lg bg-muted p-4">
-              <h3 className="font-medium mb-2">Western Zodiac Sign</h3>
-              <p className="text-lg font-semibold">{ageInfo.westernZodiac.sign}</p>
-              <p className="mt-1">{ageInfo.westernZodiac.dates}</p>
-              <p className="mt-2">{ageInfo.westernZodiac.description}</p>
-            </div>
+        <TabsContent value="zodiac" className="space-y-4">
+          <Box className="p-4">
+            <h3 className="font-medium mb-2">Western Zodiac Sign</h3>
+            <p className="text-lg font-semibold">{ageInfo.westernZodiac.sign}</p>
+            <p className="mt-1">{ageInfo.westernZodiac.dates}</p>
+            <p className="mt-2">{ageInfo.westernZodiac.description}</p>
+          </Box>
 
-            <div className="rounded-lg bg-muted p-4">
-              <h3 className="font-medium mb-2">Eastern Zodiac Sign</h3>
-              <p className="text-lg font-semibold">{ageInfo.easternZodiac.animal}</p>
-              <p className="mt-1">{ageInfo.easternZodiac.years}</p>
-              <p className="mt-2">{ageInfo.easternZodiac.description}</p>
-            </div>
-          </TabsContent>
+          <Box className="p-4">
+            <h3 className="font-medium mb-2">Eastern Zodiac Sign</h3>
+            <p className="text-lg font-semibold">{ageInfo.easternZodiac.animal}</p>
+            <p className="mt-1">{ageInfo.easternZodiac.years}</p>
+            <p className="mt-2">{ageInfo.easternZodiac.description}</p>
+          </Box>
+        </TabsContent>
 
-          <TabsContent value="numerology" className="space-y-4">
-            <div className="rounded-lg bg-muted p-4">
-              <h3 className="font-medium mb-2">Life Path Number: {ageInfo.lifePathNumber.number}</h3>
-              <p>{ageInfo.lifePathNumber.description}</p>
-            </div>
+        <TabsContent value="numerology" className="space-y-4">
+          <Box className="p-4">
+            <h3 className="font-medium mb-2">Life Path Number: {ageInfo.lifePathNumber.number}</h3>
+            <p>{ageInfo.lifePathNumber.description}</p>
+          </Box>
 
-            <div className="rounded-lg bg-muted p-4">
-              <h3 className="font-medium mb-2">Soul Urge Number: {ageInfo.soulUrgeNumber.number}</h3>
-              <p>{ageInfo.soulUrgeNumber.description}</p>
-            </div>
+          <Box className="p-4">
+            <h3 className="font-medium mb-2">Soul Urge Number: {ageInfo.soulUrgeNumber.number}</h3>
+            <p>{ageInfo.soulUrgeNumber.description}</p>
+          </Box>
 
-            <div className="rounded-lg bg-muted p-4">
-              <h3 className="font-medium mb-2">Destiny Number: {ageInfo.destinyNumber.number}</h3>
-              <p>{ageInfo.destinyNumber.description}</p>
-            </div>
-          </TabsContent>
-        </Tabs>
-      </CardContent>
-    </Card>
+          <Box className="p-4">
+            <h3 className="font-medium mb-2">Destiny Number: {ageInfo.destinyNumber.number}</h3>
+            <p>{ageInfo.destinyNumber.description}</p>
+          </Box>
+        </TabsContent>
+      </Tabs>
+    </Box>
   )
 }
 

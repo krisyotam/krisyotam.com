@@ -20,6 +20,9 @@ interface NoteData {
   status: string;
   confidence: string;
   importance: number;
+  cover_image?: string;
+  preview?: string;
+  state?: string;
 }
 
 interface NotePageProps {
@@ -39,7 +42,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: NotePageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: NotePageProps, parent: ResolvingMetadata): Promise<Metadata> {
   const note = notesData.find(n => 
     slugifyCategory(n.category) === params.category && n.slug === params.slug
   );
@@ -50,9 +53,35 @@ export async function generateMetadata({ params }: NotePageProps): Promise<Metad
     };
   }
 
+  // Get cover image URL - prioritize cover_image field, fallback to a placeholder
+  const coverUrl = note.cover_image || 
+    `https://picsum.photos/1200/630?text=${encodeURIComponent(note.title)}`
+
+  const url = `https://krisyotam.com/notes/${params.category}/${params.slug}`;
+
   return {
-    title: `${note.title} | ${note.category} | Kris Yotam`,
-    description: `Note: ${note.title} in ${note.category} category`,
+    title: `${note.title} | Kris Yotam`,
+    description: note.preview || `Note: ${note.title} in ${note.category} category`,
+    openGraph: {
+      title: note.title,
+      description: note.preview || `Note: ${note.title} in ${note.category} category`,
+      url,
+      type: "article",
+      images: [{
+        url: coverUrl,
+        width: 1200,
+        height: 630,
+        alt: note.title
+      }],
+      siteName: "Kris Yotam",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: note.title,
+      description: note.preview || `Note: ${note.title} in ${note.category} category`,
+      images: [coverUrl],
+      creator: "@krisyotam"
+    }
   };
 }
 

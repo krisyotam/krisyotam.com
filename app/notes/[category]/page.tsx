@@ -8,8 +8,9 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  // Get all unique categories from notes data
-  const categories = Array.from(new Set(notesData.map(note => note.category)));
+  // Get all unique categories from active notes data only
+  const activeNotes = notesData.filter(note => note.state === "active");
+  const categories = Array.from(new Set(activeNotes.map(note => note.category)));
   
   console.log('Available categories:', categories);
   console.log('Slugified categories:', categories.map(cat => cat.toLowerCase().replace(/\s+/g, "-")));
@@ -22,7 +23,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   // Convert slug back to category name
   const categorySlug = params.category;
-  const originalCategory = notesData.find(note => 
+  const activeNotes = notesData.filter(note => note.state === "active");
+  const originalCategory = activeNotes.find(note => 
     note.category.toLowerCase().replace(/\s+/g, "-") === categorySlug
   )?.category;
 
@@ -41,8 +43,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default function NotesCategoryPage({ params }: PageProps) {
   const categorySlug = params.category;
   
+  // Filter notes to only show active ones first
+  const activeNotes = notesData.filter(note => note.state === "active");
+  
   // Find the original category name
-  const originalCategory = notesData.find(note => 
+  const originalCategory = activeNotes.find(note => 
     note.category.toLowerCase().replace(/\s+/g, "-") === categorySlug
   )?.category;
 
@@ -51,7 +56,7 @@ export default function NotesCategoryPage({ params }: PageProps) {
   }
 
   // Sort notes by date (newest first)
-  const notes = [...notesData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const notes = [...activeNotes].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <div className="notes-container">

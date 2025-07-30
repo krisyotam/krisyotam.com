@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 interface Note {
@@ -13,6 +12,9 @@ interface Note {
   status?: string;
   confidence?: string;
   importance?: number;
+  cover_image?: string;
+  preview?: string;
+  state?: string;
 }
 
 interface NotesTableProps {
@@ -22,26 +24,8 @@ interface NotesTableProps {
 }
 
 export function NotesTable({ notes, searchQuery, activeCategory }: NotesTableProps) {
-  const [filteredNotes, setFilteredNotes] = useState<Note[]>(notes);
   const router = useRouter();
 
-  useEffect(() => {
-    const filtered = notes.filter((note) => {
-      const q = searchQuery.toLowerCase();
-      const matchesSearch =
-        !q ||
-        note.title.toLowerCase().includes(q) ||
-        note.tags.some((t) => t.toLowerCase().includes(q)) ||
-        note.category.toLowerCase().includes(q);
-
-      const matchesCategory = activeCategory === "all" || note.category === activeCategory;
-      return matchesSearch && matchesCategory;
-    });
-
-    // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-    setFilteredNotes(filtered);
-  }, [notes, searchQuery, activeCategory]);
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -65,7 +49,7 @@ export function NotesTable({ notes, searchQuery, activeCategory }: NotesTablePro
     return `/notes/${categorySlug}/${encodeURIComponent(note.slug)}`;
   }
 
-  if (!filteredNotes.length) {
+  if (!notes.length) {
     return <p className="text-center py-10 text-muted-foreground">No notes found.</p>;
   }
 
@@ -79,7 +63,7 @@ export function NotesTable({ notes, searchQuery, activeCategory }: NotesTablePro
           </tr>
         </thead>
         <tbody>
-          {filteredNotes.map((note, index) => (            <tr
+          {notes.map((note, index) => (            <tr
               key={note.slug}
               className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
                 index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
@@ -92,10 +76,6 @@ export function NotesTable({ notes, searchQuery, activeCategory }: NotesTablePro
           ))}
         </tbody>
       </table>
-      
-      {filteredNotes.length === 0 && (
-        <div className="text-muted-foreground text-sm mt-6">No notes found matching your criteria.</div>
-      )}
     </div>
   );
 }

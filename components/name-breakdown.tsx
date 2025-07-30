@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator"
 
 export default function NameBreakdown() {
   return (
-    <Card className="w-full max-w-3xl mx-auto shadow-md">
+    <Card className="w-full max-w-3xl mx-auto">
       <CardContent className="p-6">
         <div className="grid gap-6">
           <NamePart name="Kris" pronunciation="KRISS" meaning="Follower of Christ" />
