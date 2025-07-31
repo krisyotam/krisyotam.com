@@ -12,6 +12,7 @@ export function HeaderUnderlineDetector() {
       )
       
       headers.forEach((header) => {
+        if (!(header instanceof HTMLElement)) return;
         // Always use the original text for detection
         let originalText = header.getAttribute('data-original-header-text') || header.textContent || '';
 

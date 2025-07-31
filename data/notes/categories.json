@@ -404,6 +404,15 @@
 "status": "Finished",
 "confidence": "certain",
 "importance": 5
+},
+{
+"slug": "reviews",
+"title": "Reviews",
+"preview": "notes on review methods, styles, and aspects of critique.",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
 }
 ]
 }

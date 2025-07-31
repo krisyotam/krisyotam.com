@@ -1192,5 +1192,18 @@
 "confidence": "certain",
 "importance": 9,
 "state": "active"
+},
+{
+"title": "Toward a Theory of Film Critique",
+"preview": "my framework for analyzing and critiquing films covering narrative structure, cinematography, thematic depth, cultural impact, and musical score",
+"date": "2025-06-25",
+"tags": ["Film Critique", "Cinematography", "Narrative"],
+"category": "reviews",
+"slug": "toward-a-theory-of-film-critique",
+"cover_image": "",
+"status": "Notes",
+"confidence": "certain",
+"importance": 3,
+"state": "active"
 }
 ]
