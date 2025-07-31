@@ -1150,5 +1150,42 @@ p .katex-display {
   padding: 0 !important;
 }
 
+/* =============================================================================
+   PERCENTAGE-BASED UNDERLINES FOR HEADERS
+   ========================================================================== */
+/* Base positioning for headers that might have percentage underlines */
+[class*="-content"] h1,
+[class*="-content"] h2,
+[class*="-content"] h3 {
+  position: relative;
+}
+
+/* CSS custom properties for different percentages */
+[class*="-content"] h1[data-underline-width],
+[class*="-content"] h2[data-underline-width],
+[class*="-content"] h3[data-underline-width] {
+  overflow: hidden;
+}
+
+[class*="-content"] h1[data-underline-width]::after,
+[class*="-content"] h2[data-underline-width]::after,
+[class*="-content"] h3[data-underline-width]::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: calc(100% - var(--underline-width, 100%));
+  height: 1px;
+  background: var(--background, #fff);
+  z-index: 2;
+}
+
+/* Dark mode version */
+.dark [class*="-content"] h1[data-underline-width]::after,
+.dark [class*="-content"] h2[data-underline-width]::after,
+.dark [class*="-content"] h3[data-underline-width]::after {
+  background: hsl(var(--background));
+}
+
 
 

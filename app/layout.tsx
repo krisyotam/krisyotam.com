@@ -8,6 +8,7 @@ import { SettingsMenu } from "../components/settings-menu"
 import { ScrollbarController } from "../components/scrollbar-controller"
 import { DarkModeScript } from "../components/dark-mode-script"
 import { DarkModeClasses } from "../components/dark-mode-classes"
+import { HeaderUnderlineDetector } from "../components/header-underline-detector"
 import type React from "react"
 import Script from "next/script"
 import { MDXProviderWrapper } from './mdx-provider'
@@ -95,6 +96,7 @@ export default function RootLayout({
               <UniversalLinkModalWrapper />
               <ScrollbarController />
               <DarkModeClasses />
+              <HeaderUnderlineDetector />
             </div>
           </MDXProviderWrapper>
         </ThemeProvider>

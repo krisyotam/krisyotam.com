@@ -394,7 +394,16 @@
 "date": "2025-06-25",
 "status": "Finished",
 "confidence": "certain",
-"importance": 9
+"importance": 3
+},
+{
+"slug": "notes-on-people",
+"title": "Notes on People",
+"preview": "notes, dossiers, and commentaries on famous people, historical figures, their careers, and contributions.",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
 }
 ]
 }

@@ -58,6 +58,7 @@ import { QuotesFeed } from "@/components/quotes-feed"; // Add this import
 import { Tree } from "@/components/family-tree"
 import WebsiteDemo from "@/components/posts/website/website"
 import { WikiPerson } from "@/components/posts/wikipedia/wiki-person"
+import { WikiFilm } from "@/components/posts/wikipedia/wiki-film"
 import Product from "@/components/posts/basic/product"
 import { RedditEmbed } from "@/components/typography/reddit-embed"
 import AnimeCharacterDisplay from "@/components/posts/content/anime-character-display"
@@ -223,6 +224,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Company,
     Tree,
     WikiPerson,
+    WikiFilm,
     
     // Product components
     Product,

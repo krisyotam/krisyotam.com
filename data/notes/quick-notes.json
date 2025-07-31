@@ -1179,5 +1179,18 @@
 "confidence": "certain",
 "importance": 9,
 "state": "active"
+},
+{
+"title": "Notes on Winona Ryder",
+"preview": "anthology of winona ryder's roles, quotes, excerpts, references, and interviews",
+"date": "2025-06-25",
+"tags": ["Winona Ryder", "Acting", "Film", "Interviews"],
+"category": "notes-on-people",
+"slug": "notes-on-winona-ryder",
+"cover_image": "https://doc.krisyotam.com/cover/notes/winona-ryder.png",
+"status": "Notes",
+"confidence": "certain",
+"importance": 9,
+"state": "active"
 }
 ]

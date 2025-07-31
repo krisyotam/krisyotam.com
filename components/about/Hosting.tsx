@@ -25,7 +25,7 @@ export default function Hosting() {
       status: "Active"
     },
     {
-      name: "XMR node (tor)",
+      name: "Tor",
       addresses: ["3g2upl4pq6kufc4m.onion"],
       status: "Active"
     },
