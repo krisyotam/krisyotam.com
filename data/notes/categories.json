@@ -10,6 +10,15 @@
 "importance": 8
 },
 {
+"slug": "short-stories",
+"title": "Short Stories",
+"preview": "A collection of short fictional works—spanning surreal dialogues, allegorical dramas, speculative scenes, and psychological sketches. These are not by me, but gathered as part of my broader interest in narrative form, structure, and experimental fiction.",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 2
+},
+{
 "slug": "philosophy",
 "title": "Philosophy",
 "preview": "Philosophical musings, ethical considerations, and explorations of fundamental questions about existence and meaning.",

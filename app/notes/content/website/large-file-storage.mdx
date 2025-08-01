@@ -49,3 +49,118 @@ Things like this as well as research papers, historical documents, ect. are to b
 
 More fun things to store include the GeoCities Archives, which represent an important piece of early internet history that would otherwise be lost to time. 
 
+# Implementation
+
+<Dropcap type="william-morris-gothic">F</Dropcap>or now I’ve decided to keep Vercel as my main host. I already have both a Hetzner server and a Storage Box set up, but for large file hosting I went with something a little more elegant. I’m using two S3-compatible Object Storage buckets—`doc` and `cdn`—and routing traffic through a reverse proxy so they appear under custom domains: [doc.krisyotam.com](https://doc.krisyotam.com) and [cdn.krisyotam.com](https://cdn.krisyotam.com).
+
+Instead of the typical CNAME setup, I went with a reverse proxy using Caddy. It gives me full control over routing, lets me handle TLS certs easily, and keeps everything on brand. Here’s how I did it.
+
+---
+
+### Step 1 – Create the Object Storage Buckets
+
+* I created two public buckets on Hetzner’s Object Storage dashboard: one for documents, one for serving static files.
+* Then I generated S3 access keys so my reverse proxy could actually hit the bucket.
+
+---
+
+### Step 2 – Set Up the Server
+
+* I spun up a Hetzner cloud server.
+* Installed Docker and Docker Compose using [Docker’s install instructions](https://docs.docker.com/get-docker/).
+
+---
+
+### Step 3 – Set Up Caddy as a Reverse Proxy
+
+SSH into the box:
+
+```bash
+ssh root@<your-server-ip>
+```
+
+Create the directory structure:
+
+```bash
+mkdir -p /opt/caddy/data
+```
+
+Now create the Docker Compose file:
+
+```bash
+vim /opt/caddy/compose.yaml
+```
+
+Paste this in:
+
+```yaml
+services:
+  caddy:
+    container_name: caddy
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./data/Caddyfile:/etc/caddy/Caddyfile
+      - ./data/certs:/certs
+      - ./data/config:/config
+      - ./data/data:/data
+      - ./data/sites:/srv
+```
+
+Then the actual Caddyfile:
+
+```bash
+vim /opt/caddy/data/Caddyfile
+```
+
+Here’s what I put in there:
+
+```caddyfile
+cdn.krisyotam.com {
+    tls {
+        issuer acme {
+            dir https://acme-v02.api.letsencrypt.org/directory
+        }
+    }
+    reverse_proxy https://cdn.hel1.your-objectstorage.com {
+        header_up Host {http.reverse_proxy.upstream.hostport}
+        header_up X-Forwarded-Host {host}
+    }
+}
+
+doc.krisyotam.com {
+    tls {
+        issuer acme {
+            dir https://acme-v02.api.letsencrypt.org/directory
+        }
+    }
+    reverse_proxy https://doc.hel1.your-objectstorage.com {
+        header_up Host {http.reverse_proxy.upstream.hostport}
+        header_up X-Forwarded-Host {host}
+    }
+}
+```
+
+> If your object storage provider uses the bucket name in the path instead of the subdomain, make sure to adjust the `reverse_proxy` URL accordingly (e.g. `https://hel1.your-objectstorage.com/<bucket_name>`).
+
+---
+
+### Step 4 – Run It
+
+Start up the container:
+
+```bash
+cd /opt/caddy
+docker compose up -d
+```
+
+Check that it’s running:
+
+```bash
+docker ps
+```
+
+At this point, both doc.krisyotam.com and cdn.krisyotam.com are serving public files cleanly through Caddy, with HTTPS certs, and no ugly S3 links in sight.

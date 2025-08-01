@@ -116,7 +116,8 @@
 }
 
 /* code ------------------------------------------------------------------- */
-.note-content code {
+/* Only apply to inline code, not code blocks */
+.note-content :not(pre) > code {
   font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
   font-size: 0.85em;
   background: rgba(0, 0, 0, 0.05);
@@ -124,7 +125,8 @@
   border-radius: 3px;
 }
 
-.note-content pre {
+/* Only style regular pre blocks, not the syntax highlighter ones */
+.note-content pre:not(.code-block):not(.react-syntax-highlighter-line-number) {
   margin: 0.5rem 0; /* small gap above/below code blocks */
   padding: 0.75rem;
   overflow-x: auto;
@@ -133,9 +135,108 @@
   background: rgba(0, 0, 0, 0.03);
 }
 
-.note-content pre > code {
+/* Safe base styling for all pre/code elements regardless of specific classes */
+.note-content pre,
+.note-content code {
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Fallback for when the .code-block class isn't applied by the renderer */
+.note-content pre:not(.code-block) > code {
+  background: rgba(0, 0, 0, 0.03);
+  display: block;
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 0.75rem;
+}
+
+/* Comprehensive fix for code blocks to address layering issues */
+
+/* Main code block container - exact match to Box component */
+.note-content .code-block,
+.note-content pre.code-block {
+  margin: 1.5rem 0; /* Match Box my-6 */
+  width: 100%;
+  padding: 1.5rem; /* Exact match to p-6 from Box component */
+  background-color: hsl(var(--muted)/50%); /* Exact match to bg-muted/50 */
+  border-radius: 0; /* Exact match to rounded-none */
+  overflow: auto;
+  position: relative;
+  border: none;
+  box-shadow: none;
+}
+
+/* Remove outline from code blocks */
+.note-content .code-block,
+.note-content pre.code-block {
+  outline: none;
+}
+
+/* Dark mode background override to match Box */
+.dark .note-content .code-block,
+.dark .note-content pre.code-block {
+  background-color: hsl(var(--popover)); /* Exact match to Box dark:bg-[hsl(var(--popover))] */
+}
+
+/* Code block wrapper (if used) */
+.note-content .code-block-wrapper {
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+/* Reset all inner elements to prevent layering */
+.note-content .code-block *,
+.note-content pre.code-block *,
+.note-content .code-block pre,
+.note-content .code-block code,
+.note-content .code-block .syntax-line {
   background: transparent;
+  border: none;
+  margin: 0;
   padding: 0;
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Target react-syntax-highlighter container */
+.note-content .code-container {
+  max-height: none; /* Remove max-height limitation */
+  overflow: auto;
+  width: 100%;
+  display: block; /* Ensure proper block display */
+}
+
+/* Handle line numbers - removed vertical bars */
+.note-content .react-syntax-highlighter-line-number,
+.note-content span[class*="linenumber"] {
+  min-width: 3em;
+  padding-right: 1em;
+  margin-right: 1em;
+  text-align: right;
+  border-right: none !important; /* explicitly remove vertical bar */
+  color: rgba(127, 127, 127, 0.6);
+  user-select: none;
+  position: static !important; /* ensure position is static to scroll with code */
+  display: inline-block;
+  font-size: 0.8em;
+}
+
+/* Fix for line number scrolling with code */
+.note-content .syntax-line {
+  display: flex !important; /* Ensure line is displayed as flex */
+  width: 100% !important;
+  align-items: flex-start !important;
+  min-height: 1.5em !important;
+}
+
+/* Ensure code blocks scroll correctly */
+.note-content .code-block .code-container::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
 }
 
 /* tables ----------------------------------------------------------------- */

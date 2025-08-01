@@ -53,4 +53,16 @@
     "confidence": "certain",
     "importance": 6,
     "preview": "An Elizabethan sonnet meditating on the passage of time."
-  }]
+  },
+  {
+    "title": "On the Fifth Day",
+    "date": "2025-06-05",
+    "slug": "on-the-fifth-day",
+    "tags": ["Fiction", "Character Study", "Original Characters"],
+    "category": "Flash Fiction",
+    "status": "In Progress",
+    "confidence": "certain",
+    "importance": 6,
+    "preview": "A character study of a town that resists change and growth."
+  }
+]
