@@ -17,7 +17,11 @@ interface Story {
   tags: string[];
   category: string;
   cover_image?: string;
-  state?: "active" | "hidden";
+  status: string;
+  confidence: string;
+  importance: number;
+  preview: string;
+  state: "active" | "hidden";
 }
 
 interface FictionClientPageProps {

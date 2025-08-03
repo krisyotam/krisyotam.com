@@ -9,6 +9,12 @@ interface Story {
   slug: string;
   tags: string[];
   category: string;
+  cover_image?: string;
+  status: string;
+  confidence: string;
+  importance: number;
+  preview: string;
+  state: "active" | "hidden";
 }
 
 interface FictionTableProps {
