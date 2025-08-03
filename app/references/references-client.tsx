@@ -147,7 +147,7 @@ export function ReferencesClient() {
                   index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
                 }`}
               >
-                <td className="py-2 px-3 font-medium">{reference.title}</td>
+                <td className="py-2 px-3">{reference.title}</td>
                 <td className="py-2 px-3 text-muted-foreground">{reference.author}</td>
                 <td className="py-2 px-3">{reference.type}</td>
                 <td className="py-2 px-3 whitespace-nowrap">

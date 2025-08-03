@@ -1205,5 +1205,18 @@
 "confidence": "certain",
 "importance": 3,
 "state": "active"
+},
+{
+"title": "Character Creation Template",
+"preview": "a in-depth template for original character creation",
+"date": "2025-06-25",
+"tags": ["Characters", "Fiction", "Narrative"],
+"category": "templates",
+"slug": "character-creation-template",
+"cover_image": "",
+"status": "Notes",
+"confidence": "certain",
+"importance": 3,
+"state": "active"
 }
 ]

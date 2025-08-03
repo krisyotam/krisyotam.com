@@ -84,7 +84,8 @@ export function ProblemTable({ problems, searchQuery, activeCategory }: ProblemT
                 index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
               }`}
               onClick={() => router.push(getProblemUrl(problem))}
-            >              <td className="py-2 px-3 font-medium">{problem.title}</td>
+            >
+              <td className="py-2 px-3">{problem.title}</td>
               <td className="py-2 px-3">{formatCategoryDisplayName(problem.category)}</td>
               <td className="py-2 px-3">{formatDate(problem.date)}</td>
             </tr>

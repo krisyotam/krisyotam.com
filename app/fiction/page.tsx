@@ -6,8 +6,10 @@ import { staticMetadata } from "@/lib/staticMetadata";
 export const metadata: Metadata = staticMetadata.fiction;
 
 export default function FictionPage() {
-  // Sort fiction by date (newest first)
-  const stories = [...fictionData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  // Filter and sort fiction by date (newest first) - only show active stories
+  const stories = fictionData
+    .filter(story => story.state === "active" || story.state === undefined)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <div className="fiction-container">

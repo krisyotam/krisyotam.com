@@ -183,7 +183,7 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
                     className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
                     onClick={() => router.push(getPoemUrl(poem))}
                   >
-                    <td className="py-2 px-3 font-medium">{poem.title}</td>
+                    <td className="py-2 px-3">{poem.title}</td>
                     <td className="py-2 px-3">{getTypeTitle(poem.type)}</td>
                     <td className="py-2 px-3">{String(poem.year)}</td>
                   </tr>

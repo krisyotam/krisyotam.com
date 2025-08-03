@@ -145,7 +145,7 @@ export function ProgymnasmataClient({ initialTypeFilter = "All" }: Progymnasmata
                     className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
                     onClick={() => window.location.href = getEntryUrl(entry)}
                   >
-                    <td className="py-2 px-3 font-medium">{entry.title}</td>
+                    <td className="py-2 px-3">{entry.title}</td>
                     <td className="py-2 px-3">{entry.type}</td>
                     <td className="py-2 px-3">{new Date(entry.date).getFullYear()}</td>
                   </tr>

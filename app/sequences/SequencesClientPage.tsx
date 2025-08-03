@@ -230,7 +230,7 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
             key={sequence.slug}
             className={`border-b border-border hover:bg-secondary/50 transition-colors ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
           >
-            <td className="py-2 px-3 font-medium">{sequence.title}</td>
+            <td className="py-2 px-3">{sequence.title}</td>
             <td className="py-2 px-3">
               {sequence.category && (
                 <Link 

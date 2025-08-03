@@ -167,7 +167,7 @@ export default function ReviewClientPage({ reviews, initialCategory = "all" }: R
             }`}
             onClick={() => router.push(getReviewUrl(review))}
           >
-            <td className="py-2 px-3 font-medium">{review.title}</td>
+            <td className="py-2 px-3">{review.title}</td>
             <td className="py-2 px-3">{review.category}</td>
             <td className="py-2 px-3">{formatDate(review.date)}</td>
           </tr>

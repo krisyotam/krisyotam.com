@@ -375,6 +375,19 @@
 "importance": 6,
 "cover_image": "https://doc.krisyotam.com/imgs/film/breakfast-at-tiffanys.jpg",
 "state": "active"
+},
+{
+"title": "Mulholland Dr.",
+"preview": "A review of the cult classic surrealist neo-noir mystery",
+"date": "2025-07-12",
+"tags": ["Naomi Watts", "Laura Harring", "David Lynch", "English", "USA", "Surrealism", "Neo-noir", "Peter Deming"],
+"category": "film",
+"slug": "mulholland-dr",
+"status": "Draft",
+"confidence": "likely",
+"importance": 6,
+"cover_image": "https://doc.krisyotam.com/imgs/film/mulholland-dr.jpg",
+"state": "active"
 }
 
 ]

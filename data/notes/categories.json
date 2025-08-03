@@ -422,6 +422,15 @@
 "status": "Finished",
 "confidence": "certain",
 "importance": 5
+},
+{
+"slug": "templates",
+"title": "Templates",
+"preview": "templates for prose, ocs, and more",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
 }
 ]
 }

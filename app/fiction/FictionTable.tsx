@@ -78,7 +78,7 @@ export function FictionTable({ stories, searchQuery, activeCategory }: FictionTa
               }`}
               onClick={() => router.push(getStoryUrl(story))}
             >
-              <td className="py-2 px-3 font-medium">{story.title}</td>
+              <td className="py-2 px-3">{story.title}</td>
               <td className="py-2 px-3">{story.category}</td>
               <td className="py-2 px-3">{formatDate(story.date)}</td>
             </tr>

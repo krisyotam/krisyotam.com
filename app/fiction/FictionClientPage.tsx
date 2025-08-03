@@ -16,6 +16,8 @@ interface Story {
   slug: string;
   tags: string[];
   category: string;
+  cover_image?: string;
+  state?: "active" | "hidden";
 }
 
 interface FictionClientPageProps {
@@ -37,6 +39,7 @@ const defaultFictionPageData = {
 export default function FictionClientPage({ stories, initialCategory = "all" }: FictionClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const router = useRouter();
 
   const categories = ["all", ...Array.from(new Set(stories.map(n => n.category)))];
@@ -79,6 +82,100 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
     setActiveCategory(initialCategory);
   }, [initialCategory]);
 
+  // Filter stories based on search query and category
+  const filteredStories = stories.filter((story) => {
+    const q = searchQuery.toLowerCase();
+    const matchesSearch =
+      !q ||
+      story.title.toLowerCase().includes(q) ||
+      story.tags.some((tag) => tag.toLowerCase().includes(q)) ||
+      story.category.toLowerCase().includes(q);
+
+    const matchesCategory = activeCategory === "all" || story.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  // Helper to build the correct route for a story
+  function getStoryUrl(story: Story) {
+    const categorySlug = story.category.toLowerCase().replace(/\s+/g, "-");
+    return `/fiction/${categorySlug}/${encodeURIComponent(story.slug)}`;
+  }
+
+  // Helper to format date as "Month DD, YYYY"
+  function formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long", 
+      day: "numeric"
+    });
+  }
+
+  const GridView = () => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {filteredStories.map((story) => (
+        <div
+          key={story.slug}
+          className="border border-border bg-card hover:bg-secondary/50 transition-colors cursor-pointer"
+          onClick={() => router.push(getStoryUrl(story))}
+        >
+          {/* Cover Image Area - Book aspect ratio (3:4) */}
+          <div className="aspect-[3/4] bg-muted/30 border-b border-border flex items-center justify-center overflow-hidden">
+            {story.cover_image ? (
+              <img 
+                src={story.cover_image} 
+                alt={story.title}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="text-muted-foreground text-xs text-center p-4">
+                {story.title}
+              </div>
+            )}
+          </div>
+          
+          {/* Content Area */}
+          <div className="p-3">
+            <h3 className="font-medium text-xs mb-1 line-clamp-2">{story.title}</h3>
+            <p className="text-xs text-muted-foreground mb-2 line-clamp-2">{story.category}</p>
+            
+            {/* Metadata */}
+            <div className="flex items-center justify-between text-xs text-muted-foreground">
+              <span>{new Date(story.date).getFullYear()}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+  const ListView = () => (
+    <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
+      <thead>
+        <tr className="border-b border-border bg-muted/50 text-foreground">
+          <th className="py-2 text-left font-medium px-3">Title</th>
+          <th className="py-2 text-left font-medium px-3">Category</th>
+          <th className="py-2 text-left font-medium px-3">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {filteredStories.map((story, index) => (
+          <tr
+            key={story.slug}
+            className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
+              index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
+            }`}
+            onClick={() => router.push(getStoryUrl(story))}
+          >
+            <td className="py-2 px-3">{story.title}</td>
+            <td className="py-2 px-3">{story.category}</td>
+            <td className="py-2 px-3">{formatDate(story.date)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+
   // Helper function to create category slug
   function slugifyCategory(category: string) {
     return category.toLowerCase().replace(/\s+/g, "-");
@@ -106,18 +203,9 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
           importance={headerData.importance}
         />
 
-        <div className="mb-6 flex flex-col sm:flex-row gap-4">
-          {/* Category Select */}
-          <div className="w-full sm:w-48">
-            <CustomSelect
-              value={activeCategory}
-              onValueChange={handleCategoryChange}
-              options={categoryOptions}
-            />
-          </div>
-          
-          {/* Search Input */}
-          <div className="flex-1">
+        {/* Search bar */}
+        <div className="mb-4">
+          <div className="relative">
             <input 
               type="text" 
               placeholder="Search stories..." 
@@ -126,12 +214,51 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
               value={searchQuery}
             />
           </div>
-        </div>        {/* Stories table */}
-        <FictionTable
-          stories={stories}
-          searchQuery={searchQuery}
-          activeCategory={activeCategory}
-        />
+        </div>
+
+        {/* Filter and view toggle */}
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2 whitespace-nowrap">
+            <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
+            <CustomSelect
+              value={activeCategory}
+              onValueChange={handleCategoryChange}
+              options={categoryOptions}
+              className="text-sm min-w-[140px]"
+            />
+          </div>
+
+          {/* View Mode Toggle */}
+          <div className="flex items-center gap-1 border border-border rounded-none overflow-hidden">
+            <button
+              onClick={() => setViewMode("grid")}
+              className={`px-3 py-1 text-xs transition-colors ${
+                viewMode === "grid" 
+                  ? "bg-foreground text-background" 
+                  : "bg-background text-foreground hover:bg-secondary/50"
+              }`}
+            >
+              Grid
+            </button>
+            <button
+              onClick={() => setViewMode("list")}
+              className={`px-3 py-1 text-xs transition-colors ${
+                viewMode === "list" 
+                  ? "bg-foreground text-background" 
+                  : "bg-background text-foreground hover:bg-secondary/50"
+              }`}
+            >
+              List
+            </button>
+          </div>
+        </div>
+
+        {/* Content based on view mode */}
+        {viewMode === "grid" ? <GridView /> : <ListView />}
+
+        {filteredStories.length === 0 && (
+          <div className="text-muted-foreground text-sm mt-6 text-center">No stories found matching your criteria.</div>
+        )}
 
         {/* PageDescription component */}
         <PageDescription

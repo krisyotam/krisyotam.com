@@ -84,7 +84,8 @@ export function ProofTable({ proofs, searchQuery, activeCategory }: ProofTablePr
                 index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
               }`}
               onClick={() => router.push(getProofUrl(proof))}
-            >              <td className="py-2 px-3 font-medium">{proof.title}</td>
+            >
+              <td className="py-2 px-3">{proof.title}</td>
               <td className="py-2 px-3">{formatCategoryDisplayName(proof.category)}</td>
               <td className="py-2 px-3">{formatDate(proof.date)}</td>
             </tr>

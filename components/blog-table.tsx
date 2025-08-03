@@ -87,7 +87,7 @@ export function BlogTable({ notes, searchQuery, activeCategory }: BlogTableProps
               }`}
               onClick={() => router.push(getBlogUrl(note))}
             >
-              <td className="py-2 px-3 font-medium">{note.title}</td>
+              <td className="py-2 px-3">{note.title}</td>
               <td className="py-2 px-3">
                 <Link 
                   href={`/blog/${note.category.toLowerCase().replace(/\s+/g, "-")}`}

@@ -120,7 +120,7 @@ export default function VerseTypeClient({ params }: { params: { type: string } }
                     className="border-b border-muted/30 hover:bg-muted/20 cursor-pointer transition-colors"
                     onClick={() => router.push(getPoemUrl(poem))}
                   >
-                    <td className="py-2 pr-4 px-3 font-medium">{poem.title}</td>
+                    <td className="py-2 pr-4 px-3">{poem.title}</td>
                     <td className="py-2 pr-4 px-3">{poem.type}</td>
                     <td className="py-2 pr-4 px-3">{poem.year}</td>
                   </tr>

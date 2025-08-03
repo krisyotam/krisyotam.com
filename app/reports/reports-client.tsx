@@ -183,7 +183,7 @@ export function ReportsClient({ initialCategory = "All" }: { initialCategory?: s
                     className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
                     onClick={() => handleItemClick(item)}
                   >
-                    <td className="py-2 px-3 font-medium">{item.title}</td>
+                    <td className="py-2 px-3">{item.title}</td>
                     <td className="py-2 px-3">{item.category}</td>
                     <td className="py-2 px-3">{new Date(item.dateStarted).getFullYear()}</td>
                   </tr>

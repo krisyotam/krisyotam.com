@@ -82,7 +82,7 @@ export function CasesTable({ cases, searchQuery, activeCategory }: CasesTablePro
               }`}
               onClick={() => router.push(getCaseUrl(caseItem))}
             >
-              <td className="py-2 px-3 font-medium">{caseItem.title}</td>
+              <td className="py-2 px-3">{caseItem.title}</td>
               <td className="py-2 px-3">
                 <Link 
                   href={`/cases/${caseItem.category}`}
