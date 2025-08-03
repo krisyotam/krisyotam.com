@@ -22,8 +22,6 @@ const fictionData = fictionDataRaw as Story[];
 
 export const metadata: Metadata = staticMetadata.fiction;
 
-export const metadata: Metadata = staticMetadata.fiction;
-
 export default function FictionPage() {
   // Filter and sort fiction by date (newest first) - only show active stories
   const stories = fictionData
