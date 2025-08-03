@@ -2,7 +2,7 @@ export const dynamic = 'force-static';
 export const revalidate = false;
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import fictionData from "@/data/fiction/fiction.json";
+import fictionDataRaw from "@/data/fiction/fiction.json";
 import NotePageClient from "./FictionPageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
 import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
@@ -20,7 +20,12 @@ interface StoryData {
   status: string;
   confidence: string;
   importance: number;
+  preview: string;
+  state: "active" | "hidden";
 }
+
+// Type assertion to ensure the imported data matches our Story interface
+const fictionData = fictionDataRaw as StoryData[];
 
 interface StoryPageProps {
   params: { category: string; slug: string };
