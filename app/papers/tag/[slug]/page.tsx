@@ -3,6 +3,7 @@ import papersData from "@/data/papers/papers.json";
 import tagsData from "@/data/papers/tags.json";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import type { PaperMeta } from "@/types/papers";
 
 interface PageProps {
   params: { slug: string };
@@ -118,8 +119,22 @@ export default function PapersTagPage({ params }: PageProps) {
     backHref: "/papers/tags"
   };
 
-  // Sort papers by date (newest first)
-  const papers = [...papersWithTag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  // Sort papers by date (newest first) and transform to PaperMeta
+  const papers = [...papersWithTag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .map(paper => ({
+      title: paper.title,
+      subtitle: paper.preview,
+      preview: paper.preview,
+      date: paper.date,
+      slug: paper.slug,
+      tags: paper.tags,
+      category: paper.category,
+      status: paper.status as PaperMeta['status'],
+      confidence: paper.confidence as PaperMeta['confidence'],
+      importance: paper.importance,
+      state: paper.state,
+      cover_image: paper.cover_image
+    }));
 
   return (
     <div className="papers-container">

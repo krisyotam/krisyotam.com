@@ -5,20 +5,7 @@ import { EssaysTable } from "@/components/essays-table";
 import { PageHeader } from "@/components/page-header";
 import { PageDescription } from "@/components/posts/typography/page-description";
 import { useRouter } from "next/navigation";
-
-interface Essay {
-  title: string;
-  date: string;
-  slug: string;
-  tags: string[];
-  category: string;
-  status?: string;
-  confidence?: string;
-  importance?: number;
-  cover_image?: string;
-  preview?: string;
-  state?: string;
-}
+import type { Essay } from "@/types/essay";
 
 interface TagHeaderData {
   title: string;
@@ -51,11 +38,11 @@ export default function EssaysTaggedPage({ essays, tagData }: EssaysTaggedPagePr
       essay.category.toLowerCase().includes(q);
 
     return matchesSearch;
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }).sort((a, b) => new Date(b.postedOn).getTime() - new Date(a.postedOn).getTime());
 
   // Helper to build the correct route for an essay
   function getEssayUrl(essay: Essay) {
-    return `/essays/${essay.category}/${essay.slug}`;
+    return `/essays/${essay.category}/${essay.id}`;
   }
 
   return (

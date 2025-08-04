@@ -5,21 +5,7 @@ import { PapersTable } from "../../PapersTable";
 import { PageHeader } from "@/components/page-header";
 import { PageDescription } from "@/components/posts/typography/page-description";
 import { useRouter } from "next/navigation";
-import type { PaperMeta } from "@/types/papers";
-
-interface Paper {
-  title: string;
-  date: string;
-  slug: string;
-  tags: string[];
-  category: string;
-  status?: string;
-  confidence?: string;
-  importance?: number;
-  cover_image?: string;
-  preview?: string;
-  state?: string;
-}
+import type { PaperMeta, Paper } from "@/types/papers";
 
 interface TagHeaderData {
   title: string;
@@ -34,7 +20,7 @@ interface TagHeaderData {
 }
 
 interface PapersTaggedPageProps {
-  papers: Paper[];
+  papers: PaperMeta[];
   tagData: TagHeaderData;
 }
 
@@ -55,7 +41,7 @@ export default function PapersTaggedPage({ papers, tagData }: PapersTaggedPagePr
   }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   // Helper to build the correct route for a paper
-  function getPaperUrl(paper: Paper) {
+  function getPaperUrl(paper: PaperMeta) {
     return `/papers/${paper.category}/${paper.slug}`;
   }
 
@@ -102,7 +88,8 @@ export default function PapersTaggedPage({ papers, tagData }: PapersTaggedPagePr
         <PapersTable
           papers={filteredPapers.map(paper => ({
             ...paper,
-            status: paper.status as PaperMeta['status']
+            status: paper.status as PaperMeta['status'],
+            confidence: paper.confidence as PaperMeta['confidence']
           }))}
           searchQuery=""
           activeCategory="all"

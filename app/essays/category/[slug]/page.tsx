@@ -107,8 +107,28 @@ export default function EssayCategoryPage({ params }: PageProps) {
     backHref: "/essays/categories"
   };
 
-  // Sort essays by date (newest first)
-  const essays = [...essaysInCategory].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  // Sort essays by date (newest first) and transform to match Essay interface
+  const essays = [...essaysInCategory].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .map(essay => ({
+      id: essay.slug,
+      title: essay.title,
+      abstract: essay.preview,
+      importance: essay.importance,
+      confidence: essay.confidence,
+      authors: [], // Default value since not in original data
+      subject: essay.category,
+      keywords: essay.tags,
+      postedBy: "admin", // Default value
+      postedOn: essay.date,
+      dateStarted: essay.date,
+      tags: essay.tags,
+      img: essay.cover_image,
+      status: essay.status,
+      pdfLink: undefined,
+      sourceLink: undefined,
+      category: essay.category,
+      customPath: undefined
+    }));
 
   return (
     <div className="essays-container">
