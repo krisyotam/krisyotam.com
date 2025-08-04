@@ -31,6 +31,7 @@ const menuItems = [
   { icon: FileText, label: "Papers", path: "/papers" },
   { icon: FilePen, label: "Essays", path: "/essays" },
   { icon: NotebookPen, label: "Blog Posts", path: "/blog" },
+    { icon: PenBox, label: "Reviews", path: "/reviews" },
   { icon: PenBox, label: "Fiction", path: "/fiction" },
   { icon: StickyNote, label: "Notes", path: "/notes" },
   { icon: CassetteTape, label: "Cases", path: "/cases" },
@@ -44,7 +45,7 @@ const menuItems = [
   { icon: Tag, label: "Tags", path: "/tags" },
   { icon: Layers, label: "Series", path: "/series" },
   { icon: HeartHandshake, label: "Supporters", path: "/supporters" },
-  { icon: User, label: "About", path: "/blog/2025/on-myself" },
+  { icon: User, label: "About", path: "/notes/on-myself/about-kris" },
 
   // Content sections - main site areas
   { icon: Feather, label: "Verse", path: "/verse" },
