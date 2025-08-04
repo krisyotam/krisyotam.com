@@ -99,7 +99,20 @@ export default function EssaysCategoryPage({ essays, categoryData }: EssaysCateg
 
         {/* Essays table */}
         <EssaysTable
-          notes={filteredEssays}
+          notes={filteredEssays.map(essay => ({
+            title: essay.title,
+            subtitle: essay.abstract,
+            preview: essay.abstract || '',
+            date: essay.postedOn,
+            tags: essay.tags,
+            category: essay.category,
+            slug: essay.id,
+            cover_image: essay.img || '',
+            status: essay.status,
+            confidence: essay.confidence,
+            importance: typeof essay.importance === 'string' ? parseInt(essay.importance) || 1 : essay.importance,
+            customPath: essay.customPath
+          }))}
           searchQuery=""
           activeCategory="all"
         />

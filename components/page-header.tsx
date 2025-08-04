@@ -10,7 +10,7 @@ export interface PageHeaderProps {
   date?: string
   preview?: string
   description?: string
-  status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned"
+  status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned" | "Active"
   confidence?:
     | "impossible"
     | "remote"

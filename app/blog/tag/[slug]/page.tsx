@@ -2,6 +2,7 @@ import BlogTaggedPage from "./BlogTaggedPage";
 import blogData from "@/data/blog/feed.json";
 import tagsData from "@/data/blog/tags.json";
 import type { Metadata } from "next";
+import type { BlogMeta } from "@/types/blog";
 import { notFound } from "next/navigation";
 
 interface PageProps {
@@ -113,8 +114,12 @@ export default function BlogTagPage({ params }: PageProps) {
     backHref: "/blog/tags"
   };
 
-  // Sort posts by date (newest first)
-  const posts = [...postsWithTag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  // Sort posts by date (newest first) and ensure proper typing
+  const posts: BlogMeta[] = [...postsWithTag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map(post => ({
+    ...post,
+    status: post.status as BlogMeta['status'],
+    confidence: post.confidence as BlogMeta['confidence']
+  }));
 
   return (
     <div className="blog-container">

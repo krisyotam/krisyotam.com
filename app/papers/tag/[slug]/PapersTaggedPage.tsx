@@ -5,6 +5,7 @@ import { PapersTable } from "../../PapersTable";
 import { PageHeader } from "@/components/page-header";
 import { PageDescription } from "@/components/posts/typography/page-description";
 import { useRouter } from "next/navigation";
+import type { PaperMeta } from "@/types/papers";
 
 interface Paper {
   title: string;
@@ -99,7 +100,10 @@ export default function PapersTaggedPage({ papers, tagData }: PapersTaggedPagePr
 
         {/* Papers table */}
         <PapersTable
-          papers={filteredPapers}
+          papers={filteredPapers.map(paper => ({
+            ...paper,
+            status: paper.status as PaperMeta['status']
+          }))}
           searchQuery=""
           activeCategory="all"
         />
