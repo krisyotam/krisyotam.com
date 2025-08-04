@@ -21,6 +21,7 @@ import Dropcap from '@/components/dropcap'
 import Bible from "@/components/references/christianity/1611bible"
 import LinkTags from "@/components/link-tags"
 import { Box } from "@/components/posts/typography/box"
+import { Column, ColumnContainer } from "@/components/posts/typography/column"
 import NameBreakdown from '@/components/name-breakdown'
 import { Age } from "@/components/posts/typography/age"
 import { Excerpt } from "@/components/posts/typography/excerpt"
@@ -183,6 +184,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     SimpleBib,
     Books,
     Box,
+    Column,
+    ColumnContainer,
     Collapse,
     Quote,
     MiniBio,

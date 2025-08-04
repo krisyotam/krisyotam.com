@@ -335,3 +335,83 @@
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
+
+/* footnotes -------------------------------------------------------------- */
+.papers-content .footnotes {
+  padding: 1.5rem;
+  border-radius: 0;
+  margin: 1.5rem 0;
+  background-color: hsl(var(--muted) / 0.5);
+  width: 100%;
+  border: none;
+}
+
+.dark .papers-content .footnotes {
+  background-color: hsl(var(--popover));
+}
+
+.papers-content .footnotes h2 {
+  border-bottom: none !important;
+  text-decoration: none !important;
+  margin-top: 0 !important;
+  margin-bottom: 1rem !important;
+}
+
+.papers-content .footnotes::before {
+  display: none;
+}
+
+.papers-content .footnotes ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: footnote-counter;
+}
+
+.papers-content .footnotes li {
+  margin-bottom: 0.75rem;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  counter-increment: footnote-counter;
+}
+
+.papers-content .footnotes li:last-child {
+  margin-bottom: 0;
+}
+
+.papers-content .footnotes li::before {
+  content: counter(footnote-counter) ".";
+  flex-shrink: 0;
+  color: hsl(var(--muted-foreground));
+  font-weight: 500;
+  min-width: 1.5rem;
+  vertical-align: baseline;
+  font-size: inherit;
+}
+
+.papers-content .footnotes li p {
+  margin: 0;
+  flex: 1;
+}
+
+.papers-content .footnotes a {
+  color: hsl(var(--foreground));
+  text-decoration: none;
+}
+
+.papers-content .footnotes a:hover {
+  text-decoration: underline;
+  text-decoration-color: hsl(var(--muted-foreground));
+}
+
+.papers-content .footnote-backref {
+  display: none;
+}
+
+.papers-content .footnote-backref {
+  display: none;
+}

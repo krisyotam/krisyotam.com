@@ -1,22 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { NotesCategoriesTable } from "@/components/notes-categories-table";
+import { EssaysCategoriesTable } from "@/components/essays-categories-table";
 import { PageHeader } from "@/components/page-header";
 import { PageDescription } from "@/components/posts/typography/page-description";
 
 /* default page-level metadata for the header */
 const defaultCategoriesPageData = {
-  title: "\"Notes\" Categories",
+  title: "\"Essays\" Categories",
   subtitle: "",
   date: new Date().toISOString(),
-  preview: "Browse all note categories and explore different topics and themes.",
+  preview: "Browse all essay categories and explore different topics and themes.",
   status: "Finished" as const,
   confidence: "certain" as const,
   importance: 8,
 };
 
-interface NoteCategory {
+interface EssayCategory {
   slug: string;
   title: string;
   preview: string;
@@ -26,23 +26,23 @@ interface NoteCategory {
   importance: number;
 }
 
-interface NotesCategoriesClientPageProps {
-  categories: NoteCategory[];
+interface EssaysCategoriesClientPageProps {
+  categories: EssayCategory[];
 }
 
-export default function NotesCategoriesClientPage({ categories }: NotesCategoriesClientPageProps) {
+export default function EssaysCategoriesClientPage({ categories }: EssaysCategoriesClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <>
       <style jsx global>{`
-        .notes-container {
+        .essays-container {
           font-family: 'Geist', sans-serif;
         }
       `}</style>
 
-      <div className="notes-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
-        <PageHeader {...defaultCategoriesPageData} backText="Notes" backHref="/notes" />
+      <div className="essays-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
+        <PageHeader {...defaultCategoriesPageData} backText="Essays" backHref="/essays" />
 
         {/* Search bar */}
         <div className="mb-6">
@@ -58,7 +58,7 @@ export default function NotesCategoriesClientPage({ categories }: NotesCategorie
         </div>
 
         {/* Categories table */}
-        <NotesCategoriesTable
+        <EssaysCategoriesTable
           categories={categories}
           searchQuery={searchQuery}
         />
@@ -66,7 +66,7 @@ export default function NotesCategoriesClientPage({ categories }: NotesCategorie
         {/* PageDescription component */}
         <PageDescription
           title="About Categories"
-          description="This is an overview of all note categories. Each category represents a different theme or topic area. Click on any category to explore the notes within that category. Use the search bar to find specific categories by title or description."
+          description="This is an overview of all essay categories. Each category represents a different theme or topic area. Click on any category to explore the essays within that category. Use the search bar to find specific categories by title or description."
         />
       </div>
     </>
