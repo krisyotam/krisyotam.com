@@ -12,7 +12,7 @@ interface TagHeaderData {
   subtitle: string;
   date: string;
   preview: string;
-  status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Active";
+  status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned";
   confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
   importance: number;
   backText: string;
