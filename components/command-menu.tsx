@@ -31,7 +31,7 @@ const menuItems = [
   { icon: FileText, label: "Papers", path: "/papers" },
   { icon: FilePen, label: "Essays", path: "/essays" },
   { icon: NotebookPen, label: "Blog Posts", path: "/blog" },
-    { icon: PenBox, label: "Reviews", path: "/reviews" },
+  { icon: PenBox, label: "Reviews", path: "/reviews" },
   { icon: PenBox, label: "Fiction", path: "/fiction" },
   { icon: StickyNote, label: "Notes", path: "/notes" },
   { icon: CassetteTape, label: "Cases", path: "/cases" },
@@ -60,11 +60,7 @@ const menuItems = [
   { icon: Earth, label: "Globe", path: "/globe" },
   { icon: Archive, label: "Archive", path: "/archive" },
   { icon: AreaChart, label: "Stats", path: "/stats" },
-  { icon: FlaskConical, label: "Research Bounties", path: "/researchbounties" },
-  { icon: FileBarChart2, label: "Reports", path: "/reports" },
-  { icon: Files, label: "Docs", path: "/docs" },
   { icon: BookOpenCheck, label: "Lecture Notes", path: "/lecture-notes" },
-  { icon: ScrollText, label: "Flashcards", path: "/flashcards" },
   { icon: TestTube2, label: "Prompts", path: "/prompts" },
 
   // Media and entertainment
@@ -72,19 +68,14 @@ const menuItems = [
   { icon: BookOpenText, label: "Manga", path: "/manga" },
   { icon: Clapperboard, label: "Anime", path: "/anime" },
   { icon: Gamepad2, label: "Games", path: "/games" },
-  { icon: Music, label: "Playlists", path: "/playlists" },
   { icon: Video, label: "Videos", path: "/videos" },
 
   // Personal projects & documents
-  { icon: Hammer, label: "Projects", path: "/projects" },
   { icon: GraduationCap, label: "CV", path: "/cv" },
-  { icon: HelpCircle, label: "FAQ", path: "/faq" },
-  { icon: BookText, label: "Docs", path: "/doc" }, // if "doc" is distinct from "docs"
   { icon: FileEdit, label: "Changelog", path: "/changelog" },
   { icon: Footprints, label: "Colophon", path: "/colophon" },
   { icon: Users, label: "Profile", path: "/profile" },
-  { icon: Gavel, label: "Auction", path: "/auction" },
-  { icon: Star, label: "Favs", path: "/favs" },
+  { icon: Music, label: "Playlists", path: "/playlists" },
 
   // Creation and expression
   { icon: PencilLine, label: "Progymnasmata", path: "/progymnasmata" },
@@ -93,7 +84,7 @@ const menuItems = [
   { icon: Keyboard, label: "Type", path: "/type" },
 
   // Engagement and contact
-  { icon: Gift, label: "Wishlist", path: "/wishlist" },
+  { icon: Gift, label: "Wishlist", path: "https://www.amazon.com/hz/wishlist/ls/1ID8ZRMZ7CMDI?ref_=wl_share" },
   { icon: Bitcoin, label: "Donate", path: "/donate" },
   { icon: Mail, label: "Contact", path: "/contact" },
   { icon: Newspaper, label: "Newsletter", path: "/newsletter" },
@@ -102,9 +93,7 @@ const menuItems = [
   { icon: FileText, label: "RSS", path: "/rss.xml" },
   { icon: Wrench, label: "Scripts", path: "/scripts" },
   { icon: Building, label: "Companies", path: "/companies" },
-  { icon: HelpingHand, label: "Philanthropy", path: "/philanthropy" },
   { icon: Users, label: "Sources", path: "/sources" },
-  { icon: Megaphone, label: "Speeches", path: "/speeches" },
 
 ];
 

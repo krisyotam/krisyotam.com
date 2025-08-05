@@ -1,37 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import type { LectureMeta } from "@/types/lectures";
+
+interface Lecture {
+  title: string;
+  date: string;
+  slug: string;
+  tags: string[];
+  category: string;
+  status?: string;
+  confidence?: string;
+  importance?: number;
+  cover_image?: string;
+  preview?: string;
+  state?: string;
+}
 
 interface LecturesTableProps {
-  lectures: LectureMeta[];
+  lectures: Lecture[];
   searchQuery: string;
   activeCategory: string;
 }
 
 export function LecturesTable({ lectures, searchQuery, activeCategory }: LecturesTableProps) {
-  const [filteredLectures, setFilteredLectures] = useState<LectureMeta[]>(lectures);
   const router = useRouter();
-
-  useEffect(() => {
-    const filtered = lectures.filter((lecture) => {
-      const q = searchQuery.toLowerCase();
-      const matchesSearch =
-        !q ||
-        lecture.title.toLowerCase().includes(q) ||
-        lecture.tags.some((t) => t.toLowerCase().includes(q)) ||
-        lecture.category.toLowerCase().includes(q);
-
-      const matchesCategory = activeCategory === "all" || lecture.category === activeCategory;
-      return matchesSearch && matchesCategory;
-    });
-
-    // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-    setFilteredLectures(filtered);
-  }, [lectures, searchQuery, activeCategory]);
 
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
@@ -43,9 +36,22 @@ export function LecturesTable({ lectures, searchQuery, activeCategory }: Lecture
     });
   }
 
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
   // Helper to build the correct route for a lecture
-  function getLectureUrl(lecture: LectureMeta) {
-    return `/lectures/${encodeURIComponent(lecture.category)}/${encodeURIComponent(lecture.slug)}`;
+  function getLectureUrl(lecture: Lecture) {
+    const categorySlug = lecture.category.toLowerCase().replace(/\s+/g, "-");
+    return `/lectures/${categorySlug}/${encodeURIComponent(lecture.slug)}`;
+  }
+
+  if (!lectures.length) {
+    return <p className="text-center py-10 text-muted-foreground">No lectures found.</p>;
   }
 
   return (
@@ -59,7 +65,7 @@ export function LecturesTable({ lectures, searchQuery, activeCategory }: Lecture
           </tr>
         </thead>
         <tbody>
-          {filteredLectures.map((lecture, index) => (
+          {lectures.map((lecture, index) => (
             <tr
               key={lecture.slug}
               className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
@@ -68,24 +74,12 @@ export function LecturesTable({ lectures, searchQuery, activeCategory }: Lecture
               onClick={() => router.push(getLectureUrl(lecture))}
             >
               <td className="py-2 px-3 font-medium">{lecture.title}</td>
-              <td className="py-2 px-3">
-                <Link 
-                  href={`/lectures/${lecture.category}`}
-                  className="text-foreground hover:text-primary"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {lecture.category}
-                </Link>
-              </td>
+              <td className="py-2 px-3">{formatCategoryDisplayName(lecture.category)}</td>
               <td className="py-2 px-3">{formatDate(lecture.date)}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      
-      {filteredLectures.length === 0 && (
-        <div className="text-muted-foreground text-sm mt-6">No lectures found matching your criteria.</div>
-      )}
     </div>
   );
 }

@@ -22,6 +22,14 @@ const defaultSequencesPageData = {
 
 // Using imported types from /types/sequences.ts
 
+// Helper function to get total posts count for both old and new formats
+function getTotalPostsCount(sequence: Sequence): number {
+  if (sequence.sections && sequence.sections.length > 0) {
+    return sequence.sections.reduce((total, section) => total + section.posts.length, 0);
+  }
+  return sequence.posts ? sequence.posts.length : 0;
+}
+
 interface SequencesClientPageProps {
   initialCategory?: string;
   categoryName?: string;
@@ -166,9 +174,10 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
   const GridView = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {filteredSequences.map((sequence) => (
-        <div
-          key={sequence.slug}
-          className="border border-border bg-card hover:bg-secondary/50 transition-colors"
+        <Link 
+          key={sequence.slug} 
+          href={`/sequences/${sequence.slug}`}
+          className="border border-border bg-card hover:bg-secondary/50 transition-colors block"
         >
           {/* Cover Image Area */}
           <div className="aspect-[16/9] bg-muted/30 border-b border-border flex items-center justify-center">
@@ -193,13 +202,14 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <span className="flex items-center gap-2">
-                <span>{sequence.posts.length} posts</span>
+                <span>{getTotalPostsCount(sequence)} posts</span>
                 {sequence.category && (
                   <>
                     <span className="text-muted-foreground">•</span>
                     <Link 
                       href={`/sequences/category/${slugifyCategory(sequence.category)}`}
                       className="hover:text-foreground"
+                      onClick={(e) => e.stopPropagation()} // Prevent parent link from triggering
                     >
                       {sequence.category}
                     </Link>
@@ -209,7 +219,7 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
               <span>{new Date(sequence.date).getFullYear()}</span>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
@@ -230,18 +240,25 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
             key={sequence.slug}
             className={`border-b border-border hover:bg-secondary/50 transition-colors ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
           >
-            <td className="py-2 px-3">{sequence.title}</td>
+            <td className="py-2 px-3">
+              <Link 
+                href={`/sequences/${sequence.slug}`}
+                className="font-medium"
+              >
+                {sequence.title}
+              </Link>
+            </td>
             <td className="py-2 px-3">
               {sequence.category && (
                 <Link 
                   href={`/sequences/category/${slugifyCategory(sequence.category)}`}
-                  className="hover:text-blue-500"
+                  className=""
                 >
                   {sequence.category}
                 </Link>
               )}
             </td>
-            <td className="py-2 px-3">{sequence.posts.length}</td>
+            <td className="py-2 px-3">{getTotalPostsCount(sequence)}</td>
             <td className="py-2 px-3">{new Date(sequence.date).getFullYear()}</td>
           </tr>
         ))}

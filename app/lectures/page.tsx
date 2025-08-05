@@ -7,8 +7,9 @@ import { staticMetadata } from "@/lib/staticMetadata";
 export const metadata: Metadata = staticMetadata.lectures;
 
 export default function LecturesPage() {
-  // Map and sort lectures by date (newest first)
-  const lectures: LectureMeta[] = lecturesData.map(lectureItem => ({
+  // Filter lectures to only show active ones and sort by date (newest first)
+  const activeLectures = lecturesData.filter(lecture => lecture.state === "active");
+  const lectures: LectureMeta[] = activeLectures.map(lectureItem => ({
     ...lectureItem,
     status: lectureItem.status as LectureStatus,
     confidence: lectureItem.confidence as LectureConfidence

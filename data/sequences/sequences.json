@@ -6,15 +6,16 @@
 "preview": "Explorations into the foundations of moral philosophy, the nature of value, and the logic of ethical reasoning.",
 "date": "2025-06-24",
 "cover-url": "",
-"show-status": "active",
-"status": "Planned",
+"state": "hidden",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 9,
 "category": "Philosophy",
+"tags": ["philosophy", "ethics", "morality", "value-theory", "metaethics"],
 "posts": [
-{ "slug": "is-morality-objective", "order": 1 },
-{ "slug": "emotivism-vs-cognitivism", "order": 2 },
-{ "slug": "metaethics-of-effective-altruism", "order": 3 }
+{ "slug": "is-morality-objective", "order": 1, "type": "essay" },
+{ "slug": "emotivism-vs-cognitivism", "order": 2, "type": "essay" },
+{ "slug": "metaethics-of-effective-altruism", "order": 3, "type": "essay" }
 ]
 },
 {
@@ -23,15 +24,16 @@
 "preview": "A deep dive into quantum mechanics, interpretation debates, and their philosophical and technological implications.",
 "date": "2025-06-24",
 "cover-url": "https://i.postimg.cc/pX5gHTzz/istockphoto-941413406-612x612.jpg",
-"show-status": "active",
-"status": "Planned",
+"state": "hidden",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 8,
 "category": "Physics",
+"tags": ["physics", "quantum-mechanics", "science", "philosophy-of-science", "interpretation"],
 "posts": [
-{ "slug": "many-worlds-and-rationality", "order": 1 },
-{ "slug": "quantum-computation-101", "order": 2 },
-{ "slug": "is-quantum-mechanics-local", "order": 3 }
+{ "slug": "many-worlds-and-rationality", "order": 1, "type": "essay" },
+{ "slug": "quantum-computation-101", "order": 2, "type": "note" },
+{ "slug": "is-quantum-mechanics-local", "order": 3, "type": "paper" }
 ]
 },
 {
@@ -40,15 +42,16 @@
 "preview": "From foundational arithmetic and logic to abstract algebra, analysis, and the philosophy of math.",
 "date": "2025-06-24",
 "cover-url": "https://i.postimg.cc/XX6ZDmKh/math.jpg",
-"show-status": "active",
-"status": "Planned",
+"state": "hidden",
+"status": "In Progress",
 "confidence": "certain",
 "importance": 10,
 "category": "Mathematics",
+"tags": ["mathematics", "foundations", "logic", "algebra", "analysis", "philosophy-of-math"],
 "posts": [
-{ "slug": "what-is-a-function", "order": 1 },
-{ "slug": "set-theory-and-its-paradoxes", "order": 2 },
-{ "slug": "category-theory-as-language", "order": 3 }
+{ "slug": "what-is-a-function", "order": 1, "type": "note" },
+{ "slug": "set-theory-and-its-paradoxes", "order": 2, "type": "essay" },
+{ "slug": "category-theory-as-language", "order": 3, "type": "paper" }
 ]
 },
 {
@@ -57,15 +60,16 @@
 "preview": "Analyses and reflections on Liu Cixin's trilogy, focusing on philosophical, scientific, and strategic themes.",
 "date": "2025-06-24",
 "cover-url": "",
-"show-status": "active",
-"status": "Planned",
+"state": "hidden",
+"status": "In Progress",
 "confidence": "certain",
 "importance": 7,
 "category": "Literature",
+"tags": ["literature", "science-fiction", "liu-cixin", "analysis", "philosophy", "strategy"],
 "posts": [
-{ "slug": "trisolaran-psychology", "order": 1 },
-{ "slug": "dark-forest-theory-analysis", "order": 2 },
-{ "slug": "ye-wenjie-and-the-weight-of-trauma", "order": 3 }
+{ "slug": "trisolaran-psychology", "order": 1, "type": "review" },
+{ "slug": "dark-forest-theory-analysis", "order": 2, "type": "essay" },
+{ "slug": "ye-wenjie-and-the-weight-of-trauma", "order": 3, "type": "review" }
 ]
 },
 {
@@ -74,15 +78,34 @@
 "preview": "Essays on advanced reasoning strategies, metacognition, and the architecture of rational thought.",
 "date": "2025-06-24",
 "cover-url": "https://i.postimg.cc/pX5gHTzz/istockphoto-941413406-612x612.jpg",
-"show-status": "active",
-"status": "Planned",
+"state": "hidden",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 9,
 "category": "Rationality",
+"tags": ["rationality", "reasoning", "metacognition", "epistemology", "decision-theory"],
+"sections": [
+{
+"title": "FOUNDATIONS OF RATIONAL DISCOURSE",
 "posts": [
-{ "slug": "steelmanning-and-charity", "order": 1 },
-{ "slug": "epistemic-hygiene-in-the-modern-age", "order": 2 },
-{ "slug": "decision-theory-and-altruism", "order": 3 }
+{ "slug": "steelmanning-and-charity", "order": 1, "type": "essay" },
+{ "slug": "epistemic-hygiene-in-the-modern-age", "order": 2, "type": "essay" }
+]
+},
+{
+"title": "DECISION THEORY AND PRACTICE",
+"posts": [
+{ "slug": "decision-theory-and-altruism", "order": 3, "type": "paper" },
+{ "slug": "rational-choice-under-uncertainty", "order": 4, "type": "essay" }
+]
+},
+{
+"title": "METACOGNITIVE STRATEGIES",
+"posts": [
+{ "slug": "thinking-about-thinking", "order": 5, "type": "note" },
+{ "slug": "cognitive-biases-and-debiasing", "order": 6, "type": "essay" }
+]
+}
 ]
 },
 {
@@ -91,15 +114,16 @@
 "preview": "A study in social technologies, group dynamics, subculture formation, and intentional community-building.",
 "date": "2025-06-24",
 "cover-url": "",
-"show-status": "active",
-"status": "Planned",
+"state": "hidden",
+"status": "In Progress",
 "confidence": "uncertain",
 "importance": 8,
 "category": "Sociology",
+"tags": ["sociology", "community", "social-technology", "group-dynamics", "subcultures"],
 "posts": [
-{ "slug": "rituals-as-psychotechnology", "order": 1 },
-{ "slug": "building-intellectual-subcultures", "order": 2 },
-{ "slug": "failure-modes-of-communities", "order": 3 }
+{ "slug": "rituals-as-psychotechnology", "order": 1, "type": "essay" },
+{ "slug": "building-intellectual-subcultures", "order": 2, "type": "note" },
+{ "slug": "failure-modes-of-communities", "order": 3, "type": "case" }
 ]
 },
 {
@@ -108,15 +132,16 @@
 "preview": "A scholarly and esoteric examination of demonic archetypes, infernal hierarchies, and the role of demons in myth, theology, and the human psyche.",
 "date": "2025-06-24",
 "cover-url": "https://i.postimg.cc/BZrm2CPP/demonology.jpg",
-"show-status": "active",
-"status": "Planned",
+"state": "hidden",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 7,
 "category": "Theology",
+"tags": ["theology", "demonology", "occult", "mythology", "psychology", "archetypes"],
 "posts": [
-{ "slug": "goetia-and-the-72-spirits", "order": 1 },
-{ "slug": "theological-origins-of-lucifer", "order": 2 },
-{ "slug": "demons-as-psychological-metaphors", "order": 3 }
+{ "slug": "goetia-and-the-72-spirits", "order": 1, "type": "liber" },
+{ "slug": "theological-origins-of-lucifer", "order": 2, "type": "essay" },
+{ "slug": "demons-as-psychological-metaphors", "order": 3, "type": "note" }
 ]
 },
 {
@@ -125,15 +150,16 @@
 "preview": "Explorations into angelic beings across religions, their metaphysical roles, and their symbolic significance in mysticism and art.",
 "date": "2025-06-24",
 "cover-url": "",
-"show-status": "active",
-"status": "Planned",
+"state": "hidden",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 7,
 "category": "Theology",
+"tags": ["theology", "angelology", "mysticism", "religion", "metaphysics", "symbolism"],
 "posts": [
-{ "slug": "hierarchies-of-heaven", "order": 1 },
-{ "slug": "archangel-michael-in-war-and-wisdom", "order": 2 },
-{ "slug": "angelic-interventions-in-modern-mysticism", "order": 3 }
+{ "slug": "hierarchies-of-heaven", "order": 1, "type": "liber" },
+{ "slug": "archangel-michael-in-war-and-wisdom", "order": 2, "type": "essay" },
+{ "slug": "angelic-interventions-in-modern-mysticism", "order": 3, "type": "note" }
 ]
 },
 {
@@ -142,15 +168,16 @@
 "preview": "An interdisciplinary study of historical and contemporary witchcraft: spells, persecution, empowerment, and cultural symbolism.",
 "date": "2025-06-24",
 "cover-url": "https://i.postimg.cc/3NF047DB/witchcraft.jpg",
-"show-status": "active",
-"status": "Planned",
+"state": "hidden",
+"status": "In Progress",
 "confidence": "certain",
 "importance": 8,
 "category": "Occult",
+"tags": ["occult", "witchcraft", "history", "symbolism", "empowerment", "persecution"],
 "posts": [
-{ "slug": "witches-in-medieval-europe", "order": 1 },
-{ "slug": "modern-wicca-and-ecofeminism", "order": 2 },
-{ "slug": "the-magic-circle-as-a-cognitive-frame", "order": 3 }
+{ "slug": "witches-in-medieval-europe", "order": 1, "type": "essay" },
+{ "slug": "modern-wicca-and-ecofeminism", "order": 2, "type": "essay" },
+{ "slug": "the-magic-circle-as-a-cognitive-frame", "order": 3, "type": "note" }
 ]
 },
 {
@@ -159,15 +186,16 @@
 "preview": "Beyond the Philosopher's Stone—this series reinterprets alchemy as symbolic transformation, consciousness evolution, and spiritual refinement.",
 "date": "2025-06-24",
 "cover-url": "",
-"show-status": "active",
-"status": "Planned",
+"state": "hidden",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 9,
 "category": "Occult",
+"tags": ["occult", "alchemy", "transformation", "consciousness", "spirituality", "symbolism"],
 "posts": [
-{ "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
-{ "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
-{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+{ "slug": "solve-et-coagula-and-personal-integration", "order": 1, "type": "essay" },
+{ "slug": "jungian-alchemy-and-shadow-work", "order": 2, "type": "note" },
+{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3, "type": "review" }
 ]
 },
 {
@@ -176,15 +204,16 @@
 "preview": "A breakdown of the book of Genesis, it's historical context, literary structure, and moral themes.",
 "date": "2025-07-07",
 "cover-url": "https://i.postimg.cc/7LQLV8VL/genesis.jpg",
-"show-status": "active",
-"status": "Planned",
+"state": "hidden",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 9,
 "category": "Biblical Studies",
+"tags": ["biblical-studies", "genesis", "theology", "exegesis", "moral-themes", "literary-analysis"],
 "posts": [
-{ "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
-{ "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
-{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+{ "slug": "creation-narratives-and-their-meaning", "order": 1, "type": "lecture-note" },
+{ "slug": "adam-and-eve-theological-anthropology", "order": 2, "type": "essay" },
+{ "slug": "cain-and-abel-morality-tale", "order": 3, "type": "note" }
 ]
 },
 {
@@ -193,15 +222,16 @@
 "preview": "Real numbers, limits, topology of ℝ, (uniform) continuity, sequences of functions, derivatives of functions, series in ℂ, metric spaces, completeness",
 "date": "2025-07-07",
 "cover-url": "https://i.postimg.cc/rsPMhg8L/analysis-I.jpg",
-"show-status": "active",
-"status": "Planned",
+"state": "hidden",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 9,
 "category": "Mathematics",
+"tags": ["mathematics", "analysis", "real-numbers", "limits", "topology", "continuity", "derivatives"],
 "posts": [
-{ "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
-{ "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
-{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+{ "slug": "foundations-of-real-numbers", "order": 1, "type": "lecture-note" },
+{ "slug": "limits-and-convergence", "order": 2, "type": "lecture-note" },
+{ "slug": "topology-of-real-line", "order": 3, "type": "note" }
 ]
 },
 {
@@ -210,15 +240,16 @@
 "preview": "Divisibility, primes, congruences, modular arithmetic, Diophantine equations, quadratic residues, arithmetic functions, orders and primitive roots, Fermat's Little Theorem, Euler's Theorem, and the structure of ℤ/nℤ",
 "date": "2025-07-07",
 "cover-url": "https://i.postimg.cc/8zzTZXJF/Chat-GPT-Image-Jul-9-2025-03-30-31-AM.png",
-"show-status": "active",
-"status": "Planned",
+"state": "hidden",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 9,
 "category": "Mathematics",
+"tags": ["mathematics", "number-theory", "primes", "modular-arithmetic", "diophantine-equations", "fermat"],
 "posts": [
-{ "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
-{ "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
-{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+{ "slug": "divisibility-and-prime-factorization", "order": 1, "type": "lecture-note" },
+{ "slug": "modular-arithmetic-fundamentals", "order": 2, "type": "lecture-note" },
+{ "slug": "fermats-little-theorem-proof", "order": 3, "type": "proof" }
 ]
 },
 {
@@ -226,16 +257,17 @@
 "title": "Feminism",
 "preview": "An exploration of feminist theory, history, and contemporary issues.",
 "date": "2025-07-07",
-"cover-url": "https://i.postimg.cc/x8X4kHc1/feminism.jpg",
-"show-status": "active",
-"status": "Planned",
+"cover-url": "https://doc.krisyotam.com/site/sequences/feminism.jpg  ",
+"state": "active",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 9,
-"category": "Mathematics",
+"category": "Gender Studies",
+"tags": ["feminism", "gender-studies", "theory", "history", "social-justice", "equality"],
 "posts": [
-{ "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
-{ "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
-{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+{ "slug": "waves-of-feminism-historical-overview", "order": 1, "type": "essay" },
+{ "slug": "intersectionality-and-modern-feminism", "order": 2, "type": "note" },
+{ "slug": "feminist-philosophy-key-concepts", "order": 3, "type": "essay" }
 ]
 },
 {
@@ -244,15 +276,16 @@
 "preview": "A comprehensive study of historical and contemporary epidemics and pandemics, their impact on society, and lessons learned.",
 "date": "2025-07-07",
 "cover-url": "https://i.postimg.cc/pLgLmWSR/epidemics-pandemics.png",
-"show-status": "active",
-"status": "Planned",
+"state": "active",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 9,
 "category": "Pathology",
+"tags": ["pathology", "epidemics", "pandemics", "public-health", "history", "society"],
 "posts": [
-{ "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
-{ "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
-{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+{ "slug": "black-death-medieval-pandemic", "order": 1, "type": "case" },
+{ "slug": "spanish-flu-lessons-learned", "order": 2, "type": "essay" },
+{ "slug": "covid-19-modern-pandemic-response", "order": 3, "type": "dossier" }
 ]
 },
 {
@@ -260,16 +293,17 @@
 "title": "Catechesis (Milk for Babies)",
 "preview": "A comprehensive study of the basics of the Christian faith, designed for new believers and young children.",
 "date": "2025-07-07",
-"cover-url": "https://i.postimg.cc/7Y0ndC7s/biblical-milk.jpg",
-"show-status": "active",
-"status": "Planned",
+"cover-url": "https://doc.krisyotam.com/site/sequences/biblical-milk.jpg",
+"state": "active",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 9,
 "category": "Biblical Studies",
+"tags": ["biblical-studies", "catechesis", "christian-faith", "theology", "basics", "teaching"],
 "posts": [
-{ "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
-{ "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
-{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+{ "slug": "who-is-god-basics", "order": 1, "type": "lecture-note" },
+{ "slug": "jesus-christ-introduction", "order": 2, "type": "lecture-note" },
+{ "slug": "holy-spirit-fundamentals", "order": 3, "type": "lecture-note" }
 ]
 },
 {
@@ -277,16 +311,17 @@
 "title": "Didache (Bread for Children)",
 "preview": "A comprehensive study of the teachings of the early Christian church, designed for intermediate believers.",
 "date": "2025-07-07",
-"cover-url": "https://i.postimg.cc/6580KzJg/biblical-bread.jpg",
-"show-status": "active",
-"status": "Planned",
+"cover-url": "https://doc.krisyotam.com/site/sequences/biblical-bread.jpg",
+"state": "active",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 9,
 "category": "Biblical Studies",
+"tags": ["biblical-studies", "didache", "early-church", "teachings", "christian-doctrine", "discipleship"],
 "posts": [
-{ "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
-{ "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
-{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+{ "slug": "two-ways-teaching", "order": 1, "type": "lecture-note" },
+{ "slug": "baptism-and-fasting-practices", "order": 2, "type": "lecture-note" },
+{ "slug": "eucharist-early-church", "order": 3, "type": "note" }
 ]
 },
 {
@@ -294,16 +329,17 @@
 "title": "Theologia (Meat for Adults)",
 "preview": "A comprehensive study of the deeper theological concepts of the Christian faith, designed for mature believers.",
 "date": "2025-07-07",
-"cover-url": "https://i.postimg.cc/8zYdCYwJ/biblical-meat.jpg",
-"show-status": "active",
-"status": "Planned",
+"cover-url": "https://doc.krisyotam.com/site/sequences/biblical-meat.jpg",
+"state": "active",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 9,
 "category": "Biblical Studies",
+"tags": ["biblical-studies", "theology", "advanced-theology", "christian-doctrine", "systematic-theology", "apologetics"],
 "posts": [
-{ "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
-{ "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
-{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+{ "slug": "trinity-doctrine-deep-dive", "order": 1, "type": "essay" },
+{ "slug": "christology-incarnation", "order": 2, "type": "paper" },
+{ "slug": "soteriology-salvation-theology", "order": 3, "type": "essay" }
 ]
 },
 {
@@ -311,16 +347,17 @@
 "title": "Transatlantic Slave Trade",
 "preview": "A comprehensive study of the transatlantic slave trade, its history, and its impact on society.",
 "date": "2025-07-07",
-"cover-url": "https://i.postimg.cc/26NJbMm1/transatlantic-slave-trade.webp",
-"show-status": "active",
-"status": "Planned",
+"cover-url": "https://doc.krisyotam.com/site/sequences/transatlantic-slave-trade.webp",
+"state": "active",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 9,
-"category": "Biblical Studies",
+"category": "History",
+"tags": ["history", "slavery", "transatlantic", "human-rights", "colonialism", "africa", "americas"],
 "posts": [
-{ "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
-{ "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
-{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+{ "slug": "origins-of-atlantic-slavery", "order": 1, "type": "essay" },
+{ "slug": "middle-passage-horrors", "order": 2, "type": "dossier" },
+{ "slug": "abolition-movement-heroes", "order": 3, "type": "essay" }
 ]
 },
 {
@@ -329,18 +366,18 @@
 "preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
 "date": "2025-07-15",
 "cover-url": "https://i.postimg.cc/d3Dm5Rqt/select-essays-of-kris-yotam.jpg",
-"show-status": "active",
-"status": "Planned",
+"state": "active",
+"status": "In Progress",
 "confidence": "likely",
 "importance": 9,
-"category": "Biblical Studies",
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
 "posts": [
-{ "slug": "solve-et-coagula-and-personal-integration", "order": 1 },
-{ "slug": "jungian-alchemy-and-shadow-work", "order": 2 },
-{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3 }
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
 ]
 }
-
 
 ]
 
