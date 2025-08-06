@@ -9,7 +9,8 @@
 "confidence": "likely",
 "importance": 6,
 "preview": "A close reading of Edgar Allan Poe's 'Ulalume', exploring its themes, structure, and emotional depth.",
-"cover_image": "https://doc.krisyotam.com/cover/blog/ulalume.jpg"
+"cover_image": "https://doc.krisyotam.com/cover/blog/ulalume.jpg",
+"state": "active"
 },
 {
 "title": "The Waste Land, a Close Reading",
@@ -21,7 +22,8 @@
 "confidence": "likely",
 "importance": 6,
 "preview": "A close reading of T.S. Eliot's 'The Waste Land', analysis of its structure, themes, and references.",
-"cover_image": "https://doc.krisyotam.com/cover/blog/the-waste-land.jpg"
+"cover_image": "https://doc.krisyotam.com/cover/blog/the-waste-land.jpg",
+"state": "active"
 },
 {
 "title": "Reply to Mephisto",
@@ -33,7 +35,8 @@
 "confidence": "certain",
 "importance": 5,
 "preview": "the devil you don’t know is only a smoke screen for the devil you do",
-"cover_image": "https://doc.krisyotam.com/cover/blog/reply-to-mephisto.png"
+"cover_image": "https://doc.krisyotam.com/cover/blog/reply-to-mephisto.png",
+"state": "active"
 },
 {
 "title": "Marie Taglioni, the First to Float",
@@ -45,7 +48,8 @@
 "confidence": "certain",
 "importance": 5,
 "preview": "A look at Marie Taglioni's groundbreaking role in dance and performance art.",
-"cover_image": "https://doc.krisyotam.com/cover/blog/marie-taglioni-the-first-to-float.png"
+"cover_image": "https://doc.krisyotam.com/cover/blog/marie-taglioni-the-first-to-float.png",
+"state": "active"
 },
 {
 "title": "I Learned to Lie by Listening to Clocks (villanelle)",
@@ -57,7 +61,8 @@
 "confidence": "certain",
 "importance": 5,
 "preview": "A villanelle exploring the relationship between time and perception.",
-"cover_image": "https://doc.krisyotam.com/cover/blog/I-learned-to-lie-by-listening-to-clocks.png"
+"cover_image": "https://doc.krisyotam.com/cover/blog/I-learned-to-lie-by-listening-to-clocks.png",
+"state": "active"
 },
 {
 "title": "Be not overly righteous, nor overly wise (Ecc 7:16-18)",
@@ -69,7 +74,8 @@
 "confidence": "certain",
 "importance": 5,
 "preview": "a lesson on balance in righteousness and wisdom from solomon",
-"cover_image": "https://doc.krisyotam.com/cover/blog/do-not-be-overly-righteous.png"
+"cover_image": "https://doc.krisyotam.com/cover/blog/do-not-be-overly-righteous.png",
+"state": "active"
 },
 {
 "title": "God is not a tempter of man (James 1:13)",
@@ -81,7 +87,8 @@
 "confidence": "certain",
 "importance": 5,
 "preview": "a lesson on the nature of temptation and God's role in it",
-"cover_image": "https://doc.krisyotam.com/cover/blog/god-is-not-a-tempter-of-man.png"
+"cover_image": "https://doc.krisyotam.com/cover/blog/god-is-not-a-tempter-of-man.png",
+"state": "active"
 },
 {
 "title": "God is not a respector of persons (James 2:1-9)",
@@ -93,7 +100,8 @@
 "confidence": "certain",
 "importance": 5,
 "preview": "a lesson on the nature of partiality and God's impartiality",
-"cover_image": "https://doc.krisyotam.com/cover/blog/God-is-not-a-respecter-of-persons.png"
+"cover_image": "https://doc.krisyotam.com/cover/blog/God-is-not-a-respecter-of-persons.png",
+"state": "active"
 },
 {
 "title": "Film Study as Background Noise",
@@ -105,7 +113,8 @@
 "confidence": "certain",
 "importance": 9,
 "preview": "a thought on studying pre-seen films passively as background noise",
-"cover_image": "https://doc.krisyotam.com/cover/blog/Film-Study-as-Background-Noise.png"
+"cover_image": "https://doc.krisyotam.com/cover/blog/Film-Study-as-Background-Noise.png",
+"state": "active"
 },
 {
 "title": "Remarks on Measured Intelligence",
@@ -117,7 +126,8 @@
 "confidence": "certain",
 "importance": 9,
 "preview": "a thought on the nature of intelligence and its measurement.",
-"cover_image": "https://doc.krisyotam.com/cover/blog/remarks-on-measured-intelligence.jpg"
+"cover_image": "https://doc.krisyotam.com/cover/blog/remarks-on-measured-intelligence.jpg",
+"state": "active"
 },
 {
 "title": "Dialogue on Timed Cognition",
@@ -129,7 +139,8 @@
 "confidence": "certain",
 "importance": 9,
 "preview": "a conversation on the implications of timed cognitive tests and their impact on understanding intelligence",
-"cover_image": "https://doc.krisyotam.com/cover/blog/dialogue-on-time-cognition.png"
+"cover_image": "https://doc.krisyotam.com/cover/blog/dialogue-on-time-cognition.png",
+"state": "active"
 },
 {
 "title": "Against High-Functioning Giftedness",
@@ -141,7 +152,8 @@
 "confidence": "certain",
 "importance": 9,
 "preview": "a critique of giftedness, and the implications of high-functioning giftedness on society and individuals",
-"cover_image": "https://doc.krisyotam.com/cover/blog/against-high-functioning-giftedness.png"
+"cover_image": "https://doc.krisyotam.com/cover/blog/against-high-functioning-giftedness.png",
+"state": "active"
 },
 {
 "title": "A Tribute to Kris",
@@ -153,7 +165,8 @@
 "confidence": "certain",
 "importance": 9,
 "preview": "sentient thoughts from non-sentient ai on kris yotam",
-"cover_image": ""
+"cover_image": "",
+"state": "hidden"
 }
 
 ]
