@@ -87,13 +87,12 @@ export function ReadingPapersTable({ data }: ReadingPapersTableProps) {
           </tr>
         </thead>
         <tbody>
-          {papers.map((paper, index) => (
+          {papers.slice().reverse().map((paper, index) => (
             <tr
               key={index}
-              className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
+              className={`border-b border-border hover:bg-secondary/50 transition-colors ${
                 index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
               }`}
-              onClick={() => router.push(`/reading/papers/${createSlug(paper.title)}`)}
             >
               <td className="py-2 px-3">{paper.title}</td>
               <td className="py-2 px-3">{paper.author}</td>

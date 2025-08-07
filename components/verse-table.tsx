@@ -86,7 +86,7 @@ export function VerseTable({ data }: VerseTableProps) {
           </tr>
         </thead>
         <tbody>
-          {verses.map((verse, index) => (
+          {verses.slice().reverse().map((verse, index) => (
             <tr
               key={index}
               className={`border-b border-border hover:bg-secondary/50 transition-colors ${

@@ -379,7 +379,7 @@
 {
 "title": "Mulholland Dr.",
 "preview": "A review of the cult classic surrealist neo-noir mystery",
-"date": "2025-07-12",
+"date": "2025-07-22",
 "tags": ["Naomi Watts", "Laura Harring", "David Lynch", "English", "USA", "Surrealism", "Neo-noir", "Peter Deming"],
 "category": "film",
 "slug": "mulholland-dr",
@@ -387,6 +387,19 @@
 "confidence": "likely",
 "importance": 6,
 "cover_image": "https://doc.krisyotam.com/imgs/film/mulholland-dr.jpg",
+"state": "active"
+},
+{
+"title": "Diary of a Lost Girl",
+"preview": "A review of the haunting beauty and social critique of this silent Weimar-era masterpiece, starring Louise Brooks at her most enigmatic.",
+"date": "2025-08-05",
+"tags": ["G. W. Pabst", "Louise Brooks", "Margarete Bohme", "Fritz Arno Wagner", "Seep Allgeier"],
+"category": "film",
+"slug": "diary-of-a-lost-girl",
+"status": "Draft",
+"confidence": "likely",
+"importance": 6,
+"cover_image": "https://doc.krisyotam.com/imgs/film/diary-of-a-lost-girl.jpg",
 "state": "active"
 }
 

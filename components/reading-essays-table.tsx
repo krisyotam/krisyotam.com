@@ -87,13 +87,12 @@ export function ReadingEssaysTable({ data }: ReadingEssaysTableProps) {
           </tr>
         </thead>
         <tbody>
-          {essays.map((essay, index) => (
+          {essays.slice().reverse().map((essay, index) => (
             <tr
               key={index}
-              className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
+              className={`border-b border-border hover:bg-secondary/50 transition-colors ${
                 index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
               }`}
-              onClick={() => router.push(`/reading/essays/${createSlug(essay.title)}`)}
             >
               <td className="py-2 px-3">{essay.title}</td>
               <td className="py-2 px-3">{essay.author}</td>

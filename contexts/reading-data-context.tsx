@@ -84,10 +84,11 @@ interface ReadingLogEntry {
   genre: string
   sub_genre: string[]
   word_count: number
-  page_count: number
+  page_count?: number
   reads: Array<{
-    start_date: string
-    finish_date: string
+    start: string
+    end: string | null
+    log: [string, number | null, number][] // [date, pages_read, minutes_spent]
   }>
 }
 

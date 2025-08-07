@@ -85,7 +85,7 @@ export function ShortStoriesTable({ data }: ShortStoriesTableProps) {
           </tr>
         </thead>
         <tbody>
-          {shortStories.map((story, index) => (
+          {shortStories.slice().reverse().map((story, index) => (
             <tr
               key={index}
               className={`border-b border-border hover:bg-secondary/50 transition-colors ${

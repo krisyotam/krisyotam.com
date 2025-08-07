@@ -85,7 +85,7 @@ export function BlogPostsTable({ data }: BlogPostsTableProps) {
           </tr>
         </thead>
         <tbody>
-          {blogPosts.map((post, index) => (
+          {blogPosts.slice().reverse().map((post, index) => (
             <tr
               key={index}
               className={`border-b border-border hover:bg-secondary/50 transition-colors ${
