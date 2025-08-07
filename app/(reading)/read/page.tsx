@@ -4,6 +4,9 @@ import { PageDescription } from "@/components/posts/typography/page-description"
 import { staticMetadata } from "@/lib/staticMetadata"
 import type { Metadata } from "next"
 
+// Force dynamic rendering to prevent Apollo Client issues during static export
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: "Read | Kris Yotam",
   description: "books, blog posts, short stories, papers, essays, and verse completed since 2024",
