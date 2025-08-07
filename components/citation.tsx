@@ -26,8 +26,9 @@ export function Citation({ title, slug, date, url, author }: CitationProps) {
   const journal = "krisyotam.com";
   
   // Ensure URL always uses krisyotam.com as base, regardless of environment
-  const normalizedUrl = url.replace(/http:\/\/localhost:3000/g, "https://krisyotam.com")
-                           .replace(/http:\/\/127.0.0.1:3000/g, "https://krisyotam.com");
+  const normalizedUrl = url ? url.replace(/http:\/\/localhost:3000/g, "https://krisyotam.com")
+                               .replace(/http:\/\/127.0.0.1:3000/g, "https://krisyotam.com")
+                             : "https://krisyotam.com";
 
   // Human-readable citation
   const humanCitation = `${authorName}. (${month} ${year}). ${title}. ${journal}. ${normalizedUrl}`;

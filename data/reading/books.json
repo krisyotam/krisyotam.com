@@ -1,0 +1,25 @@
+{
+  "books": [
+    {
+      "title": "The Power Broker",
+      "subtitle": "Robert Moses and the Fall of New York",
+      "author": "Robert Caro",
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1327934837i/1111.jpg",
+      "link": "https://www.goodreads.com/book/show/1111.The_Power_Broker"
+    },
+    {
+      "title": "Sapiens",
+      "subtitle": "A Brief History of Humankind",
+      "author": "Yuval Noah Harari",
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1420585954i/23692271.jpg",
+      "link": "https://www.goodreads.com/book/show/23692271-sapiens"
+    },
+    {
+      "title": "The Design of Everyday Things",
+      "subtitle": "Revised and Expanded Edition",
+      "author": "Don Norman",
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1442460745i/840.jpg",
+      "link": "https://www.goodreads.com/book/show/840.The_Design_of_Everyday_Things"
+    }
+  ]
+}

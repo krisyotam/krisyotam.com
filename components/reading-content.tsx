@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client"
 import { GET_READING_STATES } from "@/lib/queries"
 import { ReadingBookCard } from "@/components/reading-book-card"
 import { ReadingLists } from "@/components/reading-lists"
+import { ReadingSubTabs } from "@/components/reading-sub-tabs"
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
@@ -106,6 +107,8 @@ export function ReadingContent() {
       <div className="mt-6">
         {activeTab === "LISTS" ? (
           <ReadingLists />
+        ) : activeTab === "FINISHED" ? (
+          <ReadingSubTabs />
         ) : (
           <>
             {filteredBooks.length > 0 ? (

@@ -15,6 +15,8 @@ export interface PaperMeta {
   importance?: number;
   state?: string;
   cover_image?: string;
+  publication_year?: number;
+  author?: string;
 }
 
 export interface PaperCategory {

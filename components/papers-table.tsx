@@ -65,29 +65,21 @@ export function PapersTable({ papers, searchQuery, activeCategory }: PapersTable
         <thead>
           <tr className="border-b border-border bg-muted/50 text-foreground">
             <th className="py-2 text-left font-medium px-3">Title</th>
-            <th className="py-2 text-left font-medium px-3">Category</th>
-            <th className="py-2 text-left font-medium px-3">Date</th>
+            <th className="py-2 text-left font-medium px-3">Author</th>
+            <th className="py-2 text-left font-medium px-3">Publication Year</th>
           </tr>
         </thead>
         <tbody>
           {filteredPapers.map((paper, index) => (
             <tr
               key={paper.slug}
-              className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
+              className={`border-b border-border hover:bg-secondary/50 transition-colors ${
                 index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
               }`}
-              onClick={() => router.push(getPaperUrl(paper))}
             >
-              <td className="py-2 px-3 font-medium">{paper.title}</td>              <td className="py-2 px-3">
-                <Link 
-                  href={`/papers/${paper.category}`}
-                  className="text-foreground hover:text-primary"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {formatCategoryDisplayName(paper.category)}
-                </Link>
-              </td>
-              <td className="py-2 px-3">{formatDate(paper.date)}</td>
+              <td className="py-2 px-3 font-medium">{paper.title}</td>
+              <td className="py-2 px-3">{paper.author}</td>
+              <td className="py-2 px-3">{paper.publication_year}</td>
             </tr>
           ))}
         </tbody>

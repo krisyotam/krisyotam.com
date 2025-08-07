@@ -1,0 +1,19 @@
+{
+  "papers": [
+    {
+      "title": "Attention Is All You Need",
+      "author": "Vaswani et al.",
+      "publication_year": 2017
+    },
+    {
+      "title": "The Unreasonable Effectiveness of Data",
+      "author": "Halevy, Norvig, Pereira",
+      "publication_year": 2009
+    },
+    {
+      "title": "Deep Learning",
+      "author": "LeCun, Bengio, Hinton",
+      "publication_year": 2015
+    }
+  ]
+}

@@ -19,6 +19,8 @@ export interface Post {
   cover?: string
   path?: string // Custom URL path for the post
   series?: string
+  publication_year?: number // Added publication_year
+  author?: string // Added author
 }
 
 export interface PostsData {

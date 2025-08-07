@@ -377,6 +377,150 @@
 { "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
 { "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
 ]
+},
+{
+"slug": "global-nuclear-coverup",
+"title": "Global Nuclear Coverup",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"date": "2025-07-15",
+"cover-url": "https://doc.krisyotam.com/site/sequences/global-nuclear-coverup.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "creation",
+"title": "Creation",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"date": "2025-07-15",
+"cover-url": "https://doc.krisyotam.com/site/sequences/creation.webp",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "haute-couture",
+"title": "Haute Couture",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"date": "2025-07-15",
+"cover-url": "https://doc.krisyotam.com/site/sequences/haute-cotour.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "freemasonry",
+"title": "Freemasonry",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"date": "2025-07-15",
+"cover-url": "https://doc.krisyotam.com/site/sequences/freemasonry.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "capitalism",
+"title": "Capitalism",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"date": "2025-07-15",
+"cover-url": "https://doc.krisyotam.com/site/sequences/capitalism.webp",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "the-flat-earth",
+"title": "The Flat Earth",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"date": "2025-07-15",
+"cover-url": "https://doc.krisyotam.com/site/sequences/the-flat-earth.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "rabbit-holes",
+"title": "Rabbit Holes",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"date": "2025-07-15",
+"cover-url": "https://doc.krisyotam.com/site/sequences/rabbit-holes.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "the-function-of-a-lady",
+"title": "The Function Of a Lady",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"date": "2025-07-15",
+"cover-url": "https://doc.krisyotam.com/site/sequences/the-function-of-a-lady.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
 }
 
 ]

@@ -4,6 +4,11 @@
  * @returns Formatted date string
  */
 export function formatDate(dateString: string): string {
+  // Handle null, undefined, or empty strings
+  if (!dateString || typeof dateString !== 'string') {
+    return 'Invalid date'
+  }
+  
   // Parse the date parts from the string to avoid timezone issues
   const [year, month, day] = dateString.split('-').map(num => parseInt(num, 10))
   

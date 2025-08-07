@@ -25,7 +25,7 @@ export function ReadingBookCard({ coverUrl, title, subtitle, author, rating, onC
             src={coverUrl || "/placeholder.svg"}
             alt={title}
             fill
-            className="object-cover rounded-sm"
+            className="object-cover"
             unoptimized={coverUrl?.startsWith("http")}
             onError={(e) => {
               console.error("Image load error for:", coverUrl)

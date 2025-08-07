@@ -7,12 +7,12 @@ import type { Metadata } from "next"
 export const metadata: Metadata = staticMetadata.reading
 
 export default function ReadingPage() {
-  // Reading page metadata
+  // Reading page metadata - currently reading
   const readingPageData = {
     title: "Reading",
     subtitle: "",
     date: new Date().toISOString(),
-    preview: "my currently reading, read, and tbr tracked at storygraph.com/krisyotam",
+    preview: "Books I'm currently reading",
     status: "In Progress" as const,
     confidence: "certain" as const,
     importance: 7,
@@ -34,7 +34,7 @@ export default function ReadingPage() {
       
       <PageDescription
         title="About the Reading Page"
-        description="This page tracks my current reading progress, books I've completed, and my to-read list. All reading data is synced from StoryGraph where I maintain my complete reading journey, including ratings, reviews, and reading statistics."
+        description="This page shows books I'm currently reading. My complete reading journey, including finished books, want-to-read list, and reading lists, can be found through the navigation tabs."
       />
     </main>
   )

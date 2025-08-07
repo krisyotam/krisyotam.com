@@ -1,8 +1,10 @@
-[
+{
+  "blog-posts": [
     {
-      "id": 1,
-      "slug": "eliezer-yudkowsky",
-      "Name": "Eliezer Yudkowsky",
-      "notes": "Focused on the first proposal scene."
+      "title": "The Road to Serfdom",
+      "author": "Hayek",
+      "source_link": "https://example.com/the-road",
+      "publication_year": 1944
     }
-]
+  ]
+}

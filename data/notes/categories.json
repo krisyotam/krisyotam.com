@@ -431,6 +431,15 @@
 "status": "Finished",
 "confidence": "certain",
 "importance": 5
+},
+{
+"slug": "rabbit-holes",
+"title": "Rabbit Holes",
+"preview": "long-form deep dives of the topics I've fallen into, linking to my public notes on notes.krisyotam.com",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
 }
 ]
 }
