@@ -9,8 +9,9 @@ import { staticMetadata } from "@/lib/staticMetadata";
 export const metadata: Metadata = staticMetadata.blog;
 
 export default function BlogPage() {
-  // Sort notes by date (newest first)
+  // Sort notes by date (newest first) and filter out hidden posts
   const posts: BlogMeta[] = [...blogData]
+    .filter(post => post.state !== "hidden") // Only show active posts
     .map(post => ({
       ...post,
       status: post.status as BlogMeta['status'],

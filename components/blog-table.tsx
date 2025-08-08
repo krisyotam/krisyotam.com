@@ -25,7 +25,11 @@ export function BlogTable({ notes, searchQuery, activeCategory }: BlogTableProps
         note.category.toLowerCase().includes(q);
 
       const matchesCategory = activeCategory === "all" || note.category === activeCategory;
-      return matchesSearch && matchesCategory;
+      
+      // Only show active posts, filter out hidden ones
+      const isActive = note.state !== "hidden";
+      
+      return matchesSearch && matchesCategory && isActive;
     });
 
     // Sort by date descending (newest first)

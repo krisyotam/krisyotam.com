@@ -86,9 +86,9 @@ export async function generateMetadata({ params }: BlogCategoryPageProps): Promi
 }
 
 export default async function BlogCategoryPage({ params }: BlogCategoryPageProps) {
-  // Filter posts for this category
+  // Filter posts for this category and exclude hidden posts
   const categoryPosts = (blogData as BlogData[])
-    .filter(post => slugifyCategory(post.category) === params.category)
+    .filter(post => slugifyCategory(post.category) === params.category && post.state !== "hidden")
     .map(post => ({
       title: post.title,
       date: post.date,
@@ -105,8 +105,10 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
     notFound();
   }
 
-  // Get all posts for the client component
-  const allPosts: BlogMeta[] = (blogData as BlogData[]).map(post => ({
+  // Get all posts for the client component, excluding hidden ones
+  const allPosts: BlogMeta[] = (blogData as BlogData[])
+    .filter(post => post.state !== "hidden")
+    .map(post => ({
     title: post.title,
     date: post.date,
     slug: post.slug,

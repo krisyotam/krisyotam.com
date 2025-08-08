@@ -13,4 +13,5 @@ export interface BlogMeta {
   confidence?: Confidence;
   importance?: number;
   cover_image?: string; // Added for image support in blog posts
+  state?: "active" | "hidden";
 } 

@@ -71,9 +71,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default function BlogTagPage({ params }: PageProps) {
   const tagSlug = params.slug;
   
-  // Find the original tag name and filter posts by tag
+  // Find the original tag name and filter posts by tag, excluding hidden posts
   let originalTag: string | undefined;
   const postsWithTag = blogData.filter(post => {
+    // First check if post is not hidden
+    if (post.state === "hidden") return false;
+    
     if (post.tags && Array.isArray(post.tags)) {
       const foundTag = post.tags.find(tag => titleToSlug(tag) === tagSlug);
       if (foundTag && !originalTag) {
