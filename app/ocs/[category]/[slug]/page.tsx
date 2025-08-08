@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: OCSPageProps, parent: Resolvi
   const images = [
     {      url: characterData.cover_image || 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
       width: 1200,
-      height: 2100,
+      height: 1200,
       alt: characterData.title
     }
   ];
