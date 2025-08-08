@@ -66,14 +66,9 @@ interface Essay {
 
 interface Paper {
   title: string
-  author: string
-  date_read: string
+  author: string[]
   source_link: string
   archive_link: string
-  word_count: number
-  estimated_read_time: string
-  rating: number
-  notes_link: string
   publication_year: number
 }
 

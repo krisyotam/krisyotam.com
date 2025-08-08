@@ -1,10 +1,25 @@
 {
-  "blog-posts": [
-    {
-      "title": "The Road to Serfdom",
-      "author": "Hayek",
-      "source_link": "https://example.com/the-road",
-      "publication_year": 1944
-    }
-  ]
+"blog-posts": [
+{
+"title": "Why You Should Never Update Your Beliefs",
+"author": "Arjun Panickssery",
+"source_link": "https://www.lesswrong.com/posts/LCduhA4m3RhMjZJPA/why-you-should-never-update-your-beliefs",
+"archive_link": "",
+"publication_year": 2023
+},
+{
+"title": "Gwern.net Large File Support",
+"author": "Gwern",
+"source_link": "https://gwern.net/blog/2025/large-files",
+"archive_link": "",
+"publication_year": 2025
+},
+{
+"title": "LLMs can be faster than you think",
+"author": "Gwern",
+"source_link": "https://gwern.net/blog/2025/llms-can-be-faster",
+"archive_link": "",
+"publication_year": 2025
+}
+]
 }

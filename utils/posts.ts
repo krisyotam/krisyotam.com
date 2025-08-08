@@ -9,7 +9,7 @@ export interface Post {
   tags: string[]
   category: string
   slug: string
-  state?: string // Make state optional since blog posts don't have it
+  state?: string // State can be "active" or "hidden" to control visibility
   status?: string
   confidence?: string
   importance?: number
@@ -118,20 +118,13 @@ export async function getAllPosts(): Promise<Post[]> {
 export async function getActivePosts(): Promise<Post[]> {
   const all = await getAllPosts()
   
-  // For essays: include those with state === "active"
-  // For blog posts: include all since they don't have state property (treated as active)
-  return all.filter((post) => {
-    if (post.path === 'essays') {
-      return post.state === "active";
-    } else {
-      // Blog posts - include all by default as they don't have state property
-      return true;
-    }
-  })
+  // Filter all posts to only include those with state === "active"
+  // This applies to both essays and blog posts
+  return all.filter((post) => post.state === "active")
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const all = await getAllPosts()
+  const all = await getActivePosts() // Use getActivePosts instead of getAllPosts to respect state
   return all.find((post) => post.slug === slug) || null
 }
 
@@ -207,12 +200,12 @@ export async function getPostContent(year: string, slug: string) {
 }
 
 export async function getPostsByTag(tag: string): Promise<Post[]> {
-  const all = await getAllPosts()
+  const all = await getActivePosts() // Use getActivePosts to respect state
   return all.filter((post) => post.tags.includes(tag))
 }
 
 export async function getTags(): Promise<{ name: string; count: number }[]> {
-  const posts = await getAllPosts()
+  const posts = await getActivePosts() // Use getActivePosts to respect state
   const tagCounts = new Map<string, number>()
 
   posts.forEach((post) => {

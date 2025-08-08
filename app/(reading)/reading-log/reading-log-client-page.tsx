@@ -4,29 +4,11 @@ import { useState, useEffect } from "react"
 import { useReadingData } from "@/contexts/reading-data-context"
 
 interface ReadingLogEntry {
-  title: string
-  author: string
-  type: string
-  genre: string
-  sub_genre: string[]
-  word_count: number
-  page_count?: number
-  reads: {
-    start: string
-    end: string | null
-    log: [string, number | null, number][] // [date, pages_read, minutes_spent]
-  }[]
-}
-
-interface DailyLogEntry {
   date: string
   title: string
   author: string
   type: string
-  pages: number | null
   minutes: number
-  status: 'completed' | 'in-progress'
-  readNumber: number
 }
 
 export function ReadingLogClient() {
@@ -57,30 +39,10 @@ export function ReadingLogClient() {
     )
   }
 
-  // Flatten all log entries and sort by date (most recent first)
-  const dailyEntries: DailyLogEntry[] = []
-  
-  data.forEach((book) => {
-    book.reads.forEach((read, readIndex) => {
-      const isCompleted = read.end !== null
-      
-      read.log.forEach(([date, pages, minutes]) => {
-        dailyEntries.push({
-          date,
-          title: book.title,
-          author: book.author,
-          type: book.type,
-          pages,
-          minutes,
-          status: isCompleted ? 'completed' : 'in-progress',
-          readNumber: readIndex + 1
-        })
-      })
-    })
-  })
-
   // Sort by date descending (most recent first)
-  dailyEntries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const sortedEntries = [...data].sort((a, b) => 
+    new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -118,16 +80,13 @@ export function ReadingLogClient() {
             </tr>
           </thead>
           <tbody>
-            {dailyEntries.map((entry, index) => (
+            {sortedEntries.map((entry, index) => (
               <tr key={`${entry.date}-${entry.title}-${index}`} className="border-b border-border hover:bg-secondary/50 transition-colors">
                 <td className="py-3 px-4 font-mono text-sm">
                   {formatDate(entry.date)}
                 </td>
                 <td className="py-3 px-4">
                   {entry.title}
-                  {entry.readNumber > 1 && (
-                    <span className="ml-1 text-xs">(Read #{entry.readNumber})</span>
-                  )}
                 </td>
                 <td className="py-3 px-4">{entry.author}</td>
                 <td className="py-3 px-4">{entry.type}</td>

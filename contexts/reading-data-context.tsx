@@ -66,30 +66,18 @@ interface Essay {
 
 interface Paper {
   title: string
-  author: string
-  date_read: string
+  author: string[]
   source_link: string
   archive_link: string
-  word_count: number
-  estimated_read_time: string
-  rating: number
-  notes_link: string
   publication_year: number
 }
 
 interface ReadingLogEntry {
+  date: string
   title: string
   author: string
   type: string
-  genre: string
-  sub_genre: string[]
-  word_count: number
-  page_count?: number
-  reads: Array<{
-    start: string
-    end: string | null
-    log: [string, number | null, number][] // [date, pages_read, minutes_spent]
-  }>
+  minutes: number
 }
 
 // Reading data interface

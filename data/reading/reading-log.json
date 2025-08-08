@@ -1,47 +1,18 @@
 {
   "reading-log": [
     {
+      "date": "2025-08-08",
       "title": "Pride and Prejudice",
       "author": "Jane Austen",
       "type": "Book",
-      "genre": "Classic Literature",
-      "sub_genre": ["Romantic Novel", "Social Commentary", "Comedy of Manners", "Victorian Fiction"],
-      "word_count": 121533,
-      "page_count": 432,
-      "reads": [
-        {
-          "start": "2025-04-25",
-          "end": null,
-          "log": [
-            ["2025-04-25", 23, 40]
-          ]
-        }
-      ]
+      "minutes": 40
     },
     {
+      "date": "2025-08-08",
       "title": "The Cathedral and the Bazaar",
       "author": "Eric S. Raymond",
       "type": "Essay",
-      "genre": "Software Development",
-      "sub_genre": ["Open Source Philosophy", "Development Methodology", "Software Engineering", "Technical Writing"],
-      "word_count": 10000,
-      "reads": [
-        {
-          "start": "2025-04-22",
-          "end": "2025-04-23",
-          "log": [
-            ["2025-04-22", null, 130],
-            ["2025-04-23", null, 95]
-          ]
-        },
-        {
-          "start": "2025-08-01",
-          "end": null,
-          "log": [
-            ["2025-08-01", 10, 30]
-          ]
-        }
-      ]
+      "minutes": 30
     }
   ]
 }

@@ -3,18 +3,11 @@
 import { useState, useEffect } from "react"
 
 interface ReadingLogEntry {
+  date: string
   title: string
   author: string
   type: string
-  genre: string
-  sub_genre: string[]
-  word_count: number | string
-  page_count?: number
-  reads: {
-    start: string
-    end: string | null
-    log: [string, number | null, number][]
-  }[]
+  minutes: number
 }
 
 interface ReadingLogData {
@@ -24,20 +17,17 @@ interface ReadingLogData {
 interface DailyStats {
   date: string
   minutes: number
-  pages: number
 }
 
 interface TypeStats {
   type: string
   minutes: number
-  pages: number
   count: number
 }
 
 interface AuthorStats {
   author: string
   minutes: number
-  pages: number
   titles: number
 }
 
@@ -72,55 +62,35 @@ export function ReadingStatsClient() {
   }
 
   // Calculate daily stats
-  const dailyStats = new Map<string, { minutes: number; pages: number }>()
+  const dailyStats = new Map<string, { minutes: number }>()
   
   data["reading-log"].forEach(entry => {
-    entry.reads.forEach(readSession => {
-      readSession.log.forEach(logEntry => {
-        const date = logEntry[0]
-        const pages = logEntry[1] || 0
-        const minutes = logEntry[2]
-        
-        const existing = dailyStats.get(date) || { minutes: 0, pages: 0 }
-        dailyStats.set(date, {
-          minutes: existing.minutes + minutes,
-          pages: existing.pages + pages
-        })
-      })
+    const existing = dailyStats.get(entry.date) || { minutes: 0 }
+    dailyStats.set(entry.date, {
+      minutes: existing.minutes + entry.minutes
     })
   })
 
   // Calculate type stats
-  const typeStats = new Map<string, { minutes: number; pages: number; count: number }>()
+  const typeStats = new Map<string, { minutes: number; count: number }>()
   
   data["reading-log"].forEach(entry => {
-    const totalMinutes = entry.reads.reduce((sum, readSession) => 
-      sum + readSession.log.reduce((logSum, logEntry) => logSum + logEntry[2], 0), 0)
-    const totalPages = entry.reads.reduce((sum, readSession) => 
-      sum + readSession.log.reduce((logSum, logEntry) => logSum + (logEntry[1] || 0), 0), 0)
-
-    const existing = typeStats.get(entry.type) || { minutes: 0, pages: 0, count: 0 }
+    const existing = typeStats.get(entry.type) || { minutes: 0, count: 0 }
     typeStats.set(entry.type, {
-      minutes: existing.minutes + totalMinutes,
-      pages: existing.pages + totalPages,
+      minutes: existing.minutes + entry.minutes,
       count: existing.count + 1
     })
   })
 
   // Calculate author stats
-  const authorStats = new Map<string, { minutes: number; pages: number; titles: number }>()
+  const authorStats = new Map<string, { minutes: number; titles: Set<string> }>()
   
   data["reading-log"].forEach(entry => {
-    const totalMinutes = entry.reads.reduce((sum, readSession) => 
-      sum + readSession.log.reduce((logSum, logEntry) => logSum + logEntry[2], 0), 0)
-    const totalPages = entry.reads.reduce((sum, readSession) => 
-      sum + readSession.log.reduce((logSum, logEntry) => logSum + (logEntry[1] || 0), 0), 0)
-
-    const existing = authorStats.get(entry.author) || { minutes: 0, pages: 0, titles: 0 }
+    const existing = authorStats.get(entry.author) || { minutes: 0, titles: new Set() }
+    existing.titles.add(entry.title)
     authorStats.set(entry.author, {
-      minutes: existing.minutes + totalMinutes,
-      pages: existing.pages + totalPages,
-      titles: existing.titles + 1
+      minutes: existing.minutes + entry.minutes,
+      titles: existing.titles
     })
   })
 
@@ -134,14 +104,14 @@ export function ReadingStatsClient() {
     .sort((a, b) => b.minutes - a.minutes)
 
   const sortedAuthorStats = Array.from(authorStats.entries())
-    .map(([author, stats]) => ({ author, ...stats }))
+    .map(([author, stats]) => ({ author, minutes: stats.minutes, titles: stats.titles.size }))
     .sort((a, b) => b.minutes - a.minutes)
 
   // Calculate totals
   const totalMinutes = sortedDailyStats.reduce((sum, day) => sum + day.minutes, 0)
-  const totalPages = sortedDailyStats.reduce((sum, day) => sum + day.pages, 0)
   const totalDays = sortedDailyStats.length
   const avgMinutesPerDay = totalDays > 0 ? Math.round(totalMinutes / totalDays) : 0
+  const totalEntries = data["reading-log"].length
 
   return (
     <div className="mt-4 space-y-8">
@@ -152,8 +122,8 @@ export function ReadingStatsClient() {
           <div className="text-sm text-muted-foreground">Total Minutes</div>
         </div>
         <div className="p-6 bg-muted/50">
-          <div className="text-2xl font-bold">{totalPages}</div>
-          <div className="text-sm text-muted-foreground">Total Pages</div>
+          <div className="text-2xl font-bold">{totalEntries}</div>
+          <div className="text-sm text-muted-foreground">Reading Sessions</div>
         </div>
         <div className="p-6 bg-muted/50">
           <div className="text-2xl font-bold">{totalDays}</div>
@@ -216,9 +186,8 @@ export function ReadingStatsClient() {
                       style={{ width: `${percentage}%` }}
                     />
                   </div>
-                  <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>{stat.count} titles</span>
-                    <span>{stat.pages} pages</span>
+                  <div className="text-xs text-muted-foreground">
+                    {stat.count} sessions
                   </div>
                 </div>
               )
@@ -246,9 +215,8 @@ export function ReadingStatsClient() {
                       style={{ width: `${percentage}%` }}
                     />
                   </div>
-                  <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>{stat.titles} titles</span>
-                    <span>{stat.pages} pages</span>
+                  <div className="text-xs text-muted-foreground">
+                    {stat.titles} titles
                   </div>
                 </div>
               )

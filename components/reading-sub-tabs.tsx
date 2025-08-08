@@ -50,6 +50,7 @@ export function ReadingSubTabs({ activeTab, onTabChange, showBooks = false, want
   const [activeSubTab, setActiveSubTab] = useState<ReadingSubTabType>(
     (activeTab as ReadingSubTabType) || "books"
   )
+  const [searchQuery, setSearchQuery] = useState("")
   
   // Use preloaded data from context
   const { data: readingData, loading: readingLoading } = useReadingData()
@@ -75,10 +76,24 @@ export function ReadingSubTabs({ activeTab, onTabChange, showBooks = false, want
   }
 
   const handleBookClick = (book: JsonBook) => {
+    console.log('Book clicked:', book.title, 'Link:', book.link);
     if (book.link) {
-      window.open(book.link, '_blank')
+      const url = book.link.startsWith('http')
+        ? book.link
+        : `https://${book.link}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
     }
   }
+
+  // Filter books based on search query
+  const filteredBooks = readingData.books.filter((book) => {
+    const q = searchQuery.toLowerCase()
+    return (
+      !q ||
+      book.title.toLowerCase().includes(q) ||
+      book.author.toLowerCase().includes(q)
+    )
+  })
 
   const subTabLabels: Record<ReadingSubTabType, string> = {
     "books": "Books",
@@ -121,23 +136,40 @@ export function ReadingSubTabs({ activeTab, onTabChange, showBooks = false, want
               <div className="text-center py-8">
                 <p className="text-muted-foreground">Loading books...</p>
               </div>
-            ) : readingData.books.length > 0 ? (
-              <div className="space-y-6">
-                {readingData.books.map((book, index) => (
-                  <ReadingBookCard
-                    key={index}
-                    coverUrl={book.cover}
-                    title={book.title}
-                    subtitle={book.subtitle || ""}
-                    author={book.author}
-                    rating={0}
-                    onClick={() => handleBookClick(book)}
-                  />
-                ))}
-              </div>
             ) : (
-              <div className="text-center py-8">
-                <p className="text-muted-foreground">No books found.</p>
+              <div className="space-y-4">
+                {/* Search bar for books */}
+                <div className="relative">
+                  <input 
+                    type="text" 
+                    placeholder="Search books..." 
+                    className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    value={searchQuery}
+                  />
+                </div>
+
+                {filteredBooks.length > 0 ? (
+                  <div className="space-y-6">
+                    {filteredBooks.slice().reverse().map((book, index) => (
+                      <ReadingBookCard
+                        key={index}
+                        coverUrl={book.cover}
+                        title={book.title}
+                        subtitle={book.subtitle || ""}
+                        author={book.author}
+                        rating={0}
+                        onClick={() => handleBookClick(book)}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <p className="text-muted-foreground">
+                      {searchQuery ? 'No books found matching your search.' : 'No books found.'}
+                    </p>
+                  </div>
+                )}
               </div>
             )}
           </>
