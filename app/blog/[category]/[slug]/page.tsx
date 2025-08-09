@@ -24,7 +24,6 @@ interface BlogData {
   cover_image?: string;
   state?: "active" | "hidden";
 }
-}
 
 interface BlogPageProps {
   params: { category: string; slug: string };
@@ -102,7 +101,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
     state: postData.state as "active" | "hidden" | undefined
   };
 
-  const posts: BlogMeta[] = blogData.map((post: BlogData) => ({
+  const posts: BlogMeta[] = blogData.map((post) => ({
     ...post,
     status: post.status as Status,
     confidence: post.confidence as Confidence,
