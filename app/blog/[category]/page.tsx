@@ -15,6 +15,7 @@ interface BlogData {
   importance: number;
   preview?: string;
   cover_image?: string;
+  state?: "active" | "hidden";
 }
 
 interface BlogCategoryPageProps {

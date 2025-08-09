@@ -22,7 +22,8 @@ interface BlogData {
   importance: number;
   preview?: string;
   cover_image?: string;
-  state?: string;
+  state?: "active" | "hidden";
+}
 }
 
 interface BlogPageProps {
