@@ -65,7 +65,7 @@ export default function LinkPageClient({ link, allLinks, children, headerOnly, c
           title={link.title}
           subtitle={link.subtitle}
           start_date={link.start_date || link.date || "2025-01-01"}
-          end_date={link.end_date || ""}
+          end_date={link.end_date || new Date().toISOString().split('T')[0]}
           tags={link.tags}
           category={link.category}
           backHref="/links"
@@ -146,7 +146,7 @@ export default function LinkPageClient({ link, allLinks, children, headerOnly, c
         title={link.title}
         subtitle={link.subtitle}
         start_date={link.start_date || link.date || "2025-01-01"}
-        end_date={link.end_date || ""}
+        end_date={link.end_date || new Date().toISOString().split('T')[0]}
         tags={link.tags}
         category={link.category}
         status={link.status}

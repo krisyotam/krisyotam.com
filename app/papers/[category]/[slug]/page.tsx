@@ -107,7 +107,7 @@ export default async function PaperPage({ params }: PaperPageProps) {
   const papers: PaperMeta[] = (papersData.papers as PaperData[]).map(paperItem => ({
     ...paperItem,
     start_date: paperItem.start_date || (paperItem as any).date || new Date().toISOString(),
-    end_date: paperItem.end_date || "",
+    end_date: paperItem.end_date || new Date().toISOString().split('T')[0],
     status: paperItem.status as PaperStatus,
     confidence: paperItem.confidence as PaperConfidence
   }));

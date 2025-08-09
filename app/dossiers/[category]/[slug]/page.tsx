@@ -105,7 +105,7 @@ export default async function DossierPage({ params }: DossierPageProps) {
   const dossiers: DossierMeta[] = (dossiersData as DossierData[]).map(dossierItem => ({
     ...dossierItem,
     start_date: dossierItem.start_date || (dossierItem as any).date || new Date().toISOString(),
-    end_date: dossierItem.end_date || "",
+    end_date: dossierItem.end_date || new Date().toISOString().split('T')[0],
     status: dossierItem.status as DossierStatus,
     confidence: dossierItem.confidence as DossierConfidence
   }));

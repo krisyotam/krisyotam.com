@@ -147,7 +147,7 @@ export function PostHeader({
             >
               {end_date && end_date.trim() 
                 ? formatDateRange(start_date, end_date)
-                : `${formatDate(start_date)} - Unfinished`
+                : formatDateRange(start_date, new Date().toISOString().split('T')[0])
               }
             </time>
           </div>

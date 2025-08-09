@@ -58,7 +58,7 @@ export default function NowPageClient({ now, allNows, children, headerOnly, cont
           title={now.title}
           subtitle={now.subtitle}
           start_date={now.start_date || now.date || "2025-01-01"}
-          end_date={now.end_date || ""}
+          end_date={now.end_date || new Date().toISOString().split('T')[0]}
           tags={now.tags}
           category={now.category}
           backHref="/now"
@@ -95,7 +95,7 @@ export default function NowPageClient({ now, allNows, children, headerOnly, cont
         title={now.title}
         subtitle={now.subtitle}
         start_date={now.start_date || now.date || "2025-01-01"}
-        end_date={now.end_date || ""}
+        end_date={now.end_date || new Date().toISOString().split('T')[0]}
         tags={now.tags}
         category={now.category}
         backHref="/now"
