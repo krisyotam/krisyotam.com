@@ -98,7 +98,8 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
       status: post.status as Status,
       confidence: post.confidence as Confidence,
       importance: post.importance,
-      preview: post.preview
+      preview: post.preview,
+      state: post.state as "active" | "hidden" | undefined
     }));
 
   if (!categoryPosts.length) {
@@ -117,7 +118,8 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
     status: post.status as Status,
     confidence: post.confidence as Confidence,
     importance: post.importance,
-    preview: post.preview
+    preview: post.preview,
+    state: post.state as "active" | "hidden" | undefined
   }));
 
   return (

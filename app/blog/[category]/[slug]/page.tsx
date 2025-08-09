@@ -22,6 +22,7 @@ interface BlogData {
   importance: number;
   preview?: string;
   cover_image?: string;
+  state?: string;
 }
 
 interface BlogPageProps {
@@ -96,13 +97,15 @@ export default async function BlogPage({ params }: BlogPageProps) {
   const post: BlogMeta = {
     ...postData,
     status: postData.status as Status,
-    confidence: postData.confidence as Confidence
+    confidence: postData.confidence as Confidence,
+    state: postData.state as "active" | "hidden" | undefined
   };
 
   const posts: BlogMeta[] = blogData.map((post: BlogData) => ({
     ...post,
     status: post.status as Status,
-    confidence: post.confidence as Confidence
+    confidence: post.confidence as Confidence,
+    state: post.state as "active" | "hidden" | undefined
   }));
 
   // Extract headings from the blog MDX content

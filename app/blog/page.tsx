@@ -15,7 +15,8 @@ export default function BlogPage() {
     .map(post => ({
       ...post,
       status: post.status as BlogMeta['status'],
-      confidence: post.confidence as BlogMeta['confidence']
+      confidence: post.confidence as BlogMeta['confidence'],
+      state: post.state as BlogMeta['state']
     }))
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
