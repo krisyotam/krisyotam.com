@@ -18,7 +18,8 @@ export interface Sequence {
   slug: string;
   title: string;
   preview: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   "cover-url": string;
   state: "active" | "hidden";
   status: SequenceStatus;

@@ -88,7 +88,8 @@ export function SymbolDetailClient({ symbol }: SymbolDetailClientProps) {
         <PostHeader
           title={symbol.name}
           subtitle={`Symbol: ${symbol.symbol}`}
-          date="2025-05-28"
+          start_date="2025-01-01"
+          end_date={new Date().toISOString().split('T')[0]}
           category={symbol.category}
           tags={symbol.contexts}
           preview={symbol.description}

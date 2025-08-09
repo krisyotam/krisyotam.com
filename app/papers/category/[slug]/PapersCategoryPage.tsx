@@ -11,6 +11,8 @@ interface CategoryHeaderData {
   title: string;
   subtitle: string;
   date: string;
+  start_date: string;
+  end_date?: string;
   preview: string;
   status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Active";
   confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
@@ -38,7 +40,11 @@ export default function PapersCategoryPage({ papers, categoryData }: PapersCateg
       (paper.preview && paper.preview.toLowerCase().includes(q));
 
     return matchesSearch;
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }).sort((a, b) => {
+    const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+    const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+    return new Date(dateB).getTime() - new Date(dateA).getTime();
+  });
 
   // Helper to build the correct route for a paper
   function getPaperUrl(paper: PaperMeta) {
@@ -57,7 +63,8 @@ export default function PapersCategoryPage({ papers, categoryData }: PapersCateg
         <PageHeader 
           title={categoryData.title}
           subtitle={categoryData.subtitle}
-          date={categoryData.date}
+          start_date={categoryData.start_date}
+          end_date={categoryData.end_date}
           preview={categoryData.preview}
           status={categoryData.status}
           confidence={categoryData.confidence}

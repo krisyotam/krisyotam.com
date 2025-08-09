@@ -108,7 +108,8 @@ export default function BlogrollEntryPage({ params }: PageProps) {
       <div className="max-w-4xl mx-auto">        {/* Post Header */}        <PostHeader
           title={title}
           subtitle={domainName}
-          date={publishDate}
+          start_date={publishDate}
+          end_date=""
           tags={entry.tags}
           category={entry.category}
           status={status as any}

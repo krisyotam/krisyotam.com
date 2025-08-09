@@ -1,5 +1,5 @@
 import BlogTaggedPage from "./BlogTaggedPage";
-import blogData from "@/data/blog/feed.json";
+import blogData from "@/data/blog/blog.json";
 import tagsData from "@/data/blog/tags.json";
 import type { Metadata } from "next";
 import type { BlogMeta } from "@/types/blog";
@@ -98,7 +98,8 @@ export default function BlogTagPage({ params }: PageProps) {
   const tagHeaderData = customTag ? {
     title: customTag.title,
     subtitle: "",
-    date: customTag.date,
+    start_date: customTag.date || new Date().toISOString(),
+    end_date: "",
     preview: customTag.preview,
     status: customTag.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
     confidence: customTag.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
@@ -108,7 +109,8 @@ export default function BlogTagPage({ params }: PageProps) {
   } : {
     title: originalTag,
     subtitle: "",
-    date: new Date().toISOString(),
+    start_date: new Date().toISOString(),
+    end_date: "",
     preview: `Blog posts tagged with ${originalTag}.`,
     status: "Active" as const,
     confidence: "certain" as const,
@@ -118,7 +120,11 @@ export default function BlogTagPage({ params }: PageProps) {
   };
 
   // Sort posts by date (newest first) and ensure proper typing
-  const posts: BlogMeta[] = [...postsWithTag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map(post => ({
+  const posts: BlogMeta[] = [...postsWithTag].sort((a, b) => {
+    const aDate = a.end_date || a.start_date;
+    const bDate = b.end_date || b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  }).map(post => ({
     ...post,
     status: post.status as BlogMeta['status'],
     confidence: post.confidence as BlogMeta['confidence'],

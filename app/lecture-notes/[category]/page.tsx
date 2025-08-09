@@ -1,5 +1,5 @@
 import { LectureNotesClient } from "../lecture-notes-client"
-import lectureNotesData from "@/data/lecture-notes.json"
+import lectureNotesData from "@/data/lecture-notes/lecture-notes.json"
 import type { Metadata } from "next"
 import type { LectureNote } from "@/types/lecture-note"
 

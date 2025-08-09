@@ -13,7 +13,8 @@ interface BlogMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -37,9 +38,11 @@ export default function BlogPageClient({ post, allPosts, children, headerOnly, c
   if (!post) notFound();
 
   /* prev / next */
-  const sorted = [...allPosts].sort(
-    (a, b) => +new Date(b.date) - +new Date(a.date)
-  );
+  const sorted = [...allPosts].sort((a, b) => {
+    const dateA = (a.end_date && a.end_date.trim()) || a.start_date;
+    const dateB = (b.end_date && b.end_date.trim()) || b.start_date;
+    return new Date(dateB).getTime() - new Date(dateA).getTime();
+  });
   const idx  = sorted.findIndex(n => n.slug === post.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
   const next = idx > 0                 ? sorted[idx - 1] : null;
@@ -57,7 +60,8 @@ export default function BlogPageClient({ post, allPosts, children, headerOnly, c
           className=""     
           title={post.title}
           subtitle={post.subtitle}
-          date={post.date}
+          start_date={post.start_date}
+          end_date={post.end_date}
           tags={post.tags}
           category={post.category}
           backHref="/blog"
@@ -78,7 +82,7 @@ export default function BlogPageClient({ post, allPosts, children, headerOnly, c
         <Citation 
           title={post.title}
           slug={post.slug}
-          date={post.date}
+          date={(post.end_date && post.end_date.trim()) || post.start_date}
           url={`https://krisyotam.com/blog/${slugifyCategory(post.category)}/${post.slug}`}
         />
         <LiveClock />
@@ -95,7 +99,8 @@ export default function BlogPageClient({ post, allPosts, children, headerOnly, c
         className=""     
         title={post.title}
         subtitle={post.subtitle}
-        date={post.date}
+        start_date={post.start_date}
+        end_date={post.end_date}
         tags={post.tags}
         category={post.category}
         backHref="/blog"
@@ -113,7 +118,7 @@ export default function BlogPageClient({ post, allPosts, children, headerOnly, c
         <Citation 
           title={post.title}
           slug={post.slug}
-          date={post.date}
+          date={(post.end_date && post.end_date.trim()) || post.start_date}
           url={`https://krisyotam.com/blog/${slugifyCategory(post.category)}/${post.slug}`}
         />
       </div>

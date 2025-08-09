@@ -1,12 +1,13 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import blogData from "@/data/blog/feed.json";
+import blogData from "@/data/blog/blog.json";
 import BlogCategoryClient from "./BlogCategoryClient";
 import type { BlogMeta, Status, Confidence } from "@/types/blog";
 
 interface BlogData {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -92,7 +93,8 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
     .filter(post => slugifyCategory(post.category) === params.category && post.state !== "hidden")
     .map(post => ({
       title: post.title,
-      date: post.date,
+      start_date: post.start_date,
+      end_date: post.end_date,
       slug: post.slug,
       tags: post.tags,
       category: post.category,
@@ -112,7 +114,8 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
     .filter(post => post.state !== "hidden")
     .map(post => ({
     title: post.title,
-    date: post.date,
+    start_date: post.start_date,
+    end_date: post.end_date,
     slug: post.slug,
     tags: post.tags,
     category: post.category,

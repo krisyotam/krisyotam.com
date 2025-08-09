@@ -213,7 +213,8 @@ export default function AnimeClientPage() {
       <div className="max-w-6xl mx-auto p-6">
         <PageHeader
           title="Anime"
-          date="2025-01-01"
+          start_date="2025-01-01"
+          end_date={new Date().toISOString().split('T')[0]}
           preview="my anime watching activity and favorites"
           status="Finished"
           confidence="certain"

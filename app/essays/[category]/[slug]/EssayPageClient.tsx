@@ -57,7 +57,8 @@ export default function EssayPageClient({ essayData: essayItem, allEssays, child
         <PageHeader
           title={essayItem.title}
           subtitle={essayItem.subtitle}
-          date={essayItem.date}
+          start_date={essayItem.start_date || (essayItem as any).date || "2025-01-01"}
+          end_date={essayItem.end_date}
           backHref="/essays"
           backText="Essays"
           preview={essayItem.preview}
@@ -76,7 +77,8 @@ export default function EssayPageClient({ essayData: essayItem, allEssays, child
         <Citation 
           title={essayItem.title}
           slug={essayItem.slug}
-          date={essayItem.date}
+          start_date={essayItem.start_date || (essayItem as any).date || "2025-01-01"}
+          end_date={essayItem.end_date}
           url={`https://krisyotam.com/essays/${essayItem.category}/${essayItem.slug}`}
         />
         <div className="mt-8">
@@ -93,7 +95,8 @@ export default function EssayPageClient({ essayData: essayItem, allEssays, child
       <PageHeader
         title={essayItem.title}
         subtitle={essayItem.subtitle}
-        date={essayItem.date}
+        start_date={essayItem.start_date || (essayItem as any).date || "2025-01-01"}
+        end_date={essayItem.end_date}
         backHref="/essays"
         backText="Essays"
         preview={essayItem.preview}
@@ -109,7 +112,8 @@ export default function EssayPageClient({ essayData: essayItem, allEssays, child
         <Citation 
           title={essayItem.title}
           slug={essayItem.slug}
-          date={essayItem.date}
+          start_date={essayItem.start_date || (essayItem as any).date || "2025-01-01"}
+          end_date={essayItem.end_date}
           url={`https://krisyotam.com/essays/${essayItem.category}/${essayItem.slug}`}
         />
       </div>      

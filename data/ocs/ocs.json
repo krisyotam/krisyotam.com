@@ -1,7 +1,8 @@
 [
   {
     "title": "Chloe Elyon",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "chloe-elyon",
     "cover_image": "https://doc.krisyotam.com/ocs/chloe-elyon.png",
     "tags": ["Protagonist", "Fantasy", "Magic User"],
@@ -15,7 +16,8 @@
   },
   {
     "title": "Sydney Lane",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "sydney-lane",
     "cover_image": "https://doc.krisyotam.com/ocs/sydney-lane.png",
     "tags": ["Mary Sue", "Academic", "Polymath"],
@@ -29,7 +31,8 @@
   },
   {
     "title": "Yif'ah Kohen",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "yifah-kohen",
     "cover_image": "https://doc.krisyotam.com/ocs/yifah-cohen.png",
     "tags": ["Supporting Character", "Fantasy", "Warrior"],
@@ -43,7 +46,8 @@
   },
   {
     "title": "Saul Matsuda",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "saul-matsuda",
     "cover_image": "https://doc.krisyotam.com/ocs/saul-matsuda.png",
     "tags": ["Supporting Character", "Fantasy", "Scholar"],
@@ -57,7 +61,8 @@
   },
   {
     "title": "Lior Elyon",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "lior-elyon",
     "cover_image": "https://doc.krisyotam.com/ocs/lior-elyon.png",
     "tags": ["Supporting Character", "Fantasy", "Family"],
@@ -71,7 +76,8 @@
   },
   {
     "title": "Zephyra",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "zephyra",
     "cover_image": "https://doc.krisyotam.com/ocs/zephyra.png",
     "tags": ["Antagonist", "Fantasy", "Powerful"],
@@ -85,7 +91,8 @@
   },
   {
     "title": "Lillith",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "lilith-taiyo",
     "cover_image": "https://doc.krisyotam.com/ocs/lillith.png",
     "tags": ["Antagonist", "Fantasy", "Dark Magic"],
@@ -99,7 +106,8 @@
   },
   {
     "title": "Azazel \"The Serpent\"",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "azazel",
     "cover_image": "https://doc.krisyotam.com/ocs/azazel.png",
     "tags": ["Antagonist", "Fantasy", "Demon"],
@@ -113,7 +121,8 @@
   },
   {
     "title": "Empress Ena of Mitani",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "ena-of-mitani",
     "cover_image": "https://doc.krisyotam.com/ocs/empress-ena-of-mitani.png",
     "tags": ["Royalty", "Fantasy", "Leader"],
@@ -127,7 +136,8 @@
   },
   {
     "title": "Miranda Strauss",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "miranda-strauss",
     "cover_image": "https://doc.krisyotam.com/ocs/miranda-strauss.png",
     "tags": ["Protagonist", "Drama", "Family"],
@@ -141,7 +151,8 @@
   },
   {
     "title": "Ella Strauss",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "ella-strauss",
     "cover_image": "",
     "tags": ["Supporting Character", "Drama", "Family"],
@@ -155,7 +166,8 @@
   },
   {
     "title": "Rylee Moncler",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "rylee-moncler",
     "cover_image": "https://doc.krisyotam.com/ocs/rylee-moncler.png",
     "tags": ["Supporting Character", "Mystery", "Victim"],
@@ -169,7 +181,8 @@
   },
   {
     "title": "Prescilla Prescott",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "prescilla-prescott",
     "cover_image": "https://doc.krisyotam.com/ocs/prescilla-prescott.png",
     "tags": ["Supporting Character", "Mystery", "Aristocrat"],
@@ -183,7 +196,8 @@
   },
   {
     "title": "Hortense Fletcher",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "hortense-fletcher",
     "cover_image": "https://doc.krisyotam.com/ocs/hortense-flethcer.png",
     "tags": ["Supporting Character", "Mystery", "Elderly"],
@@ -197,7 +211,8 @@
   },
   {
     "title": "Josephine Gilroy",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "josephine-gilroy",
     "cover_image": "https://doc.krisyotam.com/ocs/josephine-gilroy.png",
     "tags": ["Supporting Character", "Mystery", "Socialite"],
@@ -211,7 +226,8 @@
   },
   {
     "title": "Gertrude Jennings",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "gertrude-jennings",
     "cover_image": "https://doc.krisyotam.com/ocs/gertrude-jennings.png",
     "tags": ["Supporting Character", "Mystery", "Servant"],
@@ -225,7 +241,8 @@
   },
   {
     "title": "Imogen Riccheti",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "imogen-riccheti",
     "cover_image": "https://doc.krisyotam.com/ocs/imogen-riccheti.png",
     "tags": ["Supporting Character", "Mystery", "Young"],
@@ -239,7 +256,8 @@
   },
   {
     "title": "Astrid Baxter",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "astrid-baxter",
     "cover_image": "https://doc.krisyotam.com/ocs/astrid-baxter.png",
     "tags": ["Supporting Character", "Mystery", "Professional"],
@@ -253,7 +271,8 @@
   },
   {
     "title": "Morgan Elwood",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "morgan-elwood",
     "cover_image": "https://doc.krisyotam.com/ocs/morgan-elwood.png",
     "tags": ["Supporting Character", "Mystery", "Enigmatic"],
@@ -267,7 +286,8 @@
   },
   {
     "title": "Matteo Calloway",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "matteo-calloway",
     "cover_image": "",
     "tags": ["Supporting Character", "Mystery", "Charming"],
@@ -281,7 +301,8 @@
   },
   {
     "title": "Niklaus Brahms",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "niklaus-brahms",
     "cover_image": "",
     "tags": ["Supporting Character", "Mystery", "Intellectual"],
@@ -295,7 +316,8 @@
   },
   {
     "title": "Elmer Remington",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "elmer-remington",
     "cover_image": "https://doc.krisyotam.com/ocs/elmer-remington.png",
     "tags": ["Supporting Character", "Mystery", "Businessman"],
@@ -309,7 +331,8 @@
   },
   {
     "title": "Minerva Remington",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "minerva-remington",
     "cover_image": "https://doc.krisyotam.com/ocs/minerva-remington.png",
     "tags": ["Supporting Character", "Mystery", "Spouse"],
@@ -323,7 +346,8 @@
   },
   {
     "title": "Lavinia Fairchild",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "lavinia-fairchild",
     "cover_image": "https://doc.krisyotam.com/ocs/lavinia-fairchild.png",
     "tags": ["Protagonist", "Gothic", "Aristocrat"],
@@ -337,7 +361,8 @@
   },
   {
     "title": "Delta (Δ)",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "ars-mathematica-delta",
     "cover_image": "",
     "tags": ["Protagonist", "Science Fiction", "Mathematical"],
@@ -351,7 +376,8 @@
   },
   {
     "title": "Jane Von Toviah",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "jane-von-toviah",
     "cover_image": "https://doc.krisyotam.com/ocs/jane-toviah.png",
     "tags": ["Protagonist", "Academic", "Genius"],
@@ -365,7 +391,8 @@
   },
   {
     "title": "Prof. Cynthia Clarke",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "prof-cynthia-clarke",
     "cover_image": "https://doc.krisyotam.com/ocs/cynthia-clarke.png",
     "tags": ["Supporting Character", "Academic", "Professor"],
@@ -379,7 +406,8 @@
   },
   {
     "title": "Prof. Allen David",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "prof-allen-david",
     "cover_image": "https://doc.krisyotam.com/ocs/allen-david.png",
     "tags": ["Supporting Character", "Academic", "Professor"],
@@ -393,7 +421,8 @@
   },
   {
     "title": "Malik Hill",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "malik-hill",
     "cover_image": "",
     "tags": ["Supporting Character", "Academic", "Student"],
@@ -407,7 +436,8 @@
   },
   {
     "title": "Mariah Leighton",
-    "date": "2025-01-01",
+    "start_date": "2025-01-01",
+    "end_date": "",
     "slug": "mariah-leighton",
     "cover_image": "https://doc.krisyotam.com/ocs/mariah-leighton.png",
     "tags": ["Supporting Character", "Academic", "Student"],

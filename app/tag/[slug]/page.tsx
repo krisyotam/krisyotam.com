@@ -60,7 +60,8 @@ export default async function TagPage({
                 </thead>
                 <tbody>
                   {posts.map((post) => {
-                    const year = new Date(post.date).getFullYear().toString()
+                    const displayDate = post.end_date || post.start_date;
+                    const year = new Date(displayDate).getFullYear().toString()
                     const postUrl = `/${post.path || 'essays'}/${year}/${post.slug}`
                     return (
                       <tr
@@ -73,7 +74,7 @@ export default async function TagPage({
                           </Link>
                         </td>
                         <td className="py-4 px-2 text-right text-muted-foreground">
-                          {new Date(post.date).toLocaleDateString("en-US", {
+                          {new Date(displayDate).toLocaleDateString("en-US", {
                             year: "numeric",
                             month: "long",
                             day: "numeric",

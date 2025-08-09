@@ -11,7 +11,8 @@ import { ArtworkItem } from "@/components/art/art-card-base";
 const defaultArtPageData = {
   title: "Art",
   subtitle: "",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0],
   preview: "my personal art, follow me at cara.app/krisyotam",
   status: "In Progress" as const,
   confidence: "highly likely" as const,
@@ -58,7 +59,8 @@ export default function ArtClientPage({ artworks, initialCategory = "all" }: Art
     <>
       <PageHeader
         title={defaultArtPageData.title}
-        date={defaultArtPageData.date}
+        start_date={defaultArtPageData.start_date}
+        end_date={defaultArtPageData.end_date}
         preview={defaultArtPageData.preview}
         status={defaultArtPageData.status}
         confidence={defaultArtPageData.confidence}

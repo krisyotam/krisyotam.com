@@ -6,7 +6,8 @@ export interface PaperMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -23,7 +24,8 @@ export interface PaperCategory {
   slug: string;
   title: string;
   description?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   preview?: string;
   status?: PaperStatus;
   confidence?: PaperConfidence;

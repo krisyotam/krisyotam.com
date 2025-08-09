@@ -119,8 +119,11 @@ export default function EssaysTagPage({ params }: PageProps) {
   };
 
   // Sort essays by date (newest first) and transform to match Essay interface
-  const essays = [...essaysWithTag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .map(essay => ({
+  const essays = [...essaysWithTag].sort((a, b) => {
+    const aDate = a.end_date || a.start_date;
+    const bDate = b.end_date || b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  }).map(essay => ({
       id: essay.slug,
       title: essay.title,
       abstract: essay.preview,
@@ -130,8 +133,8 @@ export default function EssaysTagPage({ params }: PageProps) {
       subject: essay.category,
       keywords: essay.tags,
       postedBy: "admin", // Default value
-      postedOn: essay.date,
-      dateStarted: essay.date,
+      postedOn: essay.end_date || essay.start_date,
+      dateStarted: essay.start_date,
       tags: essay.tags,
       img: essay.cover_image,
       status: essay.status,

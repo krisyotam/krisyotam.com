@@ -27,18 +27,31 @@ export function ReviewsTable({ reviews, searchQuery, activeCategory }: ReviewsTa
       const matchesCategory = activeCategory === "all" || review.category === activeCategory;
       return matchesSearch && matchesCategory;
     });    // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    filtered.sort((a, b) => {
+      const dateA = (a.end_date && a.end_date.trim()) || a.start_date || '';
+      const dateB = (b.end_date && b.end_date.trim()) || b.start_date || '';
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    });
     setFilteredReviews(filtered);
   }, [reviews, searchQuery, activeCategory]);
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
+    if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long", 
       day: "numeric"
     });
-  }  // Helper to build the correct route for a review
+  }  
+  
+  // Helper to get the display date (end_date if available, otherwise start_date)
+  function getDisplayDate(review: ReviewMeta): string {
+    const dateToUse = (review.end_date && review.end_date.trim()) || review.start_date;
+    return formatDate(dateToUse);
+  }
+  
+  // Helper to build the correct route for a review
   function getReviewUrl(review: ReviewMeta) {
     return `/reviews/${encodeURIComponent(review.category)}/${encodeURIComponent(review.slug)}`;
   }
@@ -67,7 +80,7 @@ export function ReviewsTable({ reviews, searchQuery, activeCategory }: ReviewsTa
                   {review.category}
                 </Link>
               </td>
-              <td className="py-2 px-3">{formatDate(review.date)}</td>
+              <td className="py-2 px-3">{getDisplayDate(review)}</td>
             </tr>
           ))}
         </tbody>

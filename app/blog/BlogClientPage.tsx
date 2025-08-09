@@ -22,7 +22,8 @@ interface BlogTableProps {
 /* default page-level metadata for the header */
 const defaultBlogPageData = {
   title: "Blog Posts",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview: "informal ramblings, thought experiments, and idea play across topics and characters",
   status: "In Progress" as const,
   confidence: "likely" as const,
@@ -62,7 +63,8 @@ export default function BlogClientPage({ initialCategory = "all", notes }: BlogC
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,
+        start_date: categoryData.date || "2025-01-01",
+        end_date: categoryData.date || new Date().toISOString().split('T')[0],
         preview: categoryData.preview,
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
@@ -108,7 +110,11 @@ export default function BlogClientPage({ initialCategory = "all", notes }: BlogC
 
     const matchesCategory = activeCategory === "all" || note.category === activeCategory;
     return matchesSearch && matchesCategory;
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }).sort((a, b) => {
+    const dateA = a.end_date || a.start_date;
+    const dateB = b.end_date || b.start_date;
+    return new Date(dateB).getTime() - new Date(dateA).getTime();
+  });
 
   // Helper to build the correct route for a blog post
   function getBlogUrl(note: BlogMeta) {
@@ -157,7 +163,7 @@ export default function BlogClientPage({ initialCategory = "all", notes }: BlogC
             
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>{new Date(note.date).getFullYear()}</span>
+              <span>{new Date(note.end_date || note.start_date).getFullYear()}</span>
             </div>
           </div>
         </div>

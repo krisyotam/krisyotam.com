@@ -13,7 +13,8 @@ interface NewsMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -49,7 +50,11 @@ export default function NewsPageClient({ article, allNews, children, headerOnly,
 
   /* prev / next */
   const sorted = [...allNews].sort(
-    (a, b) => +new Date(b.date) - +new Date(a.date)
+    (a, b) => {
+      const aDate = (a.end_date?.trim()) ? a.end_date : a.start_date;
+      const bDate = (b.end_date?.trim()) ? b.end_date : b.start_date;
+      return +new Date(bDate) - +new Date(aDate);
+    }
   );
   const idx = sorted.findIndex(n => n.slug === article.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
@@ -67,7 +72,8 @@ export default function NewsPageClient({ article, allNews, children, headerOnly,
           className=""     
           title={article.title}
           subtitle={article.subtitle}
-          date={article.date}
+          start_date={article.start_date}
+          end_date={article.end_date}
           tags={article.tags}
           category={article.category}
           backHref="/news"
@@ -88,7 +94,8 @@ export default function NewsPageClient({ article, allNews, children, headerOnly,
         <Citation 
           title={article.title}
           slug={article.slug}
-          date={article.date}
+          start_date={article.start_date}
+          end_date={article.end_date}
           url={`https://krisyotam.com/news/${slugifyCategory(article.category)}/${article.slug}`}
         />
         <LiveClock />
@@ -105,7 +112,8 @@ export default function NewsPageClient({ article, allNews, children, headerOnly,
         className=""     
         title={article.title}
         subtitle={article.subtitle}
-        date={article.date}
+        start_date={article.start_date}
+        end_date={article.end_date}
         tags={article.tags}
         category={article.category}
         backHref="/news"
@@ -123,7 +131,8 @@ export default function NewsPageClient({ article, allNews, children, headerOnly,
         <Citation 
           title={article.title}
           slug={article.slug}
-          date={article.date}
+          start_date={article.start_date}
+          end_date={article.end_date}
           url={`https://krisyotam.com/news/${slugifyCategory(article.category)}/${article.slug}`}
         />
         <LiveClock />

@@ -22,7 +22,7 @@ export async function PostWrapper({ children, slug }: PostWrapperProps) {
 
   return (
     <div className="max-w-3xl mx-auto p-8 md:p-16 lg:p-24">
-      <PostHeader title={postData.title} date={postData.date} tags={postData.tags} category={postData.category} />
+      <PostHeader title={postData.title} start_date={postData.start_date} end_date={postData.end_date} tags={postData.tags} category={postData.category} />
       <article className="post-content">{children}</article>
     </div>
   )

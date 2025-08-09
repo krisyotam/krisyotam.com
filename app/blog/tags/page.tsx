@@ -1,6 +1,6 @@
 import BlogTagsClientPage from "./BlogTagsClientPage";
 import tagsData from "@/data/blog/tags.json";
-import blogData from "@/data/blog/feed.json";
+import blogData from "@/data/blog/blog.json";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

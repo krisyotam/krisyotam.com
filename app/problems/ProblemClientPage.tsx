@@ -12,7 +12,8 @@ import categoriesData from "@/data/problems/categories.json";
 /* ---------- updated type ---------- */
 interface Problem {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -27,7 +28,7 @@ interface ProblemClientPageProps {
 const defaultProblemPageData = {
   title: "Problems",
   subtitle: "Mathematical Problems, Exercises, and Challenges",
-  date: new Date().toISOString(),
+  start_date: new Date().toISOString(),
   preview: "A collection of mathematical problems ranging from elementary to advanced topics",
   status: "In Progress" as const,
   confidence: "certain" as const,
@@ -60,7 +61,7 @@ export default function ProblemClientPage({ problems, initialCategory = "all" }:
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,
+        start_date: categoryData.date,
         preview: categoryData.preview,
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
@@ -105,7 +106,7 @@ export default function ProblemClientPage({ problems, initialCategory = "all" }:
         <PageHeader 
           title={headerData.title}
           subtitle={headerData.subtitle}
-          date={headerData.date}
+          start_date={headerData.start_date}
           preview={headerData.preview}
           status={headerData.status}
           confidence={headerData.confidence}

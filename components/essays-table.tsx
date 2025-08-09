@@ -36,7 +36,11 @@ export function EssaysTable({ notes, searchQuery, activeCategory }: EssaysTableP
     });
 
     // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    filtered.sort((a, b) => {
+      const dateA = (a.end_date && a.end_date.trim()) || a.start_date || '';
+      const dateB = (b.end_date && b.end_date.trim()) || b.start_date || '';
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    });
     setFilteredNotes(filtered);
   }, [notes, searchQuery, activeCategory]);
   // Helper to format date as "Month DD, YYYY"

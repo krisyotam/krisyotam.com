@@ -1,255 +1,841 @@
-You will be creating a /stats page built after another sites /dashboard
+ng; tags: string[]; category: string; status: string; confidence: string; importance: number; state: string; preview?: undefined; } | { ...; }' is not assignable to type 'NoteData'.
+      Property 'date' is missing in type '{ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; status: string; confidence: string; importance: number; state: string; preview?: undefined; }' but required in type 'NoteData'.
 
-Below is the **smallest reasonable slice** of code that reproduces what that Astro project does, but in a modern Next.js app-router project that already has Redis available.
+103   const notes: NoteMeta[] = notesData.map((note: NoteData) => ({
+                                              ~~~~~~~~~~~~~~~~~~~~~~
+104     ...note,
+    ~~~~~~~~~~~~
+...
+106     confidence: note.confidence as Confidence
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+107   }));
+    ~~~~
 
-```
-📂 app
- ┣ 📂 analytics
- ┃ ┗ page.tsx          ← the only page
- ┣ 📂 api
- ┃ ┗ 📂 page-view
- ┃   ┗ route.ts        ← the only API route
- ┣ 📂 _components
- ┃ ┗ ChartTotalVisits.tsx  ← the only React component
- ┣ 📂 _lib
- ┃ ┗ redis.ts          ← tiny helper (optional)
- ┗ layout.tsx          ← where we drop the <AnalyticsBeacon/>
-```
+  app/notes/[category]/[slug]/page.tsx:16:3
+    16   date: string;
+         ~~~~
+    'date' is declared here.
 
-Everything else (geo-IP helper, env vars, etc.) is embedded inline, so you can copy-paste and run.
+app/notes/[category]/page.tsx:59:60 - error TS2339: Property 'date' does not exist on type '{ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; status: string; confidence: string; importance: number; state: string; preview?: undefined; } | { ...; }'.
+  Property 'date' does not exist on type '{ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; status: string; confidence: string; importance: number; state: string; preview?: undefined; }'.
 
----
+59   const notes = [...activeNotes].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                                                              ~~~~
 
-## 1.  🔌  Redis helper
+app/notes/[category]/page.tsx:59:89 - error TS2339: Property 'date' does not exist on type '{ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; status: string; confidence: string; importance: number; state: string; preview?: undefined; } | { ...; }'.
+  Property 'date' does not exist on type '{ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; status: string; confidence: string; importance: number; state: string; preview?: undefined; }'.
 
-```ts
-// _lib/redis.ts
-import Redis from 'ioredis';
+59   const notes = [...activeNotes].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                                                                                           ~~~~ 
 
-export const redis = new Redis(process.env.REDIS_URL!);
-```
+app/notes/NotesClientPage.tsx:121:32 - error TS2339: Property 'date' does not exist on type 'Note'.
 
-*(If you already expose a Redis instance somewhere, replace this line with your import and delete the file.)*
+121   }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                                   ~~~~
 
----
+app/notes/NotesClientPage.tsx:121:61 - error TS2339: Property 'date' does not exist on type 'Note'.
 
-## 2.  📡  Beacon that runs on every page
+121   }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                                                                ~~~~
 
-```tsx
-// layout.tsx  (or _app.tsx in pages/ dir)
-import Script from 'next/script';
+app/notes/NotesClientPage.tsx:178:7 - error TS2719: Type 'Note[]' is not assignable to type 'Note[]'. Two different types with this name exist, but they are unrelated.
+  Property 'date' is missing in type 'Note' but required in type 'Note'.
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body>
-        {children}
-        {/* Same idea as <astro-analytics/> */}
-        <Script id="kris-analytics" strategy="afterInteractive">{`
-          navigator.sendBeacon(
-            '/api/page-view',
-            JSON.stringify({
-              path: window.location.pathname,
-              referrer: document.referrer
-            })
-          );
-        `}</Script>
-      </body>
-    </html>
-  );
-}
-```
+178       notes={filteredNotes}
+          ~~~~~
 
----
+  components/notes-table.tsx:8:3
+    8   date: string;
+        ~~~~
+    'date' is declared here.
+  components/notes-table.tsx:21:3
+    21   notes: Note[];
+         ~~~~~
+    The expected type comes from property 'notes' which is declared here on type 'IntrinsicAttributes & NotesTableProps'
 
-## 3.  🛠️  API route that records a hit
+app/notes/tag/[slug]/NotesTaggedPage.tsx:73:11 - error TS2322: Type '{ title: string; subtitle: string; date: string; preview: string; status: "Notes" | "Draft" | "In Progress" | "Abandoned" | "Finished" | "Active"; confidence: "certain" | "likely" | "impossible" | ... 4 more ... | "highly likely"; importance: number; backText: string; backHref: string; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
 
-```ts
-// app/api/page-view/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { redis } from '@/ _lib/redis';
+73           date={tagData.date}
+             ~~~~
 
-// very tiny free MaxMind replacement ­– swap out if you already log city info
-async function lookupCity(ip?: string | null) {
-  try {
-    const res = await fetch(`https://ipapi.co/${ip ?? ''}/json/`);
-    const j = await res.json();
-    return { country: j.country_code, city: j.city, flag: j.country_code ? String.fromCodePoint(0x1f1e6 - 65 + j.country_code.charCodeAt(0), 0x1f1e6 - 65 + j.country_code.charCodeAt(1)) : '' };
-  } catch {
-    return { country: '??', city: null, flag: '' };
-  }
-}
+app/notes/tag/[slug]/page.tsx:122:61 - error TS2339: Property 'date' does not exist on type '{ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; status: string; confidence: string; importance: number; state: string; preview?: undefined; } | { ...; }'.
+  Property 'date' does not exist on type '{ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; status: string; confidence: string; importance: number; state: string; preview?: undefined; }'.
 
-export async function POST(req: NextRequest) {
-  const { path, referrer } = await req.json();
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || req.ip || '';
-  const { country, city, flag } = await lookupCity(ip);
+122   const notes = [...notesWithTag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                                                                ~~~~
 
-  const day = new Date().toISOString().slice(0, 10);            // YYYY-MM-DD
+app/notes/tag/[slug]/page.tsx:122:90 - error TS2339: Property 'date' does not exist on type '{ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; status: string; confidence: string; importance: number; state: string; preview?: undefined; } | { ...; }'.
+  Property 'date' does not exist on type '{ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; status: string; confidence: string; importance: number; state: string; preview?: undefined; }'.
 
-  // --- Redis updates
-  await Promise.all([
-    redis.zincrby('visits_by_day', 1, day),
-    redis.zincrby('referrers', 1, referrer || ''),
-    redis.zincrby('paths', 1, path),
-    redis.zincrby('cities', 1, `${country}|${city}|${flag}`)
-  ]);
+122   const notes = [...notesWithTag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                                                                                             ~~~~
 
-  return NextResponse.json({ ok: true });
-}
-```
+app/notes/tag/[slug]/page.tsx:126:24 - error TS2322: Type '({ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; status: string; confidence: string; importance: number; state: string; preview?: undefined; } | { ...; })[]' is not assignable to type 'Note[]'.
+  Type '{ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; status: string; confidence: string; importance: number; state: string; preview?: undefined; } | { ...; }' is not assignable to type 'Note'.
+    Property 'date' is missing in type '{ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; status: string; confidence: string; importance: number; state: string; preview?: undefined; }' but required in type 'Note'. 
 
-> **Why sorted sets?**
-> Redis `ZSET`s let us increment counters and pull back “top N” in one round-trip (`ZREVRANGE … WITHSCORES`).
+126       <NotesTaggedPage notes={notes} tagData={tagHeaderData} />
+                           ~~~~~
 
----
+  app/notes/tag/[slug]/NotesTaggedPage.tsx:11:3
+    11   date: string;
+         ~~~~
+    'date' is declared here.
+  app/notes/tag/[slug]/NotesTaggedPage.tsx:36:3
+    36   notes: Note[];
+         ~~~~~
+    The expected type comes from property 'notes' which is declared here on type 'IntrinsicAttributes & NotesTaggedPageProps'
 
-## 4.  📈  Chart component (unchanged)
+app/now/[...slug]/NowPageClient.tsx:54:11 - error TS2322: Type '{ className: string; title: string; subtitle: string | undefined; date: string; tags: string[]; category: string; backHref: string; backText: string; preview: string | undefined; status: "Notes" | "Draft" | "In Progress" | "Abandoned" | "Finished"; confidence: "certain" | ... 6 more ... | "highly likely"; importance...' is not assignable to type 'IntrinsicAttributes & PostHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PostHeaderProps'.
 
-```tsx
-// _components/ChartTotalVisits.tsx
-'use client';
-import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid,
-  Tooltip, ResponsiveContainer
-} from 'recharts';
+54           date={now.date}
+             ~~~~
 
-export function ChartTotalVisits({ data }: { data: { date: string; total: number }[] }) {
-  const CustomTooltip = ({ active, payload }: any) =>
-    active && payload?.length ? (
-      <div className="rounded-lg border bg-card p-2 shadow-sm">
-        <p className="font-bold">{payload[0].payload.date}</p>
-        <p>{payload[0].value} page visits</p>
-      </div>
-    ) : null;
+app/now/[...slug]/NowPageClient.tsx:90:9 - error TS2322: Type '{ className: string; title: string; subtitle: string | undefined; date: string; tags: string[]; category: string; backHref: string; backText: string; preview: string | undefined; status: "Notes" | "Draft" | "In Progress" | "Abandoned" | "Finished"; confidence: "certain" | ... 6 more ... | "highly likely"; importance...' is not assignable to type 'IntrinsicAttributes & PostHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PostHeaderProps'.
 
-  return (
-    <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={data} margin={{ top: 5, right: 10, left: 10, bottom: 0 }}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip content={<CustomTooltip />} />
-        <Line type="monotone" dataKey="total" strokeWidth={2} />
-      </LineChart>
-    </ResponsiveContainer>
-  );
-}
-```
+90         date={now.date}
+           ~~~~
 
----
+app/ocs/[category]/[slug]/OCSPageClient.tsx:59:11 - error TS2322: Type '{ className: string; title: string; subtitle: string | undefined; date: string; tags: string[]; category: string; backHref: string; backText: string; preview: string | undefined; status: "Notes" | "Draft" | "In Progress" | "Abandoned" | "Finished"; confidence: "certain" | ... 6 more ... | "highly likely"; importance...' is not assignable to type 'IntrinsicAttributes & PostHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PostHeaderProps'.
 
-## 5.  📊  Analytics page (single server component)
+59           date={character.date}
+             ~~~~
 
-```tsx
-// app/analytics/page.tsx
-import { redis } from '@/ _lib/redis';
-import { ChartTotalVisits } from '@/ _components/ChartTotalVisits';
-import Link from 'next/link';
+app/ocs/[category]/[slug]/OCSPageClient.tsx:97:9 - error TS2322: Type '{ className: string; title: string; subtitle: string | undefined; date: string; tags: string[]; category: string; backHref: string; backText: string; preview: string | undefined; status: "Notes" | "Draft" | "In Progress" | "Abandoned" | "Finished"; confidence: "certain" | ... 6 more ... | "highly likely"; importance...' is not assignable to type 'IntrinsicAttributes & PostHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PostHeaderProps'.
 
-type CountRow = [member: string, score: string];
+97         date={character.date}
+           ~~~~
 
-async function getData() {
-  const [visits, referrers, paths, cities] = await Promise.all([
-    redis.zrevrangebyscore('visits_by_day', '+inf', '-inf', 'WITHSCORES', 'LIMIT', 0, 30) as unknown as CountRow[],
-    redis.zrevrangebyscore('referrers', '+inf', '-inf', 'WITHSCORES', 'LIMIT', 0, 10) as unknown as CountRow[],
-    redis.zrevrangebyscore('paths', '+inf', '-inf', 'WITHSCORES', 'LIMIT', 0, 10) as unknown as CountRow[],
-    redis.zrevrangebyscore('cities', '+inf', '-inf', 'WITHSCORES', 'LIMIT', 0, 10) as unknown as CountRow[],
-  ]);
+app/ocs/[category]/[slug]/page.tsx:112:9 - error TS2322: Type '{ status: OCSStatus; confidence: OCSConfidence; state: "hidden" | "active"; title: string; date: string; slug: string; tags: string[]; category: string; book: string; importance: number; preview: string; cover_image?: string | undefined; subtitle?: string | undefined; }[]' is not assignable to type 'OCSMeta[]'.
+  Property 'start_date' is missing in type '{ status: OCSStatus; confidence: OCSConfidence; state: "hidden" | "active"; title: string; date: string; slug: string; tags: string[]; category: string; book: string; importance: number; preview: string; cover_image?: string; subtitle?: string; }' but required in type 'OCSMeta'.
 
-  // Shape visits for Recharts
-  const totalVisits = visits
-    .reverse()                                // oldest->newest
-    .map(([date, score]) => ({ date, total: Number(score) }));
+112   const ocs: OCSMeta[] = (ocsData as OCSData[]).map(character => ({
+            ~~~
 
-  // Helper to coerce & sort generic rows
-  const toRows = (rows: CountRow[]) =>
-    rows.map(([member, score]) => ({ member, total: Number(score) }));
+  types/ocs.ts:9:3
+    9   start_date: string;
+        ~~~~~~~~~~
+    'start_date' is declared here.
 
-  return {
-    totalVisits,
-    topReferrers: toRows(referrers),
-    topPaths: toRows(paths),
-    topCities: cities.map(([m, s]) => {
-      const [country, city, flag] = m.split('|');
-      return { city, flag, total: Number(s) };
-    }),
-  };
-}
+app/ocs/[category]/[slug]/page.tsx:112:27 - error TS2352: Conversion of type '{ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; book: string; status: string; confidence: string; importance: number; preview: string; state: string; }[]' to type 'OCSData[]' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.        
+  Property 'date' is missing in type '{ title: string; start_date: string; end_date: string; slug: string; cover_image: string; tags: string[]; category: string; book: string; status: string; confidence: string; importance: number; preview: string; state: string; }' but required in type 'OCSData'.
 
-export default async function AnalyticsPage() {
-  const { totalVisits, topReferrers, topPaths, topCities } = await getData();
+112   const ocs: OCSMeta[] = (ocsData as OCSData[]).map(character => ({
+                              ~~~~~~~~~~~~~~~~~~~~
 
-  return (
-    <main className="mx-auto max-w-2xl py-10 text-sm">
-      <h1 className="mb-8 text-2xl font-bold">Analytics</h1>
+  app/ocs/[category]/[slug]/page.tsx:13:3
+    13   date: string;
+         ~~~~
+    'date' is declared here.
 
-      {/* Total Visits */}
-      <h2 className="my-8 text-xl font-bold">Total Visits (last 30 d)</h2>
-      <ChartTotalVisits data={totalVisits} />
+app/ocs/[category]/[slug]/page.tsx:132:26 - error TS2741: Property 'date' is missing in type 'import("C:/Users/Kris Yotam/krisyotam.com/types/ocs").OCSMeta' but required in type 'OCSMeta'.    
 
-      {/* Referrers */}
-      <section className="my-8">
-        <h2 className="mb-2 text-xl font-bold">Top Referrers</h2>
-        <ul>
-          {topReferrers.map(r => (
-            <li key={r.member} className="grid grid-cols-8 border-t py-2">
-              <span className="col-span-7 truncate">{r.member || '(direct)'}</span>
-              <span className="col-span-1 text-right">{r.total}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+132           <OCSPageClient character={character} allCharacters={ocs} headerOnly={true} />     
+                             ~~~~~~~~~
 
-      {/* Posts */}
-      <section className="my-8">
-        <h2 className="mb-2 text-xl font-bold">Top Posts</h2>
-        <ul>
-          {topPaths.map(p => (
-            <li key={p.member} className="grid grid-cols-8 border-t py-2">
-              <Link href={p.member} className="col-span-7 truncate hover:underline">
-                {p.member}
-              </Link>
-              <span className="col-span-1 text-right">{p.total}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+  app/ocs/[category]/[slug]/OCSPageClient.tsx:16:3
+    16   date: string;
+         ~~~~
+    'date' is declared here.
+  app/ocs/[category]/[slug]/OCSPageClient.tsx:29:3
+    29   character: OCSMeta;
+         ~~~~~~~~~
+    The expected type comes from property 'character' which is declared here on type 'IntrinsicAttributes & Props'
 
-      {/* Cities */}
-      <section className="my-8">
-        <h2 className="mb-2 text-xl font-bold">Top Cities</h2>
-        <ul>
-          {topCities.map(c => (
-            <li key={c.city} className="grid grid-cols-8 border-t py-2">
-              <span className="col-span-7">
-                {c.flag} {c.city}
-              </span>
-              <span className="col-span-1 text-right">{c.total}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </main>
-  );
-}
-```
+app/ocs/[category]/[slug]/page.tsx:132:48 - error TS2322: Type 'import("C:/Users/Kris Yotam/krisyotam.com/types/ocs").OCSMeta[]' is not assignable to type 'OCSMeta[]'.
+  Property 'date' is missing in type 'import("C:/Users/Kris Yotam/krisyotam.com/types/ocs").OCSMeta' but required in type 'OCSMeta'.
 
----
+132           <OCSPageClient character={character} allCharacters={ocs} headerOnly={true} />     
+                                                   ~~~~~~~~~~~~~
 
-### That’s it — **one page, one component, one API route**.
+  app/ocs/[category]/[slug]/OCSPageClient.tsx:16:3
+    16   date: string;
+         ~~~~
+    'date' is declared here.
+  app/ocs/[category]/[slug]/OCSPageClient.tsx:30:3
+    30   allCharacters: OCSMeta[];
+         ~~~~~~~~~~~~~
+    The expected type comes from property 'allCharacters' which is declared here on type 'IntrinsicAttributes & Props'
 
-* You still get **live streaming** of page-views thanks to `navigator.sendBeacon`.
-* Redis keeps the logic ultra-simple; no migrations or SQL needed.
-* Replace the quick IP lookup with MaxMind or your existing geo solution if you need higher accuracy or request caps.
+app/ocs/[category]/[slug]/page.tsx:145:26 - error TS2741: Property 'date' is missing in type 'import("C:/Users/Kris Yotam/krisyotam.com/types/ocs").OCSMeta' but required in type 'OCSMeta'.    
 
-**Migrate slowly**
-If you’d rather keep the exact Postgres schema the Astro code used, point the SQL calls at Neon/Postgres instead and delete the Redis bits. The page above changes only in `getData()`.
+145           <OCSPageClient character={character} allCharacters={ocs} contentOnly={true} />    
+                             ~~~~~~~~~
 
-Let me know if you want:
+  app/ocs/[category]/[slug]/OCSPageClient.tsx:16:3
+    16   date: string;
+         ~~~~
+    'date' is declared here.
+  app/ocs/[category]/[slug]/OCSPageClient.tsx:29:3
+    29   character: OCSMeta;
+         ~~~~~~~~~
+    The expected type comes from property 'character' which is declared here on type 'IntrinsicAttributes & Props'
 
-* SSR caching,
-* edge-function deployment,
-* per-article breakdowns,
-* or adding “unique visitors” logic (needs a quick `SET` of daily IP hashes).
+app/ocs/[category]/[slug]/page.tsx:145:48 - error TS2322: Type 'import("C:/Users/Kris Yotam/krisyotam.com/types/ocs").OCSMeta[]' is not assignable to type 'OCSMeta[]'.
+  Property 'date' is missing in type 'import("C:/Users/Kris Yotam/krisyotam.com/types/ocs").OCSMeta' but required in type 'OCSMeta'.
 
+145           <OCSPageClient character={character} allCharacters={ocs} contentOnly={true} />    
+                                                   ~~~~~~~~~~~~~
+
+  app/ocs/[category]/[slug]/OCSPageClient.tsx:16:3
+    16   date: string;
+         ~~~~
+    'date' is declared here.
+  app/ocs/[category]/[slug]/OCSPageClient.tsx:30:3
+    30   allCharacters: OCSMeta[];
+         ~~~~~~~~~~~~~
+    The expected type comes from property 'allCharacters' which is declared here on type 'IntrinsicAttributes & Props'
+
+app/papers/[category]/[slug]/page.tsx:105:9 - error TS2322: Type '{ status: PaperStatus; confidence: PaperConfidence; title: string; date: string; slug: string; tags: string[]; category: string; importance: number; preview: string; subtitle?: string | undefined; state?: string | undefined; cover_image?: string | undefined; }[]' is not assignable to type 'PaperMeta[]'.
+  Property 'start_date' is missing in type '{ status: PaperStatus; confidence: PaperConfidence; title: string; date: string; slug: string; tags: string[]; category: string; importance: number; preview: string; subtitle?: string; state?: string; cover_image?: string; }' but required in type 'PaperMeta'.
+
+105   const papers: PaperMeta[] = (papersData.papers as PaperData[]).map(paperItem => ({        
+            ~~~~~~
+
+  types/papers.ts:9:3
+    9   start_date: string;
+        ~~~~~~~~~~
+    'start_date' is declared here.
+
+app/papers/[category]/[slug]/page.tsx:105:32 - error TS2352: Conversion of type '{ title: string; preview: string; start_date: string; end_date: string; tags: string[]; category: string; slug: string; cover_image: string; status: string; confidence: string; importance: number; state: string; }[]' to type 'PaperData[]' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'date' is missing in type '{ title: string; preview: string; start_date: string; end_date: string; tags: string[]; category: string; slug: string; cover_image: string; status: string; confidence: string; importance: number; state: string; }' but required in type 'PaperData'.  
+
+105   const papers: PaperMeta[] = (papersData.papers as PaperData[]).map(paperItem => ({        
+                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  app/papers/[category]/[slug]/page.tsx:14:3
+    14   date: string;
+         ~~~~
+    'date' is declared here.
+
+app/papers/category/[slug]/page.tsx:92:32 - error TS2339: Property 'start_date' does not exist on type '{ slug: string; title: string; preview: string; date: string; "show-status": string; status: string; confidence: string; importance: number; }'.
+
+92     start_date: customCategory.start_date,
+                                  ~~~~~~~~~~
+
+app/papers/category/[slug]/page.tsx:93:30 - error TS2339: Property 'end_date' does not exist on type '{ slug: string; title: string; preview: string; date: string; "show-status": string; status: string; confidence: string; importance: number; }'.
+
+93     end_date: customCategory.end_date,
+                                ~~~~~~~~
+
+app/papers/category/[slug]/page.tsx:137:43 - error TS2322: Type '{ title: string; subtitle: string; start_date: any; end_date: any; preview: string; status: "In Progress" | "Abandoned" | "Notes" | "Draft" | "Finished"; confidence: "certain" | "likely" | ... 5 more ... | "highly likely"; importance: number; backText: string; backHref: string; } | { ...; }' is not assignable to type 'CategoryHeaderData'.
+  Property 'date' is missing in type '{ title: string; subtitle: string; start_date: any; end_date: any; preview: string; status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"; confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"; importance: number; backText: string; b...' but required in type 'CategoryHeaderData'.
+
+137       <PapersCategoryPage papers={papers} categoryData={categoryHeaderData} />
+                                              ~~~~~~~~~~~~
+
+  app/papers/category/[slug]/PapersCategoryPage.tsx:13:3
+    13   date: string;
+         ~~~~
+    'date' is declared here.
+  app/papers/category/[slug]/PapersCategoryPage.tsx:24:3
+    24   categoryData: CategoryHeaderData;
+         ~~~~~~~~~~~~
+    The expected type comes from property 'categoryData' which is declared here on type 'IntrinsicAttributes & PapersCategoryPageProps'
+
+app/papers/category/[slug]/PapersCategoryPage.tsx:64:36 - error TS2339: Property 'start_date' does not exist on type 'CategoryHeaderData'.
+
+64           start_date={categoryData.start_date}
+                                      ~~~~~~~~~~
+
+app/papers/category/[slug]/PapersCategoryPage.tsx:65:34 - error TS2339: Property 'end_date' does not exist on type 'CategoryHeaderData'.
+
+65           end_date={categoryData.end_date}
+                                    ~~~~~~~~
+
+app/papers/tag/[slug]/page.tsx:123:63 - error TS2339: Property 'date' does not exist on type '{ title: string; preview: string; start_date: string; end_date: string; tags: string[]; category: string; slug: string; cover_image: string; status: string; confidence: string; importance: number; state: string; }'.
+
+123   const papers = [...papersWithTag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                                                                  ~~~~
+
+app/papers/tag/[slug]/page.tsx:123:92 - error TS2339: Property 'date' does not exist on type '{ title: string; preview: string; start_date: string; end_date: string; tags: string[]; category: string; slug: string; cover_image: string; status: string; confidence: string; importance: number; state: string; }'.
+
+123   const papers = [...papersWithTag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                                                                                               ~~~~
+
+app/papers/tag/[slug]/page.tsx:128:19 - error TS2339: Property 'date' does not exist on type '{ title: string; preview: string; start_date: string; end_date: string; tags: string[]; category: string; slug: string; cover_image: string; status: string; confidence: string; importance: number; state: string; }'.
+
+128       date: paper.date,
+                      ~~~~
+
+app/papers/tag/[slug]/page.tsx:141:25 - error TS2322: Type '{ title: string; subtitle: string; preview: string; date: any; slug: string; tags: string[]; category: string; status: PaperStatus | undefined; confidence: PaperConfidence | undefined; importance: number; state: string; cover_image: string; }[]' is not assignable to type 'PaperMeta[]'.
+  Property 'start_date' is missing in type '{ title: string; subtitle: string; preview: string; date: any; slug: string; tags: string[]; category: string; status: PaperMeta["status"]; confidence: PaperMeta["confidence"]; importance: number; state: string; cover_image: string; }' but required in type 'PaperMeta'.
+
+141       <PapersTaggedPage papers={papers} tagData={tagHeaderData} />
+                            ~~~~~~
+
+  types/papers.ts:9:3
+    9   start_date: string;
+        ~~~~~~~~~~
+    'start_date' is declared here.
+  app/papers/tag/[slug]/PapersTaggedPage.tsx:23:3
+    23   papers: PaperMeta[];
+         ~~~~~~
+    The expected type comes from property 'papers' which is declared here on type 'IntrinsicAttributes & PapersTaggedPageProps'
+
+app/papers/tag/[slug]/PapersTaggedPage.tsx:41:32 - error TS2339: Property 'date' does not exist on type 'PaperMeta'.
+
+41   }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                                  ~~~~
+
+app/papers/tag/[slug]/PapersTaggedPage.tsx:41:61 - error TS2339: Property 'date' does not exist on type 'PaperMeta'.
+
+41   }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                                                               ~~~~
+
+app/papers/tag/[slug]/PapersTaggedPage.tsx:60:11 - error TS2322: Type '{ title: string; subtitle: string; date: string; preview: string; status: "Notes" | "Finished" | "Abandoned" | "Draft" | "In Progress" | "Active"; confidence: "certain" | "unlikely" | ... 5 more ... | "highly likely"; importance: number; backText: string; backHref: string; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
+
+60           date={tagData.date}
+             ~~~~
+
+app/playlists/PlaylistsClientPage.tsx:44:11 - error TS2322: Type '{ title: string; subtitle: string; date: string; preview: string; status: "In Progress"; confidence: "certain"; importance: number; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
+
+44           date={playlistsPageData.date}
+             ~~~~
+
+app/problems/[category]/[slug]/page.tsx:75:5 - error TS2353: Object literal may only specify known properties, and 'date' does not exist in type 'NoteMeta'.
+
+75     date: (problemData.end_date && problemData.end_date.trim()) ? problemData.end_date : problemData.start_date,
+       ~~~~
+
+app/problems/[category]/[slug]/ProblemPageClient.tsx:23:27 - error TS2339: Property 'date' does not exist on type 'NoteMeta'.
+
+23     (a, b) => +new Date(b.date) - +new Date(a.date)
+                             ~~~~
+
+app/problems/[category]/[slug]/ProblemPageClient.tsx:23:47 - error TS2339: Property 'date' does not exist on type 'NoteMeta'.
+
+23     (a, b) => +new Date(b.date) - +new Date(a.date)
+                                                 ~~~~
+
+app/problems/[category]/[slug]/ProblemPageClient.tsx:40:22 - error TS2339: Property 'date' does not exist on type 'NoteMeta'.
+
+40           date={note.date}
+                        ~~~~
+
+app/problems/[category]/[slug]/ProblemPageClient.tsx:64:22 - error TS2339: Property 'date' does not exist on type 'NoteMeta'.
+
+64           date={note.date}
+                        ~~~~
+
+app/problems/[category]/[slug]/ProblemPageClient.tsx:79:20 - error TS2339: Property 'date' does not exist on type 'NoteMeta'.
+
+79         date={note.date}
+                      ~~~~
+
+app/problems/[category]/[slug]/ProblemPageClient.tsx:100:22 - error TS2339: Property 'date' does not exist on type 'NoteMeta'.
+
+100           date={note.date}
+                         ~~~~
+
+app/progymnasmata/progymnasmata-client.tsx:96:9 - error TS2322: Type '{ title: string; subtitle: string; date: string; preview: string; status: "In Progress"; confidence: "likely"; importance: number; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
+
+96         date="2025-01-01"
+           ~~~~
+
+app/progymnasmata/ProgymnasmataClientPage.tsx:59:13 - error TS2322: Type '{ title: string; preview: string; date: string; tags: string[]; importance: number; backText: string; backHref: string; }' is not assignable to type 'IntrinsicAttributes & PostHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PostHeaderProps'.
+
+59             date={postData.date}
+               ~~~~
+
+app/proofs/[category]/[slug]/page.tsx:76:13 - error TS2322: Type '{ status: Status; confidence: Confidence; title: string; date: string; slug: string; tags: string[]; category: string; importance: number; framework?: string | undefined; author?: string | undefined; license?: string | undefined; preview?: string | undefined; }[]' is not assignable to type 'NoteMeta[]'.
+  Property 'start_date' is missing in type '{ status: Status; confidence: Confidence; title: string; date: string; slug: string; tags: string[]; category: string; importance: number; framework?: string; author?: string; license?: string; preview?: string; }' but required in type 'NoteMeta'.
+
+76   };  const proofs: NoteMeta[] = proofsData.proofs.map((proof: ProofData) => ({
+               ~~~~~~
+
+  types/note.ts:6:3
+    6   start_date: string;
+        ~~~~~~~~~~
+    'start_date' is declared here.
+
+app/proofs/[category]/[slug]/page.tsx:76:56 - error TS2345: Argument of type '(proof: ProofData) => { status: Status; confidence: Confidence; title: string; date: string; slug: string; tags: string[]; category: string; importance: number; framework?: string; author?: string; license?: string; preview?: string; }' is not assignable to parameter of type '(value: { title: string; preview: string; start_date: string; end_date: string; tags: string[]; category: string; slug: string; cover_image: string; status: string; confidence: string; importance: number; state: string; framework: string; author: string; license: string; }, index: number, array: { ...; }[]) => { ......'.
+  Types of parameters 'proof' and 'value' are incompatible.
+    Property 'date' is missing in type '{ title: string; preview: string; start_date: string; end_date: string; tags: string[]; category: string; slug: string; cover_image: string; status: string; confidence: string; importance: number; state: string; framework: string; author: string; license: string; }' but required in type 'ProofData'.
+
+ 76   };  const proofs: NoteMeta[] = proofsData.proofs.map((proof: ProofData) => ({
+                                                           ~~~~~~~~~~~~~~~~~~~~~~~~
+ 77     ...proof,
+    ~~~~~~~~~~~~~
+...
+ 79     confidence: proof.confidence as Confidence
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 80   }));
+    ~~~~
+
+  app/proofs/[category]/[slug]/page.tsx:16:3
+    16   date: string;
+         ~~~~
+    'date' is declared here.
+
+app/proofs/[category]/[slug]/ProofPageClient.tsx:69:11 - error TS2322: Type '{ title: string; slug: string; start_date: string | undefined; end_date: string | undefined; url: string; }' is not assignable to type 'IntrinsicAttributes & CitationProps'.
+  Property 'start_date' does not exist on type 'IntrinsicAttributes & CitationProps'.
+
+69           start_date={note.start_date || note.date}
+             ~~~~~~~~~~
+
+app/proofs/[category]/[slug]/ProofPageClient.tsx:106:11 - error TS2322: Type '{ title: string; slug: string; start_date: string | undefined; end_date: string | undefined; url: string; }' is not assignable to type 'IntrinsicAttributes & CitationProps'.
+  Property 'start_date' does not exist on type 'IntrinsicAttributes & CitationProps'.
+
+106           start_date={note.start_date || note.date}
+              ~~~~~~~~~~
+
+app/questions/QuestionsClientPage.tsx:167:11 - error TS2322: Type '{ title: string; preview: string; date: string; status: "Notes" | "Draft" | "In Progress" | "Abandoned" | "Finished"; confidence: "certain" | "likely" | "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "highly likely"; importance: number; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
+
+167           date={headerData.date}
+              ~~~~
+
+app/research/research-client.tsx:146:9 - error TS2322: Type '{ title: string; subtitle: string; date: string; preview: string; status: "In Progress"; confidence: "likely"; importance: number; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
+
+146         date={researchPageData.date}
+            ~~~~
+
+app/reviews/[category]/[slug]/page.tsx:111:9 - error TS2322: Type '{ status: ReviewStatus; confidence: ReviewConfidence; state: "hidden" | "active"; title: string; date: string; slug: string; tags: string[]; category: string; importance: number; preview: string; cover_image?: string | undefined; subtitle?: string | undefined; }[]' is not assignable to type 'ReviewMeta[]'.
+  Property 'start_date' is missing in type '{ status: ReviewStatus; confidence: ReviewConfidence; state: "hidden" | "active"; title: string; date: string; slug: string; tags: string[]; category: string; importance: number; preview: string; cover_image?: string; subtitle?: string; }' but required in type 'ReviewMeta'.
+
+111   const reviews: ReviewMeta[] = (reviewsData as ReviewData[]).map(review => ({
+            ~~~~~~~
+
+  types/review.ts:9:3
+    9   start_date: string;
+        ~~~~~~~~~~
+    'start_date' is declared here.
+
+app/reviews/[category]/[slug]/page.tsx:111:34 - error TS2352: Conversion of type '{ title: string; start_date: string; end_date: string; slug: string; tags: string[]; category: string; status: string; confidence: string; importance: number; preview: string; cover_image: string; state: string; }[]' to type 'ReviewData[]' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'date' is missing in type '{ title: string; start_date: string; end_date: string; slug: string; tags: string[]; category: string; status: string; confidence: string; importance: number; preview: string; cover_image: string; state: string; }' but required in type 'ReviewData'. 
+
+111   const reviews: ReviewMeta[] = (reviewsData as ReviewData[]).map(review => ({
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  app/reviews/[category]/[slug]/page.tsx:13:3
+    13   date: string;
+         ~~~~
+    'date' is declared here.
+
+app/reviews/[category]/page.tsx:87:32 - error TS2339: Property 'date' does not exist on type '{ status: ReviewStatus; confidence: ReviewConfidence; state: "hidden" | "active"; title: string; start_date: string; end_date: string; slug: string; tags: string[]; category: string; importance: number; preview: string; cover_image: string; }'.
+
+87     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                                  ~~~~
+
+app/reviews/[category]/page.tsx:87:61 - error TS2339: Property 'date' does not exist on type '{ status: ReviewStatus; confidence: ReviewConfidence; state: "hidden" | "active"; title: string; start_date: string; end_date: string; slug: string; tags: string[]; category: string; importance: number; preview: string; cover_image: string; }'.
+
+87     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                                                               ~~~~
+
+app/reviews/page.tsx:19:32 - error TS2339: Property 'date' does not exist on type '{ status: ReviewStatus; confidence: ReviewConfidence; state: "hidden" | "active"; title: string; start_date: string; end_date: string; slug: string; tags: string[]; category: string; importance: number; preview: string; cover_image: string; }'.
+
+19     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                                  ~~~~
+
+app/reviews/page.tsx:19:61 - error TS2339: Property 'date' does not exist on type '{ status: ReviewStatus; confidence: ReviewConfidence; state: "hidden" | "active"; title: string; start_date: string; end_date: string; slug: string; tags: string[]; category: string; importance: number; preview: string; cover_image: string; }'.
+
+19     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                                                               ~~~~
+
+app/sequences/categories/SequencesCategoriesClientPage.tsx:34:9 - error TS2322: Type '{ title: string; subtitle: string; date: string; preview: string; status: "In Progress"; confidence: "certain"; importance: number; backHref: string; backText: string; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
+
+34         date={new Date().toISOString()}
+           ~~~~
+
+app/series/[slug]/page.tsx:65:13 - error TS2322: Type '{ title: string; subtitle: string; date: any; preview: string; status: "Draft" | "Notes" | "Abandoned" | "In Progress" | "Finished"; confidence: "impossible" | "remote" | "highly unlikely" | ... 4 more ... | "certain"; importance: number | undefined; backText: string; backHref: string; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
+
+65             date={series.date}
+               ~~~~
+
+app/series/[slug]/page.tsx:65:26 - error TS2339: Property 'date' does not exist on type 'SeriesData'.
+
+65             date={series.date}
+                            ~~~~
+
+app/series/page.tsx:23:15 - error TS2322: Type '{ title: string; subtitle: string; date: string; preview: string; status: "In Progress"; confidence: "certain"; importance: number; backText: string; backHref: string; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.   
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
+
+23               date={currentDate}
+                 ~~~~
+
+app/series/page.tsx:43:13 - error TS2322: Type '{ title: string; subtitle: string; date: string; preview: string; status: "Finished"; confidence: "certain"; importance: number; backText: string; backHref: string; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.      
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
+
+43             date={currentDate}
+               ~~~~
+
+app/social/social-client.tsx:155:9 - error TS2322: Type '{ title: string; date: string; preview: string; status: "In Progress"; confidence: "likely"; importance: number; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
+
+155         date="2025-01-01"
+            ~~~~
+
+app/sources/page.tsx:15:9 - error TS2322: Type '{ title: string; subtitle: string; date: string; preview: string; status: "In Progress"; confidence: "likely"; importance: number; className: string; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
+
+15         date="2025-03-30"
+           ~~~~
+
+app/symbols/[id]/symbol-detail-client.tsx:91:11 - error TS2322: Type '{ title: string; subtitle: string; date: string; category: string; tags: string[]; preview: string; backText: string; backHref: string; status: "Finished"; confidence: "certain"; importance: number; }' is not assignable to type 'IntrinsicAttributes & PostHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PostHeaderProps'.
+
+91           date="2025-05-28"
+             ~~~~
+
+app/symbols/symbols-client-page.tsx:164:9 - error TS2322: Type '{ title: string; subtitle: string; date: string; preview: string; status: "In Progress"; confidence: "likely"; importance: number; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
+
+164         date="2025-01-01"
+            ~~~~
+
+app/tag/[slug]/page.tsx:63:48 - error TS2339: Property 'date' does not exist on type 'Post'.    
+
+63                     const year = new Date(post.date).getFullYear().toString()
+                                                  ~~~~
+
+app/tag/[slug]/page.tsx:76:42 - error TS2339: Property 'date' does not exist on type 'Post'.    
+
+76                           {new Date(post.date).toLocaleDateString("en-US", {
+                                            ~~~~
+
+app/tags/page.tsx:31:11 - error TS2322: Type '{ title: string; subtitle: string; date: string; preview: string; status: "Finished"; confidence: "certain"; importance: number; }' is not assignable to type 'IntrinsicAttributes & PageHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PageHeaderProps'.
+
+31           date="2025-05-31"
+             ~~~~
+
+app/til/[...slug]/page.tsx:74:9 - error TS2741: Property 'start_date' is missing in type '{ status: Status; confidence: Confidence; state: State; title: string; preview: string; date: string; tags: string[]; category: string; slug: string; cover_image: string; importance: number; }' but required in type 'TilMeta'.
+
+74   const til: TilMeta = {
+           ~~~
+
+  types/til.ts:7:3
+    7   start_date: string;
+        ~~~~~~~~~~
+    'start_date' is declared here.
+
+app/til/[...slug]/page.tsx:81:9 - error TS2322: Type '{ status: Status; confidence: Confidence; state: State; title: string; date: string; slug: string; tags: string[]; category: string; importance: number; preview?: string | undefined; cover_image?: string | undefined; }[]' is not assignable to type 'TilMeta[]'.
+  Property 'start_date' is missing in type '{ status: Status; confidence: Confidence; state: State; title: string; date: string; slug: string; tags: string[]; category: string; importance: number; preview?: string; cover_image?: string; }' but required in type 'TilMeta'.
+
+81   const allTils: TilMeta[] = tilData.til.map((entry: TilData) => ({
+           ~~~~~~~
+
+  types/til.ts:7:3
+    7   start_date: string;
+        ~~~~~~~~~~
+    'start_date' is declared here.
+
+app/til/[...slug]/page.tsx:99:26 - error TS2741: Property 'date' is missing in type 'import("C:/Users/Kris Yotam/krisyotam.com/types/til").TilMeta' but required in type 'TilMeta'.
+
+99           <TilPageClient til={til} allTils={allTils} headerOnly={true} />
+                            ~~~
+
+  app/til/[...slug]/TilPageClient.tsx:16:3
+    16   date: string;
+         ~~~~
+    'date' is declared here.
+  app/til/[...slug]/TilPageClient.tsx:30:3
+    30   til: TilMeta;
+         ~~~
+    The expected type comes from property 'til' which is declared here on type 'IntrinsicAttributes & Props'
+
+app/til/[...slug]/page.tsx:99:36 - error TS2322: Type 'import("C:/Users/Kris Yotam/krisyotam.com/types/til").TilMeta[]' is not assignable to type 'TilMeta[]'.
+  Property 'date' is missing in type 'import("C:/Users/Kris Yotam/krisyotam.com/types/til").TilMeta' but required in type 'TilMeta'.
+
+99           <TilPageClient til={til} allTils={allTils} headerOnly={true} />
+                                      ~~~~~~~
+
+  app/til/[...slug]/TilPageClient.tsx:16:3
+    16   date: string;
+         ~~~~
+    'date' is declared here.
+  app/til/[...slug]/TilPageClient.tsx:31:3
+    31   allTils: TilMeta[];
+         ~~~~~~~
+    The expected type comes from property 'allTils' which is declared here on type 'IntrinsicAttributes & Props'
+
+app/til/[...slug]/page.tsx:112:26 - error TS2741: Property 'date' is missing in type 'import("C:/Users/Kris Yotam/krisyotam.com/types/til").TilMeta' but required in type 'TilMeta'.
+
+112           <TilPageClient til={til} allTils={allTils} contentOnly={true} />
+                             ~~~
+
+  app/til/[...slug]/TilPageClient.tsx:16:3
+    16   date: string;
+         ~~~~
+    'date' is declared here.
+  app/til/[...slug]/TilPageClient.tsx:30:3
+    30   til: TilMeta;
+         ~~~
+    The expected type comes from property 'til' which is declared here on type 'IntrinsicAttributes & Props'
+
+app/til/[...slug]/page.tsx:112:36 - error TS2322: Type 'import("C:/Users/Kris Yotam/krisyotam.com/types/til").TilMeta[]' is not assignable to type 'TilMeta[]'.
+  Property 'date' is missing in type 'import("C:/Users/Kris Yotam/krisyotam.com/types/til").TilMeta' but required in type 'TilMeta'.
+
+112           <TilPageClient til={til} allTils={allTils} contentOnly={true} />
+                                       ~~~~~~~
+
+  app/til/[...slug]/TilPageClient.tsx:16:3
+    16   date: string;
+         ~~~~
+    'date' is declared here.
+  app/til/[...slug]/TilPageClient.tsx:31:3
+    31   allTils: TilMeta[];
+         ~~~~~~~
+    The expected type comes from property 'allTils' which is declared here on type 'IntrinsicAttributes & Props'
+
+app/til/[...slug]/TilPageClient.tsx:56:11 - error TS2322: Type '{ className: string; title: string; subtitle: string | undefined; date: string; tags: string[]; category: string; backHref: string; backText: string; preview: string | undefined; status: "Notes" | "Draft" | "In Progress" | "Abandoned" | "Finished"; confidence: "certain" | ... 6 more ... | "highly likely"; importance...' is not assignable to type 'IntrinsicAttributes & PostHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PostHeaderProps'.
+
+56           date={til.date}
+             ~~~~
+
+app/til/[...slug]/TilPageClient.tsx:94:9 - error TS2322: Type '{ className: string; title: string; subtitle: string | undefined; date: string; tags: string[]; category: string; backHref: string; backText: string; preview: string | undefined; status: "Notes" | "Draft" | "In Progress" | "Abandoned" | "Finished"; confidence: "certain" | ... 6 more ... | "highly likely"; importance...' is not assignable to type 'IntrinsicAttributes & PostHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PostHeaderProps'.
+
+94         date={til.date}
+           ~~~~
+
+app/til/page.tsx:19:26 - error TS2339: Property 'end_date' does not exist on type 'TilEntry'.   
+
+19         const aDate = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+                            ~~~~~~~~
+
+app/til/page.tsx:19:40 - error TS2339: Property 'end_date' does not exist on type 'TilEntry'.   
+
+19         const aDate = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+                                          ~~~~~~~~
+
+app/til/page.tsx:19:61 - error TS2339: Property 'end_date' does not exist on type 'TilEntry'.   
+
+19         const aDate = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+                                                               ~~~~~~~~
+
+app/til/page.tsx:19:74 - error TS2339: Property 'start_date' does not exist on type 'TilEntry'. 
+
+19         const aDate = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+                                                                            ~~~~~~~~~~
+
+app/til/page.tsx:20:26 - error TS2339: Property 'end_date' does not exist on type 'TilEntry'.   
+
+20         const bDate = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+                            ~~~~~~~~
+
+app/til/page.tsx:20:40 - error TS2339: Property 'end_date' does not exist on type 'TilEntry'.   
+
+20         const bDate = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+                                          ~~~~~~~~
+
+app/til/page.tsx:20:61 - error TS2339: Property 'end_date' does not exist on type 'TilEntry'.   
+
+20         const bDate = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+                                                               ~~~~~~~~
+
+app/til/page.tsx:20:74 - error TS2339: Property 'start_date' does not exist on type 'TilEntry'. 
+
+20         const bDate = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+                                                                            ~~~~~~~~~~
+
+app/til/page.tsx:26:24 - error TS2322: Type 'import("C:/Users/Kris Yotam/krisyotam.com/lib/data").TilEntry[]' is not assignable to type 'TilEntry[]'.
+  Property 'start_date' is missing in type 'import("C:/Users/Kris Yotam/krisyotam.com/lib/data").TilEntry' but required in type 'TilEntry'.
+
+26         <TilClientPage tilEntries={sortedEntries} initialCategory="all" />
+                          ~~~~~~~~~~
+
+  app/til/TilClientPage.tsx:24:3
+    24   start_date: string;
+         ~~~~~~~~~~
+    'start_date' is declared here.
+  app/til/TilClientPage.tsx:35:3
+    35   tilEntries: TilEntry[];
+         ~~~~~~~~~~
+    The expected type comes from property 'tilEntries' which is declared here on type 'IntrinsicAttributes & TilClientPageProps'
+
+app/videos/page.tsx:31:11 - error TS2322: Type '{ title: string; subtitle: string; date: string; preview: string; status: "In Progress"; confidence: "highly likely"; importance: number; }' is not assignable to type 'IntrinsicAttributes & PostHeaderProps'.
+  Property 'date' does not exist on type 'IntrinsicAttributes & PostHeaderProps'.
+
+31           date={new Date().toISOString()}
+             ~~~~
+
+components/lectures-table.tsx:42:35 - error TS2304: Cannot find name 'Lecture'.
+
+42   function getLectureUrl(lecture: Lecture) {
+                                     ~~~~~~~
+
+components/libers-table.tsx:43:24 - error TS2339: Property 'end_date' does not exist on type 'Liber'.
+
+43       const dateA = (a.end_date && a.end_date.trim()) || a.start_date || '';
+                          ~~~~~~~~
+
+components/libers-table.tsx:43:38 - error TS2339: Property 'end_date' does not exist on type 'Liber'.
+
+43       const dateA = (a.end_date && a.end_date.trim()) || a.start_date || '';
+                                        ~~~~~~~~
+
+components/libers-table.tsx:43:60 - error TS2339: Property 'start_date' does not exist on type 'Liber'.
+
+43       const dateA = (a.end_date && a.end_date.trim()) || a.start_date || '';
+                                                              ~~~~~~~~~~
+
+components/libers-table.tsx:44:24 - error TS2339: Property 'end_date' does not exist on type 'Liber'.
+
+44       const dateB = (b.end_date && b.end_date.trim()) || b.start_date || '';
+                          ~~~~~~~~
+
+components/libers-table.tsx:44:38 - error TS2339: Property 'end_date' does not exist on type 'Liber'.
+
+44       const dateB = (b.end_date && b.end_date.trim()) || b.start_date || '';
+                                        ~~~~~~~~
+
+components/libers-table.tsx:44:60 - error TS2339: Property 'start_date' does not exist on type 'Liber'.
+
+44       const dateB = (b.end_date && b.end_date.trim()) || b.start_date || '';
+                                                              ~~~~~~~~~~
+
+components/libers-table.tsx:62:34 - error TS2304: Cannot find name 'LiberMeta'.
+
+62   function getDisplayDate(liber: LiberMeta): string {
+                                    ~~~~~~~~~
+
+components/notes-table.tsx:41:33 - error TS2304: Cannot find name 'NoteMeta'.
+
+41   function getDisplayDate(note: NoteMeta): string {
+                                   ~~~~~~~~
+
+components/progymnasmata/progymnasmata-entry-page.tsx:76:13 - error TS2322: Type '{ title: string; slug: string; start_date: string; end_date: string | undefined; url: string; }' is not assignable to type 'IntrinsicAttributes & CitationProps'.
+  Property 'start_date' does not exist on type 'IntrinsicAttributes & CitationProps'.
+
+76             start_date={entry.start_date}
+               ~~~~~~~~~~
+
+
+Found 249 errors in 119 files.
+
+Errors  Files
+     1  app/(reading)/read/page.tsx:37
+     1  app/(reading)/reading-lists/page.tsx:36
+     1  app/(reading)/reading-log/page.tsx:8
+     1  app/(reading)/reading-stats/page.tsx:8
+     1  app/(reading)/reading/page.tsx:26
+     1  app/(reading)/want-to-read/page.tsx:32
+     1  app/anime/anime-client-page.tsx:216
+     1  app/anime/lists/anime-lists-client-page.tsx:29
+     1  app/api/og-debug/route.ts:39
+     1  app/api/post/route.ts:23
+     1  app/archive/page.tsx:148
+     3  app/art/[slug]/page.tsx:82
+     1  app/art/ArtClientPage.tsx:61
+     1  app/art/page.tsx:14
+     6  app/blog/[category]/page.tsx:32
+     2  app/blog/BlogClientPage.tsx:66
+     2  app/blog/page.tsx:21
+     3  app/blog/tag/[slug]/BlogTaggedPage.tsx:41
+     2  app/blog/tag/[slug]/page.tsx:121
+     1  app/blogroll/[slug]/page.tsx:111
+     1  app/blogroll/blogroll-client.tsx:98
+     2  app/cases/[category]/[slug]/CasesPageClient.tsx:95
+     2  app/cases/[category]/[slug]/page.tsx:103
+     2  app/cases/page.tsx:15
+     1  app/categories/categories-client.tsx:52
+     1  app/categories/page.tsx:25
+     1  app/category/[slug]/page.tsx:39
+     1  app/changelog/page.tsx:32
+     1  app/colophon/page.tsx:103
+     1  app/companies/page.tsx:14
+     4  app/conspiracies/[category]/[slug]/ConspiraciesPageClient.tsx:60
+     2  app/conspiracies/[category]/[slug]/page.tsx:88
+     2  app/conspiracies/[category]/page.tsx:55
+     2  app/conspiracies/page.tsx:12
+     1  app/contact/page.tsx:36
+     1  app/cv/page.tsx:26
+     1  app/directory/page.tsx:14
+     2  app/dossiers/[category]/[slug]/DossiersPageClient.tsx:80
+     2  app/dossiers/[category]/[slug]/page.tsx:103
+     2  app/dossiers/page.tsx:15
+     5  app/essays/[category]/[slug]/EssayPageClient.tsx:60
+     1  app/essays/category/[slug]/EssaysCategoryPage.tsx:91
+     4  app/essays/category/[slug]/page.tsx:113
+     4  app/essays/EssaysClientPage.tsx:104
+     2  app/essays/tag/[slug]/EssaysTaggedPage.tsx:60
+     4  app/essays/tag/[slug]/page.tsx:122
+     4  app/fiction/[category]/[slug]/FictionPageClient.tsx:46
+     3  app/fiction/[category]/[slug]/page.tsx:28
+     2  app/fiction/[category]/page.tsx:21
+     4  app/fiction/FictionClientPage.tsx:103
+     2  app/fiction/FictionTable.tsx:45
+     1  app/film/page.tsx:16
+     1  app/games/games-client-page-new.tsx:181
+     1  app/games/games-client-page.tsx:181
+     2  app/lab/[category]/[slug]/LabPageClient.tsx:59
+     4  app/lab/[category]/[slug]/page.tsx:131
+     2  app/lecture-notes/lecture-notes-client.tsx:116
+     3  app/lectures/LecturesClientPage.tsx:121
+     1  app/legal/[slug]/page.tsx:63
+     1  app/legal/page.tsx:16
+     4  app/libers/[category]/[slug]/LiberPageClient.tsx:80
+     2  app/libers/[category]/[slug]/page.tsx:74
+     3  app/libers/[category]/page.tsx:54
+     3  app/libers/page.tsx:10
+     1  app/library/[classification]/[subclassification]/[title]/book-detail-client.tsx:133     
+     1  app/library/page.tsx:16
+     2  app/links/[category]/[slug]/LinkPageClient.tsx:61
+     1  app/manga/lists/manga-lists-client-page.tsx:28
+     1  app/manga/manga-client-page.tsx:258
+     1  app/mitzvah/page.tsx:16
+     2  app/news/[category]/[slug]/NewsPageClient.tsx:70
+     6  app/news/[category]/[slug]/page.tsx:102
+     2  app/news/[category]/page.tsx:83
+     1  app/news/NewsClientPage.tsx:15
+     2  app/news/page.tsx:15
+     1  app/newsletter/NewsletterClientPage.tsx:73
+     4  app/notes/[category]/[slug]/NotePageClient.tsx:61
+     2  app/notes/[category]/[slug]/page.tsx:103
+     2  app/notes/[category]/page.tsx:59
+     3  app/notes/NotesClientPage.tsx:121
+     1  app/notes/tag/[slug]/NotesTaggedPage.tsx:73
+     3  app/notes/tag/[slug]/page.tsx:122
+     2  app/now/[...slug]/NowPageClient.tsx:54
+     2  app/ocs/[category]/[slug]/OCSPageClient.tsx:59
+     6  app/ocs/[category]/[slug]/page.tsx:112
+     2  app/papers/[category]/[slug]/page.tsx:105
+     3  app/papers/category/[slug]/page.tsx:92
+     2  app/papers/category/[slug]/PapersCategoryPage.tsx:64
+     4  app/papers/tag/[slug]/page.tsx:123
+     3  app/papers/tag/[slug]/PapersTaggedPage.tsx:41
+     1  app/playlists/PlaylistsClientPage.tsx:44
+     1  app/problems/[category]/[slug]/page.tsx:75
+     6  app/problems/[category]/[slug]/ProblemPageClient.tsx:23
+     1  app/progymnasmata/progymnasmata-client.tsx:96
+     1  app/progymnasmata/ProgymnasmataClientPage.tsx:59
+     2  app/proofs/[category]/[slug]/page.tsx:76
+     2  app/proofs/[category]/[slug]/ProofPageClient.tsx:69
+     1  app/questions/QuestionsClientPage.tsx:167
+     1  app/research/research-client.tsx:146
+     2  app/reviews/[category]/[slug]/page.tsx:111
+     2  app/reviews/[category]/page.tsx:87
+     2  app/reviews/page.tsx:19
+     1  app/sequences/categories/SequencesCategoriesClientPage.tsx:34
+     2  app/series/[slug]/page.tsx:65
+     2  app/series/page.tsx:23
+     1  app/social/social-client.tsx:155
+     1  app/sources/page.tsx:15
+     1  app/symbols/[id]/symbol-detail-client.tsx:91
+     1  app/symbols/symbols-client-page.tsx:164
+     2  app/tag/[slug]/page.tsx:63
+     1  app/tags/page.tsx:31
+     6  app/til/[...slug]/page.tsx:74
+     2  app/til/[...slug]/TilPageClient.tsx:56
+     9  app/til/page.tsx:19
+     1  app/videos/page.tsx:31
+     1  components/lectures-table.tsx:42
+     7  components/libers-table.tsx:43
+     1  components/notes-table.tsx:41
+     1  components/progymnasmata/progymnasmata-entry-page.tsx:76
+PS C:\Users\Kris Yotam\krisyotam.com> 

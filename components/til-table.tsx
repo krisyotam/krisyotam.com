@@ -7,7 +7,8 @@ import { useRouter } from "next/navigation";
 interface TilEntry {
   title: string;
   preview: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   tags: string[];
   category: string;
   slug: string;
@@ -41,12 +42,18 @@ export function TilTable({ tilEntries, searchQuery, activeCategory }: TilTablePr
     });
 
     // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    filtered.sort((a, b) => {
+      const aDate = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+      const bDate = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+      return new Date(bDate).getTime() - new Date(aDate).getTime();
+    });
     setFilteredEntries(filtered);
   }, [tilEntries, searchQuery, activeCategory]);
+
   // Helper to format date as "Month DD, YYYY"
-  function formatDate(dateString: string): string {
-    const date = new Date(dateString);
+  function formatDate(entry: TilEntry): string {
+    const dateToUse = (entry.end_date && entry.end_date.trim()) ? entry.end_date : entry.start_date;
+    const date = new Date(dateToUse);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long", 
@@ -84,7 +91,7 @@ export function TilTable({ tilEntries, searchQuery, activeCategory }: TilTablePr
             >
               <td className="py-2 px-3 font-medium">{entry.title}</td>
               <td className="py-2 px-3">{entry.category}</td>
-              <td className="py-2 px-3">{formatDate(entry.date)}</td>
+              <td className="py-2 px-3">{formatDate(entry)}</td>
             </tr>
           ))}
         </tbody>

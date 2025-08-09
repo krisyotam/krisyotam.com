@@ -74,8 +74,15 @@ export function FeaturedPost({ posts, className = "" }: FeaturedPostProps) {
       const activePosts = postsWithCoverImages.length > 0 ? postsWithCoverImages : posts
         .filter(post => post.state === "active")
         .filter(post => !["On Myself", "On Website", "On Learning", "On Writing", "On Method"].includes(post.category))
-        .filter(post => post.slug && post.date && post.preview)
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .filter(post => {
+          const displayDate = (post.end_date && post.end_date.trim()) ? post.end_date : post.start_date;
+          return post.slug && displayDate && post.preview;
+        })
+        .sort((a, b) => {
+          const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+          const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+          return new Date(dateB).getTime() - new Date(dateA).getTime();
+        })
       
       const postsWithThumbnails = activePosts.map((post) => ({
         ...post,
@@ -220,7 +227,7 @@ export function FeaturedPost({ posts, className = "" }: FeaturedPostProps) {
             <div className="flex items-center gap-4 text-xs text-gray-400">
               <div className="flex items-center gap-1">
                 <Calendar className="h-3 w-3" />
-                <span>{formatDate(currentPost.date)}</span>
+                <span>{formatDate((currentPost.end_date && currentPost.end_date.trim()) ? currentPost.end_date : currentPost.start_date)}</span>
               </div>
               
               <div className="flex items-center gap-1">

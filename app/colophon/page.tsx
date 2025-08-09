@@ -10,7 +10,8 @@ import { PageHeader } from "@/components/page-header"
 const colophonPageData = {
   title: "Colophon",
   subtitle: "Design and Technical Details",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0],
   preview: "Information about the design, typography, and technology used to create this website.",
   status: "Finished" as const,
   confidence: "certain" as const,
@@ -100,7 +101,8 @@ export default function ColophonPage() {
         <PageHeader
           title={colophonPageData.title}
           subtitle={colophonPageData.subtitle}
-          date={colophonPageData.date}
+          start_date={colophonPageData.start_date}
+          end_date={colophonPageData.end_date}
           preview={colophonPageData.preview}
           status={colophonPageData.status}
           confidence={colophonPageData.confidence}

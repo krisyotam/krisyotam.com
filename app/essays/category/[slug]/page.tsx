@@ -88,7 +88,8 @@ export default function EssayCategoryPage({ params }: PageProps) {
   const categoryHeaderData = customCategory ? {
     title: customCategory.title,
     subtitle: "",
-    date: customCategory.date,
+    start_date: customCategory.date || "Undefined",
+    end_date: new Date().toISOString().split('T')[0],
     preview: customCategory.preview,
     status: customCategory.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
     confidence: customCategory.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
@@ -98,7 +99,8 @@ export default function EssayCategoryPage({ params }: PageProps) {
   } : {
     title: originalCategory,
     subtitle: "",
-    date: new Date().toISOString(),
+    start_date: "Undefined",
+    end_date: new Date().toISOString().split('T')[0],
     preview: `Essays in the ${originalCategory} category.`,
     status: "Active" as const,
     confidence: "certain" as const,
@@ -108,7 +110,11 @@ export default function EssayCategoryPage({ params }: PageProps) {
   };
 
   // Sort essays by date (newest first) and transform to match Essay interface
-  const essays = [...essaysInCategory].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const essays = [...essaysInCategory].sort((a, b) => {
+    const aDate = a.end_date || a.start_date;
+    const bDate = b.end_date || b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  })
     .map(essay => ({
       id: essay.slug,
       title: essay.title,
@@ -119,8 +125,8 @@ export default function EssayCategoryPage({ params }: PageProps) {
       subject: essay.category,
       keywords: essay.tags,
       postedBy: "admin", // Default value
-      postedOn: essay.date,
-      dateStarted: essay.date,
+      postedOn: (essay.end_date && essay.end_date.trim()) ? essay.end_date : essay.start_date,
+      dateStarted: essay.start_date,
       tags: essay.tags,
       img: essay.cover_image,
       status: essay.status,

@@ -10,7 +10,7 @@ import { PageDescription } from "@/components/posts/typography/page-description"
 const quotesPageData = {
   title: "Quotes",
   subtitle: "Notable Sayings and Excerpts",
-  date: new Date().toISOString(),
+  start_date: new Date().toISOString(),
   preview: "A collection of notable quotes and excerpts from my writings, speeches, and other creative works.",
   status: "In Progress" as const,
   confidence: "certain" as const,
@@ -30,7 +30,7 @@ export default function QuotesPage() {
         <PageHeader
           title={quotesPageData.title}
           subtitle={quotesPageData.subtitle}
-          date={quotesPageData.date}
+          start_date={quotesPageData.start_date}
           preview={quotesPageData.preview}
           status={quotesPageData.status}
           confidence={quotesPageData.confidence}

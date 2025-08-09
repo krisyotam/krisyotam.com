@@ -178,7 +178,8 @@ export default function GameClientPage() {
       <PageHeader
         title="Games"
         subtitle="My gaming journey and favorites"
-        date="2025-01-01"
+        start_date="2025-01-01"
+        end_date={new Date().toISOString().split('T')[0]}
         preview="a compilation of all the games I've played"
         status="In Progress"
         confidence="certain"

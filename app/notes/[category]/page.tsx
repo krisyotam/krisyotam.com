@@ -1,5 +1,5 @@
 import NotesClientPage from "../NotesClientPage";
-import notesData from "@/data/notes/quick-notes.json";
+import notesData from "@/data/notes/notes.json";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -56,7 +56,11 @@ export default function NotesCategoryPage({ params }: PageProps) {
   }
 
   // Sort notes by date (newest first)
-  const notes = [...activeNotes].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const notes = [...activeNotes].sort((a, b) => {
+    const aDate = (a.end_date?.trim()) ? a.end_date : a.start_date;
+    const bDate = (b.end_date?.trim()) ? b.end_date : b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  });
 
   return (
     <div className="notes-container">

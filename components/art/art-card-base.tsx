@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { getPhotoUrl } from "@/utils/flickr-api"
 
-export type ArtworkItem = {
+export interface ArtworkItem {
   id: string
   title: string
   type?: string
@@ -13,7 +13,9 @@ export type ArtworkItem = {
   description: string
   imageUrl?: string
   dimension: string
-  date: string
+  start_date: string
+  end_date?: string
+  date?: string // backward compatibility
   tags?: string[]
   status?: string
   confidence?: string
@@ -56,9 +58,10 @@ export default function ArtCardBase({
   }, [artwork.id, artwork.imageUrl])
 
   // Format date while preserving the exact day
+  const displayDate = artwork.end_date || artwork.start_date || artwork.date;
   let formattedDate = "";
-  if (artwork.date && artwork.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-    const [year, month, day] = artwork.date.split('-').map(num => parseInt(num, 10));
+  if (displayDate && displayDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    const [year, month, day] = displayDate.split('-').map(num => parseInt(num, 10));
     const date = new Date(year, month - 1, day);
     formattedDate = date.toLocaleDateString("en-US", {
       year: "numeric",
@@ -66,8 +69,8 @@ export default function ArtCardBase({
       day: "numeric",
       timeZone: 'UTC'
     });
-  } else {
-    formattedDate = new Date(artwork.date).toLocaleDateString("en-US", {
+  } else if (displayDate) {
+    formattedDate = new Date(displayDate).toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
       day: "numeric",

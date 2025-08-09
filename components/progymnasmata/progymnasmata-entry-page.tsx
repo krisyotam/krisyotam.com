@@ -34,7 +34,8 @@ export function ProgymnasmataEntryPage({ entry }: ProgymnasmataEntryPageProps) {
         <div className="flex-grow entry-container container max-w-[672px] mx-auto px-4 pt-8 pb-8">          {/* Post Header */}
           <PostHeader
             title={entry.title}
-            date={entry.date}
+            start_date={entry.start_date}
+            end_date={entry.end_date}
             tags={entry.tags || []}
             importance={entry.importance}
             preview={entry.description}
@@ -72,7 +73,8 @@ export function ProgymnasmataEntryPage({ entry }: ProgymnasmataEntryPageProps) {
           <Citation
             title={entry.title}
             slug={entry.slug}
-            date={entry.date}
+            start_date={entry.start_date}
+            end_date={entry.end_date}
             url={`https://krisyotam.com/progymnasmata/${typeSlug}/${entry.slug}`}
           />
         </div>

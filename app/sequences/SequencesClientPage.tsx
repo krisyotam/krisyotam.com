@@ -13,7 +13,8 @@ import { Sequence, SequencePost } from "@/types/sequences";
 const defaultSequencesPageData = {
   title: "Sequences",
   subtitle: "Structured Learning Paths",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview: "Curated collections of posts organized into coherent learning sequences covering philosophy, science, and rationality.",
   status: "In Progress" as const,
   confidence: "likely" as const,
@@ -101,7 +102,8 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
         return {
           title: categoryData.title,
           subtitle: "Sequence Category",
-          date: categoryData.date,
+          start_date: categoryData.date || "2025-01-01",
+          end_date: new Date().toISOString().split('T')[0],
           preview: categoryData.preview,
           status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Planned",
           confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
@@ -113,7 +115,8 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
       return {
         title: categoryDisplayName,
         subtitle: "Sequence Category",
-        date: new Date().toISOString(),
+        start_date: "2025-01-01",
+        end_date: new Date().toISOString().split('T')[0],
         preview: `Sequences in the ${categoryDisplayName} category`,
         status: "In Progress" as const,
         confidence: "certain" as const,
@@ -167,7 +170,11 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
       (sequence.category && sequence.category === categoryDisplayName);
     
     return matchesSearch && matchesCategory;
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }).sort((a, b) => {
+    const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+    const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+    return new Date(dateB).getTime() - new Date(dateA).getTime();
+  });
 
 
 
@@ -216,7 +223,7 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
                   </>
                 )}
               </span>
-              <span>{new Date(sequence.date).getFullYear()}</span>
+              <span>{new Date((sequence.end_date && sequence.end_date.trim()) ? sequence.end_date : sequence.start_date).getFullYear()}</span>
             </div>
           </div>
         </Link>
@@ -259,7 +266,7 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
               )}
             </td>
             <td className="py-2 px-3">{getTotalPostsCount(sequence)}</td>
-            <td className="py-2 px-3">{new Date(sequence.date).getFullYear()}</td>
+            <td className="py-2 px-3">{new Date((sequence.end_date && sequence.end_date.trim()) ? sequence.end_date : sequence.start_date).getFullYear()}</td>
           </tr>
         ))}
       </tbody>

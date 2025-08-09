@@ -1,6 +1,6 @@
 import NotesCategoriesClientPage from "./NotesCategoriesClientPage";
 import categoriesData from "@/data/notes/categories.json";
-import notesData from "@/data/notes/quick-notes.json";
+import notesData from "@/data/notes/notes.json";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

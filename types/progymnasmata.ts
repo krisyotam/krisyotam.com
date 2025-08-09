@@ -4,7 +4,8 @@ export interface ProgymnasmataEntry {
     title: string
     slug: string
     type: string
-    date: string
+    start_date: string
+    end_date?: string
     description: string
     paragraphs: string[]
     image?: string

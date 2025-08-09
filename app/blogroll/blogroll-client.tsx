@@ -95,7 +95,8 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
   }  return (
     <main className="max-w-2xl mx-auto px-4 py-12">      <PageHeader
         title="Blogroll"
-        date="2023-09-15"
+        start_date="2025-01-01"
+        end_date={new Date().toISOString().split('T')[0]}
         preview="a curated collection of novel and obscure blogs I read, and have read, over the years"
       />      <div className="mt-8">        <div className="mb-6 flex items-center gap-4">
           <div className="flex items-center gap-2 whitespace-nowrap">

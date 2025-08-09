@@ -49,7 +49,8 @@ export function CategoriesClient({ categories, currentDate }: CategoriesClientPr
         <PageHeader
           title="Categories"
           subtitle="Content organized by topic"
-          date={currentDate}
+          start_date={currentDate}
+          end_date=""
           preview="Browse articles and essays by subject area to explore related ideas across the site."
           status="Finished"
           confidence="certain"

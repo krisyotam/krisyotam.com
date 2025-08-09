@@ -23,7 +23,7 @@ export default function CasePageClient({ caseData: caseItem, allCases, children,
 
   /* prev / next */
   const sorted = [...allCases].sort(
-    (a, b) => +new Date(b.date) - +new Date(a.date)
+    (a, b) => +new Date(b.start_date) - +new Date(a.start_date)
   );
   const idx = sorted.findIndex(c => c.slug === caseItem.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
@@ -70,7 +70,8 @@ export default function CasePageClient({ caseData: caseItem, allCases, children,
           className=""     
           title={caseItem.title}
           subtitle={caseItem.subtitle}
-          date={caseItem.date}
+          start_date={caseItem.start_date}
+          end_date={caseItem.end_date}
           tags={caseItem.tags}
           category={caseItem.category}
           backHref="/cases"
@@ -91,7 +92,8 @@ export default function CasePageClient({ caseData: caseItem, allCases, children,
         <Citation 
           title={caseItem.title}
           slug={caseItem.slug}
-          date={caseItem.date}
+          start_date={caseItem.start_date}
+          end_date={caseItem.end_date}
           url={`https://krisyotam.com/cases/${slugifyCategory(caseItem.category)}/${caseItem.slug}`}
         />
         <LiveClock />
@@ -108,7 +110,8 @@ export default function CasePageClient({ caseData: caseItem, allCases, children,
         className=""     
         title={caseItem.title}
         subtitle={caseItem.subtitle}
-        date={caseItem.date}
+        start_date={caseItem.start_date}
+        end_date={caseItem.end_date}
         tags={caseItem.tags}
         category={caseItem.category}
         backHref="/cases"
@@ -126,7 +129,8 @@ export default function CasePageClient({ caseData: caseItem, allCases, children,
         <Citation 
           title={caseItem.title}
           slug={caseItem.slug}
-          date={caseItem.date}
+          start_date={caseItem.start_date}
+          end_date={caseItem.end_date}
           url={`https://krisyotam.com/cases/${slugifyCategory(caseItem.category)}/${caseItem.slug}`}
         />
         <LiveClock />

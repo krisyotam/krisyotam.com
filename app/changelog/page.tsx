@@ -15,7 +15,8 @@ export default async function ChangelogPage() {
   const changelogData = {
     title: "Changelog",
     subtitle: "Site Updates & Changes",
-    date: new Date().toISOString(),
+    start_date: "2025-01-01",
+    end_date: new Date().toISOString().split('T')[0],
     preview:
       "Monthly chronological list of recent major writings/changes/additions to krisyotam.com (see also the monthly newsletter)",
     status: "Finished" as const,
@@ -29,7 +30,8 @@ export default async function ChangelogPage() {
         <PageHeader
           title={changelogData.title}
           subtitle={changelogData.subtitle}
-          date={changelogData.date}
+          start_date={changelogData.start_date}
+          end_date={changelogData.end_date}
           preview={changelogData.preview}
           status={changelogData.status}
           confidence={changelogData.confidence}

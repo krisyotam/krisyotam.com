@@ -61,6 +61,31 @@ export function getCurrentMonthYear(): string {
   })
 }
 
+/**
+ * Format a date range from start date to end date
+ * @param startDate ISO date string for start date
+ * @param endDate ISO date string for end date (optional)
+ * @returns Formatted date range string
+ */
+export function formatDateRange(startDate: string, endDate?: string): string {
+  // Handle null, undefined, or empty strings for start date
+  if (!startDate || typeof startDate !== 'string') {
+    return 'Invalid date'
+  }
+
+  const formattedStart = formatDate(startDate)
+  
+  // If no end date or end date is the same as start date, return just the start date
+  if (!endDate || endDate === startDate) {
+    return formattedStart
+  }
+
+  const formattedEnd = formatDate(endDate)
+  
+  // Always show full range: "Month Day, Year - Month Day, Year"
+  return `${formattedStart} - ${formattedEnd}`
+}
+
 export function formatDateWithValidation(date: unknown): string {
 if (!(date instanceof Date) || isNaN(date.getTime())) {
   return "Invalid Date";

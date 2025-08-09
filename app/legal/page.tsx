@@ -13,7 +13,8 @@ export default function LegalPage() {  return (
       <PageHeader 
         title="Legal"
         subtitle="Policies & Terms"
-        date={new Date().toISOString()}
+        start_date="2025-01-01"
+        end_date={new Date().toISOString().split('T')[0]}
         preview="Essential legal documents and policies"
         status="Finished"
         confidence="certain"

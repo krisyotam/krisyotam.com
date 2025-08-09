@@ -10,7 +10,8 @@ import type { NewsMeta, NewsStatus, NewsConfidence } from "@/types/news";
 
 interface NewsData {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;

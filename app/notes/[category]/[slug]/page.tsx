@@ -2,7 +2,7 @@ export const dynamic = 'force-static';
 export const revalidate = false;
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import notesData from "@/data/notes/quick-notes.json";
+import notesData from "@/data/notes/notes.json";
 import NotePageClient from "./NotePageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
 import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
@@ -13,7 +13,8 @@ type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "po
 
 interface NoteData {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;

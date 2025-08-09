@@ -5,7 +5,8 @@ import { staticMetadata } from "@/lib/staticMetadata";
 
 interface Story {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -26,7 +27,7 @@ export default function FictionPage() {
   // Filter and sort fiction by date (newest first) - only show active stories
   const stories = fictionData
     .filter(story => story.state === "active" || story.state === undefined)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => new Date(b.end_date || b.start_date).getTime() - new Date(a.end_date || a.start_date).getTime());
 
   return (
     <div className="fiction-container">

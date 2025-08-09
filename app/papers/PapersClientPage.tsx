@@ -12,7 +12,8 @@ import categoriesData from "@/data/papers/categories.json";
 /* default page-level metadata for the header */
 const defaultPapersPageData = {
   title: "Papers",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview: "stable long-form papers, studies, and self-experiments across various disciplines",
   status: "In Progress" as "In Progress",
   confidence: "likely" as "likely",
@@ -63,7 +64,8 @@ export default function PapersClientPage({ papers, initialCategory = "all" }: Pa
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,
+        start_date: categoryData.date || "Undefined",
+        end_date: new Date().toISOString().split('T')[0],
         preview: categoryData.preview,
         status: mapPaperStatusToPageHeaderStatus(categoryData.status as PaperStatus),
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",

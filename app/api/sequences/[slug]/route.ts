@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import sequencesData from '@/data/sequences/sequences.json';
 import essaysData from '@/data/essays/essays.json';
-import notesData from '@/data/notes/quick-notes.json';
+import notesData from '@/data/notes/notes.json';
 import papersData from '@/data/papers/papers.json';
 import reviewsData from '@/data/reviews/reviews.json';
 import fictionData from '@/data/fiction/fiction.json';
@@ -10,8 +10,8 @@ import dossiersData from '@/data/dossiers/dossiers.json';
 import conspiraciesData from '@/data/conspiracies/conspiracies.json';
 import libersData from '@/data/libers/libers.json';
 import proofsData from '@/data/proofs/proofs.json';
-import lectureNotesData from '@/data/lecture-notes.json';
-import verseData from '@/data/verse/poems.json';
+import lectureNotesData from '@/data/lecture-notes/lecture-notes.json';
+import verseData from '@/data/verse/verse.json';
 import { Sequence, SequencesData, PostType } from '@/types/sequences';
 
 interface Params {

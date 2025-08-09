@@ -89,6 +89,8 @@ export default function PaperCategoryPage({ params }: PageProps) {
   const categoryHeaderData = customCategory ? {
     title: customCategory.title,
     subtitle: "",
+    start_date: (customCategory as any).start_date || customCategory.date || new Date().toISOString().split('T')[0],
+    end_date: (customCategory as any).end_date,
     date: customCategory.date,
     preview: customCategory.preview,
     status: customCategory.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
@@ -99,7 +101,9 @@ export default function PaperCategoryPage({ params }: PageProps) {
   } : {
     title: originalCategory,
     subtitle: "",
-    date: new Date().toISOString(),
+    date: new Date().toISOString().split('T')[0],
+    start_date: new Date().toISOString().split('T')[0],
+    end_date: "",
     preview: `Papers in the ${originalCategory} category.`,
     status: "Active" as const,
     confidence: "certain" as const,
@@ -109,12 +113,17 @@ export default function PaperCategoryPage({ params }: PageProps) {
   };
 
   // Sort papers by date (newest first) and transform to PaperMeta
-  const papers = [...papersInCategory].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const papers = [...papersInCategory].sort((a, b) => {
+    const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+    const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+    return new Date(dateB).getTime() - new Date(dateA).getTime();
+  })
     .map(paper => ({
       title: paper.title,
       subtitle: paper.preview,
       preview: paper.preview,
-      date: paper.date,
+      start_date: paper.start_date,
+      end_date: paper.end_date,
       slug: paper.slug,
       tags: paper.tags,
       category: paper.category,

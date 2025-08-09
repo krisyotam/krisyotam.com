@@ -36,7 +36,11 @@ export default async function CategoryPage({
 
     return (
       <CategoryClient 
-        posts={posts} 
+        posts={posts.map(post => ({
+          ...post,
+          start_date: post.start_date || (post as any).date || new Date().toISOString(),
+          end_date: post.end_date || ""
+        }))} 
         categoryData={categoryData} 
         categoryName={categoryName} 
         slug={params.slug} 

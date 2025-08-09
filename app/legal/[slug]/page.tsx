@@ -60,7 +60,8 @@ export default function LegalDocPage({ params }: LegalDocPageProps) {
       <PageHeader 
         title={document.name}
         subtitle="Legal"
-        date={document.lastUpdated}
+        start_date={document.lastUpdated}
+        end_date={document.lastUpdated}
         backHref="/legal"
         backText="Legal"
         preview={`Last updated on ${formatDate(document.lastUpdated)}`}

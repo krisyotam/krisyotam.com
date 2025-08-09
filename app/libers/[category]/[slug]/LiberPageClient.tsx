@@ -15,7 +15,9 @@ interface LiberMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
+  date?: string; // fallback for compatibility
   slug: string;
   tags: string[];
   category: string;
@@ -53,7 +55,7 @@ export default function LiberPageClient({ liber, allLibers, children, headerOnly
 
   /* prev / next */
   const sorted = [...allLibers].sort(
-    (a, b) => +new Date(b.date) - +new Date(a.date)
+    (a, b) => +new Date(b.start_date || b.date || '') - +new Date(a.start_date || a.date || '')
   );
   const idx  = sorted.findIndex(l => l.slug === liber.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
@@ -75,7 +77,8 @@ export default function LiberPageClient({ liber, allLibers, children, headerOnly
             className=""     
             title={liber.title}
             subtitle={liber.subtitle}
-            date={liber.date}
+            start_date={liber.start_date || (liber as any).date || new Date().toISOString().split('T')[0]}
+            end_date={liber.end_date}
             tags={liber.tags}
             category={liber.category}
             backHref="/libers"
@@ -97,7 +100,8 @@ export default function LiberPageClient({ liber, allLibers, children, headerOnly
         <Citation 
           title={liber.title}
           slug={liber.slug}
-          date={liber.date}
+          start_date={liber.start_date || liber.date}
+          end_date={liber.end_date}
           url={`https://krisyotam.com/libers/${slugifyCategory(liber.category)}/${liber.slug}`}
         />
         <LiveClock />
@@ -119,7 +123,8 @@ export default function LiberPageClient({ liber, allLibers, children, headerOnly
           className=""     
           title={liber.title}
           subtitle={liber.subtitle}
-          date={liber.date}
+          start_date={liber.start_date || (liber as any).date || new Date().toISOString().split('T')[0]}
+          end_date={liber.end_date}
           tags={liber.tags}
           category={liber.category}
           backHref="/libers"
@@ -137,7 +142,8 @@ export default function LiberPageClient({ liber, allLibers, children, headerOnly
           <Citation 
             title={liber.title}
             slug={liber.slug}
-            date={liber.date}
+            start_date={liber.start_date || liber.date}
+            end_date={liber.end_date}
             url={`https://krisyotam.com/libers/${slugifyCategory(liber.category)}/${liber.slug}`}
           />
           <LiveClock />

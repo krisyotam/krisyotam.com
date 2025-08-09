@@ -12,7 +12,11 @@ export default function NewsPage() {
     ...article,
     status: article.status as NewsStatus,
     confidence: article.confidence as NewsConfidence
-  })).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  })).sort((a, b) => {
+    const aDate = (a.end_date?.trim()) ? a.end_date : a.start_date;
+    const bDate = (b.end_date?.trim()) ? b.end_date : b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  });
 
   return (
     <div className="news-container">

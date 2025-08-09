@@ -3,7 +3,8 @@ export type NoteConfidence = "impossible" | "remote" | "highly unlikely" | "unli
 
 export interface NoteMeta {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;

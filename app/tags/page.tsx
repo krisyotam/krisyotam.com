@@ -28,7 +28,8 @@ export default async function TagsPage() {
         <PageHeader
           title="Tags"
           subtitle="Content organized by tag"
-          date="2025-05-31"
+          start_date="2025-01-01"
+          end_date={new Date().toISOString().split('T')[0]}
           preview="Browse posts by tag to explore related ideas across the site."
           status="Finished"
           confidence="certain"

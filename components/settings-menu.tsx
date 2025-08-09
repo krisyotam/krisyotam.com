@@ -274,16 +274,19 @@ export function SettingsMenu() {
             post.state !== "hidden"
           )
         })
-        .map((post) => ({
-          title: post.title,
-          subtitle: post.subtitle,
-          preview: post.preview,
-          date: post.date,
-          status: post.status || "Draft",
-          category: post.category,
-          path: `/blog/${new Date(post.date).getFullYear()}/${post.slug}`,
-          resultType: "post" as const,
-        }))
+        .map((post) => {
+          const displayDate = (post.end_date && post.end_date.trim()) ? post.end_date : post.start_date;
+          return {
+            title: post.title,
+            subtitle: post.subtitle,
+            preview: post.preview,
+            date: displayDate,
+            status: post.status || "Draft",
+            category: post.category,
+            path: `/blog/${new Date(displayDate).getFullYear()}/${post.slug}`,
+            resultType: "post" as const,
+          }
+        })
 
       results = [...results, ...filteredPosts]
     }

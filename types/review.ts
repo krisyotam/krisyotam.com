@@ -6,7 +6,8 @@ export interface ReviewMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;

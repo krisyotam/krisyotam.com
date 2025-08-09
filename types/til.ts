@@ -4,7 +4,8 @@ export type TilState = "active" | "hidden";
 
 export interface TilMeta {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;

@@ -27,11 +27,16 @@ export function ConspiraciesTable({ conspiracies, searchQuery, activeCategory }:
     });
 
     // Sort by date descending (newest first)
-    filtered.sort((a, b) => b.date.localeCompare(a.date)); // Directly compare YYYY-MM-DD strings
+    filtered.sort((a, b) => {
+      const dateA = (a.end_date && a.end_date.trim()) || a.start_date || '';
+      const dateB = (b.end_date && b.end_date.trim()) || b.start_date || '';
+      return dateB.localeCompare(dateA);
+    });
     setFilteredConspiracies(filtered);
   }, [conspiracies, searchQuery, activeCategory]);
   // Format date
   function formatDate(dateString: string): string {
+    if (!dateString) return '';
     // Parse the date parts from the string to avoid timezone issues
     const [year, month, day] = dateString.split('-').map(num => parseInt(num, 10));
     const date = new Date(year, month - 1, day);
@@ -42,6 +47,12 @@ export function ConspiraciesTable({ conspiracies, searchQuery, activeCategory }:
       day: "numeric",
       timeZone: 'UTC' // Use UTC to preserve the exact date
     });
+  }
+
+  // Helper to get the display date (end_date if available, otherwise start_date)
+  function getDisplayDate(item: ConspiracyMeta): string {
+    const dateToUse = (item.end_date && item.end_date.trim()) || item.start_date;
+    return formatDate(dateToUse);
   }
 
   // Helper function to format category display name
@@ -85,7 +96,7 @@ export function ConspiraciesTable({ conspiracies, searchQuery, activeCategory }:
                   {formatCategoryDisplayName(item.category)}
                 </Link>
               </td>
-              <td className="py-2 px-3">{formatDate(item.date)}</td>
+              <td className="py-2 px-3">{getDisplayDate(item)}</td>
             </tr>
           ))}
         </tbody>

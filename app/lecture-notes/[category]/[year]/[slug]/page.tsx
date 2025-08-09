@@ -2,7 +2,7 @@ import type { LectureNote } from "@/types/lecture-note"
 import type { Metadata, ResolvingMetadata } from "next"
 import { notFound } from "next/navigation"
 import { LectureNoteDetail } from "./lecture-note-detail"
-import lectureNotesData from "@/data/lecture-notes.json"
+import lectureNotesData from "@/data/lecture-notes/lecture-notes.json"
 
 interface LectureNoteData {
   id: string;

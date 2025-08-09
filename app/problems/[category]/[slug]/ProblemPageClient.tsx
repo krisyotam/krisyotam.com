@@ -20,7 +20,11 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
 
   /* prev / next */
   const sorted = [...allNotes].sort(
-    (a, b) => +new Date(b.date) - +new Date(a.date)
+    (a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return +new Date(bDate) - +new Date(aDate);
+    }
   );
   const idx = sorted.findIndex(n => n.slug === note.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
@@ -37,7 +41,8 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
         <ProblemHeader
           title={note.title}
           subtitle={note.subtitle}
-          date={note.date}
+          start_date={note.start_date}
+          end_date={note.end_date}
           tags={note.tags}
           category={note.category}
           backHref="/problems"
@@ -61,7 +66,8 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
         <Citation
           title={note.title}
           slug={note.slug}
-          date={note.date}
+          start_date={note.start_date}
+          end_date={note.end_date}
           url={`https://krisyotam.com/problems/${slugifyCategory(note.category)}/${note.slug}`}
         />
         <LiveClock />
@@ -76,7 +82,8 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
         className=""     
         title={note.title}
         subtitle={note.subtitle}
-        date={note.date}
+        start_date={note.start_date}
+        end_date={note.end_date}
         tags={note.tags}
         category={note.category}
         backHref="/problems"
@@ -97,7 +104,8 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
         <Citation 
           title={note.title}
           slug={note.slug}
-          date={note.date}
+          start_date={note.start_date}
+          end_date={note.end_date}
           url={`https://krisyotam.com/problems/${slugifyCategory(note.category)}/${note.slug}`}
         />
       </div>

@@ -11,7 +11,8 @@ import type { LectureMeta, LectureStatus, LectureConfidence } from "@/types/lect
 
 interface LectureData {
   title: string;
-  date: string;
+  start_date: string;
+  end_date: string;
   slug: string;
   tags: string[];
   category: string;
@@ -116,23 +117,24 @@ export default async function LecturePage({ params }: LecturePageProps) {
   
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
-      <div className="max-w-6xl mx-auto px-4">
-        {/* Header section - full width */}
-        <div className="mb-8">        <LecturesPageClient lectureData={lectureData} allLectures={lectures} headerOnly={true} />
+      <div className="container max-w-[672px] mx-auto px-4">
+        {/* Header section */}
+        <div className="mb-8">
+          <LecturesPageClient lectureData={lectureData} allLectures={lectures} headerOnly={true} />
         </div>
         
+        {/* Table of Contents */}
+        {headings.length > 0 && (
+          <TableOfContents headings={headings} />
+        )}
+        
         {/* Main content */}
-        <main className="container max-w-[672px] mx-auto px-4">
-          {/* Table of Contents - at the top of content */}
-          {headings.length > 0 && (
-            <TableOfContents headings={headings} />
-          )}
-          
-          <div className="lectures-content">
-            <LectureArticle />
-          </div>
-          <LecturesPageClient lectureData={lectureData} allLectures={lectures} contentOnly={true} />
-        </main>
+        <div className="lectures-content">
+          <LectureArticle />
+        </div>
+        
+        {/* Citation and Footer */}
+        <LecturesPageClient lectureData={lectureData} allLectures={lectures} contentOnly={true} />
       </div>
     </div>
   );

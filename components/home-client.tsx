@@ -96,7 +96,8 @@ interface HomeClientProps {
 const homePageData = {
   title: "Kris Yotam",
   subtitle: "Essays, Notes, and Musings",
-  date: new Date().toISOString(),
+  start_date: new Date().toISOString(),
+  end_date: "",
   preview: "A collection of writings on multiple disciplines.",
   status: "Finished" as const,
   confidence: "certain" as const,
@@ -122,7 +123,8 @@ function StatsCard({
 
 // Blog Post Card Component
 function BlogPostCard({ post }: { post: Post }) {
-  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
+  const displayDate = (post.end_date && post.end_date.trim()) ? post.end_date : post.start_date;
+  const formattedDate = new Date(displayDate).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -245,7 +247,8 @@ function GitHubContributions() {
 
 // Post Table Row Component
 function PostTableRow({ post }: { post: Post }) {
-  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
+  const displayDate = (post.end_date && post.end_date.trim()) ? post.end_date : post.start_date;
+  const formattedDate = new Date(displayDate).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -280,9 +283,16 @@ function PostsTable({ posts }: { posts: Post[] }) {
   // Filter out excluded categories, ensure posts are active, and sort by date (newest first)
   const filteredPosts = posts
     .filter(post => !["On Myself", "On Website", "On Learning", "On Writing", "On Method"].includes(post.category))
-    .filter(post => post.slug && post.date && post.preview)
+    .filter(post => {
+      const displayDate = (post.end_date && post.end_date.trim()) ? post.end_date : post.start_date;
+      return post.slug && displayDate && post.preview;
+    })
     .filter(post => post.state === "active" || !post.state) // Only include posts with state "active" or without a state property
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .sort((a, b) => {
+      const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+      const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    })
   
   // Calculate pagination
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage)
@@ -562,7 +572,10 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
               <div className="space-y-8">
                 {posts
                   .filter(post => !["On Myself", "On Website", "On Learning", "On Writing", "On Method"].includes(post.category))
-                  .filter(post => post.slug && post.date && post.preview)
+                  .filter(post => {
+                    const displayDate = (post.end_date && post.end_date.trim()) ? post.end_date : post.start_date;
+                    return post.slug && displayDate && post.preview;
+                  })
                   .map((post) => {
                     // Generate correct URL - using same pattern as working essays-table.tsx
                     const slugPath = getPostUrl(post);
@@ -574,7 +587,7 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                         type={"tsx"}
                         title={post.title}
                         subtitle={`${post.path === 'blog' ? 'Blog Post' : 'Essay'}: ${post.subtitle || post.category}`}
-                        date={formatDate(post.date)}
+                        date={formatDate((post.end_date && post.end_date.trim()) ? post.end_date : post.start_date)}
                         excerpt={post.preview}
                       />
                     )
@@ -590,7 +603,8 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
             <PageHeader
               title={homePageData.title}
               subtitle={homePageData.subtitle}
-              date={homePageData.date}
+              start_date={homePageData.start_date}
+              end_date={homePageData.end_date}
               preview={homePageData.preview}
               status={homePageData.status}
               confidence={homePageData.confidence}

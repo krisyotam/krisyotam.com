@@ -89,7 +89,7 @@ export default function SupportersPage() {
         <PageHeader 
           title="Supporters" 
           subtitle="With gratitude to those who've contributed to this work" 
-          date={currentDate}
+          start_date={currentDate}
           preview="This project wouldn't be possible without the contributions, both large and small, from the following individuals."
           status="Finished"
           confidence="certain"

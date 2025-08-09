@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 
 interface Story {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -17,8 +18,12 @@ interface Story {
   state: "active" | "hidden";
 }
 
-// Type assertion to ensure the imported data matches our Story interface
-const fictionData = fictionDataRaw as Story[];
+// Type assertion and mapping to ensure the imported data matches our Story interface
+const fictionData = fictionDataRaw.map(story => ({
+  ...story,
+  start_date: story.start_date || (story as any).date || new Date().toISOString().split('T')[0],
+  end_date: story.end_date
+})) as Story[];
 
 interface PageProps {
   params: { category: string };
@@ -65,7 +70,11 @@ export default function FictionCategoryPage({ params }: PageProps) {
   }
 
   // Sort stories by date (newest first)
-  const stories = [...fictionData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const stories = [...fictionData].sort((a, b) => {
+    const aDate = a.end_date || a.start_date;
+    const bDate = b.end_date || b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  });
 
   return (
     <div className="fiction-container">

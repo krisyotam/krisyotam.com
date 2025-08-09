@@ -12,7 +12,8 @@ import categoriesData from "@/data/fiction/categories.json";
 /* ---------- updated type ---------- */
 interface Story {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -33,7 +34,8 @@ interface FictionClientPageProps {
 const defaultFictionPageData = {
   title: "Fiction",
   subtitle: "Short Stories, Flash Fiction, and More",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview: "A collection of my fiction writing, from flash fiction to novel excerpts",
   status: "In Progress" as const,
   confidence: "certain" as const,
@@ -68,7 +70,8 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,
+        start_date: categoryData.date || "Undefined",
+        end_date: new Date().toISOString().split('T')[0],
         preview: categoryData.preview,
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
@@ -97,7 +100,11 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
 
     const matchesCategory = activeCategory === "all" || story.category === activeCategory;
     return matchesSearch && matchesCategory;
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }).sort((a, b) => {
+    const aDate = a.end_date || a.start_date;
+    const bDate = b.end_date || b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  });
 
   // Helper to build the correct route for a story
   function getStoryUrl(story: Story) {
@@ -145,7 +152,7 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
             
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>{new Date(story.date).getFullYear()}</span>
+              <span>{new Date(story.end_date || story.start_date).getFullYear()}</span>
             </div>
           </div>
         </div>
@@ -173,7 +180,7 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
           >
             <td className="py-2 px-3">{story.title}</td>
             <td className="py-2 px-3">{story.category}</td>
-            <td className="py-2 px-3">{formatDate(story.date)}</td>
+            <td className="py-2 px-3">{formatDate(story.end_date || story.start_date)}</td>
           </tr>
         ))}
       </tbody>
@@ -200,7 +207,8 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
         <PageHeader 
           title={headerData.title}
           subtitle={headerData.subtitle}
-          date={headerData.date}
+          start_date={headerData.start_date}
+          end_date={headerData.end_date}
           preview={headerData.preview}
           status={headerData.status}
           confidence={headerData.confidence}

@@ -19,7 +19,8 @@ export type ConspiracyConfidence =
 
 export interface ConspiracyMeta {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -27,6 +28,8 @@ export interface ConspiracyMeta {
   confidence: ConspiracyConfidence;
   importance: number;
   preview?: string;
+  // Backward compatibility
+  date?: string;
   cover_image?: string;
   subtitle?: string;
 }

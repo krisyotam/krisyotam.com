@@ -1,5 +1,5 @@
 import BlogClientPage from "./BlogClientPage";
-import blogData from "@/data/blog/feed.json";
+import blogData from "@/data/blog/blog.json";
 import type { Metadata } from "next";
 import type { BlogMeta } from "@/types/blog";
 import "./blog.css";
@@ -18,7 +18,11 @@ export default function BlogPage() {
       confidence: post.confidence as BlogMeta['confidence'],
       state: post.state as BlogMeta['state']
     }))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return new Date(bDate).getTime() - new Date(aDate).getTime();
+    });
 
   return (
     <div className="notes-container">

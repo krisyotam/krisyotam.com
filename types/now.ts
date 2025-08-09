@@ -4,7 +4,8 @@ export type NowState = "active" | "hidden";
 
 export interface NowMeta {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;

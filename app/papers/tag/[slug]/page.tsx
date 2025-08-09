@@ -100,7 +100,8 @@ export default function PapersTagPage({ params }: PageProps) {
   const tagHeaderData = customTag ? {
     title: customTag.title,
     subtitle: "",
-    date: customTag.date,
+    start_date: customTag.date || "2025-01-01",
+    end_date: new Date().toISOString().split('T')[0],
     preview: customTag.preview,
     status: customTag.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
     confidence: customTag.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
@@ -110,7 +111,8 @@ export default function PapersTagPage({ params }: PageProps) {
   } : {
     title: originalTag,
     subtitle: "",
-    date: new Date().toISOString(),
+    start_date: new Date().toISOString(),
+    end_date: "",
     preview: `Papers tagged with ${originalTag}.`,
     status: "Active" as const,
     confidence: "certain" as const,
@@ -120,12 +122,16 @@ export default function PapersTagPage({ params }: PageProps) {
   };
 
   // Sort papers by date (newest first) and transform to PaperMeta
-  const papers = [...papersWithTag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .map(paper => ({
+  const papers = [...papersWithTag].sort((a, b) => {
+    const aDate = a.end_date || a.start_date;
+    const bDate = b.end_date || b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  }).map(paper => ({
       title: paper.title,
       subtitle: paper.preview,
       preview: paper.preview,
-      date: paper.date,
+      start_date: paper.start_date,
+      end_date: paper.end_date,
       slug: paper.slug,
       tags: paper.tags,
       category: paper.category,

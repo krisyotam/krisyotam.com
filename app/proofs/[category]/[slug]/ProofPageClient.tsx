@@ -6,20 +6,26 @@ import { LiveClock } from "@/components/live-clock";
 import { Footer } from "@/components/footer";
 import type { NoteMeta } from "@/types/note";
 
+interface ProofItem extends Omit<NoteMeta, 'date'> {
+  start_date: string;
+  end_date?: string;
+  date?: string; // fallback for compatibility
+}
+
 interface Props {
-  note: NoteMeta;
-  allNotes: NoteMeta[];
+  note: ProofItem;
+  allNotes: ProofItem[];
   children?: React.ReactNode;
   headerOnly?: boolean;
   contentOnly?: boolean;
 }
 
-export default function NotePageClient({ note, allNotes, children, headerOnly, contentOnly }: Props) {
+export default function ProofPageClient({ note, allNotes, children, headerOnly, contentOnly }: Props) {
   if (!note) notFound();
 
   /* prev / next */
   const sorted = [...allNotes].sort(
-    (a, b) => +new Date(b.date) - +new Date(a.date)
+    (a, b) => +new Date(b.start_date || b.date || '') - +new Date(a.start_date || a.date || '')
   );
   const idx = sorted.findIndex(n => n.slug === note.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
@@ -36,7 +42,7 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
         <ProofHeader
           title={note.title}
           subtitle={note.subtitle}
-          date={note.date}
+          date={note.start_date || note.date || ''}
           tags={note.tags}
           category={note.category}
           backHref="/proofs"
@@ -60,7 +66,8 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
         <Citation
           title={note.title}
           slug={note.slug}
-          date={note.date}
+          start_date={note.start_date || note.date}
+          end_date={note.end_date}
           url={`https://krisyotam.com/proofs/${slugifyCategory(note.category)}/${note.slug}`}
         />
         <LiveClock />
@@ -75,7 +82,7 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
         className=""     
         title={note.title}
         subtitle={note.subtitle}
-        date={note.date}
+        date={note.start_date || note.date || ''}
         tags={note.tags}
         category={note.category}
         backHref="/proofs"
@@ -96,7 +103,8 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
         <Citation 
           title={note.title}
           slug={note.slug}
-          date={note.date}
+          start_date={note.start_date || note.date}
+          end_date={note.end_date}
           url={`https://krisyotam.com/proofs/${slugifyCategory(note.category)}/${note.slug}`}
         />
       </div>

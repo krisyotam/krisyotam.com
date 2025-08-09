@@ -31,13 +31,16 @@ export function CasesTable({ cases, searchQuery, activeCategory }: CasesTablePro
     // Sort by date descending (newest first)
     filtered.sort((a, b) => {
       // Compare dates directly as strings in YYYY-MM-DD format (which sorts correctly)
-      return b.date.localeCompare(a.date);
+      const dateA = (a.end_date && a.end_date.trim()) || a.start_date || '';
+      const dateB = (b.end_date && b.end_date.trim()) || b.start_date || '';
+      return dateB.localeCompare(dateA);
     });
     setFilteredCases(filtered);
   }, [cases, searchQuery, activeCategory]);
 
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
+    if (!dateString) return '';
     // Parse the date parts from the string to avoid timezone issues
     const [year, month, day] = dateString.split('-').map(num => parseInt(num, 10));
     const date = new Date(year, month - 1, day);
@@ -48,6 +51,12 @@ export function CasesTable({ cases, searchQuery, activeCategory }: CasesTablePro
       day: "numeric",
       timeZone: 'UTC' // Use UTC to preserve the exact date
     });
+  }
+
+  // Helper to get the display date (end_date if available, otherwise start_date)
+  function getDisplayDate(caseItem: CaseMeta): string {
+    const dateToUse = (caseItem.end_date && caseItem.end_date.trim()) || caseItem.start_date;
+    return formatDate(dateToUse);
   }
 
   // Helper to build the correct route for a case
@@ -92,7 +101,7 @@ export function CasesTable({ cases, searchQuery, activeCategory }: CasesTablePro
                   {formatCategoryDisplayName(caseItem.category)}
                 </Link>
               </td>
-              <td className="py-2 px-3">{formatDate(caseItem.date)}</td>
+              <td className="py-2 px-3">{getDisplayDate(caseItem)}</td>
             </tr>
           ))}
         </tbody>

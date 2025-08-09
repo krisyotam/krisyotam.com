@@ -6,7 +6,8 @@ export interface LectureMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -21,7 +22,8 @@ export interface LectureCategory {
   slug: string;
   title: string;
   description?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   preview?: string;
   status?: LectureStatus;
   confidence?: LectureConfidence;

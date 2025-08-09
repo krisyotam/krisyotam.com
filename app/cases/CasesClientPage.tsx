@@ -12,7 +12,8 @@ import categoriesData from "@/data/cases/categories.json";
 /* default page-level metadata for the header */
 const defaultCasesPageData = {
   title: "Cases",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview: "Case studies and investigations into mysteries, cold cases, and unresolved incidents",
   status: "In Progress" as "In Progress",
   confidence: "likely" as "likely",
@@ -64,7 +65,8 @@ export default function CasesClientPage({ cases, initialCategory = "all" }: Case
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,
+        start_date: categoryData.date || "Undefined",
+        end_date: new Date().toISOString().split('T')[0],
         preview: categoryData.preview,
         status: mapCaseStatusToPageHeaderStatus(categoryData.status as CaseStatus),
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",

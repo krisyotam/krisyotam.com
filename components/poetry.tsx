@@ -208,7 +208,9 @@ const PoetryStyles = () => (
 export function PoetryCard({ poem }: PoetryCardProps) {
   const { theme } = useTheme()
   const typeSlug = poem.type.toLowerCase().replace(/\s+/g, "-")
-  const poemUrl = `/poetry/${typeSlug}/${poem.year}/${poem.slug}`
+  const displayDate = (poem.end_date && poem.end_date.trim()) ? poem.end_date : poem.start_date
+  const poemYear = new Date(displayDate).getFullYear()
+  const poemUrl = `/poetry/${typeSlug}/${poemYear}/${poem.slug}`
 
   return (
     <>

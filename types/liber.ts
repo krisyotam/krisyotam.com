@@ -3,7 +3,8 @@ export type LiberConfidence = "impossible" | "remote" | "highly unlikely" | "unl
 
 export interface LiberMeta {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;

@@ -30,17 +30,28 @@ export function PapersTable({ papers, searchQuery, activeCategory }: PapersTable
     });
 
     // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    filtered.sort((a, b) => {
+      const dateA = (a.end_date && a.end_date.trim()) || a.start_date || '';
+      const dateB = (b.end_date && b.end_date.trim()) || b.start_date || '';
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    });
     setFilteredPapers(filtered);
   }, [papers, searchQuery, activeCategory]);
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
+    if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long", 
       day: "numeric"
     });
+  }
+
+  // Helper to get the display date (end_date if available, otherwise start_date)
+  function getDisplayDate(paper: PaperMeta): string {
+    const dateToUse = (paper.end_date && paper.end_date.trim()) || paper.start_date;
+    return formatDate(dateToUse);
   }
 
   // Helper function to format category display name

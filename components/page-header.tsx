@@ -1,4 +1,4 @@
-import { formatDate } from "@/utils/date-formatter"
+import { formatDate, formatDateRange } from "@/utils/date-formatter"
 import Link from "next/link"
 import { ArrowLeft, Info } from "lucide-react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
@@ -7,7 +7,8 @@ import { cn } from "@/lib/utils"
 export interface PageHeaderProps {
   title: string
   subtitle?: string
-  date?: string
+  start_date?: string
+  end_date?: string
   preview?: string
   description?: string
   status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned" | "Active"
@@ -94,7 +95,8 @@ function getImportanceColor(importance: number) {
 export function PageHeader({
   title,
   subtitle,
-  date,
+  start_date,
+  end_date,
   preview,
   description,
   status = "Draft",
@@ -131,13 +133,13 @@ export function PageHeader({
         )}
 
         {/* Date above other metadata */}
-        {date && (
+        {start_date && (
           <div className="text-center mb-4">
             <time
-              dateTime={typeof date === "string" ? date : undefined}
+              dateTime={typeof start_date === "string" ? start_date : undefined}
               className="font-mono text-sm text-muted-foreground"
             >
-              {formatDate(date?.toString() || "")}
+              {formatDateRange(start_date, end_date || new Date().toISOString())}
             </time>
           </div>
         )}

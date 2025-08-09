@@ -48,7 +48,7 @@ export async function getSimilarPosts(
     // sort by score desc, then newest first
     .sort(
       (a, b) =>
-        b.score - a.score || Date.parse(b.post.date) - Date.parse(a.post.date)
+        b.score - a.score || Date.parse((b.post.end_date && b.post.end_date.trim()) ? b.post.end_date : b.post.start_date) - Date.parse((a.post.end_date && a.post.end_date.trim()) ? a.post.end_date : a.post.start_date)
     );
 
   // 3. return up to `limit`

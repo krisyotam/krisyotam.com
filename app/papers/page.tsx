@@ -15,7 +15,11 @@ export default function PapersPage() {
       status: paperItem.status as PaperStatus,
       confidence: paperItem.confidence as PaperConfidence
     }))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => {
+      const dateA = a.end_date || a.start_date;
+      const dateB = b.end_date || b.start_date;
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    });
 
   return (
     <div className="papers-container">

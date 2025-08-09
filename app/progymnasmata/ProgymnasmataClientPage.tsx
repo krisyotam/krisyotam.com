@@ -56,7 +56,8 @@ export default function ProgymnasmataClientPage() {
           <PostHeader
             title={postData.title}
             preview={postData.preview}
-            date={postData.date}
+            start_date={(postData as any).start_date || postData.date || new Date().toISOString().split('T')[0]}
+            end_date={(postData as any).end_date}
             tags={postData.tags}
             importance={postData.importance}
             backText="Progymnasmata"

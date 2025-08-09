@@ -65,7 +65,8 @@ export default async function SeriesPage({ params }: SeriesPageProps) {
           <PageHeader
             title={series.title}
             subtitle={series.subtitle || ""}
-            date={series.date}
+            start_date={series.start_date}
+            end_date={series.end_date}
             preview={series.preview || ""}
             status={series.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"}
             confidence={series.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"}
@@ -88,13 +89,13 @@ export default async function SeriesPage({ params }: SeriesPageProps) {
                             {index + 1}
                           </td>
                           <td className="py-4 px-2">
-                            <Link href={`/blog/${getPostYear(post.date)}/${post.slug}`} className="text-foreground">
+                            <Link href={`/blog/${getPostYear((post.end_date && post.end_date.trim()) ? post.end_date : post.start_date)}/${post.slug}`} className="text-foreground">
                               {post.title}
                             </Link>
                             <p className="text-sm text-muted-foreground mt-1">{post.preview}</p>
                           </td>
                           <td className="py-4 px-2 text-right text-muted-foreground">
-                            {formatDate(post.date)}
+                            {formatDate((post.end_date && post.end_date.trim()) ? post.end_date : post.start_date)}
                           </td>
                         </tr>
                       ))}

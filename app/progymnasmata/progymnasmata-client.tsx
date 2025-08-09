@@ -93,7 +93,8 @@ export function ProgymnasmataClient({ initialTypeFilter = "All" }: Progymnasmata
       <PageHeader
         title="Progymnasmata"
         subtitle="Classical Rhetorical Exercises"
-        date="2025-01-01"
+        start_date="2025-01-01"
+        end_date={new Date().toISOString().split('T')[0]}
         preview="classical rhetorical excercises inspired by aelius theon"
         status="In Progress"
         confidence="likely"

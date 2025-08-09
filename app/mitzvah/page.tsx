@@ -13,7 +13,8 @@ export default function MitzvahPage() {
         <PageHeader
           title="Mitzvah"
           subtitle="Commandments and Scriptures"
-          date={new Date().toISOString()}
+          start_date="2025-01-01"
+          end_date={new Date().toISOString().split('T')[0]}
           preview="A comprehensive listing of the Biblical commandments (Mitzvot)"
           status="Finished"
           confidence="certain"

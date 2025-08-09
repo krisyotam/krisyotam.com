@@ -84,7 +84,11 @@ export default function ReviewsCategoryPage({ params }: PageProps) {
     }))
     // Filter to only show reviews with state "active" or undefined state
     .filter(review => review.state === "active" || review.state === undefined)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return new Date(bDate).getTime() - new Date(aDate).getTime();
+    });
 
   return (
     <div className="reviews-container">

@@ -11,7 +11,9 @@ import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/papers";
 
 interface PaperData {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
+  date?: string; // backward compatibility
   slug: string;
   tags: string[];
   category: string;
@@ -104,6 +106,8 @@ export default async function PaperPage({ params }: PaperPageProps) {
 
   const papers: PaperMeta[] = (papersData.papers as PaperData[]).map(paperItem => ({
     ...paperItem,
+    start_date: paperItem.start_date || (paperItem as any).date || new Date().toISOString(),
+    end_date: paperItem.end_date || "",
     status: paperItem.status as PaperStatus,
     confidence: paperItem.confidence as PaperConfidence
   }));

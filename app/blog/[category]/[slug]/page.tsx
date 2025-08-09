@@ -2,7 +2,7 @@ export const dynamic = 'force-static';
 export const revalidate = false;
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import blogData from "@/data/blog/feed.json";
+import blogData from "@/data/blog/blog.json";
 import BlogPageClient from "./BlogPageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
 import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";

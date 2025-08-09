@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 
 interface Problem {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -35,12 +36,18 @@ export function ProblemTable({ problems, searchQuery, activeCategory }: ProblemT
     });
 
     // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    filtered.sort((a, b) => {
+      const aDate = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+      const bDate = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+      return new Date(bDate).getTime() - new Date(aDate).getTime();
+    });
     setFilteredProblems(filtered);
   }, [problems, searchQuery, activeCategory]);
+
   // Helper to format date as "Month DD, YYYY"
-  function formatDate(dateString: string): string {
-    const date = new Date(dateString);
+  function formatDate(problem: Problem): string {
+    const dateToUse = (problem.end_date && problem.end_date.trim()) ? problem.end_date : problem.start_date;
+    const date = new Date(dateToUse);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long", 
@@ -87,7 +94,7 @@ export function ProblemTable({ problems, searchQuery, activeCategory }: ProblemT
             >
               <td className="py-2 px-3">{problem.title}</td>
               <td className="py-2 px-3">{formatCategoryDisplayName(problem.category)}</td>
-              <td className="py-2 px-3">{formatDate(problem.date)}</td>
+              <td className="py-2 px-3">{formatDate(problem)}</td>
             </tr>
           ))}
         </tbody>

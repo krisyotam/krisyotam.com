@@ -255,7 +255,8 @@ export default function MangaClientPage() {
       <div className="max-w-6xl mx-auto p-6">
         <PageHeader
           title="Manga"
-          date="2025-01-01"
+          start_date="2025-01-01"
+          end_date={new Date().toISOString().split('T')[0]}
           preview="my manga reading activity and favorites"
           status="Finished"
           confidence="certain"

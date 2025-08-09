@@ -6,7 +6,8 @@ export interface OCSMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -22,7 +23,8 @@ export interface OCSCategory {
   slug: string;
   title: string;
   description?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   preview?: string;
   status?: OCSStatus;
   confidence?: OCSConfidence;

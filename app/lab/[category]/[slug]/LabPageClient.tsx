@@ -13,7 +13,8 @@ interface LabMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -37,7 +38,11 @@ export default function LabPageClient({ lab, allLabs, children, headerOnly, cont
 
   /* prev / next */
   const sorted = [...allLabs].sort(
-    (a, b) => +new Date(b.date) - +new Date(a.date)
+    (a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return +new Date(bDate) - +new Date(aDate);
+    }
   );
   const idx  = sorted.findIndex(n => n.slug === lab.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
@@ -56,7 +61,8 @@ export default function LabPageClient({ lab, allLabs, children, headerOnly, cont
           className=""     
           title={lab.title}
           subtitle={lab.subtitle}
-          date={lab.date}
+          start_date={lab.start_date}
+          end_date={lab.end_date}
           tags={lab.tags}
           category={lab.category}
           backHref="/lab"
@@ -77,7 +83,8 @@ export default function LabPageClient({ lab, allLabs, children, headerOnly, cont
         <Citation 
           title={lab.title}
           slug={lab.slug}
-          date={lab.date}
+          start_date={lab.start_date}
+          end_date={lab.end_date}
           url={`https://krisyotam.com/lab/${slugifyCategory(lab.category)}/${lab.slug}`}
         />
         <LiveClock />
@@ -94,7 +101,8 @@ export default function LabPageClient({ lab, allLabs, children, headerOnly, cont
         className=""     
         title={lab.title}
         subtitle={lab.subtitle}
-        date={lab.date}
+        start_date={lab.start_date}
+        end_date={lab.end_date}
         tags={lab.tags}
         category={lab.category}
         backHref="/lab"
@@ -115,7 +123,8 @@ export default function LabPageClient({ lab, allLabs, children, headerOnly, cont
         <Citation 
           title={lab.title}
           slug={lab.slug}
-          date={lab.date}
+          start_date={lab.start_date}
+          end_date={lab.end_date}
           url={`https://krisyotam.com/lab/${slugifyCategory(lab.category)}/${lab.slug}`}
         />
 

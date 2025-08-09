@@ -2,23 +2,10 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-interface Lecture {
-  title: string;
-  date: string;
-  slug: string;
-  tags: string[];
-  category: string;
-  status?: string;
-  confidence?: string;
-  importance?: number;
-  cover_image?: string;
-  preview?: string;
-  state?: string;
-}
+import type { LectureMeta } from "@/types/lectures";
 
 interface LecturesTableProps {
-  lectures: Lecture[];
+  lectures: LectureMeta[];
   searchQuery: string;
   activeCategory: string;
 }
@@ -28,12 +15,19 @@ export function LecturesTable({ lectures, searchQuery, activeCategory }: Lecture
 
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
+    if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long", 
       day: "numeric"
     });
+  }
+
+  // Helper to get the display date (end_date if available, otherwise start_date)
+  function getDisplayDate(lecture: LectureMeta): string {
+    const dateToUse = (lecture.end_date && lecture.end_date.trim()) || lecture.start_date;
+    return formatDate(dateToUse);
   }
 
   // Helper function to format category display name
@@ -45,7 +39,7 @@ export function LecturesTable({ lectures, searchQuery, activeCategory }: Lecture
   }
 
   // Helper to build the correct route for a lecture
-  function getLectureUrl(lecture: Lecture) {
+  function getLectureUrl(lecture: LectureMeta) {
     const categorySlug = lecture.category.toLowerCase().replace(/\s+/g, "-");
     return `/lectures/${categorySlug}/${encodeURIComponent(lecture.slug)}`;
   }
@@ -75,7 +69,7 @@ export function LecturesTable({ lectures, searchQuery, activeCategory }: Lecture
             >
               <td className="py-2 px-3 font-medium">{lecture.title}</td>
               <td className="py-2 px-3">{formatCategoryDisplayName(lecture.category)}</td>
-              <td className="py-2 px-3">{formatDate(lecture.date)}</td>
+              <td className="py-2 px-3">{getDisplayDate(lecture)}</td>
             </tr>
           ))}
         </tbody>

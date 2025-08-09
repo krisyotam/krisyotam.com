@@ -161,7 +161,8 @@ export function SymbolsClient() {
       <PageHeader
         title="Symbols"
         subtitle="Mathematical, Scientific, and Logical Symbols"
-        date="2025-01-01"
+        start_date="2025-01-01"
+        end_date={new Date().toISOString().split('T')[0]}
         preview="a comprehensive reference for symbols and their meanings"
         status="In Progress"
         confidence="likely"

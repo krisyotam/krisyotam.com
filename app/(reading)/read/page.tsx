@@ -22,7 +22,8 @@ export default function ReadPage() {
   const readPageData = {
     title: "Read",
     subtitle: "",
-    date: new Date().toISOString(),
+    start_date: new Date().toISOString(),
+    end_date: "",
     preview: "a compilation of books, blog posts, short stories, papers, essays, and verse completed since 2024",
     status: "In Progress" as const,
     confidence: "certain" as const,
@@ -34,7 +35,8 @@ export default function ReadPage() {
       <PageHeader
         title={readPageData.title}
         subtitle={readPageData.subtitle}
-        date={readPageData.date}
+        start_date={readPageData.start_date}
+        end_date={readPageData.end_date}
         preview={readPageData.preview}
         status={readPageData.status}
         confidence={readPageData.confidence}

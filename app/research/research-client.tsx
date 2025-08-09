@@ -143,7 +143,8 @@ export function ResearchClient({ initialCategory = "All" }: { initialCategory?: 
       <PageHeader
         title={researchPageData.title}
         subtitle={researchPageData.subtitle}
-        date={researchPageData.date}
+        start_date={(researchPageData as any).start_date || researchPageData.date || new Date().toISOString().split('T')[0]}
+        end_date={(researchPageData as any).end_date}
         preview={researchPageData.preview}
         status={researchPageData.status}
         confidence={researchPageData.confidence}

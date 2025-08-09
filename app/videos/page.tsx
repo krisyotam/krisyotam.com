@@ -28,7 +28,8 @@ export default function VideosPage() {
         <PostHeader
           title="Videos"
           subtitle="analysis, mathematics, and walkthroughs"
-          date={new Date().toISOString()}
+          start_date="2025-01-01"
+          end_date={new Date().toISOString().split('T')[0]}
           preview="collection of thought-provoking videos."
           status="In Progress"
           confidence="highly likely"

@@ -7,7 +7,11 @@ export const metadata: Metadata = staticMetadata.libers;
 
 export default function LibersPage() {
   // Sort libers by date (newest first)
-  const libers = [...libersData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const libers = [...libersData].sort((a, b) => {
+    const aDate = a.end_date || a.start_date;
+    const bDate = b.end_date || b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  });
 
   return (
     <div className="libers-container">

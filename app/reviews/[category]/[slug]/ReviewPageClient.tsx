@@ -13,7 +13,8 @@ interface ReviewMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -36,9 +37,11 @@ export default function ReviewPageClient({ review, allReviews, children, headerO
   if (!review) notFound();
 
   /* prev / next */
-  const sorted = [...allReviews].sort(
-    (a, b) => +new Date(b.date) - +new Date(a.date)
-  );
+  const sorted = [...allReviews].sort((a, b) => {
+    const dateA = (a.end_date && a.end_date.trim()) || a.start_date;
+    const dateB = (b.end_date && b.end_date.trim()) || b.start_date;
+    return new Date(dateB).getTime() - new Date(dateA).getTime();
+  });
   const idx = sorted.findIndex(n => n.slug === review.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
   const next = idx > 0 ? sorted[idx - 1] : null;
@@ -55,7 +58,8 @@ export default function ReviewPageClient({ review, allReviews, children, headerO
           className=""     
           title={review.title}
           subtitle={review.subtitle}
-          date={review.date}
+          start_date={review.start_date}
+          end_date={review.end_date}
           tags={review.tags}
           category={review.category}
           backHref="/reviews"
@@ -76,7 +80,7 @@ export default function ReviewPageClient({ review, allReviews, children, headerO
         <Citation 
           title={review.title}
           slug={review.slug}
-          date={review.date}
+          date={(review.end_date && review.end_date.trim()) || review.start_date}
           url={`https://krisyotam.com/reviews/${slugifyCategory(review.category)}/${review.slug}`}
         />
         <LiveClock />
@@ -93,7 +97,8 @@ export default function ReviewPageClient({ review, allReviews, children, headerO
         className=""     
         title={review.title}
         subtitle={review.subtitle}
-        date={review.date}
+        start_date={review.start_date}
+        end_date={review.end_date}
         tags={review.tags}
         category={review.category}
         backHref="/reviews"
@@ -111,7 +116,7 @@ export default function ReviewPageClient({ review, allReviews, children, headerO
         <Citation 
           title={review.title}
           slug={review.slug}
-          date={review.date}
+          date={(review.end_date && review.end_date.trim()) || review.start_date}
           url={`https://krisyotam.com/reviews/${slugifyCategory(review.category)}/${review.slug}`}
         />
         <LiveClock />

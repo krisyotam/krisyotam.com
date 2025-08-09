@@ -13,7 +13,8 @@ import type { ConspiracyMeta } from "@/types/conspiracies";
 const defaultConspiraciesPageData = {
   title: "Conspiracies",
   subtitle: "",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview: "Misc thoughts, proto-essays, reviews, musings, etc.",
   status: "In Progress" as const,
   confidence: "likely" as const,
@@ -50,7 +51,8 @@ export default function ConspiraciesClientPage({ conspiracies, initialCategory =
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,
+        start_date: categoryData.date || "Undefined",
+        end_date: new Date().toISOString().split('T')[0],
         preview: categoryData.preview,
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",

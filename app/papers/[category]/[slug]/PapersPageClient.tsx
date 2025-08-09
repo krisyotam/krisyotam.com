@@ -66,7 +66,8 @@ export default function PaperPageClient({ paperData: paperItem, allPapers, child
         <PageHeader
           title={paperItem.title}
           subtitle={paperItem.subtitle}
-          date={paperItem.date}
+          start_date={paperItem.start_date}
+          end_date={paperItem.end_date}
           backHref="/papers"
           backText="Papers"
           preview={paperItem.preview}
@@ -88,7 +89,7 @@ export default function PaperPageClient({ paperData: paperItem, allPapers, child
           <Citation 
             title={paperItem.title}
             slug={paperItem.slug}
-            date={paperItem.date}
+            date={(paperItem.end_date && paperItem.end_date.trim()) || paperItem.start_date}
             url={`https://krisyotam.com/papers/${slugifyCategory(paperItem.category)}/${paperItem.slug}`}
           />
           <LiveClock />
@@ -103,7 +104,8 @@ export default function PaperPageClient({ paperData: paperItem, allPapers, child
       <PageHeader
         title={paperItem.title}
         subtitle={paperItem.subtitle}
-        date={paperItem.date}
+        start_date={paperItem.start_date}
+        end_date={paperItem.end_date}
         backHref="/papers"
         backText="Papers"
         preview={paperItem.preview}
@@ -119,7 +121,7 @@ export default function PaperPageClient({ paperData: paperItem, allPapers, child
         <Citation 
           title={paperItem.title}
           slug={paperItem.slug}
-          date={paperItem.date}
+          date={(paperItem.end_date && paperItem.end_date.trim()) || paperItem.start_date}
           url={`https://krisyotam.com/papers/${slugifyCategory(paperItem.category)}/${paperItem.slug}`}
         />
         <LiveClock />

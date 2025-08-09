@@ -6,7 +6,7 @@ export async function GET() {
   try {
     // Read data from all three sources
     const papersPath = path.join(process.cwd(), 'data/papers/papers.json')
-    const blogPath = path.join(process.cwd(), 'data/blog/feed.json')
+    const blogPath = path.join(process.cwd(), 'data/blog/blog.json')
     const essaysPath = path.join(process.cwd(), 'data/essays/essays.json')
 
     const [papersFile, blogFile, essaysFile] = await Promise.all([

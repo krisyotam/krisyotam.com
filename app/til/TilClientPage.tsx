@@ -11,7 +11,7 @@ import Collapse from "@/components/posts/typography/collapse";
 const defaultTilPageData = {
   title: "Today I Learned",
   subtitle: "Daily Learning Summaries",
-  date: new Date().toISOString(),
+  start_date: new Date().toISOString(),
   preview: "A collection of short notes from my cross-disciplinary studies, shared as I learn in public.",
   status: "In Progress" as const,
   confidence: "certain" as const,
@@ -21,7 +21,8 @@ const defaultTilPageData = {
 interface TilEntry {
   title: string;
   preview: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   tags: string[];
   category: string;
   slug: string;

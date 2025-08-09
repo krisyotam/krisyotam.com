@@ -52,7 +52,11 @@ export default function ConspiraciesCategoryPage({ params }: PageProps) {
   }
   // Sort conspiracies by date (newest first) and ensure proper typing
   const conspiracies: ConspiracyMeta[] = [...conspiraciesData]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .sort((a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return new Date(bDate).getTime() - new Date(aDate).getTime();
+    })
     .map(conspiracy => ({
       ...conspiracy,
       status: conspiracy.status as any, // Type assertion for status

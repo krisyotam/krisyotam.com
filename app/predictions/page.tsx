@@ -13,7 +13,7 @@ export default function PredictionsPage() {
         <PageHeader
           title="Predictions"
           preview="This page contains my personal predictions about various topics, tracked over time to improve forecasting accuracy."
-          date="2025-01-15"
+          start_date="2025-01-15"
           status="In Progress"
           confidence="likely"
           importance={7}

@@ -25,7 +25,8 @@ export default function MangaListsClientPage() {
     <div className="min-h-screen dark:bg-[#121212]">        <div className="max-w-6xl mx-auto p-6">
         <PageHeader
           title="Manga Lists"
-          date="2025-01-01"
+          start_date="2025-01-01"
+          end_date={new Date().toISOString().split('T')[0]}
           preview="curated collections and themed manga lists"
           status="In Progress"
           confidence="certain"

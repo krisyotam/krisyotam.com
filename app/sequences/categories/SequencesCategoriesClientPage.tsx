@@ -31,7 +31,8 @@ export default function SequencesCategoriesClientPage({ categories }: SequencesC
       <PageHeader
         title="Sequence Categories"
         subtitle="Browse all categories of sequences"
-        date={new Date().toISOString()}
+        start_date="2025-01-01"
+        end_date={new Date().toISOString().split('T')[0]}
         preview="Find sequences organized by subject matter"
         status="In Progress"
         confidence="certain"

@@ -16,7 +16,8 @@ export default async function SeriesPage() {
             <PageHeader
               title="Series"
               subtitle="Content organized in sequential collections"
-              date={currentDate}
+              start_date={currentDate}
+              end_date=""
               preview="This directory helps you navigate content organized in thematic series."
               status="In Progress"
               confidence="certain"
@@ -36,7 +37,8 @@ export default async function SeriesPage() {
           <PageHeader
             title="Series"
             subtitle="Content organized in sequential collections"
-            date={currentDate}
+            start_date={currentDate}
+            end_date=""
             preview="Browse articles and essays organized in thematic series, designed to be read in order."
             status="Finished"
             confidence="certain"

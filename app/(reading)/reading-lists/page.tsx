@@ -21,7 +21,8 @@ export default function ReadingListsPage() {
   const readingListsPageData = {
     title: "Reading Lists",
     subtitle: "",
-    date: new Date().toISOString(),
+    start_date: new Date().toISOString(),
+    end_date: "",
     preview: "Curated reading lists and book collections",
     status: "In Progress" as const,
     confidence: "certain" as const,
@@ -33,7 +34,8 @@ export default function ReadingListsPage() {
       <PageHeader
         title={readingListsPageData.title}
         subtitle={readingListsPageData.subtitle}
-        date={readingListsPageData.date}
+        start_date={readingListsPageData.start_date}
+        end_date={readingListsPageData.end_date}
         preview={readingListsPageData.preview}
         status={readingListsPageData.status}
         confidence={readingListsPageData.confidence}

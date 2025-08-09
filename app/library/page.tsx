@@ -13,7 +13,8 @@ export default function LibraryPage() {
       <PageHeader
         title="Library"
         subtitle="Books, Notes, and Literary Collections"
-        date={new Date().toISOString()}
+        start_date="2025-01-01"
+        end_date={new Date().toISOString().split('T')[0]}
         preview="a catalog of my personal physical library"
         status="In Progress"
         confidence="certain"

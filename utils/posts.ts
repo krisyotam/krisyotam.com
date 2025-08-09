@@ -5,7 +5,8 @@ export interface Post {
   title: string
   subtitle?: string
   preview: string
-  date: string
+  start_date: string
+  end_date?: string
   tags: string[]
   category: string
   slug: string
@@ -105,7 +106,11 @@ export async function getAllPosts(): Promise<Post[]> {
   const blogPosts = (blogData || []).map(post => ({ ...post, path: 'blog' }))
 
   const sortedPosts = [...essays, ...blogPosts].sort(
-    (a, b) => b.date.localeCompare(a.date) // Directly compare YYYY-MM-DD strings
+    (a, b) => {
+      const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+      const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+      return dateB.localeCompare(dateA); // Directly compare YYYY-MM-DD strings
+    }
   )
 
   if (process.env.NODE_ENV === 'production') {

@@ -1,11 +1,12 @@
 "use client"
 
-import poemsData from "@/data/verse/poems.json"
+import poemsData from "@/data/verse/verse.json"
 import categoriesData from "@/data/verse/categories.json"
 import type { Poem } from "@/utils/poems"
 import { PageHeader } from "@/components/page-header"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { formatDate, formatDateRange } from "@/utils/date-formatter"
 
 interface VerseType {
   slug: string;
@@ -47,7 +48,7 @@ export default function VerseTypeClient({ params }: { params: { type: string } }
 
   function getPoemUrl(poem: Poem) {
     const typeSlug = slugifyType(poem.type);
-    return `/verse/${encodeURIComponent(typeSlug)}/${String(poem.year)}/${encodeURIComponent(poem.slug)}`
+    return `/verse/${encodeURIComponent(typeSlug)}/${encodeURIComponent(poem.slug)}`
   }
 
   function handleTypeChange(selectedValue: string) {
@@ -122,7 +123,12 @@ export default function VerseTypeClient({ params }: { params: { type: string } }
                   >
                     <td className="py-2 pr-4 px-3">{poem.title}</td>
                     <td className="py-2 pr-4 px-3">{poem.type}</td>
-                    <td className="py-2 pr-4 px-3">{poem.year}</td>
+                    <td className="py-2 pr-4 px-3">
+                      {poem.end_date && poem.end_date.trim() 
+                        ? formatDate(poem.end_date)
+                        : formatDate(poem.start_date)
+                      }
+                    </td>
                   </tr>
                 ))}
               </tbody>

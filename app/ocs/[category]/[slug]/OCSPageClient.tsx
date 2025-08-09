@@ -13,7 +13,8 @@ interface OCSMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -38,7 +39,11 @@ export default function OCSPageClient({ character, allCharacters, children, head
 
   /* prev / next */
   const sorted = [...allCharacters].sort(
-    (a, b) => +new Date(b.date) - +new Date(a.date)
+    (a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return +new Date(bDate) - +new Date(aDate);
+    }
   );
   const idx = sorted.findIndex(n => n.slug === character.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
@@ -56,7 +61,8 @@ export default function OCSPageClient({ character, allCharacters, children, head
           className=""     
           title={character.title}
           subtitle={character.subtitle}
-          date={character.date}
+          start_date={character.start_date}
+          end_date={character.end_date}
           tags={character.tags}
           category={character.category}
           backHref="/ocs"
@@ -77,7 +83,8 @@ export default function OCSPageClient({ character, allCharacters, children, head
         <Citation 
           title={character.title}
           slug={character.slug}
-          date={character.date}
+          start_date={character.start_date}
+          end_date={character.end_date}
           url={`https://krisyotam.com/ocs/${slugifyCategory(character.category)}/${character.slug}`}
         />
         <LiveClock />
@@ -94,7 +101,8 @@ export default function OCSPageClient({ character, allCharacters, children, head
         className=""     
         title={character.title}
         subtitle={character.subtitle}
-        date={character.date}
+        start_date={character.start_date}
+        end_date={character.end_date}
         tags={character.tags}
         category={character.category}
         backHref="/ocs"
@@ -112,7 +120,8 @@ export default function OCSPageClient({ character, allCharacters, children, head
         <Citation 
           title={character.title}
           slug={character.slug}
-          date={character.date}
+          start_date={character.start_date}
+          end_date={character.end_date}
           url={`https://krisyotam.com/ocs/${slugifyCategory(character.category)}/${character.slug}`}
         />
         <LiveClock />

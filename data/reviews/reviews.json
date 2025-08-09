@@ -1,7 +1,8 @@
 [
 {
 "title": "Mermaids",
-"date": "2025-06-01",
+"start_date": "2025-06-01",
+"end_date": "",
 "slug": "mermaids",
 "tags": ["Film", "Review", "Drama", "Winona Ryder", "1990s Film"],
 "category": "film",
@@ -14,7 +15,8 @@
 },
 {
 "title": "Girl, Interrupted",
-"date": "2025-06-02",
+"start_date": "2025-06-02",
+"end_date": "",
 "slug": "girl-interrupted",
 "tags": ["Film", "Review", "Psychological Drama", "Winona Ryder", "1990s Film"],
 "category": "film",
@@ -27,7 +29,8 @@
 },
 {
 "title": "Heathers",
-"date": "2025-06-02",
+"start_date": "2025-06-02",
+"end_date": "",
 "slug": "heathers",
 "tags": ["Film", "Review", "Dark Comedy", "Winona Ryder", "1980s Film", "Cult Classic"],
 "category": "film",
@@ -41,7 +44,8 @@
 {
 "title": "Wistoria Wand & Sword",
 "preview": "A critical deep dive into Wistoria's blend of spellcasting mechanics and swordplay, evaluating its narrative, gameplay balance, and world-building.",
-"date": "2025-04-22",
+"start_date": "2025-04-22",
+"end_date": "",
 "tags": ["Fantasy", "Anime", "Action", "Wistoria Wand & Sword"],
 "category": "anime",
 "slug": "wistoria-wand-and-sword",
@@ -54,7 +58,8 @@
 {
 "title": "Neon Genesis Evangelion",
 "preview": "An in-depth exploration of Neon Genesis Evangelion, examining its psychological themes, visual storytelling, and cultural impact.",
-"date": "2025-05-05",
+"start_date": "2025-05-05",
+"end_date": "",
 "tags": ["Anime", "Analysis", "Mecha", "Psychological", "Hideaki Anno"],
 "category": "anime",
 "slug": "the-end-of-evangelion",
@@ -67,7 +72,8 @@
 {
 "title": "The Village Booksmith",
 "preview": "An in-depth review of baraboo wisconsin's the village booksmith",
-"date": "2025-06-20",
+"start_date": "2025-06-20",
+"end_date": "",
 "tags": ["Vintage", "Book Store", "Wisconsin", "Psychological", "Hideaki Anno"],
 "category": "bookstores",
 "slug": "the-village-booksmith",
@@ -80,7 +86,8 @@
 {
 "title": "Frugal Bookstore",
 "preview": "An in-depth review of frugal bookstore",
-"date": "2025-06-21",
+"start_date": "2025-06-21",
+"end_date": "",
 "tags": ["Vintage", "Book Store", "Illinois", "Frugal", "Hideaki Anno"],
 "category": "bookstores",
 "slug": "frugal-bookstore",
@@ -93,7 +100,8 @@
 {
 "title": "Pride and Prejudice",
 "preview": "A review of Jane Austen’s classic novel about wit, romance, and social class.",
-"date": "2025-06-21",
+"start_date": "2025-06-21",
+"end_date": "",
 "tags": ["Jane Austen", "Classic Literature", "British Novel", "Romance", "Social Satire"],
 "category": "book",
 "slug": "pride-and-prejudice",
@@ -106,7 +114,8 @@
 {
 "title": "Casablanca",
 "preview": "A review of the 1942 classic romantic drama starring Humphrey Bogart and Ingrid Bergman.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Film", "Review", "Classic Film", "Romance", "Drama", "1940s Film"],
 "category": "film",
 "slug": "casablanca",
@@ -119,7 +128,8 @@
 {
 "title": "Citizen Kane",
 "preview": "A review of Orson Welles' 1941 masterpiece exploring power, ambition, and the American Dream.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Film", "Review", "Classic Film", "Orson Welles", "Drama", "1940s Film"],
 "category": "film",
 "slug": "citizen-kane",
@@ -132,7 +142,8 @@
 {
 "title": "Jeanne Dielman, 23, quai du Commerce, 1080 Bruxelles",
 "preview": "A review of Chantal Akerman's groundbreaking 1975 film about domestic routine and female experience.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Film", "Review", "Art Film", "Chantal Akerman", "Experimental", "1970s Film"],
 "category": "film",
 "slug": "jeanne-dielman",
@@ -145,7 +156,8 @@
 {
 "title": "Elfen Lied",
 "preview": "A review of the controversial psychological horror anime exploring themes of humanity and violence.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Anime", "Review", "Psychological Horror", "Drama", "Violence"],
 "category": "anime",
 "slug": "elfen-lied",
@@ -158,7 +170,8 @@
 {
 "title": "Ergo Proxy",
 "preview": "A review of the cyberpunk psychological anime exploring identity and consciousness in a post-apocalyptic world.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Anime", "Review", "Cyberpunk", "Psychological", "Post-Apocalyptic"],
 "category": "anime",
 "slug": "ergo-proxy",
@@ -171,7 +184,8 @@
 {
 "title": "Haibane Renmei",
 "preview": "A review of the contemplative anime about winged beings in a mysterious walled town.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Anime", "Review", "Fantasy", "Drama", "Philosophical"],
 "category": "anime",
 "slug": "haibane-renmei",
@@ -184,7 +198,8 @@
 {
 "title": "Koukaku Kidoutai (Ghost in the Shell)",
 "preview": "A review of Mamoru Oshii's cyberpunk masterpiece exploring identity in a digital age.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Anime", "Review", "Cyberpunk", "Science Fiction", "Mamoru Oshii"],
 "category": "anime",
 "slug": "koukaku-kidoutai",
@@ -197,7 +212,8 @@
 {
 "title": "Frieren: Beyond Journey's End",
 "preview": "A review of the fantasy anime about an elf mage reflecting on time, mortality, and relationships.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Anime", "Review", "Fantasy", "Drama", "Philosophy"],
 "category": "anime",
 "slug": "sousou-no-frieren",
@@ -210,7 +226,8 @@
 {
 "title": "That Time I Got Reincarnated as a Slime",
 "preview": "A review of the isekai anime about a businessman reincarnated as a slime in a fantasy world.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Anime", "Review", "Isekai", "Fantasy", "Comedy"],
 "category": "anime",
 "slug": "tensei-shitara-slime-datta-ken",
@@ -223,7 +240,8 @@
 {
 "title": "Texhnolyze",
 "preview": "A review of the dark cyberpunk anime exploring themes of decay, technology, and human nature.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Anime", "Review", "Cyberpunk", "Dark", "Psychological"],
 "category": "anime",
 "slug": "texhnolyze",
@@ -236,7 +254,8 @@
 {
 "title": "Aku no Hana (Flowers of Evil)",
 "preview": "A review of Naoshi Urasawa's psychological manga exploring adolescent alienation and moral corruption.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Manga", "Review", "Psychological", "Drama", "Coming-of-Age"],
 "category": "manga",
 "slug": "aku-no-hana",
@@ -249,7 +268,8 @@
 {
 "title": "Chi no Wadachi (Blood on the Tracks)",
 "preview": "A review of Shuzo Oshimi's disturbing psychological manga about a mother-son relationship.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Manga", "Review", "Psychological Horror", "Drama", "Family"],
 "category": "manga",
 "slug": "chi-no-wadachi",
@@ -262,7 +282,8 @@
 {
 "title": "Koukaku Kidoutai (Ghost in the Shell) (Manga)",
 "preview": "A review of Masamune Shirow's cyberpunk manga that redefined science fiction comics.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Manga", "Review", "Cyberpunk", "Science Fiction", "Masamune Shirow"],
 "category": "manga",
 "slug": "koukaku-kidoutai",
@@ -275,7 +296,8 @@
 {
 "title": "Tomie",
 "preview": "A review of Junji Ito's horror manga about a beautiful girl who drives men to madness.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Manga", "Review", "Horror", "Junji Ito", "Supernatural"],
 "category": "manga",
 "slug": "tomie",
@@ -288,7 +310,8 @@
 {
 "title": "Bridgerton",
 "preview": "A review of the Netflix period drama series exploring romance and society in Regency England.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Television", "Review", "Period Drama", "Romance", "Netflix"],
 "category": "television",
 "slug": "bridgerton",
@@ -301,7 +324,8 @@
 {
 "title": "Charlie's Angels",
 "preview": "A review of the action television series about three female private investigators.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Television", "Review", "Action", "Crime", "1970s TV"],
 "category": "television",
 "slug": "charlies-angels",
@@ -314,7 +338,8 @@
 {
 "title": "The Vampire Diaries",
 "preview": "A review of the supernatural drama series about vampires, werewolves, and witches in Mystic Falls.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Television", "Review", "Supernatural", "Drama", "Romance"],
 "category": "television",
 "slug": "vampire-diaries",
@@ -327,7 +352,8 @@
 {
 "title": "Gossip Girl",
 "preview": "A review of the teen drama series about privileged teenagers on Manhattan's Upper East Side.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Television", "Review", "Teen Drama", "Romance", "New York"],
 "category": "television",
 "slug": "gossip-girl",
@@ -340,7 +366,8 @@
 {
 "title": "Gilmore Girls",
 "preview": "A review of the heartwarming series about a mother-daughter relationship in a small Connecticut town.",
-"date": "2025-07-02",
+"start_date": "2025-07-02",
+"end_date": "",
 "tags": ["Television", "Review", "Family Drama", "Comedy", "Small Town"],
 "category": "television",
 "slug": "gilmore-girls",
@@ -353,7 +380,8 @@
 {
 "title": "Legend of the Galactic Heroes",
 "preview": "A review of the epic space opera series that explores the conflict between the Galactic Empire and the Free Planets Alliance.",
-"date": "2025-07-04",
+"start_date": "2025-07-04",
+"end_date": "",
 "tags": ["Anime", "Review", "Science Fiction", "Space Opera", "Political Drama"],
 "category": "anime",
 "slug": "logh",
@@ -366,7 +394,8 @@
 {
 "title": "Breakfast at Tiffany's",
 "preview": "A review of the classic romantic comedy film about a young woman in New York City who becomes involved with a struggling writer.",
-"date": "2025-07-12",
+"start_date": "2025-07-12",
+"end_date": "",
 "tags": ["Film", "Review", "Romantic Comedy", "Classic"],
 "category": "film",
 "slug": "breakfast-at-tiffanys",
@@ -379,7 +408,8 @@
 {
 "title": "Mulholland Dr.",
 "preview": "A review of the cult classic surrealist neo-noir mystery",
-"date": "2025-07-22",
+"start_date": "2025-07-22",
+"end_date": "",
 "tags": ["Naomi Watts", "Laura Harring", "David Lynch", "English", "USA", "Surrealism", "Neo-noir", "Peter Deming"],
 "category": "film",
 "slug": "mulholland-dr",
@@ -392,7 +422,8 @@
 {
 "title": "Diary of a Lost Girl",
 "preview": "A review of the haunting beauty and social critique of this silent Weimar-era masterpiece, starring Louise Brooks at her most enigmatic.",
-"date": "2025-08-05",
+"start_date": "2025-08-05",
+"end_date": "",
 "tags": ["G. W. Pabst", "Louise Brooks", "Margarete Bohme", "Fritz Arno Wagner", "Seep Allgeier"],
 "category": "film",
 "slug": "diary-of-a-lost-girl",

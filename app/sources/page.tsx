@@ -12,7 +12,8 @@ export default function SourcesPage() {
       <PageHeader
         title="Sources"
         subtitle="Messages and communications that have inspired content"
-        date="2025-03-30"
+        start_date="2025-01-01"
+        end_date={new Date().toISOString().split('T')[0]}
         preview="A collection of emails, messages, and other communications that have inspired content on this site."
         status={"In Progress" as const}
         confidence={"likely" as const}

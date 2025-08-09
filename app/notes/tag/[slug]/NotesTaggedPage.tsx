@@ -8,7 +8,8 @@ import { useRouter } from "next/navigation";
 
 interface Note {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -23,7 +24,8 @@ interface Note {
 interface TagHeaderData {
   title: string;
   subtitle: string;
-  date: string;
+  start_date: string;
+  end_date: string;
   preview: string;
   status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Active";
   confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
@@ -51,7 +53,7 @@ export default function NotesTaggedPage({ notes, tagData }: NotesTaggedPageProps
       note.category.toLowerCase().includes(q);
 
     return matchesSearch;
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }).sort((a, b) => new Date(b.end_date || b.start_date).getTime() - new Date(a.end_date || a.start_date).getTime());
 
   // Helper to build the correct route for a note
   function getNoteUrl(note: Note) {
@@ -70,7 +72,8 @@ export default function NotesTaggedPage({ notes, tagData }: NotesTaggedPageProps
         <PageHeader 
           title={tagData.title}
           subtitle={tagData.subtitle}
-          date={tagData.date}
+          start_date={tagData.start_date}
+          end_date={tagData.end_date}
           preview={tagData.preview}
           status={tagData.status}
           confidence={tagData.confidence}

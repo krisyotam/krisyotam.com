@@ -29,7 +29,11 @@ export function NewsTable({ news, searchQuery, activeCategory }: NewsTableProps)
     });
 
     // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    filtered.sort((a, b) => {
+      const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+      const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    });
     setFilteredNews(filtered);
   }, [news, searchQuery, activeCategory]);
 
@@ -85,7 +89,7 @@ export function NewsTable({ news, searchQuery, activeCategory }: NewsTableProps)
                   {formatCategoryDisplayName(article.category)}
                 </Link>
               </td>
-              <td className="py-2 px-3">{formatDate(article.date)}</td>
+              <td className="py-2 px-3">{formatDate((article.end_date && article.end_date.trim()) ? article.end_date : article.start_date)}</td>
             </tr>
           ))}
         </tbody>

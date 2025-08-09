@@ -13,7 +13,8 @@ import { PageDescription } from "@/components/posts/typography/page-description"
 const newsletterPageData = {
   title: "Newsletter",
   subtitle: "Regular Updates and Insights",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0],
   preview: "An archive of my newsletter issues, featuring updates, insights, and curated content on various topics.",
   status: "In Progress" as const,
   confidence: "certain" as const,
@@ -70,7 +71,8 @@ export default function NewsletterClientPage({ initialNewsletters }: NewsletterC
           <PageHeader
             title={newsletterPageData.title}
             subtitle={newsletterPageData.subtitle}
-            date={newsletterPageData.date}
+            start_date={newsletterPageData.start_date}
+            end_date={newsletterPageData.end_date}
             preview={newsletterPageData.preview}
             status={newsletterPageData.status}
             confidence={newsletterPageData.confidence}

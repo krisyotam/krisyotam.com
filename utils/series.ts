@@ -13,7 +13,8 @@ export interface SeriesData {
   title: string
   subtitle?: string
   preview?: string
-  date: string
+  start_date: string
+  end_date?: string
   "show-status": "active" | "hidden"
   status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
   confidence?: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"

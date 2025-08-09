@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 
 interface Note {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -28,12 +29,19 @@ export function NotesTable({ notes, searchQuery, activeCategory }: NotesTablePro
 
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
+    if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long", 
       day: "numeric"
     });
+  }
+
+  // Helper to get the display date (end_date if available, otherwise start_date)
+  function getDisplayDate(note: Note): string {
+    const dateToUse = (note.end_date && note.end_date.trim()) || note.start_date;
+    return formatDate(dateToUse);
   }
 
   // Helper function to format category display name
@@ -71,7 +79,7 @@ export function NotesTable({ notes, searchQuery, activeCategory }: NotesTablePro
               onClick={() => router.push(getNoteUrl(note))}
             >              <td className="py-2 px-3 font-medium">{note.title}</td>
               <td className="py-2 px-3">{formatCategoryDisplayName(note.category)}</td>
-              <td className="py-2 px-3">{formatDate(note.date)}</td>
+              <td className="py-2 px-3">{getDisplayDate(note)}</td>
             </tr>
           ))}
         </tbody>

@@ -12,7 +12,8 @@ import { useRouter } from "next/navigation";
 const defaultQuestionsPageData = {
   title: "Questions",
   subtitle: "",
-  date: "2025-06-23",
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0],
   preview: "Important open questions and problems that fascinate me, organized by category and tracked for progress.",
   status: "In Progress" as const,
   confidence: "likely" as const,
@@ -143,7 +144,8 @@ export function QuestionsClientPage({
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,
+        start_date: (categoryData as any).start_date || categoryData.date || new Date().toISOString().split('T')[0],
+        end_date: (categoryData as any).end_date,
         preview: categoryData.preview,
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
@@ -164,7 +166,8 @@ export function QuestionsClientPage({
         <PageHeader
           title={headerData.title}
           preview={headerData.preview}
-          date={headerData.date}
+          start_date={headerData.start_date}
+          end_date={headerData.end_date}
           status={headerData.status}
           confidence={headerData.confidence}
           importance={headerData.importance}

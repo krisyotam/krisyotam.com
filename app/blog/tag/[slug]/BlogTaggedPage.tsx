@@ -10,7 +10,8 @@ import type { BlogMeta } from "@/types/blog";
 interface TagHeaderData {
   title: string;
   subtitle: string;
-  date: string;
+  start_date: string;
+  end_date: string;
   preview: string;
   status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned" | "Active";
   confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
@@ -38,7 +39,11 @@ export default function BlogTaggedPage({ posts, tagData }: BlogTaggedPageProps) 
       post.category.toLowerCase().includes(q);
 
     return matchesSearch;
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }).sort((a, b) => {
+    const aDate = a.end_date || a.start_date;
+    const bDate = b.end_date || b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  });
 
   return (
     <>
@@ -52,7 +57,8 @@ export default function BlogTaggedPage({ posts, tagData }: BlogTaggedPageProps) 
         <PageHeader 
           title={tagData.title}
           subtitle={tagData.subtitle}
-          date={tagData.date}
+          start_date={tagData.start_date}
+          end_date={tagData.end_date}
           preview={tagData.preview}
           status={tagData.status}
           confidence={tagData.confidence}

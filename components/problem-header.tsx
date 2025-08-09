@@ -7,7 +7,9 @@ import { cn } from "@/lib/utils"
 interface ProblemHeaderProps {
   title: string
   subtitle?: string
-  date: string
+  date?: string
+  start_date: string
+  end_date?: string
   tags?: string[]
   category?: string
   preview?: string
@@ -136,6 +138,8 @@ export function ProblemHeader({
   title,
   subtitle,
   date,
+  start_date,
+  end_date,
   tags,
   category,
   preview,
@@ -182,10 +186,10 @@ export function ProblemHeader({
         {/* Date above other metadata */}
         <div className="text-center mb-4">
           <time
-            dateTime={date}
+            dateTime={end_date || start_date || date}
             className="font-mono text-sm text-muted-foreground"
           >
-            {formatDate(date)}
+            {formatDate((end_date || start_date || date) as string)}
           </time>
         </div>
 

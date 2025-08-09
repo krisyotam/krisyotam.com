@@ -29,7 +29,11 @@ export function PapersTable({ papers, searchQuery, activeCategory }: PapersTable
     });
 
     // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    filtered.sort((a, b) => {
+      const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+      const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    });
     setFilteredPapers(filtered);
   }, [papers, searchQuery, activeCategory]);
 
@@ -77,7 +81,7 @@ export function PapersTable({ papers, searchQuery, activeCategory }: PapersTable
                   {paper.category}
                 </Link>
               </td>
-              <td className="py-2 px-3">{formatDate(paper.date)}</td>
+              <td className="py-2 px-3">{formatDate((paper.end_date && paper.end_date.trim()) ? paper.end_date : paper.start_date)}</td>
             </tr>
           ))}
         </tbody>

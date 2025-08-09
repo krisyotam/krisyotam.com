@@ -36,7 +36,8 @@ export async function GET(request: NextRequest) {
     const description = post.preview || "Thoughts on math, poetry, and more.";
     
     // For blog post URL construction, extract year from date
-    const year = new Date(post.date).getFullYear();
+    const displayDate = post.end_date || post.start_date;
+    const year = new Date(displayDate).getFullYear();
     const url = `https://krisyotam.com/blog/${year}/${slug}`;
     
     // Generate sample HTML with the OG tags

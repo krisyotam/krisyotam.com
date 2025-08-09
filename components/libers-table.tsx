@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 
 interface Liber {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -39,18 +40,29 @@ export function LibersTable({ libers, searchQuery, activeCategory }: LibersTable
     });
 
     // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    filtered.sort((a, b) => {
+      const dateA = (a.end_date && a.end_date.trim()) || a.start_date || '';
+      const dateB = (b.end_date && b.end_date.trim()) || b.start_date || '';
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    });
     setFilteredLibers(filtered);
   }, [libers, searchQuery, activeCategory]);
 
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
+    if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric"
     });
+  }
+  
+  // Helper to get the display date (end_date if available, otherwise start_date)
+  function getDisplayDate(liber: Liber): string {
+    const dateToUse = (liber.end_date && liber.end_date.trim()) || liber.start_date;
+    return formatDate(dateToUse);
   }
   
   // Helper to build the correct route for a liber
@@ -92,7 +104,7 @@ export function LibersTable({ libers, searchQuery, activeCategory }: LibersTable
             >
               <td className="py-2 px-3 font-medium">{liber.title}</td>
               <td className="py-2 px-3">{formatCategoryDisplayName(liber.category)}</td>
-              <td className="py-2 px-3">{formatDate(liber.date)}</td>
+              <td className="py-2 px-3">{getDisplayDate(liber)}</td>
             </tr>
           ))}
         </tbody>

@@ -11,7 +11,9 @@ import { Table } from "@/components/shared/table"
 interface Post {
   title: string
   slug: string
-  date: string
+  start_date: string
+  end_date?: string
+  date?: string // backward compatibility
   category?: string
 }
 
@@ -60,15 +62,18 @@ export function CategoryClient({ posts, categoryData, categoryName, slug }: Cate
       header: "Date",
       key: "date",
       align: "right" as const,
-      render: (post: Post) => (
-        <span className="text-muted-foreground">
-          {new Date(post.date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </span>
-      )
+      render: (post: Post) => {
+        const displayDate = post.end_date || post.start_date || post.date;
+        return displayDate ? (
+          <span className="text-muted-foreground">
+            {new Date(displayDate).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </span>
+        ) : null;
+      }
     }
   ]
 

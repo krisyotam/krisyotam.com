@@ -29,7 +29,11 @@ export function ReportsTable({ notes, searchQuery, activeCategory }: ReportsTabl
     });
 
     // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    filtered.sort((a, b) => {
+      const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+      const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    });
     setFilteredNotes(filtered);
   }, [notes, searchQuery, activeCategory]);
 
@@ -44,7 +48,8 @@ export function ReportsTable({ notes, searchQuery, activeCategory }: ReportsTabl
   }
   // Helper to build the correct route for a report
   function getReportUrl(note: Post) {
-    const year = new Date(note.date).getFullYear();
+    const displayDate = (note.end_date && note.end_date.trim()) ? note.end_date : note.start_date;
+    const year = new Date(displayDate).getFullYear();
     return `/reports/${year}/${note.slug}`;
   }
 
@@ -73,7 +78,7 @@ export function ReportsTable({ notes, searchQuery, activeCategory }: ReportsTabl
             >
               <td className="py-2 px-3 font-medium">{note.title}</td>
               <td className="py-2 px-3">{note.category}</td>
-              <td className="py-2 px-3">{formatDate(note.date)}</td>
+              <td className="py-2 px-3">{formatDate((note.end_date && note.end_date.trim()) ? note.end_date : note.start_date)}</td>
             </tr>
           ))}
         </tbody>

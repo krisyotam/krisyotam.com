@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import lectureNotesData from "@/data/lecture-notes.json"
+import lectureNotesData from "@/data/lecture-notes/lecture-notes.json"
 import { PageHeader } from "@/components/page-header"
 import { useRouter } from "next/navigation"
 import {
@@ -25,7 +25,8 @@ import type { LectureNote } from "@/types/lecture-note"
 const lectureNotesPageData = {
   title: "Lecture Notes",
   subtitle: "Academic Course Materials",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview:
     "a collection of my academic lecture notes and course materials",
   status: "In Progress" as const,
@@ -112,7 +113,8 @@ export function LectureNotesClient({ initialCategory = "All" }: { initialCategor
         <PageHeader
           title={lectureNotesPageData.title}
           subtitle={lectureNotesPageData.subtitle}
-          date={lectureNotesPageData.date}
+          start_date={lectureNotesPageData.start_date}
+          end_date={lectureNotesPageData.end_date}
           preview={lectureNotesPageData.preview}
           status={lectureNotesPageData.status}
           confidence={lectureNotesPageData.confidence}

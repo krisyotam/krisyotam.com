@@ -13,7 +13,9 @@ interface ConspiracyMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
+  date?: string; // fallback for compatibility
   slug: string;
   tags: string[];
   category: string;
@@ -37,7 +39,7 @@ export default function ConspiraciesPageClient({ conspiracy, allConspiracies, ch
 
   /* prev / next */
   const sorted = [...allConspiracies].sort(
-    (a, b) => +new Date(b.date) - +new Date(a.date)
+    (a, b) => +new Date(b.start_date || b.date || '') - +new Date(a.start_date || a.date || '')
   );
   const idx  = sorted.findIndex(n => n.slug === conspiracy.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
@@ -55,7 +57,8 @@ export default function ConspiraciesPageClient({ conspiracy, allConspiracies, ch
           className=""     
           title={conspiracy.title}
           subtitle={conspiracy.subtitle}
-          date={conspiracy.date}
+          start_date={conspiracy.start_date || (conspiracy as any).date || "2025-01-01"}
+          end_date={conspiracy.end_date}
           tags={conspiracy.tags}
           category={conspiracy.category}
           backHref="/conspiracies"
@@ -76,7 +79,8 @@ export default function ConspiraciesPageClient({ conspiracy, allConspiracies, ch
         <Citation 
           title={conspiracy.title}
           slug={conspiracy.slug}
-          date={conspiracy.date}
+          start_date={conspiracy.start_date || conspiracy.date}
+          end_date={conspiracy.end_date}
           url={`https://krisyotam.com/conspiracies/${slugifyCategory(conspiracy.category)}/${conspiracy.slug}`}
         />
         <LiveClock />
@@ -93,7 +97,8 @@ export default function ConspiraciesPageClient({ conspiracy, allConspiracies, ch
         className=""     
         title={conspiracy.title}
         subtitle={conspiracy.subtitle}
-        date={conspiracy.date}
+        start_date={conspiracy.start_date || (conspiracy as any).date || "2025-01-01"}
+        end_date={conspiracy.end_date}
         tags={conspiracy.tags}
         category={conspiracy.category}
         backHref="/conspiracies"
@@ -111,7 +116,8 @@ export default function ConspiraciesPageClient({ conspiracy, allConspiracies, ch
         <Citation 
           title={conspiracy.title}
           slug={conspiracy.slug}
-          date={conspiracy.date}
+          start_date={conspiracy.start_date || conspiracy.date}
+          end_date={conspiracy.end_date}
           url={`https://krisyotam.com/conspiracies/${slugifyCategory(conspiracy.category)}/${conspiracy.slug}`}
         />
         <LiveClock />

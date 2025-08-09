@@ -12,7 +12,8 @@ import categoriesData from "@/data/notes/categories.json";
 const defaultNotesPageData = {
   title: "Notes",
   subtitle: "",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview: "Misc thoughts, proto-essays, reviews, musings, etc.",
   status: "In Progress" as const,
   confidence: "likely" as const,
@@ -22,7 +23,8 @@ const defaultNotesPageData = {
 /* ---------- updated type ---------- */
 interface Note {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -65,7 +67,8 @@ export default function NotesClientPage({ notes, initialCategory = "all" }: Note
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,
+        start_date: categoryData.date || "Undefined",
+        end_date: new Date().toISOString().split('T')[0],
         preview: categoryData.preview,
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
@@ -115,7 +118,11 @@ export default function NotesClientPage({ notes, initialCategory = "all" }: Note
 
     const matchesCategory = activeCategory === "all" || note.category === activeCategory;
     return matchesSearch && matchesCategory;
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }).sort((a, b) => {
+    const aDate = (a.end_date?.trim()) ? a.end_date : a.start_date;
+    const bDate = (b.end_date?.trim()) ? b.end_date : b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  });
 
   // Helper to build the correct route for a note
   function getNoteUrl(note: Note) {
@@ -162,7 +169,7 @@ export default function NotesClientPage({ notes, initialCategory = "all" }: Note
             
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>{new Date(note.date).getFullYear()}</span>
+              <span>{new Date(note.end_date || note.start_date).getFullYear()}</span>
             </div>
           </div>
         </div>

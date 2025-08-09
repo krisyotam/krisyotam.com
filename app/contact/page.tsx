@@ -19,7 +19,8 @@ const ContactFormWithNoSSR = dynamic(() => import('@/components/ContactForm'), {
 // Contact page metadata
 const contactPageData = {
   title: "Contact",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0],
   preview: "Various ways to contact me, including email, PGP encryption, and a contact form.",
   status: "Finished" as const,
   confidence: "certain" as const,
@@ -33,7 +34,8 @@ export default function ContactPage() {
         {/* Add the PageHeader component */}
         <PageHeader
           title={contactPageData.title}
-          date={contactPageData.date}
+          start_date={contactPageData.start_date}
+          end_date={contactPageData.end_date}
           preview={contactPageData.preview}
           status={contactPageData.status}
           confidence={contactPageData.confidence}

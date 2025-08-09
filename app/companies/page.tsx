@@ -11,7 +11,8 @@ export default function CompaniesPage() {
       <PageHeader
         title="Companies"
         subtitle="Startup Performance Tracking"
-        date={new Date().toISOString()}
+        start_date="2025-01-01"
+        end_date={new Date().toISOString().split('T')[0]}
         preview="My collection of indie companies and startups, tracking their performance, growth metrics, and business developments over time."
         status="In Progress"
         confidence="likely"

@@ -35,13 +35,16 @@ export function BlogTable({ notes, searchQuery, activeCategory }: BlogTableProps
     // Sort by date descending (newest first)
     filtered.sort((a, b) => {
       // Compare dates directly as strings in YYYY-MM-DD format (which sorts correctly)
-      return b.date.localeCompare(a.date);
+      const dateA = (a.end_date && a.end_date.trim()) || a.start_date || '';
+      const dateB = (b.end_date && b.end_date.trim()) || b.start_date || '';
+      return dateB.localeCompare(dateA);
     });
     setFilteredNotes(filtered);
   }, [notes, searchQuery, activeCategory]);
 
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
+    if (!dateString) return '';
     // Parse the date parts from the string to avoid timezone issues
     const [year, month, day] = dateString.split('-').map(num => parseInt(num, 10));
     const date = new Date(year, month - 1, day);
@@ -52,6 +55,12 @@ export function BlogTable({ notes, searchQuery, activeCategory }: BlogTableProps
       day: "numeric",
       timeZone: 'UTC' // Use UTC to preserve the exact date
     });
+  }
+
+  // Helper to get the display date (end_date if available, otherwise start_date)
+  function getDisplayDate(note: BlogMeta): string {
+    const dateToUse = (note.end_date && note.end_date.trim()) || note.start_date;
+    return formatDate(dateToUse);
   }
 
   // Helper to build the correct route for a blog post
@@ -101,7 +110,7 @@ export function BlogTable({ notes, searchQuery, activeCategory }: BlogTableProps
                   {formatCategoryDisplayName(note.category)}
                 </Link>
               </td>
-              <td className="py-2 px-3">{formatDate(note.date)}</td>
+              <td className="py-2 px-3">{getDisplayDate(note)}</td>
             </tr>
           ))}
         </tbody>

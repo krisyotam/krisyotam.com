@@ -1,8 +1,9 @@
 export interface Poem {
     id: string
     title: string
-    dateCreated: string
-    year: number
+    start_date: string
+    end_date?: string
+    dateCreated?: string // kept for compatibility
     type: string
     collection?: string
     description?: string

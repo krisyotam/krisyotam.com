@@ -67,12 +67,16 @@ export default async function LinkPage({ params }: LinkPageProps) {
 
   const link = {
     ...linkData,
+    start_date: linkData.date,
+    end_date: undefined,
     status: linkData.status as Status,
     confidence: linkData.confidence as Confidence
   };
 
   const links = linksData.map((link: LinkData) => ({
     ...link,
+    start_date: link.date,
+    end_date: undefined,
     status: link.status as Status,
     confidence: link.confidence as Confidence
   }));

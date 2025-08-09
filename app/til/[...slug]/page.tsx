@@ -14,7 +14,8 @@ type State = "active" | "hidden";
 
 interface TilData {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -73,13 +74,15 @@ export default async function TilPage({ params }: TilPageProps) {
 
   const til: TilMeta = {
     ...tilEntry,
+    start_date: (tilEntry as any).start_date || tilEntry.date || new Date().toISOString().split('T')[0],
     status: tilEntry.status as Status,
     confidence: tilEntry.confidence as Confidence,
     state: tilEntry.state as State
   };
 
-  const allTils: TilMeta[] = tilData.til.map((entry: TilData) => ({
+  const allTils: TilMeta[] = tilData.til.map((entry: any) => ({
     ...entry,
+    start_date: entry.start_date || entry.date || new Date().toISOString().split('T')[0],
     status: entry.status as Status,
     confidence: entry.confidence as Confidence,
     state: entry.state as State

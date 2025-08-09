@@ -1,7 +1,8 @@
 [
 {
 "title": "On Suicide",
-"date": "2025-04-26",
+"start_date": "2025-04-26",
+"end_date": "",
 "slug": "on-suicide",
 "cover_image": "",
 "tags": ["Suicide", "Philosophy", "Powerlessness"],
@@ -13,7 +14,8 @@
 },
 {
 "title": "Haiku Form Guide",
-"date": "2025-05-24",
+"start_date": "2025-05-24",
+"end_date": "",
 "slug": "haiku-form-guide",
 "cover_image": "",
 "tags": ["Haiku", "Verse", "Form Guide"],
@@ -25,7 +27,8 @@
 },
 {
 "title": "Open Questions",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "open-questions",
 "cover_image": "",
 "tags": ["Questions", "Curiosities", "Intellectual Puzzles"],
@@ -38,7 +41,8 @@
 },  
 {
 "title": "The Crooked Man",
-"date": "2025-07-09",
+"start_date": "2025-07-09",
+"end_date": "",
 "slug": "nursery-rhymes/the-crooked-man",
 "cover_image": "",
 "tags": ["Nursery Rhymes", "Verse", "Traditional", "English Folklore"],
@@ -51,7 +55,8 @@
 },
 {
 "title": "Research Ideas",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "research-ideas",
 "cover_image": "", 
 "tags": ["Research", "Wishlist", "Projects"],
@@ -64,7 +69,8 @@
 },
 {
 "title": "Startup Ideas",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "startup-ideas",
 "cover_image": "",
 "tags": ["Startups", "Ideas", "Entrepreneurship"],
@@ -77,7 +83,8 @@
 },
 {
 "title": "What I No Longer Track",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "what-i-no-longer-track",
 "cover_image": "",
 "tags": ["Tracking", "Systems", "Productivity"],
@@ -90,7 +97,8 @@
 },
 {
 "title": "Open Hypotheses",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "open-hypotheses",
 "cover_image": "",
 "tags": ["Mental Models", "Hypotheses", "Thinking"],
@@ -103,7 +111,8 @@
 },
 {
 "title": "Unwritten Prose",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "unwritten-prose",
 "cover_image": "",
 "tags": ["Writing", "Prose", "Ideas"],
@@ -116,7 +125,8 @@
 },
 {
 "title": "Words That Changed Me",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "words-that-changed-me",
 "cover_image": "",
 "tags": ["Quotes", "Wisdom", "Personal Growth"],
@@ -129,7 +139,8 @@
 },
 {
 "title": "Anomalies",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "anomalies",
 "cover_image": "",
 "tags": ["Anomalies", "Strangeness", "Observations"],
@@ -142,7 +153,8 @@
 },
 {
 "title": "Conspiracies",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "conspiracies",
 "cover_image": "",
 "tags": ["Conspiracies", "Theory", "Speculation"],
@@ -155,7 +167,8 @@
 },
 {
 "title": "Retired Beliefs",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "retired-beliefs",
 "cover_image": "",
 "tags": ["Beliefs", "Change", "Growth"],
@@ -168,7 +181,8 @@
 },
 {
 "title": "Personal Axioms",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "personal-axioms",
 "cover_image": "",
 "tags": ["Axioms", "Principles", "Reasoning"],
@@ -181,7 +195,8 @@
 },
 {
 "title": "Cursed Knowledge",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "cursed-knowledge",
 "cover_image": "",
 "tags": ["Cursed Knowledge", "Awareness", "Consequences"],
@@ -194,7 +209,8 @@
 },
 {
 "title": "Beliefs I Don't Have the Courage to Test",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "beliefs-i-dont-have-the-courage-to-test",
 "cover_image": "",
 "tags": ["Beliefs", "Courage", "Truth"],
@@ -207,7 +223,8 @@
 },
 {
 "title": "Platitudes That Need to Die",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "platitudes-that-need-to-die",
 "cover_image": "",
 "tags": ["Platitudes", "Language", "Critical Thinking"],
@@ -220,7 +237,8 @@
 },
 {
 "title": "Personal Questions",
-"date": "2025-05-30",
+"start_date": "2025-05-30",
+"end_date": "",
 "slug": "personal-questions",
 "cover_image": "",
 "tags": ["Philosophy", "Existence", "Self"],
@@ -233,7 +251,8 @@
 },
 {
 "title": "Uses This",
-"date": "2025-05-07",
+"start_date": "2025-05-07",
+"end_date": "",
 "tags": ["Hardware", "Software", "Setup", "Keyboard", "Mouse", "Development", "Productivity", "Tools"],
 "category": "On Myself",
 "slug": "uses-this",
@@ -246,7 +265,8 @@
 },
 {
 "title": "Luke Smith Library",
-"date": "2025-05-31",
+"start_date": "2025-05-31",
+"end_date": "",
 "slug": "luke-smith-library",
 "cover_image": "",
 "tags": ["Books", "Library", "Reading", "Reference"],
@@ -259,7 +279,8 @@
 },
 {
 "title": "About Kris",
-"date": "2025-06-03",
+"start_date": "2025-06-03",
+"end_date": "",
 "tags": ["Kris Yotam", "Psychological Profile", "Interests", "Background"],
 "category": "On Myself",
 "slug": "about-kris",
@@ -272,7 +293,8 @@
 },
 {
 "title": "Research Bounties on Full Texts",
-"date": "2025-06-03",
+"start_date": "2025-06-03",
+"end_date": "",
 "tags": ["Research", "Bounties", "Full Texts", "Academic Papers"],
 "category": "Bounties",
 "slug": "research-bounties-on-full-texts",
@@ -285,7 +307,8 @@
 },
 {
 "title": "News",
-"date": "2025-06-03",
+"start_date": "2025-06-03",
+"end_date": "",
 "tags": ["News", "Media", "Newspapers", "Journalism"],
 "category": "News",
 "slug": "news",
@@ -298,7 +321,8 @@
 },
 {
 "title": "About This Website",
-"date": "2025-06-03",
+"start_date": "2025-06-03",
+"end_date": "",
 "tags": ["Website", "krisyotam.com", "Essays", "Design", "Architecture"],
 "category": "Website",
 "slug": "about-this-website",
@@ -311,7 +335,8 @@
 },
 {
 "title": "Design Of This Website",
-"date": "2025-06-03",
+"start_date": "2025-06-03",
+"end_date": "",
 "tags": ["Website", "krisyotam.com", "Design", "Architecture"],
 "category": "Website",
 "slug": "design-of-this-website",
@@ -324,7 +349,8 @@
 },
 {
 "title": "Random Reading Lists",
-"date": "2025-06-04",
+"start_date": "2025-06-04",
+"end_date": "",
 "tags": ["Goodreads", "Storygraph", "Reading Lists"],
 "category": "Libraries",
 "slug": "random-reading-lists",
@@ -337,7 +363,8 @@
 },
 {
 "title": "Art I Love",
-"date": "2025-06-04",
+"start_date": "2025-06-04",
+"end_date": "",
 "tags": ["Art", "Aesthetics", "Favorites"],
 "category": "On Myself",
 "slug": "art-i-love",
@@ -350,7 +377,8 @@
 },
 {
 "title": "Hobbies",
-"date": "2025-06-04",
+"start_date": "2025-06-04",
+"end_date": "",
 "tags": ["Lifestyle", "Passions", "Interests"],
 "category": "Random",
 "slug": "hobbies",
@@ -363,7 +391,8 @@
 },
 {
 "title": "Watchlist",
-"date": "2025-06-04",
+"start_date": "2025-06-04",
+"end_date": "",
 "tags": ["Film", "Literature", "Verse", "Music"],
 "category": "On Myself",
 "slug": "watchlist",
@@ -376,7 +405,8 @@
 },
 {
 "title": "Basic Mathematics",
-"date": "2025-06-04",
+"start_date": "2025-06-04",
+"end_date": "",
 "tags": ["Algebra", "Calculus", "Analysis", "Pure Mathematics"],
 "category": "Stable Syllabi",
 "slug": "basic-mathematics",
@@ -389,7 +419,8 @@
 },
 {
 "title": "Jobs for krisyotam.com",
-"date": "2025-06-06",
+"start_date": "2025-06-06",
+"end_date": "",
 "tags": ["Hiring", "Editing", "Research", "Design", "Development"],
 "category": "Website",
 "slug": "jobs",
@@ -402,7 +433,8 @@
 },
 {
 "title": "Internet Search Methods",
-"date": "2025-06-06",
+"start_date": "2025-06-06",
+"end_date": "",
 "tags": ["Search", "Internet", "Research", "Methodology"],
 "category": "Research",
 "slug": "internet-search-methods",
@@ -415,7 +447,8 @@
 },
 {
 "title": "Modern Search Methods",
-"date": "2025-06-06",
+"start_date": "2025-06-06",
+"end_date": "",
 "tags": ["Search", "Research", "Methodology", "Digital"],
 "category": "Research",
 "slug": "modern-search-methods",
@@ -428,7 +461,8 @@
 },
 {
 "title": "Large File Storage",
-"date": "2025-06-06",
+"start_date": "2025-06-06",
+"end_date": "",
 "tags": ["Storage", "Infrastructure", "Data Management"],
 "category": "Website",
 "slug": "large-file-storage",
@@ -441,7 +475,8 @@
 },
 {
 "title": "On an Eclectic Personal Library",
-"date": "2025-06-06",
+"start_date": "2025-06-06",
+"end_date": "",
 "tags": ["Library", "Books", "Reading", "Personal Development"],
 "category": "Libraries",
 "slug": "on-a-eclectic-personal-library",
@@ -454,7 +489,8 @@
 },
 {
 "title": "On Haiku",
-"date": "2025-06-06",
+"start_date": "2025-06-06",
+"end_date": "",
 "tags": ["Poetry", "Haiku", "Japanese Literature", "Form"],
 "category": "Verse",
 "slug": "on-haiku",
@@ -467,7 +503,8 @@
 },
 {
 "title": "Gojo vs Sukuna: Powerscaled",
-"date": "2025-06-06",
+"start_date": "2025-06-06",
+"end_date": "",
 "tags": ["Anime", "Jujutsu Kaisen", "Analysis", "Power Scaling"],
 "category": "Powerscaling",
 "slug": "gojo-sukuna-powerscaled",
@@ -480,7 +517,8 @@
 },
 {
 "title": "On Limericks",
-"date": "2025-06-06",
+"start_date": "2025-06-06",
+"end_date": "",
 "tags": ["Poetry", "Limericks", "Form", "Verse"],
 "category": "Verse",
 "slug": "on-limericks",
@@ -493,7 +531,8 @@
 },
 {
 "title": "Miseducation of the Negro: Book Notes",
-"date": "2025-06-06",
+"start_date": "2025-06-06",
+"end_date": "",
 "tags": ["Education", "History", "Race", "Book Notes"],
 "category": "Book Notes",
 "slug": "miseducation-of-the-negro-book-notes",
@@ -506,7 +545,8 @@
 },
 {
 "title": "Myths from Mesopotamia: Book Notes",
-"date": "2025-06-06",
+"start_date": "2025-06-06",
+"end_date": "",
 "tags": ["Mythology", "Ancient History", "Literature", "Book Notes"],
 "category": "Book Notes",
 "slug": "myths-from-mesopotamia-book-notes",
@@ -519,7 +559,8 @@
 },
 {
 "title": "Kristoo",
-"date": "2025-06-06",
+"start_date": "2025-06-06",
+"end_date": "",
 "tags": ["Linux", "Gentoo", "Operating Systems", "Customization"],
 "category": "Technology",
 "slug": "kristoo",
@@ -532,7 +573,8 @@
 },
 {
 "title": "About My Logo",
-"date": "2025-06-06",
+"start_date": "2025-06-06",
+"end_date": "",
 "tags": ["Logo", "Symbolism", "Design", "Identity"],
 "category": "On Myself",
 "slug": "about-my-logo",
@@ -545,7 +587,8 @@
 },
 {
 "title": "Wants",
-"date": "2025-06-09",
+"start_date": "2025-06-09",
+"end_date": "",
 "tags": ["Books", "Tools", "Rare", "Identity"],
 "category": "On Myself",
 "slug": "wants",
@@ -558,7 +601,8 @@
 },
 {
 "title": "Philanthropy",
-"date": "2025-06-09",
+"start_date": "2025-06-09",
+"end_date": "",
 "tags": ["Altruism", "Charity", "Philanthropy", "Identity"],
 "category": "On Myself",
 "slug": "philanthropy",
@@ -571,7 +615,8 @@
 },
 {
 "title": "Coding Contributions",
-"date": "2025-06-09",
+"start_date": "2025-06-09",
+"end_date": "",
 "tags": ["Contributions", "C", "C++", "Identity"],
 "category": "On Myself",
 "slug": "coding-contributions",
@@ -584,7 +629,8 @@
 },
 {
 "title": "Suggested Readings",
-"date": "2025-06-09",
+"start_date": "2025-06-09",
+"end_date": "",
 "tags": ["Essays", "Papers", "Blog Posts", "Notes"],
 "category": "On Myself",
 "slug": "suggested-readings",
@@ -597,7 +643,8 @@
 },
 {
 "title": "Gaia Online",
-"date": "2025-06-10",
+"start_date": "2025-06-10",
+"end_date": "",
 "slug": "gaia-online",
 "cover_image": "",
 "tags": ["Virtual Worlds", "Internet History", "Digital Culture"],
@@ -610,7 +657,8 @@
 },
 {
 "title": "WorldsChat (1995)",
-"date": "2025-06-10",
+"start_date": "2025-06-10",
+"end_date": "",
 "slug": "worlds-chat",
 "cover_image": "",
 "tags": ["Virtual Worlds", "Retro Tech", "Digital Culture"],
@@ -623,7 +671,8 @@
 },
 {
 "title": "Mathematical Formulas",
-"date": "2025-06-10",
+"start_date": "2025-06-10",
+"end_date": "",
 "slug": "mathematical-formulas",
 "cover_image": "",
 "tags": ["Formulas", "Mathematics", "Undergraduate Math"],
@@ -636,7 +685,8 @@
 },
 {
 "title": "Indie Web",
-"date": "2025-06-10",
+"start_date": "2025-06-10",
+"end_date": "",
 "slug": "indie-web",
 "cover_image": "",
 "tags": ["Internet Archive", "Wayback Machine", "Archive.org", "Digital Preservation"],
@@ -649,7 +699,8 @@
 },
 {
 "title": "Neocities Personal Sites",
-"date": "2025-06-10",
+"start_date": "2025-06-10",
+"end_date": "",
 "slug": "neocities-personal-sites",
 "cover_image": "",
 "tags": ["Neocities", "Web Design", "Personal Sites", "Digital Culture"],
@@ -662,7 +713,8 @@
 },
 {
 "title": "Things I Ought to Know",
-"date": "2025-06-11",
+"start_date": "2025-06-11",
+"end_date": "",
 "slug": "things-i-ought-to-know",
 "cover_image": "",
 "tags": ["Knowledge", "Learning", "Flashcards", "Education"],
@@ -675,7 +727,8 @@
 },
 {
 "title": "Clash Royale",
-"date": "2025-06-11",
+"start_date": "2025-06-11",
+"end_date": "",
 "slug": "clash-royale",
 "cover_image": "",
 "tags": ["Clash Royale", "Supercell", "Esports", "Education"],
@@ -688,7 +741,8 @@
 },
 {
 "title": "Physics I Ought to Know",
-"date": "2025-06-12",
+"start_date": "2025-06-12",
+"end_date": "",
 "slug": "physics-i-ought-to-know",
 "cover_image": "",
 "tags": ["Physics", "Mechanics", "Electromagnetism", "Thermodynamics"],
@@ -701,7 +755,8 @@
 },
 {
 "title": "Math I Ought to Know",
-"date": "2025-06-12",
+"start_date": "2025-06-12",
+"end_date": "",
 "slug": "math-i-ought-to-know",
 "cover_image": "",
 "tags": ["Algebra", "Calculus", "Analysis", "Pure Mathematics"],
@@ -714,7 +769,8 @@
 },
 {
 "title": "Try Hack Me",
-"date": "2025-06-12",
+"start_date": "2025-06-12",
+"end_date": "",
 "slug": "tryhackme",
 "cover_image": "",
 "tags": ["TryHackMe", "CTF", "Pentesting"],
@@ -727,7 +783,8 @@
 },
 {
 "title": "Hack The Box",
-"date": "2025-06-12",
+"start_date": "2025-06-12",
+"end_date": "",
 "slug": "hackthebox",
 "cover_image": "",
 "tags": ["HackTheBox", "CTF", "Pentesting"],
@@ -740,7 +797,8 @@
 },
 {
 "title": "Twitch",
-"date": "2025-06-14",
+"start_date": "2025-06-14",
+"end_date": "",
 "slug": "twitch",
 "cover_image": "",
 "tags": ["Twitch", "Streaming", "Content Creation"],
@@ -753,7 +811,8 @@
 },
 {
 "title": "Youtube",
-"date": "2025-06-14",
+"start_date": "2025-06-14",
+"end_date": "",
 "slug": "youtube",
 "cover_image": "",
 "tags": ["Youtube", "Content Creation", "Video", "Streaming"],
@@ -766,7 +825,8 @@
 },
 {
 "title": "Sigma Pi Phi or the \"Black Boulé\"",
-"date": "2025-06-14",
+"start_date": "2025-06-14",
+"end_date": "",
 "slug": "sigma-pi-phi",
 "cover_image": "",
 "tags": ["Fraternities", "Black Boulé", "Secret Societies"],
@@ -779,7 +839,8 @@
 },
 {
 "title": "Mathematics Workflow",
-"date": "2025-06-14",
+"start_date": "2025-06-14",
+"end_date": "",
 "slug": "mathematics-workflow",
 "cover_image": "",
 "tags": ["Mathematics", "Workflow", "Research"],
@@ -792,7 +853,8 @@
 },
 {
 "title": "My Favorite Things",
-"date": "2025-06-19",
+"start_date": "2025-06-19",
+"end_date": "",
 "slug": "favs",
 "cover_image": "",
 "tags": ["Favorites", "Personal"],
@@ -805,7 +867,8 @@
 },
 {
 "title": "Wisdom",
-"date": "2025-06-19",
+"start_date": "2025-06-19",
+"end_date": "",
 "slug": "wisdom",
 "cover_image": "",
 "tags": ["DeepSeek", "Multimodal", "FOSS"],
@@ -818,7 +881,8 @@
 },
 {
 "title": "Free Media",
-"date": "2025-06-25",
+"start_date": "2025-06-25",
+"end_date": "",
 "slug": "free-media",
 "cover_image": "",
 "tags": ["Free Media", "Media", "Books", "Music", "Anime", "Software"],
@@ -831,7 +895,8 @@
 },
 {
 "title": "Libraries",
-"date": "2025-06-25",
+"start_date": "2025-06-25",
+"end_date": "",
 "slug": "libraries",
 "cover_image": "",
 "tags": ["Libraries", "Resources", "Research", "Education"],
@@ -844,7 +909,8 @@
 },
 {
 "title": "Brother, May I Have Some Oats?",
-"date": "2025-06-27",
+"start_date": "2025-06-27",
+"end_date": "",
 "slug": "brother-may-i-have-some-oats",
 "cover_image": "",
 "tags": ["Poetry", "Dialogue", "Dark Humor", "Allegory"],
@@ -857,7 +923,8 @@
 },
 {
 "title": "Takes on Prose",
-"date": "2025-06-29",
+"start_date": "2025-06-29",
+"end_date": "",
 "slug": "takes-on-prose",
 "cover_image": "",
 "tags": ["Prose", "Papers", "Writing", "Literature"],
@@ -870,7 +937,8 @@
 },
 {
 "title": "Takes on C",
-"date": "2025-06-29",
+"start_date": "2025-06-29",
+"end_date": "",
 "slug": "takes-on-c",
 "cover_image": "",
 "tags": ["C", "Programming", "Style", "Code", "Low-Level"],
@@ -883,7 +951,8 @@
 },
 {
 "title": "Takes on Scala",
-"date": "2025-06-29",
+"start_date": "2025-06-29",
+"end_date": "",
 "slug": "takes-on-scala",
 "cover_image": "",
 "tags": ["Scala", "Functional Programming", "JVM", "Code", "Style"],
@@ -896,7 +965,8 @@
 },
 {
 "title": "Takes on Haskell",
-"date": "2025-06-29",
+"start_date": "2025-06-29",
+"end_date": "",
 "slug": "takes-on-haskell",
 "cover_image": "",
 "tags": ["Haskell", "Functional", "Purity", "Monads", "Programming"],
@@ -909,7 +979,8 @@
 },
 {
 "title": "Takes on Rust",
-"date": "2025-06-29",
+"start_date": "2025-06-29",
+"end_date": "",
 "slug": "takes-on-rust",
 "cover_image": "",
 "tags": ["Rust", "Systems Programming", "Safety", "Ownership", "Style"],
@@ -922,7 +993,8 @@
 },
 {
 "title": "Takes on C++",
-"date": "2025-06-29",
+"start_date": "2025-06-29",
+"end_date": "",
 "slug": "takes-on-cpp",
 "cover_image": "",
 "tags": ["C++", "Performance", "Code", "Modern C++", "Templates"],
@@ -935,7 +1007,8 @@
 },
 {
 "title": "Takes on Bash",
-"date": "2025-06-29",
+"start_date": "2025-06-29",
+"end_date": "",
 "slug": "takes-on-bash",
 "cover_image": "",
 "tags": ["Bash", "Scripting", "Shell", "CLI", "Unix"],
@@ -948,7 +1021,8 @@
 },
 {
 "title": "Takes on Verse",
-"date": "2025-06-29",
+"start_date": "2025-06-29",
+"end_date": "",
 "slug": "takes-on-verse",
 "cover_image": "",
 "tags": ["Poetry", "Verse", "Literature", "Language", "Form"],
@@ -961,7 +1035,8 @@
 },
 {
 "title": "Takes on LLMs",
-"date": "2025-06-29",
+"start_date": "2025-06-29",
+"end_date": "",
 "slug": "takes-on-llms",
 "cover_image": "",
 "tags": ["LLMs", "Transformers", "AI", "Architecture", "Language Models"],
@@ -974,7 +1049,8 @@
 },
 {
 "title": "Takes on Diffusion",
-"date": "2025-06-29",
+"start_date": "2025-06-29",
+"end_date": "",
 "slug": "takes-on-diffusion",
 "cover_image": "",
 "tags": ["Diffusion Models", "Image Gen", "AI", "Latents", "Style"],
@@ -987,7 +1063,8 @@
 },
 {
 "title": "Automated URL Archiving",
-"date": "2025-06-30",
+"start_date": "2025-06-30",
+"end_date": "",
 "slug": "automated-url-archiving",
 "cover_image": "",
 "tags": ["Web Archiving", "Automation", "Preservation", "Tools"],
@@ -1000,7 +1077,8 @@
 },
 {
 "title": "Donate",
-"date": "2025-06-30",
+"start_date": "2025-06-30",
+"end_date": "",
 "slug": "donate",
 "cover_image": "",
 "tags": ["Support", "Donations", "Funding", "Community"],
@@ -1013,7 +1091,8 @@
 },
 {
 "title": "Magic URLs",
-"date": "2025-07-01",
+"start_date": "2025-07-01",
+"end_date": "",
 "slug": "magic-urls",
 "cover_image": "",
 "tags": ["URLs", "Web Design", "Redirection", "Maintenance"],
@@ -1026,7 +1105,8 @@
 },  
 {
 "title": "Jack and Jill",
-"date": "2025-07-09",
+"start_date": "2025-07-09",
+"end_date": "",
 "slug": "jack-and-jill",
 "cover_image": "",
 "tags": ["Nursery Rhymes", "Children", "Traditional", "Verse"],
@@ -1039,7 +1119,8 @@
 },
 {
 "title": "London Bridge",
-"date": "2025-07-09",
+"start_date": "2025-07-09",
+"end_date": "",
 "slug": "london-bridge",
 "cover_image": "",
 "tags": ["Nursery Rhymes", "Traditional", "Verse", "English Folklore"],
@@ -1052,7 +1133,8 @@
 },
 {
 "title": "Monday's Child",
-"date": "2025-07-09",
+"start_date": "2025-07-09",
+"end_date": "",
 "slug": "mondays-child",
 "cover_image": "",
 "tags": ["Nursery Rhymes", "Fortune-Telling", "Verse", "Traditional"],
@@ -1065,7 +1147,8 @@
 },
 {
 "title": "Solomon Grundy",
-"date": "2025-07-09",
+"start_date": "2025-07-09",
+"end_date": "",
 "slug": "solomon-grundy",
 "cover_image": "",
 "tags": ["Nursery Rhymes", "Verse", "Traditional", "Life Cycle"],
@@ -1078,7 +1161,8 @@
 },
 {
 "title": "The Crooked Man",
-"date": "2025-07-09",
+"start_date": "2025-07-09",
+"end_date": "",
 "slug": "the-crooked-man",
 "cover_image": "",
 "tags": ["Nursery Rhymes", "Verse", "Traditional", "English Folklore"],
@@ -1091,7 +1175,8 @@
 },
 {
 "title": "Internet Archive",
-"date": "2025-06-10",
+"start_date": "2025-06-10",
+"end_date": "",
 "slug": "internet-archive",
 "cover_image": "",
 "tags": ["Internet Archive", "Wayback Machine", "Archive.org", "Digital Preservation"],
@@ -1104,7 +1189,8 @@
 },
 {
 "title": "Cambridge Pure Mathematics (Syllabus)",
-"date": "2025-07-11",
+"start_date": "2025-07-11",
+"end_date": "",
 "slug": "cambridge-pure-mathematics",
 "cover_image": "",
 "tags": ["Cambridge", "Pure Mathematics", "Syllabus", "Ultralearning"],
@@ -1117,7 +1203,8 @@
 },
 {
 "title": "Avant-Garde Cinema Watchlist",
-"date": "2025-07-12",
+"start_date": "2025-07-12",
+"end_date": "",
 "slug": "avant-garde-cinema-watchlist",
 "cover_image": "",
 "tags": ["Avant-Garde", "Cinema", "Watchlist"],
@@ -1130,7 +1217,8 @@
 },
 {
 "title": "Film Studies Watchlist",
-"date": "2025-07-12",
+"start_date": "2025-07-12",
+"end_date": "",
 "slug": "film-studies-watchlist",
 "cover_image": "",
 "tags": ["Film Studies", "Cinema", "Watchlist"],
@@ -1144,7 +1232,8 @@
 {
 "title": "Analysis of Susanna Kaysen",
 "preview": "A psychological and narrative exploration of Susanna Kaysen’s fragmented identity, quiet rebellion, and ambiguous diagnosis.",
-"date": "2025-06-25",
+"start_date": "2025-06-25",
+"end_date": "",
 "tags": ["Girl, Interrupted", "Psychology", "Identity", "Mental Health"],
 "category": "character-analysis",
 "slug": "analysis-of-susanna-kaysen",
@@ -1157,7 +1246,8 @@
 {
 "title": "Analysis of Daisy Randone",
 "preview": "Dissecting Daisy Randone’s compulsions, her trauma-concealing rituals, and the unbearable fragility of her control.",
-"date": "2025-06-25",
+"start_date": "2025-06-25",
+"end_date": "",
 "tags": ["Girl, Interrupted", "Trauma", "Control", "Isolation"],
 "category": "character-analysis",
 "slug": "analysis-of-daisy-randone",
@@ -1170,7 +1260,8 @@
 {
 "title": "Analysis of Lisa Rowe",
 "preview": "A character study of Lisa Rowe’s seductive nihilism, charismatic cruelty, and the contradictions of the sociopath as hero.",
-"date": "2025-06-25",
+"start_date": "2025-06-25",
+"end_date": "",
 "tags": ["Girl, Interrupted", "Charisma", "Sociopathy", "Power"],
 "category": "character-analysis",
 "slug": "analysis-of-lisa-rowe",
@@ -1183,7 +1274,8 @@
 {
 "title": "Notes on Winona Ryder",
 "preview": "anthology of winona ryder's roles, quotes, excerpts, references, and interviews",
-"date": "2025-06-25",
+"start_date": "2025-06-25",
+"end_date": "",
 "tags": ["Winona Ryder", "Acting", "Film", "Interviews"],
 "category": "notes-on-people",
 "slug": "notes-on-winona-ryder",
@@ -1196,7 +1288,8 @@
 {
 "title": "Toward a Theory of Film Critique",
 "preview": "my framework for analyzing and critiquing films covering narrative structure, cinematography, thematic depth, cultural impact, and musical score",
-"date": "2025-06-25",
+"start_date": "2025-06-25",
+"end_date": "",
 "tags": ["Film Critique", "Cinematography", "Narrative"],
 "category": "reviews",
 "slug": "toward-a-theory-of-film-critique",
@@ -1209,7 +1302,8 @@
 {
 "title": "Character Creation Template",
 "preview": "a in-depth template for original character creation",
-"date": "2025-06-25",
+"start_date": "2025-06-25",
+"end_date": "",
 "tags": ["Characters", "Fiction", "Narrative"],
 "category": "templates",
 "slug": "character-creation-template",

@@ -12,7 +12,11 @@ export default function CasesPage() {
     ...caseItem,
     status: caseItem.status as CaseStatus,
     confidence: caseItem.confidence as CaseConfidence
-  })).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  })).sort((a, b) => {
+    const aDate = a.end_date || a.start_date;
+    const bDate = b.end_date || b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  });
 
   return (
     <div className="cases-container">

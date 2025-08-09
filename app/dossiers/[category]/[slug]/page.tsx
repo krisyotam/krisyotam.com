@@ -11,7 +11,9 @@ import type { DossierMeta, DossierStatus, DossierConfidence } from "@/types/doss
 
 interface DossierData {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
+  date?: string; // backward compatibility
   slug: string;
   tags: string[];
   category: string;
@@ -102,6 +104,8 @@ export default async function DossierPage({ params }: DossierPageProps) {
 
   const dossiers: DossierMeta[] = (dossiersData as DossierData[]).map(dossierItem => ({
     ...dossierItem,
+    start_date: dossierItem.start_date || (dossierItem as any).date || new Date().toISOString(),
+    end_date: dossierItem.end_date || "",
     status: dossierItem.status as DossierStatus,
     confidence: dossierItem.confidence as DossierConfidence
   }));

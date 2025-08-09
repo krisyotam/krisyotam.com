@@ -1,8 +1,8 @@
-// app/verse/[type]/[year]/[slug]/PoemPageClient.tsx
+// app/verse/[type]/[slug]/PoemPageClient.tsx
 "use client";
 
 import { VerseHeader } from "@/components/verse-header";
-import poemsData from "@/data/verse/poems.json";
+import poemsData from "@/data/verse/verse.json";
 import type { Poem } from "@/utils/poems";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
@@ -10,17 +10,14 @@ import { Citation } from "@/components/citation";
 import { useEffect, useState } from "react";
 
 export default function PoemPageClient({
-  params: { type, year, slug },
+  params: { type, slug },
 }: {
-  params: { type: string; year: string; slug: string };
+  params: { type: string; slug: string };
 }) {
-  const y = parseInt(year, 10);
-  if (isNaN(y)) notFound();
-
-  // find the poem by matching slugified type + year + slug
+  // find the poem by matching slugified type + slug (no year)
   const poem = (poemsData as Poem[]).find((p) => {
     const tSlug = p.type.toLowerCase().replace(/\s+/g, "-");
-    return tSlug === type && p.year === y && p.slug === slug;
+    return tSlug === type && p.slug === slug;
   });
   if (!poem) notFound();
 
@@ -88,7 +85,8 @@ export default function PoemPageClient({
       <div className="max-w-2xl mx-auto px-4 md:px-8">
         <VerseHeader
           title={poem.title}
-          date={poem.dateCreated}
+          start_date={poem.start_date}
+          end_date={poem.end_date}
           type={poem.type}
           collection={poem.collection}
           preview={poem.description}
@@ -115,9 +113,9 @@ export default function PoemPageClient({
         <div className="my-8">
           <Citation 
             title={poem.title}
-            slug={`verse/${type}/${year}/${slug}`}
-            date={poem.dateCreated}
-            url={`https://krisyotam.com/verse/${type}/${year}/${slug}`}
+            slug={poem.slug}
+            date={(poem.end_date && poem.end_date.trim()) || poem.start_date}
+            url={`https://krisyotam.com/verse/${type}/${slug}`}
           />
         </div>
 

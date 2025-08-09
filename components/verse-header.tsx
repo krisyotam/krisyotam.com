@@ -1,4 +1,4 @@
-import { formatDate } from "@/utils/date-formatter"
+import { formatDate, formatDateRange } from "@/utils/date-formatter"
 import Link from "next/link"
 import { ArrowLeft, Info } from "lucide-react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
@@ -7,7 +7,9 @@ import { cn } from "@/lib/utils"
 interface VerseHeaderProps {
   title: string
   subtitle?: string
-  date: string
+  start_date: string
+  end_date?: string
+  date?: string // kept for compatibility
   tags?: string[]
   type: string
   collection?: string
@@ -92,6 +94,8 @@ function getImportanceColor(importance: number) {
 export function VerseHeader({
   title,
   subtitle,
+  start_date,
+  end_date,
   date,
   tags,
   type,
@@ -139,14 +143,19 @@ export function VerseHeader({
         )}
 
         {/* Date above other metadata */}
-        <div className="text-center mb-4">
-          <time
-            dateTime={date}
-            className="font-mono text-sm text-muted-foreground"
-          >
-            {formatDate(date)}
-          </time>
-        </div>
+        {start_date && (
+          <div className="text-center mb-4">
+            <time
+              dateTime={start_date}
+              className="font-mono text-sm text-muted-foreground"
+            >
+              {end_date && end_date.trim() 
+                ? formatDateRange(start_date, end_date)
+                : `${formatDate(start_date)} - Unfinished`
+              }
+            </time>
+          </div>
+        )}
 
         {/* Metadata section with academic styling */}
         <div className="flex flex-wrap justify-center items-center gap-x-3 text-sm font-mono mb-6">

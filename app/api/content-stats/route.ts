@@ -51,7 +51,7 @@ function countEntries(data: any, expectedKey: string): number {
 export async function GET() {
   // Read all the JSON files  
   const papers = readJsonFile("data/papers/papers.json")
-  const blog = readJsonFile("data/blog/feed.json")
+  const blog = readJsonFile("data/blog/blog.json")
   const essays = readJsonFile("data/essays/essays.json")
   const newsletters = readJsonFile("data/newsletters.json")
   const nuggets = readJsonFile("data/nuggets.json")

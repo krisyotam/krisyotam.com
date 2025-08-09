@@ -11,7 +11,9 @@ interface NowMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
+  date?: string; // backward compatibility
   slug: string;
   tags: string[];
   category: string;
@@ -37,7 +39,11 @@ export default function NowPageClient({ now, allNows, children, headerOnly, cont
 
   /* prev / next */
   const sorted = [...allNows].sort(
-    (a, b) => +new Date(b.date) - +new Date(a.date)
+    (a, b) => {
+      const aDate = a.end_date || a.start_date || a.date || "1970-01-01";
+      const bDate = b.end_date || b.start_date || b.date || "1970-01-01";
+      return +new Date(bDate) - +new Date(aDate);
+    }
   );
   const idx  = sorted.findIndex(n => n.slug === now.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
@@ -51,7 +57,8 @@ export default function NowPageClient({ now, allNows, children, headerOnly, cont
           className=""     
           title={now.title}
           subtitle={now.subtitle}
-          date={now.date}
+          start_date={now.start_date || now.date || "2025-01-01"}
+          end_date={now.end_date || ""}
           tags={now.tags}
           category={now.category}
           backHref="/now"
@@ -87,7 +94,8 @@ export default function NowPageClient({ now, allNows, children, headerOnly, cont
         className=""     
         title={now.title}
         subtitle={now.subtitle}
-        date={now.date}
+        start_date={now.start_date || now.date || "2025-01-01"}
+        end_date={now.end_date || ""}
         tags={now.tags}
         category={now.category}
         backHref="/now"

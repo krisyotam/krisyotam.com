@@ -8,17 +8,20 @@ import { Clipboard, Check } from "lucide-react";
 interface CitationProps {
   title: string;
   slug?: string;
-  date: string; // ISO string ("YYYY-MM-DD")
+  start_date?: string; // ISO string ("YYYY-MM-DD")
+  end_date?: string; // ISO string ("YYYY-MM-DD") 
+  date?: string; // Legacy support - ISO string
   url: string;
   author?: string;
 }
 
-export function Citation({ title, slug, date, url, author }: CitationProps) {
+export function Citation({ title, slug, start_date, end_date, date, url, author }: CitationProps) {
   const [copiedHuman, setCopiedHuman] = useState(false);
   const [copiedBib, setCopiedBib] = useState(false);
 
-  // Parse date
-  const d = new Date(date);
+  // Parse date with fallback logic
+  const displayDate = end_date || start_date || date || new Date().toISOString();
+  const d = new Date(displayDate);
   const year = d.getFullYear();
   const month = d.toLocaleString("default", { month: "short" });
 

@@ -11,7 +11,8 @@ export default function ReadingPage() {
   const readingPageData = {
     title: "Reading",
     subtitle: "",
-    date: new Date().toISOString(),
+    start_date: new Date().toISOString(),
+    end_date: "",
     preview: "Books I'm currently reading",
     status: "In Progress" as const,
     confidence: "certain" as const,
@@ -23,7 +24,8 @@ export default function ReadingPage() {
       <PageHeader
         title={readingPageData.title}
         subtitle={readingPageData.subtitle}
-        date={readingPageData.date}
+        start_date={readingPageData.start_date}
+        end_date={readingPageData.end_date}
         preview={readingPageData.preview}
         status={readingPageData.status}
         confidence={readingPageData.confidence}

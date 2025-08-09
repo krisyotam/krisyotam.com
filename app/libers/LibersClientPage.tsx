@@ -13,7 +13,8 @@ import categoriesData from "@/data/libers/categories.json";
 const defaultLibersPageData = {
   title: "Libers",
   subtitle: "",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview: "Dark historical studies, taboo subjects, and forbidden knowledge across cultures and time periods.",
   status: "In Progress" as const,
   confidence: "likely" as const,
@@ -23,7 +24,8 @@ const defaultLibersPageData = {
 /* ---------- updated type ---------- */
 interface Liber {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -74,7 +76,8 @@ export default function LibersClientPage({ libers, initialCategory = "all" }: Li
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,
+        start_date: categoryData.date || "Undefined",
+        end_date: new Date().toISOString().split('T')[0],
         preview: categoryData.preview,
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",

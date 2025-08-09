@@ -11,6 +11,8 @@ interface TagHeaderData {
   title: string;
   subtitle: string;
   date: string;
+  start_date?: string;
+  end_date?: string;
   preview: string;
   status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Active";
   confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
@@ -57,7 +59,8 @@ export default function EssaysTaggedPage({ essays, tagData }: EssaysTaggedPagePr
         <PageHeader 
           title={tagData.title}
           subtitle={tagData.subtitle}
-          date={tagData.date}
+          start_date={tagData.start_date}
+          end_date={tagData.end_date}
           preview={tagData.preview}
           status={tagData.status}
           confidence={tagData.confidence}
@@ -90,7 +93,8 @@ export default function EssaysTaggedPage({ essays, tagData }: EssaysTaggedPagePr
             title: essay.title,
             subtitle: essay.abstract,
             preview: essay.abstract || '',
-            date: essay.postedOn,
+            start_date: essay.dateStarted,
+            end_date: essay.postedOn !== essay.dateStarted ? essay.postedOn : undefined,
             tags: essay.tags,
             category: essay.category,
             slug: essay.id,

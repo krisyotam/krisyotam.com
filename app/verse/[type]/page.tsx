@@ -3,7 +3,7 @@ export const dynamic = 'force-static';
 export const revalidate = false;
 import type { Metadata } from "next"
 import { VerseClient } from "../verse-client"
-import poemsData from "@/data/verse/poems.json"
+import poemsData from "@/data/verse/verse.json"
 import categoriesData from "@/data/verse/categories.json"
 import type { Poem } from "@/utils/poems"
 import { notFound } from "next/navigation"

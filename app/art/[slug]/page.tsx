@@ -79,7 +79,8 @@ export default function ArtworkPage({ params }: ArtPageProps) {
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       <PageHeader
         title={artwork.title}
-        date={artwork.date}
+        start_date={artwork.start_date}
+        end_date={artwork.end_date}
         backHref="/art"
         backText="Art"
         preview={artwork.description}
@@ -100,7 +101,8 @@ export default function ArtworkPage({ params }: ArtPageProps) {
       
       <Citation 
         title={artwork.title}
-        date={artwork.date}
+        start_date={artwork.start_date}
+        end_date={artwork.end_date}
         url={`https://krisyotam.com/art/${params.slug}`}
       />
       

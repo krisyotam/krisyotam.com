@@ -10,7 +10,8 @@ import type { Essay } from "@/types/essay";
 interface CategoryHeaderData {
   title: string;
   subtitle: string;
-  date: string;
+  start_date?: string;
+  end_date?: string;
   preview: string;
   status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Active";
   confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
@@ -57,7 +58,8 @@ export default function EssaysCategoryPage({ essays, categoryData }: EssaysCateg
         <PageHeader 
           title={categoryData.title}
           subtitle={categoryData.subtitle}
-          date={categoryData.date}
+          start_date={categoryData.start_date}
+          end_date={categoryData.end_date}
           preview={categoryData.preview}
           status={categoryData.status}
           confidence={categoryData.confidence}
@@ -90,7 +92,9 @@ export default function EssaysCategoryPage({ essays, categoryData }: EssaysCateg
             title: essay.title,
             subtitle: essay.abstract,
             preview: essay.abstract || '',
-            date: essay.postedOn,
+            start_date: essay.postedOn || new Date().toISOString(),
+            end_date: "",
+            date: essay.postedOn, // backward compatibility
             tags: essay.tags,
             category: essay.category,
             slug: essay.id,

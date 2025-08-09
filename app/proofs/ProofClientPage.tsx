@@ -12,7 +12,8 @@ import categoriesData from "@/data/proofs/categories.json";
 /* ---------- updated type ---------- */
 interface Proof {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -27,7 +28,8 @@ interface ProofClientPageProps {
 const defaultProofPageData = {
   title: "Proofs",
   subtitle: "Mathematical Proofs, Theorems, and Demonstrations",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview: "A collection of mathematical proofs ranging from classical to modern results",
   status: "In Progress" as const,
   confidence: "certain" as const,
@@ -60,7 +62,8 @@ export default function ProofClientPage({ proofs, initialCategory = "all" }: Pro
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,
+        start_date: categoryData.date || "Undefined",
+        end_date: new Date().toISOString().split('T')[0],
         preview: categoryData.preview,
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
@@ -105,7 +108,8 @@ export default function ProofClientPage({ proofs, initialCategory = "all" }: Pro
         <PageHeader 
           title={headerData.title}
           subtitle={headerData.subtitle}
-          date={headerData.date}
+          start_date={headerData.start_date}
+          end_date={headerData.end_date}
           preview={headerData.preview}
           status={headerData.status}
           confidence={headerData.confidence}

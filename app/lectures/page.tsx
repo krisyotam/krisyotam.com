@@ -13,7 +13,7 @@ export default function LecturesPage() {
     ...lectureItem,
     status: lectureItem.status as LectureStatus,
     confidence: lectureItem.confidence as LectureConfidence
-  })).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  })).sort((a, b) => new Date(b.end_date || b.start_date).getTime() - new Date(a.end_date || a.start_date).getTime());
 
   return (
     <div className="lectures-container">

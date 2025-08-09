@@ -18,7 +18,8 @@ export default function WantToReadPage() {
   const pageData = {
     title: "Want to Read",
     subtitle: "",
-    date: new Date().toISOString(),
+    start_date: new Date().toISOString(),
+    end_date: "",
     preview: "A compilation of books I wish to read",
     status: "In Progress" as const,
     confidence: "certain" as const,
@@ -29,7 +30,8 @@ export default function WantToReadPage() {
       <PageHeader
         title={pageData.title}
         subtitle={pageData.subtitle}
-        date={pageData.date}
+        start_date={pageData.start_date}
+        end_date={pageData.end_date}
         preview={pageData.preview}
         status={pageData.status}
         confidence={pageData.confidence}

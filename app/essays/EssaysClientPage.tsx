@@ -13,7 +13,8 @@ import type { Post } from "@/utils/posts";
 const defaultEssaysPageData = {
   title: "Essays",
   subtitle: "Long-form thoughts and reflections",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview: "personal reflections, provocations, and open-ended thinking on life and mind",
   status: "Finished" as const,
   confidence: "certain" as const,
@@ -100,7 +101,11 @@ export default function EssaysClientPage({ notes, initialCategory = "all" }: Ess
 
     const matchesCategory = activeCategory === "all" || note.category === activeCategory;
     return matchesSearch && matchesCategory;
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }).sort((a, b) => {
+    const aDate = a.end_date || a.start_date;
+    const bDate = b.end_date || b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  });
 
   // Helper to build the correct route for an essay
   function getEssayUrl(note: Post) {
@@ -147,7 +152,7 @@ export default function EssaysClientPage({ notes, initialCategory = "all" }: Ess
             
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>{new Date(note.date).getFullYear()}</span>
+              <span>{new Date(note.end_date || note.start_date).getFullYear()}</span>
             </div>
           </div>
         </div>
@@ -175,7 +180,7 @@ export default function EssaysClientPage({ notes, initialCategory = "all" }: Ess
           >
             <td className="py-2 px-3 font-medium">{note.title}</td>
             <td className="py-2 px-3">{formatCategoryDisplayName(note.category)}</td>
-            <td className="py-2 px-3">{formatDate(note.date)}</td>
+            <td className="py-2 px-3">{formatDate(note.end_date || note.start_date)}</td>
           </tr>
         ))}
       </tbody>

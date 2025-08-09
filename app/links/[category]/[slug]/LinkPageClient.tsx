@@ -13,7 +13,9 @@ interface LinkMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
+  date?: string; // backward compatibility
   slug: string;
   tags: string[];
   category: string;
@@ -38,7 +40,11 @@ export default function LinkPageClient({ link, allLinks, children, headerOnly, c
 
   /* prev / next */
   const sorted = [...allLinks].sort(
-    (a, b) => +new Date(b.date) - +new Date(a.date)
+    (a, b) => {
+      const aDate = a.end_date || a.start_date || a.date || "1970-01-01";
+      const bDate = b.end_date || b.start_date || b.date || "1970-01-01";
+      return +new Date(bDate) - +new Date(aDate);
+    }
   );
   const idx  = sorted.findIndex(n => n.slug === link.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
@@ -58,7 +64,8 @@ export default function LinkPageClient({ link, allLinks, children, headerOnly, c
         <PostHeader
           title={link.title}
           subtitle={link.subtitle}
-          date={link.date}
+          start_date={link.start_date || link.date || "2025-01-01"}
+          end_date={link.end_date || ""}
           tags={link.tags}
           category={link.category}
           backHref="/links"
@@ -138,7 +145,8 @@ export default function LinkPageClient({ link, allLinks, children, headerOnly, c
       <PostHeader
         title={link.title}
         subtitle={link.subtitle}
-        date={link.date}
+        start_date={link.start_date || link.date || "2025-01-01"}
+        end_date={link.end_date || ""}
         tags={link.tags}
         category={link.category}
         status={link.status}

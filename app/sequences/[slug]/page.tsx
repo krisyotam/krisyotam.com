@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: SequencePageProps): Promise<M
       title: `${sequence.title} - Learning Sequence`,
       description: sequence.preview,
       type: "article",
-      publishedTime: sequence.date,
+      publishedTime: sequence.start_date,
       tags: sequence.tags,
       ...(sequence["cover-url"] && { images: [{ url: sequence["cover-url"] }] })
     },

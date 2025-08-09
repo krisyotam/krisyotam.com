@@ -29,18 +29,29 @@ export function LabTable({ labs, searchQuery, activeCategory }: LabTableProps) {
     });
 
     // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    filtered.sort((a, b) => {
+      const dateA = (a.end_date && a.end_date.trim()) || a.start_date || '';
+      const dateB = (b.end_date && b.end_date.trim()) || b.start_date || '';
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    });
     setFilteredLabs(filtered);
   }, [labs, searchQuery, activeCategory]);
 
   // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
+    if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long", 
       day: "numeric"
     });
+  }
+
+  // Helper to get the display date (end_date if available, otherwise start_date)
+  function getDisplayDate(lab: LabMeta): string {
+    const dateToUse = (lab.end_date && lab.end_date.trim()) || lab.start_date;
+    return formatDate(dateToUse);
   }
 
   // Helper to build the correct route for a lab entry
@@ -90,7 +101,7 @@ export function LabTable({ labs, searchQuery, activeCategory }: LabTableProps) {
                   {formatCategoryDisplayName(lab.category)}
                 </Link>
               </td>
-              <td className="py-2 px-3">{formatDate(lab.date)}</td>
+              <td className="py-2 px-3">{getDisplayDate(lab)}</td>
             </tr>
           ))}
         </tbody>

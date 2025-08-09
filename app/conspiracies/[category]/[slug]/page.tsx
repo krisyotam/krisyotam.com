@@ -28,7 +28,8 @@ type Confidence =
 
 interface ConspiracyData {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;

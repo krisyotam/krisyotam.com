@@ -13,7 +13,8 @@ type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "po
 
 interface ProblemData {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -73,7 +74,9 @@ export default async function ProblemPage({ params }: ProblemPageProps) {
     ...problemData,
     status: problemData.status as Status,
     confidence: problemData.confidence as Confidence
-  };  const problems: NoteMeta[] = problemsData.problems.map((problem: ProblemData) => ({
+  };
+
+  const problems: NoteMeta[] = problemsData.problems.map((problem: ProblemData) => ({
     ...problem,
     status: problem.status as Status,
     confidence: problem.confidence as Confidence

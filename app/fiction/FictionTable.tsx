@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 
 interface Story {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -41,7 +42,11 @@ export function FictionTable({ stories, searchQuery, activeCategory }: FictionTa
     });
 
     // Sort by date descending (newest first)
-    filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    filtered.sort((a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return new Date(bDate).getTime() - new Date(aDate).getTime();
+    });
     setFilteredStories(filtered);
   }, [stories, searchQuery, activeCategory]);
 
@@ -86,7 +91,7 @@ export function FictionTable({ stories, searchQuery, activeCategory }: FictionTa
             >
               <td className="py-2 px-3">{story.title}</td>
               <td className="py-2 px-3">{story.category}</td>
-              <td className="py-2 px-3">{formatDate(story.date)}</td>
+              <td className="py-2 px-3">{formatDate(story.end_date || story.start_date)}</td>
             </tr>
           ))}
         </tbody>

@@ -152,7 +152,8 @@ export function SocialClient() {
     <main className="max-w-3xl mx-auto px-4 py-12">
       <PageHeader
         title="Social"
-        date="2025-01-01"
+        start_date="2025-01-01"
+        end_date={new Date().toISOString().split('T')[0]}
         preview="a archive of my social posts from across the web"
         status="In Progress"
         confidence="likely"

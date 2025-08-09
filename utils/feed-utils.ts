@@ -4,7 +4,8 @@ interface Post {
   title: string;
   subtitle?: string;
   preview: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   tags: string[];
   category: string;
   slug: string;
@@ -38,7 +39,8 @@ export function getPostByYearAndSlug(year: string, slug: string): Post | null {
   if (!year || !slug) return null;
   
   const post = feedData.essays.find(post => {
-    const postYear = new Date(post.date).getFullYear().toString();
+    const displayDate = (post.end_date && post.end_date.trim()) ? post.end_date : post.start_date;
+    const postYear = new Date(displayDate).getFullYear().toString();
     return post.slug === slug && postYear === year;
   });
   

@@ -23,7 +23,8 @@ export default function CVPage() {
       <PageHeader
         title="Curriculum Vitae"
         description="A comprehensive overview of my professional journey, skills, and achievements."
-        date="2024-07-26" // Added current date as placeholder
+        start_date="2024-07-26"
+        end_date=""
       />
 
       <div className="container mx-auto px-4 py-12">

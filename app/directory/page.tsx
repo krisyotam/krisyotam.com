@@ -11,7 +11,8 @@ export default async function DirectoryPage() {
       <PageHeader
         title="Site Directory"
         subtitle="Complete Index of Pages & Categories"
-        date={new Date().toISOString()}
+        start_date="2025-01-01"
+        end_date={new Date().toISOString().split('T')[0]}
         preview="A comprehensive listing of all pages and content categories available on this website, organized for easy navigation and discovery."
         status="Finished"
         confidence="certain"

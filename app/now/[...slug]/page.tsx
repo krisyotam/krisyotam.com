@@ -14,7 +14,9 @@ type State = "active" | "hidden";
 
 interface NowMeta {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
+  date?: string; // backward compatibility
   slug: string;
   tags: string[];
   category: string;
@@ -88,6 +90,8 @@ export default async function NowPage({ params }: NowPageProps) {
 
   const now: NowMeta = {
     ...nowEntry,
+    start_date: nowEntry.date,
+    end_date: undefined,
     status: nowEntry.status as Status,
     confidence: nowEntry.confidence as Confidence,
     state: nowEntry.state as State
@@ -95,6 +99,8 @@ export default async function NowPage({ params }: NowPageProps) {
 
   const allNows: NowMeta[] = nowData.now.map((entry: NowData) => ({
     ...entry,
+    start_date: entry.date,
+    end_date: undefined,
     status: entry.status as Status,
     confidence: entry.confidence as Confidence,
     state: entry.state as State

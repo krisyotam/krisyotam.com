@@ -7,12 +7,14 @@ import { PageDescription } from "@/components/posts/typography/page-description"
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
 import categoriesData from "@/data/lectures/categories.json";
+import type { LectureStatus, LectureConfidence } from "@/types/lectures";
 
 /* default page-level metadata for the header */
 const defaultLecturesPageData = {
   title: "Lectures",
   subtitle: "",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview: "Educational lectures across multiple disciplines and academic fields",
   status: "In Progress" as const,
   confidence: "likely" as const,
@@ -22,7 +24,8 @@ const defaultLecturesPageData = {
 /* ---------- updated type ---------- */
 interface Lecture {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -65,7 +68,8 @@ export default function LecturesClientPage({ lectures, initialCategory = "all" }
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,
+        start_date: categoryData.date || "Undefined",
+        end_date: new Date().toISOString().split('T')[0],
         preview: categoryData.preview,
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
@@ -115,7 +119,11 @@ export default function LecturesClientPage({ lectures, initialCategory = "all" }
 
     const matchesCategory = activeCategory === "all" || lecture.category === activeCategory;
     return matchesSearch && matchesCategory;
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }).sort((a, b) => {
+    const aDate = a.end_date || a.start_date;
+    const bDate = b.end_date || b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  });
 
   // Helper to build the correct route for a lecture
   function getLectureUrl(lecture: Lecture) {
@@ -162,7 +170,7 @@ export default function LecturesClientPage({ lectures, initialCategory = "all" }
             
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>{new Date(lecture.date).getFullYear()}</span>
+              <span>{new Date(lecture.end_date || lecture.start_date).getFullYear()}</span>
             </div>
           </div>
         </div>
@@ -172,7 +180,11 @@ export default function LecturesClientPage({ lectures, initialCategory = "all" }
 
   const ListView = () => (
     <LecturesTable
-      lectures={filteredLectures}
+      lectures={filteredLectures.map(lecture => ({
+        ...lecture,
+        status: lecture.status as LectureStatus | undefined,
+        confidence: lecture.confidence as LectureConfidence | undefined
+      }))}
       searchQuery=""
       activeCategory="all"
     />

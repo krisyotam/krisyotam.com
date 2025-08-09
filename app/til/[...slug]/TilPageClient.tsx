@@ -13,7 +13,8 @@ interface TilMeta {
   title: string;
   subtitle?: string;
   preview?: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;
@@ -39,7 +40,11 @@ export default function TilPageClient({ til, allTils, children, headerOnly, cont
 
   /* prev / next */
   const sorted = [...allTils].sort(
-    (a, b) => +new Date(b.date) - +new Date(a.date)
+    (a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return +new Date(bDate) - +new Date(aDate);
+    }
   );
   const idx  = sorted.findIndex(t => t.slug === til.slug);
   const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
@@ -53,7 +58,8 @@ export default function TilPageClient({ til, allTils, children, headerOnly, cont
           className=""     
           title={til.title}
           subtitle={til.subtitle}
-          date={til.date}
+          start_date={til.start_date}
+          end_date={til.end_date}
           tags={til.tags}
           category={til.category}
           backHref="/til"
@@ -74,7 +80,8 @@ export default function TilPageClient({ til, allTils, children, headerOnly, cont
         <Citation 
           title={til.title}
           slug={til.slug}
-          date={til.date}
+          start_date={til.start_date}
+          end_date={til.end_date}
           url={`https://krisyotam.com/til/${til.slug}`}
         />
         <LiveClock />
@@ -91,7 +98,8 @@ export default function TilPageClient({ til, allTils, children, headerOnly, cont
         className=""     
         title={til.title}
         subtitle={til.subtitle}
-        date={til.date}
+        start_date={til.start_date}
+        end_date={til.end_date}
         tags={til.tags}
         category={til.category}
         backHref="/til"
@@ -109,7 +117,8 @@ export default function TilPageClient({ til, allTils, children, headerOnly, cont
         <Citation 
           title={til.title}
           slug={til.slug}
-          date={til.date}
+          start_date={til.start_date}
+          end_date={til.end_date}
           url={`https://krisyotam.com/til/${til.slug}`}
         />
       </div>

@@ -11,7 +11,8 @@ import categoriesData from "@/data/ocs/categories.json";
 /* default page-level metadata for the header */
 const defaultOCSPageData = {
   title: "Original Characters",
-  date: new Date().toISOString(),
+  start_date: new Date().toISOString(),
+  end_date: "",
   preview: "Character profiles and artwork from my original fiction stories",
   status: "In Progress" as "In Progress",
   confidence: "likely" as "likely",
@@ -94,7 +95,11 @@ export default function OCSClientPage({ ocs, initialCategory = "all" }: OCSClien
 
     const matchesCategory = activeCategory === "all" || character.category === activeCategory;
     return matchesSearch && matchesCategory;
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }).sort((a, b) => {
+    const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+    const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+    return new Date(dateB).getTime() - new Date(dateA).getTime();
+  });
 
   // Helper to build the correct route for an OC
   function getOCUrl(character: OCSMeta) {
@@ -141,7 +146,7 @@ export default function OCSClientPage({ ocs, initialCategory = "all" }: OCSClien
             
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>{new Date(character.date).getFullYear()}</span>
+              <span>{new Date(character.end_date || character.start_date).getFullYear()}</span>
             </div>
           </div>
         </div>
@@ -169,7 +174,7 @@ export default function OCSClientPage({ ocs, initialCategory = "all" }: OCSClien
           >
             <td className="py-2 px-3">{character.title}</td>
             <td className="py-2 px-3">{character.category}</td>
-            <td className="py-2 px-3">{formatDate(character.date)}</td>
+            <td className="py-2 px-3">{formatDate(character.end_date || character.start_date)}</td>
           </tr>
         ))}
       </tbody>

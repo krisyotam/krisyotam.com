@@ -22,7 +22,8 @@ export default async function CategoriesPage() {
             <PageHeader
               title="Categories"
               subtitle="Content organized by topic"
-              date={currentDate}
+              start_date={currentDate}
+              end_date=""
               preview="This directory helps you navigate content by subject area."
               status="In Progress"
               confidence="certain"

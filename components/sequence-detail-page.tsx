@@ -66,7 +66,8 @@ export default function SequenceDetailPage({ slug }: SequenceDetailPageProps) {
   const headerData = {
     title: sequence.title,
     subtitle: "Learning Sequence",
-    date: sequence.date,
+    start_date: sequence.start_date,
+    end_date: (sequence.end_date && sequence.end_date.trim()) ? sequence.end_date : new Date().toISOString().split('T')[0],
     preview: sequence.preview,
     status: sequence.status,
     confidence: sequence.confidence,
@@ -99,7 +100,8 @@ export default function SequenceDetailPage({ slug }: SequenceDetailPageProps) {
         <PageHeader 
           title={headerData.title}
           subtitle={headerData.subtitle}
-          date={headerData.date}
+          start_date={headerData.start_date}
+          end_date={headerData.end_date}
           preview={headerData.preview}
           status={headerData.status}
           confidence={headerData.confidence}

@@ -57,7 +57,8 @@ export default function DossierPageClient({ dossierData: dossierItem, allDossier
         <PageHeader
           title={dossierItem.title}
           subtitle={dossierItem.subtitle}
-          date={dossierItem.date}
+          start_date={dossierItem.start_date}
+          end_date={dossierItem.end_date}
           backHref="/dossiers"
           backText="Dossiers"
           preview={dossierItem.preview}
@@ -76,7 +77,8 @@ export default function DossierPageClient({ dossierData: dossierItem, allDossier
         <Citation 
           title={dossierItem.title}
           slug={dossierItem.slug}
-          date={dossierItem.date}
+          start_date={dossierItem.start_date}
+          end_date={dossierItem.end_date}
           url={`https://krisyotam.com/dossiers/${slugifyCategory(dossierItem.category)}/${dossierItem.slug}`}
         />
         <LiveClock />
@@ -91,7 +93,8 @@ export default function DossierPageClient({ dossierData: dossierItem, allDossier
       <PageHeader
         title={dossierItem.title}
         subtitle={dossierItem.subtitle}
-        date={dossierItem.date}
+        start_date={dossierItem.start_date}
+        end_date={dossierItem.end_date}
         backHref="/dossiers"
         backText="Dossiers"
         preview={dossierItem.preview}
@@ -107,7 +110,8 @@ export default function DossierPageClient({ dossierData: dossierItem, allDossier
         <Citation 
           title={dossierItem.title}
           slug={dossierItem.slug}
-          date={dossierItem.date}
+          start_date={dossierItem.start_date}
+          end_date={dossierItem.end_date}
           url={`https://krisyotam.com/dossiers/${slugifyCategory(dossierItem.category)}/${dossierItem.slug}`}
         />
         <LiveClock />

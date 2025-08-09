@@ -7,7 +7,8 @@ import { Post, PostsData } from "@/utils/posts"
 export interface TilEntry {
   title: string
   preview: string
-  date: string
+  start_date: string
+  end_date?: string
   tags: string[]
   category: string
   slug: string
@@ -44,7 +45,7 @@ export async function getEssaysData(): Promise<PostsData> {
  * This function ensures the file is included in Vercel's build
  */
 export async function getBlogData(): Promise<Post[]> {
-  const filePath = path.join(process.cwd(), "data/blog/feed.json")
+  const filePath = path.join(process.cwd(), "data/blog/blog.json")
   try {
     const json = await readFile(filePath, "utf-8")
     return JSON.parse(json) as Post[]

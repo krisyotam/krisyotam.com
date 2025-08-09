@@ -11,7 +11,8 @@ import { CustomSelect, SelectOption } from "@/components/ui/custom-select"
 const playlistsPageData = {
   title: "Playlists",
   subtitle: "Curated Music Collections",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0],
   preview: "A collection of carefully curated playlists spanning various genres, moods, and musical eras.",
   status: "In Progress" as const,
   confidence: "certain" as const,
@@ -41,7 +42,8 @@ export default function PlaylistsClientPage() {
         <PageHeader
           title={playlistsPageData.title}
           subtitle={playlistsPageData.subtitle}
-          date={playlistsPageData.date}
+          start_date={playlistsPageData.start_date}
+          end_date={playlistsPageData.end_date}
           preview={playlistsPageData.preview}
           status={playlistsPageData.status}
           confidence={playlistsPageData.confidence}

@@ -11,7 +11,8 @@ import categoriesData from "@/data/reviews/categories.json";
 /* default page-level metadata for the header */
 const defaultReviewsPageData = {
   title: "Reviews",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview: "In-depth reviews of books, media, art, performances, and more",
   status: "In Progress" as "In Progress",
   confidence: "likely" as "likely",
@@ -53,7 +54,9 @@ export default function ReviewClientPage({ reviews, initialCategory = "all" }: R
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,        preview: categoryData.preview,
+        start_date: categoryData.date || "Undefined",
+        end_date: new Date().toISOString().split('T')[0],
+        preview: categoryData.preview,
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
         importance: categoryData.importance
@@ -94,7 +97,11 @@ export default function ReviewClientPage({ reviews, initialCategory = "all" }: R
 
     const matchesCategory = activeCategory === "all" || review.category === activeCategory;
     return matchesSearch && matchesCategory;
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }).sort((a, b) => {
+    const dateA = (a.end_date && a.end_date.trim()) || a.start_date;
+    const dateB = (b.end_date && b.end_date.trim()) || b.start_date;
+    return new Date(dateB).getTime() - new Date(dateA).getTime();
+  });
 
   // Helper to build the correct route for a review
   function getReviewUrl(review: ReviewMeta) {
@@ -141,7 +148,7 @@ export default function ReviewClientPage({ reviews, initialCategory = "all" }: R
             
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>{new Date(review.date).getFullYear()}</span>
+              <span>{new Date((review.end_date && review.end_date.trim()) || review.start_date).getFullYear()}</span>
             </div>
           </div>
         </div>
@@ -169,7 +176,7 @@ export default function ReviewClientPage({ reviews, initialCategory = "all" }: R
           >
             <td className="py-2 px-3">{review.title}</td>
             <td className="py-2 px-3">{review.category}</td>
-            <td className="py-2 px-3">{formatDate(review.date)}</td>
+            <td className="py-2 px-3">{formatDate((review.end_date && review.end_date.trim()) || review.start_date)}</td>
           </tr>
         ))}
       </tbody>

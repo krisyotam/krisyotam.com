@@ -130,7 +130,8 @@ export function BookDetailClient({ book }: BookDetailClientProps) {
         {/* Post Header */}        <PostHeader
           title={book.title}
           subtitle={`by ${book.authorName}`}
-          date={book.yearPublished}
+          start_date={book.yearPublished}
+          end_date=""
           category={book.classification}
           tags={postTags}
           preview={book.description}

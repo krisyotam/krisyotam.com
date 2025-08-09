@@ -13,7 +13,8 @@ type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "po
 
 interface StoryData {
   title: string;
-  date: string;
+  start_date: string;
+  end_date?: string;
   slug: string;
   tags: string[];
   category: string;

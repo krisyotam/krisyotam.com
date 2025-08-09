@@ -1,5 +1,5 @@
 import NotesTaggedPage from "./NotesTaggedPage";
-import notesData from "@/data/notes/quick-notes.json";
+import notesData from "@/data/notes/notes.json";
 import tagsData from "@/data/notes/tags.json";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -99,7 +99,8 @@ export default function NotesTagPage({ params }: PageProps) {
   const tagHeaderData = customTag ? {
     title: customTag.title,
     subtitle: "",
-    date: customTag.date,
+    start_date: customTag.date || "2025-01-01",
+    end_date: new Date().toISOString().split('T')[0],
     preview: customTag.preview,
     status: customTag.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
     confidence: customTag.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
@@ -109,7 +110,8 @@ export default function NotesTagPage({ params }: PageProps) {
   } : {
     title: originalTag,
     subtitle: "",
-    date: new Date().toISOString(),
+    start_date: "2025-01-01",
+    end_date: new Date().toISOString().split('T')[0],
     preview: `Notes tagged with ${originalTag}.`,
     status: "Active" as const,
     confidence: "certain" as const,
@@ -119,7 +121,11 @@ export default function NotesTagPage({ params }: PageProps) {
   };
 
   // Sort notes by date (newest first)
-  const notes = [...notesWithTag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const notes = [...notesWithTag].sort((a, b) => {
+    const aDate = (a.end_date?.trim()) ? a.end_date : a.start_date;
+    const bDate = (b.end_date?.trim()) ? b.end_date : b.start_date;
+    return new Date(bDate).getTime() - new Date(aDate).getTime();
+  });
 
   return (
     <div className="notes-container">

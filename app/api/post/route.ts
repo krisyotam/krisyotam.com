@@ -20,7 +20,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
 
-    const year = new Date(postData.date).getFullYear().toString();
+    const displayDate = postData.end_date || postData.start_date;
+    const year = new Date(displayDate).getFullYear().toString();
     const mdxPath = path.join(process.cwd(), "app/blog", year, slug, "page.mdx");
     const tsxPath = path.join(process.cwd(), "app/blog", year, slug, "page.tsx");
     const marginNotesPath = path.join(process.cwd(), "app/blog", year, slug, "margin-notes.json");

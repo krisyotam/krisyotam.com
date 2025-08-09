@@ -51,14 +51,16 @@ export default function BlogCategoryClient({ posts, allPosts, category }: BlogCa
       status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
       confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
       importance: categoryData.importance,
-      date: categoryData.date
+      start_date: categoryData.date || "Undefined",
+      end_date: new Date().toISOString().split('T')[0]
     } : {
       title: category,
       preview: `Posts in the ${category} category`,
       status: "Finished" as const,
       confidence: "certain" as const,
       importance: 8,
-      date: new Date().toISOString()
+      start_date: "Undefined",
+      end_date: new Date().toISOString().split('T')[0]
     };
   };
 
@@ -69,7 +71,8 @@ export default function BlogCategoryClient({ posts, allPosts, category }: BlogCa
       <PageHeader
         title={categoryData.title}
         subtitle="Blog Posts"
-        date={categoryData.date}
+        start_date={categoryData.start_date}
+        end_date={categoryData.end_date}
         preview={categoryData.preview}
         status={categoryData.status}
         confidence={categoryData.confidence}

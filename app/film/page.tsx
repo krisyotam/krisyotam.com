@@ -13,7 +13,8 @@ export default function FilmPage() {
       <div className="film-page">
         <PageHeader 
           title="Film"
-          date="2025-01-01"
+          start_date="2025-01-01"
+          end_date={new Date().toISOString().split('T')[0]}
           preview="My film and TV watching activity, stats, and curated collections"
           status="Finished"
           confidence="certain"

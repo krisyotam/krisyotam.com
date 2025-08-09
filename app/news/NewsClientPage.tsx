@@ -12,7 +12,8 @@ import categoriesData from "@/data/news/categories.json";
 /* default page-level metadata for the header */
 const defaultNewsPageData = {
   title: "News",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0],
   preview: "Latest news and developments in AI, technology, and innovation",
   status: "In Progress" as "In Progress",
   confidence: "likely" as "likely",

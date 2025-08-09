@@ -12,7 +12,8 @@ import categoriesData from "@/data/dossiers/categories.json";
 /* default page-level metadata for the header */
 const defaultDossiersPageData = {
   title: "Dossiers",
-  date: new Date().toISOString(),
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
   preview: "Classified investigations and sensitive case files with detailed intelligence reports",
   status: "In Progress" as "In Progress",
   confidence: "likely" as "likely",
@@ -64,7 +65,8 @@ export default function DossiersClientPage({ dossiers, initialCategory = "all" }
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,
+        start_date: categoryData.date || "Undefined",
+        end_date: new Date().toISOString().split('T')[0],
         preview: categoryData.preview,
         status: mapDossierStatusToPageHeaderStatus(categoryData.status as DossierStatus),
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",

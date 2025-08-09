@@ -13,7 +13,7 @@ export default function RulesOfTheInternetPage() {
         <PageHeader
           title="Rules of the Internet"
           subtitle="Internet Culture Guidelines"
-          date={new Date().toISOString()}
+          start_date={new Date().toISOString()}
           preview="The unofficial rules governing internet behavior and culture according to 4chan"
           status="Finished"
           confidence="certain"

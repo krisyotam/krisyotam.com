@@ -1,6 +1,6 @@
 "use client"
 
-import poemsData from "@/data/verse/poems.json"
+import poemsData from "@/data/verse/verse.json"
 import categoriesData from "@/data/verse/categories.json"
 import type { Poem } from "@/utils/poems"
 import { PageHeader } from "@/components/page-header"
@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select"
 import { cn } from "@/lib/utils"
+import { formatDate, formatDateRange } from "@/utils/date-formatter"
 
 interface VerseType {
   slug: string;
@@ -49,7 +50,8 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
       return {
         title: "Verse",
         subtitle: "Poems, Haikus, and Other Forms", 
-        date: "2025-01-01",
+        start_date: "2025-01-01",
+        end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
         preview: "An anthology of original verse",
         status: "In Progress" as const,
         confidence: "likely" as const,
@@ -65,7 +67,8 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
       return {
         title: typeData.title,
         subtitle: "",
-        date: typeData.date,
+        start_date: typeData.date || "Undefined",
+        end_date: new Date().toISOString().split('T')[0],
         preview: typeData.preview,
         status: typeData.status,
         confidence: typeData.confidence,
@@ -77,7 +80,8 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
     return {
       title: currentType,
       subtitle: "",
-      date: "2025-01-01",
+      start_date: "Undefined",
+      end_date: new Date().toISOString().split('T')[0],
       preview: `A collection of ${currentType.toLowerCase()} poems`,
       status: "In Progress" as const,
       confidence: "likely" as const,
@@ -95,7 +99,7 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
   ]
 
   // Get poems filtered by type and search
-  const sortedPoems = [...poems].sort((a, b) => new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime());
+  const sortedPoems = [...poems].sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime());
   const filteredPoems = sortedPoems.filter(poem => {
     const matchesType = currentType === "All" || slugifyType(poem.type) === slugifyType(currentType);
     const matchesSearch = !searchQuery || 
@@ -117,7 +121,7 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
   // Helper to build the correct route for a poem
   function getPoemUrl(poem: Poem) {
     const typeSlug = slugifyType(poem.type);
-    return `/verse/${encodeURIComponent(typeSlug)}/${String(poem.year)}/${encodeURIComponent(poem.slug)}`
+    return `/verse/${encodeURIComponent(typeSlug)}/${encodeURIComponent(poem.slug)}`
   }
 
   function handleTypeChange(selectedValue: string) {
@@ -185,7 +189,12 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
                   >
                     <td className="py-2 px-3">{poem.title}</td>
                     <td className="py-2 px-3">{getTypeTitle(poem.type)}</td>
-                    <td className="py-2 px-3">{String(poem.year)}</td>
+                    <td className="py-2 px-3">
+                      {poem.end_date && poem.end_date.trim() 
+                        ? formatDate(poem.end_date)
+                        : formatDate(poem.start_date)
+                      }
+                    </td>
                   </tr>
                 ))}
               </tbody>
