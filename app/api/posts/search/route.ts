@@ -6,7 +6,7 @@ import path from "path"
  * Returns a plain array of posts (unwrapped) for client code
  */
 export async function GET(req: Request) {
-  const filePath = path.join(process.cwd(), "data", "blog", "feed.json")
+  const filePath = path.join(process.cwd(), "data", "blog", "blog.json")
   const raw = await fs.readFile(filePath, "utf8")
   const data = JSON.parse(raw)
 

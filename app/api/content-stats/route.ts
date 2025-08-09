@@ -61,7 +61,7 @@ export async function GET() {
   const books = readJsonFile("data/mybooks.json")
   const keynotes = readJsonFile("data/keynotes.json")
   const quotes = readJsonFile("data/quotes.json")
-  const poems = readJsonFile("data/poems.json")
+  const poems = readJsonFile("data/verse/verse.json")
   const characters = readJsonFile("data/ocs.json")
   const certifications = readJsonFile("data/certifications.json")
 

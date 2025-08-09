@@ -41,7 +41,7 @@ export async function getEssaysData(): Promise<PostsData> {
 }
 
 /**
- * Get blog data from feed.json
+ * Get blog data from blog.json
  * This function ensures the file is included in Vercel's build
  */
 export async function getBlogData(): Promise<Post[]> {
@@ -50,7 +50,7 @@ export async function getBlogData(): Promise<Post[]> {
     const json = await readFile(filePath, "utf-8")
     return JSON.parse(json) as Post[]
   } catch (error) {
-    console.error("Error reading feed.json:", error)
+    console.error("Error reading blog.json:", error)
     return []
   }
 }
