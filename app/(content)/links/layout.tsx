@@ -1,4 +1,4 @@
-import "../globals.css";
+import "../../globals.css";
 import "./links.css";
 import type { Metadata } from "next";
 import { staticMetadata } from "@/lib/staticMetadata";
