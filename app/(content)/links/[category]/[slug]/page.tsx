@@ -85,7 +85,7 @@ export default async function LinkPage({ params }: LinkPageProps) {
   const headings = await extractHeadingsFromMDX('links', params.slug, params.category);
 
   // Dynamically import the MDX file based on category and slug
-  const Link = (await import(`@/app/links/content/${params.category}/${params.slug}.mdx`)).default;
+  const Link = (await import(`@/app/(content)/links/content/${params.category}/${params.slug}.mdx`)).default;
 
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">

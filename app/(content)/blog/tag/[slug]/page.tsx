@@ -120,7 +120,10 @@ export default function BlogTagPage({ params }: PageProps) {
   };
 
   // Sort posts by date (newest first) and ensure proper typing
-  const posts: BlogMeta[] = [...postsWithTag].sort((a, b) => {
+  const posts: BlogMeta[] = postsWithTag.map(post => ({
+    ...post,
+    importance: typeof post.importance === 'string' ? parseInt(post.importance, 10) : post.importance
+  })).sort((a, b) => {
     const aDate = a.end_date || a.start_date;
     const bDate = b.end_date || b.start_date;
     return new Date(bDate).getTime() - new Date(aDate).getTime();

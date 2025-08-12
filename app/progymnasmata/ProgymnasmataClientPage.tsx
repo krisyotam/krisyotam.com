@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react"
 import { Progymnasmata } from "@/components/progymnasmata/progymnasmata"
 import { PostHeader } from "@/components/post-header"
-import { Footer } from "@/app/essays/components/footer"
+import { Footer } from "@/app/(content)/essays/components/footer"
 import { usePathname } from "next/navigation"
 
 // Interface for progymnasmata data

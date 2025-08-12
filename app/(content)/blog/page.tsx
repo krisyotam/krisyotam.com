@@ -10,7 +10,10 @@ export const metadata: Metadata = staticMetadata.blog;
 
 export default function BlogPage() {
   // Sort notes by date (newest first) and filter out hidden posts
-  const posts: BlogMeta[] = [...blogData]
+  const posts: BlogMeta[] = blogData.map(post => ({
+    ...post,
+    importance: typeof post.importance === 'string' ? parseInt(post.importance, 10) : post.importance
+  }))
     .filter(post => post.state !== "hidden") // Only show active posts
     .map(post => ({
       ...post,

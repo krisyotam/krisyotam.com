@@ -76,7 +76,7 @@ export default async function EssayPage({ params }: EssayPageProps) {
   const headings = await extractHeadingsFromMDX('essays', params.slug, params.category);
 
   // Dynamically import the MDX file based on category and slug
-  const EssayArticle = (await import(`@/app/essays/content/${params.category}/${params.slug}.mdx`)).default;  return (
+  const EssayArticle = (await import(`@/app/(content)/essays/content/${params.category}/${params.slug}.mdx`)).default;  return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
       <div className="max-w-6xl mx-auto px-4">
         {/* Header section - full width */}
