@@ -1,5 +1,5 @@
 /* Import the styles from posts.css */
-@import url("../essays/posts.css");
+@import url("../(content)/essays/posts.css");
 
 /* Additional changelog-specific styles */
 .changelog-content {
