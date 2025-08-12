@@ -1,2 +1,7 @@
+
 import "./dev.css"
-export { default } from "./data/page.mdx"
+import DevMDX from "./data/page.mdx"
+
+export default function DevPage() {
+	return <DevMDX />
+}
