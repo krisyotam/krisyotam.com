@@ -741,7 +741,7 @@ export function SettingsMenu() {
   }
 
   const openChangelog = () => {
-    window.open("/changelog", "_blank")
+  window.open("/updates/changelog", "_blank")
     setIsOpen(false)
   }
 
