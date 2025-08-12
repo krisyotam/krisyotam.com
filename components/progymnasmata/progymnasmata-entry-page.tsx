@@ -5,7 +5,7 @@ import Image from "next/image";
 import { PostHeader } from "@/components/post-header";
 import { LiveClock } from "@/components/live-clock";
 import type { ProgymnasmataEntry } from "@/types/progymnasmata";
-import { Footer } from "@/app/essays/components/footer";
+import { Footer } from "@/app/(content)/essays/components/footer";
 import { Citation } from "@/components/citation";
 
 interface ProgymnasmataEntryPageProps {

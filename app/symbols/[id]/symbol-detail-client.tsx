@@ -11,7 +11,7 @@ import Link from 'next/link'
 import symbolsData from '@/data/symbols.json'
 import { PostHeader } from '@/components/post-header'
 import { Citation } from '@/components/citation'
-import { Footer } from '@/app/essays/components/footer'
+import { Footer } from '@/app/(content)/essays/components/footer'
 
 type Symbol = {
   id: string

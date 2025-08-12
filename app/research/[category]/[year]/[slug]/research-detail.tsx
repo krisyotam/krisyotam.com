@@ -6,7 +6,7 @@ import { useState } from "react";
 import { PasswordDialog } from "@/components/password-dialog";
 import { Download, ExternalLink, ArrowLeft, XCircle } from "lucide-react";
 import { ResearchHeader } from "@/components/research-header";
-import { Footer } from "@/app/essays/components/footer";
+import { Footer } from "@/app/(content)/essays/components/footer";
 import Essay from "@/components/posts/typography/essay";
 import { Citation } from "@/components/citation";
 
