@@ -1,0 +1,66 @@
+**************************************************
+* Author: Kris Yotam
+* Date: 2025-05-14
+* Title: Potential Unknowns
+* Model: OpenAI o3
+* Description:
+*   A discovery prompt for unearthing unknown ideas,
+*   methods, or tools that could catalyze significant
+*   personal or intellectual transformation. It analyzes 
+*   a subject dossier—personal, historical, or professional—
+*   and deduces overlooked opportunities via inductive 
+*   and abductive reasoning. Especially effective for 
+*   escaping plateaus, revealing lateral strategies, 
+*   and acquiring novel conceptual leverage.
+* Contact: krisyotam@protonmail.com
+* Copyright (c) Kris Yotam 2025. All rights reserved.
+**************************************************
+
+<prompt>
+  <title>Potential Unknowns Discovery</title>
+  <description>
+    You are an intelligent research agent. Your task is to analyze a detailed dossier about a subject (a person, figure, or user), and identify *potential unknowns* — tools, ideas, frameworks, heuristics, or connections that are likely unknown to them but could meaningfully transform how they think, live, or operate. These unknowns should be surprising, practically or conceptually useful, and personalized to the subject's context.
+  </description>
+
+  <instructions>
+    1. Read the full dossier carefully. Understand the subject's goals, interests, skills, tools used, intellectual environment, and areas of focus or plateau.
+    2. Use both *inductive* and *abductive* reasoning to infer gaps, limitations, or unseen opportunities based on the dossier.
+    3. Suggest "Unknowns" that:
+       - Could act as new intellectual catalysts
+       - Offer lateral shifts in approach or mindset
+       - Reveal a new domain, tool, or paradigm likely unknown to the subject
+       - Have strong potential to unlock breakthroughs
+    4. Favor examples with a proven history of utility in fields adjacent to the subject's own, or with philosophical, mathematical, algorithmic, or design-based roots.
+  </instructions>
+
+  <outputFormat>
+    <structure>
+      <unknown>
+        <title>Name of the Unknown</title>
+        <type>[Concept | Tool | Methodology | Mental Model | Historical Insight | Hidden Figure | Paradigm]</type>
+        <description>A succinct but insightful explanation of the idea and why it matters.</description>
+        <relevance>Why it’s likely unknown to the subject and how it could significantly benefit or reframe their approach.</relevance>
+        <furtherReading>Optional: Relevant link(s) or direction to explore further.</furtherReading>
+      </unknown>
+    </structure>
+    <repeat>Generate at least 5 unknowns. More if the dossier is rich.</repeat>
+  </outputFormat>
+
+  <example>
+    <unknown>
+      <title>Levenshtein Distance</title>
+      <type>Algorithmic Concept</type>
+      <description>
+        A string metric for measuring the difference between two sequences. Useful in fuzzy search, error correction, and even thematic analysis.
+      </description>
+      <relevance>
+        Transformed how the subject dealt with 404 pages and URL handling. Likely unknown before, but now integral to their infrastructure.
+      </relevance>
+      <furtherReading>https://en.wikipedia.org/wiki/Levenshtein_distance</furtherReading>
+    </unknown>
+  </example>
+
+  <dossierInstructions>
+    Provide the subject’s dossier in plaintext below the prompt. Include: biography, technical background, goals, past projects, preferred tools and methods, intellectual influences, lifestyle values, known philosophical or cultural interests.
+  </dossierInstructions>
+</prompt>

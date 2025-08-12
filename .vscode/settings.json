@@ -1,0 +1,29 @@
+{
+  "mdx.validate": false,
+  "typescript.validate.enable": false,
+  "javascript.validate.enable": false,
+  "mdx.server.enable": false,
+  "files.associations": {
+    "*.mdx": "mdx"
+  },
+  "editor.quickSuggestions": {
+    "strings": false
+  },
+  "editor.suggest.showWords": false,
+  "mdx.experimental.validate": false,
+  "[mdx]": {
+    "editor.quickSuggestions": {
+      "strings": false,
+      "comments": false,
+      "other": false
+    },
+    "editor.suggest.showWords": false,
+    "editor.wordBasedSuggestions": "off"
+  },
+  "typescript.tsserver.web.projectWideIntellisense.enabled": false,
+  "launch": {
+    
+    "configurations": [],
+    "compounds": []
+  }
+}

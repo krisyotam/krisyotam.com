@@ -1,0 +1,25 @@
+{
+  "papers": [
+    {
+      "title": "Improving Language Understanding by Generative Pre-Training",
+      "author": ["Alec Radford", "Karthik Narasimhan", "Tim Salimans", "Ilya Sutskever"],
+      "source_link": "https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf",
+      "archive_link": "",
+      "publication_year": 2018
+    },
+    {
+      "title": "Language Models are Unsupervised Multitask Learners",
+      "author": ["Alec Radford", "Jeffrey Wu", "Rewon Child", "David Luan", "Dario Amodei", "Ilya Sutskever"],
+      "source_link": "https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf",
+      "archive_link": "",
+      "publication_year": 2019
+    },
+    {
+      "title": "Language Models are Few-Shot Learners",
+      "author": ["Tom B. Brown", "Benjamin Mann", "Nick Ryder", "Melanie Subbiah", "Jared Kaplan", "Prafulla Dhariwal", "Arvind Neelakantan", "Pranav Shyam", "Girish Sastry", "Amanda Askell", "Sandhini Agarwal", "Ariel Herbert-Voss", "Gretchen Krueger", "Tom Henighan", "Rewon Child", "Aditya Ramesh", "Daniel M. Ziegler", "Jeffrey Wu", "Clemens Winter", "Christopher Hesse", "Mark Chen", "Eric Sigler", "Mateusz Litwin", "Scott Gray", "Benjamin Chess", "Jack Clark", "Christopher Berner", "Sam McCandlish", "Alec Radford", "Ilya Sutskever", "Dario Amodei"],
+      "source_link": "https://arxiv.org/pdf/2005.14165",
+      "archive_link": "",
+      "publication_year": 2020
+    }
+  ]
+}

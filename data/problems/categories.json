@@ -1,0 +1,184 @@
+{
+  "categories": [
+    {
+      "slug": "number-theory",
+      "title": "Number Theory",
+      "preview": "Problems involving primes, modular arithmetic, divisibility, and Diophantine equations.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 10
+    },
+    {
+      "slug": "algebra",
+      "title": "Algebra",
+      "preview": "Problems in linear and abstract algebra, including groups, rings, fields, and polynomial identities.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 10
+    },
+    {
+      "slug": "geometry",
+      "title": "Geometry",
+      "preview": "Problems in Euclidean and coordinate geometry, constructions, loci, and transformations.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "real-analysis",
+      "title": "Real Analysis",
+      "preview": "Problems involving limits, sequences, continuity, differentiability, and integrability.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 10
+    },
+    {
+      "slug": "complex-analysis",
+      "title": "Complex Analysis",
+      "preview": "Problems involving holomorphic functions, residues, conformal mappings, and contour integration.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "combinatorics",
+      "title": "Combinatorics",
+      "preview": "Problems in counting, permutations, pigeonhole principle, inclusion-exclusion, and graph theory.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "mathematical-logic",
+      "title": "Mathematical Logic",
+      "preview": "Problems involving logical reasoning, formal systems, and foundational paradoxes.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "differential-equations",
+      "title": "Differential Equations",
+      "preview": "Problems solving ODEs, systems of equations, and applications in modeling and physics.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "mechanics",
+      "title": "Mechanics (Theoretical Physics)",
+      "preview": "Problems in classical mechanics including Newtonian systems, conservation laws, and Lagrangian dynamics based on Landau-Lifshitz Volume 1.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 10
+    },
+    {
+      "slug": "lagrangian-formalism",
+      "title": "Lagrangian Formalism",
+      "preview": "Problems involving variational principles, Euler-Lagrange equations, constraints, and generalized coordinates.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "hamiltonian-formalism",
+      "title": "Hamiltonian Formalism",
+      "preview": "Problems exploring canonical coordinates, Hamilton’s equations, and phase space structure.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "rigid-body-dynamics",
+      "title": "Rigid Body Dynamics",
+      "preview": "Problems involving rotation, inertia tensors, angular momentum, and torque in rigid systems.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "variational-calculus",
+      "title": "Variational Calculus",
+      "preview": "Problems exploring functionals, constraints, and the principles of least action.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "leetcode",
+      "title": "LeetCode",
+      "preview": "Algorithm and data structure problems from LeetCode, organized by difficulty and topic.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "hackerrank",
+      "title": "HackerRank",
+      "preview": "Coding and mathematics problems from HackerRank challenges across domains.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 6
+    },
+    {
+      "slug": "codewars",
+      "title": "Codewars",
+      "preview": "Coding kata problems from Codewars emphasizing brevity and elegant solutions.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 6
+    },
+    {
+      "slug": "atcoder",
+      "title": "AtCoder",
+      "preview": "Advanced competitive programming problems from AtCoder contests, with a focus on speed and precision.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "exercism",
+      "title": "Exercism",
+      "preview": "Coding exercises and mentorship for various programming languages.",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 7
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "title": "AWS Certified Solutions Architect - Associate",
+    "date": "2023-05-15",
+    "link": "https://www.credly.com/badges/aws-certified-solutions-architect-associate",
+    "progress": "11",
+    "status": "In Progress"
+  },
+  {
+    "title": "Microsoft Certified: Azure Developer Associate",
+    "date": "2023-02-10",
+    "link": "https://learn.microsoft.com/en-us/certifications/azure-developer/",
+    "progress": "11",
+    "status": "In Progress"
+  },
+  {
+    "title": "Google Professional Cloud Architect",
+    "date": "2022-11-28",
+    "link": "https://cloud.google.com/certification/cloud-architect",
+    "progress": "11",
+    "status": "In Progress"
+  }
+]

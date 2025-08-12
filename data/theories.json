@@ -1,0 +1,123 @@
+[
+    {
+      "id": "RESEARCH_001",
+      "title": "The Theory of Everything: Unifying the Forces of Nature",
+      "abstract": "This research proposes a unified theory that integrates quantum mechanics, general relativity, and other fundamental forces into one cohesive framework. It challenges existing models and seeks to provide a deeper understanding of the universe at both the cosmological and quantum levels.",
+      "importance": "This theory is considered the most significant in modern physics, as it aims to explain all of the fundamental forces of nature under one unified model, potentially revolutionizing our understanding of the universe.",
+      "authors": ["Albert E. Newton", "Jane M. Collins", "Lucas R. Torres"],
+      "subject": "Physics",
+      "keywords": ["Theory of Everything", "Quantum Mechanics", "General Relativity", "Unified Theory", "Fundamental Forces"],
+      "postedBy": "Albert E. Newton",
+      "postedOn": "2024-01-15",
+      "dateStarted": "2023-08-01",
+      "status": "in-progress",
+      "bibliography": [
+        "Einstein, A. (1915). The General Theory of Relativity.",
+        "Hawking, S. W. (1988). A Brief History of Time.",
+        "Kaku, M. (2011). The Physics of the Future."
+      ],
+      "img": "/research/theory-of-everything.jpg",
+      "pdfLink": "/research/theory-of-everything.pdf",
+      "sourceLink": "https://github.com/albertn/theory-of-everything",
+      "category": "Physics",
+      "tags": ["Unified Theory", "Quantum Mechanics", "Relativity", "Physics"],
+      "tier": 1
+    },
+    {
+      "id": "RESEARCH_002",
+      "title": "The Potential of Artificial Intelligence in Advancing Human Cognition",
+      "abstract": "This research investigates the role of artificial intelligence in enhancing human cognitive abilities, focusing on AI-driven cognitive augmentation and brain-computer interfaces. It explores how AI can be used to improve memory, decision-making, and creativity.",
+      "importance": "The implications of AI in cognitive enhancement could revolutionize mental health, education, and even human biology. The research has the potential to change how we interact with technology and augment human capabilities.",
+      "authors": ["Eliza H. Turner", "Oliver J. Watson", "Sarah M. Li"],
+      "subject": "Artificial Intelligence",
+      "keywords": ["Artificial Intelligence", "Cognitive Enhancement", "Brain-Computer Interfaces", "Memory", "Creativity"],
+      "postedBy": "Eliza H. Turner",
+      "postedOn": "2023-11-07",
+      "dateStarted": "2023-06-22",
+      "status": "in-progress",
+      "bibliography": [
+        "Kurzweil, R. (2005). The Singularity is Near.",
+        "Shane, J. (2018). Artificial Intelligence: A Guide for Thinking Humans.",
+        "Turner, E. H. (2023). Cognitive Enhancement with AI. Journal of Artificial Intelligence, 45(4), 230-250."
+      ],
+      "img": "/research/ai-cognition.jpg",
+      "pdfLink": "/research/ai-cognition.pdf",
+      "sourceLink": "https://github.com/elizaturner/ai-cognition",
+      "category": "Artificial Intelligence",
+      "tags": ["Cognitive Enhancement", "AI", "Brain-Computer Interface", "Neuroscience"],
+      "tier": 2
+    },
+    {
+      "id": "RESEARCH_003",
+      "title": "The Psychological Impact of Color in Marketing and Consumer Behavior",
+      "abstract": "This study examines how different colors in branding and marketing materials influence consumer emotions, decisions, and purchasing behavior. By conducting controlled experiments, we seek to understand the psychological triggers linked to specific colors.",
+      "importance": "The findings could be of significant value to businesses and marketers, providing a science-backed approach to branding and consumer engagement. The research may change marketing strategies and influence the design of consumer experiences.",
+      "authors": ["Julia T. Park", "Robert E. Grant", "Alexis M. Lee"],
+      "subject": "Marketing Psychology",
+      "keywords": ["Color Psychology", "Consumer Behavior", "Branding", "Marketing", "Psychological Triggers"],
+      "postedBy": "Julia T. Park",
+      "postedOn": "2023-09-25",
+      "dateStarted": "2023-04-15",
+      "status": "published",
+      "bibliography": [
+        "Elliot, A. J., & Maier, M. A. (2014). Color and Psychological Functioning: The Effect of Red on Performance Attainment. Journal of Experimental Psychology.",
+        "Labrecque, L. I., & Milne, G. R. (2013). To Be or Not To Be Different: Exploration of Norms and Economic Outcomes in Color Choices. Journal of Consumer Psychology.",
+        "Park, J. T. (2023). The Psychology of Color in Marketing. Journal of Consumer Behavior, 12(3), 105-118."
+      ],
+      "img": "/research/color-marketing.jpg",
+      "pdfLink": "/research/color-marketing.pdf",
+      "sourceLink": "https://github.com/juliapark/color-marketing",
+      "category": "Marketing Psychology",
+      "tags": ["Color Psychology", "Marketing", "Branding", "Consumer Behavior"],
+      "tier": 3
+    },
+    {
+      "id": "RESEARCH_004",
+      "title": "A New Hypothesis for the Alchemization of Granite into Gold",
+      "abstract": "This hypothesis proposes a new method for the transmutation of granite into gold using advanced chemical processes. While based on a combination of traditional alchemical principles and modern chemistry, the hypothesis aims to create gold by manipulating the molecular structure of granite.",
+      "importance": "Although it is highly speculative and improbable, this theory raises interesting questions about the limits of modern chemistry and the potential for breakthroughs in material science. It serves more as a thought experiment than a practical guide.",
+      "authors": ["Richard B. Moore", "Linda M. Trotter", "Henry C. Vasquez"],
+      "subject": "Chemistry",
+      "keywords": ["Granite", "Gold", "Alchemization", "Transmutation", "Chemistry"],
+      "postedBy": "Richard B. Moore",
+      "postedOn": "2023-06-15",
+      "dateStarted": "2023-01-10",
+      "status": "hypothesis",
+      "bibliography": [
+        "Newton, I. (1687). Philosophiæ Naturalis Principia Mathematica.",
+        "Von Helmont, J. B. (1644). The Collected Works of Johann Baptista von Helmont.",
+        "Moore, R. B. (2023). Alchemy and Modern Chemistry: A New Approach. Journal of Speculative Chemistry."
+      ],
+      "img": "/research/alchemizing-granite.jpg",
+      "pdfLink": "/research/alchemizing-granite.pdf",
+      "sourceLink": "https://github.com/richardbmoore/alchemizing-granite",
+      "category": "Chemistry",
+      "tags": ["Alchemy", "Chemistry", "Gold", "Granite", "Transmutation"],
+      "tier": 5
+    },
+    {
+      "id": "RESEARCH_005",
+      "title": "The Influence of Solar Activity on Global Climate Patterns",
+      "abstract": "This theory proposes that fluctuations in solar activity, particularly solar flares and sunspots, have a direct influence on Earth's climate patterns, including temperature variation, rainfall, and storm frequency. The study uses historical data and climate models to test this hypothesis.",
+      "importance": "The research is of great importance in the context of climate change, as understanding the relationship between solar activity and climate patterns could help refine predictive models and aid in mitigating climate-related risks.",
+      "authors": ["Harold F. Adams", "Maria D. Kennedy", "Jake A. Lambert"],
+      "subject": "Environmental Science",
+      "keywords": ["Solar Activity", "Climate Patterns", "Climate Change", "Solar Flares", "Sunspots"],
+      "postedBy": "Harold F. Adams",
+      "postedOn": "2024-02-02",
+      "dateStarted": "2023-09-11",
+      "status": "published",
+      "bibliography": [
+        "Lockwood, M., & Fröhlich, C. (2007). The Solar Activity-Climate Connection. Geophysical Research Letters.",
+        "Gray, L. J., et al. (2010). Solar Influence on Climate. Nature Geoscience.",
+        "Adams, H. F. (2023). The Sun and Earth's Climate: An Interdisciplinary Study. Journal of Environmental Science, 34(6), 1192-1206."
+      ],
+      "img": "/research/solar-activity-climate.jpg",
+      "pdfLink": "/research/solar-activity-climate.pdf",
+      "sourceLink": "https://github.com/haroldadams/solar-activity-climate",
+      "category": "Environmental Science",
+      "tags": ["Solar Activity", "Climate Change", "Sunspots", "Climate Patterns"],
+      "tier": 2
+    }
+  ]
+  

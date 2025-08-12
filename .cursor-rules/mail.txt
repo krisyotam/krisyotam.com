@@ -1,0 +1,45 @@
+[13:23:36.983] Running build in Washington, D.C., USA (East) – iad1
+[13:23:36.984] Build machine configuration: 2 cores, 8 GB
+[13:23:37.035] Cloning github.com/krisyotam/krisyotam.com (Branch: main, Commit: 3710e58)
+[13:23:43.864] Cloning completed: 6.828s
+[13:23:58.898] Restored build cache from previous deployment (7FczQC8UNvy2nhn4eV92wZnEsndE)
+[13:24:00.988] Running "vercel build"
+[13:24:01.448] Vercel CLI 44.2.10
+[13:24:01.713] WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+[13:24:02.005] Installing dependencies...
+[13:24:04.724] npm warn deprecated topojson@3.0.2: Use topojson-client, topojson-server or topojson-simplify directly.
+[13:24:19.306] 
+[13:24:19.307] added 7 packages, removed 21 packages, and changed 49 packages in 17s
+[13:24:19.307] 
+[13:24:19.307] 233 packages are looking for funding
+[13:24:19.307]   run `npm fund` for details
+[13:24:19.365] Detected Next.js version: 14.2.30
+[13:24:19.369] Running "npm run build"
+[13:24:19.479] 
+[13:24:19.479] > kris-yotam@0.1.0 build
+[13:24:19.480] > next build
+[13:24:19.480] 
+[13:24:20.144]   ▲ Next.js 14.2.30
+[13:24:20.145]   - Experiments (use with caution):
+[13:24:20.151]     · webpackBuildWorker
+[13:24:20.151] 
+[13:24:20.242]    Creating an optimized production build ...
+[13:25:53.711]  ✓ Compiled successfully
+[13:25:53.712]    Linting and checking validity of types ...
+[13:27:08.700] Failed to compile.
+[13:27:08.701] 
+[13:27:08.701] ./app/blog/BlogClientPage.tsx:140:19
+[13:27:08.701] Type error: Property 'cover_image' does not exist on type 'BlogMeta'.
+[13:27:08.701] 
+[13:27:08.701] [0m [90m 138 |[39m           {[90m/* Cover Image Area - Using 16:9 aspect ratio */[39m}[0m
+[13:27:08.701] [0m [90m 139 |[39m           [33m<[39m[33mdiv[39m className[33m=[39m[32m"image-placeholder aspect-[16/9]"[39m[33m>[39m[0m
+[13:27:08.701] [0m[31m[1m>[22m[39m[90m 140 |[39m             {note[33m.[39mcover_image [33m?[39m ([0m
+[13:27:08.701] [0m [90m     |[39m                   [31m[1m^[22m[39m[0m
+[13:27:08.701] [0m [90m 141 |[39m               [33m<[39m[33mimg[39m [0m
+[13:27:08.701] [0m [90m 142 |[39m                 src[33m=[39m{note[33m.[39mcover_image} [0m
+[13:27:08.702] [0m [90m 143 |[39m                 alt[33m=[39m{note[33m.[39mtitle}[0m
+[13:27:08.777] Next.js build worker exited with code: 1 and signal: null
+[13:27:08.796] Error: Command "npm run build" exited with 1
+[13:27:09.403] 
+[13:27:12.413] Exiting build container
+

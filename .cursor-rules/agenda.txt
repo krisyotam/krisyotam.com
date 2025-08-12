@@ -1,0 +1,1443 @@
+[05:10:34.572] Running build in Washington, D.C., USA (East) – iad1
+[05:10:34.572] Build machine configuration: 2 cores, 8 GB
+[05:10:34.617] Cloning github.com/krisyotam/krisyotam.com (Branch: main, Commit: 24fb9cc)
+[05:10:41.163] Cloning completed: 6.545s
+[05:10:45.265] Restored build cache from previous deployment (HWvEWW5CRNZV5mkWha3Kn6j5i9vp)
+[05:10:56.316] Running "vercel build"
+[05:10:56.797] Vercel CLI 44.7.3
+[05:10:57.069] WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+[05:10:57.326] Installing dependencies...
+[05:10:58.822] npm warn deprecated topojson@3.0.2: Use topojson-client, topojson-server or topojson-simplify directly.
+[05:10:59.149] 
+[05:10:59.149] changed 4 packages in 2s
+[05:10:59.149] 
+[05:10:59.149] 234 packages are looking for funding
+[05:10:59.149]   run `npm fund` for details
+[05:10:59.180] Detected Next.js version: 14.2.30
+[05:10:59.185] Running "npm run build"
+[05:10:59.294] 
+[05:10:59.294] > kris-yotam@0.1.0 build
+[05:10:59.294] > next build
+[05:10:59.294] 
+[05:11:00.114]   ▲ Next.js 14.2.30
+[05:11:00.115]   - Environments: .env
+[05:11:00.115]   - Experiments (use with caution):
+[05:11:00.115]     · webpackBuildWorker
+[05:11:00.116] 
+[05:11:00.224]    Creating an optimized production build ...
+[05:11:50.960]  ✓ Compiled successfully
+[05:11:50.962]    Linting and checking validity of types ...
+[05:13:17.703]    Collecting page data ...
+[05:13:20.979] Available blog tags: [
+[05:13:20.980]   'Poetry',             'Analysis',
+[05:13:20.980]   'Edgar Allan Poe',    'Close Reading',
+[05:13:20.983]   'Literary Criticism', 'T.S. Eliot',
+[05:13:20.983]   'Philosophy',         'Thought Experiments',
+[05:13:20.983]   'Mephistopheles',     'Devil',
+[05:13:20.983]   'Ethics',             'Film',
+[05:13:20.983]   'Review',             'Dance',
+[05:13:20.983]   'Marie Taglioni',     '19th Century',
+[05:13:20.983]   'Ballet',             'Villanelle',
+[05:13:20.983]   'Time',               'Perception',
+[05:13:20.983]   'LLM Poetry',         'Righteousness',
+[05:13:20.984]   'Ecclesiastes',       'Wisdom Literature',
+[05:13:20.984]   'Theology',           'Temptation',
+[05:13:20.984]   'James',              'Biblical Studies',
+[05:13:20.984]   'Film Studies',       'Cinema',
+[05:13:20.984]   'Intelligence',       'Cognition',
+[05:13:20.984]   'Psychometrics',      'IQ',
+[05:13:20.984]   'Cognitive Science'
+[05:13:20.984] ]
+[05:13:20.985] Slugified blog tags: [
+[05:13:20.985]   'poetry',             'analysis',
+[05:13:20.985]   'edgar-allan-poe',    'close-reading',
+[05:13:20.986]   'literary-criticism', 'ts-eliot',
+[05:13:20.986]   'philosophy',         'thought-experiments',
+[05:13:20.986]   'mephistopheles',     'devil',
+[05:13:20.986]   'ethics',             'film',
+[05:13:20.986]   'review',             'dance',
+[05:13:20.987]   'marie-taglioni',     '19th-century',
+[05:13:20.987]   'ballet',             'villanelle',
+[05:13:20.987]   'time',               'perception',
+[05:13:20.987]   'llm-poetry',         'righteousness',
+[05:13:20.987]   'ecclesiastes',       'wisdom-literature',
+[05:13:20.988]   'theology',           'temptation',
+[05:13:20.988]   'james',              'biblical-studies',
+[05:13:20.988]   'film-studies',       'cinema',
+[05:13:20.988]   'intelligence',       'cognition',
+[05:13:20.988]   'psychometrics',      'iq',
+[05:13:20.989]   'cognitive-science'
+[05:13:20.989] ]
+[05:13:21.060] Available categories: [
+[05:13:21.060]   'illuminati',
+[05:13:21.060]   'new-world-order',
+[05:13:21.060]   'cia-projects',
+[05:13:21.061]   'bohemian-grove',
+[05:13:21.061]   'bilderberg-group',
+[05:13:21.061]   'qanon',
+[05:13:21.061]   'roswell-and-ufo-coverups',
+[05:13:21.061]   'flat-earth',
+[05:13:21.061]   'secret-space-programs'
+[05:13:21.061] ]
+[05:13:21.061] Slugified categories: [
+[05:13:21.061]   'illuminati',
+[05:13:21.062]   'new-world-order',
+[05:13:21.062]   'cia-projects',
+[05:13:21.062]   'bohemian-grove',
+[05:13:21.062]   'bilderberg-group',
+[05:13:21.062]   'qanon',
+[05:13:21.063]   'roswell-and-ufo-coverups',
+[05:13:21.063]   'flat-earth',
+[05:13:21.063]   'secret-space-programs'
+[05:13:21.063] ]
+[05:13:21.116] Available tags: [
+[05:13:21.116]   'Learning',         'Philosophy',
+[05:13:21.116]   'Endurance',        'Education',
+[05:13:21.117]   'Self-Cultivation', 'Lifelong Learning',
+[05:13:21.117]   'Self-Education',   'Wisdom',
+[05:13:21.117]   'Trauma',           'Pain',
+[05:13:21.117]   'Resilience',       'Mental Health',
+[05:13:21.117]   'Boyhood',          'Emotional Development',
+[05:13:21.117]   'Ethics',           'Morality',
+[05:13:21.118]   'Letters'
+[05:13:21.118] ]
+[05:13:21.118] Slugified tags: [
+[05:13:21.118]   'learning',         'philosophy',
+[05:13:21.118]   'endurance',        'education',
+[05:13:21.118]   'self-cultivation', 'lifelong-learning',
+[05:13:21.119]   'self-education',   'wisdom',
+[05:13:21.119]   'trauma',           'pain',
+[05:13:21.119]   'resilience',       'mental-health',
+[05:13:21.119]   'boyhood',          'emotional-development',
+[05:13:21.119]   'ethics',           'morality',
+[05:13:21.119]   'letters'
+[05:13:21.120] ]
+[05:13:21.193] Available categories: [ 'pedagogy', 'philosophy', 'musings', 'letters', 'sexual-immorality' ]
+[05:13:21.193] Slugified categories: [ 'pedagogy', 'philosophy', 'musings', 'letters', 'sexual-immorality' ]
+[05:13:21.239] Available categories: [
+[05:13:21.239]   'liber-necrophilia',
+[05:13:21.239]   'liber-zoophilia',
+[05:13:21.239]   'liber-sodomorum',
+[05:13:21.239]   'liber-experimentorum',
+[05:13:21.239]   'liber-mortis',
+[05:13:21.239]   'liber-incubi',
+[05:13:21.239]   'liber-hysterica',
+[05:13:21.239]   'malleus-innocentium',
+[05:13:21.239]   'fabrica-excruciationis'
+[05:13:21.239] ]
+[05:13:21.246] Slugified categories: [
+[05:13:21.246]   'liber-necrophilia',
+[05:13:21.247]   'liber-zoophilia',
+[05:13:21.247]   'liber-sodomorum',
+[05:13:21.247]   'liber-experimentorum',
+[05:13:21.247]   'liber-mortis',
+[05:13:21.247]   'liber-incubi',
+[05:13:21.247]   'liber-hysterica',
+[05:13:21.247]   'malleus-innocentium',
+[05:13:21.247]   'fabrica-excruciationis'
+[05:13:21.247] ]
+[05:13:21.393] Available categories: [ 'ai', 'self-experiments', 'psychology', 'intelligence' ]
+[05:13:21.395] Slugified categories: [ 'ai', 'self-experiments', 'psychology', 'intelligence' ]
+[05:13:21.407] Available tags: [
+[05:13:21.407]   'Suicide',               'Philosophy',      'Powerlessness',
+[05:13:21.407]   'Haiku',                 'Verse',           'Form Guide',
+[05:13:21.407]   'Questions',             'Curiosities',     'Intellectual Puzzles',
+[05:13:21.407]   'Nursery Rhymes',        'Traditional',     'English Folklore',
+[05:13:21.407]   'Research',              'Wishlist',        'Projects',
+[05:13:21.407]   'Startups',              'Ideas',           'Entrepreneurship',
+[05:13:21.407]   'Tracking',              'Systems',         'Productivity',
+[05:13:21.407]   'Mental Models',         'Hypotheses',      'Thinking',
+[05:13:21.407]   'Writing',               'Prose',           'Quotes',
+[05:13:21.407]   'Wisdom',                'Personal Growth', 'Anomalies',
+[05:13:21.407]   'Strangeness',           'Observations',    'Conspiracies',
+[05:13:21.407]   'Theory',                'Speculation',     'Beliefs',
+[05:13:21.408]   'Change',                'Growth',          'Axioms',
+[05:13:21.408]   'Principles',            'Reasoning',       'Cursed Knowledge',
+[05:13:21.408]   'Awareness',             'Consequences',    'Courage',
+[05:13:21.408]   'Truth',                 'Platitudes',      'Language',
+[05:13:21.408]   'Critical Thinking',     'Existence',       'Self',
+[05:13:21.408]   'Hardware',              'Software',        'Setup',
+[05:13:21.408]   'Keyboard',              'Mouse',           'Development',
+[05:13:21.408]   'Tools',                 'Books',           'Library',
+[05:13:21.408]   'Reading',               'Reference',       'Kris Yotam',
+[05:13:21.408]   'Psychological Profile', 'Interests',       'Background',
+[05:13:21.408]   'Bounties',              'Full Texts',      'Academic Papers',
+[05:13:21.413]   'News',                  'Media',           'Newspapers',
+[05:13:21.414]   'Journalism',            'Website',         'krisyotam.com',
+[05:13:21.414]   'Essays',                'Design',          'Architecture',
+[05:13:21.414]   'Goodreads',             'Storygraph',      'Reading Lists',
+[05:13:21.414]   'Art',                   'Aesthetics',      'Favorites',
+[05:13:21.414]   'Lifestyle',             'Passions',        'Film',
+[05:13:21.414]   'Literature',            'Music',           'Algebra',
+[05:13:21.414]   'Calculus',              'Analysis',        'Pure Mathematics',
+[05:13:21.414]   'Hiring',                'Editing',         'Search',
+[05:13:21.414]   'Internet',              'Methodology',     'Digital',
+[05:13:21.414]   'Storage',
+[05:13:21.414]   ... 147 more items
+[05:13:21.414] ]
+[05:13:21.415] Slugified tags: [
+[05:13:21.415]   'suicide',               'philosophy',      'powerlessness',
+[05:13:21.415]   'haiku',                 'verse',           'form-guide',
+[05:13:21.415]   'questions',             'curiosities',     'intellectual-puzzles',
+[05:13:21.415]   'nursery-rhymes',        'traditional',     'english-folklore',
+[05:13:21.415]   'research',              'wishlist',        'projects',
+[05:13:21.415]   'startups',              'ideas',           'entrepreneurship',
+[05:13:21.415]   'tracking',              'systems',         'productivity',
+[05:13:21.415]   'mental-models',         'hypotheses',      'thinking',
+[05:13:21.415]   'writing',               'prose',           'quotes',
+[05:13:21.415]   'wisdom',                'personal-growth', 'anomalies',
+[05:13:21.415]   'strangeness',           'observations',    'conspiracies',
+[05:13:21.415]   'theory',                'speculation',     'beliefs',
+[05:13:21.415]   'change',                'growth',          'axioms',
+[05:13:21.415]   'principles',            'reasoning',       'cursed-knowledge',
+[05:13:21.415]   'awareness',             'consequences',    'courage',
+[05:13:21.416]   'truth',                 'platitudes',      'language',
+[05:13:21.416]   'critical-thinking',     'existence',       'self',
+[05:13:21.416]   'hardware',              'software',        'setup',
+[05:13:21.416]   'keyboard',              'mouse',           'development',
+[05:13:21.416]   'tools',                 'books',           'library',
+[05:13:21.416]   'reading',               'reference',       'kris-yotam',
+[05:13:21.416]   'psychological-profile', 'interests',       'background',
+[05:13:21.416]   'bounties',              'full-texts',      'academic-papers',
+[05:13:21.416]   'news',                  'media',           'newspapers',
+[05:13:21.416]   'journalism',            'website',         'krisyotamcom',
+[05:13:21.416]   'essays',                'design',          'architecture',
+[05:13:21.416]   'goodreads',             'storygraph',      'reading-lists',
+[05:13:21.416]   'art',                   'aesthetics',      'favorites',
+[05:13:21.416]   'lifestyle',             'passions',        'film',
+[05:13:21.416]   'literature',            'music',           'algebra',
+[05:13:21.416]   'calculus',              'analysis',        'pure-mathematics',
+[05:13:21.417]   'hiring',                'editing',         'search',
+[05:13:21.417]   'internet',              'methodology',     'digital',
+[05:13:21.417]   'storage',
+[05:13:21.417]   ... 147 more items
+[05:13:21.417] ]
+[05:13:21.424] Available tags: [
+[05:13:21.425]   'AI Alignment',
+[05:13:21.425]   'Ethics',
+[05:13:21.425]   'Language Models',
+[05:13:21.425]   'Benchmarking',
+[05:13:21.425]   'Nootropics',
+[05:13:21.425]   'Cognition',
+[05:13:21.425]   'Self-Experimentation',
+[05:13:21.425]   'Quantified Self',
+[05:13:21.425]   'Intelligence',
+[05:13:21.425]   'Predictive Modeling',
+[05:13:21.425]   'Open Data',
+[05:13:21.425]   'IQ Alternatives',
+[05:13:21.425]   'Learning Styles',
+[05:13:21.425]   'Psychometrics',
+[05:13:21.425]   'Education'
+[05:13:21.425] ]
+[05:13:21.426] Slugified tags: [
+[05:13:21.426]   'ai-alignment',
+[05:13:21.426]   'ethics',
+[05:13:21.426]   'language-models',
+[05:13:21.426]   'benchmarking',
+[05:13:21.426]   'nootropics',
+[05:13:21.426]   'cognition',
+[05:13:21.426]   'self-experimentation',
+[05:13:21.426]   'quantified-self',
+[05:13:21.426]   'intelligence',
+[05:13:21.426]   'predictive-modeling',
+[05:13:21.426]   'open-data',
+[05:13:21.426]   'iq-alternatives',
+[05:13:21.426]   'learning-styles',
+[05:13:21.426]   'psychometrics',
+[05:13:21.426]   'education'
+[05:13:21.426] ]
+[05:13:21.461] Available categories: [
+[05:13:21.462]   'Philosophy',
+[05:13:21.462]   'Verse',
+[05:13:21.462]   'Random',
+[05:13:21.462]   'Nursery Rhymes',
+[05:13:21.462]   'On Myself',
+[05:13:21.462]   'Libraries',
+[05:13:21.462]   'Bounties',
+[05:13:21.462]   'News',
+[05:13:21.462]   'Website',
+[05:13:21.462]   'Stable Syllabi',
+[05:13:21.463]   'Research',
+[05:13:21.463]   'Powerscaling',
+[05:13:21.463]   'Book Notes',
+[05:13:21.463]   'Technology',
+[05:13:21.463]   'Virtual Worlds',
+[05:13:21.463]   'Mathematics',
+[05:13:21.463]   'Internet Archive',
+[05:13:21.463]   'Indie Web',
+[05:13:21.463]   'Learning',
+[05:13:21.463]   'Gaming',
+[05:13:21.463]   'Physics',
+[05:13:21.464]   'Try Hack Me',
+[05:13:21.464]   'Hack The Box',
+[05:13:21.464]   'social-media',
+[05:13:21.464]   'Fraternities',
+[05:13:21.464]   'Artificial Intelligence',
+[05:13:21.464]   'Short Stories',
+[05:13:21.464]   'Manuals Of Style',
+[05:13:21.464]   'Internet Archiving',
+[05:13:21.464]   'ultralearning',
+[05:13:21.464]   'Watchlist',
+[05:13:21.464]   'character-analysis',
+[05:13:21.464]   'notes-on-people',
+[05:13:21.464]   'reviews',
+[05:13:21.464]   'templates'
+[05:13:21.465] ]
+[05:13:21.465] Slugified categories: [
+[05:13:21.465]   'philosophy',
+[05:13:21.465]   'verse',
+[05:13:21.465]   'random',
+[05:13:21.465]   'nursery-rhymes',
+[05:13:21.465]   'on-myself',
+[05:13:21.465]   'libraries',
+[05:13:21.465]   'bounties',
+[05:13:21.465]   'news',
+[05:13:21.465]   'website',
+[05:13:21.466]   'stable-syllabi',
+[05:13:21.466]   'research',
+[05:13:21.466]   'powerscaling',
+[05:13:21.466]   'book-notes',
+[05:13:21.466]   'technology',
+[05:13:21.466]   'virtual-worlds',
+[05:13:21.466]   'mathematics',
+[05:13:21.466]   'internet-archive',
+[05:13:21.466]   'indie-web',
+[05:13:21.466]   'learning',
+[05:13:21.466]   'gaming',
+[05:13:21.466]   'physics',
+[05:13:21.466]   'try-hack-me',
+[05:13:21.467]   'hack-the-box',
+[05:13:21.467]   'social-media',
+[05:13:21.467]   'fraternities',
+[05:13:21.467]   'artificial-intelligence',
+[05:13:21.467]   'short-stories',
+[05:13:21.467]   'manuals-of-style',
+[05:13:21.467]   'internet-archiving',
+[05:13:21.467]   'ultralearning',
+[05:13:21.467]   'watchlist',
+[05:13:21.467]   'character-analysis',
+[05:13:21.467]   'notes-on-people',
+[05:13:21.467]   'reviews',
+[05:13:21.467]   'templates'
+[05:13:21.468] ]
+[05:13:26.302]    Generating static pages (0/1275) ...
+[05:13:30.857] Fetching favorite actors from JSON
+[05:13:30.857] Retrieved 15 favorite actors
+[05:13:30.948] Fetching favorite characters from JSON
+[05:13:30.948] Retrieved 27 favorite characters
+[05:13:31.007] Fetching favorite film companies from JSON
+[05:13:31.007] Retrieved 12 favorite film companies
+[05:13:31.031] Fetching favorite directors from JSON
+[05:13:31.031] Retrieved 13 favorite directors
+[05:13:32.436] Error reading poems: Error: ENOENT: no such file or directory, open '/vercel/path0/data/verse/poems.json'
+[05:13:32.437]     at Object.readFileSync (node:fs:441:20)
+[05:13:32.437]     at l (/vercel/path0/.next/server/app/api/poems/route.js:1:693)
+[05:13:32.437]     at /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38417
+[05:13:32.437]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+[05:13:32.437]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+[05:13:32.438]     at ContextAPI.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+[05:13:32.438]     at NoopTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+[05:13:32.438]     at ProxyTracer.startActiveSpan (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+[05:13:32.438]     at /vercel/path0/node_modules/next/dist/server/lib/trace/tracer.js:122:103
+[05:13:32.438]     at NoopContextManager.with (/vercel/path0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062) {
+[05:13:32.438]   errno: -2,
+[05:13:32.438]   code: 'ENOENT',
+[05:13:32.438]   syscall: 'open',
+[05:13:32.438]   path: '/vercel/path0/data/verse/poems.json'
+[05:13:32.438] }
+[05:13:32.471] Error loading posts: Error: ENOENT: no such file or directory, open '/vercel/path0/data/blog/feed.json'
+[05:13:32.472]     at async open (node:internal/fs/promises:639:25)
+[05:13:32.472]     at async Object.readFile (node:internal/fs/promises:1243:14)
+[05:13:32.472]     at async d (/vercel/path0/.next/server/app/api/posts/route.js:1:668)
+[05:13:32.472]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[05:13:32.472]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[05:13:32.472]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[05:13:32.472]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[05:13:32.472]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[05:13:32.472]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[05:13:32.472]     at async Object.exportPage (/vercel/path0/node_modules/next/dist/export/worker.js:237:20) {
+[05:13:32.472]   errno: -2,
+[05:13:32.472]   code: 'ENOENT',
+[05:13:32.472]   syscall: 'open',
+[05:13:32.472]   path: '/vercel/path0/data/blog/feed.json'
+[05:13:32.472] }
+[05:13:32.701] 
+[05:13:32.701] Error occurred prerendering page "/api/posts/search". Read more: https://nextjs.org/docs/messages/prerender-error
+[05:13:32.704] 
+[05:13:32.704] Error: ENOENT: no such file or directory, open '/vercel/path0/data/blog/feed.json'
+[05:13:32.704]     at async open (node:internal/fs/promises:639:25)
+[05:13:32.704]     at async Object.readFile (node:internal/fs/promises:1243:14)
+[05:13:32.704]     at async d (/vercel/path0/.next/server/app/api/posts/search/route.js:1:675)
+[05:13:32.704]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[05:13:32.705]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[05:13:32.705]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[05:13:32.705]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[05:13:32.705]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[05:13:32.705]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[05:13:32.705]     at async Object.exportPage (/vercel/path0/node_modules/next/dist/export/worker.js:237:20)
+[05:13:34.274] Fetching user watched content from Trakt...
+[05:13:34.283] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
+[05:13:34.284] Error fetching Trakt genres: Error: Unable to get valid Trakt access token
+[05:13:34.284]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
+[05:13:34.284]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[05:13:34.285]     at async d (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4890)
+[05:13:34.285]     at async l (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:666)
+[05:13:34.285]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[05:13:34.285]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[05:13:34.285]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[05:13:34.286]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[05:13:34.286]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[05:13:34.286]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[05:13:34.396] Fetching user lists from Trakt
+[05:13:34.404] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
+[05:13:34.404] Error fetching Trakt lists: Error: Unable to get valid Trakt access token
+[05:13:34.404]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
+[05:13:34.405]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[05:13:34.405]     at async u (/vercel/path0/.next/server/app/api/trakt/lists/route.js:1:664)
+[05:13:34.405]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[05:13:34.405]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[05:13:34.405]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[05:13:34.405]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[05:13:34.405]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[05:13:34.405]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[05:13:34.405]     at async Object.exportPage (/vercel/path0/node_modules/next/dist/export/worker.js:237:20)
+[05:13:34.578] Failed to refresh Trakt token: 400 {"error":"invalid_grant","error_description":"The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."}
+[05:13:34.579] Error fetching Trakt stats: Error: Unable to get valid Trakt access token
+[05:13:34.579]     at h (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4334)
+[05:13:34.579]     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+[05:13:34.579]     at async d (/vercel/path0/.next/server/app/api/trakt/genres/route.js:1:4890)
+[05:13:34.579]     at async l (/vercel/path0/.next/server/app/api/trakt/stats/route.js:1:606)
+[05:13:34.579]     at async /vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:38411
+[05:13:34.579]     at async e_.execute (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:27880)
+[05:13:34.579]     at async e_.handle (/vercel/path0/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:6:39943)
+[05:13:34.579]     at async exportAppRoute (/vercel/path0/node_modules/next/dist/export/routes/app-route.js:77:26)
+[05:13:34.579]     at async exportPageImpl (/vercel/path0/node_modules/next/dist/export/worker.js:175:20)
+[05:13:34.579]     at async Span.traceAsyncFn (/vercel/path0/node_modules/next/dist/trace/trace.js:154:20)
+[05:13:45.147] PostTableRow - Linking to: essays/sexual-immorality/that-lust-cannot-be-sated
+[05:13:45.148] PostTableRow - Linking to: essays/musings/boy-interrupted
+[05:13:45.149] PostTableRow - Linking to: essays/letters/letter-to-the-licentious
+[05:13:45.149] PostTableRow - Linking to: blog/film/film-study-as-background-noise
+[05:13:45.149] PostTableRow - Linking to: blog/intelligence/remarks-on-measured-intelligence
+[05:13:45.150] PostTableRow - Linking to: blog/intelligence/dialogue-on-timed-cognition
+[05:13:45.150] PostTableRow - Linking to: blog/intelligence/against-high-functioning-giftedness
+[05:13:45.150] PostTableRow - Linking to: blog/biblical-theology/be-not-overly-righteous
+[05:13:45.150] PostTableRow - Linking to: blog/biblical-theology/god-is-not-a-temptor-of-man
+[05:13:45.151] PostTableRow - Linking to: blog/biblical-theology/god-is-not-a-respector-of-persons
+[05:13:46.035]    Generating static pages (318/1275) 
+[05:13:46.243] BookDetailClient - Received book: Linear Algebra Done Right
+[05:13:46.244] BookDetailClient - Book slug: linear-algebra-done-right
+[05:13:46.259] BookDetailClient - Received book: Understanding Analysis
+[05:13:46.260] BookDetailClient - Book slug: understanding-analysis
+[05:13:46.279] BookDetailClient - Received book: Elementary Analysis: The Theory of Calculus
+[05:13:46.280] BookDetailClient - Book slug: elementary-analysis-theory-of-calculus
+[05:13:46.301] BookDetailClient - Received book: Principles of Mathematical Analysis
+[05:13:46.302] BookDetailClient - Book slug: principles-of-mathematical-analysis
+[05:13:46.318] BookDetailClient - Received book: Complex Variables for Scientists and Engineers
+[05:13:46.318] BookDetailClient - Book slug: complex-variables-for-scientists-and-engineers
+[05:13:46.335] BookDetailClient - Received book: Elementary Number Theory
+[05:13:46.335] BookDetailClient - Book slug: elementary-number-theory
+[05:13:46.350] BookDetailClient - Received book: The Structure of Abstract Algebra
+[05:13:46.350] BookDetailClient - Book slug: the-structure-of-abstract-algebra
+[05:13:46.365] BookDetailClient - Received book: Plane Trigonometry with Tables
+[05:13:46.365] BookDetailClient - Book slug: plane-trigonometry-with-tables
+[05:13:52.468] Unknown content type: ocs
+[05:13:52.471] Unknown content type: ocs
+[05:13:52.485] Unknown content type: ocs
+[05:13:52.487] Unknown content type: ocs
+[05:13:52.502] Unknown content type: ocs
+[05:13:52.504] Unknown content type: ocs
+[05:13:52.521] Unknown content type: ocs
+[05:13:52.524] Unknown content type: ocs
+[05:13:52.539] Unknown content type: ocs
+[05:13:52.541] Unknown content type: ocs
+[05:13:52.555] Unknown content type: ocs
+[05:13:52.557] Unknown content type: ocs
+[05:13:52.575] Unknown content type: ocs
+[05:13:52.577] Unknown content type: ocs
+[05:13:52.594] Unknown content type: ocs
+[05:13:52.596] Unknown content type: ocs
+[05:13:52.610] Unknown content type: ocs
+[05:13:52.612] Unknown content type: ocs
+[05:13:52.625] Unknown content type: ocs
+[05:13:52.627] Unknown content type: ocs
+[05:13:52.645] Unknown content type: ocs
+[05:13:52.646] Unknown content type: ocs
+[05:13:52.661] Unknown content type: ocs
+[05:13:52.663] Unknown content type: ocs
+[05:13:52.676] Unknown content type: ocs
+[05:13:52.679] Unknown content type: ocs
+[05:13:52.692] Unknown content type: ocs
+[05:13:52.693] Unknown content type: ocs
+[05:13:52.708] Unknown content type: ocs
+[05:13:52.710] Unknown content type: ocs
+[05:13:52.731] Unknown content type: ocs
+[05:13:52.731] Unknown content type: ocs
+[05:13:52.749] Unknown content type: ocs
+[05:13:52.750] Unknown content type: ocs
+[05:13:52.768] Unknown content type: ocs
+[05:13:52.770] Unknown content type: ocs
+[05:13:52.785] Unknown content type: ocs
+[05:13:52.786] Unknown content type: ocs
+[05:13:52.800] Unknown content type: ocs
+[05:13:52.802] Unknown content type: ocs
+[05:13:52.817] Unknown content type: ocs
+[05:13:52.822] Unknown content type: ocs
+[05:13:52.836] Unknown content type: ocs
+[05:13:52.838] Unknown content type: ocs
+[05:13:52.855] Unknown content type: ocs
+[05:13:52.856] Unknown content type: ocs
+[05:13:52.869] Unknown content type: ocs
+[05:13:52.871] Unknown content type: ocs
+[05:13:52.892] Unknown content type: ocs
+[05:13:52.895] Unknown content type: ocs
+[05:13:52.910] Unknown content type: ocs
+[05:13:52.915] Unknown content type: ocs
+[05:13:52.929] Unknown content type: ocs
+[05:13:52.931] Unknown content type: ocs
+[05:13:52.945] Unknown content type: ocs
+[05:13:52.949] Unknown content type: ocs
+[05:13:52.966] Unknown content type: ocs
+[05:13:52.968] Unknown content type: ocs
+[05:13:52.982] Unknown content type: ocs
+[05:13:52.987] Unknown content type: ocs
+[05:13:54.525]    Generating static pages (637/1275) 
+[05:13:57.115] Imported problem MDX file successfully: select-elementary-improper-integrals-i
+[05:13:57.118] Imported problem MDX file successfully: select-elementary-improper-integrals-i
+[05:13:57.152] Imported problem MDX file successfully: cleos-integral
+[05:13:57.157] Imported problem MDX file successfully: cleos-integral
+[05:13:57.207] Imported problem MDX file successfully: lasagna-cpp
+[05:13:57.210] Imported problem MDX file successfully: lasagna-cpp
+[05:13:58.015] Imported proof MDX file successfully: infinitely-many-primes
+[05:13:58.020] Imported proof MDX file successfully: infinitely-many-primes
+[05:13:59.326]    Generating static pages (956/1275) 
+[05:13:59.379] Redis client type: object Available methods: [
+[05:13:59.379]   'use',          'addTelemetry', 'pipeline',     'autoPipeline',
+[05:13:59.379]   'multi',        'bitfield',     'append',       'bitcount',
+[05:13:59.379]   'bitop',        'bitpos',       'copy',         'dbsize',
+[05:13:59.379]   'decr',         'decrby',       'del',          'echo',
+[05:13:59.379]   'evalRo',       'eval',         'evalshaRo',    'evalsha',
+[05:13:59.379]   'exec',         'exists',       'expire',       'expireat',
+[05:13:59.379]   'flushall',     'flushdb',      'geoadd',       'geopos',
+[05:13:59.380]   'geodist',      'geohash',      'geosearch',    'geosearchstore',
+[05:13:59.380]   'get',          'getbit',       'getdel',       'getex',
+[05:13:59.380]   'getrange',     'getset',       'hdel',         'hexists',
+[05:13:59.380]   'hexpire',      'hexpireat',    'hexpiretime',  'httl',
+[05:13:59.380]   'hpexpire',     'hpexpireat',   'hpexpiretime', 'hpttl',
+[05:13:59.380]   'hpersist',     'hget',         'hgetall',      'hincrby',
+[05:13:59.380]   'hincrbyfloat', 'hkeys',        'hlen',         'hmget',
+[05:13:59.380]   'hmset',        'hrandfield',   'hscan',        'hset',
+[05:13:59.380]   'hsetnx',       'hstrlen',      'hvals',        'incr',
+[05:13:59.380]   'incrby',       'incrbyfloat',  'keys',         'lindex',
+[05:13:59.380]   'linsert',      'llen',         'lmove',        'lpop',
+[05:13:59.380]   'lmpop',        'lpos',         'lpush',        'lpushx',
+[05:13:59.380]   'lrange',       'lrem',         'lset',         'ltrim',
+[05:13:59.380]   'mget',         'mset',         'msetnx',       'persist',
+[05:13:59.380]   'pexpire',      'pexpireat',    'pfadd',        'pfcount',
+[05:13:59.380]   'pfmerge',      'ping',         'psetex',       'psubscribe',
+[05:13:59.380]   'pttl',         'publish',      'randomkey',    'rename',
+[05:13:59.380]   'renamenx',     'rpop',         'rpush',        'rpushx',
+[05:13:59.381]   ... 66 more items
+[05:13:59.381] ]
+[05:13:59.384] Redis client type: object Available methods: [
+[05:13:59.385]   'use',          'addTelemetry', 'pipeline',     'autoPipeline',
+[05:13:59.385]   'multi',        'bitfield',     'append',       'bitcount',
+[05:13:59.385]   'bitop',        'bitpos',       'copy',         'dbsize',
+[05:13:59.385]   'decr',         'decrby',       'del',          'echo',
+[05:13:59.386]   'evalRo',       'eval',         'evalshaRo',    'evalsha',
+[05:13:59.386]   'exec',         'exists',       'expire',       'expireat',
+[05:13:59.386]   'flushall',     'flushdb',      'geoadd',       'geopos',
+[05:13:59.386]   'geodist',      'geohash',      'geosearch',    'geosearchstore',
+[05:13:59.386]   'get',          'getbit',       'getdel',       'getex',
+[05:13:59.386]   'getrange',     'getset',       'hdel',         'hexists',
+[05:13:59.387]   'hexpire',      'hexpireat',    'hexpiretime',  'httl',
+[05:13:59.387]   'hpexpire',     'hpexpireat',   'hpexpiretime', 'hpttl',
+[05:13:59.387]   'hpersist',     'hget',         'hgetall',      'hincrby',
+[05:13:59.387]   'hincrbyfloat', 'hkeys',        'hlen',         'hmget',
+[05:13:59.387]   'hmset',        'hrandfield',   'hscan',        'hset',
+[05:13:59.387]   'hsetnx',       'hstrlen',      'hvals',        'incr',
+[05:13:59.388]   'incrby',       'incrbyfloat',  'keys',         'lindex',
+[05:13:59.388]   'linsert',      'llen',         'lmove',        'lpop',
+[05:13:59.388]   'lmpop',        'lpos',         'lpush',        'lpushx',
+[05:13:59.388]   'lrange',       'lrem',         'lset',         'ltrim',
+[05:13:59.388]   'mget',         'mset',         'msetnx',       'persist',
+[05:13:59.388]   'pexpire',      'pexpireat',    'pfadd',        'pfcount',
+[05:13:59.389]   'pfmerge',      'ping',         'psetex',       'psubscribe',
+[05:13:59.389]   'pttl',         'publish',      'randomkey',    'rename',
+[05:13:59.389]   'renamenx',     'rpop',         'rpush',        'rpushx',
+[05:13:59.389]   ... 66 more items
+[05:13:59.389] ]
+[05:14:03.677] Error fetching visits_by_day: B [Error]: Dynamic server usage: no-store fetch https://classic-caribou-31989.upstash.io /stats
+[05:14:03.677]     at /vercel/path0/.next/server/chunks/38948.js:2:10769
+[05:14:03.677]     at /vercel/path0/.next/server/chunks/38948.js:2:18390
+[05:14:03.677]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.677]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.677]     at u.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18142)
+[05:14:03.677]     at a.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18676)
+[05:14:03.677]     at /vercel/path0/.next/server/chunks/38948.js:2:17923
+[05:14:03.677]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.677]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.677]     at b.trace (/vercel/path0/.next/server/chunks/38948.js:2:17877) {
+[05:14:03.677]   description: 'no-store fetch https://classic-caribou-31989.upstash.io /stats',
+[05:14:03.677]   digest: 'DYNAMIC_SERVER_USAGE'
+[05:14:03.677] }
+[05:14:03.677] Error fetching referrers: B [Error]: Dynamic server usage: no-store fetch https://classic-caribou-31989.upstash.io /stats
+[05:14:03.677]     at /vercel/path0/.next/server/chunks/38948.js:2:10769
+[05:14:03.677]     at /vercel/path0/.next/server/chunks/38948.js:2:18390
+[05:14:03.678]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.678]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.678]     at u.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18142)
+[05:14:03.678]     at a.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18676)
+[05:14:03.678]     at /vercel/path0/.next/server/chunks/38948.js:2:17923
+[05:14:03.678]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.678]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.678]     at b.trace (/vercel/path0/.next/server/chunks/38948.js:2:17877) {
+[05:14:03.678]   description: 'no-store fetch https://classic-caribou-31989.upstash.io /stats',
+[05:14:03.678]   digest: 'DYNAMIC_SERVER_USAGE'
+[05:14:03.678] }
+[05:14:03.678] Error fetching paths: B [Error]: Dynamic server usage: no-store fetch https://classic-caribou-31989.upstash.io /stats
+[05:14:03.678]     at /vercel/path0/.next/server/chunks/38948.js:2:10769
+[05:14:03.678]     at /vercel/path0/.next/server/chunks/38948.js:2:18390
+[05:14:03.678]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.678]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.678]     at u.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18142)
+[05:14:03.678]     at a.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18676)
+[05:14:03.678]     at /vercel/path0/.next/server/chunks/38948.js:2:17923
+[05:14:03.678]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.678]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.678]     at b.trace (/vercel/path0/.next/server/chunks/38948.js:2:17877) {
+[05:14:03.678]   description: 'no-store fetch https://classic-caribou-31989.upstash.io /stats',
+[05:14:03.678]   digest: 'DYNAMIC_SERVER_USAGE'
+[05:14:03.678] }
+[05:14:03.678] Error fetching cities: B [Error]: Dynamic server usage: no-store fetch https://classic-caribou-31989.upstash.io /stats
+[05:14:03.679]     at /vercel/path0/.next/server/chunks/38948.js:2:10769
+[05:14:03.679]     at /vercel/path0/.next/server/chunks/38948.js:2:18390
+[05:14:03.679]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.679]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.679]     at u.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18142)
+[05:14:03.679]     at a.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18676)
+[05:14:03.679]     at /vercel/path0/.next/server/chunks/38948.js:2:17923
+[05:14:03.679]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.679]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.679]     at b.trace (/vercel/path0/.next/server/chunks/38948.js:2:17877) {
+[05:14:03.680]   description: 'no-store fetch https://classic-caribou-31989.upstash.io /stats',
+[05:14:03.680]   digest: 'DYNAMIC_SERVER_USAGE'
+[05:14:03.680] }
+[05:14:03.680] Error fetching visits_by_day: B [Error]: Dynamic server usage: no-store fetch https://classic-caribou-31989.upstash.io /stats
+[05:14:03.680]     at /vercel/path0/.next/server/chunks/38948.js:2:10769
+[05:14:03.680]     at /vercel/path0/.next/server/chunks/38948.js:2:18390
+[05:14:03.680]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.680]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.680]     at u.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18142)
+[05:14:03.680]     at a.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18676)
+[05:14:03.680]     at /vercel/path0/.next/server/chunks/38948.js:2:17923
+[05:14:03.680]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.680]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.680]     at b.trace (/vercel/path0/.next/server/chunks/38948.js:2:17877) {
+[05:14:03.680]   description: 'no-store fetch https://classic-caribou-31989.upstash.io /stats',
+[05:14:03.680]   digest: 'DYNAMIC_SERVER_USAGE'
+[05:14:03.680] }
+[05:14:03.682] Error fetching referrers: B [Error]: Dynamic server usage: no-store fetch https://classic-caribou-31989.upstash.io /stats
+[05:14:03.682]     at /vercel/path0/.next/server/chunks/38948.js:2:10769
+[05:14:03.682]     at /vercel/path0/.next/server/chunks/38948.js:2:18390
+[05:14:03.682]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.682]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.682]     at u.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18142)
+[05:14:03.682]     at a.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18676)
+[05:14:03.682]     at /vercel/path0/.next/server/chunks/38948.js:2:17923
+[05:14:03.682]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.682]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.682]     at b.trace (/vercel/path0/.next/server/chunks/38948.js:2:17877) {
+[05:14:03.682]   description: 'no-store fetch https://classic-caribou-31989.upstash.io /stats',
+[05:14:03.682]   digest: 'DYNAMIC_SERVER_USAGE'
+[05:14:03.682] }
+[05:14:03.682] Error fetching paths: B [Error]: Dynamic server usage: no-store fetch https://classic-caribou-31989.upstash.io /stats
+[05:14:03.682]     at /vercel/path0/.next/server/chunks/38948.js:2:10769
+[05:14:03.682]     at /vercel/path0/.next/server/chunks/38948.js:2:18390
+[05:14:03.682]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.682]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.682]     at u.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18142)
+[05:14:03.682]     at a.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18676)
+[05:14:03.682]     at /vercel/path0/.next/server/chunks/38948.js:2:17923
+[05:14:03.682]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.682]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.683]     at b.trace (/vercel/path0/.next/server/chunks/38948.js:2:17877) {
+[05:14:03.683]   description: 'no-store fetch https://classic-caribou-31989.upstash.io /stats',
+[05:14:03.683]   digest: 'DYNAMIC_SERVER_USAGE'
+[05:14:03.683] }
+[05:14:03.683] Error fetching cities: B [Error]: Dynamic server usage: no-store fetch https://classic-caribou-31989.upstash.io /stats
+[05:14:03.683]     at /vercel/path0/.next/server/chunks/38948.js:2:10769
+[05:14:03.683]     at /vercel/path0/.next/server/chunks/38948.js:2:18390
+[05:14:03.683]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.683]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.683]     at u.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18142)
+[05:14:03.683]     at a.startActiveSpan (/vercel/path0/.next/server/chunks/38948.js:1:18676)
+[05:14:03.683]     at /vercel/path0/.next/server/chunks/38948.js:2:17923
+[05:14:03.683]     at a.with (/vercel/path0/.next/server/chunks/38948.js:1:8887)
+[05:14:03.683]     at u.with (/vercel/path0/.next/server/chunks/38948.js:1:3087)
+[05:14:03.683]     at b.trace (/vercel/path0/.next/server/chunks/38948.js:2:17877) {
+[05:14:03.683]   description: 'no-store fetch https://classic-caribou-31989.upstash.io /stats',
+[05:14:03.683]   digest: 'DYNAMIC_SERVER_USAGE'
+[05:14:03.684] }
+[05:14:09.790] Fetching from Monkeytype API: https://api.monkeytype.com/users/stats
+[05:14:09.792] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[05:14:09.792] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=30
+[05:14:09.792] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
+[05:14:09.793] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[05:14:09.793] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=10
+[05:14:09.793] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=25
+[05:14:09.794] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[05:14:09.794] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=100
+[05:14:09.794] Fetching from Monkeytype API: https://api.monkeytype.com/users/streak
+[05:14:09.795] Fetching from Monkeytype API: https://api.monkeytype.com/users/currentTestActivity
+[05:14:09.795] Fetching from Monkeytype API: https://api.monkeytype.com/results?limit=10
+[05:14:09.796] Fetching from Monkeytype API: https://api.monkeytype.com/users/stats
+[05:14:09.797] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=15
+[05:14:09.797] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=30
+[05:14:09.798] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=60
+[05:14:09.798] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[05:14:09.800] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=10
+[05:14:09.800] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=25
+[05:14:09.800] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=50
+[05:14:09.800] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=words&mode2=100
+[05:14:09.800] Fetching from Monkeytype API: https://api.monkeytype.com/users/streak
+[05:14:09.800] Fetching from Monkeytype API: https://api.monkeytype.com/users/currentTestActivity
+[05:14:09.800] Fetching from Monkeytype API: https://api.monkeytype.com/results?limit=10
+[05:14:09.948] API response for /users/personalBests: {
+[05:14:09.948]   message: 'Personal bests retrieved',
+[05:14:09.948]   data: [
+[05:14:09.948]     {
+[05:14:09.948]       acc: 95.73,
+[05:14:09.948]       consistency: 69.5,
+[05:14:09.948]       difficulty: 'normal',
+[05:14:09.949]       lazyMode: false,
+[05:14:09.949]       language: 'english',
+[05:14:09.949]       punctuation: false,
+[05:14:09.949]       raw: 110,
+[05:14:09.949]       wpm: 102,
+[05:14:09.949]       timestamp: 1741147359513,
+[05:14:09.949]       numbers: false
+[05:14:09.949]     }
+[05:14:09.949]   ]
+[05:14:09.949] }
+[05:14:09.949] Personal bests data: [
+[05:14:09.949]   {
+[05:14:09.949]     "acc": 95.73,
+[05:14:09.949]     "consistency": 69.5,
+[05:14:09.949]     "difficulty": "normal",
+[05:14:09.949]     "lazyMode": false,
+[05:14:09.949]     "language": "english",
+[05:14:09.949]     "punctuation": false,
+[05:14:09.949]     "raw": 110,
+[05:14:09.949]     "wpm": 102,
+[05:14:09.949]     "timestamp": 1741147359513,
+[05:14:09.950]     "numbers": false
+[05:14:09.950]   }
+[05:14:09.950] ]
+[05:14:09.950] API response for /users/personalBests: {
+[05:14:09.950]   message: 'Personal bests retrieved',
+[05:14:09.950]   data: [
+[05:14:09.950]     {
+[05:14:09.950]       acc: 95.73,
+[05:14:09.950]       consistency: 69.5,
+[05:14:09.950]       difficulty: 'normal',
+[05:14:09.950]       lazyMode: false,
+[05:14:09.950]       language: 'english',
+[05:14:09.950]       punctuation: false,
+[05:14:09.950]       raw: 110,
+[05:14:09.950]       wpm: 102,
+[05:14:09.950]       timestamp: 1741147359513,
+[05:14:09.950]       numbers: false
+[05:14:09.950]     }
+[05:14:09.951]   ]
+[05:14:09.951] }
+[05:14:09.951] Personal bests data: [
+[05:14:09.951]   {
+[05:14:09.951]     "acc": 95.73,
+[05:14:09.951]     "consistency": 69.5,
+[05:14:09.951]     "difficulty": "normal",
+[05:14:09.951]     "lazyMode": false,
+[05:14:09.951]     "language": "english",
+[05:14:09.951]     "punctuation": false,
+[05:14:09.951]     "raw": 110,
+[05:14:09.951]     "wpm": 102,
+[05:14:09.951]     "timestamp": 1741147359513,
+[05:14:09.951]     "numbers": false
+[05:14:09.951]   }
+[05:14:09.951] ]
+[05:14:09.969] Monkeytype API error (503): {}
+[05:14:09.969] Retrying request (attempt 1/3)...
+[05:14:09.992] Monkeytype API error (503): {}
+[05:14:09.992] Retrying request (attempt 1/3)...
+[05:14:10.148] API response for /users/personalBests: {
+[05:14:10.148]   message: 'Personal bests retrieved',
+[05:14:10.149]   data: [
+[05:14:10.149]     {
+[05:14:10.149]       acc: 87.73,
+[05:14:10.149]       consistency: 84.65,
+[05:14:10.149]       difficulty: 'normal',
+[05:14:10.149]       lazyMode: false,
+[05:14:10.149]       language: 'english',
+[05:14:10.149]       punctuation: false,
+[05:14:10.149]       raw: 130.38,
+[05:14:10.149]       wpm: 104.79,
+[05:14:10.149]       numbers: false,
+[05:14:10.149]       timestamp: 1741147466281
+[05:14:10.149]     }
+[05:14:10.149]   ]
+[05:14:10.149] }
+[05:14:10.149] Personal bests data: [
+[05:14:10.149]   {
+[05:14:10.149]     "acc": 87.73,
+[05:14:10.149]     "consistency": 84.65,
+[05:14:10.149]     "difficulty": "normal",
+[05:14:10.149]     "lazyMode": false,
+[05:14:10.149]     "language": "english",
+[05:14:10.149]     "punctuation": false,
+[05:14:10.149]     "raw": 130.38,
+[05:14:10.150]     "wpm": 104.79,
+[05:14:10.150]     "numbers": false,
+[05:14:10.150]     "timestamp": 1741147466281
+[05:14:10.150]   }
+[05:14:10.150] ]
+[05:14:10.150] API response for /users/personalBests: {
+[05:14:10.150]   message: 'Personal bests retrieved',
+[05:14:10.150]   data: [
+[05:14:10.150]     {
+[05:14:10.150]       acc: 87.73,
+[05:14:10.150]       consistency: 84.65,
+[05:14:10.150]       difficulty: 'normal',
+[05:14:10.150]       lazyMode: false,
+[05:14:10.151]       language: 'english',
+[05:14:10.151]       punctuation: false,
+[05:14:10.151]       raw: 130.38,
+[05:14:10.151]       wpm: 104.79,
+[05:14:10.151]       numbers: false,
+[05:14:10.151]       timestamp: 1741147466281
+[05:14:10.151]     }
+[05:14:10.151]   ]
+[05:14:10.151] }
+[05:14:10.151] Personal bests data: [
+[05:14:10.151]   {
+[05:14:10.152]     "acc": 87.73,
+[05:14:10.152]     "consistency": 84.65,
+[05:14:10.152]     "difficulty": "normal",
+[05:14:10.152]     "lazyMode": false,
+[05:14:10.152]     "language": "english",
+[05:14:10.152]     "punctuation": false,
+[05:14:10.152]     "raw": 130.38,
+[05:14:10.152]     "wpm": 104.79,
+[05:14:10.152]     "numbers": false,
+[05:14:10.152]     "timestamp": 1741147466281
+[05:14:10.152]   }
+[05:14:10.152] ]
+[05:14:10.345] API response for /users/stats: {
+[05:14:10.346]   message: 'Personal stats retrieved',
+[05:14:10.346]   data: {
+[05:14:10.346]     _id: '638bd797bd098f2ba5dfa400',
+[05:14:10.346]     completedTests: 86,
+[05:14:10.346]     startedTests: 120,
+[05:14:10.346]     timeTyping: 16820.659999999996
+[05:14:10.346]   }
+[05:14:10.346] }
+[05:14:10.346] API response for /users/stats: {
+[05:14:10.346]   message: 'Personal stats retrieved',
+[05:14:10.346]   data: {
+[05:14:10.348]     _id: '638bd797bd098f2ba5dfa400',
+[05:14:10.349]     completedTests: 86,
+[05:14:10.349]     startedTests: 120,
+[05:14:10.349]     timeTyping: 16820.659999999996
+[05:14:10.349]   }
+[05:14:10.349] }
+[05:14:10.551] API response for /users/personalBests: {
+[05:14:10.551]   message: 'Personal bests retrieved',
+[05:14:10.551]   data: [
+[05:14:10.551]     {
+[05:14:10.551]       acc: 99.27,
+[05:14:10.551]       consistency: 71.97,
+[05:14:10.551]       difficulty: 'normal',
+[05:14:10.551]       lazyMode: false,
+[05:14:10.551]       language: 'english',
+[05:14:10.551]       punctuation: false,
+[05:14:10.551]       raw: 120.15,
+[05:14:10.551]       wpm: 120.15,
+[05:14:10.551]       timestamp: 1747112614042,
+[05:14:10.551]       numbers: false
+[05:14:10.551]     }
+[05:14:10.552]   ]
+[05:14:10.552] }
+[05:14:10.552] Personal bests data: [
+[05:14:10.552]   {
+[05:14:10.552]     "acc": 99.27,
+[05:14:10.552]     "consistency": 71.97,
+[05:14:10.552]     "difficulty": "normal",
+[05:14:10.552]     "lazyMode": false,
+[05:14:10.552]     "language": "english",
+[05:14:10.552]     "punctuation": false,
+[05:14:10.552]     "raw": 120.15,
+[05:14:10.552]     "wpm": 120.15,
+[05:14:10.552]     "timestamp": 1747112614042,
+[05:14:10.552]     "numbers": false
+[05:14:10.552]   }
+[05:14:10.552] ]
+[05:14:10.552] API response for /users/personalBests: {
+[05:14:10.552]   message: 'Personal bests retrieved',
+[05:14:10.552]   data: [
+[05:14:10.553]     {
+[05:14:10.553]       acc: 99.27,
+[05:14:10.553]       consistency: 71.97,
+[05:14:10.553]       difficulty: 'normal',
+[05:14:10.553]       lazyMode: false,
+[05:14:10.553]       language: 'english',
+[05:14:10.553]       punctuation: false,
+[05:14:10.553]       raw: 120.15,
+[05:14:10.553]       wpm: 120.15,
+[05:14:10.553]       timestamp: 1747112614042,
+[05:14:10.553]       numbers: false
+[05:14:10.553]     }
+[05:14:10.553]   ]
+[05:14:10.553] }
+[05:14:10.553] Personal bests data: [
+[05:14:10.553]   {
+[05:14:10.553]     "acc": 99.27,
+[05:14:10.553]     "consistency": 71.97,
+[05:14:10.553]     "difficulty": "normal",
+[05:14:10.554]     "lazyMode": false,
+[05:14:10.554]     "language": "english",
+[05:14:10.554]     "punctuation": false,
+[05:14:10.554]     "raw": 120.15,
+[05:14:10.554]     "wpm": 120.15,
+[05:14:10.554]     "timestamp": 1747112614042,
+[05:14:10.554]     "numbers": false
+[05:14:10.554]   }
+[05:14:10.554] ]
+[05:14:10.743] API response for /users/personalBests: {
+[05:14:10.743]   message: 'Personal bests retrieved',
+[05:14:10.743]   data: [
+[05:14:10.743]     {
+[05:14:10.744]       acc: 90.57,
+[05:14:10.744]       consistency: 47.29,
+[05:14:10.744]       difficulty: 'normal',
+[05:14:10.744]       lazyMode: false,
+[05:14:10.745]       language: 'english',
+[05:14:10.745]       punctuation: false,
+[05:14:10.748]       raw: 111.45,
+[05:14:10.748]       wpm: 97.8,
+[05:14:10.748]       numbers: false,
+[05:14:10.748]       timestamp: 1747112917927
+[05:14:10.748]     }
+[05:14:10.748]   ]
+[05:14:10.748] }
+[05:14:10.749] Personal bests data: [
+[05:14:10.749]   {
+[05:14:10.749]     "acc": 90.57,
+[05:14:10.749]     "consistency": 47.29,
+[05:14:10.749]     "difficulty": "normal",
+[05:14:10.749]     "lazyMode": false,
+[05:14:10.749]     "language": "english",
+[05:14:10.749]     "punctuation": false,
+[05:14:10.749]     "raw": 111.45,
+[05:14:10.749]     "wpm": 97.8,
+[05:14:10.749]     "numbers": false,
+[05:14:10.749]     "timestamp": 1747112917927
+[05:14:10.749]   }
+[05:14:10.749] ]
+[05:14:10.749] API response for /users/personalBests: {
+[05:14:10.749]   message: 'Personal bests retrieved',
+[05:14:10.749]   data: [
+[05:14:10.749]     {
+[05:14:10.749]       acc: 90.57,
+[05:14:10.749]       consistency: 47.29,
+[05:14:10.749]       difficulty: 'normal',
+[05:14:10.749]       lazyMode: false,
+[05:14:10.749]       language: 'english',
+[05:14:10.749]       punctuation: false,
+[05:14:10.749]       raw: 111.45,
+[05:14:10.749]       wpm: 97.8,
+[05:14:10.749]       numbers: false,
+[05:14:10.749]       timestamp: 1747112917927
+[05:14:10.749]     }
+[05:14:10.749]   ]
+[05:14:10.749] }
+[05:14:10.750] Personal bests data: [
+[05:14:10.750]   {
+[05:14:10.750]     "acc": 90.57,
+[05:14:10.750]     "consistency": 47.29,
+[05:14:10.750]     "difficulty": "normal",
+[05:14:10.750]     "lazyMode": false,
+[05:14:10.750]     "language": "english",
+[05:14:10.750]     "punctuation": false,
+[05:14:10.750]     "raw": 111.45,
+[05:14:10.750]     "wpm": 97.8,
+[05:14:10.750]     "numbers": false,
+[05:14:10.750]     "timestamp": 1747112917927
+[05:14:10.750]   }
+[05:14:10.750] ]
+[05:14:10.946] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[05:14:10.947] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[05:14:10.970] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[05:14:10.971] Monkeytype API error (503): {}
+[05:14:10.971] Retrying request (attempt 2/3)...
+[05:14:10.992] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[05:14:10.993] Monkeytype API error (503): {}
+[05:14:10.993] Retrying request (attempt 2/3)...
+[05:14:11.154] API response for /users/personalBests: {
+[05:14:11.154]   message: 'Personal bests retrieved',
+[05:14:11.155]   data: [
+[05:14:11.155]     {
+[05:14:11.155]       acc: 94.55,
+[05:14:11.155]       consistency: 66.53,
+[05:14:11.155]       difficulty: 'normal',
+[05:14:11.155]       lazyMode: false,
+[05:14:11.155]       language: 'english',
+[05:14:11.155]       punctuation: false,
+[05:14:11.155]       raw: 63.4,
+[05:14:11.155]       wpm: 61.46,
+[05:14:11.155]       timestamp: 1670133327519
+[05:14:11.155]     }
+[05:14:11.155]   ]
+[05:14:11.155] }
+[05:14:11.155] Personal bests data: [
+[05:14:11.155]   {
+[05:14:11.155]     "acc": 94.55,
+[05:14:11.155]     "consistency": 66.53,
+[05:14:11.155]     "difficulty": "normal",
+[05:14:11.155]     "lazyMode": false,
+[05:14:11.155]     "language": "english",
+[05:14:11.155]     "punctuation": false,
+[05:14:11.155]     "raw": 63.4,
+[05:14:11.155]     "wpm": 61.46,
+[05:14:11.155]     "timestamp": 1670133327519
+[05:14:11.156]   }
+[05:14:11.156] ]
+[05:14:11.156] API response for /users/personalBests: {
+[05:14:11.156]   message: 'Personal bests retrieved',
+[05:14:11.156]   data: [
+[05:14:11.156]     {
+[05:14:11.156]       acc: 94.55,
+[05:14:11.156]       consistency: 66.53,
+[05:14:11.156]       difficulty: 'normal',
+[05:14:11.156]       lazyMode: false,
+[05:14:11.156]       language: 'english',
+[05:14:11.156]       punctuation: false,
+[05:14:11.156]       raw: 63.4,
+[05:14:11.156]       wpm: 61.46,
+[05:14:11.156]       timestamp: 1670133327519
+[05:14:11.156]     }
+[05:14:11.156]   ]
+[05:14:11.156] }
+[05:14:11.156] Personal bests data: [
+[05:14:11.156]   {
+[05:14:11.156]     "acc": 94.55,
+[05:14:11.156]     "consistency": 66.53,
+[05:14:11.156]     "difficulty": "normal",
+[05:14:11.157]     "lazyMode": false,
+[05:14:11.157]     "language": "english",
+[05:14:11.157]     "punctuation": false,
+[05:14:11.157]     "raw": 63.4,
+[05:14:11.157]     "wpm": 61.46,
+[05:14:11.157]     "timestamp": 1670133327519
+[05:14:11.157]   }
+[05:14:11.157] ]
+[05:14:11.352] API response for /users/streak: {
+[05:14:11.353]   message: 'Streak data retrieved',
+[05:14:11.353]   data: {
+[05:14:11.353]     lastResultTimestamp: 1747121765000,
+[05:14:11.353]     length: 1,
+[05:14:11.353]     maxLength: 6,
+[05:14:11.353]     hourOffset: null
+[05:14:11.353]   }
+[05:14:11.353] }
+[05:14:11.353] API response for /users/streak: {
+[05:14:11.353]   message: 'Streak data retrieved',
+[05:14:11.353]   data: {
+[05:14:11.353]     lastResultTimestamp: 1747121765000,
+[05:14:11.353]     length: 1,
+[05:14:11.353]     maxLength: 6,
+[05:14:11.353]     hourOffset: null
+[05:14:11.353]   }
+[05:14:11.353] }
+[05:14:11.558] API response for /results: {
+[05:14:11.558]   message: 'Results retrieved',
+[05:14:11.558]   data: [
+[05:14:11.558]     {
+[05:14:11.558]       _id: '6822f665df21a5c1da374b59',
+[05:14:11.558]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.558]       wpm: 74.13,
+[05:14:11.558]       rawWpm: 79.45,
+[05:14:11.558]       charStats: [Array],
+[05:14:11.558]       acc: 89.27,
+[05:14:11.559]       mode: 'words',
+[05:14:11.559]       mode2: '50',
+[05:14:11.559]       timestamp: 1747121765000,
+[05:14:11.559]       restartCount: 4,
+[05:14:11.559]       incompleteTestSeconds: 26.77,
+[05:14:11.559]       testDuration: 38.36,
+[05:14:11.559]       consistency: 57.28,
+[05:14:11.559]       keyConsistency: 0.02
+[05:14:11.559]     },
+[05:14:11.559]     {
+[05:14:11.559]       _id: '6822f617df21a5c1da37484a',
+[05:14:11.559]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.559]       wpm: 94.2,
+[05:14:11.559]       rawWpm: 94.2,
+[05:14:11.559]       charStats: [Array],
+[05:14:11.559]       acc: 95.83,
+[05:14:11.559]       mode: 'words',
+[05:14:11.559]       mode2: '50',
+[05:14:11.559]       timestamp: 1747121687000,
+[05:14:11.560]       testDuration: 34.52,
+[05:14:11.560]       consistency: 60.29,
+[05:14:11.560]       keyConsistency: 1.96
+[05:14:11.560]     },
+[05:14:11.560]     {
+[05:14:11.560]       _id: '6822d447df21a5c1da35f42c',
+[05:14:11.560]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.560]       wpm: 96.52,
+[05:14:11.560]       rawWpm: 102.98,
+[05:14:11.560]       charStats: [Array],
+[05:14:11.560]       acc: 90.41,
+[05:14:11.560]       mode: 'words',
+[05:14:11.562]       mode2: '50',
+[05:14:11.562]       timestamp: 1747113031000,
+[05:14:11.562]       restartCount: 6,
+[05:14:11.562]       incompleteTestSeconds: 27.88,
+[05:14:11.565]       testDuration: 31.58,
+[05:14:11.565]       consistency: 63.38,
+[05:14:11.565]       keyConsistency: 2.07
+[05:14:11.565]     },
+[05:14:11.565]     {
+[05:14:11.565]       _id: '6822d3d5df21a5c1da35f014',
+[05:14:11.565]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.565]       wpm: 97.8,
+[05:14:11.565]       rawWpm: 111.45,
+[05:14:11.565]       charStats: [Array],
+[05:14:11.565]       acc: 90.57,
+[05:14:11.565]       mode: 'words',
+[05:14:11.565]       mode2: '10',
+[05:14:11.566]       timestamp: 1747112917000,
+[05:14:11.566]       restartCount: 1,
+[05:14:11.566]       incompleteTestSeconds: 1.81,
+[05:14:11.566]       testDuration: 5.28,
+[05:14:11.566]       consistency: 47.29,
+[05:14:11.566]       keyConsistency: 8.22,
+[05:14:11.566]       isPb: true
+[05:14:11.566]     },
+[05:14:11.566]     {
+[05:14:11.566]       _id: '6822d3bedf21a5c1da35ef2c',
+[05:14:11.566]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.567]       wpm: 105.53,
+[05:14:11.567]       rawWpm: 105.53,
+[05:14:11.567]       charStats: [Array],
+[05:14:11.567]       acc: 98.48,
+[05:14:11.567]       mode: 'words',
+[05:14:11.567]       mode2: '50',
+[05:14:11.567]       timestamp: 1747112894000,
+[05:14:11.567]       restartCount: 1,
+[05:14:11.567]       incompleteTestSeconds: 2.46,
+[05:14:11.567]       testDuration: 29.45,
+[05:14:11.567]       consistency: 72.1,
+[05:14:11.567]       keyConsistency: 15.77
+[05:14:11.567]     },
+[05:14:11.567]     {
+[05:14:11.567]       _id: '6822d347df21a5c1da35eabb',
+[05:14:11.567]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.567]       wpm: 113.25,
+[05:14:11.567]       rawWpm: 118.04,
+[05:14:11.568]       charStats: [Array],
+[05:14:11.568]       acc: 96.79,
+[05:14:11.568]       mode: 'words',
+[05:14:11.568]       mode2: '50',
+[05:14:11.568]       timestamp: 1747112775000,
+[05:14:11.568]       restartCount: 5,
+[05:14:11.568]       incompleteTestSeconds: 31.85,
+[05:14:11.568]       testDuration: 27.55,
+[05:14:11.568]       consistency: 75.48,
+[05:14:11.568]       keyConsistency: 9.83
+[05:14:11.568]     },
+[05:14:11.568]     {
+[05:14:11.568]       _id: '6822d2a6df21a5c1da35e476',
+[05:14:11.568]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.568]       wpm: 120.15,
+[05:14:11.568]       rawWpm: 120.15,
+[05:14:11.568]       charStats: [Array],
+[05:14:11.568]       acc: 99.27,
+[05:14:11.568]       mode: 'words',
+[05:14:11.569]       mode2: '50',
+[05:14:11.569]       timestamp: 1747112614000,
+[05:14:11.569]       restartCount: 1,
+[05:14:11.569]       incompleteTestSeconds: 25.16,
+[05:14:11.569]       testDuration: 27.07,
+[05:14:11.569]       consistency: 71.97,
+[05:14:11.569]       keyConsistency: 29.89,
+[05:14:11.569]       isPb: true
+[05:14:11.569]     },
+[05:14:11.569]     {
+[05:14:11.569]       _id: '6822d25fdf21a5c1da35e19c',
+[05:14:11.569]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.569]       wpm: 78.98,
+[05:14:11.569]       rawWpm: 81.49,
+[05:14:11.569]       charStats: [Array],
+[05:14:11.569]       acc: 93.31,
+[05:14:11.569]       mode: 'custom',
+[05:14:11.569]       mode2: 'custom',
+[05:14:11.570]       timestamp: 1747112543000,
+[05:14:11.570]       restartCount: 2,
+[05:14:11.570]       incompleteTestSeconds: 29.08,
+[05:14:11.570]       testDuration: 33.43,
+[05:14:11.570]       consistency: 58.3,
+[05:14:11.570]       keyConsistency: 1.04,
+[05:14:11.570]       isPb: true
+[05:14:11.570]     },
+[05:14:11.570]     {
+[05:14:11.570]       _id: '6822ce95df21a5c1da35bce5',
+[05:14:11.570]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.570]       wpm: 113.66,
+[05:14:11.570]       rawWpm: 113.66,
+[05:14:11.570]       charStats: [Array],
+[05:14:11.570]       acc: 98.15,
+[05:14:11.570]       mode: 'words',
+[05:14:11.570]       mode2: '50',
+[05:14:11.570]       timestamp: 1747111573000,
+[05:14:11.571]       testDuration: 27.98,
+[05:14:11.571]       consistency: 76.97,
+[05:14:11.571]       keyConsistency: 21.07,
+[05:14:11.571]       isPb: true
+[05:14:11.571]     },
+[05:14:11.571]     {
+[05:14:11.571]       _id: '682008a1df21a5c1da19c9cf',
+[05:14:11.571]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.571]       wpm: 79.76,
+[05:14:11.571]       rawWpm: 89.6,
+[05:14:11.571]       charStats: [Array],
+[05:14:11.571]       acc: 84.06,
+[05:14:11.571]       mode: 'words',
+[05:14:11.571]       mode2: '50',
+[05:14:11.571]       timestamp: 1746929825000,
+[05:14:11.571]       restartCount: 3,
+[05:14:11.571]       incompleteTestSeconds: 88.11,
+[05:14:11.571]       testDuration: 32.95,
+[05:14:11.571]       consistency: 59.82,
+[05:14:11.572]       keyConsistency: 0.75
+[05:14:11.572]     }
+[05:14:11.572]   ]
+[05:14:11.572] }
+[05:14:11.573] API response for /results: {
+[05:14:11.573]   message: 'Results retrieved',
+[05:14:11.573]   data: [
+[05:14:11.573]     {
+[05:14:11.573]       _id: '6822f665df21a5c1da374b59',
+[05:14:11.573]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.573]       wpm: 74.13,
+[05:14:11.573]       rawWpm: 79.45,
+[05:14:11.573]       charStats: [Array],
+[05:14:11.573]       acc: 89.27,
+[05:14:11.573]       mode: 'words',
+[05:14:11.573]       mode2: '50',
+[05:14:11.574]       timestamp: 1747121765000,
+[05:14:11.574]       restartCount: 4,
+[05:14:11.574]       incompleteTestSeconds: 26.77,
+[05:14:11.574]       testDuration: 38.36,
+[05:14:11.574]       consistency: 57.28,
+[05:14:11.574]       keyConsistency: 0.02
+[05:14:11.574]     },
+[05:14:11.574]     {
+[05:14:11.574]       _id: '6822f617df21a5c1da37484a',
+[05:14:11.574]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.574]       wpm: 94.2,
+[05:14:11.574]       rawWpm: 94.2,
+[05:14:11.574]       charStats: [Array],
+[05:14:11.574]       acc: 95.83,
+[05:14:11.574]       mode: 'words',
+[05:14:11.574]       mode2: '50',
+[05:14:11.574]       timestamp: 1747121687000,
+[05:14:11.574]       testDuration: 34.52,
+[05:14:11.574]       consistency: 60.29,
+[05:14:11.574]       keyConsistency: 1.96
+[05:14:11.574]     },
+[05:14:11.574]     {
+[05:14:11.574]       _id: '6822d447df21a5c1da35f42c',
+[05:14:11.574]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.574]       wpm: 96.52,
+[05:14:11.574]       rawWpm: 102.98,
+[05:14:11.574]       charStats: [Array],
+[05:14:11.574]       acc: 90.41,
+[05:14:11.574]       mode: 'words',
+[05:14:11.574]       mode2: '50',
+[05:14:11.574]       timestamp: 1747113031000,
+[05:14:11.574]       restartCount: 6,
+[05:14:11.574]       incompleteTestSeconds: 27.88,
+[05:14:11.574]       testDuration: 31.58,
+[05:14:11.575]       consistency: 63.38,
+[05:14:11.575]       keyConsistency: 2.07
+[05:14:11.575]     },
+[05:14:11.575]     {
+[05:14:11.575]       _id: '6822d3d5df21a5c1da35f014',
+[05:14:11.575]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.575]       wpm: 97.8,
+[05:14:11.575]       rawWpm: 111.45,
+[05:14:11.575]       charStats: [Array],
+[05:14:11.575]       acc: 90.57,
+[05:14:11.575]       mode: 'words',
+[05:14:11.575]       mode2: '10',
+[05:14:11.575]       timestamp: 1747112917000,
+[05:14:11.575]       restartCount: 1,
+[05:14:11.575]       incompleteTestSeconds: 1.81,
+[05:14:11.575]       testDuration: 5.28,
+[05:14:11.575]       consistency: 47.29,
+[05:14:11.575]       keyConsistency: 8.22,
+[05:14:11.575]       isPb: true
+[05:14:11.575]     },
+[05:14:11.575]     {
+[05:14:11.575]       _id: '6822d3bedf21a5c1da35ef2c',
+[05:14:11.575]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.575]       wpm: 105.53,
+[05:14:11.575]       rawWpm: 105.53,
+[05:14:11.583]       charStats: [Array],
+[05:14:11.583]       acc: 98.48,
+[05:14:11.583]       mode: 'words',
+[05:14:11.583]       mode2: '50',
+[05:14:11.583]       timestamp: 1747112894000,
+[05:14:11.583]       restartCount: 1,
+[05:14:11.583]       incompleteTestSeconds: 2.46,
+[05:14:11.583]       testDuration: 29.45,
+[05:14:11.583]       consistency: 72.1,
+[05:14:11.583]       keyConsistency: 15.77
+[05:14:11.583]     },
+[05:14:11.583]     {
+[05:14:11.583]       _id: '6822d347df21a5c1da35eabb',
+[05:14:11.583]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.583]       wpm: 113.25,
+[05:14:11.583]       rawWpm: 118.04,
+[05:14:11.583]       charStats: [Array],
+[05:14:11.583]       acc: 96.79,
+[05:14:11.583]       mode: 'words',
+[05:14:11.583]       mode2: '50',
+[05:14:11.583]       timestamp: 1747112775000,
+[05:14:11.583]       restartCount: 5,
+[05:14:11.583]       incompleteTestSeconds: 31.85,
+[05:14:11.583]       testDuration: 27.55,
+[05:14:11.584]       consistency: 75.48,
+[05:14:11.584]       keyConsistency: 9.83
+[05:14:11.584]     },
+[05:14:11.584]     {
+[05:14:11.584]       _id: '6822d2a6df21a5c1da35e476',
+[05:14:11.584]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.584]       wpm: 120.15,
+[05:14:11.584]       rawWpm: 120.15,
+[05:14:11.584]       charStats: [Array],
+[05:14:11.590]       acc: 99.27,
+[05:14:11.590]       mode: 'words',
+[05:14:11.590]       mode2: '50',
+[05:14:11.590]       timestamp: 1747112614000,
+[05:14:11.590]       restartCount: 1,
+[05:14:11.590]       incompleteTestSeconds: 25.16,
+[05:14:11.590]       testDuration: 27.07,
+[05:14:11.590]       consistency: 71.97,
+[05:14:11.590]       keyConsistency: 29.89,
+[05:14:11.590]       isPb: true
+[05:14:11.590]     },
+[05:14:11.590]     {
+[05:14:11.590]       _id: '6822d25fdf21a5c1da35e19c',
+[05:14:11.590]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.590]       wpm: 78.98,
+[05:14:11.590]       rawWpm: 81.49,
+[05:14:11.590]       charStats: [Array],
+[05:14:11.590]       acc: 93.31,
+[05:14:11.590]       mode: 'custom',
+[05:14:11.590]       mode2: 'custom',
+[05:14:11.590]       timestamp: 1747112543000,
+[05:14:11.590]       restartCount: 2,
+[05:14:11.590]       incompleteTestSeconds: 29.08,
+[05:14:11.590]       testDuration: 33.43,
+[05:14:11.590]       consistency: 58.3,
+[05:14:11.590]       keyConsistency: 1.04,
+[05:14:11.591]       isPb: true
+[05:14:11.591]     },
+[05:14:11.591]     {
+[05:14:11.591]       _id: '6822ce95df21a5c1da35bce5',
+[05:14:11.591]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.591]       wpm: 113.66,
+[05:14:11.591]       rawWpm: 113.66,
+[05:14:11.591]       charStats: [Array],
+[05:14:11.591]       acc: 98.15,
+[05:14:11.591]       mode: 'words',
+[05:14:11.591]       mode2: '50',
+[05:14:11.591]       timestamp: 1747111573000,
+[05:14:11.591]       testDuration: 27.98,
+[05:14:11.591]       consistency: 76.97,
+[05:14:11.591]       keyConsistency: 21.07,
+[05:14:11.591]       isPb: true
+[05:14:11.591]     },
+[05:14:11.591]     {
+[05:14:11.591]       _id: '682008a1df21a5c1da19c9cf',
+[05:14:11.591]       uid: 'AiuHNtWpdzWvCES50neyWDhE1QW2',
+[05:14:11.591]       wpm: 79.76,
+[05:14:11.591]       rawWpm: 89.6,
+[05:14:11.591]       charStats: [Array],
+[05:14:11.591]       acc: 84.06,
+[05:14:11.591]       mode: 'words',
+[05:14:11.591]       mode2: '50',
+[05:14:11.591]       timestamp: 1746929825000,
+[05:14:11.591]       restartCount: 3,
+[05:14:11.591]       incompleteTestSeconds: 88.11,
+[05:14:11.591]       testDuration: 32.95,
+[05:14:11.592]       consistency: 59.82,
+[05:14:11.592]       keyConsistency: 0.75
+[05:14:11.592]     }
+[05:14:11.592]   ]
+[05:14:11.592] }
+[05:14:11.744] API response for /users/currentTestActivity: {
+[05:14:11.745]   message: 'Current test activity data retrieved',
+[05:14:11.745]   data: {
+[05:14:11.745]     testsByDays: [
+[05:14:11.745]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.745]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.745]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.745]       null, null, null, null, null, 1,    2,    null, null, null,
+[05:14:11.745]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.745]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.745]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.745]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.745]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.745]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.745]       ... 272 more items
+[05:14:11.745]     ],
+[05:14:11.745]     lastDay: 1747094400000
+[05:14:11.745]   }
+[05:14:11.745] }
+[05:14:11.745] API response for /users/currentTestActivity: {
+[05:14:11.745]   message: 'Current test activity data retrieved',
+[05:14:11.745]   data: {
+[05:14:11.745]     testsByDays: [
+[05:14:11.745]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.746]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.746]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.746]       null, null, null, null, null, 1,    2,    null, null, null,
+[05:14:11.746]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.746]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.746]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.746]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.746]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.746]       null, null, null, null, null, null, null, null, null, null,
+[05:14:11.746]       ... 272 more items
+[05:14:11.746]     ],
+[05:14:11.755]     lastDay: 1747094400000
+[05:14:11.762]   }
+[05:14:11.766] }
+[05:14:11.946] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[05:14:11.946] API response for /users/personalBests: { message: 'Personal bests retrieved', data: null }
+[05:14:12.973] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[05:14:12.974] Monkeytype API error (503): {}
+[05:14:12.974] Retrying request (attempt 3/3)...
+[05:14:12.994] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[05:14:12.996] Monkeytype API error (503): {}
+[05:14:12.996] Retrying request (attempt 3/3)...
+[05:14:15.975] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[05:14:15.976] Monkeytype API error (503): {}
+[05:14:15.996] Fetching from Monkeytype API: https://api.monkeytype.com/users/personalBests?mode=time&mode2=120
+[05:14:16.000] Monkeytype API error (503): {}
+[05:14:16.062]  ✓ Generating static pages (1275/1275)
+[05:14:16.071] 
+[05:14:16.071] > Export encountered errors on following paths:
+[05:14:16.071] 	/api/posts/search/route: /api/posts/search
+[05:14:16.879] Error: Command "npm run build" exited with 1

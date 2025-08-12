@@ -1,0 +1,80 @@
+[
+  {
+    "id": "1",
+    "name": "Christopher Nolan",
+    "image": "/placeholder.svg?height=150&width=150",
+    "description": "Known for Inception, Interstellar, and The Dark Knight trilogy"
+  },
+  {
+    "id": "2",
+    "name": "Denis Villeneuve",
+    "image": "/placeholder.svg?height=150&width=150",
+    "description": "Known for Dune, Arrival, and Blade Runner 2049"
+  },
+  {
+    "id": "3",
+    "name": "Greta Gerwig",
+    "image": "/placeholder.svg?height=150&width=150",
+    "description": "Known for Lady Bird, Little Women, and Barbie"
+  },
+  {
+    "id": "4",
+    "name": "Taika Waititi",
+    "image": "/placeholder.svg?height=150&width=150",
+    "description": "Known for Thor: Ragnarok, Jojo Rabbit, and What We Do in the Shadows"
+  },
+  {
+    "id": "5",
+    "name": "Ava DuVernay",
+    "image": "/placeholder.svg?height=150&width=150",
+    "description": "Known for Selma, 13th, and When They See Us"
+  },
+  {
+    "id": "6",
+    "name": "Steven Spielberg",
+    "image": "/placeholder.svg?height=150&width=150",
+    "description": "Known for Jurassic Park, E.T., and Schindler's List"
+  },
+  {
+    "id": "7",
+    "name": "Martin Scorsese",
+    "image": "/placeholder.svg?height=150&width=150",
+    "description": "Known for Goodfellas, The Departed, and Taxi Driver"
+  },
+  {
+    "id": "8",
+    "name": "Quentin Tarantino",
+    "image": "/placeholder.svg?height=150&width=150",
+    "description": "Known for Pulp Fiction, Django Unchained, and Kill Bill"
+  },
+  {
+    "id": "9",
+    "name": "Kathryn Bigelow",
+    "image": "/placeholder.svg?height=150&width=150",
+    "description": "Known for The Hurt Locker, Zero Dark Thirty, and Point Break"
+  },
+  {
+    "id": "10",
+    "name": "Bong Joon-ho",
+    "image": "/placeholder.svg?height=150&width=150",
+    "description": "Known for Parasite, Snowpiercer, and Okja"
+  },
+  {
+    "id": "11",
+    "name": "Wes Anderson",
+    "image": "/placeholder.svg?height=150&width=150",
+    "description": "Known for The Grand Budapest Hotel, Moonrise Kingdom, and The Royal Tenenbaums"
+  },
+  {
+    "id": "12",
+    "name": "Jordan Peele",
+    "image": "/placeholder.svg?height=150&width=150",
+    "description": "Known for Get Out, Us, and Nope"
+  },
+  {
+    "id": "13",
+    "name": "Sofia Coppola",
+    "image": "/placeholder.svg?height=150&width=150",
+    "description": "Known for Lost in Translation, The Virgin Suicides, and Marie Antoinette"
+  }
+] 
