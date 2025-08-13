@@ -15,8 +15,8 @@
 },
 {
 "title": "Girl, Interrupted",
-"start_date": "2025-06-02",
-"end_date": "",
+"start_date": "2025-04-02",
+"end_date": "2025-04-06",
 "slug": "girl-interrupted",
 "tags": ["Film", "Review", "Psychological Drama", "Winona Ryder", "1990s Film"],
 "category": "film",
@@ -431,6 +431,20 @@
 "confidence": "likely",
 "importance": 6,
 "cover_image": "https://doc.krisyotam.com/imgs/film/diary-of-a-lost-girl.jpg",
+"state": "active"
+},
+{
+"title": "Pulp Fiction",
+"preview": "A review of Tarantino’s genre-defining crime mosaic: nonlinear storytelling, pop culture monologues, and the violence of Los Angeles cool.",
+"start_date": "2025-08-13",
+"end_date": "",
+"tags": ["Quentin Tarantino", "Uma Thurman", "Samuel L. Jackson", "John Travolta", "Bruce Willis"],
+"category": "film",
+"slug": "pulp-fiction",
+"status": "Draft",
+"confidence": "likely",
+"importance": 6,
+"cover_image": "https://doc.krisyotam.com/imgs/film/pulp-fiction.jpg",
 "state": "active"
 }
 
