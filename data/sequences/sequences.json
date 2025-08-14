@@ -707,6 +707,177 @@
 { "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
 { "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
 ]
+},
+{
+"slug": "prayer",
+"title": "Prayer",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/prayer.png",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "us-history",
+"title": "U.S. History",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/us-history.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "japanese-literature",
+"title": "Japanese Literature",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/japanese-literature.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "us-law",
+"title": "U.S. Law",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/us-law.webp",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "biomagnetism",
+"title": "Biomagnetism",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/biomagnetism.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "mesopotamia",
+"title": "Mesopotamia",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/mesopotamia.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "orcas",
+"title": "Orcas",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/orcas.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "rms-titantic",
+"title": "RMS Titanic",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/rms-titantic.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "cetaceans",
+"title": "Cetaceans",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/cetaceans.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
 }
 
 ]

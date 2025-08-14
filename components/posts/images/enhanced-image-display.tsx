@@ -16,12 +16,18 @@ interface EnhancedImageDisplayProps {
   images: ImageItem[] | ImageItem;
   className?: string;
   type?: "default" | "wrap";
+  width?: number;
+  height?: number;
+  align?: "center" | "left" | "right";
 }
 
 export function EnhancedImageDisplay({
   images,
   className = "",
   type = "default",
+  width = 300,
+  height = 200,
+  align = "center",
 }: EnhancedImageDisplayProps) {
   const { resolvedTheme } = useTheme();
   const imagesArray = Array.isArray(images) ? images : [images];
@@ -66,34 +72,30 @@ export function EnhancedImageDisplay({
 
   const isWrap = type === "wrap";
 
+  // Alignment classes
+  let alignClass = "";
+  if (align === "center") alignClass = "mx-auto flex justify-center";
+  else if (align === "left") alignClass = "mr-auto";
+  else if (align === "right") alignClass = "ml-auto";
+
   return (
     <>
       <div
-        className={`${className} ${
-          isWrap ? "float-right ml-6 mb-0 w-[300px] max-w-full" : "mb-0"
+        className={`${className} ${alignClass} ${
+          isWrap ? `float-right ml-6 mb-0 w-[${width}px] max-w-full` : "mb-0"
         }`}
         data-enhanced-container
       >
         <div className="relative group cursor-pointer" onClick={() => openModal(currentImageIndex)}>
           <div className={isWrap ? "relative w-full h-auto" : "relative aspect-[16/9]"}>
-            {isWrap ? (
-              <Image
-                src={getCurrentSrc(imagesArray[currentImageIndex]) || "/placeholder.svg"}
-                alt={imagesArray[currentImageIndex].alt}
-                width={300}
-                height={200}
-                className="object-contain w-full h-auto !m-0"
-                data-enhanced
-              />
-            ) : (
-              <Image
-                src={getCurrentSrc(imagesArray[currentImageIndex]) || "/placeholder.svg"}
-                alt={imagesArray[currentImageIndex].alt}
-                fill
-                className="object-cover !m-0"
-                data-enhanced
-              />
-            )}
+            <Image
+              src={getCurrentSrc(imagesArray[currentImageIndex]) || "/placeholder.svg"}
+              alt={imagesArray[currentImageIndex].alt}
+              width={width}
+              height={height}
+              className={isWrap ? "object-contain w-full h-auto !m-0" : "object-cover !m-0"}
+              data-enhanced
+            />
           </div>
 
           {/* Always show overlay */}
@@ -105,11 +107,7 @@ export function EnhancedImageDisplay({
           </div>
         </div>
 
-        {imagesArray[currentImageIndex].caption && (
-          <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            {imagesArray[currentImageIndex].caption}
-          </div>
-        )}
+  {/* Caption removed from inline image, only shown in modal */}
       </div>
 
       {isModalOpen && (
@@ -125,8 +123,8 @@ export function EnhancedImageDisplay({
               <Image
                 src={getCurrentSrc(imagesArray[currentImageIndex]) || "/placeholder.svg"}
                 alt={imagesArray[currentImageIndex].alt}
-                width={1200}
-                height={675}
+                width={width * 3.5}
+                height={height * 3.5}
                 className="object-contain max-h-[80vh] !m-0"
                 data-enhanced
                 priority

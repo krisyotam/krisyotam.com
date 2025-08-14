@@ -14,7 +14,7 @@ const defaultNotesPageData = {
   subtitle: "",
   start_date: "2025-01-01",
   end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
-  preview: "Misc thoughts, proto-essays, reviews, musings, etc.",
+  preview: "Misc thoughts, proto-essays, analysis, musings, etc.",
   status: "In Progress" as const,
   confidence: "likely" as const,
   importance: 6,
