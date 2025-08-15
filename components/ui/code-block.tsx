@@ -134,13 +134,26 @@ export const CodeBlock = ({
     : highlightLines;
 
   return (
-    <div className="code-block p-6 rounded-none my-6 bg-muted/50 dark:bg-[hsl(var(--popover))] font-mono text-sm relative">
+  <div className="code-block p-6 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))] font-mono text-sm relative" style={{marginBottom: 0, paddingBottom: 0, paddingLeft: 0, paddingRight: 0, marginTop: 0, paddingTop: 0}}>
       {/* Header with tabs or filename */}
       <div className="flex flex-col gap-2">
-        <div className="flex justify-between items-center py-2">
-          <div className="flex overflow-x-auto">
-            {tabsExist ? 
-              tabs.map((tab, index) => (
+  <div className="relative w-full h-7 mb-4" style={{marginTop: 0}}>
+          {/* Filename at top left */}
+          {(!tabsExist && filename) && (
+            <div className="absolute text-xs text-muted-foreground h-7 flex items-center" style={{whiteSpace: 'nowrap', marginTop: 0, left: 0, top: 0, position: 'absolute'}}>{filename}</div>
+          )}
+          {/* Copy button at very top right */}
+          <button
+            onClick={copyToClipboard}
+            className="absolute right-0 top-0 flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors font-sans px-2 py-1 rounded"
+            style={{marginRight: '0.5rem', marginTop: '0.25rem'}}
+          >
+            {copied ? <IconCheck size={14} /> : <IconCopy size={14} />}
+          </button>
+          {/* Tabs (if present) below filename */}
+          {tabsExist && (
+            <div className="flex items-center gap-2 min-w-0 absolute left-0 top-0 h-7 pl-2">
+              {tabs.map((tab, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveTab(index)}
@@ -152,21 +165,23 @@ export const CodeBlock = ({
                 >
                   {tab.name}
                 </button>
-              ))
-              : (filename && <div className="text-xs text-muted-foreground">{filename}</div>)
-            }
-          </div>
-          <button
-            onClick={copyToClipboard}
-            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors font-sans"
-          >
-            {copied ? <IconCheck size={14} /> : <IconCopy size={14} />}
-          </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Code Content with scrollbar after 20 lines */}
-      <div className="code-container max-h-[500px] overflow-y-auto w-full overflow-x-auto">
+      {/* Code Content with always-visible, square-cornered scrollbars */}
+      <div
+        className="code-container max-h-[500px] w-full"
+        style={{
+          overflow: 'scroll',
+          padding: 0,
+          margin: 0,
+          boxSizing: 'border-box',
+          height: '100%',
+        }}
+      >
         <SyntaxHighlighter
           language={activeLanguage}
           style={theme === 'dark' ? atomDark : prism}
@@ -174,15 +189,17 @@ export const CodeBlock = ({
             margin: 0,
             padding: 0,
             background: "transparent",
-            fontSize: "0.875rem", // text-sm equivalent
+            fontSize: "0.875rem",
             width: "100%",
-            overflowX: "visible",
+            overflow: "visible",
+            paddingLeft: 0,
+            paddingRight: 0,
           }}
           codeTagProps={{
             style: {
               display: 'block',
               width: '100%',
-              paddingLeft: '0',
+              paddingLeft: 0,
             }
           }}
           wrapLines={true}
@@ -198,9 +215,9 @@ export const CodeBlock = ({
               width: "100%",
               minWidth: "100%",
               whiteSpace: "pre",
-              paddingLeft: "0",
-              paddingRight: "0",
-              margin: "0",
+              paddingLeft: 0,
+              paddingRight: 0,
+              margin: 0,
             },
             className: "syntax-line"
           })}
@@ -210,7 +227,7 @@ export const CodeBlock = ({
             float: 'left',
             minWidth: '3em',
             maxWidth: '3em',
-            position: 'sticky', 
+            position: 'sticky',
             left: 0,
             background: 'inherit',
           }}
@@ -233,6 +250,36 @@ export const CodeBlock = ({
         >
           {String(activeCode || '')}
         </SyntaxHighlighter>
+        {/* Custom scrollbar for square corners (Webkit) */}
+        <style>{`
+          .code-container::-webkit-scrollbar {
+            border-radius: 0 !important;
+            background: #181c20 !important;
+            height: 28px !important;
+            width: 28px !important;
+            margin: 0 !important;
+          }
+          .code-container::-webkit-scrollbar-thumb {
+            border-radius: 0 !important;
+            background: #444 !important;
+            min-height: 28px !important;
+            min-width: 28px !important;
+            height: 36px !important;
+            width: 36px !important;
+          }
+          .code-container {
+            padding: 0 !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+            /* Remove border-radius if present */
+            border-radius: 0 !important;
+          }
+          .code-container > * {
+            margin: 0 !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+          }
+        `}</style>
       </div>
     </div>
   );

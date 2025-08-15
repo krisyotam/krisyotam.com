@@ -47,6 +47,7 @@ interface SearchResult {
 }
 
 export function SettingsMenu() {
+  const [spinDirection, setSpinDirection] = useState<"left"|"right"|null>(null)
   const [isOpen, setIsOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
@@ -718,7 +719,9 @@ export function SettingsMenu() {
   }
 
   const toggleDropdown = () => {
+    setSpinDirection(isOpen ? "right" : "left")
     setIsOpen(!isOpen)
+    setTimeout(() => setSpinDirection(null), 600)
     if (!isOpen) {
       setIsSearchOpen(false)
       setSearchQuery("")
@@ -824,7 +827,15 @@ export function SettingsMenu() {
         className="flex h-10 w-10 items-center justify-center border border-input bg-background shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
         aria-label="Settings"
       >
-        <Settings className="h-5 w-5" />
+        <span className={
+          spinDirection === "left"
+            ? "inline-block transition-transform duration-600 ease-in-out animate-spin-left"
+            : spinDirection === "right"
+            ? "inline-block transition-transform duration-600 ease-in-out animate-spin-right"
+            : ""
+        }>
+          <Settings className="h-5 w-5" />
+        </span>
       </button>
 
       {isOpen && (

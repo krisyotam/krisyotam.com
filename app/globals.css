@@ -109,8 +109,7 @@
    
    /* Make code blocks scroll nicely on smaller screens */
    .code-container::-webkit-scrollbar {
-     height: 6px;
-     width: 6px;
+     /* Allow custom sizing from component */
    }
    
    .code-container::-webkit-scrollbar-track {
@@ -145,8 +144,7 @@
    
    /* Scrollbar styling for native code blocks */
    pre::-webkit-scrollbar {
-     height: 6px;
-     width: 6px;
+     /* Allow custom sizing from component */
    }
    
    pre::-webkit-scrollbar-track {
@@ -1185,6 +1183,19 @@ p .katex-display {
 .dark [class*="-content"] h2[data-underline-width]::after,
 .dark [class*="-content"] h3[data-underline-width]::after {
   background: hsl(var(--background));
+}
+
+@keyframes spin-left {
+  100% { transform: rotate(-360deg); }
+}
+@keyframes spin-right {
+  100% { transform: rotate(360deg); }
+}
+.animate-spin-left {
+  animation: spin-left 2s cubic-bezier(.4,2,.3,1) both;
+}
+.animate-spin-right {
+  animation: spin-right 2s cubic-bezier(.4,2,.3,1) both;
 }
 
 

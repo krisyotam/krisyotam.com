@@ -302,52 +302,61 @@ export function UniversalLinkModal() {
 
   // Link hover detection
   useEffect(() => {
+    const hasNoModalOrPreview = (el: HTMLElement | null) => {
+      while (el) {
+        if (
+          el.getAttribute("data-no-preview") === "true" ||
+          el.getAttribute("data-no-modal") === "true"
+        ) {
+          return true;
+        }
+        el = el.parentElement;
+      }
+      return false;
+    };
+
     const handleGlobalMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      const linkElement = target.closest("a") as HTMLAnchorElement | null
+      const target = e.target as HTMLElement;
+      const linkElement = target.closest("a") as HTMLAnchorElement | null;
 
-      if (!linkElement) return
-      if (linkElement.hasAttribute("data-hover-listener")) return
-      if (
-        linkElement.getAttribute("data-no-preview") === "true" ||
-        linkElement.getAttribute("data-no-modal") === "true"
-      )
-        return
+      if (!linkElement) return;
+      if (linkElement.hasAttribute("data-hover-listener")) return;
+      if (hasNoModalOrPreview(linkElement)) return;
 
-      const href = linkElement.href
-      if (!href || href === "#" || href.startsWith("javascript:")) return
+      const href = linkElement.href;
+      if (!href || href === "#" || href.startsWith("javascript:")) return;
 
       if (isDomainBanned(href)) {
-        linkElement.setAttribute("data-no-preview", "true")
-        return
+        linkElement.setAttribute("data-no-preview", "true");
+        return;
       }
 
       if (!shouldShowPreview(href)) {
-        linkElement.setAttribute("data-no-preview", "true")
-        return
+        linkElement.setAttribute("data-no-preview", "true");
+        return;
       }
 
-      if (hoveredLinkRef.current === linkElement) return
+      if (hoveredLinkRef.current === linkElement) return;
 
       if (hoverTimerRef.current) {
-        clearTimeout(hoverTimerRef.current)
+        clearTimeout(hoverTimerRef.current);
       }
 
-      hoveredLinkRef.current = linkElement
-      debugRef.current.hoverCount++
-      debugRef.current.lastHoveredUrl = href
+      hoveredLinkRef.current = linkElement;
+      debugRef.current.hoverCount++;
+      debugRef.current.lastHoveredUrl = href;
 
       hoverTimerRef.current = setTimeout(() => {
-        if (hoveredLinkRef.current !== linkElement) return
+        if (hoveredLinkRef.current !== linkElement) return;
 
-        debugRef.current.modalAttempts++
-        const rect = linkElement.getBoundingClientRect()
-        const x = rect.left + rect.width / 2
-        const y = rect.top
+        debugRef.current.modalAttempts++;
+        const rect = linkElement.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top;
 
-        createModal(href, linkElement.textContent || "", x, y)
-      }, 500)
-    }
+        createModal(href, linkElement.textContent || "", x, y);
+      }, 500);
+    };
 
     const handleGlobalMouseOut = (e: MouseEvent) => {
       const target = e.target as HTMLElement

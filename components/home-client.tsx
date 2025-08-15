@@ -49,6 +49,7 @@ import SupportMe from "@/components/about/SupportMe"
 import RecommendedContent from "@/components/about/RecommendedContent"
 import { FeaturedPost } from "@/components/featured-post"
 import { Post } from "@/utils/posts"
+import Favorites from "@/components/Favorites"
 
 // URL generation helper - based on correct route patterns for both content types
 function getPostUrl(post: Post): string {
@@ -718,6 +719,13 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                 content={<AboutMe />}
                 isOpen={openSections.includes(0)}
                 onToggle={() => toggleSection(0)}
+              />
+              {/* Favorites tab below About Me, above Socials */}
+              <AccordionItem
+                title="Favorites"
+                content={<Favorites />}
+                isOpen={openSections.includes(-1)}
+                onToggle={() => toggleSection(-1)}
               />
               <AccordionItem
                 title="Socials"

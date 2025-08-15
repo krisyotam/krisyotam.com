@@ -1,3 +1,21 @@
+.problem-content .code-block pre,
+.problem-content pre.code-block {
+  overflow: scroll !important; /* Always show scrollbars */
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb, #888) var(--scrollbar-track, #222);
+}
+
+.problem-content .code-block pre::-webkit-scrollbar,
+.problem-content pre.code-block::-webkit-scrollbar {
+  border-radius: 0 !important;
+  background: var(--scrollbar-track, #222);
+  height: 8px;
+}
+.problem-content .code-block pre::-webkit-scrollbar-thumb,
+.problem-content pre.code-block::-webkit-scrollbar-thumb {
+  border-radius: 0 !important;
+  background: var(--scrollbar-thumb, #888);
+}
 /* problems.css ─ styles are applied ONLY inside `.problem-content` */
 
 @import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
@@ -179,6 +197,34 @@
 .dark .problem-content .code-block,
 .dark .problem-content pre.code-block {
   background-color: hsl(var(--popover)); /* Exact match to Box dark:bg-[hsl(var(--popover))] */
+}
+/* Ensure all inner elements of code blocks are transparent in dark mode */
+.dark .problem-content .code-block *,
+.dark .problem-content pre.code-block *,
+.dark .problem-content .code-block pre,
+.dark .problem-content .code-block code,
+.dark .problem-content .code-block .syntax-line {
+  background: transparent !important;
+  border: none;
+}
+
+/* Square scrollbar corners for code blocks */
+.problem-content .code-block pre,
+.problem-content pre.code-block {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb, #888) var(--scrollbar-track, #222);
+}
+
+.problem-content .code-block pre::-webkit-scrollbar,
+.problem-content pre.code-block::-webkit-scrollbar {
+  border-radius: 0 !important;
+  background: var(--scrollbar-track, #222);
+  height: 8px;
+}
+.problem-content .code-block pre::-webkit-scrollbar-thumb,
+.problem-content pre.code-block::-webkit-scrollbar-thumb {
+  border-radius: 0 !important;
+  background: var(--scrollbar-thumb, #888);
 }
 
 /* Code block wrapper (if used) */
