@@ -78,14 +78,14 @@ export function Favorites() {
   React.useEffect(() => {
     fetch(`/api/favorites?section=${section}`)
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: CardType[]) => {
         if (section === "music") {
           setCards(
-            data.slice(0, 8).map((entry) => ({ ...entry, isAlbum: true }))
+            data.slice(0, 8).map((entry: CardType) => ({ ...entry, isAlbum: true }))
           );
         } else {
           setCards(
-            data.slice(0, 4).map((entry) => ({ ...entry, isAlbum: false }))
+            data.slice(0, 4).map((entry: CardType) => ({ ...entry, isAlbum: false }))
           );
         }
       });
