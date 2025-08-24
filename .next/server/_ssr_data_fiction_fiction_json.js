@@ -1,0 +1,25 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+exports.id = "_ssr_data_fiction_fiction_json";
+exports.ids = ["_ssr_data_fiction_fiction_json"];
+exports.modules = {
+
+/***/ "(ssr)/./data/fiction/fiction.json":
+/*!***********************************!*\
+  !*** ./data/fiction/fiction.json ***!
+  \***********************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('[{"title":"The Clockmaker\'s Daughter","start_date":"2025-06-05","end_date":"","slug":"the-clockmakers-daughter","cover_image":"","tags":["Fiction","Mystery","Novel"],"category":"Short Stories","status":"In Progress","confidence":"certain","importance":8,"preview":"A novel exploring mysteries and revelations in an old clockmaker\'s workshop.","state":"hidden"},{"title":"A Theory of Rooms","start_date":"2025-06-05","end_date":"","slug":"a-theory-of-rooms","cover_image":"","tags":["Poetry","Sonnets","Elizabethan","Structure"],"category":"Short Stories","status":"In Progress","confidence":"certain","importance":7,"preview":"An Elizabethan sonnet exploring the meaning and metaphor of rooms.","state":"hidden"},{"title":"How They Fall","start_date":"2025-06-05","end_date":"","slug":"how-they-fall","cover_image":"","tags":["Fiction","Character Study","Original Characters"],"category":"Short Stories","status":"In Progress","confidence":"certain","importance":7,"preview":"Two siblings arrive at the illustrious Château de Noya enduring a series of misfortunes","state":"active"},{"title":"What the Faculty Forgot","start_date":"2025-06-05","end_date":"","slug":"what-the-faculty-forgot","cover_image":"","tags":["Poetry","Sonnets","Academic"],"category":"Flash Fiction","status":"In Progress","confidence":"certain","importance":6,"preview":"An Elizabethan sonnet about memory and academia.","state":"hidden"},{"title":"When the Bell Tolls Twice","start_date":"2025-06-05","end_date":"","slug":"when-the-bell-tolls-twice","cover_image":"","tags":["Poetry","Sonnets","Time"],"category":"Flash Fiction","status":"In Progress","confidence":"certain","importance":6,"preview":"An Elizabethan sonnet meditating on the passage of time.","state":"hidden"},{"title":"On the Fifth Day","start_date":"2025-06-05","end_date":"","slug":"on-the-fifth-day","cover_image":"","tags":["Fiction","Character Study","Original Characters"],"category":"Flash Fiction","status":"In Progress","confidence":"certain","importance":6,"preview":"A character study of a town that resists change and growth.","state":"active"}]');
+
+/***/ })
+
+};
+;

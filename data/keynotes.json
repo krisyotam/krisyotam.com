@@ -1,0 +1,73 @@
+[
+  {
+    "id": "1",
+    "img": "/images/keynote_stoicism.jpg",
+    "name": "Stoic Wisdom",
+    "date": "2024-01-15",
+    "title": "The Art of Living: Stoic Philosophy in Modern Times",
+    "subtitle": "Applying ancient wisdom to contemporary challenges",
+    "authors": "Kris Yotam",
+    "description": "This keynote explores how Stoic philosophy can be applied to navigate the complexities of modern life, offering practical strategies for resilience, ethical decision-making, and personal growth.",
+    "category": "Western Philosophy",
+    "tags": ["Stoicism", "Ethics", "Personal Development"],
+    "keynote_pdf": "/data/src/keynotes/stoic_wisdom.pdf",
+    "keynote_pptx": "/data/src/keynotes/stoic_wisdom.pptx"
+  },
+  {
+    "id": "2",
+    "img": "/images/keynote_zen.jpg",
+    "name": "Zen and the Art of Living",
+    "date": "2024-02-10",
+    "title": "Finding Peace in Chaos: Zen Philosophy for the Modern World",
+    "subtitle": "Cultivating mindfulness and presence in daily life",
+    "authors": "Kris Yotam",
+    "description": "This presentation delves into Zen Buddhist philosophy, offering insights on how to cultivate inner peace, mindfulness, and presence amidst the chaos of contemporary existence.",
+    "category": "Eastern Philosophy",
+    "tags": ["Zen", "Mindfulness", "Meditation"],
+    "keynote_pdf": "/data/src/keynotes/zen_living.pdf",
+    "keynote_pptx": "/data/src/keynotes/zen_living.pptx"
+  },
+  {
+    "id": "3",
+    "img": "/images/keynote_poetry.jpg",
+    "name": "The Power of Poetry",
+    "date": "2024-03-05",
+    "title": "Verses that Move: The Impact of Poetry on Human Consciousness",
+    "subtitle": "Exploring the transformative power of poetic expression",
+    "authors": "Kris Yotam",
+    "description": "This keynote examines the profound impact of poetry on human consciousness, emotions, and societal change, featuring analyses of influential poems and their cultural significance.",
+    "category": "Literature",
+    "tags": ["Poetry", "Literary Analysis", "Cultural Impact"],
+    "keynote_pdf": "/data/src/keynotes/power_of_poetry.pdf",
+    "keynote_pptx": "/data/src/keynotes/power_of_poetry.pptx"
+  },
+  {
+    "id": "4",
+    "img": "/images/keynote_existentialism.jpg",
+    "name": "Existential Thoughts",
+    "date": "2024-04-20",
+    "title": "Being and Nothingness: Navigating Existential Philosophy",
+    "subtitle": "Understanding freedom, responsibility, and meaning in life",
+    "authors": "Kris Yotam",
+    "description": "This presentation explores key concepts in existential philosophy, discussing how they can inform our understanding of personal freedom, responsibility, and the search for meaning in an absurd world.",
+    "category": "Western Philosophy",
+    "tags": ["Existentialism", "Freedom", "Meaning of Life"],
+    "keynote_pdf": "/data/src/keynotes/existential_thoughts.pdf",
+    "keynote_pptx": "/data/src/keynotes/existential_thoughts.pptx"
+  },
+  {
+    "id": "5",
+    "img": "/keynotes/creation-god-to-man/from-god-to-man.jpg",
+    "name": "Creation: God To Man",
+    "date": "2024-05-15",
+    "title": "Creation from God To Man",
+    "subtitle": "Understanding God's Plan for Creation and Humanity",
+    "authors": "Kris Yotam",
+    "description": "This keynote delves into the craft of writing, offering practical advice, creative techniques, and insights into the power of language to convey ideas, emotions, and stories effectively.",
+    "category": "Writing",
+    "tags": ["Creative Writing", "Communication", "Storytelling"],
+    "keynote_pdf": "/keynotes/creation-god-to-man/from-god-to-man-pdf.pdf",
+    "keynote_pptx": "/data/src/keynotes/craft_of_writing.pptx"
+  }
+]
+

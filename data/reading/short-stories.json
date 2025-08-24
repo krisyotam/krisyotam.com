@@ -1,0 +1,24 @@
+{
+  "short-stories": [
+    {
+      "title": "The Tell-Tale Heart",
+      "author": "Edgar Allan Poe",
+      "publication_year": 1843
+    },
+    {
+      "title": "Ligeia",
+      "author": "Edgar Allan Poe",
+      "publication_year": 1838
+    },
+    {
+      "title": "Tom Thumb",
+      "author": "Brothers Grimm",
+      "publication_year": 1812
+    },
+    {
+      "title": "The Frog Prince",
+      "author": "Brothers Grimm",
+      "publication_year": 1812
+    }
+  ]
+}

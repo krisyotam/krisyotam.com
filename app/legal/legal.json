@@ -1,0 +1,78 @@
+{
+  "pageHeader": {
+    "title": "Legal",
+    "description": "Essential legal policies governing the use of krisyotam.com"
+  },
+  "documents": [
+    {
+      "name": "Terms of Use",
+      "slug": "terms-of-use",
+      "status": "active",
+      "lastUpdated": "2025-05-23",
+      "description": "Sets forth the rules for site use—acceptable behavior in comments, account policies, right to modify or remove content, and liability disclaimers."
+    },
+    {
+      "name": "Privacy Policy",
+      "slug": "privacy-policy",
+      "status": "active",
+      "lastUpdated": "2025-05-23",
+      "description": "Discloses what personal data is collected, how it's stored, used, shared, and how users may access or delete it (GDPR/CCPA provisions included)."
+    },
+    {
+      "name": "Cookie & Tracking Notice",
+      "slug": "cookie-tracking-notice",
+      "status": "active",
+      "lastUpdated": "2025-05-23",
+      "description": "Details all cookies and tracking technologies in use, their purposes, and how users can accept or reject non-essential cookies."
+    },
+    {
+      "name": "Copyright Statement",
+      "slug": "copyright-statement",
+      "status": "active",
+      "lastUpdated": "2025-05-23",
+      "description": "Asserts ownership of text, images, and code, and specifies reuse permissions for different content types published on the website."
+    },
+    {
+      "name": "Code Licensing",
+      "slug": "code-licensing",
+      "status": "active",
+      "lastUpdated": "2025-05-23",
+      "description": "Declares the license governing published code and outlines permissions for forking, modifying, and redistributing code examples."
+    },
+    {
+      "name": "AI Transparency",
+      "slug": "ai-transparency",
+      "status": "active",
+      "lastUpdated": "2025-05-23",
+      "description": "Discloses which AI tools are used in content creation or editing and describes the human review processes applied to AI-generated content."
+    },
+    {
+      "name": "DMCA Policy",
+      "slug": "dmca-policy",
+      "status": "active",
+      "lastUpdated": "2025-05-23",
+      "description": "Provides a takedown procedure for copyright holders, including designated agent contact details and the steps followed upon receiving a notice."
+    },
+    {
+      "name": "Disclaimers",
+      "slug": "disclaimers",
+      "status": "active",
+      "lastUpdated": "2025-05-23",
+      "description": "Limits liability for errors or omissions in content with general disclaimers and specific disclaimers for specialized content areas."
+    },
+    {
+      "name": "Affiliate Disclosure",
+      "slug": "affiliate-disclosure",
+      "status": "active",
+      "lastUpdated": "2025-05-23",
+      "description": "Transparently states the use of ads, sponsored posts, or affiliate links and the nature of any commissions earned through the website."
+    },
+    {
+      "name": "Accessibility Statement",
+      "slug": "accessibility-statement",
+      "status": "active",
+      "lastUpdated": "2025-05-23",
+      "description": "Affirms commitment to web accessibility, describes tools or guidelines followed, and provides contact information for reporting accessibility issues."
+    }
+  ]
+}

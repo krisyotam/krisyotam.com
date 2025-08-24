@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Sample Family",
+    "slug": "sample-family",
+    "description": "A sample family tree showing basic structure"
+  },
+  {
+    "name": "Rothschild Family",
+    "slug": "rothschild",
+    "description": "The Rothschild banking dynasty"
+  }
+]

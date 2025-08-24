@@ -1,0 +1,21 @@
+{
+"proofs": [
+{
+"title": "Infinitely Many Primes",
+"preview": "A classical proof by Euclid demonstrating that the set of prime numbers cannot be finite. Elegant, self-contained, and foundational to number theory.",
+"start_date": "2025-06-18",
+"end_date": "",
+"tags": ["number-theory", "primes", "classical", "contradiction"],
+"category": "number-theory",
+"slug": "infinitely-many-primes",
+"cover_image": "",
+"status": "Finished",
+"confidence": "certain",
+"importance": 10,
+"state": "active",
+"framework": "Classical",
+"author": "Euclid",
+"license": "Public Domain"
+}
+]
+}

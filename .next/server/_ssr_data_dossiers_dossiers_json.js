@@ -1,0 +1,25 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+exports.id = "_ssr_data_dossiers_dossiers_json";
+exports.ids = ["_ssr_data_dossiers_dossiers_json"];
+exports.modules = {
+
+/***/ "(ssr)/./data/dossiers/dossiers.json":
+/*!*************************************!*\
+  !*** ./data/dossiers/dossiers.json ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('[{"title":"Elisa Lam","start_date":"2013-02-19","end_date":"","slug":"elisa-lam","tags":["Unsolved Crimes","Hotel Surveillance","Mental Health"],"category":"unsolved-crimes","status":"Published","confidence":"uncertain","importance":9,"preview":"The mysterious death of Canadian student Elisa Lam at the Cecil Hotel in Los Angeles, captured in haunting elevator footage and surrounded by unexplained circumstances.","state":"active"},{"title":"Jill Dando","start_date":"1999-04-26","end_date":"","slug":"jill-dando","tags":["Homicide","UK","Cold Case"],"category":"homicide","status":"Published","confidence":"uncertain","importance":8,"preview":"A beloved British television presenter shot dead on her doorstep in broad daylight—numerous theories exist, but the case remains unsolved.","state":"active"},{"title":"The Boy in the Box (1957)","start_date":"1957-02-25","end_date":"","slug":"boy-in-the-box-1957","tags":["Unidentified Persons","Cold Case","Philadelphia"],"category":"unidentified-persons","status":"Published","confidence":"uncertain","importance":9,"preview":"A young boy’s body was found in a cardboard box in Philadelphia, sparking one of the most enduring unidentified child cases in American history.","state":"active"},{"title":"Silk Road","start_date":"2025-06-14","end_date":"","slug":"silkroad","tags":["Darknet","Marketplaces","Cryptocurrency"],"category":"darknet","status":"Published","confidence":"uncertain","importance":9,"preview":"A deep dive into the SilkRoad marketplace, exploring its rise, fall, and impact on the darknet economy.","state":"active"},{"title":"Raid Forums","start_date":"2025-06-14","end_date":"","slug":"raidforums","tags":["Darknet","Marketplaces","Cryptocurrency"],"category":"darknet","status":"Published","confidence":"uncertain","importance":9,"preview":"A deep dive into the RaidForums marketplace, exploring its rise, fall, and impact on the darknet economy.","state":"active"}]');
+
+/***/ })
+
+};
+;
