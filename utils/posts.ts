@@ -1,5 +1,5 @@
 // utils/posts.ts
-import { getEssaysData, getBlogData, getCategoriesData, getSeriesData } from "@/lib/data"
+import { getEssaysData, getBlogData, getCategoriesData } from "@/lib/data"
 
 export interface Post {
   title: string
@@ -19,7 +19,6 @@ export interface Post {
   cover_image?: string
   cover?: string
   path?: string // Custom URL path for the post
-  series?: string
   publication_year?: number // Added publication_year
   author?: string // Added author
 }
@@ -222,18 +221,4 @@ export async function getTags(): Promise<{ name: string; count: number }[]> {
   return Array.from(tagCounts.entries())
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => a.name.localeCompare(b.name))
-}
-
-export async function getSeries(): Promise<{ name: string; count: number }[]> {
-  const seriesData = await getSeriesData()
-
-  if (!seriesData?.series) return []
-
-  return seriesData.series
-    .filter((series: any) => series && series.name && Array.isArray(series.posts))
-    .map((series: any) => ({
-      name: series.name,
-      count: series.posts.length
-    }))
-    .sort((a: { name: string; count: number }, b: { name: string; count: number }) => a.name.localeCompare(b.name))
 }
