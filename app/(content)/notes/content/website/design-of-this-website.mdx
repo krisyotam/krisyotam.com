@@ -1,0 +1,39 @@
+<Box>**krisyotam.com** is a hybrid static, dynamic site using next.js, and currently hosted on vercel. The goals of this site differ 
+slightly from other "blogs" and it is designed to be fast, practical, and aesthetically pleasing. So you won't tend to see large thumbnail images, 
+frequent pop-ups, or pestering notifications to join a email list. </Box>
+
+# Development 
+The majority of the code for this site is written in [TypeScript](https://www.typescriptlang.org/), with some components written in [JavaScript](https://www.javascript.com/). The site uses [Next.js](https://nextjs.org/) for server-side rendering and static site generation, and is styled using [Tailwind CSS](https://tailwindcss.com/).
+
+## Developers 
+The site is primarily developed by [Kris Yotam](https://github.com/krisyotam), with some major contributions from [Ally Taffet](https://github.com/allytaffet), and [Lydia Lorien](https://github.com/lydialorien). The site is closed source, and currently invite only, but we may release the source code in the future. 
+
+  
+# Design Principles
+<Collapse title="Laws of Simplicity">
+This site is designed to follow the [**Laws of simplicity**](https://lawsofsimplicity.com/) by John Maeda, and is heavily inspired by the [**Minimalist Design**](https://www.minimalistdesign.com/) movement.  
+  
+**Law 1**: The simplest way to achieve simplicity is through thoughtful reduction.  
+**Law 2**: Organization makes a system of many appear fewer.  
+**Law 3**: Savings in time feel like simplicity.  
+**Law 4**: Knowledge makes everything simpler.  
+**Law 5**: Simplicity and complexity need each other.  
+**Law 6**: What lies in the periphery of simplicity is definitely not peripheral.  
+**Law 7**: More emotions are better than less.  
+**Law 8**: In simplicity we trust.  
+**Law 9**: Some things can never be made simple.  
+**Law 10**: Simplicity is about subtracting the obvious, and adding the meaningful.  
+</Collapse>
+
+The goals of this site can be presented as a elegant refactor of gwerns question "What does it take to present, for the long-term, complex, highly-referenced, link-intensive, long-form text online as effectively as possible, while conserving the reader's time & attention?" as such 
+
+<Box>The goal of this site is to explore and implement the best methods for presenting complex, long-form, highly-referenced, and link-intensive writing online—optimized for long-term preservation and designed to conserve the reader’s time and attention.</Box>
+
+One of the largest challenges of this site, and a critical barrier to law 8 was the lack of rigor in deciding what is "meaningful" and what is "obvious". Take for example my page for the [Mitzvah](/mitzvah), and [Rules of the Internet](/rules-of-the-internet). Implementing these with their own respective root level pages vs. as a 
+much simpler mdx blog post was a difficult decision. For the mitzvah, I felt that the content was important enough to warrant its own page, but for something like "Rules of the Internet" their happen to be dozens of equally important sets of rules, laws, ect. that I can compile into lists to store for people to access. 
+Going forward it would be much simpler to have these implemented as a mdx blog post. This is where the decision to create Hierarchical Content pages comes from, and why I have [Essays](/essays), [Blog Posts](/blog), and [Notes](/notes). 
+
+# LLM Digestion 
+<Quote author="Gary Taylor">
+What has been done, thought, written, or spoken is not culture; culture is only that fraction which is remembered. 
+</Quote>

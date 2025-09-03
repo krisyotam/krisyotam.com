@@ -1,0 +1,78 @@
+[
+  {
+    "id": "1",
+    "name": "Winona Ryder",
+    "image": "https://i.postimg.cc/ZKPTkKYP/winona-ryder.webp"
+  },
+  {
+    "id": "2",
+    "name": "Marilyn Monroe",
+    "image": "https://i.postimg.cc/SNtHBN1w/marilyn-monroe.webp"
+  },
+  {
+    "id": "3",
+    "name": "Denzel Washington",
+    "image": "https://i.postimg.cc/dQXcVywK/denzel-washington.webp"
+  },
+  {
+    "id": "4",
+    "name": "Katherine Hepburn",
+    "image": "https://i.postimg.cc/c1nxmBVb/katherine-hepburn.jpg"
+  },
+  {
+    "id": "5",
+    "name": "Leonardo DiCaprio",
+    "image": "https://i.postimg.cc/xCfnLD4D/leonardo-dicaprio.webp"
+  },
+  {
+    "id": "6",
+    "name": "Meryl Streep",
+    "image": "https://i.postimg.cc/6QwXNxw2/meryl-streep.jpg"
+  },
+  {
+    "id": "7",
+    "name": "Morgan Freeman",
+    "image": "https://i.postimg.cc/HkMYgtyK/morgan-freeman.jpg"
+  },
+  {
+    "id": "8",
+    "name": "Jenna Ortega",
+    "image": "https://i.postimg.cc/8C8hpwnr/jenna-ortega.jpg"
+  },
+  {
+    "id": "9",
+    "name": "Nicole Kidman",
+    "image": "https://i.postimg.cc/R0Qv3VGL/nicole-kidman.jpg"
+  },
+  {
+    "id": "10",
+    "name": "Angelina Jolie",
+    "image": "https://i.postimg.cc/FKB1FKKC/angelina-jolie.webp"
+  },
+  {
+    "id": "11",
+    "name": "Brad Pitt",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "12",
+    "name": "Emma Stone",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "13",
+    "name": "Joaquin Phoenix",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "14",
+    "name": "Frances McDormand",
+    "image": "/placeholder.svg?height=150&width=150"
+  },
+  {
+    "id": "15",
+    "name": "Daniel Day-Lewis",
+    "image": "/placeholder.svg?height=150&width=150"
+  }
+]
+

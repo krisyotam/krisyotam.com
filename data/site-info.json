@@ -1,0 +1,18 @@
+[
+    {
+      "Name": "Open-Source Version",
+      "Purpose": "A minimalist version of this site for those interested",
+      "Link": "https://example.com/open-source"
+    },
+    {
+      "Name": "Paid-Version",
+      "Purpose": "More complex than the open-source version with all current page components *does not include post components",
+      "Link": "https://example.com/paid-version"
+    },
+    {
+      "Name": "Mystery Box",
+      "Purpose": "Contains unknown items for those seeking surprise and curiosity",
+      "Link": "https://example.com/mystery-box"
+    }
+  ]
+  

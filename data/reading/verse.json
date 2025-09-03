@@ -1,0 +1,87 @@
+{
+"verse": [
+{
+"title": "Ulalume",
+"author": "Edgar Allan Poe",
+"verse_type": "narrative poem",
+"source_link": "https://example.com/the-road",
+"publication_year": 1847
+},
+{
+"title": "The Raven",
+"author": "Edgar Allan Poe",
+"verse_type": "narrative poem",
+"source_link": "https://example.com/the-road",
+"publication_year": 1845
+},
+{
+"title": "Lenore",
+"author": "Edgar Allan Poe",
+"verse_type": "lyric poem",
+"source_link": "https://example.com/the-road",
+"publication_year": 1831
+},
+{
+"title": "Annabel Lee",
+"author": "Edgar Allan Poe",
+"verse_type": "ballad",
+"source_link": "https://example.com/the-road",
+"publication_year": 1849
+},
+{
+"title": "First Fig",
+"author": "Edna St. Vincent Millay",
+"verse_type": "epigram",
+"source_link": "https://example.com/the-road",
+"publication_year": 1920
+},
+{
+"title": "One Art",
+"author": "Elizabeth Bishop",
+"verse_type": "villanelle",
+"source_link": "https://example.com/the-road",
+"publication_year": 1976
+},
+{
+"title": "The City in the Sea",
+"author": "Edgar Allan Poe",
+"verse_type": "gothic poem",
+"publication_year": 1831
+},
+{
+"title": "Let me not to the marriage of true minds",
+"author": "William Shakespeare",
+"verse_type": "sonnet",
+"source_link": "https://example.com/the-road",
+"publication_year": 1609
+},
+{
+"title": "Shall I compare thee to a summer’s day?",
+"author": "William Shakespeare",
+"verse_type": "sonnet",
+"source_link": "https://example.com/the-road",
+"publication_year": 1609
+},
+{
+"title": "Because I could not stop for Death",
+"author": "Emily Dickinson",
+"verse_type": "lyric poem",
+"source_link": "https://example.com/the-road",
+"publication_year": 1890
+},
+{
+"title": "Hope is the thing with feathers",
+"author": "Emily Dickinson",
+"verse_type": "lyric poem",
+"source_link": "https://example.com/the-road",
+"publication_year": 1891
+},
+{
+"title": "Boots",
+"author": "Rudyard Kipling",
+"verse_type": "narrative poem",
+"source_link": "https://example.com/the-road",
+"publication_year": 1903
+}
+]
+}

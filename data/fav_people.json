@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Makoto Shinkai",
+    "photolink": "/images/anime/people/shinkai.jpg",
+    "link": "https://myanimelist.net/people/1117/Makoto_Shinkai",
+    "ranking": 1
+  },
+  {
+    "name": "Mamoru Hosoda",
+    "photolink": "/images/anime/people/hosoda.jpg",
+    "link": "https://myanimelist.net/people/5067/Mamoru_Hosoda",
+    "ranking": 2
+  },
+  {
+    "name": "Hayao Miyazaki",
+    "photolink": "/images/anime/people/miyazaki.jpg",
+    "link": "https://myanimelist.net/people/1870/Hayao_Miyazaki",
+    "ranking": 3
+  },
+  {
+    "name": "Yuki Kaji",
+    "photolink": "/images/anime/people/kaji.jpg",
+    "link": "https://myanimelist.net/people/672/Yuki_Kaji",
+    "ranking": 4
+  },
+  {
+    "name": "Saori Hayami",
+    "photolink": "/images/anime/people/hayami.jpg",
+    "link": "https://myanimelist.net/people/869/Saori_Hayami",
+    "ranking": 5
+  }
+]
+

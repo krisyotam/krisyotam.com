@@ -1,0 +1,22 @@
+[
+  {
+    "cover": "https://cookingwithcassandra.com/wp-content/uploads/2022/10/Copy-of-Copy-of-DSC03750-2-scaled.jpg",
+    "title": "Art Title 1",
+    "link": "https://example.com/art1"
+  },
+  {
+    "cover": "https://cookingwithcassandra.com/wp-content/uploads/2022/10/Copy-of-Copy-of-DSC03750-2-scaled.jpg",
+    "title": "Art Title 2",
+    "link": "https://example.com/art2"
+  },
+  {
+    "cover": "https://cookingwithcassandra.com/wp-content/uploads/2022/10/Copy-of-Copy-of-DSC03750-2-scaled.jpg",
+    "title": "Art Title 3",
+    "link": "https://example.com/art3"
+  },
+  {
+    "cover": "https://cookingwithcassandra.com/wp-content/uploads/2022/10/Copy-of-Copy-of-DSC03750-2-scaled.jpg",
+    "title": "Art Title 4",
+    "link": "https://example.com/art4"
+  }
+]

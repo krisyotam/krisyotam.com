@@ -1,0 +1,91 @@
+{
+  "rootMemberId": "mayer",
+  "members": [
+    {
+      "id": "mayer",
+      "name": "Mayer Amschel Rothschild",
+      "birthDate": "1744-02-23",
+      "deathDate": "1812-09-19",
+      "imageUrl": "https://i.postimg.cc/SNtHBN1w/marilyn-monroe.webp",
+      "bio": "Founder of the Rothschild banking dynasty. Started as a dealer of rare coins in Frankfurt.",
+      "spouseIds": ["gutle"],
+      "childrenIds": ["amschel", "salomon", "nathan", "kalmann", "jakob"]
+    },
+    {
+      "id": "gutle",
+      "name": "Gutle Schnapper",
+      "birthDate": "1753-08-23",
+      "deathDate": "1849-05-07",
+      "imageUrl": "https://i.postimg.cc/SNtHBN1w/marilyn-monroe.webp",
+      "bio": "Wife of Mayer Amschel Rothschild and matriarch of the Rothschild family.",
+      "spouseIds": ["mayer"],
+      "childrenIds": ["amschel", "salomon", "nathan", "kalmann", "jakob"]
+    },
+    {
+      "id": "amschel",
+      "name": "Amschel Mayer Rothschild",
+      "birthDate": "1773-06-12",
+      "deathDate": "1855-12-06",
+      "imageUrl": "https://i.postimg.cc/SNtHBN1w/marilyn-monroe.webp",
+      "bio": "Head of the Frankfurt House, continuing his father's banking business in Germany.",
+      "parentIds": ["mayer", "gutle"]
+    },
+    {
+      "id": "salomon",
+      "name": "Salomon Mayer Rothschild",
+      "birthDate": "1774-09-09",
+      "deathDate": "1855-07-28",
+      "imageUrl": "https://i.postimg.cc/SNtHBN1w/marilyn-monroe.webp",
+      "bio": "Founder of the Vienna House, expanding Rothschild banking into the Austrian Empire.",
+      "parentIds": ["mayer", "gutle"]
+    },
+    {
+      "id": "nathan",
+      "name": "Nathan Mayer Rothschild",
+      "birthDate": "1777-09-16",
+      "deathDate": "1836-07-28",
+      "imageUrl": "https://i.postimg.cc/SNtHBN1w/marilyn-monroe.webp",
+      "bio": "Founder of the London House, the most successful of the Rothschild branches.",
+      "parentIds": ["mayer", "gutle"],
+      "spouseIds": ["hannah"],
+      "childrenIds": ["lionel"]
+    },
+    {
+      "id": "kalmann",
+      "name": "Kalmann (Carl) Mayer Rothschild",
+      "birthDate": "1788-04-24",
+      "deathDate": "1855-03-10",
+      "imageUrl": "https://i.postimg.cc/SNtHBN1w/marilyn-monroe.webp",
+      "bio": "Founder of the Naples House, managing banking operations in Italy.",
+      "parentIds": ["mayer", "gutle"]
+    },
+    {
+      "id": "jakob",
+      "name": "Jakob (James) Mayer Rothschild",
+      "birthDate": "1792-05-15",
+      "deathDate": "1868-11-15",
+      "imageUrl": "https://i.postimg.cc/SNtHBN1w/marilyn-monroe.webp",
+      "bio": "Founder of the Paris House, establishing the Rothschild banking presence in France.",
+      "parentIds": ["mayer", "gutle"]
+    },
+    {
+      "id": "hannah",
+      "name": "Hannah Barent Cohen",
+      "birthDate": "1783-01-01",
+      "deathDate": "1850-01-01",
+      "imageUrl": "https://i.postimg.cc/SNtHBN1w/marilyn-monroe.webp",
+      "bio": "Wife of Nathan Rothschild, helped establish the family in British society.",
+      "spouseIds": ["nathan"],
+      "childrenIds": ["lionel"]
+    },
+    {
+      "id": "lionel",
+      "name": "Lionel de Rothschild",
+      "birthDate": "1808-11-22",
+      "deathDate": "1879-06-03",
+      "imageUrl": "https://i.postimg.cc/SNtHBN1w/marilyn-monroe.webp",
+      "bio": "First Jewish Member of Parliament in Britain, taking the seat for the City of London in 1858.",
+      "parentIds": ["nathan", "hannah"]
+    }
+  ]
+} 

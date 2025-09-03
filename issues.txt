@@ -1,0 +1,10 @@
+[22:21:00.770] MDX file not found: /vercel/path0/app/cases/content/internet-mysteries/cicada-3301.mdx
+[22:21:00.813] MDX file not found: /vercel/path0/app/cases/content/internet-mysteries/markovian-parallax-denigrate.mdx
+[22:21:00.845] MDX file not found: /vercel/path0/app/cases/content/internet-mysteries/lake-city-quiet-pills.mdx
+[22:21:00.913] MDX file not found: /vercel/path0/app/cases/content/internet-mysteries/unfavorable-semicircle.mdx
+[22:21:00.960] MDX file not found: /vercel/path0/app/cases/content/internet-mysteries/a858-stonehenge-redux.mdx
+[22:21:00.997] MDX file not found: /vercel/path0/app/cases/content/homicide/zodiac-killer.mdx
+[22:21:01.033] MDX file not found: /vercel/path0/app/cases/content/missing-persons/lars-mittank-disappearance.mdx
+[22:21:01.077] MDX file not found: /vercel/path0/app/cases/content/unidentified-persons/tamam-shud-case.mdx
+[22:21:01.094] MDX file not found: /vercel/path0/app/cases/content/missing-persons/brandon-swanson-disappearance.mdx
+[22:21:16.305] Error occurred prerendering page "/progymnasmata/chreia/on-socrates-wisdom". Read more: https://nextjs.org/docs/messages/prerender-error

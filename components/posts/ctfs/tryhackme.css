@@ -1,0 +1,46 @@
+/* the “bento” background */
+.tryhackme-box {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+    background-color: hsl(var(--muted) / 0.5);
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;      /* centers the wrapper and caption */
+    box-sizing: border-box;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .tryhackme-box {
+      background-color: hsl(var(--popover));
+    }
+  }
+  
+  /* remove any clipping—let it grow to the embed’s full size */
+  .tryhackme-iframe-wrapper {
+    display: flex;
+    justify-content: center;  /* centers the iframe horizontally */
+    align-items: center;      /* centers it vertically (though it fills its own height) */
+  }
+  
+  /* the badge itself */
+  .tryhackme-iframe {
+    border: none;        /* eliminates any extra gaps */
+  }
+  
+  /* your caption underneath */
+  .tryhackme-caption {
+    margin-top: -1rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    text-align: center;
+  }
+  
+  .tryhackme-iframe-wrapper {
+    justify-content: center;
+    align-items: center;
+
+  }
+  

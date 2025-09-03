@@ -1,0 +1,69 @@
+import MangaPanelDisplay from "@/components/posts/content/manga-panel-display"
+import MangaPanelDisplayCollection from "@/components/posts/content/manga-panel-display-collection"
+import MangaDisplay from "@/components/posts/content/manga-display"
+import CharacterDisplay from "@/components/posts/characters/character-display"
+import AnimeDisplay from "@/components/posts/content/anime-display"
+import AnimeCharacterDisplay from "@/components/posts/content/anime-character-display"
+
+
+
+<div className="flex flex-wrap justify-center gap-8 my-8">
+<MangaDisplay 
+    coverImage="https://i.postimg.cc/rsT1CYrc/jujutusu-kaisen-manga.webp"
+    title="Jujutsu Kaisen"
+    author="Gege Akutami"
+    publisher="VIZ Media LLC"
+    yearStarted={2018}
+    yearEnded={2024}
+    volumes={30} 
+    genre="Shonen"
+  />
+</div>
+
+
+# Background 
+
+For those unaware this article is on the subject of a battle between Satoru Gojo, & Ryomen Sukuna. This battle takes place
+in Shinjuku Tokyo on December 24th which is the in Universe Anniversery of the death of [Suguru Geto](https://jujutsu-kaisen.fandom.com/wiki/Suguru_Geto). 
+
+Gojo was was selaed in the Prison Realm on October 31 during the Shibuya Incident, and was unsealed approximately 19 days later, around November 19. After being released
+Gojo went to confront kenjaku. Upon confronting Kenjaku gojo fully intended to kill him. 
+
+
+<div className="flex flex-wrap justify-center gap-8 my-8 w-full">
+  <MangaPanelDisplayCollection 
+    panels={[
+      { image: "https://i.postimg.cc/YCJ9YB1G/3ec1e-16908923074171-1920.webp", pageName: "1" },
+      { image: "https://i.postimg.cc/YCJ9YB1G/3ec1e-16908923074171-1920.webp", pageName: "The Transformation" },
+      { image: "https://i.postimg.cc/YCJ9YB1G/3ec1e-16908923074171-1920.webp", pageName: "The Aftermath" }
+    ]}
+    mangaTitle="Jujutsu Kaisen"
+    layout="horizontal"
+    artist="Gege Akutami"
+    chapter="Chapter 31, Inhuman Makyo Shinjuku Showdown, Part 1"
+    className="mx-auto"
+  />
+</div>
+
+
+
+# Introduction 
+
+<div className="flex gap-4">  
+  <AnimeCharacterDisplay 
+    image="https://i.postimg.cc/NMk9YGKq/ryomen-sukuna.jpg"
+    characterName="Ryomen Sukuna"
+    voiceActor="Junichi Suwabe"
+    animeName="Jujutsu Kaisen"
+    animeYear={2023}
+  />
+
+  <AnimeCharacterDisplay 
+    image="https://i.postimg.cc/Gt3Bp0DB/gojo-satoru.jpg"
+    characterName="Satoru Gojo"
+    voiceActor="Yūichi Nakamura"
+    animeName="Jujutsu Kaisen"
+    animeYear={2023}
+  />
+
+</div>
