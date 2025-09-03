@@ -23,6 +23,25 @@ export interface TilData {
   til: TilEntry[]
 }
 
+// Now data types
+export interface NowEntry {
+  title: string
+  preview: string
+  date: string
+  tags: string[]
+  category: string
+  slug: string
+  cover_image: string
+  status: string
+  confidence: string
+  importance: number
+  state: string
+}
+
+export interface NowData {
+  now: NowEntry[]
+}
+
 /**
  * Get essays data from essays.json
  * This function ensures the file is included in Vercel's build
@@ -69,7 +88,6 @@ export async function getCategoriesData(): Promise<any> {
   }
 }
 
-
 /**
  * Get tags data from tags.json
  */
@@ -112,23 +130,4 @@ export async function getNowData(): Promise<NowData> {
     console.error("Error reading now.json:", error)
     return { now: [] }
   }
-}
-
-// Now data types
-export interface NowEntry {
-  title: string
-  preview: string
-  date: string
-  tags: string[]
-  category: string
-  slug: string
-  cover_image: string
-  status: string
-  confidence: string
-  importance: number
-  state: string
-}
-
-export interface NowData {
-  now: NowEntry[]
 }
