@@ -50,6 +50,9 @@ import RecommendedContent from "@/components/about/RecommendedContent"
 import { FeaturedPost } from "@/components/featured-post"
 import { Post } from "@/utils/posts"
 import Favorites from "@/components/Favorites"
+import { InfiniteMovingQuotes } from "@/components/InfiniteMovingQuotes"
+import { ThemeImageCompare } from "@/components/about/ThemeImageCompare"
+import TestimonialsSection from "@/components/about/testimonials"
 
 // URL generation helper - based on correct route patterns for both content types
 function getPostUrl(post: Post): string {
@@ -703,6 +706,18 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                   </div>
                 </CardContent>
               </Card>
+            </div>
+
+            {/* Sliding Quotes Animation */}
+            <div className="mb-8">
+              <InfiniteMovingQuotes />
+            </div>
+            {/* Theme Image Compare Animation */}
+            <div className="mb-8">
+              <ThemeImageCompare />
+            </div>
+            <div className="mb-8">
+              <TestimonialsSection />
             </div>
 
             {/* About This Site Collapse */}

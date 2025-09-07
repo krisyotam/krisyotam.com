@@ -1,10 +1,18 @@
-[22:21:00.770] MDX file not found: /vercel/path0/app/cases/content/internet-mysteries/cicada-3301.mdx
-[22:21:00.813] MDX file not found: /vercel/path0/app/cases/content/internet-mysteries/markovian-parallax-denigrate.mdx
-[22:21:00.845] MDX file not found: /vercel/path0/app/cases/content/internet-mysteries/lake-city-quiet-pills.mdx
-[22:21:00.913] MDX file not found: /vercel/path0/app/cases/content/internet-mysteries/unfavorable-semicircle.mdx
-[22:21:00.960] MDX file not found: /vercel/path0/app/cases/content/internet-mysteries/a858-stonehenge-redux.mdx
-[22:21:00.997] MDX file not found: /vercel/path0/app/cases/content/homicide/zodiac-killer.mdx
-[22:21:01.033] MDX file not found: /vercel/path0/app/cases/content/missing-persons/lars-mittank-disappearance.mdx
-[22:21:01.077] MDX file not found: /vercel/path0/app/cases/content/unidentified-persons/tamam-shud-case.mdx
-[22:21:01.094] MDX file not found: /vercel/path0/app/cases/content/missing-persons/brandon-swanson-disappearance.mdx
-[22:21:16.305] Error occurred prerendering page "/progymnasmata/chreia/on-socrates-wisdom". Read more: https://nextjs.org/docs/messages/prerender-error
+
+We are going to be adding a new component components/about named testimonials 
+
+You will be adding this to lib/utils.ts 
+
+import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+and using components/ui/animated-testimonialst.tsx, you will pull from testimonials.json in /data 
+
+also for changes for the component i want the outside of the bento to have square corners, and the photo bento should be 
+in black and white and only color on hover, then make the arrow buttons square as well. 
+
+you are going to add it under the themeimagecompare. 

@@ -469,26 +469,26 @@ export const staticMetadata: Record<string, Metadata> = {
     }
   },
   grid: {
-    title: 'Grid',
-    description: 'Content organized in a grid layout for easy browsing.',
+    title: siteConfig.name,
+    description: siteConfig.description,
     openGraph: {
-      title: 'Grid',
-      description: 'Content organized in a grid layout for easy browsing.',
+      title: siteConfig.name,
+      description: siteConfig.description,
       images: [
         {
-          url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
+          url: siteConfig.ogImage,
           width: 1200,
           height: 630,
-          alt: 'Grid'
+          alt: siteConfig.name
         }
       ],
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Grid',
-      description: 'Content organized in a grid layout for easy browsing.',
-      images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
+      title: siteConfig.name,
+      description: siteConfig.description,
+      images: [siteConfig.ogImage],
       creator: '@krisyotam'
     }
   },

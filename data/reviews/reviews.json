@@ -810,6 +810,20 @@
 "preview": "A review of Memories of Emanon.",
 "cover_image": "https://doc.krisyotam.com/imgs/anime/omoide-emanon.jpg",
 "state": "active"
+},
+{
+"title": "Never Let Me Go",
+"start_date": "2025-09-02",
+"end_date": "",
+"slug": "never-let-me-go",
+"tags": ["Literary Fiction", "Psychological", "Review"],
+"category": "book",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8,
+"preview": "A review of Never Let Me Go.",
+"cover_image": "https://doc.krisyotam.com/imgs/books/never-let-me-go-kazuo-ishiguro.jpg",
+"state": "active"
 }
 
 ]

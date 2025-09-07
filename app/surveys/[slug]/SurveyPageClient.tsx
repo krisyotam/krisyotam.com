@@ -1,5 +1,4 @@
 /* app/surveys/[slug]/SurveyPageClient.tsx */
-
 "use client";
 
 import { PostHeader } from "@/components/post-header";
@@ -9,6 +8,7 @@ import SiteFooter from "@/components/typography/expanded-footer-block";
 import ContactForm from "@/components/ContactForm";
 import AnonymousFeedbackForm from "@/components/surveys/anonymous-feedback";
 import { LiveClock } from "@/components/live-clock";
+import dynamic from "next/dynamic";
 
 export type Survey = {
   title: string;
@@ -28,15 +28,21 @@ interface Props {
 
 export default function SurveyPageClient({ survey }: Props) {
   let SurveyForm = null;
-  if (survey.title.toLowerCase().includes("anonymous")) {
-    SurveyForm = <AnonymousFeedbackForm />;
-  } else {
-    SurveyForm = <ContactForm />;
+
+  try {
+    const DynamicSurvey = dynamic(() => import(`@/components/surveys/${survey.slug}`), { ssr: false });
+    SurveyForm = <DynamicSurvey />;
+  } catch (e) {
+    if (survey.title.toLowerCase().includes("anonymous")) {
+      SurveyForm = <AnonymousFeedbackForm />;
+    } else {
+      SurveyForm = <ContactForm />;
+    }
   }
 
   return (
     <>
-      <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
+      <div className="container w-full max-w-4xl mx-auto px-4 pt-16 pb-6">
         <PostHeader
           title={survey.title}
           preview={survey.preview}
@@ -49,13 +55,15 @@ export default function SurveyPageClient({ survey }: Props) {
           backText="Surveys"
           backHref="/surveys"
         />
-        <div className="mb-8">
-          {SurveyForm}
-        </div>
+        <div className="mb-6">{SurveyForm}</div>
       </div>
-      <SiteFooter />
-      {/* Citation below expanded footer */}
-      <div className="mt-8 container max-w-[672px] mx-auto px-4 pb-8">
+
+      {/* Expanded footer aligned and spaced tighter */}
+      <div className="container max-w-4xl mx-auto px-4">
+        <SiteFooter />
+      </div>
+
+      <div className="container max-w-4xl mx-auto px-4 pt-4 pb-16">
         <Citation
           title={survey.title}
           slug={survey.slug}
@@ -63,7 +71,9 @@ export default function SurveyPageClient({ survey }: Props) {
           end_date={survey.end_date}
           url={`https://krisyotam.com/surveys/${survey.slug}`}
         />
-        <LiveClock />
+        <div className="mt-4">
+          <LiveClock />
+        </div>
         <Footer />
       </div>
     </>
