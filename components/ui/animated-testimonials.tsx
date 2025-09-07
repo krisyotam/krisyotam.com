@@ -44,7 +44,6 @@ export const AnimatedTestimonials = ({
   };
   return (
     <div className="mx-auto max-w-sm px-4 pt-6 pb-10 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12 border border-border rounded-none bg-card">
-
       <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
         <div>
           <div className="relative h-80 w-full">
@@ -93,7 +92,7 @@ export const AnimatedTestimonials = ({
             </AnimatePresence>
           </div>
         </div>
-        <div className="flex flex-col justify-between py-4">
+        <div className="flex flex-col justify-between py-4 min-h-80 w-full">
           <motion.div
             key={active}
             initial={{

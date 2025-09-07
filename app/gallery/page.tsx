@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { PageHeader } from "@/components/page-header";
-import { FocusCards } from "@/app/(content)/gallery/FocusCards";
+// import { FocusCards } from "@/app/(content)/gallery/FocusCards";
 import GalleryClientPage from "./GalleryClientPage";
 import galleryData from "@/data/gallery/gallery.json";
 import { staticMetadata } from "@/lib/staticMetadata";
