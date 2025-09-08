@@ -44,6 +44,7 @@ export const AnimatedTestimonials = ({
   };
   return (
     <div className="mx-auto max-w-sm px-4 pt-6 pb-10 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12 border border-border rounded-none bg-card">
+
       <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
         <div>
           <div className="relative h-80 w-full">
@@ -92,7 +93,7 @@ export const AnimatedTestimonials = ({
             </AnimatePresence>
           </div>
         </div>
-        <div className="flex flex-col justify-between py-4 min-h-80 w-full">
+        <div className="flex flex-col justify-between py-4">
           <motion.div
             key={active}
             initial={{
@@ -141,6 +142,12 @@ export const AnimatedTestimonials = ({
                 >
                   {word}&nbsp;
                 </motion.span>
+              ))}
+              {/* Pad with invisible spans to ensure at least 3 lines (using visibility: hidden so they take up space) */}
+              {Array.from({ length: Math.max(0, 3 - Math.ceil(testimonials[active].quote.length / 60)) }).map((_, i) => (
+                <span key={"pad-" + i} aria-hidden="true" style={{ display: 'block', height: '1.5em', width: '100%', visibility: 'hidden' }}>
+                  &nbsp;
+                </span>
               ))}
             </motion.p>
           </motion.div>
