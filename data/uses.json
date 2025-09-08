@@ -1,0 +1,48 @@
+{
+  "hardware": [
+    {"label": "Phone", "value": "Google Pixel 6 running Graphene OS", "note": "blog post about my Graphene OS experience here"},
+    {"label": "Laptop", "value": "Asus Zenbook 14 running Fedora and Qubes"},
+    {"label": "Desktop", "value": "Ryzen 7 5800X3D, 32gb ram, 2tb nvme, 1tb ssd, 6tb hdd, 3060ti running dual boot with both Fedora and Windows"},
+    {"label": "Server", "value": "See this post"}
+  ],
+  "camera": [
+    {"label": "Body", "value": "Fuji XS-20"},
+    {"label": "Lenses", "value": "Fujinon XF18-55 F2.8"},
+    {"label": "Lenses", "value": "Fujinon XF27 F2.8 R WR"},
+    {"label": "Main Fuji Recipe", "value": "Film Simulation: Provia, Grain Effect: Weak / Small, Color Chrome Effect: Strong, Color Chrome Effect Blue: Weak, White balance: Auto, R-1, B+1, Tone curve: H-2, S+1, Color: +3, Sharpness: +4, High iso nr: -1, Clarity: 0"}
+  ],
+  "peripherals": [
+    {"label": "Keyboard", "value": "HHKB Hybrid Silent-S"},
+    {"label": "Headset", "value": "Beyerdynamic DT 770 PRO 80 Ohm"},
+    {"label": "Mouse", "value": "Razer Viper V3 Pro"},
+    {"label": "Microphone", "value": "Shure MV7+"}
+  ],
+  "software": [
+    {"label": "Browser", "value": "Librewolf + Vivaldi + Zen"},
+    {"label": "Code Editor", "value": "VSCodium + Zed"},
+    {"label": "Writing / Notes-Taking", "value": "OnlyOffice + Obsidian ❤️"},
+    {"label": "Backups / Sync", "value": "Syncthing to my server"}
+  ],
+  "fedora": [
+    {"label": "Operating System", "value": "Fedora"},
+    {"label": "Compositor", "value": "Hyprland"},
+    {"label": "Bar", "value": "Waybar"},
+    {"label": "Terminal", "value": "Alacritty + fish + tmux"}
+  ],
+  "services": [
+    {"label": "Mail + Calendar", "value": "Proton + Posteo + Riseup"},
+    {"label": "Password manager", "value": "Bitwarden + ProtonPass + KeePassXC"},
+    {"label": "VPN", "value": "OVPN + Proton + Mullvad"},
+    {"label": "Search", "value": "Kagi + DuckDuckGo + Brave Search"},
+    {"label": "Messages", "value": "Signal + Threema + (sadly Telegram and WhatsApp)"},
+    {"label": "DNS", "value": "dns.sy.st"}
+  ],
+  "website": [
+    {"label": "Domain", "value": "Njalla"},
+    {"label": "CDN", "value": "Bunny"},
+    {"label": "DNS", "value": "Bunny"},
+    {"label": "Proxy", "value": "OVPN"},
+    {"label": "Server", "value": "Super duper secret location (home)"},
+    {"label": "Made with", "value": "Hugo"}
+  ]
+}

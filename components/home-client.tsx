@@ -53,6 +53,7 @@ import Favorites from "@/components/Favorites"
 import { InfiniteMovingQuotes } from "@/components/InfiniteMovingQuotes"
 import { ThemeImageCompare } from "@/components/about/ThemeImageCompare"
 import TestimonialsSection from "@/components/about/testimonials"
+import Uses from "@/components/about/Uses"
 
 // URL generation helper - based on correct route patterns for both content types
 function getPostUrl(post: Post): string {
@@ -559,12 +560,12 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                   )}
                 </p>
                 {showMoreQuote && (
-                  <button 
+                  <button
                     onClick={(e) => {
                       e.stopPropagation();
                       setExpandQuote(!expandQuote);
                     }}
-                    className="inline-flex items-center text-xs text-gray-500 dark:text-gray-500 hover:text-primary dark:hover:text-primary mt-1 cursor-pointer"
+                    className="inline-flex items-center text-xs text-gray-500 dark:text-gray-400 mt-1"
                   >
                     <ChevronDown className={`h-4 w-4 transition-transform ${expandQuote ? 'rotate-180' : ''}`} />
                     <span className="ml-1">{expandQuote ? 'Show less' : 'Show more'}</span>
@@ -741,6 +742,13 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                 content={<Favorites />}
                 isOpen={openSections.includes(-1)}
                 onToggle={() => toggleSection(-1)}
+              />
+              {/* Uses tab below Favorites, above Socials */}
+              <AccordionItem
+                title="Uses"
+                content={<Uses />}
+                isOpen={openSections.includes(-2)}
+                onToggle={() => toggleSection(-2)}
               />
               <AccordionItem
                 title="Socials"
