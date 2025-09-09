@@ -1,8 +1,16 @@
-import { PageHeader } from "@/components/page-header";
+"use client";
+
+import { useState, useEffect } from "react";
 import { PageDescription } from "@/components/posts/typography/page-description";
-import Hero from "@/components/portfolio/hero";
+import { Hero } from "@/components/portfolio/hero";
 import { ThreeDMarqueeDemo } from "@/components/portfolio/dev";
 import { FeaturesSectionDemo } from "@/components/portfolio/hosting";
+import { About } from "@/components/portfolio/about";
+import { Posts } from "@/components/portfolio/posts";
+import { Projects } from "@/components/portfolio/projects";
+import { CV } from "@/components/portfolio/cv";
+import projectsData from "@/data/portfolio/projects.json";
+import categoriesData from "@/data/portfolio/categories.json";
 
 const portfolioPageData = {
   title: "Portfolio",
@@ -17,30 +25,49 @@ const portfolioPageData = {
 };
 
 export default function PortfolioPage() {
+  // Temporarily set default to "projects" for testing
+  const [activeTab, setActiveTab] = useState("projects");
+
+  const handleTabChange = (tab: string) => {
+    console.log("Tab changed to:", tab);
+    setActiveTab(tab);
+  };
+
+  // Add effect to log active tab for debugging
+  useEffect(() => {
+    console.log("Active tab in portfolio page:", activeTab);
+  }, [activeTab]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <main className="container max-w-2xl mx-auto px-4 py-8">
-        <PageHeader
-          title={portfolioPageData.title}
-          subtitle={portfolioPageData.subtitle}
-          start_date={portfolioPageData.start_date}
-          end_date={portfolioPageData.end_date}
-          preview={portfolioPageData.preview}
-          status={portfolioPageData.status}
-          confidence={portfolioPageData.confidence}
-          importance={portfolioPageData.importance}
-        />
-        <Hero />
+        <Hero activeTab={activeTab} onTabChange={handleTabChange} />
+        
+        {/* Tab Content */}
         <div className="my-2">
-          <div className="rounded-none overflow-hidden">
-            <ThreeDMarqueeDemo />
-          </div>
+          {activeTab === "posts" && <Posts isActive={true} />}
+          {activeTab === "projects" && <Projects isActive={true} />}
+          {activeTab === "cv" && <CV isActive={true} />}
+          {activeTab === "about" && <About isActive={true} />}
+          <About isActive={activeTab === "about"} />
         </div>
-        <div className="my-2">
-          <div className="rounded-none overflow-hidden">
-            <FeaturesSectionDemo />
-          </div>
-        </div>
+
+        {/* Default sections - only show when no specific tab is active or for posts */}
+        {activeTab === "posts" && (
+          <>
+            <div className="my-2">
+              <div className="rounded-none overflow-hidden">
+                <ThreeDMarqueeDemo />
+              </div>
+            </div>
+            <div className="my-2">
+              <div className="rounded-none overflow-hidden">
+                <FeaturesSectionDemo />
+              </div>
+            </div>
+          </>
+        )}
+        
         <PageDescription
           title={portfolioPageData.title}
           description={portfolioPageData.description}

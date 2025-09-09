@@ -1,0 +1,16 @@
+{
+  "categories": [
+    {
+      "name": "Web Design",
+      "slug": "web-design"
+    },
+    {
+      "name": "Web Dev",
+      "slug": "web-dev"
+    },
+    {
+      "name": "Pentesting",
+      "slug": "pentesting"
+    }
+  ]
+}
