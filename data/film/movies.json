@@ -27,15 +27,15 @@
 },
 {
 "id": "3",
-"title": "House",
-"year": 1977,
-"posterUrl": "https://doc.krisyotam.com/imgs/film/house.png",
-"genres": ["Horror","Fantasy","Comedy"],
-"runtime": 88,
-"director": "Nobuhiko Obayashi",
+"title": "Diary of a Lost Girl",
+"year": 1929,
+"posterUrl": "https://doc.krisyotam.com/imgs/film/diary-of-a-lost-girl.jpg",
+"genres": ["Drama","Silent","German Expressionism"],
+"runtime": 104,
+"director": "G.W. Pabst",
 "last_watched_at": "2025-04-15T22:30:00.000Z",
 "rating": 5,
-"overview": "A schoolgirl travels with her friends to her aunt’s haunted house where supernatural events quickly spiral into surreal chaos.",
+"overview": "After becoming pregnant out of wedlock, a young woman is sent to a repressive reform school, where she resists societal condemnation and eventually finds her way back to herself. A haunting silent-era critique of patriarchal hypocrisy, anchored by Louise Brooks’ iconic performance.",
 "times_watched": 1
 },
 {
@@ -352,6 +352,19 @@
 },
 {
 "id": "28",
+"title": "House",
+"year": 1977,
+"posterUrl": "https://doc.krisyotam.com/imgs/film/house.png",
+"genres": ["Horror","Fantasy","Comedy"],
+"runtime": 88,
+"director": "Nobuhiko Obayashi",
+"last_watched_at": "2025-04-15T22:30:00.000Z",
+"rating": 5,
+"overview": "A schoolgirl travels with her friends to her aunt’s haunted house where supernatural events quickly spiral into surreal chaos.",
+"times_watched": 1
+},
+{
+"id": "29",
 "title": "Double Indemnity",
 "year": 1944,
 "posterUrl": "https://s3.amazonaws.com/criterion-production/films/b415e7735c3b593f2fb714c2c6831a26/So0yJBlzFXZG1ganHAXLtpJPhBnmg4_large.jpg",

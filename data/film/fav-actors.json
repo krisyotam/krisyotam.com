@@ -6,8 +6,8 @@
 },
 {
     "id": "2",
-    "name": "Marilyn Monroe",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Marilyn_Monroe%2C_Photoplay_1953.jpg/250px-Marilyn_Monroe%2C_Photoplay_1953.jpg"
+    "name": "Louise Brooks",
+    "image": "https://2.bp.blogspot.com/-e6kHG4R9VGw/V1cEmP3EvII/AAAAAAAAChc/x62KIKYMQIgRRYVawParPgYxplLtckAggCK4B/s1600/Louise%2BBrooks%252C%2BC.1930%25E2%2580%2599s.jpg"
 },
 {
     "id": "3",
@@ -82,6 +82,11 @@
 {
     "id": "17",
     "name": "Katherine Hepburn",
-    "image": "https://i.postimg.cc/c1nxmBVb/katherine-hepburn.jpg"
+    ",image": "https://i.postimg.cc/c1nxmBVb/katherine-hepburn.jpg"
+},
+{
+    "id": "18",
+    "name": "Marilyn Monroe",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Marilyn_Monroe%2C_Photoplay_1953.jpg/250px-Marilyn_Monroe%2C_Photoplay_1953.jpg"
 }
 ]
