@@ -8,15 +8,17 @@ export const metadata: Metadata = staticMetadata.film
 
 export default function FilmSocialsPage() {
   return (
-    <div className="film-page py-12">
-      <PageHeader 
-        title="Film Socials" 
-        preview="My film and TV social media profiles and accounts"
-      />
-      
-      <FilmTabs>
-        <FilmSocialsSection />
-      </FilmTabs>
+    <div className="py-12">
+      <div className="film-page">
+        <PageHeader 
+          title="Film Socials" 
+          preview="My film and TV social media profiles and accounts"
+        />
+        
+        <FilmTabs>
+          <FilmSocialsSection />
+        </FilmTabs>
+      </div>
     </div>
   )
 }

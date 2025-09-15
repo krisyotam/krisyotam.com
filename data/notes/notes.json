@@ -872,7 +872,7 @@
 "slug": "wisdom",
 "cover_image": "",
 "tags": ["DeepSeek", "Multimodal", "FOSS"],
-"category": "Artificial Intelligence",
+"category": "projects",
 "status": "In Progress",
 "confidence": "certain",
 "importance": 9,
@@ -1381,6 +1381,20 @@
   "status": "Notes",
   "confidence": "certain",
   "importance": 3,
+  "state": "active"
+},
+{
+  "title": "Mnemosyne",
+  "preview": "a overview of my lifelogging system since 2025",
+  "start_date": "2025-09-11",
+  "end_date": "",
+  "tags": ["Lifelogging", "Personal", "System"],
+  "category": "projects",
+  "slug": "mnemosyne",
+  "cover_image": "https://doc.krisyotam.com/cover/notes/mnemosyne.png",
+  "status": "Notes",
+  "confidence": "certain",
+  "importance": 9,
   "state": "active"
 }
 

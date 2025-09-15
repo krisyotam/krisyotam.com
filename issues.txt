@@ -1,18 +1,1 @@
-
-We are going to be adding a new component components/about named testimonials 
-
-You will be adding this to lib/utils.ts 
-
-import { ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-and using components/ui/animated-testimonialst.tsx, you will pull from testimonials.json in /data 
-
-also for changes for the component i want the outside of the bento to have square corners, and the photo bento should be 
-in black and white and only color on hover, then make the arrow buttons square as well. 
-
-you are going to add it under the themeimagecompare. 
+now look at the image i gave you. You will now add a tab next to overview on /film it will be called "watched" and it will be designed exactly like what you see in the img, it should have "You have seen "number" of films", and under that filters for decade, and genre which can all be calculated by watched.json, then under that just a 5x5 of all the covers of watched movies in a endless scroll

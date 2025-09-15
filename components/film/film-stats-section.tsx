@@ -23,7 +23,7 @@ export function FilmStatsSection({ moviesCount, tvShowsCount, hoursWatched }: Fi
       <div className="p-6 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))] w-full text-center">
         <Tv className="h-8 w-8 mx-auto mb-2 text-gray-700 dark:text-zinc-300" />
         <div className="text-3xl font-bold mb-1 dark:text-white">{tvShowsCount.toLocaleString()}</div>
-        <div className="text-gray-500 dark:text-zinc-400">TV Shows Watched</div>
+        <div className="text-gray-500 dark:text-zinc-400">Watched This Year</div>
       </div>
 
       <div className="p-6 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))] w-full text-center">

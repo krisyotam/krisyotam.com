@@ -1,11 +1,11 @@
 .film-page {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 0;
 }
 
 .film-section {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .film-section-header {

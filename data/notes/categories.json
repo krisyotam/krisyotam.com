@@ -458,6 +458,15 @@
 "status": "Finished",
 "confidence": "certain",
 "importance": 5
+},
+{
+"slug": "projects",
+"title": "Projects",
+"preview": "long form projects I've worked on, their details, and outcomes",
+"date": "2025-06-25",
+"status": "Notes",
+"confidence": "certain",
+"importance": 9
 }
 ]
 }

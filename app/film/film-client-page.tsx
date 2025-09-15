@@ -44,7 +44,7 @@ export default function FilmClientPage() {
           genresRes,
           recentMoviesRes,
           recentShowsRes,
-          mostWatchedMoviesRes,
+          watchedMoviesRes,
           mostWatchedShowsRes,
           favoriteMoviesRes,
           favoriteShowsRes,
@@ -53,13 +53,13 @@ export default function FilmClientPage() {
           favCompaniesRes,
           favCharactersRes,
         ] = await Promise.all([
-          fetch("/api/trakt/stats")
+          fetch("/api/film/watched-stats")
             .then((res) => {
-              console.log("FilmClientPage: Trakt stats response status:", res.status)
+              console.log("FilmClientPage: Watched stats response status:", res.status)
               return res.json()
             })
             .catch((err) => {
-              console.error("FilmClientPage: Error fetching Trakt stats:", err)
+              console.error("FilmClientPage: Error fetching watched stats:", err)
               return { moviesWatched: 0, tvShowsWatched: 0, timeWatchedHours: 0 }
             }),
           fetch("/api/trakt/genres")
@@ -89,13 +89,13 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching Trakt recent shows:", err)
               return []
             }),
-          fetch("/api/trakt/most-watched-movies?limit=20")
+          fetch("/api/film/watched?limit=20")
             .then((res) => {
-              console.log("FilmClientPage: Trakt most watched movies response status:", res.status)
+              console.log("FilmClientPage: Watched movies response status:", res.status)
               return res.json()
             })
             .catch((err) => {
-              console.error("FilmClientPage: Error fetching Trakt most watched movies:", err)
+              console.error("FilmClientPage: Error fetching watched movies:", err)
               return []
             }),
           fetch("/api/trakt/most-watched-shows?limit=20")
@@ -188,7 +188,7 @@ export default function FilmClientPage() {
         setMostWatchedGenres(genresRes)
         setRecentMovies(recentMoviesRes)
         setRecentShows(recentShowsRes)
-        setMostWatchedMovies(mostWatchedMoviesRes)
+        setMostWatchedMovies(watchedMoviesRes)
         setMostWatchedShows(mostWatchedShowsRes)
         setFavoriteMovies(favoriteMoviesRes)
         setFavoriteShows(favoriteShowsRes)
@@ -244,7 +244,6 @@ export default function FilmClientPage() {
     <div>
       {/* Stats Section */}
       <section className="film-section">
-        <TraktSectionHeader title="" />
         <FilmStatsSection
           moviesCount={watchedStats?.moviesWatched || 0}
           tvShowsCount={watchedStats?.tvShowsWatched || 0}
@@ -259,89 +258,9 @@ export default function FilmClientPage() {
         <FilmGenresSection genres={mostWatchedGenres} />
       </section>
 
-      {/* Recently Watched Movies Section */}
-      <section className="film-section">
-        <TraktSectionHeader title="Recently Watched Movies" />
-        {recentMovies && recentMovies.length > 0 ? (
-          <TraktHorizontalScroll squareButtons={true}>
-            {recentMovies.map((movie) => (
-              <TraktMovieCard
-                key={movie.id}
-                id={movie.id}
-                title={movie.title}
-                year={movie.year}
-                posterUrl={movie.posterUrl}
-              />
-            ))}
-          </TraktHorizontalScroll>
-        ) : (
-          <TraktEmptyState message="No recently watched movies available." />
-        )}
-      </section>
-
-      {/* Recently Watched Shows Section */}
-      <section className="film-section">
-        <TraktSectionHeader title="Recently Watched Shows" />
-        {recentShows && recentShows.length > 0 ? (
-          <TraktHorizontalScroll squareButtons={true}>
-            {recentShows.map((show) => (
-              <TraktShowCard
-                key={show.id}
-                id={show.id}
-                title={show.title}
-                year={show.year}
-                posterUrl={show.posterUrl}
-              />
-            ))}
-          </TraktHorizontalScroll>
-        ) : (
-          <TraktEmptyState message="No recently watched shows available." />
-        )}
-      </section>
-
-      {/* Most Watched Movies Section */}
-      <section className="film-section">
-        <TraktSectionHeader title="Most Watched Movies" />
-        {mostWatchedMovies && mostWatchedMovies.length > 0 ? (
-          <TraktHorizontalScroll squareButtons={true}>
-            {mostWatchedMovies.map((movie) => (
-              <TraktMovieCard
-                key={movie.id}
-                id={movie.id}
-                title={movie.title}
-                year={movie.year}
-                posterUrl={movie.posterUrl}
-              />
-            ))}
-          </TraktHorizontalScroll>
-        ) : (
-          <TraktEmptyState message="No most watched movies available." />
-        )}
-      </section>
-
-      {/* Most Watched Shows Section */}
-      <section className="film-section">
-        <TraktSectionHeader title="Most Watched Shows" />
-        {mostWatchedShows && mostWatchedShows.length > 0 ? (
-          <TraktHorizontalScroll squareButtons={true}>
-            {mostWatchedShows.map((show) => (
-              <TraktShowCard
-                key={show.id}
-                id={show.id}
-                title={show.title}
-                year={show.year}
-                posterUrl={show.posterUrl}
-              />
-            ))}
-          </TraktHorizontalScroll>
-        ) : (
-          <TraktEmptyState message="No most watched shows available." />
-        )}
-      </section>
-
       {/* Favorite Movies Section */}
       <section className="film-section">
-        <TraktSectionHeader title="Favorite Movies" />
+        <TraktSectionHeader title="Favorite Films" />
         {favoriteMovies && favoriteMovies.length > 0 ? (
           <TraktHorizontalScroll squareButtons={true}>
             {favoriteMovies.map((movie) => (
@@ -356,26 +275,6 @@ export default function FilmClientPage() {
           </TraktHorizontalScroll>
         ) : (
           <TraktEmptyState message="No favorite movies available." />
-        )}
-      </section>
-
-      {/* Favorite Shows Section */}
-      <section className="film-section">
-        <TraktSectionHeader title="Favorite Shows" />
-        {favoriteShows && favoriteShows.length > 0 ? (
-          <TraktHorizontalScroll squareButtons={true}>
-            {favoriteShows.map((show) => (
-              <TraktShowCard
-                key={show.id}
-                id={show.id}
-                title={show.title}
-                year={show.year}
-                posterUrl={show.posterUrl}
-              />
-            ))}
-          </TraktHorizontalScroll>
-        ) : (
-          <TraktEmptyState message="No favorite shows available." />
         )}
       </section>
 
@@ -424,6 +323,26 @@ export default function FilmClientPage() {
           </TraktHorizontalScroll>
         ) : (
           <TraktEmptyState message="No favorite characters available." />
+        )}
+      </section>
+
+      {/* Watched Movies Section */}
+      <section className="film-section">
+        <TraktSectionHeader title="Watched" />
+        {mostWatchedMovies && mostWatchedMovies.length > 0 ? (
+          <TraktHorizontalScroll squareButtons={true}>
+            {mostWatchedMovies.map((movie) => (
+              <TraktMovieCard
+                key={movie.id}
+                id={movie.id}
+                title={movie.title}
+                year={movie.year}
+                posterUrl={movie.posterUrl}
+              />
+            ))}
+          </TraktHorizontalScroll>
+        ) : (
+          <TraktEmptyState message="No most watched movies available." />
         )}
       </section>
 

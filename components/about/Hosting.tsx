@@ -25,6 +25,11 @@ export default function Hosting() {
       status: "Active"
     },
     {
+      name: "IPFS",
+      addresses: ["krisyotam.eth"],
+      status: "Active"
+    },
+    {
       name: "Tor",
       addresses: ["3g2upl4pq6kufc4m.onion"],
       status: "Active"

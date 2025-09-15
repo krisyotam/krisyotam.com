@@ -8,15 +8,17 @@ export const metadata: Metadata = staticMetadata.film
 
 export default function FilmListsPage() {
   return (
-    <div className="film-page py-12">
-      <PageHeader 
-        title="Film Lists" 
-        preview="My custom movie and TV show lists from Trakt.tv"
-      />
-      
-      <FilmTabs>
-        <FilmListsSection />
-      </FilmTabs>
+    <div className="py-12">
+      <div className="film-page">
+        <PageHeader 
+          title="Film Lists" 
+          preview="My custom movie and TV show lists from Trakt.tv"
+        />
+        
+        <FilmTabs>
+          <FilmListsSection />
+        </FilmTabs>
+      </div>
     </div>
   )
 }

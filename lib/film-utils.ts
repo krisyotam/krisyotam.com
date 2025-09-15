@@ -189,9 +189,9 @@ export async function getFavoriteMovies(limit: number = 10): Promise<Movie[]> {
   try {
     const movies = await getMovies();
     
-    // Sort by rating (descending) and then by title
+    // Sort by ID (ascending)
     return movies
-      .sort((a, b) => b.rating - a.rating || a.title.localeCompare(b.title))
+      .sort((a, b) => parseInt(a.id) - parseInt(b.id))
       .slice(0, limit);
   } catch (error) {
     console.error('Error getting favorite movies:', error);

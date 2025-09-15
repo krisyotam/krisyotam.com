@@ -6,6 +6,31 @@ import { LibraryBookCard } from "./library-book-card"
 import { Book } from "@/types/library"
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select"
 
+// Define content types
+type ContentType = "all" | "literature" | "film"
+
+// Define film interface
+interface Film {
+  id: string
+  slug: string
+  title: string
+  director: string
+  originalTitle?: string
+  year: number
+  country: string
+  runtime: number
+  genre: string[]
+  posterUrl: string
+  production: string
+  collection: string
+  language: string
+  classification: string
+  subClassification: string
+}
+
+// Combined item type
+type CatalogItem = Book | (Film & { itemType: "film" })
+
 // Map of Library of Congress classifications to human-readable names
 const locClassifications: Record<string, string> = {
   A: "General Works",
@@ -33,8 +58,10 @@ const locClassifications: Record<string, string> = {
 
 export function CatalogContent() {
   const [books, setBooks] = useState<Book[]>([])
+  const [films, setFilms] = useState<Film[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [selectedContentType, setSelectedContentType] = useState<ContentType>("all")
   const [selectedClassification, setSelectedClassification] = useState("all")
   const [selectedSubClassification, setSelectedSubClassification] = useState("all")
   const [searchQuery, setSearchQuery] = useState("")
@@ -43,60 +70,128 @@ export function CatalogContent() {
   const router = useRouter()
 
   useEffect(() => {
-    async function fetchBooks() {
+    async function fetchData() {
       try {
-        const response = await fetch("/api/library-catalog")
-        const data = await response.json()
+        // Fetch books
+        const booksResponse = await fetch("/api/library-catalog")
+        const booksData = await booksResponse.json()
 
-        if (Array.isArray(data)) {
-          setBooks(data)          // Extract unique classifications and subclassifications
-          const classifications = [...new Set(data.map((book) => book.classification))].sort()
-          setAvailableClassifications(classifications)
-          
-          const subClassifications = [...new Set(data.map((book) => book.subClassification))].sort()
-          setAvailableSubClassifications(subClassifications)
+        // Fetch films
+        const filmsResponse = await fetch("/api/films-catalog")
+        const filmsData = await filmsResponse.json()
+
+        if (Array.isArray(booksData)) {
+          setBooks(booksData)
         } else {
-          console.error("Unexpected data format:", data)
-          setError("Received invalid data format from API")
+          console.error("Unexpected books data format:", booksData)
           setBooks([])
         }
+
+        if (Array.isArray(filmsData)) {
+          setFilms(filmsData)
+        } else {
+          console.error("Unexpected films data format:", filmsData)
+          setFilms([])
+        }
+
+        // Extract unique classifications and subclassifications from both books and films
+        if (Array.isArray(booksData)) {
+          const bookClassifications = [...new Set(booksData.map((book) => book.classification))].sort()
+          const filmClassifications = Array.isArray(filmsData) ? [...new Set(filmsData.map((film) => film.classification))].sort() : []
+          const allClassifications = [...new Set([...bookClassifications, ...filmClassifications])].sort()
+          setAvailableClassifications(allClassifications)
+          
+          const bookSubClassifications = [...new Set(booksData.map((book) => book.subClassification))].sort()
+          const filmSubClassifications = Array.isArray(filmsData) ? [...new Set(filmsData.map((film) => film.subClassification))].sort() : []
+          const allSubClassifications = [...new Set([...bookSubClassifications, ...filmSubClassifications])].sort()
+          setAvailableSubClassifications(allSubClassifications)
+        }
       } catch (error) {
-        console.error("Error fetching library catalog:", error)
-        setError("Failed to load library catalog")
-        setBooks([])
+        console.error("Error fetching catalog data:", error)
+        setError("Failed to load catalog")
       } finally {
         setLoading(false)
       }
     }
 
-    fetchBooks()
+    fetchData()
   }, [])
 
-  // Update available subclassifications based on selected classification
+  // Update available subclassifications based on selected classification (for both books and films)
   useEffect(() => {
     if (selectedClassification === "all") {
-      const allSubClassifications = [...new Set(books.map((book) => book.subClassification))].sort()
+      const bookSubClassifications = [...new Set(books.map((book) => book.subClassification))].sort()
+      const filmSubClassifications = [...new Set(films.map((film) => film.subClassification))].sort()
+      const allSubClassifications = [...new Set([...bookSubClassifications, ...filmSubClassifications])].sort()
       setAvailableSubClassifications(allSubClassifications)
     } else {
-      const filteredSubClassifications = [...new Set(
+      const bookSubClassifications = [...new Set(
         books
           .filter((book) => book.classification === selectedClassification)
           .map((book) => book.subClassification)
       )].sort()
+      const filmSubClassifications = [...new Set(
+        films
+          .filter((film) => film.classification === selectedClassification)
+          .map((film) => film.subClassification)
+      )].sort()
+      const filteredSubClassifications = [...new Set([...bookSubClassifications, ...filmSubClassifications])].sort()
       setAvailableSubClassifications(filteredSubClassifications)
     }
     setSelectedSubClassification("all")
-  }, [selectedClassification, books])
+  }, [selectedClassification, books, films])
 
-  const filteredBooks = books.filter((book) => {
-    const matchesClassification = selectedClassification === "all" || book.classification === selectedClassification
-    const matchesSubClassification = selectedSubClassification === "all" || book.subClassification === selectedSubClassification
-    const matchesSearch = !searchQuery || 
-      book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (book.authorName?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false) ||
-      (book.authorNames?.some(name => name.toLowerCase().includes(searchQuery.toLowerCase())) ?? false)
+  // Get filtered items based on content type and other filters
+  const getFilteredItems = () => {
+    let items: CatalogItem[] = []
+
+    if (selectedContentType === "all" || selectedContentType === "literature") {
+      items = [...items, ...books]
+    }
+
+    if (selectedContentType === "all" || selectedContentType === "film") {
+      const filmsWithType = films.map(film => ({ ...film, itemType: "film" as const }))
+      items = [...items, ...filmsWithType]
+    }
+
+    return items.filter((item) => {
+      // Apply classification and subclassification filters to both books and films
+      const matchesClassification = selectedClassification === "all" || item.classification === selectedClassification
+      const matchesSubClassification = selectedSubClassification === "all" || item.subClassification === selectedSubClassification
+      
+      // Apply search filter
+      let matchesSearch = false
+      if (!searchQuery) {
+        matchesSearch = true
+      } else {
+        // For books
+        if ('authorName' in item || 'authorNames' in item) {
+          const book = item as Book
+          matchesSearch = book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            (book.authorName?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false) ||
+            (book.authorNames?.some((name: string) => name.toLowerCase().includes(searchQuery.toLowerCase())) ?? false)
+        }
+        // For films
+        else if ('director' in item) {
+          const film = item as Film
+          matchesSearch = film.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            film.director.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            (film.originalTitle?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false)
+        }
+      }
+
       return matchesClassification && matchesSubClassification && matchesSearch
-  })
+    })
+  }
+
+  const filteredItems = getFilteredItems()
+
+  // Content type options
+  const contentTypeOptions: SelectOption[] = [
+    { value: "all", label: "All" },
+    { value: "literature", label: "Literature" },
+    { value: "film", label: "Film" }
+  ]
 
   // Convert classifications to SelectOption format
   const classificationOptions: SelectOption[] = [
@@ -131,38 +226,53 @@ export function CatalogContent() {
     return <div className="py-8 text-center text-red-500">{error}</div>
   }
 
-  if (books.length === 0) {
-    return <div className="py-8 text-center">No books found in your catalog.</div>
+  if (books.length === 0 && films.length === 0) {
+    return <div className="py-8 text-center">No items found in your catalog.</div>
   }
 
   return (
-    <div>      <div className="mb-6 space-y-4">
-        <div className="flex items-center gap-4 flex-wrap">
+    <div>
+      <div className="mb-6 space-y-4">
+        <div className="flex items-center gap-3 flex-wrap">
           <div className="flex items-center gap-2 whitespace-nowrap">
-            <label htmlFor="classification-filter" className="text-sm text-muted-foreground">Classification:</label>
+            <label htmlFor="content-filter" className="text-xs text-muted-foreground">Content:</label>
             <CustomSelect
-              value={selectedClassification}
-              onValueChange={setSelectedClassification}
-              options={classificationOptions}
-              className="text-sm min-w-[180px]"
+              value={selectedContentType}
+              onValueChange={(value) => setSelectedContentType(value as ContentType)}
+              options={contentTypeOptions}
+              className="text-xs min-w-[100px]"
             />
           </div>
           
-          <div className="flex items-center gap-2 whitespace-nowrap">
-            <label htmlFor="subclassification-filter" className="text-sm text-muted-foreground">Subclassification:</label>
-            <CustomSelect
-              value={selectedSubClassification}
-              onValueChange={setSelectedSubClassification}
-              options={subClassificationOptions}
-              className="text-sm min-w-[120px]"
-            />
-          </div>
+          {(selectedContentType === "all" || selectedContentType === "literature" || selectedContentType === "film") && (
+            <>
+              <div className="flex items-center gap-2 whitespace-nowrap">
+                <label htmlFor="classification-filter" className="text-xs text-muted-foreground">Class:</label>
+                <CustomSelect
+                  value={selectedClassification}
+                  onValueChange={setSelectedClassification}
+                  options={classificationOptions}
+                  className="text-xs min-w-[140px]"
+                />
+              </div>
+              
+              <div className="flex items-center gap-2 whitespace-nowrap">
+                <label htmlFor="subclassification-filter" className="text-xs text-muted-foreground">Subclass:</label>
+                <CustomSelect
+                  value={selectedSubClassification}
+                  onValueChange={setSelectedSubClassification}
+                  options={subClassificationOptions}
+                  className="text-xs min-w-[100px]"
+                />
+              </div>
+            </>
+          )}
         </div>
         
         <div className="relative">
           <input 
             type="text" 
-            placeholder="Search books..." 
+            placeholder={selectedContentType === "film" ? "Search films..." : selectedContentType === "literature" ? "Search books..." : "Search catalog..."} 
             className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
             onChange={(e) => setSearchQuery(e.target.value)}
             value={searchQuery}
@@ -170,30 +280,56 @@ export function CatalogContent() {
         </div>
       </div>
 
-      {filteredBooks.length === 0 ? (
-        <div className="py-8 text-center">No books found matching your criteria.</div>
+      {filteredItems.length === 0 ? (
+        <div className="py-8 text-center">No items found matching your criteria.</div>
       ) : (
         <div className="grid grid-cols-1 gap-4">
-          {filteredBooks.map((book) => {
-            const bookSlug = book.title.toLowerCase()
-              .replace(/[^a-z0-9\s-]/g, '')
-              .replace(/\s+/g, '-')
-              .replace(/-+/g, '-')
-              .trim()
-            
-            return (
-              <LibraryBookCard
-                key={book.id}
-                coverUrl={book.coverUrl || "/placeholder.svg?height=100&width=100"}
-                title={book.title}
-                author={book.authorName || book.authorNames?.join(", ") || "Unknown Author"}
-                rating={0}
-                subtitle={`${book.classification} - ${book.subClassification}`}
-                onClick={() => {
-                  router.push(`/library/${book.classification}/${book.subClassification}/${bookSlug}`)
-                }}
-              />
-            )
+          {filteredItems.map((item) => {
+            if ('director' in item) {
+              // This is a film
+              const film = item as Film & { itemType: "film" }
+              const filmSlug = film.title.toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .trim()
+              
+              return (
+                <LibraryBookCard
+                  key={film.id}
+                  coverUrl={film.posterUrl}
+                  title={film.title}
+                  author={film.director}
+                  rating={0}
+                  subtitle={`${film.classification} - ${film.subClassification}`}
+                  onClick={() => {
+                    router.push(`/library/${film.classification}/${film.subClassification}/${filmSlug}`)
+                  }}
+                />
+              )
+            } else {
+              // This is a book
+              const book = item as Book
+              const bookSlug = book.title.toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .trim()
+              
+              return (
+                <LibraryBookCard
+                  key={book.id}
+                  coverUrl={book.coverUrl || "/placeholder.svg?height=100&width=100"}
+                  title={book.title}
+                  author={book.authorName || book.authorNames?.join(", ") || "Unknown Author"}
+                  rating={0}
+                  subtitle={`${book.classification} - ${book.subClassification}`}
+                  onClick={() => {
+                    router.push(`/library/${book.classification}/${book.subClassification}/${bookSlug}`)
+                  }}
+                />
+              )
+            }
           })}
         </div>
       )}
