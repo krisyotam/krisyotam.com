@@ -1,1 +1,1 @@
-now look at the image i gave you. You will now add a tab next to overview on /film it will be called "watched" and it will be designed exactly like what you see in the img, it should have "You have seen "number" of films", and under that filters for decade, and genre which can all be calculated by watched.json, then under that just a 5x5 of all the covers of watched movies in a endless scroll
+Bullshit Test for GIT
