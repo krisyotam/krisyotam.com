@@ -198,6 +198,15 @@
 "status": "Finished",
 "confidence": "certain",
 "importance": 10
+},
+{
+"slug": "discourse",
+"title": "Discourse",
+"preview": "transcribed conversations, dialogues, and discussions on various topics of interest",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 10
 }
 
 ]

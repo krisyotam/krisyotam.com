@@ -13,6 +13,7 @@ import { Tweet } from "@/components/typography/tweet"
 import Math from "@/components/typography/math"
 import dynamic from 'next/dynamic'
 import { Pfp } from "@/components/typography/pfp"
+import Redacted from "@/components/typography/redacted"
 // Import TikZ with no SSR to avoid hydration issues
 const TikZ = dynamic(() => import('@/components/typography/tikz'), { ssr: false })
 
@@ -202,6 +203,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     LinkTags,
     Paper,
     Pfp,
+    Redacted,
     
     // Typography components
     Lead: Typography.Lead,

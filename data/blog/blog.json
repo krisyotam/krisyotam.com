@@ -223,6 +223,20 @@
   "preview": "",
   "cover_image": "",
   "state": ""
+},
+{
+  "title": "A discourse on egoism",
+  "start_date": "2025-09-26",
+  "end_date": "",
+  "slug": "a-discourse-on-egoism",
+  "tags": ["Psychology", "Egoism", "Philosophy"],
+  "category": "philosophy",
+  "status": "in progress",
+  "confidence": "certain",
+  "importance": "8",
+  "preview": "a conversation on the morality of selfishness",
+  "cover_image": "",
+  "state": "active"
 }
 ]
   
