@@ -1,0 +1,75 @@
+{
+  "books": [
+    {
+      "isbn13": "9780141391601",
+      "title": "The Ode Less Travelled",
+      "category": "Poetry",
+      "tags": ["writing", "poetry", "creativity", "education"],
+      "authors": ["Stephen Fry"]
+    },
+    {
+      "isbn13": "9780679723165",
+      "title": "Thus Spoke Zarathustra",
+      "category": "Philosophy",
+      "tags": ["philosophy", "classics", "existentialism", "spirituality"],
+      "authors": ["Friedrich Nietzsche"]
+    },
+    {
+      "isbn13": "9780393356182",
+      "title": "The Well-Educated Mind",
+      "category": "Education",
+      "tags": ["education", "learning", "classics", "self-improvement"],
+      "authors": ["Susan Wise Bauer"]
+    },
+    {
+      "isbn13": "9780674992573",
+      "title": "Meditations",
+      "category": "Philosophy",
+      "tags": ["stoicism", "philosophy", "classics", "wisdom"],
+      "authors": ["Marcus Aurelius"]
+    },
+    {
+      "isbn13": "9780140449334",
+      "title": "The Republic",
+      "category": "Philosophy",
+      "tags": ["philosophy", "politics", "classics", "education"],
+      "authors": ["Plato"]
+    },
+    {
+      "isbn13": "9780140441185",
+      "title": "The Aeneid",
+      "category": "Classical Literature",
+      "tags": ["poetry", "epic", "classics", "mythology"],
+      "authors": ["Virgil"]
+    },
+    {
+      "isbn13": "9780199267170",
+      "title": "The Origin of Species",
+      "category": "Science",
+      "tags": ["biology", "evolution", "science", "nature"],
+      "authors": ["Charles Darwin"]
+    },
+    {
+      "isbn13": "9780674057579",
+      "title": "The Structure of Scientific Revolutions",
+      "category": "Science",
+      "tags": ["philosophy", "science", "history", "epistemology"],
+      "authors": ["Thomas S. Kuhn"]
+    },
+    {
+      "isbn13": "9780872203495",
+      "title": "Confessions",
+      "category": "Religion",
+      "tags": ["christianity", "philosophy", "autobiography", "spirituality"],
+      "authors": ["Saint Augustine"]
+    },
+    {
+      "isbn13": "9780872201361",
+      "title": "The Art of Learning",
+      "category": "Education",
+      "tags": ["learning", "psychology", "self-improvement", "education"],
+      "authors": ["Josh Waitzkin"]
+    }
+  ]
+}
+

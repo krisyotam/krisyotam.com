@@ -1,0 +1,25 @@
+{
+  "blogs": [
+    {
+      "title": "The Art of Minimalism",
+      "tags": ["Design", "Lifestyle", "Philosophy"]
+    },
+    {
+      "title": "Productivity Hacks for Developers",
+      "tags": ["Programming", "Productivity", "Technology"]
+    },
+    {
+      "title": "Understanding Modern Web Architecture",
+      "tags": ["Web Development", "Architecture", "Technology"]
+    },
+    {
+      "title": "The Impact of AI on Society",
+      "tags": ["AI", "Technology", "Society"]
+    },
+    {
+      "title": "Memoria Press",
+      "tags": ["Wellness", "Technology", "Lifestyle"]
+    }
+  ]
+}
+

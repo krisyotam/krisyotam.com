@@ -1,0 +1,67 @@
+[
+{
+    "id": "1",
+    "name": "Chantal Akerman",
+    "image": "https://memorialdigitalapp.com.br/wp-content/uploads/2024/12/Chantal-Ar.jpg"
+},
+{
+    "id": "2",
+    "name": "Akira Kurosawa",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/05/Kinema-Junpo-1960-February-late-4.jpg"
+},
+{
+    "id": "3",
+    "name": "Barbara Loden",
+    "image": "https://www.notrecinema.com/images/usercontent/kpitalrisk/images/stars/95000/vign/v_117350.jpg"
+},
+{
+    "id": "4",
+    "name": "Bela Tarr",
+    "image": "https://bostonglobe-prod.cdn.arcpublishing.com/resizer/v2/FVAK3BDOZAI6DKL5JPGA2NDX7E.jpg?auth=d4039b8855ce1522b2785d38565f748cd01c64f8b61c8da6dc0b37b5575c2967&width=1440"
+},
+{
+    "id": "5",
+    "name": "Georges Franju",
+    "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTtvhYljHtO6HHEGTk1kpApqr6ittkjjnGNT_hRhsjGSWuFNQ6HWIvHn0j01deMVjKAvKnNkVUhCDDOLv577rnZinnHAwMUCgA3Ot4qaQ"
+},
+{
+    "id": "6",
+    "name": "Steven Spielberg",
+    "image": "/placeholder.svg?height=150&width=150"
+},
+{
+    "id": "7",
+    "name": "Martin Scorsese",
+    "image": "/placeholder.svg?height=150&width=150"
+},
+{
+    "id": "8",
+    "name": "Quentin Tarantino",
+    "image": "/placeholder.svg?height=150&width=150"
+},
+{
+    "id": "9",
+    "name": "Kathryn Bigelow",
+    "image": "/placeholder.svg?height=150&width=150"
+},
+{
+    "id": "10",
+    "name": "Bong Joon-ho",
+    "image": "/placeholder.svg?height=150&width=150"
+},
+{
+    "id": "11",
+    "name": "Wes Anderson",
+    "image": "/placeholder.svg?height=150&width=150"
+},
+{
+    "id": "12",
+    "name": "Jordan Peele",
+    "image": "/placeholder.svg?height=150&width=150"
+},
+{
+    "id": "13",
+    "name": "Sofia Coppola",
+    "image": "/placeholder.svg?height=150&width=150"
+}
+]

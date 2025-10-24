@@ -1,0 +1,30 @@
+{
+  "goals": [
+    {
+      "item": "First Edition Hemingway",
+      "targetPrice": "$3,000",
+      "priority": "High"
+    },
+    {
+      "item": "19th Century Landscape Painting",
+      "targetPrice": "$5,000",
+      "priority": "Medium"
+    },
+    {
+      "item": "Vintage Mechanical Watch",
+      "targetPrice": "$1,200",
+      "priority": "High"
+    },
+    {
+      "item": "Art Deco Furniture Piece",
+      "targetPrice": "$2,500",
+      "priority": "Low"
+    },
+    {
+      "item": "Rare Vinyl Record Collection",
+      "targetPrice": "$800",
+      "priority": "Medium"
+    }
+  ]
+}
+

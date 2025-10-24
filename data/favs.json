@@ -1,0 +1,143 @@
+{
+  "items": [
+    {
+      "id": "11",
+      "title": "Pride and Prejudice",
+      "category": "Books",
+      "tags": ["Classic Literature", "Romance", "19th Century"],
+      "description": "Jane Austen's masterpiece about the Bennet sisters, particularly Elizabeth, and her tumultuous relationship with the proud Mr. Darcy.",
+      "author": "Jane Austen",
+      "blockType": "book",
+      "imageUrl": "https://i.postimg.cc/ncWxzzZn/pride-and-prejudice-penguin-classics.jpg",
+      "year": 1813,
+      "publisher": "T. Egerton, Whitehall"
+    },
+    {
+      "id": "12",
+      "title": "Girl, Interrupted",
+      "category": "Film",
+      "tags": ["Drama", "Biography", "Psychological"],
+      "description": "Based on Susanna Kaysen's memoir about her stay in a mental institution in the 1960s.",
+      "author": "James Mangold",
+      "blockType": "movie",
+      "imageUrl": "https://i.postimg.cc/QxzYC6rv/girl-interrupted.png",
+      "year": 1999,
+      "runtime": 127
+    },
+    {
+      "id": "1",
+      "title": "Starry Night",
+      "category": "Art",
+      "tags": ["Impressionism", "Night Scene", "Classic"],
+      "description": "One of Vincent van Gogh's most famous works, painted in June 1889.",
+      "author": "Vincent van Gogh",
+      "blockType": "painting",
+      "imageUrl": "https://i.postimg.cc/ydmy2DpD/Lenovo-Think-Pad-X1-Ultrabook-Nov-16-2012.png",
+      "year": 1889,
+      "medium": "Oil on canvas",
+      "dimensions": "73.7 cm × 92.1 cm"
+    },
+    {
+      "id": "2",
+      "title": "The Road Not Taken",
+      "category": "Poetry",
+      "tags": ["American Literature", "Nature", "Life Choices"],
+      "description": "A poem about life choices and paths taken.",
+      "author": "Robert Frost",
+      "blockType": "poem",
+      "content": "Two roads diverged in a yellow wood,\nAnd sorry I could not travel both\nAnd be one traveler, long I stood\nAnd looked down one as far as I could\nTo where it bent in the undergrowth...",
+      "year": 1916,
+      "collection": "Mountain Interval"
+    },
+    {
+      "id": "3",
+      "title": "Be yourself; everyone else is already taken.",
+      "category": "Quote",
+      "tags": ["Individuality", "Wisdom", "Self-acceptance"],
+      "author": "Oscar Wilde",
+      "blockType": "quote",
+      "context": "Often attributed to Oscar Wilde, this quote emphasizes authenticity."
+    },
+    {
+      "id": "4",
+      "title": "Mona Lisa",
+      "category": "Art",
+      "tags": ["Renaissance", "Portrait", "Iconic"],
+      "description": "The most famous portrait painting in the world.",
+      "author": "Leonardo da Vinci",
+      "blockType": "painting",
+      "imageUrl": "https://i.postimg.cc/MK3Bhkv6/thumbnail-1.png",
+      "year": 1503,
+      "medium": "Oil on poplar panel",
+      "dimensions": "77 cm × 53 cm"
+    },
+    {
+      "id": "5",
+      "title": "Ozymandias",
+      "category": "Poetry",
+      "tags": ["Sonnet", "Power", "Impermanence"],
+      "description": "A sonnet about the impermanence of power and the legacy of rulers.",
+      "author": "Percy Bysshe Shelley",
+      "blockType": "poem",
+      "content": "I met a traveller from an antique land,\nWho said—\"Two vast and trunkless legs of stone\nStand in the desert. . . . Near them, on the sand,\nHalf sunk a shattered visage lies...",
+      "year": 1818,
+      "collection": "The Examiner"
+    },
+    {
+      "id": "6",
+      "title": "The only thing we have to fear is fear itself.",
+      "category": "Quote",
+      "tags": ["Politics", "Courage", "Historical"],
+      "author": "Franklin D. Roosevelt",
+      "blockType": "quote",
+      "context": "From Roosevelt's first inaugural address during the Great Depression, 1933."
+    },
+    {
+      "id": "7",
+      "title": "Guernica",
+      "category": "Art",
+      "tags": ["Cubism", "War", "Political"],
+      "description": "A powerful anti-war painting depicting the bombing of Guernica, Spain.",
+      "author": "Pablo Picasso",
+      "blockType": "painting",
+      "imageUrl": "https://i.postimg.cc/ydmy2DpD/Lenovo-Think-Pad-X1-Ultrabook-Nov-16-2012.png",
+      "year": 1937,
+      "medium": "Oil on canvas",
+      "dimensions": "349.3 cm × 776.6 cm"
+    },
+    {
+      "id": "8",
+      "title": "Do I contradict myself? Very well, then I contradict myself.",
+      "category": "Quote",
+      "tags": ["Philosophy", "Identity", "Transcendentalism"],
+      "author": "Walt Whitman",
+      "blockType": "quote",
+      "context": "From 'Song of Myself' in Leaves of Grass, embracing the complexity of human nature."
+    },
+    {
+      "id": "9",
+      "title": "The Persistence of Memory",
+      "category": "Art",
+      "tags": ["Surrealism", "Time", "Dreams"],
+      "description": "Famous surrealist painting with melting clocks in a dreamscape.",
+      "author": "Salvador Dalí",
+      "blockType": "painting",
+      "imageUrl": "https://i.postimg.cc/MK3Bhkv6/thumbnail-1.png",
+      "year": 1931,
+      "medium": "Oil on canvas",
+      "dimensions": "24 cm × 33 cm"
+    },
+    {
+      "id": "10",
+      "title": "If—",
+      "category": "Poetry",
+      "tags": ["Inspirational", "Victorian", "Manhood"],
+      "description": "A poem written as paternal advice on qualities of an ideal man.",
+      "author": "Rudyard Kipling",
+      "blockType": "poem",
+      "content": "If you can keep your head when all about you\nAre losing theirs and blaming it on you,\nIf you can trust yourself when all men doubt you,\nBut make allowance for their doubting too...",
+      "year": 1895,
+      "collection": "Rewards and Fairies"
+    }
+  ]
+}

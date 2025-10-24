@@ -1,0 +1,118 @@
+.games-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.games-section {
+  margin-bottom: 2.5rem;
+}
+
+.games-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.games-section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.games-section-count {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+.games-genres-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.games-genre-badge {
+  background-color: #f3f4f6;
+  color: #374151;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.dark .games-genre-badge {
+  background-color: #27272a;
+  color: #e4e4e7;
+}
+
+.games-empty-state {
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dark .games-empty-state {
+  background-color: #000000;
+}
+
+.games-empty-state-icon {
+  margin-bottom: 1rem;
+}
+
+.games-empty-state-message {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.dark .games-empty-state-message {
+  color: #a1a1aa;
+}
+
+.games-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.games-pagination-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.games-pagination-button:not(:disabled):hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark .games-pagination-button:not(:disabled):hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.games-pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.games-pagination-info {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.dark .games-pagination-info {
+  color: #a1a1aa;
+}
+
+@media (max-width: 640px) {
+  .games-page {
+    padding: 1rem;
+  }
+}

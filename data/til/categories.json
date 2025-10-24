@@ -1,0 +1,13 @@
+{
+  "categories": [
+    {
+      "slug": "til",
+      "title": "Today I Learned",
+      "preview": "Daily learning entries and discoveries across various topics including technology, science, mathematics, philosophy, and more.",
+      "date": "2025-06-18",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 9
+    }
+  ]
+}

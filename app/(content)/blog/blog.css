@@ -1,0 +1,472 @@
+/* blog.css ─ styles are applied ONLY inside `.note-content` */
+
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
+
+/* root wrapper ----------------------------------------------------------- */
+.note-content {
+  font-family: "Source Serif 4", Baskerville, "Libre Baskerville",
+    "Droid Serif", "Times New Roman", Times, serif, "Noto Emoji", Quivira;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #000;
+  hyphens: auto;
+}
+
+/* headings --------------------------------------------------------------- */
+/* NOTE: No margin or padding overrides, so default Markdown/browser spacing remains */
+.note-content h1,
+.note-content h2,
+.note-content h3 {
+  font: 600 1rem/1.2 inherit;
+  letter-spacing: -0.01em;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.6); /* dotted underline only */
+  color: #333;
+  scroll-margin-top: 5rem;
+}
+
+.note-content h1 {
+  font-size: 22px;
+}
+
+.note-content h2 {
+  font-size: 18px;
+}
+
+.note-content h3 {
+  font-size: 16px;
+  border-bottom-color: rgba(0, 0, 0, 0.4);
+}
+
+.note-content h4 {
+  font: 600 1rem/1.2 inherit;
+  letter-spacing: -0.01em;
+  font-size: 15px;
+  border: none;    /* no underline on h4 */
+  color: #333;
+  scroll-margin-top: 5rem;
+}
+
+/* prose blocks ----------------------------------------------------------- */
+/* Remove all paragraph margins and padding */
+.note-content p {
+  text-align: justify;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Fix for empty paragraphs used for intentional spacing in markdown */
+.note-content p:empty {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+}
+
+/* blockquote retains minimal spacing as defined */
+.note-content blockquote {
+  margin: 0.5rem 0;
+  padding: 0.5rem 1.5rem;
+  font-style: italic;
+  border-left: 3px solid rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* links ------------------------------------------------------------------ */
+.note-content a {
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px dotted #666;
+  transition: border-color 0.2s ease;
+}
+
+.note-content a:hover {
+  border-bottom-color: #000;
+}
+
+/* lists ------------------------------------------------------------------ */
+/* Allow default list indent and spacing; no margin reset */
+.note-content ul,
+.note-content ol {
+  padding-left: 1.25rem;
+}
+
+.note-content li {
+  line-height: 1.4;
+}
+
+/* Fix for h4 + list spacing */
+.note-content h4 + ul,
+.note-content h4 + ol {
+  margin-top: 0;   /* prevent extra top margin if browser applies any */
+}
+
+/* Fix for h4 + paragraph + list sequence */
+.note-content h4 + p + ul,
+.note-content h4 + p + ol {
+  margin-top: 0;
+}
+
+.note-content li + li {
+  margin-top: 0.05rem; /* minimal gap between items */
+}
+
+.note-content li > ul,
+.note-content li > ol {
+  margin-top: 0.05rem;
+  margin-bottom: 0.05rem;
+}
+
+/* code ------------------------------------------------------------------- */
+.note-content code {
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+.note-content pre {
+  margin: 0.5rem 0; /* small gap above/below code blocks */
+  padding: 0.75rem;
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.note-content pre > code {
+  background: transparent;
+  padding: 0;
+}
+
+/* tables ----------------------------------------------------------------- */
+/* Retain default table spacing around and inside; only adjust styling */
+.note-content table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-size: 0.9em !important;
+  line-height: 1.4 !important;
+  table-layout: fixed !important;
+  margin: 0.75rem 0; /* small gap above/below tables */
+}
+
+.note-content thead {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+.note-content th,
+.note-content td {
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  padding: 0.5rem !important;
+}
+
+.note-content th {
+  background: rgba(0, 0, 0, 0.03) !important;
+  font-weight: 600 !important;
+}
+
+/* table wrapper for responsive tables */
+.note-content .table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0.75rem 0; /* small gap above/below wrapper */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+/* images ----------------------------------------------------------------- */
+.note-content img {
+  display: block;
+  max-width: 100%;
+  margin: 0.5rem auto; /* small vertical gap around images */
+}
+
+.note-content figure {
+  margin: 0.5rem 0;    /* small gap above/below figures */
+}
+
+.note-content figcaption {
+  font-size: 0.85em;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.7);
+  margin-top: 0.25rem;
+}
+
+/* horizontal rule -------------------------------------------------------- */
+.note-content hr {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  margin: 1rem 0;      /* small gap above/below */
+}
+
+/* definition lists ------------------------------------------------------- */
+.note-content dl {
+  margin: 0.5rem 0 0.75rem; /* small gap around definitions */
+}
+
+.note-content dt {
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.note-content dd {
+  margin-left: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* task lists ------------------------------------------------------------- */
+.note-content input[type="checkbox"] {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+/* footnotes -------------------------------------------------------------- */
+.note-content .footnotes {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 1.5rem;
+  padding-top: 0.75rem;
+  font-size: 0.9em;
+}
+
+.note-content .footnotes ol {
+  margin-left: 1rem;
+}
+
+.note-content .footnotes li {
+  margin-bottom: 0.25rem;
+}
+
+.note-content .footnote-ref {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.note-content .footnote-backref {
+  font-size: 0.8em;
+  text-decoration: none;
+}
+
+/* abbreviations ---------------------------------------------------------- */
+.note-content abbr {
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.5);
+  cursor: help;
+}
+
+/* keyboard --------------------------------------------------------------- */
+.note-content kbd {
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* dark mode -------------------------------------------------------------- */
+.dark .note-content {
+  color: #e5e5e5;
+}
+
+.dark .note-content h1,
+.dark .note-content h2,
+.dark .note-content h3,
+.dark .note-content h4 {
+  color: #e5e5e5;
+  border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+.dark .note-content a {
+  color: #e5e5e5;
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .note-content a:hover {
+  border-bottom-color: #fff;
+}
+
+.dark .note-content code,
+.dark .note-content kbd {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark .note-content blockquote {
+  border-left-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark .note-content table {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .note-content th,
+.dark .note-content td {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .note-content th {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark .note-content tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.dark .note-content hr {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .note-content figcaption {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .note-content abbr {
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .note-content kbd {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.blog-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.category-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.category-filter {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-filter:hover {
+  background: var(--hover-color);
+}
+
+.category-filter.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.blog-card {
+  display: block;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.blog-card h2 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+}
+
+.blog-card .preview {
+  margin: 0 0 1rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.blog-card .meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Blog Post Styles */
+.blog-post {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.blog-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.blog-header h1 {
+  font-size: 2.5rem;
+  margin: 0 0 1rem;
+}
+
+.blog-header .meta {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.blog-content {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.blog-footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.related-posts h3 {
+  margin-bottom: 1.5rem;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.related-card {
+  display: block;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.related-card:hover {
+  background: var(--hover-color);
+}
+
+.related-card h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.related-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}

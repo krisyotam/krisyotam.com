@@ -1,0 +1,980 @@
+{
+"sequences": [
+{
+"slug": "metaethics",
+"title": "Metaethics",
+"preview": "Explorations into the foundations of moral philosophy, the nature of value, and the logic of ethical reasoning.",
+"start_date": "2025-06-24",
+"end_date": "",
+"cover-url": "",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Philosophy",
+"tags": ["philosophy", "ethics", "morality", "value-theory", "metaethics"],
+"posts": [
+{ "slug": "is-morality-objective", "order": 1, "type": "essay" },
+{ "slug": "emotivism-vs-cognitivism", "order": 2, "type": "essay" },
+{ "slug": "metaethics-of-effective-altruism", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "quantum-physics",
+"title": "Quantum Physics",
+"preview": "A deep dive into quantum mechanics, interpretation debates, and their philosophical and technological implications.",
+"start_date": "2025-06-24",
+"end_date": "",
+"cover-url": "https://i.postimg.cc/pX5gHTzz/istockphoto-941413406-612x612.jpg",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 8,
+"category": "Physics",
+"tags": ["physics", "quantum-mechanics", "science", "philosophy-of-science", "interpretation"],
+"posts": [
+{ "slug": "many-worlds-and-rationality", "order": 1, "type": "essay" },
+{ "slug": "quantum-computation-101", "order": 2, "type": "note" },
+{ "slug": "is-quantum-mechanics-local", "order": 3, "type": "paper" }
+]
+},
+{
+"slug": "mathematics",
+"title": "Mathematics",
+"preview": "From foundational arithmetic and logic to abstract algebra, analysis, and the philosophy of math.",
+"start_date": "2025-06-24",
+"end_date": "",
+"cover-url": "https://i.postimg.cc/XX6ZDmKh/math.jpg",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 10,
+"category": "Mathematics",
+"tags": ["mathematics", "foundations", "logic", "algebra", "analysis", "philosophy-of-math"],
+"posts": [
+{ "slug": "what-is-a-function", "order": 1, "type": "note" },
+{ "slug": "set-theory-and-its-paradoxes", "order": 2, "type": "essay" },
+{ "slug": "category-theory-as-language", "order": 3, "type": "paper" }
+]
+},
+{
+"slug": "three-body-problem",
+"title": "3 Body Problem",
+"preview": "Analyses and reflections on Liu Cixin's trilogy, focusing on philosophical, scientific, and strategic themes.",
+"start_date": "2025-06-24",
+"end_date": "",
+"cover-url": "",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 7,
+"category": "Literature",
+"tags": ["literature", "science-fiction", "liu-cixin", "analysis", "philosophy", "strategy"],
+"posts": [
+{ "slug": "trisolaran-psychology", "order": 1, "type": "review" },
+{ "slug": "dark-forest-theory-analysis", "order": 2, "type": "essay" },
+{ "slug": "ye-wenjie-and-the-weight-of-trauma", "order": 3, "type": "review" }
+]
+},
+{
+"slug": "higher-order-reason",
+"title": "Higher Order Reason",
+"preview": "Essays on advanced reasoning strategies, metacognition, and the architecture of rational thought.",
+"start_date": "2025-06-24",
+"end_date": "",
+"cover-url": "https://i.postimg.cc/pX5gHTzz/istockphoto-941413406-612x612.jpg",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Rationality",
+"tags": ["rationality", "reasoning", "metacognition", "epistemology", "decision-theory"],
+"sections": [
+{
+"title": "FOUNDATIONS OF RATIONAL DISCOURSE",
+"posts": [
+{ "slug": "steelmanning-and-charity", "order": 1, "type": "essay" },
+{ "slug": "epistemic-hygiene-in-the-modern-age", "order": 2, "type": "essay" }
+]
+},
+{
+"title": "DECISION THEORY AND PRACTICE",
+"posts": [
+{ "slug": "decision-theory-and-altruism", "order": 3, "type": "paper" },
+{ "slug": "rational-choice-under-uncertainty", "order": 4, "type": "essay" }
+]
+},
+{
+"title": "METACOGNITIVE STRATEGIES",
+"posts": [
+{ "slug": "thinking-about-thinking", "order": 5, "type": "note" },
+{ "slug": "cognitive-biases-and-debiasing", "order": 6, "type": "essay" }
+]
+}
+]
+},
+{
+"slug": "craft-of-community",
+"title": "The Craft of Community",
+"preview": "A study in social technologies, group dynamics, subculture formation, and intentional community-building.",
+"start_date": "2025-06-24",
+"end_date": "",
+"cover-url": "",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "uncertain",
+"importance": 8,
+"category": "Sociology",
+"tags": ["sociology", "community", "social-technology", "group-dynamics", "subcultures"],
+"posts": [
+{ "slug": "rituals-as-psychotechnology", "order": 1, "type": "essay" },
+{ "slug": "building-intellectual-subcultures", "order": 2, "type": "note" },
+{ "slug": "failure-modes-of-communities", "order": 3, "type": "case" }
+]
+},
+{
+"slug": "demonology",
+"title": "Demonology",
+"preview": "A scholarly and esoteric examination of demonic archetypes, infernal hierarchies, and the role of demons in myth, theology, and the human psyche.",
+"start_date": "2025-06-24",
+"end_date": "",
+"cover-url": "https://i.postimg.cc/BZrm2CPP/demonology.jpg",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 7,
+"category": "Theology",
+"tags": ["theology", "demonology", "occult", "mythology", "psychology", "archetypes"],
+"posts": [
+{ "slug": "goetia-and-the-72-spirits", "order": 1, "type": "liber" },
+{ "slug": "theological-origins-of-lucifer", "order": 2, "type": "essay" },
+{ "slug": "demons-as-psychological-metaphors", "order": 3, "type": "note" }
+]
+},
+{
+"slug": "angelology",
+"title": "Angelology",
+"preview": "Explorations into angelic beings across religions, their metaphysical roles, and their symbolic significance in mysticism and art.",
+"start_date": "2025-06-24",
+"end_date": "",
+"cover-url": "",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 7,
+"category": "Theology",
+"tags": ["theology", "angelology", "mysticism", "religion", "metaphysics", "symbolism"],
+"posts": [
+{ "slug": "hierarchies-of-heaven", "order": 1, "type": "liber" },
+{ "slug": "archangel-michael-in-war-and-wisdom", "order": 2, "type": "essay" },
+{ "slug": "angelic-interventions-in-modern-mysticism", "order": 3, "type": "note" }
+]
+},
+{
+"slug": "witchcraft",
+"title": "Witchcraft",
+"preview": "An interdisciplinary study of historical and contemporary witchcraft: spells, persecution, empowerment, and cultural symbolism.",
+"start_date": "2025-06-24",
+"end_date": "",
+"cover-url": "https://i.postimg.cc/3NF047DB/witchcraft.jpg",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 8,
+"category": "Occult",
+"tags": ["occult", "witchcraft", "history", "symbolism", "empowerment", "persecution"],
+"posts": [
+{ "slug": "witches-in-medieval-europe", "order": 1, "type": "essay" },
+{ "slug": "modern-wicca-and-ecofeminism", "order": 2, "type": "essay" },
+{ "slug": "the-magic-circle-as-a-cognitive-frame", "order": 3, "type": "note" }
+]
+},
+{
+"slug": "higher-order-alchemy",
+"title": "Higher Order Alchemy",
+"preview": "Beyond the Philosopher's Stone—this series reinterprets alchemy as symbolic transformation, consciousness evolution, and spiritual refinement.",
+"start_date": "2025-06-24",
+"end_date": "",
+"cover-url": "",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Occult",
+"tags": ["occult", "alchemy", "transformation", "consciousness", "spirituality", "symbolism"],
+"posts": [
+{ "slug": "solve-et-coagula-and-personal-integration", "order": 1, "type": "essay" },
+{ "slug": "jungian-alchemy-and-shadow-work", "order": 2, "type": "note" },
+{ "slug": "alchemical-symbolism-in-modern-fiction", "order": 3, "type": "review" }
+]
+},
+{
+"slug": "genesis",
+"title": "Genesis",
+"preview": "A breakdown of the book of Genesis, it's historical context, literary structure, and moral themes.",
+"start_date": "2025-07-07",
+"end_date": "",
+"cover-url": "https://i.postimg.cc/7LQLV8VL/genesis.jpg",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Biblical Studies",
+"tags": ["biblical-studies", "genesis", "theology", "exegesis", "moral-themes", "literary-analysis"],
+"posts": [
+{ "slug": "creation-narratives-and-their-meaning", "order": 1, "type": "lecture-note" },
+{ "slug": "adam-and-eve-theological-anthropology", "order": 2, "type": "essay" },
+{ "slug": "cain-and-abel-morality-tale", "order": 3, "type": "note" }
+]
+},
+{
+"slug": "analysis-i",
+"title": "Analysis I",
+"preview": "Real numbers, limits, topology of ℝ, (uniform) continuity, sequences of functions, derivatives of functions, series in ℂ, metric spaces, completeness",
+"start_date": "2025-07-07",
+"end_date": "",
+"cover-url": "https://i.postimg.cc/rsPMhg8L/analysis-I.jpg",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Mathematics",
+"tags": ["mathematics", "analysis", "real-numbers", "limits", "topology", "continuity", "derivatives"],
+"posts": [
+{ "slug": "foundations-of-real-numbers", "order": 1, "type": "lecture-note" },
+{ "slug": "limits-and-convergence", "order": 2, "type": "lecture-note" },
+{ "slug": "topology-of-real-line", "order": 3, "type": "note" }
+]
+},
+{
+"slug": "number-theory",
+"title": "Number Theory",
+"preview": "Divisibility, primes, congruences, modular arithmetic, Diophantine equations, quadratic residues, arithmetic functions, orders and primitive roots, Fermat's Little Theorem, Euler's Theorem, and the structure of ℤ/nℤ",
+"start_date": "2025-07-07",
+"end_date": "",
+"cover-url": "https://i.postimg.cc/8zzTZXJF/Chat-GPT-Image-Jul-9-2025-03-30-31-AM.png",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Mathematics",
+"tags": ["mathematics", "number-theory", "primes", "modular-arithmetic", "diophantine-equations", "fermat"],
+"posts": [
+{ "slug": "divisibility-and-prime-factorization", "order": 1, "type": "lecture-note" },
+{ "slug": "modular-arithmetic-fundamentals", "order": 2, "type": "lecture-note" },
+{ "slug": "fermats-little-theorem-proof", "order": 3, "type": "proof" }
+]
+},
+{
+"slug": "feminism",
+"title": "Feminism",
+"preview": "An exploration of feminist theory, history, and contemporary issues.",
+"start_date": "2025-07-07",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/feminism.jpg  ",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Gender Studies",
+"tags": ["feminism", "gender-studies", "theory", "history", "social-justice", "equality"],
+"posts": [
+{ "slug": "waves-of-feminism-historical-overview", "order": 1, "type": "essay" },
+{ "slug": "intersectionality-and-modern-feminism", "order": 2, "type": "note" },
+{ "slug": "feminist-philosophy-key-concepts", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "epidemics-pandemics",
+"title": "Epidemics and Pandemics",
+"preview": "A comprehensive study of historical and contemporary epidemics and pandemics, their impact on society, and lessons learned.",
+"start_date": "2025-07-07",
+"end_date": "",
+"cover-url": "https://i.postimg.cc/pLgLmWSR/epidemics-pandemics.png",
+"state": "hidden",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Pathology",
+"tags": ["pathology", "epidemics", "pandemics", "public-health", "history", "society"],
+"posts": [
+{ "slug": "black-death-medieval-pandemic", "order": 1, "type": "case" },
+{ "slug": "spanish-flu-lessons-learned", "order": 2, "type": "essay" },
+{ "slug": "covid-19-modern-pandemic-response", "order": 3, "type": "dossier" }
+]
+},
+{
+"slug": "catechesis",
+"title": "Catechesis (Milk for Babies)",
+"preview": "A comprehensive study of the basics of the Christian faith, designed for new believers and young children.",
+"start_date": "2025-07-07",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/biblical-milk.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Biblical Studies",
+"tags": ["biblical-studies", "catechesis", "christian-faith", "theology", "basics", "teaching"],
+"posts": [
+{ "slug": "who-is-god-basics", "order": 1, "type": "lecture-note" },
+{ "slug": "jesus-christ-introduction", "order": 2, "type": "lecture-note" },
+{ "slug": "holy-spirit-fundamentals", "order": 3, "type": "lecture-note" }
+]
+},
+{
+"slug": "didache",
+"title": "Didache (Bread for Children)",
+"preview": "A comprehensive study of the teachings of the early Christian church, designed for intermediate believers.",
+"start_date": "2025-07-07",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/biblical-bread.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Biblical Studies",
+"tags": ["biblical-studies", "didache", "early-church", "teachings", "christian-doctrine", "discipleship"],
+"posts": [
+{ "slug": "two-ways-teaching", "order": 1, "type": "lecture-note" },
+{ "slug": "baptism-and-fasting-practices", "order": 2, "type": "lecture-note" },
+{ "slug": "eucharist-early-church", "order": 3, "type": "note" }
+]
+},
+{
+"slug": "theologia",
+"title": "Theologia (Meat for Adults)",
+"preview": "A comprehensive study of the deeper theological concepts of the Christian faith, designed for mature believers.",
+"start_date": "2025-07-07",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/biblical-meat.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Biblical Studies",
+"tags": ["biblical-studies", "theology", "advanced-theology", "christian-doctrine", "systematic-theology", "apologetics"],
+"posts": [
+{ "slug": "trinity-doctrine-deep-dive", "order": 1, "type": "essay" },
+{ "slug": "christology-incarnation", "order": 2, "type": "paper" },
+{ "slug": "soteriology-salvation-theology", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "transatlantic-slave-trade",
+"title": "Transatlantic Slave Trade",
+"preview": "A comprehensive study of the transatlantic slave trade, its history, and its impact on society.",
+"start_date": "2025-07-07",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/transatlantic-slave-trade.webp",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "History",
+"tags": ["history", "slavery", "transatlantic", "human-rights", "colonialism", "africa", "americas"],
+"posts": [
+{ "slug": "origins-of-atlantic-slavery", "order": 1, "type": "essay" },
+{ "slug": "middle-passage-horrors", "order": 2, "type": "dossier" },
+{ "slug": "abolition-movement-heroes", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "select-essays-of-kris-yotam",
+"title": "Select Essays of Kris Yotam",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/krisyotam-essays.png",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "global-nuclear-coverup",
+"title": "Global Nuclear Coverup",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/global-nuclear-coverup.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "creation",
+"title": "Creation",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/creation.webp",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "haute-couture",
+"title": "Haute Couture",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/haute-cotour.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "freemasonry",
+"title": "Freemasonry",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/freemasonry.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "capitalism",
+"title": "Capitalism",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/capitalism.webp",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "the-flat-earth",
+"title": "The Flat Earth",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/the-flat-earth.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "rabbit-holes",
+"title": "Rabbit Holes",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/rabbit-holes.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "the-function-of-a-lady",
+"title": "The Function Of a Lady",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/the-function-of-a-lady.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "age-of-ai",
+"title": "Age of AI",
+"preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/age-of-ai.png",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "the-elitist-companion-to-anime",
+"title": "The Elitist's Companion to Anime",
+"preview": "A study of anime at its highest craft—examining influential directors, defining studios, landmark series, and the refinement of animation techniques, visual design, and storytelling that shape discerning taste.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/the-elitist-companion-to-anime.webp",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"sections": [
+  {
+    "title": "Lexicon",
+    "posts": [
+      { "slug": "a-formal-lexicon-for-weebs", "order": 1, "type": "essay" }
+    ]
+  },
+  {
+    "title": "DIRECTORS & AUTEURS",
+    "posts": [
+      { "slug": "miyazaki-profile", "order": 1, "type": "essay" }
+    ]
+  },
+  {
+    "title": "STUDIOS & PRODUCTION",
+    "posts": [
+      { "slug": "studio-ghibli-overview", "order": 1, "type": "essay" }
+    ]
+  },
+  {
+    "title": "LANDMARK SERIES",
+    "posts": [
+      { "slug": "evangelion-analysis", "order": 1, "type": "essay" }
+    ]
+  },
+  {
+    "title": "FILM MASTERWORKS",
+    "posts": [
+      { "slug": "akira-film-study", "order": 1, "type": "essay" }
+    ]
+  },
+  {
+    "title": "VISUAL DESIGN & ANIMATION",
+    "posts": [
+      { "slug": "sakuga-explained", "order": 1, "type": "essay" }
+    ]
+  },
+  {
+    "title": "GENRES & THEMES",
+    "posts": [
+      { "slug": "mecha-genre-intro", "order": 1, "type": "essay" }
+    ]
+  },
+  {
+    "title": "CULTURAL IMPACT",
+    "posts": [
+      { "slug": "anime-influence-worldwide", "order": 1, "type": "essay" }
+    ]
+  },
+  {
+    "title": "PHILOSOPHY & IDEAS",
+    "posts": [
+      { "slug": "existentialism-in-anime", "order": 1, "type": "essay" }
+    ]
+  },
+  {
+    "title": "FANDOM & CRITICISM",
+    "posts": [
+      { "slug": "anime-fandom-culture", "order": 1, "type": "essay" }
+    ]
+  },
+  {
+    "title": "FUTURE & INNOVATION",
+    "posts": [
+      { "slug": "future-of-anime", "order": 1, "type": "essay" }
+    ]
+  }
+]
+},
+{
+"slug": "love-theory",
+"title": "Love Theory",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/love-theory.png",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "the-cinephiles-guide-to-film",
+"title": "The Cinephiles Companion to Film",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/the-cinephiles-guide-to-film.webp",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "high-society",
+"title": "High Society",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/high-society.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "prayer",
+"title": "Prayer",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/prayer.png",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "us-history",
+"title": "U.S. History",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/us-history.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "japanese-literature",
+"title": "Japanese Literature",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/japanese-literature.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "us-law",
+"title": "U.S. Law",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/us-law.webp",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "biomagnetism",
+"title": "Biomagnetism",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/biomagnetism.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "mesopotamia",
+"title": "Mesopotamia",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/mesopotamia.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "orcas",
+"title": "Orcas",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/orcas.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "rms-titantic",
+"title": "RMS Titanic",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/rms-titantic.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "cetaceans",
+"title": "Cetaceans",
+"preview": "A theory of what love is, the boundaries between romantic and platonic bonds, and whether love can be shared among several people. It asks if “true love” exists, why we fall out of love, and whether we could love more—and better. A practical and philosophical inquiry into understanding, sustaining, and expanding human connection.",
+"start_date": "2025-07-15",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/cetaceans.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "the-cinematic-year-in-review",
+"title": "The Cinematic Year in Review",
+"preview":"I watch and review the greatest years in cinema history, with accompanying analysis essays",
+"start_date": "2025-08-25",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/cinema-a-year-in-review.png",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "empirical-raciology",
+"title": "Empirical Raciology",
+"preview":"a empirical discussion on historical, and contemporary racial claims",
+"start_date": "2025-08-25",
+"end_date": "",
+"cover-url": "https://doc.krisyotam.com/site/sequences/empirical-raciology.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "great-books-of-the-western-world",
+"title": "Great Books of the Western World",
+"preview":"my decade long journey through the great books of western civilization",
+"start_date": "2025-08-25",
+"end_date": "",
+"cover-url": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fc%2Fc3%2FRaphael_School_of_Athens.jpg&f=1&nofb=1&ipt=9cfb5b61e5b4a8339d06be6be706a20c2e7ea6a38f58b7363ba1481309ef8cd0",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "on-adulthood",
+"title": "On Adulthood",
+"preview":"a rigirous examination of the philosophy, psychology, practicalties, and science of adulthood",
+"start_date": "2025-08-25",
+"end_date": "",
+"cover-url": "https://substackcdn.com/image/fetch/$s_!2RZq!,w_600,h_400,c_fill,f_webp,q_auto:good,fl_progressive:steep,g_center/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb69f8acd-7068-4cc0-8523-c41d5bc8f82c_355x355.jpeg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+},
+{
+"slug": "the-discourses",
+"title": "The Discourses",
+"preview":"transcriptions of various personal discourses i have had over the years",
+"start_date": "2025-08-25",
+"end_date": "",
+"cover-url": "https://understandingslavery.com/wp-content/uploads/2020/10/slave_in_chains2-238x300.jpg",
+"state": "active",
+"status": "In Progress",
+"confidence": "likely",
+"importance": 9,
+"category": "Personal",
+"tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+"posts": [
+{ "slug": "boy-interrupted", "order": 1, "type": "essay" },
+{ "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+{ "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+]
+}
+
+]
+
+}

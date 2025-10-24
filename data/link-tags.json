@@ -1,0 +1,53 @@
+[
+    {
+      "name": "Archive",
+      "domain": "archive.org",
+      "svg": "archive.svg"
+    },
+    {
+      "name": "MyAnimeList",
+      "domain": "myanimelist.net",
+      "svg": "mal.svg"
+    },
+    {
+      "name": "ArXiv",
+      "domain": "arxiv.org",
+      "svg": "arxiv.svg"
+    },
+    {
+      "name": "Apple",
+      "domain": "apple.com",
+      "svg": "apple.svg"
+    },
+    {
+      "name": "PDF",
+      "extension": ".pdf",
+      "svg": "pdf.svg"
+    },
+    {
+      "name": "MP4",
+      "extension": ".mp4",
+      "svg": "mp4.svg"
+    },
+    {
+      "name": "MP3",
+      "extension": ".mp3",
+      "svg": "mp3.svg"
+    },
+    {
+      "name": "ZIP",
+      "extension": ".zip",
+      "svg": "zip.svg"
+    },
+    {
+     "name": "Youtube",
+     "domain": "youtube.com",
+     "svg": "youtube.svg"
+    },
+    {
+      "name": "Internal",
+      "domain": "/",
+      "svg": "krisyotam.png"
+    }
+  ]
+  

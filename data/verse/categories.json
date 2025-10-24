@@ -1,0 +1,148 @@
+{
+  "types": [
+    {
+      "slug": "antiphon",
+      "title": "Antiphon",
+      "preview": "A call-and-response style of liturgical or spiritual poetry, often invoking divine or cosmic themes.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "cinquain",
+      "title": "Cinquain",
+      "preview": "A five-line poetic form with a structured syllabic or word pattern, capturing a vivid image or idea.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 6
+    },
+    {
+      "slug": "concrete-poem",
+      "title": "Concrete Poem",
+      "preview": "Poetry in which visual arrangement is as important as textual content, forming shapes or patterns with words.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 5
+    },
+    {
+      "slug": "elegy",
+      "title": "Elegy",
+      "preview": "A mournful or reflective poem, typically lamenting the dead or meditating on loss and mortality.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "free-verse",
+      "title": "Free Verse",
+      "preview": "Unrhymed poetry without regular meter, emphasizing natural rhythm and expressive freedom.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "haiku",
+      "title": "Haiku",
+      "preview": "A minimalist three-line Japanese poetic form, traditionally 5-7-5 syllables, evoking nature or fleeting moments.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 10
+    },
+    {
+      "slug": "light-verse",
+      "title": "Light Verse",
+      "preview": "Humorous or whimsical poetry that plays with language, rhythm, and clever wordplay.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 4
+    },
+    {
+      "slug": "limerick",
+      "title": "Limerick",
+      "preview": "A humorous five-line poem with a distinct rhythm (AABBA) and playful tone.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 5
+    },
+    {
+      "slug": "list-poem",
+      "title": "List Poem",
+      "preview": "A poem constructed through enumeration, cataloging ideas, observations, or images in a rhythmic sequence.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 4
+    },
+    {
+      "slug": "lune",
+      "title": "Lune",
+      "preview": "An American adaptation of the haiku, typically following a 5-3-5 syllabic or word count structure.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 3
+    },
+    {
+      "slug": "lyric",
+      "title": "Lyric",
+      "preview": "Emotionally expressive and personal poetry, often musical in tone and reflective of inner feelings.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "ode",
+      "title": "Ode",
+      "preview": "A formal and often exalted poem praising a person, idea, or object with deep admiration.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "quatrain-ballad-meter",
+      "title": "Quatrain (Ballad Meter)",
+      "preview": "A four-line stanza poem with alternating lines of iambic tetrameter and trimeter, often with rhyme.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 6
+    },
+    {
+      "slug": "slam-poetry",
+      "title": "Slam Poetry",
+      "preview": "Performance-based poetry meant to be spoken aloud, often political, raw, and emotionally charged.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "sonnet",
+      "title": "Sonnet",
+      "preview": "A structured 14-line poem, often in iambic pentameter, exploring love, beauty, or philosophy.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "villanelle",
+      "title": "Villanelle",
+      "preview": "A 19-line poem with repeating lines and a fixed rhyme scheme, known for its hypnotic effect and emotional resonance.",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
+    }
+  ]
+}

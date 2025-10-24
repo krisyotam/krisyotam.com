@@ -1,0 +1,82 @@
+import Dropcap from '@/components/dropcap'
+import LinkTags from "@/components/link-tags"
+import { Box } from "@/components/posts/typography/box";
+import { Excerpt } from "@/components/posts/typography/excerpt";
+import { Quote } from "@/components/posts/typography/quote";
+import Define from "@/components/references/language/oed";
+import { Spoiler } from "@/components/posts/typography/spoiler";
+import { PoemBox } from "@/components/posts/typography/poem"
+import Collapse from "@/components/posts/typography/collapse"
+import { EnhancedImageDisplay } from "@/components/posts/images/enhanced-image-display";
+import TryHackMe from "@/components/posts/ctfs/tryhackme"
+
+<TryHackMe />
+
+
+<Box>This is a long form guide to be concurrenlty edited while I build out my gentoo system. It will discuss the philosophy, software, and hardware. The current version of 
+the file will always be viewable at the bottom of this post with a link to the kristoo directory.</Box>
+
+# Toward a Independant Desktop 
+<Dropcap type="william-morris-gothic">S</Dropcap>ince I built my PC on July 9th, 2022 I have been running a heavily customized version of the gov. build of windows, and a archlinux system using larbs to install suckless utilities with 
+a couple alterations like changing librewolf to thorium, and installing tor, irc, ect. Larbs has seemingly worked perfectly for me through the years. It is simple, fast, and efficient. 
+However since larbs (dwm) proved to be quite inadacquite for what i expected of it with a 4 monitor setup. 
+<EnhancedImageDisplay
+  type="wrap"
+  images={[
+    {
+      src: "https://i.postimg.cc/QN4G5NKy/gentoo-linux.png",
+      alt: "Gentoo Linux Logo",
+      caption: ""
+    }
+  ]}
+/>
+I decided to make a change. I would switch to gentoo once and for all (not my first time.). 
+The goal is a more fine grained system, with a default install script similar to [larbs.xyz](https://larbs.xyz/)(for anyone to use), and a private script to install custom settings, directory structure, and download things 
+from private repos. Another goal of this is better control, and automation of my new server from hetzner via [], and subsequently my storage box. This also gives me the ability to loose all sense and automate just about everything. 
+However at heart the goals for a "Independant Desktop" are focused on **Privacy**, **Focus**, **Intention**, and **Security**. The goal is for this to be a system that allows for easy hyperfocus over a extended period of time. Minimizing 
+distractions, blocking depraved content, and having robust privacy/security. 
+<Quote author="Richard Stallman">Free software is a matter of liberty, not price. To understand the concept, you should think of 'free' as in 'free speech,' not as in 'free beer.'</Quote> 
+The goals of a free desktop although greatly benefitting the frugal are not about price. They are about rights. Fundamental Humans Rights of privacy, security, and free will that are stripped away from people by corporations (and proprietary software) for corporate gain. 
+As with anything going against the grain this causes a lot of pain, stress, and discomfort. This is because naturally the more autonomous one becomes the more things you must understand, maintain, and fix. Drastically decreasing convenience.
+<EnhancedImageDisplay
+  images={[
+    {
+      src: "https://i.postimg.cc/cHQ10vxH/autonomy-vs-convenience-100-whites.png",
+      darkSrc: "https://i.postimg.cc/cC0xHdCc/autonomy-vs-convenience-100-matte-blacks.png", // optional
+      alt: "a demonstration of convenience as autonomy increases",
+      caption: "a demonstration of convenience as autonomy increases."
+    }
+  ]}
+/>
+
+
+# Philosophy 
+
+# Requirements 
+
+# Software 
+
+### Password Manager (KeypassXC)  
+<Quote author="Troy Hunt">Your brain is a very bad password manager: it's incapable of storing more than a couple of genuinely random strings of reasonable length.</Quote>
+The next step is a reliable password manager. My Requirements for this section weren't to heavy. It needs to have the ability to store, generate, and hold passwords. Along with the ability to store 
+secure notes used for recovery tokens. It needed to have 2FA built in for the sites that require it's use, and it needed to be desktop available. It also needed to have the capability of being constantly backed up, and exported to a file. 
+
+### Numi (Calculator) 
+Numi is a cmd line tool for basic calculations to be done by describing them in natural language. For ex.
+<Box>$20 in euro - 5% discount</Box> is how something may be described. 
+
+### SageMath
+[SageMath](https://www.sagemath.org/) is a free & open-source cas system designed specifically to compete with Magma, Maple, Mathematica, and Matlab. Seeing as it is a FOSS alternative I will be trying my hand at using this as my long-term CAS system. 
+
+### Gaming 
+
+I don't spend much time gaming these days but this is a solution I intend on solving for those of you who are planning on using the script in the future. The plans right now include Steam, and OSU!. 
+
+
+# Hardware 
+
+# The Guide 
+<Box>You can safely ignore this section for now, when the project is finished the PDF guide will be embedded here.</Box>
+
+# The Script (kristoo.sh)
+<Box>This is updated live via my file viewer component so what you see is current</Box>

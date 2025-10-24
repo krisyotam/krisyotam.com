@@ -1,0 +1,25 @@
+{
+  "interests": [
+    {
+      "type": "Art",
+      "specifics": ["Renaissance Portraits", "Impressionist Landscapes", "Modern Abstract"]
+    },
+    {
+      "type": "Literature",
+      "specifics": ["First Editions", "Signed Copies", "Limited Runs"]
+    },
+    {
+      "type": "Collectibles",
+      "specifics": ["Vintage Cameras", "Antique Maps", "Rare Coins"]
+    },
+    {
+      "type": "Furniture",
+      "specifics": ["Mid-Century Modern", "Art Deco", "Victorian"]
+    },
+    {
+      "type": "Timepieces",
+      "specifics": ["Mechanical Watches", "Vintage Clocks", "Limited Edition Pieces"]
+    }
+  ]
+}
+

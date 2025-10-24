@@ -1,0 +1,40 @@
+{
+    "metadata": {
+      "title": "Frequently Asked Questions",
+      "description": "Answers to common questions about this site, content, and more.",
+      "lastUpdated": "2025-04-22"
+    },
+    "faqs": [
+      {
+        "id": "updates",
+        "question": "How can I get an update when a new post comes out?",
+        "answer": "Subscribe on my substack I'll shoot weakly updated out there. There is also an RSS feed available at /rss.xml."
+      },
+      {
+        "id": "programs",
+        "question": "Do you open source the code used for data anlaysis in your posts?",
+        "answer": "Yes there is a repo on my github titled site-architecture which holds scripts used here on krisyotam.com, and on krisyotam.net."
+      },
+      {
+        "id": "corrections",
+        "question": "What if I see something incorrect in the post?",
+        "answer": "Send me an email at krisyotam@protonmail.com if you have questions or find errors. Thanks 😊! But time of one person is limited and I'm really busy nowadays, so there may take some time for me to get to process it."
+      },
+      {
+        "id": "translations",
+        "question": "Can I translate your posts to another language?",
+        "answer": "Yes and my pleasure! But please email me in advance and please keep the original post link on top."
+      },
+      {
+        "id": "updates-old",
+        "question": "Do you update your old posts?",
+        "answer": "Yes, I update my old posts periodically. You can view recent updates via the changelog at /changelog or get them via my substack."
+      },
+      {
+        "id": "blogging",
+        "question": "How can you keep up blogging?",
+        "answer": "\"Pain is inevitable but suffering is optional\" --- this is the first sentence of Haruki Murakami's book \"What I Talk About When I Talk About Running\". I love that book. His altitude towards running is pretty much aligned with how I feel about maintaining this blog."
+      }
+    ]
+  }
+  

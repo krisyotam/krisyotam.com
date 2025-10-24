@@ -1,0 +1,22 @@
+[
+  {
+    "cover": "https://doc.krisyotam.com/imgs/manga/ghost-in-the-shell.jpg",
+    "title": "Koukaku Kidoutai",
+    "link": "https://example.com/art1"
+  },
+  {
+    "cover": "https://doc.krisyotam.com/imgs/manga/chi-no-wadachi.jpg",
+    "title": "Chi no Wadachi",
+    "link": "https://example.com/art2"
+  },
+  {
+    "cover": "https://doc.krisyotam.com/imgs/anime/omoide-emanon.jpg",
+    "title": "Omoide Emanon",
+    "link": "https://example.com/art3"
+  },
+  {
+    "cover": "https://doc.krisyotam.com/imgs/manga/aku-no-hana.png",
+    "title": "Aku no Hana",
+    "link": "https://example.com/art4"
+  }
+]

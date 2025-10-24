@@ -1,0 +1,58 @@
+{
+  "categories": [
+    {
+      "slug": "short-stories",
+      "title": "Short Stories",
+      "preview": "Brief works of fiction exploring various themes and styles",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "flash-fiction",
+      "title": "Flash Fiction",
+      "preview": "Ultra-short stories that pack a punch in under 1000 words",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "novel-excerpts",
+      "title": "Novel Excerpts",
+      "preview": "Selected passages from longer works in progress",
+      "date": "2025-06-05",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 6
+    },
+    {
+      "slug": "creepypasta",
+      "title": "Creepypasta",
+      "preview": "Internet-native horror stories and modern urban legends",
+      "date": "2025-06-10",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 6
+    },
+    {
+      "slug": "tragedies",
+      "title": "Tragedies",
+      "preview": "Narratives centered on human suffering, fate, and catharsis—classical to modern",
+      "date": "2025-06-10",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "excerpts",
+      "title": "Excerpts",
+      "preview": "experiments in form, structure, and style",
+      "date": "2025-06-10",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 8
+    }
+  ]
+}

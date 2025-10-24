@@ -1,0 +1,16 @@
+/* More specific CSS to override table styling in problems section */
+.problem-content table td {
+  font-weight: normal !important;
+}
+
+/* Target direct child elements to ensure consistent styling */
+.problem-content > table td,
+.problem-content > * > table td,
+.problem-content > * > * > table td {
+  font-weight: normal !important;
+}
+
+/* Target by attribute to avoid potential class overrides */
+[data-problem-table] td {
+  font-weight: normal !important;
+}

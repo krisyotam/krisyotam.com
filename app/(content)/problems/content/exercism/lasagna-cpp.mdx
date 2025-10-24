@@ -1,0 +1,27 @@
+<Box>
+This is my solution to [Exercism Lasagna exercise](https://exercism.org/tracks/cpp/exercises/lasagna) in c++.
+</Box>
+
+## Lasagna (C++)
+```cpp(lasagna.cpp)
+// ovenTime returns the total expected oven time for the lasagna.
+int ovenTime() {
+    return 40;
+}
+
+// remainingOvenTime returns the remaining oven time based on actual minutes already in the oven.
+int remainingOvenTime(int actualMinutesInOven) {
+    return ovenTime() - actualMinutesInOven;
+}
+
+// preparationTime returns total prep time based on number of layers (2 minutes per layer).
+int preparationTime(int numberOfLayers) {
+    return numberOfLayers * 2;
+}
+
+// elapsedTime returns the total time spent so far: prep + baking.
+int elapsedTime(int numberOfLayers, int actualMinutesInOven) {
+    return preparationTime(numberOfLayers) + actualMinutesInOven;
+}
+```
+

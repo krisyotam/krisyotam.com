@@ -1,0 +1,34 @@
+{
+"tags": [
+{
+"slug": "poetry",
+"title": "Poetry",
+"cover_image": "",
+"preview": "posts about poetry, poetic analysis, and verse exploration",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8
+},
+{
+"slug": "philosophy",
+"title": "Philosophy",
+"cover_image": "",
+"preview": "philosophical musings, thought experiments, and ethical considerations",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 9
+},
+{
+"slug": "literary-criticism",
+"title": "Literary Criticism",
+"cover_image": "",
+"preview": "analysis and critical examination of literary works and authors",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8
+}
+]
+}

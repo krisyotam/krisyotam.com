@@ -1,0 +1,155 @@
+%-----------------------------%
+% Template 4c: Legal Document Template
+%-----------------------------%
+\documentclass[11pt]{article}
+
+%- Packages -%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+%- Title formatting -%
+\newcommand{\TitleLine}{\noindent\rule{\textwidth}{0.4pt}}
+\titleformat*{\section}{\bfseries\normalsize}
+\titleformat*{\subsection}{\bfseries\normalsize}
+
+%- Header / Footer -%
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\itshape © 2025 Kris Yotam}
+\fancyfoot[R]{\itshape Last Updated: May 23, 2025}
+\fancyfoot[C]{\thepage}
+
+%- Document -%
+\begin{document}
+\onehalfspacing
+
+%- Title block -%
+\vspace*{-1em}
+\TitleLine
+\vspace{0.5em}
+\begin{center}
+  {\Large\bfseries Code \& Program Licensing}\\[0.75em]
+  {\normalsize Kris Yotam}\\
+  {\itshape Illinois, United States}
+\end{center}
+\vspace{0.5em}
+\TitleLine
+
+\vspace{1.5em}
+
+%- Preamble & Keywords -%
+\noindent\textbf{Preamble}\\
+This document outlines the licensing terms for code, programming examples, software, and technical projects published on krisyotam.com. It specifies which licenses apply to different code components and explains the permissions, restrictions, and obligations associated with using code from the site.
+
+\vspace{0.75em}
+\noindent\textit{Keywords:} Open Source; MIT License; Code Usage; Attribution Requirements; Liability
+
+\vspace{1.5em}
+
+%- Main sections -%
+\section{Default Code License}
+Unless otherwise specified, all code examples, snippets, libraries, and programming projects explicitly marked as open source on krisyotam.com are released under the MIT License. Code not explicitly marked as open source is protected by copyright with all rights reserved.
+
+\section{MIT License Terms}
+For code released under the MIT License, the following terms apply:
+
+\begin{quote}
+Copyright (c) 2025 Kris Yotam
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+\end{quote}
+
+\section{Identifying Open Source Code}
+Code released as open source under the MIT License will be clearly identified in one or more of the following ways:
+\begin{itemize}
+  \item An explicit statement of "Released under the MIT License" near the code
+  \item A LICENSE or LICENSE.txt file in the associated GitHub repository
+  \item A comment block at the top of code files containing the MIT License information
+  \item A note on the page containing the code indicating it is available under the MIT License
+\end{itemize}
+
+\section{Other Potential Licenses}
+While the MIT License is our default, some projects or code examples may occasionally be released under different licenses. When this is the case, the specific license will be clearly indicated with the code. Potential alternative licenses might include:
+
+\subsection{Apache License 2.0}
+A permissive license similar to MIT, but with additional provisions related to patents. The full text of this license will be provided with any code released under these terms.
+
+\subsection{GNU General Public License (GPL)}
+A copyleft license that requires derivatives to be released under the same license. Any code released under GPL versions will be clearly marked as such.
+
+\subsection{Proprietary License}
+Some code may be published under a proprietary license with more restrictive terms. These restrictions will be explicitly stated wherever such code appears.
+
+\section{Using Code from krisyotam.com}
+When using code published on krisyotam.com, please adhere to the following guidelines:
+
+\subsection{MIT Licensed Code}
+For code published under the MIT License:
+\begin{itemize}
+  \item You are free to use, modify, and distribute the code for both personal and commercial purposes
+  \item You must include the copyright notice and the permission notice (license text) in all copies or substantial portions of the software
+  \item Attribution is required as specified in the MIT License
+\end{itemize}
+
+\subsection{Proprietary Code (All Rights Reserved)}
+For code not explicitly marked as open source:
+\begin{itemize}
+  \item You may study and learn from the code
+  \item You may use small snippets (less than 10 lines) with attribution in your own projects
+  \item For substantial use, please contact \href{mailto:code@krisyotam.com}{code@krisyotam.com} to request permission
+\end{itemize}
+
+\section{Attribution Requirements}
+When using MIT-licensed code from krisyotam.com, please attribute as follows:
+\begin{itemize}
+  \item For source code: Include the MIT License text with copyright notice at the top of the file or in your project's LICENSE file
+  \item For binary distributions: Include the copyright notice and MIT License in your documentation
+  \item When reasonable, consider adding: "Contains code from krisyotam.com" with a link to the original source
+\end{itemize}
+
+\section{No Warranty and Limitation of Liability}
+All code, whether open source or proprietary, is provided "as is" without warranty of any kind, express or implied. The author makes no representations concerning the suitability, accuracy, or fitness of the code for any purpose.
+
+In no event shall the author be liable for any damages whatsoever, including but not limited to direct, indirect, special, incidental, or consequential damages arising out of the use or inability to use the code, even if advised of the possibility of such damage.
+
+\section{Third-Party Code and Dependencies}
+Some code examples or projects may incorporate third-party libraries, frameworks, or code snippets. These third-party components are governed by their respective licenses. We make efforts to properly attribute and comply with the licenses of all third-party code used in our projects.
+
+\section{Academic and Educational Use}
+Educators, students, and academic institutions are encouraged to use our open source code examples for educational purposes. When used in academic work or teaching materials:
+\begin{itemize}
+  \item Please maintain all license and copyright notices
+  \item Provide attribution to krisyotam.com when using examples in teaching materials
+  \item Consider notifying us of educational uses at \href{mailto:code@krisyotam.com}{code@krisyotam.com}
+\end{itemize}
+
+\section{Contributing to Our Code}
+If you wish to contribute improvements or fixes to our open source code:
+\begin{itemize}
+  \item Contributions submitted through GitHub pull requests or other means will be considered to be offered under the same license as the original project
+  \item You confirm that you have the right to submit the contribution under these terms
+  \item Major contributions may be acknowledged in project documentation at our discretion
+\end{itemize}
+
+\section{Changes to Licensing Terms}
+We reserve the right to change the licensing terms for future code releases. However, code already released under a specific license will continue to be available under that license unless otherwise noted.
+
+\section{Contact Information}
+For questions about code licensing, permission requests, or other related inquiries, please contact:
+\begin{quote}
+  Kris Yotam\\
+  \href{mailto:code@krisyotam.com}{code@krisyotam.com}
+\end{quote}
+
+\end{document}

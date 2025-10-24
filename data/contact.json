@@ -1,0 +1,20 @@
+{
+    "Notice": {
+      "message": "I’m not on Telegram, I’m not on Twitter, I’m not on Facebook, I am on Reddit occasionally Quora, and no account anywhere imitating me or any of my 'brands' has any association with me other than fraudulent. Any profile not linked from this site is simply not mine."
+    },
+    "Rules": [
+      {
+        "rule": "Don’t get offended if you don’t get a response. I get a lot of email. I can’t do pen pals."
+      },
+      {
+        "rule": "Don’t contact me about gossip (especially if it’s about me), or conspiracies (use the form)."
+      },
+      {
+        "rule": "Don’t contact me asking me to shill your product unless it is all free software and you have some comprehension of the themes of my blog. It should go without saying that we’re not consumers here."
+      }
+    ],
+    "Blacklist": {
+      "message": "My email server cannot communicate with iCloud or Zoho addresses, so if you have one of these accounts, do not email me there."
+    }
+  }
+  

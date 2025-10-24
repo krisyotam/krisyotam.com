@@ -1,0 +1,5 @@
+You are going to redo my rss feed. It should be at krisyotam.com/rss.xml, but you are going to play around with keeping it updated via js 
+you will create a script that combines entries from 
+app/(content) directories like /blog, /essays, and /papers which are the main content focused directories. And their .json files
+in the respective data directories like data/blog, data/papers, and data/essays. Remember to only add the ones with state active 
+to the rss feed. 

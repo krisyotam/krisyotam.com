@@ -1,0 +1,214 @@
+{
+"categories": 
+[    
+{
+"slug": "on-myself",
+"title": "On Myself",
+"preview": "Personal reflections, introspections, and observations about my thoughts, beliefs, and experiences.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8
+},    
+{
+"slug": "philosophy",
+"title": "Philosophy",
+"preview": "Philosophical musings, ethical considerations, and explorations of fundamental questions about existence and meaning.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 9
+},    
+{
+"slug": "verse",
+"title": "Verse",
+"preview": "Poetry, haiku, and verse forms - explorations in rhythm, meter, and poetic expression.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 6
+},    
+{
+"slug": "culture",
+"title": "Culture",
+"preview": "Cultural observations, critiques, and analyses of society, media, and social phenomena.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 7
+},    
+{
+"slug": "design",
+"title": "Design",
+"preview": "Design principles, aesthetic considerations, and thoughts on simplicity and visual communication.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 7
+},    
+{
+"slug": "health",
+"title": "Health",
+"preview": "Health, fitness, and wellness observations - both physical and mental wellbeing considerations.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8
+},    
+{
+"slug": "lifestyle",
+"title": "Lifestyle",
+"preview": "Daily life observations, routines, and reflections on simple pleasures and lifestyle choices.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
+},    
+{
+"slug": "mathematics",
+"title": "Mathematics",
+"preview": "Mathematical concepts, beauty in mathematics, and explorations of mathematical thinking.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8
+},    
+{
+"slug": "personal",
+"title": "Personal",
+"preview": "Personal growth, learning, and development - reflections on self-improvement and growth.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 7
+},    
+{
+"slug": "libraries",
+"title": "Libraries",
+"preview": "An archive of other people's book collections, reading lists, and personal libraries.",
+"date": "2025-06-01",
+"status": "Finished",
+"confidence": "certain",
+"importance": 10
+},    
+{
+"slug": "film",
+"title": "Film",
+"preview": "analyses, and reflections on cinema as an art form",
+"date": "2025-06-01",
+"status": "Finished",
+"confidence": "certain",
+"importance": 7
+},
+{
+"slug": "spiritual-warfare",
+"title": "Spiritual Warfare",
+"preview": "Reflections on temptation, internal battles, devils real and imagined, and the struggle for clarity and control.",
+"date": "2025-06-23",
+"status": "Finished",
+"confidence": "certain",
+"importance": 9
+},
+{
+"slug": "psychology",
+"title": "Psychology",
+"preview": "Mental models, emotional mechanisms, and investigations into the human mind and behavior.",
+"date": "2025-06-23",
+"status": "Finished",
+"confidence": "certain",
+"importance": 9
+},
+{
+"slug": "close-reading-verse",
+"title": "Close Reading Verse",
+"preview": "Detailed textual analysis, annotations, and interpretive commentary aimed at uncovering nuanced meanings within verse.",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8
+},
+{
+"slug": "close-reading-prose",
+"title": "Close Reading Verse",
+"preview": "Detailed textual analysis, annotations, and interpretive commentary aimed at uncovering nuanced meanings within prose.",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8
+},
+{
+"slug": "lesswrong",
+"title": "LessWrong",
+"preview": "repost of my original lw content, and remarks on lw content I find interesting",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8
+},
+{
+"slug": "thought-experiments",
+"title": "Thought Experiments",
+"preview": "Explorations of hypothetical scenarios, philosophical inquiries, and imaginative exercises in reasoning.",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8
+},
+{
+"slug": "ballet",
+"title": "Ballet",
+"preview": "talks of ballet as an art form, its history, and its cultural significance.",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
+},
+{
+"slug": "reddit",
+"title": "Reddit",
+"preview": "responses to interesting reddit posts, and expansions on my own comments",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
+},
+{
+"slug": "biblical-theology",
+"title": "Biblical Theology",
+"preview": "Biblical studies, exegesis, theology, and reflections on the spiritual, historical, and moral dimensions of biblical texts",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
+},
+{
+"slug": "intelligence",
+"title": "Intelligence",
+"preview": "thoughts on intelligence, its nature, measurement, and implications for understanding the mind.",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 10
+},
+{
+"slug": "kris-yotam",
+"title": "Kris Yotam",
+"preview": "thoughts, meditations, analysis, and elementary takes on myself",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 10
+},
+{
+"slug": "discourse",
+"title": "Discourse",
+"preview": "transcribed conversations, dialogues, and discussions on various topics of interest",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 10
+}
+
+]
+}
+  

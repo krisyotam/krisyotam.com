@@ -1,0 +1,216 @@
+{
+  "papyrus": "Ani",
+  "translation_by": "E. A. Wallis Budge (1895–1913)",
+  "negative_confessions": [
+    {
+      "number": 1,
+      "declaration_en": "I have not done iniquity.",
+      "declaration_original": "<hieroglyph/L1 transliteration>"
+    },
+    {
+      "number": 2,
+      "declaration_en": "I have not robbed with violence.",
+      "declaration_original": "<hieroglyph/L2 transliteration>"
+    },
+    {
+      "number": 3,
+      "declaration_en": "I have not stolen.",
+      "declaration_original": "<hieroglyph/L3 transliteration>"
+    },
+    {
+      "number": 4,
+      "declaration_en": "I have done no murder; I have done no harm.",
+      "declaration_original": "<hieroglyph/L4 transliteration>"
+    },
+    {
+      "number": 5,
+      "declaration_en": "I have not defrauded offerings.",
+      "declaration_original": "<hieroglyph/L5 transliteration>"
+    },
+    {
+      "number": 6,
+      "declaration_en": "I have not minished oblations.",
+      "declaration_original": "<hieroglyph/L6 transliteration>"
+    },
+    {
+      "number": 7,
+      "declaration_en": "I have not plundered the god.",
+      "declaration_original": "<hieroglyph/L7 transliteration>"
+    },
+    {
+      "number": 8,
+      "declaration_en": "I have spoken no lies.",
+      "declaration_original": "<hieroglyph/L8 transliteration>"
+    },
+    {
+      "number": 9,
+      "declaration_en": "I have not snatched away food.",
+      "declaration_original": "<hieroglyph/L9 transliteration>"
+    },
+    {
+      "number": 10,
+      "declaration_en": "I have not caused pain.",
+      "declaration_original": "<hieroglyph/L10 transliteration>"
+    },
+    {
+      "number": 11,
+      "declaration_en": "I have not committed fornication.",
+      "declaration_original": "<hieroglyph/L11 transliteration>"
+    },
+    {
+      "number": 12,
+      "declaration_en": "I have not caused shedding of tears.",
+      "declaration_original": "<hieroglyph/L12 transliteration>"
+    },
+    {
+      "number": 13,
+      "declaration_en": "I have not dealt deceitfully.",
+      "declaration_original": "<hieroglyph/L13 transliteration>"
+    },
+    {
+      "number": 14,
+      "declaration_en": "I have not transgressed.",
+      "declaration_original": "<hieroglyph/L14 transliteration>"
+    },
+    {
+      "number": 15,
+      "declaration_en": "I have not acted guilefully.",
+      "declaration_original": "<hieroglyph/L15 transliteration>"
+    },
+    {
+      "number": 16,
+      "declaration_en": "I have not laid waste the ploughed land.",
+      "declaration_original": "<hieroglyph/L16 transliteration>"
+    },
+    {
+      "number": 17,
+      "declaration_en": "I have not been an eavesdropper.",
+      "declaration_original": "<hieroglyph/L17 transliteration>"
+    },
+    {
+      "number": 18,
+      "declaration_en": "I have not set my lips in motion [against any man].",
+      "declaration_original": "<hieroglyph/L18 transliteration>"
+    },
+    {
+      "number": 19,
+      "declaration_en": "I have not been angry and wrathful except for a just cause.",
+      "declaration_original": "<hieroglyph/L19 transliteration>"
+    },
+    {
+      "number": 20,
+      "declaration_en": "I have not defiled the wife of any man.",
+      "declaration_original": "<hieroglyph/L20 transliteration>"
+    },
+    {
+      "number": 21,
+      "declaration_en": "I have not defiled the wife of any man.",
+      "declaration_original": "<hieroglyph/L21 transliteration>"
+    },
+    {
+      "number": 22,
+      "declaration_en": "I have not polluted myself.",
+      "declaration_original": "<hieroglyph/L22 transliteration>"
+    },
+    {
+      "number": 23,
+      "declaration_en": "I have not caused terror.",
+      "declaration_original": "<hieroglyph/L23 transliteration>"
+    },
+    {
+      "number": 24,
+      "declaration_en": "I have not transgressed [the law].",
+      "declaration_original": "<hieroglyph/L24 transliteration>"
+    },
+    {
+      "number": 25,
+      "declaration_en": "I have not burned with rage.",
+      "declaration_original": "<hieroglyph/L25 transliteration>"
+    },
+    {
+      "number": 26,
+      "declaration_en": "I have not stopped my ears against the words of Right and Truth.",
+      "declaration_original": "<hieroglyph/L26 transliteration>"
+    },
+    {
+      "number": 27,
+      "declaration_en": "I have not worked grief.",
+      "declaration_original": "<hieroglyph/L27 transliteration>"
+    },
+    {
+      "number": 28,
+      "declaration_en": "I have not acted with insolence.",
+      "declaration_original": "<hieroglyph/L28 transliteration>"
+    },
+    {
+      "number": 29,
+      "declaration_en": "I have not stirred up strife.",
+      "declaration_original": "<hieroglyph/L29 transliteration>"
+    },
+    {
+      "number": 30,
+      "declaration_en": "I have not judged hastily.",
+      "declaration_original": "<hieroglyph/L30 transliteration>"
+    },
+    {
+      "number": 31,
+      "declaration_en": "I have not been an eavesdropper.",
+      "declaration_original": "<hieroglyph/L31 transliteration>"
+    },
+    {
+      "number": 32,
+      "declaration_en": "I have not multiplied words exceedingly.",
+      "declaration_original": "<hieroglyph/L32 transliteration>"
+    },
+    {
+      "number": 33,
+      "declaration_en": "I have done neither harm nor ill.",
+      "declaration_original": "<hieroglyph/L33 transliteration>"
+    },
+    {
+      "number": 34,
+      "declaration_en": "I have never cursed the king.",
+      "declaration_original": "<hieroglyph/L34 transliteration>"
+    },
+    {
+      "number": 35,
+      "declaration_en": "I have never fouled the water.",
+      "declaration_original": "<hieroglyph/L35 transliteration>"
+    },
+    {
+      "number": 36,
+      "declaration_en": "I have not spoken scornfully.",
+      "declaration_original": "<hieroglyph/L36 transliteration>"
+    },
+    {
+      "number": 37,
+      "declaration_en": "I have never cursed God.",
+      "declaration_original": "<hieroglyph/L37 transliteration>"
+    },
+    {
+      "number": 38,
+      "declaration_en": "I have not stolen.",
+      "declaration_original": "<hieroglyph/L38 transliteration>"
+    },
+    {
+      "number": 39,
+      "declaration_en": "I have not defrauded the offerings of the gods.",
+      "declaration_original": "<hieroglyph/L39 transliteration>"
+    },
+    {
+      "number": 40,
+      "declaration_en": "I have not plundered the offerings to the blessed dead.",
+      "declaration_original": "<hieroglyph/L40 transliteration>"
+    },
+    {
+      "number": 41,
+      "declaration_en": "I have not filched the food of the infant, neither have I sinned against the god of my native town.",
+      "declaration_original": "<hieroglyph/L41 transliteration>"
+    },
+    {
+      "number": 42,
+      "declaration_en": "I have not slaughtered with evil intent the cattle of the god.",
+      "declaration_original": "<hieroglyph/L42 transliteration>"
+    }
+  ]
+}

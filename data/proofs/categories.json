@@ -1,0 +1,154 @@
+{
+  "categories": [
+    {
+      "slug": "number-theory",
+      "title": "Number Theory",
+      "preview": "Proofs involving integers, divisibility, prime numbers, modular arithmetic, and Diophantine equations",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 10
+    },
+    {
+      "slug": "euclidean-geometry",
+      "title": "Euclidean Geometry",
+      "preview": "Classical geometric proofs involving lines, angles, triangles, and circles based on Euclid's axioms",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "algebra",
+      "title": "Algebra",
+      "preview": "Proofs covering equations, polynomials, inequalities, and abstract algebra topics",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "real-analysis",
+      "title": "Real Analysis",
+      "preview": "Proofs in limits, continuity, differentiability, integrability, and sequences of real-valued functions",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 10
+    },
+    {
+      "slug": "complex-analysis",
+      "title": "Complex Analysis",
+      "preview": "Proofs involving holomorphic functions, contour integrals, residues, and the complex plane",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "set-theory",
+      "title": "Set Theory",
+      "preview": "Proofs about sets, cardinalities, ordinals, and foundational principles of mathematics",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "logic",
+      "title": "Logic",
+      "preview": "Formal logical proofs including propositional logic, predicate logic, and proof systems",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "combinatorics",
+      "title": "Combinatorics",
+      "preview": "Counting arguments, pigeonhole principle, graph theory, and bijective proofs",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "topology",
+      "title": "Topology",
+      "preview": "Proofs involving continuity, compactness, connectedness, and topological spaces",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "linear-algebra",
+      "title": "Linear Algebra",
+      "preview": "Proofs involving vector spaces, linear maps, eigenvalues, and matrix theory",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "differential-geometry",
+      "title": "Differential Geometry",
+      "preview": "Proofs involving manifolds, curvature, geodesics, and Riemannian metrics",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 8
+    },
+    {
+      "slug": "discrete-mathematics",
+      "title": "Discrete Mathematics",
+      "preview": "Proofs in logic, set theory, algorithms, relations, and discrete structures",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 7
+    },
+    {
+      "slug": "category-theory",
+      "title": "Category Theory",
+      "preview": "Proofs involving objects, morphisms, functors, natural transformations, and limits",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 6
+    },
+    {
+      "slug": "mathematical-logic",
+      "title": "Mathematical Logic",
+      "preview": "Meta-mathematical proofs including Gödel's incompleteness theorems and model theory",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 9
+    },
+    {
+      "slug": "mathematical-physics",
+      "title": "Mathematical Physics",
+      "preview": "Proofs in areas of quantum mechanics, relativity, and field theory formalized mathematically",
+      "date": "2025-06-18",
+      "show-status": "active",
+      "status": "In Progress",
+      "confidence": "certain",
+      "importance": 7
+    }
+  ]
+}

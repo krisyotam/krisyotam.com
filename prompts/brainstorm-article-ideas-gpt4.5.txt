@@ -1,0 +1,95 @@
+**************************************************
+* Author: Kris Yotam
+* Date: 2025-04-23
+* Title: Brainstorm Article Ideas
+* Model: GPT-4.5
+* Description:
+*   A prompt designed to generate a highly 
+*   curated list of blog post ideas rooted in intellectual 
+*   depth, narrative precision, and thematic clarity. 
+*   Each output is tailored to reflect a distinct identity, 
+*   writing style, and audience, based on detailed arrays.
+* Contact: krisyotam@protonmail.com
+* Copyright (c) Kris Yotam 2025. All rights reserved.
+**************************************************
+
+<Identity>
+Identity: I am an Independent Researcher, a Contemporary Polymath, and a multi-PhD scholar. I possess deep expertise in human psychology, classical philosophy, 
+rhetoric, and persuasion. I treat writing as a tool of precision. Blog posts are not generic guides, but stories that orbit a tightly defined narrative—akin to 
+Zettelkasten notes.
+
+For example, instead of writing “A Beginner's Guide to Writing Iambic Pentameter,” I would write “Detecting ictus and syllable-weight variation in Shakespeare’s 
+Sonnet 18.” This specific focus demands clarity of thought and concentrated research. Each post stands as a discrete intellectual artifact.
+</Identity>
+
+<Description>
+Types of Posts  
+{Insert Array 1}
+
+My blog is centered around the themes of  
+{Insert Array 2}
+
+My writing style can best be described as  
+{Insert Array 3}
+
+My target readability level for each type is  
+{Insert Array 4}
+
+My primary audience is  
+{Insert Array 5}
+
+My intended tone and voice is  
+{Insert Array 6}
+
+The emotional/intellectual outcome I aim for with my writing is  
+{Insert Array 7}
+
+Each post should follow SEO best practices. Please focus on  
+{Insert Array 8}
+
+Each blog post should be approximately  
+{Insert Array 9}
+</Description>
+
+
+<Instruction>
+  **What you should generate:**  
+From this information, you should generate a comprehensive list of blog post ideas that adhere to the identity and constraints above. The output should be presented 
+as a table with the following columns:
+
+- **Post Title**: Concise, specific, and intellectually compelling  
+- **Post Type**: Must match one from Array 1  
+- **Theme**: Should relate to a theme from Array 2  
+- **Style & Voice**: Reflect the tone/style from Arrays 3 & 6  
+- **Target Audience**: Pulled from Array 5  
+- **Description**: A 1–2 sentence explanation of the post’s aim, argument, or narrative arc
+
+You should generate at least 20–30 ideas per batch. All ideas must be high-level, original, and tailored to the polymathic, elite readership described.
+</Instruction>
+
+
+Array 1: "Expository", "Descriptive", "Narrative", "Persuasive", "How-To", "Listicle", "Opinion", "Case Study", "Review", "News", "Round-Up", "Interview", 
+"Pillar", "Thought-Leadership", "Personal", "FAQ", "Comparison", "Debunking"
+
+Array 2: "Mathematics", "Philosophy", "Literature", "Biblical Scholarship", "Film & Anime Analysis", "History (East & West)", "Poetry & Rhetoric", "Esoterica", 
+"Education Reform", "Artificial Intelligence", "Conspiracies", "Cybersecurity", "Architecture", "Self-Improvement", "Fictional Worldbuilding", "Study Methodologies"
+
+Array 3: "Minimalist", "Intellectual", "Analytical", "Narrative-Driven", "Elitist and Highbrow", "Scholarly yet Poetic", "Meticulous and Structured"
+
+Array 4: "Expository: Grade 9", "Descriptive: Grade 7", "Narrative: Grade 8", "Persuasive: Grade 10", "How-To: Grade 6", "Listicle: Grade 5", "Opinion: Grade 10", 
+"Case Study: Grade 12", "Review: Grade 11", "News: Grade 9", "Round-Up: Grade 10", "Interview: Grade 11", "Pillar: Grade 12", "Thought-Leadership: Grade 12", 
+"Personal: Grade 8", "FAQ: Grade 6", "Comparison: Grade 9", "Debunking: Grade 11"
+
+Array 5: "Graduate Students", "Independent Thinkers", "Academics", "Researchers", "Deep Generalists", "Intellectual Enthusiasts", "Philosophy-Literate Readers", 
+"Critical Thinkers"
+
+Array 6: "Authoritative but Warm", "Conversational yet Scholarly", "Precise and Elevated", "Reflective and Intimate", "Cold and Technical when Necessary", 
+"Visionary and Esoteric"
+
+Array 7: "Spark epiphanies", "Encourage intellectual rigor", "Invite re-examination of dogma", "Deliver practical clarity", "Instill fascination and curiosity", 
+"Foster historical awareness", "Trigger scholarly debate"
+
+Array 8: "Semantic keyword integration", "Structured data (Schema.org)", "Interlink with internal posts", "Use of heading hierarchy", "Meta description crafting", 
+"Clear CTA at end of post"
+
+Array 9: "800–1,200 words (Concise)", "1,500–2,000 words (Standard)", "2,500–3,500 words (Deep Dive)", "Variable depending on subject complexity"

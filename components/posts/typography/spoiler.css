@@ -1,0 +1,28 @@
+/* Spoiler.css */
+
+.spoiler {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+    line-height: inherit;
+  }
+  
+  .spoiler::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #000;       /* fully opaque black */
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+    z-index: 2;             /* sit on top of the text */
+  }
+  
+  .spoiler:hover::before {
+    opacity: 0;             /* reveal on hover */
+  }
+  
+  /* you no longer need to push text above the overlay */
+  .spoiler > * {
+    position: relative;
+    z-index: 1;             /* underneath the ::before */
+  }

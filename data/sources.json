@@ -1,0 +1,165 @@
+{
+  "sources": [
+    {
+      "from": "alex.chen@gmail.com",
+      "content": "I've been following your work on functional programming and it's been incredibly helpful. Have you considered writing about monads in a way that's accessible to beginners? I think there's a real gap in the literature there.",
+      "date": "2025-03-15",
+      "link": "/post/functional-programming-basics",
+      "type": "email",
+      "profileLink": "mailto:alex.chen@gmail.com"
+    },
+    {
+      "from": "sarah_developer",
+      "content": "Your article on React performance optimizations changed how I approach component rendering. I implemented the techniques you suggested and saw a 40% improvement in our app's load time!",
+      "date": "2025-03-10",
+      "link": "/post/react-performance-deep-dive",
+      "type": "twitter",
+      "profileLink": "https://twitter.com/sarah_developer"
+    },
+    {
+      "from": "tech_enthusiast42",
+      "content": "I've been struggling with understanding closures in JavaScript for months. Your explanation with the backpack analogy finally made it click for me. Would love to see more content like this that breaks down complex concepts into simple mental models.",
+      "date": "2025-03-05",
+      "link": "/post/javascript-closures-explained",
+      "type": "reddit",
+      "profileLink": "https://reddit.com/user/tech_enthusiast42"
+    },
+    {
+      "from": "maria.lopez@outlook.com",
+      "content": "Your book recommendations have been spot on. I just finished 'Gödel, Escher, Bach' on your suggestion and it's completely changed how I think about consciousness and AI. Do you have any other recommendations in this vein?",
+      "date": "2025-02-28",
+      "link": "/post/books-that-changed-my-thinking",
+      "type": "email",
+      "profileLink": "mailto:maria.lopez@outlook.com"
+    },
+    {
+      "from": "code_ninja",
+      "content": "I implemented your approach to state management in our enterprise app and it's been a game-changer. The separation of concerns you advocated for made our codebase so much more maintainable. Our team wants to know if you'd be open to a consulting session?",
+      "date": "2025-02-20",
+      "link": "/post/scalable-state-management",
+      "type": "linkedin",
+      "profileLink": "https://linkedin.com/in/code_ninja"
+    },
+    {
+      "from": "philosophy_student",
+      "content": "Your essay on the intersection of Eastern philosophy and modern physics was fascinating. I'm writing my thesis on a related topic and would love to cite your work. Do you have any academic publications in this area?",
+      "date": "2025-02-15",
+      "link": "/post/eastern-philosophy-meets-quantum-physics",
+      "type": "instagram",
+      "profileLink": "https://instagram.com/philosophy_student"
+    },
+    {
+      "from": "david.wilson@protonmail.com",
+      "content": "I've been following your journey into minimalism and it inspired me to declutter my digital life. I deleted over 15,000 emails and dozens of unused apps. The mental clarity I've gained is remarkable. Thank you for sharing your experience.",
+      "date": "2025-02-10",
+      "link": "/post/digital-minimalism",
+      "type": "email",
+      "profileLink": "mailto:david.wilson@protonmail.com"
+    },
+    {
+      "from": "startup_founder",
+      "content": "Your framework for validating business ideas saved me from making a huge mistake. I was about to invest heavily in an idea that, after using your validation process, clearly wasn't going to work. You saved me thousands of dollars and months of effort.",
+      "date": "2025-02-05",
+      "link": "/post/idea-validation-framework",
+      "type": "twitter",
+      "profileLink": "https://twitter.com/startup_founder"
+    },
+    {
+      "from": "machine_learning_enthusiast",
+      "content": "I've been trying to understand transformers architecture for weeks, and your breakdown with the visual explanations finally made it click. The way you explained attention mechanisms was particularly helpful. Would you consider doing a deep dive on BERT specifically?",
+      "date": "2025-01-30",
+      "link": "/post/transformers-explained-simply",
+      "type": "reddit",
+      "profileLink": "https://reddit.com/user/machine_learning_enthusiast"
+    },
+    {
+      "from": "emma.johnson@gmail.com",
+      "content": "Your writing on building a second brain has transformed my productivity. I've implemented your note-taking system and for the first time in my life, I feel like I'm actually learning from what I read rather than just consuming information.",
+      "date": "2025-01-25",
+      "link": "/post/building-a-second-brain",
+      "type": "email",
+      "profileLink": "mailto:emma.johnson@gmail.com"
+    },
+    {
+      "from": "design_thinker",
+      "content": "I used your design thinking workshop format with my team last week and it was incredibly productive. We generated more innovative ideas in 3 hours than we had in the previous 3 months. The constraint exercises were particularly effective.",
+      "date": "2025-01-20",
+      "link": "/post/design-thinking-workshops",
+      "type": "linkedin",
+      "profileLink": "https://linkedin.com/in/design_thinker"
+    },
+    {
+      "from": "meditation_practitioner",
+      "content": "Your guide to mindfulness for knowledge workers has been a daily reference for me. The 5-minute desk meditation you shared has become an essential part of my workday. I'm noticing significant improvements in my focus and stress levels.",
+      "date": "2025-01-15",
+      "link": "/post/mindfulness-for-knowledge-workers",
+      "type": "instagram",
+      "profileLink": "https://instagram.com/meditation_practitioner"
+    },
+    {
+      "from": "james.smith@outlook.com",
+      "content": "I've been struggling with impostor syndrome throughout my tech career. Your article on the subject made me realize I'm not alone and gave me practical strategies to overcome these feelings. I've started keeping a 'wins' journal as you suggested.",
+      "date": "2025-01-10",
+      "link": "/post/overcoming-impostor-syndrome",
+      "type": "email",
+      "profileLink": "mailto:james.smith@outlook.com"
+    },
+    {
+      "from": "crypto_researcher",
+      "content": "Your analysis of zero-knowledge proofs and their potential applications beyond cryptocurrency was eye-opening. I'm researching privacy-preserving technologies and would love to discuss some ideas with you if you're open to it.",
+      "date": "2025-01-05",
+      "link": "/post/zero-knowledge-proofs-explained",
+      "type": "twitter",
+      "profileLink": "https://twitter.com/crypto_researcher"
+    },
+    {
+      "from": "future_thinker",
+      "content": "Your essay on technological determinism vs. social constructivism gave me a new framework for thinking about how technology shapes society. I'm teaching a course on tech ethics next semester and plan to assign your piece as required reading.",
+      "date": "2024-12-30",
+      "link": "/post/how-technology-shapes-society",
+      "type": "reddit",
+      "profileLink": "https://reddit.com/user/future_thinker"
+    },
+    {
+      "from": "sophia.garcia@gmail.com",
+      "content": "I implemented your spaced repetition learning system for my medical studies, and it's been transformative. I'm retaining information much better and spending less time reviewing. Would you consider creating an app based on your methodology?",
+      "date": "2024-12-25",
+      "link": "/post/spaced-repetition-learning",
+      "type": "email",
+      "profileLink": "mailto:sophia.garcia@gmail.com"
+    },
+    {
+      "from": "systems_architect",
+      "content": "Your breakdown of microservices vs. monoliths was the most balanced take I've read. We were about to break up our monolith based on hype, but your article helped us make a more nuanced decision that saved us from unnecessary complexity.",
+      "date": "2024-12-20",
+      "link": "/post/microservices-vs-monoliths",
+      "type": "linkedin",
+      "profileLink": "https://linkedin.com/in/systems_architect"
+    },
+    {
+      "from": "creative_coder",
+      "content": "Your generative art tutorials inspired me to combine coding with my artistic practice. I created a series based on your noise function techniques and just got accepted to my first digital art exhibition. Thank you for opening this door for me!",
+      "date": "2024-12-15",
+      "link": "/post/creative-coding-generative-art",
+      "type": "instagram",
+      "profileLink": "https://instagram.com/creative_coder"
+    },
+    {
+      "from": "thomas.nguyen@protonmail.com",
+      "content": "Your writing on digital gardens vs. traditional blogs influenced me to start my own digital garden. The freedom to publish evolving thoughts rather than polished articles has reignited my love for writing. I've published more in the last month than in the previous year.",
+      "date": "2024-12-10",
+      "link": "/post/digital-gardens",
+      "type": "email",
+      "profileLink": "mailto:thomas.nguyen@protonmail.com"
+    },
+    {
+      "from": "remote_work_advocate",
+      "content": "I used your remote team communication framework to revamp how our globally distributed team works together. The asynchronous-first principles and documentation practices you outlined have significantly reduced our meeting load while improving collaboration.",
+      "date": "2024-12-05",
+      "link": "/post/remote-team-communication",
+      "type": "twitter",
+      "profileLink": "https://twitter.com/remote_work_advocate"
+    }
+  ]
+}
+

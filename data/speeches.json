@@ -1,0 +1,73 @@
+[
+  {
+    "id": "1",
+    "img": "/images/speech_taoism.jpg",
+    "name": "The Way of Tao",
+    "date": "2024-01-08",
+    "title": "Embracing the Flow: Taoist Wisdom for Modern Life",
+    "subtitle": "Harmonizing with nature's rhythms in a fast-paced world",
+    "authors": "Kris Yotam",
+    "description": "This speech explores the fundamental principles of Taoism and their relevance in navigating the complexities of modern existence, offering insights on finding balance, embracing change, and living in harmony with the natural world.",
+    "category": "Eastern Philosophy",
+    "tags": ["Taoism", "Balance", "Harmony"],
+    "speech_pdf": "/data/src/speeches/way_of_tao.pdf",
+    "speech_docx": "/data/src/speeches/way_of_tao.docx"
+  },
+  {
+    "id": "2",
+    "img": "/images/speech_critical_thinking.jpg",
+    "name": "The Art of Reason",
+    "date": "2024-02-22",
+    "title": "Sharpening the Mind: Critical Thinking in the Information Age",
+    "subtitle": "Developing analytical skills for navigating a complex world",
+    "authors": "Kris Yotam",
+    "description": "This presentation focuses on the importance of critical thinking skills in the modern information age, providing strategies for analyzing arguments, detecting fallacies, and making informed decisions in both personal and professional contexts.",
+    "category": "Philosophy of Mind",
+    "tags": ["Critical Thinking", "Logic", "Decision Making"],
+    "speech_pdf": "/data/src/speeches/art_of_reason.pdf",
+    "speech_docx": "/data/src/speeches/art_of_reason.docx"
+  },
+  {
+    "id": "3",
+    "img": "/images/speech_aesthetics.jpg",
+    "name": "Beauty and Meaning",
+    "date": "2024-03-12",
+    "title": "The Philosophy of Aesthetics: Understanding Beauty and Art",
+    "subtitle": "Exploring the nature of aesthetic experience and artistic value",
+    "authors": "Kris Yotam",
+    "description": "This speech delves into the philosophy of aesthetics, examining theories of beauty, the nature of artistic expression, and the role of art in human culture and individual experience.",
+    "category": "Aesthetics",
+    "tags": ["Art", "Beauty", "Cultural Analysis"],
+    "speech_pdf": "/data/src/speeches/philosophy_of_aesthetics.pdf",
+    "speech_docx": "/data/src/speeches/philosophy_of_aesthetics.docx"
+  },
+  {
+    "id": "4",
+    "img": "/images/speech_creative_writing.jpg",
+    "name": "Crafting Worlds with Words",
+    "date": "2024-04-05",
+    "title": "The Alchemy of Creative Writing: Turning Imagination into Art",
+    "subtitle": "Techniques and inspiration for aspiring writers",
+    "authors": "Kris Yotam",
+    "description": "This speech explores the creative writing process, offering insights into character development, world-building, and narrative structure. It aims to inspire and guide aspiring writers in honing their craft and finding their unique voice.",
+    "category": "Writing",
+    "tags": ["Creative Writing", "Storytelling", "Literary Craft"],
+    "speech_pdf": "/data/src/speeches/creative_writing_alchemy.pdf",
+    "speech_docx": "/data/src/speeches/creative_writing_alchemy.docx"
+  },
+  {
+    "id": "5",
+    "img": "/images/speech_ethics.jpg",
+    "name": "Moral Landscapes",
+    "date": "2024-05-20",
+    "title": "Navigating Ethical Dilemmas in a Complex World",
+    "subtitle": "Applying philosophical frameworks to real-world ethical challenges",
+    "authors": "Kris Yotam",
+    "description": "This presentation examines various ethical frameworks and their application to contemporary moral dilemmas, encouraging critical thinking about issues such as AI ethics, environmental responsibility, and social justice.",
+    "category": "Ethics",
+    "tags": ["Moral Philosophy", "Applied Ethics", "Social Responsibility"],
+    "speech_pdf": "/data/src/speeches/navigating_ethics.pdf",
+    "speech_docx": "/data/src/speeches/navigating_ethics.docx"
+  }
+]
+

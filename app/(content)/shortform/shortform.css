@@ -1,0 +1,349 @@
+/* shortform.css ─ styles are applied ONLY inside `.shortform-content` */
+
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
+
+/* root wrapper ----------------------------------------------------------- */
+.shortform-content {
+  font-family: "Source Serif 4", Baskerville, "Libre Baskerville",
+    "Droid Serif", "Times New Roman", Times, serif, "Noto Emoji", Quivira;
+  font-size: 14px;
+  line-height: 1.5;
+  color: inherit;
+  hyphens: auto;
+}
+
+/* headings --------------------------------------------------------------- */
+/* NOTE: No margin or padding overrides, so default Markdown/browser spacing remains */
+.shortform-content h1,
+.shortform-content h2,
+.shortform-content h3 {
+  font: 600 1rem/1.2 inherit;
+  letter-spacing: -0.01em;
+  border-bottom: 1px dotted currentColor; /* dotted underline only */
+  color: inherit;
+  scroll-margin-top: 5rem;
+}
+
+.shortform-content h1 {
+  font-size: 22px;
+}
+
+.shortform-content h2 {
+  font-size: 18px;
+}
+
+.shortform-content h3 {
+  font-size: 16px;
+  border-bottom-color: rgba(0, 0, 0, 0.4);
+}
+
+.shortform-content h4 {
+  font: 600 1rem/1.2 inherit;
+  letter-spacing: -0.01em;
+  font-size: 15px;
+  border: none;    /* no underline on h4 */
+  color: inherit;
+  scroll-margin-top: 5rem;
+}
+
+/* prose blocks ----------------------------------------------------------- */
+/* Remove all paragraph margins and padding */
+.shortform-content p {
+  text-align: justify;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Fix for empty paragraphs used for intentional spacing in markdown */
+.shortform-content p:empty {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+}
+
+/* blockquote retains minimal spacing as defined */
+.shortform-content blockquote {
+  margin: 0.5rem 0;
+  padding: 0.5rem 1.5rem;
+  font-style: italic;
+  border-left: 3px solid rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* links ------------------------------------------------------------------ */
+.shortform-content a {
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px dotted #666;
+  transition: border-color 0.2s ease;
+}
+
+.shortform-content a:hover {
+  border-bottom-color: #000;
+}
+
+/* lists ------------------------------------------------------------------ */
+/* Allow default list indent and spacing; no margin reset */
+.shortform-content ul,
+.shortform-content ol {
+  padding-left: 1.25rem;
+}
+
+.shortform-content li {
+  line-height: 1.4;
+}
+
+/* Fix for h4 + list spacing */
+.shortform-content h4 + ul,
+.shortform-content h4 + ol {
+  margin-top: 0;   /* prevent extra top margin if browser applies any */
+}
+
+/* Fix for h4 + paragraph + list sequence */
+.shortform-content h4 + p + ul,
+.shortform-content h4 + p + ol {
+  margin-top: 0;
+}
+
+.shortform-content li + li {
+  margin-top: 0.05rem; /* minimal gap between items */
+}
+
+.shortform-content li > ul,
+.shortform-content li > ol {
+  margin-top: 0.05rem;
+  margin-bottom: 0.05rem;
+}
+
+/* code ------------------------------------------------------------------- */
+/* Only apply to inline code, not code blocks */
+.shortform-content :not(pre) > code {
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+/* Only style regular pre blocks, not the syntax highlighter ones */
+.shortform-content pre:not(.code-block):not(.react-syntax-highlighter-line-number) {
+  margin: 0.5rem 0; /* small gap above/below code blocks */
+  padding: 0.75rem;
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* Safe base styling for all pre/code elements regardless of specific classes */
+.shortform-content pre,
+.shortform-content code {
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Fallback for when the .code-block class isn't applied by the renderer */
+.shortform-content pre:not(.code-block) > code {
+  background: rgba(0, 0, 0, 0.03);
+  display: block;
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 0.75rem;
+}
+
+/* Comprehensive fix for code blocks to address layering issues */
+
+/* Main code block container - exact match to Box component */
+.shortform-content .code-block,
+.shortform-content pre.code-block {
+  margin: 1.5rem 0; /* Match Box my-6 */
+  width: 100%;
+  padding: 1.5rem; /* Exact match to p-6 from Box component */
+  background-color: hsl(var(--muted)/50%); /* Exact match to bg-muted/50 */
+  border-radius: 0; /* Exact match to rounded-none */
+  overflow: auto;
+  position: relative;
+  border: none;
+  box-shadow: none;
+}
+
+/* Remove outline from code blocks */
+.shortform-content .code-block,
+.shortform-content pre.code-block {
+  outline: none;
+}
+
+/* Dark mode background override to match Box */
+.dark .shortform-content .code-block,
+.dark .shortform-content pre.code-block {
+  background-color: hsl(var(--popover)); /* Exact match to Box dark:bg-[hsl(var(--popover))] */
+}
+
+/* Code block wrapper (if used) */
+.shortform-content .code-block-wrapper {
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+/* Reset all inner elements to prevent layering */
+.shortform-content .code-block *,
+.shortform-content pre.code-block *,
+.shortform-content .code-block pre,
+.shortform-content .code-block code,
+.shortform-content .code-block .syntax-line {
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Target react-syntax-highlighter container */
+.shortform-content .code-container {
+  max-height: none; /* Remove max-height limitation */
+  overflow: auto;
+  width: 100%;
+  display: block; /* Ensure proper block display */
+}
+
+/* Handle line numbers - removed vertical bars */
+.shortform-content .react-syntax-highlighter-line-number,
+.shortform-content span[class*="linenumber"] {
+  min-width: 3em;
+  padding-right: 1em;
+  margin-right: 1em;
+  text-align: right;
+  border-right: none !important; /* explicitly remove vertical bar */
+  color: rgba(127, 127, 127, 0.6);
+  user-select: none;
+  position: static !important; /* ensure position is static to scroll with code */
+  display: inline-block;
+  font-size: 0.8em;
+}
+
+/* Fix for line number scrolling with code */
+.shortform-content .syntax-line {
+  display: flex !important; /* Ensure line is displayed as flex */
+  width: 100% !important;
+  align-items: flex-start !important;
+  min-height: 1.5em !important;
+}
+
+/* Ensure code blocks scroll correctly */
+.shortform-content .code-block .code-container::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+/* tables ----------------------------------------------------------------- */
+/* Retain default table spacing around and inside; only adjust styling */
+.shortform-content table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-size: 0.9em !important;
+  line-height: 1.4 !important;
+  table-layout: fixed !important;
+  margin: 0.75rem 0; /* small gap above/below tables */
+}
+
+.shortform-content thead {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+.shortform-content th,
+.shortform-content td {
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  padding: 0.5rem !important;
+}
+
+.shortform-content th {
+  background: rgba(0, 0, 0, 0.03) !important;
+  font-weight: 600 !important;
+}
+
+/* table wrapper for responsive tables */
+.shortform-content .table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0.75rem 0; /* small gap above/below wrapper */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+/* images ----------------------------------------------------------------- */
+.shortform-content img:not([data-enhanced]) {
+  display: block;
+  max-width: 100%;
+  margin: auto; /* small vertical gap around images */
+}
+
+.shortform-content figure {
+  margin: 0.5rem 0;    /* small gap above/below figures */
+}
+
+.shortform-content figcaption {
+  font-size: 0.85em;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.7);
+  margin-top: 0.25rem;
+}
+
+/* horizontal rule -------------------------------------------------------- */
+.shortform-content hr {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  margin: 1rem 0;      /* small gap above/below */
+}
+
+/* definition lists ------------------------------------------------------- */
+.shortform-content dl {
+  margin: 0.5rem 0 0.75rem; /* small gap around definitions */
+}
+
+.shortform-content dt {
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.shortform-content dd {
+  margin-left: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* task lists ------------------------------------------------------------- */
+.shortform-content input[type="checkbox"] {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+/* footnotes -------------------------------------------------------------- */
+.shortform-content .footnotes {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 1.5rem;
+  padding-top: 0.75rem;
+  font-size: 0.9em;
+}
+
+.shortform-content .footnotes ol {
+  margin-left: 1rem;
+}
+
+.shortform-content .footnotes li {
+  margin-bottom: 0.25rem;
+}
+
+.shortform-content .footnote-ref {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.shortform-content .footnote-backref {
+  font-size: 0.8em;
+  text-decoration: none;
+}

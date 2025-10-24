@@ -1,0 +1,472 @@
+{
+"categories": [
+{
+"slug": "on-myself",
+"title": "On Myself",
+"preview": "Personal reflections, introspections, and observations about my thoughts, beliefs, and experiences.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8
+},
+{
+"slug": "short-stories",
+"title": "Short Stories",
+"preview": "A collection of short fictional works—spanning surreal dialogues, allegorical dramas, speculative scenes, and psychological sketches. These are not by me, but gathered as part of my broader interest in narrative form, structure, and experimental fiction.",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 2
+},
+{
+"slug": "philosophy",
+"title": "Philosophy",
+"preview": "Philosophical musings, ethical considerations, and explorations of fundamental questions about existence and meaning.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 9
+},
+{
+"slug": "verse",
+"title": "Verse",
+"preview": "Poetry, haiku, and verse forms - explorations in rhythm, meter, and poetic expression.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "culture",
+"title": "Culture",
+"preview": "Cultural observations, critiques, and analyses of society, media, and social phenomena.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 7
+},
+{
+"slug": "design",
+"title": "Design",
+"preview": "Design principles, aesthetic considerations, and thoughts on simplicity and visual communication.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 7
+},
+{
+"slug": "health",
+"title": "Health",
+"preview": "Health, fitness, and wellness observations - both physical and mental wellbeing considerations.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8
+},
+{
+"slug": "lifestyle",
+"title": "Lifestyle",
+"preview": "Daily life observations, routines, and reflections on simple pleasures and lifestyle choices.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
+},
+{
+"slug": "mathematics",
+"title": "Mathematics",
+"preview": "Mathematical concepts, beauty in mathematics, and explorations of mathematical thinking.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 8
+},
+{
+"slug": "physics",
+"title": "Physics",
+"preview": "Fundamental principles, theories, and concepts in physics.",
+"date": "2025-05-31",
+"status": "Finished",
+"confidence": "certain",
+"importance": 7
+},
+{
+"slug": "libraries",
+"title": "Libraries",
+"preview": "An archive of other people's book collections, reading lists, and personal libraries.",
+"date": "2025-06-01",
+"status": "Finished",
+"confidence": "certain",
+"importance": 10
+},
+{
+"slug": "film-reviews",
+"title": "Film Reviews",
+"preview": "A compilation of my film reviews.",
+"date": "2025-06-01",
+"status": "Finished",
+"confidence": "certain",
+"importance": 7
+},
+{
+"slug": "bounties",
+"title": "Bounties",
+"preview": "Things I pay people for if they find—bugs, issues, rare books, vulnerabilities, or helpful content.",
+"date": "2025-06-03",
+"status": "Finished",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "website",
+"title": "Website",
+"preview": "site ideals, design, architecture, and other technical details about this website",
+"date": "2025-06-03",
+"status": "Finished",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "random",
+"title": "Random",
+"preview": "a cabinet of anomalies, axioms, open questions, failed frameworks, cursed knowledge, conspiracies, and fragments of thought I don't know where else to put",
+"date": "2025-06-04",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 8
+},
+{
+"slug": "stable-syllabi",
+"title": "Stable Syllabi",
+"preview": "long-term stable syllabi for learning complex fields",
+"date": "2025-06-04",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 9
+},
+{
+"slug": "simple-syllabi",
+"title": "Simple Syllabi",
+"preview": "lists of things you ought to know",
+"date": "2025-06-04",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 7
+},
+{
+"slug": "laels-systems",
+"title": "Lael’s Systems",
+"preview": "I like to create frameworks, I list them here",
+"date": "2025-06-04",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 4
+},
+{
+"slug": "virtual-worlds",
+"title": "Virtual Worlds",
+"preview": "notes on avatar-based social spaces like Gaia Online and WorldsChat",
+"date": "2025-06-10",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 5
+},
+{
+"slug": "hypertext-games",
+"title": "Hypertext Games",
+"preview": "notes on nonlinear, choice-driven browser games and interactive fiction",
+"date": "2025-06-10",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "mathematics",
+"title": "Mathematics",
+"preview": "general notes on mathematics, formulas, concepts, puzzles",
+"date": "2025-06-10",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "hack-the-box",
+"title": "HackTheBox",
+"preview": "write ups for HackTheBox CTFs, Machines, and CERTs",
+"date": "2025-06-10",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "try-hack-me",
+"title": "Try Hack Me",
+"preview": "write ups for TryHackMe CTFs, Rooms, and CERTs",
+"date": "2025-06-10",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "gaming",
+"title": "Gaming",
+"preview": "notes on my personal gaming experiences, strategies, and stats",
+"date": "2025-06-10",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "fraternities",
+"title": "Fraternities",
+"preview": "notes on fraternities, their contributions, culture, and impact",
+"date": "2025-06-10",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "sororities",
+"title": "Sororities",
+"preview": "notes on sororities, their contributions, culture, and impact",
+"date": "2025-06-10",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "social-media",
+"title": "Social Media",
+"preview": "notes on social media platforms, their history, my involvement",
+"date": "2025-06-10",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "artificial-intelligence",
+"title": "Artificial Intelligence",
+"preview": "notes on ai projects that don't fit into a specific category such as llms, image generation, and other specific ai tools",
+"date": "2025-06-10",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 10
+},
+{
+"slug": "aops",
+"title": "Art of Problem Solving",
+"preview": "life updates, exposition, and notes on the art of problem solving",
+"date": "2025-06-10",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "manuals-of-style",
+"title": "Manuals of Style",
+"preview": "Documentation of krisyotam.com writing conventions for essays and code",
+"date": "2025-06-10",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 0
+},
+{
+"slug": "internet-archive",
+"title": "Internet Archiving",
+"preview": "Notes on web archiving, preservation, search methods and related tools",
+"date": "2025-06-30",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 0
+},
+{
+"slug": "nursery-rhymes",
+"title": "Nursery Rhymes",
+"preview": "a collection of classic nursery rhymes, their history, and significance",
+"date": "2025-06-30",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 0
+},
+{
+"slug": "book-notes",
+"title": "Book Notes",
+"preview": "a collection of notes and summaries from my reading",
+"date": "2025-07-01",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 0
+},
+{
+"slug": "technology",
+"title": "Technology",
+"preview": "notes on various technologies and personal projects",
+"date": "2025-07-02",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 8
+},
+{
+"slug": "research",
+"title": "Research",
+"preview": "research methods, tools, and approaches",
+"date": "2025-07-02",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 7
+},
+{
+"slug": "indie-web",
+"title": "Indie Web",
+"preview": "notes on the independent web, personal sites, and the web outside major platforms",
+"date": "2025-07-02",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "learning",
+"title": "Learning",
+"preview": "notes on learning methods, resources, and personal education",
+"date": "2025-07-02",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 8
+},
+{
+"slug": "news",
+"title": "News",
+"preview": "notes on current events and personal news consumption",
+"date": "2025-07-02",
+"status": "In Progress",
+"confidence": "certain",
+"importance": 5
+},
+{
+"slug": "gaming",
+"title": "Gaming",
+"preview": "Notes on games, gaming experiences, and game analysis.",
+"date": "2025-07-03",
+"status": "Finished",
+"confidence": "certain",
+"importance": 6
+},
+{
+"slug": "hack-the-box",
+"title": "Hack The Box",
+"preview": "Notes and walkthroughs for Hack The Box challenges and machines.",
+"date": "2025-07-03",
+"status": "Finished",
+"confidence": "certain",
+"importance": 7
+},
+{
+"slug": "try-hack-me",
+"title": "Try Hack Me",
+"preview": "Notes and walkthroughs for Try Hack Me challenges and rooms.",
+"date": "2025-07-03",
+"status": "Finished",
+"confidence": "certain",
+"importance": 7
+},
+{
+"slug": "nursery-rhymes",
+"title": "Nursery Rhymes",
+"preview": "full-text of classic nursery rhymes.",
+"date": "2025-07-03",
+"status": "Finished",
+"confidence": "certain",
+"importance": 7
+},
+{
+"slug": "ultralearning",
+"title": "Ultralearning",
+"preview": "A collection of resources and notes on immersive self-directed learning",
+"date": "2025-07-03",
+"status": "Finished",
+"confidence": "certain",
+"importance": 7
+},
+{
+"slug": "watchlist",
+"title": "Watchlist",
+"preview": "several watchlists for films, series, and documentaries",
+"date": "2025-07-03",
+"status": "Finished",
+"confidence": "certain",
+"importance": 7
+},
+{
+"slug": "character-analysis",
+"title": "Character Analysis",
+"preview": "In-depth studies of fictional and historical characters, exploring psychology, motivations, symbolism, and narrative function.",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 3
+},
+{
+"slug": "notes-on-people",
+"title": "Notes on People",
+"preview": "notes, dossiers, and commentaries on famous people, historical figures, their careers, and contributions.",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
+},
+{
+"slug": "reviews",
+"title": "Reviews",
+"preview": "notes on review methods, styles, and aspects of critique.",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
+},
+{
+"slug": "templates",
+"title": "Templates",
+"preview": "templates for prose, ocs, and more",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
+},
+{
+"slug": "rabbit-holes",
+"title": "Rabbit Holes",
+"preview": "long-form deep dives of the topics I've fallen into, linking to my public notes on notes.krisyotam.com",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
+},
+{
+"slug": "film",
+"title": "Film",
+"preview": "long-form deep dives of the topics I've fallen into, linking to my public notes on notes.krisyotam.com",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
+},
+{
+"slug": "piracy",
+"title": "Piracy",
+"preview": "long-form deep dives of the topics I've fallen into, linking to my public notes on notes.krisyotam.com",
+"date": "2025-06-25",
+"status": "Finished",
+"confidence": "certain",
+"importance": 5
+},
+{
+"slug": "projects",
+"title": "Projects",
+"preview": "long form projects I've worked on, their details, and outcomes",
+"date": "2025-06-25",
+"status": "Notes",
+"confidence": "certain",
+"importance": 9
+}
+]
+}

@@ -1,0 +1,1200 @@
+/* =============================================================================
+   BASE TAILWIND IMPORTS
+   ========================================================================== */
+   @import 'katex/dist/katex.min.css';
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+   
+   /* =============================================================================
+      CODE BLOCK STYLES
+      ========================================================================== */
+   .code-block pre {
+     margin: 0;
+     padding: 0;
+     overflow-x: auto;
+   }
+   
+   /* Improved line numbers styling with clear separation */
+   .code-container span[style*="userSelect"] {
+     user-select: none !important;
+     border-right: 1px solid rgba(127, 127, 127, 0.25) !important;
+     margin-right: 1em !important;
+     padding-right: 1em !important;
+     opacity: 0.6 !important;
+     min-width: 3em !important;
+     text-align: right !important;
+     display: inline-block !important;
+     position: sticky;
+     left: 0;
+     background: inherit;
+   }
+   
+   /* Fix for line number display in native code blocks */
+   .code-container span[style*="display: block"] {
+     display: flex !important;
+     min-width: 100% !important;
+   }
+   
+   /* Ensure code content doesn't overlap line numbers */
+   .code-container span[style*="display: block"] > span:last-child {
+     padding-left: 1em !important;
+     flex: 1 !important;
+     min-width: 0 !important;
+   }
+   
+   /* Make line numbers container fixed width */
+   .code-container .linenumber {
+     min-width: 3em !important;
+     max-width: 3em !important;
+     text-align: right !important;
+     padding-right: 1em !important;
+     border-right: 1px solid rgba(127, 127, 127, 0.25) !important;
+     margin-right: 1em !important;
+     opacity: 0.6 !important;
+     user-select: none !important;
+     position: sticky;
+     left: 0;
+     background: inherit;
+   }
+   
+   /* Specific fix for making sure line numbers don't get colored by syntax highlighting */
+   .code-container .react-syntax-highlighter-line-number {
+     color: rgba(127, 127, 127, 0.6) !important;
+     background: transparent !important;
+   }
+   
+   /* Fix alignment of code */
+   .code-container pre {
+     margin: 0 !important;
+     padding: 0 !important;
+   }
+   
+   /* Code content alignment fix */
+   .syntax-line {
+     display: flex !important; 
+     width: 100% !important;
+     min-width: 100% !important;
+   }
+   
+   /* Line number column styling */
+   .syntax-line span:first-child {
+     flex: 0 0 auto !important;
+     text-align: right !important;
+     padding-right: 1em !important;
+     min-width: 3em !important;
+     width: 3em !important;
+     border-right: 1px solid rgba(127, 127, 127, 0.2) !important;
+     margin-right: 1em !important;
+     user-select: none !important;
+     position: sticky;
+     left: 0;
+     background: inherit;
+   }
+   
+   /* Code content column styling */
+   .syntax-line span:last-child {
+     flex: 1 1 auto !important;
+     padding-left: 1em !important;
+     min-width: 0 !important;
+     overflow-wrap: break-word !important;
+   }
+   
+   /* Force proper display for syntax highlighting wrapper */
+   .code-block-wrapper {
+     position: relative;
+     display: block;
+     width: 100%;
+   }
+   
+   /* Make code blocks scroll nicely on smaller screens */
+   .code-container::-webkit-scrollbar {
+     /* Allow custom sizing from component */
+   }
+   
+   .code-container::-webkit-scrollbar-track {
+     background: transparent;
+   }
+   
+   .code-container::-webkit-scrollbar-thumb {
+     background-color: rgba(127, 127, 127, 0.4);
+     border-radius: 3px;
+   }
+   
+   /* Native code block styling */
+   pre code.hljs {
+     display: block;
+     padding: 0;
+     overflow-x: auto;
+     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+     font-size: 0.875rem;
+     line-height: 1.5;
+   }
+   
+   /* Light and dark theme for code */
+   :is(.light) pre code.hljs {
+     color: #24292e; /* GitHub-like dark text */
+     background: transparent;
+   }
+   
+   :is(.dark) pre code.hljs {
+     color: #e1e4e8; /* GitHub-like light text */
+     background: transparent;
+   }
+   
+   /* Scrollbar styling for native code blocks */
+   pre::-webkit-scrollbar {
+     /* Allow custom sizing from component */
+   }
+   
+   pre::-webkit-scrollbar-track {
+     background: transparent;
+   }
+   
+   pre::-webkit-scrollbar-thumb {
+     background-color: rgba(127, 127, 127, 0.4);
+     border-radius: 3px;
+   }
+   
+   /* =============================================================================
+      COLOR THEME VARIABLES
+      ========================================================================== */
+   @layer base {
+    :root {
+      /* Light mode colors inspired by Kenya Hara's "100 Whites" */
+      --background: 0 0% 98%; /* A soft, warm white like rice paper */
+      --foreground: 0 0% 20%; /* A deep, muted charcoal instead of pure black */
+      --card: 0 0% 99%; /* A crisp, clean white like fresh snow */
+      --card-foreground: 0 0% 15%; /* A slightly softer dark tone */
+      --popover: 0 0% 97%; /* A delicate white, like wax or silk */
+      --popover-foreground: 0 0% 25%; /* A muted gray for readability */
+      --primary: 0 0% 10%; /* A near-black with a hint of warmth */
+      --primary-foreground: 0 0% 95%; /* A bright, airy white like clouds */
+      --secondary: 0 0% 90%; /* A slightly darker off-white for more contrast */
+      --secondary-foreground: 0 0% 30%; /* A soft gray for contrast */
+      --muted: 0 0% 92%; /* A faint white, like mist or frosted glass */
+      --muted-foreground: 0 0% 50%; /* A mid-tone gray for subdued text */
+      --accent: 0 0% 96%; /* A gentle white, like polished ivory */
+      --accent-foreground: 0 0% 20%; /* A dark, understated tone */
+      --destructive: 0 70% 55%; /* A muted red, softened to fit the palette */
+      --destructive-foreground: 0 0% 98%; /* A near-white for legibility */
+      --border: 0 0% 88%; /* A pale gray-white, like stone or ash */
+      --input: 0 0% 90%; /* A light, clean white for fields */
+      --ring: 0 0% 40%; /* A subtle gray for focus states */
+      --radius: 0.5rem; /* Unchanged, as it's a structural property */
+    }
+   
+     .dark {
+       /* Dark mode colors - monochrome palette */
+       --background: 0 0% 7%;
+       --foreground: 0 0% 98%;
+       --card: 0 0% 9%;
+       --card-foreground: 0 0% 98%;
+       --popover: 0 0% 9%;
+       --popover-foreground: 0 0% 98%;
+       --primary: 0 0% 98%;
+       --primary-foreground: 0 0% 9%;
+       --secondary: 0 0% 12%;
+       --secondary-foreground: 0 0% 98%;
+       --muted: 0 0% 12%;
+       --muted-foreground: 0 0% 70%;
+       --accent: 0 0% 12%;
+       --accent-foreground: 0 0% 98%;
+       --destructive: 0 62% 30%;
+       --destructive-foreground: 0 0% 98%;
+       --border: 0 0% 15%;
+       --input: 0 0% 15%;
+       --ring: 0 0% 83%;
+     }
+   }
+   
+   /* =============================================================================
+      BASE ELEMENT STYLES
+      ========================================================================== */
+   @layer base {
+     * {
+       @apply border-border;
+     }
+   
+     body {
+       @apply bg-background text-foreground;
+       font-feature-settings: "rlig" 1, "calt" 1;
+       -webkit-font-smoothing: antialiased;
+       -moz-osx-font-smoothing: grayscale;
+       text-rendering: optimizeLegibility;
+     }
+   }
+   
+   /* =============================================================================
+      TYPOGRAPHY
+      ========================================================================== */
+   /* Font declarations */
+   @font-face {
+     font-family: "Outfit";
+     font-style: normal;
+     font-weight: 100 900; /* Full range for variable font */
+     font-display: swap;
+     src: url("/fonts/outfit.woff2") format("woff2");
+   }
+   
+   @font-face {
+     font-family: "Outfit Mono";
+     font-style: normal;
+     font-weight: 400;
+     font-display: swap;
+     src: url("/fonts/space-mono-400.woff2") format("woff2");
+   }
+   
+   /* Book content typography */
+   .book-content {
+     font-family: "Georgia", serif;
+     font-size: 1.125rem;
+     line-height: 1.75;
+     max-width: 65ch;
+     margin: 0 auto;
+   }
+
+   .book-content p {
+     margin: 0;
+     padding: 0;
+   }
+   
+   /* Fix for bento card white outlines during view transitions */
+   .no-outline {
+     outline: none !important;
+     border-style: solid;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+     -webkit-backface-visibility: hidden;
+     backface-visibility: hidden;
+   }
+   
+   .book-content h1,
+   .book-content h2,
+   .book-content h3,
+   .book-content h4,
+   .book-content h5,
+   .book-content h6 {
+     font-family: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+     font-weight: 700;
+     margin-top: 2em;
+     margin-bottom: 1em;
+     letter-spacing: -0.015em;
+   }
+   
+   .book-content a {
+     color: inherit;
+     text-decoration: underline;
+     text-decoration-thickness: 1px;
+     text-underline-offset: 0.15em;
+   }
+   
+   .book-content blockquote {
+     font-style: italic;
+     border-left: 3px solid currentColor;
+     padding-left: 1em;
+     margin-left: 0;
+   }
+   
+   .book-content pre,
+   .book-content code {
+     font-family: "Outfit Mono", "Courier New", Courier, monospace;
+     background-color: #f0f0f0;
+     padding: 0.2em 0.4em;
+     border-radius: 3px;
+   }
+   
+   .book-content img {
+     max-width: 100%;
+     height: auto;
+     display: block;
+     margin: 2em auto;
+   }
+   
+   /* =============================================================================
+      PROSE STYLES (MARKDOWN CONTENT)
+      ========================================================================== */
+   @layer base {
+     .prose {
+       @apply max-w-none text-foreground;
+       font-family: "Georgia", serif;
+     }
+   
+     /* Headings */
+     .prose h1,
+     .prose h2,
+     .prose h3,
+     .prose h4,
+     .prose h5,
+     .prose h6 {
+       font-family: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+       font-weight: 700;
+       margin-top: 2em;
+       margin-bottom: 1em;
+       letter-spacing: -0.015em;
+       line-height: 1.2;
+     }
+   
+     .prose h1 {
+       @apply text-4xl;
+     }
+     .prose h2 {
+       @apply text-3xl;
+     }
+     .prose h3 {
+       @apply text-2xl;
+     }
+     .prose h4 {
+       @apply text-xl;
+     }
+     .prose h5 {
+       @apply text-lg;
+     }
+     .prose h6 {
+       @apply text-base;
+     }
+   
+     /* Paragraphs and Links */
+     .prose p {
+       @apply m-0 p-0 leading-relaxed;
+     }
+   
+     .prose a {
+       @apply text-primary underline transition-colors;
+       text-decoration-thickness: 1px;
+       text-underline-offset: 0.15em;
+     }
+   
+     .dark .prose a {
+       @apply hover:text-white;
+     }
+   
+     /* Lists */
+     .prose ul,
+     .prose ol {
+       @apply pl-6 mb-4;
+     }
+   
+     .prose ul {
+       @apply list-disc;
+     }
+   
+     .prose ol {
+       @apply list-decimal;
+     }
+   
+     .prose li {
+       @apply mb-2;
+     }
+   
+     /* Blockquotes */
+     .prose blockquote {
+       @apply border-l-4 pl-4 italic text-muted-foreground;
+     }
+   
+     /* Code Blocks */
+     .prose code {
+       font-family: "Outfit Mono", "Courier New", Courier, monospace;
+       @apply bg-muted text-muted-foreground px-1 py-0.5 rounded;
+     }
+   
+     .prose pre {
+       font-family: "Outfit Mono", "Courier New", Courier, monospace;
+       @apply bg-muted text-muted-foreground p-4 rounded-lg overflow-x-auto;
+     }
+   
+     /* Images */
+     .prose img {
+       @apply mx-auto my-6 rounded-lg shadow;
+     }
+   
+     /* Horizontal Rules */
+     .prose hr {
+       @apply border-t border-border my-6;
+     }
+   
+     /* Tables */
+     .prose table {
+       @apply w-full border-collapse border border-border my-4;
+     }
+   
+     .prose th,
+     .prose td {
+       @apply border border-border px-4 py-2;
+     }
+   
+     .prose th {
+       @apply bg-secondary text-secondary-foreground font-bold;
+     }
+   
+     /* Details and Summary (for collapsible sections) */
+     .prose details {
+       @apply bg-muted p-4 rounded-lg shadow;
+     }
+   
+     .prose summary {
+       @apply font-semibold cursor-pointer;
+     }
+   
+     /* Light/Dark Mode Adjustments */
+     .dark .prose {
+       @apply text-foreground;
+     }
+   
+     .dark .prose code {
+       @apply bg-secondary text-secondary-foreground;
+     }
+   
+     .dark .prose pre {
+       @apply bg-secondary text-secondary-foreground;
+     }
+   
+     .dark .prose table {
+       @apply border-border;
+     }
+   
+     .dark .prose th {
+       @apply bg-muted text-foreground;
+     }
+   }
+   
+   /* =============================================================================
+      UTILITY CLASSES
+      ========================================================================== */
+   @layer utilities {
+     .command-menu-open::after {
+       content: "";
+       position: fixed;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       backdrop-filter: blur(5px);
+       z-index: 40;
+     }
+   }
+   
+   /* Component class to break out of layout constraints */
+   .component {
+     width: 100vw;
+     position: relative;
+     left: 50%;
+     right: 50%;
+     margin-left: -50vw;
+     margin-right: -50vw;
+     max-width: 100vw;
+     overflow-x: hidden;
+     display: flex;
+     justify-content: center;
+   }
+   
+   /* The actual content inside the component should be constrained */
+   .component > div {
+     width: 100%;
+     max-width: calc(100% - 2rem);
+     padding-left: 1rem;
+     padding-right: 1rem;
+   }
+   
+   @media (min-width: 768px) {
+     .component > div {
+       max-width: calc(100% - 4rem);
+       padding-left: 2rem;
+       padding-right: 2rem;
+     }
+   }
+   
+   @media (min-width: 1200px) {
+     .component > div {
+       max-width: 1200px;
+     }
+   }
+   
+   /* Override component styles to ensure they're not affected by parent styles */
+   .component * {
+     max-width: none !important;
+   }
+   
+   /* =============================================================================
+      MAP AND MARKER STYLES
+      ========================================================================== */
+   @keyframes pulse {
+     0% {
+       transform: scale(1);
+       opacity: 0.7;
+     }
+     50% {
+       transform: scale(1.5);
+       opacity: 0.3;
+     }
+     100% {
+       transform: scale(1);
+       opacity: 0.7;
+     }
+   }
+   
+   /* Marker Type Styles */
+   .pin {
+     width: 6px;
+     height: 6px;
+     border-radius: 50%;
+     box-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
+     position: relative;
+     transition: all 0.3s ease;
+   }
+   
+   .pin::after {
+     content: "";
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     border-radius: 50%;
+     animation: pulse 2s ease-in-out infinite;
+   }
+   
+   /* City Marker */
+   .pin-city {
+     background-color: rgba(236, 72, 153, 0.7);
+     border: 2px solid rgba(236, 72, 153, 0.1);
+   }
+   .pin-city::after {
+     background-color: rgba(236, 72, 153, 0.7);
+   }
+   
+   /* Place Marker */
+   .pin-place {
+     background-color: rgba(168, 85, 247, 0.7);
+     border: 2px solid rgba(168, 85, 247, 0.1);
+   }
+   .pin-place::after {
+     background-color: rgba(168, 85, 247, 0.7);
+   }
+   
+   /* Airport Marker */
+   .pin-airport {
+     background-color: rgba(244, 63, 94, 0.7);
+     border: 2px solid rgba(244, 63, 94, 0.1);
+   }
+   .pin-airport::after {
+     background-color: rgba(244, 63, 94, 0.7);
+   }
+   
+   /* Country Marker */
+   .pin-country {
+     background-color: rgba(34, 197, 94, 0.7);
+     border: 2px solid rgba(34, 197, 94, 0.1);
+   }
+   .pin-country::after {
+     background-color: rgba(34, 197, 94, 0.7);
+   }
+   
+   /* Neighborhood Marker */
+   .pin-neighborhood {
+     background-color: rgba(249, 115, 22, 0.7);
+     border: 2px solid rgba(249, 115, 22, 0.1);
+   }
+   .pin-neighborhood::after {
+     background-color: rgba(249, 115, 22, 0.7);
+   }
+   
+   /* Hotel Marker */
+   .pin-hotel {
+     background-color: rgba(250, 204, 21, 0.7);
+     border: 2px solid rgba(250, 204, 21, 0.1);
+   }
+   .pin-hotel::after {
+     background-color: rgba(250, 204, 21, 0.7);
+   }
+   
+   /* Park Marker */
+   .pin-park {
+     background-color: rgba(16, 185, 129, 0.7);
+     border: 2px solid rgba(16, 185, 129, 0.1);
+   }
+   .pin-park::after {
+     background-color: rgba(16, 185, 129, 0.7);
+   }
+   
+   /* Building Marker */
+   .pin-building {
+     background-color: rgba(59, 130, 246, 0.7);
+     border: 2px solid rgba(59, 130, 246, 0.1);
+   }
+   .pin-building::after {
+     background-color: rgba(59, 130, 246, 0.7);
+   }
+   
+   /* Modern Popup Styles */
+   .mapboxgl-popup {
+     max-width: 320px !important;
+     font-family: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+   }
+   
+   .mapboxgl-popup-content {
+     padding: 1.5rem !important;
+     border-radius: 1rem !important;
+     background: rgba(255, 255, 255, 0.95) !important;
+     backdrop-filter: blur(10px) !important;
+     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08) !important;
+     border: 1px solid rgba(0, 0, 0, 0.05) !important;
+   }
+   
+   .dark .mapboxgl-popup-content {
+     background: rgba(23, 23, 23, 0.95) !important;
+     border: 1px solid rgba(255, 255, 255, 0.1) !important;
+   }
+   
+   .mapboxgl-popup-tip {
+     display: none !important;
+   }
+   
+   .mapboxgl-popup-close-button {
+     padding: 0.5rem !important;
+     right: 0.5rem !important;
+     top: 0.5rem !important;
+     color: #666 !important;
+     font-size: 1.5rem !important;
+     line-height: 1 !important;
+     background: transparent !important;
+     border: none !important;
+     cursor: pointer !important;
+     transition: color 0.2s ease !important;
+   }
+   
+   .dark .mapboxgl-popup-close-button {
+     color: #999 !important;
+   }
+   
+   .mapboxgl-popup-close-button:hover {
+     color: #000 !important;
+     background: transparent !important;
+   }
+   
+   .dark .mapboxgl-popup-close-button:hover {
+     color: #fff !important;
+   }
+   
+   /* Location Popup Content Styles */
+   .location-popup {
+     min-width: 280px;
+   }
+   
+   .location-popup-header {
+     display: flex;
+     align-items: center;
+     margin-bottom: 1rem;
+     gap: 0.75rem;
+   }
+   
+   .location-popup-icon {
+     width: 2.5rem;
+     height: 2.5rem;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background: #f3f4f6;
+   }
+   
+   .dark .location-popup-icon {
+     background: rgba(255, 255, 255, 0.1);
+   }
+   
+   .location-popup-title {
+     flex: 1;
+   }
+   
+   .location-popup-name {
+     font-size: 1.25rem;
+     font-weight: 600;
+     color: #111;
+     margin: 0;
+     line-height: 1.2;
+   }
+   
+   .dark .location-popup-name {
+     color: #fff;
+   }
+   
+   .location-popup-type {
+     font-size: 0.875rem;
+     color: #666;
+     margin: 0;
+   }
+   
+   .dark .location-popup-type {
+     color: #999;
+   }
+   
+   .location-popup-stats {
+     display: flex;
+     gap: 1rem;
+     padding: 0.75rem 0;
+     border-top: 1px solid rgba(0, 0, 0, 0.05);
+     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+     margin: 1rem 0;
+   }
+   
+   .dark .location-popup-stats {
+     border-color: rgba(255, 255, 255, 0.1);
+   }
+   
+   .location-popup-stat {
+     flex: 1;
+   }
+   
+   .location-popup-stat-label {
+     font-size: 0.75rem;
+     color: #666;
+     margin: 0;
+   }
+   
+   .dark .location-popup-stat-label {
+     color: #999;
+   }
+   
+   .location-popup-stat-value {
+     font-size: 1rem;
+     font-weight: 600;
+     color: #111;
+     margin: 0;
+   }
+   
+   .dark .location-popup-stat-value {
+     color: #fff;
+   }
+   
+   .location-popup-description {
+     font-size: 0.875rem;
+     color: #444;
+     line-height: 1.5;
+     margin: 0 0 1rem 0;
+   }
+   
+   .dark .location-popup-description {
+     color: #bbb;
+   }
+   
+   .location-popup-actions {
+     display: flex;
+     gap: 0.5rem;
+   }
+   
+   .location-popup-button {
+     flex: 1;
+     padding: 0.5rem 1rem;
+     border-radius: 0.5rem;
+     font-size: 0.875rem;
+     font-weight: 500;
+     text-align: center;
+     cursor: pointer;
+     transition: all 0.2s ease;
+     background: #f3f4f6;
+     color: #111;
+     border: none;
+   }
+   
+   .dark .location-popup-button {
+     background: rgba(255, 255, 255, 0.1);
+     color: #fff;
+   }
+   
+   .location-popup-button:hover {
+     background: #e5e7eb;
+   }
+   
+   .dark .location-popup-button:hover {
+     background: rgba(255, 255, 255, 0.15);
+   }
+   
+   .location-popup-button-primary {
+     background: #111;
+     color: #fff;
+   }
+   
+   .dark .location-popup-button-primary {
+     background: #fff;
+     color: #111;
+   }
+   
+   .location-popup-button-primary:hover {
+     background: #000;
+   }
+   
+   .dark .location-popup-button-primary:hover {
+     background: #f3f4f6;
+   }
+   
+   /* =============================================================================
+      TWEET STYLES
+      ========================================================================== */
+   .tweet .react-tweet-theme {
+     --tweet-container-margin: 0;
+     --tweet-font-family: inherit;
+     --tweet-font-color: inherit;
+     --tweet-bg-color: #fff;
+     --tweet-bg-color-hover: #fff;
+     --tweet-quoted-bg-color-hover: rgba(0, 0, 0, 0.03);
+     --tweet-border: 1px solid rgb(207, 217, 222);
+     --tweet-skeleton-gradient: linear-gradient(270deg, #fafafa, #eaeaea, #eaeaea, #fafafa);
+     --tweet-color-red-primary: rgb(249, 24, 128);
+     --tweet-color-red-primary-hover: rgba(249, 24, 128, 0.1);
+     --tweet-color-green-primary: rgb(0, 186, 124);
+     --tweet-color-green-primary-hover: rgba(0, 186, 124, 0.1);
+     --tweet-twitter-icon-color: var(--tweet-font-color);
+     --tweet-verified-old-color: rgb(130, 154, 171);
+     --tweet-verified-blue-color: var(--tweet-color-blue-primary);
+   }
+   
+   .dark .tweet .react-tweet-theme {
+     --tweet-bg-color: #111;
+     --tweet-bg-color-hover: #111;
+     --tweet-quoted-bg-color-hover: rgba(255, 255, 255, 0.03);
+     --tweet-border: 1px solid #222;
+   }
+   
+   .tweet .react-tweet-theme p {
+     font-size: inherit;
+     line-height: 1.3rem;
+   }
+   
+   .tweet .react-tweet-theme p a {
+     border-bottom: 1px solid #d1d5db;
+     transition-property: border-color;
+     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+     transition-duration: 150ms;
+   }
+   
+   .tweet .react-tweet-theme p a:hover {
+     border-color: #4b5563;
+     text-decoration: none;
+   }
+   
+   .dark .tweet .react-tweet-theme p a {
+     color: #fff;
+     border-color: #333;
+   }
+   
+   .dark .tweet .react-tweet-theme p a:hover {
+     border-color: #fff;
+   }
+   
+   /* =============================================================================
+      SCROLLBAR CONTROL
+      ========================================================================== */
+   /* Default scrollbar styles */
+   html {
+     scrollbar-gutter: stable; /* Always reserve space for scrollbar to prevent layout shift */
+   }
+   
+   /* Show scrollbar explicitly for blog posts and notes */
+   html.show-scrollbar {
+     overflow-y: scroll;
+   }
+   
+   /* Hide scrollbar for regular pages while preserving space for it */
+   html.hide-scrollbar {
+     scrollbar-width: none; /* Firefox */
+     -ms-overflow-style: none; /* IE and Edge */
+   }
+   
+   /* Hide scrollbar for Webkit browsers while preserving space */
+   html.hide-scrollbar::-webkit-scrollbar {
+     width: 0;
+     background: transparent;
+     display: none;
+   }
+
+   
+   /* =============================================================================
+      BASE ELEMENT STYLES
+      ========================================================================== */
+   @layer base {
+     * {
+       @apply border-border;
+     }
+   
+     body {
+       @apply bg-background text-foreground;
+       font-feature-settings: "rlig" 1, "calt" 1;
+       -webkit-font-smoothing: antialiased;
+       -moz-osx-font-smoothing: grayscale;
+       text-rendering: optimizeLegibility;
+     }
+   }
+   
+   /* =============================================================================
+      TARGET THE NEXT.JS IMAGE WRAPPER <SPAN> BY ITS DATA‑ATTRIBUTE
+      ========================================================================== */
+   span[data-nimg] {
+     display: block !important;
+   }
+   
+   /* globals.css */
+   span[data-nimg]:not(.dropcap-image-wrapper span) {
+     display: block !important;      /* kill inline‑block spacing */
+     margin: 0 !important;           /* no margins */
+     padding: 0 !important;          /* no padding */
+     vertical-align: top !important; /* align it flush */
+     /* leave border-radius & overflow alone */
+   }
+   
+   img:not(.dropcap-image) {
+     display: block !important;
+     margin: 0 !important;
+     padding: 0 !important;
+     border: 0 !important;
+     vertical-align: top !important;
+   }
+   
+   .dropcap-image-wrapper {
+     float: left;
+     margin-right: 0.25em !important;    /* force smaller right margin */
+     margin-top: 0.1em !important;       /* align to baseline */
+     margin-bottom: -8px !important;        /* force remove bottom margin */
+     margin-left: 0 !important;          /* force remove left margin */
+     line-height: 0;
+     padding: 0 !important;  /* force remove any padding */
+     display: inline-block !important;   /* ensure proper float behavior */
+     clear: none !important;             /* don't clear other floats */
+   }
+
+   /* Ensure no extra space is created after the dropcap container */
+   .dropcap-image-wrapper::after {
+     content: none !important;
+     display: none !important;
+   }
+
+   /* Ensure dropcap Next.js Image wrapper spans stay inline */
+   .dropcap-image-wrapper span[data-nimg] {
+     display: inline-block !important;
+     margin: 0 !important;
+     padding: 0 !important;
+     vertical-align: top !important;
+     line-height: 0 !important;
+   }
+   
+   .dropcap-image {
+     background: transparent;
+     border: none;
+     user-select: none;
+     margin: 0 !important;   /* force remove all margins */
+     padding: 0 !important;  /* force remove all padding */
+     display: inline-block !important; /* override global img block display */
+     vertical-align: top !important;
+     /* you can also set width/height via CSS if you prefer: */
+     /* width: 3em; */
+     /* height: auto; */
+   }
+   
+   .dropcap-image {
+     /* disable any outlines, highlights, shadows, or filters */
+     outline: none !important;
+     box-shadow: none !important;
+     filter: none !important;
+     opacity: 1 !important;
+     background: transparent !important;
+   }
+   
+   .dropcap-image {
+     /* make it big enough to admire — 10em is the intended size */
+     width: 10em !important;
+     height: 10em !important;
+     /* keep it perfectly square */
+     object-fit: contain;
+   }
+   
+   /* =============================================================================
+      POST CONTENT STYLES
+      ========================================================================== */
+   /* ensure the browser can hyphenate text in English */
+   .post-content {
+     hyphens: auto;
+     -webkit-hyphens: auto;
+     -ms-hyphens: auto;
+   }
+   
+   /* justify all but the last line, and allow hyphenated breaks */
+   .post-content p {
+     text-align: justify;
+     text-align-last: left;  /* keep the last line ragged-right */
+     hyphens: auto;
+     -webkit-hyphens: auto;
+     -ms-hyphens: auto;
+     margin: 0 !important;
+     padding: 0 !important;
+   }
+
+   /* Ensure paragraphs containing dropcaps have no extra spacing */
+   .post-content p:has(.dropcap-image-wrapper),
+   .post-content p .dropcap-image-wrapper {
+     margin: 0 !important;
+     padding: 0 !important;
+   }
+
+   /* Ensure paragraphs after dropcaps don't add extra top margin */
+   .post-content .dropcap-image-wrapper + p,
+   .post-content p:has(.dropcap-image-wrapper) + p {
+     margin-top: 0 !important;
+   }
+   
+   /* Constrain FileViewer and its <pre> to 100% of whatever parent they live in */
+   .post-content .file-viewer {
+     width: 100% !important;
+     max-width: 100% !important;
+     box-sizing: border-box;
+   }
+   
+   .post-content .file-viewer pre {
+     /* force the <pre> itself to fill its container */
+     width: 100% !important;
+     max-width: 100% !important;
+     
+     /* scroll rather than overflow the page */
+     overflow-x: auto !important;
+     box-sizing: border-box;
+   }
+   
+   /* (optional) wrap long words/URLs rather than overflow */
+   .post-content .file-viewer code {
+     word-break: break-word;
+     overflow-wrap: anywhere;
+   }
+   
+   /* =============================================================================
+   LOGO THEME SWITCHING
+   ========================================================================== */
+/* Force logo visibility states with !important to override any conflicting styles */
+/* Use higher specificity by targeting img elements directly */
+img.logo-light,
+span[data-nimg] img.logo-light {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.dark img.logo-light,
+.dark span[data-nimg] img.logo-light {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+img.logo-dark,
+span[data-nimg] img.logo-dark {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.dark img.logo-dark,
+.dark span[data-nimg] img.logo-dark {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* =============================================================================
+   MARGIN NOTES DARK MODE IMPROVEMENTS
+   ========================================================================== */
+/* Override Card component's default border for margin notes in dark mode */
+.dark [data-note-index] {
+  border-color: hsl(0 0% 20%) !important;
+}
+
+/* Improve margin notes outline colors in dark mode */
+.dark [data-note-index] .border,
+.dark [data-note-index] .bg-border {
+  border-color: hsl(0 0% 20%) !important;
+  background-color: hsl(0 0% 20%) !important;
+}
+
+.dark [data-note-index] .border-t {
+  border-top-color: hsl(0 0% 20%) !important;
+}
+
+.dark [data-note-index] .border-dotted {
+  border-color: hsl(0 0% 35%) !important;
+}
+
+/* Math and LaTeX styles */
+.katex-display {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0.5em auto !important;
+  max-width: 100%;
+  padding: 0 !important;
+}
+
+.katex-inline {
+  display: inline;
+}
+
+/* Ensure KaTeX display math is properly centered */
+.katex-display .katex {
+  display: inline-block;
+}
+
+/* Override paragraph margins for math content */
+.problem-content .katex-display,
+.proof-content .katex-display,
+p .katex-display {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0.5em auto !important;
+  padding: 0 !important;
+}
+
+/* =============================================================================
+   PERCENTAGE-BASED UNDERLINES FOR HEADERS
+   ========================================================================== */
+/* Base positioning for headers that might have percentage underlines */
+[class*="-content"] h1,
+[class*="-content"] h2,
+[class*="-content"] h3 {
+  position: relative;
+}
+
+/* CSS custom properties for different percentages */
+[class*="-content"] h1[data-underline-width],
+[class*="-content"] h2[data-underline-width],
+[class*="-content"] h3[data-underline-width] {
+  overflow: hidden;
+}
+
+[class*="-content"] h1[data-underline-width]::after,
+[class*="-content"] h2[data-underline-width]::after,
+[class*="-content"] h3[data-underline-width]::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: calc(100% - var(--underline-width, 100%));
+  height: 1px;
+  background: var(--background, #fff);
+  z-index: 2;
+}
+
+/* Dark mode version */
+.dark [class*="-content"] h1[data-underline-width]::after,
+.dark [class*="-content"] h2[data-underline-width]::after,
+.dark [class*="-content"] h3[data-underline-width]::after {
+  background: hsl(var(--background));
+}
+
+@keyframes spin-left {
+  100% { transform: rotate(-360deg); }
+}
+@keyframes spin-right {
+  100% { transform: rotate(360deg); }
+}
+.animate-spin-left {
+  animation: spin-left 2s cubic-bezier(.4,2,.3,1) both;
+}
+.animate-spin-right {
+  animation: spin-right 2s cubic-bezier(.4,2,.3,1) both;
+}
+

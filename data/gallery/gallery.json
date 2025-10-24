@@ -1,0 +1,49 @@
+{
+  "artworks": [
+    {
+      "id": "1",
+      "title": "Demo Photography I",
+      "description": "A sample photograph showcasing the portfolio section.",
+      "imageUrl": "https://images.pexels.com/photos/237266/pexels-photo-237266.jpeg",
+      "dimension": "3x2",
+      "start_date": "2024-01-15",
+      "end_date": "",
+      "category": "photography",
+      "tags": ["street", "monochrome", "documentary"],
+      "status": "Completed",
+      "confidence": "high",
+      "importance": 8,
+      "bio": "Captured in a quiet city alley, this piece focuses on the raw narrative potential of everyday urban scenes — part of an ongoing exploration of street photography as visual storytelling."
+    },
+    {
+      "id": "2",
+      "title": "Demo Photography II",
+      "description": "A placeholder work in progress within the photography section.",
+      "imageUrl": "https://images.pexels.com/photos/237266/pexels-photo-237266.jpeg",
+      "dimension": "4x3",
+      "start_date": "2024-01-10",
+      "end_date": "",
+      "category": "photography",
+      "tags": ["portrait", "natural-light", "candid"],
+      "status": "In Progress",
+      "confidence": "medium",
+      "importance": 6,
+      "bio": "This piece experiments with candid natural lighting in close-range portraiture — testing how spontaneity and subtle expression shape emotional intimacy in frame."
+    },
+    {
+      "id": "3",
+      "title": "Demo Photography III",
+      "description": "Another sample image demonstrating the photography portfolio.",
+      "imageUrl": "https://images.pexels.com/photos/237266/pexels-photo-237266.jpeg",
+      "dimension": "16x9",
+      "start_date": "2024-01-05",
+      "end_date": "",
+      "category": "photography",
+      "tags": ["landscape", "sunset", "composition"],
+      "status": "Completed",
+      "confidence": "high",
+      "importance": 7,
+      "bio": "Shot during golden hour, this landscape study centers on balance and atmospheric depth — an exercise in precise horizon placement and mood-driven composition."
+    }
+  ]
+}
