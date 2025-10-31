@@ -1,3 +1,6 @@
+"use client"
+
+import React, { useState, useCallback } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Star } from "lucide-react"
 
@@ -48,6 +51,7 @@ interface AnimeItem {
   link?: string;
   photolink?: string;
   description?: string;
+  text?: string;
   num_episodes?: number; // Added to align with AnimeNode and usage in getTotal
   num_chapters?: number; // Added to align with AnimeNode and usage in getTotal
 }
@@ -198,8 +202,42 @@ export function AnimeFavoriteCard({ item, type, isCompany = false, subtitle, onI
   const title = item?.name || item?.title || "Unknown"
   const url = item?.url || item?.link || `https://myanimelist.net/${type}/${item?.id || item?.mal_id}`
   const aspectRatioClass = isCompany ? "aspect-square" : "aspect-[2/3]"
-  return (
-    <Card className="w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#1a1a1a] flex flex-col h-full">
+
+  const hasText = Boolean(item?.description || item?.text)
+
+  // If there is no extra text, render the original card (no flip wrapper)
+  if (!hasText) {
+    return (
+      <Card className="w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#1a1a1a] flex flex-col h-full">
+        <div className={`relative ${aspectRatioClass} overflow-hidden`}>
+          <img
+            src={imageUrl || "/placeholder.svg"}
+            alt={title}
+            className="w-full h-full object-cover"
+            onError={onImageError}
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+            <span className="text-white text-xs font-medium">Favorite</span>
+          </div>
+        </div>
+        <CardContent className="p-3">
+          <h3 className="font-medium text-sm line-clamp-2">
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              {title}
+            </a>
+          </h3>
+          {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
+        </CardContent>
+      </Card>
+    )
+  }
+
+  // Flip-capable rendering (grid overlay preserves layout)
+  const [flipped, setFlipped] = useState(false)
+  const toggle = useCallback(() => setFlipped((v) => !v), [])
+
+  const front = (
+    <Card className="card-3d-front w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#1a1a1a] flex flex-col h-full">
       <div className={`relative ${aspectRatioClass} overflow-hidden`}>
         <img
           src={imageUrl || "/placeholder.svg"}
@@ -217,11 +255,48 @@ export function AnimeFavoriteCard({ item, type, isCompany = false, subtitle, onI
             {title}
           </a>
         </h3>
-        {subtitle && (
-          <p className="text-xs text-muted-foreground">{subtitle}</p>
-        )}
+        {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
       </CardContent>
     </Card>
+  )
+
+  const back = (
+    <Card className="card-3d-back w-full overflow-hidden border dark:border-zinc-800 dark:bg-[#111] flex flex-col h-full">
+      <div className={`relative ${aspectRatioClass} overflow-hidden`}>
+        <img
+          src={imageUrl || "/placeholder.svg"}
+          alt={title}
+          className="w-full h-full object-cover opacity-30"
+          onError={onImageError}
+        />
+        <div className="absolute inset-0 p-4 flex items-center justify-center">
+          <div>
+            <h3 className="font-medium text-sm mb-2">{title}</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed max-h-[8rem] overflow-auto">
+              {item?.description || item?.text || "No description provided yet."}
+            </p>
+          </div>
+        </div>
+      </div>
+    </Card>
+  )
+
+  return (
+    <div
+      className={`card-3d w-full h-full ${flipped ? "flip" : ""}`}
+      onClick={toggle}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") toggle()
+      }}
+      role="button"
+      tabIndex={0}
+      aria-pressed={flipped}
+    >
+      <div className="card-3d-inner w-full h-full">
+        {front}
+        {back}
+      </div>
+    </div>
   )
 }
 

@@ -551,8 +551,8 @@
 ]
 },
 {
-"slug": "age-of-ai",
-"title": "Age of AI",
+"slug": "ai-alignment",
+"title": "AI Alignment",
 "preview": "a curated collection of my essays, by myself, on various topics, including philosophy, psychology, and culture.",
 "start_date": "2025-07-15",
 "end_date": "",
@@ -973,7 +973,65 @@
 { "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
 { "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
 ]
+},
+{
+  "slug": "the-anime-year-in-review",
+  "title": "The Anime Year in Review",
+  "preview": "I watch and review the greatest years in anime history, with accompanying analysis essays",
+  "start_date": "2025-08-25",
+  "end_date": "",
+  "cover-url": "https://tezukaosamu.net/en/anime/img/30/a0030_002.jpg",
+  "state": "active",
+  "status": "In Progress",
+  "confidence": "likely",
+  "importance": 9,
+  "category": "Personal",
+  "tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+  "posts": [
+    { "slug": "boy-interrupted", "order": 1, "type": "essay" },
+    { "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+    { "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+  ]
+},
+{
+  "slug": "ancient-bloodlines",
+  "title": "Ancient Bloodlines",
+  "preview": "A study of ancient bloodlines and their manifestation as contemporary power structures in modern society.",
+  "start_date": "2025-08-25",
+  "end_date": "",
+  "cover-url": "https://i.pinimg.com/736x/19/a7/54/19a754afc6a8292237b4c386c632cf1c.jpg",
+  "state": "active",
+  "status": "In Progress",
+  "confidence": "likely",
+  "importance": 9,
+  "category": "Personal",
+  "tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+  "posts": [
+    { "slug": "boy-interrupted", "order": 1, "type": "essay" },
+    { "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+    { "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+  ]
+},
+{
+  "slug": "on-suicide",
+  "title": "On Suicide",
+  "preview": "A study of ancient bloodlines and their manifestation as contemporary power structures in modern society.",
+  "start_date": "2025-08-25",
+  "end_date": "",
+  "cover-url": "https://i.pinimg.com/1200x/80/f1/fc/80f1fc0e9a816f4e2e78dfe7cf73931c.jpg",
+  "state": "active",
+  "status": "In Progress",
+  "confidence": "likely",
+  "importance": 9,
+  "category": "Personal",
+  "tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+  "posts": [
+    { "slug": "boy-interrupted", "order": 1, "type": "essay" },
+    { "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+    { "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+  ]
 }
+
 
 ]
 

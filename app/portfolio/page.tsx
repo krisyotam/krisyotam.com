@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 import { PageDescription } from "@/components/posts/typography/page-description";
 import { Hero } from "@/components/portfolio/hero";
-import { ThreeDMarqueeDemo } from "@/components/portfolio/dev";
-import { FeaturesSectionDemo } from "@/components/portfolio/hosting";
 import { About } from "@/components/portfolio/about";
 import { Posts } from "@/components/portfolio/posts";
 import { Projects } from "@/components/portfolio/projects";
@@ -49,29 +47,11 @@ export default function PortfolioPage() {
           {activeTab === "projects" && <Projects isActive={true} />}
           {activeTab === "cv" && <CV isActive={true} />}
           {activeTab === "about" && <About isActive={true} />}
-          <About isActive={activeTab === "about"} />
         </div>
 
-        {/* Default sections - only show when no specific tab is active or for posts */}
-        {activeTab === "posts" && (
-          <>
-            <div className="my-2">
-              <div className="rounded-none overflow-hidden">
-                <ThreeDMarqueeDemo />
-              </div>
-            </div>
-            <div className="my-2">
-              <div className="rounded-none overflow-hidden">
-                <FeaturesSectionDemo />
-              </div>
-            </div>
-          </>
-        )}
+        {/* removed marquee and features demo per request */}
         
-        <PageDescription
-          title={portfolioPageData.title}
-          description={portfolioPageData.description}
-        />
+        {/* page description removed as requested */}
       </main>
     </div>
   );
