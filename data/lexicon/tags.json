@@ -1,0 +1,24 @@
+{
+  "tags": [
+    {
+      "slug": "etymology",
+      "title": "Etymology",
+      "cover_image": "",
+      "preview": "Words and their histories.",
+      "date": "2025-10-01",
+      "status": "Finished",
+      "confidence": "certain",
+      "importance": 5
+    },
+    {
+      "slug": "technical",
+      "title": "Technical",
+      "cover_image": "",
+      "preview": "Computer science or engineering related terms.",
+      "date": "2025-10-01",
+      "status": "In Progress",
+      "confidence": "likely",
+      "importance": 6
+    }
+  ]
+}

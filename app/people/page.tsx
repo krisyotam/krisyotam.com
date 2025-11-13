@@ -29,7 +29,9 @@ async function loadPeopleFiles(): Promise<PeopleFile[]> {
     const out: PeopleFile[] = []
     // Prefer these files (in order) if they exist, otherwise fall back to all JSONs
   const preferred = ["journalists.json", "writers.json", "mathematicians.json", "designers.json"]
-    const toRead = preferred.filter((f) => filenames.includes(f))
+    // prefer showing artists first when present
+    const preferredWithArtists = ["artists.json", ...preferred]
+    const toRead = preferredWithArtists.filter((f) => filenames.includes(f))
     const finalList = toRead.length > 0 ? toRead : filenames.filter((f) => f.endsWith(".json"))
 
     await Promise.all(
@@ -50,6 +52,7 @@ async function loadPeopleFiles(): Promise<PeopleFile[]> {
           // nicer labels for known files
           const displayNames: Record<string, string> = {
             "journalists.json": "Journalists",
+            "artists.json": "Artists",
             "writers.json": "Writers",
             "mathematicians.json": "Mathematicians",
             "designers.json": "Designers",

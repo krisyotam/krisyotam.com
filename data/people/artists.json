@@ -1,0 +1,29 @@
+[
+  {
+    "id": "jane-doe",
+    "name": "Jane Doe",
+    "bio": "Interdisciplinary artist working with sound and installation.",
+    "location": "London",
+    "tags": ["sound", "installation", "conceptual"],
+    "image": "",
+    "created": "2024-09-01"
+  },
+  {
+    "id": "ilo-quinn",
+    "name": "Ilo Quinn",
+    "bio": "Painter exploring memory and materiality.",
+    "location": "New York",
+    "tags": ["painting", "memory"],
+    "image": "",
+    "created": "2023-05-20"
+  },
+  {
+    "id": "aria-martin",
+    "name": "Aria Martin",
+    "bio": "Performance artist focused on bodily narratives.",
+    "location": "Berlin",
+    "tags": ["performance", "body"],
+    "image": "",
+    "created": "2022-11-10"
+  }
+]
