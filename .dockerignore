@@ -28,7 +28,6 @@ tsconfig.tsbuildinfo
 
 # Generated / CI / platform files
 .vercel
-.nixpacks
 
 # Large media / source masters and uploads (keep runtime-sized assets outside these folders)
 public/highres
