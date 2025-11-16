@@ -1,11 +1,11 @@
 [
   {
-    "id": "jane-doe",
-    "name": "Jane Doe",
+    "id": "dongni-hou",
+    "name": "Dongni Hou",
     "bio": "Interdisciplinary artist working with sound and installation.",
     "location": "London",
     "tags": ["sound", "installation", "conceptual"],
-    "image": "",
+    "image": "https://imgs.search.brave.com/3fdncU5ZAMdIpIIgdUY0IhCabActSfE9G8mKRR2RlZc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly82NC5t/ZWRpYS50dW1ibHIu/Y29tL2ZmYmEyMGZj/ZjdjZTI1NzllYjRh/MWU5ZjlhMzRjZjU3/L2Y0NjU4Y2NkNDU2/ZTFhMmItYTIvczEy/ODB4MTkyMC84MjYx/MzE0YzhmMjQwMWQy/ZmYxODBkMDNhZTcx/MGI0MDU1ZWRhNzNi/LmpwZw",
     "created": "2024-09-01"
   },
   {
