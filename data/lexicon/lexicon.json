@@ -1,23 +1,5 @@
 [
   {
-    "title": "Example Term",
-    "slug": "example-term",
-    "category": "Terms",
-    "start_date": "2023-01-01",
-    "preview": "An example lexicon term used for testing.",
-    "cover_image": "",
-    "tags": []
-  },
-  {
-    "title": "Hello World",
-    "slug": "hello-world",
-    "category": "Phrases",
-    "start_date": "2022-06-01",
-    "preview": "A sample phrase entry.",
-    "cover_image": "",
-    "tags": []
-  },
-  {
     "title": "Defamiliarization",
     "start_date": "2025-10-01",
     "end_date": "",
