@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Script to remove the "year" field from all entries in verse.json
+ * Script to remove the "year" field from ALL entries in verse.json
  */
 
 const fs = require('fs');
