@@ -9,7 +9,8 @@
       "date_added": "2025-06-23",
       "status": "open",
       "state": "active",
-      "notes": "The Riemann Hypothesis concerns the zeros of the Riemann zeta function and their relation to the distribution of prime numbers."
+      "notes": "The Riemann Hypothesis concerns the zeros of the Riemann zeta function and their relation to the distribution of prime numbers.",
+      "answer": ""
     },
     {
       "id": 2,
@@ -20,7 +21,8 @@
       "date_added": "2025-06-23",
       "status": "open",
       "state": "active",
-      "notes": "The problem involves proving existence and smoothness of solutions for 3D incompressible fluid flow."
+      "notes": "The problem involves proving existence and smoothness of solutions for 3D incompressible fluid flow.",
+      "answer": ""
     },
     {
       "id": 3,
@@ -31,7 +33,8 @@
       "date_added": "2025-06-23",
       "status": "open",
       "state": "active",
-      "notes": "Asks whether problems whose solutions can be verified quickly can also be solved quickly."
+      "notes": "Asks whether problems whose solutions can be verified quickly can also be solved quickly.",
+      "answer": ""
     },
     {
       "id": 4,
@@ -42,7 +45,8 @@
       "date_added": "2025-06-23",
       "status": "open",
       "state": "active",
-      "notes": "This is the Smooth Poincaré Conjecture in dimension four, still open."
+      "notes": "This is the Smooth Poincaré Conjecture in dimension four, still open.",
+      "answer": ""
     },
     {
       "id": 5,
@@ -53,7 +57,8 @@
       "date_added": "2025-06-23",
       "status": "open",
       "state": "active",
-      "notes": "Shows whether non-abelian gauge theories have a mass gap."
+      "notes": "Shows whether non-abelian gauge theories have a mass gap.",
+      "answer": ""
     },
     {
       "id": 6,
@@ -64,7 +69,8 @@
       "date_added": "2025-06-23",
       "status": "open",
       "state": "active",
-      "notes": "Relates to the characterization of certain classes in the cohomology of algebraic varieties."
+      "notes": "Relates to the characterization of certain classes in the cohomology of algebraic varieties.",
+      "answer": ""
     },
     {
       "id": 7,
@@ -75,7 +81,21 @@
       "date_added": "2025-06-23",
       "status": "open",
       "state": "active",
-      "notes": "Links the number of rational solutions of an elliptic curve to the behavior of its L-function."
+      "notes": "Links the number of rational solutions of an elliptic curve to the behavior of its L-function.",
+      "answer": ""
+    }
+    ,
+    {
+      "id": 8,
+      "question": "Demo: What is the simplest demonstrable question with an answer?",
+      "category": "demo",
+      "tags": ["demo", "example"],
+      "source": "Local Demo",
+      "date_added": "2025-11-17",
+      "status": "answered",
+      "state": "active",
+      "notes": "A demo entry to show how answered questions render and provide an answer link.",
+      "answer": "/blog/demo/demo-question-answer"
     }
   ]
 }

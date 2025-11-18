@@ -27,9 +27,10 @@ interface Question {
   tags: string[];
   source: string;
   date_added: string;
-  status: "open" | "solved";
+  status: string;
   state: "active" | "hidden";
   notes: string;
+  answer?: string;
 }
 
 interface Category {
@@ -222,6 +223,7 @@ export function QuestionsClientPage({
               source={question.source}
               dateAdded={question.date_added}
               status={question.status}
+              answer={question.answer ?? ""}
               state={question.state}
               notes={question.notes}
             />

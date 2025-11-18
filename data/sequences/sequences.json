@@ -1030,6 +1030,25 @@
     { "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
     { "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
   ]
+},
+{
+  "slug": "on-murder",
+  "title": "On Murder",
+  "preview": "A study of the act of murder from philosophical, psychological, and sociological perspectives.",
+  "start_date": "2025-08-25",
+  "end_date": "",
+  "cover-url": "https://imgs.search.brave.com/3fdncU5ZAMdIpIIgdUY0IhCabActSfE9G8mKRR2RlZc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly82NC5t/ZWRpYS50dW1ibHIu/Y29tL2ZmYmEyMGZj/ZjdjZTI1NzllYjRh/MWU5ZjlhMzRjZjU3/L2Y0NjU4Y2NkNDU2/ZTFhMmItYTIvczEy/ODB4MTkyMC84MjYx/MzE0YzhmMjQwMWQy/ZmYxODBkMDNhZTcx/MGI0MDU1ZWRhNzNi/LmpwZw",
+  "state": "active",
+  "status": "In Progress",
+  "confidence": "likely",
+  "importance": 9,
+  "category": "Personal",
+  "tags": ["essays", "philosophy", "psychology", "culture", "personal-writing", "curated"],
+  "posts": [
+    { "slug": "boy-interrupted", "order": 1, "type": "essay" },
+    { "slug": "reflections-on-modern-society", "order": 2, "type": "essay" },
+    { "slug": "philosophy-of-personal-growth", "order": 3, "type": "essay" }
+  ]
 }
 
 

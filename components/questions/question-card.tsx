@@ -1,4 +1,6 @@
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 import { formatDate } from "@/utils/date-formatter"
 
 interface QuestionCardProps {
@@ -8,9 +10,10 @@ interface QuestionCardProps {
   tags: string[]
   source: string
   dateAdded: string
-  status: "open" | "solved"
+  status: string
   state: "active" | "hidden"
   notes: string
+  answer?: string
 }
 
 export function QuestionCard({
@@ -23,8 +26,18 @@ export function QuestionCard({
   status,
   state,
   notes,
+  answer = "",
 }: QuestionCardProps) {
-  const statusColor = status === "solved" ? "bg-green-500/10 text-green-500" : "bg-blue-500/10 text-blue-500"
+  // Determine color by status: open (red), answered/solved (green), dropped (gray), fallback (blue)
+  const normalized = (status || "").toLowerCase();
+  let statusColor = "bg-blue-500/10 text-blue-500";
+  if (normalized === "open") {
+    statusColor = "bg-red-500/10 text-red-500";
+  } else if (normalized === "answered" || normalized === "solved") {
+    statusColor = "bg-green-500/10 text-green-500";
+  } else if (normalized === "dropped" || normalized === "abandoned") {
+    statusColor = "bg-gray-500/10 text-gray-500";
+  }
 
   return (
     <div className="border rounded-none p-6 space-y-4 bg-card hover:bg-card/80 transition-colors">
@@ -37,9 +50,23 @@ export function QuestionCard({
             {notes}
           </p>
         </div>
-        <Badge variant="outline" className={statusColor}>
-          {status}
-        </Badge>
+        <div className="flex flex-col items-end gap-2">
+          <Badge variant="outline" className={statusColor}>
+            {status}
+          </Badge>
+          {answer && answer.trim() !== "" ? (
+            // Use client-side navigation for internal links, external links open in new tab
+            answer.startsWith("/") ? (
+              <Button asChild size="xs" variant="default" className="bg-green-500/10 text-green-500 hover:bg-green-500/20 border-green-200 dark:border-green-800">
+                <Link href={answer}>Answer</Link>
+              </Button>
+            ) : (
+              <Button asChild size="xs" variant="default" className="bg-green-500/10 text-green-500 hover:bg-green-500/20 border-green-200 dark:border-green-800">
+                <a href={answer} target="_blank" rel="noopener noreferrer">Answer</a>
+              </Button>
+            )
+          ) : null}
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-2 mb-3">
