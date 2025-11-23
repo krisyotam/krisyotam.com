@@ -1,24 +1,24 @@
-/*
- * Title: 404 Error Page URL Suggester
- * Author: Kris Yotam
- * Date: 2023-08-20
- * License: CC-0
- *
- * This script enhances the 404 error page by suggesting similar URLs
- * based on the current path that resulted in the 404 error. It loads URLs from various
- * JSON data files (pages, posts, notes, tags, sequences, categories) and presents the most 
- * similar ones by text edit distance as suggestions to the user.
- *
- * Features:
- * - Collects URLs from multiple JSON data sources
- * - Uses Levenshtein distance algorithm for efficient URL comparison
- * - Presents ≤10 unique, most similar URLs as suggestions
- * - Injects the suggestions into the current page
- *
- * Example:
- * If a user goes to `/bloog`, intending to go to `/blog`, this will return
- * suggestions including `/blog` and other similar paths.
- */
+/*********************************************************************************************
+ * Title: 404 Error Page URL Suggester                                                       *
+ * Author: Kris Yotam                                                                        *
+ * Date: 2023-08-20                                                                          *
+ * License: CC-0                                                                             *
+ *                                                                                           *
+ * This script enhances the 404 error page by suggesting similar URLs                        *
+ * based on the current path that resulted in the 404 error. It loads URLs from various      *
+ * JSON data files (pages, posts, notes, tags, sequences, categories) and presents the most  *  
+ * similar ones by text edit distance as suggestions to the user.                            *
+ *                                                                                           *
+ * Features:                                                                                 *
+ * - Collects URLs from multiple JSON data sources                                           *
+ * - Uses Levenshtein distance algorithm for efficient URL comparison                        *
+ * - Presents ≤10 unique, most similar URLs as suggestions                                   *
+ * - Injects the suggestions into the current page                                           *
+ *                                                                                           *
+ * Example:                                                                                  *
+ * If a user goes to `/bloog`, intending to go to `/blog`, this will return                  *
+ * suggestions including `/blog` and other similar paths.                                    *
+ *********************************************************************************************/
 
 // Check if script was already loaded to prevent duplicate declarations
 if (typeof window.URL_SUGGESTER_LOADED === 'undefined') {
@@ -269,17 +269,38 @@ if (typeof window.URL_SUGGESTER_LOADED === 'undefined') {
 
   // Function to inject suggestions into the page
   function injectSuggestions(currentPath, suggestions) {
-    let suggestionsHtml = suggestions.length > 0
-      ? suggestions.map(item => `<li><p><a class="link-live" href="${item.url}"><code>${item.path}</code></a></p></li>`).join("")
-      : "<li><p><strong>No similar URLs found.</strong></p></li>";
+    // If we are injecting into the dedicated suggestions container (card header is rendered in the page),
+    // only create the inner list markup to avoid duplicate headings. Otherwise, render the full suggestions section.
+    const isDedicatedContainer = !!document.getElementById('url-suggestions-container');
 
-    let suggestionsElement = elementFromHTML(`<section class="space-y-4">
-        <h2 class="text-2xl font-semibold" id="guessed-urls">Suggested URLs</h2>
-        <p class="text-muted-foreground dark:text-zinc-400">Similar URLs to your current path (<code>${currentPath}</code>):</p>
+    let suggestionsHtml = suggestions.length > 0
+      ? suggestions.map(item => `<li class="py-3 px-4"><a class="link-live block" href="${item.url}"><code>${item.path}</code></a></li>`).join("")
+      : `<li class="py-3 px-4"><strong>No similar URLs found.</strong></li>`;
+
+    let suggestionsElement;
+    if (isDedicatedContainer) {
+      // Only produce the inner list so the page's card header remains the top section
+      suggestionsElement = elementFromHTML(`<div><ul class="divide-y divide-border">${suggestionsHtml}</ul></div>`);
+    } else {
+      // Fallback full section when no dedicated container exists
+      suggestionsElement = elementFromHTML(`<section class="space-y-4">
+        <h2 class="text-2xl font-semibold" id="guessed-urls">Suggested pages</h2>
+        <p class="text-muted-foreground">Did you mean one of these? (<code>${currentPath}</code>)</p>
         <div>
           <ul class="space-y-2">${suggestionsHtml}</ul>
         </div>
-    </section>`);
+      </section>`);
+    }
+
+    // Prefer inserting into the dedicated suggestions container if present
+    const suggestionsContainer = document.getElementById('url-suggestions-container');
+    if (suggestionsContainer) {
+      // Clear any previous contents and append the new suggestions section
+      suggestionsContainer.innerHTML = '';
+      suggestionsContainer.appendChild(suggestionsElement);
+      console.log('404 Suggester: Injected suggestions into #url-suggestions-container');
+      return;
+    }
 
     // First try to find the #markdownBody element because that's specifically set up for this in not-found.tsx
     const markdownBody = document.getElementById('markdownBody');

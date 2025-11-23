@@ -1,11 +1,14 @@
 "use client"
 
 import { useEffect, useState } from "react"
+// Note: no Next <Script> or Link needed here
+import { useRouter } from "next/navigation"
+import { Search } from "lucide-react"
+import { LiveClock } from "@/components/live-clock"
+import SiteFooter from "@/components/typography/expanded-footer-block"
+import { Footer } from "@/components/footer"
+import { PageHeader } from "@/components/page-header"
 import { Card } from "@/components/ui/card"
-import Script from "next/script"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowLeft, Home, Search } from "lucide-react"
 
 interface Quote {
   text: string
@@ -13,22 +16,11 @@ interface Quote {
 }
 
 export default function NotFound() {
-  const [randomQuote, setRandomQuote] = useState<Quote | null>(null)
+  // no inline quote here; SiteFooter provides the quote bento lower on the page
+  const [searchTerm, setSearchTerm] = useState("")
+  const router = useRouter()
   
   useEffect(() => {
-    // Fetch quotes from the header-quotes.json file
-    const fetchQuote = async () => {
-      try {
-        const response = await fetch('/api/random-quote')
-        const data = await response.json()
-        setRandomQuote(data)
-      } catch (error) {
-        console.error("Failed to fetch random quote:", error)
-      }
-    }
-    
-    fetchQuote()
-
     // Load the 404-suggester script using the /api/get-script API route
     const loadScript = () => {
       // Remove any existing script first to avoid duplicates
@@ -52,53 +44,64 @@ export default function NotFound() {
 
   return (
     <>
-      <div className="min-h-screen bg-background dark:bg-[#0A0A0A] text-foreground dark:text-zinc-100">
-        <div className="max-w-2xl mx-auto p-8 md:p-16 lg:p-24">
-          <div className="space-y-8">
-            {/* 404 Header */}
-            <div className="text-center">
-              <h1 className="text-6xl font-semibold mb-2">404</h1>
-              <p className="text-xl text-muted-foreground dark:text-zinc-400">Page not found</p>
+  <div className="min-h-screen bg-background text-foreground pt-16">
+        <div className="max-w-6xl mx-auto px-4">
+          {/* Page header to match regular pages */}
+          <div className="mb-8 container max-w-[672px] mx-auto px-4">
+            <PageHeader
+              title="404 - Page not found"
+              preview="We couldn't find the page you requested. Below are a few suggestions that might help you find what you were looking for."
+              backText="Home"
+              backHref="/"
+            />
+          </div>
+
+          {/* Main column that matches essay width */}
+          <main id="markdownBody" className="container max-w-[672px] mx-auto px-4 space-y-6">
+            {/* Search bar (like /read) */}
+            <div className="w-full">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <input
+                  aria-label="Search site"
+                  type="text"
+                  placeholder="Search site..."
+                  className="w-full h-9 pl-10 pr-3 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      const q = searchTerm.trim();
+                      if (q) router.push(`/search?q=${encodeURIComponent(q)}`)
+                    }
+                  }}
+                />
+              </div>
             </div>
-            
-            {/* Random Quote Card */}
-            {randomQuote && (
-              <Card className="p-6 bg-card dark:bg-[#1A1A1A] text-card-foreground dark:text-zinc-100 border-border dark:border-zinc-800">
-                <blockquote className="space-y-2">
-                  <p className="text-lg italic">&ldquo;{randomQuote.text}&rdquo;</p>
-                  <footer className="text-sm text-muted-foreground dark:text-zinc-400">— {randomQuote.author}</footer>
-                </blockquote>
-              </Card>
-            )}
-            
-            {/* URL Suggestions Container - This will be populated by the 404-suggester.js script */}
-            <div id="markdownBody" className="space-y-6">
-              {/* Empty div with id for the loading indicator */}
-              <div id="url-suggestions-container"></div>
-              
-              {/* Other Options Section */}
-              <section id="other-options" className="space-y-4">
-                <h2 className="text-2xl font-semibold">Other Options</h2>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button variant="outline" className="flex items-center gap-2" onClick={() => window.history.back()}>
-                    <ArrowLeft className="h-4 w-4" />
-                    Go Back
-                  </Button>
-                  <Link href="/" passHref>
-                    <Button variant="outline" className="flex items-center gap-2">
-                      <Home className="h-4 w-4" />
-                      Home
-                    </Button>
-                  </Link>
-                  <Link href="/search" passHref>
-                    <Button variant="outline" className="flex items-center gap-2">
-                      <Search className="h-4 w-4" />
-                      Search
-                    </Button>
-                  </Link>
+
+            {/* (No inline quote here; the SiteFooter below provides the footer bento) */}
+
+            {/* URL Suggestions Container - populated by the 404-suggester.js script
+                Wrapped in a square-corner bento that looks like a vertical table */}
+            <div>
+              <Card className="w-full">
+                <div className="p-4 border-b border-border">
+                  <h3 className="text-lg font-medium">Suggested pages</h3>
+                  <p className="text-sm text-muted-foreground">Did you mean one of these?</p>
                 </div>
-              </section>
+                <div id="url-suggestions-container" className="divide-y divide-border" />
+              </Card>
             </div>
+
+            {/* Other Options removed per design — search bar added above */}
+          </main>
+          {/* Footer and clock like essay pages */}
+          <div className="mt-8 container max-w-[672px] mx-auto px-4">
+            <SiteFooter lastUpdated={new Date().toISOString().slice(0,10)} rawMarkdown={""} />
+            <div className="mt-4">
+              <LiveClock />
+            </div>
+            <Footer />
           </div>
         </div>
       </div>
