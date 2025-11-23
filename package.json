@@ -8,8 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "compile-legal": "node scripts/compile-legal-docs.js"
-    ,"generate-rss": "node --experimental-specifier-resolution=node scripts/generate-rss.mjs"
+    "compile-legal": "node scripts/compile-legal-docs.js",
+    "generate-rss": "node --experimental-specifier-resolution=node scripts/generate-rss.mjs"
   },
   "dependencies": {
     "@apollo/client": "3.13.8",
@@ -78,6 +78,7 @@
     "mapbox-gl-globe-minimap": "^1.2.0",
     "mapbox-gl-style-switcher": "^1.0.11",
     "marked": "^15.0.7",
+    "mime-types": "^3.0.2",
     "motion": "^12.23.12",
     "msgpack-lite": "^0.1.26",
     "next": "^14.2.26",
@@ -128,6 +129,7 @@
   "devDependencies": {
     "@types/escodegen": "^0.0.10",
     "@types/mapbox-gl": "^3.4.1",
+    "@types/mime-types": "^3.0.1",
     "@types/node": "22.15.3",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^18.3.20",
