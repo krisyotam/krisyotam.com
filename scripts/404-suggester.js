@@ -29,110 +29,28 @@ if (typeof window.URL_SUGGESTER_LOADED === 'undefined') {
   const MAX_SUGGESTIONS = 10;
   const MAX_DISTANCE = 8; // Max edit distance to consider
 
-  // URLs for data sources
-  const dataUrls = {
-    pages: '/api/data?file=page-directory.json',
-    posts: '/api/data?file=feed.json',
-    notes: '/api/data?file=quick-notes.json',
-    tags: '/api/data?file=tags.json',
-    sequences: '/api/data?file=seq.json',
-    categories: '/api/data?file=category-data.json',
-    poems: '/api/data?file=poems.json'
-  };
+  // The script now relies on the server-side `/api/404-suggester` endpoint which
+  // returns { paths: string[], map: { rootFiles: string[], folders: { [name]: { files: string[], hasPosts, hasTags, hasCategories } } } }
 
-  // Function to fetch JSON data from a URL
-  async function fetchData(url) {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch ${url}: ${response.status} ${response.statusText}`);
-      }
-      return await response.json();
-    } catch (error) {
-      console.error(`Error fetching data from ${url}:`, error);
-      return null;
-    }
-  }
-
-  // Extract paths from each data source
+  // Function to fetch path list from the new server-side endpoint
   async function collectPaths() {
-    const allPaths = [];
-    
     try {
-      // Pages
-      const pagesData = await fetchData(dataUrls.pages);
-      if (pagesData && pagesData.pages) {
-        pagesData.pages.forEach(page => {
-          if (page.path) {
-            allPaths.push(page.path);
-          }
-        });
+      const resp = await fetch('/api/404-suggester');
+      if (!resp.ok) {
+        console.warn('404 Suggester: /api/404-suggester responded with', resp.status);
+        return [];
       }
-
-      // Posts
-      const postsData = await fetchData(dataUrls.posts);
-      if (postsData && postsData.posts) {
-        postsData.posts.forEach(post => {
-          if (post.slug) {
-            allPaths.push(`/blog/${post.slug}`);
-          }
-        });
+      const body = await resp.json();
+      // Expose the hard map on window for debugging and possible future UI uses
+      if (body && body.map) {
+        try { window.URL_SUGGESTER_MAP = body.map; } catch (e) { /* ignore in restrictive envs */ }
       }
-
-      // Notes
-      const notesData = await fetchData(dataUrls.notes);
-      if (notesData && Array.isArray(notesData)) {
-        notesData.forEach(note => {
-          if (note.slug) {
-            allPaths.push(`/notes/${note.slug}`);
-          }
-        });
-      }
-
-      // Tags
-      const tagsData = await fetchData(dataUrls.tags);
-      if (tagsData && tagsData.tags) {
-        tagsData.tags.forEach(tag => {
-          if (tag.slug) {
-            allPaths.push(`/tag/${tag.slug}`);
-          }
-        });
-      }
-
-      // sequences
-      const sequencesData = await fetchData(dataUrls.sequences);
-      if (sequencesData && sequencesData.sequences) {
-        sequencesData.sequences.forEach(sequences => {
-          if (sequences.slug) {
-            allPaths.push(`/sequences/${sequences.slug}`);
-          }
-        });
-      }
-
-      // Categories
-      const categoriesData = await fetchData(dataUrls.categories);
-      if (categoriesData && categoriesData.categories) {
-        categoriesData.categories.forEach(category => {
-          if (category.slug) {
-            allPaths.push(`/category/${category.slug}`);
-          }
-        });
-      }
-
-      // Poems
-      const poemsData = await fetchData(dataUrls.poems);
-      if (poemsData && poemsData.poems) {
-        poemsData.poems.forEach(poem => {
-          if (poem.slug) {
-            allPaths.push(`/poetry/${poem.slug}`);
-          }
-        });
-      }
-    } catch (error) {
-      console.error("Error collecting paths:", error);
+      if (body && Array.isArray(body.paths)) return body.paths;
+      return (body && body.paths) || [];
+    } catch (err) {
+      console.error('404 Suggester: Error fetching /api/404-suggester', err);
+      return [];
     }
-
-    return allPaths;
   }
 
   // Function to calculate Levenshtein distance with early termination
@@ -171,6 +89,144 @@ if (typeof window.URL_SUGGESTER_LOADED === 'undefined') {
     return matrix[b.length][a.length];
   }
 
+  // Normalize a path for comparison: lowercase, trim, remove extension, collapse separators
+  function normalizePath(p) {
+    if (!p || typeof p !== 'string') return '';
+    return p
+      .toLowerCase()
+      .trim()
+      .replace(/\.html?$|\.mdx?$|\.md$/g, '')
+      .replace(/[^a-z0-9/]+/g, '-')
+      .replace(/--+/g, '-')
+      .replace(/(^-|-$)/g, '')
+      .replace(/\/+$/g, '')
+      ;
+  }
+
+  // Split a path into meaningful tokens (segments and words)
+  function tokenizePath(p) {
+    const norm = normalizePath(p);
+    const segments = norm.split('/').filter(Boolean);
+    const words = [];
+    segments.forEach(seg => {
+      seg.split(/[-_]+/).forEach(w => {
+        if (w) words.push(w);
+      });
+    });
+    return { segments, words };
+  }
+
+  // Simple Soundex implementation for phonetic comparison
+  function soundex(word) {
+    if (!word) return '';
+    const s = word.toUpperCase().replace(/[^A-Z]/g, '');
+    if (!s) return '';
+    const first = s[0];
+    const map = { B:1,F:1,P:1,V:1, C:2,G:2,J:2,K:2,Q:2,S:2,X:2,Z:2, D:3,T:3, L:4, M:5,N:5, R:6 };
+    let prev = map[first] || 0;
+    let out = first;
+    for (let i = 1; i < s.length && out.length < 4; i++) {
+      const c = s[i];
+      const code = map[c] || 0;
+      if (code === prev) continue;
+      if (code !== 0) out += String(code);
+      prev = code;
+    }
+    while (out.length < 4) out += '0';
+    return out;
+  }
+
+  // Jaro-Winkler similarity (returns 0..1 where 1 is identical)
+  function jaroWinkler(s1, s2) {
+    if (!s1 || !s2) return 0;
+    s1 = s1.toLowerCase();
+    s2 = s2.toLowerCase();
+    if (s1 === s2) return 1;
+    const maxDist = Math.floor(Math.max(s1.length, s2.length) / 2) - 1;
+    const matched1 = new Array(s1.length).fill(false);
+    const matched2 = new Array(s2.length).fill(false);
+    let matches = 0;
+    for (let i = 0; i < s1.length; i++) {
+      const start = Math.max(0, i - maxDist);
+      const end = Math.min(s2.length - 1, i + maxDist);
+      for (let j = start; j <= end; j++) {
+        if (matched2[j]) continue;
+        if (s1[i] !== s2[j]) continue;
+        matched1[i] = true;
+        matched2[j] = true;
+        matches++;
+        break;
+      }
+    }
+    if (matches === 0) return 0;
+    let t = 0;
+    let k = 0;
+    for (let i = 0; i < s1.length; i++) {
+      if (!matched1[i]) continue;
+      while (!matched2[k]) k++;
+      if (s1[i] !== s2[k]) t++;
+      k++;
+    }
+    t = t / 2;
+    const m = matches;
+    const jaro = (m / s1.length + m / s2.length + (m - t) / m) / 3;
+    // Winkler boost
+    let l = 0;
+    const prefixLimit = 4;
+    for (let i = 0; i < Math.min(prefixLimit, s1.length, s2.length); i++) {
+      if (s1[i] === s2[i]) l++; else break;
+    }
+    const p = 0.1; // scaling factor
+    return jaro + l * p * (1 - jaro);
+  }
+
+  // Word-level aggregated Levenshtein: for each target word, find best match in candidate words,
+  // normalize by length and sum. Lower is better.
+  function wordLevelDistance(targetWords, candWords) {
+    if (!targetWords || targetWords.length === 0) return 0;
+    if (!candWords || candWords.length === 0) return Infinity;
+    let sum = 0;
+    targetWords.forEach(tw => {
+      let best = Infinity;
+      candWords.forEach(cw => {
+        const d = boundedLevenshteinDistance(tw, cw, Math.max(tw.length, cw.length));
+        const norm = d / Math.max(1, Math.max(tw.length, cw.length));
+        if (norm < best) best = norm;
+      });
+      sum += best;
+    });
+    // average
+    return sum / targetWords.length;
+  }
+
+  // Composite score: lower is better
+  function compositeScore(targetPath, candidatePath) {
+    const t = tokenizePath(targetPath);
+    const c = tokenizePath(candidatePath);
+
+    // Word-level normalized Levenshtein (0 best)
+    const wordLev = wordLevelDistance(t.words, c.words);
+
+    // Jaro-Winkler on full normalized path (1 best) -> convert to distance
+    const jw = jaroWinkler(normalizePath(targetPath), normalizePath(candidatePath));
+    const jwDist = 1 - jw;
+
+    // Phonetic boost: proportion of words whose soundex matches
+    let phoneticMatches = 0;
+    t.words.forEach(tw => {
+      const ts = soundex(tw);
+      c.words.forEach(cw => {
+        if (ts && ts === soundex(cw)) phoneticMatches += 1;
+      });
+    });
+    const phoneticRatio = t.words.length ? phoneticMatches / t.words.length : 0;
+    const phoneticBoost = 1 - phoneticRatio; // lower is better
+
+    // Combine with weights
+    const score = (wordLev * 0.6) + (jwDist * 0.3) + (phoneticBoost * 0.1);
+    return score;
+  }
+
   // Function to find similar URLs
   function findSimilarUrls(paths, targetPath, n = MAX_SUGGESTIONS, maxDistance = MAX_DISTANCE) {
     // Quick filter based on length difference
@@ -178,26 +234,37 @@ if (typeof window.URL_SUGGESTER_LOADED === 'undefined') {
       Math.abs(path.length - targetPath.length) <= maxDistance
     );
 
-    const similarUrls = potentialMatches
-      .map(path => ({
-        path,
-        distance: boundedLevenshteinDistance(path, targetPath, maxDistance)
-      }))
-      .filter(item => item.distance <= maxDistance)
-      .sort((a, b) => a.distance - b.distance);
+    // If we have a folder map and the current path belongs to a folder under /data,
+    // prefer results that live in that folder by applying a small boost to their score.
+    const folderPrefix = (function() {
+      try {
+        const map = window.URL_SUGGESTER_MAP;
+        if (!map || !map.folders) return null;
+        const seg = targetPath.split('/').filter(Boolean)[0];
+        if (seg && map.folders[seg]) return `/${seg}/`;
+      } catch (e) { /* ignore */ }
+      return null;
+    })();
 
-    // De-duplicate while preserving order
-    const seenUrls = new Set();
-    const uniqueSimilarUrls = similarUrls.filter(item => {
-      if (seenUrls.has(item.path)) return false;
-      seenUrls.add(item.path);
-      return true;
-    }).slice(0, n);
+      const scored = potentialMatches.map(path => {
+        const score = compositeScore(targetPath, path);
+        const folderBoost = folderPrefix && path.startsWith(folderPrefix) ? 0.15 : 0;
+        return { path, score: score - folderBoost };
+      }).filter(item => Number.isFinite(item.score));
 
-    return uniqueSimilarUrls.map(item => ({
-      path: item.path,
-      url: window.location.origin + item.path
-    }));
+      scored.sort((a, b) => a.score - b.score);
+
+      // De-duplicate while preserving order
+      const seenUrls = new Set();
+      const uniqueSimilarUrls = [];
+      for (const item of scored) {
+        if (seenUrls.has(item.path)) continue;
+        seenUrls.add(item.path);
+        uniqueSimilarUrls.push(item);
+        if (uniqueSimilarUrls.length >= n) break;
+      }
+
+      return uniqueSimilarUrls.map(item => ({ path: item.path, url: window.location.origin + item.path }));
   }
 
   // Function to inject suggestions into the page

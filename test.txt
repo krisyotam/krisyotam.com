@@ -1,48 +1,10 @@
 
-now for /portfolio at the top we are going to add pixelated canvas with my pfp
+404.suggester.py is one of the most important site scripts and underpins the uniqueness of the site. 
+We are going to completelyh rework 404-suggester.py I want everything organized into neat functions, using the 
+suckless programming style. I want you to create a api route for 404-suggester itself to pull data from the needed json files 
 
-add this to the lib/utils
-
-import { ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-
-and use components/ui/pixelated-canvas.tsx 
-
-here are some differnet props: 
-
-"use client";
-import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
-
-export function PixelatedCanvasDemo() {
-  return (
-    <div className="mx-auto mt-8 flex w-full items-center justify-center">
-      <PixelatedCanvas
-        src="https://images.unsplash.com/photo-1630487656049-6db93a53a7e9?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        width={800}
-        height={600}
-        cellSize={4}
-        dotScale={0.9}
-        shape="square"
-        backgroundColor="#000000"
-        dropoutStrength={0.1}
-        interactive
-        distortionStrength={0.1}
-        distortionRadius={200}
-        distortionMode="repel"
-        followSpeed={0.2}
-        jitterStrength={4}
-        jitterSpeed={1}
-        sampleAverage
-        className="rounded-xl shadow-lg"
-      />
-    </div>
-  );
-}
-
-the image should be square and will use this image "https://doc.krisyotam.com/site/krisyotam-site-light.png"
-"https://doc.krisyotam.com/site/krisyotam-site-dark.png";, one for light mode the other for dark mode 
+and for routes it will need to know every page app. This is easy for the standard / roues for pages like /grid for ex. 
+but for post pages, category pages, and tag pages you will need to go ahead and check the .json files for that directory.  
+for ex. for essays 
+go to data/essays and it will need to take in essays.json, tags.json and categories.json from the data/essays directory and understand 
+the structure of those 3 types of files as it will be the same process for all the routes in (content) directory. 
