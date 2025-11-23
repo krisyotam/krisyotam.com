@@ -32,6 +32,6 @@
     ".next/types/**/*.ts", 
     "types/**/*.d.ts",
     "global.d.ts"
-, "app/doc/[...file]/route.js"  ],
+, "app/doc/[...file]/route.ts"  ],
   "exclude": ["node_modules", "**/*.mdx"]
 }
