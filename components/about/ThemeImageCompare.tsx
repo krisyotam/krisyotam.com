@@ -37,11 +37,11 @@ export function ThemeImageCompare({ className }: { className?: string }) {
   const isDark = useIsDarkMode();
 
   const firstImage = isDark
-    ? "https://doc.krisyotam.com/site/krisyotam-site-dark.png"
-    : "https://doc.krisyotam.com/site/krisyotam-site-light.png";
+    ? "https://krisyotam.com/doc/site/krisyotam-site-dark.png"
+    : "https://krisyotam.com/doc/site/krisyotam-site-light.png";
   const secondImage = isDark
-    ? "https://doc.krisyotam.com/site/krisyotam-site-light.png"
-    : "https://doc.krisyotam.com/site/krisyotam-site-dark.png";
+    ? "https://krisyotam.com/doc/site/krisyotam-site-light.png"
+    : "https://krisyotam.com/doc/site/krisyotam-site-dark.png";
 
   return (
     <div

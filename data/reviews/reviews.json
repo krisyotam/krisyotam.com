@@ -10,7 +10,7 @@
 "confidence": "certain",
 "importance": 5,
 "preview": "A review of the 1990 film 'Mermaids' starring Winona Ryder",
-"cover_image": "https://doc.krisyotam.com/imgs/film/Mermaids.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/Mermaids.jpg",
 "state": "active"
 },
 {
@@ -24,7 +24,7 @@
 "confidence": "certain",
 "importance": 5,
 "preview": "A review of the 1999 psychological drama 'Girl, Interrupted' starring Winona Ryder and Angelina Jolie.",
-"cover_image": "https://doc.krisyotam.com/imgs/film/girl-interrupted.png",
+"cover_image": "https://krisyotam.com/doc/imgs/film/girl-interrupted.png",
 "state": "active"
 },
 {
@@ -38,7 +38,7 @@
 "confidence": "certain",
 "importance": 5,
 "preview": "A review of the 1989 cult classic dark comedy 'Heathers' starring Winona Ryder and Christian Slater.",
-"cover_image": "https://doc.krisyotam.com/imgs/film/heathers.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/heathers.jpg",
 "state": "active"
 },
 {
@@ -52,7 +52,7 @@
 "status": "Draft",
 "confidence": "unlikely",
 "importance": 1,
-"cover_image": "https://doc.krisyotam.com/imgs/anime/wistoria-wand-and-sw-ord.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/wistoria-wand-and-sw-ord.jpg",
 "state": "hidden"
 },
 {
@@ -66,7 +66,7 @@
 "status": "In Progress",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://doc.krisyotam.com/imgs/anime/neon-genesis-evanglion.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/neon-genesis-evanglion.jpg",
 "state": "active"
 },
 {
@@ -80,7 +80,7 @@
 "status": "In Progress",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://doc.krisyotam.com/imgs/bookstores/the-village-booksmith.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/bookstores/the-village-booksmith.jpg",
 "state": "active"
 },
 {
@@ -94,7 +94,7 @@
 "status": "In Progress",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://doc.krisyotam.com/imgs/bookstores/frugal-muse.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/bookstores/frugal-muse.jpg",
 "state": "active"
 },
 {
@@ -108,7 +108,7 @@
 "status": "In Progress",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://doc.krisyotam.com/imgs/books/pride-and-prejudice-penguin-classics.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/books/pride-and-prejudice-penguin-classics.jpg",
 "state": "active"
 },
 {
@@ -122,7 +122,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://doc.krisyotam.com/imgs/film/casablanca.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/casablanca.jpg",
 "state": "active"
 },
 {
@@ -136,7 +136,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 9,
-"cover_image": "https://doc.krisyotam.com/imgs/film/citizen-kane.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/citizen-kane.jpg",
 "state": "active"
 },
 {
@@ -150,7 +150,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://doc.krisyotam.com/imgs/film/Jeanne-Dielman.png",
+"cover_image": "https://krisyotam.com/doc/imgs/film/Jeanne-Dielman.png",
 "state": "active"
 },
 {
@@ -164,7 +164,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://doc.krisyotam.com/imgs/anime/elfen-lied.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/elfen-lied.jpg",
 "state": "active"
 },
 	{
@@ -178,7 +178,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://doc.krisyotam.com/imgs/anime/ergo-proxy.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/ergo-proxy.jpg",
 "state": "active"
 },
 {
@@ -192,7 +192,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://doc.krisyotam.com/imgs/anime/haibane-renmei.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/haibane-renmei.jpg",
 "state": "active"
 },
 {
@@ -206,7 +206,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://doc.krisyotam.com/imgs/anime/ghsot-in-the-shell.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/ghsot-in-the-shell.jpg",
 "state": "active"
 },
 {
@@ -220,7 +220,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://doc.krisyotam.com/imgs/anime/sousou-no-frieren.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/sousou-no-frieren.jpg",
 "state": "active"
 },
 {
@@ -234,7 +234,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://doc.krisyotam.com/imgs/anime/that-time-i-got-reincarnated-as-a-slime.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/that-time-i-got-reincarnated-as-a-slime.jpg",
 "state": "active"
 },
 {
@@ -248,7 +248,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://doc.krisyotam.com/imgs/anime/texhnolyze.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/texhnolyze.jpg",
 "state": "active"
 },
 {
@@ -262,7 +262,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://doc.krisyotam.com/imgs/manga/aku-no-hana.png",
+"cover_image": "https://krisyotam.com/doc/imgs/manga/aku-no-hana.png",
 "state": "active"
 },
 {
@@ -276,7 +276,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://doc.krisyotam.com/imgs/manga/chi-no-wadachi.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/manga/chi-no-wadachi.jpg",
 "state": "active"
 },
 {
@@ -290,7 +290,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 8,
-"cover_image": "https://doc.krisyotam.com/imgs/manga/ghost-in-the-shell.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/manga/ghost-in-the-shell.jpg",
 "state": "active"
 },
 {
@@ -304,7 +304,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 7,
-"cover_image": "https://doc.krisyotam.com/imgs/manga/tomie.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/manga/tomie.jpg",
 "state": "active"
 },
 {
@@ -318,7 +318,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://doc.krisyotam.com/imgs/film/bridgerton.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/bridgerton.jpg",
 "state": "active"
 },
 {
@@ -332,7 +332,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://doc.krisyotam.com/imgs/film/charlies-angels.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/charlies-angels.jpg",
 "state": "active"
 },
 {
@@ -346,7 +346,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://doc.krisyotam.com/imgs/film/the-vampire-diaries.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/the-vampire-diaries.jpg",
 "state": "active"
 },
 {
@@ -360,7 +360,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://doc.krisyotam.com/imgs/film/gossip-girl.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/gossip-girl.jpg",
 "state": "active"
 },
 {
@@ -374,7 +374,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://doc.krisyotam.com/imgs/film/gilmore-girl.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/gilmore-girl.jpg",
 "state": "active"
 },
 {
@@ -388,7 +388,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://doc.krisyotam.com/imgs/anime/logh.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/logh.jpg",
 "state": "active"
 },
 {
@@ -402,7 +402,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://doc.krisyotam.com/imgs/film/breakfast-at-tiffanys.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/breakfast-at-tiffanys.jpg",
 "state": "active"
 },
 {
@@ -416,7 +416,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://doc.krisyotam.com/imgs/film/mulholland-dr.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/mulholland-dr.jpg",
 "state": "active"
 },
 {
@@ -430,7 +430,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://doc.krisyotam.com/imgs/film/diary-of-a-lost-girl.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/diary-of-a-lost-girl.jpg",
 "state": "active"
 },
 {
@@ -444,7 +444,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 6,
-"cover_image": "https://doc.krisyotam.com/imgs/film/pulp-fiction.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/pulp-fiction.jpg",
 "state": "active"
 },
 {
@@ -458,7 +458,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://doc.krisyotam.com/imgs/film/the-shining.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/the-shining.jpg",
 "state": "active"
 },
 {
@@ -472,7 +472,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://doc.krisyotam.com/imgs/film/picnic-at-hanging-rock.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/picnic-at-hanging-rock.jpg",
 "state": "active"
 },
 {
@@ -486,7 +486,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://doc.krisyotam.com/imgs/film/all-about-eve.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/all-about-eve.jpg",
 "state": "active"
 },
 {
@@ -500,7 +500,7 @@
 "status": "Draft",
 "confidence": "likely",
 "importance": 5,
-"cover_image": "https://doc.krisyotam.com/imgs/film/weapons.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/weapons.jpg",
 "state": "active"
 },
 {
@@ -514,7 +514,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of The Duncan Sisters Eva and Topsy.",
-"cover_image": "https://doc.krisyotam.com/imgs/film/the-duncan-sisters-eva-and-topsy.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/the-duncan-sisters-eva-and-topsy.jpg",
 "state": "hidden"
 },
 {
@@ -528,7 +528,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of The Haunting of Hill House.",
-"cover_image": "https://doc.krisyotam.com/imgs/television/the-haunting-of-hill-house.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/television/the-haunting-of-hill-house.jpg",
 "state": "hidden"
 },
 {
@@ -542,7 +542,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Speed Grapher.",
-"cover_image": "https://doc.krisyotam.com/imgs/anime/speed-grapher.jpeg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/speed-grapher.jpeg",
 "state": "hidden"
 },
 {
@@ -556,7 +556,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Perfect Blue (Manga).",
-"cover_image": "https://doc.krisyotam.com/imgs/manga/perfect-blue-manga.jpeg",
+"cover_image": "https://krisyotam.com/doc/imgs/manga/perfect-blue-manga.jpeg",
 "state": "hidden"
 },
 {
@@ -570,7 +570,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Les Yeux Sans Visage.",
-"cover_image": "https://doc.krisyotam.com/imgs/film/les-yeux-sans-visage.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/les-yeux-sans-visage.jpg",
 "state": "hidden"
 },
 {
@@ -584,7 +584,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Serial Experiments Lain.",
-"cover_image": "https://doc.krisyotam.com/imgs/anime/serial-experiments-lain.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/serial-experiments-lain.jpg",
 "state": "hidden"
 },
 {
@@ -598,7 +598,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Fraction (Manga).",
-"cover_image": "https://doc.krisyotam.com/imgs/manga/fraction-manga.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/manga/fraction-manga.jpg",
 "state": "hidden"
 },
 {
@@ -612,7 +612,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Lost Highway.",
-"cover_image": "https://doc.krisyotam.com/imgs/film/lost-highway.png",
+"cover_image": "https://krisyotam.com/doc/imgs/film/lost-highway.png",
 "state": "hidden"
 },
 {
@@ -626,7 +626,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Death Note.",
-"cover_image": "https://doc.krisyotam.com/imgs/anime/death-note.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/death-note.jpg",
 "state": "hidden"
 },
 {
@@ -640,7 +640,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Uzumaki (Manga).",
-"cover_image": "https://doc.krisyotam.com/imgs/manga/uzumaki.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/manga/uzumaki.jpg",
 "state": "hidden"
 },
 {
@@ -654,7 +654,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Possession.",
-"cover_image": "https://doc.krisyotam.com/imgs/film/possession.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/possession.jpg",
 "state": "hidden"
 },
 {
@@ -668,7 +668,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of FLCL.",
-"cover_image": "https://doc.krisyotam.com/imgs/anime/flcl.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/flcl.jpg",
 "state": "hidden"
 },
 {
@@ -682,7 +682,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Venus in the Blind Spot (Manga).",
-"cover_image": "https://doc.krisyotam.com/imgs/manga/venus-in-the-blind-spot.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/manga/venus-in-the-blind-spot.jpg",
 "state": "hidden"
 },
 {
@@ -696,7 +696,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Love and Basketball (agenda entry).",
-"cover_image": "https://doc.krisyotam.com/imgs/film/love-and-basketball.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/love-and-basketball.jpg",
 "state": "hidden"
 },
 {
@@ -710,7 +710,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Tatami Galaxy.",
-"cover_image": "https://doc.krisyotam.com/imgs/anime/tatami-galaxy.png",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/tatami-galaxy.png",
 "state": "hidden"
 },
 {
@@ -724,7 +724,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of The Breakfast Club.",
-"cover_image": "https://doc.krisyotam.com/imgs/film/the-breakfast-club.webp",
+"cover_image": "https://krisyotam.com/doc/imgs/film/the-breakfast-club.webp",
 "state": "hidden"
 },
 {
@@ -738,7 +738,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Angel's Egg.",
-"cover_image": "https://doc.krisyotam.com/imgs/anime/angels-egg.jpeg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/angels-egg.jpeg",
 "state": "hidden"
 },
 {
@@ -752,7 +752,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of House Party.",
-"cover_image": "https://doc.krisyotam.com/imgs/film/house-party.webp",
+"cover_image": "https://krisyotam.com/doc/imgs/film/house-party.webp",
 "state": "hidden"
 },
 {
@@ -766,7 +766,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Cowboy Bebop.",
-"cover_image": "https://doc.krisyotam.com/imgs/anime/cowboy-bebop.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/cowboy-bebop.jpg",
 "state": "hidden"
 },
 {
@@ -780,7 +780,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of Night on Earth.",
-"cover_image": "https://doc.krisyotam.com/imgs/film/night-on-earth.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/film/night-on-earth.jpg",
 "state": "hidden"
 },
 {
@@ -794,7 +794,7 @@
 "confidence": "unknown",
 "importance": 5,
 "preview": "A review of The Tale of Princess Kaguya.",
-"cover_image": "https://doc.krisyotam.com/imgs/anime/the-tale-of-princess-kaguya.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/the-tale-of-princess-kaguya.jpg",
 "state": "hidden"
 },
 {
@@ -808,7 +808,7 @@
 "confidence": "certain",
 "importance": 8,
 "preview": "A review of Memories of Emanon.",
-"cover_image": "https://doc.krisyotam.com/imgs/anime/omoide-emanon.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/anime/omoide-emanon.jpg",
 "state": "active"
 },
 {
@@ -822,7 +822,7 @@
 "confidence": "certain",
 "importance": 8,
 "preview": "A review of Never Let Me Go.",
-"cover_image": "https://doc.krisyotam.com/imgs/books/never-let-me-go-kazuo-ishiguro.jpg",
+"cover_image": "https://krisyotam.com/doc/imgs/books/never-let-me-go-kazuo-ishiguro.jpg",
 "state": "active"
 }
 

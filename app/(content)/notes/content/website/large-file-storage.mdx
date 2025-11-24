@@ -51,7 +51,7 @@ More fun things to store include the GeoCities Archives, which represent an impo
 
 # Implementation
 
-<Dropcap type="william-morris-gothic">F</Dropcap>or now I’ve decided to keep Vercel as my main host. I already have both a Hetzner server and a Storage Box set up, but for large file hosting I went with something a little more elegant. I’m using two S3-compatible Object Storage buckets—`doc` and `cdn`—and routing traffic through a reverse proxy so they appear under custom domains: [doc.krisyotam.com](https://doc.krisyotam.com) and [cdn.krisyotam.com](https://cdn.krisyotam.com).
+<Dropcap type="william-morris-gothic">F</Dropcap>or now I’ve decided to keep Vercel as my main host. I already have both a Hetzner server and a Storage Box set up, but for large file hosting I went with something a little more elegant. I’m using two S3-compatible Object Storage buckets—`doc` and `cdn`—and routing traffic through a reverse proxy so they appear under custom domains: [krisyotam.com/doc](https://krisyotam.com/doc) and [cdn.krisyotam.com](https://cdn.krisyotam.com).
 
 Instead of the typical CNAME setup, I went with a reverse proxy using Caddy. It gives me full control over routing, lets me handle TLS certs easily, and keeps everything on brand. Here’s how I did it.
 
@@ -131,7 +131,7 @@ cdn.krisyotam.com {
     }
 }
 
-doc.krisyotam.com {
+krisyotam.com/doc {
     tls {
         issuer acme {
             dir https://acme-v02.api.letsencrypt.org/directory
@@ -163,4 +163,4 @@ Check that it’s running:
 docker ps
 ```
 
-At this point, both doc.krisyotam.com and cdn.krisyotam.com are serving public files cleanly through Caddy, with HTTPS certs, and no ugly S3 links in sight.
+At this point, both krisyotam.com/doc and cdn.krisyotam.com are serving public files cleanly through Caddy, with HTTPS certs, and no ugly S3 links in sight.

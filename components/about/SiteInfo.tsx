@@ -14,7 +14,7 @@ export default function SiteInfo() {
             <div className="flex justify-center">
               <div className="relative w-full h-[200px]">                <div className="dark:block hidden w-full h-full relative">
                   <Image
-                    src="https://doc.krisyotam.com/site/krisyotam-site-sticker-darkmode.gif"
+                    src="https://krisyotam.com/doc/site/krisyotam-site-sticker-darkmode.gif"
                     alt="Site Sticker Dark Mode"
                     fill
                     style={{ objectFit: "contain" }}
@@ -23,7 +23,7 @@ export default function SiteInfo() {
                 </div>
                 <div className="dark:hidden block w-full h-full relative">
                   <Image
-                    src="https://doc.krisyotam.com/site/krisyotam-site-sticker-lightmode.gif"
+                    src="https://krisyotam.com/doc/site/krisyotam-site-sticker-lightmode.gif"
                     alt="Site Sticker Light Mode"
                     fill
                     style={{ objectFit: "contain" }}

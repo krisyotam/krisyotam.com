@@ -1,21 +1,21 @@
 [
   {
-    "cover": "https://doc.krisyotam.com/imgs/books/crime-and-punishment.jpg",
+    "cover": "https://krisyotam.com/doc/imgs/books/crime-and-punishment.jpg",
     "title": "Crime and Punishment",
     "link": "https://example.com/book4"
   },
   {
-    "cover": "https://doc.krisyotam.com/imgs/books/anna-karenina-leo-tolstoy.jpg",
+    "cover": "https://krisyotam.com/doc/imgs/books/anna-karenina-leo-tolstoy.jpg",
     "title": "Anna Karenina",
     "link": "https://example.com/book1"
   },
   {
-    "cover": "https://doc.krisyotam.com/imgs/books/emma-austen.webp",
+    "cover": "https://krisyotam.com/doc/imgs/books/emma-austen.webp",
     "title": "Emma",
     "link": "https://example.com/book2"
   },
   {
-    "cover": "https://doc.krisyotam.com/imgs/books/the-trial-kafka.jpg",
+    "cover": "https://krisyotam.com/doc/imgs/books/the-trial-kafka.jpg",
     "title": "The Trial",
     "link": "https://example.com/book3"
   }

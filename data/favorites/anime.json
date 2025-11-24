@@ -1,21 +1,21 @@
 [
   {
-    "cover": "https://doc.krisyotam.com/imgs/anime/logh.jpg",
+    "cover": "https://krisyotam.com/doc/imgs/anime/logh.jpg",
     "title": "Legend of the Galactic Heroes",
     "link": "https://example.com/anime1"
   },
   {
-    "cover": "https://doc.krisyotam.com/imgs/anime/ergo-proxy.jpg",
+    "cover": "https://krisyotam.com/doc/imgs/anime/ergo-proxy.jpg",
     "title": "Ergo Proxy",
     "link": "https://example.com/anime2"
   },
   {
-    "cover": "https://doc.krisyotam.com/imgs/anime/neon-genesis-evanglion.jpg",
+    "cover": "https://krisyotam.com/doc/imgs/anime/neon-genesis-evanglion.jpg",
     "title": "Neon Genesis Evangelion",
     "link": "https://example.com/anime3"
   },
   {
-    "cover": "https://doc.krisyotam.com/imgs/anime/haibane-renmei.jpg",
+    "cover": "https://krisyotam.com/doc/imgs/anime/haibane-renmei.jpg",
     "title": "Haibane Renmei",
     "link": "https://example.com/anime4"
   }

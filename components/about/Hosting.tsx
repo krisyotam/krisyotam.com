@@ -41,7 +41,7 @@ export default function Hosting() {
     },
     {
       name: "Hetzner",
-      addresses: ["doc.krisyotam.com", "cdn.krisyotam.com", "git.krisyotam.com"],
+      addresses: ["krisyotam.com/doc", "cdn.krisyotam.com", "git.krisyotam.com"],
       status: "Active"
     }
   ]

@@ -102,8 +102,8 @@ export default function SiteFooter({ lastUpdated, rawMarkdown }: { lastUpdated?:
 
   const isDark = resolvedTheme === "dark";
   const pfpUrl = isDark
-    ? "https://doc.krisyotam.com/site/krisyotam-dark.png"
-    : "https://doc.krisyotam.com/site/krisyotam-light.png";
+    ? "https://krisyotam.com/doc/site/krisyotam-dark.png"
+    : "https://krisyotam.com/doc/site/krisyotam-light.png";
 
   return (
     <footer className={`${isDark ? "bg-background" : "bg-card"} py-8`}>

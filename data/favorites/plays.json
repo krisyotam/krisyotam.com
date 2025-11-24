@@ -1,21 +1,21 @@
 [
   {
-    "cover": "https://doc.krisyotam.com/imgs/plays/hamlet-prince-of-denmark.jpg",
+    "cover": "https://krisyotam.com/doc/imgs/plays/hamlet-prince-of-denmark.jpg",
     "title": "Hamlet",
     "link": "https://example.com/art1"
   },
   {
-    "cover": "https://doc.krisyotam.com/imgs/plays/othello-the-moore.jpg",
+    "cover": "https://krisyotam.com/doc/imgs/plays/othello-the-moore.jpg",
     "title": "Othello",
     "link": "https://example.com/art2"
   },
   {
-    "cover": "https://doc.krisyotam.com/imgs/plays/the-seagull-chekhov.jpg",
+    "cover": "https://krisyotam.com/doc/imgs/plays/the-seagull-chekhov.jpg",
     "title": "The Seagull",
     "link": "https://example.com/art3"
   },
   {
-    "cover": "https://doc.krisyotam.com/imgs/plays/no-exit-jeanne-paul-sarte.jpg",
+    "cover": "https://krisyotam.com/doc/imgs/plays/no-exit-jeanne-paul-sarte.jpg",
     "title": "No Exit",
     "link": "https://example.com/art4"
   }
