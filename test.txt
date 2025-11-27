@@ -1,10 +1,2 @@
 
-404.suggester.py is one of the most important site scripts and underpins the uniqueness of the site. 
-We are going to completelyh rework 404-suggester.py I want everything organized into neat functions, using the 
-suckless programming style. I want you to create a api route for 404-suggester itself to pull data from the needed json files 
-
-and for routes it will need to know every page app. This is easy for the standard / roues for pages like /grid for ex. 
-but for post pages, category pages, and tag pages you will need to go ahead and check the .json files for that directory.  
-for ex. for essays 
-go to data/essays and it will need to take in essays.json, tags.json and categories.json from the data/essays directory and understand 
-the structure of those 3 types of files as it will be the same process for all the routes in (content) directory. 
+We are going to create a bin script named write. It has one objective. To find the file I want 

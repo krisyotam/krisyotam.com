@@ -12,8 +12,10 @@ interface HomeWrapperProps {
   initialView?: 'list' | 'grid'
 }
 
-export const revalidate = 3600
-export const fetchCache = 'force-cache'
+// Make the home wrapper render dynamically and avoid server-side caching
+export const revalidate = 0
+export const fetchCache = 'no-store'
+export const dynamic = 'force-dynamic'
 
 export default async function HomeWrapper({ initialView = 'list' }: HomeWrapperProps) {
   try {

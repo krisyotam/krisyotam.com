@@ -32,6 +32,7 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
   const [loading, setLoading] = useState(true)
   const [categoryFilter, setCategoryFilter] = useState<string>(initialCategoryFilter)
   const [searchQuery, setSearchQuery] = useState("")
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list')
   const router = useRouter()
   const pathname = usePathname()
 
@@ -109,6 +110,22 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
 
       <div className="mt-8">
         <div className="mb-6 flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setViewMode('list')}
+              className={`text-sm px-3 py-1 rounded-none border ${viewMode === 'list' ? 'bg-muted/50' : 'bg-transparent'}`}
+              aria-pressed={viewMode === 'list'}
+            >
+              List
+            </button>
+            <button
+              onClick={() => setViewMode('grid')}
+              className={`text-sm px-3 py-1 rounded-none border ${viewMode === 'grid' ? 'bg-muted/50' : 'bg-transparent'}`}
+              aria-pressed={viewMode === 'grid'}
+            >
+              Grid
+            </button>
+          </div>
           <div className="flex items-center gap-2 whitespace-nowrap">
             <label htmlFor="category-filter" className="text-sm text-muted-foreground">
               Filter by category:
@@ -144,36 +161,63 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
           </div>
         ) : (
           <>
-            <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
-              <thead>
-                <tr className="border-b border-border bg-muted/50 text-foreground">
-                  <th className="py-2 text-left font-medium px-3">Title</th>
-                  <th className="py-2 text-left font-medium px-3">Tags</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredEntries.map((entry, index) => (
-                  <tr
-                    key={entry.slug}
-                    className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
-                      index % 2 === 0 ? "bg-transparent" : "bg-muted/5"
-                    }`}
-                    onClick={() => router.push(getEntryUrl(entry))}
-                  >
-                    <td className="py-2 px-3 font-medium">{entry.title}</td>
-                    <td className="py-2 px-3">
-                      <div className="flex flex-wrap gap-1">
-                        {entry.tags.slice(0, 3).map((tag, i) => (
-                          <span key={i} className="px-1.5 py-0.5 text-xs bg-muted/50 rounded-sm">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </td>
+            {viewMode === 'list' ? (
+              <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
+                <thead>
+                  <tr className="border-b border-border bg-muted/50 text-foreground">
+                    <th className="py-2 text-left font-medium px-3">Title</th>
+                    <th className="py-2 text-left font-medium px-3">Tags</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {filteredEntries.map((entry, index) => (
+                    <tr
+                      key={entry.slug}
+                      className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
+                        index % 2 === 0 ? "bg-transparent" : "bg-muted/5"
+                      }`}
+                      onClick={() => router.push(getEntryUrl(entry))}
+                    >
+                      <td className="py-2 px-3 font-medium break-words whitespace-normal">{entry.title}</td>
+                      <td className="py-2 px-3">
+                        <div className="flex flex-wrap gap-1">
+                          {entry.tags.slice(0, 3).map((tag, i) => (
+                            <span key={i} className="px-1.5 py-0.5 text-xs bg-muted/50 rounded-sm">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <div className="w-full">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-0 border border-border">
+                  {filteredEntries.map((entry) => {
+                    let host = ''
+                    try {
+                      const urlStr = entry.url.startsWith('http') ? entry.url : `https://${entry.url}`
+                      host = new URL(urlStr).host.replace(/^www\./, '')
+                    } catch (e) {
+                      host = entry.url.replace(/^https?:\/\//, '').replace(/^www\./, '')
+                    }
+
+                    return (
+                      <div
+                        key={entry.slug}
+                        className="p-6 border-r border-b border-border last:border-r-0 hover:bg-secondary/5 cursor-pointer"
+                        onClick={() => router.push(getEntryUrl(entry))}
+                      >
+                        <div className="font-medium mb-1 break-words whitespace-normal">{entry.title}</div>
+                        <div className="text-xs italic text-muted-foreground break-words whitespace-normal">{host}</div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
 
             {filteredEntries.length === 0 && !loading && (
               <div className="text-muted-foreground text-sm mt-6">

@@ -502,8 +502,13 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
 
   const getNewRandomQuote = async () => {
     try {
-      // Get a new random quote from the server
-      const response = await fetch('/api/random-quote');
+      // Get a new random quote from the server. Add a timestamp query param
+      // and request no-store to avoid getting a cached response from the
+      // browser or any intermediate caches.
+      const response = await fetch(`/api/random-quote?ts=${Date.now()}`, {
+        cache: 'no-store',
+      });
+
       const newQuote = await response.json();
       setCurrentQuote(newQuote);
     } catch (error) {
