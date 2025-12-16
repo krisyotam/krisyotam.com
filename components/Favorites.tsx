@@ -96,24 +96,17 @@ export function Favorites() {
       {section === "music" ? (
         <div className="grid grid-cols-4 gap-2">
           {cards.map((card, index) => (
-            <a
-              href={card.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              key={card.title}
-              data-no-modal="true"
-              data-no-preview="true"
-            >
+            <div key={card.title}>
               <Card card={card} index={index} hovered={hovered} setHovered={setHovered} />
-            </a>
+            </div>
           ))}
         </div>
       ) : (
         <div className="grid grid-cols-4 gap-1">
           {cards.map((card, index) => (
-            <a href={card.link} target="_blank" rel="noopener noreferrer" key={card.title}>
+            <div key={card.title}>
               <Card card={card} index={index} hovered={hovered} setHovered={setHovered} />
-            </a>
+            </div>
           ))}
         </div>
       )}

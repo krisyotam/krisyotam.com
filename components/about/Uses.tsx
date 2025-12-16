@@ -6,7 +6,7 @@ const sectionOrder = [
   { key: "camera", label: "Camera" },
   { key: "peripherals", label: "Peripherals" },
   { key: "software", label: "Software" },
-  { key: "fedora", label: "Fedora" },
+  { key: "os", label: "Operating System" },
   { key: "services", label: "Services" },
   { key: "website", label: "Website" },
 ] as const
@@ -28,8 +28,8 @@ function ArrowButton({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`h-10 w-10 flex items-center justify-center border border-border bg-background text-foreground rounded-none shadow-md transition-colors ${
-        disabled ? "opacity-40 cursor-not-allowed" : "hover:bg-accent"
+      className={`h-10 w-10 flex items-center justify-center border border-border bg-background text-foreground rounded-none transition-colors ${
+        disabled ? "opacity-40 cursor-not-allowed" : "hover:bg-muted/50"
       }`}
       aria-label={direction === "left" ? "Previous section" : "Next section"}
       style={{ borderRadius: 0 }}
@@ -58,11 +58,11 @@ function UsesSectionCard({
 }) {
   return (
     <div
-      className={`w-full h-full bg-card border border-border p-6 flex flex-col gap-3 justify-center items-start rounded-none shadow-md transition-colors ${className ?? ""}`}
+      className={`w-full h-full bg-card border border-border p-5 flex flex-col gap-3 justify-center items-start rounded-none transition-colors ${className ?? ""}`}
     >
-      <h2 className="text-xl font-semibold mb-2 text-primary">{label}</h2>
+      <h2 className="text-sm uppercase tracking-wide text-muted-foreground mb-3">{label}</h2>
       <ul className="w-full space-y-2">
-        {section.map((item, idx) => (
+        {(Array.isArray(section) ? section : []).map((item, idx) => (
           <li key={idx} className="flex flex-col">
             <span className="font-medium text-foreground">{item.label}</span>
             <span className="text-muted-foreground text-sm">{item.value}</span>
@@ -114,7 +114,8 @@ export default function Uses() {
   }, [wrapperWidth, usesData]) // re-measure if layout width changes (or data changes)
 
   const { key, label } = sectionOrder[current]
-  const section = (usesData as UsesData)[key]
+  const sectionCandidate = (usesData as Partial<UsesData>)[key]
+  const section: UsesItem[] = Array.isArray(sectionCandidate) ? (sectionCandidate as UsesItem[]) : []
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
@@ -130,7 +131,7 @@ export default function Uses() {
           {sectionOrder.map((_, idx) => (
             <div
               key={idx}
-              className={`h-2 w-6 rounded-none ${idx === current ? "bg-primary" : "bg-border"}`}
+              className={`h-1.5 w-5 rounded-none ${idx === current ? "bg-foreground/70" : "bg-border"}`}
               style={{ borderRadius: 0 }}
             />
           ))}
@@ -152,7 +153,8 @@ export default function Uses() {
         }}
       >
         {sectionOrder.map(({ key, label }, i) => {
-          const sec = (usesData as UsesData)[key]
+          const secCandidate = (usesData as Partial<UsesData>)[key]
+          const sec: UsesItem[] = Array.isArray(secCandidate) ? (secCandidate as UsesItem[]) : []
           return (
             <div
               key={key}

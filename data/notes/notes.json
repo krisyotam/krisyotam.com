@@ -1085,9 +1085,23 @@
 "category": "Website",
 "status": "Finished",
 "confidence": "certain",
-"importance": 0,
+"importance": 10,
 "preview": "how to support krisyotam.com and its projects through donations, sponsorships, and other means",
 "state": "active"
+},
+{
+"title": "FAQ",
+"start_date": "2025-06-30",
+"end_date": "",
+"slug": "faq",
+"cover_image": "",
+"tags": ["FAQ", "Questions", "Support"],
+"category": "Website",
+"status": "Finished",
+"confidence": "certain",
+"importance": 10,
+"preview": "Frequently asked questions about this site",
+"state": "hidden"
 },
 {
 "title": "Magic URLs",

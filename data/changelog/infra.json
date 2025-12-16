@@ -1,0 +1,57 @@
+[
+  {
+    "id": "2025-01-05",
+    "date": {
+      "day": "5",
+      "weekday": "Fri",
+      "month": "Jan.",
+      "year": "2025"
+    },
+    "text": "I vacuumed the carpets today.",
+    "kind": "daily"
+  },
+  {
+    "id": "2025-01-06",
+    "date": {
+      "day": "6",
+      "weekday": "Sat",
+      "month": "Jan.",
+      "year": "2025"
+    },
+    "text": "We will have a basketball match next week.",
+    "kind": "daily"
+  },
+  {
+    "id": "2025-01-08",
+    "date": {
+      "day": "8",
+      "weekday": "Mon",
+      "month": "Jan.",
+      "year": "2025"
+    },
+    "text": "Tomorrow I begin a new life, new life, new journey!",
+    "kind": "milestone"
+  },
+  {
+    "id": "2025-01-09",
+    "date": {
+      "day": "9",
+      "weekday": "Tue",
+      "month": "Jan.",
+      "year": "2025"
+    },
+    "text": "This is a living document, not a content farm casualty. It exists to be revised, contradicted, sharpened, and occasionally embarrassed by future versions of itself. What begins as a loose observation may harden into an argument or dissolve entirely, which is fine because permanence is overrated and revision is the only honest form of thinking. The goal is not to sound authoritative but to be precise, to leave a trail of thought that someone else could follow, challenge, or steal productively. If it feels unfinished, good. That means it’s still alive.",
+    "kind": "reflection"
+  },
+  {
+    "id": "2025-12-16",
+    "date": {
+      "day": "16",
+      "weekday": "Tue",
+      "month": "Dec.",
+      "year": "2025"
+    },
+    "text": "Today I managed to finish creating url rewrites for some of the most important pages on the site. They are as follows: /me, /about, /logo, /design, /donate, /faq",
+    "kind": "milestone"
+  }
+]

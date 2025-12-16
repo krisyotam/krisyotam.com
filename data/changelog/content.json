@@ -1,0 +1,46 @@
+[
+  {
+    "id": "2025-01-05",
+    "date": {
+      "day": "5",
+      "weekday": "Fri",
+      "month": "Jan.",
+      "year": "2025"
+    },
+    "text": "I vacuumed the carpets today.",
+    "kind": "daily"
+  },
+  {
+    "id": "2025-01-06",
+    "date": {
+      "day": "6",
+      "weekday": "Sat",
+      "month": "Jan.",
+      "year": "2025"
+    },
+    "text": "We will have a basketball match next week.",
+    "kind": "daily"
+  },
+  {
+    "id": "2025-01-08",
+    "date": {
+      "day": "8",
+      "weekday": "Mon",
+      "month": "Jan.",
+      "year": "2025"
+    },
+    "text": "Tomorrow I begin a new life, new life, new journey!",
+    "kind": "milestone"
+  },
+  {
+    "id": "2025-01-09",
+    "date": {
+      "day": "9",
+      "weekday": "Tue",
+      "month": "Jan.",
+      "year": "2025"
+    },
+    "text": "It is very rewarding to keep a diary of daily happenings.",
+    "kind": "reflection"
+  }
+]

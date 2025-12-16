@@ -1,2 +1,0 @@
-
-We are going to create a bin script named write. It has one objective. To find the file I want 

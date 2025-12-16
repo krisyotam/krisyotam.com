@@ -1,7 +1,7 @@
 {
   "hardware": [
-    {"label": "Phone", "value": "Google Pixel 6 running Graphene OS", "note": "blog post about my Graphene OS experience here"},
-    {"label": "Laptop", "value": "Asus Zenbook 14 running Fedora and Qubes"},
+    {"label": "Phone", "value": "iPhone 17 Pro & Pixel 10 Pro (grapheneOS)", "note": "iPhone for work use, Pixel for personal use"},
+    {"label": "Laptop", "value": "2x 2015 MacBook Pros (13-inch, 16gb ram, 512gb ssd) arch linux"},
     {"label": "Desktop", "value": "Ryzen 7 5800X3D, 32gb ram, 2tb nvme, 1tb ssd, 6tb hdd, 3060ti running dual boot with both Fedora and Windows"},
     {"label": "Server", "value": "See this post"}
   ],
@@ -13,29 +13,31 @@
   ],
   "peripherals": [
     {"label": "Keyboard", "value": "HHKB Hybrid Silent-S"},
-    {"label": "Headset", "value": "Beyerdynamic DT 770 PRO 80 Ohm"},
-    {"label": "Mouse", "value": "Razer Viper V3 Pro"},
-    {"label": "Microphone", "value": "Shure MV7+"}
+    {"label": "Headset", "value": "Airpods Max"},
+    {"label": "Mouse", "value": "G-Pro X Superlight 2"},
+    {"label": "Trackpad", "value": "Magic Trackpad 2"},
+    {"label": "Microphone", "value": "Shure SM7B"}
   ],
   "software": [
-    {"label": "Browser", "value": "Librewolf + Vivaldi + Zen"},
-    {"label": "Code Editor", "value": "VSCodium + Zed"},
-    {"label": "Writing / Notes-Taking", "value": "OnlyOffice + Obsidian ❤️"},
+    {"label": "Browser", "value": "Brave or (Librewolf + Surf + tor)"},
+    {"label": "Code Editor", "value": "Neovim + Void"},
+    {"label": "Writing / Notes-Taking", "value": "Notesnook + Obsidian ❤️"},
     {"label": "Backups / Sync", "value": "Syncthing to my server"}
   ],
-  "fedora": [
-    {"label": "Operating System", "value": "Fedora"},
-    {"label": "Compositor", "value": "Hyprland"},
-    {"label": "Bar", "value": "Waybar"},
-    {"label": "Terminal", "value": "Alacritty + fish + tmux"}
+  "os": [
+    {"label": "Operating System", "value": "Arch"},
+    {"label": "Compositor", "value": "X11 + picom"},
+    {"label": "Window Manager", "value": "dwm"},
+    {"label": "Bar", "value": "dwmblocks"},
+    {"label": "Terminal", "value": "st + fish + tmux"}
   ],
   "services": [
-    {"label": "Mail + Calendar", "value": "Proton + Posteo + Riseup"},
-    {"label": "Password manager", "value": "Bitwarden + ProtonPass + KeePassXC"},
-    {"label": "VPN", "value": "OVPN + Proton + Mullvad"},
-    {"label": "Search", "value": "Kagi + DuckDuckGo + Brave Search"},
-    {"label": "Messages", "value": "Signal + Threema + (sadly Telegram and WhatsApp)"},
-    {"label": "DNS", "value": "dns.sy.st"}
+    {"label": "Mail + Calendar", "value": "Proton + Mutt + Superhuman (business email & all calenaders)"},
+    {"label": "Password manager", "value": "ProtonPass + KeePassXC"},
+    {"label": "VPN", "value": "OVPN + Proton + Mullvad + SPN"},
+    {"label": "Search", "value": "Kagi + Searxng"},
+    {"label": "Messages", "value": "Molly + IRC + Discord (for chat w/ normies)"},
+    {"label": "DNS", "value": "cloudflare"}
   ],
   "website": [
     {"label": "Domain", "value": "Njalla"},
@@ -43,6 +45,6 @@
     {"label": "DNS", "value": "Bunny"},
     {"label": "Proxy", "value": "OVPN"},
     {"label": "Server", "value": "Super duper secret location (home)"},
-    {"label": "Made with", "value": "Hugo"}
+    {"label": "Made with", "value": "Next.js"}
   ]
 }

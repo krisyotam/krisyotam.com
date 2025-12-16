@@ -83,6 +83,7 @@ interface ReadingLogEntry {
 // Reading data interface
 interface ReadingData {
   books: ReadingBook[]
+  audiobooks: ReadingBook[]
   blogPosts: BlogPost[]
   shortStories: ShortStory[]
   verse: VerseEntry[]
@@ -103,6 +104,7 @@ interface ReadingDataContextType {
 const ReadingDataContext = createContext<ReadingDataContextType>({
   data: {
     books: [],
+    audiobooks: [],
     blogPosts: [],
     shortStories: [],
     verse: [],
@@ -131,6 +133,7 @@ interface ReadingDataProviderProps {
 export function ReadingDataProvider({ children }: ReadingDataProviderProps) {
   const [data, setData] = useState<ReadingData>({
     books: [],
+    audiobooks: [],
     blogPosts: [],
     shortStories: [],
     verse: [],
@@ -150,6 +153,7 @@ export function ReadingDataProvider({ children }: ReadingDataProviderProps) {
       // Load all data in parallel for maximum speed
       const [
         booksResponse,
+        audiobooksResponse,
         blogsResponse,
         shortStoriesResponse,
         verseResponse,
@@ -159,6 +163,7 @@ export function ReadingDataProvider({ children }: ReadingDataProviderProps) {
         wantToReadResponse
       ] = await Promise.all([
         fetch('/api/reading/books'),
+        fetch('/api/reading/audiobooks'),
         fetch('/api/reading/blogs'),
         fetch('/api/reading/short-stories'),
         fetch('/api/reading/verse'),
@@ -169,7 +174,7 @@ export function ReadingDataProvider({ children }: ReadingDataProviderProps) {
       ])
 
       // Check for any failed requests
-      if (!booksResponse.ok || !blogsResponse.ok || !shortStoriesResponse.ok || 
+      if (!booksResponse.ok || !audiobooksResponse.ok || !blogsResponse.ok || !shortStoriesResponse.ok || 
           !verseResponse.ok || !essaysResponse.ok || !papersResponse.ok || 
           !readingLogResponse.ok || !wantToReadResponse.ok) {
         throw new Error('Failed to load some reading data')
@@ -178,6 +183,7 @@ export function ReadingDataProvider({ children }: ReadingDataProviderProps) {
       // Parse all responses in parallel
       const [
         booksData,
+        audiobooksData,
         blogsData,
         shortStoriesData,
         verseData,
@@ -187,6 +193,7 @@ export function ReadingDataProvider({ children }: ReadingDataProviderProps) {
         wantToReadData
       ] = await Promise.all([
         booksResponse.json(),
+        audiobooksResponse.json(),
         blogsResponse.json(),
         shortStoriesResponse.json(),
         verseResponse.json(),
@@ -199,6 +206,7 @@ export function ReadingDataProvider({ children }: ReadingDataProviderProps) {
       // Update state with all the loaded data
       setData({
         books: booksData.books || [],
+        audiobooks: audiobooksData.audiobooks || [],
         blogPosts: blogsData['blog-posts'] || [],
         shortStories: shortStoriesData['short-stories'] || [],
         verse: verseData.verse || [],

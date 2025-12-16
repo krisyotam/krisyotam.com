@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Kris's Favorite Bookstore",
+    "slug": "kris-bookstore",
+    "category": "Books",
+    "url": "https://example-bookstore.com/ref/kris",
+    "website": "https://example-bookstore.com",
+    "reward": "10% off your first order when you use my referral link",
+    "description": "A small independent bookstore I like — curated selections and great staff picks. Use the referral link for a small discount and to support the site.",
+    "tags": ["books", "indie", "discount"],
+    "status": "Finished",
+    "importance": 6,
+    "socials": ["https://twitter.com/examplebookstore"],
+    "importantUrls": ["https://example-bookstore.com/collections/new"]
+  },
+  {
+    "title": "Acme Cloud - Referral",
+    "slug": "acme-cloud-referral",
+    "category": "Services",
+    "url": "https://acmecloud.example/ref/kris",
+    "website": "https://acmecloud.example",
+    "reward": "Receive $50 in credit for new signups",
+    "description": "Reliable small-business cloud hosting with a generous free trial and credits for new accounts.",
+    "tags": ["cloud", "hosting", "credits"],
+    "status": "Finished",
+    "importance": 8,
+    "socials": [],
+    "importantUrls": ["https://acmecloud.example/pricing"]
+  },
+  {
+    "title": "StudyCourse Pro",
+    "slug": "studycourse-pro",
+    "category": "Education",
+    "url": "https://studycourse.example/ref/kris",
+    "website": "https://studycourse.example",
+    "reward": "5% lifetime discount and an extra module free",
+    "description": "An online course platform offering deep-dive modules on writing, research, and pedagogy.",
+    "tags": ["courses", "education", "discount"],
+    "status": "In Progress",
+    "importance": 7,
+    "socials": ["https://instagram.com/studycourse"],
+    "importantUrls": []
+  }
+]

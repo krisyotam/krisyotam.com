@@ -11,7 +11,7 @@ import { ReadingEssaysTable } from "@/components/reading-essays-table"
 import { ReadingPapersTable } from "@/components/reading-papers-table"
 import { useReadingData } from "@/contexts/reading-data-context"
 
-type ReadingSubTabType = "books" | "blog-posts" | "short-stories" | "verse" | "essays" | "papers"
+type ReadingSubTabType = "books" | "audiobooks" | "blog-posts" | "short-stories" | "verse" | "essays" | "papers"
 
 interface Author {
   name: string
@@ -37,6 +37,14 @@ interface JsonBook {
   author: string
   cover: string
   link: string
+}
+
+interface Audiobook {
+  title: string
+  subtitle?: string
+  author: string
+  cover?: string
+  link?: string
 }
 
 interface ReadingSubTabsProps {
@@ -95,8 +103,20 @@ export function ReadingSubTabs({ activeTab, onTabChange, showBooks = false, want
     )
   })
 
+  // Audiobooks list (if present)
+  const audiobooks: Audiobook[] = readingData.audiobooks || []
+  const filteredAudiobooks = audiobooks.filter((ab) => {
+    const q = searchQuery.toLowerCase()
+    return (
+      !q ||
+      ab.title.toLowerCase().includes(q) ||
+      ab.author.toLowerCase().includes(q)
+    )
+  })
+
   const subTabLabels: Record<ReadingSubTabType, string> = {
     "books": "Books",
+    "audiobooks": "Audiobooks",
     "blog-posts": "Blog Posts",
     "short-stories": "Short Stories", 
     "verse": "Verse",
@@ -168,6 +188,48 @@ export function ReadingSubTabs({ activeTab, onTabChange, showBooks = false, want
                     <p className="text-muted-foreground">
                       {searchQuery ? 'No books found matching your search.' : 'No books found.'}
                     </p>
+                  </div>
+                )}
+              </div>
+            )}
+          </>
+        )}
+        {activeSubTab === "audiobooks" && (
+          <>
+            {readingLoading ? (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">Loading audiobooks...</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {/* Search bar for audiobooks */}
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search audiobooks..."
+                    className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    value={searchQuery}
+                  />
+                </div>
+
+                {filteredAudiobooks.length > 0 ? (
+                  <div className="space-y-6">
+                    {filteredAudiobooks.slice().reverse().map((ab, index) => (
+                      <ReadingBookCard
+                        key={index}
+                        coverUrl={ab.cover || ""}
+                        title={ab.title}
+                        subtitle={ab.subtitle || ""}
+                        author={ab.author}
+                        rating={0}
+                        onClick={() => handleBookClick(ab as JsonBook)}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <p className="text-muted-foreground">{searchQuery ? 'No audiobooks found matching your search.' : 'No audiobooks found.'}</p>
                   </div>
                 )}
               </div>

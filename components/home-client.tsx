@@ -52,6 +52,7 @@ import { Post } from "@/utils/posts"
 import Favorites from "@/components/Favorites"
 import { InfiniteMovingQuotes } from "@/components/InfiniteMovingQuotes"
 import { ThemeImageCompare } from "@/components/about/ThemeImageCompare"
+import { BentoNav } from "@/components/bento-nav"
 import TestimonialsSection from "@/components/about/testimonials"
 import Uses from "@/components/about/Uses"
 
@@ -714,16 +715,24 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
               </Card>
             </div>
 
-            {/* Sliding Quotes Animation */}
-            <div className="mb-8">
-              <InfiniteMovingQuotes />
-            </div>
-            {/* Theme Image Compare Animation */}
-            <div className="mb-8">
-              <ThemeImageCompare />
-            </div>
-            <div className="mb-8">
-              <TestimonialsSection />
+            {/* Focus section: floating quotes, most important pages (bento), dark mode preview, comments showcase */}
+            <div className="my-6 md:my-8">
+              <div className="space-y-6 md:space-y-8">
+                {/* Sliding Quotes Animation (trim internal bottom padding) */}
+                <InfiniteMovingQuotes className="[&>ul]:py-1 md:[&>ul]:py-2" />
+
+                {/* Bento navigation */}
+                <BentoNav />
+
+                {/* Theme Image Compare Animation with caption */}
+                <div>
+                  <ThemeImageCompare />
+                  <p className="mt-2 text-center text-xs text-muted-foreground">hover to view site in dark mode</p>
+                </div>
+
+                {/* Comment showcase */}
+                <TestimonialsSection />
+              </div>
             </div>
 
             {/* About This Site Collapse */}

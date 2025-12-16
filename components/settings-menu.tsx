@@ -734,7 +734,7 @@ export function SettingsMenu() {
   }
 
   const openRSS = () => {
-    window.open("/rss.xml", "_blank")
+    window.open("https://krisyotam.substack.com/?utm_campaign=profile_chips", "_blank")
     setIsOpen(false)
   }
 
@@ -744,7 +744,7 @@ export function SettingsMenu() {
   }
 
   const openChangelog = () => {
-  window.open("/updates/changelog", "_blank")
+  window.open("/changelog", "_blank")
     setIsOpen(false)
   }
 
@@ -754,7 +754,7 @@ export function SettingsMenu() {
   }
 
   const openGithub = () => {
-    window.open("https://git.krisyotam.com", "_blank")
+    window.open("https://github.com/krisyotam", "_blank")
     setIsOpen(false)
   }
 

@@ -136,13 +136,25 @@ export function PageHeader({
         )}
 
         {/* Date above other metadata */}
-        {start_date && (
+        {(start_date || end_date) && (
           <div className="text-center mb-4">
             <time
-              dateTime={typeof start_date === "string" ? start_date : undefined}
+              dateTime={
+                typeof start_date === "string"
+                  ? start_date
+                  : typeof end_date === "string"
+                  ? end_date
+                  : undefined
+              }
               className="font-mono text-sm text-muted-foreground"
             >
-              {formatDateRange(start_date, end_date || new Date().toISOString())}
+              {start_date
+                ? // If start exists, show a range to end (or to now if end is missing)
+                  formatDateRange(start_date, (end_date && end_date.trim()) ? end_date : new Date().toISOString().split("T")[0])
+                : // If only end exists, show the single end date
+                  end_date
+                  ? formatDate(end_date.split("T")[0])
+                  : ""}
             </time>
           </div>
         )}

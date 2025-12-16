@@ -139,16 +139,19 @@ export function PostHeader({
         )}
 
         {/* Date above other metadata */}
-        {start_date && (
+        {(start_date || end_date) && (
           <div className="text-center mb-4">
             <time
-              dateTime={start_date}
+              dateTime={start_date || end_date}
               className="font-mono text-sm text-muted-foreground"
             >
-              {end_date && end_date.trim() 
-                ? formatDateRange(start_date, end_date)
-                : formatDateRange(start_date, new Date().toISOString().split('T')[0])
-              }
+              {start_date
+                ? end_date && end_date.trim()
+                  ? formatDateRange(start_date, end_date)
+                  : formatDateRange(start_date, new Date().toISOString().split("T")[0])
+                : end_date
+                ? formatDate(end_date.split("T")[0])
+                : ""}
             </time>
           </div>
         )}

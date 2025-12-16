@@ -16,7 +16,7 @@ export function ReadClientPage() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '')
-      if (hash && ['books', 'blog-posts', 'short-stories', 'verse', 'essays', 'papers'].includes(hash)) {
+      if (hash && ['books', 'audiobooks', 'blog-posts', 'short-stories', 'verse', 'essays', 'papers'].includes(hash)) {
         setActiveSubTab(hash)
       } else {
         setActiveSubTab('books')
