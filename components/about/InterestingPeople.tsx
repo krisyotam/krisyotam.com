@@ -1,5 +1,7 @@
 "use client"
 
+"use client"
+
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -7,12 +9,15 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
+import { CustomSelect } from "@/components/ui/custom-select"
 import recommendedBlogsData from "@/data/recommended-blogs.json"
 
 export default function InterestingPeople() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All")
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [selectedBlog, setSelectedBlog] = useState<any>(null)
+  const [page, setPage] = useState<number>(1)
+  const pageSize = 7
 
   // Get categories from the data
   const categories = ["All", ...Array.from(new Set(recommendedBlogsData.blogs.map((blog) => blog.category)))].sort()
@@ -27,33 +32,31 @@ export default function InterestingPeople() {
         blog.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
         (blog.author?.name && blog.author.name.toLowerCase().includes(searchQuery.toLowerCase())),
     )
+  
+  const totalPages = Math.max(1, Math.ceil(filteredBlogs.length / pageSize))
+  const currentPage = Math.min(page, totalPages)
+  const paginatedBlogs = filteredBlogs.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+
+  // Reset to page 1 when filters change
+  
     
   // Function to download the JSON data
   const handleDownloadJSON = () => {
-    // Create a JSON blob with the data
     const jsonBlob = new Blob([JSON.stringify(recommendedBlogsData, null, 2)], { type: 'application/json' });
-    
-    // Create a temporary URL for the blob
     const url = URL.createObjectURL(jsonBlob);
-    
-    // Create a link element to trigger the download
     const link = document.createElement('a');
     link.href = url;
     link.download = 'interesting-people.json';
-    
-    // Add the link to the document, click it, and remove it
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    
-    // Clean up the temporary URL
     URL.revokeObjectURL(url);
   };
 
   return (
     <div>
-      {/* Boxed header section with centered content */}
-      <div className="border border-border rounded-md mb-6 overflow-hidden">
+      {/* Boxed header section with centered content - square corners */}
+      <div className="border border-border mb-6 overflow-hidden">
         <div className="text-center py-5 px-4">
           <h3 className="text-lg font-semibold text-foreground">Interesting People</h3>
           <p className="text-sm text-muted-foreground mt-1 mx-auto max-w-2xl">
@@ -105,30 +108,28 @@ export default function InterestingPeople() {
       <div className="mb-6 flex items-center gap-4">
         <div className="flex items-center gap-2 whitespace-nowrap">
           <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
-          <select
+          <CustomSelect
             id="category-filter"
-            className="border rounded px-2 py-1 text-sm bg-background"
             value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            {categories.map(category => (
-              <option key={category} value={category}>{category}</option>
-            ))}
-          </select>
+            onValueChange={(val) => setSelectedCategory(val)}
+            options={categories.map((c) => ({ value: c, label: c }))}
+            className="text-sm min-w-[160px]"
+          />
         </div>
         
         <div className="relative flex-1">
           <input 
             type="text" 
             placeholder="Search by name, tag, or keyword..." 
-            className="w-full px-3 py-1 border rounded text-sm bg-background"
+            className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => { setSearchQuery(e.target.value); setPage(1) }}
           />
           {searchQuery && (
             <button
               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
               onClick={() => setSearchQuery("")}
+              aria-label="Clear search"
             >
               ×
             </button>
@@ -146,7 +147,7 @@ export default function InterestingPeople() {
             </tr>
           </thead>
           <tbody>
-            {filteredBlogs.map((blog, index) => (
+            {paginatedBlogs.map((blog, index) => (
               <tr
                 key={index}
                 className={`border-b border-border hover:bg-secondary/50 transition-colors ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
@@ -294,6 +295,35 @@ export default function InterestingPeople() {
             ))}
           </tbody>
         </table>
+        {/* Pagination */}
+        {filteredBlogs.length > pageSize && (
+          <div className="flex items-center justify-center gap-2 mt-4">
+            <button
+              className="h-9 px-3 border border-border bg-background text-sm rounded-none hover:bg-secondary/50 disabled:opacity-50"
+              onClick={() => setPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            {/* Page numbers */}
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+              <button
+                key={p}
+                className={`h-9 w-9 border border-border text-sm rounded-none ${p === currentPage ? 'bg-secondary/50' : 'bg-background hover:bg-secondary/50'}`}
+                onClick={() => setPage(p)}
+              >
+                {p}
+              </button>
+            ))}
+            <button
+              className="h-9 px-3 border border-border bg-background text-sm rounded-none hover:bg-secondary/50 disabled:opacity-50"
+              onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
+        )}
         {filteredBlogs.length === 0 && (
           <div className="text-muted-foreground text-sm mt-6 text-center py-8">
             No matching people found. Try adjusting your search or filter.
@@ -302,4 +332,4 @@ export default function InterestingPeople() {
       </div>
     </div>
   )
-} 
+}
