@@ -1,68 +1,54 @@
 // next.config.mjs
+
 import withMDX from '@next/mdx'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 
-/* ─── Consolidated Next.js configuration ───────────────────── */
+/* ============================================================================
+   CORE NEXT.JS CONFIG
+   Focus: clean routing, stable builds, MDX support, archive passthrough
+============================================================================ */
+
 const baseConfig = {
   reactStrictMode: true,
-  // Reduce memory usage during production builds
+
+  // keep builds stable on low memory hosts
   swcMinify: false,
-  // We'll skip eslint during the build to save memory; linting should run in CI instead
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: false },
   staticPageGenerationTimeout: 120,
   productionBrowserSourceMaps: false,
 
-  /* ─── Redirects (URL changes, browser-visible) ───────────── */
-  async redirects() {
-    return [
-      {
-        source: '/music',
-        destination: 'https://www.last.fm/user/krisyotam',
-        permanent: true,
-      },
-    ]
-  },
-
-  /* ─── Rewrites (vanity URLs, internal routing only) ─────────
-     These map public-facing paths to internal App Router MDX
-     locations without changing the browser URL.
-     Edit `destination` values freely.
-  ─────────────────────────────────────────────────────────── */
+  /* ============================================================================
+     REWRITES
+     Maps URLs to internal destinations without changing the browser location.
+     Also proxies /doc/* to Hetzner object storage.
+  ============================================================================ */
   async rewrites() {
     return [
-      /* on-myself */
-      {
-        source: '/me',
-        destination: '/notes/on-myself/about-kris',
-      },
-      {
-        source: '/logo',
-        destination: '/notes/on-myself/about-my-logo',
-      },
+      // --- vanity URLs to MDX content ---
+      { source: '/me',     destination: '/notes/on-myself/about-kris' },
+      { source: '/logo',   destination: '/notes/on-myself/about-my-logo' },
 
-      /* website */
+      { source: '/about',  destination: '/notes/website/about-this-website' },
+      { source: '/design', destination: '/notes/website/design-of-this-website' },
+      { source: '/donate', destination: '/notes/website/donate' },
+      { source: '/faq',    destination: '/notes/website/faq' },
+
+      // --- public archive path ---
       {
-        source: '/about',
-        destination: '/notes/website/about-this-website',
-      },
-      {
-        source: '/design',
-        destination: '/notes/website/design-of-this-website',
-      },
-      {
-        source: '/donate',
-        destination: '/notes/website/donate',
-      },
-      {
-        source: '/faq',
-        destination: '/notes/website/faq',
+        source: '/doc/:path*',
+        destination: 'https://hel1.your-objectstorage.com/:path*',
       },
     ]
   },
 
+  /* ============================================================================
+     IMAGE HANDLING
+     Local image optimization disabled to avoid memory cost.
+     External domains allowed for embeds & QR generator.
+  ============================================================================ */
   images: {
     unoptimized: true,
     remotePatterns: [
@@ -71,8 +57,12 @@ const baseConfig = {
     domains: ['api.qrserver.com', 'i.postimg.cc', 'gateway.pinata.cloud'],
   },
 
+  /* ============================================================================
+     EXPERIMENTAL + BUILD
+     Disables worker threads for Webpack for tiny hosts.
+     Standalone output for portability.
+  ============================================================================ */
   experimental: {
-    // Disable Webpack build worker to avoid worker OOMs on tiny hosts
     webpackBuildWorker: false,
   },
 
@@ -80,19 +70,30 @@ const baseConfig = {
   transpilePackages: ['react-syntax-highlighter'],
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 
+  /* ============================================================================
+     WEBPACK EXTENSIONS
+     MDX raw import support + canvas externalization
+  ============================================================================ */
   webpack(config) {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       'next/image$': 'next/future/image',
     }
 
-    config.module.rules.push({ test: /\.mdx\?raw$/, type: 'asset/source' })
+    config.module.rules.push({
+      test: /\.mdx\?raw$/,
+      type: 'asset/source',
+    })
 
     config.externals = [...(config.externals || []), { canvas: 'canvas' }]
 
     return config
   },
 
+  /* ============================================================================
+     SECURITY HEADERS
+     Frame protection + basic CSP
+  ============================================================================ */
   async headers() {
     return [
       {
@@ -106,7 +107,10 @@ const baseConfig = {
   },
 }
 
-/* ─── MDX wrapper (GFM Tables + Math + KaTeX) ──────────────── */
+/* ============================================================================
+   MDX PIPELINE
+   GitHub-flavored markdown + math + KaTeX rendering
+============================================================================ */
 const nextConfig = withMDX({
   extension: /\.mdx?$/,
   options: {
