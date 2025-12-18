@@ -1,24 +1,15 @@
 {
   "version": 2,
-
   "builds": [
     {
       "src": "package.json",
       "use": "@vercel/next"
     }
   ],
-
   "rewrites": [
     {
       "source": "/doc/(.*)",
       "destination": "https://hel1.your-objectstorage.com/doc/$1"
-    }
-  ],
-
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
     }
   ]
 }
