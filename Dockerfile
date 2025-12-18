@@ -2,14 +2,16 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json* ./
-RUN npm ci
+# Install only production dependencies to reduce image size and memory usage during install
+RUN npm ci --omit=dev
 
 # Build the app
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npm run build
+## Run the low-memory build (uses NEXT_WORKER_COUNT and restricted NODE_OPTIONS)
+RUN npm run build:lowmem
 
 # Run the app
 FROM node:20-alpine AS runner

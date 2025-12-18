@@ -1,383 +1,331 @@
 "use client"
 
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import Link from "next/link"
-import { FileText, Film, Database, BookOpen, Download, Search, Filter, Tag, Video, Headphones, Wrench, Code, Book } from "lucide-react"
+import { FileText, Film, Database, BookOpen, Search, Tag, Video, Headphones, Wrench, Book, LayoutGrid, List, Folder } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import archiveJson from "@/data/archive/archive.json"
 
-export type ArchiveItem = {
+type RawObject = {
+  bucket: string
+  key: string
+  size: number
+  last_modified: string
+  original_url?: string
+  public_url?: string
+}
+
+type NodeType = string
+
+type Node = {
   id: string
-  title: string
-  type: "pdf" | "video" | "dataset" | "manuscript"
-  category: string
-  tags: string[]
-  description: string
-  size: string
-  format: string
-  duration?: string
-  dateAdded: string
-  downloadUrl: string
+  name: string
+  path: string // relative path inside bucket
+  type: NodeType
+  children?: Node[]
+  meta?: RawObject
 }
 
-interface ArchivesComponentProps {
-  archivesData: ArchiveItem[]
+function isFile(node: Node) {
+  return node.type !== 'directory' && node.type !== 'bucket'
 }
 
-type ArchiveType = "note" | "essay" | "lecture-note" | "book" | "article" | "video" | "podcast" | "tool" | "project" | "dataset" | "manuscript" | "pdf"
+function formatSize(bytes: number) {
+  if (!bytes || bytes === 0) return "—"
+  const units = ["B", "KB", "MB", "GB", "TB"]
+  let i = 0
+  let n = bytes
+  while (n >= 1024 && i < units.length - 1) {
+    n /= 1024
+    i++
+  }
+  return `${n.toFixed(n >= 10 ? 0 : 1)} ${units[i]}`
+}
 
-export default function ArchivesComponent({ archivesData }: ArchivesComponentProps) {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [typeFilter, setTypeFilter] = useState("all")
-  const [categoryFilter, setCategoryFilter] = useState("all")
+function getIconForName(name: string, isFolder = false) {
+  if (isFolder) return <Folder className="h-5 w-5" />
+  const ext = name.split('.').pop()?.toLowerCase() ?? ''
+  if (['pdf', 'doc', 'docx', 'txt', 'md'].includes(ext)) return <FileText className="h-5 w-5" />
+  if (['mp4', 'mkv', 'webm'].includes(ext)) return <Video className="h-5 w-5" />
+  if (['mp3', 'm4a', 'flac'].includes(ext)) return <Headphones className="h-5 w-5" />
+  if (['zip', 'tar', 'gz'].includes(ext)) return <Database className="h-5 w-5" />
+  return <FileText className="h-5 w-5" />
+}
 
-  // Extract unique categories for the filter dropdown
-  const categories = ["all", ...new Set(archivesData.map((item) => item.category))].sort()
+// Build a tree of nodes per bucket from the JSON listing
+function buildBucketsTree(data: any): Node[] {
+  const buckets: Node[] = []
+  if (!data?.buckets) return buckets
 
-  // Filter archives based on search query and filters
-  const filteredArchives = archivesData.filter((item) => {
-    const matchesSearch =
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+  for (const b of data.buckets) {
+    const bucketNode: Node = { id: b.name, name: b.name, path: '', type: 'bucket', children: [] }
+    const map = new Map<string, Node>()
+    map.set('', bucketNode)
 
-    const matchesType = typeFilter === "all" || item.type === typeFilter
-    const matchesCategory = categoryFilter === "all" || item.category === categoryFilter
+    for (const obj of b.objects as RawObject[]) {
+      const key = obj.key
+      const parts = key.split('/').filter(Boolean)
+      if (parts.length === 0) continue
 
-    return matchesSearch && matchesType && matchesCategory
-  })
+      for (let i = 0; i < parts.length; i++) {
+        const subpath = parts.slice(0, i + 1).join('/')
+        const parentPath = parts.slice(0, i).join('/')
+        const isLast = i === parts.length - 1
+  const isDirectory = key.endsWith('/') || !isLast ? true : false
 
-  // Get icon based on archive type
-  const getTypeIcon = (type: ArchiveType) => {
-    switch (type) {
-      case "pdf":
-        return <FileText className="h-4 w-4" />
-      case "note":
-        return <FileText className="h-4 w-4" />
-      case "essay":
-        return <Book className="h-4 w-4" />
-      case "lecture-note":
-        return <Book className="h-4 w-4" />
-      case "book":
-        return <Book className="h-4 w-4" />
-      case "article":
-        return <FileText className="h-4 w-4" />
-      case "video":
-        return <Video className="h-4 w-4" />
-      case "podcast":
-        return <Headphones className="h-4 w-4" />
-      case "tool":
-        return <Wrench className="h-4 w-4" />
-      case "project":
-        return <Film className="h-4 w-4" />
-      case "dataset":
-        return <Database className="h-4 w-4" />
-      case "manuscript":
-        return <BookOpen className="h-4 w-4" />
-      default:
-        return <FileText className="h-4 w-4" />
+        if (!map.has(subpath)) {
+          const node: Node = {
+            id: `${b.name}/${subpath}`,
+            name: parts[i],
+            path: subpath,
+            type: isDirectory ? 'directory' : (obj?.key.split('.').pop() ?? 'file').toLowerCase(),
+            children: isDirectory ? [] : undefined,
+            meta: isDirectory ? undefined : obj,
+          }
+          map.set(subpath, node)
+          const parent = map.get(parentPath)!
+          parent.children = parent.children || []
+          parent.children.push(node)
+        } else if (!isDirectory) {
+          // existing node but mark as file and attach meta; set type to extension
+          const existing = map.get(subpath)!
+          existing.type = (obj?.key.split('.').pop() ?? 'file').toLowerCase()
+          existing.meta = obj
+        }
+      }
+    }
+
+    // assign children sorted
+    const addChildren = (node: Node) => {
+      if (!node.children) return
+      node.children.sort((a, b) => {
+        if (a.type === b.type) return a.name.localeCompare(b.name)
+        return a.type === 'directory' ? -1 : 1
+      })
+      node.children.forEach(addChildren)
+    }
+    addChildren(bucketNode)
+    buckets.push(bucketNode)
+  }
+
+  return buckets
+}
+
+export default function ArchivesComponent() {
+  const [query, setQuery] = useState("")
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list')
+  // default to the "doc" bucket so /archive behaves like /doc
+  const [currentBucket, setCurrentBucket] = useState<string | null>('doc')
+  const [currentPath, setCurrentPath] = useState<string>('')
+
+  const buckets = useMemo(() => buildBucketsTree(archiveJson), [])
+
+  // find current node
+  const currentNode = useMemo(() => {
+    if (!currentBucket) return null
+    const bucket = buckets.find(b => b.name === currentBucket)
+    if (!bucket) return null
+    if (!currentPath) return bucket
+    const parts = currentPath.split('/').filter(Boolean)
+    let node: Node | undefined = bucket
+    for (const p of parts) {
+      node = node.children?.find(c => c.name === p)
+      if (!node) break
+    }
+    return node ?? null
+  }, [buckets, currentBucket, currentPath])
+
+  // items to display: if not in bucket show buckets, else show children of currentNode filtered by query
+  const itemsToShow = useMemo(() => {
+    if (!currentBucket) return buckets
+    const children = currentNode?.children ?? []
+    if (!query) return children
+    const q = query.toLowerCase()
+    // filter children and directories whose subtree contains match
+    const results: Node[] = []
+    const walk = (n: Node) => {
+      if (n.name.toLowerCase().includes(q) && n !== currentNode) results.push(n)
+      if (n.children) n.children.forEach(walk)
+    }
+    children.forEach(c => {
+      if (c.name.toLowerCase().includes(q)) results.push(c)
+      else if (c.type === 'directory') walk(c)
+    })
+    return results
+  }, [buckets, currentBucket, currentNode, query])
+
+  const enterFolder = (node: Node) => {
+    if (node.type !== 'directory' && node.type !== 'bucket') return
+    setCurrentBucket(node.type === 'bucket' ? node.name : currentBucket)
+    if (node.type === 'directory') {
+      setCurrentPath(node.path)
+    } else {
+      setCurrentPath('')
     }
   }
 
-  return (
-    <div
-      className="container mx-auto pt-0 pb-8 px-4 max-w-6xl dark:bg-[#121212]"
-      style={{ fontFamily: "Georgia, serif" }}
-    >
-      <div
-        className="mb-8 border-b border-gray-200 dark:border-gray-800 pb-4"
-        style={{ borderBottom: "1px solid var(--border)" }}
-      >
-      </div>
+  const openNode = (node: Node) => {
+    // open files in a new tab, sanitize known duplicate /doc/doc/ prefix
+    if (isFile(node) && node.meta?.public_url) {
+      const sanitizePublicUrl = (url: string) => {
+        if (!url) return url
+        try {
+          // If currentBucket is set, remove duplicated bucket segments like /doc/doc/
+          if (currentBucket) {
+            const dup = `/${currentBucket}/${currentBucket}/`
+            if (url.includes(dup)) return url.replace(new RegExp(dup, 'g'), `/${currentBucket}/`)
+          }
+          // Fallback specific fix for /doc/doc/
+          if (url.includes('/doc/doc/')) return url.replace(/\/doc\/doc\//g, '/doc/')
+        } catch (e) {
+          // noop
+        }
+        return url
+      }
 
-      {/* Filters and search */}
-      <div className="flex flex-col md:flex-row gap-4 mb-8">
+      const url = sanitizePublicUrl(node.meta.public_url)
+      window.open(url, '_blank')
+    } else if (node.type === 'directory') {
+      enterFolder(node)
+    }
+  }
+
+  const breadcrumbs = useMemo(() => {
+    if (!currentBucket) return [] as string[]
+    if (!currentPath) return [currentBucket]
+    return [currentBucket, ...currentPath.split('/').filter(Boolean)]
+  }, [currentBucket, currentPath])
+
+  return (
+    <main className="max-w-2xl mx-auto px-4 py-2">
+      <div className="mb-4 flex items-center gap-4">
         <div className="flex-1 relative">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <Search className="h-4 w-4 text-muted-foreground" />
           </div>
-          <Input
-            placeholder="Search archives by title, description, or tags..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className={cn(
-              "w-full pl-10 bg-background rounded-none",
-              "border-border focus:ring-0 focus:ring-offset-0 focus:border-border",
-              "dark:border-border dark:focus:border-border"
-            )}
-          />
+          <Input placeholder="Search files and folders..." className="w-full pl-10 rounded-none" value={query} onChange={(e) => setQuery(e.target.value)} />
         </div>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-muted-foreground" />
-            <Select value={typeFilter} onValueChange={setTypeFilter}>
-              <SelectTrigger className={cn(
-                "w-[180px] rounded-none border-border",
-                "focus:ring-0 focus:ring-offset-0 focus:border-border",
-                "dark:border-border dark:focus:border-border"
-              )}>
-                <SelectValue placeholder="Filter by type" />
-              </SelectTrigger>
-              <SelectContent className="rounded-none border-border">
-                <SelectItem value="all">All Types</SelectItem>
-                <SelectItem value="pdf">PDF</SelectItem>
-                <SelectItem value="video">Video</SelectItem>
-                <SelectItem value="dataset">Dataset</SelectItem>
-                <SelectItem value="manuscript">Manuscript</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex items-center gap-2">
-            <Tag className="h-4 w-4 text-muted-foreground" />
-            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger 
-                className={cn(
-                  "w-[180px] rounded-none border-border",
-                  "focus:ring-0 focus:ring-offset-0 focus:border-border",
-                  "dark:border-border dark:focus:border-border"
-                )}
-              >
-                <SelectValue placeholder="Filter by category" />
-              </SelectTrigger>
-              <SelectContent className="rounded-none border-border">
-                {categories.map((category) => (
-                  <SelectItem key={category} value={category}>
-                    {category === "all" ? "All Categories" : category}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="icon" className={cn('rounded-none', viewMode === 'list' ? 'bg-secondary/50' : '')} onClick={() => setViewMode('list')} aria-label="List view"><List className="h-4 w-4" /></Button>
+          <Button variant="outline" size="icon" className={cn('rounded-none', viewMode === 'grid' ? 'bg-secondary/50' : '')} onClick={() => setViewMode('grid')} aria-label="Grid view"><LayoutGrid className="h-4 w-4" /></Button>
         </div>
       </div>
 
-      {/* Archives table */}
-      <div className="border border-border hidden md:block">
-        <table className="min-w-full divide-y divide-border">
-          <thead className="bg-muted/50 dark:bg-[hsl(var(--popover))]">
-            <tr>
-              <th
-                scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
+      {/* Breadcrumbs */}
+      <div className="text-sm text-muted-foreground mb-4 flex flex-wrap items-center gap-2">
+        {breadcrumbs.map((b, i) => {
+          const isFirst = i === 0
+          // build path for this breadcrumb (skip bucket at index 0)
+          const path = isFirst ? '' : breadcrumbs.slice(1, i + 1).join('/')
+          return (
+            <span key={i} className="flex items-center">
+              {i > 0 && <span className="mx-1 text-muted-foreground">/</span>}
+              <button
+                className="text-sm text-foreground hover:underline"
+                onClick={() => {
+                  if (isFirst) {
+                    setCurrentPath('')
+                    setCurrentBucket(b)
+                  } else {
+                    setCurrentPath(path)
+                  }
+                }}
               >
-                Title & Description
-              </th>
-              <th
-                scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
-              >
-                Type & Category
-              </th>
-              <th
-                scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
-              >
-                Details
-              </th>
-              <th
-                scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
-              >
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-background dark:bg-[hsl(var(--popover))] divide-y divide-border">
-            {filteredArchives.length > 0 ? (
-              filteredArchives.map((archive) => (
-                <tr key={archive.id} className="hover:bg-muted/50 dark:hover:bg-muted/5">
-                  <td className="px-4 py-4">
-                    <div className="text-sm font-medium text-foreground">
-                      {archive.title}
-                    </div>
-                    <div className="text-xs text-muted-foreground mt-1 line-clamp-2">
-                      {archive.description}
-                    </div>
-                    <div className="mt-2 flex flex-wrap gap-1">
-                      {archive.tags.slice(0, 3).map((tag, index) => (
-                        <Badge
-                          key={index}
-                          variant="outline"
-                          className="rounded-none text-[10px] px-1.5 py-0 bg-muted/50 dark:bg-[hsl(var(--popover))]"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                      {archive.tags.length > 3 && (
-                        <Badge 
-                          variant="outline"
-                          className="text-[10px] px-1.5 py-0 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))]"
-                        >
-                          +{archive.tags.length - 3} more
-                        </Badge>
-                      )}
-                    </div>
-                  </td>
-                  <td className="px-4 py-4">
-                    <div className="flex items-center">
-                      <span className="flex-shrink-0 mr-2 text-muted-foreground">
-                        {getTypeIcon(archive.type)}
-                      </span>
-                      <span className="text-xs uppercase tracking-wide text-foreground">
-                        {archive.type}
-                      </span>
-                    </div>
-                    <div className="text-xs text-muted-foreground mt-2">
-                      Category: <span className="text-foreground">{archive.category}</span>
-                    </div>
-                  </td>
-                  <td className="px-4 py-4">
-                    <div className="text-xs text-muted-foreground">
-                      <div className="mb-1">
-                        Size: <span className="text-foreground">{archive.size}</span>
-                      </div>
-                      <div className="mb-1">
-                        Format: <span className="text-foreground">{archive.format}</span>
-                      </div>
-                      {archive.duration && (
-                        <div className="mb-1">
-                          Duration: <span className="text-foreground">{archive.duration}</span>
-                        </div>
-                      )}
-                      <div>
-                        Added: <span className="text-foreground">{archive.dateAdded}</span>
-                      </div>
-                    </div>
-                  </td>                  <td className="px-4 py-4">
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="rounded-none w-full text-xs"
-                    >
-                      <Link 
-                        href={archive.downloadUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="flex w-full items-center justify-center"
-                      >
-                        Open Archive
-                      </Link>
-                    </Button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={4} className="px-4 py-4 text-center text-muted-foreground">
-                  <div className="text-sm">No archives found matching your criteria.</div>
-                  <Button
-                    variant="outline"
-                    className="mt-4 rounded-none text-xs"
-                    onClick={() => {
-                      setSearchQuery("")
-                      setTypeFilter("all")
-                      setCategoryFilter("all")
-                    }}
-                  >
-                    Clear Filters
-                  </Button>
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+                {b}
+              </button>
+            </span>
+          )
+        })}
       </div>
 
-      {/* Alternative card view for mobile */}
-      <div className="md:hidden mt-8 space-y-4">
-        {filteredArchives.length > 0 ? (
-          filteredArchives.map((archive) => (
-            <Card
-              key={archive.id}
-              className="rounded-none border-border bg-muted/50 dark:bg-[hsl(var(--popover))]"
-            >
-              <CardHeader className="p-4 pb-2 border-b border-border">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-muted-foreground">{getTypeIcon(archive.type)}</span>
-                    <span className="text-xs uppercase tracking-wide text-foreground">
-                      {archive.type}
-                    </span>
-                  </div>
-                  <span className="text-xs text-muted-foreground">
-                    {archive.dateAdded}
-                  </span>
-                </div>
-                <h3 className="text-sm font-medium mt-2 text-foreground">
-                  {archive.title}
-                </h3>
-                <div className="text-xs text-muted-foreground mt-1">
-                  Category: {archive.category}
-                </div>
-              </CardHeader>
-              <CardContent className="p-4 pt-3 text-xs text-muted-foreground">
-                <p className="mb-3 line-clamp-2">
-                  {archive.description}
-                </p>
-                <div className="flex flex-wrap gap-1 mb-3">
-                  {archive.tags.map((tag, index) => (
-                    <Badge
-                      key={index}
-                      variant="outline"
-                      className="rounded-none text-[10px] px-1.5 py-0 bg-muted/50 dark:bg-[hsl(var(--popover))]"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                <div className="grid grid-cols-2 gap-2">
+      {/* Content */}
+      {(!currentBucket) ? (
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {buckets.map(b => (
+            <Card key={b.name} className="rounded-none border-border cursor-pointer hover:bg-secondary/50 transition-colors" onClick={() => { setCurrentBucket(b.name); setCurrentPath('') }}>
+              <CardContent className="p-4">
+                <div className="flex items-center gap-3">
+                  <Folder className="h-6 w-6 text-muted-foreground" />
                   <div>
-                    Size: <span className="text-foreground">{archive.size}</span>
+                    <div className="font-medium">{b.name}</div>
+                    <div className="text-xs text-muted-foreground">{b.children?.length ?? 0} items</div>
                   </div>
-                  <div>
-                    Format: <span className="text-foreground">{archive.format}</span>
-                  </div>
-                  {archive.duration && (
-                    <div className="col-span-2">
-                      Duration: <span className="text-foreground">{archive.duration}</span>
-                    </div>
-                  )}
                 </div>
               </CardContent>
-              <CardFooter className="p-4 pt-0">                <Button
-                  asChild
-                  variant="outline"
-                  className="w-full rounded-none text-xs"
-                >
-                  <Link 
-                    href={archive.downloadUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex w-full items-center justify-center"
-                  >
-                    Open Archive
-                  </Link>
-                </Button>
-              </CardFooter>
             </Card>
-          ))
-        ) : (
-          <div className="text-center">
-            <div className="text-sm text-muted-foreground">No archives found matching your criteria.</div>
-            <Button
-              variant="outline" 
-              className="mt-4 rounded-none text-xs"
-              onClick={() => {
-                setSearchQuery("")
-                setTypeFilter("all")
-                setCategoryFilter("all")
-              }}
-            >
-              Clear Filters
-            </Button>
+          ))}
+        </div>
+      ) : (
+        // inside bucket
+        viewMode === 'grid' ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {itemsToShow.map(item => (
+              <Card key={item.id} className="rounded-none border-border hover:bg-secondary/50 transition-colors">
+                <CardContent className="p-4 cursor-pointer" onClick={() => openNode(item)}>
+                  <div className="flex items-center gap-3">
+                    {getIconForName(item.name, item.type === 'directory')}
+                    <div>
+                      <div className="font-medium text-foreground">{item.name}</div>
+                      <div className="text-xs text-muted-foreground">{isFile(item) ? formatSize(item.meta?.size ?? 0) : `${item.children?.length ?? 0} items`}</div>
+                    </div>
+                  </div>
+                </CardContent>
+                <CardFooter className="p-4 pt-0 text-xs text-muted-foreground">
+                  {isFile(item) ? (
+                    <div className="flex justify-between items-center text-xs text-muted-foreground">
+                      <span>{formatSize(item.meta?.size ?? 0)}</span>
+                      <span>{item.meta?.last_modified ? new Date(item.meta.last_modified).toLocaleString('en-US', { timeZone: 'America/Chicago', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : '—'}</span>
+                    </div>
+                  ) : (
+                    <div className="text-xs text-muted-foreground">{`${item.children?.length ?? 0} items`}</div>
+                  )}
+                </CardFooter>
+              </Card>
+            ))}
           </div>
-        )}
-      </div>
-    </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
+              <thead>
+                <tr className="border-b border-border bg-muted/50 text-foreground">
+                  <th className="py-2 text-left font-medium px-3">Name</th>
+                  <th className="py-2 text-left font-medium px-3">Type</th>
+                  <th className="py-2 text-left font-medium px-3">Size</th>
+                  <th className="py-2 text-left font-medium px-3">Modified</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+        {itemsToShow.map((item) => (
+          <tr key={item.id} className="border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer" onClick={() => openNode(item)}>
+                      <td className="py-3 px-3">
+                        <div className="flex items-center gap-3">
+                          {getIconForName(item.name, item.type === 'directory')}
+                          <div className="font-medium">{item.name}</div>
+                        </div>
+                      </td>
+                      <td className="py-3 px-3">{item.type}</td>
+                      <td className="py-3 px-3">{isFile(item) ? formatSize(item.meta?.size ?? 0) : `${item.children?.length ?? 0} items`}</td>
+                      <td className="py-3 px-3">{item.meta?.last_modified ? new Date(item.meta.last_modified).toLocaleString('en-US', { timeZone: 'America/Chicago', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : '—'}</td>
+                    
+                    </tr>
+                ))}
+                {itemsToShow.length === 0 && (
+                  <tr>
+                    <td colSpan={4} className="py-6 text-center text-muted-foreground">No items found.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )
+      )}
+    </main>
   )
 }
 

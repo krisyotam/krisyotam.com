@@ -6,12 +6,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import ArchivesComponent from "@/components/archive"
-import type { ArchiveItem } from "@/components/archive"
 import { PageHeader } from "@/components/page-header"
 import { PageDescription } from "@/components/posts/typography/page-description"
 
 export default function ArchivesPage() {
-  const [archivesData, setArchivesData] = useState<ArchiveItem[]>([])
+  // archives data is loaded inside the component from local JSON; keep auth state here
   const [isLoading, setIsLoading] = useState(true)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [password, setPassword] = useState("")
@@ -37,7 +36,7 @@ export default function ArchivesPage() {
         throw new Error("Failed to fetch archives data")
       }
       const data = await response.json()
-      setArchivesData(data)
+      // we fetch to validate access; component reads the JSON directly
     } catch (error) {
       console.error("Error fetching archives:", error)
     } finally {
@@ -141,7 +140,7 @@ export default function ArchivesPage() {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
-      <div className="container mx-auto max-w-6xl px-4 pt-8">
+      <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
         <PageHeader
           title="Archive"
           subtitle="Collection of Documents"
@@ -150,15 +149,16 @@ export default function ArchivesPage() {
           status="Finished"
           confidence="certain"
           importance={7}
-          preview="a archive page providing access to a expansive collection of documents."
+          preview="a comprehensive list of the archived content available at krisyotam.com"
+        />
+
+        <ArchivesComponent />
+
+        <PageDescription
+          title="About Archives"
+          description="The 'Archives' page is a specialized hub designed to provide access to rare and expansive collections, including massive data sets, rare book PDFs, manuscripts, and extensive video series that are not widely available. Structured similarly to the 'OCs page,' it features a user-friendly interface with a search bar and categorized sections at the top for easy navigation. Each entry is presented through a custom archive component displaying key details such as the title, type (e.g., PDF, video, dataset), and a concise description—no images are included due to the large scale of the content. Links within each entry direct users to an external platform where these unique resources can be downloaded, making the Archives page an invaluable resource for researchers, enthusiasts, and curious minds alike."
         />
       </div>
-      <ArchivesComponent archivesData={archivesData} />
-
-      <PageDescription
-        title="About Archives"
-        description="The 'Archives' page is a specialized hub designed to provide access to rare and expansive collections, including massive data sets, rare book PDFs, manuscripts, and extensive video series that are not widely available. Structured similarly to the 'OCs page,' it features a user-friendly interface with a search bar and categorized sections at the top for easy navigation. Each entry is presented through a custom archive component displaying key details such as the title, type (e.g., PDF, video, dataset), and a concise description—no images are included due to the large scale of the content. Links within each entry direct users to an external platform where these unique resources can be downloaded, making the Archives page an invaluable resource for researchers, enthusiasts, and curious minds alike."
-      />
     </div>
   )
 }

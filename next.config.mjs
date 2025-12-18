@@ -7,8 +7,10 @@ import rehypeKatex from 'rehype-katex'
 /* ─── Consolidated Next.js configuration ───────────────────── */
 const baseConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-  eslint: { ignoreDuringBuilds: false },
+  // Reduce memory usage during production builds
+  swcMinify: false,
+  // We'll skip eslint during the build to save memory; linting should run in CI instead
+  eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: false },
   staticPageGenerationTimeout: 120,
   productionBrowserSourceMaps: false,
@@ -70,7 +72,8 @@ const baseConfig = {
   },
 
   experimental: {
-    webpackBuildWorker: true,
+    // Disable Webpack build worker to avoid worker OOMs on tiny hosts
+    webpackBuildWorker: false,
   },
 
   output: 'standalone',

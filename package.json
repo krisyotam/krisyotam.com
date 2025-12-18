@@ -4,9 +4,10 @@
   "private": true,
   "description": "Personal website of Kris Yotam - using Next.js 14.2.26 with all dependencies pinned for long-term stability. IMPORTANT: Upgrades to any framework or library should be done never. This project is intentionally frozen at known-good versions to avoid breaking changes.",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+  "dev": "next dev",
+  "build": "next build",
+  "build:lowmem": "NEXT_WORKER_COUNT=1 NODE_OPTIONS='--max-old-space-size=512' DISABLE_ESLINT_PLUGIN=true NEXT_DISABLE_TYPE_CHECKING=1 next build",
+  "start": "next start",
     "lint": "next lint",
     "compile-legal": "node scripts/compile-legal-docs.js",
     "generate-rss": "node --experimental-specifier-resolution=node scripts/generate-rss.mjs"
