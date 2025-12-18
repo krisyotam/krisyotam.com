@@ -48,8 +48,8 @@ export { default as Inflation } from './inflation';
 // Content Components
 export { ContentTable } from './shared/content-table';
 export { CategoryHeader } from './category-header';
-// DELETED_BY_SCRIPT: export { DirectoryCategoryHeader } from './directory-category-header';
-// DELETED_BY_SCRIPT: export { DirectoryPageHeader } from './directory-page-header';
+export { DirectoryCategoryHeader } from './directory-category-header';
+export { DirectoryPageHeader } from './directory-page-header';
 export { DocsHeader } from './docs/docs-header';
 export { PageHeader } from './page-header';
 // PostHeader already exported above

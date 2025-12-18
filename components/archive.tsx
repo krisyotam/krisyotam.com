@@ -201,7 +201,7 @@ export default function ArchivesComponent() {
   }, [currentBucket, currentPath])
 
   return (
-    <main className="max-w-2xl mx-auto px-4 py-2">
+    <main className="w-full py-2">
       <div className="mb-4 flex items-center gap-4">
         <div className="flex-1 relative">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
