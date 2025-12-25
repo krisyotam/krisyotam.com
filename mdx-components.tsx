@@ -14,6 +14,7 @@ import Math from "@/components/typography/math"
 import dynamic from 'next/dynamic'
 import { Pfp } from "@/components/typography/pfp"
 import Redacted from "@/components/typography/redacted"
+import DateComponent from "@/components/time-stamp"
 // Import TikZ with no SSR to avoid hydration issues
 const TikZ = dynamic(() => import('@/components/typography/tikz'), { ssr: false })
 
@@ -183,6 +184,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Math,
     Tikz: TikZ,
     Tweet,
+  Date: DateComponent,
     SimpleBib,
     Books,
     Cinema,

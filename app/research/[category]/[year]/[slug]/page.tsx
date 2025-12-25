@@ -1,27 +1,8 @@
-import researchData from "@/data/research.json";
+import researchDataRaw from "@/data/research/research.json";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { ResearchDetail } from "./research-detail";
-
-interface Research {
-  id: string;
-  title: string;
-  abstract: string;
-  importance: string | number;
-  authors: string[];
-  subject: string;
-  keywords: string[];
-  postedBy: string;
-  postedOn: string;
-  dateStarted: string;
-  status: string;
-  bibliography: string[];
-  img: string;
-  pdfLink: string;
-  sourceLink: string;
-  category: string;
-  tags: string[];
-}
+import type { Research } from '@/types/research'
 
 function slugifyTitle(title: string) {
   return title.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
@@ -32,11 +13,11 @@ function slugifyCategory(category: string) {
 }
 
 export async function generateStaticParams() {
-  const research = researchData as Research[];
+  const research = (researchDataRaw as any).research as Research[];
   return research.map((item) => ({
-    category: slugifyCategory(item.category),
-    year: new Date(item.dateStarted).getFullYear().toString(),
-    slug: slugifyTitle(item.title),
+    category: slugifyCategory(item.status || 'all'),
+    year: new Date(item.start_date).getFullYear().toString(),
+    slug: slugifyTitle(item.name),
   }));
 }
 
@@ -47,51 +28,47 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   // Find the research item by category, year, and slug
   const y = parseInt(params.year, 10);
-  const research = researchData as Research[];
+  const research = (researchDataRaw as any).research as Research[];
   const item = research.find((r) => {
-    const categorySlug = slugifyCategory(r.category);
-    const itemYear = new Date(r.dateStarted).getFullYear();
-    const titleSlug = slugifyTitle(r.title);
+    const categorySlug = slugifyCategory(r.status || 'all');
+    const itemYear = new Date(r.start_date).getFullYear();
+    const titleSlug = slugifyTitle(r.name);
     return categorySlug === params.category && itemYear === y && titleSlug === params.slug;
   });
 
-  // If research item not found, return default metadata
-  if (!item) {
+    // If research item not found, return default metadata
+    if (!item) {
+      return {
+        title: "Research Not Found",
+      };
+    }
+
+    // Build simple metadata from new research fields
+    const image = item.imgs && item.imgs.length > 0 ? item.imgs[0].img_url : "https://i.postimg.cc/jSDMT1Sn/research.png";
+
     return {
-      title: "Research Not Found",
+      title: `${item.name} | ${item.status || "Research"} | Kris Yotam`,
+      description: item.description,
+      openGraph: {
+        title: item.name,
+        description: item.description,
+        type: "article",
+        images: [
+          {
+            url: image,
+            alt: `${item.name} | Research`,
+            width: 1200,
+            height: 630,
+          },
+        ],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: item.name,
+        description: item.description,
+        images: [image],
+      },
     };
-  }
-
-  // Get base URL from parent metadata for absolute URLs
-  const previousImages = (await parent).openGraph?.images || [];
-
-  // Construct metadata with OpenGraph properties
-  return {
-    title: `${item.title} | ${item.category} | Kris Yotam`,
-    description: item.abstract,
-    openGraph: {
-      title: item.title,
-      description: item.abstract,
-      type: "article",
-      publishedTime: item.postedOn,
-      authors: item.authors,
-      tags: item.tags || [],
-      images: [
-        {
-          url: "https://i.postimg.cc/jSDMT1Sn/research.png",
-          alt: `${item.title} | Research`,
-          width: 1200,
-          height: 630
-        }
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: item.title,
-      description: item.abstract,
-      images: ["https://i.postimg.cc/jSDMT1Sn/research.png"],
-    },
-  };
 }
 
 export default function ResearchPage({
@@ -103,11 +80,11 @@ export default function ResearchPage({
   if (isNaN(y)) notFound();
 
   // Find the research item
-  const research = researchData as Research[];
+  const research = (researchDataRaw as any).research as Research[];
   const item = research.find((r) => {
-    const categorySlug = slugifyCategory(r.category);
-    const itemYear = new Date(r.dateStarted).getFullYear();
-    const titleSlug = slugifyTitle(r.title);
+    const categorySlug = slugifyCategory(r.status || 'all');
+    const itemYear = new Date(r.start_date).getFullYear();
+    const titleSlug = slugifyTitle(r.name);
     return categorySlug === params.category && itemYear === y && titleSlug === params.slug;
   });
 

@@ -4,9 +4,9 @@ import type React from "react"
 
 import Link from "next/link"
 import { useState, useEffect } from "react"
-import { ExternalLink } from "lucide-react"
+import LinkIcon from "@/components/link-icon"
 
-interface EnhancedLinkProps {
+interface EnhancedLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string
   children: React.ReactNode
   className?: string
@@ -14,7 +14,7 @@ interface EnhancedLinkProps {
   skipModal?: boolean
 }
 
-export function EnhancedLink({ href, children, className = "", prefetch, skipModal = false }: EnhancedLinkProps) {
+export function EnhancedLink({ href, children, className = "", prefetch, skipModal = false, ...rest }: EnhancedLinkProps) {
   const [isExternal, setIsExternal] = useState(false)
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export function EnhancedLink({ href, children, className = "", prefetch, skipMod
   // For internal links, use Next.js Link component
   if (!isExternal) {
     return (
-      <Link href={href} className={className} prefetch={prefetch}>
+      <Link href={href} className={className} prefetch={prefetch} {...(rest as any)}>
         {children}
       </Link>
     )
@@ -40,17 +40,19 @@ export function EnhancedLink({ href, children, className = "", prefetch, skipMod
         target="_blank"
         rel="noopener noreferrer"
         data-no-modal="true"
+        {...rest}
       >
         {children}
-        <ExternalLink className="ml-1 h-3 w-3" />
+        <LinkIcon href={href} className="ml-1" />
       </a>
     )
   }
 
   // For external links that should use the modal
   return (
-    <a href={href} className={`${className} cursor-pointer`}>
+    <a href={href} className={`${className} cursor-pointer`} {...rest}>
       {children}
+      <LinkIcon href={href} className="ml-1" />
     </a>
   )
 }

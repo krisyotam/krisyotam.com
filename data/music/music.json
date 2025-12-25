@@ -1,0 +1,43 @@
+{
+  "music": [
+    {
+      "playlist_name": "1960s Soul",
+      "slug": "1960s-soul",
+      "cover_url": "https://kagi.com/proxy/OtisHandsClose.jpg?c=jdk3aQfjvHj3aYinHQZoqbKast_aKXM4F937LppvQuLMp3w8tmCn243EhEhehhXNI-Vx-I2XlBfeJDQQmXnRe2y2R6GZ2cpSCUH5QL1A3LqjkDCu0XgVQZPAegKcuaLk",
+      "amount_of_songs": "118",
+      "last_updated": "2025-12-20",
+      "category": "soul",
+      "tidal": "",
+      "qobuz": "",
+      "apple_music": "",
+      "spotify": "",
+      "status": "live"
+    },
+    {
+      "playlist_name": "2020s Jazz",
+      "slug": "2020s-jazz",
+      "cover_url": "https://kagi.com/proxy/22ww9tej2o9f1.jpeg?c=TklOzPjLPioJ5YMJT75bSqhwltls-JfMSQ7X63eLmSTR4rcKTRYm2YxbUjIeot7Y",
+      "amount_of_songs": "88",
+      "last_updated": "2025-12-20",
+      "category": "jazz",
+      "tidal": "",
+      "qobuz": "",
+      "apple_music": "",
+      "spotify": "",
+      "status": "live"
+    },
+    {
+      "playlist_name": "2025 Wrapped",
+      "slug": "2025-wrapped",
+      "cover_url": "https://kagi.com/proxy/22ww9tej2o9f1.jpeg?c=TklOzPjLPioJ5YMJT75bSqhwltls-JfMSQ7X63eLmSTR4rcKTRYm2YxbUjIeot7Y",
+      "amount_of_songs": "64",
+      "last_updated": "2025-12-20",
+      "category": "fitness",
+      "tidal": "",
+      "qobuz": "",
+      "apple_music": "",
+      "spotify": "",
+      "status": "live"
+    }
+  ]
+}

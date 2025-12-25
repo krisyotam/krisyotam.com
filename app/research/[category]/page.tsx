@@ -1,32 +1,14 @@
 import type { Metadata } from "next"
 import { ResearchClient } from "../research-client"
-import researchData from "@/data/research.json"
+import researchDataRaw from "@/data/research/research.json"
+import type { Research } from '@/types/research'
 import { notFound } from "next/navigation"
-
-interface Research {
-  id: string
-  title: string
-  abstract: string
-  importance: string | number
-  authors: string[]
-  subject: string
-  keywords: string[]
-  postedBy: string
-  postedOn: string
-  dateStarted: string
-  status: string
-  bibliography: string[]
-  img: string
-  pdfLink: string
-  sourceLink: string
-  category: string
-  tags: string[]
-}
 
 // Generate metadata dynamically based on the research category
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-  const research = researchData as Research[]
-  const categories = Array.from(new Set(research.map(item => item.category))).sort()
+  const research = (researchDataRaw as any).research as Research[]
+  // derive categories from status field
+  const categories = Array.from(new Set(research.map(item => item.status))).sort()
   
   // Decode the URL-encoded category parameter and convert from slug to regular category
   const categorySlug = params.category.toLowerCase()
@@ -41,13 +23,13 @@ export async function generateMetadata({ params }: { params: { category: string 
     }
   }
 
-  // Get a representative research with an image for this category (if available)
+  // Get a representative research for this status (used as category)
   const researchOfCategory = matchedCategory 
-    ? research.filter(item => item.category === matchedCategory) 
+    ? research.filter(item => item.status === matchedCategory) 
     : research;
   
   // Find a research with an image to use as the featured image
-  const featuredResearch = researchOfCategory.find(item => item.img && item.img.length > 0);
+  const featuredResearch = researchOfCategory.find(item => item.imgs && item.imgs.length > 0);
   
   const title = matchedCategory ? `${matchedCategory} | Research | Kris Yotam` : "Research | Kris Yotam";
   const description = matchedCategory 
@@ -80,8 +62,8 @@ export async function generateMetadata({ params }: { params: { category: string 
 }
 
 export default function CategoryResearchPage({ params }: { params: { category: string } }) {
-  const research = researchData as Research[]
-  const categories = Array.from(new Set(research.map(item => item.category))).sort()
+  const research = (researchDataRaw as any).research as Research[]
+  const categories = Array.from(new Set(research.map(item => item.status))).sort()
   
   // Verify that the requested category exists
   const categorySlug = params.category.toLowerCase()

@@ -700,7 +700,7 @@ export function HomeClient({ posts, randomQuote, initialView = 'list' }: HomeCli
                     <div className="flex items-center gap-2">
                       <HeartButton />
                       <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
-                        <a href="https://coff.ee/krisyotam" target="_blank" rel="noopener noreferrer">
+                        <a href="https://buy.stripe.com/bJe00ibt4eVe1gA90q4Ni00" target="_blank" rel="noopener noreferrer">
                           ☕ Buy Me Tea
                         </a>
                       </Button>

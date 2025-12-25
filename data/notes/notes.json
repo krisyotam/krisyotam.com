@@ -667,7 +667,7 @@
 "confidence": "certain",
 "importance": 6,
 "preview": "notes on WorldsChat, one of the earliest 3D avatar chatrooms on the internet — exploring its design and historical significance",
-"state": "active"
+"state": "hidden"
 },
 {
 "title": "Mathematical Formulas",
@@ -681,7 +681,7 @@
 "confidence": "certain",
 "importance": 9,
 "preview": "a list of mathematical formulas, concepts, and theorems that are essential",
-"state": "active"
+"state": "hidden"
 },
 {
 "title": "Indie Web",

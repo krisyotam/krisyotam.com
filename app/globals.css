@@ -1238,3 +1238,22 @@ p .katex-display {
   animation: spin-right 2s cubic-bezier(.4,2,.3,1) both;
 }
 
+
+/* Link icon styling: make icons invert/brighten in dark mode so they stay visible
+   - use both .dark (class-based theme) and prefers-color-scheme for robustness */
+.link-icon-img {
+  filter: none;
+  transition: filter 150ms ease, opacity 150ms ease;
+  display: block; /* we set block inside inline wrapper to remove descender gaps */
+}
+
+.dark .link-icon-img {
+  filter: invert(1) grayscale(1) brightness(2) contrast(1.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .link-icon-img {
+    filter: invert(1) grayscale(1) brightness(2) contrast(1.1);
+  }
+}
+

@@ -10,10 +10,13 @@
     {
       "source": "/doc/(.*)",
       "destination": "https://hel1.your-objectstorage.com/doc/$1"
-    },
+    }
+  ],
+  "redirects": [
     {
       "source": "/clippings(/)?",
-      "destination": "https://fabric.so/p/clippings-5Rgtx9QgJW1kq0zfOvujaw"
+      "destination": "https://fabric.so/p/clippings-5Rgtx9QgJW1kq0zfOvujaw",
+      "permanent": true
     }
   ]
 }

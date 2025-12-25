@@ -41,6 +41,22 @@ const baseConfig = {
         source: '/doc/:path*',
         destination: 'https://hel1.your-objectstorage.com/:path*',
       },
+
+    ]
+  },
+
+  /* ==========================================================================
+     REDIRECTS
+     Permanent redirects for external destinations (301). Keep separate from
+     rewrites so browser URL updates to the destination host.
+  ========================================================================== */
+  async redirects() {
+    return [
+      {
+        source: '/clippings',
+        destination: 'https://fabric.so/p/clippings-5Rgtx9QgJW1kq0zfOvujaw',
+        permanent: true,
+      },
     ]
   },
 

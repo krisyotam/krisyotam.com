@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import LinkIcon from "@/components/link-icon"
 
 interface AProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string
@@ -7,6 +8,9 @@ interface AProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 export function A({ href, title, children, className, ...props }: AProps) {
+  // Consider links starting with "/" as internal and skip the icon.
+  const isInternal = href && (href.startsWith("/") || href.startsWith("#"));
+
   return (
     <a
       href={href}
@@ -15,6 +19,7 @@ export function A({ href, title, children, className, ...props }: AProps) {
       {...props}
     >
       {children}
+      {!isInternal && <LinkIcon href={href} />}
     </a>
   )
-} 
+}

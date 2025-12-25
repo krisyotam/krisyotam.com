@@ -1,0 +1,34 @@
+{
+  "flashcards": [
+    {
+      "name": "Real Analysis I Basics",
+      "url": "https://example.com/flashcards/real-analysis-i-basics",
+      "cover_photo_url": "https://example.com/images/real-analysis-i.png",
+      "description": "Foundational definitions, theorems, and epsilon-delta concepts.",
+      "date_of_create": "2025-12-21",
+      "note_count": 42,
+      "audio_count": 3,
+      "image_count": 5
+    },
+    {
+      "name": "Classical Literature Quotes",
+      "url": "https://example.com/flashcards/classical-literature-quotes",
+      "cover_photo_url": "https://example.com/images/classical-lit.png",
+      "description": "Flashcards of important lines from classic works.",
+      "date_of_create": "2025-12-21",
+      "note_count": 88,
+      "audio_count": 0,
+      "image_count": 10
+    },
+    {
+      "name": "Japanese N5 Vocabulary",
+      "url": "https://example.com/flashcards/japanese-n5-vocab",
+      "cover_photo_url": "https://example.com/images/japanese-n5.png",
+      "description": "Essential vocabulary for the N5 exam level.",
+      "date_of_create": "2025-12-21",
+      "note_count": 120,
+      "audio_count": 120,
+      "image_count": 0
+    }
+  ]
+}

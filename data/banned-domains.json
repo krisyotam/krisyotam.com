@@ -30,6 +30,10 @@
   {
     "name": "Substack",
     "domain": "substack.com"
+  },
+  {
+    "name": "Stripe",
+    "domain": "stripe.com"
   }
 ]
 
