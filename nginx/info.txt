@@ -1,0 +1,27 @@
+The following are the nginx files that are in development for the reconstruction of krisyotam.com with optimizations both for 
+self hosting, and for vercel. 
+
+The goal is to have a mirrored site in this format 
+# krisyotam.com | production site hosted on vercel and optimized for max speed 
+# krisyotam.net | privacy focused optimized for self-hosting 
+# krisyotam.eth | 
+# onion url     | for the darkweb no js 
+
+
+# krisyotam.com.conf 
+# memoriam.sh
+# syncd.conf 
+# twdne.conf 
+
+
+
+# Cleanup 
+
+There are several dozens of components in the components directory. 
+
+trace.ts --> a typescript script that is designed to read the components directory and find components that are not 
+being used in the app directory make sure you dont accidently flag a component that is a part of a component that is 
+being used in the app directory. 
+
+I want a massive .txt file in /cleanup named components.txt that lists each component and under it all the 
+file paths it appears in so I diagnose more complex ones. 

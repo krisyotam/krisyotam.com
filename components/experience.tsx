@@ -64,7 +64,7 @@ export default function Experience() {
         // Fetch all required JSON files in parallel
         const sources = {
           blog: () => import("@/data/blog/blog.json"),
-          offsite: () => import("@/data/archive/archive.json"),
+          offsite: () => import("@/data/doc/archive.json"),
           notes: () => import("@/data/notes/notes.json"),
           newsletters: async () => 10,
           papers: () => import("@/data/papers/papers.json"),

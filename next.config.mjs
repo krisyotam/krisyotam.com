@@ -36,14 +36,23 @@ const baseConfig = {
       { source: '/donate', destination: '/notes/website/donate' },
       { source: '/faq',    destination: '/notes/website/faq' },
 
-      // --- public archive path ---
-      {
-        source: '/doc/:path*',
-        destination: 'https://hel1.your-objectstorage.com/:path*',
-      },
+      // next.config.js
 
-    ]
-  },
+      {
+        source: '/doc/:path*.:ext',
+        destination: 'https://hel1.your-objectstorage.com/doc/:path*.:ext',
+      },
+      {
+        source: '/src/:path*.:ext',
+        destination: 'https://hel1.your-objectstorage.com/src/:path*.:ext',
+      },
+      {
+        source: '/archive/:path*.:ext',
+        destination: 'https://hel1.your-objectstorage.com/public-archive/:path*.:ext',
+      },
+  ]
+},
+
 
   /* ==========================================================================
      REDIRECTS

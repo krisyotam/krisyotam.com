@@ -1,14 +1,14 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, useEffect } from "react"
 import Link from "next/link"
-import { FileText, Film, Database, BookOpen, Search, Tag, Video, Headphones, Wrench, Book, LayoutGrid, List, Folder } from "lucide-react"
+import { FileText, Film, Database, BookOpen, Search, Tag, Video, Headphones, Wrench, Book, LayoutGrid, List, Folder, ArrowLeft, Copy as CopyIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
-import archiveJson from "@/data/archive/archive.json"
+import archiveJson from "@/data/doc/archive.json"
 
 type RawObject = {
   bucket: string
@@ -115,14 +115,23 @@ function buildBucketsTree(data: any): Node[] {
   return buckets
 }
 
-export default function ArchivesComponent() {
+export default function ArchivesComponent({ defaultBucket, data }: { defaultBucket?: string; data?: any } = {}) {
   const [query, setQuery] = useState("")
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list')
-  // default to the "doc" bucket so /archive behaves like /doc
-  const [currentBucket, setCurrentBucket] = useState<string | null>('doc')
+  // allow caller to set default bucket (pages like /src, /doc, /archive pass this)
+  const [currentBucket, setCurrentBucket] = useState<string | null>(defaultBucket ?? 'doc')
   const [currentPath, setCurrentPath] = useState<string>('')
 
-  const buckets = useMemo(() => buildBucketsTree(archiveJson), [])
+  // mapping between bucket names and site path segments
+  const bucketToSegment: Record<string, string> = {
+    doc: 'doc',
+    src: 'src',
+    'public-archive': 'archive',
+    public_archive: 'archive',
+  }
+  const segmentToBucket: Record<string, string> = Object.fromEntries(Object.entries(bucketToSegment).map(([k, v]) => [v, k]))
+
+  const buckets = useMemo(() => buildBucketsTree(data ?? archiveJson), [data])
 
   // find current node
   const currentNode = useMemo(() => {
@@ -160,35 +169,51 @@ export default function ArchivesComponent() {
 
   const enterFolder = (node: Node) => {
     if (node.type !== 'directory' && node.type !== 'bucket') return
-    setCurrentBucket(node.type === 'bucket' ? node.name : currentBucket)
-    if (node.type === 'directory') {
-      setCurrentPath(node.path)
-    } else {
-      setCurrentPath('')
-    }
+    const newBucket = node.type === 'bucket' ? node.name : (currentBucket ?? 'doc')
+    const newPath = node.type === 'directory' ? node.path : ''
+    setCurrentBucket(newBucket)
+    setCurrentPath(newPath)
   }
 
   const openNode = (node: Node) => {
     // open files in a new tab, sanitize known duplicate /doc/doc/ prefix
     if (isFile(node) && node.meta?.public_url) {
-      const sanitizePublicUrl = (url: string) => {
-        if (!url) return url
+      // Build a deterministic public URL from the bucket and key so files
+      // always open under the correct site root. This avoids cases where
+      // generated `public_url` values accidentally point to the wrong root
+      // (e.g. a /doc URL showing up while browsing /src).
+      // Use the current origin in dev (localhost) so links open on the same host.
+      // On the server (SSR) `window` is undefined; fall back to the canonical host.
+      const baseOrigin = (typeof window !== 'undefined') ? window.location.origin : 'https://krisyotam.com'
+      const rootMap: Record<string, string> = {
+        doc: `${baseOrigin}/doc`,
+        src: `${baseOrigin}/src`,
+        'public-archive': `${baseOrigin}/archive`,
+        public_archive: `${baseOrigin}/archive`,
+      }
+
+      const bucket = node.meta?.bucket ?? currentBucket ?? 'doc'
+      const key = node.meta?.key ?? node.path
+      if (key) {
+        const root = rootMap[bucket] ?? rootMap[currentBucket ?? 'doc'] ?? `${baseOrigin}/doc`
+        const cleanedRoot = root.replace(/\/$/, '')
+        const cleanedKey = key.replace(/^\/+/, '')
+        const url = `${cleanedRoot}/${cleanedKey}`
+        window.open(url, '_blank')
+      } else {
+        // Fallback to the generated public_url if no key is available
+        // If running locally, prefer to rewrite https://krisyotam.com -> baseOrigin
+        let fallback = node.meta.public_url
         try {
-          // If currentBucket is set, remove duplicated bucket segments like /doc/doc/
-          if (currentBucket) {
-            const dup = `/${currentBucket}/${currentBucket}/`
-            if (url.includes(dup)) return url.replace(new RegExp(dup, 'g'), `/${currentBucket}/`)
+          if (fallback && typeof window !== 'undefined') {
+            // replace canonical host with local origin when appropriate
+            fallback = fallback.replace(/^https?:\/\/krisyotam\.com/, baseOrigin)
           }
-          // Fallback specific fix for /doc/doc/
-          if (url.includes('/doc/doc/')) return url.replace(/\/doc\/doc\//g, '/doc/')
         } catch (e) {
           // noop
         }
-        return url
+        window.open(fallback, '_blank')
       }
-
-      const url = sanitizePublicUrl(node.meta.public_url)
-      window.open(url, '_blank')
     } else if (node.type === 'directory') {
       enterFolder(node)
     }
@@ -200,9 +225,77 @@ export default function ArchivesComponent() {
     return [currentBucket, ...currentPath.split('/').filter(Boolean)]
   }, [currentBucket, currentPath])
 
+  // address bar state for copy feedback
+  const [copied, setCopied] = useState(false)
+
+  const getDisplayUrl = () => {
+    const origin = (typeof window !== 'undefined') ? window.location.origin : 'https://krisyotam.com'
+    const seg = currentBucket ? (bucketToSegment[currentBucket] ?? currentBucket) : ''
+    const cleanedPath = currentPath ? `/${currentPath.replace(/^\/+/, '')}` : ''
+    return seg ? `${origin}/${seg}${cleanedPath}` : origin
+  }
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(getDisplayUrl())
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    } catch (e) {
+      // ignore copy errors
+    }
+  }
+
+  const handleBack = () => {
+    // perform internal navigation: go up one path segment or exit bucket
+    if (currentPath) {
+      const parts = currentPath.split('/').filter(Boolean)
+      if (parts.length <= 1) {
+        setCurrentPath('')
+      } else {
+        setCurrentPath(parts.slice(0, -1).join('/'))
+      }
+    } else if (currentBucket) {
+      setCurrentBucket(null)
+    }
+  }
+
+  // sync state from current pathname on mount so direct links work
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const parts = window.location.pathname.split('/').filter(Boolean)
+    if (parts.length === 0) return
+    const seg = parts[0]
+    const mapped = segmentToBucket[seg]
+    if (mapped) {
+      setCurrentBucket(mapped)
+      setCurrentPath(parts.slice(1).join('/'))
+    }
+  }, [])
+
   return (
     <main className="w-full py-2">
-      <div className="mb-4 flex items-center gap-4">
+      {/* Address bar (matches search row width) */}
+      <div className="mb-3 flex items-center gap-4">
+        <div className="flex-1 relative">
+          <Input
+            readOnly
+            value={getDisplayUrl()}
+            onClick={(e) => (e.currentTarget as HTMLInputElement).select()}
+            className="w-full rounded-none font-mono text-sm"
+            aria-label="Current location"
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="icon" onClick={handleBack} className="rounded-none" aria-label="Go back">
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+          <Button variant="outline" size="icon" onClick={handleCopy} className="rounded-none" aria-label="Copy URL">
+            <CopyIcon className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+
+      <div className="mb-2 flex items-center gap-4">
         <div className="flex-1 relative">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <Search className="h-4 w-4 text-muted-foreground" />
@@ -216,38 +309,13 @@ export default function ArchivesComponent() {
         </div>
       </div>
 
-      {/* Breadcrumbs */}
-      <div className="text-sm text-muted-foreground mb-4 flex flex-wrap items-center gap-2">
-        {breadcrumbs.map((b, i) => {
-          const isFirst = i === 0
-          // build path for this breadcrumb (skip bucket at index 0)
-          const path = isFirst ? '' : breadcrumbs.slice(1, i + 1).join('/')
-          return (
-            <span key={i} className="flex items-center">
-              {i > 0 && <span className="mx-1 text-muted-foreground">/</span>}
-              <button
-                className="text-sm text-foreground hover:underline"
-                onClick={() => {
-                  if (isFirst) {
-                    setCurrentPath('')
-                    setCurrentBucket(b)
-                  } else {
-                    setCurrentPath(path)
-                  }
-                }}
-              >
-                {b}
-              </button>
-            </span>
-          )
-        })}
-      </div>
+      {/* (breadcrumb removed) */}
 
       {/* Content */}
       {(!currentBucket) ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           {buckets.map(b => (
-            <Card key={b.name} className="rounded-none border-border cursor-pointer hover:bg-secondary/50 transition-colors" onClick={() => { setCurrentBucket(b.name); setCurrentPath('') }}>
+            <Card key={b.name} className="rounded-none border-border cursor-pointer hover:bg-secondary/50 transition-colors" onClick={() => enterFolder(b)}>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <Folder className="h-6 w-6 text-muted-foreground" />
