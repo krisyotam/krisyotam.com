@@ -1,6 +1,6 @@
 import WantToReadClientPage from "./want-to-read-client-page"
-import { PageHeader } from "@/components/page-header"
-import { PageDescription } from "@/components/posts/typography/page-description"
+import { PageHeader } from "@/components/core"
+import { PageDescription } from "@/components/core"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {

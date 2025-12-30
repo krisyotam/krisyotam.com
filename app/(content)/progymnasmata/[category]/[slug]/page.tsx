@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import postsData from "@/data/progymnasmata/progymnasmata.json";
 import { Footer } from "@/app/(content)/essays/components/footer";
 import ProgymnasmataPageClient from "./ProgymnasmataPageClient";
-import { PageHeader } from "@/components/page-header";
+import { PageHeader } from "@/components/core";
 
 
 export async function generateStaticParams() {

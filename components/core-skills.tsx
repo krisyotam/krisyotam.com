@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { LayoutGrid, ListFilter } from "lucide-react"
-import defaultSkillsData from "@/data/core-skills.json"
+import defaultSkillsData from "@/data/about/core-skills.json"
 import type { CoreSkillsProps, SkillItem, ViewType } from "@/utils/skills"
 
 export default function CoreSkills({ data = defaultSkillsData, className }: CoreSkillsProps) {

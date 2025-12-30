@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PapersTable } from "../../PapersTable";
-import { PageHeader } from "@/components/page-header";
-import { PageDescription } from "@/components/posts/typography/page-description";
+import { ContentTable } from "@/components/content";
+import { PageHeader } from "@/components/core";
+import { PageDescription } from "@/components/core";
 import { useRouter } from "next/navigation";
 import type { PaperMeta, Paper } from "@/types/papers";
 
@@ -91,14 +91,12 @@ export default function PapersTaggedPage({ papers, tagData }: PapersTaggedPagePr
         </div>
 
         {/* Papers table */}
-        <PapersTable
-          papers={filteredPapers.map(paper => ({
-            ...paper,
-            status: paper.status as PaperMeta['status'],
-            confidence: paper.confidence as PaperMeta['confidence']
-          }))}
-          searchQuery=""
-          activeCategory="all"
+        <ContentTable
+          items={filteredPapers}
+          basePath="/papers"
+          showCategoryLinks={true}
+          formatCategoryNames={false}
+          emptyMessage="No papers found matching your criteria."
         />
 
         {filteredPapers.length === 0 && (

@@ -1,41 +1,41 @@
 [
   {
-    "albumCover": "https://krisyotam.com/doc/imgs/albums/off-the-wall.jpg",
+    "albumCover": "https://krisyotam.com/doc/imgs/artists/michael-jackson/covers/off-the-wall.jpg",
     "title": "Off The Wall",
     "link": "https://example.com/album1"
   },
   {
-    "albumCover": "https://krisyotam.com/doc/imgs/albums/lesley-gore-sings-of-mixed-up-hearts.webp",
+    "albumCover": "https://krisyotam.com/doc/imgs/artists/lesley-gore/covers/lesley-gore-sings-of-mixed-up-hearts.webp",
     "title": "Lesley Gore Sings Of Mixed Up Hearts",
     "link": "https://example.com/album2"
   },
   {
-    "albumCover": "https://krisyotam.com/doc/imgs/albums/kindofblue.jpg",
+    "albumCover": "https://krisyotam.com/doc/imgs/artists/miles-davis/covers/kindofblue.jpg",
     "title": "Kind Of Blue",
     "link": "https://example.com/album3"
   },
   {
-    "albumCover": "https://krisyotam.com/doc/imgs/albums/in-the-aeroplane-over-the-sea.jpg",
+    "albumCover": "https://krisyotam.com/doc/imgs/artists/neutral-milk-hotel/covers/in-the-aeroplane-over-the-sea.jpg",
     "title": "In The Aeroplane Over The Sea",
     "link": "https://example.com/album4"
   },
   {
-    "albumCover": "https://krisyotam.com/doc/imgs/albums/hilary-hahn-paganini-violin-concerto-no-1-spohr-violin-concerto-no-8.jpg",
+    "albumCover": "https://krisyotam.com/doc/imgs/artists/hilary-hahn/covers/hilary-hahn-paganini-violin-concerto-no-1-spohr-violin-concerto-no-8.jpg",
     "title": "Hilary Hahn - Paganini Violin Concerto no. 1, Spohr: Violin Concerto No. 8",
     "link": "https://example.com/album5"
   },
   {
-    "albumCover": "https://krisyotam.com/doc/imgs/albums/vespertine.jpg",
+    "albumCover": "https://krisyotam.com/doc/imgs/artists/bjork/covers/vespertine.jpg",
     "title": "Vespertine",
     "link": "https://example.com/album6"
   },
   {
-    "albumCover": "https://krisyotam.com/doc/imgs/albums/abbey-road.jpg",
+    "albumCover": "https://krisyotam.com/doc/imgs/artists/the-beatles/covers/abbey-road.jpg",
     "title": "Abbey Road",
     "link": "https://example.com/album7"
   },
   {
-    "albumCover": "https://krisyotam.com/doc/imgs/albums/ilmatic.jpg",
+    "albumCover": "https://krisyotam.com/doc/imgs/artists/nas/covers/ilmatic.jpg",
     "title": "ilmatic",
     "link": "https://example.com/album8"
   }

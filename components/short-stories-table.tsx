@@ -66,7 +66,7 @@ export function ShortStoriesTable({ data }: ShortStoriesTableProps) {
     const date = new Date(dateString)
     return date.toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long", 
+      month: "long",
       day: "numeric"
     })
   }
@@ -79,9 +79,9 @@ export function ShortStoriesTable({ data }: ShortStoriesTableProps) {
     <div className="space-y-4">
       {/* Search bar */}
       <div className="relative">
-        <input 
-          type="text" 
-          placeholder="Search short stories..." 
+        <input
+          type="text"
+          placeholder="Search short stories..."
           className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
           onChange={(e) => setSearchQuery(e.target.value)}
           value={searchQuery}

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BlogTable } from "@/components/blog-table";
-import { PageHeader } from "@/components/page-header";
-import { PageDescription } from "@/components/posts/typography/page-description";
+import { PageHeader } from "@/components/core";
+import { PageDescription } from "@/components/core";
+import { Navigation, ContentTable } from "@/components/content";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -181,73 +181,34 @@ export default function BlogClientPage({ initialCategory = "all", notes }: BlogC
 
       <div className="blog-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
         <PageHeader {...headerData} />
-        
-        <div className="mb-4">
-          <div className="relative">
-            <input 
-              type="text" 
-              placeholder="Search posts..." 
-              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
-              onChange={(e) => setSearchQuery(e.target.value)}
-              value={searchQuery}
-            />
-          </div>
-        </div>
 
-        {/* Filter and view toggle */}
-        <div className="mb-6 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2 whitespace-nowrap">
-            <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
-            <CustomSelect
-              value={activeCategory}
-              onValueChange={handleCategoryChange}
-              options={categories}
-              className="text-sm min-w-[140px]"
-            />
-          </div>
-
-          {/* View Mode Toggle */}
-          <div className="flex items-center gap-1 border border-border rounded-none overflow-hidden">
-            <button
-              onClick={() => setViewMode("grid")}
-              className={`px-3 py-1 text-xs transition-colors ${
-                viewMode === "grid" 
-                  ? "bg-foreground text-background" 
-                  : "bg-background text-foreground hover:bg-secondary/50"
-              }`}
-            >
-              Grid
-            </button>
-            <button
-              onClick={() => setViewMode("list")}
-              className={`px-3 py-1 text-xs transition-colors ${
-                viewMode === "list" 
-                  ? "bg-foreground text-background" 
-                  : "bg-background text-foreground hover:bg-secondary/50"
-              }`}
-            >
-              List
-            </button>
-          </div>
-        </div>
+        <Navigation
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          searchPlaceholder="Search posts..."
+          showCategoryFilter={true}
+          categoryOptions={categories}
+          selectedCategory={activeCategory}
+          onCategoryChange={handleCategoryChange}
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
+        />
 
         {/* Filtered and view mode controlled content */}
-        {filteredNotes.length > 0 ? (
-          viewMode === "list" ? (
-            <BlogTable
-              notes={notes}
-              searchQuery={searchQuery}
-              activeCategory={activeCategory}
-            />
-          ) : (
-            <GridView 
-              notes={notes}
-              searchQuery={searchQuery}
-              activeCategory={activeCategory}
-            />
-          )
+        {viewMode === "list" ? (
+          <ContentTable
+            items={filteredNotes}
+            basePath="/blog"
+            showCategoryLinks={true}
+            formatCategoryNames={true}
+            emptyMessage="No posts found matching your criteria."
+          />
         ) : (
-          <div className="text-muted-foreground text-sm mt-6 text-center">No posts found matching your criteria.</div>
+          <GridView
+            notes={notes}
+            searchQuery={searchQuery}
+            activeCategory={activeCategory}
+          />
         )}
 
         <PageDescription

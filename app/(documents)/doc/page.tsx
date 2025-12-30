@@ -7,8 +7,8 @@ import { Input } from "@/components/ui/input"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import ArchivesComponent from "@/components/archive"
 import docJson from "@/data/doc/doc.json"
-import { PageHeader } from "@/components/page-header"
-import { PageDescription } from "@/components/posts/typography/page-description"
+import { PageHeader } from "@/components/core"
+import { PageDescription } from "@/components/core"
 
 export default function ArchivesPage() {
   // archives data is loaded inside the component from local JSON; keep auth state here

@@ -1,7 +1,7 @@
 import dynamicImport from 'next/dynamic'
 import { redirect } from 'next/navigation'
 
-const HomeWrapper = dynamicImport(() => import('./home-wrapper'), {
+const HomeWrapper = dynamicImport(() => import('./home/home-wrapper'), {
   ssr: true,
   loading: () => (
     <div className="min-h-screen flex items-center justify-center">
@@ -12,7 +12,7 @@ const HomeWrapper = dynamicImport(() => import('./home-wrapper'), {
 
 export const dynamic = "force-dynamic"
 
-export default function Home() {
+export default function RootPage() {
   return <HomeWrapper />
 }
 

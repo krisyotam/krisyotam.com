@@ -36,6 +36,9 @@ const baseConfig = {
       { source: '/donate', destination: '/notes/website/donate' },
       { source: '/faq',    destination: '/notes/website/faq' },
 
+      // --- short URLs ---
+      { source: '/roti',   destination: '/rules-of-the-internet' },
+
       // next.config.js
 
       {

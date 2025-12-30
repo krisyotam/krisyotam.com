@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { NewsTable } from "@/components/news-table";
-import { PageHeader } from "@/components/page-header";
-import type { PageHeaderProps } from "@/components/page-header";
-import { PageDescription } from "@/components/posts/typography/page-description";
-import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
+import { PageHeader } from "@/components/core";
+import type { PageHeaderProps } from "@/components/core";
+import { PageDescription } from "@/components/core";
+import { Navigation, ContentTable } from "@/components/content";
+import { SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
 import categoriesData from "@/data/news/categories.json";
 
@@ -30,6 +30,7 @@ interface NewsClientPageProps {
 export default function NewsClientPage({ news, initialCategory = "all" }: NewsClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const router = useRouter();
 
   const categories = ["all", ...Array.from(new Set(news.map(n => n.category)))];
@@ -109,34 +110,40 @@ export default function NewsClientPage({ news, initialCategory = "all" }: NewsCl
       <div className="news-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
         <PageHeader {...headerData} />
 
-        {/* Search and filter on same row */}
-        <div className="mb-6 flex items-center gap-4">
-          <div className="flex items-center gap-2 whitespace-nowrap">
-            <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
-            <CustomSelect
-              value={activeCategory}
-              onValueChange={handleCategoryChange}
-              options={categoryOptions}
-              className="text-sm min-w-[140px]"
-            />
-          </div>
-          
-          <div className="relative flex-1">
-            <input 
-              type="text" 
-              placeholder="Search news..." 
-              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
-              onChange={(e) => setSearchQuery(e.target.value)}
-              value={searchQuery}
-            />
-          </div>
-        </div>
+        {/* Navigation with search, filter, and view toggle */}
+        <Navigation
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          searchPlaceholder="Search news..."
+          showCategoryFilter={true}
+          categoryOptions={categoryOptions}
+          selectedCategory={activeCategory}
+          onCategoryChange={handleCategoryChange}
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
+          showViewToggle={false}
+        />
 
         {/* News table */}
-        <NewsTable
-          news={news}
-          searchQuery={searchQuery}
-          activeCategory={activeCategory}
+        <ContentTable
+          items={news.filter((n) => {
+            const q = searchQuery.toLowerCase();
+            const matchesSearch =
+              !q ||
+              n.title.toLowerCase().includes(q) ||
+              n.tags.some((t) => t.toLowerCase().includes(q)) ||
+              n.category.toLowerCase().includes(q);
+            const matchesCategory = activeCategory === "all" || n.category === activeCategory;
+            return matchesSearch && matchesCategory;
+          }).sort((a, b) => {
+            const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+            const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+            return new Date(dateB).getTime() - new Date(dateA).getTime();
+          })}
+          basePath="/news"
+          showCategoryLinks={false}
+          formatCategoryNames={false}
+          emptyMessage="No news found matching your criteria."
         />
 
         {/* PageDescription component */}

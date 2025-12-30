@@ -1,6 +1,6 @@
 import { ReadingListsClientPage } from "./reading-lists-client-page"
-import { PageHeader } from "@/components/page-header"
-import { PageDescription } from "@/components/posts/typography/page-description"
+import { PageHeader } from "@/components/core"
+import { PageDescription } from "@/components/core"
 import type { Metadata } from "next"
 
 // Force dynamic rendering to prevent Apollo Client issues during static export

@@ -7,7 +7,7 @@ import { Search } from "lucide-react"
 import { LiveClock } from "@/components/live-clock"
 import SiteFooter from "@/components/typography/expanded-footer-block"
 import { Footer } from "@/components/footer"
-import { PageHeader } from "@/components/page-header"
+import { PageHeader } from "@/components/core"
 import { Card } from "@/components/ui/card"
 
 interface Quote {

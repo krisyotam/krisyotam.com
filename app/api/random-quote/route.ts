@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import quotesData from '../../../data/header-quotes.json';
+import quotesData from '../../../data/quotes.json';
 
 export async function GET() {
   try {

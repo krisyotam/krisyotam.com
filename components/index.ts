@@ -19,7 +19,7 @@ export { MobileNav } from './mobile-nav';
 export { InternalLink } from './internal-link';
 // export { default as ExternalLink } from './external-link'; // File missing
 // export { default as UniversalLink } from './universal-link'; // File missing
-export { UniversalLinkModal } from './universal-link-modal';
+export { UniversalLinkModal } from './core/universal-link-modal';
 
 // Book Components
 export { default as Book } from './posts/books/book';
@@ -47,11 +47,11 @@ export { default as Inflation } from './inflation';
 
 // Content Components
 export { ContentTable } from './shared/content-table';
-export { CategoryHeader } from './category-header';
+export { CategoryHeader } from './core';
 // DELETED_BY_SCRIPT: export { DirectoryCategoryHeader } from './directory-category-header';
 // DELETED_BY_SCRIPT: export { DirectoryPageHeader } from './directory-page-header';
 export { DocsHeader } from './docs/docs-header';
-export { PageHeader } from './page-header';
+export { PageHeader } from './core';
 // PostHeader already exported above
 export { TagHeader } from './tag-header';
 export { VerseHeader } from './verse-header';
@@ -60,22 +60,17 @@ export { VerseHeader } from './verse-header';
 export { default as NewsletterCard } from './newsletter-card';
 export { default as NewsletterHeader } from './newsletter-header';
 export { default as NewsletterFooter } from './newsletter-footer';
-export { default as NewsletterSearch } from './newsletter-search';
 export { default as NewsletterYearFilter } from './newsletter-year-filter';
-export { default as NewsletterViewToggle } from './newsletter-view-toggle';
 export { default as NewsletterHelpModal } from './newsletter-help-modal';
 
 // Playlist Components
 export { default as PlaylistList } from './playlist-list';
-export { default as PlaylistGenreFilter } from './playlist-genre-filter';
-export { default as PlaylistSearch } from './playlist-search';
 export { default as PlaylistCard } from './playlist-card';
 
 // Other Components
 export { default as ProfileBento } from './profile-bento';
 export { default as SiteStickerCarousel } from './site-sticker-carousel';
 export { default as PersonalityCarousel } from './personality-carousel';
-export { default as ResourcesTable } from './resources-table';
 export { default as Archive } from './archive';
 export { default as PGP } from './pgp';
 // export { ContactInfo } from './contact-info'; // File missing or no named export

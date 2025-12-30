@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PageHeader } from "@/components/page-header";
-import type { PageHeaderProps } from "@/components/page-header";
-import { PageDescription } from "@/components/posts/typography/page-description";
-import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
+import { PageHeader } from "@/components/core";
+import type { PageHeaderProps } from "@/components/core";
+import { PageDescription } from "@/components/core";
+import { Navigation, ContentTable } from "@/components/content";
+import { SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
 import categoriesData from "@/data/ocs/categories.json";
 
@@ -155,30 +156,13 @@ export default function OCSClientPage({ ocs, initialCategory = "all" }: OCSClien
   );
 
   const ListView = () => (
-    <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
-      <thead>
-        <tr className="border-b border-border bg-muted/50 text-foreground">
-          <th className="py-2 text-left font-medium px-3">Title</th>
-          <th className="py-2 text-left font-medium px-3">Category</th>
-          <th className="py-2 text-left font-medium px-3">Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        {filteredOCS.map((character, index) => (
-          <tr
-            key={character.slug}
-            className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
-              index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'
-            }`}
-            onClick={() => router.push(getOCUrl(character))}
-          >
-            <td className="py-2 px-3">{character.title}</td>
-            <td className="py-2 px-3">{character.category}</td>
-            <td className="py-2 px-3">{formatDate(character.end_date || character.start_date)}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <ContentTable
+      items={filteredOCS}
+      basePath="/ocs"
+      showCategoryLinks={false}
+      formatCategoryNames={false}
+      emptyMessage="No characters found matching your criteria."
+    />
   );
 
   return (
@@ -192,55 +176,19 @@ export default function OCSClientPage({ ocs, initialCategory = "all" }: OCSClien
       <div className="ocs-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
         <PageHeader {...headerData} />
 
-        {/* Search bar */}
-        <div className="mb-4">
-          <div className="relative">
-            <input 
-              type="text" 
-              placeholder="Search characters..." 
-              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
-              onChange={(e) => setSearchQuery(e.target.value)}
-              value={searchQuery}
-            />
-          </div>
-        </div>
-
-        {/* Filter and view toggle */}
-        <div className="mb-6 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2 whitespace-nowrap">
-            <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
-            <CustomSelect
-              value={activeCategory}
-              onValueChange={handleCategoryChange}
-              options={categoryOptions}
-              className="text-sm min-w-[140px]"
-            />
-          </div>
-
-          {/* View Mode Toggle */}
-          <div className="flex items-center gap-1 border border-border rounded-none overflow-hidden">
-            <button
-              onClick={() => setViewMode("grid")}
-              className={`px-3 py-1 text-xs transition-colors ${
-                viewMode === "grid" 
-                  ? "bg-foreground text-background" 
-                  : "bg-background text-foreground hover:bg-secondary/50"
-              }`}
-            >
-              Grid
-            </button>
-            <button
-              onClick={() => setViewMode("list")}
-              className={`px-3 py-1 text-xs transition-colors ${
-                viewMode === "list" 
-                  ? "bg-foreground text-background" 
-                  : "bg-background text-foreground hover:bg-secondary/50"
-              }`}
-            >
-              List
-            </button>
-          </div>
-        </div>
+        {/* Navigation with search, filter, and view toggle */}
+        <Navigation
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          searchPlaceholder="Search characters..."
+          showCategoryFilter={true}
+          categoryOptions={categoryOptions}
+          selectedCategory={activeCategory}
+          onCategoryChange={handleCategoryChange}
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
+          showViewToggle={true}
+        />
 
         {/* Content based on view mode */}
         {viewMode === "grid" ? <GridView /> : <ListView />}

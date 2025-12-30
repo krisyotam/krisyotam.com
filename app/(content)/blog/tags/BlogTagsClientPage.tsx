@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { BlogTagsTable } from "@/components/blog-tags-table";
-import { PageHeader } from "@/components/page-header";
-import { PageDescription } from "@/components/posts/typography/page-description";
+import { ContentTable } from "@/components/content";
+import { PageHeader } from "@/components/core";
+import { PageDescription } from "@/components/core";
 
 /* default page-level metadata for the header */
 const defaultTagsPageData = {
@@ -58,9 +58,21 @@ export default function BlogTagsClientPage({ tags }: BlogTagsClientPageProps) {
         </div>
 
         {/* Tags table */}
-        <BlogTagsTable
-          tags={tags}
-          searchQuery={searchQuery}
+        <ContentTable
+          items={tags.filter((tag) => {
+            const q = searchQuery.toLowerCase();
+            return !q || tag.title.toLowerCase().includes(q) || tag.preview.toLowerCase().includes(q) || tag.status.toLowerCase().includes(q);
+          }).sort((a, b) => b.importance - a.importance).map(tag => ({
+            title: tag.title,
+            start_date: tag.date,
+            slug: tag.slug,
+            tags: [],
+            category: tag.preview
+          }))}
+          basePath="/blog/tag"
+          showCategoryLinks={false}
+          formatCategoryNames={false}
+          emptyMessage="No tags found matching your criteria."
         />
 
         {/* PageDescription component */}

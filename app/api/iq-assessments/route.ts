@@ -1,7 +1,7 @@
 "use server"
 
 import { NextResponse } from "next/server"
-import iqAssessmentsData from "@/data/iq-assessments.json"
+import iqAssessmentsData from "@/data/about/iq-assessments.json"
 
 export async function GET() {
   try {

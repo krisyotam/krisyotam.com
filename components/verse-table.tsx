@@ -68,7 +68,7 @@ export function VerseTable({ data }: VerseTableProps) {
     const date = new Date(dateString)
     return date.toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long", 
+      month: "long",
       day: "numeric"
     })
   }
@@ -81,9 +81,9 @@ export function VerseTable({ data }: VerseTableProps) {
     <div className="space-y-4">
       {/* Search bar */}
       <div className="relative">
-        <input 
-          type="text" 
-          placeholder="Search verse..." 
+        <input
+          type="text"
+          placeholder="Search verse..."
           className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
           onChange={(e) => setSearchQuery(e.target.value)}
           value={searchQuery}

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { NotesTable } from "@/components/notes-table";
-import { PageHeader } from "@/components/page-header";
-import { PageDescription } from "@/components/posts/typography/page-description";
+import { ContentTable } from "@/components/content";
+import { PageHeader } from "@/components/core";
+import { PageDescription } from "@/components/core";
 import { useRouter } from "next/navigation";
 
 interface Note {
@@ -101,10 +101,12 @@ export default function NotesTaggedPage({ notes, tagData }: NotesTaggedPageProps
         </div>
 
         {/* Notes table */}
-        <NotesTable
-          notes={filteredNotes}
-          searchQuery=""
-          activeCategory="all"
+        <ContentTable
+          items={filteredNotes}
+          basePath="/notes"
+          showCategoryLinks={false}
+          formatCategoryNames={true}
+          emptyMessage="No notes found matching your criteria."
         />
 
         {filteredNotes.length === 0 && (

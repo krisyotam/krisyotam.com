@@ -3,7 +3,7 @@
 import { Citation } from "@/components/citation";
 import { Footer } from "@/app/(content)/essays/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
-import { PageHeader } from "@/components/page-header";
+import { PageHeader } from "@/components/core";
 
 interface ProgymnasmataClientProps {
   post: any;

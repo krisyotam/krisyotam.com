@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { NotesTable } from "@/components/notes-table";
-import { PageHeader } from "@/components/page-header";
-import { PageDescription } from "@/components/posts/typography/page-description";
+import { PageHeader } from "@/components/core";
+import { PageDescription } from "@/components/core";
+import { Navigation, ContentTable } from "@/components/content";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
 import categoriesData from "@/data/notes/categories.json";
@@ -178,10 +178,12 @@ export default function NotesClientPage({ notes, initialCategory = "all" }: Note
   );
 
   const ListView = () => (
-    <NotesTable
-      notes={filteredNotes}
-      searchQuery=""
-      activeCategory="all"
+    <ContentTable
+      items={filteredNotes}
+      basePath="/notes"
+      showCategoryLinks={false}
+      formatCategoryNames={true}
+      emptyMessage="No notes found matching your criteria."
     />
   );
 
@@ -196,55 +198,17 @@ export default function NotesClientPage({ notes, initialCategory = "all" }: Note
       <div className="notes-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
         <PageHeader {...headerData} />
 
-        {/* Search bar */}
-        <div className="mb-4">
-          <div className="relative">
-            <input 
-              type="text" 
-              placeholder="Search notes..." 
-              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
-              onChange={(e) => setSearchQuery(e.target.value)}
-              value={searchQuery}
-            />
-          </div>
-        </div>
-
-        {/* Filter and view toggle */}
-        <div className="mb-6 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2 whitespace-nowrap">
-            <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
-            <CustomSelect
-              value={activeCategory}
-              onValueChange={handleCategoryChange}
-              options={categoryOptions}
-              className="text-sm min-w-[140px]"
-            />
-          </div>
-
-          {/* View Mode Toggle */}
-          <div className="flex items-center gap-1 border border-border rounded-none overflow-hidden">
-            <button
-              onClick={() => setViewMode("grid")}
-              className={`px-3 py-1 text-xs transition-colors ${
-                viewMode === "grid" 
-                  ? "bg-foreground text-background" 
-                  : "bg-background text-foreground hover:bg-secondary/50"
-              }`}
-            >
-              Grid
-            </button>
-            <button
-              onClick={() => setViewMode("list")}
-              className={`px-3 py-1 text-xs transition-colors ${
-                viewMode === "list" 
-                  ? "bg-foreground text-background" 
-                  : "bg-background text-foreground hover:bg-secondary/50"
-              }`}
-            >
-              List
-            </button>
-          </div>
-        </div>
+        <Navigation
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          searchPlaceholder="Search notes..."
+          showCategoryFilter={true}
+          categoryOptions={categoryOptions}
+          selectedCategory={activeCategory}
+          onCategoryChange={handleCategoryChange}
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
+        />
 
         {/* Content based on view mode */}
         {viewMode === "grid" ? <GridView /> : <ListView />}

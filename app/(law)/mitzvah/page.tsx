@@ -1,0 +1,35 @@
+import { PageHeader } from "@/components/core"
+import { MitzvahClient } from "./mitzvah-client"
+import { PageDescription } from "@/components/core"
+import { staticMetadata } from "@/lib/staticMetadata"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = staticMetadata.mitzvah
+
+export default function MitzvahPage() {
+  return (
+    <main className="container mx-auto px-4 py-12">
+      <div className="max-w-2xl mx-auto">
+        <PageHeader
+          title="Mitzvah"
+          subtitle="Commandments and Scriptures"
+          start_date="2025-01-01"
+          end_date={new Date().toISOString().split('T')[0]}
+          preview="A comprehensive listing of the Biblical commandments (Mitzvot)"
+          status="Finished"
+          confidence="certain"
+          importance={10}
+        />
+
+        <PageDescription
+          title="About the Mitzvah Laws"
+          description="This page presents the Mitzvah laws, which are the commandments in Judaism as derived from the Torah. These 613 commandments (תרי״ג מצוות, taryag mitzvot) include both positive commandments (things to do) and negative commandments (things to refrain from doing). They serve as a comprehensive guide for Jewish religious life and practice. Each commandment is presented with its scriptural reference."
+        />
+
+        <div className="mt-8">
+          <MitzvahClient />
+        </div>
+      </div>
+    </main>
+  )
+} 

@@ -1,6 +1,6 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import testimonials from "@/data/testimonials.json";
+import testimonials from "@/data/about/testimonials.json";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

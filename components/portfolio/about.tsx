@@ -1,7 +1,7 @@
 "use client";
 
-import "../../app/portfolio/portfolio.css";
-import AboutMDX from "../../app/portfolio/content/about.mdx";
+import "../../app/(prof)/portfolio/portfolio.css";
+import AboutMDX from "../../app/(prof)/portfolio/content/about.mdx";
 
 interface AboutProps {
   isActive: boolean;

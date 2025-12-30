@@ -43,15 +43,7 @@ interface ExperienceStats {
   ocs: number
   certifications: number
   lectureNotes: number
-  lectures: number
   articles: number
-  cases: number
-  dossiers: number
-  libers: number
-  conspiracies: number
-  proofs: number
-  problems: number
-  shortform: number
 }
 
 export default function Experience() {
@@ -72,17 +64,9 @@ export default function Experience() {
           fiction: () => import("@/data/fiction/fiction.json"),
           verse: () => import("@/data/verse/verse.json"),
           ocs: () => import("@/data/ocs/ocs.json"),
-          certifications: () => import("@/data/certifications.json"),
+          certifications: () => import("@/data/about/certifications.json"),
           lectureNotes: () => import("@/data/lecture-notes/lecture-notes.json"),
-          lectures: () => import("@/data/lectures/lectures.json"),
           articles: () => import("@/data/news/news.json"),
-          cases: () => import("@/data/cases/cases.json"),
-          dossiers: () => import("@/data/dossiers/dossiers.json"),
-          libers: () => import("@/data/libers/libers.json"),
-          conspiracies: () => import("@/data/conspiracies/conspiracies.json"),
-          proofs: () => import("@/data/proofs/proofs.json"),
-          problems: () => import("@/data/problems/problems.json"),
-          shortform: () => import("@/data/shortform/shortform.json"),
         }
         const results = await Promise.all(
           Object.entries(sources).map(async ([key, loader]) => {
@@ -125,15 +109,7 @@ export default function Experience() {
           ocs: 0,
           certifications: 0,
           lectureNotes: 0,
-          lectures: 0,
           articles: 0,
-          cases: 0,
-          dossiers: 0,
-          libers: 0,
-          conspiracies: 0,
-          proofs: 0,
-          problems: 0,
-          shortform: 0,
         })
       } finally {
         setLoading(false)
@@ -222,15 +198,7 @@ export default function Experience() {
   <StatCard title="Characters" count={stats?.ocs || 0} icon={<Users className="h-6 w-6 text-primary" />} variants={item} href="/characters" />
   <StatCard title="Certifications" count={stats?.certifications || 0} icon={<Award className="h-6 w-6 text-primary" />} variants={item} href="/certifications" />
   <StatCard title="Lecture Notes" count={stats?.lectureNotes || 0} icon={<School className="h-6 w-6 text-primary" />} variants={item} href="/lecture-notes" />
-  <StatCard title="Lectures" count={stats?.lectures || 0} icon={<GraduationCap className="h-6 w-6 text-primary" />} variants={item} href="/lectures" />
   <StatCard title="Articles" count={stats?.articles || 0} icon={<Newspaper className="h-6 w-6 text-primary" />} variants={item} href="/articles" />
-  <StatCard title="Cases" count={stats?.cases || 0} icon={<Scale className="h-6 w-6 text-primary" />} variants={item} href="/cases" />
-  <StatCard title="Dossiers" count={stats?.dossiers || 0} icon={<FileSpreadsheet className="h-6 w-6 text-primary" />} variants={item} href="/dossiers" />
-  <StatCard title="Libers" count={stats?.libers || 0} icon={<Book className="h-6 w-6 text-primary" />} variants={item} href="/libers" />
-  <StatCard title="Conspiracies" count={stats?.conspiracies || 0} icon={<HelpCircle className="h-6 w-6 text-primary" />} variants={item} href="/conspiracies" />
-  <StatCard title="Proofs" count={stats?.proofs || 0} icon={<CheckSquare className="h-6 w-6 text-primary" />} variants={item} href="/proofs" />
-  <StatCard title="Problems" count={stats?.problems || 0} icon={<ThumbsDown className="h-6 w-6 text-primary" />} variants={item} href="/problems" />
-  <StatCard title="Short Form" count={stats?.shortform || 0} icon={<ScrollText className="h-6 w-6 text-primary" />} variants={item} href="/shortform" />
     </motion.div>
   )
 }

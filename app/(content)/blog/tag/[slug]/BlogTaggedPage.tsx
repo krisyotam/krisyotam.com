@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BlogTable } from "@/components/blog-table";
-import { PageHeader } from "@/components/page-header";
-import { PageDescription } from "@/components/posts/typography/page-description";
+import { ContentTable } from "@/components/content";
+import { PageHeader } from "@/components/core";
+import { PageDescription } from "@/components/core";
 import { useRouter } from "next/navigation";
 import type { BlogMeta } from "@/types/blog";
 
@@ -86,10 +86,12 @@ export default function BlogTaggedPage({ posts, tagData }: BlogTaggedPageProps) 
         </div>
 
         {/* Posts table */}
-        <BlogTable
-          notes={filteredPosts}
-          searchQuery=""
-          activeCategory="all"
+        <ContentTable
+          items={filteredPosts}
+          basePath="/blog"
+          showCategoryLinks={true}
+          formatCategoryNames={true}
+          emptyMessage="No posts found matching your criteria."
         />
 
         {filteredPosts.length === 0 && (

@@ -33,5 +33,5 @@
     "types/**/*.d.ts",
     "global.d.ts"
 , "app/(documents)/doc/[...file]/route.ts"  ],
-  "exclude": ["node_modules", "**/*.mdx"]
+  "exclude": ["node_modules", "**/*.mdx", "components/archive", "lib/archive"]
 }

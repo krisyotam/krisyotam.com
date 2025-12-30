@@ -468,7 +468,7 @@ export const staticMetadata: Record<string, Metadata> = {
       creator: '@krisyotam'
     }
   },
-  grid: {
+  home: {
     title: siteConfig.name,
     description: siteConfig.description,
     openGraph: {

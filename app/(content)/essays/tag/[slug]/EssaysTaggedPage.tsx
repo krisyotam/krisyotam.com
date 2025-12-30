@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { EssaysTable } from "@/components/essays-table";
-import { PageHeader } from "@/components/page-header";
-import { PageDescription } from "@/components/posts/typography/page-description";
+import { ContentTable } from "@/components/content";
+import { PageHeader } from "@/components/core";
+import { PageDescription } from "@/components/core";
 import { useRouter } from "next/navigation";
 import type { Essay } from "@/types/essay";
 
@@ -88,24 +88,19 @@ export default function EssaysTaggedPage({ essays, tagData }: EssaysTaggedPagePr
         </div>
 
         {/* Essays table */}
-        <EssaysTable
-          notes={filteredEssays.map(essay => ({
+        <ContentTable
+          items={filteredEssays.map(essay => ({
             title: essay.title,
-            subtitle: essay.abstract,
-            preview: essay.abstract || '',
             start_date: essay.dateStarted,
             end_date: essay.postedOn !== essay.dateStarted ? essay.postedOn : undefined,
             tags: essay.tags,
             category: essay.category,
-            slug: essay.id,
-            cover_image: essay.img || '',
-            status: essay.status,
-            confidence: essay.confidence,
-            importance: typeof essay.importance === 'string' ? parseInt(essay.importance) || 1 : essay.importance,
-            customPath: essay.customPath
+            slug: essay.id
           }))}
-          searchQuery=""
-          activeCategory="all"
+          basePath="/essays"
+          showCategoryLinks={false}
+          formatCategoryNames={false}
+          emptyMessage="No essays found matching your criteria."
         />
 
         {filteredEssays.length === 0 && (

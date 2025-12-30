@@ -63,7 +63,7 @@ export async function GET() {
   const quotes = readJsonFile("data/quotes.json")
   const poems = readJsonFile("data/verse/verse.json")
   const characters = readJsonFile("data/ocs.json")
-  const certifications = readJsonFile("data/certifications.json")
+  const certifications = readJsonFile("data/about/certifications.json")
 
   // Count the entries in each file, handling different JSON structures
   const stats = {

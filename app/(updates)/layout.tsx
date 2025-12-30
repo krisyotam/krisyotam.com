@@ -1,4 +1,4 @@
-import { PageHeader } from "@/components/page-header";
+import { PageHeader } from "@/components/core";
 import "./updates.css";
 
 export default function UpdatesLayout({ children }: { children: React.ReactNode }) {

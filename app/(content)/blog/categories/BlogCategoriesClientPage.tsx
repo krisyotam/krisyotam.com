@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { BlogCategoriesTable } from "@/components/blog-categories-table";
-import { PageHeader } from "@/components/page-header";
-import { PageDescription } from "@/components/posts/typography/page-description";
+import { ContentTable } from "@/components/content";
+import { PageHeader } from "@/components/core";
+import { PageDescription } from "@/components/core";
 
 /* default page-level metadata for the header */
 const defaultCategoriesPageData = {
@@ -58,9 +58,21 @@ export default function BlogCategoriesClientPage({ categories }: BlogCategoriesC
         </div>
 
         {/* Categories table */}
-        <BlogCategoriesTable
-          categories={categories}
-          searchQuery={searchQuery}
+        <ContentTable
+          items={categories.filter((category) => {
+            const q = searchQuery.toLowerCase();
+            return !q || category.title.toLowerCase().includes(q) || category.preview.toLowerCase().includes(q) || category.status.toLowerCase().includes(q);
+          }).sort((a, b) => b.importance - a.importance).map(category => ({
+            title: category.title,
+            start_date: category.date,
+            slug: category.slug,
+            tags: [],
+            category: category.preview
+          }))}
+          basePath="/blog/category"
+          showCategoryLinks={false}
+          formatCategoryNames={false}
+          emptyMessage="No categories found matching your criteria."
         />
 
         {/* PageDescription component */}

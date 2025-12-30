@@ -1,6 +1,6 @@
 import React from 'react';
 import { Quote } from '@/components/posts/typography/quote';
-import quotesFromFile from '@/data/header-quotes.json';
+import quotesFromFile from '@/data/quotes.json';
 
 interface HeaderQuoteItem {
   author: string;

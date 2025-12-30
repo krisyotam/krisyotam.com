@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { BlogTable } from "@/components/blog-table";
-import { PageHeader } from "@/components/page-header";
-import { PageDescription } from "@/components/posts/typography/page-description";
+import { ContentTable } from "@/components/content";
+import { PageHeader } from "@/components/core";
+import { PageDescription } from "@/components/core";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
 import type { BlogMeta } from "@/types/blog";
@@ -100,10 +100,25 @@ export default function BlogCategoryClient({ posts, allPosts, category }: BlogCa
         </div>
       </div>
 
-      <BlogTable
-        notes={posts}
-        searchQuery={searchQuery}
-        activeCategory={category}
+      <ContentTable
+        items={posts.filter((post) => {
+          const q = searchQuery.toLowerCase();
+          const matchesSearch =
+            !q ||
+            post.title.toLowerCase().includes(q) ||
+            post.tags.some((t) => t.toLowerCase().includes(q)) ||
+            post.category.toLowerCase().includes(q);
+          const isActive = post.state !== "hidden";
+          return matchesSearch && isActive;
+        }).sort((a, b) => {
+          const dateA = (a.end_date && a.end_date.trim()) || a.start_date || '';
+          const dateB = (b.end_date && b.end_date.trim()) || b.start_date || '';
+          return dateB.localeCompare(dateA);
+        })}
+        basePath="/blog"
+        showCategoryLinks={true}
+        formatCategoryNames={true}
+        emptyMessage="No posts found."
       />
 
       <PageDescription

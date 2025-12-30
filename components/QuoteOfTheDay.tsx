@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import quotesData from "@/data/header-quotes.json"
+import quotesData from "@/data/quotes.json"
 
 export function QuoteOfTheDay() {
   const [quote, setQuote] = useState({ text: "", author: "" })

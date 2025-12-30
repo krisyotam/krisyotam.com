@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import quotesData from "@/data/header-quotes.json";
+import quotesData from "@/data/quotes.json";
 import { cn } from "@/lib/utils";
 
 // Fallback quotes if none valid

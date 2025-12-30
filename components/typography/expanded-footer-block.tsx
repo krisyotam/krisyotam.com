@@ -64,7 +64,7 @@ export default function SiteFooter({ lastUpdated, rawMarkdown }: { lastUpdated?:
   useEffect(() => {
     async function fetchQuote() {
       try {
-        const res = await fetch("/api/header-quotes");
+        const res = await fetch("/api/quotes");
         const data = await res.json();
         if (Array.isArray(data.quotes) && data.quotes.length > 0) {
           const q = data.quotes[Math.floor(Math.random() * data.quotes.length)];
@@ -72,7 +72,7 @@ export default function SiteFooter({ lastUpdated, rawMarkdown }: { lastUpdated?:
           setAuthor(q.author || "Unknown");
         }
       } catch (err) {
-        console.error("Failed to fetch /api/header-quotes", err);
+        console.error("Failed to fetch /api/quotes", err);
         setQuote(
           "The best way to find out if you can trust somebody is to trust them. What we know is a drop, what we don't know is an ocean."
         );

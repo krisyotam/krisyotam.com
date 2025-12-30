@@ -333,67 +333,67 @@
         },
         {
           "bucket": "doc",
-          "key": "imgs/albums/abbey-road.jpg",
+          "key": "imgs/artists/the-beatles/covers/abbey-road.jpg",
           "size": 159905,
           "last_modified": "2025-08-15T09:48:53.347000+00:00",
-          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/albums/abbey-road.jpg",
-          "public_url": "https://krisyotam.com/doc/imgs/albums/abbey-road.jpg"
+          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/artists/the-beatles/covers/abbey-road.jpg",
+          "public_url": "https://krisyotam.com/doc/imgs/artists/the-beatles/covers/abbey-road.jpg"
         },
         {
           "bucket": "doc",
-          "key": "imgs/albums/hilary-hahn-paganini-violin-concerto-no-1-spohr-violin-concerto-no-8.jpg",
+          "key": "imgs/artists/hilary-hahn/covers/hilary-hahn-paganini-violin-concerto-no-1-spohr-violin-concerto-no-8.jpg",
           "size": 86377,
           "last_modified": "2025-08-15T09:48:53.278000+00:00",
-          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/albums/hilary-hahn-paganini-violin-concerto-no-1-spohr-violin-concerto-no-8.jpg",
-          "public_url": "https://krisyotam.com/doc/imgs/albums/hilary-hahn-paganini-violin-concerto-no-1-spohr-violin-concerto-no-8.jpg"
+          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/artists/hilary-hahn/covers/hilary-hahn-paganini-violin-concerto-no-1-spohr-violin-concerto-no-8.jpg",
+          "public_url": "https://krisyotam.com/doc/imgs/artists/hilary-hahn/covers/hilary-hahn-paganini-violin-concerto-no-1-spohr-violin-concerto-no-8.jpg"
         },
         {
           "bucket": "doc",
-          "key": "imgs/albums/ilmatic.jpg",
+          "key": "imgs/artists/nas/covers/ilmatic.jpg",
           "size": 42866,
           "last_modified": "2025-08-15T09:48:54.113000+00:00",
-          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/albums/ilmatic.jpg",
-          "public_url": "https://krisyotam.com/doc/imgs/albums/ilmatic.jpg"
+          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/artists/nas/covers/ilmatic.jpg",
+          "public_url": "https://krisyotam.com/doc/imgs/artists/nas/covers/ilmatic.jpg"
         },
         {
           "bucket": "doc",
-          "key": "imgs/albums/in-the-aeroplane-over-the-sea.jpg",
+          "key": "imgs/artists/neutral-milk-hotel/covers/in-the-aeroplane-over-the-sea.jpg",
           "size": 1179096,
           "last_modified": "2025-08-15T09:48:54.669000+00:00",
-          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/albums/in-the-aeroplane-over-the-sea.jpg",
-          "public_url": "https://krisyotam.com/doc/imgs/albums/in-the-aeroplane-over-the-sea.jpg"
+          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/artists/neutral-milk-hotel/covers/in-the-aeroplane-over-the-sea.jpg",
+          "public_url": "https://krisyotam.com/doc/imgs/artists/neutral-milk-hotel/covers/in-the-aeroplane-over-the-sea.jpg"
         },
         {
           "bucket": "doc",
-          "key": "imgs/albums/kindofblue.jpg",
+          "key": "imgs/artists/miles-davis/covers/kindofblue.jpg",
           "size": 158490,
           "last_modified": "2025-08-15T09:48:53.394000+00:00",
-          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/albums/kindofblue.jpg",
-          "public_url": "https://krisyotam.com/doc/imgs/albums/kindofblue.jpg"
+          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/artists/miles-davis/covers/kindofblue.jpg",
+          "public_url": "https://krisyotam.com/doc/imgs/artists/miles-davis/covers/kindofblue.jpg"
         },
         {
           "bucket": "doc",
-          "key": "imgs/albums/lesley-gore-sings-of-mixed-up-hearts.webp",
+          "key": "imgs/artists/lesley-gore/covers/lesley-gore-sings-of-mixed-up-hearts.webp",
           "size": 24998,
           "last_modified": "2025-08-15T09:48:53.042000+00:00",
-          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/albums/lesley-gore-sings-of-mixed-up-hearts.webp",
-          "public_url": "https://krisyotam.com/doc/imgs/albums/lesley-gore-sings-of-mixed-up-hearts.webp"
+          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/artists/lesley-gore/covers/lesley-gore-sings-of-mixed-up-hearts.webp",
+          "public_url": "https://krisyotam.com/doc/imgs/artists/lesley-gore/covers/lesley-gore-sings-of-mixed-up-hearts.webp"
         },
         {
           "bucket": "doc",
-          "key": "imgs/albums/off-the-wall.jpg",
+          "key": "imgs/artists/michael-jackson/covers/off-the-wall.jpg",
           "size": 133185,
           "last_modified": "2025-08-15T09:48:53.328000+00:00",
-          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/albums/off-the-wall.jpg",
-          "public_url": "https://krisyotam.com/doc/imgs/albums/off-the-wall.jpg"
+          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/artists/michael-jackson/covers/off-the-wall.jpg",
+          "public_url": "https://krisyotam.com/doc/imgs/artists/michael-jackson/covers/off-the-wall.jpg"
         },
         {
           "bucket": "doc",
-          "key": "imgs/albums/vespertine.jpg",
+          "key": "imgs/artists/bjork/covers/vespertine.jpg",
           "size": 130144,
           "last_modified": "2025-08-15T09:48:54.254000+00:00",
-          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/albums/vespertine.jpg",
-          "public_url": "https://krisyotam.com/doc/imgs/albums/vespertine.jpg"
+          "original_url": "https://hel1.your-objectstorage.com/doc/imgs/artists/bjork/covers/vespertine.jpg",
+          "public_url": "https://krisyotam.com/doc/imgs/artists/bjork/covers/vespertine.jpg"
         },
         {
           "bucket": "doc",
@@ -5944,42 +5944,42 @@
           "albums": {
             "__files": [
               {
-                "key": "imgs/albums/abbey-road.jpg",
+                "key": "imgs/artists/the-beatles/covers/abbey-road.jpg",
                 "size": 159905,
                 "last_modified": "2025-08-15T09:48:53.347000+00:00"
               },
               {
-                "key": "imgs/albums/hilary-hahn-paganini-violin-concerto-no-1-spohr-violin-concerto-no-8.jpg",
+                "key": "imgs/artists/hilary-hahn/covers/hilary-hahn-paganini-violin-concerto-no-1-spohr-violin-concerto-no-8.jpg",
                 "size": 86377,
                 "last_modified": "2025-08-15T09:48:53.278000+00:00"
               },
               {
-                "key": "imgs/albums/ilmatic.jpg",
+                "key": "imgs/artists/nas/covers/ilmatic.jpg",
                 "size": 42866,
                 "last_modified": "2025-08-15T09:48:54.113000+00:00"
               },
               {
-                "key": "imgs/albums/in-the-aeroplane-over-the-sea.jpg",
+                "key": "imgs/artists/neutral-milk-hotel/covers/in-the-aeroplane-over-the-sea.jpg",
                 "size": 1179096,
                 "last_modified": "2025-08-15T09:48:54.669000+00:00"
               },
               {
-                "key": "imgs/albums/kindofblue.jpg",
+                "key": "imgs/artists/miles-davis/covers/kindofblue.jpg",
                 "size": 158490,
                 "last_modified": "2025-08-15T09:48:53.394000+00:00"
               },
               {
-                "key": "imgs/albums/lesley-gore-sings-of-mixed-up-hearts.webp",
+                "key": "imgs/artists/lesley-gore/covers/lesley-gore-sings-of-mixed-up-hearts.webp",
                 "size": 24998,
                 "last_modified": "2025-08-15T09:48:53.042000+00:00"
               },
               {
-                "key": "imgs/albums/off-the-wall.jpg",
+                "key": "imgs/artists/michael-jackson/covers/off-the-wall.jpg",
                 "size": 133185,
                 "last_modified": "2025-08-15T09:48:53.328000+00:00"
               },
               {
-                "key": "imgs/albums/vespertine.jpg",
+                "key": "imgs/artists/bjork/covers/vespertine.jpg",
                 "size": 130144,
                 "last_modified": "2025-08-15T09:48:54.254000+00:00"
               }

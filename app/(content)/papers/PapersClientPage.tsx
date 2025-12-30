@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PapersTable } from "./PapersTable";
-import { PageHeader } from "@/components/page-header";
-import type { PageHeaderProps } from "@/components/page-header";
-import { PageDescription } from "@/components/posts/typography/page-description";
+import { PageHeader } from "@/components/core";
+import type { PageHeaderProps } from "@/components/core";
+import { PageDescription } from "@/components/core";
+import { Navigation, ContentTable } from "@/components/content";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
 import categoriesData from "@/data/papers/categories.json";
@@ -30,6 +30,7 @@ interface PapersClientPageProps {
 export default function PapersClientPage({ papers, initialCategory = "all" }: PapersClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const router = useRouter();
   const categories = ["all", ...Array.from(new Set(papers.map(p => p.category)))];  // Helper to get category title from slug
   function getCategoryTitle(categorySlug: string): string {
@@ -116,34 +117,38 @@ export default function PapersClientPage({ papers, initialCategory = "all" }: Pa
       <div className="papers-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
         <PageHeader {...headerData} />
 
-        {/* Search and filter on same row */}
-        <div className="mb-6 flex items-center gap-4">
-          <div className="flex items-center gap-2 whitespace-nowrap">
-            <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
-            <CustomSelect
-              value={activeCategory}
-              onValueChange={handleCategoryChange}
-              options={categoryOptions}
-              className="text-sm min-w-[140px]"
-            />
-          </div>
-          
-          <div className="relative flex-1">
-            <input 
-              type="text" 
-              placeholder="Search papers..." 
-              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
-              onChange={(e) => setSearchQuery(e.target.value)}
-              value={searchQuery}
-            />
-          </div>
-        </div>
+        <Navigation
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          searchPlaceholder="Search papers..."
+          showCategoryFilter={true}
+          categoryOptions={categoryOptions}
+          selectedCategory={activeCategory}
+          onCategoryChange={handleCategoryChange}
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
+        />
 
         {/* Papers table */}
-        <PapersTable
-          papers={papers}
-          searchQuery={searchQuery}
-          activeCategory={activeCategory}
+        <ContentTable
+          items={papers.filter((paper) => {
+            const q = searchQuery.toLowerCase();
+            const matchesSearch =
+              !q ||
+              paper.title.toLowerCase().includes(q) ||
+              paper.tags.some((t) => t.toLowerCase().includes(q)) ||
+              paper.category.toLowerCase().includes(q);
+            const matchesCategory = activeCategory === "all" || paper.category === activeCategory;
+            return matchesSearch && matchesCategory;
+          }).sort((a, b) => {
+            const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+            const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+            return new Date(dateB).getTime() - new Date(dateA).getTime();
+          })}
+          basePath="/papers"
+          showCategoryLinks={true}
+          formatCategoryNames={false}
+          emptyMessage="No papers found matching your criteria."
         />
 
         {/* PageDescription component */}
