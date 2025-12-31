@@ -9,6 +9,7 @@ import { PostHeader } from "@/components/post-header";
 import { Footer } from "@/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Citation } from "@/components/citation";
+import { Comments } from "@/components/core/comments";
 
 interface NoteMeta {
   title: string;
@@ -85,6 +86,7 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
   if (contentOnly) {
     return (
       <div className="mt-8">
+        <Comments />
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />
         <Citation 
           title={note.title}
@@ -121,8 +123,9 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
       
       {/* MDX body -------------------------------------------------------- */}
       <div className="note-content">{children}</div>
-      
+
       <div className="mt-8">
+        <Comments />
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />
         <Citation 
           title={note.title}

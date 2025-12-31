@@ -7,6 +7,7 @@ import type { Poem } from "@/utils/poems";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Citation } from "@/components/citation";
+import { Comments } from "@/components/core/comments";
 import { useEffect, useState } from "react";
 
 export default function PoemPageClient({
@@ -110,8 +111,10 @@ export default function PoemPageClient({
           )}
         </div>
         
-        <div className="my-8">
-          <Citation 
+        <Comments />
+
+        <div className="mt-4 mb-8">
+          <Citation
             title={poem.title ?? ""}
             slug={poem.slug ?? ""}
             date={((poem.end_date ?? "").trim()) || (poem.start_date ?? "")}
