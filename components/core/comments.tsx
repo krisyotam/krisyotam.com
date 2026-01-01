@@ -9,6 +9,7 @@ import { atomDark, prism } from "react-syntax-highlighter/dist/cjs/styles/prism"
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
 import rehypeKatex from "rehype-katex"
+import { getUserRole, canDeleteAnyComment, ROLE_CONFIG } from "@/lib/comments-config"
 
 interface User {
   id: string
@@ -24,8 +25,11 @@ interface Comment {
   username: string
   avatar_url: string | null
   created_at: string
+  edited_at: string | null
+  parent_id: string | null
   reactions: Record<string, number>
   userReactions: string[]
+  replies?: Comment[]
 }
 
 interface Pagination {
@@ -62,6 +66,11 @@ export function Comments({ pageSlug }: CommentsProps) {
   const [error, setError] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<"write" | "preview">("write")
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null)
+  const [replyingTo, setReplyingTo] = useState<string | null>(null)
+  const [replyContent, setReplyContent] = useState("")
+  const [replyActiveTab, setReplyActiveTab] = useState<"write" | "preview">("write")
+  const [editingComment, setEditingComment] = useState<string | null>(null)
+  const [editContent, setEditContent] = useState("")
 
   // Fetch current user
   useEffect(() => {
@@ -154,8 +163,19 @@ export function Comments({ pageSlug }: CommentsProps) {
         return
       }
 
-      // Remove from local state
-      setComments((prev) => prev.filter((c) => c.id !== deleteConfirm))
+      // Remove from local state - check if it's a top-level comment or reply
+      setComments((prev) => {
+        // First try to remove as top-level comment
+        const filtered = prev.filter((c) => c.id !== deleteConfirm)
+        if (filtered.length !== prev.length) {
+          return filtered
+        }
+        // If not found, it's a reply - remove from parent's replies
+        return prev.map((comment) => ({
+          ...comment,
+          replies: comment.replies?.filter((r) => r.id !== deleteConfirm),
+        }))
+      })
     } catch {
       setError("Failed to delete comment")
     } finally {
@@ -205,13 +225,121 @@ export function Comments({ pageSlug }: CommentsProps) {
     }
   }
 
+  // Submit reply
+  const handleReply = async (parentId: string) => {
+    if (!replyContent.trim() || !user) return
+
+    setSubmitting(true)
+    setError(null)
+
+    try {
+      const res = await fetch("/api/comments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pageSlug: slug, content: replyContent, parentId }),
+      })
+
+      if (!res.ok) {
+        throw new Error("Failed to post reply")
+      }
+
+      const data = await res.json()
+      // Add reply to the parent comment
+      setComments((prev) =>
+        prev.map((comment) => {
+          if (comment.id === parentId) {
+            return {
+              ...comment,
+              replies: [...(comment.replies || []), { ...data.comment, reactions: {}, userReactions: [] }],
+            }
+          }
+          return comment
+        })
+      )
+      setReplyContent("")
+      setReplyingTo(null)
+    } catch {
+      setError("Failed to post reply")
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  // Start editing a comment
+  const handleStartEdit = (comment: Comment) => {
+    setEditingComment(comment.id)
+    setEditContent(comment.content)
+  }
+
+  // Submit edit
+  const handleEdit = async (commentId: string, isReply: boolean, parentId?: string) => {
+    if (!editContent.trim() || !user) return
+
+    setSubmitting(true)
+    setError(null)
+
+    try {
+      const res = await fetch("/api/comments", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ commentId, content: editContent }),
+      })
+
+      if (!res.ok) {
+        throw new Error("Failed to update comment")
+      }
+
+      const data = await res.json()
+
+      if (isReply && parentId) {
+        // Update reply in parent's replies array
+        setComments((prev) =>
+          prev.map((comment) => {
+            if (comment.id === parentId) {
+              return {
+                ...comment,
+                replies: comment.replies?.map((reply) =>
+                  reply.id === commentId
+                    ? { ...reply, content: data.comment.content, edited_at: data.comment.edited_at }
+                    : reply
+                ),
+              }
+            }
+            return comment
+          })
+        )
+      } else {
+        // Update top-level comment
+        setComments((prev) =>
+          prev.map((comment) =>
+            comment.id === commentId
+              ? { ...comment, content: data.comment.content, edited_at: data.comment.edited_at }
+              : comment
+          )
+        )
+      }
+
+      setEditContent("")
+      setEditingComment(null)
+    } catch {
+      setError("Failed to update comment")
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr)
-    return date.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    })
+    const month = String(date.getMonth() + 1).padStart(2, "0")
+    const day = String(date.getDate()).padStart(2, "0")
+    const year = date.getFullYear()
+    let hours = date.getHours()
+    const minutes = String(date.getMinutes()).padStart(2, "0")
+    const ampm = hours >= 12 ? "PM" : "AM"
+    hours = hours % 12
+    hours = hours ? hours : 12 // 0 should be 12
+    const hoursStr = String(hours).padStart(2, "0")
+    return `${month}.${day}.${year} at ${hoursStr}:${minutes} ${ampm}`
   }
 
   return (
@@ -281,7 +409,7 @@ export function Comments({ pageSlug }: CommentsProps) {
                     style={{ height: content ? "auto" : "100px" }}
                   />
                 ) : (
-                  <div className="min-h-[100px] p-3 prose prose-sm dark:prose-invert max-w-none prose-headings:mt-0 prose-headings:mb-2 prose-p:my-1 prose-p:leading-relaxed">
+                  <div className="min-h-[100px] p-3 comment-content">
                     {content.trim() ? (
                       <ReactMarkdown
                         remarkPlugins={[remarkGfm, remarkMath]}
@@ -397,15 +525,133 @@ export function Comments({ pageSlug }: CommentsProps) {
       {/* Comments List */}
       <div className="space-y-4">
         {(comments || []).map((comment) => (
-          <CommentItem
-            key={comment.id}
-            comment={comment}
-            currentUserId={user?.id}
-            resolvedTheme={resolvedTheme}
-            onReaction={handleReaction}
-            onDelete={handleDeleteRequest}
-            formatDate={formatDate}
-          />
+          <div key={comment.id}>
+            <CommentItem
+              comment={comment}
+              currentUserId={user?.id}
+              currentUsername={user?.username}
+              resolvedTheme={resolvedTheme}
+              onReaction={handleReaction}
+              onDelete={handleDeleteRequest}
+              onReply={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
+              onStartEdit={handleStartEdit}
+              onCancelEdit={() => { setEditingComment(null); setEditContent("") }}
+              onSubmitEdit={(id) => handleEdit(id, false)}
+              isEditing={editingComment === comment.id}
+              editContent={editContent}
+              onEditContentChange={setEditContent}
+              formatDate={formatDate}
+              isReply={false}
+            />
+
+            {/* Reply form */}
+            {replyingTo === comment.id && user && (
+              <div className="ml-8 mt-4 border border-border">
+                <div className="flex items-stretch border-b border-border">
+                  <div className="flex items-center justify-center w-12 border-r border-border">
+                    <img
+                      src={user.avatar_url}
+                      alt={user.username}
+                      className="w-8 h-8 flex-shrink-0 object-cover"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setReplyActiveTab("write")}
+                    className={`px-4 py-2 text-xs font-medium transition-colors border-r border-border ${
+                      replyActiveTab === "write"
+                        ? "text-foreground bg-muted/50"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                    }`}
+                  >
+                    Write
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setReplyActiveTab("preview")}
+                    className={`px-4 py-2 text-xs font-medium transition-colors border-r border-border ${
+                      replyActiveTab === "preview"
+                        ? "text-foreground bg-muted/50"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                    }`}
+                  >
+                    Preview
+                  </button>
+                  <div className="flex items-center px-3 py-2">
+                    <span className="text-xs text-muted-foreground">Replying to @{comment.username}</span>
+                  </div>
+                </div>
+
+                {replyActiveTab === "write" ? (
+                  <textarea
+                    value={replyContent}
+                    onChange={(e) => setReplyContent(e.target.value)}
+                    placeholder="Write a reply..."
+                    className="w-full min-h-[80px] p-3 bg-transparent resize-none focus:outline-none text-sm"
+                    disabled={submitting}
+                  />
+                ) : (
+                  <div className="min-h-[80px] p-3 comment-content">
+                    {replyContent.trim() ? (
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm, remarkMath]}
+                        rehypePlugins={[rehypeKatex]}
+                      >
+                        {replyContent}
+                      </ReactMarkdown>
+                    ) : (
+                      <span className="text-muted-foreground text-sm">Nothing to preview</span>
+                    )}
+                  </div>
+                )}
+
+                <div className="flex items-stretch border-t border-border">
+                  <div className="flex-1" />
+                  <button
+                    type="button"
+                    onClick={() => { setReplyingTo(null); setReplyContent(""); setReplyActiveTab("write") }}
+                    className="px-3 py-2 text-xs text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-colors border-l border-border"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleReply(comment.id)}
+                    disabled={submitting || !replyContent.trim()}
+                    className="px-3 py-2 text-xs bg-muted/50 hover:bg-muted disabled:opacity-50 transition-colors border-l border-border"
+                  >
+                    {submitting ? "Posting..." : "Reply"}
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Replies */}
+            {comment.replies && comment.replies.length > 0 && (
+              <div className="ml-8 mt-4 space-y-2">
+                {comment.replies.map((reply) => (
+                  <CommentItem
+                    key={reply.id}
+                    comment={reply}
+                    currentUserId={user?.id}
+                    currentUsername={user?.username}
+                    resolvedTheme={resolvedTheme}
+                    onReaction={handleReaction}
+                    onDelete={handleDeleteRequest}
+                    onStartEdit={handleStartEdit}
+                    onCancelEdit={() => { setEditingComment(null); setEditContent("") }}
+                    onSubmitEdit={(id) => handleEdit(id, true, comment.id)}
+                    isEditing={editingComment === reply.id}
+                    editContent={editContent}
+                    onEditContentChange={setEditContent}
+                    formatDate={formatDate}
+                    isReply={true}
+                    parentId={comment.id}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         ))}
       </div>
 
@@ -472,20 +718,43 @@ export function Comments({ pageSlug }: CommentsProps) {
 function CommentItem({
   comment,
   currentUserId,
+  currentUsername,
   resolvedTheme,
   onReaction,
   onDelete,
+  onReply,
+  onStartEdit,
+  onCancelEdit,
+  onSubmitEdit,
+  isEditing,
+  editContent,
+  onEditContentChange,
   formatDate,
+  isReply,
+  parentId,
 }: {
   comment: Comment
   currentUserId: string | undefined
+  currentUsername: string | undefined
   resolvedTheme: string | undefined
   onReaction: (commentId: string, reactionType: string) => void
   onDelete: (commentId: string) => void
+  onReply?: () => void
+  onStartEdit: (comment: Comment) => void
+  onCancelEdit: () => void
+  onSubmitEdit: (commentId: string) => void
+  isEditing: boolean
+  editContent: string
+  onEditContentChange: (content: string) => void
   formatDate: (date: string) => string
+  isReply: boolean
+  parentId?: string
 }) {
   const [showReactionPicker, setShowReactionPicker] = useState(false)
   const isOwner = currentUserId && currentUserId === comment.user_id
+  const canDeleteAny = canDeleteAnyComment(currentUsername)
+  const canDelete = isOwner || canDeleteAny
+  const commentAuthorRole = getUserRole(comment.username)
 
   // Get reactions that have counts > 0
   const activeReactions = REACTIONS.filter(
@@ -504,19 +773,34 @@ function CommentItem({
             className="w-10 h-10 flex-shrink-0 object-cover"
           />
         </div>
+        {/* Username */}
+        <a
+          href={`https://github.com/${comment.username}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center px-3 border-r border-border text-sm font-medium hover:bg-muted/30 transition-colors"
+          title={`https://github.com/${comment.username}`}
+        >
+          @{comment.username}
+        </a>
+        {/* Role badge */}
+        {commentAuthorRole && (
+          <div className="flex items-center justify-center px-2 border-r border-border">
+            <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+              {ROLE_CONFIG[commentAuthorRole].label}
+            </span>
+          </div>
+        )}
         {/* Info */}
-        <div className="flex-1 flex items-center px-3 py-2 gap-2">
-          <a
-            href={`https://github.com/${comment.username}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium text-sm hover:underline"
-          >
-            {comment.username}
-          </a>
+        <div className="flex-1 flex items-center px-3 py-2 gap-2 flex-wrap">
           <span className="text-muted-foreground text-sm">
-            commented on {formatDate(comment.created_at)}
+            {isReply ? "replied" : "commented"} on {formatDate(comment.created_at)}
           </span>
+          {comment.edited_at && (
+            <span className="text-muted-foreground text-xs italic">
+              (edited {formatDate(comment.edited_at)})
+            </span>
+          )}
         </div>
         {/* Reaction picker button */}
         <div className="relative border-l border-border">
@@ -532,72 +816,116 @@ function CommentItem({
           </button>
           {/* Reaction picker dropdown */}
           {showReactionPicker && (
-            <div className="absolute right-0 top-full mt-1 z-10 bg-popover border border-border shadow-lg">
-              <div className="text-xs text-muted-foreground px-3 py-2 border-b border-border whitespace-nowrap">Pick your reaction</div>
-              <div className="flex items-stretch">
-                {REACTIONS.map(({ type, emoji }, index) => (
-                  <button
-                    key={type}
-                    onClick={() => {
-                      onReaction(comment.id, type)
-                      setShowReactionPicker(false)
-                    }}
-                    className={`px-3 py-2 text-lg hover:bg-muted transition-colors ${
-                      index < REACTIONS.length - 1 ? "border-r border-border" : ""
-                    }`}
-                    title={type}
-                  >
-                    {emoji}
-                  </button>
-                ))}
+            <>
+              {/* Invisible backdrop to capture outside clicks */}
+              <div
+                className="fixed inset-0 z-[5]"
+                onClick={() => setShowReactionPicker(false)}
+              />
+              <div className="absolute right-0 top-full mt-1 z-10 bg-popover border border-border shadow-lg">
+                <div className="text-xs text-muted-foreground px-3 py-2 border-b border-border whitespace-nowrap">Pick your reaction</div>
+                <div className="flex items-stretch">
+                  {REACTIONS.map(({ type, emoji }, index) => (
+                    <button
+                      key={type}
+                      onClick={() => {
+                        onReaction(comment.id, type)
+                        setShowReactionPicker(false)
+                      }}
+                      className={`px-3 py-2 text-lg hover:bg-muted transition-colors ${
+                        index < REACTIONS.length - 1 ? "border-r border-border" : ""
+                      }`}
+                      title={type}
+                    >
+                      {emoji}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            </>
           )}
         </div>
       </div>
 
-      {/* Content with Markdown */}
-      <div className="p-3 prose prose-sm dark:prose-invert max-w-none comment-content prose-headings:mt-0 prose-headings:mb-2 prose-p:my-1 prose-p:leading-relaxed">
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm, remarkMath]}
-          rehypePlugins={[rehypeKatex]}
-          components={{
-            code({ node, className, children, ...props }) {
-              const match = /language-(\w+)/.exec(className || "")
-              const inline = !match && !className
+      {/* Content with Markdown or Edit form */}
+      {isEditing ? (
+        <div className="p-3">
+          <textarea
+            value={editContent}
+            onChange={(e) => onEditContentChange(e.target.value)}
+            className="w-full min-h-[100px] p-2 bg-muted/30 border border-border resize-none focus:outline-none focus:border-foreground/50 text-sm"
+          />
+          <div className="flex items-center justify-end gap-2 mt-2">
+            <button
+              type="button"
+              onClick={onCancelEdit}
+              className="px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={() => onSubmitEdit(comment.id)}
+              disabled={!editContent.trim()}
+              className="px-3 py-1.5 text-xs bg-muted hover:bg-muted/80 disabled:opacity-50 transition-colors"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="p-3 comment-content">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm, remarkMath]}
+            rehypePlugins={[rehypeKatex]}
+            components={{
+              code({ node, className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || "")
+                const inline = !match && !className
 
-              if (inline) {
+                if (inline) {
+                  return (
+                    <code className="px-1.5 py-0.5 bg-muted text-sm font-mono" {...props}>
+                      {children}
+                    </code>
+                  )
+                }
+
                 return (
-                  <code className="px-1.5 py-0.5 bg-muted text-sm font-mono" {...props}>
-                    {children}
-                  </code>
+                  <div className="my-3 overflow-hidden border border-border">
+                    <SyntaxHighlighter
+                      style={resolvedTheme === "dark" ? atomDark : prism}
+                      language={match ? match[1] : "text"}
+                      PreTag="div"
+                      customStyle={{
+                        margin: 0,
+                        padding: "1rem",
+                        fontSize: "0.875rem",
+                        background: resolvedTheme === "dark" ? "#1e1e1e" : "#f6f8fa",
+                      }}
+                    >
+                      {String(children).replace(/\n$/, "")}
+                    </SyntaxHighlighter>
+                  </div>
                 )
-              }
-
-              return (
-                <div className="my-3 overflow-hidden border border-border">
-                  <SyntaxHighlighter
-                    style={resolvedTheme === "dark" ? atomDark : prism}
-                    language={match ? match[1] : "text"}
-                    PreTag="div"
-                    customStyle={{
-                      margin: 0,
-                      padding: "1rem",
-                      fontSize: "0.875rem",
-                      background: resolvedTheme === "dark" ? "#1e1e1e" : "#f6f8fa",
-                    }}
-                  >
-                    {String(children).replace(/\n$/, "")}
-                  </SyntaxHighlighter>
-                </div>
-              )
-            },
-            a({ href, children }) {
-              const text = String(children)
-              if (text.startsWith("@")) {
+              },
+              a({ href, children }) {
+                const text = String(children)
+                if (text.startsWith("@")) {
+                  return (
+                    <a
+                      href={`https://github.com/${text.slice(1)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 dark:text-blue-400 hover:underline"
+                    >
+                      {children}
+                    </a>
+                  )
+                }
                 return (
                   <a
-                    href={`https://github.com/${text.slice(1)}`}
+                    href={href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 dark:text-blue-400 hover:underline"
@@ -605,71 +933,81 @@ function CommentItem({
                     {children}
                   </a>
                 )
-              }
-              return (
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
-                >
-                  {children}
-                </a>
-              )
-            },
-            p({ children }) {
-              return <p className="mb-3 last:mb-0">{children}</p>
-            },
-            blockquote({ children }) {
-              return (
-                <blockquote className="border-l-4 border-muted-foreground/30 pl-4 my-3 text-muted-foreground italic">
-                  {children}
-                </blockquote>
-              )
-            },
-          }}
-        >
-          {comment.content}
-        </ReactMarkdown>
-      </div>
-
-      {/* Footer - Reactions and Delete */}
-      {(activeReactions.length > 0 || isOwner) && (
-        <div className="flex items-stretch border-t border-border">
-          {/* Reactions */}
-          {activeReactions.map(({ type, emoji }, index) => {
-            const count = comment.reactions[type] || 0
-            const hasReacted = comment.userReactions.includes(type)
-
-            return (
-              <button
-                key={type}
-                onClick={() => onReaction(comment.id, type)}
-                className={`inline-flex items-center gap-2 px-3 py-2 text-sm transition-colors border-r border-border ${
-                  hasReacted
-                    ? "bg-muted text-foreground"
-                    : "hover:bg-muted/30"
-                }`}
-              >
-                <span>{emoji}</span>
-                <span className="text-xs font-medium">{count}</span>
-              </button>
-            )
-          })}
-          {/* Spacer */}
-          <div className="flex-1" />
-          {/* Delete button */}
-          {isOwner && (
-            <button
-              onClick={() => onDelete(comment.id)}
-              className="px-4 py-2 text-xs text-destructive/70 hover:text-destructive hover:bg-destructive/10 transition-colors border-l border-border"
-              title="Delete comment"
-            >
-              Delete
-            </button>
-          )}
+              },
+              p({ children }) {
+                return <p className="mb-3 last:mb-0">{children}</p>
+              },
+              blockquote({ children }) {
+                return (
+                  <blockquote className="border-l-4 border-muted-foreground/30 pl-4 my-3 text-muted-foreground italic">
+                    {children}
+                  </blockquote>
+                )
+              },
+            }}
+          >
+            {comment.content}
+          </ReactMarkdown>
         </div>
       )}
+
+      {/* Footer - Reactions, Reply, Edit, Delete */}
+      <div className="flex items-stretch border-t border-border">
+        {/* Reactions */}
+        {activeReactions.map(({ type, emoji }) => {
+          const count = comment.reactions[type] || 0
+          const hasReacted = comment.userReactions.includes(type)
+
+          return (
+            <button
+              key={type}
+              onClick={() => onReaction(comment.id, type)}
+              className={`inline-flex items-center gap-2 px-3 py-2 text-sm transition-colors border-r border-border ${
+                hasReacted
+                  ? "bg-muted text-foreground"
+                  : "hover:bg-muted/30"
+              }`}
+            >
+              <span>{emoji}</span>
+              <span className="text-xs font-medium">{count}</span>
+            </button>
+          )
+        })}
+
+        {/* Reply button - only for top-level comments */}
+        {!isReply && onReply && currentUserId && (
+          <button
+            onClick={onReply}
+            className="px-3 py-2 text-xs text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-colors border-r border-border"
+          >
+            Reply
+          </button>
+        )}
+
+        {/* Spacer */}
+        <div className="flex-1" />
+
+        {/* Edit button - only for owner */}
+        {isOwner && !isEditing && (
+          <button
+            onClick={() => onStartEdit(comment)}
+            className="px-3 py-2 text-xs text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-colors border-l border-border"
+          >
+            Edit
+          </button>
+        )}
+
+        {/* Delete button - owner or admin */}
+        {canDelete && (
+          <button
+            onClick={() => onDelete(comment.id)}
+            className="px-3 py-2 text-xs text-destructive/70 hover:text-destructive hover:bg-destructive/10 transition-colors border-l border-border"
+            title="Delete comment"
+          >
+            Delete
+          </button>
+        )}
+      </div>
     </article>
   )
 }

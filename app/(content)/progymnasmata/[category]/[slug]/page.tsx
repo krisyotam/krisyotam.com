@@ -6,6 +6,7 @@ import postsData from "@/data/progymnasmata/progymnasmata.json";
 import { Footer } from "@/app/(content)/essays/components/footer";
 import ProgymnasmataPageClient from "./ProgymnasmataPageClient";
 import { PageHeader } from "@/components/core";
+import { Comments } from "@/components/core/comments";
 
 
 export async function generateStaticParams() {
@@ -42,6 +43,7 @@ export default async function ProgymnasmataSlugPage({ params }: { params: { cate
             <MdxContent />
           </div>
           <ProgymnasmataPageClient post={post} contentOnly={true} />
+          <Comments />
         </main>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { Citation } from "@/components/citation";
 import { LiveClock } from "@/components/live-clock";
 import { Footer } from "@/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
+import { Comments } from "@/components/core/comments";
 import type { NoteMeta } from "@/types/note";
 
 interface FictionItem extends Omit<NoteMeta, 'date'> {
@@ -67,6 +68,7 @@ export default function FictionPageClient({ note, allNotes, children, headerOnly
   if (contentOnly) {
     return (
       <div className="mt-8">
+        <Comments />
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />
         <Citation
           title={note.title}

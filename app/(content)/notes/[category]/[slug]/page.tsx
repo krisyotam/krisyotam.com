@@ -6,6 +6,7 @@ import notesData from "@/data/notes/notes.json";
 import NotePageClient from "./NotePageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
 import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
+import { Comments } from "@/components/core/comments";
 import type { NoteMeta } from "@/types/note";
 
 type Status = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";

@@ -1,12 +1,23 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect, ReactNode } from "react";
 import { PageHeader } from "@/components/core";
-import { CustomSelect } from "@/components/ui/custom-select";
-import { ContentTable } from "@/components/content";
-import Collapse from "@/components/posts/typography/collapse";
-import Link from "next/link";
+import { PageDescription } from "@/components/core";
+import { Navigation, NowFeed } from "@/components/content";
+import { SelectOption } from "@/components/ui/custom-select";
+import { useRouter } from "next/navigation";
+
+/* default page-level metadata for the header */
+const defaultNowPageData = {
+  title: "Now",
+  subtitle: "What I'm Focused On Right Now",
+  start_date: "2025-01-01",
+  end_date: new Date().toISOString().split('T')[0],
+  preview: "A real-time snapshot of what I'm currently focused on, inspired by Derek Sivers' /now page movement.",
+  status: "In Progress" as const,
+  confidence: "certain" as const,
+  importance: 8,
+};
 
 interface NowEntry {
   title: string;
@@ -22,63 +33,51 @@ interface NowEntry {
   state: string;
 }
 
-interface NowClientPageProps {
-  nowEntries: NowEntry[];
+interface NowEntryWithContent {
+  entry: NowEntry;
+  content: ReactNode;
 }
 
-export default function NowClientPage({ nowEntries }: NowClientPageProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+interface NowClientPageProps {
+  entriesWithContent: NowEntryWithContent[];
+  initialCategory?: string;
+}
+
+export default function NowClientPage({ entriesWithContent, initialCategory = "all" }: NowClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState(initialCategory);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const router = useRouter();
 
-  // Page header data
-  const nowPageData = {
-    title: "Now",
-    subtitle: "What I'm Focused On Right Now",
-    date: new Date().toISOString(),
-    preview: "A real-time snapshot of what I'm currently focused on, inspired by Derek Sivers' /now page movement.",
-    status: "In Progress" as const,
-    confidence: "certain" as const,
-    importance: 8,
-  };
+  // Extract entries from the content wrapper
+  const nowEntries = entriesWithContent.map(e => e.entry);
 
-  const headerData = {
-    title: nowPageData.title,
-    subtitle: nowPageData.subtitle,
-    date: nowPageData.date,
-    preview: nowPageData.preview,
-    status: nowPageData.status,
-    confidence: nowPageData.confidence,
-    importance: nowPageData.importance,
-  };
+  const categories = ["all", ...Array.from(new Set(nowEntries.map(n => n.category)))];
 
-  // Get URL category parameter
+  // Convert categories to SelectOption format
+  const categoryOptions: SelectOption[] = categories.map(category => ({
+    value: category,
+    label: category === "all" ? "All Categories" : formatCategoryDisplayName(category)
+  }));
+
+  const headerData = defaultNowPageData;
+
+  // Update activeCategory when initialCategory changes
   useEffect(() => {
-    const categoryParam = searchParams.get("category");
-    if (categoryParam) {
-      setSelectedCategory(categoryParam);
-    }
-  }, [searchParams]);
+    setActiveCategory(initialCategory);
+  }, [initialCategory]);
 
-  // Extract unique categories from nowEntries
-  const categories = useMemo(() => {
-    const uniqueCategories = Array.from(new Set(nowEntries.map((entry) => entry.category)));
-    return uniqueCategories.sort();
-  }, [nowEntries]);
-
-  // Set initial category
-  const activeCategory = selectedCategory === "all" ? "all" : selectedCategory;
-
-  // Category options for the select
-  const categoryOptions = [
-    { value: "all", label: "All Categories" },
-    ...categories.map((cat) => ({ value: cat, label: cat })),
-  ];
-
-  // Utility function to convert category to URL-friendly slug
-  function slugifyCategory(category: string): string {
+  // Helper function to create category slug
+  function slugifyCategory(category: string) {
     return category.toLowerCase().replace(/\s+/g, "-");
+  }
+
+  // Helper function to format category display name
+  function formatCategoryDisplayName(category: string) {
+    return category
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 
   // Handle category change with URL routing
@@ -88,7 +87,26 @@ export default function NowClientPage({ nowEntries }: NowClientPageProps) {
     } else {
       router.push(`/now?category=${slugifyCategory(selectedValue)}`);
     }
+    setActiveCategory(selectedValue);
   }
+
+  // Filter entries based on search query and category
+  const filteredEntriesWithContent = entriesWithContent.filter(({ entry }) => {
+    const q = searchQuery.toLowerCase();
+    const matchesSearch =
+      !q ||
+      entry.title.toLowerCase().includes(q) ||
+      entry.tags.some((tag) => tag.toLowerCase().includes(q)) ||
+      entry.category.toLowerCase().includes(q);
+
+    const matchesCategory = activeCategory === "all" || entry.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  }).sort((a, b) => {
+    return new Date(b.entry.date).getTime() - new Date(a.entry.date).getTime();
+  });
+
+  // For empty state check
+  const filteredEntries = filteredEntriesWithContent.map(e => e.entry);
 
   return (
     <>
@@ -98,79 +116,34 @@ export default function NowClientPage({ nowEntries }: NowClientPageProps) {
         }
       `}</style>
 
-      <div className="relative min-h-screen bg-background text-foreground">
-        <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-          <PageHeader {...headerData} />
+      <div className="now-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
+        <PageHeader {...headerData} />
 
-          {/* About Now section */}
-          <div className="mt-8 mb-6">
-            <Collapse title="About Now">
-              <div className="space-y-4 text-sm text-muted-foreground">
-                <p>
-                  This is a <Link href="https://nownownow.com/about" className="text-foreground underline hover:text-primary">/now page</Link>, inspired by Derek Sivers. It's a regularly updated snapshot of what I'm currently focused on in my life and work. If we haven't talked in a while, this page should give you a good sense of what I'm up to these days.
-                </p>
-                <p>
-                  The entries here represent monthly updates on my primary focus areas, current projects, and what's capturing my attention. Each entry provides a window into my evolving priorities and interests.
-                </p>
-                <p>
-                  <strong>{nowEntries.length}</strong> Now entries and counting... Want to see what I'm up to?
-                </p>
-                <p>
-                  This page is updated regularly to reflect my current priorities and focus areas.
-                </p>
-              </div>
-            </Collapse>
-          </div>
+        <Navigation
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          searchPlaceholder="Search Now entries..."
+          showCategoryFilter={true}
+          categoryOptions={categoryOptions}
+          selectedCategory={activeCategory}
+          onCategoryChange={handleCategoryChange}
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
+          showGridOption={false}
+        />
 
-          {/* Search and filter on same row */}
-          <div className="mb-6 flex items-center gap-4">
-            <div className="flex items-center gap-2 whitespace-nowrap">
-              <label htmlFor="category-filter" className="text-sm text-muted-foreground">Filter by category:</label>
-              <CustomSelect
-                value={activeCategory}
-                onValueChange={handleCategoryChange}
-                options={categoryOptions}
-                className="text-sm min-w-[140px]"
-              />
-            </div>
-            
-            <div className="relative flex-1">
-              <input 
-                type="text" 
-                placeholder="Search Now entries..." 
-                className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
-                onChange={(e) => setSearchQuery(e.target.value)}
-                value={searchQuery}
-              />
-            </div>
-          </div>
+        {/* List view only */}
+        <NowFeed entries={filteredEntriesWithContent} />
 
-          {/* Now table */}
-          <ContentTable
-            items={nowEntries.filter((entry) => {
-              const q = searchQuery.toLowerCase();
-              const matchesSearch =
-                !q ||
-                entry.title.toLowerCase().includes(q) ||
-                entry.tags.some((t) => t.toLowerCase().includes(q)) ||
-                entry.category.toLowerCase().includes(q);
-              const matchesCategory = activeCategory === "all" || entry.category === activeCategory;
-              return matchesSearch && matchesCategory;
-            }).sort((a, b) => {
-              return new Date(b.date).getTime() - new Date(a.date).getTime();
-            }).map(entry => ({
-              title: entry.title,
-              start_date: entry.date,
-              slug: entry.slug,
-              tags: entry.tags,
-              category: entry.category
-            }))}
-            basePath="/now"
-            showCategoryLinks={false}
-            formatCategoryNames={true}
-            emptyMessage="No Now entries found matching your criteria."
-          />
-        </div>
+        {filteredEntries.length === 0 && (
+          <div className="text-muted-foreground text-sm mt-6 text-center">No Now entries found matching your criteria.</div>
+        )}
+
+        {/* PageDescription component */}
+        <PageDescription
+          title="About Now"
+          description={`This is a /now page, inspired by Derek Sivers. It's a regularly updated snapshot of what I'm currently focused on in my life and work. If we haven't talked in a while, this page should give you a good sense of what I'm up to these days. The entries here represent monthly updates on my primary focus areas, current projects, and what's capturing my attention. Each entry provides a window into my evolving priorities and interests. Currently ${nowEntries.length} Now entries and counting.`}
+        />
       </div>
     </>
   );

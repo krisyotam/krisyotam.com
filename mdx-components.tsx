@@ -167,14 +167,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </td>
     ),
 
-    // Custom image component with Next.js Image
+    // Custom image component - use regular img for external URLs since we can't know dimensions
     img: (props) => (
       <div className="my-6 text-center">
-        <Image
-          sizes="100vw"
-          style={{ width: "100%", height: "auto", maxWidth: "100%", margin: "0 auto" }}
-          {...(props as ImageProps)}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={props.src}
           alt={props.alt || ""}
+          style={{ width: "100%", height: "auto", maxWidth: "100%", margin: "0 auto" }}
+          loading="lazy"
         />
         {props.title && <Typography.Caption>{props.title}</Typography.Caption>}
       </div>

@@ -2,28 +2,87 @@ import { getTilData } from "@/lib/data"
 import TilClientPage from "./TilClientPage"
 import { staticMetadata } from "@/lib/staticMetadata"
 import type { Metadata } from "next"
+import { ReactNode } from "react"
 
 export const dynamic = "force-static"
 
 export const metadata: Metadata = staticMetadata.til
+
+interface TilEntryWithContent {
+  entry: {
+    title: string
+    preview: string
+    date: string
+    tags: string[]
+    category: string
+    slug: string
+    cover_image?: string
+    status: string
+    confidence: string
+    importance: number
+    state: string
+  }
+  content: ReactNode
+}
 
 export default async function TILPage() {
   try {
     const tilData = await getTilData()
     const tilEntries = tilData.til
 
-    // Sort by date (newest first)
-    const sortedEntries = tilEntries
-      .slice() // Copy to avoid modifying the original array
+    // Filter active entries and sort by date (newest first)
+    const activeEntries = tilEntries
+      .filter(entry => entry.state === "active")
       .sort((a, b) => {
-        const aDate = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
-        const bDate = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
-        return new Date(bDate).getTime() - new Date(aDate).getTime();
-      }); // Sort by date in descending order
+        return new Date(b.date).getTime() - new Date(a.date).getTime()
+      })
+
+    // Dynamically import MDX content for each entry
+    const entriesWithContent: TilEntryWithContent[] = await Promise.all(
+      activeEntries.map(async (entry) => {
+        try {
+          const TilContent = (await import(`@/app/(content)/til/content/${entry.slug}.mdx`)).default
+          return {
+            entry: {
+              title: entry.title,
+              preview: entry.preview || "",
+              date: entry.date,
+              tags: entry.tags,
+              category: entry.category,
+              slug: entry.slug,
+              cover_image: entry.cover_image,
+              status: entry.status,
+              confidence: entry.confidence,
+              importance: entry.importance,
+              state: entry.state,
+            },
+            content: <TilContent />
+          }
+        } catch (error) {
+          console.error(`Failed to load MDX for TIL entry ${entry.slug}:`, error)
+          return {
+            entry: {
+              title: entry.title,
+              preview: entry.preview || "",
+              date: entry.date,
+              tags: entry.tags,
+              category: entry.category,
+              slug: entry.slug,
+              cover_image: entry.cover_image,
+              status: entry.status,
+              confidence: entry.confidence,
+              importance: entry.importance,
+              state: entry.state,
+            },
+            content: <p className="text-muted-foreground">Content not found.</p>
+          }
+        }
+      })
+    )
 
     return (
       <div className="til-container">
-        <TilClientPage tilEntries={sortedEntries} initialCategory="all" />
+        <TilClientPage entriesWithContent={entriesWithContent} initialCategory="all" />
       </div>
     )
   } catch (error) {
@@ -36,15 +95,8 @@ export default async function TILPage() {
             Failed to load TIL entries. The GitHub repository might be unavailable or there might be an issue with the
             connection.
           </p>
-          <button
-            onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
-          >
-            Try Again
-          </button>
         </div>
       </div>
     )
   }
 }
-

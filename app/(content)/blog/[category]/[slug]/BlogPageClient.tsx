@@ -7,6 +7,7 @@ import { PostHeader } from "@/components/post-header";
 import { Footer } from "@/app/(content)/essays/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Citation } from "@/components/citation";
+import { Comments } from "@/components/core/comments";
 
 interface BlogMeta {
   title: string;
@@ -82,6 +83,7 @@ export default function BlogPageClient({ post, allPosts, children, headerOnly, c
   if (contentOnly) {
     return (
       <div className="mt-8 w-full">
+        <Comments />
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />
         <Citation
           title={post.title}

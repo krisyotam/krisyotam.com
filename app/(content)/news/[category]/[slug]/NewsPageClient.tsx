@@ -9,6 +9,7 @@ import { PostHeader } from "@/components/post-header";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Footer } from "@/app/(content)/essays/components/footer";
 import { Citation } from "@/components/citation";
+import { Comments } from "@/components/core/comments";
 
 interface NewsMeta {
   title: string;
@@ -95,6 +96,7 @@ export default function NewsPageClient({ article, allNews, children, headerOnly,
   if (contentOnly) {
     return (
       <div className="mt-8">
+        <Comments />
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />
         <Citation 
           title={article.title}

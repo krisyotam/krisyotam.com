@@ -5,6 +5,7 @@ import { Citation } from "@/components/citation";
 import { LiveClock } from "@/components/live-clock";
 import { Footer } from "@/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
+import { Comments } from "@/components/core/comments";
 import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/papers";
 
 interface Props {
@@ -91,8 +92,9 @@ export default function PaperPageClient({ paperData: paperItem, allPapers, child
         <div className="papers-content">{children}</div>
         
         <div className="mt-8">
+          <Comments />
           <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />
-          <Citation 
+          <Citation
             title={paperItem.title}
             slug={paperItem.slug}
             date={(paperItem.end_date && paperItem.end_date.trim()) || paperItem.start_date}

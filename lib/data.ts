@@ -7,8 +7,7 @@ import { Post, PostsData } from "@/utils/posts"
 export interface TilEntry {
   title: string
   preview: string
-  start_date: string
-  end_date?: string
+  date: string
   tags: string[]
   category: string
   slug: string

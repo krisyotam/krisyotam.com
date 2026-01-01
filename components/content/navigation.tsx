@@ -56,6 +56,7 @@ export interface NavigationProps {
   viewMode: "grid" | "list";
   onViewModeChange: (mode: "grid" | "list") => void;
   showViewToggle?: boolean;
+  showGridOption?: boolean;
 
   // Optional styling
   className?: string;
@@ -73,6 +74,7 @@ export function Navigation({
   viewMode,
   onViewModeChange,
   showViewToggle = true,
+  showGridOption = true,
   className,
 }: NavigationProps) {
   return (
@@ -117,16 +119,18 @@ export function Navigation({
           >
             <List className="h-4 w-4" />
           </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className={cn("rounded-none", viewMode === "grid" && "bg-secondary/50")}
-            onClick={() => onViewModeChange("grid")}
-            aria-label="Grid view"
-            aria-pressed={viewMode === "grid"}
-          >
-            <LayoutGrid className="h-4 w-4" />
-          </Button>
+          {showGridOption && (
+            <Button
+              variant="outline"
+              size="icon"
+              className={cn("rounded-none", viewMode === "grid" && "bg-secondary/50")}
+              onClick={() => onViewModeChange("grid")}
+              aria-label="Grid view"
+              aria-pressed={viewMode === "grid"}
+            >
+              <LayoutGrid className="h-4 w-4" />
+            </Button>
+          )}
         </div>
       )}
     </div>

@@ -5,6 +5,7 @@ import { Citation } from "@/components/citation";
 import { LiveClock } from "@/components/live-clock";
 import { Footer } from "@/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
+import { Comments } from "@/components/core/comments";
 import type { Post } from "@/utils/posts";
 
 interface Props {
@@ -81,6 +82,7 @@ export default function EssayPageClient({ essayData: essayItem, allEssays, child
   if (contentOnly) {
     return (
       <div className="mt-8">
+        <Comments />
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />
         <Citation 
           title={essayItem.title}

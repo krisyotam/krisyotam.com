@@ -7,6 +7,7 @@ import papersData from "@/data/papers/papers.json";
 import PapersPageClient from "./PapersPageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
 import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
+import { Comments } from "@/components/core/comments";
 import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/papers";
 
 interface PaperData {
@@ -137,6 +138,7 @@ export default async function PaperPage({ params }: PaperPageProps) {
             <PaperArticle />
           </div>
           <PapersPageClient paperData={paperData} allPapers={papers} contentOnly={true} />
+          <Comments />
         </main>
       </div>
     </div>

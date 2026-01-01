@@ -6,6 +6,7 @@ import reviewsData from "@/data/reviews/reviews.json";
 import ReviewPageClient from "./ReviewPageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
 import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
+import { Comments } from "@/components/core/comments";
 import type { ReviewMeta, ReviewStatus, ReviewConfidence } from "@/types/review";
 
 interface ReviewData {
@@ -143,6 +144,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
             <Review />
           </div>
           <ReviewPageClient review={review} allReviews={reviews} contentOnly={true} />
+          <Comments />
         </main>
       </div>
     </div>
