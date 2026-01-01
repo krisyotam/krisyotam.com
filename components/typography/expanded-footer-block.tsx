@@ -106,10 +106,10 @@ export default function SiteFooter({ lastUpdated, rawMarkdown }: { lastUpdated?:
     : "https://krisyotam.com/doc/site/krisyotam-light.png";
 
   return (
-    <footer className={`${isDark ? "bg-background" : "bg-card"} py-8`}>
+    <footer className={`${isDark ? "bg-background" : "bg-card"} pt-2 pb-8`}>
       <div className="w-full px-0 mx-0">
         {/* Top decorative border (single horizontal line with centered diamond) */}
-        <div className="flex items-center justify-center mb-6">
+        <div className="flex items-center justify-center mb-4">
           <div className="flex-1 h-px bg-border"></div>  {/* left line */}
           <div className="px-4">
             <div className="w-2 h-2 bg-muted-foreground/30 rotate-45"></div>  {/* diamond */}
@@ -118,7 +118,7 @@ export default function SiteFooter({ lastUpdated, rawMarkdown }: { lastUpdated?:
         </div>
 
         {/* Survey Button */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <a href="/surveys/anonymous-feedback">
             <Button
               variant="outline"

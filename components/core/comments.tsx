@@ -343,9 +343,9 @@ export function Comments({ pageSlug }: CommentsProps) {
   }
 
   return (
-    <section className="mt-8 pt-6 border-t border-border">
+    <section className="mt-6 pt-4 border-t border-border">
       {/* Comment Input Box (at top) */}
-      <div className="mb-4">
+      <div className="mb-2">
         {user ? (
           <form onSubmit={handleSubmit}>
             <div className="border border-border">
@@ -655,20 +655,14 @@ export function Comments({ pageSlug }: CommentsProps) {
         ))}
       </div>
 
-      {/* Loading / Empty State */}
+      {/* Loading State */}
       {loading && comments.length === 0 && (
-        <div className="text-center py-8 text-muted-foreground">Loading comments...</div>
-      )}
-
-      {!loading && comments.length === 0 && (
-        <div className="text-center py-8 text-muted-foreground">
-          No comments yet. Be the first to comment!
-        </div>
+        <div className="text-center py-4 text-muted-foreground">Loading comments...</div>
       )}
 
       {/* Pagination */}
       {pagination && pagination.hasMore && (
-        <div className="mt-6 text-center">
+        <div className="mt-4 text-center">
           <button
             onClick={() => fetchComments(pagination.page + 1)}
             disabled={loading}
