@@ -13,7 +13,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 import { Calendar, MapPin } from "lucide-react"
-import { formatDate } from "@/utils/date-formatter"
+import { formatDate } from "@/lib/date"
 import type { Memory } from "./memory-card"
 
 interface MemoryModalProps {

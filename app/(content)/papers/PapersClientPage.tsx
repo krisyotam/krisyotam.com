@@ -20,7 +20,7 @@ const defaultPapersPageData = {
   importance: 9,
 } satisfies PageHeaderProps;
 
-import type { PaperMeta, PaperStatus } from "@/types/papers";
+import type { PaperMeta, PaperStatus } from "@/types/content";
 
 interface PapersClientPageProps {
   papers: PaperMeta[];

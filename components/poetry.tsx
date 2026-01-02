@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Calendar, BookText, Bookmark } from "lucide-react";
 import { useTheme } from "next-themes";
-import type { Poem } from "@/utils/poems";
+import type { Poem } from "@/types/content";
 
 interface PoetryCardProps {
   poem: Poem;

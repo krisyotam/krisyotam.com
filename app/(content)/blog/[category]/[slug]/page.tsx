@@ -5,8 +5,8 @@ import { notFound } from "next/navigation";
 import blogData from "@/data/blog/blog.json";
 import BlogPageClient from "./BlogPageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
-import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
-import type { BlogMeta } from "@/types/blog";
+import { extractHeadingsFromMDX } from "@/lib/mdx";
+import type { BlogMeta } from "@/types/content";
 
 type Status = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
 type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";

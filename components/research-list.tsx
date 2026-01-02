@@ -1,5 +1,5 @@
 import React from "react"
-import { Research as ResearchType } from "@/types/research"
+import { Research as ResearchType } from "@/types/content"
 
 export default function ResearchList({
   items,

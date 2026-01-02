@@ -7,7 +7,7 @@
 
 import { Card } from "@/components/ui/card"
 import Link from "next/link"
-import type { Poem } from "@/utils/poems"
+import type { Poem } from "@/types/content"
 
 interface PoetryCardProps {
   poem: Poem

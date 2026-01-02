@@ -1,5 +1,5 @@
 import EssaysClientPage from "./EssaysClientPage";
-import { getActivePosts } from "@/utils/posts";
+import { getActivePosts } from "@/lib/posts";
 import { staticMetadata } from "@/lib/staticMetadata";
 import type { Metadata } from "next";
 

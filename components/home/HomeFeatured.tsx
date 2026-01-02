@@ -5,7 +5,7 @@
  * @description Featured post section wrapper
  */
 
-import { Post } from "@/utils/posts"
+import { Post } from "@/lib/posts"
 import { FeaturedPost } from "@/components/featured-post"
 
 interface HomeFeaturedProps {

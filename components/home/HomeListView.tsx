@@ -8,7 +8,7 @@
 "use client"
 
 import { BlogPost } from "@/components/blog-post"
-import { Post } from "@/utils/posts"
+import { Post } from "@/lib/posts"
 import { ListHeader } from "./list"
 import { getPostUrl } from "./posts"
 

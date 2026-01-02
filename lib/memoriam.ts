@@ -55,8 +55,8 @@
 
 export const memorials: Record<string, string[]> = {
   // === JANUARY ===
-  "01-01": ["E.M. Forster", "Hank Williams"], // 1970, 1953
-  "01-02": ["Tex Ritter", "Townes Van Zandt"], // 1974, 1997
+  "01-01": ["E.M. Forster", "Hank Williams", "Townes Van Zandt"], // 1970, 1953, 1997
+  "01-02": ["Tex Ritter"], // 1974
   "01-03": ["Conrad Hilton", "Joy Adamson"], // 1979, 1980
   "01-04": ["Albert Camus", "T.S. Eliot"], // 1960, 1965
   "01-05": ["Calvin Coolidge", "Paramahansa Yogananda"], // 1933, 1952
@@ -449,17 +449,17 @@ export const memorials: Record<string, string[]> = {
  * FUNCTIONS
  * ----------------------------------------------------------------------------- */
 
+import { getCentralTimeDateKey } from "./date"
+
 /**
  * Returns a random name from today's memorials, or null if none exist.
- * Uses UTC time to ensure consistency across edge nodes.
+ * Uses Central Time (America/Chicago) for date calculation.
  *
  * @param date - Optional date override (defaults to current date)
  * @returns A name to honor, or null if no memorials exist for today
  */
 export function getTodaysClacks(date = new Date()): string | null {
-  const mm = String(date.getUTCMonth() + 1).padStart(2, "0")
-  const dd = String(date.getUTCDate()).padStart(2, "0")
-  const key = `${mm}-${dd}`
+  const key = getCentralTimeDateKey(date)
 
   const names = memorials[key]
   if (!names || names.length === 0) return null

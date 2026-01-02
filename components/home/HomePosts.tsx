@@ -5,7 +5,7 @@
  * @description Posts table with pagination
  */
 
-import { Post } from "@/utils/posts"
+import { Post } from "@/lib/posts"
 import { Card } from "@/components/ui/card"
 import { PostsTable } from "./posts"
 

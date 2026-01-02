@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { LibraryBookCard } from "./library-book-card"
-import { Book } from "@/types/library"
+import { Book } from "@/types/content"
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select"
 
 // Define content types

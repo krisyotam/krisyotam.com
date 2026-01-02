@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const filename = searchParams.get("filename")
 
-    const promptsDir = path.join(process.cwd(), "prompts")
+    const promptsDir = path.join(process.cwd(), "public", "prompts")
 
     // If a specific file is requested, return its contents
     if (filename) {

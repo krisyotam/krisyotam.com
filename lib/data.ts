@@ -1,7 +1,7 @@
 // lib/data.ts - Server-side data fetching functions
 import { readFile } from "fs/promises"
 import path from "path"
-import { Post, PostsData } from "@/utils/posts"
+import { Post, PostsData } from "@/lib/posts"
 
 // TIL data types
 export interface TilEntry {

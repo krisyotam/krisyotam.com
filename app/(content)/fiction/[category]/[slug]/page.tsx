@@ -5,8 +5,8 @@ import { notFound } from "next/navigation";
 import fictionDataRaw from "@/data/fiction/fiction.json";
 import NotePageClient from "./FictionPageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
-import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
-import type { NoteMeta } from "@/types/note";
+import { extractHeadingsFromMDX } from "@/lib/mdx";
+import type { NoteMeta } from "@/types/content";
 
 type Status = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
 type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";

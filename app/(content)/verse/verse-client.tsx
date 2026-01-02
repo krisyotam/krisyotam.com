@@ -2,13 +2,13 @@
 
 import poemsData from "@/data/verse/verse.json"
 import categoriesData from "@/data/verse/categories.json"
-import type { Poem } from "@/utils/poems"
+import type { Poem } from "@/types/content"
 import { PageHeader } from "@/components/core"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Navigation, ContentTable } from "@/components/content"
 import { SelectOption } from "@/components/ui/custom-select"
-import { formatDate, formatDateRange } from "@/utils/date-formatter"
+import { formatDate, formatDateRange } from "@/lib/date"
 
 interface VerseType {
   slug: string;

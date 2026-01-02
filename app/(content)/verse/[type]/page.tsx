@@ -5,7 +5,7 @@ import type { Metadata } from "next"
 import { VerseClient } from "../verse-client"
 import poemsData from "@/data/verse/verse.json"
 import categoriesData from "@/data/verse/categories.json"
-import type { Poem } from "@/utils/poems"
+import type { Poem } from "@/types/content"
 import { notFound } from "next/navigation"
 
 function slugifyType(type: string) {

@@ -1,0 +1,25 @@
+/* =============================================================================
+ * THEME IMPORTS
+ * =============================================================================
+ *
+ * Barrel file for all theme stylesheets. Import this file in globals.css
+ * to include all available themes.
+ *
+ * To add a new theme:
+ *   1. Create a new CSS file in this directory (e.g., nord.css)
+ *   2. Define your theme variables using a class selector (e.g., .theme-nord)
+ *   3. Add the import below
+ *
+ * ============================================================================= */
+
+/* Default theme (Kenya Hara "100 Whites" inspired) */
+@import './default.css';
+
+/* Solarized theme (Ethan Schoonover) */
+@import './solarized.css';
+
+/* Future themes can be added here:
+ * @import './nord.css';
+ * @import './dracula.css';
+ * @import './gruvbox.css';
+ */

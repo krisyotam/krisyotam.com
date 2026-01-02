@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import redis from '@/utils/redis';
+import redis from '@/lib/redis';
 
 // very tiny free MaxMind replacement – swap out if you already log city info
 async function lookupCity(ip?: string | null) {

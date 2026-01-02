@@ -1,7 +1,26 @@
 import { NextResponse } from "next/server"
 import fs from "fs"
 import path from "path"
-import { getNowPosts, type NowPost } from "@/utils/markdown"
+
+export interface NowPost {
+  date: string
+  slug: string
+  status: "active" | "hidden"
+  title: string
+  content?: string
+}
+
+async function getNowPosts(): Promise<NowPost[]> {
+  try {
+    const postsPath = path.join(process.cwd(), "data/now-posts.json")
+    const fileContents = fs.readFileSync(postsPath, "utf8")
+    const posts: NowPost[] = JSON.parse(fileContents)
+    return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  } catch (error) {
+    console.error("Error reading now posts data", error)
+    return []
+  }
+}
 
 export async function POST(request: Request) {
   try {
@@ -57,4 +76,3 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Failed to update now page" }, { status: 500 })
   }
 }
-

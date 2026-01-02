@@ -1,7 +1,7 @@
 import SequencesCategoriesClientPage from "./SequencesCategoriesClientPage";
 import sequencesData from "@/data/sequences/sequences.json";
 import type { Metadata } from "next";
-import { SequencesData } from "@/types/sequences";
+import { SequencesData } from "@/types/content";
 
 export const metadata: Metadata = {
   title: "Sequence Categories",

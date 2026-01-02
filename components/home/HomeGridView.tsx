@@ -9,7 +9,7 @@
 
 import { useState, useEffect } from "react"
 import { PageHeader } from "@/components/core"
-import { Post } from "@/utils/posts"
+import { Post } from "@/lib/posts"
 import { HomeHeader } from "./header"
 import { HomeFocus } from "./HomeFocus"
 import { HomeAbout } from "./HomeAbout"

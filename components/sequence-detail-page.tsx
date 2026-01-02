@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { PostHeader } from "@/components/post-header";
 import Link from "next/link";
-import { Sequence, SequenceSection, PostType } from "@/types/sequences";
+import { Sequence, SequenceSection, PostType } from "@/types/content";
 
 interface SequenceDetailPageProps {
   slug: string;

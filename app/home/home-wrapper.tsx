@@ -1,4 +1,4 @@
-import { getActivePosts } from "@/utils/posts"
+import { getActivePosts } from "@/lib/posts"
 import quotesData from "@/data/quotes.json"
 import { HomeClient } from "@/components/home/HomeClient"
 import FixOutlineIssue from "@/components/fix-outline-issue"

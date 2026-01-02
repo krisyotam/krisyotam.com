@@ -1,6 +1,6 @@
 // app/tag/[tag]/page.tsx
 import { notFound } from "next/navigation";
-import { getAllUniversalTags, getUniversalPostsByTag, getTagMeta, type UniversalPost } from "@/utils/universal-content";
+import { getAllUniversalTags, getUniversalPostsByTag, getTagMeta, type UniversalPost } from "@/lib/content";
 import { PageHeader } from "@/components/core";
 import { ContentTable } from "@/components/content";
 import type { Metadata } from "next";

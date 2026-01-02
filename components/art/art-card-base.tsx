@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { getPhotoUrl } from "@/utils/flickr-api"
+import { getPhotoUrl } from "@/lib/flickr"
 
 export interface ArtworkItem {
   id: string

@@ -1,7 +1,7 @@
 import BlogClientPage from "./BlogClientPage";
 import blogData from "@/data/blog/blog.json";
 import type { Metadata } from "next";
-import type { BlogMeta } from "@/types/blog";
+import type { BlogMeta } from "@/types/content";
 import "./blog.css";
 import "./blog-grid.css";
 import { staticMetadata } from "@/lib/staticMetadata";

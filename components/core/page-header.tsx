@@ -1,4 +1,4 @@
-import { formatDate, formatDateRange } from "@/utils/date-formatter"
+import { formatDate, formatDateRange } from "@/lib/date"
 import Link from "next/link"
 import { ArrowLeft, Info } from "lucide-react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"

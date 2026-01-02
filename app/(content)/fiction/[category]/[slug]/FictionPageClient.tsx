@@ -6,7 +6,7 @@ import { LiveClock } from "@/components/live-clock";
 import { Footer } from "@/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Comments } from "@/components/core/comments";
-import type { NoteMeta } from "@/types/note";
+import type { NoteMeta } from "@/types/content";
 
 interface FictionItem extends Omit<NoteMeta, 'date'> {
   start_date: string;

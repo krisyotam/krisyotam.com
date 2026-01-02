@@ -6,7 +6,7 @@ import papersData from '@/data/papers/papers.json';
 import reviewsData from '@/data/reviews/reviews.json';
 import fictionData from '@/data/fiction/fiction.json';
 import verseData from '@/data/verse/verse.json';
-import { Sequence, SequencesData, PostType } from '@/types/sequences';
+import { Sequence, SequencesData, PostType } from '@/types/content';
 
 interface Params {
   slug: string;

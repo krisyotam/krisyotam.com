@@ -1,0 +1,195 @@
+/* =============================================================================
+ * DEFAULT THEME
+ * =============================================================================
+ *
+ * A refined monochromatic theme inspired by Kenya Hara's "100 Whites" -
+ * celebrating the subtle variations and quiet beauty found in shades of white.
+ * This theme emphasizes minimalism, clarity, and thoughtful restraint.
+ *
+ * -----------------------------------------------------------------------------
+ * @file        default.css
+ * @author      Kris Yotam
+ * @created     2026-01-01
+ * @license     MIT
+ * -----------------------------------------------------------------------------
+ *
+ * PHILOSOPHY
+ * ----------
+ * Like traditional Japanese aesthetics, this theme finds richness in
+ * simplicity. Each shade of white carries its own character - from the
+ * warmth of rice paper to the crispness of fresh snow, from the delicacy
+ * of silk to the softness of morning mist.
+ *
+ * COLOR SYSTEM
+ * ------------
+ * All colors use HSL format: hue saturation% lightness%
+ * The monochromatic palette uses 0 hue (neutral gray) with varying lightness.
+ *
+ * ============================================================================= */
+
+
+/* =============================================================================
+ * LIGHT MODE
+ * =============================================================================
+ * Soft, warm whites inspired by natural materials - rice paper, snow,
+ * silk, mist, ivory, stone, and ash. The foreground uses deep, muted
+ * charcoals rather than pure black for a gentler reading experience.
+ * ============================================================================= */
+
+:root {
+  /* -------------------------------------------------------------------------
+   * BACKGROUNDS & SURFACES
+   * ----------------------------------------------------------------------- */
+
+  /* Primary background - soft warm white like rice paper */
+  --background: 0 0% 98%;
+
+  /* Card surfaces - crisp clean white like fresh snow */
+  --card: 0 0% 99%;
+
+  /* Popover/dropdown surfaces - delicate white like wax or silk */
+  --popover: 0 0% 97%;
+
+  /* Secondary surfaces - slightly darker off-white for contrast */
+  --secondary: 0 0% 90%;
+
+  /* Muted surfaces - faint white like mist or frosted glass */
+  --muted: 0 0% 92%;
+
+  /* Accent surfaces - gentle white like polished ivory */
+  --accent: 0 0% 96%;
+
+  /* -------------------------------------------------------------------------
+   * TEXT COLORS
+   * ----------------------------------------------------------------------- */
+
+  /* Primary text - deep muted charcoal (not pure black) */
+  --foreground: 0 0% 20%;
+
+  /* Card text - slightly softer dark tone */
+  --card-foreground: 0 0% 15%;
+
+  /* Popover text - muted gray for readability */
+  --popover-foreground: 0 0% 25%;
+
+  /* Secondary text - soft gray for contrast */
+  --secondary-foreground: 0 0% 30%;
+
+  /* Muted text - mid-tone gray for subdued content */
+  --muted-foreground: 0 0% 50%;
+
+  /* Accent text - dark understated tone */
+  --accent-foreground: 0 0% 20%;
+
+  /* -------------------------------------------------------------------------
+   * PRIMARY & DESTRUCTIVE
+   * ----------------------------------------------------------------------- */
+
+  /* Primary color - near-black with warmth */
+  --primary: 0 0% 10%;
+  --primary-foreground: 0 0% 95%;
+
+  /* Destructive actions - muted red, softened to fit palette */
+  --destructive: 0 70% 55%;
+  --destructive-foreground: 0 0% 98%;
+
+  /* -------------------------------------------------------------------------
+   * BORDERS & INPUTS
+   * ----------------------------------------------------------------------- */
+
+  /* Border color - pale gray-white like stone or ash */
+  --border: 0 0% 88%;
+
+  /* Input fields - light clean white */
+  --input: 0 0% 90%;
+
+  /* Focus ring - subtle gray */
+  --ring: 0 0% 40%;
+
+  /* -------------------------------------------------------------------------
+   * LAYOUT
+   * ----------------------------------------------------------------------- */
+
+  /* Border radius - consistent rounding */
+  --radius: 0.5rem;
+}
+
+
+/* =============================================================================
+ * DARK MODE
+ * =============================================================================
+ * A true monochromatic dark palette that inverts the philosophy - finding
+ * beauty in the depths of shadow. Deep charcoals and soft whites create
+ * a comfortable nocturnal reading experience.
+ * ============================================================================= */
+
+.dark {
+  /* -------------------------------------------------------------------------
+   * BACKGROUNDS & SURFACES
+   * ----------------------------------------------------------------------- */
+
+  /* Primary background - deep charcoal */
+  --background: 0 0% 7%;
+
+  /* Card surfaces - slightly elevated dark */
+  --card: 0 0% 9%;
+
+  /* Popover surfaces - matching card elevation */
+  --popover: 0 0% 9%;
+
+  /* Secondary surfaces - subtle elevation */
+  --secondary: 0 0% 12%;
+
+  /* Muted surfaces - matching secondary */
+  --muted: 0 0% 12%;
+
+  /* Accent surfaces - matching secondary */
+  --accent: 0 0% 12%;
+
+  /* -------------------------------------------------------------------------
+   * TEXT COLORS
+   * ----------------------------------------------------------------------- */
+
+  /* Primary text - soft white */
+  --foreground: 0 0% 98%;
+
+  /* Card text - matching primary */
+  --card-foreground: 0 0% 98%;
+
+  /* Popover text - matching primary */
+  --popover-foreground: 0 0% 98%;
+
+  /* Secondary text - matching primary */
+  --secondary-foreground: 0 0% 98%;
+
+  /* Muted text - softer gray for subdued content */
+  --muted-foreground: 0 0% 70%;
+
+  /* Accent text - matching primary */
+  --accent-foreground: 0 0% 98%;
+
+  /* -------------------------------------------------------------------------
+   * PRIMARY & DESTRUCTIVE
+   * ----------------------------------------------------------------------- */
+
+  /* Primary - inverted for dark mode */
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+
+  /* Destructive - darker red for dark mode */
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 0 0% 98%;
+
+  /* -------------------------------------------------------------------------
+   * BORDERS & INPUTS
+   * ----------------------------------------------------------------------- */
+
+  /* Border color - subtle dark divider */
+  --border: 0 0% 15%;
+
+  /* Input fields - matching border */
+  --input: 0 0% 15%;
+
+  /* Focus ring - bright for visibility */
+  --ring: 0 0% 83%;
+}

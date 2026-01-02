@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Card } from "@/components/ui/card"
-import { formatDate } from "@/utils/date-formatter"
+import { formatDate } from "@/lib/date"
 
 type Note = {
   id: string

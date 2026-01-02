@@ -1,0 +1,203 @@
+/* =============================================================================
+ * SOLARIZED THEME
+ * =============================================================================
+ *
+ * Based on Ethan Schoonover's Solarized color scheme - a carefully designed
+ * sixteen color palette for use with terminal and GUI applications.
+ * Known for its balanced contrast and pleasant color relationships.
+ *
+ * -----------------------------------------------------------------------------
+ * @file        solarized.css
+ * @author      Kris Yotam
+ * @created     2026-01-01
+ * @license     MIT
+ * @see         https://ethanschoonover.com/solarized/
+ * -----------------------------------------------------------------------------
+ *
+ * COLOR PALETTE
+ * -------------
+ * Base colors (monotone backgrounds):
+ *   base03  #002b36  hsl(193, 100%, 11%)  - darkest background
+ *   base02  #073642  hsl(192, 90%, 14%)   - dark background
+ *   base01  #586e75  hsl(194, 14%, 40%)   - dark content/comments
+ *   base00  #657b83  hsl(195, 13%, 45%)   - dark primary content
+ *   base0   #839496  hsl(186, 8%, 55%)    - light primary content
+ *   base1   #93a1a1  hsl(180, 7%, 60%)    - light content/comments
+ *   base2   #eee8d5  hsl(44, 44%, 87%)    - light background
+ *   base3   #fdf6e3  hsl(44, 87%, 94%)    - lightest background
+ *
+ * Accent colors:
+ *   yellow  #b58900  hsl(45, 100%, 35%)
+ *   orange  #cb4b16  hsl(18, 89%, 44%)
+ *   red     #dc322f  hsl(1, 71%, 52%)
+ *   magenta #d33682  hsl(331, 64%, 52%)
+ *   violet  #6c71c4  hsl(237, 45%, 59%)
+ *   blue    #268bd2  hsl(205, 82%, 49%)
+ *   cyan    #2aa198  hsl(175, 59%, 40%)
+ *   green   #859900  hsl(68, 100%, 30%)
+ *
+ * ============================================================================= */
+
+
+/* =============================================================================
+ * SOLARIZED LIGHT
+ * =============================================================================
+ * Warm, paper-like backgrounds with dark blue-gray text.
+ * Uses base3/base2 for backgrounds, base00/base01 for text.
+ * ============================================================================= */
+
+.theme-solarized {
+  /* -------------------------------------------------------------------------
+   * BACKGROUNDS & SURFACES
+   * ----------------------------------------------------------------------- */
+
+  /* Primary background - warm cream (base3) */
+  --background: 44 87% 94%;
+
+  /* Card surfaces - slightly darker cream (base2) */
+  --card: 44 44% 87%;
+
+  /* Popover surfaces - matching card */
+  --popover: 44 44% 87%;
+
+  /* Secondary surfaces - between base2 and base1 */
+  --secondary: 44 30% 82%;
+
+  /* Muted surfaces - subtle cream */
+  --muted: 44 35% 85%;
+
+  /* Accent surfaces - warm highlight */
+  --accent: 44 50% 90%;
+
+  /* -------------------------------------------------------------------------
+   * TEXT COLORS
+   * ----------------------------------------------------------------------- */
+
+  /* Primary text - dark blue-gray (base00) */
+  --foreground: 195 13% 45%;
+
+  /* Card text - slightly darker (base01) */
+  --card-foreground: 194 14% 40%;
+
+  /* Popover text - matching foreground */
+  --popover-foreground: 195 13% 45%;
+
+  /* Secondary text - lighter (base0) */
+  --secondary-foreground: 186 8% 55%;
+
+  /* Muted text - comments tone (base1) */
+  --muted-foreground: 180 7% 60%;
+
+  /* Accent text - dark for contrast */
+  --accent-foreground: 194 14% 40%;
+
+  /* -------------------------------------------------------------------------
+   * PRIMARY & DESTRUCTIVE
+   * ----------------------------------------------------------------------- */
+
+  /* Primary - Solarized blue */
+  --primary: 205 82% 49%;
+  --primary-foreground: 44 87% 94%;
+
+  /* Destructive - Solarized red */
+  --destructive: 1 71% 52%;
+  --destructive-foreground: 44 87% 94%;
+
+  /* -------------------------------------------------------------------------
+   * BORDERS & INPUTS
+   * ----------------------------------------------------------------------- */
+
+  /* Border - subtle warm gray */
+  --border: 44 20% 75%;
+
+  /* Input fields - light cream */
+  --input: 44 35% 85%;
+
+  /* Focus ring - cyan accent */
+  --ring: 175 59% 40%;
+
+  /* -------------------------------------------------------------------------
+   * LAYOUT
+   * ----------------------------------------------------------------------- */
+
+  --radius: 0.5rem;
+}
+
+
+/* =============================================================================
+ * SOLARIZED DARK
+ * =============================================================================
+ * Deep blue-teal backgrounds with light gray text.
+ * Uses base03/base02 for backgrounds, base0/base1 for text.
+ * ============================================================================= */
+
+.theme-solarized.dark {
+  /* -------------------------------------------------------------------------
+   * BACKGROUNDS & SURFACES
+   * ----------------------------------------------------------------------- */
+
+  /* Primary background - deep teal (base03) */
+  --background: 193 100% 11%;
+
+  /* Card surfaces - slightly lighter (base02) */
+  --card: 192 90% 14%;
+
+  /* Popover surfaces - matching card */
+  --popover: 192 90% 14%;
+
+  /* Secondary surfaces - elevated dark */
+  --secondary: 192 70% 18%;
+
+  /* Muted surfaces - subtle elevation */
+  --muted: 192 80% 16%;
+
+  /* Accent surfaces - dark highlight */
+  --accent: 192 60% 20%;
+
+  /* -------------------------------------------------------------------------
+   * TEXT COLORS
+   * ----------------------------------------------------------------------- */
+
+  /* Primary text - light gray (base0) */
+  --foreground: 186 8% 55%;
+
+  /* Card text - matching primary */
+  --card-foreground: 186 8% 55%;
+
+  /* Popover text - matching primary */
+  --popover-foreground: 186 8% 55%;
+
+  /* Secondary text - lighter (base1) */
+  --secondary-foreground: 180 7% 60%;
+
+  /* Muted text - comments tone (base01) */
+  --muted-foreground: 194 14% 40%;
+
+  /* Accent text - bright for visibility */
+  --accent-foreground: 180 7% 60%;
+
+  /* -------------------------------------------------------------------------
+   * PRIMARY & DESTRUCTIVE
+   * ----------------------------------------------------------------------- */
+
+  /* Primary - Solarized cyan for dark mode */
+  --primary: 175 59% 40%;
+  --primary-foreground: 193 100% 11%;
+
+  /* Destructive - Solarized orange (more visible on dark) */
+  --destructive: 18 89% 44%;
+  --destructive-foreground: 193 100% 11%;
+
+  /* -------------------------------------------------------------------------
+   * BORDERS & INPUTS
+   * ----------------------------------------------------------------------- */
+
+  /* Border - subtle dark divider */
+  --border: 192 50% 22%;
+
+  /* Input fields - matching muted */
+  --input: 192 80% 16%;
+
+  /* Focus ring - yellow accent for visibility */
+  --ring: 45 100% 35%;
+}

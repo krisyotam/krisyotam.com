@@ -10,8 +10,7 @@ export type { MarginNote } from './margin-notes';
 export { default as Footnotes } from './footnotes';
 
 // Navigation Components
-export { MainNav } from './main-nav';
-export { MobileNav } from './mobile-nav';
+// MainNav and MobileNav removed - unused
 // export { default as Breadcrumbs } from './breadcrumbs'; // File missing
 // export { default as Pagination } from './pagination'; // File missing
 

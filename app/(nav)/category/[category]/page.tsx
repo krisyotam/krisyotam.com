@@ -1,6 +1,6 @@
 // app/category/[category]/page.tsx
 import { notFound } from "next/navigation";
-import { getAllUniversalCategories, getUniversalPostsByCategory, getCategoryMeta, type UniversalPost } from "@/utils/universal-content";
+import { getAllUniversalCategories, getUniversalPostsByCategory, getCategoryMeta, type UniversalPost } from "@/lib/content";
 import { PageHeader } from "@/components/core";
 import { ContentTable } from "@/components/content";
 import type { Metadata } from "next";

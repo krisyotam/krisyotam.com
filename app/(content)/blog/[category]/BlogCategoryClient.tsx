@@ -6,7 +6,7 @@ import { PageHeader } from "@/components/core";
 import { PageDescription } from "@/components/core";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
-import type { BlogMeta } from "@/types/blog";
+import type { BlogMeta } from "@/types/content";
 import categoriesData from "@/data/blog/categories.json";
 
 interface BlogCategoryClientProps {

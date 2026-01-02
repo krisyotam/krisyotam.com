@@ -5,7 +5,7 @@ import { ContentTable } from "@/components/content";
 import { PageHeader } from "@/components/core";
 import { PageDescription } from "@/components/core";
 import { useRouter } from "next/navigation";
-import type { Essay } from "@/types/essay";
+import type { Essay } from "@/types/content";
 
 interface CategoryHeaderData {
   title: string;

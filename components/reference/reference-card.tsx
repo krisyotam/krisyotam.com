@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Download, ExternalLink } from "lucide-react"
-import { formatDate } from "@/utils/date-formatter"
+import { formatDate } from "@/lib/date"
 
 interface ReferenceCardProps {
   id: string

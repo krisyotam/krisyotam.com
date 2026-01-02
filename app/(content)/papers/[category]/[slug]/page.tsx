@@ -6,9 +6,9 @@ import { notFound } from "next/navigation";
 import papersData from "@/data/papers/papers.json";
 import PapersPageClient from "./PapersPageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
-import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
+import { extractHeadingsFromMDX } from "@/lib/mdx";
 import { Comments } from "@/components/core/comments";
-import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/papers";
+import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/content";
 
 interface PaperData {
   title: string;

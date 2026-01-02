@@ -2,7 +2,7 @@ import BlogTaggedPage from "./BlogTaggedPage";
 import blogData from "@/data/blog/blog.json";
 import tagsData from "@/data/blog/tags.json";
 import type { Metadata } from "next";
-import type { BlogMeta } from "@/types/blog";
+import type { BlogMeta } from "@/types/content";
 import { notFound } from "next/navigation";
 
 interface PageProps {

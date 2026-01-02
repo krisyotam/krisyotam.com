@@ -5,4 +5,4 @@
  */
 
 export { PoetryCard } from './PoetryCard'
-export type { Poem } from '@/utils/poems'
+export type { Poem } from '@/types/content'

@@ -3,24 +3,14 @@
 import type React from "react"
 
 import { useState, useRef, useEffect, useCallback } from "react"
-import { Search, Settings, Rss, X, Maximize, Move, CircleHelp, GitCompare, Code, Github, Link2, ExternalLink, ChevronDown } from "lucide-react"
+import { Search, Settings, Rss, X, Maximize, Move, CircleHelp, GitCompare, Code, Github, ExternalLink, Palette } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
 import { motion, useMotionValue } from "framer-motion"
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 
-import { Post } from "@/utils/posts"
+import { Post } from "@/lib/posts"
 
 interface Page {
   title: string
@@ -43,7 +33,7 @@ interface SearchResult {
   status: string
   category?: string
   path: string
-  resultType: "post" | "page" | "category" | "essay" | "paper" | "fiction" | "news" | "conspiracy" | "note" | "problem" | "progymnasmata" | "prompt" | "script" | "lab" | "lecture" | "link"
+  resultType: "post" | "page" | "essay" | "paper" | "fiction" | "news" | "note" | "progymnasmata" | "lab" | "lecture" | "link"
 }
 
 export function SettingsMenu() {
@@ -58,25 +48,18 @@ export function SettingsMenu() {
   const [papers, setPapers] = useState<any[]>([])
   const [fiction, setFiction] = useState<any[]>([])
   const [news, setNews] = useState<any[]>([])
-  const [conspiracies, setConspiracies] = useState<any[]>([])
   const [quickNotes, setQuickNotes] = useState<any[]>([])
-  const [problems, setProblems] = useState<any[]>([])
   const [progymnasmata, setProgymnasmata] = useState<any[]>([])
-  const [prompts, setPrompts] = useState<any[]>([])
-  const [scripts, setScripts] = useState<any[]>([])
   const [lab, setLab] = useState<any[]>([])
   const [lectures, setLectures] = useState<any[]>([])
   const [links, setLinks] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const [searchFilter, setSearchFilter] = useState<
-    "all" | "posts" | "pages" | "bible" | "essays" | "papers" | "fiction" | "news" | "conspiracies" | "notes" | "problems" | "progymnasmata" | "prompts" | "scripts" | "lab" | "lectures" | "links" | "academic" | "misc"
-  >("all")
-  const [bibleVersion, setBibleVersion] = useState<string>("NKJV")
-  const [isMaximized, setIsMaximized] = useState(false)
+    const [isMaximized, setIsMaximized] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [universalLinkModalEnabled, setUniversalLinkModalEnabled] = useState(true)
   const [universalLinkModalMode, setUniversalLinkModalMode] = useState<"all" | "external" | "off">("external")
   const [isLinkHoverMenuVisible, setIsLinkHoverMenuVisible] = useState(false)
+  const [colorTheme, setColorTheme] = useState<"default" | "solarized">("default")
   const dropdownRef = useRef<HTMLDivElement>(null)
   const searchInputRef = useRef<HTMLInputElement>(null)
   const searchWindowRef = useRef<HTMLDivElement>(null)
@@ -123,12 +106,39 @@ export function SettingsMenu() {
     if (storedSetting !== null) {
       setUniversalLinkModalEnabled(storedSetting === "true")
     }
-    
+
     const storedMode = localStorage.getItem("settings_universalLinkModalMode")
     if (storedMode !== null && ["all", "external", "off"].includes(storedMode)) {
       setUniversalLinkModalMode(storedMode as "all" | "external" | "off")
     }
   }, [])
+
+  // Load and apply color theme from localStorage
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("settings_colorTheme")
+    if (storedTheme !== null && ["default", "solarized"].includes(storedTheme)) {
+      setColorTheme(storedTheme as "default" | "solarized")
+      applyColorTheme(storedTheme as "default" | "solarized")
+    }
+  }, [])
+
+  // Apply color theme to document
+  const applyColorTheme = (theme: "default" | "solarized") => {
+    const root = document.documentElement
+    // Remove all theme classes
+    root.classList.remove("theme-solarized")
+    // Apply new theme class if not default
+    if (theme === "solarized") {
+      root.classList.add("theme-solarized")
+    }
+  }
+
+  // Set color theme
+  const setAndApplyColorTheme = (theme: "default" | "solarized") => {
+    setColorTheme(theme)
+    localStorage.setItem("settings_colorTheme", theme)
+    applyColorTheme(theme)
+  }
 
   // Toggle universal link modal setting
   const toggleUniversalLinkModal = () => {
@@ -197,12 +207,8 @@ export function SettingsMenu() {
           papersData,
           fictionData,
           newsData,
-          conspiraciesData,
           notesData,
-          problemsData,
           progymnasmataData,
-          promptsData,
-          scriptsData,
           labData,
           lecturesData,
           linksData,
@@ -213,17 +219,13 @@ export function SettingsMenu() {
           safelyFetchData("/api/papers"),
           safelyFetchData("/api/fiction/fiction"),
           safelyFetchData("/api/news"),
-          safelyFetchData("/api/conspiracies"),
           safelyFetchData("/api/notes"),
-          safelyFetchData("/api/problems"),
           safelyFetchData("/api/progymnasmata"),
-          safelyFetchData("/api/prompts"),
-          safelyFetchData("/api/scripts"),
           safelyFetchData("/api/lab/labs"),
           safelyFetchData("/api/lectures"),
           safelyFetchData("/api/links"),
         ]);
-        
+
         // Set state for each data type
         setPosts(postsData || []);
         setPages(directoryData?.pages?.filter((page: Page) => page["show-status"] === "active") || []);
@@ -231,12 +233,8 @@ export function SettingsMenu() {
         setPapers(papersData || []);
         setFiction(fictionData || []);
         setNews(newsData || []);
-        setConspiracies(conspiraciesData || []);
         setQuickNotes(notesData || []);
-        setProblems(problemsData || []);
         setProgymnasmata(progymnasmataData || []);
-        setPrompts(promptsData || []);
-        setScripts(scriptsData || []);
         setLab(labData || []);
         setLectures(lecturesData || []);
         setLinks(linksData || []);
@@ -250,7 +248,7 @@ export function SettingsMenu() {
     fetchData()
   }, [])
 
-  // Handle search
+  // Handle search - full text across all content types
   useEffect(() => {
     if (searchQuery.trim() === "") {
       setSearchResults([])
@@ -260,400 +258,236 @@ export function SettingsMenu() {
     const query = searchQuery.toLowerCase()
     let results: SearchResult[] = []
 
-    // Search posts if filter is "all" or "posts"
-    if (searchFilter === "all" || searchFilter === "posts") {
-      const filteredPosts = posts
-        .filter((post) => {
-          const matchesTitle = post.title.toLowerCase().includes(query)
-          const matchesSubtitle = post.subtitle?.toLowerCase().includes(query)
-          const matchesPreview = post.preview?.toLowerCase().includes(query)
-          const matchesCategory = post.category?.toLowerCase().includes(query)
-          const matchesTags = post.tags?.some((tag: string) => tag.toLowerCase().includes(query))
+    // Search posts
+    const filteredPosts = posts
+      .filter((post) => {
+        const matchesTitle = post.title.toLowerCase().includes(query)
+        const matchesSubtitle = post.subtitle?.toLowerCase().includes(query)
+        const matchesPreview = post.preview?.toLowerCase().includes(query)
+        const matchesCategory = post.category?.toLowerCase().includes(query)
+        const matchesTags = post.tags?.some((tag: string) => tag.toLowerCase().includes(query))
+        return (matchesTitle || matchesSubtitle || matchesPreview || matchesCategory || matchesTags) && post.state !== "hidden"
+      })
+      .map((post) => {
+        const displayDate = (post.end_date && post.end_date.trim()) ? post.end_date : post.start_date
+        return {
+          title: post.title,
+          subtitle: post.subtitle,
+          preview: post.preview,
+          date: displayDate,
+          status: post.status || "Draft",
+          category: post.category,
+          path: `/blog/${new Date(displayDate).getFullYear()}/${post.slug}`,
+          resultType: "post" as const,
+        }
+      })
+    results = [...results, ...filteredPosts]
 
-          return (
-            (matchesTitle || matchesSubtitle || matchesPreview || matchesCategory || matchesTags) &&
-            post.state !== "hidden"
-          )
-        })
-        .map((post) => {
-          const displayDate = (post.end_date && post.end_date.trim()) ? post.end_date : post.start_date;
-          return {
-            title: post.title,
-            subtitle: post.subtitle,
-            preview: post.preview,
-            date: displayDate,
-            status: post.status || "Draft",
-            category: post.category,
-            path: `/blog/${new Date(displayDate).getFullYear()}/${post.slug}`,
-            resultType: "post" as const,
-          }
-        })
+    // Search pages
+    const filteredPages = pages
+      .filter((page) => {
+        const matchesTitle = page.title.toLowerCase().includes(query)
+        const matchesSubtitle = page.subtitle?.toLowerCase().includes(query)
+        const matchesPreview = page.preview?.toLowerCase().includes(query)
+        return matchesTitle || matchesSubtitle || matchesPreview
+      })
+      .map((page) => ({
+        title: page.title,
+        subtitle: page.subtitle,
+        preview: page.preview,
+        date: page.date,
+        status: page.status,
+        path: page.path,
+        resultType: "page" as const,
+      }))
+    results = [...results, ...filteredPages]
 
-      results = [...results, ...filteredPosts]
-    }
+    // Search essays
+    const filteredEssays = essays
+      .filter((essay) => {
+        const matchesTitle = essay.title?.toLowerCase().includes(query)
+        const matchesSubtitle = essay.subtitle?.toLowerCase().includes(query)
+        const matchesPreview = essay.preview?.toLowerCase().includes(query)
+        const matchesTags = essay.tags?.some((tag: string) => tag.toLowerCase().includes(query))
+        const matchesCategory = essay.category?.toLowerCase().includes(query)
+        return matchesTitle || matchesSubtitle || matchesPreview || matchesTags || matchesCategory
+      })
+      .map((essay) => ({
+        title: essay.title,
+        subtitle: essay.subtitle,
+        preview: essay.preview,
+        date: essay.date,
+        status: essay.status || "Published",
+        category: essay.category,
+        path: `/essays/${essay.slug}`,
+        resultType: "essay" as const,
+      }))
+    results = [...results, ...filteredEssays]
 
-    // Search pages if filter is "all" or "pages"
-    if (searchFilter === "all" || searchFilter === "pages") {
-      const filteredPages = pages
-        .filter((page) => {
-          const matchesTitle = page.title.toLowerCase().includes(query)
-          const matchesSubtitle = page.subtitle?.toLowerCase().includes(query)
-          const matchesPreview = page.preview?.toLowerCase().includes(query)
+    // Search papers
+    const filteredPapers = papers
+      .filter((paper) => {
+        if (paper.state === "hidden") return false
+        const matchesTitle = paper.title?.toLowerCase().includes(query)
+        const matchesSubtitle = paper.subtitle?.toLowerCase().includes(query)
+        const matchesPreview = paper.preview?.toLowerCase().includes(query)
+        const matchesTags = paper.tags?.some((tag: string) => tag.toLowerCase().includes(query))
+        return matchesTitle || matchesSubtitle || matchesPreview || matchesTags
+      })
+      .map((paper) => ({
+        title: paper.title,
+        subtitle: paper.subtitle,
+        preview: paper.preview,
+        date: paper.date,
+        status: paper.status || "Published",
+        category: "Academic",
+        path: `/papers/${paper.slug}`,
+        resultType: "paper" as const,
+      }))
+    results = [...results, ...filteredPapers]
 
-          return matchesTitle || matchesSubtitle || matchesPreview
-        })
-        .map((page) => ({
-          title: page.title,
-          subtitle: page.subtitle,
-          preview: page.preview,
-          date: page.date,
-          status: page.status,
-          path: page.path,
-          resultType: "page" as const,
-        }))
+    // Search fiction
+    const filteredFiction = fiction
+      .filter((item) => {
+        const matchesTitle = item.title?.toLowerCase().includes(query)
+        const matchesSubtitle = item.subtitle?.toLowerCase().includes(query)
+        const matchesPreview = item.preview?.toLowerCase().includes(query)
+        return matchesTitle || matchesSubtitle || matchesPreview
+      })
+      .map((item) => ({
+        title: item.title,
+        subtitle: item.subtitle,
+        preview: item.preview,
+        date: item.date,
+        status: item.status || "Published",
+        category: "Fiction",
+        path: `/fiction/${item.slug}`,
+        resultType: "fiction" as const,
+      }))
+    results = [...results, ...filteredFiction]
 
-      results = [...results, ...filteredPages]
-    }
-    
-    // Search essays if filter is "all" or "essays"
-    if (searchFilter === "all" || searchFilter === "essays") {
-      const filteredEssays = essays
-        .filter((essay) => {
-          const matchesTitle = essay.title?.toLowerCase().includes(query)
-          const matchesSubtitle = essay.subtitle?.toLowerCase().includes(query)
-          const matchesPreview = essay.preview?.toLowerCase().includes(query)
-          const matchesTags = essay.tags?.some((tag: string) => tag.toLowerCase().includes(query))
-          const matchesCategory = essay.category?.toLowerCase().includes(query)
+    // Search news
+    const filteredNews = news
+      .filter((item) => {
+        const matchesTitle = item.title?.toLowerCase().includes(query)
+        const matchesSubtitle = item.subtitle?.toLowerCase().includes(query)
+        const matchesPreview = item.preview?.toLowerCase().includes(query)
+        return matchesTitle || matchesSubtitle || matchesPreview
+      })
+      .map((item) => ({
+        title: item.title,
+        subtitle: item.subtitle,
+        preview: item.preview,
+        date: item.date,
+        status: item.status || "Published",
+        category: "News",
+        path: `/news/${item.slug}`,
+        resultType: "news" as const,
+      }))
+    results = [...results, ...filteredNews]
 
-          return matchesTitle || matchesSubtitle || matchesPreview || matchesTags || matchesCategory
-        })
-        .map((essay) => ({
-          title: essay.title,
-          subtitle: essay.subtitle,
-          preview: essay.preview,
-          date: essay.date,
-          status: essay.status || "Published",
-          category: essay.category,
-          path: `/essays/${essay.slug}`,
-          resultType: "essay" as const,
-        }))
+    // Search notes
+    const filteredNotes = quickNotes
+      .filter((item) => {
+        const matchesTitle = item.title?.toLowerCase().includes(query)
+        const matchesSubtitle = item.subtitle?.toLowerCase().includes(query)
+        const matchesPreview = item.preview?.toLowerCase().includes(query)
+        const matchesContent = item.content?.toLowerCase().includes(query)
+        return matchesTitle || matchesSubtitle || matchesPreview || matchesContent
+      })
+      .map((item) => ({
+        title: item.title,
+        subtitle: item.subtitle,
+        preview: item.preview || item.content?.substring(0, 100),
+        date: item.date,
+        status: item.status || "Published",
+        category: "Note",
+        path: `/notes/${item.slug}`,
+        resultType: "note" as const,
+      }))
+    results = [...results, ...filteredNotes]
 
-      results = [...results, ...filteredEssays]
-    }
-    
-    // Search papers if filter is "all" or "papers"
-    if (searchFilter === "all" || searchFilter === "papers") {
-      const filteredPapers = papers
-        .filter((paper) => {
-          // First filter out papers with state "hidden"
-          if (paper.state === "hidden") {
-            return false;
-          }
-          
-          const matchesTitle = paper.title?.toLowerCase().includes(query)
-          const matchesSubtitle = paper.subtitle?.toLowerCase().includes(query)
-          const matchesPreview = paper.preview?.toLowerCase().includes(query)
-          const matchesTags = paper.tags?.some((tag: string) => tag.toLowerCase().includes(query))
+    // Search progymnasmata
+    const filteredProgymnasmata = progymnasmata
+      .filter((item) => {
+        const matchesTitle = item.title?.toLowerCase().includes(query)
+        const matchesPreview = item.preview?.toLowerCase().includes(query)
+        return matchesTitle || matchesPreview
+      })
+      .map((item) => ({
+        title: item.title,
+        subtitle: item.subtitle,
+        preview: item.preview,
+        date: item.date,
+        status: item.status || "Published",
+        category: "Progymnasmata",
+        path: `/progymnasmata/${item.slug}`,
+        resultType: "progymnasmata" as const,
+      }))
+    results = [...results, ...filteredProgymnasmata]
 
-          return matchesTitle || matchesSubtitle || matchesPreview || matchesTags
-        })
-        .map((paper) => ({
-          title: paper.title,
-          subtitle: paper.subtitle,
-          preview: paper.preview,
-          date: paper.date,
-          status: paper.status || "Published",
-          category: "Academic",
-          path: `/papers/${paper.slug}`,
-          resultType: "paper" as const,
-        }))
+    // Search lab
+    const filteredLab = lab
+      .filter((item) => {
+        const matchesTitle = item.title?.toLowerCase().includes(query)
+        const matchesDescription = item.description?.toLowerCase().includes(query)
+        const matchesTags = item.tags?.some((tag: string) => tag.toLowerCase().includes(query))
+        return matchesTitle || matchesDescription || matchesTags
+      })
+      .map((item) => ({
+        title: item.title,
+        preview: item.description,
+        date: item.date,
+        status: item.status || "Published",
+        category: "Lab",
+        path: `/lab/${item.slug}`,
+        resultType: "lab" as const,
+      }))
+    results = [...results, ...filteredLab]
 
-      results = [...results, ...filteredPapers]
-    }
-    
-    // Search fiction if filter is "all" or "fiction"
-    if (searchFilter === "all" || searchFilter === "fiction") {
-      const filteredFiction = fiction
-        .filter((item) => {
-          const matchesTitle = item.title?.toLowerCase().includes(query)
-          const matchesSubtitle = item.subtitle?.toLowerCase().includes(query)
-          const matchesPreview = item.preview?.toLowerCase().includes(query)
+    // Search lectures
+    const filteredLectures = lectures
+      .filter((item) => {
+        const matchesTitle = item.title?.toLowerCase().includes(query)
+        const matchesDescription = item.description?.toLowerCase().includes(query)
+        const matchesTags = item.tags?.some((tag: string) => tag.toLowerCase().includes(query))
+        return matchesTitle || matchesDescription || matchesTags
+      })
+      .map((item) => ({
+        title: item.title,
+        preview: item.description,
+        date: item.date,
+        status: item.status || "Published",
+        category: "Lecture",
+        path: `/lectures/${item.slug}`,
+        resultType: "lecture" as const,
+      }))
+    results = [...results, ...filteredLectures]
 
-          return matchesTitle || matchesSubtitle || matchesPreview
-        })
-        .map((item) => ({
-          title: item.title,
-          subtitle: item.subtitle,
-          preview: item.preview,
-          date: item.date,
-          status: item.status || "Published",
-          category: "Fiction",
-          path: `/fiction/${item.slug}`,
-          resultType: "fiction" as const,
-        }))
+    // Search links
+    const filteredLinks = links
+      .filter((item) => {
+        const matchesTitle = item.title?.toLowerCase().includes(query)
+        const matchesDescription = item.description?.toLowerCase().includes(query)
+        const matchesUrl = item.url?.toLowerCase().includes(query)
+        const matchesTags = item.tags?.some((tag: string) => tag.toLowerCase().includes(query))
+        return matchesTitle || matchesDescription || matchesUrl || matchesTags
+      })
+      .map((item) => ({
+        title: item.title,
+        preview: item.description,
+        date: item.date || new Date().toISOString(),
+        status: "Link",
+        category: item.category || "External Link",
+        path: item.url,
+        resultType: "link" as const,
+      }))
+    results = [...results, ...filteredLinks]
 
-      results = [...results, ...filteredFiction]
-    }
-    
-    // Search news if filter is "all" or "news"
-    if (searchFilter === "all" || searchFilter === "news") {
-      const filteredNews = news
-        .filter((item) => {
-          const matchesTitle = item.title?.toLowerCase().includes(query)
-          const matchesSubtitle = item.subtitle?.toLowerCase().includes(query)
-          const matchesPreview = item.preview?.toLowerCase().includes(query)
-
-          return matchesTitle || matchesSubtitle || matchesPreview
-        })
-        .map((item) => ({
-          title: item.title,
-          subtitle: item.subtitle,
-          preview: item.preview,
-          date: item.date,
-          status: item.status || "Published",
-          category: "News",
-          path: `/news/${item.slug}`,
-          resultType: "news" as const,
-        }))
-
-      results = [...results, ...filteredNews]
-    }
-    
-    // Search conspiracies if filter is "all" or "conspiracies"
-    if (searchFilter === "all" || searchFilter === "conspiracies") {
-      const filteredConspiracies = conspiracies
-        .filter((item) => {
-          const matchesTitle = item.title?.toLowerCase().includes(query)
-          const matchesSubtitle = item.subtitle?.toLowerCase().includes(query)
-          const matchesPreview = item.preview?.toLowerCase().includes(query)
-
-          return matchesTitle || matchesSubtitle || matchesPreview
-        })
-        .map((item) => ({
-          title: item.title,
-          subtitle: item.subtitle,
-          preview: item.preview,
-          date: item.date,
-          status: item.status || "Published",
-          category: "Conspiracy",
-          path: `/conspiracies/${item.slug}`,
-          resultType: "conspiracy" as const,
-        }))
-
-      results = [...results, ...filteredConspiracies]
-    }
-    
-    // Search quick notes if filter is "all" or "notes"
-    if (searchFilter === "all" || searchFilter === "notes") {
-      const filteredNotes = quickNotes
-        .filter((item) => {
-          const matchesTitle = item.title?.toLowerCase().includes(query)
-          const matchesSubtitle = item.subtitle?.toLowerCase().includes(query)
-          const matchesPreview = item.preview?.toLowerCase().includes(query)
-          const matchesContent = item.content?.toLowerCase().includes(query)
-
-          return matchesTitle || matchesSubtitle || matchesPreview || matchesContent
-        })
-        .map((item) => ({
-          title: item.title,
-          subtitle: item.subtitle,
-          preview: item.preview || item.content?.substring(0, 100),
-          date: item.date,
-          status: item.status || "Published",
-          category: "Note",
-          path: `/notes/${item.slug}`,
-          resultType: "note" as const,
-        }))
-
-      results = [...results, ...filteredNotes]
-    }
-    
-    // Search problems if filter is "all" or "problems"
-    if (searchFilter === "all" || searchFilter === "problems") {
-      const filteredProblems = problems
-        .filter((item) => {
-          const matchesTitle = item.title?.toLowerCase().includes(query)
-          const matchesPreview = item.preview?.toLowerCase().includes(query)
-          const matchesTags = item.tags?.some((tag: string) => tag.toLowerCase().includes(query))
-
-          return matchesTitle || matchesPreview || matchesTags
-        })
-        .map((item) => ({
-          title: item.title,
-          subtitle: item.subtitle,
-          preview: item.preview,
-          date: item.date,
-          status: item.status || "Open",
-          category: "Problem",
-          path: `/problems/${item.slug}`,
-          resultType: "problem" as const,
-        }))
-
-      results = [...results, ...filteredProblems]
-    }
-    
-    // Search progymnasmata if filter is "all" or "progymnasmata"
-    if (searchFilter === "all" || searchFilter === "progymnasmata") {
-      const filteredProgymnasmata = progymnasmata
-        .filter((item) => {
-          const matchesTitle = item.title?.toLowerCase().includes(query)
-          const matchesPreview = item.preview?.toLowerCase().includes(query)
-
-          return matchesTitle || matchesPreview
-        })
-        .map((item) => ({
-          title: item.title,
-          subtitle: item.subtitle,
-          preview: item.preview,
-          date: item.date,
-          status: item.status || "Published",
-          category: "Progymnasmata",
-          path: `/progymnasmata/${item.slug}`,
-          resultType: "progymnasmata" as const,
-        }))
-
-      results = [...results, ...filteredProgymnasmata]
-    }
-    
-    // Search prompts if filter is "all" or "prompts"
-    if (searchFilter === "all" || searchFilter === "prompts") {
-      const filteredPrompts = prompts
-        .filter((item) => {
-          const matchesTitle = item.title?.toLowerCase().includes(query)
-          const matchesPreview = item.preview?.toLowerCase().includes(query)
-          const matchesContent = item.content?.toLowerCase().includes(query)
-
-          return matchesTitle || matchesPreview || matchesContent
-        })
-        .map((item) => ({
-          title: item.title,
-          subtitle: item.subtitle,
-          preview: item.preview || item.content?.substring(0, 100),
-          date: item.date,
-          status: item.status || "Published",
-          category: "Prompt",
-          path: `/prompts/${item.slug}`,
-          resultType: "prompt" as const,
-        }))
-
-      results = [...results, ...filteredPrompts]
-    }
-    
-    // Search scripts if filter is "all" or "scripts"
-    if (searchFilter === "all" || searchFilter === "scripts") {
-      const filteredScripts = scripts
-        .filter((item) => {
-          if (typeof item === 'string') {
-            return item.toLowerCase().includes(query);
-          }
-          
-          const matchesName = item.name?.toLowerCase().includes(query)
-          const matchesContent = item.content?.toLowerCase().includes(query)
-
-          return matchesName || matchesContent
-        })
-        .map((item) => {
-          if (typeof item === 'string') {
-            return {
-              title: item,
-              preview: "Script file",
-              date: new Date().toISOString(),
-              status: "Available",
-              category: "Script",
-              path: `/scripts?filename=${encodeURIComponent(item)}`,
-              resultType: "script" as const,
-            };
-          }
-          
-          return {
-            title: item.name,
-            preview: item.content?.substring(0, 100) || "Script file",
-            date: item.modified || new Date().toISOString(),
-            status: "Available",
-            category: "Script",
-            path: `/scripts?filename=${encodeURIComponent(item.name)}`,
-            resultType: "script" as const,
-          };
-        })
-
-      results = [...results, ...filteredScripts]
-    }
-    
-    // Search lab content if filter is "all" or "lab"
-    if (searchFilter === "all" || searchFilter === "lab") {
-      const filteredLab = lab
-        .filter((item) => {
-          const matchesTitle = item.title?.toLowerCase().includes(query)
-          const matchesDescription = item.description?.toLowerCase().includes(query)
-          const matchesTags = item.tags?.some((tag: string) => tag.toLowerCase().includes(query))
-
-          return matchesTitle || matchesDescription || matchesTags
-        })
-        .map((item) => ({
-          title: item.title,
-          preview: item.description,
-          date: item.date,
-          status: item.status || "Published",
-          category: "Lab",
-          path: `/lab/${item.slug}`,
-          resultType: "lab" as const,
-        }))
-
-      results = [...results, ...filteredLab]
-    }
-    
-    // Search lectures if filter is "all" or "academic"
-    if (searchFilter === "all" || searchFilter === "academic") {
-      const filteredLectures = lectures
-        .filter((item) => {
-          const matchesTitle = item.title?.toLowerCase().includes(query)
-          const matchesDescription = item.description?.toLowerCase().includes(query)
-          const matchesTags = item.tags?.some((tag: string) => tag.toLowerCase().includes(query))
-
-          return matchesTitle || matchesDescription || matchesTags
-        })
-        .map((item) => ({
-          title: item.title,
-          preview: item.description,
-          date: item.date,
-          status: item.status || "Published",
-          category: "Lecture",
-          path: `/lectures/${item.slug}`,
-          resultType: "lecture" as const,
-        }))
-
-      results = [...results, ...filteredLectures]
-    }
-    
-    // Search links if filter is "all" or "misc"
-    if (searchFilter === "all" || searchFilter === "misc") {
-      const filteredLinks = links
-        .filter((item) => {
-          const matchesTitle = item.title?.toLowerCase().includes(query)
-          const matchesDescription = item.description?.toLowerCase().includes(query)
-          const matchesUrl = item.url?.toLowerCase().includes(query)
-          const matchesTags = item.tags?.some((tag: string) => tag.toLowerCase().includes(query))
-
-          return matchesTitle || matchesDescription || matchesUrl || matchesTags
-        })
-        .map((item) => ({
-          title: item.title,
-          preview: item.description,
-          date: item.date || new Date().toISOString(),
-          status: "Link",
-          category: item.category || "External Link",
-          path: item.url,
-          resultType: "link" as const,
-        }))
-
-      results = [...results, ...filteredLinks]
-    }
-
-    // Sort by date (newest first) and limit to 10 results instead of 5 due to more sources
+    // Sort by date (newest first) and limit results
     results.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     setSearchResults(results.slice(0, 10))
-  }, [searchQuery, posts, pages, essays, papers, fiction, news, conspiracies, quickNotes, 
-      problems, progymnasmata, prompts, scripts, lab, lectures, links, searchFilter])
+  }, [searchQuery, posts, pages, essays, papers, fiction, news, quickNotes, progymnasmata, lab, lectures, links])
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -690,28 +524,17 @@ export function SettingsMenu() {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    
-    if (searchFilter === "bible" && searchQuery.trim() !== "") {
-      // Generate the Bible search URL
-      const bibleSearchUrl = `https://www.blueletterbible.org/search/preSearch.cfm?Criteria=${encodeURIComponent(searchQuery)}&t=${bibleVersion}`
-      
-      // Trigger the universal link modal to open with this URL
-      createModal(bibleSearchUrl, `Bible Search: ${searchQuery}`, window.innerWidth / 2, window.innerHeight / 2)
-      return
-    }
-    
+
     if (searchResults.length > 0) {
       const firstResult = searchResults[0]
-      
+
       // Check if it's an external link
       if (firstResult.resultType === "link" && firstResult.path?.startsWith('http')) {
-        // Use the universal link modal for external links
         createModal(firstResult.path, firstResult.title, window.innerWidth / 2, window.innerHeight / 2)
       } else {
-        // Use the router for internal links
         router.push(firstResult.path)
       }
-      
+
       setIsSearchOpen(false)
       setIsOpen(false)
       setSearchQuery("")
@@ -988,62 +811,95 @@ export function SettingsMenu() {
               </button>
             </div>
 
-            <div className="space-y-4 py-4">
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center space-x-2">
-                    <ExternalLink className="h-4 w-4" />
-                    <label className="text-sm font-medium">
-                      Link Preview Modal
-                    </label>
-                  </div>
+            <div className="grid gap-3 py-4">
+              {/* Link Preview Section */}
+              <div className="border border-border p-4">
+                <div className="flex items-center space-x-2 mb-3">
+                  <ExternalLink className="h-4 w-4" />
+                  <label className="text-sm font-medium">Link Preview Modal</label>
                 </div>
-                
-                <div className="ml-6 space-y-2">
-                  <label className="flex items-center space-x-2">
-                    <input 
-                      type="radio" 
-                      name="linkModalMode" 
-                      checked={universalLinkModalMode === "all"} 
+
+                <div className="space-y-2">
+                  <label className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="linkModalMode"
+                      checked={universalLinkModalMode === "all"}
                       onChange={() => setLinkModalMode("all")}
-                      className="h-4 w-4"
+                      className="h-4 w-4" style={{ accentColor: 'hsl(var(--foreground))' }}
                     />
                     <span className="text-sm">All links (internal & external)</span>
                   </label>
-                  
-                  <label className="flex items-center space-x-2">
-                    <input 
-                      type="radio" 
-                      name="linkModalMode" 
-                      checked={universalLinkModalMode === "external"} 
+
+                  <label className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="linkModalMode"
+                      checked={universalLinkModalMode === "external"}
                       onChange={() => setLinkModalMode("external")}
-                      className="h-4 w-4"
+                      className="h-4 w-4" style={{ accentColor: 'hsl(var(--foreground))' }}
                     />
                     <span className="text-sm">External links only</span>
                   </label>
-                  
-                  <label className="flex items-center space-x-2">
-                    <input 
-                      type="radio" 
-                      name="linkModalMode" 
-                      checked={universalLinkModalMode === "off"} 
+
+                  <label className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="linkModalMode"
+                      checked={universalLinkModalMode === "off"}
                       onChange={() => setLinkModalMode("off")}
-                      className="h-4 w-4"
+                      className="h-4 w-4" style={{ accentColor: 'hsl(var(--foreground))' }}
                     />
                     <span className="text-sm">Off (no link previews)</span>
                   </label>
                 </div>
-                
-                <p className="text-xs text-muted-foreground mt-2">
-                  Configure how the link preview modal works when you hover over links on the site.
+
+                <p className="text-xs text-muted-foreground mt-3">
+                  Configure how the link preview modal works when you hover over links.
+                </p>
+              </div>
+
+              {/* Color Theme Section */}
+              <div className="border border-border p-4">
+                <div className="flex items-center space-x-2 mb-3">
+                  <Palette className="h-4 w-4" />
+                  <label className="text-sm font-medium">Color Theme</label>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="colorTheme"
+                      checked={colorTheme === "default"}
+                      onChange={() => setAndApplyColorTheme("default")}
+                      className="h-4 w-4" style={{ accentColor: 'hsl(var(--foreground))' }}
+                    />
+                    <span className="text-sm">Default (100 Whites)</span>
+                  </label>
+
+                  <label className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="colorTheme"
+                      checked={colorTheme === "solarized"}
+                      onChange={() => setAndApplyColorTheme("solarized")}
+                      className="h-4 w-4" style={{ accentColor: 'hsl(var(--foreground))' }}
+                    />
+                    <span className="text-sm">Solarized</span>
+                  </label>
+                </div>
+
+                <p className="text-xs text-muted-foreground mt-3">
+                  Choose a color theme. Works with both light and dark modes.
                 </p>
               </div>
             </div>
 
-            <div className="border-t border-border pt-4">
+            <div className="pt-2">
               <button
                 onClick={() => setIsSettingsOpen(false)}
-                className="w-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+                className="w-full border border-border px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
               >
                 Save Settings
               </button>
@@ -1089,7 +945,7 @@ export function SettingsMenu() {
                     <Maximize className="h-3 w-3" />
                   </button>
                 </div>
-                <div className="flex-1 text-center text-sm font-medium">KrisYotam.com Search</div>
+                <div className="flex-1 text-center text-sm font-medium">krisyotam.com search</div>
                 <div className="flex items-center">
                   <Move className="h-4 w-4 text-muted-foreground" />
                 </div>
@@ -1102,7 +958,7 @@ export function SettingsMenu() {
                       ref={searchInputRef}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="KrisYotam.com search"
+                      placeholder="search..."
                       className="flex h-9 w-full border-l border-y border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                     />
                     <button
@@ -1114,89 +970,6 @@ export function SettingsMenu() {
                   </form>
                 </div>
               </div>
-
-              <div className="border-b border-border p-2">
-                <div className="flex items-center justify-between">
-                  <div className="text-xs text-muted-foreground">Search in:</div>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger className="flex items-center gap-1 text-sm px-2 py-1 rounded border border-input bg-transparent hover:bg-accent hover:text-accent-foreground">
-                      {searchFilter === "all" ? "All Content" : 
-                       searchFilter === "posts" ? "Posts" : 
-                       searchFilter === "pages" ? "Pages" :
-                       searchFilter === "essays" ? "Essays" :
-                       searchFilter === "papers" ? "Papers" :
-                       searchFilter === "fiction" ? "Fiction" :
-                       searchFilter === "news" ? "News" :
-                       searchFilter === "conspiracies" ? "Conspiracies" :
-                       searchFilter === "notes" ? "Notes" :
-                       searchFilter === "problems" ? "Problems" :
-                       searchFilter === "progymnasmata" ? "Progymnasmata" :
-                       searchFilter === "prompts" ? "Prompts" :
-                       searchFilter === "scripts" ? "Scripts" :
-                       searchFilter === "lab" ? "Lab" :
-                       searchFilter === "lectures" ? "Lectures" :
-                       searchFilter === "links" ? "Links" :
-                       searchFilter === "bible" ? "Bible" : "All Content"}
-                      <ChevronDown className="h-3 w-3" />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-52">
-                      <DropdownMenuRadioGroup value={searchFilter} onValueChange={value => setSearchFilter(value as any)}>
-                        <DropdownMenuRadioItem value="all">All Content</DropdownMenuRadioItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuRadioItem value="posts">Posts</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="pages">Pages</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="essays">Essays</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="papers">Papers</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="fiction">Fiction</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="news">News</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="conspiracies">Conspiracies</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="notes">Notes</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="problems">Problems</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="progymnasmata">Progymnasmata</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="prompts">Prompts</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="scripts">Scripts</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="lab">Lab</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="lectures">Lectures</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="links">Links</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="bible">Bible</DropdownMenuRadioItem>
-                      </DropdownMenuRadioGroup>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              </div>
-              
-              {searchFilter === "bible" && (
-                <div className="border-b border-border p-2">
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="text-xs text-muted-foreground">Bible version:</div>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger className="flex items-center gap-1 text-xs px-2 py-1 rounded border border-input bg-transparent hover:bg-accent hover:text-accent-foreground">
-                        {bibleVersion}
-                        <ChevronDown className="h-3 w-3" />
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="w-[120px] max-h-[200px] overflow-auto">
-                        <DropdownMenuRadioGroup value={bibleVersion} onValueChange={setBibleVersion}>
-                          <DropdownMenuRadioItem value="KJV">KJV</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="NKJV">NKJV</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="NLT">NLT</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="NIV">NIV</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="ESV">ESV</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="CSB">CSB</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="NASB20">NASB20</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="NASB95">NASB95</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="LSB">LSB</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="AMP">AMP</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="NET">NET</DropdownMenuRadioItem>
-                          <DropdownMenuRadioItem value="RSV">RSV</DropdownMenuRadioItem>
-                        </DropdownMenuRadioGroup>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                  <div className="mt-1 text-xs text-muted-foreground">
-                    Enter a Bible verse or search term and press Search
-                  </div>
-                </div>
-              )}
 
               <div className={`${isMaximized ? "max-h-[calc(90vh-120px)]" : "max-h-[300px]"} overflow-y-auto`}>
                 {isLoading ? (

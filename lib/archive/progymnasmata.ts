@@ -1,5 +1,5 @@
 // /lib/progymnasmata.ts
-import { ProgymnasmataEntry } from "@/types/progymnasmata"
+import { ProgymnasmataEntry } from "@/types/content"
 
 export async function getProgymnasmataEntryBySlug(slug: string): Promise<ProgymnasmataEntry | undefined> {
   try {

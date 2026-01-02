@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input"
 import { PageDescription } from "@/components/core"
 import ResearchGrid from "@/components/research-grid"
 import ResearchList from "@/components/research-list"
-import type { Research } from "@/types/research"
+import type { Research } from "@/types/content"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 

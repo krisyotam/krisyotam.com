@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import categoriesData from "@/data/sequences/categories.json";
-import { Sequence, SequencePost } from "@/types/sequences";
+import { Sequence, SequencePost } from "@/types/content";
 
 /* Page-level metadata for the header */
 const defaultSequencesPageData = {

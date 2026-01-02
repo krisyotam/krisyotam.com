@@ -1,6 +1,6 @@
 import { staticMetadata } from '@/lib/staticMetadata';
 import { Metadata } from 'next';
-import redis from '@/utils/redis';
+import redis from '@/lib/redis';
 import dynamic from 'next/dynamic';
 
 export const metadata: Metadata = {

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import sequencesData from '@/data/sequences/sequences.json';
-import { SequencesData } from '@/types/sequences';
+import { SequencesData } from '@/types/content';
 
 export async function GET() {
   try {

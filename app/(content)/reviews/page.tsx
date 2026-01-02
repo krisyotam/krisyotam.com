@@ -1,7 +1,7 @@
 import ReviewClientPage from "./ReviewClientPage";
 import reviewsData from "@/data/reviews/reviews.json";
 import type { Metadata } from "next";
-import type { ReviewMeta, ReviewStatus, ReviewConfidence } from "@/types/review";
+import type { ReviewMeta, ReviewStatus, ReviewConfidence } from "@/types/content";
 import { staticMetadata } from "@/lib/staticMetadata";
 
 export const metadata: Metadata = staticMetadata.reviews;

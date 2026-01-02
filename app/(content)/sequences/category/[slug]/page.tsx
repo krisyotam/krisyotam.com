@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import sequencesData from "@/data/sequences/sequences.json";
 import categoriesData from "@/data/sequences/categories.json";
-import { SequencesData } from "@/types/sequences";
+import { SequencesData } from "@/types/content";
 
 interface CategoryPageProps {
   params: { slug: string };

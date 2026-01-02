@@ -20,7 +20,7 @@ const defaultOCSPageData = {
   importance: 7,
 } satisfies PageHeaderProps;
 
-import type { OCSMeta } from "@/types/ocs";
+import type { OCSMeta } from "@/types/content";
 
 interface OCSClientPageProps {
   ocs: OCSMeta[];

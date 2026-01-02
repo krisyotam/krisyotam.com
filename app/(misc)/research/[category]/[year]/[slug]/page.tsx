@@ -2,7 +2,7 @@ import researchDataRaw from "@/data/research/research.json";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { ResearchDetail } from "./research-detail";
-import type { Research } from '@/types/research'
+import type { Research } from '@/types/content'
 
 function slugifyTitle(title: string) {
   return title.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");

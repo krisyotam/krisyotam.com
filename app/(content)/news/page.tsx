@@ -1,7 +1,7 @@
 import NewsClientPage from "./NewsClientPage";
 import newsData from "@/data/news/news.json";
 import type { Metadata } from "next";
-import type { NewsMeta, NewsStatus, NewsConfidence } from "@/types/news";
+import type { NewsMeta, NewsStatus, NewsConfidence } from "@/types/content";
 import { staticMetadata } from "@/lib/staticMetadata";
 
 export const metadata: Metadata = staticMetadata.news;

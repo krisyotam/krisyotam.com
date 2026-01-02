@@ -5,7 +5,7 @@
  * @description Table row for displaying a post in list view
  */
 
-import { Post } from "@/utils/posts"
+import { Post } from "@/lib/posts"
 import Link from "next/link"
 import { getPostUrl } from "./utils"
 

@@ -1,4 +1,4 @@
-import { formatDateWithValidation } from "@/utils/date-formatter"
+import { formatDateWithValidation } from "@/lib/date"
 import { ArrowLeft, Info } from "lucide-react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 import { cn } from "@/lib/utils"

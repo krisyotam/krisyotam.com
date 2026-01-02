@@ -5,9 +5,9 @@ import { notFound } from "next/navigation";
 import notesData from "@/data/notes/notes.json";
 import NotePageClient from "./NotePageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
-import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
+import { extractHeadingsFromMDX } from "@/lib/mdx";
 import { Comments } from "@/components/core/comments";
-import type { NoteMeta } from "@/types/note";
+import type { NoteMeta } from "@/types/content";
 
 type Status = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
 type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";

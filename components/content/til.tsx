@@ -87,20 +87,20 @@ function TilItem({
           href={`https://github.com/${GITHUB_USERNAME}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center px-3 border-r border-border text-sm font-medium hover:bg-muted/30 transition-colors"
+          className="flex items-center justify-center px-3 border-r border-border text-xs text-muted-foreground uppercase hover:bg-muted/30 transition-colors"
           title={`https://github.com/${GITHUB_USERNAME}`}
         >
           @{GITHUB_USERNAME}
         </a>
         {/* Month badge */}
-        <div className="flex items-center justify-center px-2 border-r border-border">
-          <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+        <div className="flex items-center justify-center px-3 border-r border-border">
+          <span className="text-xs text-muted-foreground uppercase hover:text-foreground transition-colors cursor-default">
             {formatMonth(entry.date)}
           </span>
         </div>
-        {/* Info */}
-        <div className="flex-1 flex items-center px-3 py-2 gap-2 flex-wrap">
-          <span className="text-muted-foreground text-sm">
+        {/* Posted date */}
+        <div className="flex-1 flex items-center justify-center px-3 py-2">
+          <span className="text-xs text-muted-foreground uppercase hover:text-foreground transition-colors cursor-default">
             posted on {formatDate(entry.date)}
           </span>
         </div>
@@ -155,7 +155,6 @@ function TilItem({
 
       {/* Content */}
       <div className="p-3 comment-content">
-        <h3 className="font-medium text-lg mb-3 pb-2 border-b border-border">{entry.title}</h3>
         <div className="[&>*:first-child]:mt-0">{content}</div>
       </div>
 

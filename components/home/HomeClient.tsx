@@ -8,7 +8,7 @@
 "use client"
 
 import { useState } from "react"
-import { Post } from "@/utils/posts"
+import { Post } from "@/lib/posts"
 import { HomeListView } from "./HomeListView"
 import { HomeGridView } from "./HomeGridView"
 import { ViewToggle } from "./ViewToggle"

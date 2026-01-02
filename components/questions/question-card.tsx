@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { formatDate } from "@/utils/date-formatter"
+import { formatDate } from "@/lib/date"
 
 interface QuestionCardProps {
   id: number

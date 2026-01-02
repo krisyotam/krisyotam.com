@@ -4,7 +4,7 @@
  * @date 2025-12-29
  */
 
-import { Post } from "@/utils/posts"
+import { Post } from "@/lib/posts"
 
 /**
  * Generate correct URL for a post based on whether it's a blog post or essay

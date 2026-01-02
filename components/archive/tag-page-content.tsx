@@ -1,4 +1,5 @@
-import { cn, formatDate } from "@/lib/utils"
+import { cn } from "@/lib/utils"
+import { formatDate } from "@/lib/date"
 import Link from "next/link"
 import Image from "next/image"
 

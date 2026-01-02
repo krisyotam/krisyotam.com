@@ -4,7 +4,7 @@ import path from "path";
 
 export async function GET() {
   try {
-    const scriptPath = path.join(process.cwd(), "scripts", "404-suggester.js");
+    const scriptPath = path.join(process.cwd(), "public", "scripts", "404-suggester.js");
     const scriptContent = await fs.readFile(scriptPath, "utf-8");
 
     return new NextResponse(scriptContent, {

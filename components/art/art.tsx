@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from "next/image";
 import { Box } from '@/components/posts/typography/box';
-import { getPhotoUrl } from "@/utils/flickr-api";
+import { getPhotoUrl } from "@/lib/flickr";
 
 interface ArtProps {
   imageUrl: string;

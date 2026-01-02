@@ -20,7 +20,7 @@ const defaultReviewsPageData = {
   importance: 7,
 } satisfies PageHeaderProps;
 
-import type { ReviewMeta } from "@/types/review";
+import type { ReviewMeta } from "@/types/content";
 
 interface ReviewClientPageProps {
   reviews: ReviewMeta[];

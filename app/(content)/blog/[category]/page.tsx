@@ -2,7 +2,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import blogData from "@/data/blog/blog.json";
 import BlogCategoryClient from "./BlogCategoryClient";
-import type { BlogMeta, Status, Confidence } from "@/types/blog";
+import type { BlogMeta, Status, Confidence } from "@/types/content";
 
 interface BlogData {
   title: string;

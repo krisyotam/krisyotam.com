@@ -6,7 +6,7 @@ import { LiveClock } from "@/components/live-clock";
 import { Footer } from "@/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Comments } from "@/components/core/comments";
-import type { Post } from "@/utils/posts";
+import type { Post } from "@/lib/posts";
 
 interface Props {
   essayData: Post;

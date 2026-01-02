@@ -5,8 +5,8 @@ import { notFound } from "next/navigation";
 import ocsData from "@/data/ocs/ocs.json";
 import OCSPageClient from "./OCSPageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
-import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
-import type { OCSMeta, OCSStatus, OCSConfidence } from "@/types/ocs";
+import { extractHeadingsFromMDX } from "@/lib/mdx";
+import type { OCSMeta, OCSStatus, OCSConfidence } from "@/types/content";
 
 interface OCSData {
   title: string;

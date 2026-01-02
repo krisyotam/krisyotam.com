@@ -5,8 +5,7 @@ import { ChevronLeft, ExternalLink, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useRouter } from "next/navigation"
-import katex from "katex"
-import "katex/dist/katex.min.css"
+import { renderMathToString, MATH_CLASSES } from "@/lib/math"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 // Enhanced SocialPost interface with context and conversation
@@ -36,10 +35,10 @@ interface SocialPostDetailProps {
   post: SocialPost
 }
 
-// Function to process LaTeX in text
+// Function to process LaTeX in text using centralized math utility
 const processLatex = (text: string) => {
   if (!text) return [];
-  
+
   // Find all LaTeX expressions between $$ and $$
   const parts = text.split(/(\$\$[^$]+\$\$|\$[^$\n]+\$)/g)
 
@@ -47,29 +46,13 @@ const processLatex = (text: string) => {
     if (part.startsWith("$$") && part.endsWith("$$")) {
       // Display mode (centered equation)
       const latex = part.slice(2, -2)
-      try {
-        const html = katex.renderToString(latex, {
-          throwOnError: false,
-          output: "html",
-          displayMode: true,
-        })
-        return <div key={index} className="text-center my-4" dangerouslySetInnerHTML={{ __html: html }} />
-      } catch (error) {
-        return <span key={index}>{part}</span>
-      }
+      const html = renderMathToString(latex, { displayMode: true })
+      return <div key={index} className={`text-center my-4 ${MATH_CLASSES.display}`} dangerouslySetInnerHTML={{ __html: html }} />
     } else if (part.startsWith("$") && part.endsWith("$")) {
       // Inline mode
       const latex = part.slice(1, -1)
-      try {
-        const html = katex.renderToString(latex, {
-          throwOnError: false,
-          output: "html",
-          displayMode: false,
-        })
-        return <span key={index} dangerouslySetInnerHTML={{ __html: html }} />
-      } catch (error) {
-        return <span key={index}>{part}</span>
-      }
+      const html = renderMathToString(latex, { displayMode: false })
+      return <span key={index} className={MATH_CLASSES.inline} dangerouslySetInnerHTML={{ __html: html }} />
     }
     return <span key={index}>{part}</span>
   })

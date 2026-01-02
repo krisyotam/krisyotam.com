@@ -1,7 +1,7 @@
 import PapersClientPage from "./PapersClientPage";
 import papersData from "@/data/papers/papers.json";
 import type { Metadata } from "next";
-import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/papers";
+import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/content";
 import { staticMetadata } from "@/lib/staticMetadata";
 
 export const metadata: Metadata = staticMetadata.papers;

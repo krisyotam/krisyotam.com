@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { ResearchClient } from "../research-client"
 import researchDataRaw from "@/data/research/research.json"
-import type { Research } from '@/types/research'
+import type { Research } from '@/types/content'
 import { notFound } from "next/navigation"
 
 // Generate metadata dynamically based on the research category

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useReadingData } from "@/contexts/reading-data-context"
+import { useReadingData } from "@/app/(reading)/reading-data-context"
 
 interface ReadingLogEntry {
   date: string

@@ -1,6 +1,6 @@
 // app/verse/[type]/[slug]/page.tsx
 import poemsData from "@/data/verse/verse.json";
-import type { Poem } from "@/utils/poems";
+import type { Poem } from "@/types/content";
 import PoemPageClient from "./PoemPageClient";
 import type { Metadata, ResolvingMetadata } from "next";
 

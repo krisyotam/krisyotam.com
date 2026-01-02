@@ -5,8 +5,8 @@ import { notFound } from "next/navigation";
 import newsData from "@/data/news/news.json";
 import NewsPageClient from "./NewsPageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
-import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
-import type { NewsMeta, NewsStatus, NewsConfidence } from "@/types/news";
+import { extractHeadingsFromMDX } from "@/lib/mdx";
+import type { NewsMeta, NewsStatus, NewsConfidence } from "@/types/content";
 
 interface NewsData {
   title: string;

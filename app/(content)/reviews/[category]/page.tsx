@@ -2,7 +2,7 @@ import ReviewClientPage from "../ReviewClientPage";
 import reviewsData from "@/data/reviews/reviews.json";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import type { ReviewMeta, ReviewStatus, ReviewConfidence } from "@/types/review";
+import type { ReviewMeta, ReviewStatus, ReviewConfidence } from "@/types/content";
 
 interface PageProps {
   params: { category: string };

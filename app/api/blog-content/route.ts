@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getPostBySlug } from "@/utils/posts"
+import { getPostBySlug } from "@/lib/posts"
 import fs from "fs"
 import path from "path"
 

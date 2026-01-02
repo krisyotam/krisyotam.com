@@ -9,7 +9,7 @@ import { ShortStoriesTable } from "@/components/short-stories-table"
 import { VerseTable } from "@/components/verse-table"
 import { ReadingEssaysTable } from "@/components/reading-essays-table"
 import { ReadingPapersTable } from "@/components/reading-papers-table"
-import { useReadingData } from "@/contexts/reading-data-context"
+import { useReadingData } from "@/app/(reading)/reading-data-context"
 
 type ReadingSubTabType = "books" | "audiobooks" | "blog-posts" | "short-stories" | "verse" | "essays" | "papers"
 

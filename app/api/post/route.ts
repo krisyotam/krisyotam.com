@@ -2,8 +2,8 @@
 export const dynamic = 'force-dynamic';
 
 import { type NextRequest, NextResponse } from "next/server";
-import { getPostBySlug, getAllPosts } from "@/utils/posts";
-import { getPostMetadata } from "@/utils/mdx-utils";
+import { getPostBySlug, getAllPosts } from "@/lib/posts";
+import { getPostMetadata } from "@/lib/mdx";
 import path from "path";
 import fs from "fs";
 

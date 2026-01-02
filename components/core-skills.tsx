@@ -8,7 +8,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { LayoutGrid, ListFilter } from "lucide-react"
 import defaultSkillsData from "@/data/about/core-skills.json"
-import type { CoreSkillsProps, SkillItem, ViewType } from "@/utils/skills"
+import type { CoreSkillsProps, SkillItem, ViewType } from "@/types/content"
 
 export default function CoreSkills({ data = defaultSkillsData, className }: CoreSkillsProps) {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null)

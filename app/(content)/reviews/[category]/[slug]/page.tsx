@@ -5,9 +5,9 @@ import { notFound } from "next/navigation";
 import reviewsData from "@/data/reviews/reviews.json";
 import ReviewPageClient from "./ReviewPageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
-import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
+import { extractHeadingsFromMDX } from "@/lib/mdx";
 import { Comments } from "@/components/core/comments";
-import type { ReviewMeta, ReviewStatus, ReviewConfidence } from "@/types/review";
+import type { ReviewMeta, ReviewStatus, ReviewConfidence } from "@/types/content";
 
 interface ReviewData {
   title: string;

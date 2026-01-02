@@ -8,7 +8,7 @@ import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import type { BlogMeta } from "@/types/blog";
+import type { BlogMeta } from "@/types/content";
 import categoriesData from "@/data/blog/categories.json";
 import "./blog-grid.css";
 

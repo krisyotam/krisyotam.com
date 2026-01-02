@@ -1,6 +1,6 @@
 // app/tags/page.tsx
 import Link from "next/link";
-import { getAllUniversalTags } from "@/utils/universal-content";
+import { getAllUniversalTags } from "@/lib/content";
 import { PageHeader } from "@/components/core";
 import { notFound } from "next/navigation";
 import { staticMetadata } from "@/lib/staticMetadata";

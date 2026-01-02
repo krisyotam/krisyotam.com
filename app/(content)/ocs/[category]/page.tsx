@@ -2,7 +2,7 @@ import OCSClientPage from "../OCSClientPage";
 import ocsData from "@/data/ocs/ocs.json";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import type { OCSMeta, OCSStatus, OCSConfidence } from "@/types/ocs";
+import type { OCSMeta, OCSStatus, OCSConfidence } from "@/types/content";
 
 interface PageProps {
   params: { category: string };

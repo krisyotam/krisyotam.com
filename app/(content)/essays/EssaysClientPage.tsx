@@ -8,7 +8,7 @@ import { Navigation, ContentTable } from "@/components/content";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
 import categoriesData from "@/data/essays/categories.json";
-import type { Post } from "@/utils/posts";
+import type { Post } from "@/lib/posts";
 
 /* default page-level metadata for the header */
 const defaultEssaysPageData = {

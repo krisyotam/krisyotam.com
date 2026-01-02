@@ -3,7 +3,7 @@ import papersData from "@/data/papers/papers.json";
 import categoriesData from "@/data/papers/categories.json";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import type { PaperMeta } from "@/types/papers";
+import type { PaperMeta } from "@/types/content";
 
 interface PageProps {
   params: { slug: string };

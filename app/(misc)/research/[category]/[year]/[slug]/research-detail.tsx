@@ -6,7 +6,7 @@ import { ExternalLink } from "lucide-react";
 import { ResearchHeader } from "@/components/research-header";
 import { Footer } from "@/app/(content)/essays/components/footer";
 import { Citation } from "@/components/citation";
-import type { Research } from '@/types/research'
+import type { Research } from '@/types/content'
 
 function slugify(text: string) {
   return text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');

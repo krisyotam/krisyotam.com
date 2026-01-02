@@ -19,23 +19,6 @@ export function formatFileSize(bytes: number): string {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
 }
 
-export function formatDate(date: string | Date): string {
-  if (typeof date === "string" && date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-    // Parse the date parts from the string to avoid timezone issues
-    const [year, month, day] = date.split("-").map((num) => parseInt(num, 10));
-    date = new Date(year, month - 1, day);
-  } else if (typeof date === "string") {
-    date = new Date(date);
-  }
-
-  return date.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-    timeZone: "UTC", // Use UTC to preserve the exact date
-  });
-}
-
 export type Testimonial = {
   quote: string;
   name: string;

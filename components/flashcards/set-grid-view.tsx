@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { formatDate } from "@/utils/date-formatter"
+import { formatDate } from "@/lib/date"
 
 interface Set {
   id: string

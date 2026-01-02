@@ -1,6 +1,6 @@
 import type React from "react"
 import { PostHeader } from "@/components/post-header"
-import { getPostBySlug } from "@/utils/posts"
+import { getPostBySlug } from "@/lib/posts"
 
 interface PostWrapperProps {
   children: React.ReactNode

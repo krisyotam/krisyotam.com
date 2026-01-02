@@ -1,7 +1,7 @@
 import OCSClientPage from "./OCSClientPage";
 import ocsData from "@/data/ocs/ocs.json";
 import type { Metadata } from "next";
-import type { OCSMeta, OCSStatus, OCSConfidence } from "@/types/ocs";
+import type { OCSMeta, OCSStatus, OCSConfidence } from "@/types/content";
 import { staticMetadata } from "@/lib/staticMetadata";
 
 export const metadata: Metadata = staticMetadata.ocs;

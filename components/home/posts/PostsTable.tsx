@@ -8,7 +8,7 @@
 "use client"
 
 import { useState } from "react"
-import { Post } from "@/utils/posts"
+import { Post } from "@/lib/posts"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { PostTableRow } from "./PostTableRow"

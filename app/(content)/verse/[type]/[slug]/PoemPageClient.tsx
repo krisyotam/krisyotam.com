@@ -3,7 +3,7 @@
 
 import { VerseHeader } from "@/components/verse-header";
 import poemsData from "@/data/verse/verse.json";
-import type { Poem } from "@/utils/poems";
+import type { Poem } from "@/types/content";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Citation } from "@/components/citation";

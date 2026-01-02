@@ -2,7 +2,7 @@ import NewsClientPage from "../NewsClientPage";
 import newsData from "@/data/news/news.json";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import type { NewsMeta, NewsStatus, NewsConfidence } from "@/types/news";
+import type { NewsMeta, NewsStatus, NewsConfidence } from "@/types/content";
 
 interface PageProps {
   params: { category: string };

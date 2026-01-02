@@ -10,7 +10,6 @@ import { CodeBlock } from "@/components/ui/code-block"
 import Books from "@/components/posts/books/books"
 import Cinema from "@/components/posts/books/cinema"
 import { Tweet } from "@/components/typography/tweet"
-import Math from "@/components/typography/math"
 import dynamic from 'next/dynamic'
 import { Pfp } from "@/components/typography/pfp"
 import Redacted from "@/components/typography/redacted"
@@ -182,7 +181,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
 
     // Custom components
-    Math,
     Tikz: TikZ,
     Tweet,
   Date: DateComponent,

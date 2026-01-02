@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import PapersClientPage from "../PapersClientPage";
 import papersData from "@/data/papers/papers.json";
 import categoriesData from "@/data/papers/categories.json";
-import type { PaperMeta } from "@/types/papers";
+import type { PaperMeta } from "@/types/content";
 
 interface CategoryPageProps {
   params: {

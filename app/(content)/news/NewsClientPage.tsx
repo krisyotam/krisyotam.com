@@ -20,7 +20,7 @@ const defaultNewsPageData = {
   importance: 8,
 } satisfies PageHeaderProps;
 
-import type { NewsMeta, NewsStatus } from "@/types/news";
+import type { NewsMeta, NewsStatus } from "@/types/content";
 
 interface NewsClientPageProps {
   news: NewsMeta[];

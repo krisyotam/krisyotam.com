@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getAllUniversalCategories } from "@/utils/universal-content"
+import { getAllUniversalCategories } from "@/lib/content"
 import { PageHeader } from "@/components/core"
 import { PageDescription } from "@/components/core"
 import { CategoriesClient } from "./categories-client"

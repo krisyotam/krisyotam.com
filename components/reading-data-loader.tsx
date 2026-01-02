@@ -1,6 +1,6 @@
 "use client"
 
-import { useReadingData } from "@/contexts/reading-data-context"
+import { useReadingData } from "@/app/(reading)/reading-data-context"
 
 interface ReadingDataLoaderProps {
   children: React.ReactNode

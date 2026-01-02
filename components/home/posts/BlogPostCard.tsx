@@ -5,7 +5,7 @@
  * @description Card view for displaying blog posts and essays
  */
 
-import { Post } from "@/utils/posts"
+import { Post } from "@/lib/posts"
 import { Card } from "@/components/ui/card"
 import { Tag } from "lucide-react"
 import Link from "next/link"

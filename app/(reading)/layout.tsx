@@ -1,6 +1,6 @@
 
 import { ReactNode } from "react"
-import { ReadingDataProvider } from "@/contexts/reading-data-context"
+import { ReadingDataProvider } from "@/app/(reading)/reading-data-context"
 
 interface ReadingLayoutProps {
   children: ReactNode

@@ -5,7 +5,7 @@ import { ContentTable } from "@/components/content";
 import { PageHeader } from "@/components/core";
 import { PageDescription } from "@/components/core";
 import { useRouter } from "next/navigation";
-import type { PaperMeta, Paper } from "@/types/papers";
+import type { PaperMeta, Paper } from "@/types/content";
 
 interface TagHeaderData {
   title: string;

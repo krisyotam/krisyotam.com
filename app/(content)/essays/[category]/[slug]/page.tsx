@@ -7,8 +7,8 @@ import { notFound } from "next/navigation";
 import essaysData from "@/data/essays/essays.json";
 import EssayPageClient from "./EssayPageClient";
 import { TableOfContents } from "@/components/typography/table-of-contents";
-import { extractHeadingsFromMDX } from "@/utils/extract-mdx-headings";
-import type { Post } from "@/utils/posts";
+import { extractHeadingsFromMDX } from "@/lib/mdx";
+import type { Post } from "@/lib/posts";
 
 interface EssayPageProps {
   params: { category: string; slug: string };
