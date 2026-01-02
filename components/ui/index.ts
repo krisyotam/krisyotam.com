@@ -43,7 +43,6 @@ export {
 } from './tabs';
 
 export { Toast } from './toast';
-export { Toaster } from './toaster';
 
 export {
   Card,
@@ -110,7 +109,6 @@ export * from './progress';
 export * from './radio-group';
 export * from './resizable';
 export * from './scroll-area';
-export * from './sidebar';
 export * from './slider';
 export * from './sonner';
 export * from './toggle-group';

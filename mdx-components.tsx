@@ -69,6 +69,7 @@ import { Art7x4 } from "@/components/posts/art/art-7x4"
 import RatingDisplay from "@/components/posts/content/rating"
 import Paper from "@/components/typography/paper"
 import { WebsitePreview } from "@/components/website-preview"
+import { Math } from "@/components/typography/math"
 
 // Define components for MDX
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -277,7 +278,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     
     // Website components
     WebsitePreview,
-    
+
+    // Math component for LaTeX
+    Math,
+
     // Pass through any provided components (for overrides)
     ...components,
   }
