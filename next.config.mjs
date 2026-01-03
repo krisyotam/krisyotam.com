@@ -82,7 +82,7 @@ const baseConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'api.qrserver.com', pathname: '/v1/**' },
     ],
-    domains: ['api.qrserver.com', 'i.postimg.cc', 'gateway.pinata.cloud'],
+    domains: ['api.qrserver.com', 'i.postimg.cc', 'gateway.pinata.cloud', 'doc.krisyotam.com'],
   },
 
   /* ============================================================================
@@ -121,6 +121,7 @@ const baseConfig = {
   /* ============================================================================
      SECURITY HEADERS
      Frame protection + basic CSP
+     Allows iframing only from own domains (for TOC preview, etc.)
   ============================================================================ */
   async headers() {
     return [
@@ -128,7 +129,10 @@ const baseConfig = {
         source: '/(.*)',
         headers: [
           { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
-          { key: 'Content-Security-Policy', value: "frame-ancestors 'none';" },
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self' https://krisyotam.com https://*.krisyotam.com https://kyotam.com https://*.kyotam.com https://krisyotam.net https://*.krisyotam.net;"
+          },
         ],
       },
     ]

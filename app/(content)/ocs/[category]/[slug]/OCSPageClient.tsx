@@ -10,6 +10,7 @@ import { Footer } from "@/app/(content)/essays/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Citation } from "@/components/citation";
 import { Comments } from "@/components/core/comments";
+import { Footnotes } from "@/components/core/footnotes";
 
 interface OCSMeta {
   title: string;
@@ -86,6 +87,7 @@ export default function OCSPageClient({ character, allCharacters, children, head
     return (
       <div className="mt-8">
         <Comments />
+        <Footnotes containerSelector="#content" />
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />
         <Citation 
           title={character.title}

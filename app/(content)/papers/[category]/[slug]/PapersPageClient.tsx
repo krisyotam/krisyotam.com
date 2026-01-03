@@ -6,6 +6,7 @@ import { LiveClock } from "@/components/live-clock";
 import { Footer } from "@/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Comments } from "@/components/core/comments";
+import { Footnotes } from "@/components/core/footnotes";
 import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/content";
 
 interface Props {
@@ -87,22 +88,18 @@ export default function PaperPageClient({ paperData: paperItem, allPapers, child
   // Render only content (citation, footer, etc.)
   if (contentOnly) {
     return (
-      <div>
-        {/* MDX body */}
-        <div className="papers-content">{children}</div>
-        
-        <div className="mt-8">
-          <Comments />
-          <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />
-          <Citation
-            title={paperItem.title}
-            slug={paperItem.slug}
-            date={(paperItem.end_date && paperItem.end_date.trim()) || paperItem.start_date}
-            url={`https://krisyotam.com/papers/${slugifyCategory(paperItem.category)}/${paperItem.slug}`}
-          />
-          <LiveClock />
-          <Footer />
-        </div>
+      <div className="mt-8">
+        <Comments />
+        <Footnotes containerSelector="#content" />
+        <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />
+        <Citation
+          title={paperItem.title}
+          slug={paperItem.slug}
+          date={(paperItem.end_date && paperItem.end_date.trim()) || paperItem.start_date}
+          url={`https://krisyotam.com/papers/${slugifyCategory(paperItem.category)}/${paperItem.slug}`}
+        />
+        <LiveClock />
+        <Footer />
       </div>
     );
   }

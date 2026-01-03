@@ -881,18 +881,36 @@
    html {
      scrollbar-gutter: stable; /* Always reserve space for scrollbar to prevent layout shift */
    }
-   
+
+   /* Page scrollbar - square corners */
+   ::-webkit-scrollbar {
+     width: 8px;
+   }
+
+   ::-webkit-scrollbar-track {
+     background: hsl(var(--background));
+   }
+
+   ::-webkit-scrollbar-thumb {
+     background: hsl(var(--muted-foreground) / 0.3);
+     border-radius: 0; /* Square corners */
+   }
+
+   ::-webkit-scrollbar-thumb:hover {
+     background: hsl(var(--muted-foreground) / 0.5);
+   }
+
    /* Show scrollbar explicitly for blog posts and notes */
    html.show-scrollbar {
      overflow-y: scroll;
    }
-   
+
    /* Hide scrollbar for regular pages while preserving space for it */
    html.hide-scrollbar {
      scrollbar-width: none; /* Firefox */
      -ms-overflow-style: none; /* IE and Edge */
    }
-   
+
    /* Hide scrollbar for Webkit browsers while preserving space */
    html.hide-scrollbar::-webkit-scrollbar {
      width: 0;
@@ -1520,5 +1538,108 @@ p .katex-display {
 
 .comment-content sub {
   bottom: -0.25em;
+}
+
+/* =============================================================================
+   SIDENOTES (Gwern-style)
+   ========================================================================== */
+
+/* Sidenote column responsive hiding */
+@media (max-width: 1199px) {
+  .sidenote-column {
+    display: none !important;
+  }
+}
+
+/* Sidenote column - hide scrollbar but keep scroll */
+.sidenote-column {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE/Edge */
+}
+
+.sidenote-column::-webkit-scrollbar {
+  display: none !important; /* Chrome/Safari/Opera */
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Citation highlighting when hovering its sidenote */
+.sidenote-citation-active {
+  background-color: hsl(var(--muted));
+  border-radius: 2px;
+  box-shadow: 0 0 0 2px hsl(var(--muted));
+}
+
+/* Sidenote hover effects */
+.sidenote:hover {
+  background-color: hsl(var(--background));
+  box-shadow: 0 0 0 12px hsl(var(--background));
+}
+
+/* Sidenote content - hide scrollbar but keep scroll */
+.sidenote-content-wrapper {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.sidenote-content-wrapper::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Sidenote content prose adjustments */
+.sidenote-content p {
+  margin: 0 0 0.5em 0;
+}
+
+.sidenote-content p:last-child {
+  margin-bottom: 0;
+}
+
+.sidenote-content a {
+  color: hsl(var(--foreground));
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+}
+
+.sidenote-content a:hover {
+  text-decoration-style: solid;
+}
+
+/* Footnote section styling (fallback when sidenotes hidden) */
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid hsl(var(--border));
+  font-size: 0.875rem;
+}
+
+.footnotes hr {
+  display: none;
+}
+
+.footnotes ol {
+  padding-left: 1.5rem;
+}
+
+.footnotes li {
+  margin-bottom: 0.75rem;
+}
+
+.footnotes li p {
+  margin: 0;
+}
+
+/* Footnote back-reference link */
+.footnote-backref {
+  margin-left: 0.25rem;
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+.footnote-backref:hover {
+  opacity: 1;
 }
 

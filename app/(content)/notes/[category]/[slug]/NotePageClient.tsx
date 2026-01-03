@@ -10,6 +10,7 @@ import { Footer } from "@/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Citation } from "@/components/citation";
 import { Comments } from "@/components/core/comments";
+import { Footnotes } from "@/components/core/footnotes";
 
 interface NoteMeta {
   title: string;
@@ -87,6 +88,7 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
     return (
       <div className="mt-8">
         <Comments />
+        <Footnotes containerSelector="#content" />
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />
         <Citation 
           title={note.title}

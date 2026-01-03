@@ -4,7 +4,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import ocsData from "@/data/ocs/ocs.json";
 import OCSPageClient from "./OCSPageClient";
-import { TableOfContents } from "@/components/typography/table-of-contents";
+import { TOC } from "@/components/core/toc";
+import { Sidenotes } from "@/components/core/sidenotes";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 import type { OCSMeta, OCSStatus, OCSConfidence } from "@/types/content";
 
@@ -134,17 +135,20 @@ export default async function OCSPage({ params }: OCSPageProps) {
         </div>
         
         {/* Main content */}
-        <main className="container max-w-[672px] mx-auto px-4">
+        <main id="content" className="container max-w-[672px] mx-auto px-4">
           {/* Table of Contents - at the top of content */}
           {headings.length > 0 && (
-            <TableOfContents headings={headings} />
+            <TOC headings={headings} />
           )}
-          
+
           <div className="ocs-content">
             <Character />
           </div>
           <OCSPageClient character={character} allCharacters={ocs} contentOnly={true} />
         </main>
+
+        {/* Sidenotes for wide viewports */}
+        <Sidenotes containerSelector="#content" />
       </div>
     </div>
   );

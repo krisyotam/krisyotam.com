@@ -5,7 +5,7 @@ export { PostWrapper } from './post-wrapper';
 export { PostHeader } from './post-header';
 // export { default as PostFooter } from './post-footer'; // File missing or not a module
 export { PostMap } from './post-map';
-export { default as LinkTags } from './link-tags';
+// LinkTags removed - dead code
 export type { MarginNote } from './margin-notes';
 export { default as Footnotes } from './footnotes';
 
@@ -18,7 +18,7 @@ export { default as Footnotes } from './footnotes';
 export { InternalLink } from './internal-link';
 // export { default as ExternalLink } from './external-link'; // File missing
 // export { default as UniversalLink } from './universal-link'; // File missing
-export { UniversalLinkModal } from './core/universal-link-modal';
+export { UniversalLinkModal, Popups } from './core/popups';
 
 // Book Components
 export { default as Book } from './posts/books/book';

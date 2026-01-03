@@ -29,7 +29,7 @@ export function TraktProfileHeader({
       <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
         <div className="relative h-32 w-32 rounded-lg overflow-hidden border-4 border-gray-200 dark:border-zinc-800">
           <Image
-            src={avatar || "/profiles/krisyotam-smoking-colored.jpg"}
+            src={avatar || "https://doc.krisyotam.com/site/krisyotam-smoking-colored.jpg"}
             alt={fullName}
             fill
             sizes="128px"

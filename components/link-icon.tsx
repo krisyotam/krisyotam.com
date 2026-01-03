@@ -37,6 +37,7 @@ const EXT_ICON_MAP: Record<string, string> = {
 
 // Domain keyword mapping
 const DOMAIN_ICON_MAP: Record<string, string> = {
+  "krisyotam.com": "krisyotam",
   "wikipedia.org": "wikipedia",
   "youtube.com": "youtube",
   "youtu.be": "youtube",

@@ -4,6 +4,8 @@ import { Citation } from "@/components/citation";
 import { Footer } from "@/app/(content)/essays/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { PageHeader } from "@/components/core";
+import { Comments } from "@/components/core/comments";
+import { Footnotes } from "@/components/core/footnotes";
 
 interface ProgymnasmataClientProps {
   post: any;
@@ -36,6 +38,8 @@ export default function ProgymnasmataPageClient({ post, headerOnly, contentOnly 
   if (contentOnly) {
     return (
       <div className="mt-8">
+        <Comments />
+        <Footnotes containerSelector="#content" />
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={""} />
         <Citation
           title={post.title}

@@ -21,7 +21,6 @@ const TikZ = dynamic(() => import('@/components/typography/tikz'), { ssr: false 
 import MiniBio from '@/components/posts/people/mini-bio'
 import Dropcap from '@/components/dropcap'
 import Bible from "@/components/references/christianity/1611bible"
-import LinkTags from "@/components/link-tags"
 import { Box } from "@/components/posts/typography/box"
 import { Column, ColumnContainer } from "@/components/posts/typography/column"
 import NameBreakdown from '@/components/name-breakdown'
@@ -202,7 +201,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     MangaDisplay,
     MangaPanel: MangaPanelDisplay,
     Dropcap,
-    LinkTags,
     Paper,
     Pfp,
     Redacted,

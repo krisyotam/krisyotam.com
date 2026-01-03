@@ -155,6 +155,7 @@
 		{ "slug": "yud", "svg": "yud.svg" },
         { "slug": "goodreads", "svg": "goodreads.svg" },
         { "slug": "arena", "svg": "arena.svg" },
-		{ "slug": "arena", "svg": "icons.svg" }
+		{ "slug": "arena", "svg": "icons.svg" },
+		{ "slug": "krisyotam", "svg": "krisyotam.png" }
 	]
 }
