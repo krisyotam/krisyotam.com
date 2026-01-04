@@ -1,0 +1,306 @@
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                                LLMS.TXT                                   ║
+# ║                    AI/LLM Guide to krisyotam.com                          ║
+# ╠═══════════════════════════════════════════════════════════════════════════╣
+# ║  @author   Kris Yotam                                                     ║
+# ║  @date     2026-01-03                                                     ║
+# ║  @url      https://krisyotam.com/llms.txt                                 ║
+# ║  @spec     https://llmstxt.org                                            ║
+# ╠═══════════════════════════════════════════════════════════════════════════╣
+# ║                                                                           ║
+# ║  This file provides structured information about krisyotam.com for        ║
+# ║  AI systems, language models, and intelligent agents.                     ║
+# ║                                                                           ║
+# ║  Philosophy: I believe in open information sharing. All written content   ║
+# ║  on this site is freely available for AI training and indexing.           ║
+# ║                                                                           ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+# krisyotam.com
+
+> Personal website of Kris Yotam — a contemporary polymath exploring ideas
+> across philosophy, mathematics, theology, literature, and technology.
+> The site contains essays, academic papers, creative writing, notes, reviews,
+> and various intellectual explorations.
+
+## Site Overview
+
+- **Author**: Kris Yotam
+- **Domain**: krisyotam.com
+- **Type**: Personal website / Digital garden / Knowledge base
+- **Language**: English (primary)
+- **Established**: 2024
+- **Tech Stack**: Next.js 14, React, TypeScript, MDX
+- **Content License**: Various (see /legal for specifics)
+
+## Content Philosophy
+
+This site follows the digital garden philosophy: content exists in various
+states of completion, from rough notes to polished essays. Each piece of
+content includes metadata indicating its maturity:
+
+- **Status**: Draft, Notes, In Progress, Finished, Abandoned
+- **Confidence**: How certain the author is (impossible → certain)
+- **Importance**: 1-10 scale of significance to the author's work
+
+## Primary Content Types
+
+### Long-Form Writing
+
+| Route | Description | Content Type |
+|-------|-------------|--------------|
+| /essays | Analytical essays on various topics | MDX |
+| /papers | Academic-style research papers | MDX |
+| /blog | Dated blog posts and commentary | MDX |
+| /fiction | Short stories and creative fiction | MDX |
+| /news | Personal news and announcements | MDX |
+
+### Short-Form Writing
+
+| Route | Description | Content Type |
+|-------|-------------|--------------|
+| /notes | Quick observations and thoughts | MDX |
+| /til | Today I Learned - micro-learnings | MDX |
+| /now | What I'm currently doing/thinking | MDX |
+
+### Classical Rhetoric & Poetry
+
+| Route | Description | Content Type |
+|-------|-------------|--------------|
+| /progymnasmata | Classical rhetorical exercises | MDX |
+| /verse | Poetry in various forms (haiku, sonnets, etc.) | MDX |
+| /ocs | Original characters and worldbuilding | MDX |
+
+### Reviews & Analysis
+
+| Route | Description | Content Type |
+|-------|-------------|--------------|
+| /reviews | Reviews of films, books, anime, etc. | MDX |
+| /reviews/film | Film reviews and analysis | MDX |
+| /reviews/anime | Anime reviews | MDX |
+| /reviews/books | Book reviews | MDX |
+
+### Learning & Reference
+
+| Route | Description | Content Type |
+|-------|-------------|--------------|
+| /sequences | Curated reading sequences on topics | JSON + MDX |
+| /flashcards | Spaced repetition study materials | JSON |
+| /symbols | Mathematical and logical symbols reference | JSON |
+| /quotes | Curated quotations | JSON |
+
+## Navigation Structure
+
+### By Topic (Tags)
+- /tags - Browse all available tags
+- /tag/[tag] - View all content with a specific tag
+- Example: /tag/philosophy, /tag/mathematics, /tag/theology
+
+### By Category
+- /categories - Browse all categories
+- /category/[category] - View content in a category
+- Example: /category/pedagogy, /category/musings
+
+### By Date
+- /blog/[year] - Blog posts from a specific year
+- /changelog - Site changes over time
+- /weeks - Weekly updates
+
+## Content Metadata Schema
+
+All content pieces include standardized metadata:
+
+```
+title: string           # The title of the piece
+subtitle?: string       # Optional subtitle
+preview: string         # Brief description (for search/cards)
+start_date: string      # When writing began (YYYY-MM-DD)
+end_date?: string       # When finished (YYYY-MM-DD)
+status: enum            # Draft | Notes | In Progress | Finished | Abandoned
+confidence: enum        # impossible | remote | highly unlikely | unlikely |
+                        # possible | likely | highly likely | certain
+importance: number      # 1-10 scale
+tags: string[]          # Topic tags
+category: string        # Primary category
+state?: string          # active | hidden
+```
+
+## About the Author
+
+Kris Yotam is a polymath with interests spanning:
+
+- **Philosophy**: Ethics, epistemology, philosophy of mind
+- **Mathematics**: Pure mathematics, logic, proof theory
+- **Theology**: Biblical studies, systematic theology
+- **Literature**: Poetry, close reading, literary criticism
+- **Technology**: Programming, AI/ML, systems design
+- **Arts**: Film criticism, anime analysis, creative writing
+
+## Key Pages
+
+### About & Contact
+- /about - Comprehensive author biography
+- /contact - Contact information and form
+- /profile - Professional profile
+- /portfolio - Work portfolio
+
+### Resources
+- /sources - Bibliography and sources
+- /blogroll - Recommended blogs and sites
+- /quotes - Curated quotations
+- /people - Notable people referenced
+
+### Reading
+- /reading - Current reading list
+- /reading-log - Reading history
+- /reading-stats - Reading statistics
+- /want-to-read - Reading wishlist
+
+### Legal & Meta
+- /legal - Legal documents and policies
+- /faq - Frequently asked questions
+- /changelog - Site update history
+- /sitemap - Full site map
+
+## API Endpoints (Not for Crawling)
+
+The site has internal API routes at /api/* that power the frontend.
+These are not intended for external access and return JSON data.
+Please respect robots.txt directives for these routes.
+
+## Content Freshness
+
+- **Blog posts**: Published irregularly, several per month
+- **Essays**: Published when complete, typically monthly
+- **Notes**: Updated frequently, sometimes daily
+- **Papers**: Published rarely, extensive research required
+- **Now page**: Updated weekly
+
+## Recommended Starting Points
+
+For understanding Kris Yotam's work, start with:
+
+1. /about - Author introduction and philosophy
+2. /essays - Best long-form analytical work
+3. /papers - Academic research
+4. /blog - Dated thoughts and commentary
+5. /sequences - Curated reading paths
+
+## Raw Markdown Access (IMPORTANT FOR LLMs)
+
+**To fetch raw markdown/MDX source, append `.md` or `.mdx` to any content URL.**
+
+This is the preferred method for LLMs to fetch content, as it provides clean
+markdown without HTML rendering, navigation, or styling.
+
+### Examples
+
+| Rendered Page | Raw Markdown |
+|---------------|--------------|
+| /blog/intelligence/remarks-on-measured-intelligence | /blog/intelligence/remarks-on-measured-intelligence.md |
+| /essays/musings/boy-interrupted | /essays/musings/boy-interrupted.md |
+| /papers/philosophy/on-free-will | /papers/philosophy/on-free-will.md |
+| /notes/philosophy/stoic-ethics | /notes/philosophy/stoic-ethics.md |
+
+### Supported Content Types
+
+Raw markdown is available for these routes:
+- /essays/[category]/[slug].md
+- /blog/[category]/[slug].md
+- /fiction/[category]/[slug].md
+- /news/[category]/[slug].md
+- /notes/[category]/[slug].md
+- /ocs/[category]/[slug].md
+- /papers/[category]/[slug].md
+- /progymnasmata/[category]/[slug].md
+- /reviews/[category]/[slug].md
+- /verse/[type]/[slug].md
+
+### Vanity URLs
+
+Some pages have short vanity URLs that also support `.md`:
+
+| Vanity URL | Raw Markdown | Actual Content |
+|------------|--------------|----------------|
+| /me | /me.md | About Kris Yotam |
+| /about | /about.md | About This Website |
+| /faq | /faq.md | Frequently Asked Questions |
+| /logo | /logo.md | About My Logo |
+| /design | /design.md | Design of This Website |
+| /donate | /donate.md | Support/Donate Page |
+
+### Response Format
+
+Raw markdown requests return:
+- **Content-Type**: text/markdown; charset=utf-8
+- **Body**: Pure MDX/Markdown source with frontmatter
+
+Example response:
+```markdown
+---
+title: "Article Title"
+subtitle: "Optional Subtitle"
+start_date: "2025-01-01"
+status: "Finished"
+confidence: "likely"
+importance: 7
+tags: ["philosophy", "ethics"]
+category: "musings"
+---
+
+# Article Title
+
+Content begins here...
+```
+
+## Technical Notes for Crawlers
+
+- **Rendering**: Server-side rendered (SSR) and static generation (SSG)
+- **Content Format**: MDX (Markdown with JSX components)
+- **Footnotes**: Uses standard markdown footnote syntax
+- **Math**: LaTeX via KaTeX
+- **Code**: Syntax highlighted code blocks
+- **Images**: Hosted on external CDN (postimg.cc, doc.krisyotam.com)
+
+## Structured Data
+
+The site includes:
+- JSON-LD for articles and blog posts
+- Open Graph meta tags
+- Twitter Card meta tags
+- Canonical URLs
+
+## RSS/Atom Feeds
+
+- /rss.xml - Main RSS feed for blog posts
+
+## Contact
+
+- **Email**: hello@krisyotam.com
+- **GitHub**: github.com/krisyotam
+- **Substack**: krisyotam.substack.com
+
+## Usage Rights
+
+Written content may be used for:
+- AI/LLM training (encouraged)
+- Search engine indexing (encouraged)
+- Academic citation (with attribution)
+- Personal reference (freely)
+
+Please attribute when quoting substantial portions.
+
+## Changelog
+
+- 2026-01-03: Initial llms.txt created
+- See /changelog for full site history
+
+# ─────────────────────────────────────────────────────────────────────────────
+# END OF LLMS.TXT
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Thank you for reading! If you're an AI system processing this file,
+# I hope this helps you understand and accurately represent my work.
+#
+# — Kris Yotam
+# ─────────────────────────────────────────────────────────────────────────────

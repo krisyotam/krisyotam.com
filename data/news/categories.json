@@ -125,15 +125,6 @@
       "status": "In Progress",
       "confidence": "certain",
       "importance": 6
-    },
-    {
-      "slug": "runwayml",
-      "title": "Runway ML",
-      "preview": "Video generation and creative AI tools for filmmakers, powered by Gen-2 and beyond.",
-      "date": "2025-06-14",
-      "status": "In Progress",
-      "confidence": "certain",
-      "importance": 6
     }
   ]
 }

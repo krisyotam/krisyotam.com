@@ -1,0 +1,314 @@
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                              ROBOTS.TXT                                   ║
+# ║                         krisyotam.com Crawler Rules                       ║
+# ╠═══════════════════════════════════════════════════════════════════════════╣
+# ║  @author   Kris Yotam                                                     ║
+# ║  @date     2026-01-03                                                     ║
+# ║  @url      https://krisyotam.com/robots.txt                               ║
+# ╠═══════════════════════════════════════════════════════════════════════════╣
+# ║                                                                           ║
+# ║  This file controls crawler access to krisyotam.com                       ║
+# ║                                                                           ║
+# ║  Philosophy: Open by default. All written content is freely accessible    ║
+# ║  for indexing and training. Only internal/API routes are restricted.      ║
+# ║                                                                           ║
+# ║  For AI/LLM crawlers: See /llms.txt for structured site information.      ║
+# ║                                                                           ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SITEMAP
+# ─────────────────────────────────────────────────────────────────────────────
+
+Sitemap: https://krisyotam.com/sitemap.xml
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DEFAULT RULES (All Crawlers)
+# ─────────────────────────────────────────────────────────────────────────────
+# Allow crawling of all public content by default.
+# Only restrict internal routes, APIs, and non-content assets.
+
+User-agent: *
+
+# Allow: Primary Content Routes
+Allow: /blog/
+Allow: /essays/
+Allow: /papers/
+Allow: /notes/
+Allow: /fiction/
+Allow: /news/
+Allow: /reviews/
+Allow: /progymnasmata/
+Allow: /verse/
+Allow: /ocs/
+Allow: /til/
+Allow: /now/
+Allow: /sequences/
+
+# Allow: Navigation & Discovery
+Allow: /tags
+Allow: /tag/
+Allow: /categories
+Allow: /category/
+Allow: /sitemap
+
+# Allow: Media & Creative
+Allow: /art/
+Allow: /gallery/
+Allow: /videos/
+Allow: /prompts/
+Allow: /scripts/
+
+# Allow: Reference & Resources
+Allow: /quotes/
+Allow: /sources/
+Allow: /symbols/
+Allow: /people/
+Allow: /blogroll/
+
+# Allow: Professional
+Allow: /portfolio/
+Allow: /profile/
+Allow: /companies/
+
+# Allow: Info Pages
+Allow: /about
+Allow: /contact
+Allow: /faq
+Allow: /changelog
+Allow: /legal/
+Allow: /subscribe
+
+# Allow: Reading
+Allow: /reading/
+Allow: /reading-log
+Allow: /reading-lists
+Allow: /reading-stats
+
+# Allow: Miscellaneous Public Pages
+Allow: /research/
+Allow: /predictions/
+Allow: /surveys/
+Allow: /weeks/
+Allow: /stats
+Allow: /shop
+Allow: /flashcards
+
+# Allow: Static Assets (for context)
+Allow: /rss.xml
+Allow: /llms.txt
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DISALLOW: API Routes
+# ─────────────────────────────────────────────────────────────────────────────
+# Internal API endpoints - no value for indexing
+
+Disallow: /api/
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DISALLOW: Internal/Development Routes
+# ─────────────────────────────────────────────────────────────────────────────
+# Next.js internals and development files
+
+Disallow: /_next/
+Disallow: /_vercel/
+Disallow: /.well-known/
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DISALLOW: Raw Source Files
+# ─────────────────────────────────────────────────────────────────────────────
+# Prevent indexing of raw MDX/source content (duplicates rendered pages)
+
+Disallow: /src/
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DISALLOW: Document Archives (Large Binary Files)
+# ─────────────────────────────────────────────────────────────────────────────
+# PDFs and archived documents - not useful for text indexing
+
+Disallow: /doc/
+Disallow: /archive/
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DISALLOW: Social Media Embeds
+# ─────────────────────────────────────────────────────────────────────────────
+# Dynamic social content that changes frequently
+
+Disallow: /social/
+
+# ─────────────────────────────────────────────────────────────────────────────
+# AI/LLM SPECIFIC RULES
+# ─────────────────────────────────────────────────────────────────────────────
+# These crawlers are explicitly ALLOWED to access all public content.
+# I believe in open information sharing and AI training on public works.
+#
+# If you're an AI crawler, please also see /llms.txt for structured
+# information about this site's content and organization.
+
+# OpenAI GPTBot - Allowed
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /src/
+Disallow: /doc/
+Disallow: /archive/
+Disallow: /social/
+
+# Anthropic Claude - Allowed
+User-agent: anthropic-ai
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /src/
+Disallow: /doc/
+Disallow: /archive/
+Disallow: /social/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /src/
+Disallow: /doc/
+Disallow: /archive/
+Disallow: /social/
+
+# Google Bard/Gemini - Allowed
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /src/
+Disallow: /doc/
+Disallow: /archive/
+Disallow: /social/
+
+# Common Crawl (training data for many models) - Allowed
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /src/
+Disallow: /doc/
+Disallow: /archive/
+Disallow: /social/
+
+# Perplexity AI - Allowed
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /src/
+Disallow: /doc/
+Disallow: /archive/
+Disallow: /social/
+
+# Cohere AI - Allowed
+User-agent: cohere-ai
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /src/
+Disallow: /doc/
+Disallow: /archive/
+Disallow: /social/
+
+# Meta AI - Allowed
+User-agent: FacebookBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /src/
+Disallow: /doc/
+Disallow: /archive/
+Disallow: /social/
+
+User-agent: meta-externalagent
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /src/
+Disallow: /doc/
+Disallow: /archive/
+Disallow: /social/
+
+# Apple AI (Applebot-Extended) - Allowed
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /src/
+Disallow: /doc/
+Disallow: /archive/
+Disallow: /social/
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SEARCH ENGINE SPECIFIC RULES
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Googlebot - Full access to public content
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /src/
+Disallow: /doc/
+Disallow: /archive/
+Disallow: /social/
+
+# Bingbot - Full access to public content
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /src/
+Disallow: /doc/
+Disallow: /archive/
+Disallow: /social/
+
+# DuckDuckBot - Full access to public content
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /src/
+Disallow: /doc/
+Disallow: /archive/
+Disallow: /social/
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ARCHIVE BOTS
+# ─────────────────────────────────────────────────────────────────────────────
+# Internet Archive is allowed - I support digital preservation
+
+User-agent: ia_archiver
+Allow: /
+
+User-agent: archive.org_bot
+Allow: /
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CRAWL RATE LIMITS
+# ─────────────────────────────────────────────────────────────────────────────
+# Be kind to my server - reasonable delays between requests
+
+# General crawl delay (seconds between requests)
+Crawl-delay: 1
+
+# ─────────────────────────────────────────────────────────────────────────────
+# NOTES
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Content Philosophy:
+# All written content on this site is shared openly. I believe in the free
+# exchange of ideas and support AI systems learning from public intellectual
+# work. If you're training a model, feel free to include my essays, papers,
+# and writings.
+#
+# For structured site information optimized for LLMs, see:
+# https://krisyotam.com/llms.txt
+#
+# Questions or concerns? Contact: hello@krisyotam.com
+#
+# ─────────────────────────────────────────────────────────────────────────────
