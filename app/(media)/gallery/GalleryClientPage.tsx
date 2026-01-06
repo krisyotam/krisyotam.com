@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { PageHeader } from "@/components/core";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
-import categoriesData from "@/data/gallery/categories.json";
 
 interface ArtworkItem {
   id: string;
@@ -34,8 +33,7 @@ export default function GalleryClientPage({ artworks, initialCategory = "all" }:
   }));
 
   function formatCategoryDisplayName(slug: string): string {
-    const category = categoriesData.categories.find(cat => cat.slug === slug);
-    return category ? category.title : slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    return slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   }
 
   const filteredArtworks = artworks.filter(artwork => {

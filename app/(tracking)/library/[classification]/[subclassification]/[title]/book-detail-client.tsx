@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { ArrowLeft, Copy, Check, ExternalLink, Share2, BookOpen, Calendar, Building, Hash, Tag, Globe, MapPin, User } from 'lucide-react'
+import { ArrowLeft, Copy, Check, ExternalLink, Share2, BookOpen, Calendar, Building, Hash, Tag, Globe, MapPin } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -9,35 +9,13 @@ import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Link from 'next/link'
 import Image from 'next/image'
-import { PostHeader } from '@/components/post-header'
+import { PostHeader } from "@/components/core"
 import { Citation } from '@/components/citation'
 import { Footer } from '@/app/(content)/essays/components/footer'
-
-type Author = {
-  id: string
-  name: string
-  firstName?: string
-  lastName?: string
-  bio?: string
-  affiliations?: string[]
-  specializations?: string[]
-  website?: string
-  orcid?: string
-  slug?: string
-  fullName?: string
-  degrees?: string[]
-  university?: string
-  currentAffiliation?: string
-  previousAffiliations?: string[]
-  fieldOfExpertise?: string[]
-  notableAchievements?: string[]
-  role?: string
-}
 
 type Book = {
   title: string
   slug: string
-  authors?: Author[]
   authorName: string
   publisher: string
   yearPublished: string
@@ -195,9 +173,8 @@ export function BookDetailClient({ book }: BookDetailClientProps) {
           </div>
         )}        {/* Content Tabs */}
         <Tabs defaultValue="details" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="details">Details</TabsTrigger>
-            <TabsTrigger value="authors">Authors</TabsTrigger>
             <TabsTrigger value="topics">Topics</TabsTrigger>
           </TabsList>
 
@@ -355,165 +332,6 @@ export function BookDetailClient({ book }: BookDetailClientProps) {
                 </CardContent>
               </Card>
             )}
-          </TabsContent>
-
-          <TabsContent value="authors" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Author Information</CardTitle>
-                <CardDescription>
-                  Details about the book's {book.authors && book.authors.length > 1 ? 'authors' : 'author'}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                {book.authors && book.authors.length > 0 ? (
-                  <div className="space-y-6">
-                    {book.authors.map((author, index) => (
-                      <div key={author.id || index} className="space-y-4">
-                        <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                            <User className="w-5 h-5 text-primary" />
-                          </div>                          <div className="flex-1">
-                            <h4 className="font-medium">{author.name}</h4>
-                            {author.fullName && author.fullName !== author.name && (
-                              <p className="text-xs text-muted-foreground">
-                                Full name: {author.fullName}
-                              </p>
-                            )}
-                            {author.bio && (
-                              <p className="text-sm text-muted-foreground mt-1">
-                                {author.bio}
-                              </p>
-                            )}
-                            
-                            {author.currentAffiliation && (
-                              <div className="mt-2">
-                                <span className="text-xs font-medium text-muted-foreground">Current Affiliation:</span>
-                                <div className="mt-1">
-                                  <Badge variant="outline" className="text-xs">
-                                    {author.currentAffiliation}
-                                  </Badge>
-                                </div>
-                              </div>
-                            )}
-
-                            {author.degrees && author.degrees.length > 0 && (
-                              <div className="mt-2">
-                                <span className="text-xs font-medium text-muted-foreground">Education:</span>
-                                <div className="flex flex-wrap gap-1 mt-1">
-                                  {author.degrees.map((degree, idx) => (
-                                    <Badge key={idx} variant="secondary" className="text-xs">
-                                      {degree}
-                                    </Badge>
-                                  ))}
-                                </div>
-                                {author.university && (
-                                  <p className="text-xs text-muted-foreground mt-1">
-                                    from {author.university}
-                                  </p>
-                                )}
-                              </div>
-                            )}
-                            
-                            {author.fieldOfExpertise && author.fieldOfExpertise.length > 0 && (
-                              <div className="mt-2">
-                                <span className="text-xs font-medium text-muted-foreground">Expertise:</span>
-                                <div className="flex flex-wrap gap-1 mt-1">
-                                  {author.fieldOfExpertise.map((field, idx) => (
-                                    <Badge key={idx} variant="default" className="text-xs">
-                                      {field}
-                                    </Badge>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-
-                            {author.notableAchievements && author.notableAchievements.length > 0 && (
-                              <div className="mt-2">
-                                <span className="text-xs font-medium text-muted-foreground">Notable Achievements:</span>
-                                <ul className="text-xs text-muted-foreground mt-1 ml-3 space-y-1">
-                                  {author.notableAchievements.map((achievement, idx) => (
-                                    <li key={idx} className="list-disc">
-                                      {achievement}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            )}
-
-                            {author.previousAffiliations && author.previousAffiliations.length > 0 && (
-                              <div className="mt-2">
-                                <span className="text-xs font-medium text-muted-foreground">Previous Affiliations:</span>
-                                <div className="flex flex-wrap gap-1 mt-1">
-                                  {author.previousAffiliations.map((affiliation, idx) => (
-                                    <Badge key={idx} variant="outline" className="text-xs">
-                                      {affiliation}
-                                    </Badge>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-                            
-                            {author.affiliations && author.affiliations.length > 0 && (
-                              <div className="mt-2">
-                                <span className="text-xs font-medium text-muted-foreground">Affiliations:</span>
-                                <div className="flex flex-wrap gap-1 mt-1">
-                                  {author.affiliations.map((affiliation, idx) => (
-                                    <Badge key={idx} variant="outline" className="text-xs">
-                                      {affiliation}
-                                    </Badge>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-                            
-                            {author.specializations && author.specializations.length > 0 && (
-                              <div className="mt-2">
-                                <span className="text-xs font-medium text-muted-foreground">Specializations:</span>
-                                <div className="flex flex-wrap gap-1 mt-1">
-                                  {author.specializations.map((spec, idx) => (
-                                    <Badge key={idx} variant="secondary" className="text-xs">
-                                      {spec}
-                                    </Badge>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-                            
-                            {(author.website || author.orcid) && (
-                              <div className="flex gap-2 mt-3">
-                                {author.website && (
-                                  <Button variant="outline" size="sm" asChild>
-                                    <a href={author.website} target="_blank" rel="noopener noreferrer">
-                                      <Globe className="w-3 h-3 mr-1" />
-                                      Website
-                                    </a>
-                                  </Button>
-                                )}
-                                {author.orcid && (
-                                  <Button variant="outline" size="sm" asChild>
-                                    <a href={`https://orcid.org/${author.orcid}`} target="_blank" rel="noopener noreferrer">
-                                      <ExternalLink className="w-3 h-3 mr-1" />
-                                      ORCID
-                                    </a>
-                                  </Button>
-                                )}
-                              </div>
-                            )}                          </div>
-                        </div>
-                        {book.authors && index < book.authors.length - 1 && <Separator />}
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-6 text-muted-foreground">
-                    <User className="w-8 h-8 mx-auto mb-2" />
-                    <p>Author: {book.authorName}</p>
-                    <p className="text-sm">No detailed author information available</p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
           </TabsContent>
 
           <TabsContent value="topics" className="space-y-6">

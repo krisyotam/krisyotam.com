@@ -1,8 +1,110 @@
 "use client"
 
-import { useState } from "react"
 import CoreSkills from "@/components/core-skills"
-import skillsData from "@/data/about/core-skills.json"
+
+const CORE_SKILLS_DATA = {
+  skillCategories: [
+    {
+      id: "math",
+      name: "Mathematics",
+      color: {
+        bg: "bg-[#E6F2FF]",
+        border: "border-[#B3D9FF]",
+        text: "text-[#4D94FF]",
+        hover: "hover:bg-[#CCE6FF]"
+      },
+      skills: ["Calculus", "Linear Algebra", "Statistics", "Probability", "Discrete Math"]
+    },
+    {
+      id: "physics",
+      name: "Physics",
+      color: {
+        bg: "bg-[#F5E6FF]",
+        border: "border-[#E6CCFF]",
+        text: "text-[#9966CC]",
+        hover: "hover:bg-[#EBD9FF]"
+      },
+      skills: ["Mechanics", "Electromagnetism", "Quantum Physics", "Thermodynamics"]
+    },
+    {
+      id: "cs",
+      name: "Computer Science",
+      color: {
+        bg: "bg-[#E6FFEF]",
+        border: "border-[#B3FFD9]",
+        text: "text-[#33CC85]",
+        hover: "hover:bg-[#CCFFE6]"
+      },
+      skills: ["Algorithms", "Data Structures", "Machine Learning", "Software Engineering", "Web Development", "Database Systems"]
+    },
+    {
+      id: "finance",
+      name: "Finance",
+      color: {
+        bg: "bg-[#E6FFF9]",
+        border: "border-[#B3FFED]",
+        text: "text-[#00CCAA]",
+        hover: "hover:bg-[#CCFFF5]"
+      },
+      skills: ["Investment Analysis", "Financial Modeling", "Risk Management", "Portfolio Theory"]
+    },
+    {
+      id: "business",
+      name: "Business",
+      color: {
+        bg: "bg-[#FFF8E6]",
+        border: "border-[#FFEDB3]",
+        text: "text-[#FFCC66]",
+        hover: "hover:bg-[#FFF2CC]"
+      },
+      skills: ["Strategic Planning", "Marketing", "Operations Management", "Entrepreneurship"]
+    },
+    {
+      id: "biology",
+      name: "Biology",
+      color: {
+        bg: "bg-[#FFEBEB]",
+        border: "border-[#FFCCCC]",
+        text: "text-[#FF8080]",
+        hover: "hover:bg-[#FFD9D9]"
+      },
+      skills: ["Molecular Biology", "Genetics", "Ecology", "Physiology"]
+    },
+    {
+      id: "research",
+      name: "Research Methods",
+      color: {
+        bg: "bg-[#EBE6FF]",
+        border: "border-[#D1CCFF]",
+        text: "text-[#8080FF]",
+        hover: "hover:bg-[#DED9FF]"
+      },
+      skills: ["Experimental Design", "Data Analysis", "Scientific Writing", "Literature Review"]
+    },
+    {
+      id: "global",
+      name: "Global Studies",
+      color: {
+        bg: "bg-[#E6FAFF]",
+        border: "border-[#B3F0FF]",
+        text: "text-[#33CCFF]",
+        hover: "hover:bg-[#CCF5FF]"
+      },
+      skills: ["International Relations", "Cultural Studies", "Global Economics", "Geopolitics"]
+    },
+    {
+      id: "philosophy",
+      name: "Philosophy",
+      color: {
+        bg: "bg-[#FFE6F0]",
+        border: "border-[#FFB3D9]",
+        text: "text-[#FF66A3]",
+        hover: "hover:bg-[#FFCCE6]"
+      },
+      skills: ["Ethics", "Logic", "Epistemology", "Metaphysics", "Political Philosophy"]
+    }
+  ]
+}
 
 export default function CoreSkillsComponent() {
   return (
@@ -11,7 +113,7 @@ export default function CoreSkillsComponent() {
         A visualization of my primary skills and knowledge areas across various disciplines.
       </p>
       <div className="max-w-[900px] mx-auto">
-        <CoreSkills data={skillsData} className="max-w-full" />
+        <CoreSkills data={CORE_SKILLS_DATA} className="max-w-full" />
       </div>
     </div>
   )

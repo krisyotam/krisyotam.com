@@ -1,53 +1,71 @@
+/**
+ * =============================================================================
+ * Paper Tag Page
+ * =============================================================================
+ *
+ * Dynamic route for displaying papers with a specific tag.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import PapersTaggedPage from "./PapersTaggedPage";
-import papersData from "@/data/papers/papers.json";
-import tagsData from "@/data/papers/tags.json";
+import { getActiveContentByType, getTagsByContentType } from "@/lib/data";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { PaperMeta } from "@/types/content";
 
+// =============================================================================
+// Types
+// =============================================================================
+
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-// Helper function to convert tag title to slug
+// =============================================================================
+// Helpers
+// =============================================================================
+
 function titleToSlug(title: string): string {
   return title
     .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
     .trim();
 }
 
+// =============================================================================
+// Static Generation
+// =============================================================================
+
 export async function generateStaticParams() {
-  // Get all unique tags from active papers data only
-  const activePapers = papersData.papers.filter(paper => paper.state === "active");
+  const papers = getActiveContentByType('papers');
+
   const allTagsSet = new Set<string>();
-  
-  activePapers.forEach(paper => {
+  papers.forEach(paper => {
     if (paper.tags && Array.isArray(paper.tags)) {
-      paper.tags.forEach(tag => allTagsSet.add(tag));
+      paper.tags.forEach(tag => allTagsSet.add(titleToSlug(tag)));
     }
   });
-  
-  const allTags = Array.from(allTagsSet);
-  
-  console.log('Available tags:', allTags);
-  console.log('Slugified tags:', allTags.map(tag => titleToSlug(tag)));
-  
-  return allTags.map(tag => ({
-    slug: titleToSlug(tag)
-  }));
+
+  return Array.from(allTagsSet).map(slug => ({ slug }));
 }
 
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  // Convert slug back to tag name
-  const tagSlug = params.slug;
-  const activePapers = papersData.papers.filter(paper => paper.state === "active");
-  
-  // Find the original tag name
+  const { slug: tagSlug } = await params;
+  const papers = getActiveContentByType('papers');
+  const dbTags = getTagsByContentType('papers');
+
+  // Find original tag name
   let originalTag: string | undefined;
-  for (const paper of activePapers) {
+  for (const paper of papers) {
     if (paper.tags && Array.isArray(paper.tags)) {
       originalTag = paper.tags.find(tag => titleToSlug(tag) === tagSlug);
       if (originalTag) break;
@@ -55,14 +73,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   if (!originalTag) {
-    return {
-      title: "Tag Not Found | Papers",
-    };
+    return { title: "Tag Not Found | Papers" };
   }
 
-  // Check if this tag has custom metadata in tags.json
-  const customTag = tagsData.tags.find(t => t.slug === tagSlug);
-  const tagTitle = customTag ? customTag.title : originalTag;
+  const dbTag = dbTags.find(t => t.slug === tagSlug);
+  const tagTitle = dbTag?.title || originalTag;
 
   return {
     title: `${tagTitle} Papers | Kris Yotam`,
@@ -70,20 +85,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function PapersTagPage({ params }: PageProps) {
-  const tagSlug = params.slug;
-  
-  // Filter papers to only show active ones first
-  const activePapers = papersData.papers.filter(paper => paper.state === "active");
-  
-  // Find the original tag name and filter papers by tag
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function PapersTagPage({ params }: PageProps) {
+  const { slug: tagSlug } = await params;
+
+  // Fetch data from database
+  const allPapers = getActiveContentByType('papers');
+  const dbTags = getTagsByContentType('papers');
+
+  // Find matching papers and original tag name
   let originalTag: string | undefined;
-  const papersWithTag = activePapers.filter(paper => {
+  const papersWithTag = allPapers.filter(paper => {
     if (paper.tags && Array.isArray(paper.tags)) {
       const foundTag = paper.tags.find(tag => titleToSlug(tag) === tagSlug);
-      if (foundTag && !originalTag) {
-        originalTag = foundTag;
-      }
+      if (foundTag && !originalTag) originalTag = foundTag;
       return !!foundTag;
     }
     return false;
@@ -93,19 +111,19 @@ export default function PapersTagPage({ params }: PageProps) {
     notFound();
   }
 
-  // Check if this tag has custom metadata in tags.json
-  const customTag = tagsData.tags.find(t => t.slug === tagSlug);
-  
-  // Create header data for this tag
-  const tagHeaderData = customTag ? {
-    title: customTag.title,
+  // Get tag metadata
+  const dbTag = dbTags.find(t => t.slug === tagSlug);
+
+  // Build header data
+  const tagHeaderData = dbTag ? {
+    title: dbTag.title,
     subtitle: "",
-    start_date: customTag.date || "2025-01-01",
+    start_date: "2025-01-01",
     end_date: new Date().toISOString().split('T')[0],
-    preview: customTag.preview,
-    status: customTag.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
-    confidence: customTag.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-    importance: customTag.importance,
+    preview: dbTag.preview || `Papers tagged with ${dbTag.title}.`,
+    status: "Active" as const,
+    confidence: "certain" as const,
+    importance: dbTag.importance,
     backText: "Tags",
     backHref: "/papers/tags"
   } : {
@@ -121,12 +139,14 @@ export default function PapersTagPage({ params }: PageProps) {
     backHref: "/papers/tags"
   };
 
-  // Sort papers by date (newest first) and transform to PaperMeta
-  const papers = [...papersWithTag].sort((a, b) => {
-    const aDate = a.end_date || a.start_date;
-    const bDate = b.end_date || b.start_date;
-    return new Date(bDate).getTime() - new Date(aDate).getTime();
-  }).map(paper => ({
+  // Sort and transform papers
+  const papers: PaperMeta[] = [...papersWithTag]
+    .sort((a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return new Date(bDate).getTime() - new Date(aDate).getTime();
+    })
+    .map(paper => ({
       title: paper.title,
       subtitle: paper.preview,
       preview: paper.preview,

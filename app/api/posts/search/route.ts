@@ -1,17 +1,11 @@
-// app/api/posts/posts.ts
-import { promises as fs } from "fs"
-import path from "path"
+// app/api/posts/search/route.ts
+import { getContentByType } from "@/lib/data"
 
 /**
- * Returns a plain array of posts (unwrapped) for client code
+ * Returns a plain array of blog posts for client code
  */
 export async function GET(req: Request) {
-  const filePath = path.join(process.cwd(), "data", "blog", "blog.json")
-  const raw = await fs.readFile(filePath, "utf8")
-  const data = JSON.parse(raw)
-
-  // If your feed.json is { posts: [...] }, extract it; otherwise assume data is already an array
-  const posts = Array.isArray(data) ? data : data.posts
+  const posts = getContentByType('blog')
 
   return new Response(JSON.stringify(posts), {
     status: 200,

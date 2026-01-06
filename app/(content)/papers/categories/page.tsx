@@ -1,26 +1,54 @@
+/**
+ * =============================================================================
+ * Papers Categories Page
+ * =============================================================================
+ *
+ * Server component that displays all paper categories.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import PapersCategoriesClientPage from "./PapersCategoriesClientPage";
-import categoriesData from "@/data/papers/categories.json";
-import papersData from "@/data/papers/papers.json";
+import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
 import type { Metadata } from "next";
+
+// =============================================================================
+// Metadata
+// =============================================================================
 
 export const metadata: Metadata = {
   title: "Papers Categories",
   description: "Browse all paper categories and their descriptions",
 };
 
-export default function PapersCategoriesPage() {
-  // Get all unique categories that actually exist in papers (only active papers)
-  const activePapers = papersData.papers.filter(paper => paper.state === "active");
-  const existingCategories = Array.from(new Set(activePapers.map(paper => paper.category)));
-  
-  // Filter categories.json to only include categories that exist in papers
-  const categories = categoriesData.categories
-    .filter(category => {
-      // Check if this category exists in the papers
-      return existingCategories.includes(category.title) || 
-             existingCategories.includes(category.slug) ||
-             existingCategories.some(cat => cat.toLowerCase().replace(/\s+/g, "-") === category.slug);
-    })
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function PapersCategoriesPage() {
+  // Fetch data from database
+  const papers = getActiveContentByType('papers');
+  const allCategories = getCategoriesByContentType('papers');
+
+  // Get unique categories that exist in active papers
+  const existingCategorySlugs = new Set(
+    papers.map(paper => paper.category?.toLowerCase().replace(/\s+/g, "-"))
+  );
+
+  // Filter, transform and sort categories by importance
+  const categories = allCategories
+    .filter(category => existingCategorySlugs.has(category.slug))
+    .map(category => ({
+      slug: category.slug,
+      title: category.title,
+      preview: category.preview || `Papers in the ${category.title} category.`,
+      date: category.date || new Date().toISOString().split('T')[0],
+      status: category.status || "Active",
+      confidence: category.confidence || "certain",
+      importance: category.importance || 5,
+    }))
     .sort((a, b) => b.importance - a.importance);
 
   return (

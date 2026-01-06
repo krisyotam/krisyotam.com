@@ -1,44 +1,70 @@
-// app/essays/[category]/[slug]/page.tsx
+/**
+ * =============================================================================
+ * Essay Detail Page
+ * =============================================================================
+ *
+ * Dynamic route for displaying individual essays.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 export const dynamic = 'force-static';
 export const revalidate = false;
 
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import essaysData from "@/data/essays/essays.json";
+import { getContentByType } from "@/lib/data";
 import EssayPageClient from "./EssayPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 import type { Post } from "@/lib/posts";
 
+// =============================================================================
+// Types
+// =============================================================================
+
 interface EssayPageProps {
-  params: { category: string; slug: string };
+  params: Promise<{ category: string; slug: string }>;
 }
 
+// =============================================================================
+// Static Generation
+// =============================================================================
+
 export async function generateStaticParams() {
-  // Generate all category/slug combinations
-  return essaysData.essays.map(essay => ({
+  const essays = getContentByType('essays');
+
+  return essays.map(essay => ({
     category: essay.category,
     slug: essay.slug
   }));
 }
 
-export async function generateMetadata({ params }: EssayPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const essayItem = essaysData.essays.find(e => 
-    e.category === params.category && e.slug === params.slug
+// =============================================================================
+// Metadata
+// =============================================================================
+
+export async function generateMetadata(
+  { params }: EssayPageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { category, slug } = await params;
+  const essays = getContentByType('essays');
+
+  const essayItem = essays.find(e =>
+    e.category === category && e.slug === slug
   );
 
   if (!essayItem) {
-    return {
-      title: "Essay Not Found",
-    };
+    return { title: "Essay Not Found" };
   }
 
-  // Get cover image URL - prioritize cover_image field
-  const coverUrl = essayItem.cover_image || 
-    `https://picsum.photos/1200/630?text=${encodeURIComponent(essayItem.title)}`
-
-  const url = `https://krisyotam.com/essays/${params.category}/${params.slug}`;
+  const coverUrl = essayItem.cover_image ||
+    `https://picsum.photos/1200/630?text=${encodeURIComponent(essayItem.title)}`;
+  const url = `https://krisyotam.com/essays/${category}/${slug}`;
 
   return {
     title: `${essayItem.title} | Kris Yotam`,
@@ -66,39 +92,57 @@ export async function generateMetadata({ params }: EssayPageProps, parent: Resol
   };
 }
 
+// =============================================================================
+// Page Component
+// =============================================================================
+
 export default async function EssayPage({ params }: EssayPageProps) {
-  const essayItem = essaysData.essays.find(e => 
-    e.category === params.category && e.slug === params.slug
+  const { category, slug } = await params;
+  const essays = getContentByType('essays');
+
+  const essayItem = essays.find(e =>
+    e.category === category && e.slug === slug
   );
 
   if (!essayItem) {
     notFound();
-  }  // Extract headings from the essay MDX content
-  const headings = await extractHeadingsFromMDX('essays', params.slug, params.category);
+  }
 
-  // Dynamically import the MDX file based on category and slug
-  const EssayArticle = (await import(`@/app/(content)/essays/content/${params.category}/${params.slug}.mdx`)).default;  return (
+  // Extract headings from MDX content
+  const headings = await extractHeadingsFromMDX('essays', slug, category);
+
+  // Dynamically import MDX file
+  const EssayArticle = (
+    await import(`@/app/(content)/essays/content/${category}/${slug}.mdx`)
+  ).default;
+
+  return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Header section - full width */}
+        {/* Header section */}
         <div className="mb-8">
-          <EssayPageClient essayData={essayItem} allEssays={essaysData.essays} headerOnly={true} />
+          <EssayPageClient
+            essayData={essayItem}
+            allEssays={essays}
+            headerOnly={true}
+          />
         </div>
-        
+
         {/* Main content */}
         <main id="content" className="container max-w-[672px] mx-auto px-4">
-          {/* Table of Contents - at the top of content */}
-          {headings.length > 0 && (
-            <TOC headings={headings} />
-          )}
+          {headings.length > 0 && <TOC headings={headings} />}
 
           <div className="essays-content">
             <EssayArticle />
           </div>
-          <EssayPageClient essayData={essayItem} allEssays={essaysData.essays} contentOnly={true} />
+
+          <EssayPageClient
+            essayData={essayItem}
+            allEssays={essays}
+            contentOnly={true}
+          />
         </main>
 
-        {/* Sidenotes for wide viewports */}
         <Sidenotes containerSelector="#content" />
       </div>
     </div>

@@ -1,31 +1,50 @@
+/**
+ * =============================================================================
+ * Papers Category Page
+ * =============================================================================
+ *
+ * Dynamic route for displaying papers within a specific category.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PapersClientPage from "../PapersClientPage";
-import papersData from "@/data/papers/papers.json";
-import categoriesData from "@/data/papers/categories.json";
-import type { PaperMeta } from "@/types/content";
+import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
+import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/content";
+
+// =============================================================================
+// Types
+// =============================================================================
 
 interface CategoryPageProps {
-  params: {
-    category: string;
-  };
+  params: Promise<{ category: string }>;
 }
 
-// Generate static params for all categories
+// =============================================================================
+// Static Generation
+// =============================================================================
+
 export async function generateStaticParams() {
-  return categoriesData.categories.map((category) => ({
-    category: category.slug,
-  }));
+  const categories = getCategoriesByContentType('papers');
+  return categories.map(category => ({ category: category.slug }));
 }
 
-// Generate metadata for each category
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-  const categoryData = categoriesData.categories.find(cat => cat.slug === params.category);
-  
+  const { category: categorySlug } = await params;
+  const categories = getCategoriesByContentType('papers');
+
+  const categoryData = categories.find(cat => cat.slug === categorySlug);
+
   if (!categoryData) {
-    return {
-      title: "Category Not Found",
-    };
+    return { title: "Category Not Found" };
   }
 
   return {
@@ -34,20 +53,37 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   };
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
-  const allPapers: PaperMeta[] = papersData.papers as PaperMeta[];
-  
-  // Filter papers for this category
-  const categoryData = categoriesData.categories.find(cat => cat.slug === params.category);
-  
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { category: categorySlug } = await params;
+
+  // Fetch data from database
+  const allPapers = getActiveContentByType('papers');
+  const categories = getCategoriesByContentType('papers');
+
+  const categoryData = categories.find(cat => cat.slug === categorySlug);
+
   if (!categoryData) {
     notFound();
   }
 
-  // Filter out hidden papers and only include those in the current category
-  const filteredPapers = allPapers.filter(paper => 
-    paper.category === params.category && paper.state !== "hidden"
-  );
+  // Filter and transform papers
+  const filteredPapers: PaperMeta[] = allPapers
+    .filter(paper => paper.category === categorySlug)
+    .map(paper => ({
+      ...paper,
+      status: paper.status as PaperStatus,
+      confidence: paper.confidence as PaperConfidence
+    }));
 
-  return <PapersClientPage papers={filteredPapers} initialCategory={params.category} />;
+  return (
+    <PapersClientPage
+      papers={filteredPapers}
+      categories={categories}
+      initialCategory={categorySlug}
+    />
+  );
 }

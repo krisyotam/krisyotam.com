@@ -1,58 +1,74 @@
+/**
+ * =============================================================================
+ * Papers Category Page
+ * =============================================================================
+ *
+ * Dynamic route for displaying papers in a specific category.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import PapersCategoryPage from "./PapersCategoryPage";
-import papersData from "@/data/papers/papers.json";
-import categoriesData from "@/data/papers/categories.json";
+import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { PaperMeta } from "@/types/content";
 
+// =============================================================================
+// Types
+// =============================================================================
+
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
+
+// =============================================================================
+// Helpers
+// =============================================================================
+
+function slugifyCategory(category: string) {
+  return category.toLowerCase().replace(/\s+/g, "-");
+}
+
+// =============================================================================
+// Static Generation
+// =============================================================================
 
 export async function generateStaticParams() {
-  // Get all unique categories from active papers data only
-  const activePapers = papersData.papers.filter(paper => paper.state === "active");
-  const allCategoriesSet = new Set<string>();
-  
-  activePapers.forEach(paper => {
+  const papers = getActiveContentByType('papers');
+  const categorySlugs = new Set<string>();
+
+  papers.forEach(paper => {
     if (paper.category) {
-      allCategoriesSet.add(paper.category);
+      categorySlugs.add(slugifyCategory(paper.category));
     }
   });
-  
-  const allCategories = Array.from(allCategoriesSet);
-  
-  console.log('Available categories:', allCategories);
-  console.log('Slugified categories:', allCategories.map(cat => cat.toLowerCase().replace(/\s+/g, "-")));
-  
-  return allCategories.map(category => ({
-    slug: category.toLowerCase().replace(/\s+/g, "-")
-  }));
+
+  return Array.from(categorySlugs).map(slug => ({ slug }));
 }
 
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  // Convert slug back to category name
-  const categorySlug = params.slug;
-  const activePapers = papersData.papers.filter(paper => paper.state === "active");
-  
+  const { slug: categorySlug } = await params;
+  const papers = getActiveContentByType('papers');
+  const categories = getCategoriesByContentType('papers');
+
   // Find the original category name
-  let originalCategory: string | undefined;
-  for (const paper of activePapers) {
-    if (paper.category && paper.category.toLowerCase().replace(/\s+/g, "-") === categorySlug) {
-      originalCategory = paper.category;
-      break;
-    }
+  const paperWithCategory = papers.find(paper =>
+    paper.category && slugifyCategory(paper.category) === categorySlug
+  );
+
+  if (!paperWithCategory) {
+    return { title: "Category Not Found | Papers" };
   }
 
-  if (!originalCategory) {
-    return {
-      title: "Category Not Found | Papers",
-    };
-  }
-
-  // Check if this category has custom metadata in categories.json
-  const customCategory = categoriesData.categories.find(c => c.slug === categorySlug);
-  const categoryTitle = customCategory ? customCategory.title : originalCategory;
+  const customCategory = categories.find(c => c.slug === categorySlug);
+  const categoryTitle = customCategory?.title || paperWithCategory.category;
 
   return {
     title: `${categoryTitle} Papers | Kris Yotam`,
@@ -60,16 +76,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function PaperCategoryPage({ params }: PageProps) {
-  const categorySlug = params.slug;
-  
-  // Filter papers to only show active ones first
-  const activePapers = papersData.papers.filter(paper => paper.state === "active");
-  
-  // Find the original category name and filter papers by category
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function PaperCategoryPage({ params }: PageProps) {
+  const { slug: categorySlug } = await params;
+
+  // Fetch data from database
+  const allPapers = getActiveContentByType('papers');
+  const categories = getCategoriesByContentType('papers');
+
+  // Find the original category name and filter papers
   let originalCategory: string | undefined;
-  const papersInCategory = activePapers.filter(paper => {
-    if (paper.category && paper.category.toLowerCase().replace(/\s+/g, "-") === categorySlug) {
+  const papersInCategory = allPapers.filter(paper => {
+    if (paper.category && slugifyCategory(paper.category) === categorySlug) {
       if (!originalCategory) {
         originalCategory = paper.category;
       }
@@ -82,20 +103,20 @@ export default function PaperCategoryPage({ params }: PageProps) {
     notFound();
   }
 
-  // Check if this category has custom metadata in categories.json
-  const customCategory = categoriesData.categories.find(c => c.slug === categorySlug);
-  
+  // Check if this category has custom metadata
+  const customCategory = categories.find(c => c.slug === categorySlug);
+
   // Create header data for this category
   const categoryHeaderData = customCategory ? {
     title: customCategory.title,
     subtitle: "",
-    start_date: (customCategory as any).start_date || customCategory.date || new Date().toISOString().split('T')[0],
-    end_date: (customCategory as any).end_date,
+    start_date: customCategory.date || new Date().toISOString().split('T')[0],
+    end_date: "",
     date: customCategory.date,
-    preview: customCategory.preview,
-    status: customCategory.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
-    confidence: customCategory.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-    importance: customCategory.importance,
+    preview: customCategory.preview || `Papers in the ${customCategory.title} category.`,
+    status: (customCategory.status || "Active") as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
+    confidence: (customCategory.confidence || "certain") as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
+    importance: customCategory.importance ?? 5,
     backText: "Categories",
     backHref: "/papers/categories"
   } : {
@@ -113,11 +134,12 @@ export default function PaperCategoryPage({ params }: PageProps) {
   };
 
   // Sort papers by date (newest first) and transform to PaperMeta
-  const papers = [...papersInCategory].sort((a, b) => {
-    const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
-    const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
-    return new Date(dateB).getTime() - new Date(dateA).getTime();
-  })
+  const papers: PaperMeta[] = [...papersInCategory]
+    .sort((a, b) => {
+      const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
+      const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    })
     .map(paper => ({
       title: paper.title,
       subtitle: paper.preview,

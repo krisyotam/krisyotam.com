@@ -1,16 +1,28 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import quotesData from "@/data/quotes.json"
+
+interface Quote {
+  text: string;
+  author: string;
+}
 
 export function QuoteOfTheDay() {
-  const [quote, setQuote] = useState({ text: "", author: "" })
+  const [quote, setQuote] = useState<Quote>({ text: "", author: "" })
 
   useEffect(() => {
-    if (quotesData?.quotes?.length) {
-      const randomIndex = Math.floor(Math.random() * quotesData.quotes.length)
-      setQuote(quotesData.quotes[randomIndex])
+    async function fetchRandomQuote() {
+      try {
+        const response = await fetch('/api/random-quote')
+        if (response.ok) {
+          const data = await response.json()
+          setQuote({ text: data.text || "", author: data.author || "" })
+        }
+      } catch (error) {
+        console.error('Error fetching quote:', error)
+      }
     }
+    fetchRandomQuote()
   }, [])
 
   return (

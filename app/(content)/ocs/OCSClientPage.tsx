@@ -1,3 +1,15 @@
+/**
+ * =============================================================================
+ * OCS Client Page
+ * =============================================================================
+ *
+ * Client-side component for OCS listing with search, filtering, and view modes.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,7 +19,22 @@ import { PageDescription } from "@/components/core";
 import { Navigation, ContentTable } from "@/components/content";
 import { SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
-import categoriesData from "@/data/ocs/categories.json";
+import type { OCSMeta } from "@/types/content";
+import type { CategoryData } from "@/lib/types/content";
+
+// =============================================================================
+// Types
+// =============================================================================
+
+interface OCSClientPageProps {
+  ocs: OCSMeta[];
+  initialCategory?: string;
+  categories?: CategoryData[];
+}
+
+// =============================================================================
+// Constants
+// =============================================================================
 
 /* default page-level metadata for the header */
 const defaultOCSPageData = {
@@ -20,23 +47,25 @@ const defaultOCSPageData = {
   importance: 7,
 } satisfies PageHeaderProps;
 
-import type { OCSMeta } from "@/types/content";
+// =============================================================================
+// Page Component
+// =============================================================================
 
-interface OCSClientPageProps {
-  ocs: OCSMeta[];
-  initialCategory?: string;
-}
-
-export default function OCSClientPage({ ocs, initialCategory = "all" }: OCSClientPageProps) {
+export default function OCSClientPage({ ocs, initialCategory = "all", categories: categoriesFromDb = [] }: OCSClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const router = useRouter();
 
-  const categories = ["all", ...Array.from(new Set(ocs.map(r => r.category)))];
+  // Helper function to create category slug
+  function slugifyCategory(category: string) {
+    return category.toLowerCase().replace(/\s+/g, "-");
+  }
+
+  const categoryNames = ["all", ...Array.from(new Set(ocs.map(r => r.category)))];
 
   // Convert categories to SelectOption format
-  const categoryOptions: SelectOption[] = categories.map(category => ({
+  const categoryOptions: SelectOption[] = categoryNames.map(category => ({
     value: category,
     label: category === "all" ? "All Categories" : category
   }));
@@ -46,22 +75,23 @@ export default function OCSClientPage({ ocs, initialCategory = "all" }: OCSClien
     if (initialCategory === "all" || !initialCategory) {
       return defaultOCSPageData;
     }
-    
-    // Find category data from categories.json
+
+    // Find category data from database categories
     const categorySlug = slugifyCategory(initialCategory);
-    const categoryData = categoriesData.types.find(cat => cat.slug === categorySlug);
-    
+    const categoryData = categoriesFromDb.find(cat => cat.slug === categorySlug);
+
     if (categoryData) {
       return {
         title: categoryData.title,
         subtitle: "",
-        date: categoryData.date,        preview: categoryData.preview,
+        date: categoryData.date,
+        preview: categoryData.preview,
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
         importance: categoryData.importance
       };
     }
-    
+
     // Fallback to default if category not found
     return defaultOCSPageData;
   };
@@ -72,10 +102,6 @@ export default function OCSClientPage({ ocs, initialCategory = "all" }: OCSClien
     setActiveCategory(initialCategory);
   }, [initialCategory]);
 
-  // Helper function to create category slug
-  function slugifyCategory(category: string) {
-    return category.toLowerCase().replace(/\s+/g, "-");
-  }
   // Handle category change with URL routing
   function handleCategoryChange(selectedValue: string) {
     if (selectedValue === "all") {

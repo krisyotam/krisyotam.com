@@ -1,22 +1,45 @@
+/**
+ * =============================================================================
+ * Blog Page
+ * =============================================================================
+ *
+ * Server component for the blog listing page.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import BlogClientPage from "./BlogClientPage";
-import blogData from "@/data/blog/blog.json";
+import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
 import type { Metadata } from "next";
 import type { BlogMeta } from "@/types/content";
 import "./blog.css";
 import "./blog-grid.css";
 import { staticMetadata } from "@/lib/staticMetadata";
 
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export const metadata: Metadata = staticMetadata.blog;
 
-export default function BlogPage() {
-  // Sort notes by date (newest first) and filter out hidden posts
-  const posts: BlogMeta[] = blogData.map(post => ({
-    ...post,
-    importance: typeof post.importance === 'string' ? parseInt(post.importance, 10) : post.importance
-  }))
-    .filter(post => post.state !== "hidden") // Only show active posts
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function BlogPage() {
+  // Fetch data from database
+  const rawPosts = getActiveContentByType('blog');
+  const categories = getCategoriesByContentType('blog');
+
+  // Transform and sort posts
+  const posts: BlogMeta[] = rawPosts
     .map(post => ({
       ...post,
+      importance: typeof post.importance === 'string'
+        ? parseInt(post.importance as string, 10)
+        : post.importance,
       status: post.status as BlogMeta['status'],
       confidence: post.confidence as BlogMeta['confidence'],
       state: post.state as BlogMeta['state']
@@ -29,7 +52,11 @@ export default function BlogPage() {
 
   return (
     <div className="notes-container">
-      <BlogClientPage notes={posts} initialCategory="all" />
+      <BlogClientPage
+        notes={posts}
+        categories={categories}
+        initialCategory="all"
+      />
     </div>
   );
 }

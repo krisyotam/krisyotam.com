@@ -1,52 +1,70 @@
+/**
+ * =============================================================================
+ * Essay Tag Page
+ * =============================================================================
+ *
+ * Dynamic route for displaying essays with a specific tag.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import EssaysTaggedPage from "./EssaysTaggedPage";
-import essaysData from "@/data/essays/essays.json";
-import tagsData from "@/data/essays/tags.json";
+import { getActiveContentByType, getTagsByContentType } from "@/lib/data";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+// =============================================================================
+// Types
+// =============================================================================
+
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-// Helper function to convert tag title to slug
+// =============================================================================
+// Helpers
+// =============================================================================
+
 function titleToSlug(title: string): string {
   return title
     .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
     .trim();
 }
 
+// =============================================================================
+// Static Generation
+// =============================================================================
+
 export async function generateStaticParams() {
-  // Get all unique tags from active essays data only
-  const activeEssays = essaysData.essays.filter(essay => essay.state === "active");
+  const essays = getActiveContentByType('essays');
+
   const allTagsSet = new Set<string>();
-  
-  activeEssays.forEach(essay => {
+  essays.forEach(essay => {
     if (essay.tags && Array.isArray(essay.tags)) {
-      essay.tags.forEach(tag => allTagsSet.add(tag));
+      essay.tags.forEach(tag => allTagsSet.add(titleToSlug(tag)));
     }
   });
-  
-  const allTags = Array.from(allTagsSet);
-  
-  console.log('Available tags:', allTags);
-  console.log('Slugified tags:', allTags.map(tag => titleToSlug(tag)));
-  
-  return allTags.map(tag => ({
-    slug: titleToSlug(tag)
-  }));
+
+  return Array.from(allTagsSet).map(slug => ({ slug }));
 }
 
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  // Convert slug back to tag name
-  const tagSlug = params.slug;
-  const activeEssays = essaysData.essays.filter(essay => essay.state === "active");
-  
-  // Find the original tag name
+  const { slug: tagSlug } = await params;
+  const essays = getActiveContentByType('essays');
+  const dbTags = getTagsByContentType('essays');
+
+  // Find original tag name
   let originalTag: string | undefined;
-  for (const essay of activeEssays) {
+  for (const essay of essays) {
     if (essay.tags && Array.isArray(essay.tags)) {
       originalTag = essay.tags.find(tag => titleToSlug(tag) === tagSlug);
       if (originalTag) break;
@@ -54,14 +72,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   if (!originalTag) {
-    return {
-      title: "Tag Not Found | Essays",
-    };
+    return { title: "Tag Not Found | Essays" };
   }
 
-  // Check if this tag has custom metadata in tags.json
-  const customTag = tagsData.tags.find(t => t.slug === tagSlug);
-  const tagTitle = customTag ? customTag.title : originalTag;
+  const dbTag = dbTags.find(t => t.slug === tagSlug);
+  const tagTitle = dbTag?.title || originalTag;
 
   return {
     title: `${tagTitle} Essays | Kris Yotam`,
@@ -69,20 +84,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function EssaysTagPage({ params }: PageProps) {
-  const tagSlug = params.slug;
-  
-  // Filter essays to only show active ones first
-  const activeEssays = essaysData.essays.filter(essay => essay.state === "active");
-  
-  // Find the original tag name and filter essays by tag
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function EssaysTagPage({ params }: PageProps) {
+  const { slug: tagSlug } = await params;
+
+  // Fetch data from database
+  const allEssays = getActiveContentByType('essays');
+  const dbTags = getTagsByContentType('essays');
+
+  // Find matching essays and original tag name
   let originalTag: string | undefined;
-  const essaysWithTag = activeEssays.filter(essay => {
+  const essaysWithTag = allEssays.filter(essay => {
     if (essay.tags && Array.isArray(essay.tags)) {
       const foundTag = essay.tags.find(tag => titleToSlug(tag) === tagSlug);
-      if (foundTag && !originalTag) {
-        originalTag = foundTag;
-      }
+      if (foundTag && !originalTag) originalTag = foundTag;
       return !!foundTag;
     }
     return false;
@@ -92,18 +110,18 @@ export default function EssaysTagPage({ params }: PageProps) {
     notFound();
   }
 
-  // Check if this tag has custom metadata in tags.json
-  const customTag = tagsData.tags.find(t => t.slug === tagSlug);
-  
-  // Create header data for this tag
-  const tagHeaderData = customTag ? {
-    title: customTag.title,
+  // Get tag metadata
+  const dbTag = dbTags.find(t => t.slug === tagSlug);
+
+  // Build header data
+  const tagHeaderData = dbTag ? {
+    title: dbTag.title,
     subtitle: "",
-    date: customTag.date,
-    preview: customTag.preview,
-    status: customTag.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
-    confidence: customTag.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-    importance: customTag.importance,
+    date: new Date().toISOString(),
+    preview: dbTag.preview || `Essays tagged with ${dbTag.title}.`,
+    status: "Active" as const,
+    confidence: "certain" as const,
+    importance: dbTag.importance,
     backText: "Tags",
     backHref: "/essays/tags"
   } : {
@@ -118,26 +136,28 @@ export default function EssaysTagPage({ params }: PageProps) {
     backHref: "/essays/tags"
   };
 
-  // Sort essays by date (newest first) and transform to match Essay interface
-  const essays = [...essaysWithTag].sort((a, b) => {
-    const aDate = a.end_date || a.start_date;
-    const bDate = b.end_date || b.start_date;
-    return new Date(bDate).getTime() - new Date(aDate).getTime();
-  }).map(essay => ({
+  // Sort and transform essays
+  const essays = [...essaysWithTag]
+    .sort((a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return new Date(bDate).getTime() - new Date(aDate).getTime();
+    })
+    .map(essay => ({
       id: essay.slug,
       title: essay.title,
-      abstract: essay.preview,
-      importance: essay.importance,
-      confidence: essay.confidence,
-      authors: [], // Default value since not in original data
+      abstract: essay.preview || "",
+      importance: essay.importance ?? 5,
+      confidence: essay.confidence ?? "certain",
+      authors: [],
       subject: essay.category,
-      keywords: essay.tags,
-      postedBy: "admin", // Default value
+      keywords: essay.tags || [],
+      postedBy: "admin",
       postedOn: essay.end_date || essay.start_date,
       dateStarted: essay.start_date,
-      tags: essay.tags,
+      tags: essay.tags || [],
       img: essay.cover_image,
-      status: essay.status,
+      status: essay.status ?? "Finished",
       pdfLink: undefined,
       sourceLink: undefined,
       category: essay.category,

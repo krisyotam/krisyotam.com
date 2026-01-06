@@ -1,96 +1,107 @@
-import type { Metadata, ResolvingMetadata } from "next";
+/**
+ * =============================================================================
+ * Blog Category Page
+ * =============================================================================
+ *
+ * Dynamic route for displaying blog posts within a specific category.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import blogData from "@/data/blog/blog.json";
+import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
 import BlogCategoryClient from "./BlogCategoryClient";
 import type { BlogMeta, Status, Confidence } from "@/types/content";
 
-interface BlogData {
-  title: string;
-  start_date: string;
-  end_date?: string;
-  slug: string;
-  tags: string[];
-  category: string;
-  status: string;
-  confidence: string;
-  importance: number;
-  preview?: string;
-  cover_image?: string;
-  state?: "active" | "hidden";
-}
+// =============================================================================
+// Types
+// =============================================================================
 
 interface BlogCategoryPageProps {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }
 
-// Helper function to slugify category
+// =============================================================================
+// Helpers
+// =============================================================================
+
 function slugifyCategory(category: string) {
   return category.toLowerCase().replace(/\s+/g, "-");
 }
 
+// =============================================================================
+// Static Generation
+// =============================================================================
+
 export async function generateStaticParams() {
-  // Get unique categories from blog data
-  const categories = Array.from(new Set((blogData as BlogData[]).map(post => post.category)));
-  
-  // Generate params for each category
-  return categories.map(category => ({
-    category: slugifyCategory(category)
-  }));
+  const posts = getActiveContentByType('blog');
+  const categorySlugs = new Set<string>();
+
+  posts.forEach(post => {
+    if (post.category) {
+      categorySlugs.add(slugifyCategory(post.category));
+    }
+  });
+
+  return Array.from(categorySlugs).map(category => ({ category }));
 }
 
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export async function generateMetadata({ params }: BlogCategoryPageProps): Promise<Metadata> {
-  // Find the first post in this category to get category name
-  const categoryPost = (blogData as BlogData[]).find(post => 
-    slugifyCategory(post.category) === params.category
+  const { category: categorySlug } = await params;
+  const posts = getActiveContentByType('blog');
+
+  const categoryPost = posts.find(post =>
+    slugifyCategory(post.category) === categorySlug
   );
 
   if (!categoryPost) {
-    return {
-      title: "Category Not Found",
-    };
+    return { title: "Category Not Found" };
   }
-  
+
   const categoryTitle = categoryPost.category;
-  const url = `https://krisyotam.com/blog/${params.category}`;
+  const url = `https://krisyotam.com/blog/${categorySlug}`;
   const description = `Blog posts in the ${categoryTitle} category`;
-  
+
   return {
     title: `${categoryTitle} | Blog | Kris Yotam`,
-    description: description,
+    description,
     openGraph: {
       title: `${categoryTitle} Blog Posts`,
-      description: description,
+      description,
       url,
       type: "website",
-      images: [{
-        url: `https://krisyotam.com/images/og-image.jpg`,
-        width: 1200,
-        height: 630,
-        alt: `${categoryTitle} Blog Posts`
-      }],
       siteName: "Kris Yotam",
     },
     twitter: {
       card: "summary_large_image",
       title: `${categoryTitle} Blog Posts`,
-      description: description,
-      images: [`https://krisyotam.com/images/og-image.jpg`],
+      description,
       creator: "@krisyotam"
     }
   };
-
-  // Use safe navigation by checking if categoryPost exists before accessing properties
-  const category = categoryPost?.category || 'Blog';
-  return {
-    title: `${category} | Blog | Kris Yotam`,
-    description: `Blog posts in the ${category} category`,
-  };
 }
 
+// =============================================================================
+// Page Component
+// =============================================================================
+
 export default async function BlogCategoryPage({ params }: BlogCategoryPageProps) {
-  // Filter posts for this category and exclude hidden posts
-  const categoryPosts = (blogData as BlogData[])
-    .filter(post => slugifyCategory(post.category) === params.category && post.state !== "hidden")
+  const { category: categorySlug } = await params;
+
+  // Fetch data from database
+  const allPosts = getActiveContentByType('blog');
+  const categories = getCategoriesByContentType('blog');
+
+  // Filter posts for this category
+  const categoryPosts = allPosts
+    .filter(post => slugifyCategory(post.category) === categorySlug)
     .map(post => ({
       title: post.title,
       start_date: post.start_date,
@@ -109,10 +120,8 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
     notFound();
   }
 
-  // Get all posts for the client component, excluding hidden ones
-  const allPosts: BlogMeta[] = (blogData as BlogData[])
-    .filter(post => post.state !== "hidden")
-    .map(post => ({
+  // Transform all posts for client
+  const posts: BlogMeta[] = allPosts.map(post => ({
     title: post.title,
     start_date: post.start_date,
     end_date: post.end_date,
@@ -127,10 +136,11 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
   }));
 
   return (
-    <BlogCategoryClient 
-      posts={categoryPosts} 
-      allPosts={allPosts}
+    <BlogCategoryClient
+      posts={categoryPosts}
+      allPosts={posts}
       category={categoryPosts[0].category}
+      categories={categories}
     />
   );
 }

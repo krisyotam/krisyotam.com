@@ -1,11 +1,23 @@
+/**
+ * ============================================================================
+ * Mitzvah Client Component
+ * Author: Kris Yotam
+ * Description: Client component for displaying and searching the 613 Mitzvot
+ *              (commandments). Fetches data from reference.db via API route.
+ * ============================================================================
+ */
+
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import mitzvahData from "@/data/mitzvah.json"
+import { useState, useEffect } from "react"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { useInView } from "react-intersection-observer"
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select"
+
+// ============================================================================
+// TYPE DEFINITIONS
+// ============================================================================
 
 type MitzvahItem = {
   id: number
@@ -13,9 +25,115 @@ type MitzvahItem = {
   scripture: string
 }
 
+// ============================================================================
+// BIBLE URL GENERATOR
+// ============================================================================
+
+const bookAbbreviations: Record<string, string> = {
+  "Genesis": "gen",
+  "Exodus": "exo",
+  "Leviticus": "lev",
+  "Numbers": "num",
+  "Deuteronomy": "deu",
+  "Joshua": "jos",
+  "Judges": "jdg",
+  "Ruth": "rth",
+  "1 Samuel": "1sa",
+  "2 Samuel": "2sa",
+  "1 Kings": "1ki",
+  "2 Kings": "2ki",
+  "1 Chronicles": "1ch",
+  "2 Chronicles": "2ch",
+  "Ezra": "ezr",
+  "Nehemiah": "neh",
+  "Esther": "est",
+  "Job": "job",
+  "Psalms": "psa",
+  "Proverbs": "pro",
+  "Ecclesiastes": "ecc",
+  "Song of Solomon": "sng",
+  "Isaiah": "isa",
+  "Jeremiah": "jer",
+  "Lamentations": "lam",
+  "Ezekiel": "eze",
+  "Daniel": "dan",
+  "Hosea": "hos",
+  "Joel": "joe",
+  "Amos": "amo",
+  "Obadiah": "oba",
+  "Jonah": "jon",
+  "Micah": "mic",
+  "Nahum": "nah",
+  "Habakkuk": "hab",
+  "Zephaniah": "zep",
+  "Haggai": "hag",
+  "Zechariah": "zec",
+  "Malachi": "mal",
+  "Matthew": "mat",
+  "Mark": "mar",
+  "Luke": "luk",
+  "John": "jhn",
+  "Acts": "act",
+  "Romans": "rom",
+  "1 Corinthians": "1co",
+  "2 Corinthians": "2co",
+  "Galatians": "gal",
+  "Ephesians": "eph",
+  "Philippians": "php",
+  "Colossians": "col",
+  "1 Thessalonians": "1th",
+  "2 Thessalonians": "2th",
+  "1 Timothy": "1ti",
+  "2 Timothy": "2ti",
+  "Titus": "tit",
+  "Philemon": "phm",
+  "Hebrews": "heb",
+  "James": "jas",
+  "1 Peter": "1pe",
+  "2 Peter": "2pe",
+  "1 John": "1jn",
+  "2 John": "2jn",
+  "3 John": "3jn",
+  "Jude": "jud",
+  "Revelation": "rev"
+}
+
+function generateBibleUrl(scripture: string, bibleVersion: string): string {
+  try {
+    const parts = scripture.split(' ')
+    let book: string
+    let reference: string
+
+    if (parts.length === 2) {
+      book = parts[0]
+      reference = parts[1]
+    } else {
+      book = parts.slice(0, parts.length - 1).join(' ')
+      reference = parts[parts.length - 1]
+    }
+
+    const [chapter, verse] = reference.split(':')
+    const bookAbbr = bookAbbreviations[book] || book.toLowerCase()
+
+    return `https://www.blueletterbible.org/${bibleVersion}/${bookAbbr}/${chapter}/${verse}/`
+  } catch (error) {
+    console.error("Error parsing scripture reference:", error)
+    return `https://www.blueletterbible.org/search/search.cfm?Criteria=${encodeURIComponent(scripture)}`
+  }
+}
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+
 export function MitzvahClient() {
+  // ---------------------------------------------------------------------------
+  // State Management
+  // ---------------------------------------------------------------------------
+  const [mitzvahData, setMitzvahData] = useState<MitzvahItem[]>([])
+  const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
-  const [filteredMitzvah, setFilteredMitzvah] = useState<MitzvahItem[]>(mitzvahData)
+  const [filteredMitzvah, setFilteredMitzvah] = useState<MitzvahItem[]>([])
   const [bibleVersion, setBibleVersion] = useState("kjv")
   const [displayCount, setDisplayCount] = useState(50)
   const { ref, inView } = useInView({
@@ -23,6 +141,9 @@ export function MitzvahClient() {
     rootMargin: "200px",
   })
 
+  // ---------------------------------------------------------------------------
+  // Bible Version Options
+  // ---------------------------------------------------------------------------
   const bibleVersionOptions: SelectOption[] = [
     { value: "kjv", label: "KJV" },
     { value: "nkjv", label: "NKJV" },
@@ -38,11 +159,33 @@ export function MitzvahClient() {
     { value: "rsv", label: "RSV" },
   ]
 
-  // Filter mitzvah based on search query
+  // ---------------------------------------------------------------------------
+  // Data Fetching
+  // ---------------------------------------------------------------------------
+  useEffect(() => {
+    async function fetchMitzvot() {
+      try {
+        const response = await fetch("/api/reference/mitzvot")
+        if (!response.ok) throw new Error("Failed to fetch mitzvot")
+        const data = await response.json()
+        setMitzvahData(data)
+        setFilteredMitzvah(data)
+      } catch (error) {
+        console.error("Error fetching mitzvot:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchMitzvot()
+  }, [])
+
+  // ---------------------------------------------------------------------------
+  // Search Filtering
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     if (searchQuery.trim() === "") {
       setFilteredMitzvah(mitzvahData)
-      setDisplayCount(50) // Reset display count when search query changes
+      setDisplayCount(50)
       return
     }
 
@@ -55,10 +198,12 @@ export function MitzvahClient() {
     })
 
     setFilteredMitzvah(filtered)
-    setDisplayCount(50) // Reset display count when search query changes
-  }, [searchQuery])
+    setDisplayCount(50)
+  }, [searchQuery, mitzvahData])
 
-  // Infinite scroll - load more items when the user scrolls to the bottom
+  // ---------------------------------------------------------------------------
+  // Infinite Scroll
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     if (inView) {
       setDisplayCount((prevCount) => {
@@ -68,117 +213,29 @@ export function MitzvahClient() {
     }
   }, [inView, filteredMitzvah.length])
 
+  // ---------------------------------------------------------------------------
+  // Event Handlers
+  // ---------------------------------------------------------------------------
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchQuery(e.target.value)
   }
 
-  function generateBibleUrl(scripture: string) {
-    // Map of full book names to their abbreviated forms used by Blue Letter Bible
-    const bookAbbreviations: Record<string, string> = {
-      "Genesis": "gen",
-      "Exodus": "exo",
-      "Leviticus": "lev",
-      "Numbers": "num",
-      "Deuteronomy": "deu",
-      "Joshua": "jos",
-      "Judges": "jdg",
-      "Ruth": "rth",
-      "1 Samuel": "1sa",
-      "2 Samuel": "2sa",
-      "1 Kings": "1ki",
-      "2 Kings": "2ki",
-      "1 Chronicles": "1ch",
-      "2 Chronicles": "2ch",
-      "Ezra": "ezr",
-      "Nehemiah": "neh",
-      "Esther": "est",
-      "Job": "job",
-      "Psalms": "psa",
-      "Proverbs": "pro",
-      "Ecclesiastes": "ecc",
-      "Song of Solomon": "sng",
-      "Isaiah": "isa",
-      "Jeremiah": "jer",
-      "Lamentations": "lam",
-      "Ezekiel": "eze",
-      "Daniel": "dan",
-      "Hosea": "hos",
-      "Joel": "joe",
-      "Amos": "amo",
-      "Obadiah": "oba",
-      "Jonah": "jon",
-      "Micah": "mic",
-      "Nahum": "nah",
-      "Habakkuk": "hab",
-      "Zephaniah": "zep",
-      "Haggai": "hag",
-      "Zechariah": "zec",
-      "Malachi": "mal",
-      "Matthew": "mat",
-      "Mark": "mar",
-      "Luke": "luk",
-      "John": "jhn",
-      "Acts": "act",
-      "Romans": "rom",
-      "1 Corinthians": "1co",
-      "2 Corinthians": "2co",
-      "Galatians": "gal",
-      "Ephesians": "eph",
-      "Philippians": "php",
-      "Colossians": "col",
-      "1 Thessalonians": "1th",
-      "2 Thessalonians": "2th",
-      "1 Timothy": "1ti",
-      "2 Timothy": "2ti",
-      "Titus": "tit",
-      "Philemon": "phm",
-      "Hebrews": "heb",
-      "James": "jas",
-      "1 Peter": "1pe",
-      "2 Peter": "2pe",
-      "1 John": "1jn",
-      "2 John": "2jn",
-      "3 John": "3jn",
-      "Jude": "jud",
-      "Revelation": "rev"
-    }
-    
-    try {
-      // Extract the book and reference (chapter:verse)
-      const parts = scripture.split(' ')
-      let book: string
-      let reference: string
-      
-      if (parts.length === 2) {
-        // Simple case like "Exodus 20:2"
-        book = parts[0]
-        reference = parts[1]
-      } else {
-        // Handle books with spaces like "1 Samuel 15:22"
-        book = parts.slice(0, parts.length - 1).join(' ')
-        reference = parts[parts.length - 1]
-      }
-      
-      // Split chapter and verse
-      const [chapter, verse] = reference.split(':')
-      
-      // Get the correct book abbreviation
-      const bookAbbr = bookAbbreviations[book] || book.toLowerCase()
-      
-      // Form the URL in the correct format
-      return `https://www.blueletterbible.org/${bibleVersion}/${bookAbbr}/${chapter}/${verse}/`
-    } catch (error) {
-      console.error("Error parsing scripture reference:", error)
-      // Fallback to a search URL if parsing fails
-      return `https://www.blueletterbible.org/search/search.cfm?Criteria=${encodeURIComponent(scripture)}`
-    }
+  // ---------------------------------------------------------------------------
+  // Render
+  // ---------------------------------------------------------------------------
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="animate-spin h-6 w-6 border-2 border-primary border-t-transparent rounded-full"></div>
+      </div>
+    )
   }
 
-  // Display only the specified number of items
   const itemsToDisplay = filteredMitzvah.slice(0, displayCount)
 
   return (
     <div className="space-y-6">
+      {/* Search and Controls Bar */}
       <div className="mb-6 flex items-center gap-4">
         <div className="relative flex-1">
           <Input
@@ -203,6 +260,7 @@ export function MitzvahClient() {
         </div>
       </div>
 
+      {/* Mitzvot Table */}
       <div className="border border-border overflow-hidden shadow-sm">
         <table className="w-full text-sm">
           <thead>
@@ -214,16 +272,16 @@ export function MitzvahClient() {
           </thead>
           <tbody>
             {itemsToDisplay.map((item, index) => (
-              <tr 
-                key={item.id} 
+              <tr
+                key={item.id}
                 className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
               >
                 <td className="py-2 px-3 align-top font-medium">{item.id}</td>
                 <td className="py-2 px-3 align-top">{item.law}</td>
                 <td className="py-2 px-3 align-top">
-                  <Link 
-                    href={generateBibleUrl(item.scripture)} 
-                    target="_blank" 
+                  <Link
+                    href={generateBibleUrl(item.scripture, bibleVersion)}
+                    target="_blank"
                     className="text-primary hover:underline"
                   >
                     {item.scripture}
@@ -241,8 +299,8 @@ export function MitzvahClient() {
           </tbody>
         </table>
       </div>
-      
-      {/* Intersection observer target - when this is visible, load more rows */}
+
+      {/* Infinite Scroll Loader */}
       {filteredMitzvah.length > displayCount && (
         <div ref={ref} className="h-10 flex items-center justify-center">
           <div className="animate-spin h-5 w-5 border-2 border-primary border-t-transparent rounded-full"></div>

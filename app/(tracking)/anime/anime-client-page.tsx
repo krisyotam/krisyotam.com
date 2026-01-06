@@ -14,7 +14,24 @@ import { TraktSectionHeader } from "@/components/trakt/trakt-section-header";
 import { Pagination } from "@/components/anime/pagination";
 import { PageDescription } from "@/components/core";
 
-import favCompanies from "@/data/fav_companies.json";
+// Favorite animation studios/companies data embedded directly
+const favCompanies = [
+  { name: "A-1 Pictures", photolink: "https://i.postimg.cc/JnYQsnkM/a-1.avif", link: "https://myanimelist.net/anime/producer/56/A-1_Pictures", ranking: 1 },
+  { name: "Studio Ghibli", photolink: "https://i.postimg.cc/4dx54tnW/ghibli.avif", link: "https://myanimelist.net/anime/producer/21/Studio_Ghibli", ranking: 2 },
+  { name: "Madhouse", photolink: "https://i.postimg.cc/q7LwdQBt/mad-house.avif", link: "https://myanimelist.net/anime/producer/8/Madhouse", ranking: 3 },
+  { name: "Triangle Staff", photolink: "https://i.postimg.cc/rpcjb7TX/triangle-staff.avif", link: "https://myanimelist.net/anime/producer/110/Triangle_Staff", ranking: 4 },
+  { name: "Studio Pierrot", photolink: "https://i.postimg.cc/RZwGg4jL/pierrot.webp", link: "https://myanimelist.net/anime/producer/1/Studio_Pierrot", ranking: 5 },
+  { name: "MAPPA", photolink: "https://i.postimg.cc/GhWqPHSp/mappa.avif", link: "https://myanimelist.net/anime/producer/569/MAPPA", ranking: 6 },
+  { name: "CloverWorks", photolink: "https://i.postimg.cc/C5tJQ1hm/clover-works.avif", link: "https://myanimelist.net/anime/producer/1835/CloverWorks", ranking: 7 },
+  { name: "Sunrise", photolink: "https://i.postimg.cc/zXbxRn7M/sunrise.avif", link: "https://myanimelist.net/anime/producer/14/Sunrise", ranking: 8 },
+  { name: "Toei Animation", photolink: "https://i.postimg.cc/T2HkwkVg/toei.avif", link: "https://myanimelist.net/anime/producer/18/Toei_Animation", ranking: 9 },
+  { name: "Gainax", photolink: "https://i.postimg.cc/Gt9qKYC4/gainax.avif", link: "https://myanimelist.net/anime/producer/6/Gainax", ranking: 10 },
+  { name: "Wit Studio", photolink: "https://i.postimg.cc/cHFFfhVq/wit.avif", link: "https://myanimelist.net/anime/producer/858/Wit_Studio", ranking: 11 },
+  { name: "Shaft", photolink: "https://i.postimg.cc/8CVXGjhY/shaft.avif", link: "https://myanimelist.net/anime/producer/44/Shaft", ranking: 12 },
+  { name: "Bones", photolink: "https://i.postimg.cc/ZRbf92sF/bones.avif", link: "https://myanimelist.net/anime/producer/25/Bones", ranking: 13 },
+  { name: "Studio 4°C", photolink: "https://i.postimg.cc/s296gsmg/studio4c.avif", link: "https://myanimelist.net/anime/producer/70/Studio_4%C2%B0C", ranking: 14 },
+  { name: "Production I.G", photolink: "https://i.postimg.cc/GmDg6ksY/productionig.webp", link: "https://myanimelist.net/anime/producer/10/Production_I.G", ranking: 15 },
+];
 
 // Number of items to show per page
 const ITEMS_PER_PAGE = 5;

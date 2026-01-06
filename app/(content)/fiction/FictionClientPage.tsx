@@ -1,3 +1,15 @@
+/**
+ * =============================================================================
+ * Fiction Client Page
+ * =============================================================================
+ *
+ * Client-side component for fiction listing with search and filtering.
+ * Fetches data from content.db via lib/data.ts functions (passed as props).
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,9 +19,12 @@ import { PageDescription } from "@/components/core";
 import { Navigation, ContentTable } from "@/components/content";
 import { CustomSelect } from "@/components/ui/custom-select";
 import type { SelectOption } from "@/components/ui/custom-select";
-import categoriesData from "@/data/fiction/categories.json";
+import type { CategoryData } from "@/lib/types/content";
 
-/* ---------- updated type ---------- */
+// =============================================================================
+// Types
+// =============================================================================
+
 interface Story {
   title: string;
   start_date: string;
@@ -18,17 +33,22 @@ interface Story {
   tags: string[];
   category: string;
   cover_image?: string;
-  status: string;
-  confidence: string;
-  importance: number;
+  status?: string;
+  confidence?: string;
+  importance?: number;
   preview: string;
-  state: "active" | "hidden";
+  state: string;
 }
 
 interface FictionClientPageProps {
   stories: Story[];
   initialCategory?: string;
+  categories: CategoryData[];
 }
+
+// =============================================================================
+// Helpers
+// =============================================================================
 
 // Default page data
 const defaultFictionPageData = {
@@ -42,16 +62,35 @@ const defaultFictionPageData = {
   importance: 8,
 };
 
-export default function FictionClientPage({ stories, initialCategory = "all" }: FictionClientPageProps) {
+// Helper function to create category slug
+function slugifyCategory(category: string) {
+  return category.toLowerCase().replace(/\s+/g, "-");
+}
+
+// Helper to format date as "Month DD, YYYY"
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+}
+
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default function FictionClientPage({ stories, initialCategory = "all", categories }: FictionClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const router = useRouter();
 
-  const categories = ["all", ...Array.from(new Set(stories.map(n => n.category)))];
+  const categoryNames = ["all", ...Array.from(new Set(stories.map(n => n.category)))];
 
   // Convert categories to SelectOption format
-  const categoryOptions: SelectOption[] = categories.map(category => ({
+  const categoryOptions: SelectOption[] = categoryNames.map(category => ({
     value: category,
     label: category === "all" ? "All Categories" : category
   }));
@@ -61,24 +100,24 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
     if (initialCategory === "all" || !initialCategory) {
       return defaultFictionPageData;
     }
-    
-    // Find category data from categories.json
+
+    // Find category data from categories prop
     const categorySlug = slugifyCategory(initialCategory);
-    const categoryData = categoriesData.categories.find(cat => cat.slug === categorySlug);
-    
+    const categoryData = categories.find(cat => cat.slug === categorySlug);
+
     if (categoryData) {
       return {
         title: categoryData.title,
         subtitle: "",
         start_date: categoryData.date || "Undefined",
         end_date: new Date().toISOString().split('T')[0],
-        preview: categoryData.preview,
+        preview: categoryData.preview || "",
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-        importance: categoryData.importance
+        importance: categoryData.importance || 5
       };
     }
-    
+
     // Fallback to default if category not found
     return defaultFictionPageData;
   };
@@ -112,16 +151,6 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
     return `/fiction/${categorySlug}/${encodeURIComponent(story.slug)}`;
   }
 
-  // Helper to format date as "Month DD, YYYY"
-  function formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long", 
-      day: "numeric"
-    });
-  }
-
   const GridView = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {filteredStories.map((story) => (
@@ -133,8 +162,8 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
           {/* Cover Image Area - Book aspect ratio (3:4) */}
           <div className="aspect-[3/4] bg-muted/30 border-b border-border flex items-center justify-center overflow-hidden">
             {story.cover_image ? (
-              <img 
-                src={story.cover_image} 
+              <img
+                src={story.cover_image}
                 alt={story.title}
                 className="w-full h-full object-cover"
               />
@@ -144,12 +173,12 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
               </div>
             )}
           </div>
-          
+
           {/* Content Area */}
           <div className="p-3">
             <h3 className="font-medium text-xs mb-1 line-clamp-2">{story.title}</h3>
             <p className="text-xs text-muted-foreground mb-2 line-clamp-2">{story.category}</p>
-            
+
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <span>{new Date(story.end_date || story.start_date).getFullYear()}</span>
@@ -170,11 +199,6 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
     />
   );
 
-  // Helper function to create category slug
-  function slugifyCategory(category: string) {
-    return category.toLowerCase().replace(/\s+/g, "-");
-  }
-
   // Handle category change with URL routing
   function handleCategoryChange(selectedValue: string) {
     if (selectedValue === "all") {
@@ -187,7 +211,7 @@ export default function FictionClientPage({ stories, initialCategory = "all" }: 
   return (
     <>
       <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
-        <PageHeader 
+        <PageHeader
           title={headerData.title}
           subtitle={headerData.subtitle}
           start_date={headerData.start_date}

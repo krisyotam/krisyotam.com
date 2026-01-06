@@ -1,10 +1,25 @@
+/**
+ * =============================================================================
+ * Sequences API Route
+ * =============================================================================
+ *
+ * Returns all active sequences.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import { NextResponse } from 'next/server';
-import sequencesData from '@/data/sequences/sequences.json';
-import { Sequence, SequencesData } from '@/types/content';
+import { getSequencesData } from '@/lib/data';
+
+// =============================================================================
+// GET Handler
+// =============================================================================
 
 export async function GET() {
   try {
-    const data = sequencesData as SequencesData;
+    const data = await getSequencesData();
     const activeSequences = data.sequences.filter(sequence => sequence.state === "active");
     return NextResponse.json({ sequences: activeSequences });
   } catch (error) {

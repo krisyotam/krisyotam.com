@@ -2,7 +2,7 @@
 "use client";
 
 import Image from "next/image";
-import { PostHeader } from "@/components/post-header";
+import { PostHeader } from "@/components/core";
 import { LiveClock } from "@/components/live-clock";
 import type { ProgymnasmataEntry } from "@/types/content";
 import { Footer } from "@/app/(content)/essays/components/footer";

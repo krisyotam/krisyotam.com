@@ -1,6 +1,5 @@
 import type React from "react"
 import * as Typography from "@/components/typography"
-import { ScriptTagger } from "@/components/script-tagger"
 
 // Define the types for our JSON content structure
 export type ContentBlockType =
@@ -130,11 +129,7 @@ export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
     return (
       <article className="paragraph-article">
         <Typography.P {...block.props}>
-          {(block as TextContentBlock).tagTerms ? (
-            <ScriptTagger>{(block as TextContentBlock).content}</ScriptTagger>
-          ) : (
-            (block as TextContentBlock).content
-          )}
+          {(block as TextContentBlock).content}
         </Typography.P>
       </article>
     )
@@ -171,13 +166,7 @@ export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
 
     case "p":
       const pBlock = block as TextContentBlock
-      return pBlock.tagTerms ? (
-        <Typography.P {...pBlock.props}>
-          <ScriptTagger>{pBlock.content}</ScriptTagger>
-        </Typography.P>
-      ) : (
-        <Typography.P {...pBlock.props}>{pBlock.content}</Typography.P>
-      )
+      return <Typography.P {...pBlock.props}>{pBlock.content}</Typography.P>
 
     case "a":
       const aBlock = block as LinkContentBlock

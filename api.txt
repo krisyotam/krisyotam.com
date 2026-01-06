@@ -1,0 +1,76 @@
+VERIFIED Dead API Routes
+========================
+
+These routes have been verified to have NO references in the codebase.
+Pages that could use them (gallery, sequences, essays, etc.) use server-side
+data fetching (lib/data.ts or direct JSON imports) instead.
+
+Content Management (12)
+-----------------------
+/api/blog-content
+/api/flashcards
+/api/iq-assessments
+/api/map
+/api/music
+/api/newsletters
+/api/og-debug
+/api/post              (Note: /api/posts/search IS used, but /api/post is not)
+/api/posts             (Note: /api/posts/search IS used, but /api/posts root is not)
+/api/post-exists
+/api/post-mdx
+/api/questions
+/api/verify-theory-password
+/api/updates
+
+Library/Catalog (4)
+-------------------
+/api/library/book/[title]
+/api/library-series
+/api/local-collections
+/api/locations
+
+Film/Media (8)
+--------------
+/api/film/genres
+/api/film/most-watched-movies
+/api/film/recent-movies
+/api/film/recent-shows
+/api/film/stats
+/api/film/most-watched-shows
+/api/trakt/most-watched-movies
+/api/trakt/stats
+
+MAL Anime/Manga (5)
+-------------------
+/api/mal/anime-by-id
+/api/mal/fav-chars
+/api/mal/fav-companies
+/api/mal/manga-by-id
+/api/mal/refresh-token
+
+Category/Tag Routes (5)
+-----------------------
+/api/essays/categories     (essays page uses lib/data.ts, not this API)
+/api/essays/tags           (essays page uses lib/data.ts, not this API)
+/api/questions/categories  (no questions page exists)
+/api/sequences/categories  (sequences page uses lib/data.ts, not this API)
+/api/sequences/tags        (sequences page uses lib/data.ts, not this API)
+
+Gallery (2)
+-----------
+/api/gallery               (gallery page imports JSON directly, not API)
+/api/gallery/categories    (gallery page imports JSON directly, not API)
+
+Other (1)
+---------
+/api/now/update
+
+
+=== ROUTES THAT ARE ACTUALLY USED (removed from original list) ===
+
+- /api/poems           -> used in components/home/HomeGridView.tsx
+- /api/papers          -> used in components/core/settings.tsx
+- /api/changelog       -> used in app/(updates)/changelog/ui.tsx
+
+
+Total verified dead routes: 37

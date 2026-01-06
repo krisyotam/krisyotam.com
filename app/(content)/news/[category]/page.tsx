@@ -1,29 +1,62 @@
+/**
+ * =============================================================================
+ * News Category Page
+ * =============================================================================
+ *
+ * Dynamic page for displaying news articles filtered by category.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import NewsClientPage from "../NewsClientPage";
-import newsData from "@/data/news/news.json";
+import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import type { NewsMeta, NewsStatus, NewsConfidence } from "@/types/content";
 
+// =============================================================================
+// Types
+// =============================================================================
+
 interface PageProps {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }
 
+// =============================================================================
+// Helpers
+// =============================================================================
+
+function slugifyCategory(category: string) {
+  return category.toLowerCase().replace(/\s+/g, "-");
+}
+
+// =============================================================================
+// Static Generation
+// =============================================================================
+
 export async function generateStaticParams() {
+  const newsContent = getActiveContentByType('news');
+
   // Get all unique categories and generate their slugs
-  const categories = new Set(newsData.map(article => 
-    article.category.toLowerCase().replace(/\s+/g, "-")
+  const categories = new Set(newsContent.map(article =>
+    slugifyCategory(article.category)
   ));
-  
+
   return Array.from(categories).map(category => ({
     category: category
   }));
 }
 
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export async function generateMetadata({ params }: PageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const categorySlug = params.category;
-  const categoryData = (await import('@/data/news/categories.json')).default.categories.find(
-    cat => cat.slug === categorySlug
-  );
+  const { category: categorySlug } = await params;
+  const categories = getCategoriesByContentType('news');
+  const categoryData = categories.find(cat => cat.slug === categorySlug);
 
   if (!categoryData) {
     return {
@@ -44,10 +77,10 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 
   return {
     title: `${categoryData.title} | News | Kris Yotam`,
-    description: categoryData.preview,
+    description: categoryData.preview || "",
     openGraph: {
       title: categoryData.title,
-      description: categoryData.preview,
+      description: categoryData.preview || "",
       url,
       type: "website",
       images,
@@ -56,19 +89,26 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
     twitter: {
       card: "summary_large_image",
       title: categoryData.title,
-      description: categoryData.preview,
+      description: categoryData.preview || "",
       images: images.map(img => img.url),
       creator: "@krisyotam"
     }
   };
 }
 
-export default function NewsCategoryPage({ params }: PageProps) {
-  const categorySlug = params.category;
-  
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function NewsCategoryPage({ params }: PageProps) {
+  const { category: categorySlug } = await params;
+
+  const newsContent = getActiveContentByType('news');
+  const categories = getCategoriesByContentType('news');
+
   // Find the original category name
-  const originalCategory = newsData.find(article => 
-    article.category.toLowerCase().replace(/\s+/g, "-") === categorySlug
+  const originalCategory = newsContent.find(article =>
+    slugifyCategory(article.category) === categorySlug
   )?.category;
 
   if (!originalCategory) {
@@ -76,10 +116,18 @@ export default function NewsCategoryPage({ params }: PageProps) {
   }
 
   // Map and sort news by date (newest first)
-  const news: NewsMeta[] = newsData.map(article => ({
-    ...article,
+  const news: NewsMeta[] = newsContent.map(article => ({
+    title: article.title,
+    subtitle: article.subtitle,
+    preview: article.preview,
+    start_date: article.start_date,
+    end_date: article.end_date,
+    slug: article.slug,
+    tags: article.tags,
+    category: article.category,
     status: article.status as NewsStatus,
-    confidence: article.confidence as NewsConfidence
+    confidence: article.confidence as NewsConfidence,
+    importance: article.importance
   })).sort((a, b) => {
     const aDate = (a.end_date?.trim()) ? a.end_date : a.start_date;
     const bDate = (b.end_date?.trim()) ? b.end_date : b.start_date;
@@ -88,7 +136,7 @@ export default function NewsCategoryPage({ params }: PageProps) {
 
   return (
     <div className="news-container">
-      <NewsClientPage news={news} initialCategory={originalCategory} />
+      <NewsClientPage news={news} initialCategory={originalCategory} categories={categories} />
     </div>
   );
 }

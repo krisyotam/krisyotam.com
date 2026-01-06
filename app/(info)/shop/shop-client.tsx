@@ -1,8 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { PageHeader } from "@/components/core"
-import { PageDescription } from "@/components/core"
 import { Input } from "@/components/ui/input"
 import { CustomSelect } from "@/components/ui/custom-select"
 import { Card } from "@/components/ui/card"
@@ -16,11 +14,23 @@ interface ShopItem {
   payment_url: string
   image: string
   description?: string
+  "aspect-ratio"?: string
 }
+
+// Define shop categories with display names and aspect ratios
+const SHOP_CATEGORIES = [
+  { slug: "books", title: "Books", aspectRatio: "rectangle" },
+  { slug: "essays", title: "Essays", aspectRatio: "rectangle" },
+  { slug: "courses", title: "Courses", aspectRatio: "square" },
+  { slug: "digital", title: "Digital", aspectRatio: "rectangle" },
+  { slug: "prints", title: "Prints", aspectRatio: "rectangle" },
+  { slug: "dropcaps", title: "Dropcaps", aspectRatio: "square" },
+  { slug: "apparel", title: "Apparel", aspectRatio: "rectangle" },
+  { slug: "accessories", title: "Accessories", aspectRatio: "rectangle" },
+] as const
 
 export default function ShopClient() {
   const [items, setItems] = useState<ShopItem[]>([])
-  const [categories, setCategories] = useState<{ title: string; slug: string; "aspect-ratio"?: string }[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("")
   const [category, setCategory] = useState("All")
@@ -28,23 +38,10 @@ export default function ShopClient() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const [itemsRes, catsRes] = await Promise.all([
-          fetch("/api/shop"),
-          fetch("/api/shop/categories"),
-        ])
-
-        if (!itemsRes.ok) throw new Error("Failed to load shop items")
-        if (!catsRes.ok) throw new Error("Failed to load categories")
-
-  const itemsJson = await itemsRes.json()
-        const catsJson = await catsRes.json()
-
-        // Defensive: ensure only active items are set on the client as well
-        const active = Array.isArray(itemsJson)
-          ? itemsJson.filter((it: any) => (it?.state || "").toString().toLowerCase() === "active")
-          : []
-        setItems(active)
-        setCategories(Array.isArray(catsJson?.categories) ? catsJson.categories : [])
+        const response = await fetch("/api/shop")
+        if (!response.ok) throw new Error("Failed to load shop items")
+        const data = await response.json()
+        setItems(Array.isArray(data) ? data : [])
       } catch (err) {
         console.error("Error loading shop data:", err)
       } finally {
@@ -56,36 +53,30 @@ export default function ShopClient() {
   }, [])
 
   const filtered = items.filter((it) => {
-    const matchesCategory = category === "All" || it.category === category
+    const matchesCategory = category === "All" || it.category.toLowerCase() === category.toLowerCase()
     const q = search.trim().toLowerCase()
     const matchesSearch = !q || it.name.toLowerCase().includes(q) || (it.description || "").toLowerCase().includes(q)
     return matchesCategory && matchesSearch
   })
 
-  // Only consider active items (server already filters, this is defensive)
-  const activeItems = filtered
-
-  // Categories that should be shown (from categories.json) and that have at least
-  // one active item. We use slug comparison case-insensitively.
-  const categoriesToShow = categories.filter((c) =>
-    activeItems.some((it) => (it.category || "").toLowerCase() === (c.slug || "").toLowerCase())
+  // Get categories that have at least one item
+  const categoriesWithItems = SHOP_CATEGORIES.filter((cat) =>
+    filtered.some((it) => it.category.toLowerCase() === cat.slug.toLowerCase())
   )
 
-  // Items whose category doesn't match any category entry (show under 'Other items')
-  const uncategorized = activeItems.filter(
-    (it) => !categories.some((c) => (c.slug || "").toLowerCase() === (it.category || "").toLowerCase())
+  // Items whose category doesn't match any defined category
+  const uncategorized = filtered.filter(
+    (it) => !SHOP_CATEGORIES.some((cat) => cat.slug.toLowerCase() === it.category.toLowerCase())
   )
 
-  // Helper to get the aspect ratio for a category (defaults to 'rectangle')
-  const getCategoryAspect = (slug: string | undefined) => {
-    if (!slug) return "rectangle"
-    const cat = categories.find((c) => c.slug === slug)
-    const ar = cat?.["aspect-ratio"]
-    return ar && ar.trim() !== "" ? ar.toLowerCase() : "rectangle"
+  // Helper to get the aspect ratio for a category
+  const getAspectRatio = (categorySlug: string) => {
+    const cat = SHOP_CATEGORIES.find((c) => c.slug.toLowerCase() === categorySlug.toLowerCase())
+    return cat?.aspectRatio || "rectangle"
   }
 
   return (
-  <div className="container mx-auto max-w-6xl px-4 pt-4 pb-8">
+    <div className="container mx-auto max-w-6xl px-4 pt-4 pb-8">
       <div className="mb-6 flex items-center gap-4">
         <Input
           placeholder="Search shop..."
@@ -98,7 +89,10 @@ export default function ShopClient() {
           id="shop-category-filter"
           value={category}
           onValueChange={(v) => setCategory(v)}
-          options={[{ value: "All", label: "All" }, ...categories.map((c) => ({ value: c.slug, label: c.title }))]}
+          options={[
+            { value: "All", label: "All" },
+            ...SHOP_CATEGORIES.map((c) => ({ value: c.slug, label: c.title }))
+          ]}
           className="min-w-[160px] text-sm"
         />
       </div>
@@ -107,12 +101,12 @@ export default function ShopClient() {
         <div className="py-24 text-center">Loading…</div>
       ) : (
         <div className="space-y-8">
-          {/* Render a section per category from categories.json if it has items */}
-          {categoriesToShow.map((cat) => {
-            const itemsForCat = activeItems.filter(
-              (it) => (it.category || "").toLowerCase() === (cat.slug || "").toLowerCase()
+          {/* Render a section per category */}
+          {categoriesWithItems.map((cat) => {
+            const itemsForCat = filtered.filter(
+              (it) => it.category.toLowerCase() === cat.slug.toLowerCase()
             )
-            const isSquareCat = getCategoryAspect(cat.slug) === "square"
+            const isSquare = cat.aspectRatio === "square"
 
             return (
               <section key={cat.slug}>
@@ -122,13 +116,13 @@ export default function ShopClient() {
                   {itemsForCat.map((it) => (
                     <Card key={it.slug} className="p-4 bg-card border-0 border-t border-l border-gray-300/80 dark:border-neutral-700/60 rounded-none hover:bg-secondary/50 cursor-pointer shadow-none">
                       <a href={it.payment_url} target="_blank" rel="noopener noreferrer" className="no-underline text-foreground">
-                        <div className="w-full mb-4 relative overflow-hidden bg-transparent" style={{ paddingTop: isSquareCat ? '100%' : '150%' }}>
+                        <div className="w-full mb-4 relative overflow-hidden bg-transparent" style={{ paddingTop: isSquare ? '100%' : '150%' }}>
                           <img src={it.image} alt={it.name} className="absolute inset-0 w-full h-full object-contain select-none" draggable={false} onDragStart={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
                         </div>
                         <div className="flex items-center justify-between">
                           <div>
                             <div className="font-medium text-sm leading-tight break-words whitespace-normal">{it.name}</div>
-                            <div className="text-xs italic text-muted-foreground">{it.category}</div>
+                            <div className="text-xs italic text-muted-foreground">{cat.title}</div>
                           </div>
                           <div className="text-xs font-medium text-muted-foreground">{it.currency ? `${it.currency} ${it.price}` : `$${it.price}`}</div>
                         </div>
@@ -143,11 +137,11 @@ export default function ShopClient() {
           {/* Items that don't belong to any defined category */}
           {uncategorized.length > 0 && (
             <section>
-              <h2 className="text-sm font-medium text-muted-foreground mb-2">Other items</h2>
+              <h2 className="text-sm font-medium text-muted-foreground mb-2">Other Items</h2>
               <div className="border-t border-border mb-4" />
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 border-r border-b border-gray-300/80 dark:border-neutral-700/60">
                 {uncategorized.map((it) => {
-                  const isSquare = getCategoryAspect(it.category) === "square"
+                  const isSquare = getAspectRatio(it.category) === "square"
                   return (
                     <Card key={it.slug} className="p-4 bg-card border-0 border-t border-l border-gray-300/80 dark:border-neutral-700/60 rounded-none hover:bg-secondary/50 cursor-pointer shadow-none">
                       <a href={it.payment_url} target="_blank" rel="noopener noreferrer" className="no-underline text-foreground">

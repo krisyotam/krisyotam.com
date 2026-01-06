@@ -1,51 +1,71 @@
+/**
+ * =============================================================================
+ * Blog Tag Page
+ * =============================================================================
+ *
+ * Dynamic route for displaying blog posts with a specific tag.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import BlogTaggedPage from "./BlogTaggedPage";
-import blogData from "@/data/blog/blog.json";
-import tagsData from "@/data/blog/tags.json";
+import { getActiveContentByType, getTagsByContentType } from "@/lib/data";
 import type { Metadata } from "next";
 import type { BlogMeta } from "@/types/content";
 import { notFound } from "next/navigation";
 
+// =============================================================================
+// Types
+// =============================================================================
+
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-// Helper function to convert tag title to slug
+// =============================================================================
+// Helpers
+// =============================================================================
+
 function titleToSlug(title: string): string {
   return title
     .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
     .trim();
 }
 
+// =============================================================================
+// Static Generation
+// =============================================================================
+
 export async function generateStaticParams() {
-  // Get all unique tags from blog data
+  const posts = getActiveContentByType('blog');
+
   const allTagsSet = new Set<string>();
-  
-  blogData.forEach(post => {
+  posts.forEach(post => {
     if (post.tags && Array.isArray(post.tags)) {
-      post.tags.forEach(tag => allTagsSet.add(tag));
+      post.tags.forEach(tag => allTagsSet.add(titleToSlug(tag)));
     }
   });
-  
-  const allTags = Array.from(allTagsSet);
-  
-  console.log('Available blog tags:', allTags);
-  console.log('Slugified blog tags:', allTags.map(tag => titleToSlug(tag)));
-  
-  return allTags.map(tag => ({
-    slug: titleToSlug(tag)
-  }));
+
+  return Array.from(allTagsSet).map(slug => ({ slug }));
 }
 
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  // Convert slug back to tag name
-  const tagSlug = params.slug;
-  
-  // Find the original tag name
+  const { slug: tagSlug } = await params;
+  const posts = getActiveContentByType('blog');
+  const dbTags = getTagsByContentType('blog');
+
+  // Find original tag name
   let originalTag: string | undefined;
-  for (const post of blogData) {
+  for (const post of posts) {
     if (post.tags && Array.isArray(post.tags)) {
       originalTag = post.tags.find(tag => titleToSlug(tag) === tagSlug);
       if (originalTag) break;
@@ -53,14 +73,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   if (!originalTag) {
-    return {
-      title: "Tag Not Found | Blog",
-    };
+    return { title: "Tag Not Found | Blog" };
   }
 
-  // Check if this tag has custom metadata in tags.json
-  const customTag = tagsData.tags.find(t => t.slug === tagSlug);
-  const tagTitle = customTag ? customTag.title : originalTag;
+  const dbTag = dbTags.find(t => t.slug === tagSlug);
+  const tagTitle = dbTag?.title || originalTag;
 
   return {
     title: `${tagTitle} Blog Posts | Kris Yotam`,
@@ -68,20 +85,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function BlogTagPage({ params }: PageProps) {
-  const tagSlug = params.slug;
-  
-  // Find the original tag name and filter posts by tag, excluding hidden posts
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function BlogTagPage({ params }: PageProps) {
+  const { slug: tagSlug } = await params;
+
+  // Fetch data from database
+  const allPosts = getActiveContentByType('blog');
+  const dbTags = getTagsByContentType('blog');
+
+  // Find matching posts and original tag name
   let originalTag: string | undefined;
-  const postsWithTag = blogData.filter(post => {
-    // First check if post is not hidden
-    if (post.state === "hidden") return false;
-    
+  const postsWithTag = allPosts.filter(post => {
     if (post.tags && Array.isArray(post.tags)) {
       const foundTag = post.tags.find(tag => titleToSlug(tag) === tagSlug);
-      if (foundTag && !originalTag) {
-        originalTag = foundTag;
-      }
+      if (foundTag && !originalTag) originalTag = foundTag;
       return !!foundTag;
     }
     return false;
@@ -91,19 +111,19 @@ export default function BlogTagPage({ params }: PageProps) {
     notFound();
   }
 
-  // Check if this tag has custom metadata in tags.json
-  const customTag = tagsData.tags.find(t => t.slug === tagSlug);
-  
-  // Create header data for this tag
-  const tagHeaderData = customTag ? {
-    title: customTag.title,
+  // Get tag metadata
+  const dbTag = dbTags.find(t => t.slug === tagSlug);
+
+  // Build header data
+  const tagHeaderData = dbTag ? {
+    title: dbTag.title,
     subtitle: "",
-    start_date: customTag.date || new Date().toISOString(),
+    start_date: new Date().toISOString(),
     end_date: "",
-    preview: customTag.preview,
-    status: customTag.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
-    confidence: customTag.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-    importance: customTag.importance,
+    preview: dbTag.preview || `Blog posts tagged with ${dbTag.title}.`,
+    status: "Active" as const,
+    confidence: "certain" as const,
+    importance: dbTag.importance,
     backText: "Tags",
     backHref: "/blog/tags"
   } : {
@@ -119,20 +139,25 @@ export default function BlogTagPage({ params }: PageProps) {
     backHref: "/blog/tags"
   };
 
-  // Sort posts by date (newest first) and ensure proper typing
-  const posts: BlogMeta[] = postsWithTag.map(post => ({
-    ...post,
-    importance: typeof post.importance === 'string' ? parseInt(post.importance, 10) : post.importance
-  })).sort((a, b) => {
-    const aDate = a.end_date || a.start_date;
-    const bDate = b.end_date || b.start_date;
-    return new Date(bDate).getTime() - new Date(aDate).getTime();
-  }).map(post => ({
-    ...post,
-    status: post.status as BlogMeta['status'],
-    confidence: post.confidence as BlogMeta['confidence'],
-    state: post.state as BlogMeta['state']
-  }));
+  // Sort and transform posts
+  const posts: BlogMeta[] = postsWithTag
+    .map(post => ({
+      ...post,
+      importance: typeof post.importance === 'string'
+        ? parseInt(post.importance as string, 10)
+        : post.importance
+    }))
+    .sort((a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return new Date(bDate).getTime() - new Date(aDate).getTime();
+    })
+    .map(post => ({
+      ...post,
+      status: post.status as BlogMeta['status'],
+      confidence: post.confidence as BlogMeta['confidence'],
+      state: post.state as BlogMeta['state']
+    }));
 
   return (
     <div className="blog-container">

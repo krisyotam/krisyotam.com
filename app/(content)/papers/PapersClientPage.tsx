@@ -1,3 +1,17 @@
+/**
+ * =============================================================================
+ * PapersClientPage.tsx
+ * =============================================================================
+ * 
+ * Client component for the papers listing page.
+ * Displays papers with filtering, search, and view mode options.
+ *
+ * Data is passed via props from server component (fetched from content.db).
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -5,99 +19,136 @@ import { PageHeader } from "@/components/core";
 import type { PageHeaderProps } from "@/components/core";
 import { PageDescription } from "@/components/core";
 import { Navigation, ContentTable } from "@/components/content";
-import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
+import { SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
-import categoriesData from "@/data/papers/categories.json";
+import type { PaperMeta, PaperStatus } from "@/types/content";
 
-/* default page-level metadata for the header */
+// =============================================================================
+// Types
+// =============================================================================
+
+interface CategoryData {
+  slug: string;
+  title: string;
+  preview?: string | null;
+  date?: string;
+  status?: string;
+  confidence?: string;
+  importance?: number;
+}
+
+interface PapersClientPageProps {
+  papers: PaperMeta[];
+  categories?: CategoryData[];
+  initialCategory?: string;
+}
+
+// =============================================================================
+// Constants
+// =============================================================================
+
 const defaultPapersPageData = {
   title: "Papers",
   start_date: "2025-01-01",
-  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
+  end_date: new Date().toISOString().split('T')[0],
   preview: "stable long-form papers, studies, and self-experiments across various disciplines",
   status: "In Progress" as "In Progress",
   confidence: "likely" as "likely",
   importance: 9,
 } satisfies PageHeaderProps;
 
-import type { PaperMeta, PaperStatus } from "@/types/content";
+// =============================================================================
+// Helpers
+// =============================================================================
 
-interface PapersClientPageProps {
-  papers: PaperMeta[];
-  initialCategory?: string;
+function slugifyCategory(category: string) {
+  return category.toLowerCase().replace(/\s+/g, "-");
 }
 
-export default function PapersClientPage({ papers, initialCategory = "all" }: PapersClientPageProps) {
+function formatCategoryDisplayName(category: string) {
+  return category
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+function mapPaperStatusToPageHeaderStatus(
+  paperStatus: PaperStatus
+): "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" {
+  const statusMap: Record<PaperStatus, "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"> = {
+    Draft: "Draft",
+    Published: "Finished",
+    Archived: "Abandoned",
+    Active: "In Progress",
+    Notes: "Notes"
+  };
+  return statusMap[paperStatus] || "Draft";
+}
+
+// =============================================================================
+// Component
+// =============================================================================
+
+export default function PapersClientPage({
+  papers,
+  categories = [],
+  initialCategory = "all"
+}: PapersClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const router = useRouter();
-  const categories = ["all", ...Array.from(new Set(papers.map(p => p.category)))];  // Helper to get category title from slug
-  function getCategoryTitle(categorySlug: string): string {
-    const category = categoriesData.categories.find(cat => cat.slug === categorySlug);
-    return category ? category.title : categorySlug;
-  }
-  // Convert categories to SelectOption format
-  const categoryOptions: SelectOption[] = categories.map(category => ({
+
+  // Build category list
+  const categoryList = ["all", ...Array.from(new Set(papers.map(p => p.category)))];
+
+  // Convert to SelectOption format
+  const categoryOptions: SelectOption[] = categoryList.map(category => ({
     value: category,
     label: category === "all" ? "All Categories" : formatCategoryDisplayName(category)
   }));
-    // Function to map paper status to PageHeader compatible status
-  const mapPaperStatusToPageHeaderStatus = (paperStatus: PaperStatus): "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" => {
-    const statusMap: Record<PaperStatus, "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"> = {
-      Draft: "Draft",
-      Published: "Finished",
-      Archived: "Abandoned",
-      Active: "In Progress",
-      Notes: "Notes"
-    };
-    return statusMap[paperStatus] || "Draft";
-  };  // Determine which header data to use
+
+  // ---------------------------------------------------------------------------
+  // Header Data
+  // ---------------------------------------------------------------------------
+
   const getHeaderData = () => {
     if (initialCategory === "all" || !initialCategory) {
       return defaultPapersPageData;
     }
-    
-    // Find category data from categories.json
-    const categoryData = categoriesData.categories.find(cat => cat.slug === initialCategory);
-    
+
+    const categoryData = categories.find(cat => cat.slug === initialCategory);
+
     if (categoryData) {
       return {
         title: categoryData.title,
         subtitle: "",
         start_date: categoryData.date || "Undefined",
         end_date: new Date().toISOString().split('T')[0],
-        preview: categoryData.preview,
+        preview: categoryData.preview || "",
         status: mapPaperStatusToPageHeaderStatus(categoryData.status as PaperStatus),
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
         importance: categoryData.importance
       };
     }
-    
-    // Fallback to default if category not found
+
     return defaultPapersPageData;
   };
 
   const headerData = getHeaderData();
 
-  // Update activeCategory when initialCategory changes
+  // ---------------------------------------------------------------------------
+  // Effects
+  // ---------------------------------------------------------------------------
+
   useEffect(() => {
     setActiveCategory(initialCategory);
   }, [initialCategory]);
-  // Helper function to create category slug
-  function slugifyCategory(category: string) {
-    return category.toLowerCase().replace(/\s+/g, "-");
-  }
 
-  // Helper function to format category display name
-  function formatCategoryDisplayName(category: string) {
-    return category
-      .split('-')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
-  }
+  // ---------------------------------------------------------------------------
+  // Handlers
+  // ---------------------------------------------------------------------------
 
-  // Handle category change with URL routing
   function handleCategoryChange(selectedValue: string) {
     if (selectedValue === "all") {
       router.push("/papers");
@@ -105,6 +156,31 @@ export default function PapersClientPage({ papers, initialCategory = "all" }: Pa
       router.push(`/papers/${slugifyCategory(selectedValue)}`);
     }
   }
+
+  // ---------------------------------------------------------------------------
+  // Filtering
+  // ---------------------------------------------------------------------------
+
+  const filteredPapers = papers
+    .filter((paper) => {
+      const q = searchQuery.toLowerCase();
+      const matchesSearch =
+        !q ||
+        paper.title.toLowerCase().includes(q) ||
+        paper.tags.some((t) => t.toLowerCase().includes(q)) ||
+        paper.category.toLowerCase().includes(q);
+      const matchesCategory = activeCategory === "all" || paper.category === activeCategory;
+      return matchesSearch && matchesCategory;
+    })
+    .sort((a, b) => {
+      const dateA = (a.end_date?.trim()) ? a.end_date : a.start_date;
+      const dateB = (b.end_date?.trim()) ? b.end_date : b.start_date;
+      return new Date(dateB).getTime() - new Date(dateA).getTime();
+    });
+
+  // ---------------------------------------------------------------------------
+  // Render
+  // ---------------------------------------------------------------------------
 
   return (
     <>
@@ -129,32 +205,17 @@ export default function PapersClientPage({ papers, initialCategory = "all" }: Pa
           onViewModeChange={setViewMode}
         />
 
-        {/* Papers table */}
         <ContentTable
-          items={papers.filter((paper) => {
-            const q = searchQuery.toLowerCase();
-            const matchesSearch =
-              !q ||
-              paper.title.toLowerCase().includes(q) ||
-              paper.tags.some((t) => t.toLowerCase().includes(q)) ||
-              paper.category.toLowerCase().includes(q);
-            const matchesCategory = activeCategory === "all" || paper.category === activeCategory;
-            return matchesSearch && matchesCategory;
-          }).sort((a, b) => {
-            const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
-            const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
-            return new Date(dateB).getTime() - new Date(dateA).getTime();
-          })}
+          items={filteredPapers}
           basePath="/papers"
           showCategoryLinks={true}
           formatCategoryNames={false}
           emptyMessage="No papers found matching your criteria."
         />
 
-        {/* PageDescription component */}
         <PageDescription
           title="About Papers"
-          description="This section contains research papers and academic inquiries across multiple disciplines. Each paper includes status (draft/active/notes), confidence in the research, and importance. Use the search bar to find specific papers by title, tag, or category. You can also filter papers by category using the dropdown above."
+          description="This section contains research papers and academic inquiries across multiple disciplines. Each paper includes status (draft/active/notes), confidence in the research, and importance."
         />
       </div>
     </>

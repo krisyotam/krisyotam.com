@@ -1,73 +1,83 @@
+/**
+ * =============================================================================
+ * Paper Detail Page
+ * =============================================================================
+ *
+ * Dynamic route for displaying individual papers.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 export const dynamic = 'force-static';
 export const revalidate = false;
 
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import papersData from "@/data/papers/papers.json";
+import { getContentByType } from "@/lib/data";
 import PapersPageClient from "./PapersPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/content";
 
-interface PaperData {
-  title: string;
-  start_date: string;
-  end_date?: string;
-  date?: string; // backward compatibility
-  slug: string;
-  tags: string[];
-  category: string;
-  status: string;
-  confidence: string;
-  importance: number;
-  preview: string;
-  subtitle?: string;
-  state?: string;
-  cover_image?: string;
-}
+// =============================================================================
+// Types
+// =============================================================================
 
 interface PaperPageProps {
-  params: { category: string; slug: string };
+  params: Promise<{ category: string; slug: string }>;
 }
 
-// Helper function to slugify category
+// =============================================================================
+// Helpers
+// =============================================================================
+
 function slugifyCategory(category: string) {
   return category.toLowerCase().replace(/\s+/g, "-");
 }
 
+// =============================================================================
+// Static Generation
+// =============================================================================
+
 export async function generateStaticParams() {
-  // Generate all category/slug combinations
-  return papersData.papers.map(paperItem => ({
-    category: slugifyCategory(paperItem.category),
-    slug: paperItem.slug
+  const papers = getContentByType('papers');
+
+  return papers.map(paper => ({
+    category: slugifyCategory(paper.category),
+    slug: paper.slug
   }));
 }
 
-export async function generateMetadata({ params }: PaperPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const paperItem = papersData.papers.find(p => 
-    slugifyCategory(p.category) === params.category && p.slug === params.slug
+// =============================================================================
+// Metadata
+// =============================================================================
+
+export async function generateMetadata(
+  { params }: PaperPageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { category, slug } = await params;
+  const papers = getContentByType('papers');
+
+  const paperItem = papers.find(p =>
+    slugifyCategory(p.category) === category && p.slug === slug
   );
 
   if (!paperItem) {
-    return {
-      title: "Paper Not Found",
-    };
+    return { title: "Paper Not Found" };
   }
 
-  // Get the default OpenGraph image from parent
-  const previousImages = (await parent).openGraph?.images || [];
-  // Use Kris Yotam's logo for paper articles
-  const images = [
-    {
-      url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
-      width: 1200,
-      height: 2100,
-      alt: paperItem.title
-    }
-  ];
+  const images = [{
+    url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
+    width: 1200,
+    height: 2100,
+    alt: paperItem.title
+  }];
 
-  const url = `https://krisyotam.com/papers/${params.category}/${params.slug}`;
+  const url = `https://krisyotam.com/papers/${category}/${slug}`;
 
   return {
     title: `${paperItem.title} | ${paperItem.category} Papers | Kris Yotam`,
@@ -90,57 +100,72 @@ export async function generateMetadata({ params }: PaperPageProps, parent: Resol
   };
 }
 
+// =============================================================================
+// Page Component
+// =============================================================================
+
 export default async function PaperPage({ params }: PaperPageProps) {
-  const paperItem = papersData.papers.find(p => 
-    slugifyCategory(p.category) === params.category && p.slug === params.slug
+  const { category, slug } = await params;
+  const allPapers = getContentByType('papers');
+
+  const paperItem = allPapers.find(p =>
+    slugifyCategory(p.category) === category && p.slug === slug
   );
 
   if (!paperItem) {
     notFound();
   }
 
+  // Transform paper data
   const paperData: PaperMeta = {
     ...paperItem,
     status: paperItem.status as PaperStatus,
     confidence: paperItem.confidence as PaperConfidence
   };
 
-  const papers: PaperMeta[] = (papersData.papers as PaperData[]).map(paperItem => ({
-    ...paperItem,
-    start_date: paperItem.start_date || (paperItem as any).date || new Date().toISOString(),
-    end_date: paperItem.end_date || new Date().toISOString().split('T')[0],
-    status: paperItem.status as PaperStatus,
-    confidence: paperItem.confidence as PaperConfidence
+  const papers: PaperMeta[] = allPapers.map(p => ({
+    ...p,
+    start_date: p.start_date || new Date().toISOString(),
+    end_date: p.end_date || new Date().toISOString().split('T')[0],
+    status: p.status as PaperStatus,
+    confidence: p.confidence as PaperConfidence
   }));
 
-  // Extract headings from the papers MDX content
-  const headings = await extractHeadingsFromMDX('papers', params.slug, params.category);
+  // Extract headings from MDX content
+  const headings = await extractHeadingsFromMDX('papers', slug, category);
 
-  // Dynamically import the MDX file based on category and slug
-  const PaperArticle = (await import(`@/app/(content)/papers/content/${params.category}/${params.slug}.mdx`)).default;
-  
+  // Dynamically import MDX file
+  const PaperArticle = (
+    await import(`@/app/(content)/papers/content/${category}/${slug}.mdx`)
+  ).default;
+
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Header section - full width */}
+        {/* Header section */}
         <div className="mb-8">
-          <PapersPageClient paperData={paperData} allPapers={papers} headerOnly={true} />
+          <PapersPageClient
+            paperData={paperData}
+            allPapers={papers}
+            headerOnly={true}
+          />
         </div>
 
         {/* Main content */}
         <main id="content" className="container max-w-[672px] mx-auto px-4">
-          {/* Table of Contents - at the top of content */}
-          {headings.length > 0 && (
-            <TOC headings={headings} />
-          )}
+          {headings.length > 0 && <TOC headings={headings} />}
 
           <div className="papers-content">
             <PaperArticle />
           </div>
-          <PapersPageClient paperData={paperData} allPapers={papers} contentOnly={true} />
+
+          <PapersPageClient
+            paperData={paperData}
+            allPapers={papers}
+            contentOnly={true}
+          />
         </main>
 
-        {/* Sidenotes for wide viewports */}
         <Sidenotes containerSelector="#content" />
       </div>
     </div>

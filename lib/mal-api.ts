@@ -1,26 +1,64 @@
 // lib/mal-api.ts
 
+import { updateMalTokensInEnv } from "@/lib/update-mal-tokens";
+
 // -----------------------
-// Helper: Refresh MAL OAuth Token
-async function refreshToken() {
+// Helper: Refresh MAL OAuth Token (server-side, calls MAL directly)
+async function refreshToken(): Promise<{ access_token: string; refresh_token: string } | null> {
   try {
     console.log("MAL API Debug - refreshToken: Attempting to refresh token");
-    const response = await fetch("/api/mal/refresh-token", {
+
+    const currentRefreshToken = process.env.MAL_REFRESH_TOKEN;
+    const clientId = process.env.MAL_CLIENT_ID;
+    const clientSecret = process.env.MAL_CLIENT_SECRET;
+
+    if (!currentRefreshToken || !clientId || !clientSecret) {
+      console.error("MAL API Debug - refreshToken: Missing credentials");
+      return null;
+    }
+
+    const params = new URLSearchParams({
+      grant_type: "refresh_token",
+      refresh_token: currentRefreshToken,
+      client_id: clientId,
+      client_secret: clientSecret,
+    });
+
+    const response = await fetch("https://myanimelist.net/v1/oauth2/token", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: params.toString(),
     });
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       console.error("MAL API Debug - refreshToken: Failed to refresh token:", errorData);
-      throw new Error("Failed to refresh token");
+      return null;
     }
 
-    const data = await response.json();
+    const tokenData = await response.json();
     console.log("MAL API Debug - refreshToken: Token refresh successful");
-    return data;
+
+    // Update in-memory env vars
+    process.env.MAL_ACCESS_TOKEN = tokenData.access_token;
+    process.env.MAL_REFRESH_TOKEN = tokenData.refresh_token;
+
+    // Persist to .env.local (best effort)
+    try {
+      await updateMalTokensInEnv(tokenData.access_token, tokenData.refresh_token);
+    } catch (e) {
+      console.warn("MAL API Debug - refreshToken: Could not persist tokens to file:", e);
+    }
+
+    return {
+      access_token: tokenData.access_token,
+      refresh_token: tokenData.refresh_token,
+    };
   } catch (error) {
     console.error("MAL API Debug - refreshToken: Error:", error);
-    throw error;
+    return null;
   }
 }
 
@@ -42,15 +80,12 @@ async function makeMALRequest(url: string, accessToken: string, options: Request
       console.log("MAL API Debug - makeMALRequest: Got 401, attempting token refresh");
       const refreshResult = await refreshToken();
 
-      if (!refreshResult) {
+      if (!refreshResult || !refreshResult.access_token) {
         throw new Error("Failed to refresh token");
       }
 
-      // After refresh, MAL_ACCESS_TOKEN in environment should be updated by your backend.
-      const newAccessToken = process.env.MAL_ACCESS_TOKEN;
-      if (!newAccessToken) {
-        throw new Error("No access token available after refresh");
-      }
+      // Use the new token from the refresh response directly
+      const newAccessToken = refreshResult.access_token;
 
       console.log("MAL API Debug - makeMALRequest: Retrying request with new token");
       const retryResponse = await fetch(url, {

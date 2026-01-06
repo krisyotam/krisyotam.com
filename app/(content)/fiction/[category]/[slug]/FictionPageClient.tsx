@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { notFound } from "next/navigation";
-import { PostHeader } from "@/components/post-header";
+import { PostHeader } from "@/components/core";
 import { Citation } from "@/components/citation";
 import { LiveClock } from "@/components/live-clock";
 import { Footer } from "@/components/footer";

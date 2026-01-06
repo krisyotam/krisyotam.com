@@ -1,32 +1,43 @@
-import { NextResponse } from "next/server"
-import contentData from "@/data/changelog/content.json"
-import infraData from "@/data/changelog/infra.json"
+/**
+ * ============================================================================
+ * Changelog API Route
+ * ============================================================================
+ * Author: Kris Yotam
+ * Description: API endpoint for fetching changelog entries from system.db
+ * Created: 2026-01-04
+ * ============================================================================
+ */
 
-type Entry = {
-  id: string
-  date: { day: string; weekday: string; month: string; year: string }
-  text: string
-  kind?: string
-}
+import { NextResponse } from "next/server";
+import { getChangelogContent, getChangelogInfra, type ChangelogEntry } from "@/lib/system-db";
+
+// ============================================================================
+// Helper Functions
+// ============================================================================
 
 function normalize(text: string) {
-  return (text || "").toLowerCase()
+  return (text || "").toLowerCase();
 }
 
-function selectFeed(feed: string | null): Entry[] {
-  if (feed === "infra") return infraData as Entry[]
-  return contentData as Entry[]
+function selectFeed(feed: string | null): ChangelogEntry[] {
+  if (feed === "infra") return getChangelogInfra();
+  return getChangelogContent();
 }
+
+// ============================================================================
+// GET Handler
+// ============================================================================
 
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url)
-  const feed = searchParams.get("feed")
-  const q = searchParams.get("q")
+  const { searchParams } = new URL(req.url);
+  const feed = searchParams.get("feed");
+  const q = searchParams.get("q");
 
-  let items = selectFeed(feed)
+  let items = selectFeed(feed);
 
+  // Apply search filter if provided
   if (q && q.trim().length > 0) {
-    const n = normalize(q)
+    const n = normalize(q);
     items = items.filter((e) => {
       const hay = [
         e.text,
@@ -37,16 +48,20 @@ export async function GET(req: Request) {
         e.date?.year ?? "",
       ]
         .join("\n")
-        .toLowerCase()
-      return hay.includes(n)
-    })
+        .toLowerCase();
+      return hay.includes(n);
+    });
   }
 
-  // newest first (ids are ISO dates)
-  items = [...items].sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0))
+  // Sort newest first (ids are ISO dates)
+  items = [...items].sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0));
 
-  return NextResponse.json({ feed: feed === "infra" ? "infra" : "content", count: items.length, items })
+  return NextResponse.json({
+    feed: feed === "infra" ? "infra" : "content",
+    count: items.length,
+    items,
+  });
 }
 
-export const revalidate = 60
-export const dynamic = "force-dynamic"
+export const revalidate = 60;
+export const dynamic = "force-dynamic";

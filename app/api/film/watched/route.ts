@@ -1,31 +1,42 @@
-import { NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
+/**
+ * ============================================================================
+ * Watched Films API Route
+ * Author: Kris Yotam
+ * Date: 2026-01-05
+ * Filename: route.ts
+ * Description: API endpoint for retrieving watched films from media.db.
+ * ============================================================================
+ */
+
+import { NextResponse } from "next/server";
+import { getWatchedFilms } from "@/lib/media-db";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const limit = parseInt(searchParams.get('limit') || '20');
+    const limit = parseInt(searchParams.get("limit") || "0");
 
-    // Read the watched.json file
-    const filePath = path.join(process.cwd(), 'data', 'film', 'watched.json');
-    const fileContent = await fs.readFile(filePath, 'utf8');
-    const watchedMovies = JSON.parse(fileContent);
+    const watchedFilms = getWatchedFilms();
 
     // Transform the data to match the expected format for TraktMovieCard
-    const transformedMovies = watchedMovies.map((movie: any) => ({
-        id: movie.id.toString(),
-        title: movie.name,
-        year: parseInt(movie.year),
-        posterUrl: movie.poster,
-        genres: movie.genres
+    const transformedMovies = watchedFilms.map((film) => ({
+      id: film.id.toString(),
+      title: film.name,
+      year: parseInt(film.year) || 0,
+      posterUrl: film.poster,
+      genres: film.genres,
     }));
 
-    return NextResponse.json(transformedMovies);
+    // Apply limit if specified
+    const result = limit > 0 ? transformedMovies.slice(0, limit) : transformedMovies;
+
+    return NextResponse.json(result);
   } catch (error) {
-    console.error('Error fetching watched movies:', error);
+    console.error("Error fetching watched movies:", error);
     return NextResponse.json(
-      { error: 'Failed to fetch watched movies' },
+      { error: "Failed to fetch watched movies" },
       { status: 500 }
     );
   }

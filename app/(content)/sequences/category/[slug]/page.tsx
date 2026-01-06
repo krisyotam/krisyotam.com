@@ -1,36 +1,88 @@
+/**
+ * =============================================================================
+ * Sequence Category Detail Page
+ * =============================================================================
+ *
+ * Page showing sequences filtered by a specific category.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import SequencesClientPage from "../../SequencesClientPage";
+import { getSequencesData, getCategoriesData } from "@/lib/data";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import sequencesData from "@/data/sequences/sequences.json";
-import categoriesData from "@/data/sequences/categories.json";
-import { SequencesData } from "@/types/content";
+
+// =============================================================================
+// Types
+// =============================================================================
 
 interface CategoryPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-// Helper function to slugify category
-function slugifyCategory(category: string) {
+// =============================================================================
+// Helpers
+// =============================================================================
+
+/**
+ * Convert a category name to URL slug
+ */
+function slugifyCategory(category: string): string {
   return category.toLowerCase().replace(/\s+/g, "-");
 }
 
-// Get categories from categories.json
-const getCategories = () => {
-  return categoriesData.categories.map(cat => cat.title);
-};
+// =============================================================================
+// Static Generation
+// =============================================================================
 
 export async function generateStaticParams() {
-  const categories = getCategories();
-  return categories.map(category => ({ slug: slugifyCategory(category) }));
+  const data = await getSequencesData();
+
+  // Get unique categories from sequences
+  const categories = new Set<string>();
+  data.sequences.forEach((sequence) => {
+    if (sequence.category) {
+      categories.add(sequence.category);
+    }
+  });
+
+  return Array.from(categories).map((category) => ({
+    slug: slugifyCategory(category),
+  }));
 }
 
-export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-  const { slug } = params;
-  
+// =============================================================================
+// Metadata
+// =============================================================================
+
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const categoriesData = await getCategoriesData();
+
   // Find the category in the categories data
-  const category = categoriesData.categories.find(cat => cat.slug === slug);
-  
+  const category = categoriesData.categories.find((cat) => cat.slug === slug);
+
   if (!category) {
+    // Try to find by matching slug from sequence categories
+    const sequencesData = await getSequencesData();
+    const sequenceCategory = Array.from(
+      new Set(
+        sequencesData.sequences.map((s) => s.category).filter(Boolean)
+      )
+    ).find((cat) => slugifyCategory(cat as string) === slug);
+
+    if (sequenceCategory) {
+      return {
+        title: `${sequenceCategory} Sequences | Kris Yotam`,
+        description: `Sequences in the ${sequenceCategory} category`,
+      };
+    }
+
     return {
       title: "Category Not Found",
     };
@@ -42,25 +94,69 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   };
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
-  const { slug } = params;
-  
-  // Find the category in the categories data
-  const category = categoriesData.categories.find(cat => cat.slug === slug);
-  
-  if (!category) {
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { slug } = await params;
+  const [sequencesData, categoriesData] = await Promise.all([
+    getSequencesData(),
+    getCategoriesData(),
+  ]);
+
+  // Filter to only active sequences
+  const activeSequences = sequencesData.sequences.filter(
+    (sequence) => sequence.state === "active"
+  );
+
+  // Find the category by slug
+  let category = categoriesData.categories.find((cat) => cat.slug === slug);
+  let categoryName: string | undefined;
+
+  if (category) {
+    categoryName = category.title;
+  } else {
+    // Try to find category name from sequences
+    const sequenceCategory = Array.from(
+      new Set(activeSequences.map((s) => s.category).filter(Boolean))
+    ).find((cat) => slugifyCategory(cat as string) === slug);
+
+    if (sequenceCategory) {
+      categoryName = sequenceCategory as string;
+    }
+  }
+
+  if (!categoryName) {
     notFound();
   }
 
-  // Find sequences for this category
-  const data = sequencesData as SequencesData;
-  const categorySequences = data.sequences.filter(seq => 
-    seq.category && slugifyCategory(seq.category) === slug
+  // Get sequences for this category
+  const categorySequences = activeSequences.filter(
+    (seq) => seq.category && slugifyCategory(seq.category) === slug
   );
-  
+
   if (categorySequences.length === 0) {
-    console.warn(`No sequences found for category: ${category.title} (slug: ${slug})`);
+    console.warn(
+      `No sequences found for category: ${categoryName} (slug: ${slug})`
+    );
   }
 
-  return <SequencesClientPage initialCategory={category.title} categoryName={category.title} />;
+  // Get unique categories from sequences for the filter dropdown
+  const sequenceCategories = Array.from(
+    new Set(activeSequences.map((s) => s.category).filter(Boolean))
+  );
+
+  const relevantCategories = categoriesData.categories.filter((cat) =>
+    sequenceCategories.includes(cat.slug)
+  );
+
+  return (
+    <SequencesClientPage
+      sequences={activeSequences}
+      categories={relevantCategories}
+      initialCategory={categoryName}
+      categoryName={categoryName}
+    />
+  );
 }

@@ -1,25 +1,56 @@
 "use client"
 
-import { useState } from "react"
-import videosData from "@/data/content/videos.json"
-import { PostHeader } from "@/components/post-header"
+import { useState, useEffect } from "react"
+import { PostHeader } from "@/components/core"
 import Collapse from "@/components/posts/typography/collapse"
 import Video from "@/components/posts/media/video"
 
+interface VideoData {
+  slug: string
+  title: string
+  subtitle: string
+  preview: string
+  image: string
+  video: string
+  category: string
+  tags: string[]
+  date: string
+  status: string
+  confidence: string
+  importance: number
+  state: string
+}
+
 export default function VideosPage() {
+  const [videos, setVideos] = useState<VideoData[]>([])
+  const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
 
-  // only include active videos and apply search filter
-  const filtered = videosData
-    .filter((v) => v.state === "active")
-    .filter((v) => {
-      if (!searchQuery.trim()) return true
-      const q = searchQuery.toLowerCase()
-      return (
-        v.title.toLowerCase().includes(q) ||
-        v.tags.some((t) => t.toLowerCase().includes(q))
-      )
-    })
+  useEffect(() => {
+    async function fetchVideos() {
+      try {
+        const response = await fetch("/api/videos")
+        if (!response.ok) throw new Error("Failed to fetch videos")
+        const data = await response.json()
+        setVideos(data)
+      } catch (error) {
+        console.error("Error loading videos:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchVideos()
+  }, [])
+
+  // apply search filter
+  const filtered = videos.filter((v) => {
+    if (!searchQuery.trim()) return true
+    const q = searchQuery.toLowerCase()
+    return (
+      v.title.toLowerCase().includes(q) ||
+      v.tags.some((t) => t.toLowerCase().includes(q))
+    )
+  })
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -77,19 +108,23 @@ export default function VideosPage() {
       </div>
 
       {/* Videos grid */}
-      <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
-        {filtered.map((video) => (
-          <Video
-            key={video.episode}
-            image={video.image}
-            title={video.title}
-            episode={video.episode}
-            video={video.video}
-            category={video.category}
-            subtitle={video.subtitle}
-          />
-        ))}
-      </div>
+      {loading ? (
+        <div className="max-w-2xl mx-auto text-center py-12">Loading videos...</div>
+      ) : (
+        <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+          {filtered.map((video) => (
+            <Video
+              key={video.slug}
+              image={video.image}
+              title={video.title}
+              episode={video.slug}
+              video={video.video}
+              category={video.category}
+              subtitle={video.subtitle}
+            />
+          ))}
+        </div>
+      )}
     </main>
   )
 }

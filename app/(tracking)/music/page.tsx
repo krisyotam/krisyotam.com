@@ -1,17 +1,53 @@
-import type { Metadata } from "next"
-import dynamic from "next/dynamic"
-import musicData from "@/data/music/music.json"
-import { PageHeader } from "@/components/core"
+/**
+ * ============================================================================
+ * Music Page
+ * Author: Kris Yotam
+ * Date: 2026-01-05
+ * Filename: page.tsx
+ * Description: Server component for the music page. Loads playlist data from
+ *              media.db and renders the music client component.
+ * ============================================================================
+ */
 
-// Load client-only components dynamically so this page stays a server component
-const MusicClient = dynamic(() => import("./MusicClient"), { ssr: false })
-const PageDescription = dynamic(() => import("@/components/core").then(mod => ({ default: mod.PageDescription })), { ssr: false })
+import dynamic from "next/dynamic";
+import { getMusicPlaylists } from "@/lib/media-db";
+import { PageHeader } from "@/components/core";
 
-// Removed generateMetadata to avoid Next.js metadata/client conflict
+// ============================================================================
+// DYNAMIC IMPORTS
+// ============================================================================
+
+const MusicClient = dynamic(() => import("./MusicClient"), { ssr: false });
+const PageDescription = dynamic(
+  () =>
+    import("@/components/core").then((mod) => ({
+      default: mod.PageDescription,
+    })),
+  { ssr: false }
+);
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
 
 export default async function MusicPage() {
-  // Load music data from the local JSON file (server-side)
-  const playlists = (musicData as any)?.music || []
+  // Load music data from the database (server-side)
+  const playlists = getMusicPlaylists();
+
+  // Transform to match the expected client format
+  const playlistData = playlists.map((p) => ({
+    playlist_name: p.playlist_name,
+    slug: p.slug,
+    cover_url: p.cover_url,
+    amount_of_songs: p.amount_of_songs,
+    last_updated: p.last_updated,
+    category: p.category,
+    tidal: p.tidal,
+    qobuz: p.qobuz,
+    apple_music: p.apple_music,
+    spotify: p.spotify,
+    status: p.status,
+  }));
 
   return (
     <div className="relative min-h-screen bg-background text-foreground dark:bg-[#0d0d0d] dark:text-[#f2f2f2]">
@@ -20,25 +56,25 @@ export default async function MusicPage() {
           title="Music"
           subtitle="Music — reviews, recommendations, and playlists"
           start_date="2023-01-01"
-          end_date={new Date().toISOString().split('T')[0]}
+          end_date={new Date().toISOString().split("T")[0]}
           preview="carefully curated playlists from my studies of various genres, artists, and eras"
           status="In Progress"
           confidence="certain"
           importance={6}
         />
-        <MusicClient playlists={playlists} />
+        <MusicClient playlists={playlistData} />
       </div>
 
       <PageDescription
         title="About Music"
         description="A place for music recommendations, reviews, and curated playlist collections. Use the search or filters to explore."
         icons={[
-          { slug: 'spotify', url: '#' },
-          { slug: 'apple', url: '#' },
-          { slug: 'tidal', url: '#' },
-          { slug: 'qobuz', url: '#' },
+          { slug: "spotify", url: "#" },
+          { slug: "apple", url: "#" },
+          { slug: "tidal", url: "#" },
+          { slug: "qobuz", url: "#" },
         ]}
       />
     </div>
-  )
+  );
 }

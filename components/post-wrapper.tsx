@@ -1,5 +1,5 @@
 import type React from "react"
-import { PostHeader } from "@/components/post-header"
+import { PostHeader } from "@/components/core"
 import { getPostBySlug } from "@/lib/posts"
 
 interface PostWrapperProps {

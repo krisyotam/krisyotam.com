@@ -1,16 +1,20 @@
 import { NextResponse } from 'next/server'
-import path from 'path'
-import { promises as fs } from 'fs'
+import { getReadingLists } from '@/lib/media-db'
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), 'data', 'reading', 'reading-lists.json')
-    const fileContents = await fs.readFile(filePath, 'utf8')
-    const data = JSON.parse(fileContents)
-    
-    return NextResponse.json(data)
+    const lists = getReadingLists()
+    // Transform to match original format (list_id -> id)
+    const formattedLists = lists.map(list => ({
+      id: list.list_id,
+      title: list.title,
+      description: list.description,
+      author: list.author,
+      books: list.books
+    }))
+    return NextResponse.json({ lists: formattedLists })
   } catch (error) {
-    console.error('Error reading reading-lists.json:', error)
+    console.error('Error reading lists:', error)
     return NextResponse.json({ error: 'Failed to read reading lists data' }, { status: 500 })
   }
 }

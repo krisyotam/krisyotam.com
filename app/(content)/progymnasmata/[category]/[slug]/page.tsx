@@ -1,24 +1,65 @@
-// /app/progymnasmata/[type]/[slug]/page.tsx
+/**
+ * =============================================================================
+ * Progymnasmata Slug Page
+ * =============================================================================
+ *
+ * Individual progymnasmata exercise page with MDX content.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 export const dynamic = 'force-static';
 export const revalidate = false;
+
 import { notFound } from "next/navigation";
-import postsData from "@/data/progymnasmata/progymnasmata.json";
+import { getContentByType } from "@/lib/data";
 import ProgymnasmataPageClient from "./ProgymnasmataPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 
+// =============================================================================
+// Types
+// =============================================================================
+
+interface PageProps {
+  params: Promise<{ category: string; slug: string }>;
+}
+
+// =============================================================================
+// Static Generation
+// =============================================================================
+
 export async function generateStaticParams() {
-  return postsData.map(post => ({
+  const posts = getContentByType('progymnasmata');
+  return posts.map(post => ({
     category: post.category,
     slug: post.slug,
   }));
 }
 
-export default async function ProgymnasmataSlugPage({ params }: { params: { category: string; slug: string } }) {
-  const { category, slug } = params;
-  const post = postsData.find(p => p.category === category && p.slug === slug);
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function ProgymnasmataSlugPage({ params }: PageProps) {
+  const { category, slug } = await params;
+  const posts = getContentByType('progymnasmata');
+  const post = posts.find(p => p.category === category && p.slug === slug);
+
   if (!post) return notFound();
+
+  // Transform post with defaults
+  const transformedPost = {
+    ...post,
+    state: post.state || "active",
+    status: post.status || "Finished",
+    confidence: post.confidence || "certain",
+    importance: post.importance ?? 5,
+    tags: post.tags || []
+  };
 
   // Extract headings from the progymnasmata MDX content
   const headings = await extractHeadingsFromMDX('progymnasmata', slug, category);
@@ -36,7 +77,7 @@ export default async function ProgymnasmataSlugPage({ params }: { params: { cate
       <div className="max-w-6xl mx-auto px-4">
         {/* Header section - full width */}
         <div className="mb-8">
-          <ProgymnasmataPageClient post={post} headerOnly={true} />
+          <ProgymnasmataPageClient post={transformedPost} headerOnly={true} />
         </div>
 
         {/* Main content */}
@@ -49,7 +90,7 @@ export default async function ProgymnasmataSlugPage({ params }: { params: { cate
           <div className="progymnasmata-content">
             <MdxContent />
           </div>
-          <ProgymnasmataPageClient post={post} contentOnly={true} />
+          <ProgymnasmataPageClient post={transformedPost} contentOnly={true} />
         </main>
 
         {/* Sidenotes for wide viewports */}

@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
-import missionData from "@/data/about/mission.json"
+
+const MISSION_CONTENT = "To refine my taste and understanding by drawing from the wisdom of masters across diverse fields, cultivating a unique and complex perspective. I seek to immerse myself in the richness of different cultures, religions, belief systems, and political landscapes, to truly understand the motivations behind human actions. Through this journey, I aim to write polarizing articles that spark meaningful feedback and discussion. Above all, I am committed to the revival of *ad fontes* education, learning from the old masters to rediscover timeless wisdom and foster a deeper, more nuanced understanding of the world."
 
 export default function MyMission() {
   return (
@@ -11,7 +11,7 @@ export default function MyMission() {
         <Card className="col-span-1 md:col-span-3 bg-muted/50 hover:bg-muted/70 transition-colors">
           <CardContent className="p-6">
             <h3 className="text-xl font-medium mb-4 text-foreground">Mission Statement</h3>
-            <p className="text-muted-foreground leading-relaxed">{missionData.content}</p>
+            <p className="text-muted-foreground leading-relaxed">{MISSION_CONTENT}</p>
           </CardContent>
         </Card>
       </div>

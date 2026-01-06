@@ -2,9 +2,15 @@
 
 import { useState, useEffect, useMemo } from "react"
 import { QuoteCard } from "@/components/quote-card"
-import quotesData from "@/data/quotes.json"
 import { PageHeader } from "@/components/core"
 import { PageDescription } from "@/components/core"
+
+interface Quote {
+  id?: number;
+  text: string;
+  author: string;
+  source?: string | null;
+}
 
 // Add Quotes page metadata after other imports
 const quotesPageData = {
@@ -21,21 +27,33 @@ const quotesPageData = {
 export const dynamic = "force-dynamic"
 
 export default function QuotesPage() {
-  // quotes entries have { text, author, source }
-  // Shuffle quotes for randomized order once on mount (client-side)
-  const [quotes, setQuotes] = useState(() => [...(quotesData.quotes || [])])
+  const [quotes, setQuotes] = useState<Quote[]>([])
+  const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("")
 
   useEffect(() => {
-    const arr = [...quotes]
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      const tmp = arr[i]
-      arr[i] = arr[j]
-      arr[j] = tmp
+    async function fetchQuotes() {
+      try {
+        const response = await fetch('/api/quotes')
+        if (response.ok) {
+          const data = await response.json()
+          // Shuffle quotes
+          const arr = [...(data.quotes || [])]
+          for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1))
+            const tmp = arr[i]
+            arr[i] = arr[j]
+            arr[j] = tmp
+          }
+          setQuotes(arr)
+        }
+      } catch (error) {
+        console.error('Error fetching quotes:', error)
+      } finally {
+        setLoading(false)
+      }
     }
-    setQuotes(arr)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchQuotes()
   }, [])
 
   // Filter by author or text (case-insensitive)
@@ -51,8 +69,7 @@ export default function QuotesPage() {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
-  <div className="max-w-4xl mx-auto p-6 md:p-12 lg:p-16">
-        {/* Add the PageHeader component */}
+      <div className="max-w-4xl mx-auto p-6 md:p-12 lg:p-16">
         <PageHeader
           title={quotesPageData.title}
           subtitle={quotesPageData.subtitle}
@@ -65,7 +82,7 @@ export default function QuotesPage() {
 
         <div className="mb-6">
           <label htmlFor="quote-search" className="sr-only">Search quotes</label>
-          <div className="flex gap-2"> 
+          <div className="flex gap-2">
             <input
               id="quote-search"
               type="search"
@@ -86,19 +103,24 @@ export default function QuotesPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4">
-          {filtered.map((quote, idx) => (
-            <QuoteCard
-              key={quote.text + (quote.author || '') + idx}
-              text={quote.text}
-              author={quote.author}
-              source={quote.source}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex items-center justify-center py-12">
+            <p className="text-muted-foreground">Loading quotes...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-4">
+            {filtered.map((quote, idx) => (
+              <QuoteCard
+                key={quote.text + (quote.author || '') + idx}
+                text={quote.text}
+                author={quote.author}
+                source={quote.source || undefined}
+              />
+            ))}
+          </div>
+        )}
       </div>
-      
-      {/* PageDescription component */}
+
       <PageDescription
         title="About this collection"
         description={`This is a personally curated collection of quotes drawn from literature I've read, films I've watched, and people I've talked to. Each quote has personal resonance — they mean something internally to me rather than being a neutral compilation.`}

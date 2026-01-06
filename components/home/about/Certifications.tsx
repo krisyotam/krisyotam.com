@@ -1,8 +1,41 @@
 "use client"
 
-import { useState } from "react"
-import certificationsData from "@/data/about/certifications.json"
 import Link from "next/link"
+
+const CERTIFICATIONS_DATA = [
+  {
+    title: "Certified Penetration Testing Specialist (CPTS)",
+    date: "2023-05-15",
+    link: "",
+    progress: "0",
+    status: "In Progress",
+    state: "active"
+  },
+  {
+    title: "Certified Bug Bounty Hunter (CBBH)",
+    date: "2023-02-10",
+    link: "",
+    progress: "0",
+    status: "In Progress",
+    state: "active"
+  },
+  {
+    title: "Certified Defensive Security Analyst (CDSA)",
+    date: "2022-11-28",
+    link: "",
+    progress: "0",
+    status: "In Progress",
+    state: "active"
+  },
+  {
+    title: "Certified Web Exploitation Expert (CWEE)",
+    date: "2022-11-28",
+    link: "",
+    progress: "0",
+    status: "In Progress",
+    state: "active"
+  }
+]
 
 export default function Certifications() {
   return (
@@ -20,7 +53,7 @@ export default function Certifications() {
             </tr>
           </thead>
           <tbody>
-            {certificationsData.map((cert, index) => (
+            {CERTIFICATIONS_DATA.map((cert, index) => (
               <tr
                 key={index}
                 className="border-t border-border hover:bg-accent/10 transition-colors duration-200 cursor-pointer"

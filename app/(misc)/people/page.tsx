@@ -1,4 +1,4 @@
-import fs from "fs"
+import Database from "better-sqlite3"
 import path from "path"
 import React from "react"
 import "../../(tracking)/film/film.css"
@@ -8,74 +8,37 @@ import { TraktFavActorCard } from "@/components/trakt/trakt-fav-actor-card"
 import { TraktHorizontalScroll } from "@/components/trakt/trakt-horizontal-scroll"
 import { PageDescription } from "@/components/core"
 
-type PersonEntry = {
-  id?: string | number
+type Person = {
+  slug: string
   name: string
-  image?: string
-  avatar?: string
-  [k: string]: any
+  type: string
+  image: string
+  wiki: string
 }
 
-type PeopleFile = {
-  file: string
-  label?: string
-  people: PersonEntry[]
-}
-
-async function loadPeopleFiles(): Promise<PeopleFile[]> {
-  const dir = path.join(process.cwd(), "data", "people")
+function loadPeople(): Person[] {
+  const dbPath = path.join(process.cwd(), "public", "data", "system.db")
+  const db = new Database(dbPath, { readonly: true })
   try {
-    const filenames = await fs.promises.readdir(dir)
-    const out: PeopleFile[] = []
-    // Prefer these files (in order) if they exist, otherwise fall back to all JSONs
-  const preferred = ["journalists.json", "writers.json", "mathematicians.json", "designers.json"]
-    // prefer showing artists first when present
-    const preferredWithArtists = ["artists.json", ...preferred]
-    const toRead = preferredWithArtists.filter((f) => filenames.includes(f))
-    const finalList = toRead.length > 0 ? toRead : filenames.filter((f) => f.endsWith(".json"))
-
-    await Promise.all(
-      finalList.map(async (file) => {
-        const content = await fs.promises.readFile(path.join(dir, file), "utf8")
-        try {
-          const parsed = JSON.parse(content)
-          let people: PersonEntry[] = []
-
-          if (Array.isArray(parsed)) {
-            people = parsed
-          } else if (parsed && Array.isArray((parsed as any).people)) {
-            people = (parsed as any).people
-          } else if (parsed && parsed.name) {
-            people = [parsed]
-          }
-
-          // nicer labels for known files
-          const displayNames: Record<string, string> = {
-            "journalists.json": "Journalists",
-            "artists.json": "Artists",
-            "writers.json": "Writers",
-            "mathematicians.json": "Mathematicians",
-            "designers.json": "Designers",
-          }
-
-          out.push({ file, label: displayNames[file] ?? path.basename(file, ".json"), people })
-        } catch (err) {
-          // eslint-disable-next-line no-console
-          console.error(`Failed to parse ${file}:`, err)
-        }
-      })
-    )
-
-    return out
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error("Error loading people data:", err)
-    return []
+    return db.prepare("SELECT slug, name, type, image, wiki FROM people ORDER BY name").all() as Person[]
+  } finally {
+    db.close()
   }
 }
 
-export default async function PeoplePage() {
-  const files = await loadPeopleFiles()
+function groupByType(people: Person[]): Record<string, Person[]> {
+  return people.reduce((acc, person) => {
+    const type = person.type || "Other"
+    if (!acc[type]) acc[type] = []
+    acc[type].push(person)
+    return acc
+  }, {} as Record<string, Person[]>)
+}
+
+export default function PeoplePage() {
+  const people = loadPeople()
+  const groupedPeople = groupByType(people)
+  const types = Object.keys(groupedPeople).sort()
 
   return (
     <div className="py-12">
@@ -91,40 +54,32 @@ export default async function PeoplePage() {
         />
 
         <div className="mt-6">
-          {files.length === 0 && (
+          {types.length === 0 ? (
             <div className="p-6 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))] w-full text-center">
-              <p className="text-gray-600 dark:text-zinc-400">No people files found in data/people.</p>
+              <p className="text-gray-600 dark:text-zinc-400">No people found.</p>
             </div>
-          )}
-
-          {files.map((f) => (
-            <section key={f.file} className="film-section">
-              <TraktSectionHeader title={f.label ?? f.file} count={f.people.length} />
-
-              {f.people && f.people.length > 0 ? (
+          ) : (
+            types.map((type) => (
+              <section key={type} className="film-section">
+                <TraktSectionHeader title={type + "s"} count={groupedPeople[type].length} />
                 <TraktHorizontalScroll squareButtons={true}>
-                  {f.people.map((p, idx) => (
+                  {groupedPeople[type].map((p) => (
                     <TraktFavActorCard
-                      key={p.id ?? p.name ?? idx}
-                      id={p.id ?? p.name ?? idx}
+                      key={p.slug}
+                      id={p.slug}
                       name={p.name}
-                      image={p.image ?? p.avatar ?? "/imgs/placeholder.svg"}
+                      image={p.image || "/imgs/placeholder.svg"}
                     />
                   ))}
                 </TraktHorizontalScroll>
-              ) : (
-                <div className="p-6 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))] w-full text-center">
-                  <p className="text-gray-600 dark:text-zinc-400">No people in this file.</p>
-                </div>
-              )}
-            </section>
-          ))}
+              </section>
+            ))
+          )}
         </div>
 
-        {/* Page info button (bottom-left) */}
         <PageDescription
           title="People"
-          description={`This page renders lists of people pulled from JSON files in data/people. Each file is shown as its own horizontal row using the same actor cards as the /film page.`}
+          description="People I admire from various fields."
         />
       </div>
     </div>

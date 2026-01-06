@@ -1,59 +1,79 @@
+/**
+ * =============================================================================
+ * Verse Type Client Component
+ * =============================================================================
+ *
+ * Client-side component for displaying poems of a specific verse type.
+ * Receives data as props from server components.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 "use client"
 
-import poemsData from "@/data/verse/verse.json"
-import categoriesData from "@/data/verse/categories.json"
-import type { Poem } from "@/types/content"
+// =============================================================================
+// Imports
+// =============================================================================
+
 import { PageHeader } from "@/components/core"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Navigation, ContentTable } from "@/components/content"
 import { SelectOption } from "@/components/ui/custom-select"
-import { formatDate, formatDateRange } from "@/lib/date"
+import type { VerseType, VersePost } from "@/lib/data"
 
-interface VerseType {
-  slug: string;
-  title: string;
-  preview: string;
-  date: string;
-  status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
-  confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
-  importance: number;
+// =============================================================================
+// Types
+// =============================================================================
+
+interface VerseTypeClientProps {
+  typeSlug: string
+  verseTypes: VerseType[]
+  poems: VersePost[]
 }
 
+// =============================================================================
+// Helpers
+// =============================================================================
+
 function slugifyType(type: string) {
-  return type.toLowerCase().replace(/\s+/g, "-");
+  return type.toLowerCase().replace(/\s+/g, "-")
 }
 
 function unslugifyType(slug: string, verseTypes: VerseType[]): string {
-  const typeData = verseTypes.find(t => t.slug === slug);
-  return typeData ? typeData.title : "All";
+  const typeData = verseTypes.find(t => t.slug === slug)
+  return typeData ? typeData.title : "All"
 }
 
-export default function VerseTypeClient({ params }: { params: { type: string } }) {
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default function VerseTypeClient({ typeSlug, verseTypes, poems }: VerseTypeClientProps) {
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
-  const poems = poemsData as Poem[]
-  const verseTypes = categoriesData.types as VerseType[]
   const router = useRouter()
 
-  const typeData = verseTypes.find(t => t.slug === params.type)
+  const typeData = verseTypes.find(t => t.slug === typeSlug)
   const currentType = typeData ? typeData.slug : "All"
 
   const filteredPoems = (currentType === "All"
-  ? poems
-  : poems.filter(poem => slugifyType(poem.type ?? "") === params.type))
-  .filter(poem => {
-    if (!searchQuery) return true
-    const q = searchQuery.toLowerCase()
-    return (poem.title ?? "").toLowerCase().includes(q) ||
-           (poem.content ?? "").toLowerCase().includes(q)
-  })
+    ? poems
+    : poems.filter(poem => slugifyType(poem.verse_type ?? "") === typeSlug))
+    .filter(poem => {
+      if (!searchQuery) return true
+      const q = searchQuery.toLowerCase()
+      return (poem.title ?? "").toLowerCase().includes(q) ||
+             (poem.description ?? "").toLowerCase().includes(q)
+    })
 
   useEffect(() => {
     // Show loading state briefly for better UX during type changes
     const timeout = setTimeout(() => setLoading(false), 400)
     return () => clearTimeout(timeout)
-  }, [params.type])
+  }, [typeSlug])
 
   // Get type options for the dropdown
   const typeOptions: SelectOption[] = [
@@ -77,8 +97,8 @@ export default function VerseTypeClient({ params }: { params: { type: string } }
     title: typeData.title,
     date: typeData.date,
     preview: typeData.preview,
-    status: typeData.status,
-    confidence: typeData.confidence,
+    status: typeData.status as "In Progress" | "Draft" | "Finished" | "Abandoned" | "Notes",
+    confidence: typeData.confidence as "likely" | "certain" | "possible" | "unlikely" | "highly likely" | "highly unlikely" | "remote" | "impossible",
     importance: typeData.importance
   } : {
     title: "Verse",
@@ -121,7 +141,7 @@ export default function VerseTypeClient({ params }: { params: { type: string } }
             end_date: poem.end_date,
             slug: poem.slug ?? "",
             tags: poem.tags ?? [],
-            category: poem.type ?? "",
+            category: poem.verse_type ?? "",
             status: poem.status,
             confidence: poem.confidence,
             importance: poem.importance

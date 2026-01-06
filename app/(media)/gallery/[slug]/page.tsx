@@ -4,7 +4,7 @@ export const revalidate = false;
 
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import galleryData from "@/data/gallery/gallery.json";
+import { getGallery } from "@/lib/content-db";
 import { PageHeader } from "@/components/core";
 import { Citation } from "@/components/citation";
 import { LiveClock } from "@/components/live-clock";
@@ -15,17 +15,20 @@ interface GalleryPageProps {
   params: { slug: string };
 }
 
+function generateSlug(title: string): string {
+  return title.toLowerCase().replace(/\s+/g, '-');
+}
+
 export async function generateStaticParams() {
-  // Generate all slugs
-  return galleryData.artworks.map(artwork => ({
-    slug: artwork.title.toLowerCase().replace(/\s+/g, '-')
+  const artworks = getGallery();
+  return artworks.map(artwork => ({
+    slug: generateSlug(artwork.title)
   }));
 }
 
 export async function generateMetadata({ params }: GalleryPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const artwork = galleryData.artworks.find(a => 
-    a.title.toLowerCase().replace(/\s+/g, '-') === params.slug
-  );
+  const artworks = getGallery();
+  const artwork = artworks.find(a => generateSlug(a.title) === params.slug);
 
   if (!artwork) {
     return {
@@ -43,21 +46,19 @@ export async function generateMetadata({ params }: GalleryPageProps, parent: Res
       description: artwork.description || "View this photo by Kris Yotam",
       url,
       type: "website",
-      images: [{
-        url: artwork.imageUrl,
+      images: artwork.image_url ? [{
+        url: artwork.image_url,
         width: 1200,
         height: 630,
         alt: artwork.title
-      }]
+      }] : undefined
     }
   };
 }
 
 export default function PhotoPage({ params }: GalleryPageProps) {
-  // Find the artwork by slug
-  const artwork = galleryData.artworks.find(
-    a => a.title.toLowerCase().replace(/\s+/g, '-') === params.slug
-  );
+  const artworks = getGallery();
+  const artwork = artworks.find(a => generateSlug(a.title) === params.slug);
 
   if (!artwork) {
     return notFound();
@@ -67,27 +68,27 @@ export default function PhotoPage({ params }: GalleryPageProps) {
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       <PageHeader
         title={artwork.title}
-        start_date={artwork.start_date}
-        end_date={artwork.end_date}
+        start_date={artwork.start_date || undefined}
+        end_date={artwork.end_date || undefined}
         backHref="/gallery"
         backText="Gallery"
-        preview={artwork.description}
-        status={artwork.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned"}
+        preview={artwork.description || undefined}
+        status={artwork.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned" | undefined}
         confidence={artwork.confidence as any}
-        importance={artwork.importance}
+        importance={artwork.importance || undefined}
       />
       <div className="my-8">
-        <img src={artwork.imageUrl} alt={artwork.title} className="w-full h-auto rounded shadow" />
+        <img src={artwork.image_url || ""} alt={artwork.title} className="w-full h-auto rounded shadow" />
       </div>
       {artwork.bio && (
         <Box className="my-8">
           <p>{artwork.bio}</p>
         </Box>
       )}
-      <Citation 
+      <Citation
         title={artwork.title}
-        start_date={artwork.start_date}
-        end_date={artwork.end_date}
+        start_date={artwork.start_date || undefined}
+        end_date={artwork.end_date || undefined}
         url={`https://krisyotam.com/gallery/${params.slug}`}
       />
       <div className="mt-8">

@@ -5,12 +5,12 @@ import { Command } from "cmdk"
 import { useRouter } from "next/navigation"
 import {
   Home, User, BookOpen, FileText, Sun, Moon, List, Quote, Heart, Presentation, Users, School, Gift, Mail, Scroll,
-  Earth, Clock, Brain, Waypoints, Notebook, HandCoins, Bitcoin, Archive, Music, Origami, Film, Newspaper, StickyNote,
+  Earth, Clock, Brain, Waypoints, Notebook, HandCoins, Bitcoin, Archive, Music, Origami, Film, StickyNote,
   SquareLibrary, Feather, PenLine, CircleHelp, PencilRuler, Tags, Layers, Building, GraduationCap, Contact,
   CalendarDays, BookMarked, BookCopy, Briefcase, Flame, Video, Lightbulb, Sparkles, Rocket, FlaskConical, Landmark,
   GalleryHorizontal, HeartHandshake, ShoppingCart, Pencil, Code, HelpCircle, LifeBuoy, FlipHorizontal, Server,
   Paperclip, MonitorPlay, BookText, Coins, Upload, Laptop, FolderKanban, ClipboardEdit, AreaChart, MessageSquare,
-  Link, Grid, Receipt, MessageSquareText, Tag, Gamepad2, Clapperboard, Gavel, Star, Hammer, Footprints, PenBox, BookDashed, Shapes, UserSquare, BrainCircuit,
+  Link, Grid, Receipt, Tag, Gamepad2, Clapperboard, Gavel, Star, Hammer, Footprints, PenBox, BookDashed, Shapes, UserSquare, BrainCircuit,
   GlobeLock, BoxSelect, TestTube2, FileBarChart2, Files, Megaphone, BookOpenCheck, ScrollText, BookOpenText, FileEdit, PencilLine, Wrench, Pen, HelpingHand, Keyboard, Palette,
   Sigma,
   DraftingCompass,
@@ -49,7 +49,6 @@ const menuItems = [
 
   // Content sections - main site areas
   { icon: Feather, label: "Verse", path: "/verse" },
-  { icon: MessageSquareText, label: "Social", path: "/social" },
   { icon: BookMarked, label: "Reading", path: "/reading" },
   { icon: Clock, label: "Now", path: "/now" },
 
@@ -87,7 +86,6 @@ const menuItems = [
   { icon: Gift, label: "Wishlist", path: "https://www.amazon.com/hz/wishlist/ls/1ID8ZRMZ7CMDI?ref_=wl_share" },
   { icon: Bitcoin, label: "Donate", path: "/donate" },
   { icon: Mail, label: "Contact", path: "/contact" },
-  { icon: Newspaper, label: "Newsletter", path: "/newsletter" },
 
   // Infrastructure
   { icon: FileText, label: "RSS", path: "/rss.xml" },

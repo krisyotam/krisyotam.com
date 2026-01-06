@@ -1,8 +1,31 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
-import myMethodsData from "@/data/about/my-methods.json"
+
+const MY_METHODS_DATA = {
+  methods: [
+    {
+      title: "On Learning",
+      link: "/learn",
+      description: "A structured yet flexible approach to continuous growth. I distill complex ideas into essential insights, applying knowledge through deliberate practice and reflection."
+    },
+    {
+      title: "On Writing",
+      link: "/write",
+      description: "Clarity through iteration. I shape raw thoughts into refined narratives, balancing creativity with precision, always striving for authenticity and impact."
+    },
+    {
+      title: "On Method",
+      link: "/method",
+      description: "A look into how I use my Linux setup, scripts, and automation to streamline research, with my server handling data processing and backups to keep everything organized."
+    },
+    {
+      title: "On Website",
+      link: "/website",
+      description: "A look into the function & purposes of this website"
+    }
+  ]
+}
 
 export default function OnMyMethod() {
   return (
@@ -22,7 +45,7 @@ export default function OnMyMethod() {
             </tr>
           </thead>
           <tbody>
-            {myMethodsData.methods.map((item, index) => (
+            {MY_METHODS_DATA.methods.map((item, index) => (
               <tr
                 key={index}
                 className="border-t border-border hover:bg-secondary/50 transition-colors duration-200 cursor-pointer"

@@ -2,7 +2,7 @@
 export { default as TableOfContents } from './table-of-contents';
 export { BlogPost } from './blog-post';
 export { PostWrapper } from './post-wrapper';
-export { PostHeader } from './post-header';
+export { PostHeader } from './core';
 // export { default as PostFooter } from './post-footer'; // File missing or not a module
 export { PostMap } from './post-map';
 // LinkTags removed - dead code
@@ -54,13 +54,6 @@ export { PageHeader } from './core';
 // PostHeader already exported above
 export { TagHeader } from './tag-header';
 export { VerseHeader } from './verse-header';
-
-// Newsletter Components
-export { default as NewsletterCard } from './newsletter-card';
-export { default as NewsletterHeader } from './newsletter-header';
-export { default as NewsletterFooter } from './newsletter-footer';
-export { default as NewsletterYearFilter } from './newsletter-year-filter';
-export { default as NewsletterHelpModal } from './newsletter-help-modal';
 
 // Playlist Components
 export { default as PlaylistList } from './playlist-list';

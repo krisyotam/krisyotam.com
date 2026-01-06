@@ -1,16 +1,12 @@
 import { NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
+import { getReadingVerse } from '@/lib/media-db'
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), 'data', 'reading', 'verse.json')
-    const fileContents = fs.readFileSync(filePath, 'utf8')
-    const data = JSON.parse(fileContents)
-    
-    return NextResponse.json(data)
+    const verse = getReadingVerse()
+    return NextResponse.json({ verse })
   } catch (error) {
-    console.error('Error reading verse.json:', error)
+    console.error('Error reading verse:', error)
     return NextResponse.json({ verse: [] })
   }
 }

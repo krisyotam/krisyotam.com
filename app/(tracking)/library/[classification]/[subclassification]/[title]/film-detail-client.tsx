@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Link from 'next/link'
 import Image from 'next/image'
-import { PostHeader } from '@/components/post-header'
+import { PostHeader } from "@/components/core"
 import { Citation } from '@/components/citation'
 import { Footer } from '@/app/(content)/essays/components/footer'
 

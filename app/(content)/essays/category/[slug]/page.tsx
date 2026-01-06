@@ -1,57 +1,69 @@
+/**
+ * =============================================================================
+ * Essay Category Page
+ * =============================================================================
+ *
+ * Dynamic route for displaying essays within a specific category.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import EssaysCategoryPage from "./EssaysCategoryPage";
-import essaysData from "@/data/essays/essays.json";
-import categoriesData from "@/data/essays/categories.json";
+import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+// =============================================================================
+// Types
+// =============================================================================
+
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
+
+// =============================================================================
+// Static Generation
+// =============================================================================
 
 export async function generateStaticParams() {
-  // Get all unique categories from active essays data only
-  const activeEssays = essaysData.essays.filter(essay => essay.state === "active");
+  const essays = getActiveContentByType('essays');
+
   const allCategoriesSet = new Set<string>();
-  
-  activeEssays.forEach(essay => {
+  essays.forEach(essay => {
     if (essay.category) {
-      allCategoriesSet.add(essay.category);
+      allCategoriesSet.add(essay.category.toLowerCase().replace(/\s+/g, "-"));
     }
   });
-  
-  const allCategories = Array.from(allCategoriesSet);
-  
-  console.log('Available categories:', allCategories);
-  console.log('Slugified categories:', allCategories.map(cat => cat.toLowerCase().replace(/\s+/g, "-")));
-  
-  return allCategories.map(category => ({
-    slug: category.toLowerCase().replace(/\s+/g, "-")
-  }));
+
+  return Array.from(allCategoriesSet).map(slug => ({ slug }));
 }
 
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  // Convert slug back to category name
-  const categorySlug = params.slug;
-  const activeEssays = essaysData.essays.filter(essay => essay.state === "active");
-  
-  // Find the original category name
+  const { slug: categorySlug } = await params;
+  const essays = getActiveContentByType('essays');
+  const categories = getCategoriesByContentType('essays');
+
+  // Find original category name
   let originalCategory: string | undefined;
-  for (const essay of activeEssays) {
-    if (essay.category && essay.category.toLowerCase().replace(/\s+/g, "-") === categorySlug) {
+  for (const essay of essays) {
+    if (essay.category?.toLowerCase().replace(/\s+/g, "-") === categorySlug) {
       originalCategory = essay.category;
       break;
     }
   }
 
   if (!originalCategory) {
-    return {
-      title: "Category Not Found | Essays",
-    };
+    return { title: "Category Not Found | Essays" };
   }
 
-  // Check if this category has custom metadata in categories.json
-  const customCategory = categoriesData.categories.find(c => c.slug === categorySlug);
-  const categoryTitle = customCategory ? customCategory.title : originalCategory;
+  const customCategory = categories.find(c => c.slug === categorySlug);
+  const categoryTitle = customCategory?.title || originalCategory;
 
   return {
     title: `${categoryTitle} Essays | Kris Yotam`,
@@ -59,19 +71,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function EssayCategoryPage({ params }: PageProps) {
-  const categorySlug = params.slug;
-  
-  // Filter essays to only show active ones first
-  const activeEssays = essaysData.essays.filter(essay => essay.state === "active");
-  
-  // Find the original category name and filter essays by category
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function EssayCategoryPage({ params }: PageProps) {
+  const { slug: categorySlug } = await params;
+
+  // Fetch data from database
+  const allEssays = getActiveContentByType('essays');
+  const categories = getCategoriesByContentType('essays');
+
+  // Find matching essays and original category name
   let originalCategory: string | undefined;
-  const essaysInCategory = activeEssays.filter(essay => {
-    if (essay.category && essay.category.toLowerCase().replace(/\s+/g, "-") === categorySlug) {
-      if (!originalCategory) {
-        originalCategory = essay.category;
-      }
+  const essaysInCategory = allEssays.filter(essay => {
+    if (essay.category?.toLowerCase().replace(/\s+/g, "-") === categorySlug) {
+      if (!originalCategory) originalCategory = essay.category;
       return true;
     }
     return false;
@@ -81,19 +96,19 @@ export default function EssayCategoryPage({ params }: PageProps) {
     notFound();
   }
 
-  // Check if this category has custom metadata in categories.json
-  const customCategory = categoriesData.categories.find(c => c.slug === categorySlug);
-  
-  // Create header data for this category
+  // Get category metadata
+  const customCategory = categories.find(c => c.slug === categorySlug);
+
+  // Build header data
   const categoryHeaderData = customCategory ? {
     title: customCategory.title,
     subtitle: "",
     start_date: customCategory.date || "Undefined",
     end_date: new Date().toISOString().split('T')[0],
-    preview: customCategory.preview,
-    status: customCategory.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
-    confidence: customCategory.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-    importance: customCategory.importance,
+    preview: customCategory.preview || `Essays in the ${customCategory.title} category.`,
+    status: (customCategory.status || "Active") as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
+    confidence: (customCategory.confidence || "certain") as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
+    importance: customCategory.importance ?? 5,
     backText: "Categories",
     backHref: "/essays/categories"
   } : {
@@ -109,27 +124,28 @@ export default function EssayCategoryPage({ params }: PageProps) {
     backHref: "/essays/categories"
   };
 
-  // Sort essays by date (newest first) and transform to match Essay interface
-  const essays = [...essaysInCategory].sort((a, b) => {
-    const aDate = a.end_date || a.start_date;
-    const bDate = b.end_date || b.start_date;
-    return new Date(bDate).getTime() - new Date(aDate).getTime();
-  })
+  // Sort and transform essays
+  const essays = [...essaysInCategory]
+    .sort((a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return new Date(bDate).getTime() - new Date(aDate).getTime();
+    })
     .map(essay => ({
       id: essay.slug,
       title: essay.title,
-      abstract: essay.preview,
-      importance: essay.importance,
-      confidence: essay.confidence,
-      authors: [], // Default value since not in original data
+      abstract: essay.preview || "",
+      importance: essay.importance ?? 5,
+      confidence: essay.confidence ?? "certain",
+      authors: [],
       subject: essay.category,
-      keywords: essay.tags,
-      postedBy: "admin", // Default value
-      postedOn: (essay.end_date && essay.end_date.trim()) ? essay.end_date : essay.start_date,
+      keywords: essay.tags || [],
+      postedBy: "admin",
+      postedOn: (essay.end_date?.trim()) ? essay.end_date : essay.start_date,
       dateStarted: essay.start_date,
-      tags: essay.tags,
+      tags: essay.tags || [],
       img: essay.cover_image,
-      status: essay.status,
+      status: essay.status ?? "Finished",
       pdfLink: undefined,
       sourceLink: undefined,
       category: essay.category,

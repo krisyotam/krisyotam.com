@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PostHeader } from "@/components/post-header";
+import { PostHeader } from "@/components/core";
 import Link from "next/link";
 import { Sequence, SequenceSection, PostType } from "@/types/content";
 

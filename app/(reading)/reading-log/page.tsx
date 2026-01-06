@@ -1,5 +1,5 @@
 import { ReadingNavigation } from "@/components/reading-navigation"
-import { PostHeader } from "@/components/post-header"
+import { PostHeader } from "@/components/core"
 import { ReadingLogClient } from "./reading-log-client-page"
 
 export default function ReadingLogPage() {

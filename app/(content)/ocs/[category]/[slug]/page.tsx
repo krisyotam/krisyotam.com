@@ -1,53 +1,65 @@
+/**
+ * =============================================================================
+ * OCS Detail Page
+ * =============================================================================
+ *
+ * Individual character profile page for Original Characters (OCS).
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 export const dynamic = 'force-static';
 export const revalidate = false;
+
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import ocsData from "@/data/ocs/ocs.json";
+import { getActiveContentByType, getContentByType } from "@/lib/data";
 import OCSPageClient from "./OCSPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 import type { OCSMeta, OCSStatus, OCSConfidence } from "@/types/content";
 
-interface OCSData {
-  title: string;
-  start_date: string;
-  end_date?: string;
-  slug: string;
-  tags: string[];
-  category: string;
-  book: string;
-  status: string;
-  confidence: string;
-  importance: number;
-  preview: string;
-  cover_image?: string;
-  subtitle?: string;
-  state?: "active" | "hidden";
-}
+// =============================================================================
+// Types
+// =============================================================================
 
 interface OCSPageProps {
-  params: { category: string; slug: string };
+  params: Promise<{ category: string; slug: string }>;
 }
 
-// Helper function to slugify category
+// =============================================================================
+// Helpers
+// =============================================================================
+
 function slugifyCategory(category: string) {
   return category.toLowerCase().replace(/\s+/g, "-");
 }
 
+// =============================================================================
+// Static Generation
+// =============================================================================
+
 export async function generateStaticParams() {
   // Generate all category/slug combinations, but only for active characters
-  return ocsData
-    .filter(character => character.state !== "hidden") // Only include active characters
-    .map(character => ({
-      category: slugifyCategory(character.category),
-      slug: character.slug
-    }));
+  const ocsData = getActiveContentByType('ocs');
+  return ocsData.map(character => ({
+    category: slugifyCategory(character.category),
+    slug: character.slug
+  }));
 }
 
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export async function generateMetadata({ params }: OCSPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const characterData = ocsData.find(c => 
-    slugifyCategory(c.category) === params.category && c.slug === params.slug
+  const { category, slug } = await params;
+  const ocsData = getContentByType('ocs');
+  const characterData = ocsData.find(c =>
+    slugifyCategory(c.category) === category && c.slug === slug
   );
 
   if (!characterData) {
@@ -56,18 +68,17 @@ export async function generateMetadata({ params }: OCSPageProps, parent: Resolvi
     };
   }
 
-  // Get the default OpenGraph image from parent
-  const previousImages = (await parent).openGraph?.images || [];
   // Use cover image if available, otherwise use Kris Yotam's logo
   const images = [
-    {      url: characterData.cover_image || 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
+    {
+      url: characterData.cover_image || 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
       width: 1200,
       height: 1200,
       alt: characterData.title
     }
   ];
 
-  const url = `https://krisyotam.com/ocs/${params.category}/${params.slug}`;
+  const url = `https://krisyotam.com/ocs/${category}/${slug}`;
 
   return {
     title: `${characterData.title} | ${characterData.category} Characters | Kris Yotam`,
@@ -90,41 +101,69 @@ export async function generateMetadata({ params }: OCSPageProps, parent: Resolvi
   };
 }
 
+// =============================================================================
+// Page Component
+// =============================================================================
+
 export default async function OCSPage({ params }: OCSPageProps) {
-  const characterData = ocsData.find(c => 
-    slugifyCategory(c.category) === params.category && c.slug === params.slug
+  const { category, slug } = await params;
+
+  // Fetch data from database
+  const ocsData = getContentByType('ocs');
+  const characterData = ocsData.find(c =>
+    slugifyCategory(c.category) === category && c.slug === slug
   );
 
   if (!characterData) {
     notFound();
   }
-  
+
   // Check if the character is meant to be hidden
   if (characterData.state === "hidden") {
     notFound();
   }
-  
+
   const character: OCSMeta = {
-    ...characterData,
+    title: characterData.title,
+    subtitle: characterData.subtitle,
+    preview: characterData.preview,
+    start_date: characterData.start_date,
+    end_date: characterData.end_date,
+    slug: characterData.slug,
+    tags: characterData.tags,
+    category: characterData.category,
+    book: characterData.category, // OCS uses category as book
     status: characterData.status as OCSStatus,
     confidence: characterData.confidence as OCSConfidence,
-    state: (characterData.state as "active" | "hidden" | undefined) || "active" // Default to "active" if state is not defined
+    importance: characterData.importance,
+    cover_image: characterData.cover_image,
+    state: (characterData.state as "active" | "hidden" | undefined) || "active"
   };
-  
-  const ocs: OCSMeta[] = (ocsData as OCSData[]).map(character => ({
-    ...character,
-    status: character.status as OCSStatus,
-    confidence: character.confidence as OCSConfidence,
-    state: (character.state as "active" | "hidden" | undefined) || "active" // Default to "active" if state is not defined
-  }))
-  // Filter to only show characters with state "active" or undefined state
-  .filter(character => character.state === "active" || character.state === undefined);
+
+  // Get all active characters for navigation
+  const activeOcsData = getActiveContentByType('ocs');
+  const ocs: OCSMeta[] = activeOcsData.map(char => ({
+    title: char.title,
+    subtitle: char.subtitle,
+    preview: char.preview,
+    start_date: char.start_date,
+    end_date: char.end_date,
+    slug: char.slug,
+    tags: char.tags,
+    category: char.category,
+    book: char.category,
+    status: char.status as OCSStatus,
+    confidence: char.confidence as OCSConfidence,
+    importance: char.importance,
+    cover_image: char.cover_image,
+    state: (char.state as "active" | "hidden" | undefined) || "active"
+  }));
 
   // Extract headings from the character MDX content
-  const headings = await extractHeadingsFromMDX('ocs', params.slug, params.category);
+  const headings = await extractHeadingsFromMDX('ocs', slug, category);
 
   // Dynamically import the MDX file based on category and slug
-  const Character = (await import(`@/app/(content)/ocs/content/${params.category}/${params.slug}.mdx`)).default;
+  const Character = (await import(`@/app/(content)/ocs/content/${category}/${slug}.mdx`)).default;
 
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
@@ -133,7 +172,7 @@ export default async function OCSPage({ params }: OCSPageProps) {
         <div className="mb-8">
           <OCSPageClient character={character} allCharacters={ocs} headerOnly={true} />
         </div>
-        
+
         {/* Main content */}
         <main id="content" className="container max-w-[672px] mx-auto px-4">
           {/* Table of Contents - at the top of content */}

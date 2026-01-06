@@ -21,7 +21,7 @@ export function LibraryBookCard({ coverUrl, title, subtitle, author, rating, onC
     >
       <div className="w-[100px] bg-muted p-4">
         <div className="relative h-[100px] w-full">
-          <Image src={coverUrl || "/placeholder.svg"} alt={title} fill className="object-cover rounded-sm" />
+          <Image src={coverUrl || "/placeholder.svg"} alt={title} fill className="object-cover" />
         </div>
       </div>
       <div className="flex-1 p-4 overflow-hidden">

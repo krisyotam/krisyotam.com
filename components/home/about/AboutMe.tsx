@@ -4,8 +4,9 @@ import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import aboutMeData from "@/data/about/about-me.json"
 import NameBreakdown from "@/components/name-breakdown"
+
+const ABOUT_ME_CONTENT = "Hi! I am Kris Yotam, a Applied Researcher, Essayist, Critic, and Blogger. I write about a wide variety of topics, and if you are interested in my work you can even view my notes at notes.krisyotam.com"
 import PersonalBio from "@/components/personal-bio"
 import { WordOfTheDay } from "@/components/WordOfTheDay"
 import { QuoteOfTheDay } from "@/components/QuoteOfTheDay"
@@ -19,7 +20,7 @@ export default function AboutMe() {
         <Card className="col-span-1 md:col-span-2 bg-muted/50 hover:bg-muted/70 transition-colors">
           <CardContent className="p-4">
             <h3 className="text-lg font-medium mb-2">About Me</h3>
-            <p className="text-muted-foreground">{aboutMeData.content}</p>
+            <p className="text-muted-foreground">{ABOUT_ME_CONTENT}</p>
           </CardContent>
         </Card>
 

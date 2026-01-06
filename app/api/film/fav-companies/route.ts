@@ -1,18 +1,25 @@
-import { NextResponse } from "next/server"
-import fs from "fs"
-import path from "path"
+/**
+ * ============================================================================
+ * Favorite Film Companies API Route
+ * Author: Kris Yotam
+ * Date: 2026-01-05
+ * Filename: route.ts
+ * Description: API endpoint for retrieving favorite film companies from media.db.
+ * ============================================================================
+ */
+
+import { NextResponse } from "next/server";
+import { getFavFilmCompanies } from "@/lib/media-db";
 
 export async function GET() {
-  console.log("Fetching favorite film companies from JSON")
   try {
-    const filePath = path.join(process.cwd(), "data", "film", "fav-film-companies.json")
-    const fileContents = fs.readFileSync(filePath, "utf8")
-    const data = JSON.parse(fileContents)
-
-    console.log(`Retrieved ${data.length} favorite film companies`)
-    return NextResponse.json(data)
+    const data = getFavFilmCompanies();
+    return NextResponse.json(data);
   } catch (error) {
-    console.error("Error fetching favorite film companies:", error)
-    return NextResponse.json({ error: "Failed to fetch favorite film companies" }, { status: 500 })
+    console.error("Error fetching favorite film companies:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch favorite film companies" },
+      { status: 500 }
+    );
   }
-} 
+}

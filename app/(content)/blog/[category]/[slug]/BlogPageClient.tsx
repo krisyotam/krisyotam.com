@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LiveClock } from "@/components/live-clock";
-import { PostHeader } from "@/components/post-header";
+import { PostHeader } from "@/components/core";
 import { Footer } from "@/app/(content)/essays/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Citation } from "@/components/citation";

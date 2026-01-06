@@ -1,26 +1,47 @@
-import React from 'react';
+"use client";
+
+import React, { useEffect, useState } from 'react';
 import { Quote } from '@/components/posts/typography/quote';
-import quotesFromFile from '@/data/quotes.json';
 
-interface HeaderQuoteItem {
+interface QuoteItem {
+  id?: number;
+  text: string;
   author: string;
-  text?: string; // Optional text field for the actual quote
+  source?: string | null;
 }
-
-interface HeaderQuotesData {
-  quotes: HeaderQuoteItem[];
-}
-
-const quotesData: HeaderQuotesData = quotesFromFile;
 
 export function QuotesFeed() {
-  if (!quotesData || !quotesData.quotes || quotesData.quotes.length === 0) {
+  const [quotes, setQuotes] = useState<QuoteItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchQuotes() {
+      try {
+        const response = await fetch('/api/quotes');
+        if (response.ok) {
+          const data = await response.json();
+          setQuotes(data.quotes || []);
+        }
+      } catch (error) {
+        console.error('Error fetching quotes:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchQuotes();
+  }, []);
+
+  if (loading) {
+    return <p>Loading quotes...</p>;
+  }
+
+  if (!quotes || quotes.length === 0) {
     return <p>No quotes available to display.</p>;
   }
 
   return (
     <div className="quotes-feed-container">
-      {quotesData.quotes.map((item, index) => (
+      {quotes.map((item, index) => (
         <Quote key={index} author={item.author}>
           {item.text || `Collected thoughts from ${item.author}`}
         </Quote>

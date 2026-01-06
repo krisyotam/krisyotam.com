@@ -5,7 +5,7 @@ import path from "path"
 export async function GET() {
   try {
     // Read the verse.json file
-    const filePath = path.join(process.cwd(), "data", "verse", "verse.json")
+    const filePath = path.join(process.cwd(), "public", "data", "verse", "verse.json")
     const fileContents = fs.readFileSync(filePath, "utf8")
     const poems = JSON.parse(fileContents)
 

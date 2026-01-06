@@ -1,32 +1,29 @@
 import { Suspense } from "react";
 import { PageHeader } from "@/components/core";
-// import { FocusCards } from "@/app/(content)/gallery/FocusCards";
 import GalleryClientPage from "./GalleryClientPage";
-import galleryData from "@/data/gallery/gallery.json";
+import { getGallery } from "@/lib/content-db";
 import { staticMetadata } from "@/lib/staticMetadata";
-
-interface Artwork {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  dimension: string;
-  start_date: string;
-  end_date?: string;
-  category: string;
-  tags: string[];
-  status: string;
-  confidence: string;
-  importance: number;
-  bio: string;
-}
 
 export const metadata = staticMetadata.art ? { ...staticMetadata.art, title: "Gallery", openGraph: { ...staticMetadata.art.openGraph, title: "Gallery" }, twitter: { ...staticMetadata.art.twitter, title: "Gallery" } } : { title: "Gallery" };
 
 export default function GalleryPage() {
-  const mappedArtworks = galleryData.artworks.map(artwork => ({
-    ...artwork,
-    date: artwork.end_date || artwork.start_date
+  const galleryData = getGallery();
+
+  const mappedArtworks = galleryData.map(artwork => ({
+    id: String(artwork.id),
+    title: artwork.title,
+    description: artwork.description || "",
+    imageUrl: artwork.image_url || "",
+    dimension: artwork.dimension || "",
+    start_date: artwork.start_date || "",
+    end_date: artwork.end_date || undefined,
+    date: artwork.end_date || artwork.start_date || "",
+    category: artwork.category_slug || "",
+    tags: [],
+    status: artwork.status || "",
+    confidence: artwork.confidence || "",
+    importance: artwork.importance || 0,
+    bio: artwork.bio || "",
   }));
 
   return (

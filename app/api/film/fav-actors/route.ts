@@ -1,18 +1,25 @@
-import { NextResponse } from "next/server"
-import fs from "fs"
-import path from "path"
+/**
+ * ============================================================================
+ * Favorite Actors API Route
+ * Author: Kris Yotam
+ * Date: 2026-01-05
+ * Filename: route.ts
+ * Description: API endpoint for retrieving favorite actors from media.db.
+ * ============================================================================
+ */
+
+import { NextResponse } from "next/server";
+import { getFavActors } from "@/lib/media-db";
 
 export async function GET() {
-  console.log("Fetching favorite actors from JSON")
   try {
-    const filePath = path.join(process.cwd(), "data", "film", "fav-actors.json")
-    const fileContents = fs.readFileSync(filePath, "utf8")
-    const data = JSON.parse(fileContents)
-
-    console.log(`Retrieved ${data.length} favorite actors`)
-    return NextResponse.json(data)
+    const data = getFavActors();
+    return NextResponse.json(data);
   } catch (error) {
-    console.error("Error fetching favorite actors:", error)
-    return NextResponse.json({ error: "Failed to fetch favorite actors" }, { status: 500 })
+    console.error("Error fetching favorite actors:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch favorite actors" },
+      { status: 500 }
+    );
   }
-} 
+}

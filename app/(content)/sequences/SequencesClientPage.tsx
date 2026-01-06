@@ -1,4 +1,21 @@
+/**
+ * =============================================================================
+ * Sequences Client Page
+ * =============================================================================
+ *
+ * Client-side component for displaying and filtering sequences.
+ * Receives data as props from server component.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 "use client";
+
+// =============================================================================
+// Imports
+// =============================================================================
 
 import { useState, useEffect } from "react";
 import { PageHeader } from "@/components/core";
@@ -9,81 +26,78 @@ import { Search, LayoutGrid, List } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import categoriesData from "@/data/sequences/categories.json";
-import { Sequence, SequencePost } from "@/types/content";
+import type { Sequence } from "@/lib/data";
+import type { CategoryData } from "@/lib/types/content";
 
-/* Page-level metadata for the header */
+// =============================================================================
+// Types
+// =============================================================================
+
+interface SequencesClientPageProps {
+  sequences: Sequence[];
+  categories: CategoryData[];
+  initialCategory?: string;
+  categoryName?: string;
+}
+
+// =============================================================================
+// Constants
+// =============================================================================
+
 const defaultSequencesPageData = {
   title: "Sequences",
   subtitle: "Structured Learning Paths",
   start_date: "2025-01-01",
-  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
-  preview: "Curated collections of posts organized into coherent learning sequences covering philosophy, science, and rationality.",
+  end_date: new Date().toISOString().split("T")[0],
+  preview:
+    "Curated collections of posts organized into coherent learning sequences covering philosophy, science, and rationality.",
   status: "In Progress" as const,
   confidence: "likely" as const,
   importance: 8,
 };
 
-// Using imported types from /types/sequences.ts
+// =============================================================================
+// Helpers
+// =============================================================================
 
-// Helper function to get total posts count for both old and new formats
+/**
+ * Get total posts count for both sectioned and flat sequences
+ */
 function getTotalPostsCount(sequence: Sequence): number {
   if (sequence.sections && sequence.sections.length > 0) {
-    return sequence.sections.reduce((total, section) => total + section.posts.length, 0);
+    return sequence.sections.reduce(
+      (total, section) => total + section.posts.length,
+      0
+    );
   }
   return sequence.posts ? sequence.posts.length : 0;
 }
 
-interface SequencesClientPageProps {
-  initialCategory?: string;
-  categoryName?: string;
+/**
+ * Convert a category name to URL slug
+ */
+function slugifyCategory(category: string): string {
+  return category.toLowerCase().replace(/\s+/g, "-");
 }
 
-async function fetchSequences(): Promise<Sequence[]> {
-  try {
-    const response = await fetch('/api/sequences');
-    if (!response.ok) throw new Error('Failed to fetch sequences');
-    const data = await response.json();
-    return Array.isArray(data.sequences) ? data.sequences : [];
-  } catch (error) {
-    console.error('Error fetching sequences:', error);
-    return [];
-  }
-}
+// =============================================================================
+// Page Component
+// =============================================================================
 
-async function fetchCategories(): Promise<any[]> {
-  try {
-    const response = await fetch('/api/sequences/categories');
-    if (!response.ok) throw new Error('Failed to fetch categories');
-    const data = await response.json();
-    return Array.isArray(data.categories) ? data.categories : [];
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-    return [];
-  }
-}
-
-async function fetchTags(): Promise<any[]> {
-  try {
-    const response = await fetch('/api/sequences/tags');
-    if (!response.ok) throw new Error('Failed to fetch tags');
-    const data = await response.json();
-    return Array.isArray(data.tags) ? data.tags : [];
-  } catch (error) {
-    console.error('Error fetching tags:', error);
-    return [];
-  }
-}
-
-export default function SequencesClientPage({ initialCategory = "all", categoryName }: SequencesClientPageProps) {
+export default function SequencesClientPage({
+  sequences,
+  categories,
+  initialCategory = "all",
+  categoryName,
+}: SequencesClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState<string | undefined>(initialCategory);
-  const [categoryDisplayName, setCategoryDisplayName] = useState<string | undefined>(categoryName);
+  const [activeCategory, setActiveCategory] = useState<string | undefined>(
+    initialCategory
+  );
+  const [categoryDisplayName, setCategoryDisplayName] = useState<
+    string | undefined
+  >(categoryName);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [sequences, setSequences] = useState<Sequence[]>([]);
-  const [categories, setCategories] = useState<any[]>([]);
-  const [tags, setTags] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   // Update activeCategory when props change
@@ -95,141 +109,149 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
   // Get header data based on category
   const getHeaderData = () => {
     if (activeCategory !== "all" && categoryDisplayName) {
-      // Find category data from categories.json
       const categorySlug = slugifyCategory(categoryDisplayName);
-      const categoryData = categoriesData.categories.find(cat => 
-        cat.slug === categorySlug || cat.title === categoryDisplayName
+      const categoryData = categories.find(
+        (cat) => cat.slug === categorySlug || cat.title === categoryDisplayName
       );
-      
+
       if (categoryData) {
         return {
           title: categoryData.title,
           subtitle: "Sequence Category",
           start_date: categoryData.date || "2025-01-01",
-          end_date: new Date().toISOString().split('T')[0],
+          end_date: new Date().toISOString().split("T")[0],
           preview: categoryData.preview,
-          status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Planned",
-          confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-          importance: categoryData.importance
+          status: categoryData.status as
+            | "Abandoned"
+            | "Notes"
+            | "Draft"
+            | "In Progress"
+            | "Finished"
+            | "Planned",
+          confidence: categoryData.confidence as
+            | "impossible"
+            | "remote"
+            | "highly unlikely"
+            | "unlikely"
+            | "possible"
+            | "likely"
+            | "highly likely"
+            | "certain",
+          importance: categoryData.importance,
         };
       }
-      
+
       // Fallback if category not found in data
       return {
         title: categoryDisplayName,
         subtitle: "Sequence Category",
         start_date: "2025-01-01",
-        end_date: new Date().toISOString().split('T')[0],
+        end_date: new Date().toISOString().split("T")[0],
         preview: `Sequences in the ${categoryDisplayName} category`,
         status: "In Progress" as const,
         confidence: "certain" as const,
-        importance: 8
+        importance: 8,
       };
     }
-    
+
     return defaultSequencesPageData;
   };
 
   const headerData = getHeaderData();
-  useEffect(() => {
-    async function loadData() {
-      setLoading(true);
-      try {
-        const [sequencesData, categoriesData, tagsData] = await Promise.all([
-          fetchSequences(),
-          fetchCategories(),
-          fetchTags()
-        ]);
-        
-        setSequences(sequencesData);
-        setCategories(categoriesData);
-        setTags(tagsData);
-      } catch (error) {
-        console.error('Error loading data:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    
-    loadData();
-  }, []);
-
-  // Helper function to slugify category
-  function slugifyCategory(category: string) {
-    return category.toLowerCase().replace(/\s+/g, "-");
-  }
 
   // Filter sequences based on search query and category
-  const filteredSequences = sequences.filter((sequence) => {
-    const q = searchQuery.toLowerCase();
-    const matchesSearch =
-      !q ||
-      sequence.title.toLowerCase().includes(q) ||
-      sequence.preview.toLowerCase().includes(q);
+  const filteredSequences = sequences
+    .filter((sequence) => {
+      const q = searchQuery.toLowerCase();
+      const matchesSearch =
+        !q ||
+        sequence.title.toLowerCase().includes(q) ||
+        (sequence.preview && sequence.preview.toLowerCase().includes(q));
 
-    // Check if matches category
-    const matchesCategory = 
-      activeCategory === "all" || 
-      (sequence.category && sequence.category === categoryDisplayName);
-    
-    return matchesSearch && matchesCategory;
-  }).sort((a, b) => {
-    const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
-    const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
-    return new Date(dateB).getTime() - new Date(dateA).getTime();
-  });
+      // Check if matches category
+      const matchesCategory =
+        activeCategory === "all" ||
+        (sequence.category && sequence.category === categoryDisplayName);
 
+      return matchesSearch && matchesCategory;
+    })
+    .sort((a, b) => {
+      const dateA =
+        a.end_date && a.end_date.trim() ? a.end_date : a.start_date;
+      const dateB =
+        b.end_date && b.end_date.trim() ? b.end_date : b.start_date;
+      return (
+        new Date(dateB || "").getTime() - new Date(dateA || "").getTime()
+      );
+    });
 
+  // =============================================================================
+  // View Components
+  // =============================================================================
 
   const GridView = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {filteredSequences.map((sequence) => (
-        <Link 
-          key={sequence.slug} 
-          href={`/sequences/${sequence.slug}`}
-          className="border border-border bg-card hover:bg-secondary/50 transition-colors block"
+        <article
+          key={sequence.slug}
+          className="border border-border bg-card hover:bg-secondary/50 transition-colors cursor-pointer"
+          onClick={() => router.push(`/sequences/${sequence.slug}`)}
         >
           {/* Cover Image Area */}
           <div className="aspect-[16/9] bg-muted/30 border-b border-border flex items-center justify-center">
-            {sequence["cover-url"] ? (
-              <img 
-                src={sequence["cover-url"]} 
+            {sequence["cover-url"]?.trim() ? (
+              <img
+                src={sequence["cover-url"].trim()}
                 alt={sequence.title}
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="text-muted-foreground text-sm text-center p-4">
+              <span className="text-muted-foreground text-sm text-center p-4 block">
                 {sequence.title}
-              </div>
+              </span>
             )}
           </div>
-          
+
           {/* Content Area */}
           <div className="p-4">
-            <h3 className="font-medium text-sm mb-2 line-clamp-2">{sequence.title}</h3>
-            <p className="text-xs text-muted-foreground mb-3 line-clamp-3">{sequence.preview}</p>
-            
+            <h3 className="font-medium text-sm mb-2 line-clamp-2">
+              {sequence.title}
+            </h3>
+            <p className="text-xs text-muted-foreground mb-3 line-clamp-3">
+              {sequence.preview}
+            </p>
+
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <span className="flex items-center gap-2">
                 <span>{getTotalPostsCount(sequence)} posts</span>
                 {sequence.category && (
                   <>
-                    <span className="text-muted-foreground">•</span>
-                    <Link 
-                      href={`/sequences/category/${slugifyCategory(sequence.category)}`}
-                      className="hover:text-foreground"
-                      onClick={(e) => e.stopPropagation()} // Prevent parent link from triggering
+                    <span className="text-muted-foreground">-</span>
+                    <span
+                      className="hover:text-foreground cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (sequence.category) {
+                          router.push(`/sequences/category/${slugifyCategory(sequence.category)}`);
+                        }
+                      }}
                     >
                       {sequence.category}
-                    </Link>
+                    </span>
                   </>
                 )}
               </span>
-              <span>{new Date((sequence.end_date && sequence.end_date.trim()) ? sequence.end_date : sequence.start_date).getFullYear()}</span>
+              <span>
+                {new Date(
+                  sequence.end_date && sequence.end_date.trim()
+                    ? sequence.end_date
+                    : sequence.start_date || ""
+                ).getFullYear()}
+              </span>
             </div>
           </div>
-        </Link>
+        </article>
       ))}
     </div>
   );
@@ -248,10 +270,12 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
         {filteredSequences.map((sequence, index) => (
           <tr
             key={sequence.slug}
-            className={`border-b border-border hover:bg-secondary/50 transition-colors ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/5'}`}
+            className={`border-b border-border hover:bg-secondary/50 transition-colors ${
+              index % 2 === 0 ? "bg-transparent" : "bg-muted/5"
+            }`}
           >
             <td className="py-2 px-3">
-              <Link 
+              <Link
                 href={`/sequences/${sequence.slug}`}
                 className="font-medium"
               >
@@ -260,7 +284,7 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
             </td>
             <td className="py-2 px-3">
               {sequence.category && (
-                <Link 
+                <Link
                   href={`/sequences/category/${slugifyCategory(sequence.category)}`}
                   className=""
                 >
@@ -269,31 +293,28 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
               )}
             </td>
             <td className="py-2 px-3">{getTotalPostsCount(sequence)}</td>
-            <td className="py-2 px-3">{new Date((sequence.end_date && sequence.end_date.trim()) ? sequence.end_date : sequence.start_date).getFullYear()}</td>
+            <td className="py-2 px-3">
+              {new Date(
+                sequence.end_date && sequence.end_date.trim()
+                  ? sequence.end_date
+                  : sequence.start_date || ""
+              ).getFullYear()}
+            </td>
           </tr>
         ))}
       </tbody>
     </table>
   );
 
-  if (loading) {
-    return (
-      <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
-        <div className="flex justify-center items-center py-24">
-          <svg className="animate-spin h-8 w-8 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-          </svg>
-        </div>
-      </div>
-    );
-  }
+  // =============================================================================
+  // Render
+  // =============================================================================
 
   return (
     <>
       <style jsx global>{`
         .sequences-container {
-          font-family: 'Geist', sans-serif;
+          font-family: "Geist", sans-serif;
         }
       `}</style>
 
@@ -329,12 +350,12 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
               }}
               options={[
                 { value: "all", label: "All Categories" },
-                ...categoriesData.categories
+                ...categories
                   .sort((a, b) => a.title.localeCompare(b.title))
-                  .map(category => ({
+                  .map((category) => ({
                     value: category.title,
-                    label: category.title
-                  }))
+                    label: category.title,
+                  })),
               ]}
               placeholder="All Categories"
               className="text-sm min-w-[160px]"
@@ -346,8 +367,11 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
             <Button
               variant="outline"
               size="icon"
-              className={cn('rounded-none', viewMode === 'list' && 'bg-secondary/50')}
-              onClick={() => setViewMode('list')}
+              className={cn(
+                "rounded-none",
+                viewMode === "list" && "bg-secondary/50"
+              )}
+              onClick={() => setViewMode("list")}
               aria-label="List view"
             >
               <List className="h-4 w-4" />
@@ -355,8 +379,11 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
             <Button
               variant="outline"
               size="icon"
-              className={cn('rounded-none', viewMode === 'grid' && 'bg-secondary/50')}
-              onClick={() => setViewMode('grid')}
+              className={cn(
+                "rounded-none",
+                viewMode === "grid" && "bg-secondary/50"
+              )}
+              onClick={() => setViewMode("grid")}
               aria-label="Grid view"
             >
               <LayoutGrid className="h-4 w-4" />
@@ -367,12 +394,11 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
         {/* Content based on view mode */}
         {viewMode === "grid" ? <GridView /> : <ListView />}
 
-        {filteredSequences.length === 0 && !loading && (
+        {filteredSequences.length === 0 && (
           <div className="text-muted-foreground text-sm mt-6 text-center">
-            {activeCategory !== "all" ? 
-              `No sequences found in the ${categoryDisplayName} category.` :
-              "No sequences found matching your criteria."
-            }
+            {activeCategory !== "all"
+              ? `No sequences found in the ${categoryDisplayName} category.`
+              : "No sequences found matching your criteria."}
           </div>
         )}
 
@@ -383,7 +409,7 @@ export default function SequencesClientPage({ initialCategory = "all", categoryN
         <PageDescription
           title={
             activeCategory !== "all"
-              ? `About ${categoryDisplayName} Sequences` 
+              ? `About ${categoryDisplayName} Sequences`
               : "About Sequences"
           }
           description={

@@ -1,47 +1,66 @@
+/**
+ * =============================================================================
+ * Verse Client Component
+ * =============================================================================
+ *
+ * Client-side component for displaying and filtering verse content.
+ * Receives data as props from server components.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 "use client"
 
-import poemsData from "@/data/verse/verse.json"
-import categoriesData from "@/data/verse/categories.json"
-import type { Poem } from "@/types/content"
+// =============================================================================
+// Imports
+// =============================================================================
+
 import { PageHeader } from "@/components/core"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Navigation, ContentTable } from "@/components/content"
 import { SelectOption } from "@/components/ui/custom-select"
-import { formatDate, formatDateRange } from "@/lib/date"
+import type { VerseType, VersePost } from "@/lib/data"
 
-interface VerseType {
-  slug: string;
-  title: string;
-  preview: string;
-  date: string;
-  status: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished";
-  confidence: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain";
-  importance: number;
+// =============================================================================
+// Types
+// =============================================================================
+
+interface VerseClientProps {
+  initialType?: string
+  verseTypes: VerseType[]
+  poems: VersePost[]
 }
 
+// =============================================================================
+// Helpers
+// =============================================================================
+
 function slugifyType(type: string) {
-  return type.toLowerCase().replace(/\s+/g, "-");
+  return type.toLowerCase().replace(/\s+/g, "-")
 }
 
 function unslugifyType(slug: string, allTypes: VerseType[]): string {
-  const typeData = allTypes.find(t => t.slug === slug);
-  return typeData ? typeData.title : "All";
+  const typeData = allTypes.find(t => t.slug === slug)
+  return typeData ? typeData.title : "All"
 }
 
-export function VerseClient({ initialType = "All" }: { initialType?: string }) {
-  const [loading, setLoading] = useState(true)  
-  const [currentType, setCurrentType] = useState(initialType)  
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export function VerseClient({ initialType = "All", verseTypes, poems }: VerseClientProps) {
+  const [loading, setLoading] = useState(true)
+  const [currentType, setCurrentType] = useState(initialType)
   const [searchQuery, setSearchQuery] = useState("")
   const router = useRouter()
-  
-  const poems = poemsData as Poem[]  
-  const verseTypes = categoriesData.types as VerseType[]
 
   // Get proper type title from slug or raw type
   const getTypeTitle = (type: string) => {
-    const typeData = verseTypes.find(t => t.slug === slugifyType(type) || t.title === type);
-    return typeData ? typeData.title : type;
+    const typeData = verseTypes.find(t => t.slug === slugifyType(type) || t.title === type)
+    return typeData ? typeData.title : type
   }
 
   // Get current category metadata for header
@@ -49,9 +68,9 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
     if (currentType === "All") {
       return {
         title: "Verse",
-        subtitle: "Poems, Haikus, and Other Forms", 
+        subtitle: "Poems, Haikus, and Other Forms",
         start_date: "2025-01-01",
-        end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
+        end_date: new Date().toISOString().split('T')[0],
         preview: "An anthology of original verse",
         status: "In Progress" as const,
         confidence: "likely" as const,
@@ -70,13 +89,13 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
         start_date: typeData.date || "Undefined",
         end_date: new Date().toISOString().split('T')[0],
         preview: typeData.preview,
-        status: typeData.status,
-        confidence: typeData.confidence,
+        status: typeData.status as "In Progress" | "Draft" | "Finished" | "Abandoned" | "Notes",
+        confidence: typeData.confidence as "likely" | "certain" | "possible" | "unlikely" | "highly likely" | "highly unlikely" | "remote" | "impossible",
         importance: typeData.importance
       }
     }
 
-    // Fallback to default if not found 
+    // Fallback to default if not found
     return {
       title: currentType,
       subtitle: "",
@@ -92,26 +111,30 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
   // Get type options for the dropdown
   const typeOptions: SelectOption[] = [
     { value: "All", label: "All Types" },
-    ...verseTypes.map(type => ({ 
+    ...verseTypes.map(type => ({
       value: type.slug,
       label: type.title
     }))
   ]
 
   // Get poems filtered by type and search
-  const sortedPoems = [...poems].sort((a, b) => new Date(b.start_date ?? "1970-01-01").getTime() - new Date(a.start_date ?? "1970-01-01").getTime());
+  const sortedPoems = [...poems].sort((a, b) =>
+    new Date(b.start_date ?? "1970-01-01").getTime() - new Date(a.start_date ?? "1970-01-01").getTime()
+  )
+
   const filteredPoems = sortedPoems.filter(poem => {
-    const matchesType = currentType === "All" || slugifyType(poem.type ?? "") === slugifyType(currentType);
-    const matchesSearch = !searchQuery || 
-      (poem.title ?? "").toLowerCase().includes(searchQuery.toLowerCase()) || 
-      ((poem.content ?? "").toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesType && matchesSearch;
-  });
+    const poemTypeSlug = slugifyType(poem.verse_type ?? "")
+    const matchesType = currentType === "All" || poemTypeSlug === slugifyType(currentType)
+    const matchesSearch = !searchQuery ||
+      (poem.title ?? "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+      ((poem.description ?? "").toLowerCase().includes(searchQuery.toLowerCase()))
+    return matchesType && matchesSearch
+  })
 
   useEffect(() => {
     // Update current type when initialType changes
     setCurrentType(initialType)
-    
+
     // Show loading state briefly for better UX during type changes
     setLoading(true)
     const timeout = setTimeout(() => setLoading(false), 300)
@@ -119,9 +142,9 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
   }, [initialType])
 
   // Helper to build the correct route for a poem
-  function getPoemUrl(poem: Poem) {
-  const typeSlug = slugifyType(poem.type ?? "");
-  return `/verse/${encodeURIComponent(typeSlug)}/${encodeURIComponent(poem.slug ?? "")}`
+  function getPoemUrl(poem: VersePost) {
+    const typeSlug = slugifyType(poem.verse_type ?? "")
+    return `/verse/${encodeURIComponent(typeSlug)}/${encodeURIComponent(poem.slug ?? "")}`
   }
 
   function handleTypeChange(selectedValue: string) {
@@ -129,13 +152,13 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
     if (!selectedType) return
 
     if (selectedType.value === "All") {
-      router.push("/verse");
+      router.push("/verse")
     } else {
-      router.push(`/verse/${encodeURIComponent(selectedType.value)}`);
+      router.push(`/verse/${encodeURIComponent(selectedType.value)}`)
     }
   }
 
-  const headerData = getHeaderData();
+  const headerData = getHeaderData()
 
   return (
     <main className="max-w-2xl mx-auto px-4 py-12">
@@ -169,7 +192,7 @@ export function VerseClient({ initialType = "All" }: { initialType?: string }) {
             end_date: poem.end_date,
             slug: poem.slug ?? "",
             tags: poem.tags ?? [],
-            category: poem.type ?? "",
+            category: poem.verse_type ?? "",
             status: poem.status,
             confidence: poem.confidence,
             importance: poem.importance

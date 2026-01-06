@@ -1,22 +1,44 @@
-import { NextResponse } from "next/server"
-import fs from "fs"
-import path from "path"
+/**
+ * ============================================================================
+ * Shop API Route
+ * ============================================================================
+ * Author: Kris Yotam
+ * Description: API endpoint for fetching shop items from system.db
+ * Created: 2026-01-05
+ * ============================================================================
+ */
+
+import { NextResponse } from "next/server";
+import { getAllShopItems } from "@/lib/system-db";
+
+// ============================================================================
+// GET Handler
+// ============================================================================
 
 export async function GET() {
   try {
-    const dataDirectory = path.join(process.cwd(), "data", "shop")
-    const fileContents = fs.readFileSync(path.join(dataDirectory, "shop.json"), "utf8")
-    const data = JSON.parse(fileContents)
+    const items = getAllShopItems();
 
-    // Only return items explicitly marked as active. This prevents hidden/inactive
-    // items from appearing on the public /shop page.
-    const activeItems = Array.isArray(data)
-      ? data.filter((item: any) => (item?.state || "").toString().toLowerCase() === "active")
-      : []
+    // Transform to match expected format for backwards compatibility
+    const transformedItems = items.map((item) => ({
+      name: item.name,
+      slug: item.slug,
+      category: item.category,
+      price: item.price,
+      currency: item.currency,
+      payment_url: item.paymentUrl,
+      image: item.image,
+      description: item.description,
+      date: item.date,
+      status: item.status,
+      importance: item.importance,
+      state: item.state,
+      "aspect-ratio": item.aspectRatio,
+    }));
 
-    return NextResponse.json(activeItems)
+    return NextResponse.json(transformedItems);
   } catch (error) {
-    console.error("Error reading shop data:", error)
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 })
+    console.error("Error reading shop data:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

@@ -1,14 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { PageDescription } from "@/components/core";
+import { useState } from "react";
 import { Hero } from "@/components/portfolio/hero";
 import { About } from "@/components/portfolio/about";
 import { Posts } from "@/components/portfolio/posts";
 import { Projects } from "@/components/portfolio/projects";
 import { CV } from "@/components/portfolio/cv";
-import projectsData from "@/data/portfolio/projects.json";
-import categoriesData from "@/data/portfolio/categories.json";
 
 const portfolioPageData = {
   title: "Portfolio",
@@ -27,14 +24,8 @@ export default function PortfolioPage() {
   const [activeTab, setActiveTab] = useState("projects");
 
   const handleTabChange = (tab: string) => {
-    console.log("Tab changed to:", tab);
     setActiveTab(tab);
   };
-
-  // Add effect to log active tab for debugging
-  useEffect(() => {
-    console.log("Active tab in portfolio page:", activeTab);
-  }, [activeTab]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">

@@ -1,0 +1,202 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+###############################################################################
+# KRIS WRITE — Content launcher for krisyotam.com
+#
+# Maintainer:   Kris Yotam <krisyotam@pm.me>
+# Repository:   https://github.com/krisyotam/krisrice
+# License:      MIT
+# Created:      2025-01-01
+# Description:  Interactive selector for site content types and entries.
+#               Opens the resolved MDX file in Apostrophe for writing.
+#               Uses fzf for selection and queries content.db directly.
+###############################################################################
+
+###############################################################################
+# config
+###############################################################################
+
+PROJECT_ROOT="${KRIS_WRITE_ROOT:-$HOME/Dev/krisyotam.com}"
+APP_CONTENT="$PROJECT_ROOT/app/(content)"
+DB_PATH="$PROJECT_ROOT/public/data/content.db"
+
+###############################################################################
+# helpers
+###############################################################################
+
+have_cmd() { command -v "$1" >/dev/null 2>&1; }
+
+have_cmd sqlite3 || { echo "sqlite3 required"; exit 2; }
+have_cmd fzf || { echo "fzf required"; exit 2; }
+
+db() {
+  sqlite3 -separator $'\t' "$DB_PATH" "$1"
+}
+
+###############################################################################
+# ui
+###############################################################################
+
+print_banner() {
+  local cols
+  cols="$(tput cols 2>/dev/null || echo 80)"
+
+  if have_cmd figlet; then
+    figlet -w "$cols" -f big "KRISYOTAM.COM" 2>/dev/null \
+      || figlet -w "$cols" -f banner "KRISYOTAM.COM" 2>/dev/null \
+      || figlet -w "$cols" -f slant "KRISYOTAM.COM" 2>/dev/null \
+      || figlet -w "$cols" "KRISYOTAM.COM"
+  else
+    echo "KRISYOTAM.COM"
+  fi
+
+  echo
+  echo "est. 2025"
+  echo "author: Kris Yotam"
+  echo "publisher: krisyotam.com"
+  echo
+  echo "  Do I contradict myself? Very well then I contradict myself, (I am large, I contain multitudes.)"
+  echo "  — Walt Whitman"
+  echo
+}
+
+###############################################################################
+# content model
+###############################################################################
+
+content_types=(
+  blog essays fiction news notes ocs
+  papers progymnasmata reviews sequences verse
+)
+
+read_entries() {
+  local type="$1"
+  db "SELECT title, slug, COALESCE(category_slug, '') FROM $type ORDER BY start_date DESC"
+}
+
+get_entry_details() {
+  local type="$1"
+  local slug="$2"
+
+  local main_info
+  main_info=$(db "SELECT
+    'ID: ' || id,
+    'Slug: ' || slug,
+    'Title: ' || title,
+    'Preview: ' || COALESCE(preview, ''),
+    'Category: ' || COALESCE(category_slug, ''),
+    'Status: ' || COALESCE(status, ''),
+    'Confidence: ' || COALESCE(confidence, ''),
+    'Importance: ' || COALESCE(importance, ''),
+    'Start Date: ' || COALESCE(start_date, ''),
+    'End Date: ' || COALESCE(end_date, ''),
+    'State: ' || COALESCE(state, '')
+  FROM $type WHERE slug = '$slug'" | tr '\t' '\n')
+
+  # Get tags
+  local id
+  id=$(db "SELECT id FROM $type WHERE slug = '$slug'")
+  local tags
+  tags=$(db "SELECT GROUP_CONCAT(t.title, ', ') FROM tags t
+    JOIN content_tags ct ON t.id = ct.tag_id
+    WHERE ct.content_type = '$type' AND ct.content_id = $id")
+
+  echo "$main_info"
+  echo "Tags: $tags"
+}
+
+resolve_file() {
+  local type="$1"
+  local slug="$2"
+
+  local cat
+  cat=$(db "SELECT COALESCE(category_slug, '') FROM $type WHERE slug = '$slug'")
+
+  local f="$APP_CONTENT/$type/content/$cat/$slug.mdx"
+  [[ -f "$f" ]] && printf "%s" "$f"
+}
+
+open_file() {
+  flatpak run org.gnome.gitlab.somas.Apostrophe "$1" & disown
+}
+
+###############################################################################
+# main
+###############################################################################
+
+main() {
+  clear
+  print_banner
+
+  while true; do
+    type="$(
+      printf "%s\n" "${content_types[@]}" "quit" |
+      fzf --prompt="type> " --height=50% --layout=reverse --border
+    )" || exit 0
+
+    [[ "$type" == "quit" ]] && exit 0
+
+    # Check table exists
+    db "SELECT 1 FROM $type LIMIT 1" >/dev/null 2>&1 || continue
+
+    slug="$(
+      read_entries "$type" |
+      awk -F'\t' '{printf "%s — %s\t%s\n",$1,$2,$2}' |
+      fzf \
+        --prompt="$type> " \
+        --delimiter=$'\t' \
+        --with-nth=1 \
+        --height=70% --layout=reverse --border \
+        --preview="
+          slug=\$(echo {} | awk -F'\t' '{print \$2}')
+          sqlite3 '$DB_PATH' \"
+            SELECT
+              'Title:      ' || title || char(10) ||
+              'Slug:       ' || slug || char(10) ||
+              'Category:   ' || COALESCE(category_slug, '') || char(10) ||
+              'Status:     ' || COALESCE(status, '') || char(10) ||
+              'Confidence: ' || COALESCE(confidence, '') || char(10) ||
+              'Importance: ' || COALESCE(importance, '') || char(10) ||
+              'Start:      ' || COALESCE(start_date, '') || char(10) ||
+              'End:        ' || COALESCE(end_date, '') || char(10) ||
+              'State:      ' || COALESCE(state, '') || char(10) ||
+              char(10) ||
+              'Preview:' || char(10) ||
+              COALESCE(preview, '')
+            FROM $type WHERE slug = '\$slug'
+          \"
+        " |
+      awk -F'\t' '{print $2}'
+    )" || continue
+
+    while true; do
+      echo
+      echo "Selected: $type → $slug"
+      echo "1) details"
+      echo "2) write"
+      echo "3) back"
+      echo "4) quit"
+      read -rp "Action> " act
+
+      case "$act" in
+        1|details)
+          get_entry_details "$type" "$slug"
+          read -rp "Press Enter…" _
+          ;;
+        2|write)
+          if file="$(resolve_file "$type" "$slug")"; then
+            open_file "$file"
+          else
+            echo "Content file not found." >&2
+          fi
+          ;;
+        3|back) break ;;
+        4|quit) exit 0 ;;
+        *) echo "Unknown action." ;;
+      esac
+    done
+  done
+}
+
+main

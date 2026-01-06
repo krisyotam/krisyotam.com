@@ -1,11 +1,16 @@
 "use client";
 
 import React from "react";
-import quotesData from "@/data/quotes.json";
 import { cn } from "@/lib/utils";
 
+interface Quote {
+	text: string;
+	author: string;
+	source?: string | null;
+}
+
 // Fallback quotes if none valid
-const fallbackQuotes = [
+const fallbackQuotes: Quote[] = [
 	{ text: "The only way to do great work is to love what you do.", author: "Steve Jobs", source: "Stanford Commencement" },
 	{ text: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci", source: "" },
 	{ text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt", source: "Speech" },
@@ -13,13 +18,6 @@ const fallbackQuotes = [
 	{ text: "May you live in interesting times.", author: "Chinese Proverb", source: "" },
 	{ text: "If you can't stand the heat, get out of the kitchen.", author: "Harry S. Truman", source: "" },
 ];
-
-// Only accept quotes with both text and author, and not too long
-function getValidQuotes() {
-	return (quotesData.quotes || []).filter(
-		(q) => q.text && q.author && q.text.length <= 180
-	);
-}
 
 const inlineScrollStyles = `
   @keyframes scroll {
@@ -44,10 +42,36 @@ export const InfiniteMovingQuotes = ({
 	const containerRef = React.useRef<HTMLDivElement>(null);
 	const scrollerRef = React.useRef<HTMLUListElement>(null);
 	const [start, setStart] = React.useState(false);
+	const [items, setItems] = React.useState<Quote[]>(fallbackQuotes);
+	const hasAnimated = React.useRef(false);
+
+	// Fetch quotes from API
+	React.useEffect(() => {
+		async function fetchQuotes() {
+			try {
+				const response = await fetch('/api/quotes');
+				if (response.ok) {
+					const data = await response.json();
+					const validQuotes = (data.quotes || []).filter(
+						(q: Quote) => q.text && q.author && q.text.length <= 180
+					);
+					if (validQuotes.length > 0) {
+						setItems(validQuotes);
+					}
+				}
+			} catch (error) {
+				console.error('Error fetching quotes:', error);
+			}
+		}
+		fetchQuotes();
+	}, []);
 
 	React.useEffect(() => {
-		addAnimation();
-	}, []);
+		if (!hasAnimated.current) {
+			addAnimation();
+			hasAnimated.current = true;
+		}
+	}, [items]);
 
 	function addAnimation() {
 		if (containerRef.current && scrollerRef.current) {
@@ -66,9 +90,6 @@ export const InfiniteMovingQuotes = ({
 			containerRef.current.style.setProperty("--animation-direction", direction === "left" ? "forwards" : "reverse");
 		}
 	};
-
-	const validQuotes = getValidQuotes();
-	const items = validQuotes.length > 0 ? validQuotes : fallbackQuotes;
 
 	return (
 		<div

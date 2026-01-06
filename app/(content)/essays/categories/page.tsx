@@ -1,26 +1,54 @@
+/**
+ * =============================================================================
+ * Essays Categories Page
+ * =============================================================================
+ *
+ * Server component that displays all essay categories.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import EssaysCategoriesClientPage from "./EssaysCategoriesClientPage";
-import categoriesData from "@/data/essays/categories.json";
-import essaysData from "@/data/essays/essays.json";
+import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
 import type { Metadata } from "next";
+
+// =============================================================================
+// Metadata
+// =============================================================================
 
 export const metadata: Metadata = {
   title: "Essays Categories",
   description: "Browse all essay categories and their descriptions",
 };
 
-export default function EssaysCategoriesPage() {
-  // Get all unique categories that actually exist in essays (only active essays)
-  const activeEssays = essaysData.essays.filter(essay => essay.state === "active");
-  const existingCategories = Array.from(new Set(activeEssays.map(essay => essay.category)));
-  
-  // Filter categories.json to only include categories that exist in essays
-  const categories = categoriesData.categories
-    .filter(category => {
-      // Check if this category exists in the essays
-      return existingCategories.includes(category.title) || 
-             existingCategories.includes(category.slug) ||
-             existingCategories.some(cat => cat.toLowerCase().replace(/\s+/g, "-") === category.slug);
-    })
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function EssaysCategoriesPage() {
+  // Fetch data from database
+  const essays = getActiveContentByType('essays');
+  const allCategories = getCategoriesByContentType('essays');
+
+  // Get unique categories that exist in active essays
+  const existingCategorySlugs = new Set(
+    essays.map(essay => essay.category?.toLowerCase().replace(/\s+/g, "-"))
+  );
+
+  // Filter, transform and sort categories by importance
+  const categories = allCategories
+    .filter(category => existingCategorySlugs.has(category.slug))
+    .map(category => ({
+      slug: category.slug,
+      title: category.title,
+      preview: category.preview || `Essays in the ${category.title} category.`,
+      date: category.date || new Date().toISOString().split('T')[0],
+      status: category.status || "Active",
+      confidence: category.confidence || "certain",
+      importance: category.importance || 5,
+    }))
     .sort((a, b) => b.importance - a.importance);
 
   return (

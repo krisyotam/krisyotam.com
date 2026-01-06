@@ -1,37 +1,59 @@
+/**
+ * =============================================================================
+ * Notes Category Page
+ * =============================================================================
+ *
+ * Dynamic route for displaying notes within a specific category.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import NotesClientPage from "../NotesClientPage";
-import notesData from "@/data/notes/notes.json";
+import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+// =============================================================================
+// Types
+// =============================================================================
+
 interface PageProps {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }
+
+// =============================================================================
+// Static Generation
+// =============================================================================
 
 export async function generateStaticParams() {
-  // Get all unique categories from active notes data only
-  const activeNotes = notesData.filter(note => note.state === "active");
-  const categories = Array.from(new Set(activeNotes.map(note => note.category)));
-  
-  console.log('Available categories:', categories);
-  console.log('Slugified categories:', categories.map(cat => cat.toLowerCase().replace(/\s+/g, "-")));
-  
-  return categories.map(category => ({
-    category: category.toLowerCase().replace(/\s+/g, "-")
-  }));
+  const notes = getActiveContentByType('notes');
+  const categorySlugs = new Set<string>();
+
+  notes.forEach(note => {
+    if (note.category) {
+      categorySlugs.add(note.category.toLowerCase().replace(/\s+/g, "-"));
+    }
+  });
+
+  return Array.from(categorySlugs).map(category => ({ category }));
 }
 
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  // Convert slug back to category name
-  const categorySlug = params.category;
-  const activeNotes = notesData.filter(note => note.state === "active");
-  const originalCategory = activeNotes.find(note => 
+  const { category: categorySlug } = await params;
+  const notes = getActiveContentByType('notes');
+
+  const originalCategory = notes.find(note =>
     note.category.toLowerCase().replace(/\s+/g, "-") === categorySlug
   )?.category;
 
   if (!originalCategory) {
-    return {
-      title: "Category Not Found | Notes",
-    };
+    return { title: "Category Not Found | Notes" };
   }
 
   return {
@@ -40,14 +62,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function NotesCategoryPage({ params }: PageProps) {
-  const categorySlug = params.category;
-  
-  // Filter notes to only show active ones first
-  const activeNotes = notesData.filter(note => note.state === "active");
-  
-  // Find the original category name
-  const originalCategory = activeNotes.find(note => 
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function NotesCategoryPage({ params }: PageProps) {
+  const { category: categorySlug } = await params;
+
+  // Fetch data from database
+  const allNotes = getActiveContentByType('notes');
+  const categories = getCategoriesByContentType('notes');
+
+  // Find original category name
+  const originalCategory = allNotes.find(note =>
     note.category.toLowerCase().replace(/\s+/g, "-") === categorySlug
   )?.category;
 
@@ -55,8 +82,8 @@ export default function NotesCategoryPage({ params }: PageProps) {
     notFound();
   }
 
-  // Sort notes by date (newest first)
-  const notes = [...activeNotes].sort((a, b) => {
+  // Sort notes by date
+  const notes = [...allNotes].sort((a, b) => {
     const aDate = (a.end_date?.trim()) ? a.end_date : a.start_date;
     const bDate = (b.end_date?.trim()) ? b.end_date : b.start_date;
     return new Date(bDate).getTime() - new Date(aDate).getTime();
@@ -64,7 +91,11 @@ export default function NotesCategoryPage({ params }: PageProps) {
 
   return (
     <div className="notes-container">
-      <NotesClientPage notes={notes} initialCategory={originalCategory} />
+      <NotesClientPage
+        notes={notes}
+        categories={categories}
+        initialCategory={originalCategory}
+      />
     </div>
   );
 }

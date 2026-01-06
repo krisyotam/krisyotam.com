@@ -1,3 +1,16 @@
+/**
+ * =============================================================================
+ * Blog Category Client Page
+ * =============================================================================
+ *
+ * Client-side component for displaying blog posts in a specific category.
+ * Receives data as props from server component.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 "use client";
 
 import { useState } from "react";
@@ -7,29 +20,38 @@ import { PageDescription } from "@/components/core";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
 import type { BlogMeta } from "@/types/content";
-import categoriesData from "@/data/blog/categories.json";
+import type { CategoryData } from "@/lib/types/content";
+
+// =============================================================================
+// Types
+// =============================================================================
 
 interface BlogCategoryClientProps {
   posts: BlogMeta[];
   allPosts: BlogMeta[];
   category: string;
+  categories?: CategoryData[];
 }
 
-export default function BlogCategoryClient({ posts, allPosts, category }: BlogCategoryClientProps) {
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default function BlogCategoryClient({ posts, allPosts, category, categories: categoriesFromDb = [] }: BlogCategoryClientProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
 
   // Get unique categories and convert to SelectOption format
-  const categories: SelectOption[] = ["all", ...new Set(allPosts.map(post => post.category))]
+  const categoryOptions: SelectOption[] = ["all", ...new Set(allPosts.map(post => post.category))]
     .sort()
-    .map(category => ({
-      value: category,
-      label: category === "all" ? "All Categories" : category
+    .map(cat => ({
+      value: cat,
+      label: cat === "all" ? "All Categories" : cat
     }));
 
   // Helper function to create category slug
-  function slugifyCategory(category: string) {
-    return category.toLowerCase().replace(/\s+/g, "-");
+  function slugifyCategory(cat: string) {
+    return cat.toLowerCase().replace(/\s+/g, "-");
   }
 
   const handleCategoryChange = (newCategory: string) => {
@@ -40,11 +62,11 @@ export default function BlogCategoryClient({ posts, allPosts, category }: BlogCa
     }
   };
 
-  // Get category data from categories.json
+  // Get category data from props (passed from server component)
   const getCategoryData = () => {
     const categorySlug = slugifyCategory(category);
-    const categoryData = categoriesData.categories.find(cat => cat.slug === categorySlug);
-    
+    const categoryData = categoriesFromDb.find(cat => cat.slug === categorySlug);
+
     return categoryData ? {
       title: categoryData.title,
       preview: categoryData.preview,
@@ -85,7 +107,7 @@ export default function BlogCategoryClient({ posts, allPosts, category }: BlogCa
           <CustomSelect
             value={category}
             onValueChange={handleCategoryChange}
-            options={categories}
+            options={categoryOptions}
             className="text-sm min-w-[140px]"
           />
         </div>

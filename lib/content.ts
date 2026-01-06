@@ -1,8 +1,27 @@
-// utils/universal-content.ts
-// Universal content aggregation across all content types
+/**
+ * =============================================================================
+ * Universal Content Aggregation
+ * =============================================================================
+ *
+ * Aggregates content across all types from content.db.
+ * Used for global /tags and /categories pages.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
 
-import { promises as fs } from 'fs'
-import path from 'path'
+import {
+  getActiveContentByType,
+  getTagsByContentType,
+  getCategoriesByContentType,
+  type Post,
+  type TagData,
+  type CategoryData
+} from '@/lib/data'
+
+// =============================================================================
+// Types
+// =============================================================================
 
 export interface UniversalPost {
   title: string
@@ -19,8 +38,8 @@ export interface UniversalPost {
   confidence?: string
   importance?: number
   cover_image?: string
-  type: string // Content type (essays, notes, papers, etc.)
-  route: string // URL route to the post
+  type: string
+  route: string
 }
 
 export interface TagMeta {
@@ -46,87 +65,116 @@ export interface CategoryMeta {
   importance?: number
 }
 
-// Content types with their corresponding routes
-const CONTENT_TYPES = [
-  { type: 'blog', route: 'blog', dataFile: 'blog.json', key: 'posts' },
-  { type: 'essays', route: 'essays', dataFile: 'essays.json', key: 'essays' },
-  { type: 'fiction', route: 'fiction', dataFile: 'fiction.json', key: 'fiction' },
-  { type: 'news', route: 'news', dataFile: 'news.json', key: 'news' },
-  { type: 'notes', route: 'notes', dataFile: 'notes.json', key: 'notes' },
-  { type: 'papers', route: 'papers', dataFile: 'papers.json', key: 'papers' },
-  { type: 'progymnasmata', route: 'progymnasmata', dataFile: 'progymnasmata.json', key: 'progymnasmata' },
-  { type: 'reviews', route: 'reviews', dataFile: 'reviews.json', key: 'reviews' },
-  { type: 'sequences', route: 'sequences', dataFile: 'sequences.json', key: 'sequences' },
-  { type: 'til', route: 'til', dataFile: 'til.json', key: 'til' },
-  { type: 'verse', route: 'verse', dataFile: 'verse.json', key: 'verse' },
-  { type: 'research', route: 'research', dataFile: 'research.json', key: 'research' },
-]
+// =============================================================================
+// Content Types Configuration
+// =============================================================================
 
-// Helper to read JSON file safely
-async function readJSONFile<T>(filePath: string): Promise<T | null> {
-  try {
-    const contents = await fs.readFile(filePath, 'utf8')
-    return JSON.parse(contents) as T
-  } catch (error) {
-    // File doesn't exist or can't be parsed, return null
-    return null
-  }
+// Content types that were migrated to the database
+const DB_CONTENT_TYPES = [
+  { type: 'blog', route: 'blog' },
+  { type: 'essays', route: 'essays' },
+  { type: 'fiction', route: 'fiction' },
+  { type: 'news', route: 'news' },
+  { type: 'notes', route: 'notes' },
+  { type: 'ocs', route: 'characters' },
+  { type: 'papers', route: 'papers' },
+  { type: 'progymnasmata', route: 'progymnasmata' },
+  { type: 'reviews', route: 'reviews' },
+  { type: 'sequences', route: 'sequences' },
+  { type: 'verse', route: 'verse' },
+] as const
+
+type ContentType = typeof DB_CONTENT_TYPES[number]['type']
+
+// =============================================================================
+// Helper Functions
+// =============================================================================
+
+function slugify(str: string): string {
+  return str.toLowerCase().replace(/\s+/g, '-')
 }
 
-// Get all posts from all content types
+// =============================================================================
+// Universal Post Functions
+// =============================================================================
+
+/**
+ * Get all active posts from all content types in the database
+ */
 export async function getAllUniversalPosts(): Promise<UniversalPost[]> {
   const allPosts: UniversalPost[] = []
 
-  for (const contentType of CONTENT_TYPES) {
-    const dataPath = path.join(process.cwd(), 'data', contentType.type, contentType.dataFile)
-    const data = await readJSONFile<any>(dataPath)
+  for (const contentType of DB_CONTENT_TYPES) {
+    try {
+      const posts = getActiveContentByType(contentType.type)
 
-    if (data && data[contentType.key]) {
-      const posts = data[contentType.key].map((post: any) => ({
-        ...post,
+      const transformedPosts = posts.map((post: Post) => ({
+        title: post.title,
+        subtitle: post.subtitle,
+        preview: post.preview,
+        start_date: post.start_date,
+        end_date: post.end_date,
+        tags: post.tags || [],
+        category: post.category,
+        slug: post.slug,
+        state: post.state,
+        status: post.status,
+        confidence: post.confidence,
+        importance: post.importance,
+        cover_image: post.cover_image,
         type: contentType.type,
         route: `/${contentType.route}`,
-        // Normalize date field
-        start_date: post.start_date || post.date || '',
       }))
 
-      allPosts.push(...posts)
+      allPosts.push(...transformedPosts)
+    } catch (error) {
+      console.error(`Error loading ${contentType.type}:`, error)
     }
   }
 
   return allPosts
 }
 
-// Get only active posts (state === "active")
+/**
+ * Get only active posts (state === "active")
+ */
 export async function getActiveUniversalPosts(): Promise<UniversalPost[]> {
-  const all = await getAllUniversalPosts()
-  return all.filter(post => post.state === 'active')
+  // getActiveContentByType already filters by state === 'active'
+  return getAllUniversalPosts()
 }
 
-// Get all tags from all content types, merged by slug
+// =============================================================================
+// Universal Tag Functions
+// =============================================================================
+
+/**
+ * Get all tags from all content types, merged by slug
+ */
 export async function getAllUniversalTags(): Promise<{ slug: string; title: string; count: number; types: string[] }[]> {
   const posts = await getActiveUniversalPosts()
   const tagMap = new Map<string, { title: string; count: number; types: Set<string> }>()
 
   // Load tag metadata from all content types
-  const tagMetaMap = new Map<string, TagMeta>()
-  for (const contentType of CONTENT_TYPES) {
-    const tagsPath = path.join(process.cwd(), 'data', contentType.type, 'tags.json')
-    const tagsData = await readJSONFile<{ tags: TagMeta[] }>(tagsPath)
-
-    if (tagsData?.tags) {
-      for (const tag of tagsData.tags) {
-        if (!tagMetaMap.has(tag.slug) || tag['show-status'] === 'active') {
+  const tagMetaMap = new Map<string, TagData>()
+  for (const contentType of DB_CONTENT_TYPES) {
+    try {
+      const tags = getTagsByContentType(contentType.type)
+      for (const tag of tags) {
+        if (!tagMetaMap.has(tag.slug)) {
           tagMetaMap.set(tag.slug, tag)
         }
       }
+    } catch (error) {
+      // Content type may not have tags
     }
   }
 
   // Count posts per tag
   posts.forEach(post => {
+    if (!post.tags) return
+
     post.tags.forEach(tag => {
-      const slug = tag.toLowerCase().replace(/\s+/g, '-')
+      const slug = slugify(tag)
 
       if (!tagMap.has(slug)) {
         const meta = tagMetaMap.get(slug)
@@ -143,12 +191,8 @@ export async function getAllUniversalTags(): Promise<{ slug: string; title: stri
     })
   })
 
-  // Convert to array and filter hidden tags
+  // Convert to array and sort by title
   return Array.from(tagMap.entries())
-    .filter(([slug]) => {
-      const meta = tagMetaMap.get(slug)
-      return !meta || meta['show-status'] !== 'hidden'
-    })
     .map(([slug, data]) => ({
       slug,
       title: data.title,
@@ -158,29 +202,37 @@ export async function getAllUniversalTags(): Promise<{ slug: string; title: stri
     .sort((a, b) => a.title.localeCompare(b.title))
 }
 
-// Get all categories from all content types, merged by slug
+// =============================================================================
+// Universal Category Functions
+// =============================================================================
+
+/**
+ * Get all categories from all content types, merged by slug
+ */
 export async function getAllUniversalCategories(): Promise<{ slug: string; title: string; count: number; types: string[] }[]> {
   const posts = await getActiveUniversalPosts()
   const categoryMap = new Map<string, { title: string; count: number; types: Set<string> }>()
 
   // Load category metadata from all content types
-  const categoryMetaMap = new Map<string, CategoryMeta>()
-  for (const contentType of CONTENT_TYPES) {
-    const categoriesPath = path.join(process.cwd(), 'data', contentType.type, 'categories.json')
-    const categoriesData = await readJSONFile<{ categories: CategoryMeta[] }>(categoriesPath)
-
-    if (categoriesData?.categories) {
-      for (const category of categoriesData.categories) {
-        if (!categoryMetaMap.has(category.slug) || category['show-status'] === 'active') {
+  const categoryMetaMap = new Map<string, CategoryData>()
+  for (const contentType of DB_CONTENT_TYPES) {
+    try {
+      const categories = getCategoriesByContentType(contentType.type)
+      for (const category of categories) {
+        if (!categoryMetaMap.has(category.slug)) {
           categoryMetaMap.set(category.slug, category)
         }
       }
+    } catch (error) {
+      // Content type may not have categories
     }
   }
 
   // Count posts per category
   posts.forEach(post => {
-    const slug = post.category.toLowerCase().replace(/\s+/g, '-')
+    if (!post.category) return
+
+    const slug = slugify(post.category)
 
     if (!categoryMap.has(slug)) {
       const meta = categoryMetaMap.get(slug)
@@ -196,12 +248,8 @@ export async function getAllUniversalCategories(): Promise<{ slug: string; title
     categoryData.types.add(post.type)
   })
 
-  // Convert to array and filter hidden categories
+  // Convert to array and sort by title
   return Array.from(categoryMap.entries())
-    .filter(([slug]) => {
-      const meta = categoryMetaMap.get(slug)
-      return !meta || meta['show-status'] !== 'hidden'
-    })
     .map(([slug, data]) => ({
       slug,
       title: data.title,
@@ -211,58 +259,92 @@ export async function getAllUniversalCategories(): Promise<{ slug: string; title
     .sort((a, b) => a.title.localeCompare(b.title))
 }
 
-// Get posts by tag across all content types
+// =============================================================================
+// Posts by Tag/Category Functions
+// =============================================================================
+
+/**
+ * Get posts by tag across all content types
+ */
 export async function getUniversalPostsByTag(tagSlug: string): Promise<UniversalPost[]> {
   const posts = await getActiveUniversalPosts()
   return posts.filter(post => {
-    return post.tags.some(tag => {
-      const slug = tag.toLowerCase().replace(/\s+/g, '-')
-      return slug === tagSlug
-    })
+    if (!post.tags) return false
+    return post.tags.some(tag => slugify(tag) === tagSlug)
   }).sort((a, b) => {
-    const dateA = a.end_date || a.start_date || a.date || ''
-    const dateB = b.end_date || b.start_date || b.date || ''
+    const dateA = a.end_date || a.start_date || ''
+    const dateB = b.end_date || b.start_date || ''
     return dateB.localeCompare(dateA)
   })
 }
 
-// Get posts by category across all content types
+/**
+ * Get posts by category across all content types
+ */
 export async function getUniversalPostsByCategory(categorySlug: string): Promise<UniversalPost[]> {
   const posts = await getActiveUniversalPosts()
   return posts.filter(post => {
-    const slug = post.category.toLowerCase().replace(/\s+/g, '-')
-    return slug === categorySlug
+    if (!post.category) return false
+    return slugify(post.category) === categorySlug
   }).sort((a, b) => {
-    const dateA = a.end_date || a.start_date || a.date || ''
-    const dateB = b.end_date || b.start_date || b.date || ''
+    const dateA = a.end_date || a.start_date || ''
+    const dateB = b.end_date || b.start_date || ''
     return dateB.localeCompare(dateA)
   })
 }
 
-// Get tag metadata by slug
-export async function getTagMeta(tagSlug: string): Promise<TagMeta | null> {
-  for (const contentType of CONTENT_TYPES) {
-    const tagsPath = path.join(process.cwd(), 'data', contentType.type, 'tags.json')
-    const tagsData = await readJSONFile<{ tags: TagMeta[] }>(tagsPath)
+// =============================================================================
+// Metadata Functions
+// =============================================================================
 
-    if (tagsData?.tags) {
-      const tag = tagsData.tags.find(t => t.slug === tagSlug)
-      if (tag) return tag
+/**
+ * Get tag metadata by slug
+ */
+export async function getTagMeta(tagSlug: string): Promise<TagMeta | null> {
+  for (const contentType of DB_CONTENT_TYPES) {
+    try {
+      const tags = getTagsByContentType(contentType.type)
+      const tag = tags.find(t => t.slug === tagSlug)
+      if (tag) {
+        return {
+          slug: tag.slug,
+          title: tag.title,
+          preview: tag.preview || undefined,
+          date: new Date().toISOString(),
+          status: 'Active',
+          confidence: 'certain',
+          importance: tag.importance,
+        }
+      }
+    } catch (error) {
+      // Continue to next content type
     }
   }
 
   return null
 }
 
-// Get category metadata by slug
+/**
+ * Get category metadata by slug
+ */
 export async function getCategoryMeta(categorySlug: string): Promise<CategoryMeta | null> {
-  for (const contentType of CONTENT_TYPES) {
-    const categoriesPath = path.join(process.cwd(), 'data', contentType.type, 'categories.json')
-    const categoriesData = await readJSONFile<{ categories: CategoryMeta[] }>(categoriesPath)
-
-    if (categoriesData?.categories) {
-      const category = categoriesData.categories.find(c => c.slug === categorySlug)
-      if (category) return category
+  for (const contentType of DB_CONTENT_TYPES) {
+    try {
+      const categories = getCategoriesByContentType(contentType.type)
+      const category = categories.find(c => c.slug === categorySlug)
+      if (category) {
+        return {
+          slug: category.slug,
+          title: category.title,
+          preview: category.preview || undefined,
+          date: category.date || new Date().toISOString(),
+          status: category.status,
+          confidence: category.confidence,
+          importance: category.importance,
+        }
+      }
+    } catch (error) {
+      // Continue to next content type
     }
   }
 

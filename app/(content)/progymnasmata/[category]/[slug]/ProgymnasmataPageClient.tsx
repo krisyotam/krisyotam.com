@@ -1,3 +1,16 @@
+/**
+ * =============================================================================
+ * Progymnasmata Page Client Component
+ * =============================================================================
+ *
+ * Client-side component for individual progymnasmata exercise pages.
+ * Handles header and footer rendering with post metadata.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 "use client";
 
 import { Citation } from "@/components/citation";
@@ -7,11 +20,34 @@ import { PageHeader } from "@/components/core";
 import { Comments } from "@/components/core/comments";
 import { Footnotes } from "@/components/core/footnotes";
 
+// =============================================================================
+// Types
+// =============================================================================
+
+interface ProgymnasmataPost {
+  title: string;
+  preview: string;
+  start_date: string;
+  end_date?: string;
+  tags: string[];
+  category: string;
+  slug: string;
+  cover_image?: string;
+  status?: string;
+  confidence?: string;
+  importance?: number;
+  state: string;
+}
+
 interface ProgymnasmataClientProps {
-  post: any;
+  post: ProgymnasmataPost;
   headerOnly?: boolean;
   contentOnly?: boolean;
 }
+
+// =============================================================================
+// Page Component
+// =============================================================================
 
 export default function ProgymnasmataPageClient({ post, headerOnly, contentOnly }: ProgymnasmataClientProps) {
   const lastUpdated = (post.end_date && post.end_date.trim()) || new Date().toISOString().split('T')[0];

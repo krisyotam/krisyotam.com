@@ -1,3 +1,16 @@
+/**
+ * =============================================================================
+ * Progymnasmata Client Component
+ * =============================================================================
+ *
+ * Client-side component for Progymnasmata listing with search and filtering.
+ * Receives data as props from server components.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 "use client"
 
 import { useState } from "react"
@@ -7,11 +20,45 @@ import { PageDescription } from "@/components/core"
 import { Navigation, ContentTable } from "@/components/content"
 import { SelectOption } from "@/components/ui/custom-select"
 
+// =============================================================================
+// Types
+// =============================================================================
+
+interface ProgymnasmataPost {
+  title: string;
+  preview: string;
+  start_date: string;
+  end_date?: string;
+  tags: string[];
+  category: string;
+  slug: string;
+  cover_image?: string;
+  status?: string;
+  confidence?: string;
+  importance?: number;
+  state: string;
+}
+
+interface ProgymnasmataCategory {
+  slug: string;
+  title: string;
+  preview?: string;
+  date: string;
+  'show-status': 'active' | 'hidden';
+  status: string;
+  confidence: string;
+  importance: number;
+}
+
 interface ProgymnasmataClientProps {
-  posts: any[];
-  categories: any[];
+  posts: ProgymnasmataPost[];
+  categories: ProgymnasmataCategory[];
   initialCategory?: string;
 }
+
+// =============================================================================
+// Page Component
+// =============================================================================
 
 export function ProgymnasmataClient({
   posts,
@@ -30,6 +77,10 @@ export function ProgymnasmataClient({
     { value: "all", label: "All" },
     ...safeCategories.map((c) => ({ value: c.slug, label: c.title })),
   ];
+
+  // =============================================================================
+  // Helpers
+  // =============================================================================
 
   // Filter posts
   const filteredPosts = safePosts.filter((post) => {
@@ -56,7 +107,7 @@ export function ProgymnasmataClient({
     }
   }
 
-  function getPostUrl(post: any) {
+  function getPostUrl(post: ProgymnasmataPost) {
     return `/progymnasmata/${post.category.toLowerCase()}/${post.slug}`;
   }
 

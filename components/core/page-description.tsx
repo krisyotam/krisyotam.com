@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { HelpCircle, X, ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
-import iconsJson from "@/data/icons/icons.json"
+import { ICONS_DATA } from "@/components/link-icon"
 
 interface IconEntry {
   slug: string
@@ -98,7 +98,7 @@ export function PageDescription({ title, description, className, icons }: PageDe
                       <div className="mt-4">
                         <div className="border-t border-border pt-3 flex items-center justify-center">
                           {icons.map((ic: IconEntry, idx: number) => {
-                            const found = (iconsJson as any)?.icons?.find((x: any) => x.slug === ic.slug)
+                            const found = ICONS_DATA.find((x) => x.slug === ic.slug)
                             const src = found ? `/icons/${found.svg}` : `/icons/${ic.slug}.svg`
                             const extra = idx > 0 ? 'pl-4 border-l border-border ml-4' : ''
                             return (
@@ -161,7 +161,7 @@ export function PageDescription({ title, description, className, icons }: PageDe
                     <div className="mt-4">
                       <div className="border-t border-border pt-3 flex items-center justify-center">
                         {icons.map((ic: IconEntry, idx: number) => {
-                          const found = (iconsJson as any)?.icons?.find((x: any) => x.slug === ic.slug)
+                          const found = ICONS_DATA.find((x: any) => x.slug === ic.slug)
                           const src = found ? `/icons/${found.svg}` : `/icons/${ic.slug}.svg`
                           const extra = idx > 0 ? 'pl-4 border-l border-border ml-4' : ''
                           return (

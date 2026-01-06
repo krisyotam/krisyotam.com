@@ -2,7 +2,20 @@
 
 import { useState } from "react"
 import { Copy, Check, CopyCheck } from "lucide-react"
-import areasOfInterestData from "@/data/about/areas-of-interest.json"
+
+const AREAS_OF_INTEREST_DATA = [
+  { field: "Mathematics", subfields: ["Number Theory", "Algebraic Geometry", "Algebraic Topology", "Mathematical Logic", "Methematical Pedagogy"] },
+  { field: "Physics", subfields: ["Classical Mechanics", "Thermodynamics", "Electromagnetism", "Optics", "Quantum Mechanics", "Relativity"] },
+  { field: "Art History", subfields: ["Ancient Art", "Medieval Art", "Renaissance Art", "Baroque and Rococo Art", "Neoclassicism and Romanticism", "Modern Art", "Contemporary Art", "Non-Western Art", "Art Criticism", "Museum Studies"] },
+  { field: "Western Philosophy", subfields: ["Ontology", "Cosmology", "Free Will", "Empiricism", "Skepticism", "Rationalism", "Aesthetics", "Formal Logic", "Symbolic Logic", "Informal Logic"] },
+  { field: "Eastern Philosophy", subfields: ["Jainism", "Buddhism", "Nyaya", "Samkhya", "Confucianism", "Taoism", "Zen Buddhism", "Yogacara", "Madhyamaka"] },
+  { field: "Psychology", subfields: ["Biological Psychology", "Cognitive Psychology", "Social Psychology", "Neuropsychology"] },
+  { field: "Literature", subfields: ["Greek Literature", "Roman Literature", "Victorian Literature", "Romantic Literature", "Elizabethan Literature", "Essays", "Poetry"] },
+  { field: "Linguistics", subfields: ["Phonetics", "Phonology", "Morphology", "Syntax", "Semantics", "Pragmatics", "Psycholinguistics"] },
+  { field: "Philology", subfields: ["Chinese Philology (Mandarin, Cantonese)", "Japanese Philology", "German Philology (German, Dutch, English)", "Romance Philology (French, Spanish, Italian, Portuguese)"] },
+  { field: "Pedagogy", subfields: ["Teaching Methods", "Learning Theories", "Progressivism", "Charlotte Mason", "Montessori Method", "Reggio Emilia Approach", "Inclusive Education", "Behavior Management", "Andragogy"] },
+  { field: "Classical Pedagogy", subfields: ["Narration", "Encomium", "Comparison & Contradiction", "Rhetoric (Ethos, Pathos, Logos)", "Panegyric", "Refutation", "Quadrivium (Arithmetic, Geometry, Music, Astronomy)", "Trivium (Grammar, Logic, Rhetoric)"] }
+]
 
 export default function AreasOfInterest() {
   const [copiedRow, setCopiedRow] = useState<number | null>(null);
@@ -21,10 +34,10 @@ export default function AreasOfInterest() {
   };
   
   const copyAllToClipboard = () => {
-    const allText = areasOfInterestData.map(area => 
+    const allText = AREAS_OF_INTEREST_DATA.map(area =>
       `${area.field}: ${area.subfields.join(", ")}`
     ).join("\n");
-    
+
     copyToClipboard(allText);
   };
   
@@ -67,7 +80,7 @@ export default function AreasOfInterest() {
             </tr>
           </thead>
           <tbody>
-            {areasOfInterestData.map((area, index) => (
+            {AREAS_OF_INTEREST_DATA.map((area, index) => (
               <tr
                 key={index}
                 className="border-t border-border hover:bg-secondary/50 transition-colors duration-200"

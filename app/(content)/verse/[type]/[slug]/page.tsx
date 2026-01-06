@@ -1,41 +1,70 @@
-// app/verse/[type]/[slug]/page.tsx
-import poemsData from "@/data/verse/verse.json";
-import type { Poem } from "@/types/content";
-import PoemPageClient from "./PoemPageClient";
-import type { Metadata, ResolvingMetadata } from "next";
+/**
+ * =============================================================================
+ * Individual Poem Page
+ * =============================================================================
+ *
+ * Dynamic page for displaying a single poem by type and slug.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
 
-export async function generateStaticParams() {
-  const poems = poemsData as Poem[];
-  return poems.map((poem) => ({
-    type: (poem.type ?? "").toLowerCase().replace(/\s+/g, "-"),
-    slug: poem.slug ?? "",
-  }));
+// =============================================================================
+// Imports
+// =============================================================================
+
+import { getAllVerseContent, getVerseContentByTypeAndSlug } from "@/lib/data"
+import PoemPageClient from "./PoemPageClient"
+import type { Metadata, ResolvingMetadata } from "next"
+import { notFound } from "next/navigation"
+
+// =============================================================================
+// Types
+// =============================================================================
+
+interface PageProps {
+  params: Promise<{ type: string; slug: string }>
 }
 
-// Generate metadata for each poem page
+// =============================================================================
+// Static Generation
+// =============================================================================
+
+export async function generateStaticParams() {
+  const poems = getAllVerseContent()
+  return poems.map((poem) => ({
+    type: (poem.verse_type ?? "").toLowerCase().replace(/\s+/g, "-"),
+    slug: poem.slug ?? "",
+  }))
+}
+
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export async function generateMetadata(
-  { params }: { params: { type: string; slug: string } },
+  { params }: PageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  const { type, slug } = await params
+
   // Find the poem by type and slug
-  const poem = (poemsData as Poem[]).find((p) => {
-    const tSlug = (p.type ?? "").toLowerCase().replace(/\s+/g, "-");
-    return tSlug === params.type && (p.slug ?? "") === params.slug;
-  });
+  const poem = getVerseContentByTypeAndSlug(type, slug)
 
   // If poem not found, return default metadata
   if (!poem) {
     return {
       title: "Poem Not Found",
-    };
+    }
   }
 
   // Get base URL from parent metadata for absolute URLs
-  const previousImages = (await parent).openGraph?.images || [];
+  const previousImages = (await parent).openGraph?.images || []
 
   // Construct metadata with OpenGraph properties
   return {
-    title: `${poem.title} | ${poem.type} | Kris Yotam`,
+    title: `${poem.title} | ${poem.verse_type} | Kris Yotam`,
     description: poem.description || `${poem.title} by Kris Yotam`,
     openGraph: {
       title: poem.title,
@@ -44,7 +73,7 @@ export async function generateMetadata(
       publishedTime: poem.start_date,
       authors: ["Kris Yotam"],
       tags: poem.tags || [],
-      images: poem.image 
+      images: poem.image
         ? [
             {
               url: poem.image,
@@ -59,13 +88,22 @@ export async function generateMetadata(
       description: poem.description || `${poem.title} by Kris Yotam`,
       images: poem.image ? [poem.image] : [],
     },
-  };
+  }
 }
 
-export default function PoemPage({
-  params: { type, slug },
-}: {
-  params: { type: string; slug: string };
-}) {
-  return <PoemPageClient params={{ type, slug }} />;
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function PoemPage({ params }: PageProps) {
+  const { type, slug } = await params
+
+  // Fetch poem data from database
+  const poem = getVerseContentByTypeAndSlug(type, slug)
+
+  if (!poem) {
+    notFound()
+  }
+
+  return <PoemPageClient poem={poem} type={type} slug={slug} />
 }

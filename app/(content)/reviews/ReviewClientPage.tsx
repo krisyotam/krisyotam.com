@@ -1,3 +1,17 @@
+/**
+ * =============================================================================
+ * ReviewClientPage.tsx
+ * =============================================================================
+ *
+ * Client component for the reviews listing page.
+ * Displays reviews with filtering, search, and view mode options.
+ *
+ * Data is passed via props from server component (fetched from content.db).
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,50 +21,85 @@ import { PageDescription } from "@/components/core";
 import { Navigation, ContentTable } from "@/components/content";
 import { SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
-import categoriesData from "@/data/reviews/categories.json";
+import type { ReviewMeta } from "@/types/content";
 
-/* default page-level metadata for the header */
+// =============================================================================
+// Types
+// =============================================================================
+
+interface CategoryData {
+  slug: string;
+  title: string;
+  preview?: string;
+  date?: string;
+  status?: string;
+  confidence?: string;
+  importance?: number;
+}
+
+interface ReviewClientPageProps {
+  reviews: ReviewMeta[];
+  categories: CategoryData[];
+  initialCategory?: string;
+}
+
+// =============================================================================
+// Constants
+// =============================================================================
+
 const defaultReviewsPageData = {
   title: "Reviews",
   start_date: "2025-01-01",
-  end_date: new Date().toISOString().split('T')[0], // Current date as YYYY-MM-DD
+  end_date: new Date().toISOString().split('T')[0],
   preview: "In-depth reviews of literature, film, ballet, plays, art, anime, manga and more since 2023",
   status: "In Progress" as "In Progress",
   confidence: "likely" as "likely",
   importance: 7,
 } satisfies PageHeaderProps;
 
-import type { ReviewMeta } from "@/types/content";
+// =============================================================================
+// Helpers
+// =============================================================================
 
-interface ReviewClientPageProps {
-  reviews: ReviewMeta[];
-  initialCategory?: string;
+function slugifyCategory(category: string) {
+  return category.toLowerCase().replace(/\s+/g, "-");
 }
 
-export default function ReviewClientPage({ reviews, initialCategory = "all" }: ReviewClientPageProps) {
+// =============================================================================
+// Component
+// =============================================================================
+
+export default function ReviewClientPage({
+  reviews,
+  categories,
+  initialCategory = "all"
+}: ReviewClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const router = useRouter();
 
-  const categories = ["all", ...Array.from(new Set(reviews.map(r => r.category)))];
+  const categoryList = ["all", ...Array.from(new Set(reviews.map(r => r.category)))];
 
   // Convert categories to SelectOption format
-  const categoryOptions: SelectOption[] = categories.map(category => ({
+  const categoryOptions: SelectOption[] = categoryList.map(category => ({
     value: category,
     label: category === "all" ? "All Categories" : category
   }));
 
-  // Determine which header data to use
+  // ---------------------------------------------------------------------------
+  // Header Data
+  // ---------------------------------------------------------------------------
+
   const getHeaderData = () => {
     if (initialCategory === "all" || !initialCategory) {
       return defaultReviewsPageData;
     }
-    
-    // Find category data from categories.json
+
+    // Find category data from props
     const categorySlug = slugifyCategory(initialCategory);
-    const categoryData = categoriesData.types.find(cat => cat.slug === categorySlug);
-    
+    const categoryData = categories.find(cat => cat.slug === categorySlug);
+
     if (categoryData) {
       return {
         title: categoryData.title,
@@ -63,22 +112,24 @@ export default function ReviewClientPage({ reviews, initialCategory = "all" }: R
         importance: categoryData.importance
       };
     }
-    
-    // Fallback to default if category not found
+
     return defaultReviewsPageData;
   };
+
   const headerData = getHeaderData();
 
-  // Update activeCategory when initialCategory changes
+  // ---------------------------------------------------------------------------
+  // Effects
+  // ---------------------------------------------------------------------------
+
   useEffect(() => {
     setActiveCategory(initialCategory);
   }, [initialCategory]);
 
-  // Helper function to create category slug
-  function slugifyCategory(category: string) {
-    return category.toLowerCase().replace(/\s+/g, "-");
-  }
-  // Handle category change with URL routing
+  // ---------------------------------------------------------------------------
+  // Handlers
+  // ---------------------------------------------------------------------------
+
   function handleCategoryChange(selectedValue: string) {
     if (selectedValue === "all") {
       router.push("/reviews");
@@ -87,7 +138,10 @@ export default function ReviewClientPage({ reviews, initialCategory = "all" }: R
     }
   }
 
-  // Filter reviews based on search query and category
+  // ---------------------------------------------------------------------------
+  // Filtering & Sorting
+  // ---------------------------------------------------------------------------
+
   const filteredReviews = reviews.filter((review) => {
     const q = searchQuery.toLowerCase();
     const matchesSearch =
@@ -104,20 +158,26 @@ export default function ReviewClientPage({ reviews, initialCategory = "all" }: R
     return new Date(dateB).getTime() - new Date(dateA).getTime();
   });
 
-  // Helper to build the correct route for a review
+  // ---------------------------------------------------------------------------
+  // Helpers
+  // ---------------------------------------------------------------------------
+
   function getReviewUrl(review: ReviewMeta) {
     return `/reviews/${encodeURIComponent(review.category)}/${encodeURIComponent(review.slug)}`;
   }
 
-  // Helper to format date as "Month DD, YYYY"
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long", 
+      month: "long",
       day: "numeric"
     });
   }
+
+  // ---------------------------------------------------------------------------
+  // Views
+  // ---------------------------------------------------------------------------
 
   const GridView = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -130,8 +190,8 @@ export default function ReviewClientPage({ reviews, initialCategory = "all" }: R
           {/* Cover Image Area - Book aspect ratio (3:4) */}
           <div className="aspect-[3/4] bg-muted/30 border-b border-border flex items-center justify-center overflow-hidden">
             {review.cover_image ? (
-              <img 
-                src={review.cover_image} 
+              <img
+                src={review.cover_image}
                 alt={review.title}
                 className="w-full h-full object-cover"
               />
@@ -141,12 +201,12 @@ export default function ReviewClientPage({ reviews, initialCategory = "all" }: R
               </div>
             )}
           </div>
-          
+
           {/* Content Area */}
           <div className="p-3">
             <h3 className="font-medium text-xs mb-1 line-clamp-2">{review.title}</h3>
             <p className="text-xs text-muted-foreground mb-2 line-clamp-2">{review.category}</p>
-            
+
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <span>{new Date((review.end_date && review.end_date.trim()) || review.start_date).getFullYear()}</span>
@@ -166,6 +226,10 @@ export default function ReviewClientPage({ reviews, initialCategory = "all" }: R
       emptyMessage="No reviews found matching your criteria."
     />
   );
+
+  // ---------------------------------------------------------------------------
+  // Render
+  // ---------------------------------------------------------------------------
 
   return (
     <>

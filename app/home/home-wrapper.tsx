@@ -1,11 +1,11 @@
 import { getActivePosts } from "@/lib/posts"
-import quotesData from "@/data/quotes.json"
+import { getRandomQuote as getRandomQuoteFromDb } from "@/lib/system-db"
 import { HomeClient } from "@/components/home/HomeClient"
 import FixOutlineIssue from "@/components/fix-outline-issue"
 
 function getRandomQuote() {
-  const quotes = quotesData.quotes
-  return quotes[Math.floor(Math.random() * quotes.length)]
+  const quote = getRandomQuoteFromDb()
+  return quote || { text: "", author: "" }
 }
 
 interface HomeWrapperProps {

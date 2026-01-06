@@ -29,9 +29,9 @@ export function MyBookList() {
 
   // Filter out hidden books
   const activeBooks = useMemo(() => {
-    return mybooksData.books
-      .filter((book) => book.status === "active")
-      .map((book) => ({
+    return (mybooksData.books as any[])
+      .filter((book: any) => book.status === "active")
+      .map((book: any) => ({
         ...book,
         access: book.access as "free" | "paid" // Ensure proper typing
       }));
@@ -61,8 +61,8 @@ export function MyBookList() {
         searchQuery === "" ||
         book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         book.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        book.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        book.authors.some((author) => author.toLowerCase().includes(searchQuery.toLowerCase()))
+        book.tags.some((tag: string) => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        book.authors.some((author: string) => author.toLowerCase().includes(searchQuery.toLowerCase()))
 
       const matchesCategory = activeCategory === "All" || book.category === activeCategory
       const matchesClassification = activeClassification === "All" || book.classification === activeClassification

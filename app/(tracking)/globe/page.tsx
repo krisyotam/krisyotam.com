@@ -3,7 +3,18 @@
 import { useEffect, useRef, useState } from "react"
 import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
-import locations from "@/data/locations.json"
+
+interface Location {
+  id: number;
+  name: string;
+  description: string;
+  coordinates: [number, number];
+  type: string;
+  visitDate: string;
+  duration: string;
+  highlights: string[];
+  rating: number;
+}
 
 // Environment variable with fallback
 const MAPBOX_ACCESS_TOKEN =
@@ -22,6 +33,23 @@ export default function GlobePage() {
   const map = useRef<mapboxgl.Map | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [locations, setLocations] = useState<Location[]>([])
+
+  // Fetch locations from API
+  useEffect(() => {
+    async function fetchLocations() {
+      try {
+        const response = await fetch("/api/locations");
+        if (!response.ok) throw new Error("Failed to fetch locations");
+        const data = await response.json();
+        setLocations(data.locations || []);
+      } catch (err) {
+        console.error("Error fetching locations:", err);
+        setError("Failed to load location data");
+      }
+    }
+    fetchLocations();
+  }, []);
 
   // Initialize the Street View function on the window object
   useEffect(() => {
@@ -68,7 +96,7 @@ export default function GlobePage() {
   }, [])
 
   useEffect(() => {
-    if (map.current) return // Map already initialized
+    if (map.current || locations.length === 0) return // Map already initialized or no locations yet
 
     try {
       // Check if mapboxgl is available (important for SSR)
@@ -242,7 +270,7 @@ export default function GlobePage() {
         map.current = null
       }
     }
-  }, [])
+  }, [locations])
 
   // Handle window resize
   useEffect(() => {

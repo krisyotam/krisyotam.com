@@ -6,14 +6,14 @@
  * Does NOT inherit typography, spacing, or layout styles from parent pages.
  */
 import React, { useMemo, useState } from "react"
-import iconsData from "@/data/icons/icons.json"
+import { ICONS_DATA } from "@/components/link-icon"
 
 interface IconDemoProps {
   pageSize?: number
 }
 
 export default function IconDemo({ pageSize = 36 }: IconDemoProps) {
-  const icons = useMemo(() => (iconsData as any)?.icons || [], [])
+  const icons = useMemo(() => ICONS_DATA, [])
   const total = icons.length
   const pages = Math.max(1, Math.ceil(total / pageSize))
 

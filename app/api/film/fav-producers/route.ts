@@ -1,20 +1,27 @@
-import { NextResponse } from "next/server"
-import fs from "fs"
-import path from "path"
+/**
+ * ============================================================================
+ * Favorite Producers API Route
+ * Author: Kris Yotam
+ * Date: 2026-01-05
+ * Filename: route.ts
+ * Description: API endpoint for retrieving favorite producers from media.db.
+ * ============================================================================
+ */
 
-export const dynamic = 'force-dynamic';
+import { NextResponse } from "next/server";
+import { getFavProducers } from "@/lib/media-db";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
-  console.log("Fetching favorite producers from JSON")
   try {
-    const filePath = path.join(process.cwd(), "data", "film", "fav-producers.json")
-    const fileContents = fs.readFileSync(filePath, "utf8")
-    const data = JSON.parse(fileContents)
-
-    console.log(`Retrieved ${data.length} favorite producers`)
-    return NextResponse.json(data)
+    const data = getFavProducers();
+    return NextResponse.json(data);
   } catch (error) {
-    console.error("Error fetching favorite producers:", error)
-    return NextResponse.json({ error: "Failed to fetch favorite producers" }, { status: 500 })
+    console.error("Error fetching favorite producers:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch favorite producers" },
+      { status: 500 }
+    );
   }
-} 
+}

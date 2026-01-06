@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-import { PostHeader } from "@/components/post-header"
+import { PostHeader } from "@/components/core"
 import { PageDescription } from "@/components/core"
 import SubscribeClient from "./SubscribeClient"
 

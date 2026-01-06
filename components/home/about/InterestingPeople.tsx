@@ -1,7 +1,5 @@
 "use client"
 
-"use client"
-
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -10,7 +8,131 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { CustomSelect } from "@/components/ui/custom-select"
-import recommendedBlogsData from "@/data/about/recommended-blogs.json"
+
+const RECOMMENDED_BLOGS_DATA = {
+  blogs: [
+    {
+      title: "Terrance Tao",
+      tags: ["Expository Papers", "Research Mathematics", "Open Problems"],
+      url: "https://terrytao.wordpress.com/",
+      description: "Terrance Tao's blog covers a wide range of mathematical topics, from expository papers to cutting-edge research and open problems in mathematics.",
+      category: "Mathematics",
+      author: {
+        name: "Terrance Tao",
+        position: "Professor of Mathematics at UCLA",
+        achievements: ["Fields Medal (2006)", "Breakthrough Prize in Mathematics (2014)", "MacArthur Fellowship (2006)"],
+        researchAreas: ["Harmonic Analysis", "Partial Differential Equations", "Combinatorics", "Number Theory"]
+      },
+      blogHighlights: ["In-depth discussions on mathematical proofs", "Explanations of complex mathematical concepts", "Updates on recent developments in mathematics"],
+      readerLevel: "Advanced undergraduate to professional mathematicians"
+    },
+    {
+      title: "Matt Might",
+      tags: ["Computer Science", "Machine Learning", "Biomedical Sciences"],
+      url: "https://matt.might.net/#blog",
+      description: "Matt Might's blog explores various aspects of computer science, machine learning, and their applications in biomedical sciences.",
+      category: "Computer Science",
+      author: {
+        name: "Matt Might",
+        position: "Professor of Internal Medicine and Computer Science at the University of Alabama at Birmingham",
+        achievements: ["CAREER Award from the National Science Foundation", "Young Faculty Award from DARPA"],
+        researchAreas: ["Programming Languages", "Static Analysis", "Precision Medicine", "Rare Disease"]
+      },
+      blogHighlights: ["Practical advice for graduate students and researchers", "Insights into the intersection of computer science and medicine", "Explanations of complex computer science concepts"],
+      readerLevel: "Computer science students, researchers, and professionals"
+    },
+    {
+      title: "Christopher Perrin",
+      tags: ["Classical Education", "Technology", "Society"],
+      url: "https://christopherperrin.substack.com/",
+      description: "Christopher Perrin's blog focuses on renewing classical education principles and their intersection with modern technology and society.",
+      category: "Education",
+      author: {
+        name: "Christopher Perrin",
+        position: "Publisher and CEO of Classical Academic Press",
+        achievements: ["Author of multiple books on classical education", "Consultant and speaker on classical education"],
+        expertise: ["Classical Education Philosophy", "Curriculum Development", "School Leadership"]
+      },
+      blogHighlights: ["Analysis of classical education principles in modern context", "Discussions on the role of technology in classical education", "Insights into societal impacts on education"],
+      readerLevel: "Educators, school leaders, and parents interested in classical education"
+    },
+    {
+      title: "Maria Tatar",
+      tags: ["Folklore", "Fairy Tales", "Mythology"],
+      url: "https://example.com/maria-tatar-blog",
+      description: "Maria Tatar explores the rich world of folklore, fairy tales, and mythology, offering insights into their cultural significance and enduring appeal.",
+      category: "Literature",
+      author: {
+        name: "Maria Tatar",
+        position: "Professor of Folklore and Mythology at Harvard University",
+        achievements: ["Distinguished research on fairy tales and folklore", "Author of numerous books on folklore and children's literature"],
+        researchAreas: ["Fairy Tales", "Folklore", "Children's Literature", "Cultural Studies"]
+      },
+      blogHighlights: ["Analysis of classic and contemporary fairy tales", "Exploration of folklore's role in modern society", "Discussions on the psychological aspects of myths and legends"],
+      readerLevel: "Literature enthusiasts, folklorists, and students of cultural studies"
+    },
+    {
+      title: "Sara Taglialagamba",
+      tags: ["Art History", "Renaissance", "Leonardo da Vinci"],
+      url: "https://example.com/sara-taglialagamba-blog",
+      description: "Sara Taglialagamba delves into the life, works, and legacy of Leonardo da Vinci, offering expert insights into Renaissance art and science.",
+      category: "Art History",
+      author: {
+        name: "Sara Taglialagamba",
+        position: "Scholar at the Leonardo da Vinci Museum in Florence, Italy",
+        achievements: ["Expert on Leonardo da Vinci", "Curator of numerous exhibitions on Renaissance art"],
+        researchAreas: ["Renaissance Art", "Leonardo da Vinci", "Art and Science in the Renaissance"]
+      },
+      blogHighlights: ["In-depth analysis of da Vinci's artworks and inventions", "Exploration of Renaissance art techniques and innovations", "Discussions on the intersection of art and science in da Vinci's work"],
+      readerLevel: "Art history enthusiasts, Renaissance scholars, and students of interdisciplinary studies"
+    },
+    {
+      title: "Irving Finkel",
+      tags: ["Assyriology", "Ancient Languages", "Archaeology"],
+      url: "https://example.com/irving-finkel-blog",
+      description: "Irving Finkel unravels the mysteries of ancient Mesopotamian languages and artifacts, offering fascinating insights into one of the world's oldest civilizations.",
+      category: "Ancient History",
+      author: {
+        name: "Irving Finkel",
+        position: "Curator at the British Museum",
+        achievements: ["Expert in ancient Mesopotamian languages", "Author of books on cuneiform and Mesopotamian culture"],
+        researchAreas: ["Assyriology", "Cuneiform", "Ancient Near Eastern History"]
+      },
+      blogHighlights: ["Decipherment of ancient texts and inscriptions", "Exploration of Mesopotamian myths and legends", "Insights into the daily life of ancient Mesopotamians"],
+      readerLevel: "History enthusiasts, archaeologists, and students of ancient civilizations"
+    },
+    {
+      title: "Jim Al-Khalili",
+      tags: ["Physics", "Quantum Mechanics", "Science Communication"],
+      url: "https://example.com/jim-al-khalili-blog",
+      description: "Jim Al-Khalili explores the fascinating world of theoretical physics, quantum mechanics, and the latest developments in scientific research.",
+      category: "Physics",
+      author: {
+        name: "Jim Al-Khalili",
+        position: "Distinguished Emeritus Professor of Physics at the University of Surrey",
+        achievements: ["Renowned physicist and science communicator", "Author of popular science books", "Presenter of science documentaries"],
+        researchAreas: ["Nuclear Physics", "Quantum Mechanics", "Science Communication"]
+      },
+      blogHighlights: ["Explanations of complex physics concepts for a general audience", "Updates on cutting-edge research in quantum physics", "Reflections on the role of science in society"],
+      readerLevel: "Science enthusiasts, students, and anyone interested in modern physics"
+    },
+    {
+      title: "Laura Ashe",
+      tags: ["Medieval Literature", "History", "Culture"],
+      url: "https://example.com/laura-ashe-blog",
+      description: "Laura Ashe offers insightful perspectives on medieval literature, history, and culture, focusing on England and its neighbors from the 10th to the 17th century.",
+      category: "Medieval Studies",
+      author: {
+        name: "Laura Ashe",
+        position: "Professor of English Literature at the University of Oxford",
+        achievements: ["Expert in medieval literature and history", "Author of books on medieval English culture"],
+        researchAreas: ["Medieval Literature", "Medieval History", "Cultural Studies"]
+      },
+      blogHighlights: ["Analysis of medieval texts and their historical context", "Explorations of medieval society and culture", "Discussions on the relevance of medieval studies today"],
+      readerLevel: "Literature students, historians, and medieval enthusiasts"
+    }
+  ]
+}
 
 export default function InterestingPeople() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All")
@@ -20,10 +142,10 @@ export default function InterestingPeople() {
   const pageSize = 7
 
   // Get categories from the data
-  const categories = ["All", ...Array.from(new Set(recommendedBlogsData.blogs.map((blog) => blog.category)))].sort()
+  const categories = ["All", ...Array.from(new Set(RECOMMENDED_BLOGS_DATA.blogs.map((blog) => blog.category)))].sort()
 
   // Filter blogs based on selected category and search query
-  const filteredBlogs = recommendedBlogsData.blogs
+  const filteredBlogs = RECOMMENDED_BLOGS_DATA.blogs
     .filter((blog) => selectedCategory === "All" || blog.category === selectedCategory)
     .filter(
       (blog) =>
@@ -42,7 +164,7 @@ export default function InterestingPeople() {
     
   // Function to download the JSON data
   const handleDownloadJSON = () => {
-    const jsonBlob = new Blob([JSON.stringify(recommendedBlogsData, null, 2)], { type: 'application/json' });
+    const jsonBlob = new Blob([JSON.stringify(RECOMMENDED_BLOGS_DATA, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(jsonBlob);
     const link = document.createElement('a');
     link.href = url;
@@ -78,7 +200,7 @@ export default function InterestingPeople() {
                   <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                {recommendedBlogsData.blogs.length} People
+                {RECOMMENDED_BLOGS_DATA.blogs.length} People
               </span>
             </Button>
             

@@ -1,8 +1,6 @@
 export * from './tab-switcher';
-export * from './lists-page';
 export * from './anime-cards';
 export * from './favorite-item-card';
-export * from './collections-page';
 export * from './profile-header';
 export * from './stats-section';
 export * from './section-header';
@@ -11,6 +9,4 @@ export * from './manga-card';
 export * from './horizontal-scroll';
 export * from './help-modal';
 export * from './content-cards';
-export * from './collection-modal';
-export * from './collection-card';
 export * from './anime-card'; 

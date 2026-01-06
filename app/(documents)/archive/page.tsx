@@ -1,54 +1,101 @@
-"use client"
+/**
+ * ============================================================================
+ * Archive Page
+ * Author: Kris Yotam
+ * Date: 2026-01-04
+ * Filename: page.tsx
+ * Description: Public archive page displaying publicly available archived
+ *              content. Protected by password authentication.
+ * ============================================================================
+ */
 
-import { useState, useEffect } from "react"
-import { Lock, AlertCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import ArchivesComponent from "@/components/archive"
-import archiveJson from "@/data/doc/archive.json"
-import { PageHeader } from "@/components/core"
-import { PageDescription } from "@/components/core"
+"use client";
 
-export default function ArchivesPage() {
-  // archives data is loaded inside the component from local JSON; keep auth state here
-  const [isLoading, setIsLoading] = useState(true)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [isVerifying, setIsVerifying] = useState(false)
+import { useState, useEffect } from "react";
+import { Lock, AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import ArchivesComponent from "@/components/archive";
+import { PageHeader } from "@/components/core";
+import { PageDescription } from "@/components/core";
+
+// ============================================================================
+// TYPE DEFINITIONS
+// ============================================================================
+
+interface StorageData {
+  buckets: {
+    name: string;
+    objects: {
+      bucket: string;
+      key: string;
+      size: number;
+      last_modified: string;
+      original_url: string;
+      public_url: string;
+    }[];
+  }[];
+}
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+
+export default function ArchivePage() {
+  // -------------------------------------------------------------------------
+  // State
+  // -------------------------------------------------------------------------
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [storageData, setStorageData] = useState<StorageData | null>(null);
+
+  // -------------------------------------------------------------------------
+  // Effects
+  // -------------------------------------------------------------------------
 
   useEffect(() => {
-    // Check if user was previously authenticated in this session
-    const sessionAuth = sessionStorage.getItem("archives-authenticated")
+    const sessionAuth = sessionStorage.getItem("archives-authenticated");
     if (sessionAuth === "true") {
-      setIsAuthenticated(true)
-      fetchArchives()
+      setIsAuthenticated(true);
+      fetchStorageData();
     } else {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }, [])
+  }, []);
 
-  const fetchArchives = async () => {
-    setIsLoading(true)
+  // -------------------------------------------------------------------------
+  // Data Fetching
+  // -------------------------------------------------------------------------
+
+  const fetchStorageData = async () => {
+    setIsLoading(true);
     try {
-      const response = await fetch("/api/archives")
+      const response = await fetch("/api/storage?bucket=archive");
       if (!response.ok) {
-        throw new Error("Failed to fetch archives data")
+        throw new Error("Failed to fetch storage data");
       }
-      const data = await response.json()
-      // we fetch to validate access; component reads the JSON directly
+      const data = await response.json();
+      setStorageData(data);
     } catch (error) {
-      console.error("Error fetching archives:", error)
+      console.error("Error fetching storage data:", error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
+
+  // -------------------------------------------------------------------------
+  // Event Handlers
+  // -------------------------------------------------------------------------
 
   const handlePasswordSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setError("")
-    setIsVerifying(true)
+    e.preventDefault();
+    setError("");
+    setIsVerifying(true);
 
     try {
       const response = await fetch("/api/verify-archives-password", {
@@ -57,37 +104,45 @@ export default function ArchivesPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ password }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (response.ok && data.success) {
-        setIsAuthenticated(true)
-        sessionStorage.setItem("archives-authenticated", "true")
-        fetchArchives()
+        setIsAuthenticated(true);
+        sessionStorage.setItem("archives-authenticated", "true");
+        fetchStorageData();
       } else {
-        setError("Incorrect password. Please try again.")
+        setError("Incorrect password. Please try again.");
       }
     } catch (error) {
-      setError("An error occurred. Please try again.")
+      setError("An error occurred. Please try again.");
     } finally {
-      setIsVerifying(false)
+      setIsVerifying(false);
     }
-  }
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handlePasswordSubmit(e as unknown as React.FormEvent<HTMLFormElement>)
+      handlePasswordSubmit(e as unknown as React.FormEvent<HTMLFormElement>);
     }
-  }
+  };
+
+  // -------------------------------------------------------------------------
+  // Loading State
+  // -------------------------------------------------------------------------
 
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-background text-foreground">
         <p className="text-lg">Loading...</p>
       </div>
-    )
+    );
   }
+
+  // -------------------------------------------------------------------------
+  // Authentication Gate
+  // -------------------------------------------------------------------------
 
   if (!isAuthenticated) {
     return (
@@ -96,9 +151,12 @@ export default function ArchivesPage() {
           <div className="flex items-center justify-center mb-6">
             <Lock className="h-8 w-8 text-gray-500 dark:text-gray-400" />
           </div>
-          <h1 className="text-xl font-serif text-center mb-6 dark:text-gray-100">Archives Access</h1>
+          <h1 className="text-xl font-serif text-center mb-6 dark:text-gray-100">
+            Archives Access
+          </h1>
           <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-6">
-            This page is password protected. Please enter the password to access the archives.
+            This page is password protected. Please enter the password to access
+            the archives.
           </p>
 
           <form onSubmit={handlePasswordSubmit}>
@@ -136,8 +194,12 @@ export default function ArchivesPage() {
           </form>
         </div>
       </div>
-    )
+    );
   }
+
+  // -------------------------------------------------------------------------
+  // Main Content
+  // -------------------------------------------------------------------------
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
@@ -146,14 +208,16 @@ export default function ArchivesPage() {
           title="Archive"
           subtitle="Collection of Documents"
           start_date="2025-01-01"
-          end_date={new Date().toISOString().split('T')[0]}
+          end_date={new Date().toISOString().split("T")[0]}
           status="Finished"
           confidence="certain"
           importance={7}
           preview="a comprehensive list of the archived content available at krisyotam.com"
         />
 
-  <ArchivesComponent defaultBucket="public-archive" data={archiveJson} />
+        {storageData && (
+          <ArchivesComponent defaultBucket="public-archive" data={storageData} />
+        )}
 
         <PageDescription
           title="About Archives"
@@ -161,5 +225,5 @@ export default function ArchivesPage() {
         />
       </div>
     </div>
-  )
+  );
 }

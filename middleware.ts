@@ -56,11 +56,43 @@ const VANITY_URL_MAPPINGS: Record<string, { contentType: RawContentType; categor
   '/faq':    { contentType: 'notes', category: 'website', slug: 'faq' },
 }
 
+// Known top-level routes that should NOT be treated as magic URL slugs
+const KNOWN_ROUTES = new Set([
+  'api', 'essays', 'blog', 'fiction', 'news', 'notes', 'ocs', 'papers',
+  'progymnasmata', 'reviews', 'verse', 'categories', 'tags', 'series',
+  'reading', 'now', 'research', 'til', 'library', 'globe', 'archive',
+  'stats', 'lecture-notes', 'prompts', 'film', 'manga', 'anime', 'games',
+  'videos', 'cv', 'changelog', 'colophon', 'profile', 'playlists', 'art',
+  'type', 'wishlist', 'contact', 'rss.xml', 'scripts', 'companies',
+  'sources', 'quotes', 'supporters', 'proofs', 'problems', 'cases',
+  'dossiers', 'conspiracies', 'libers', 'sequences', 'category', 'tag',
+])
+
 /**
  * Checks if a pathname requests raw content (ends with .md or .mdx)
  */
 function isRawContentRequest(pathname: string): boolean {
   return /\.(md|mdx)$/.test(pathname)
+}
+
+/**
+ * Checks if a pathname is a potential magic URL slug
+ * (single segment, not a known route, no file extension)
+ */
+function isMagicUrlCandidate(pathname: string): string | null {
+  // Must start with / and have exactly one segment
+  const match = pathname.match(/^\/([^/]+)$/)
+  if (!match) return null
+
+  const segment = match[1]
+
+  // Skip if it has a file extension
+  if (/\.\w+$/.test(segment)) return null
+
+  // Skip if it's a known route
+  if (KNOWN_ROUTES.has(segment)) return null
+
+  return segment
 }
 
 /**
@@ -136,6 +168,19 @@ export function middleware(request: NextRequest) {
       url.pathname = `/api/raw/${parsed.contentType}/${parsed.category}/${parsed.slug}`
       return NextResponse.rewrite(url)
     }
+  }
+
+  /* ---------------------------------------------------------------------------
+   * MAGIC URL HANDLING
+   * ---------------------------------------------------------------------------
+   * Check if this is a bare slug that should be redirected to its canonical path
+   * Example: /my-essay-slug -> /essays/philosophy/my-essay-slug
+   * ------------------------------------------------------------------------- */
+  const magicSlug = isMagicUrlCandidate(pathname)
+  if (magicSlug) {
+    const url = request.nextUrl.clone()
+    url.pathname = `/api/magic-urls/${magicSlug}`
+    return NextResponse.rewrite(url)
   }
 
   /* ---------------------------------------------------------------------------

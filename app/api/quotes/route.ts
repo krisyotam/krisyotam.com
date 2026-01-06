@@ -1,6 +1,15 @@
 import { NextResponse } from "next/server";
-import quotes from "@/data/quotes.json";
+import { getAllQuotes } from "@/lib/system-db";
 
 export async function GET() {
-  return NextResponse.json(quotes);
+  try {
+    const quotes = getAllQuotes();
+    return NextResponse.json({ quotes });
+  } catch (error) {
+    console.error("Error fetching quotes:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch quotes" },
+      { status: 500 }
+    );
+  }
 }

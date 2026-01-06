@@ -5,11 +5,17 @@
  * @description Central export point for all core components used across pages
  */
 
-export { PageHeader } from './page-header'
-export type { PageHeaderProps } from './page-header'
-export { CategoryHeader } from './category-header'
+export { Header, PageHeader, PostHeader, CategoryHeader } from './header'
+export type {
+  HeaderProps,
+  HeaderVariant,
+  HeaderStatus,
+  HeaderConfidence,
+  PageHeaderProps,
+  PostHeaderProps,
+  CategoryHeaderProps
+} from './header'
 export { PageDescription } from './page-description'
-export { Sitemap } from './sitemap'
 export { Comments } from './comments'
 export { Chat } from './chat'
 export { Popups, UniversalLinkModal } from './popups'
@@ -17,3 +23,12 @@ export { Sidenotes } from './sidenotes'
 export { TOC } from './toc'
 export type { TOCItem, TOCProps } from './toc'
 export { Footnotes } from './footnotes'
+export {
+  JsonLd,
+  WebsiteJsonLd,
+  PersonJsonLd,
+  ArticleJsonLd,
+  BreadcrumbJsonLd,
+  ArticlePageJsonLd,
+  HomePageJsonLd,
+} from './SEO'

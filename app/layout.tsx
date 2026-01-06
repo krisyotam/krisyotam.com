@@ -13,41 +13,72 @@ import type React from "react"
 import Script from "next/script"
 import { MDXProviderWrapper } from './mdx-provider'
 import { cn } from '../lib/utils'
-import localFont from 'next/font/local';
+import localFont from 'next/font/local'
+import { siteConfig } from '@/lib/seo'
 
 // Define fontSans using localFont
 const fontSans = localFont({
-  src: '../public/fonts/outfit.woff2', // Adjust path if necessary
-  variable: '--font-sans', // Optional: for CSS variable usage
+  src: '../public/fonts/outfit.woff2',
+  variable: '--font-sans',
 });
 
-// Default metadata for the site
+// Enhanced metadata for the site
 export const metadata: Metadata = {
-  title: "Kris Yotam",
-  description: "Ideas, works, and reflections of a contemporary polymath",
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: [...siteConfig.keywords],
+  authors: [{ name: siteConfig.author.name, url: siteConfig.author.url }],
+  creator: siteConfig.author.name,
+  publisher: siteConfig.author.name,
+  metadataBase: new URL(siteConfig.url),
+  alternates: {
+    canonical: siteConfig.url,
+    types: {
+      'application/rss+xml': `${siteConfig.url}/feed.xml`,
+    },
+  },
   openGraph: {
-    title: "Kris Yotam",
-    description: "Ideas, works, and reflections of a contemporary polymath",
-    url: "https://krisyotam.com",
-    siteName: "Kris Yotam",    images: [
+    title: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    images: [
       {
-        url: "https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png",
+        url: `${siteConfig.url}/og?title=${encodeURIComponent(siteConfig.name)}`,
         width: 1200,
         height: 630,
-        alt: "Kris Yotam",
+        alt: siteConfig.name,
       },
     ],
-    locale: "en_US",
+    locale: siteConfig.locale,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kris Yotam",
-    description: "Ideas, works, and reflections of a contemporary polymath",
-    creator: "@krisyotam",
-    images: ["https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png"]
+    title: siteConfig.name,
+    description: siteConfig.description,
+    creator: siteConfig.creator,
+    images: [`${siteConfig.url}/og?title=${encodeURIComponent(siteConfig.name)}`],
   },
-  metadataBase: new URL("https://krisyotam.com"),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    // Add these when you have them
+    // google: 'your-google-verification-code',
+    // yandex: 'your-yandex-verification-code',
+  },
 }
 
 // Viewport export for theme color
@@ -75,6 +106,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.png" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="alternate" type="application/rss+xml" title="Kris Yotam RSS Feed" href="/feed.xml" />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#0c0c0c" media="(prefers-color-scheme: dark)" />
         <script async src="https://cdn.seline.so/seline.js" data-token="9bc08e3c42882e0"></script>

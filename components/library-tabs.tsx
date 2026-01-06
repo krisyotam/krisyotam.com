@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { CatalogContent } from "./catalog-content"
-import { LibrarySeriesContent } from "./library-series-content"
 import { LibraryNotesContent } from "./library-notes-content"
 
 export function LibraryTabs() {
@@ -10,7 +9,6 @@ export function LibraryTabs() {
 
   const tabs = [
     { id: "catalog", label: "Catalog" },
-    { id: "collections", label: "Collections" },
     { id: "notes", label: "Notes" }
   ]
 
@@ -36,10 +34,9 @@ export function LibraryTabs() {
           ))}
         </div>
       </div>
-      
+
       <div className="mt-6">
         {activeTab === "catalog" && <CatalogContent />}
-        {activeTab === "collections" && <LibrarySeriesContent />}
         {activeTab === "notes" && <LibraryNotesContent />}
       </div>
     </div>

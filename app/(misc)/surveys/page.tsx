@@ -1,25 +1,77 @@
+/**
+ * ============================================================================
+ * Surveys Page
+ * Author: Kris Yotam
+ * Description: Display active surveys with external links that open in new tabs.
+ * ============================================================================
+ */
+
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { PageHeader } from "@/components/core";
 import { PageDescription } from "@/components/core";
-import { ContentTable } from "@/components/content";
+import { ExternalLink } from "lucide-react";
+
+// ============================================================================
+// TYPE DEFINITIONS
+// ============================================================================
 
 interface Survey {
   title: string;
   preview: string;
   start_date: string;
   end_date: string;
-  slug: string;
+  url: string;
   status: string;
   confidence: string;
   importance: number;
   state: string;
 }
 
-interface SurveysJson {
-  shortform: Survey[];
-}
+// ============================================================================
+// SURVEYS DATA
+// ============================================================================
+
+const surveysData: Survey[] = [
+  {
+    title: "Contact Form",
+    preview: "Get in touch with me directly through this contact form.",
+    start_date: "2025-07-02",
+    end_date: "2025-07-02",
+    url: "https://forms.gle/contactform",
+    status: "Draft",
+    confidence: "likely",
+    importance: 5,
+    state: "active",
+  },
+  {
+    title: "Anonymous Feedback Form",
+    preview: "Leave feedback on my writing, site, ideas, or anything else.",
+    start_date: "2025-07-02",
+    end_date: "2025-07-02",
+    url: "https://forms.gle/anonymousfeedback",
+    status: "Draft",
+    confidence: "likely",
+    importance: 5,
+    state: "active",
+  },
+  {
+    title: "Home Page Comment",
+    preview: "Have your site comment left on the home page. You must provide a name (or username), occupation, and a profile picture.",
+    start_date: "2025-07-02",
+    end_date: "2025-07-02",
+    url: "https://forms.gle/homepagecomment",
+    status: "Draft",
+    confidence: "likely",
+    importance: 5,
+    state: "active",
+  },
+];
+
+// ============================================================================
+// PAGE METADATA
+// ============================================================================
 
 const defaultSurveysPageData = {
   title: "Surveys",
@@ -32,31 +84,31 @@ const defaultSurveysPageData = {
   importance: 5,
 };
 
+// ============================================================================
+// UTILITY FUNCTIONS
+// ============================================================================
+
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+
 export default function SurveysPage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [surveys, setSurveys] = useState<Survey[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchSurveys() {
-      setLoading(true);
-      try {
-        const res = await fetch("/api/surveys");
-        if (!res.ok) throw new Error("Failed to fetch surveys");
-        const data: SurveysJson = await res.json();
-        setSurveys(data.shortform.filter((s) => s.state === "active"));
-      } catch (error) {
-        console.error(error);
-        setSurveys([]);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchSurveys();
-  }, []);
+  // Filter to only active surveys
+  const activeSurveys = surveysData.filter((s) => s.state === "active");
 
   // Filter surveys by search query
-  const filteredSurveys = surveys.filter((survey) => {
+  const filteredSurveys = activeSurveys.filter((survey) => {
     const q = searchQuery.toLowerCase();
     return (
       !q ||
@@ -73,7 +125,7 @@ export default function SurveysPage() {
         description="Participate in ongoing surveys, feedback forms, and research polls. Use the search bar to find a specific survey by title or description. Only active surveys are shown."
       />
 
-      {/* Search bar, copied from essays page markup */}
+      {/* Search Bar */}
       <div className="mb-4">
         <div className="relative">
           <input
@@ -86,26 +138,61 @@ export default function SurveysPage() {
         </div>
       </div>
 
+      {/* Surveys Table */}
       <div className="mb-4">
-        {loading ? (
+        {filteredSurveys.length === 0 ? (
           <div className="text-center py-10 text-gray-400">
-            Loading surveys...
+            No surveys found matching your criteria.
           </div>
         ) : (
-          <ContentTable
-            items={filteredSurveys.map(survey => ({
-              title: survey.title,
-              start_date: survey.start_date,
-              end_date: survey.end_date,
-              slug: survey.slug,
-              tags: [],
-              category: ""
-            }))}
-            basePath="/surveys"
-            showCategoryLinks={false}
-            formatCategoryNames={false}
-            emptyMessage="No surveys found matching your criteria."
-          />
+          <div className="border border-border">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-muted/50">
+                  <th className="py-2 px-3 text-left font-medium">Title</th>
+                  <th className="py-2 px-3 text-left font-medium hidden sm:table-cell">Date</th>
+                  <th className="py-2 px-3 text-center font-medium w-12"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredSurveys.map((survey, index) => (
+                  <tr
+                    key={survey.title}
+                    className={`border-b border-border hover:bg-secondary/50 transition-colors ${
+                      index % 2 === 0 ? "bg-transparent" : "bg-muted/5"
+                    }`}
+                  >
+                    <td className="py-2 px-3">
+                      <a
+                        href={survey.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline font-medium"
+                      >
+                        {survey.title}
+                      </a>
+                      <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
+                        {survey.preview}
+                      </p>
+                    </td>
+                    <td className="py-2 px-3 text-muted-foreground hidden sm:table-cell whitespace-nowrap">
+                      {formatDate(survey.start_date)}
+                    </td>
+                    <td className="py-2 px-3 text-center">
+                      <a
+                        href={survey.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center text-muted-foreground hover:text-primary"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>

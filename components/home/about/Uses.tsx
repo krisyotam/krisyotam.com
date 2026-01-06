@@ -1,5 +1,55 @@
 import React, { useEffect, useRef, useState } from "react"
-import usesData from "@/data/about/uses.json"
+
+const USES_DATA = {
+  hardware: [
+    { label: "Phone", value: "iPhone 17 Pro & Pixel 10 Pro (grapheneOS)", note: "iPhone for work use, Pixel for personal use" },
+    { label: "Laptop", value: "2x 2015 MacBook Pros (13-inch, 16gb ram, 512gb ssd) arch linux" },
+    { label: "Desktop", value: "Ryzen 7 5800X3D, 32gb ram, 2tb nvme, 1tb ssd, 6tb hdd, 3060ti running dual boot with both Fedora and Windows" },
+    { label: "Server", value: "See this post" }
+  ],
+  camera: [
+    { label: "Body", value: "Fuji XS-20" },
+    { label: "Lenses", value: "Fujinon XF18-55 F2.8" },
+    { label: "Lenses", value: "Fujinon XF27 F2.8 R WR" },
+    { label: "Main Fuji Recipe", value: "Film Simulation: Provia, Grain Effect: Weak / Small, Color Chrome Effect: Strong, Color Chrome Effect Blue: Weak, White balance: Auto, R-1, B+1, Tone curve: H-2, S+1, Color: +3, Sharpness: +4, High iso nr: -1, Clarity: 0" }
+  ],
+  peripherals: [
+    { label: "Keyboard", value: "HHKB Hybrid Silent-S" },
+    { label: "Headset", value: "Airpods Max" },
+    { label: "Mouse", value: "G-Pro X Superlight 2" },
+    { label: "Trackpad", value: "Magic Trackpad 2" },
+    { label: "Microphone", value: "Shure SM7B" }
+  ],
+  software: [
+    { label: "Browser", value: "Brave or (Librewolf + Surf + tor)" },
+    { label: "Code Editor", value: "Neovim + Void" },
+    { label: "Writing / Notes-Taking", value: "Notesnook + Obsidian ❤️" },
+    { label: "Backups / Sync", value: "Syncthing to my server" }
+  ],
+  os: [
+    { label: "Operating System", value: "Arch" },
+    { label: "Compositor", value: "X11 + picom" },
+    { label: "Window Manager", value: "dwm" },
+    { label: "Bar", value: "dwmblocks" },
+    { label: "Terminal", value: "st + fish + tmux" }
+  ],
+  services: [
+    { label: "Mail + Calendar", value: "Proton + Mutt + Superhuman (business email & all calenaders)" },
+    { label: "Password manager", value: "ProtonPass + KeePassXC" },
+    { label: "VPN", value: "OVPN + Proton + Mullvad + SPN" },
+    { label: "Search", value: "Kagi + Searxng" },
+    { label: "Messages", value: "Molly + IRC + Discord (for chat w/ normies)" },
+    { label: "DNS", value: "cloudflare" }
+  ],
+  website: [
+    { label: "Domain", value: "Njalla" },
+    { label: "CDN", value: "Bunny" },
+    { label: "DNS", value: "Bunny" },
+    { label: "Proxy", value: "OVPN" },
+    { label: "Server", value: "Super duper secret location (home)" },
+    { label: "Made with", value: "Next.js" }
+  ]
+}
 
 const sectionOrder = [
   { key: "hardware", label: "Hardware" },
@@ -111,10 +161,10 @@ export default function Uses() {
     const heights = measureRefs.current.map((el) => (el ? el.getBoundingClientRect().height : 0))
     const max = Math.max(0, ...heights)
     if (max > 0) setMaxHeight(Math.ceil(max))
-  }, [wrapperWidth, usesData]) // re-measure if layout width changes (or data changes)
+  }, [wrapperWidth]) // re-measure if layout width changes
 
   const { key, label } = sectionOrder[current]
-  const sectionCandidate = (usesData as Partial<UsesData>)[key]
+  const sectionCandidate = (USES_DATA as Partial<UsesData>)[key]
   const section: UsesItem[] = Array.isArray(sectionCandidate) ? (sectionCandidate as UsesItem[]) : []
 
   return (
@@ -153,7 +203,7 @@ export default function Uses() {
         }}
       >
         {sectionOrder.map(({ key, label }, i) => {
-          const secCandidate = (usesData as Partial<UsesData>)[key]
+          const secCandidate = (USES_DATA as Partial<UsesData>)[key]
           const sec: UsesItem[] = Array.isArray(secCandidate) ? (secCandidate as UsesItem[]) : []
           return (
             <div

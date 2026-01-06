@@ -5,7 +5,6 @@ import MasonryGrid from "@/components/art/masonry-grid";
 import { PageHeader } from "@/components/core";
 import { PageDescription } from "@/components/core";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
-import categoriesData from "@/data/art/categories.json";
 import { ArtworkItem } from "@/components/art/art-card-base";
 
 const defaultArtPageData = {
@@ -37,10 +36,9 @@ export default function ArtClientPage({ artworks, initialCategory = "all" }: Art
     label: category === "all" ? "All Categories" : formatCategoryDisplayName(category)
   }));
 
-  // Format category name using categories.json - exact implementation from NotesClientPage
+  // Format category name from slug
   function formatCategoryDisplayName(slug: string): string {
-    const category = categoriesData.categories.find(cat => cat.slug === slug);
-    return category ? category.title : slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    return slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   }
 
   // Filter artworks based on search query and active category

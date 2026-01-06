@@ -4,7 +4,7 @@ export const revalidate = false;
 
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import artworksData from "@/data/art/art.json";
+import { getArt } from "@/lib/content-db";
 import { Art } from "@/components/art/art";
 import { PageHeader } from "@/components/core";
 import { Citation } from "@/components/citation";
@@ -16,17 +16,20 @@ interface ArtPageProps {
   params: { slug: string };
 }
 
+function generateSlug(title: string): string {
+  return title.toLowerCase().replace(/\s+/g, '-');
+}
+
 export async function generateStaticParams() {
-  // Generate all slugs
-  return artworksData.artworks.map(artwork => ({
-    slug: artwork.title.toLowerCase().replace(/\s+/g, '-')
+  const artworks = getArt();
+  return artworks.map(artwork => ({
+    slug: generateSlug(artwork.title)
   }));
 }
 
 export async function generateMetadata({ params }: ArtPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const artwork = artworksData.artworks.find(a => 
-    a.title.toLowerCase().replace(/\s+/g, '-') === params.slug
-  );
+  const artworks = getArt();
+  const artwork = artworks.find(a => generateSlug(a.title) === params.slug);
 
   if (!artwork) {
     return {
@@ -44,29 +47,27 @@ export async function generateMetadata({ params }: ArtPageProps, parent: Resolvi
       description: artwork.description || "View this artwork by Kris Yotam",
       url,
       type: "website",
-      images: [{
-        url: artwork.imageUrl,
+      images: artwork.image_url ? [{
+        url: artwork.image_url,
         width: 1200,
         height: 630,
         alt: artwork.title
-      }]
+      }] : undefined
     }
   };
 }
 
 export default function ArtworkPage({ params }: ArtPageProps) {
-  // Find the artwork by slug
-  const artwork = artworksData.artworks.find(
-    a => a.title.toLowerCase().replace(/\s+/g, '-') === params.slug
-  );
+  const artworks = getArt();
+  const artwork = artworks.find(a => generateSlug(a.title) === params.slug);
 
-  // If no artwork found, return 404
   if (!artwork) {
     return notFound();
   }
 
   // Map confidence to PageHeader compatible format
-  const mapConfidence = (confidence: string): "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain" => {
+  const mapConfidence = (confidence: string | null): "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain" => {
+    if (!confidence) return "possible";
     const confidenceMap: Record<string, "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"> = {
       low: "unlikely",
       medium: "possible",
@@ -79,37 +80,37 @@ export default function ArtworkPage({ params }: ArtPageProps) {
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
       <PageHeader
         title={artwork.title}
-        start_date={artwork.start_date}
-        end_date={artwork.end_date}
+        start_date={artwork.start_date || undefined}
+        end_date={artwork.end_date || undefined}
         backHref="/art"
         backText="Art"
-        preview={artwork.description}
-        status={artwork.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned"}
+        preview={artwork.description || undefined}
+        status={artwork.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned" | undefined}
         confidence={mapConfidence(artwork.confidence)}
-        importance={artwork.importance}
+        importance={artwork.importance || undefined}
       />
-      
+
       <div className="my-8">
-        <Art imageUrl={artwork.imageUrl} dimension={artwork.dimension} />
+        <Art imageUrl={artwork.image_url || ""} dimension={artwork.dimension || ""} />
       </div>
-      
+
       {artwork.bio && (
         <Box className="my-8">
           <p>{artwork.bio}</p>
         </Box>
       )}
-      
-      <Citation 
+
+      <Citation
         title={artwork.title}
-        start_date={artwork.start_date}
-        end_date={artwork.end_date}
+        start_date={artwork.start_date || undefined}
+        end_date={artwork.end_date || undefined}
         url={`https://krisyotam.com/art/${params.slug}`}
       />
-      
+
       <div className="mt-8">
         <LiveClock />
       </div>
-      
+
       <Footer />
     </div>
   );

@@ -620,51 +620,19 @@ Review these - they appear empty, duplicate, or unclear:
 
 | File | Status | Notes |
 |------|--------|-------|
-| `data/hashes.json` | EMPTY | Just whitespace |
-| `data/donate.json` | EMPTY | 0 bytes |
-| `data/questions.json` | EMPTY | 0 bytes |
-| `data/blogs.json` | UNCLEAR | Duplicate of blog/blog.json? Only 5 items, no slugs |
 | `data/others.json` | DUPLICATE? | Contains blogroll-like data, overlaps with blogroll/ |
-| `data/now-posts.json` | DUPLICATE? | May overlap with now/now.json |
-| `data/questions/questions.json` | CHECK | May overlap with questions.json |
-| `data/research.json` | DUPLICATE? | May overlap with research/research.json |
-| `data/projects.json` | DUPLICATE? | May overlap with portfolio/projects.json |
-| `data/archive.json` | DIFFERENT | Archive page items, not object storage |
 | `data/accreditations.json` | UNCLEAR | Where is this used? |
-| `data/art-bio.json` | UNCLEAR | Single bio, maybe merge with about/ |
-| `data/art-texts.json` | UNCLEAR | Check usage |
-| `data/auction-goals.json` | UNCLEAR | Check usage |
 | `data/cpi.json` | UNCLEAR | Consumer price index? Check usage |
-| `data/cryptocurrencies.json` | UNCLEAR | Check usage |
-| `data/indie-companies.json` | UNCLEAR | Check usage |
-| `data/inspirations.json` | UNCLEAR | Merge with favorites? |
-| `data/keynotes.json` | UNCLEAR | Check usage |
-| `data/learning-content.json` | UNCLEAR | Check usage |
-| `data/local-collections.json` | UNCLEAR | Check usage |
 | `data/locations.json` | KEEP | Places visited, could go to media.db |
 | `data/map/map.json` | CHECK | Overlaps with locations.json? |
 | `data/mochi.json` | UNCLEAR | Flashcard app export? |
 | `data/newsletters.json` | UNCLEAR | Check usage |
 | `data/references.json` | UNCLEAR | Check usage |
-| `data/related-posts.json` | UNCLEAR | Auto-generated? |
-| `data/research-bounties.json` | UNCLEAR | Check usage |
-| `data/research-interests.json` | UNCLEAR | Merge with about/? |
-| `data/resources-archives.json` | UNCLEAR | Check usage |
 | `data/sources.json` | UNCLEAR | Check usage |
-| `data/speeches.json` | UNCLEAR | Check usage |
 | `data/supporters.json` | UNCLEAR | Check usage |
 | `data/support-them.json` | UNCLEAR | Check usage |
 | `data/surveys/data/contact-form.json` | CHECK | Submissions data? |
-| `data/theories.json` | UNCLEAR | Check usage |
-| `data/updates.json` | UNCLEAR | Changelog? |
-| `data/wiki-pages.json` | UNCLEAR | Check usage |
 | `data/wikipedia.json` | UNCLEAR | Check usage |
-| `data/wishlist.json` | KEEP | Goes to media.db or content.db |
-| `data/words.json` | UNCLEAR | Vocabulary? |
-| `data/worlds.json` | UNCLEAR | Worldbuilding? Goes to content.db? |
-| `data/writing-content.json` | UNCLEAR | Check usage |
-| `data/changelog/content.json` | KEEP | Site changelog |
-| `data/changelog/infra.json` | KEEP | Infra changelog |
 
 ---
 

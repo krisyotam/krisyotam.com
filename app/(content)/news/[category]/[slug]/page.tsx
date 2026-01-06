@@ -1,48 +1,67 @@
+/**
+ * =============================================================================
+ * News Article Page
+ * =============================================================================
+ *
+ * Dynamic page for displaying individual news articles.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 export const dynamic = 'force-static';
 export const revalidate = false;
+
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import newsData from "@/data/news/news.json";
+import { getActiveContentByType } from "@/lib/data";
 import NewsPageClient from "./NewsPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 import type { NewsMeta, NewsStatus, NewsConfidence } from "@/types/content";
 
-interface NewsData {
-  title: string;
-  start_date: string;
-  end_date?: string;
-  slug: string;
-  tags: string[];
-  category: string;
-  status: string;
-  confidence: string;
-  importance: number;
-  preview: string;
-  subtitle?: string;
-}
+// =============================================================================
+// Types
+// =============================================================================
 
 interface NewsPageProps {
-  params: { category: string; slug: string };
+  params: Promise<{ category: string; slug: string }>;
 }
 
-// Helper function to slugify category
+// =============================================================================
+// Helpers
+// =============================================================================
+
 function slugifyCategory(category: string) {
   return category.toLowerCase().replace(/\s+/g, "-");
 }
 
+// =============================================================================
+// Static Generation
+// =============================================================================
+
 export async function generateStaticParams() {
+  const newsContent = getActiveContentByType('news');
+
   // Generate all category/slug combinations
-  return newsData.map(article => ({
+  return newsContent.map(article => ({
     category: slugifyCategory(article.category),
     slug: article.slug
   }));
 }
 
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export async function generateMetadata({ params }: NewsPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const newsArticle = newsData.find(a => 
-    slugifyCategory(a.category) === params.category && a.slug === params.slug
+  const { category, slug } = await params;
+  const newsContent = getActiveContentByType('news');
+
+  const newsArticle = newsContent.find(a =>
+    slugifyCategory(a.category) === category && a.slug === slug
   );
 
   if (!newsArticle) {
@@ -63,7 +82,7 @@ export async function generateMetadata({ params }: NewsPageProps, parent: Resolv
     }
   ];
 
-  const url = `https://krisyotam.com/news/${params.category}/${params.slug}`;
+  const url = `https://krisyotam.com/news/${category}/${slug}`;
 
   return {
     title: `${newsArticle.title} | ${newsArticle.category} News | Kris Yotam`,
@@ -86,9 +105,16 @@ export async function generateMetadata({ params }: NewsPageProps, parent: Resolv
   };
 }
 
+// =============================================================================
+// Page Component
+// =============================================================================
+
 export default async function NewsPage({ params }: NewsPageProps) {
-  const newsArticle = newsData.find(a => 
-    slugifyCategory(a.category) === params.category && a.slug === params.slug
+  const { category, slug } = await params;
+  const newsContent = getActiveContentByType('news');
+
+  const newsArticle = newsContent.find(a =>
+    slugifyCategory(a.category) === category && a.slug === slug
   );
 
   if (!newsArticle) {
@@ -96,22 +122,39 @@ export default async function NewsPage({ params }: NewsPageProps) {
   }
 
   const article: NewsMeta = {
-    ...newsArticle,
+    title: newsArticle.title,
+    subtitle: newsArticle.subtitle,
+    preview: newsArticle.preview,
+    start_date: newsArticle.start_date,
+    end_date: newsArticle.end_date,
+    slug: newsArticle.slug,
+    tags: newsArticle.tags,
+    category: newsArticle.category,
     status: newsArticle.status as NewsStatus,
-    confidence: newsArticle.confidence as NewsConfidence
+    confidence: newsArticle.confidence as NewsConfidence,
+    importance: newsArticle.importance
   };
 
-  const news: NewsMeta[] = (newsData as NewsData[]).map(article => ({
-    ...article,
-    status: article.status as NewsStatus,
-    confidence: article.confidence as NewsConfidence
+  const news: NewsMeta[] = newsContent.map(item => ({
+    title: item.title,
+    subtitle: item.subtitle,
+    preview: item.preview,
+    start_date: item.start_date,
+    end_date: item.end_date,
+    slug: item.slug,
+    tags: item.tags,
+    category: item.category,
+    status: item.status as NewsStatus,
+    confidence: item.confidence as NewsConfidence,
+    importance: item.importance
   }));
 
   // Extract headings from the news MDX content
-  const headings = await extractHeadingsFromMDX('news', params.slug, params.category);
+  const headings = await extractHeadingsFromMDX('news', slug, category);
 
   // Dynamically import the MDX file based on category and slug
-  const NewsArticle = (await import(`@/app/(content)/news/content/${params.category}/${params.slug}.mdx`)).default;
+  const NewsArticle = (await import(`@/app/(content)/news/content/${category}/${slug}.mdx`)).default;
+
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
       <div className="max-w-6xl mx-auto px-4">
@@ -119,7 +162,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
         <div className="mb-8">
           <NewsPageClient article={article} allNews={news} headerOnly={true} />
         </div>
-        
+
         {/* Main content */}
         <main id="content" className="container max-w-[672px] mx-auto px-4">
           {/* Table of Contents - at the top of content */}

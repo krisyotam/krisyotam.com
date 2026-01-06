@@ -1,59 +1,99 @@
-// app/verse/[type]/page.tsx
-export const dynamic = 'force-static';
-export const revalidate = false;
+/**
+ * =============================================================================
+ * Verse Type Page
+ * =============================================================================
+ *
+ * Dynamic page for displaying poems of a specific verse type (e.g., haiku, sonnet).
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
+export const dynamic = 'force-static'
+export const revalidate = false
+
+// =============================================================================
+// Imports
+// =============================================================================
+
 import type { Metadata } from "next"
 import { VerseClient } from "../verse-client"
-import poemsData from "@/data/verse/verse.json"
-import categoriesData from "@/data/verse/categories.json"
-import type { Poem } from "@/types/content"
+import { getVerseTypes, getAllVerseContent, getVerseByType } from "@/lib/data"
 import { notFound } from "next/navigation"
 
-function slugifyType(type: string) {
-  return type.toLowerCase().replace(/\s+/g, "-");
+// =============================================================================
+// Types
+// =============================================================================
+
+interface PageProps {
+  params: Promise<{ type: string }>
 }
 
-// Generate metadata dynamically based on the verse type
-export async function generateMetadata({ params }: { params: { type: string } }): Promise<Metadata> {
-  // Get category data from categories.json
-  const categorySlug = params.type.toLowerCase()
-  const matchedCategory = categoriesData.types.find(type => 
-    type.slug === categorySlug
-  )
+// =============================================================================
+// Helpers
+// =============================================================================
 
-  if (!matchedCategory && params.type !== 'all') {
+function slugifyType(type: string) {
+  return type.toLowerCase().replace(/\s+/g, "-")
+}
+
+// =============================================================================
+// Static Generation
+// =============================================================================
+
+export async function generateStaticParams() {
+  const verseTypes = getVerseTypes()
+  return verseTypes.map((type) => ({
+    type: type.slug,
+  }))
+}
+
+// =============================================================================
+// Metadata
+// =============================================================================
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { type } = await params
+  const verseTypes = getVerseTypes()
+  const categorySlug = type.toLowerCase()
+  const matchedCategory = verseTypes.find(t => t.slug === categorySlug)
+
+  if (!matchedCategory && type !== 'all') {
     return {
       title: "Verse | Not Found",
       description: "The requested verse type could not be found."
     }
   }
 
-  // Use category title for display and metadata
-  const categoryTitle = matchedCategory?.title
-
   // Get a representative poem with an image for this type (if available)
-  const poemsOfType = categoryTitle
-    ? poemsData.filter(poem => slugifyType(poem.type) === categorySlug)
-    : poemsData;
-  
+  const poemsOfType = matchedCategory
+    ? getVerseByType(categorySlug)
+    : getAllVerseContent()
+
   // Find a poem with an image to use as the featured image
-  const featuredPoem = poemsOfType.find(poem => poem.image && poem.image.length > 0);
-  const title = categoryTitle ? `${categoryTitle} | Verse | Kris Yotam` : "Verse | Kris Yotam";
-  const description = matchedCategory 
+  const featuredPoem = poemsOfType.find(poem => poem.cover_image && poem.cover_image.length > 0)
+  const title = matchedCategory
+    ? `${matchedCategory.title} | Verse | Kris Yotam`
+    : "Verse | Kris Yotam"
+  const description = matchedCategory
     ? matchedCategory.preview
-    : "A collection of poems, haikus, and other verse forms.";
-  
+    : "A collection of poems, haikus, and other verse forms."
+
   return {
     title,
     description,
     openGraph: {
-      title: categoryTitle ? `${categoryTitle} Collection | Kris Yotam` : "Poetry Collection | Kris Yotam",
+      title: matchedCategory
+        ? `${matchedCategory.title} Collection | Kris Yotam`
+        : "Poetry Collection | Kris Yotam",
       description: matchedCategory?.preview || description,
       type: "website",
-      images: featuredPoem?.image 
+      images: featuredPoem?.cover_image
         ? [
             {
-              url: featuredPoem.image,
-              alt: `${categoryTitle || 'Poetry'} Collection by Kris Yotam`,
+              url: featuredPoem.cover_image,
+              alt: `${matchedCategory?.title || 'Poetry'} Collection by Kris Yotam`,
               width: 1200,
               height: 630,
             },
@@ -61,7 +101,7 @@ export async function generateMetadata({ params }: { params: { type: string } })
         : [
             {
               url: "https://i.postimg.cc/6p4X2MNX/shall-i-compare-thee-to-a-winters-night.png",
-              alt: `${categoryTitle || 'Poetry'} Collection by Kris Yotam`,
+              alt: `${matchedCategory?.title || 'Poetry'} Collection by Kris Yotam`,
               width: 1200,
               height: 630,
             }
@@ -69,24 +109,40 @@ export async function generateMetadata({ params }: { params: { type: string } })
     },
     twitter: {
       card: "summary_large_image",
-      title: categoryTitle ? `${categoryTitle} Collection | Kris Yotam` : "Poetry Collection | Kris Yotam",
+      title: matchedCategory
+        ? `${matchedCategory.title} Collection | Kris Yotam`
+        : "Poetry Collection | Kris Yotam",
       description,
-      images: featuredPoem?.image ? [featuredPoem.image] : ["https://i.postimg.cc/6p4X2MNX/shall-i-compare-thee-to-a-winters-night.png"],
+      images: featuredPoem?.cover_image
+        ? [featuredPoem.cover_image]
+        : ["https://i.postimg.cc/6p4X2MNX/shall-i-compare-thee-to-a-winters-night.png"],
     },
   }
 }
 
-export default function TypedVersePage({ params }: { params: { type: string } }) {
-  // Get category data
-  const typeSlug = params.type.toLowerCase()
-  const matchedCategory = categoriesData.types.find(type => 
-    type.slug === typeSlug
-  )
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function TypedVersePage({ params }: PageProps) {
+  const { type } = await params
+  const verseTypes = getVerseTypes()
+  const typeSlug = type.toLowerCase()
+  const matchedCategory = verseTypes.find(t => t.slug === typeSlug)
 
   // Special case for 'all' to show all verses
-  if (params.type !== 'all' && !matchedCategory) {
+  if (type !== 'all' && !matchedCategory) {
     notFound()
   }
 
-  return <VerseClient initialType={matchedCategory?.title || 'All'} />
+  // Fetch all poems for client-side filtering
+  const poems = getAllVerseContent()
+
+  return (
+    <VerseClient
+      initialType={matchedCategory?.title || 'All'}
+      verseTypes={verseTypes}
+      poems={poems}
+    />
+  )
 }

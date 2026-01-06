@@ -1,32 +1,66 @@
 "use client";
 
-import { useEffect } from "react";
 import { ProjectsClient } from "./projects-client";
-
-import projectsData from "@/data/portfolio/projects.json"; 
-import categoriesData from "@/data/portfolio/categories.json";
 
 interface ProjectsProps {
   isActive: boolean;
 }
 
+const projects = [
+  {
+    name: "E-commerce Platform",
+    url: "https://rodrnio.com/media/img/oxh-01.jpg",
+    src: "/projects/ecommerce-platform.png",
+    description: "A full-stack e-commerce platform built with Next.js and Stripe integration for seamless online shopping experience.",
+    category: "web-dev",
+    date: "2024-03-15"
+  },
+  {
+    name: "Task Management App",
+    url: "https://rodrnio.com/media/img/oxh-01.jpg",
+    src: "/projects/task-management.png",
+    description: "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
+    category: "web-dev",
+    date: "2024-01-22"
+  },
+  {
+    name: "Weather Dashboard",
+    url: "https://rodrnio.com/media/img/oxh-01.jpg",
+    src: "/projects/weather-dashboard.png",
+    description: "An interactive weather dashboard that provides real-time weather data, forecasts, and visualizations for multiple locations.",
+    category: "web-dev",
+    date: "2023-11-08"
+  },
+  {
+    name: "Blog CMS",
+    url: "https://rodrnio.com/media/img/oxh-01.jpg",
+    src: "/projects/blog-cms.png",
+    description: "A headless content management system for blogs with markdown support, SEO optimization, and admin dashboard.",
+    category: "web-dev",
+    date: "2023-09-12"
+  },
+  {
+    name: "Portfolio Generator",
+    url: "https://rodrnio.com/media/img/oxh-01.jpg",
+    src: "/projects/portfolio-generator.png",
+    description: "An automated portfolio generator that creates responsive portfolio websites from JSON configuration files.",
+    category: "web-dev",
+    date: "2023-07-30"
+  }
+];
+
+const categories = [
+  { name: "Web Design", slug: "web-design" },
+  { name: "Web Dev", slug: "web-dev" },
+  { name: "Pentesting", slug: "pentesting" }
+];
+
 export function Projects({ isActive }: ProjectsProps) {
-  const projects = projectsData.projects || [];
-  const categories = categoriesData.categories || [];
-
-  useEffect(() => {
-    if (isActive) {
-      console.log("Projects component data:", projects);
-      console.log("Categories component data:", categories);
-      console.log("isActive prop:", isActive);
-    }
-  }, [isActive, projects, categories]);
-
   return isActive ? (
-    <ProjectsClient 
-      projects={projects} 
-      categories={categories} 
-      isActive={true} 
+    <ProjectsClient
+      projects={projects}
+      categories={categories}
+      isActive={true}
     />
   ) : null;
 }

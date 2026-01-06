@@ -1,31 +1,20 @@
 'use client'
 
 import React, { useState } from 'react'
-import { ArrowLeft, Copy, Check, ExternalLink, Share2 } from 'lucide-react'
+import { Copy, Check, Share2, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Card, CardContent } from '@/components/ui/card'
 import Link from 'next/link'
-import symbolsData from '@/data/symbols.json'
-import { PostHeader } from '@/components/post-header'
+import { PostHeader } from "@/components/core"
 import { Citation } from '@/components/citation'
 import { Footer } from '@/app/(content)/essays/components/footer'
 
-type Symbol = {
-  id: string
+interface Symbol {
+  id: number
+  slug: string
   name: string
   symbol: string
-  isImage?: boolean
-  category: string
-  description: string
-  unicodeValue: string | null
-  htmlEntity: string | null
-  contexts: string[]
-  commonUses: string[]
-  related: string[]
-  examples: string[]
+  url: string | null
 }
 
 interface SymbolDetailClientProps {
@@ -50,7 +39,7 @@ export function SymbolDetailClient({ symbol }: SymbolDetailClientProps) {
       try {
         await navigator.share({
           title: `${symbol.name} Symbol Reference`,
-          text: `${symbol.name} (${symbol.symbol}) - ${symbol.description}`,
+          text: `${symbol.name} (${symbol.symbol})`,
           url: window.location.href,
         })
       } catch (err) {
@@ -61,10 +50,7 @@ export function SymbolDetailClient({ symbol }: SymbolDetailClientProps) {
     }
   }
 
-  // Get related symbols
-  const relatedSymbols = symbolsData.symbols.filter(s => 
-    symbol.related.includes(s.id)
-  )
+  const isImageSymbol = symbol.symbol.startsWith('http')
 
   const CopyButton = ({ text, item, children }: { text: string, item: string, children: React.ReactNode }) => (
     <Button
@@ -81,33 +67,36 @@ export function SymbolDetailClient({ symbol }: SymbolDetailClientProps) {
       {children}
     </Button>
   )
+
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-2xl mx-auto px-4 py-8">
         {/* Post Header */}
         <PostHeader
           title={symbol.name}
-          subtitle={`Symbol: ${symbol.symbol}`}
+          subtitle={`Symbol: ${isImageSymbol ? '(image)' : symbol.symbol}`}
           start_date="2025-01-01"
           end_date={new Date().toISOString().split('T')[0]}
-          category={symbol.category}
-          tags={symbol.contexts}
-          preview={symbol.description}
+          category="Symbols"
+          tags={[]}
+          preview={`The ${symbol.name} symbol`}
           backText="symbols"
           backHref="/symbols"
           status="Finished"
           confidence="certain"
           importance={6}
-        />        {/* Symbol Display Section */}
+        />
+
+        {/* Symbol Display Section */}
         <div className="mb-8">
           <div className="flex items-stretch gap-3">
             <Card className="flex-shrink-0">
               <CardContent className="flex items-center justify-center p-6 h-full">
                 <div className="text-6xl font-mono">
-                  {symbol.isImage ? (
-                    <img 
-                      src={symbol.symbol} 
-                      alt={symbol.name} 
+                  {isImageSymbol ? (
+                    <img
+                      src={symbol.symbol}
+                      alt={symbol.name}
                       className="w-16 h-16 object-contain"
                     />
                   ) : (
@@ -116,25 +105,15 @@ export function SymbolDetailClient({ symbol }: SymbolDetailClientProps) {
                 </div>
               </CardContent>
             </Card>
-            
+
             <div className="flex-1">
               <Card className="h-full">
                 <CardContent className="space-y-3 pt-6 h-full">
                   <div className="grid grid-cols-2 gap-2">
-                    <CopyButton text={symbol.isImage ? symbol.name : symbol.symbol} item="symbol">
-                      Copy {symbol.isImage ? 'Name' : 'Symbol'}
+                    <CopyButton text={isImageSymbol ? symbol.name : symbol.symbol} item="symbol">
+                      Copy {isImageSymbol ? 'Name' : 'Symbol'}
                     </CopyButton>
-                    {symbol.unicodeValue && (
-                      <CopyButton text={symbol.unicodeValue} item="unicode">
-                        Copy Unicode
-                      </CopyButton>
-                    )}
-                    {symbol.htmlEntity && (
-                      <CopyButton text={symbol.htmlEntity} item="html">
-                        Copy HTML
-                      </CopyButton>
-                    )}
-                    {symbol.isImage && (
+                    {isImageSymbol && (
                       <CopyButton text={symbol.symbol} item="image">
                         Copy Image URL
                       </CopyButton>
@@ -143,6 +122,14 @@ export function SymbolDetailClient({ symbol }: SymbolDetailClientProps) {
                       <Share2 className="h-3 w-3 mr-1" />
                       Share
                     </Button>
+                    {symbol.url && (
+                      <Link href={symbol.url} target="_blank" rel="noopener noreferrer">
+                        <Button variant="outline" size="sm" className="w-full">
+                          <ExternalLink className="h-3 w-3 mr-1" />
+                          Reference
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -157,195 +144,39 @@ export function SymbolDetailClient({ symbol }: SymbolDetailClientProps) {
           </div>
         )}
 
-        {/* Content Tabs */}
-        <Tabs defaultValue="details" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="details">Details</TabsTrigger>
-            <TabsTrigger value="usage">Usage</TabsTrigger>
-            <TabsTrigger value="examples">Examples</TabsTrigger>
-            <TabsTrigger value="related">Related</TabsTrigger>
-          </TabsList>          <TabsContent value="details" className="space-y-6">
-            <div className="grid gap-6">              <Card>
-                <CardHeader>
-                  <CardTitle>Technical Details</CardTitle>
-                  <CardDescription>
-                    {symbol.isImage ? 'Image and metadata information' : 'Unicode and encoding information'}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {symbol.isImage ? (
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium">Image URL</span>
-                        <CopyButton text={symbol.symbol} item="image-url-detail">
-                          Copy
-                        </CopyButton>
-                      </div>
-                      <code className="text-sm bg-muted px-2 py-1 rounded break-all">
-                        {symbol.symbol}
-                      </code>
-                    </div>
-                  ) : (
-                    <>
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium">Unicode Value</span>
-                          <CopyButton text={symbol.unicodeValue!} item="unicode-detail">
-                            Copy
-                          </CopyButton>
-                        </div>
-                        <code className="text-sm bg-muted px-2 py-1 rounded">
-                          {symbol.unicodeValue}
-                        </code>
-                      </div>
-                      <Separator />
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium">HTML Entity</span>
-                          <CopyButton text={symbol.htmlEntity!} item="html-detail">
-                            Copy
-                          </CopyButton>
-                        </div>
-                        <code className="text-sm bg-muted px-2 py-1 rounded">
-                          {symbol.htmlEntity}
-                        </code>
-                      </div>
-                    </>
-                  )}
-                  <Separator />
-                  <div>
-                    <span className="text-sm font-medium">Category</span>
-                    <div className="mt-1">
-                      <Badge variant="secondary">{symbol.category}</Badge>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Contexts</CardTitle>
-                  <CardDescription>
-                    Fields where this symbol is commonly used
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {symbol.contexts.map((context) => (
-                      <Badge key={context} variant="outline">
-                        {context}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="usage" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Common Uses</CardTitle>
-                <CardDescription>
-                  Typical applications and meanings of {symbol.name}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  {symbol.commonUses.map((use, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                      <span>{use}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="examples" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Usage Examples</CardTitle>
-                <CardDescription>
-                  Real-world examples showing {symbol.name} in context
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {symbol.examples.map((example, index) => (
-                    <div key={index} className="p-4 bg-muted/50 rounded-lg border">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm text-muted-foreground">
-                          Example {index + 1}
-                        </span>
-                        <CopyButton text={example} item={`example-${index}`}>
-                          Copy
-                        </CopyButton>
-                      </div>
-                      <code className="text-sm font-mono break-all">
-                        {example}
-                      </code>
-                    </div>
-                  ))}
+        {/* Symbol Info */}
+        <Card className="mb-8">
+          <CardContent className="pt-6">
+            <dl className="space-y-4">
+              <div>
+                <dt className="text-sm font-medium text-muted-foreground">Name</dt>
+                <dd className="text-lg">{symbol.name}</dd>
+              </div>
+              <div>
+                <dt className="text-sm font-medium text-muted-foreground">Slug</dt>
+                <dd className="font-mono text-sm">{symbol.slug}</dd>
+              </div>
+              {symbol.url && (
+                <div>
+                  <dt className="text-sm font-medium text-muted-foreground">Reference URL</dt>
+                  <dd>
+                    <Link href={symbol.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                      {symbol.url}
+                    </Link>
+                  </dd>
                 </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+              )}
+            </dl>
+          </CardContent>
+        </Card>
 
-          <TabsContent value="related" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Related Symbols</CardTitle>
-                <CardDescription>
-                  Other symbols commonly used with {symbol.name}
-                </CardDescription>
-              </CardHeader>              <CardContent>
-                {relatedSymbols.length > 0 ? (
-                  <div className="grid gap-4">
-                    {relatedSymbols.map((relatedSymbol) => (
-                      <Link key={relatedSymbol.id} href={`/symbols/${relatedSymbol.id}`}>
-                        <Card className="hover:shadow-md transition-shadow cursor-pointer">
-                          <CardContent className="p-4">
-                            <div className="flex items-center gap-3">
-                              <div className="text-2xl font-mono bg-background rounded p-2 border flex-shrink-0">
-                                {relatedSymbol.isImage ? (
-                                  <img 
-                                    src={relatedSymbol.symbol} 
-                                    alt={relatedSymbol.name} 
-                                    className="w-8 h-8 object-contain"
-                                  />
-                                ) : (
-                                  relatedSymbol.symbol
-                                )}
-                              </div>
-                              <div className="flex-1 min-w-0 overflow-hidden">
-                                <h4 className="font-medium truncate">{relatedSymbol.name}</h4>
-                                <p className="text-sm text-muted-foreground truncate">
-                                  {relatedSymbol.description}
-                                </p>
-                              </div>
-                              <ExternalLink className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </Link>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-muted-foreground">
-                    No related symbols found for {symbol.name}.
-                  </p>
-                )}
-              </CardContent>
-            </Card>
-          </TabsContent>        </Tabs>        {/* Citation Component */}
+        {/* Citation Component */}
         <div className="mt-12 mb-8">
           <Citation
             title={symbol.name}
-            slug={symbol.id}
+            slug={symbol.slug}
             date="2025-05-28"
-            url={`https://krisyotam.com/symbols/${symbol.id}`}
+            url={`https://krisyotam.com/symbols/${symbol.slug}`}
           />
         </div>
 

@@ -1,3 +1,15 @@
+/**
+ * =============================================================================
+ * News Client Page
+ * =============================================================================
+ *
+ * Client-side component for displaying and filtering news articles.
+ * Receives data from content.db via server component props.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,7 +19,23 @@ import { PageDescription } from "@/components/core";
 import { Navigation, ContentTable } from "@/components/content";
 import { SelectOption } from "@/components/ui/custom-select";
 import { useRouter } from "next/navigation";
-import categoriesData from "@/data/news/categories.json";
+import type { CategoryData } from "@/lib/types/content";
+
+// =============================================================================
+// Types
+// =============================================================================
+
+import type { NewsMeta, NewsStatus } from "@/types/content";
+
+interface NewsClientPageProps {
+  news: NewsMeta[];
+  initialCategory?: string;
+  categories: CategoryData[];
+}
+
+// =============================================================================
+// Helpers
+// =============================================================================
 
 /* default page-level metadata for the header */
 const defaultNewsPageData = {
@@ -20,60 +48,63 @@ const defaultNewsPageData = {
   importance: 8,
 } satisfies PageHeaderProps;
 
-import type { NewsMeta, NewsStatus } from "@/types/content";
+// Function to map news status to PageHeader compatible status
+const mapNewsStatusToPageHeaderStatus = (newsStatus: NewsStatus): "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" => {
+  const statusMap: Record<NewsStatus, "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"> = {
+    Draft: "Draft",
+    Published: "Finished",
+    Archived: "Abandoned",
+    Breaking: "In Progress",
+    Developing: "In Progress"
+  };
+  return statusMap[newsStatus] || "Draft";
+};
 
-interface NewsClientPageProps {
-  news: NewsMeta[];
-  initialCategory?: string;
+// Helper function to create category slug
+function slugifyCategory(category: string) {
+  return category.toLowerCase().replace(/\s+/g, "-");
 }
 
-export default function NewsClientPage({ news, initialCategory = "all" }: NewsClientPageProps) {
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default function NewsClientPage({ news, initialCategory = "all", categories }: NewsClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const router = useRouter();
 
-  const categories = ["all", ...Array.from(new Set(news.map(n => n.category)))];
+  const categoryNames = ["all", ...Array.from(new Set(news.map(n => n.category)))];
 
   // Convert categories to SelectOption format
-  const categoryOptions: SelectOption[] = categories.map(category => ({
+  const categoryOptions: SelectOption[] = categoryNames.map(category => ({
     value: category,
     label: category === "all" ? "All Categories" : category
   }));
-  // Function to map news status to PageHeader compatible status
-  const mapNewsStatusToPageHeaderStatus = (newsStatus: NewsStatus): "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" => {
-    const statusMap: Record<NewsStatus, "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"> = {
-      Draft: "Draft",
-      Published: "Finished",
-      Archived: "Abandoned", 
-      Breaking: "In Progress",
-      Developing: "In Progress"
-    };
-    return statusMap[newsStatus] || "Draft";
-  };
 
   // Determine which header data to use
   const getHeaderData = () => {
     if (initialCategory === "all" || !initialCategory) {
       return defaultNewsPageData;
     }
-    
-    // Find category data from categories.json
+
+    // Find category data from categories prop
     const categorySlug = slugifyCategory(initialCategory);
-    const categoryData = categoriesData.categories.find(cat => cat.slug === categorySlug);
-    
+    const categoryData = categories.find(cat => cat.slug === categorySlug);
+
     if (categoryData) {
       return {
         title: categoryData.title,
         subtitle: "",
         date: categoryData.date,
-        preview: categoryData.preview,
+        preview: categoryData.preview || "",
         status: mapNewsStatusToPageHeaderStatus(categoryData.status as NewsStatus),
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-        importance: categoryData.importance
+        importance: categoryData.importance || 5
       };
     }
-    
+
     // Fallback to default if category not found
     return defaultNewsPageData;
   };
@@ -84,11 +115,6 @@ export default function NewsClientPage({ news, initialCategory = "all" }: NewsCl
   useEffect(() => {
     setActiveCategory(initialCategory);
   }, [initialCategory]);
-
-  // Helper function to create category slug
-  function slugifyCategory(category: string) {
-    return category.toLowerCase().replace(/\s+/g, "-");
-  }
 
   // Handle category change with URL routing
   function handleCategoryChange(selectedValue: string) {

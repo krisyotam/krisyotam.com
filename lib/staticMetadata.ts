@@ -733,30 +733,6 @@ export const staticMetadata: Record<string, Metadata> = {
       creator: '@krisyotam'
     }
   },
-  newsletter: {
-    title: 'Newsletter',
-    description: 'Subscribe to my newsletter for regular updates.',
-    openGraph: {
-      title: 'Newsletter',
-      description: 'Subscribe to my newsletter for regular updates.',
-      images: [
-        {
-          url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
-          width: 1200,
-          height: 630,
-          alt: 'Newsletter'
-        }
-      ],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Newsletter',
-      description: 'Subscribe to my newsletter for regular updates.',
-      images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
-      creator: '@krisyotam'
-    }
-  },
   notes: {
     title: 'Notes',
     description: 'Misc thoughts, proto-essays, reviews, musings, etc.',

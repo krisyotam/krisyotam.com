@@ -4,7 +4,7 @@ import path from "path";
 
 export async function GET() {
   try {
-    const scriptPath = path.join(process.cwd(), "public", "scripts", "404-suggester.js");
+    const scriptPath = path.join(process.cwd(), "public", "scripts", "404.js");
     const scriptContent = await fs.readFile(scriptPath, "utf-8");
 
     return new NextResponse(scriptContent, {
@@ -13,7 +13,7 @@ export async function GET() {
       },
     });
   } catch (error) {
-    console.error("Error serving 404-suggester.js:", error);
+    console.error("Error serving 404.js:", error);
     return new NextResponse("Failed to load script", { status: 500 });
   }
 }

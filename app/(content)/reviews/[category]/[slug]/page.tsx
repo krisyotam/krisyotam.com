@@ -1,52 +1,70 @@
+/**
+ * =============================================================================
+ * Review Detail Page
+ * =============================================================================
+ *
+ * Individual review page with full content.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 export const dynamic = 'force-static';
 export const revalidate = false;
+
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import reviewsData from "@/data/reviews/reviews.json";
+import { getActiveContentByType, getContentByType } from "@/lib/data";
 import ReviewPageClient from "./ReviewPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 import type { ReviewMeta, ReviewStatus, ReviewConfidence } from "@/types/content";
 
-interface ReviewData {
-  title: string;
-  start_date: string;
-  end_date?: string;
-  slug: string;
-  tags: string[];
-  category: string;
-  status: string;
-  confidence: string;
-  importance: number;
-  preview: string;
-  cover_image?: string;
-  subtitle?: string;
-  state?: "active" | "hidden";
-}
+// =============================================================================
+// Types
+// =============================================================================
 
 interface ReviewPageProps {
-  params: { category: string; slug: string };
+  params: Promise<{ category: string; slug: string }>;
 }
 
-// Helper function to slugify category
+// =============================================================================
+// Helpers
+// =============================================================================
+
 function slugifyCategory(category: string) {
   return category.toLowerCase().replace(/\s+/g, "-");
 }
 
+// =============================================================================
+// Static Generation
+// =============================================================================
+
 export async function generateStaticParams() {
-  // Generate all category/slug combinations, but only for active reviews
-  return reviewsData
-    .filter(review => review.state !== "hidden") // Only include active reviews
-    .map(review => ({
-      category: slugifyCategory(review.category),
-      slug: review.slug
-    }));
+  const reviewsData = getActiveContentByType('reviews');
+
+  // Generate all category/slug combinations for active reviews
+  return reviewsData.map(review => ({
+    category: slugifyCategory(review.category),
+    slug: review.slug
+  }));
 }
 
-export async function generateMetadata({ params }: ReviewPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const reviewData = reviewsData.find(r => 
-    slugifyCategory(r.category) === params.category && r.slug === params.slug
+// =============================================================================
+// Metadata
+// =============================================================================
+
+export async function generateMetadata(
+  { params }: ReviewPageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const resolvedParams = await params;
+  const reviewsData = getContentByType('reviews');
+
+  const reviewData = reviewsData.find(r =>
+    slugifyCategory(r.category) === resolvedParams.category && r.slug === resolvedParams.slug
   );
 
   if (!reviewData) {
@@ -57,16 +75,18 @@ export async function generateMetadata({ params }: ReviewPageProps, parent: Reso
 
   // Get the default OpenGraph image from parent
   const previousImages = (await parent).openGraph?.images || [];
+
   // Use cover image if available, otherwise use Kris Yotam's logo
   const images = [
-    {      url: reviewData.cover_image || 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
+    {
+      url: reviewData.cover_image || 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
       width: 1200,
       height: 2100,
       alt: reviewData.title
     }
   ];
 
-  const url = `https://krisyotam.com/reviews/${params.category}/${params.slug}`;
+  const url = `https://krisyotam.com/reviews/${resolvedParams.category}/${resolvedParams.slug}`;
 
   return {
     title: `${reviewData.title} | ${reviewData.category} Reviews | Kris Yotam`,
@@ -89,41 +109,67 @@ export async function generateMetadata({ params }: ReviewPageProps, parent: Reso
   };
 }
 
+// =============================================================================
+// Page Component
+// =============================================================================
+
 export default async function ReviewPage({ params }: ReviewPageProps) {
-  const reviewData = reviewsData.find(r => 
-    slugifyCategory(r.category) === params.category && r.slug === params.slug
+  const resolvedParams = await params;
+  const reviewsData = getContentByType('reviews');
+
+  const reviewData = reviewsData.find(r =>
+    slugifyCategory(r.category) === resolvedParams.category && r.slug === resolvedParams.slug
   );
 
   if (!reviewData) {
     notFound();
   }
-  
+
   // Check if the review is meant to be hidden
   if (reviewData.state === "hidden") {
     notFound();
   }
-  
+
   const review: ReviewMeta = {
-    ...reviewData,
+    title: reviewData.title,
+    subtitle: reviewData.subtitle,
+    preview: reviewData.preview,
+    start_date: reviewData.start_date,
+    end_date: reviewData.end_date,
+    slug: reviewData.slug,
+    tags: reviewData.tags,
+    category: reviewData.category,
     status: reviewData.status as ReviewStatus,
     confidence: reviewData.confidence as ReviewConfidence,
-    state: (reviewData.state as "active" | "hidden" | undefined) || "active" // Default to "active" if state is not defined
+    importance: reviewData.importance,
+    cover_image: reviewData.cover_image,
+    state: (reviewData.state as "active" | "hidden" | undefined) || "active"
   };
-  
-  const reviews: ReviewMeta[] = (reviewsData as ReviewData[]).map(review => ({
-    ...review,
-    status: review.status as ReviewStatus,
-    confidence: review.confidence as ReviewConfidence,
-    state: (review.state as "active" | "hidden" | undefined) || "active" // Default to "active" if state is not defined
-  }))
-  // Filter to only show reviews with state "active" or undefined state
-  .filter(review => review.state === "active" || review.state === undefined);
+
+  // Get all active reviews for navigation
+  const reviews: ReviewMeta[] = reviewsData
+    .filter(r => r.state !== "hidden")
+    .map(r => ({
+      title: r.title,
+      subtitle: r.subtitle,
+      preview: r.preview,
+      start_date: r.start_date,
+      end_date: r.end_date,
+      slug: r.slug,
+      tags: r.tags,
+      category: r.category,
+      status: r.status as ReviewStatus,
+      confidence: r.confidence as ReviewConfidence,
+      importance: r.importance,
+      cover_image: r.cover_image,
+      state: (r.state as "active" | "hidden" | undefined) || "active"
+    }));
 
   // Extract headings from the review MDX content
-  const headings = await extractHeadingsFromMDX('reviews', params.slug, params.category);
+  const headings = await extractHeadingsFromMDX('reviews', resolvedParams.slug, resolvedParams.category);
 
   // Dynamically import the MDX file based on category and slug
-  const Review = (await import(`@/app/(content)/reviews/content/${params.category}/${params.slug}.mdx`)).default;
+  const Review = (await import(`@/app/(content)/reviews/content/${resolvedParams.category}/${resolvedParams.slug}.mdx`)).default;
 
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
@@ -132,7 +178,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
         <div className="mb-8">
           <ReviewPageClient review={review} allReviews={reviews} headerOnly={true} />
         </div>
-        
+
         {/* Main content */}
         <main id="content" className="container max-w-[672px] mx-auto px-4">
           {/* Table of Contents - at the top of content */}

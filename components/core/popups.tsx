@@ -34,7 +34,6 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react"
 import { X, Maximize2, ChevronLeft, ChevronRight, Copy, ExternalLink, Check, Minimize2, Pin, PinOff, Shrink, Square, PanelBottomClose } from "lucide-react"
 import { linkEvents } from "@/components/typography/a"
 import { usePathname } from "next/navigation"
-import bannedDomains from "@/data/banned-domains.json"
 import { cn } from "@/lib/utils"
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -45,11 +44,26 @@ const CONFIG = {
   hoverDelay: 500,
   submenuTimeout: 150,
   excludedPages: ["/", "/categories"],
-  additionalBannedDomains: [
-    { name: "TikTok", domain: "tiktok.com" },
-    { name: "Medium", domain: "medium.com" },
-  ],
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BANNED DOMAINS
+   Domains that should not show link previews (iframe restrictions, etc.)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const BANNED_DOMAINS = [
+  { name: "Literal", domain: "literal.club" },
+  { name: "Amazon", domain: "amazon.com" },
+  { name: "Oxford English Dictionary", domain: "oed.com" },
+  { name: "Github", domain: "github.com" },
+  { name: "Youtube", domain: "youtube.com" },
+  { name: "Localhost", domain: "localhost" },
+  { name: "Hetzner", domain: "hetzner.com" },
+  { name: "Substack", domain: "substack.com" },
+  { name: "Stripe", domain: "stripe.com" },
+  { name: "TikTok", domain: "tiktok.com" },
+  { name: "Medium", domain: "medium.com" },
+] as const
 
 const DEFAULT_SIZE = { width: 600, height: 500 }
 
@@ -148,11 +162,10 @@ export function Popups() {
   const timers = useRef<{ hover: NodeJS.Timeout | null; zoom: NodeJS.Timeout | null; minimize: NodeJS.Timeout | null; hovered: HTMLAnchorElement | null }>({ hover: null, zoom: null, minimize: null, hovered: null })
 
   // ─── Helpers ───────────────────────────────────────────────────────────────
-  const allBanned = useMemo(() => [...bannedDomains, ...CONFIG.additionalBannedDomains], [])
   const isBanned = useCallback((url: string) => {
     const domain = getDomain(url)
-    return allBanned.some(b => domain === b.domain || domain.endsWith(`.${b.domain}`))
-  }, [allBanned])
+    return BANNED_DOMAINS.some(b => domain === b.domain || domain.endsWith(`.${b.domain}`))
+  }, [])
 
   const isInternal = useCallback((url: string) => {
     if (url.startsWith("/") || url.startsWith("#") || url.startsWith("./") || url.startsWith("../")) return true

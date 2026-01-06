@@ -1,16 +1,12 @@
 import { NextResponse } from 'next/server'
-import path from 'path'
-import { promises as fs } from 'fs'
+import { getReadingEssays } from '@/lib/media-db'
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), 'data', 'reading', 'essays.json')
-    const fileContents = await fs.readFile(filePath, 'utf8')
-    const data = JSON.parse(fileContents)
-    
-    return NextResponse.json(data)
+    const essays = getReadingEssays()
+    return NextResponse.json({ essays })
   } catch (error) {
-    console.error('Error reading essays.json:', error)
+    console.error('Error reading essays:', error)
     return NextResponse.json({ error: 'Failed to read essays data' }, { status: 500 })
   }
 }

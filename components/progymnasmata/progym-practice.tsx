@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { motion } from "framer-motion"
 import {
@@ -21,20 +22,40 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 
-import progymData from "@/data/progymnasmata/progymnasmata.json"
-
 // Define types for the progymnasmata statistics
 interface ProgymStats {
   [key: string]: number
 }
 
+interface ProgymItem {
+  category: string
+}
+
 export default function ProgymPractice() {
-  // Count exercises per category from static JSON
-  const stats: ProgymStats = {}
-  for (const item of progymData) {
-    const cat = item.category.toLowerCase()
-    stats[cat] = (stats[cat] || 0) + 1
-  }
+  const [stats, setStats] = useState<ProgymStats>({})
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        const res = await fetch('/api/progymnasmata')
+        const data: ProgymItem[] = await res.json()
+
+        // Count exercises per category
+        const categoryStats: ProgymStats = {}
+        for (const item of data) {
+          const cat = item.category.toLowerCase()
+          categoryStats[cat] = (categoryStats[cat] || 0) + 1
+        }
+        setStats(categoryStats)
+      } catch (error) {
+        console.error('Failed to fetch progymnasmata stats:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchStats()
+  }, [])
 
   // Animation variants
   const container = {
@@ -67,7 +88,7 @@ export default function ProgymPractice() {
         <CardContent className="p-4 flex flex-col items-center justify-center h-full">
           <div className="mb-2 transition-colors duration-300 ease-in-out group-hover:text-primary">{icon}</div>
           <div className="text-3xl font-bold text-foreground mb-1 transition-colors duration-300 ease-in-out group-hover:text-primary/90">
-            {count}
+            {loading ? "-" : count}
           </div>
           <div className="text-sm text-muted-foreground transition-colors duration-300 ease-in-out group-hover:text-foreground">
             {title}

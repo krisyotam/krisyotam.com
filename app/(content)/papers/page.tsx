@@ -1,19 +1,42 @@
+/**
+ * =============================================================================
+ * Papers Page
+ * =============================================================================
+ *
+ * Server component for the papers listing page.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import PapersClientPage from "./PapersClientPage";
-import papersData from "@/data/papers/papers.json";
+import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
 import type { Metadata } from "next";
-import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/content";
+import type { PaperStatus, PaperConfidence } from "@/types/content";
 import { staticMetadata } from "@/lib/staticMetadata";
+
+// =============================================================================
+// Metadata
+// =============================================================================
 
 export const metadata: Metadata = staticMetadata.papers;
 
-export default function PapersPage() {
-  // Filter out hidden papers, then map and sort by date (newest first)
-  const papers: PaperMeta[] = papersData.papers
-    .filter(paperItem => paperItem.state !== "hidden")
-    .map(paperItem => ({
-      ...paperItem,
-      status: paperItem.status as PaperStatus,
-      confidence: paperItem.confidence as PaperConfidence
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function PapersPage() {
+  // Fetch data from database
+  const rawPapers = getActiveContentByType('papers');
+  const categories = getCategoriesByContentType('papers');
+
+  // Transform and sort papers
+  const papers = rawPapers
+    .map(paper => ({
+      ...paper,
+      status: paper.status as PaperStatus,
+      confidence: paper.confidence as PaperConfidence
     }))
     .sort((a, b) => {
       const dateA = a.end_date || a.start_date;
@@ -23,7 +46,11 @@ export default function PapersPage() {
 
   return (
     <div className="papers-container">
-      <PapersClientPage papers={papers} initialCategory="all" />
+      <PapersClientPage
+        papers={papers}
+        categories={categories}
+        initialCategory="all"
+      />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { ReadingNavigation } from "@/components/reading-navigation"
-import { PostHeader } from "@/components/post-header"
+import { PostHeader } from "@/components/core"
 import { ReadingStatsClient } from "./reading-stats-client-page"
 
 export default function ReadingStatsPage() {

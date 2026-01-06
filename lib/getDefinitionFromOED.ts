@@ -1,45 +1,39 @@
-import oed from '@/data/reference/oed.json';
-import merriam from '@/data/reference/merriam-webster.json';
+/**
+ * ============================================================================
+ * OED Definition Lookup Library
+ * Author: Kris Yotam
+ * Date: 2026-01-04
+ * Filename: getDefinitionFromOED.ts
+ * Description: Provides word definition lookup from OED and Merriam-Webster
+ *              dictionaries via API. Designed for client-side use.
+ * ============================================================================
+ */
 
-interface OEDEntry {
-  _id?: { $oid: string };
-  word: string;
-  definition: string;
-  __v?: number;
-}
+// ============================================================================
+// UTILITY FUNCTIONS
+// ============================================================================
 
-// Normalize words
+/**
+ * Normalize words for consistent lookup
+ */
 function normalizeWord(word: string): string {
   return word
-    .normalize('NFKD')
-    .replace(/[^\p{L}\p{N}]/gu, '')
+    .normalize("NFKD")
+    .replace(/[^\p{L}\p{N}]/gu, "")
     .trim()
     .toUpperCase();
 }
 
-// Build OED map
-const definitionsMap: Map<string, string> = new Map(
-  (oed as OEDEntry[]).map(e => [normalizeWord(e.word), e.definition])
-);
-
-// Build fallback Merriam map
-let fallbackDefinitionsMap: Map<string, string>;
-
-if (Array.isArray(merriam)) {
-  fallbackDefinitionsMap = new Map(
-    (merriam as OEDEntry[]).map(e => [normalizeWord(e.word), e.definition])
-  );
-} else {
-  fallbackDefinitionsMap = new Map(
-    Object.entries(merriam).map(([word, definition]) => [
-      normalizeWord(word),
-      typeof definition === 'string' ? definition : (definition as any).definition
-    ])
-  );
-}
+// ============================================================================
+// MAIN FUNCTION
+// ============================================================================
 
 /**
  * Returns definition from OED first, then fallback Merriam-Webster if not found.
+ * This function uses the API for client-side compatibility.
+ *
+ * @param word - The word to look up
+ * @returns The definition string or null if not found
  */
 export async function getDefinitionFromOED(
   word: string
@@ -47,18 +41,33 @@ export async function getDefinitionFromOED(
   const cleaned = normalizeWord(word);
   console.log(`[DEFINE] Looking up cleaned word: '${cleaned}'`);
 
-  const exactMatch = definitionsMap.get(cleaned);
-  if (exactMatch) {
-    console.log(`[DEFINE] ✅ Found in OED.`);
-    return exactMatch;
-  }
+  try {
+    // Call the dictionary API
+    const response = await fetch(
+      `/api/reference/dictionary?word=${encodeURIComponent(cleaned)}`
+    );
 
-  const fallbackMatch = fallbackDefinitionsMap.get(cleaned);
-  if (fallbackMatch) {
-    console.log(`[DEFINE] ✅ Found in Merriam-Webster.`);
-    return fallbackMatch;
-  }
+    if (!response.ok) {
+      // Try lowercase for Merriam-Webster fallback
+      const fallbackResponse = await fetch(
+        `/api/reference/dictionary?word=${encodeURIComponent(cleaned.toLowerCase())}`
+      );
 
-  console.error(`[DEFINE] ❌ No match found.`);
-  return null;
+      if (!fallbackResponse.ok) {
+        console.error(`[DEFINE] No match found.`);
+        return null;
+      }
+
+      const fallbackData = await fallbackResponse.json();
+      console.log(`[DEFINE] Found in fallback lookup.`);
+      return fallbackData.definition || null;
+    }
+
+    const data = await response.json();
+    console.log(`[DEFINE] Found definition.`);
+    return data.definition || null;
+  } catch (error) {
+    console.error(`[DEFINE] Error fetching definition:`, error);
+    return null;
+  }
 }

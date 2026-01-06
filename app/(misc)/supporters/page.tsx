@@ -2,11 +2,17 @@
 
 import { useEffect, useState, useRef } from "react"
 import { PageHeader } from "@/components/core"
-import supportersData from "@/data/supporters.json"
 import { cn } from "@/lib/utils"
 
+interface Supporter {
+  id: number;
+  name: string;
+  contribution: string;
+}
+
 export default function SupportersPage() {
-  const [supporters, setSupporters] = useState(supportersData.supporters)
+  const [supporters, setSupporters] = useState<Supporter[]>([])
+  const [loading, setLoading] = useState(true)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [scrollMode, setScrollMode] = useState<'auto' | 'manual'>('auto')
   const containerRef = useRef<HTMLDivElement>(null)
@@ -14,11 +20,27 @@ export default function SupportersPage() {
   const animationRef = useRef<number | null>(null)
   const lastTimestampRef = useRef<number | null>(null)
   const currentDate = new Date().toISOString()
-  
+
+  // Fetch supporters data
+  useEffect(() => {
+    async function fetchSupporters() {
+      try {
+        const response = await fetch('/api/supporters')
+        const data = await response.json()
+        // Duplicate for seamless loop
+        setSupporters([...data.supporters, ...data.supporters])
+      } catch (error) {
+        console.error('Error fetching supporters:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchSupporters()
+  }, [])
+
   // Set up auto-scrolling
   useEffect(() => {
-    // Duplicate the supporters to create a seamless loop
-    setSupporters([...supportersData.supporters, ...supportersData.supporters])
+    if (loading || supporters.length === 0) return
     
     const scrollSpeed = 30 // pixels per second
     
@@ -64,7 +86,7 @@ export default function SupportersPage() {
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [scrollMode]) // Re-run when scrollMode changes
+  }, [scrollMode, loading, supporters.length]) // Re-run when scrollMode changes or data loads
   
   // Handle manual scrolling
   const handleManualScroll = (e: React.UIEvent<HTMLDivElement>) => {
@@ -83,19 +105,40 @@ export default function SupportersPage() {
     }
   }
   
+  if (loading) {
+    return (
+      <div className="relative min-h-screen bg-background text-foreground">
+        <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
+          <PageHeader
+            title="Supporters"
+            subtitle="With gratitude to those who've contributed to this work"
+            start_date={currentDate}
+            preview="This project wouldn't be possible without the contributions, both large and small, from the following individuals."
+            status="Finished"
+            confidence="certain"
+            importance={9}
+          />
+          <div className="mt-12 h-[600px] border border-border rounded-md bg-card shadow-sm flex items-center justify-center">
+            <p className="text-muted-foreground">Loading supporters...</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
-        <PageHeader 
-          title="Supporters" 
-          subtitle="With gratitude to those who've contributed to this work" 
+        <PageHeader
+          title="Supporters"
+          subtitle="With gratitude to those who've contributed to this work"
           start_date={currentDate}
           preview="This project wouldn't be possible without the contributions, both large and small, from the following individuals."
           status="Finished"
           confidence="certain"
           importance={9}
         />
-        
+
         {/* Scrolling controls */}
         <div className="flex justify-center space-x-2 mb-4 mt-12">
           <button

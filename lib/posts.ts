@@ -1,47 +1,21 @@
-// utils/posts.ts
+/**
+ * =============================================================================
+ * posts.ts
+ * =============================================================================
+ *
+ * Post data fetching and manipulation utilities.
+ *
+ * Provides functions to get, filter, and sort posts from content.db.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import { getEssaysData, getBlogData, getCategoriesData } from "@/lib/data"
 
-export interface Post {
-  title: string
-  subtitle?: string
-  preview: string
-  start_date: string
-  end_date?: string
-  tags: string[]
-  category: string
-  slug: string
-  state?: string // State can be "active" or "hidden" to control visibility
-  status?: string
-  confidence?: string
-  importance?: number
-  headings?: string[]
-  marginNotes?: string[]
-  cover_image?: string
-  cover?: string
-  path?: string // Custom URL path for the post
-  publication_year?: number // Added publication_year
-  author?: string // Added author
-}
-
-export interface PostsData {
-  posts: Post[]
-}
-
-export interface CategoryData {
-  slug: string
-  title: string
-  subtitle?: string
-  preview?: string
-  date: string
-  "show-status": "active" | "hidden"
-  status: string
-  confidence?: "certain" | "unlikely" | "likely" | "impossible" | "remote" | "highly unlikely" | "possible" | "highly likely"
-  importance?: number
-}
-
-export interface CategoriesData {
-  categories: CategoryData[]
-}
+// Re-export types for backward compatibility
+export type { Post, PostsData, CategoryData, CategoriesData } from "@/lib/types/content"
+import type { Post, CategoryData } from "@/lib/types/content"
 
 // Helper to guard server‑only code
 function assertServer() {
@@ -76,7 +50,7 @@ async function readDataFile<T>(filename: string): Promise<T | null> {
     import("path"),
   ])
 
-  const fullPath = path.join(process.cwd(), "data", filename)
+  const fullPath = path.join(process.cwd(), "public", "data", filename)
 
   try {
     const contents = await fs.readFile(fullPath, "utf8")

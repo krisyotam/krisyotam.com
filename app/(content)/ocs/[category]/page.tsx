@@ -1,29 +1,61 @@
+/**
+ * =============================================================================
+ * OCS Category Page
+ * =============================================================================
+ *
+ * Category-specific listing page for Original Characters (OCS).
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import OCSClientPage from "../OCSClientPage";
-import ocsData from "@/data/ocs/ocs.json";
+import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import type { OCSMeta, OCSStatus, OCSConfidence } from "@/types/content";
 
+// =============================================================================
+// Types
+// =============================================================================
+
 interface PageProps {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }
 
+// =============================================================================
+// Helpers
+// =============================================================================
+
+function slugifyCategory(category: string) {
+  return category.toLowerCase().replace(/\s+/g, "-");
+}
+
+// =============================================================================
+// Static Generation
+// =============================================================================
+
 export async function generateStaticParams() {
-  // Get all unique categories and generate their slugs
-  const categories = new Set(ocsData.map(character => 
-    character.category.toLowerCase().replace(/\s+/g, "-")
+  // Get all unique categories from database
+  const ocsData = getActiveContentByType('ocs');
+  const categories = new Set(ocsData.map(character =>
+    slugifyCategory(character.category)
   ));
-  
+
   return Array.from(categories).map(category => ({
     category: category
   }));
 }
 
+// =============================================================================
+// Metadata
+// =============================================================================
+
 export async function generateMetadata({ params }: PageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const categorySlug = params.category;
-  const categoryData = (await import('@/data/ocs/categories.json')).default.types.find(
-    cat => cat.slug === categorySlug
-  );
+  const { category: categorySlug } = await params;
+  const categories = getCategoriesByContentType('ocs');
+  const categoryData = categories.find(cat => cat.slug === categorySlug);
 
   if (!categoryData) {
     return {
@@ -32,7 +64,7 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
   }
 
   const url = `https://krisyotam.com/ocs/${categorySlug}`;
-    // Use Kris Yotam's logo for category pages
+  // Use Kris Yotam's logo for category pages
   const images = [
     {
       url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
@@ -63,27 +95,44 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
   };
 }
 
-export default function OCSCategoryPage({ params }: PageProps) {
-  const categorySlug = params.category;
-  
+// =============================================================================
+// Page Component
+// =============================================================================
+
+export default async function OCSCategoryPage({ params }: PageProps) {
+  const { category: categorySlug } = await params;
+
+  // Fetch data from database
+  const ocsData = getActiveContentByType('ocs');
+  const categories = getCategoriesByContentType('ocs');
+
   // Find the original category name
-  const originalCategory = ocsData.find(character => 
-    character.category.toLowerCase().replace(/\s+/g, "-") === categorySlug
+  const originalCategory = ocsData.find(character =>
+    slugifyCategory(character.category) === categorySlug
   )?.category;
 
   if (!originalCategory) {
     notFound();
   }
-  // Map and sort characters by date (newest first)
+
+  // Map to OCSMeta type and sort by date (newest first)
   const ocs: OCSMeta[] = ocsData
     .map(character => ({
-      ...character,
+      title: character.title,
+      subtitle: character.subtitle,
+      preview: character.preview,
+      start_date: character.start_date,
+      end_date: character.end_date,
+      slug: character.slug,
+      tags: character.tags,
+      category: character.category,
+      book: character.category, // OCS uses category as book
       status: character.status as OCSStatus,
       confidence: character.confidence as OCSConfidence,
-      state: (character.state as "active" | "hidden" | undefined) || "active" // Default to "active" if state is not defined
+      importance: character.importance,
+      cover_image: character.cover_image,
+      state: (character.state as "active" | "hidden" | undefined) || "active"
     }))
-    // Filter to only show characters with state "active" or undefined state
-    .filter(character => character.state === "active" || character.state === undefined)
     .sort((a, b) => {
       const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
       const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;
@@ -92,7 +141,7 @@ export default function OCSCategoryPage({ params }: PageProps) {
 
   return (
     <div className="ocs-container">
-      <OCSClientPage ocs={ocs} initialCategory={originalCategory} />
+      <OCSClientPage ocs={ocs} initialCategory={originalCategory} categories={categories} />
     </div>
   );
 }

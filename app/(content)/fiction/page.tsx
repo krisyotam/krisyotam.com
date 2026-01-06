@@ -1,7 +1,23 @@
+/**
+ * =============================================================================
+ * Fiction Page
+ * =============================================================================
+ *
+ * Main fiction listing page displaying all fiction stories.
+ * Fetches data from content.db via lib/data.ts functions.
+ *
+ * Author: Kris Yotam
+ * =============================================================================
+ */
+
 import FictionClientPage from "./FictionClientPage";
-import fictionDataRaw from "@/data/fiction/fiction.json";
+import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
 import type { Metadata } from "next";
 import { staticMetadata } from "@/lib/staticMetadata";
+
+// =============================================================================
+// Types
+// =============================================================================
 
 interface Story {
   title: string;
@@ -11,27 +27,41 @@ interface Story {
   tags: string[];
   category: string;
   cover_image?: string;
-  status: string;
-  confidence: string;
-  importance: number;
+  status?: string;
+  confidence?: string;
+  importance?: number;
   preview: string;
-  state: "active" | "hidden";
+  state: string;
 }
 
-// Type assertion to ensure the imported data matches our Story interface
-const fictionData = fictionDataRaw as Story[];
+// =============================================================================
+// Metadata
+// =============================================================================
 
 export const metadata: Metadata = staticMetadata.fiction;
 
+// =============================================================================
+// Page Component
+// =============================================================================
+
 export default function FictionPage() {
-  // Filter and sort fiction by date (newest first) - only show active stories
+  // Fetch active fiction content from database
+  const fictionData = getActiveContentByType('fiction');
+
+  // Fetch categories for the client component
+  const categories = getCategoriesByContentType('fiction');
+
+  // Sort fiction by date (newest first)
   const stories = fictionData
-    .filter(story => story.state === "active" || story.state === undefined)
-    .sort((a, b) => new Date(b.end_date || b.start_date).getTime() - new Date(a.end_date || a.start_date).getTime());
+    .sort((a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return new Date(bDate).getTime() - new Date(aDate).getTime();
+    }) as Story[];
 
   return (
     <div className="fiction-container">
-      <FictionClientPage stories={stories} initialCategory="all" />
+      <FictionClientPage stories={stories} initialCategory="all" categories={categories} />
     </div>
   );
 }
