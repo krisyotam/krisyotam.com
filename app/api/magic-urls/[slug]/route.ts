@@ -124,7 +124,7 @@ function lookupSlug(slug: string): { type: string; category: string; path: strin
 export async function GET(
   request: Request,
   { params }: RouteParams
-): Promise<NextResponse | never> {
+): Promise<NextResponse> {
   const { slug } = await params
 
   if (!slug) {
@@ -140,6 +140,7 @@ export async function GET(
     return NextResponse.redirect(url, 307)
   }
 
-  // Not found - trigger Next.js 404 page
-  notFound()
+  // Not found - return 404 status with empty body
+  // This triggers Next.js 404 page when used via middleware rewrite
+  return new NextResponse(null, { status: 404 })
 }
