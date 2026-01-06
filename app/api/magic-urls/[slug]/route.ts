@@ -139,9 +139,9 @@ export async function GET(
     return NextResponse.redirect(url, 307)
   }
 
-  // Not found - redirect to 404 page so not-found.tsx and 404.js take over
-  const url = new URL(request.url)
-  url.pathname = `/${slug}`
-  // Use 307 to preserve the original path for 404.js suggestions
-  return NextResponse.redirect(url, 307)
+  // Not found - return 404 response
+  return NextResponse.json(
+    { error: 'Not found', slug },
+    { status: 404 }
+  )
 }
