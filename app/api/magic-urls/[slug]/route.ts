@@ -24,6 +24,7 @@
  */
 
 import { NextResponse } from 'next/server'
+import { notFound } from 'next/navigation'
 import Database from 'better-sqlite3'
 import path from 'path'
 import fs from 'fs'
@@ -123,7 +124,7 @@ function lookupSlug(slug: string): { type: string; category: string; path: strin
 export async function GET(
   request: Request,
   { params }: RouteParams
-): Promise<NextResponse> {
+): Promise<NextResponse | never> {
   const { slug } = await params
 
   if (!slug) {
@@ -139,9 +140,6 @@ export async function GET(
     return NextResponse.redirect(url, 307)
   }
 
-  // Not found - return 404 response
-  return NextResponse.json(
-    { error: 'Not found', slug },
-    { status: 404 }
-  )
+  // Not found - trigger Next.js 404 page
+  notFound()
 }

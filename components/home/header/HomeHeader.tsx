@@ -41,17 +41,17 @@ export function HomeHeader() {
             </p>
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
-                <a href="/notes/on-myself/about-kris" target="_blank" rel="noopener noreferrer">
+                <a href="/me" target="_blank" rel="noopener noreferrer">
                   About Me
                 </a>
               </Button>
               <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
-                <a href="/notes/website/about-this-website" target="_blank" rel="noopener noreferrer">
+                <a href="/about" target="_blank" rel="noopener noreferrer">
                   About Website
                 </a>
               </Button>
               <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
-                <a href="/notes/on-myself/about-my-logo" target="_blank" rel="noopener noreferrer">
+                <a href="/logo" target="_blank" rel="noopener noreferrer">
                   About Logo
                 </a>
               </Button>

@@ -57,15 +57,51 @@ const VANITY_URL_MAPPINGS: Record<string, { contentType: RawContentType; categor
 }
 
 // Known top-level routes that should NOT be treated as magic URL slugs
+// This includes vanity URLs (handled by next.config.mjs rewrites) and real app routes
 const KNOWN_ROUTES = new Set([
-  'api', 'essays', 'blog', 'fiction', 'news', 'notes', 'ocs', 'papers',
-  'progymnasmata', 'reviews', 'verse', 'categories', 'tags', 'series',
-  'reading', 'now', 'research', 'til', 'library', 'globe', 'archive',
-  'stats', 'lecture-notes', 'prompts', 'film', 'manga', 'anime', 'games',
-  'videos', 'cv', 'changelog', 'colophon', 'profile', 'playlists', 'art',
-  'type', 'wishlist', 'contact', 'rss.xml', 'scripts', 'companies',
-  'sources', 'quotes', 'supporters', 'proofs', 'problems', 'cases',
-  'dossiers', 'conspiracies', 'libers', 'sequences', 'category', 'tag',
+  // Vanity URLs (rewrites in next.config.mjs - must be excluded from magic URL handling)
+  'me', 'logo', 'about', 'design', 'donate', 'faq', 'roti',
+
+  // API and system routes
+  'api', '_next', '_vercel', 'feed.xml', 'rss.xml', 'og', 'styles', 'home',
+
+  // Content types
+  'essays', 'blog', 'fiction', 'news', 'notes', 'ocs', 'papers',
+  'progymnasmata', 'reviews', 'verse', 'sequences', 'til', 'now',
+
+  // Navigation/taxonomy
+  'categories', 'category', 'tags', 'tag', 'series',
+
+  // Reading/tracking
+  'reading', 'read', 'reading-lists', 'reading-log', 'reading-stats', 'want-to-read',
+  'library', 'film', 'manga', 'anime', 'games', 'music', 'globe',
+
+  // Media
+  'art', 'gallery', 'videos',
+
+  // Documents
+  'archive', 'doc', 'src',
+
+  // Info pages
+  'legal', 'shop',
+
+  // Law/rules
+  'mitzvah', 'rules-of-the-internet',
+
+  // Misc pages
+  'blogroll', 'contact', 'people', 'predictions', 'quotes', 'sources',
+  'stats', 'subscribe', 'supporters', 'surveys', 'symbols', 'type',
+
+  // Professional
+  'companies', 'portfolio', 'profile',
+
+  // Updates
+  'changelog',
+
+  // Legacy/other
+  'research', 'lecture-notes', 'prompts', 'cv', 'colophon', 'playlists',
+  'wishlist', 'scripts', 'proofs', 'problems', 'cases',
+  'dossiers', 'conspiracies', 'libers',
 ])
 
 /**
@@ -175,6 +211,9 @@ export function proxy(request: NextRequest) {
    * ---------------------------------------------------------------------------
    * Check if this is a bare slug that should be redirected to its canonical path
    * Example: /my-essay-slug -> /essays/philosophy/my-essay-slug
+   * The API route handles the database lookup and returns either:
+   * - 307 redirect to the canonical path (if found)
+   * - 404 via notFound() which renders the not-found page (if not found)
    * ------------------------------------------------------------------------- */
   const magicSlug = isMagicUrlCandidate(pathname)
   if (magicSlug) {
