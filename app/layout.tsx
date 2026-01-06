@@ -1,14 +1,12 @@
 import "../app/globals.css"
 import "katex/dist/katex.min.css"
-import { CommandMenu } from "../components/core/command-menu"
 import type { Metadata, Viewport } from "next"
 import { ThemeProvider } from "../components/theme-provider"
-import { UniversalLinkModal } from "../components/core/popups"
-import { SettingsMenu } from "../components/core/settings"
 import { ScrollbarController } from "../components/scrollbar-controller"
 import { DarkModeScript } from "../components/dark-mode-script"
 import { DarkModeClasses } from "../components/dark-mode-classes"
 import { HeaderUnderlineDetector } from "../components/header-underline-detector"
+import { Wrapper } from "../components/core/wrapper"
 import type React from "react"
 import Script from "next/script"
 import { MDXProviderWrapper } from './mdx-provider'
@@ -92,11 +90,6 @@ export const viewport: Viewport = {
 // Toggle this to true or false to control execution
 const SHOW_UNIVERSAL_LINK_MODAL = true
 
-function UniversalLinkModalWrapper() {
-  if (!SHOW_UNIVERSAL_LINK_MODAL) return null
-  return <UniversalLinkModal />
-}
-
 export default function RootLayout({
   children,
 }: {
@@ -110,7 +103,6 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" title="Kris Yotam RSS Feed" href="/feed.xml" />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#0c0c0c" media="(prefers-color-scheme: dark)" />
-        <script async src="https://cdn.seline.so/seline.js" data-token="9bc08e3c42882e0"></script>
         <DarkModeScript />
       </head>
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
@@ -124,16 +116,21 @@ export default function RootLayout({
           <MDXProviderWrapper>
             <div className="min-h-screen flex flex-col">
               <main className="flex-grow">{children}</main>
-              <CommandMenu />
-              <SettingsMenu />
-              <UniversalLinkModalWrapper />
+              {/* Lazy-loaded interactive components */}
+              <Wrapper showModal={SHOW_UNIVERSAL_LINK_MODAL} />
               <ScrollbarController />
               <DarkModeClasses />
               <HeaderUnderlineDetector />
             </div>
           </MDXProviderWrapper>
         </ThemeProvider>
-        {/* Analytics Beacon */}
+        {/* Seline Analytics - loaded after page interactive */}
+        <Script
+          src="https://cdn.seline.so/seline.js"
+          data-token="9bc08e3c42882e0"
+          strategy="afterInteractive"
+        />
+        {/* Page View Beacon */}
         <Script id="kris-analytics" strategy="afterInteractive">{`
           navigator.sendBeacon(
             '/api/page-view',

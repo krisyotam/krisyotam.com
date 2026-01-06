@@ -1,7 +1,6 @@
 import { staticMetadata } from '@/lib/staticMetadata';
 import { Metadata } from 'next';
 import redis from '@/lib/redis';
-import dynamic from 'next/dynamic';
 
 export const metadata: Metadata = {
   ...staticMetadata.stats,
@@ -123,8 +122,8 @@ export default async function StatsPage() {
     });
 
   // Import the client component to render the stats UI
-  const StatsClient = dynamic(() => import('./client'), { ssr: false });
-  
+  const StatsClient = (await import('./client')).default;
+
   return <StatsClient 
     totalVisits={totalVisits}
     topPaths={topPaths}

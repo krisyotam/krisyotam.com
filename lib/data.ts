@@ -522,6 +522,7 @@ interface SequencePost {
 }
 
 export interface Sequence {
+  id: number
   slug: string
   title: string
   preview: string | null
@@ -568,7 +569,7 @@ export async function getSequencesData(): Promise<{ sequences: Sequence[] }> {
   try {
     const rows = db.prepare(`
       SELECT * FROM sequences
-      ORDER BY start_date DESC, title ASC
+      ORDER BY id ASC
     `).all() as DbSequenceRow[]
 
     const sequences = rows.map(row => {
@@ -630,6 +631,7 @@ export async function getSequencesData(): Promise<{ sequences: Sequence[] }> {
       }
 
       return {
+        id: row.id,
         slug: row.slug,
         title: row.title,
         preview: row.preview,

@@ -18,7 +18,7 @@ async function lookupCity(ip?: string | null) {
 
 export async function POST(req: NextRequest) {
   const { path, referrer } = await req.json();
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || req.ip || '';
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || req.headers.get('x-real-ip') || '';
   const { country, city, flag } = await lookupCity(ip);
 
   const day = new Date().toISOString().slice(0, 10);  // YYYY-MM-DD

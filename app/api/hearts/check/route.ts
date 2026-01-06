@@ -23,7 +23,7 @@ async function setRedisValue(key: string, value: number): Promise<void> {
 }
 
 export async function GET() {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const hasLiked = cookieStore.has('has_liked')
   const count = await getRedisValue('heart_count')
   

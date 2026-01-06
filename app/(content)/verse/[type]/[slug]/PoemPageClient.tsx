@@ -21,7 +21,7 @@ import { VerseHeader } from "@/components/verse-header"
 import { Footer } from "@/components/footer"
 import { Citation } from "@/components/citation"
 import { Comments } from "@/components/core/comments"
-import { useEffect, useState } from "react"
+import { useEffect, useState, type JSX } from "react"
 import type { VersePost } from "@/lib/data"
 
 // =============================================================================

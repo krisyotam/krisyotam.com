@@ -38,7 +38,7 @@ export function ColumnContainer({ children, className }: ColumnContainerProps) {
       let previousColumnType: 'left' | 'right' | null = null
       
       childArray.forEach((child, index) => {
-        if (React.isValidElement(child) && child.type === Column) {
+        if (React.isValidElement<ColumnProps>(child) && child.type === Column) {
           const columnType = child.props.type
           
           if (columnType === 'right' && previousColumnType !== 'left') {

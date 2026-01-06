@@ -9,7 +9,7 @@ export const dynamic = "force-static";
 export const revalidate = false;
 
 interface CategoryPageProps {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }
 
 export async function generateStaticParams() {
@@ -19,7 +19,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata(props: CategoryPageProps): Promise<Metadata> {
+  const params = await props.params;
   const categoryMeta = await getCategoryMeta(params.category);
   const categoryTitle = categoryMeta?.title || params.category.split("-").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");
 
@@ -32,7 +33,8 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 type Status = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned" | "Active";
 type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain" | "speculative";
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
+export default async function CategoryPage(props: CategoryPageProps) {
+  const params = await props.params;
   const posts = await getUniversalPostsByCategory(params.category);
   const categoryMeta = await getCategoryMeta(params.category);
 

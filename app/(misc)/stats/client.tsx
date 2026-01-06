@@ -1,11 +1,17 @@
 "use client"
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { StatsFilter } from '@/components/stats/stats-filter';
-import { StatsChart } from '@/components/stats/stats-chart';
 import { StatsTable } from '@/components/stats/stats-table';
 import { PageHeader, PageHeaderProps, PageDescription } from '@/components/core';
 import { AreaChart } from "lucide-react";
+
+// Lazy load chart component to reduce initial bundle (recharts is ~300KB)
+const StatsChart = dynamic(() => import('@/components/stats/stats-chart').then(mod => mod.StatsChart), {
+  ssr: false,
+  loading: () => <div className="h-[300px] bg-muted/50 animate-pulse rounded" />,
+});
 
 interface VisitData {
   date: string;

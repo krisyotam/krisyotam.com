@@ -12,7 +12,7 @@ import { Footer } from "@/components/footer";
 import { Box } from "@/components/posts/typography/box";
 
 interface GalleryPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 function generateSlug(title: string): string {
@@ -26,7 +26,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: GalleryPageProps, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(props: GalleryPageProps, parent: ResolvingMetadata): Promise<Metadata> {
+  const params = await props.params;
   const artworks = getGallery();
   const artwork = artworks.find(a => generateSlug(a.title) === params.slug);
 
@@ -56,7 +57,8 @@ export async function generateMetadata({ params }: GalleryPageProps, parent: Res
   };
 }
 
-export default function PhotoPage({ params }: GalleryPageProps) {
+export default async function PhotoPage(props: GalleryPageProps) {
+  const params = await props.params;
   const artworks = getGallery();
   const artwork = artworks.find(a => generateSlug(a.title) === params.slug);
 

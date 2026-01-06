@@ -4,10 +4,11 @@ import { SymbolDetailClient } from './symbol-detail-client'
 import { getSymbolBySlug, getAllSymbols } from '@/lib/reference-db'
 
 type Props = {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const symbol = getSymbolBySlug(params.id)
 
   if (!symbol) {
@@ -36,7 +37,8 @@ export async function generateStaticParams() {
   }))
 }
 
-export default function SymbolDetailPage({ params }: Props) {
+export default async function SymbolDetailPage(props: Props) {
+  const params = await props.params;
   const symbol = getSymbolBySlug(params.id)
 
   if (!symbol) {

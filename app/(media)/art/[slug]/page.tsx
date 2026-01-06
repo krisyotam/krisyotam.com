@@ -13,7 +13,7 @@ import { Footer } from "@/components/footer";
 import { Box } from "@/components/posts/typography/box";
 
 interface ArtPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 function generateSlug(title: string): string {
@@ -27,7 +27,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: ArtPageProps, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(props: ArtPageProps, parent: ResolvingMetadata): Promise<Metadata> {
+  const params = await props.params;
   const artworks = getArt();
   const artwork = artworks.find(a => generateSlug(a.title) === params.slug);
 
@@ -57,7 +58,8 @@ export async function generateMetadata({ params }: ArtPageProps, parent: Resolvi
   };
 }
 
-export default function ArtworkPage({ params }: ArtPageProps) {
+export default async function ArtworkPage(props: ArtPageProps) {
+  const params = await props.params;
   const artworks = getArt();
   const artwork = artworks.find(a => generateSlug(a.title) === params.slug);
 

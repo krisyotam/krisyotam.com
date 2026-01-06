@@ -1,4 +1,5 @@
 import type React from "react"
+import { createElement, type JSX } from "react"
 
 interface TOCHeadingProps {
   id: string
@@ -9,7 +10,7 @@ interface TOCHeadingProps {
 export function TOCHeading({ id, level, children }: TOCHeadingProps) {
   // This component is primarily for MDX parsing
   // The actual rendering is handled by the TableOfContents component
-  const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements
-  return <HeadingTag id={id}>{children}</HeadingTag>
+  const tag = `h${level}` as keyof JSX.IntrinsicElements
+  return createElement(tag, { id }, children)
 }
 

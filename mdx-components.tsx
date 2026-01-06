@@ -6,16 +6,14 @@ import { Spoiler } from "spoiled"
 import { InternalLink } from "@/components/internal-link"
 import SimpleBib from "@/components/simplebib"
 import { EnhancedLink } from "@/components/enhanced-link"
-import { CodeBlock } from "@/components/ui/code-block"
 import Books from "@/components/posts/books/books"
 import Cinema from "@/components/posts/books/cinema"
 import { Tweet } from "@/components/typography/tweet"
-import dynamic from 'next/dynamic'
 import { Pfp } from "@/components/typography/pfp"
 import Redacted from "@/components/typography/redacted"
 import DateComponent from "@/components/time-stamp"
-// Import TikZ with no SSR to avoid hydration issues
-const TikZ = dynamic(() => import('@/components/typography/tikz'), { ssr: false })
+import TikZ from '@/components/typography/tikz'
+import { CodeBlock } from '@/components/ui/code-block'
 
 // Import all post-related components
 import MiniBio from '@/components/posts/people/mini-bio'
@@ -113,16 +111,18 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     
     // Handle code blocks with proper styling
     pre: ({ children, className }) => {
+      // Type for code element children
+      interface CodeProps { className?: string; children?: React.ReactNode }
       // Check if this is a code block with language
-      if (React.isValidElement(children) && 
-          children.props?.className && 
+      if (React.isValidElement<CodeProps>(children) &&
+          children.props?.className &&
           children.props.className.startsWith('language-')) {
-        
+
         // Extract language from className (e.g., "language-javascript" -> "javascript")
         let language = children.props.className.replace('language-', '');
         
         // Extract filename if present in format ```lang(filename.ext)
-        let filename = null;
+        let filename: string | undefined = undefined;
         const filenameMatch = language.match(/^(.+?)\((.+?)\)$/);
         if (filenameMatch) {
           language = filenameMatch[1]; // Get the language part

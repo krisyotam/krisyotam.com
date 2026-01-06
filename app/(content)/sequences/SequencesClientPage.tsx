@@ -160,6 +160,7 @@ export default function SequencesClientPage({
   const headerData = getHeaderData();
 
   // Filter sequences based on search query and category
+  // Note: sequences are pre-sorted by id from the database
   const filteredSequences = sequences
     .filter((sequence) => {
       const q = searchQuery.toLowerCase();
@@ -175,15 +176,7 @@ export default function SequencesClientPage({
 
       return matchesSearch && matchesCategory;
     })
-    .sort((a, b) => {
-      const dateA =
-        a.end_date && a.end_date.trim() ? a.end_date : a.start_date;
-      const dateB =
-        b.end_date && b.end_date.trim() ? b.end_date : b.start_date;
-      return (
-        new Date(dateB || "").getTime() - new Date(dateA || "").getTime()
-      );
-    });
+    .sort((a, b) => a.id - b.id);
 
   // =============================================================================
   // View Components

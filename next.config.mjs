@@ -13,12 +13,13 @@ import rehypeKatex from 'rehype-katex'
 const baseConfig = {
   reactStrictMode: true,
 
-  // keep builds stable on low memory hosts
-  swcMinify: false,
-  eslint: { ignoreDuringBuilds: true },
+  // Next.js 16+ uses Turbopack by default (handles minification automatically)
   typescript: { ignoreBuildErrors: false },
   staticPageGenerationTimeout: 120,
   productionBrowserSourceMaps: false,
+
+  // Disable Turbopack - MDX not fully supported in Turbopack yet
+  // turbopack: {},
 
   /* ============================================================================
      REWRITES
@@ -74,26 +75,37 @@ const baseConfig = {
 
   /* ============================================================================
      IMAGE HANDLING
-     Local image optimization disabled to avoid memory cost.
-     External domains allowed for embeds & QR generator.
+     Optimized images with WebP/AVIF conversion, long cache TTL.
+     All external image domains whitelisted via remotePatterns.
   ============================================================================ */
   images: {
-    unoptimized: true,
+    minimumCacheTTL: 31536000, // 1 year cache for optimized images
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
-      { protocol: 'https', hostname: 'api.qrserver.com', pathname: '/v1/**' },
+      // QR code generation
+      { protocol: 'https', hostname: 'api.qrserver.com', pathname: '/**' },
+      // Image hosting services
+      { protocol: 'https', hostname: 'i.postimg.cc', pathname: '/**' },
+      { protocol: 'https', hostname: 'i.pinimg.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'gateway.pinata.cloud', pathname: '/**' },
+      // Search engine image proxies
+      { protocol: 'https', hostname: 'external-content.duckduckgo.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'imgs.search.brave.com', pathname: '/**' },
+      // Content platforms
+      { protocol: 'https', hostname: 'substackcdn.com', pathname: '/**' },
+      // External sites with images
+      { protocol: 'https', hostname: 'tezukaosamu.net', pathname: '/**' },
+      { protocol: 'https', hostname: 'understandingslavery.com', pathname: '/**' },
+      // Own domain (doc storage)
+      { protocol: 'https', hostname: 'krisyotam.com', pathname: '/doc/**' },
+      { protocol: 'https', hostname: 'www.krisyotam.com', pathname: '/doc/**' },
     ],
-    domains: ['api.qrserver.com', 'i.postimg.cc', 'gateway.pinata.cloud', 'doc.krisyotam.com'],
   },
 
   /* ============================================================================
-     EXPERIMENTAL + BUILD
-     Disables worker threads for Webpack for tiny hosts.
+     BUILD OUTPUT
      Standalone output for portability.
   ============================================================================ */
-  experimental: {
-    webpackBuildWorker: false,
-  },
-
   output: 'standalone',
   transpilePackages: ['react-syntax-highlighter'],
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
@@ -103,11 +115,6 @@ const baseConfig = {
      MDX raw import support + canvas externalization
   ============================================================================ */
   webpack(config) {
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}),
-      'next/image$': 'next/future/image',
-    }
-
     config.module.rules.push({
       test: /\.mdx\?raw$/,
       type: 'asset/source',

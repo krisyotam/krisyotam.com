@@ -9,7 +9,7 @@ export const dynamic = "force-static";
 export const revalidate = false;
 
 interface TagPageProps {
-  params: { tag: string };
+  params: Promise<{ tag: string }>;
 }
 
 export async function generateStaticParams() {
@@ -19,7 +19,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
+export async function generateMetadata(props: TagPageProps): Promise<Metadata> {
+  const params = await props.params;
   const tagMeta = await getTagMeta(params.tag);
   const tagTitle = tagMeta?.title || params.tag.split("-").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");
 
@@ -32,7 +33,8 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
 type Status = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned" | "Active";
 type Confidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain" | "speculative";
 
-export default async function TagPage({ params }: TagPageProps) {
+export default async function TagPage(props: TagPageProps) {
+  const params = await props.params;
   const posts = await getUniversalPostsByTag(params.tag);
   const tagMeta = await getTagMeta(params.tag);
 

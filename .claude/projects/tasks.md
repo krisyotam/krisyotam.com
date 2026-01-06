@@ -303,28 +303,28 @@ Every dynamic component wrapped in Suspense with appropriate fallback:
 
 ## Implementation Plan
 
-### Phase 1: Quick Wins (No Breaking Changes)
+### Phase 1: Quick Wins (No Breaking Changes) ✅ COMPLETE
 
 **Estimated Impact: +15-20 points**
 
-- [ ] **1.1** Enable `swcMinify: true` in next.config.mjs
-- [ ] **1.2** Move seline script to `afterInteractive` strategy
-- [ ] **1.3** Add `minimumCacheTTL: 31536000` for images
-- [ ] **1.4** Enable image optimization (remove `unoptimized: true`)
-- [ ] **1.5** Add image domains/remotePatterns for all external sources
+- [x] **1.1** Enable `swcMinify: true` in next.config.mjs
+- [x] **1.2** Move seline script to `afterInteractive` strategy
+- [x] **1.3** Add `minimumCacheTTL: 31536000` for images
+- [x] **1.4** Enable image optimization (remove `unoptimized: true`)
+- [x] **1.5** Add image domains/remotePatterns for all external sources
 
-### Phase 2: Suspense & Code Splitting
+### Phase 2: Suspense & Code Splitting ✅ COMPLETE
 
 **Estimated Impact: +10-15 points**
 
-- [ ] **2.1** Add Suspense boundaries around heavy components in layout.tsx
-- [ ] **2.2** Lazy load CommandMenu component
-- [ ] **2.3** Lazy load SettingsMenu component
-- [ ] **2.4** Lazy load UniversalLinkModal component
-- [ ] **2.5** Dynamic import for react-syntax-highlighter
-- [ ] **2.6** Dynamic import for katex (only on math pages)
-- [ ] **2.7** Dynamic import for mapbox-gl (only on map pages)
-- [ ] **2.8** Dynamic import for recharts (only on chart pages)
+- [x] **2.1** Add Suspense boundaries around heavy components in layout.tsx
+- [x] **2.2** Lazy load CommandMenu component
+- [x] **2.3** Lazy load SettingsMenu component
+- [x] **2.4** Lazy load UniversalLinkModal component
+- [x] **2.5** Dynamic import for react-syntax-highlighter (CodeBlock in mdx-components)
+- [x] **2.6** Dynamic import for katex (Math component in mdx-components)
+- [x] **2.7** Dynamic import for mapbox-gl (globe page)
+- [x] **2.8** Dynamic import for recharts (StatsChart in stats page)
 
 ### Phase 3: Next.js 15 Upgrade
 

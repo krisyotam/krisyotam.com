@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es2015",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -12,7 +16,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "downlevelIteration": true,
     "plugins": [
@@ -21,17 +25,28 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "@essays/*": ["./app/essays/*"]
+      "@/*": [
+        "./*"
+      ],
+      "@essays/*": [
+        "./app/essays/*"
+      ]
     }
   },
   "include": [
-    "next-env.d.ts", 
-    "**/*.ts", 
-    "**/*.tsx", 
-    ".next/types/**/*.ts", 
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
     "types/**/*.d.ts",
-    "global.d.ts"
-, "app/(documents)/doc/[...file]/route.ts"  ],
-  "exclude": ["node_modules", "**/*.mdx", "components/archive", "lib/archive"]
+    "global.d.ts",
+    "app/(documents)/doc/[...file]/route.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.mdx",
+    "components/archive",
+    "lib/archive"
+  ]
 }

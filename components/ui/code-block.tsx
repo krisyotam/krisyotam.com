@@ -49,51 +49,57 @@ export const CodeBlock = ({
   const [activeTab, setActiveTab] = React.useState(0);
   const { theme } = useTheme();
 
+  // Type for code block children props
+  interface CodeChildProps {
+    children?: string | ReactNode | ReactNode[];
+    className?: string;
+  }
+
   // Extract code from children if provided
   const extractCodeFromChildren = (): string => {
     if (!children) return '';
-    
+
     // If children is a string, use it directly
     if (typeof children === 'string') {
       return children;
     }
-    
+
     // Handle code as a template literal in braces (common in MDX)
-    if (React.isValidElement(children)) {
+    if (React.isValidElement<CodeChildProps>(children)) {
       const childProps = children.props;
-      
+
       // Handle the {`...code...`} pattern (most common in MDX)
       if (childProps) {
         // Direct string child
         if (typeof childProps.children === 'string') {
           return childProps.children;
         }
-        
+
         // Handle array of children where one might be our code
         if (Array.isArray(childProps.children)) {
           // Combine all string children
           const stringParts = childProps.children
-            .filter((child: any) => typeof child === 'string')
+            .filter((child: unknown) => typeof child === 'string')
             .join('');
-          
+
           if (stringParts) {
             return stringParts;
           }
-          
+
           // Look for nested structure
           for (const child of childProps.children) {
-            if (React.isValidElement(child) && child.props && 
-                typeof (child.props as { children?: string }).children === 'string') {
-              return (child.props as { children: string }).children;
+            if (React.isValidElement<CodeChildProps>(child) && child.props &&
+                typeof child.props.children === 'string') {
+              return child.props.children;
             }
           }
         }
       }
-      
+
       // Handle native markdown code blocks from MDX processing
       if (childProps?.className?.startsWith('language-')) {
-        return typeof childProps.children === 'string' 
-          ? childProps.children 
+        return typeof childProps.children === 'string'
+          ? childProps.children
           : '';
       }
     }

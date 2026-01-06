@@ -102,7 +102,8 @@ function getPostUrl(
 // GET Handler
 // =============================================================================
 
-export async function GET(request: Request, { params }: { params: Params }) {
+export async function GET(request: Request, props: { params: Promise<Params> }) {
+  const params = await props.params;
   try {
     const { slug } = params;
     const data = await getSequencesData();

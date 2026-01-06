@@ -5,14 +5,15 @@ import { FilmDetailClient } from './film-detail-client'
 import { getLibraryBooks, getFilms } from '@/lib/media-db'
 
 type Props = {
-  params: {
+  params: Promise<{
     classification: string
     subclassification: string
     title: string
-  }
+  }>
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const books = getLibraryBooks()
   const films = getFilms()
 
@@ -74,7 +75,8 @@ export async function generateStaticParams() {
   return [...bookParams, ...filmParams]
 }
 
-export default function LibraryItemPage({ params }: Props) {
+export default async function LibraryItemPage(props: Props) {
+  const params = await props.params;
   const books = getLibraryBooks()
   const films = getFilms()
 

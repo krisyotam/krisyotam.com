@@ -12,20 +12,21 @@ import { Footer } from '@/app/(content)/essays/components/footer';
 import legalData from '../legal.json';
 
 interface LegalDocPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export async function generateMetadata({ params }: LegalDocPageProps): Promise<Metadata> {
+export async function generateMetadata(props: LegalDocPageProps): Promise<Metadata> {
+  const params = await props.params;
   const document = legalData.documents.find(doc => doc.slug === params.slug);
-  
+
   if (!document) {
     return {
       title: 'Document Not Found | Kris Yotam',
     };
   }
-  
+
   return {
     title: `${document.name} | Kris Yotam`,
     description: `${document.name} - Legal document for Kris Yotam's website`,
@@ -40,46 +41,47 @@ export async function generateStaticParams() {
     }));
 }
 
-export default function LegalDocPage({ params }: LegalDocPageProps) {
+export default async function LegalDocPage(props: LegalDocPageProps) {
+  const params = await props.params;
   const { slug } = params;
   const document = legalData.documents.find(doc => doc.slug === params.slug);
-  
+
   // Check if document exists and is active
   if (!document || document.status !== 'active') {
     notFound();
   }
-  
+
   const formatDate = (dateString: string) => {
     try {
       return format(new Date(dateString), "MMMM d, yyyy");
     } catch (error) {
       return dateString;
     }
-  };  return (
-    <main className="max-w-[600px] mx-auto px-4 py-12">
-      <PageHeader 
-        title={document.name}
-        subtitle="Legal"
-        start_date={document.lastUpdated}
-        end_date={document.lastUpdated}
-        backHref="/legal"
-        backText="Legal"
-        preview={`Last updated on ${formatDate(document.lastUpdated)}`}
-        status="Finished"
-        confidence="certain"
-        importance={8}      />      <PDFViewer
-        pdfUrl={`/legal/documents/${slug}.pdf`} 
-        className="mt-6 w-full"
-      />      <div className="mt-8">
-        <Citation 
+  };return (
+      <main className="max-w-[600px] mx-auto px-4 py-12">
+        <PageHeader 
           title={document.name}
-          slug={document.slug}
-          date={document.lastUpdated}
-          url={`https://krisyotam.com/legal/${document.slug}`}
-        />
-      </div>
-      
-      <Footer />
-    </main>
-  );
+          subtitle="Legal"
+          start_date={document.lastUpdated}
+          end_date={document.lastUpdated}
+          backHref="/legal"
+          backText="Legal"
+          preview={`Last updated on ${formatDate(document.lastUpdated)}`}
+          status="Finished"
+          confidence="certain"
+          importance={8}      />      <PDFViewer
+          pdfUrl={`/legal/documents/${slug}.pdf`} 
+          className="mt-6 w-full"
+        />      <div className="mt-8">
+          <Citation 
+            title={document.name}
+            slug={document.slug}
+            date={document.lastUpdated}
+            url={`https://krisyotam.com/legal/${document.slug}`}
+          />
+        </div>
+        
+        <Footer />
+      </main>
+    );
 }

@@ -30,7 +30,7 @@ import {
 // ============================================================================
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 // ============================================================================
@@ -100,7 +100,8 @@ function getSocialInfo(url: string) {
 // Metadata
 // ============================================================================
 
-export function generateMetadata({ params }: PageProps): Metadata {
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
   const entry = getBlogrollBySlug(params.slug);
   if (!entry) {
     return { title: "Entry Not Found | Blogroll" };
@@ -115,7 +116,8 @@ export function generateMetadata({ params }: PageProps): Metadata {
 // Page Component
 // ============================================================================
 
-export default function BlogrollEntryPage({ params }: PageProps) {
+export default async function BlogrollEntryPage(props: PageProps) {
+  const params = await props.params;
   const entry = getBlogrollBySlug(params.slug);
   if (!entry) notFound();
 

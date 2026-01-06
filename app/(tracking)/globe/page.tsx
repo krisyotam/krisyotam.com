@@ -1,8 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import mapboxgl from "mapbox-gl"
-import "mapbox-gl/dist/mapbox-gl.css"
+import type mapboxgl from "mapbox-gl"
 
 interface Location {
   id: number;
@@ -98,19 +97,33 @@ export default function GlobePage() {
   useEffect(() => {
     if (map.current || locations.length === 0) return // Map already initialized or no locations yet
 
-    try {
-      // Check if mapboxgl is available (important for SSR)
-      if (!mapboxgl) {
-        setError("Mapbox GL JS is not available")
-        setLoading(false)
-        return
-      }
+    // Dynamically import mapbox-gl to reduce initial bundle size
+    const initMap = async () => {
+      try {
+        // Import mapbox-gl dynamically
+        const mapboxglModule = await import("mapbox-gl")
+        const mapboxgl = mapboxglModule.default
 
-      // Set the access token
-      mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN
+        // Add mapbox CSS if not already present
+        if (!document.querySelector('link[href*="mapbox-gl"]')) {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = 'https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css'
+          document.head.appendChild(link)
+        }
 
-      // Initialize the map
-      map.current = new mapboxgl.Map({
+        // Check if mapboxgl is available
+        if (!mapboxgl) {
+          setError("Mapbox GL JS is not available")
+          setLoading(false)
+          return
+        }
+
+        // Set the access token
+        mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN
+
+        // Initialize the map
+        map.current = new mapboxgl.Map({
         container: mapContainer.current!,
         style: {
           version: 8,
@@ -257,11 +270,14 @@ export default function GlobePage() {
         setError("An error occurred while loading the map")
         setLoading(false)
       })
-    } catch (err) {
-      console.error("Error initializing map:", err)
-      setError("Failed to initialize the map")
-      setLoading(false)
+      } catch (err) {
+        console.error("Error initializing map:", err)
+        setError("Failed to initialize the map")
+        setLoading(false)
+      }
     }
+
+    initMap()
 
     // Cleanup function
     return () => {

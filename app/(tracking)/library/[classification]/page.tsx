@@ -1,12 +1,13 @@
 import { notFound } from 'next/navigation'
 
 interface LibraryClassificationPageProps {
-  params: {
+  params: Promise<{
     classification: string
-  }
+  }>
 }
 
-export default function LibraryClassificationPage({ params }: LibraryClassificationPageProps) {
+export default async function LibraryClassificationPage({ params }: LibraryClassificationPageProps) {
+  const { classification } = await params
   // This page is not yet implemented
   notFound()
 }

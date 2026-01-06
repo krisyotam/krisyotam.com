@@ -9,22 +9,9 @@
  * ============================================================================
  */
 
-import dynamic from "next/dynamic";
 import { getMusicPlaylists } from "@/lib/media-db";
-import { PageHeader } from "@/components/core";
-
-// ============================================================================
-// DYNAMIC IMPORTS
-// ============================================================================
-
-const MusicClient = dynamic(() => import("./MusicClient"), { ssr: false });
-const PageDescription = dynamic(
-  () =>
-    import("@/components/core").then((mod) => ({
-      default: mod.PageDescription,
-    })),
-  { ssr: false }
-);
+import { PageHeader, PageDescription } from "@/components/core";
+import MusicClient from "./MusicClient";
 
 // ============================================================================
 // MAIN COMPONENT

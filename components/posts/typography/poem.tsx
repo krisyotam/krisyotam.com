@@ -21,8 +21,8 @@ function extractItems(children: React.ReactNode): Item[] {
   const nodes = React.Children.toArray(children)
 
   nodes.forEach((node, idx) => {
-    if (React.isValidElement(node) && node.type === "p") {
-      const inline = React.Children.toArray(node.props.children as React.ReactNode)
+    if (React.isValidElement<{ children?: React.ReactNode }>(node) && node.type === "p") {
+      const inline = React.Children.toArray(node.props.children)
       let current: React.ReactNode[] = []
       inline.forEach(child => {
         if (React.isValidElement(child) && child.type === "br") {

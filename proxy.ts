@@ -1,8 +1,8 @@
 /* =============================================================================
- * MIDDLEWARE - krisyotam.com
+ * PROXY - krisyotam.com (Next.js 16+)
  * =============================================================================
- * Central middleware for handling cross-cutting concerns like headers,
- * rewrites, and content serving.
+ * Central proxy (formerly middleware) for handling cross-cutting concerns like
+ * headers, rewrites, and content serving.
  * ============================================================================= */
 
 /* -----------------------------------------------------------------------------
@@ -140,10 +140,10 @@ function parseRawContentPath(pathname: string): {
 }
 
 /* -----------------------------------------------------------------------------
- * MIDDLEWARE FUNCTION
+ * PROXY FUNCTION (formerly middleware)
  * ----------------------------------------------------------------------------- */
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
   /* ---------------------------------------------------------------------------
@@ -203,9 +203,9 @@ export function middleware(request: NextRequest) {
 }
 
 /* -----------------------------------------------------------------------------
- * MIDDLEWARE CONFIG
+ * PROXY CONFIG
  * -----------------------------------------------------------------------------
- * Define which routes the middleware should run on
+ * Define which routes the proxy should run on
  * ----------------------------------------------------------------------------- */
 
 export const config = {
