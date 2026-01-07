@@ -1,0 +1,1728 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+###############################################################################
+# KRIS CREATE — Content manager for krisyotam.com
+#
+# Maintainer:   Kris Yotam <krisyotam@pm.me>
+# Repository:   https://github.com/krisyotam/krisrice
+# License:      MIT
+# Created:      2025-01-01
+# Description:  Interactive TUI for managing content, categories, and tags.
+#               Edit properties, bulk toggle active/hidden state.
+#               Uses fzf for selection and queries content.db directly.
+###############################################################################
+
+PROJECT_ROOT="${KRIS_CREATE_ROOT:-$HOME/Dev/krisyotam.com}"
+DB_PATH="$PROJECT_ROOT/public/data/content.db"
+
+have() { command -v "$1" >/dev/null 2>&1; }
+
+have sqlite3 || { echo "sqlite3 required"; exit 1; }
+have fzf || { echo "fzf required"; exit 1; }
+
+db() {
+  sqlite3 -separator $'\t' "$DB_PATH" "$1"
+}
+
+db_exec() {
+  sqlite3 "$DB_PATH" "$1"
+}
+
+###############################################################################
+# ui helpers
+###############################################################################
+
+print_banner() {
+  local cols
+  cols="$(tput cols 2>/dev/null || echo 80)"
+
+  if have figlet; then
+    figlet -w "$cols" -f big "KRISYOTAM.COM" 2>/dev/null \
+      || figlet -w "$cols" -f banner "KRISYOTAM.COM" 2>/dev/null \
+      || figlet -w "$cols" -f slant "KRISYOTAM.COM" 2>/dev/null \
+      || figlet -w "$cols" "KRISYOTAM.COM"
+  else
+    echo "KRISYOTAM.COM"
+  fi
+
+  echo
+  echo "est. 2025"
+  echo "author: Kris Yotam"
+  echo "publisher: krisyotam.com"
+  echo
+  echo "  Do I contradict myself? Very well then I contradict myself, (I am large, I contain multitudes.)"
+  echo "  — Walt Whitman"
+  echo
+}
+
+prompt() {
+  local label="$1"
+  local def="${2:-}"
+  local out
+  out="$(fzf --print-query \
+            --prompt="$label> " \
+            --height=50% --layout=reverse --border \
+            ${def:+--query="$def"} \
+            <<< "" 2>/dev/null | head -n1)" || true
+  printf "%s" "$out"
+}
+
+pick_enum() {
+  local label="$1"; shift
+  printf "%s\n" "$@" | fzf --prompt="$label> " --height=50% --layout=reverse --border
+}
+
+slugify() {
+  echo "$1" \
+    | tr '[:upper:]' '[:lower:]' \
+    | sed -E 's/[^a-z0-9]+/-/g; s/^-|-$//g'
+}
+
+###############################################################################
+# content tables
+###############################################################################
+
+content_tables=(blog essays fiction news notes ocs papers progymnasmata reviews sequences verse)
+
+###############################################################################
+# category functions
+###############################################################################
+
+list_categories() {
+  db "SELECT title || ' [' || state || ']' || char(9) || id || char(9) || slug FROM categories ORDER BY title"
+}
+
+create_category() {
+  local title preview importance state slug
+
+  title="$(prompt 'Title')"
+  [[ -z "$title" ]] && { echo "Title required"; return 1; }
+
+  preview="$(prompt 'Preview (optional)')"
+  importance="$(prompt 'Importance (0-10)' '5')"
+  state="$(pick_enum 'State' active hidden)"
+  slug="$(slugify "$title")"
+
+  [[ "$importance" =~ ^[0-9]+$ ]] || importance=5
+  ((importance > 10)) && importance=10
+
+  db_exec "INSERT INTO categories (slug, title, preview, importance, state) VALUES ('$slug', '$title', '$preview', $importance, '$state')"
+  echo "Created category: $title ($slug)"
+}
+
+edit_category() {
+  local id="$1"
+  local data old_slug old_title old_preview old_importance old_state
+
+  data=$(db "SELECT id, slug, title, COALESCE(preview, ''), COALESCE(importance, 5), COALESCE(state, 'active') FROM categories WHERE id = $id")
+  IFS=$'\t' read -r _ old_slug old_title old_preview old_importance old_state <<< "$data"
+
+  local title preview importance state slug
+
+  title="$(prompt 'Title' "$old_title")"
+  [[ -z "$title" ]] && title="$old_title"
+
+  preview="$(prompt 'Preview' "$old_preview")"
+  importance="$(prompt 'Importance (0-10)' "$old_importance")"
+  state="$(pick_enum 'State' active hidden)" || state="$old_state"
+  slug="$(slugify "$title")"
+
+  [[ "$importance" =~ ^[0-9]+$ ]] || importance=5
+  ((importance > 10)) && importance=10
+
+  db_exec "UPDATE categories SET slug='$slug', title='$title', preview='$preview', importance=$importance, state='$state' WHERE id=$id"
+  echo "Updated category: $title"
+}
+
+delete_category() {
+  local id="$1"
+  local title
+  title=$(db "SELECT title FROM categories WHERE id = $id")
+
+  echo "Delete category '$title'?"
+  read -rp "(y/N)> " confirm
+  [[ "$confirm" == "y" || "$confirm" == "Y" ]] || return 0
+
+  db_exec "DELETE FROM categories WHERE id=$id"
+  echo "Deleted category: $title"
+}
+
+toggle_categories_state() {
+  echo
+  echo "Select categories to toggle (TAB to select multiple, ENTER to confirm):"
+
+  local selections
+  selections="$(list_categories | fzf --multi --prompt="toggle> " --delimiter=$'\t' --with-nth=1 \
+    --height=70% --layout=reverse --border \
+    --header='TAB=select multiple, ENTER=confirm, ESC=cancel')" || return
+
+  [[ -z "$selections" ]] && return
+
+  local count=0
+  while IFS=$'\t' read -r _ id _; do
+    local current_state new_state
+    current_state=$(db "SELECT state FROM categories WHERE id = $id")
+    new_state=$([[ "$current_state" == "active" ]] && echo "hidden" || echo "active")
+    db_exec "UPDATE categories SET state='$new_state' WHERE id=$id"
+    ((count++))
+  done <<< "$selections"
+
+  echo "Toggled $count categories"
+}
+
+list_content_by_category() {
+  local slug="$1"
+  local title
+  title=$(db "SELECT title FROM categories WHERE slug = '$slug'")
+
+  echo
+  echo "Content in category: $title"
+  echo "─────────────────────────────────"
+
+  for table in "${content_tables[@]}"; do
+    local count
+    count=$(db "SELECT COUNT(*) FROM $table WHERE category_slug = '$slug'")
+    if ((count > 0)); then
+      echo
+      echo "[$table] ($count entries)"
+      db "SELECT '  • ' || title || ' (' || slug || ') [' || state || ']' FROM $table WHERE category_slug = '$slug' ORDER BY title"
+    fi
+  done
+}
+
+###############################################################################
+# tag functions
+###############################################################################
+
+list_tags() {
+  db "SELECT title || ' [' || state || ']' || char(9) || id FROM tags ORDER BY title"
+}
+
+create_tag() {
+  local title preview importance state slug
+
+  title="$(prompt 'Title')"
+  [[ -z "$title" ]] && { echo "Title required"; return 1; }
+
+  preview="$(prompt 'Preview (optional)')"
+  importance="$(prompt 'Importance (0-10)' '5')"
+  state="$(pick_enum 'State' active hidden)"
+  slug="$(slugify "$title")"
+
+  [[ "$importance" =~ ^[0-9]+$ ]] || importance=5
+  ((importance > 10)) && importance=10
+
+  db_exec "INSERT INTO tags (slug, title, preview, importance, state) VALUES ('$slug', '$title', '$preview', $importance, '$state')"
+  echo "Created tag: $title ($slug)"
+}
+
+edit_tag() {
+  local id="$1"
+  local data old_slug old_title old_preview old_importance old_state
+
+  data=$(db "SELECT id, slug, title, COALESCE(preview, ''), COALESCE(importance, 5), COALESCE(state, 'active') FROM tags WHERE id = $id")
+  IFS=$'\t' read -r _ old_slug old_title old_preview old_importance old_state <<< "$data"
+
+  local title preview importance state slug
+
+  title="$(prompt 'Title' "$old_title")"
+  [[ -z "$title" ]] && title="$old_title"
+
+  preview="$(prompt 'Preview' "$old_preview")"
+  importance="$(prompt 'Importance (0-10)' "$old_importance")"
+  state="$(pick_enum 'State' active hidden)" || state="$old_state"
+  slug="$(slugify "$title")"
+
+  [[ "$importance" =~ ^[0-9]+$ ]] || importance=5
+  ((importance > 10)) && importance=10
+
+  db_exec "UPDATE tags SET slug='$slug', title='$title', preview='$preview', importance=$importance, state='$state' WHERE id=$id"
+  echo "Updated tag: $title"
+}
+
+delete_tag() {
+  local id="$1"
+  local title
+  title=$(db "SELECT title FROM tags WHERE id = $id")
+
+  echo "Delete tag '$title'? This will remove all content associations."
+  read -rp "(y/N)> " confirm
+  [[ "$confirm" == "y" || "$confirm" == "Y" ]] || return 0
+
+  db_exec "DELETE FROM content_tags WHERE tag_id=$id"
+  db_exec "DELETE FROM tags WHERE id=$id"
+  echo "Deleted tag: $title"
+}
+
+toggle_tags_state() {
+  echo
+  echo "Select tags to toggle (TAB to select multiple, ENTER to confirm):"
+
+  local selections
+  selections="$(list_tags | fzf --multi --prompt="toggle> " --delimiter=$'\t' --with-nth=1 \
+    --height=70% --layout=reverse --border \
+    --header='TAB=select multiple, ENTER=confirm, ESC=cancel')" || return
+
+  [[ -z "$selections" ]] && return
+
+  local count=0
+  while IFS=$'\t' read -r _ id; do
+    local current_state new_state
+    current_state=$(db "SELECT state FROM tags WHERE id = $id")
+    new_state=$([[ "$current_state" == "active" ]] && echo "hidden" || echo "active")
+    db_exec "UPDATE tags SET state='$new_state' WHERE id=$id"
+    ((count++))
+  done <<< "$selections"
+
+  echo "Toggled $count tags"
+}
+
+list_content_by_tag() {
+  local id="$1"
+  local title
+  title=$(db "SELECT title FROM tags WHERE id = $id")
+
+  echo
+  echo "Content tagged: $title"
+  echo "─────────────────────────────────"
+
+  for table in "${content_tables[@]}"; do
+    local entries
+    entries=$(db "SELECT c.title, c.slug, c.state FROM $table c
+      JOIN content_tags ct ON ct.content_id = c.id AND ct.content_type = '$table'
+      WHERE ct.tag_id = $id ORDER BY c.title")
+
+    if [[ -n "$entries" ]]; then
+      local count
+      count=$(echo "$entries" | wc -l)
+      echo
+      echo "[$table] ($count entries)"
+      echo "$entries" | while IFS=$'\t' read -r t s st; do
+        echo "  • $t ($s) [$st]"
+      done
+    fi
+  done
+}
+
+###############################################################################
+# sequence functions
+###############################################################################
+
+list_sequences() {
+  db "SELECT title || ' [' || COALESCE(state, 'active') || '] (' || (SELECT COUNT(*) FROM sequence_content WHERE sequence_id = sequences.id) || ' posts)' || char(9) || id || char(9) || slug FROM sequences ORDER BY title"
+}
+
+list_sequence_posts() {
+  local seq_id="$1"
+  db "SELECT
+    sc.position || '. ' || COALESCE(
+      (SELECT title FROM essays WHERE slug = sc.content_slug),
+      (SELECT title FROM notes WHERE slug = sc.content_slug),
+      (SELECT title FROM papers WHERE slug = sc.content_slug),
+      (SELECT title FROM reviews WHERE slug = sc.content_slug),
+      (SELECT title FROM blog WHERE slug = sc.content_slug),
+      (SELECT title FROM fiction WHERE slug = sc.content_slug),
+      (SELECT title FROM news WHERE slug = sc.content_slug),
+      (SELECT title FROM verse WHERE slug = sc.content_slug),
+      (SELECT title FROM progymnasmata WHERE slug = sc.content_slug),
+      (SELECT title FROM ocs WHERE slug = sc.content_slug),
+      sc.content_slug
+    ) || ' [' || sc.content_type || ']' || char(9) || sc.id || char(9) || sc.position || char(9) || sc.content_type || char(9) || sc.content_slug
+    FROM sequence_content sc
+    WHERE sc.sequence_id = $seq_id
+    ORDER BY sc.position"
+}
+
+create_sequence() {
+  local title preview cover_url category_slug status confidence importance start_date slug
+
+  title="$(prompt 'Title')"
+  [[ -z "$title" ]] && { echo "Title required"; return 1; }
+
+  preview="$(prompt 'Preview (optional)')"
+  cover_url="$(prompt 'Cover URL (optional)')"
+
+  local cats
+  cats=$(db "SELECT slug FROM categories ORDER BY title")
+  category_slug="$(echo "$cats" | fzf --prompt="Category> " --height=50% --layout=reverse --border)" || category_slug=""
+
+  status="$(pick_enum 'Status' Abandoned Notes Draft 'In Progress' Finished)" || status="Draft"
+  confidence="$(pick_enum 'Confidence' certain 'highly likely' likely possible unlikely 'highly unlikely' remote impossible)" || confidence="likely"
+  importance="$(prompt 'Importance (0-10)' '5')"
+  start_date="$(prompt 'Start Date (YYYY-MM-DD)' "$(date +%Y-%m-%d)")"
+  slug="$(slugify "$title")"
+
+  [[ "$importance" =~ ^[0-9]+$ ]] || importance=5
+  ((importance > 10)) && importance=10
+
+  db_exec "INSERT INTO sequences (slug, title, preview, cover_url, category_slug, status, confidence, importance, start_date, state)
+    VALUES ('$slug', '$title', '$(echo "$preview" | sed "s/'/''/g")', '$cover_url', '$category_slug', '$status', '$confidence', $importance, '$start_date', 'active')"
+  echo "Created sequence: $title ($slug)"
+}
+
+edit_sequence() {
+  local id="$1"
+  local data
+  data=$(db "SELECT slug, title, COALESCE(preview, ''), COALESCE(cover_url, ''), COALESCE(category_slug, ''), COALESCE(status, ''), COALESCE(confidence, ''), COALESCE(importance, 5), COALESCE(start_date, ''), COALESCE(end_date, ''), COALESCE(state, 'active') FROM sequences WHERE id = $id")
+
+  IFS=$'\t' read -r old_slug old_title old_preview old_cover old_cat old_status old_conf old_imp old_start old_end old_state <<< "$data"
+
+  while true; do
+    clear
+    echo "Editing Sequence: $old_title"
+    echo "─────────────────────────────────"
+    echo "1) Title:       $old_title"
+    echo "2) Preview:     ${old_preview:0:50}..."
+    echo "3) Cover URL:   ${old_cover:0:40}..."
+    echo "4) Category:    $old_cat"
+    echo "5) Status:      $old_status"
+    echo "6) Confidence:  $old_conf"
+    echo "7) Importance:  $old_imp"
+    echo "8) Start Date:  $old_start"
+    echo "9) End Date:    $old_end"
+    echo "0) State:       $old_state"
+    echo "s) Save changes"
+    echo "q) Cancel"
+    echo
+    read -rp "Edit field> " field
+
+    case "$field" in
+      1) old_title="$(prompt 'Title' "$old_title")"; old_slug="$(slugify "$old_title")" ;;
+      2) old_preview="$(prompt 'Preview' "$old_preview")" ;;
+      3) old_cover="$(prompt 'Cover URL' "$old_cover")" ;;
+      4)
+        local cats
+        cats=$(db "SELECT slug FROM categories ORDER BY title")
+        old_cat="$(echo "$cats" | fzf --prompt="Category> " --height=50% --layout=reverse --border --query="$old_cat")" || true
+        ;;
+      5) old_status="$(pick_enum 'Status' Abandoned Notes Draft 'In Progress' Finished)" || true ;;
+      6) old_conf="$(pick_enum 'Confidence' certain 'highly likely' likely possible unlikely 'highly unlikely' remote impossible)" || true ;;
+      7)
+        old_imp="$(prompt 'Importance (0-10)' "$old_imp")"
+        [[ "$old_imp" =~ ^[0-9]+$ ]] || old_imp=5
+        ((old_imp > 10)) && old_imp=10
+        ;;
+      8) old_start="$(prompt 'Start Date (YYYY-MM-DD)' "$old_start")" ;;
+      9) old_end="$(prompt 'End Date (YYYY-MM-DD)' "$old_end")" ;;
+      0) old_state="$(pick_enum 'State' active hidden)" || true ;;
+      s)
+        db_exec "UPDATE sequences SET
+          slug='$old_slug',
+          title='$old_title',
+          preview='$(echo "$old_preview" | sed "s/'/''/g")',
+          cover_url='$old_cover',
+          category_slug='$old_cat',
+          status='$old_status',
+          confidence='$old_conf',
+          importance=$old_imp,
+          start_date='$old_start',
+          end_date='$old_end',
+          state='$old_state',
+          updated_at=datetime('now')
+          WHERE id=$id"
+        echo "Saved!"
+        read -rp "Press Enter…" _
+        return
+        ;;
+      q) return ;;
+    esac
+  done
+}
+
+delete_sequence() {
+  local id="$1"
+  local title
+  title=$(db "SELECT title FROM sequences WHERE id = $id")
+
+  echo "Delete sequence '$title'? This will remove all post associations."
+  read -rp "(y/N)> " confirm
+  [[ "$confirm" == "y" || "$confirm" == "Y" ]] || return 0
+
+  db_exec "DELETE FROM sequence_content WHERE sequence_id=$id"
+  db_exec "DELETE FROM sequence_tags WHERE sequence_id=$id"
+  db_exec "DELETE FROM sequences WHERE id=$id"
+  echo "Deleted sequence: $title"
+}
+
+add_post_to_sequence() {
+  local seq_id="$1"
+  local seq_title
+  seq_title=$(db "SELECT title FROM sequences WHERE id = $seq_id")
+
+  echo
+  echo "Select content type to add from:"
+  local content_type
+  content_type="$(printf "%s\n" essays notes papers reviews blog fiction news verse progymnasmata ocs |
+    fzf --prompt="type> " --height=50% --layout=reverse --border)" || return
+
+  echo
+  echo "Select posts to add (TAB for multiple):"
+
+  local available
+  available=$(db "SELECT title || ' (' || slug || ')' || char(9) || slug FROM $content_type
+    WHERE slug NOT IN (SELECT content_slug FROM sequence_content WHERE sequence_id = $seq_id AND content_type = '$content_type')
+    ORDER BY title")
+
+  [[ -z "$available" ]] && { echo "No available posts to add"; read -rp "Press Enter…" _; return; }
+
+  local selections
+  selections="$(echo "$available" | fzf --multi --prompt="add> " --delimiter=$'\t' --with-nth=1 \
+    --height=70% --layout=reverse --border \
+    --header='TAB=select multiple, ENTER=confirm')" || return
+
+  [[ -z "$selections" ]] && return
+
+  local max_pos
+  max_pos=$(db "SELECT COALESCE(MAX(position), 0) FROM sequence_content WHERE sequence_id = $seq_id")
+
+  local count=0
+  while IFS=$'\t' read -r _ slug; do
+    ((max_pos++))
+    db_exec "INSERT INTO sequence_content (sequence_id, content_type, content_slug, position) VALUES ($seq_id, '$content_type', '$slug', $max_pos)"
+    ((count++))
+  done <<< "$selections"
+
+  echo "Added $count posts to sequence"
+}
+
+remove_post_from_sequence() {
+  local seq_id="$1"
+
+  local posts
+  posts=$(list_sequence_posts "$seq_id")
+  [[ -z "$posts" ]] && { echo "No posts in sequence"; return; }
+
+  echo
+  echo "Select posts to remove (TAB for multiple):"
+
+  local selections
+  selections="$(echo "$posts" | fzf --multi --prompt="remove> " --delimiter=$'\t' --with-nth=1 \
+    --height=70% --layout=reverse --border \
+    --header='TAB=select multiple, ENTER=confirm')" || return
+
+  [[ -z "$selections" ]] && return
+
+  local count=0
+  while IFS=$'\t' read -r _ id _ _ _; do
+    db_exec "DELETE FROM sequence_content WHERE id=$id"
+    ((count++))
+  done <<< "$selections"
+
+  # Renumber remaining posts
+  renumber_sequence_posts "$seq_id"
+
+  echo "Removed $count posts from sequence"
+}
+
+renumber_sequence_posts() {
+  local seq_id="$1"
+  local pos=0
+
+  db "SELECT id FROM sequence_content WHERE sequence_id = $seq_id ORDER BY position" | while read -r id; do
+    ((pos++))
+    db_exec "UPDATE sequence_content SET position = $pos WHERE id = $id"
+  done
+}
+
+move_post_up() {
+  local seq_id="$1"
+  local post_id="$2"
+
+  local current_pos
+  current_pos=$(db "SELECT position FROM sequence_content WHERE id = $post_id")
+
+  ((current_pos <= 1)) && { echo "Already at top"; return; }
+
+  local prev_id
+  prev_id=$(db "SELECT id FROM sequence_content WHERE sequence_id = $seq_id AND position = $((current_pos - 1))")
+
+  db_exec "UPDATE sequence_content SET position = $current_pos WHERE id = $prev_id"
+  db_exec "UPDATE sequence_content SET position = $((current_pos - 1)) WHERE id = $post_id"
+}
+
+move_post_down() {
+  local seq_id="$1"
+  local post_id="$2"
+
+  local current_pos max_pos
+  current_pos=$(db "SELECT position FROM sequence_content WHERE id = $post_id")
+  max_pos=$(db "SELECT MAX(position) FROM sequence_content WHERE sequence_id = $seq_id")
+
+  ((current_pos >= max_pos)) && { echo "Already at bottom"; return; }
+
+  local next_id
+  next_id=$(db "SELECT id FROM sequence_content WHERE sequence_id = $seq_id AND position = $((current_pos + 1))")
+
+  db_exec "UPDATE sequence_content SET position = $current_pos WHERE id = $next_id"
+  db_exec "UPDATE sequence_content SET position = $((current_pos + 1)) WHERE id = $post_id"
+}
+
+swap_post_positions() {
+  local seq_id="$1"
+
+  local posts
+  posts=$(list_sequence_posts "$seq_id")
+  [[ -z "$posts" ]] && { echo "No posts in sequence"; return; }
+
+  echo
+  echo "Select FIRST post to swap:"
+  local first
+  first="$(echo "$posts" | fzf --prompt="first> " --delimiter=$'\t' --with-nth=1 \
+    --height=70% --layout=reverse --border)" || return
+
+  local first_id first_pos
+  first_id="$(echo "$first" | awk -F'\t' '{print $2}')"
+  first_pos="$(echo "$first" | awk -F'\t' '{print $3}')"
+
+  echo
+  echo "Select SECOND post to swap with:"
+  local second
+  second="$(echo "$posts" | fzf --prompt="second> " --delimiter=$'\t' --with-nth=1 \
+    --height=70% --layout=reverse --border)" || return
+
+  local second_id second_pos
+  second_id="$(echo "$second" | awk -F'\t' '{print $2}')"
+  second_pos="$(echo "$second" | awk -F'\t' '{print $3}')"
+
+  [[ "$first_id" == "$second_id" ]] && { echo "Same post selected"; return; }
+
+  db_exec "UPDATE sequence_content SET position = $second_pos WHERE id = $first_id"
+  db_exec "UPDATE sequence_content SET position = $first_pos WHERE id = $second_id"
+
+  echo "Swapped positions"
+}
+
+set_post_position() {
+  local seq_id="$1"
+
+  local posts
+  posts=$(list_sequence_posts "$seq_id")
+  [[ -z "$posts" ]] && { echo "No posts in sequence"; return; }
+
+  echo
+  echo "Select post to move:"
+  local selection
+  selection="$(echo "$posts" | fzf --prompt="select> " --delimiter=$'\t' --with-nth=1 \
+    --height=70% --layout=reverse --border)" || return
+
+  local post_id current_pos
+  post_id="$(echo "$selection" | awk -F'\t' '{print $2}')"
+  current_pos="$(echo "$selection" | awk -F'\t' '{print $3}')"
+
+  local max_pos
+  max_pos=$(db "SELECT MAX(position) FROM sequence_content WHERE sequence_id = $seq_id")
+
+  local new_pos
+  new_pos="$(prompt "New position (1-$max_pos)" "$current_pos")"
+
+  [[ "$new_pos" =~ ^[0-9]+$ ]] || { echo "Invalid position"; return; }
+  ((new_pos < 1)) && new_pos=1
+  ((new_pos > max_pos)) && new_pos=$max_pos
+
+  [[ "$new_pos" == "$current_pos" ]] && { echo "Same position"; return; }
+
+  if ((new_pos < current_pos)); then
+    # Moving up: shift posts between new_pos and current_pos-1 down by 1
+    db_exec "UPDATE sequence_content SET position = position + 1
+      WHERE sequence_id = $seq_id AND position >= $new_pos AND position < $current_pos"
+  else
+    # Moving down: shift posts between current_pos+1 and new_pos up by 1
+    db_exec "UPDATE sequence_content SET position = position - 1
+      WHERE sequence_id = $seq_id AND position > $current_pos AND position <= $new_pos"
+  fi
+
+  db_exec "UPDATE sequence_content SET position = $new_pos WHERE id = $post_id"
+  echo "Moved to position $new_pos"
+}
+
+bulk_reorder_sequence() {
+  local seq_id="$1"
+  local seq_title
+  seq_title=$(db "SELECT title FROM sequences WHERE id = $seq_id")
+
+  local posts
+  posts=$(list_sequence_posts "$seq_id")
+  [[ -z "$posts" ]] && { echo "No posts in sequence"; return; }
+
+  local tmpfile
+  tmpfile=$(mktemp)
+
+  echo "# Reorder posts for: $seq_title" > "$tmpfile"
+  echo "# Drag/reorder lines to change order (position numbers will be ignored)" >> "$tmpfile"
+  echo "# Lines starting with # are comments" >> "$tmpfile"
+  echo "# Save and exit to apply changes, or delete all lines to cancel" >> "$tmpfile"
+  echo "" >> "$tmpfile"
+
+  echo "$posts" | while IFS=$'\t' read -r display id pos type slug; do
+    echo "$id|$type|$slug|$display" >> "$tmpfile"
+  done
+
+  ${EDITOR:-vim} "$tmpfile"
+
+  local new_order=()
+  local pos=0
+  while IFS='|' read -r id type slug display; do
+    [[ "$id" =~ ^# ]] && continue
+    [[ -z "$id" ]] && continue
+    ((pos++))
+    db_exec "UPDATE sequence_content SET position = $pos WHERE id = $id"
+  done < <(grep -v '^#' "$tmpfile" | grep -v '^$')
+
+  rm -f "$tmpfile"
+  echo "Reordered sequence posts"
+}
+
+interactive_reorder_sequence() {
+  local seq_id="$1"
+
+  while true; do
+    clear
+    local seq_title
+    seq_title=$(db "SELECT title FROM sequences WHERE id = $seq_id")
+
+    echo "Reordering: $seq_title"
+    echo "─────────────────────────────────"
+
+    local posts
+    posts=$(list_sequence_posts "$seq_id")
+
+    if [[ -z "$posts" ]]; then
+      echo "(no posts)"
+      echo
+      echo "q) Back"
+      read -rp "> " _
+      return
+    fi
+
+    echo "$posts" | awk -F'\t' '{print $1}'
+    echo
+    echo "─────────────────────────────────"
+    echo "Commands:"
+    echo "  u <pos>  - Move post at position UP"
+    echo "  d <pos>  - Move post at position DOWN"
+    echo "  s        - Swap two posts"
+    echo "  m        - Move post to specific position"
+    echo "  e        - Edit order in \$EDITOR"
+    echo "  q        - Done/Back"
+    echo
+    read -rp "Command> " cmd arg
+
+    case "$cmd" in
+      u|U)
+        [[ -z "$arg" ]] && { read -rp "Position to move up> " arg; }
+        local post_id
+        post_id=$(db "SELECT id FROM sequence_content WHERE sequence_id = $seq_id AND position = $arg")
+        [[ -n "$post_id" ]] && move_post_up "$seq_id" "$post_id"
+        ;;
+      d|D)
+        [[ -z "$arg" ]] && { read -rp "Position to move down> " arg; }
+        local post_id
+        post_id=$(db "SELECT id FROM sequence_content WHERE sequence_id = $seq_id AND position = $arg")
+        [[ -n "$post_id" ]] && move_post_down "$seq_id" "$post_id"
+        ;;
+      s|S)
+        swap_post_positions "$seq_id"
+        read -rp "Press Enter…" _
+        ;;
+      m|M)
+        set_post_position "$seq_id"
+        read -rp "Press Enter…" _
+        ;;
+      e|E)
+        bulk_reorder_sequence "$seq_id"
+        read -rp "Press Enter…" _
+        ;;
+      q|Q) return ;;
+    esac
+  done
+}
+
+sequence_posts_menu() {
+  local seq_id="$1"
+
+  while true; do
+    clear
+    local seq_title post_count
+    seq_title=$(db "SELECT title FROM sequences WHERE id = $seq_id")
+    post_count=$(db "SELECT COUNT(*) FROM sequence_content WHERE sequence_id = $seq_id")
+
+    echo "Sequence: $seq_title ($post_count posts)"
+    echo "─────────────────────────────────"
+
+    local choice
+    choice="$(printf "%s\n" "View Posts" "Add Posts" "Remove Posts" "Reorder Posts" "Swap Two Posts" "Move Post to Position" "Edit Order in \$EDITOR" "Back" |
+      fzf --prompt="posts> " --height=50% --layout=reverse --border)" || return
+
+    case "$choice" in
+      "View Posts")
+        echo
+        list_sequence_posts "$seq_id" | awk -F'\t' '{print $1}'
+        echo
+        read -rp "Press Enter…" _
+        ;;
+      "Add Posts")
+        add_post_to_sequence "$seq_id"
+        read -rp "Press Enter…" _
+        ;;
+      "Remove Posts")
+        remove_post_from_sequence "$seq_id"
+        read -rp "Press Enter…" _
+        ;;
+      "Reorder Posts")
+        interactive_reorder_sequence "$seq_id"
+        ;;
+      "Swap Two Posts")
+        swap_post_positions "$seq_id"
+        read -rp "Press Enter…" _
+        ;;
+      "Move Post to Position")
+        set_post_position "$seq_id"
+        read -rp "Press Enter…" _
+        ;;
+      "Edit Order in \$EDITOR")
+        bulk_reorder_sequence "$seq_id"
+        read -rp "Press Enter…" _
+        ;;
+      "Back") return ;;
+    esac
+  done
+}
+
+sequence_menu() {
+  while true; do
+    clear
+    print_banner
+    echo "Sequences"
+    echo "─────────────────────────────────"
+
+    local choice
+    choice="$(printf "%s\n" "List/Edit Sequence" "Create New" "Bulk Toggle State" "Back" |
+      fzf --prompt="sequences> " --height=50% --layout=reverse --border)" || return
+
+    case "$choice" in
+      "List/Edit Sequence")
+        local selection id
+        selection="$(list_sequences | fzf --prompt="select> " --delimiter=$'\t' --with-nth=1 \
+          --height=70% --layout=reverse --border \
+          --preview="
+            id=\$(echo {} | awk -F'\t' '{print \$2}')
+            echo 'Posts in sequence:'
+            echo '─────────────────────────────────'
+            sqlite3 '$DB_PATH' \"
+              SELECT sc.position || '. ' || COALESCE(
+                (SELECT title FROM essays WHERE slug = sc.content_slug),
+                (SELECT title FROM notes WHERE slug = sc.content_slug),
+                (SELECT title FROM papers WHERE slug = sc.content_slug),
+                (SELECT title FROM reviews WHERE slug = sc.content_slug),
+                (SELECT title FROM blog WHERE slug = sc.content_slug),
+                sc.content_slug
+              ) || ' [' || sc.content_type || ']'
+              FROM sequence_content sc
+              WHERE sc.sequence_id = \$id
+              ORDER BY sc.position
+            \"
+          ")" || continue
+        id="$(echo "$selection" | awk -F'\t' '{print $2}')"
+
+        while true; do
+          local title state post_count act
+          title=$(db "SELECT title FROM sequences WHERE id = $id")
+          state=$(db "SELECT state FROM sequences WHERE id = $id")
+          post_count=$(db "SELECT COUNT(*) FROM sequence_content WHERE sequence_id = $id")
+
+          act="$(printf "%s\n" "Edit properties" "Manage posts" "Toggle state" "Delete" "Back" |
+            fzf --prompt="$title> " --height=50% --layout=reverse --border \
+                --header="Sequence: $title [$state] ($post_count posts)")" || break
+
+          case "$act" in
+            "Edit properties") edit_sequence "$id" ;;
+            "Manage posts") sequence_posts_menu "$id" ;;
+            "Toggle state")
+              local new
+              new=$([[ "$state" == "active" ]] && echo "hidden" || echo "active")
+              db_exec "UPDATE sequences SET state='$new', updated_at=datetime('now') WHERE id=$id"
+              echo "Toggled to $new"
+              read -rp "Press Enter…" _
+              ;;
+            "Delete") delete_sequence "$id"; break ;;
+            "Back") break ;;
+          esac
+        done
+        ;;
+      "Create New")
+        create_sequence
+        read -rp "Press Enter…" _
+        ;;
+      "Bulk Toggle State")
+        echo
+        echo "Select sequences to toggle (TAB to select multiple):"
+        local selections
+        selections="$(list_sequences | fzf --multi --prompt="toggle> " --delimiter=$'\t' --with-nth=1 \
+          --height=70% --layout=reverse --border \
+          --header='TAB=select multiple, ENTER=confirm, ESC=cancel')" || continue
+
+        [[ -z "$selections" ]] && continue
+
+        local count=0
+        while IFS=$'\t' read -r _ id _; do
+          local current_state new_state
+          current_state=$(db "SELECT state FROM sequences WHERE id = $id")
+          new_state=$([[ "$current_state" == "active" ]] && echo "hidden" || echo "active")
+          db_exec "UPDATE sequences SET state='$new_state', updated_at=datetime('now') WHERE id=$id"
+          ((count++))
+        done <<< "$selections"
+
+        echo "Toggled $count sequences"
+        read -rp "Press Enter…" _
+        ;;
+      "Back") return ;;
+    esac
+  done
+}
+
+###############################################################################
+# content/post functions
+###############################################################################
+
+# Content directory mapping
+get_content_dir() {
+  local table="$1"
+  echo "$PROJECT_ROOT/app/(content)/$table/content"
+}
+
+# Certainty options (stored as 'confidence' in database)
+CERTAINTY_OPTIONS="certain
+highly likely
+likely
+possible
+unlikely
+highly unlikely
+remote
+impossible"
+
+# Importance options (1-10)
+IMPORTANCE_OPTIONS="1
+2
+3
+4
+5
+6
+7
+8
+9
+10"
+
+# Create standard content (essays, blog, fiction, news, notes, ocs, papers, progymnasmata, reviews)
+create_standard_content() {
+  local table="$1"
+  local title preview cover_image category_slug status confidence importance start_date end_date slug
+
+  title="$(prompt 'Title')"
+  [[ -z "$title" ]] && { echo "Title required"; return 1; }
+
+  slug="$(slugify "$title")"
+
+  # Check slug uniqueness across ALL content types
+  slug="$(get_unique_slug "$slug")"
+  [[ -z "$slug" ]] && { echo "Slug required"; return 1; }
+
+  preview="$(prompt 'Preview (optional)')"
+  cover_image="$(prompt 'Cover Image URL (optional)')"
+
+  # Select category
+  local cats
+  cats=$(db "SELECT slug FROM categories ORDER BY title")
+  echo
+  echo "Select category:"
+  category_slug="$(echo "$cats" | fzf --prompt="Category> " --height=50% --layout=reverse --border)" || category_slug=""
+  [[ -z "$category_slug" ]] && { echo "Category required"; return 1; }
+
+  status="$(echo "$STATUS_OPTIONS" | fzf --prompt="Status> " --height=50% --layout=reverse --border)" || status=""
+  [[ -z "$status" ]] && { echo "Status required"; return 1; }
+
+  confidence="$(echo "$CERTAINTY_OPTIONS" | fzf --prompt="Certainty> " --height=50% --layout=reverse --border)" || confidence=""
+  [[ -z "$confidence" ]] && { echo "Certainty required"; return 1; }
+
+  importance="$(echo "$IMPORTANCE_OPTIONS" | fzf --prompt="Importance (1-10)> " --height=50% --layout=reverse --border)" || importance=""
+  [[ -z "$importance" ]] && { echo "Importance required"; return 1; }
+
+  # Start date is REQUIRED
+  while true; do
+    start_date="$(prompt 'Start Date (YYYY-MM-DD, required)' "$(date +%Y-%m-%d)")"
+    if [[ "$start_date" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+      break
+    fi
+    echo "Start date is required and must be in YYYY-MM-DD format"
+  done
+
+  # End date is optional
+  end_date="$(prompt 'End Date (YYYY-MM-DD, optional - clear to skip)' "$(date +%Y-%m-%d)")"
+
+  # Create directory if needed
+  local content_dir
+  content_dir="$(get_content_dir "$table")/$category_slug"
+  mkdir -p "$content_dir"
+
+  # Create MDX file
+  local mdx_path="$content_dir/$slug.mdx"
+  if [[ -f "$mdx_path" ]]; then
+    echo "Error: File already exists at $mdx_path"
+    return 1
+  fi
+
+  # Write starter MDX content
+  cat > "$mdx_path" << 'MDXEOF'
+# Introduction
+
+Start writing your content here...
+MDXEOF
+
+  # Insert into database
+  local end_date_sql
+  [[ -n "$end_date" ]] && end_date_sql="'$end_date'" || end_date_sql="NULL"
+  db_exec "INSERT INTO $table (slug, title, preview, cover_image, category_slug, status, confidence, importance, start_date, end_date, state)
+    VALUES ('$slug', '$(echo "$title" | sed "s/'/''/g")', '$(echo "$preview" | sed "s/'/''/g")', '$cover_image', '$category_slug', '$status', '$confidence', $importance, '$start_date', $end_date_sql, 'active')"
+
+  echo
+  echo "Created $table entry: $title"
+  echo "  Slug: $slug"
+  echo "  Category: $category_slug"
+  echo "  File: $mdx_path"
+  echo
+  echo "Opening in editor..."
+  ${EDITOR:-vim} "$mdx_path"
+}
+
+# Check if slug exists in ANY content table
+slug_exists() {
+  local slug="$1"
+  local total=0
+  for t in "${content_tables[@]}"; do
+    local count
+    count=$(db "SELECT COUNT(*) FROM $t WHERE slug = '$slug'" 2>/dev/null) || continue
+    ((total += count))
+  done
+  ((total > 0))
+}
+
+# Get unique slug with user input
+get_unique_slug() {
+  local initial_slug="$1"
+  local slug="$initial_slug"
+
+  while slug_exists "$slug"; do
+    echo "Error: Slug '$slug' already exists in another content type"
+    slug="$(prompt 'Enter a unique slug' "$slug")"
+    [[ -z "$slug" ]] && return 1
+    slug="$(slugify "$slug")"
+  done
+  echo "$slug"
+}
+
+# Verse type list
+VERSE_TYPES="antiphon
+cinquain
+concrete-poem
+elegy
+free-verse
+haiku
+light-verse
+limerick
+list-poem
+lune
+lyric
+ode
+quatrain-ballad-meter
+slam-poetry
+sonnet
+villanelle"
+
+# Status options
+STATUS_OPTIONS="Abandoned
+Notes
+Draft
+In Progress
+Finished"
+
+# Create verse content (special handling for verse_type and collection)
+create_verse_content() {
+  local title preview cover_image verse_type collection status confidence importance start_date end_date slug
+
+  title="$(prompt 'Title')"
+  [[ -z "$title" ]] && { echo "Title required"; return 1; }
+
+  slug="$(slugify "$title")"
+
+  # Check slug uniqueness across ALL content types
+  slug="$(get_unique_slug "$slug")"
+  [[ -z "$slug" ]] && { echo "Slug required"; return 1; }
+
+  preview="$(prompt 'Preview (optional)')"
+  cover_image="$(prompt 'Cover Image URL (optional)')"
+
+  echo
+  echo "Select verse type (determines URL path):"
+  verse_type="$(echo "$VERSE_TYPES" | fzf --prompt="Verse Type> " --height=50% --layout=reverse --border)" || verse_type=""
+  [[ -z "$verse_type" ]] && { echo "Verse type required"; return 1; }
+
+  collection="$(prompt 'Collection (optional)')"
+
+  status="$(echo "$STATUS_OPTIONS" | fzf --prompt="Status> " --height=50% --layout=reverse --border)" || status=""
+  [[ -z "$status" ]] && { echo "Status required"; return 1; }
+
+  confidence="$(echo "$CERTAINTY_OPTIONS" | fzf --prompt="Certainty> " --height=50% --layout=reverse --border)" || confidence=""
+  [[ -z "$confidence" ]] && { echo "Certainty required"; return 1; }
+
+  importance="$(echo "$IMPORTANCE_OPTIONS" | fzf --prompt="Importance (1-10)> " --height=50% --layout=reverse --border)" || importance=""
+  [[ -z "$importance" ]] && { echo "Importance required"; return 1; }
+
+  # Start date is REQUIRED
+  while true; do
+    start_date="$(prompt 'Start Date (YYYY-MM-DD, required)' "$(date +%Y-%m-%d)")"
+    if [[ "$start_date" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+      break
+    fi
+    echo "Start date is required and must be in YYYY-MM-DD format"
+  done
+
+  # End date is optional
+  end_date="$(prompt 'End Date (YYYY-MM-DD, optional - clear to skip)' "$(date +%Y-%m-%d)")"
+
+  # Create directory (uses verse_type for path)
+  local content_dir
+  content_dir="$(get_content_dir "verse")/$verse_type"
+  mkdir -p "$content_dir"
+
+  # Create MDX file
+  local mdx_path="$content_dir/$slug.mdx"
+  if [[ -f "$mdx_path" ]]; then
+    echo "Error: File already exists at $mdx_path"
+    return 1
+  fi
+
+  # Write starter verse content (minimal for poetry)
+  cat > "$mdx_path" << 'MDXEOF'
+MDXEOF
+
+  # Insert into database
+  local end_date_sql
+  [[ -n "$end_date" ]] && end_date_sql="'$end_date'" || end_date_sql="NULL"
+  db_exec "INSERT INTO verse (slug, title, preview, cover_image, category_slug, verse_type, collection, status, confidence, importance, start_date, end_date, state)
+    VALUES ('$slug', '$(echo "$title" | sed "s/'/''/g")', '$(echo "$preview" | sed "s/'/''/g")', '$cover_image', '$verse_type', '$verse_type', '$(echo "$collection" | sed "s/'/''/g")', '$status', '$confidence', $importance, '$start_date', $end_date_sql, 'active')"
+
+  echo
+  echo "Created verse entry: $title"
+  echo "  Slug: $slug"
+  echo "  Type: $verse_type"
+  echo "  Collection: $collection"
+  echo "  File: $mdx_path"
+  echo
+  echo "Opening in editor..."
+  ${EDITOR:-vim} "$mdx_path"
+}
+
+# Create content dispatcher
+create_content() {
+  local table="$1"
+
+  if [[ "$table" == "verse" ]]; then
+    create_verse_content
+  elif [[ "$table" == "sequences" ]]; then
+    create_sequence
+  else
+    create_standard_content "$table"
+  fi
+}
+
+# Edit verse content
+edit_verse_content() {
+  local id="$1"
+
+  # Fetch current values
+  local old_slug old_title old_preview old_vtype old_coll old_status old_conf old_imp old_start old_end old_state old_cover
+
+  old_slug=$(db "SELECT slug FROM verse WHERE id = $id")
+  old_title=$(db "SELECT title FROM verse WHERE id = $id")
+  old_preview=$(db "SELECT COALESCE(preview, '') FROM verse WHERE id = $id")
+  old_vtype=$(db "SELECT COALESCE(verse_type, '') FROM verse WHERE id = $id")
+  old_coll=$(db "SELECT COALESCE(collection, '') FROM verse WHERE id = $id")
+  old_status=$(db "SELECT COALESCE(status, 'Draft') FROM verse WHERE id = $id")
+  old_conf=$(db "SELECT COALESCE(confidence, 'likely') FROM verse WHERE id = $id")
+  old_imp=$(db "SELECT COALESCE(importance, 5) FROM verse WHERE id = $id")
+  old_start=$(db "SELECT COALESCE(start_date, '') FROM verse WHERE id = $id")
+  old_end=$(db "SELECT COALESCE(end_date, '') FROM verse WHERE id = $id")
+  old_state=$(db "SELECT COALESCE(state, 'active') FROM verse WHERE id = $id")
+  old_cover=$(db "SELECT COALESCE(cover_image, '') FROM verse WHERE id = $id")
+
+  while true; do
+    local choice
+    choice="$(printf "%s\n" \
+      "Title: $old_title" \
+      "Preview: ${old_preview:0:50}..." \
+      "Verse Type: $old_vtype" \
+      "Collection: $old_coll" \
+      "Status: $old_status" \
+      "Certainty: $old_conf" \
+      "Importance: $old_imp" \
+      "Start Date: $old_start" \
+      "End Date: $old_end" \
+      "State: $old_state" \
+      "Cover Image: ${old_cover:0:40}..." \
+      "Edit MDX file" \
+      "Save changes" \
+      "Back" |
+      fzf --prompt="edit $old_title> " --height=70% --layout=reverse --border \
+          --header="Editing Verse: $old_title")" || return
+
+    case "$choice" in
+      "Title:"*)
+        local new_title new_slug
+        new_title="$(prompt 'Title' "$old_title")"
+        [[ -z "$new_title" ]] && continue
+        new_slug="$(slugify "$new_title")"
+        if [[ "$new_slug" != "$old_slug" ]]; then
+          if slug_exists "$new_slug"; then
+            echo "Error: Slug '$new_slug' already exists"
+            read -rp "Press Enter…" _
+            continue
+          fi
+        fi
+        old_title="$new_title"
+        old_slug="$new_slug"
+        ;;
+      "Preview:"*) old_preview="$(prompt 'Preview' "$old_preview")" ;;
+      "Verse Type:"*)
+        local new_vtype
+        new_vtype="$(echo "$VERSE_TYPES" | fzf --prompt="Verse Type> " --height=50% --layout=reverse --border --query="$old_vtype")" || continue
+        [[ -n "$new_vtype" ]] && old_vtype="$new_vtype"
+        ;;
+      "Collection:"*) old_coll="$(prompt 'Collection' "$old_coll")" ;;
+      "Status:"*)
+        local new_status
+        new_status="$(echo "$STATUS_OPTIONS" | fzf --prompt="Status> " --height=50% --layout=reverse --border --query="$old_status")" || continue
+        [[ -n "$new_status" ]] && old_status="$new_status"
+        ;;
+      "Certainty:"*)
+        local new_conf
+        new_conf="$(echo "$CERTAINTY_OPTIONS" | fzf --prompt="Certainty> " --height=50% --layout=reverse --border --query="$old_conf")" || continue
+        [[ -n "$new_conf" ]] && old_conf="$new_conf"
+        ;;
+      "Importance:"*)
+        local new_imp
+        new_imp="$(echo "$IMPORTANCE_OPTIONS" | fzf --prompt="Importance (1-10)> " --height=50% --layout=reverse --border --query="$old_imp")" || continue
+        [[ -n "$new_imp" ]] && old_imp="$new_imp"
+        ;;
+      "Start Date:"*)
+        local new_start
+        new_start="$(prompt 'Start Date (YYYY-MM-DD)' "$old_start")"
+        if [[ "$new_start" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+          old_start="$new_start"
+        else
+          echo "Start date must be in YYYY-MM-DD format"
+          read -rp "Press Enter…" _
+        fi
+        ;;
+      "End Date:"*)
+        local new_end
+        new_end="$(prompt 'End Date (YYYY-MM-DD, clear to remove)' "$old_end")"
+        if [[ -z "$new_end" ]] || [[ "$new_end" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+          old_end="$new_end"
+        else
+          echo "End date must be in YYYY-MM-DD format or empty"
+          read -rp "Press Enter…" _
+        fi
+        ;;
+      "State:"*)
+        local new_state
+        new_state="$(printf "active\nhidden" | fzf --prompt="State> " --height=50% --layout=reverse --border)" || continue
+        [[ -n "$new_state" ]] && old_state="$new_state"
+        ;;
+      "Cover Image:"*) old_cover="$(prompt 'Cover Image URL' "$old_cover")" ;;
+      "Edit MDX file")
+        local mdx_path
+        mdx_path="$(get_content_dir "verse")/$old_vtype/$old_slug.mdx"
+        if [[ -f "$mdx_path" ]]; then
+          ${EDITOR:-vim} "$mdx_path"
+        else
+          echo "MDX file not found at $mdx_path"
+          read -rp "Press Enter…" _
+        fi
+        ;;
+      "Save changes")
+        local end_date_sql
+        [[ -n "$old_end" ]] && end_date_sql="'$old_end'" || end_date_sql="NULL"
+        db_exec "UPDATE verse SET
+          slug='$old_slug',
+          title='$(echo "$old_title" | sed "s/'/''/g")',
+          preview='$(echo "$old_preview" | sed "s/'/''/g")',
+          category_slug='$old_vtype',
+          verse_type='$old_vtype',
+          collection='$(echo "$old_coll" | sed "s/'/''/g")',
+          status='$old_status',
+          confidence='$old_conf',
+          importance=$old_imp,
+          start_date='$old_start',
+          end_date=$end_date_sql,
+          state='$old_state',
+          cover_image='$old_cover',
+          updated_at=datetime('now')
+          WHERE id=$id"
+        echo "Saved!"
+        read -rp "Press Enter…" _
+        return
+        ;;
+      "Back") return ;;
+    esac
+  done
+}
+
+# Open content MDX file in editor
+open_content_file() {
+  local table="$1"
+  local id="$2"
+
+  local slug category_slug verse_type
+  if [[ "$table" == "verse" ]]; then
+    read -r slug verse_type <<< "$(db "SELECT slug, verse_type FROM verse WHERE id = $id")"
+    local mdx_path
+    mdx_path="$(get_content_dir "$table")/$verse_type/$slug.mdx"
+  else
+    read -r slug category_slug <<< "$(db "SELECT slug, category_slug FROM $table WHERE id = $id")"
+    local mdx_path
+    mdx_path="$(get_content_dir "$table")/$category_slug/$slug.mdx"
+  fi
+
+  if [[ -f "$mdx_path" ]]; then
+    ${EDITOR:-vim} "$mdx_path"
+  else
+    echo "MDX file not found at $mdx_path"
+    read -rp "Create it? (y/N)> " confirm
+    if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
+      mkdir -p "$(dirname "$mdx_path")"
+      echo "# Start writing..." > "$mdx_path"
+      ${EDITOR:-vim} "$mdx_path"
+    fi
+  fi
+}
+
+list_content() {
+  local table="$1"
+  db "SELECT title || ' [' || COALESCE(state, 'active') || ']' || char(9) || id || char(9) || slug FROM $table ORDER BY start_date DESC"
+}
+
+edit_content() {
+  local table="$1"
+  local id="$2"
+
+  # Fetch current values individually to avoid tab parsing issues
+  local old_slug old_title old_preview old_cat old_status old_conf old_imp old_start old_end old_state old_cover
+
+  old_slug=$(db "SELECT slug FROM $table WHERE id = $id")
+  old_title=$(db "SELECT title FROM $table WHERE id = $id")
+  old_preview=$(db "SELECT COALESCE(preview, '') FROM $table WHERE id = $id")
+  old_cat=$(db "SELECT COALESCE(category_slug, '') FROM $table WHERE id = $id")
+  old_status=$(db "SELECT COALESCE(status, 'Draft') FROM $table WHERE id = $id")
+  old_conf=$(db "SELECT COALESCE(confidence, 'likely') FROM $table WHERE id = $id")
+  old_imp=$(db "SELECT COALESCE(importance, 5) FROM $table WHERE id = $id")
+  old_start=$(db "SELECT COALESCE(start_date, '') FROM $table WHERE id = $id")
+  old_end=$(db "SELECT COALESCE(end_date, '') FROM $table WHERE id = $id")
+  old_state=$(db "SELECT COALESCE(state, 'active') FROM $table WHERE id = $id")
+  old_cover=$(db "SELECT COALESCE(cover_image, '') FROM $table WHERE id = $id")
+
+  while true; do
+    local choice
+    choice="$(printf "%s\n" \
+      "Title: $old_title" \
+      "Preview: ${old_preview:0:50}..." \
+      "Category: $old_cat" \
+      "Status: $old_status" \
+      "Certainty: $old_conf" \
+      "Importance: $old_imp" \
+      "Start Date: $old_start" \
+      "End Date: $old_end" \
+      "State: $old_state" \
+      "Cover Image: ${old_cover:0:40}..." \
+      "Edit MDX file" \
+      "Save changes" \
+      "Back" |
+      fzf --prompt="edit $old_title> " --height=70% --layout=reverse --border \
+          --header="Editing: $old_title")" || return
+
+    case "$choice" in
+      "Title:"*)
+        local new_title new_slug
+        new_title="$(prompt 'Title' "$old_title")"
+        [[ -z "$new_title" ]] && continue
+        new_slug="$(slugify "$new_title")"
+        if [[ "$new_slug" != "$old_slug" ]]; then
+          if slug_exists "$new_slug"; then
+            echo "Error: Slug '$new_slug' already exists"
+            read -rp "Press Enter…" _
+            continue
+          fi
+        fi
+        old_title="$new_title"
+        old_slug="$new_slug"
+        ;;
+      "Preview:"*) old_preview="$(prompt 'Preview' "$old_preview")" ;;
+      "Category:"*)
+        local cats new_cat
+        cats=$(db "SELECT slug FROM categories ORDER BY title")
+        new_cat="$(echo "$cats" | fzf --prompt="Category> " --height=50% --layout=reverse --border --query="$old_cat")" || continue
+        [[ -n "$new_cat" ]] && old_cat="$new_cat"
+        ;;
+      "Status:"*)
+        local new_status
+        new_status="$(echo "$STATUS_OPTIONS" | fzf --prompt="Status> " --height=50% --layout=reverse --border --query="$old_status")" || continue
+        [[ -n "$new_status" ]] && old_status="$new_status"
+        ;;
+      "Certainty:"*)
+        local new_conf
+        new_conf="$(echo "$CERTAINTY_OPTIONS" | fzf --prompt="Certainty> " --height=50% --layout=reverse --border --query="$old_conf")" || continue
+        [[ -n "$new_conf" ]] && old_conf="$new_conf"
+        ;;
+      "Importance:"*)
+        local new_imp
+        new_imp="$(echo "$IMPORTANCE_OPTIONS" | fzf --prompt="Importance (1-10)> " --height=50% --layout=reverse --border --query="$old_imp")" || continue
+        [[ -n "$new_imp" ]] && old_imp="$new_imp"
+        ;;
+      "Start Date:"*)
+        local new_start
+        new_start="$(prompt 'Start Date (YYYY-MM-DD)' "$old_start")"
+        if [[ "$new_start" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+          old_start="$new_start"
+        else
+          echo "Start date must be in YYYY-MM-DD format"
+          read -rp "Press Enter…" _
+        fi
+        ;;
+      "End Date:"*)
+        local new_end
+        new_end="$(prompt 'End Date (YYYY-MM-DD, clear to remove)' "$old_end")"
+        if [[ -z "$new_end" ]] || [[ "$new_end" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+          old_end="$new_end"
+        else
+          echo "End date must be in YYYY-MM-DD format or empty"
+          read -rp "Press Enter…" _
+        fi
+        ;;
+      "State:"*)
+        local new_state
+        new_state="$(printf "active\nhidden" | fzf --prompt="State> " --height=50% --layout=reverse --border)" || continue
+        [[ -n "$new_state" ]] && old_state="$new_state"
+        ;;
+      "Cover Image:"*) old_cover="$(prompt 'Cover Image URL' "$old_cover")" ;;
+      "Edit MDX file") open_content_file "$table" "$id" ;;
+      "Save changes")
+        local end_date_sql
+        [[ -n "$old_end" ]] && end_date_sql="'$old_end'" || end_date_sql="NULL"
+        db_exec "UPDATE $table SET
+          slug='$old_slug',
+          title='$(echo "$old_title" | sed "s/'/''/g")',
+          preview='$(echo "$old_preview" | sed "s/'/''/g")',
+          category_slug='$old_cat',
+          status='$old_status',
+          confidence='$old_conf',
+          importance=$old_imp,
+          start_date='$old_start',
+          end_date=$end_date_sql,
+          state='$old_state',
+          cover_image='$old_cover',
+          updated_at=datetime('now')
+          WHERE id=$id"
+        echo "Saved!"
+        read -rp "Press Enter…" _
+        return
+        ;;
+      "Back") return ;;
+    esac
+  done
+}
+
+toggle_content_state() {
+  local table="$1"
+
+  echo
+  echo "Select entries to toggle (TAB to select multiple, ENTER to confirm):"
+
+  local selections
+  selections="$(list_content "$table" | fzf --multi --prompt="toggle> " --delimiter=$'\t' --with-nth=1 \
+    --height=70% --layout=reverse --border \
+    --header='TAB=select multiple, ENTER=confirm, ESC=cancel')" || return
+
+  [[ -z "$selections" ]] && return
+
+  local count=0
+  while IFS=$'\t' read -r _ id _; do
+    local current_state new_state
+    current_state=$(db "SELECT state FROM $table WHERE id = $id")
+    new_state=$([[ "$current_state" == "active" ]] && echo "hidden" || echo "active")
+    db_exec "UPDATE $table SET state='$new_state', updated_at=datetime('now') WHERE id=$id"
+    ((count++))
+  done <<< "$selections"
+
+  echo "Toggled $count entries"
+}
+
+bulk_set_state() {
+  local table="$1"
+  local target_state="$2"
+
+  echo
+  echo "Select entries to set to $target_state (TAB to select multiple):"
+
+  local selections
+  selections="$(list_content "$table" | fzf --multi --prompt="$target_state> " --delimiter=$'\t' --with-nth=1 \
+    --height=70% --layout=reverse --border \
+    --header='TAB=select multiple, ENTER=confirm, ESC=cancel')" || return
+
+  [[ -z "$selections" ]] && return
+
+  local count=0
+  while IFS=$'\t' read -r _ id _; do
+    db_exec "UPDATE $table SET state='$target_state', updated_at=datetime('now') WHERE id=$id"
+    ((count++))
+  done <<< "$selections"
+
+  echo "Set $count entries to $target_state"
+}
+
+###############################################################################
+# menus
+###############################################################################
+
+category_menu() {
+  while true; do
+    clear
+    print_banner
+    echo "Categories"
+    echo "─────────────────────────────────"
+
+    local choice
+    choice="$(printf "%s\n" "List/Edit Category" "Create New" "Bulk Toggle State" "Back" |
+      fzf --prompt="categories> " --height=50% --layout=reverse --border)" || return
+
+    case "$choice" in
+      "List/Edit Category")
+        local selection id slug
+        selection="$(list_categories | fzf --prompt="select> " --delimiter=$'\t' --with-nth=1 \
+          --height=70% --layout=reverse --border)" || continue
+        id="$(echo "$selection" | awk -F'\t' '{print $2}')"
+        slug="$(echo "$selection" | awk -F'\t' '{print $3}')"
+
+        while true; do
+          echo
+          echo "Category: $(db "SELECT title || ' [' || state || ']' FROM categories WHERE id = $id")"
+          echo "1) Edit"
+          echo "2) List content"
+          echo "3) Toggle state"
+          echo "4) Delete"
+          echo "5) Back"
+          read -rp "Action> " act
+
+          case "$act" in
+            1) edit_category "$id" ;;
+            2) list_content_by_category "$slug"; read -rp "Press Enter…" _ ;;
+            3)
+              local current new
+              current=$(db "SELECT state FROM categories WHERE id = $id")
+              new=$([[ "$current" == "active" ]] && echo "hidden" || echo "active")
+              db_exec "UPDATE categories SET state='$new' WHERE id=$id"
+              echo "Toggled to $new"
+              ;;
+            4) delete_category "$id"; break ;;
+            5) break ;;
+          esac
+        done
+        ;;
+      "Create New")
+        create_category
+        read -rp "Press Enter…" _
+        ;;
+      "Bulk Toggle State")
+        toggle_categories_state
+        read -rp "Press Enter…" _
+        ;;
+      "Back") return ;;
+    esac
+  done
+}
+
+tag_menu() {
+  while true; do
+    clear
+    print_banner
+    echo "Tags"
+    echo "─────────────────────────────────"
+
+    local choice
+    choice="$(printf "%s\n" "List/Edit Tag" "Create New" "Bulk Toggle State" "Back" |
+      fzf --prompt="tags> " --height=50% --layout=reverse --border)" || return
+
+    case "$choice" in
+      "List/Edit Tag")
+        local selection id
+        selection="$(list_tags | fzf --prompt="select> " --delimiter=$'\t' --with-nth=1 \
+          --height=70% --layout=reverse --border)" || continue
+        id="$(echo "$selection" | awk -F'\t' '{print $2}')"
+
+        while true; do
+          echo
+          echo "Tag: $(db "SELECT title || ' [' || state || ']' FROM tags WHERE id = $id")"
+          echo "1) Edit"
+          echo "2) List content"
+          echo "3) Toggle state"
+          echo "4) Delete"
+          echo "5) Back"
+          read -rp "Action> " act
+
+          case "$act" in
+            1) edit_tag "$id" ;;
+            2) list_content_by_tag "$id"; read -rp "Press Enter…" _ ;;
+            3)
+              local current new
+              current=$(db "SELECT state FROM tags WHERE id = $id")
+              new=$([[ "$current" == "active" ]] && echo "hidden" || echo "active")
+              db_exec "UPDATE tags SET state='$new' WHERE id=$id"
+              echo "Toggled to $new"
+              ;;
+            4) delete_tag "$id"; break ;;
+            5) break ;;
+          esac
+        done
+        ;;
+      "Create New")
+        create_tag
+        read -rp "Press Enter…" _
+        ;;
+      "Bulk Toggle State")
+        toggle_tags_state
+        read -rp "Press Enter…" _
+        ;;
+      "Back") return ;;
+    esac
+  done
+}
+
+content_menu() {
+  while true; do
+    clear
+    print_banner
+    echo "Content"
+    echo "─────────────────────────────────"
+
+    local table
+    table="$(printf "%s\n" "${content_tables[@]}" "Back" |
+      fzf --prompt="content type> " --height=50% --layout=reverse --border)" || return
+
+    [[ "$table" == "Back" ]] && return
+
+    while true; do
+      clear
+      print_banner
+      local count
+      count=$(db "SELECT COUNT(*) FROM $table")
+      echo "Content: $table ($count entries)"
+      echo "─────────────────────────────────"
+
+      local choice
+      choice="$(printf "%s\n" "Create New" "List/Edit Entry" "Bulk Toggle State" "Bulk Set Active" "Bulk Set Hidden" "Back" |
+        fzf --prompt="$table> " --height=50% --layout=reverse --border)" || break
+
+      case "$choice" in
+        "Create New")
+          create_content "$table"
+          read -rp "Press Enter…" _
+          ;;
+        "List/Edit Entry")
+          local selection id
+          selection="$(list_content "$table" | fzf --prompt="select> " --delimiter=$'\t' --with-nth=1 \
+            --height=70% --layout=reverse --border \
+            --preview="
+              id=\$(echo {} | awk -F'\t' '{print \$2}')
+              sqlite3 '$DB_PATH' \"
+                SELECT
+                  'Title:      ' || title || char(10) ||
+                  'Slug:       ' || slug || char(10) ||
+                  'Category:   ' || COALESCE(category_slug, '') || char(10) ||
+                  'Status:     ' || COALESCE(status, '') || char(10) ||
+                  'Confidence: ' || COALESCE(confidence, '') || char(10) ||
+                  'Importance: ' || COALESCE(importance, '') || char(10) ||
+                  'Start:      ' || COALESCE(start_date, '') || char(10) ||
+                  'End:        ' || COALESCE(end_date, '') || char(10) ||
+                  'State:      ' || COALESCE(state, '') || char(10) ||
+                  char(10) || 'Preview:' || char(10) ||
+                  COALESCE(preview, '')
+                FROM $table WHERE id = \$id
+              \"
+            ")" || continue
+          id="$(echo "$selection" | awk -F'\t' '{print $2}')"
+
+          while true; do
+            local title state act
+            title=$(db "SELECT title FROM $table WHERE id = $id")
+            state=$(db "SELECT state FROM $table WHERE id = $id")
+
+            act="$(printf "%s\n" "Edit properties" "Edit MDX file" "Toggle state" "Back" |
+              fzf --prompt="$title> " --height=50% --layout=reverse --border \
+                  --header="Entry: $title [$state]")" || break
+
+            case "$act" in
+              "Edit properties")
+                if [[ "$table" == "verse" ]]; then
+                  edit_verse_content "$id"
+                else
+                  edit_content "$table" "$id"
+                fi
+                ;;
+              "Edit MDX file") open_content_file "$table" "$id" ;;
+              "Toggle state")
+                local new
+                new=$([[ "$state" == "active" ]] && echo "hidden" || echo "active")
+                db_exec "UPDATE $table SET state='$new', updated_at=datetime('now') WHERE id=$id"
+                echo "Toggled to $new"
+                read -rp "Press Enter…" _
+                ;;
+              "Back") break ;;
+            esac
+          done
+          ;;
+        "Bulk Toggle State")
+          toggle_content_state "$table"
+          read -rp "Press Enter…" _
+          ;;
+        "Bulk Set Active")
+          bulk_set_state "$table" "active"
+          read -rp "Press Enter…" _
+          ;;
+        "Bulk Set Hidden")
+          bulk_set_state "$table" "hidden"
+          read -rp "Press Enter…" _
+          ;;
+        "Back") break ;;
+      esac
+    done
+  done
+}
+
+main_menu() {
+  while true; do
+    clear
+    print_banner
+
+    local choice
+    choice="$(printf "%s\n" "Manage Content" "Manage Sequences" "Manage Categories" "Manage Tags" "Quit" |
+      fzf --prompt="main> " --height=50% --layout=reverse --border)" || exit 0
+
+    case "$choice" in
+      "Manage Content") content_menu ;;
+      "Manage Sequences") sequence_menu ;;
+      "Manage Categories") category_menu ;;
+      "Manage Tags") tag_menu ;;
+      "Quit") exit 0 ;;
+    esac
+  done
+}
+
+main_menu

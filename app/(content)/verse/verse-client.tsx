@@ -161,7 +161,7 @@ export function VerseClient({ initialType = "All", verseTypes, poems }: VerseCli
   const headerData = getHeaderData()
 
   return (
-    <main className="max-w-2xl mx-auto px-4 py-12">
+    <main className="container max-w-[672px] mx-auto px-4 py-12">
       <PageHeader {...headerData} />
 
       <Navigation

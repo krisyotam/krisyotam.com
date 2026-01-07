@@ -17,7 +17,7 @@
 // Imports
 // =============================================================================
 
-import { VerseHeader } from "@/components/verse-header"
+import { Header, type HeaderStatus, type HeaderConfidence } from "@/components/core/header"
 import { Footer } from "@/components/footer"
 import { Citation } from "@/components/citation"
 import { Comments } from "@/components/core/comments"
@@ -27,9 +27,6 @@ import type { VersePost } from "@/lib/data"
 // =============================================================================
 // Types
 // =============================================================================
-
-type VerseStatus = "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
-type VerseConfidence = "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"
 
 interface PoemPageClientProps {
   poem: VersePost
@@ -73,6 +70,8 @@ export default function PoemPageClient({ poem, type, slug }: PoemPageClientProps
   }, [type, slug])
 
   const tags = poem.tags || []
+  const verseType = poem.verse_type ?? ""
+  const typeSlug = verseType.toLowerCase().replace(/\s+/g, "-")
 
   // =============================================================================
   // Helpers
@@ -111,18 +110,22 @@ export default function PoemPageClient({ poem, type, slug }: PoemPageClientProps
 
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-8">
-      <div className="max-w-2xl mx-auto px-4 md:px-8">
-        <VerseHeader
+      <div className="container max-w-[672px] mx-auto px-4">
+        <Header
+          variant="post"
           title={poem.title ?? ""}
+          preview={poem.description ?? ""}
           start_date={poem.start_date ?? ""}
           end_date={poem.end_date ?? ""}
-          type={poem.verse_type ?? ""}
-          collection={poem.collection ?? ""}
-          preview={poem.description ?? ""}
-          status={poem.status as VerseStatus | undefined}
-          confidence={poem.confidence as VerseConfidence | undefined}
+          status={poem.status as HeaderStatus | undefined}
+          confidence={poem.confidence as HeaderConfidence | undefined}
           importance={poem.importance ?? 0}
-          tags={tags ?? []}
+          tags={tags}
+          category={verseType}
+          categoryHref={`/verse?type=${typeSlug}`}
+          secondaryInfo={poem.collection ? `From collection: ${poem.collection}` : undefined}
+          backText={`${verseType} Poems`}
+          backHref={`/verse?type=${typeSlug}`}
         />
 
         <div className="p-6 my-6 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))] overflow-y-auto max-h-[500px]">

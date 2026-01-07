@@ -15,11 +15,17 @@ const baseConfig = {
 
   // Next.js 16+ uses Turbopack by default (handles minification automatically)
   typescript: { ignoreBuildErrors: false },
+
+  // Strip console.log/warn/info/debug in production, keep console.error for diagnostics
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production'
+      ? { exclude: ['error'] }
+      : false,
+  },
   staticPageGenerationTimeout: 120,
   productionBrowserSourceMaps: false,
 
-  // Disable Turbopack - MDX not fully supported in Turbopack yet
-  // turbopack: {},
+  // Turbopack disabled - MDX not fully supported yet
 
   /* ============================================================================
      REWRITES

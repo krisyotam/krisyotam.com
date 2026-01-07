@@ -4,7 +4,7 @@
   "private": true,
   "description": "Personal website of Kris Yotam - using Next.js 16.1 with React 19",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "next build --webpack",
     "build:lowmem": "NEXT_WORKER_COUNT=1 NODE_OPTIONS='--max-old-space-size=512' DISABLE_ESLINT_PLUGIN=true NEXT_DISABLE_TYPE_CHECKING=1 next build --webpack",
     "start": "next start",

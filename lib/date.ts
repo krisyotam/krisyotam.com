@@ -184,7 +184,7 @@ export function formatRelative(input: DateInput): string {
 
 /**
  * Date range: "January 1, 2025 - January 15, 2025"
- * If same date, returns single date.
+ * Always shows both dates when end is provided (even if same day).
  */
 export function formatRange(start: DateInput, end?: DateInput): string {
   const startDate = parseDate(start)
@@ -194,11 +194,6 @@ export function formatRange(start: DateInput, end?: DateInput): string {
 
   const endDate = parseDate(end)
   if (!endDate) return formatFull(startDate)
-
-  // Same date
-  if (formatISO(startDate) === formatISO(endDate)) {
-    return formatFull(startDate)
-  }
 
   return `${formatFull(startDate)} - ${formatFull(endDate)}`
 }

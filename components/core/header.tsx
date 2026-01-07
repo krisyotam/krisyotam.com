@@ -113,6 +113,12 @@ export interface HeaderProps {
   /** Category for "Filed under" link */
   category?: string
 
+  /** Custom href for category link (defaults to /category/{slug}) */
+  categoryHref?: string
+
+  /** Secondary info line (e.g., "From collection: X") */
+  secondaryInfo?: string
+
   /* ─────────────────────────────────────────────────────────────────────────
    * Navigation Props
    * ───────────────────────────────────────────────────────────────────────── */
@@ -256,6 +262,8 @@ export function Header({
   importance = 5,
   tags,
   category,
+  categoryHref,
+  secondaryInfo,
   backText,
   backHref,
   className,
@@ -288,8 +296,10 @@ export function Header({
       let formattedDate = ""
 
       if (start_date) {
-        const endDateValue = end_date?.trim() || new Date().toISOString().split("T")[0]
-        formattedDate = formatDateRange(start_date, endDateValue)
+        // Only show range if end_date is provided, otherwise just show start_date
+        formattedDate = end_date?.trim()
+          ? formatDateRange(start_date, end_date)
+          : formatDateRange(start_date)
       } else if (end_date) {
         formattedDate = formatDate(end_date.split("T")[0])
       }
@@ -431,11 +441,20 @@ export function Header({
             {category && (
               <div className="text-center mt-4">
                 <Link
-                  href={`/category/${encodeURIComponent(category.toLowerCase().replace(/\s+/g, "-"))}`}
+                  href={categoryHref || `/category/${encodeURIComponent(category.toLowerCase().replace(/\s+/g, "-"))}`}
                   className="text-sm font-serif italic text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Filed under: {category}
                 </Link>
+              </div>
+            )}
+
+            {/* Secondary info (e.g., collection) */}
+            {secondaryInfo && (
+              <div className="text-center mt-2">
+                <span className="text-sm font-serif italic text-muted-foreground">
+                  {secondaryInfo}
+                </span>
               </div>
             )}
           </>

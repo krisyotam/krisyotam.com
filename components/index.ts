@@ -53,7 +53,6 @@ export { DocsHeader } from './docs/docs-header';
 export { PageHeader } from './core';
 // PostHeader already exported above
 export { TagHeader } from './tag-header';
-export { VerseHeader } from './verse-header';
 
 // Playlist Components
 export { default as PlaylistList } from './playlist-list';
