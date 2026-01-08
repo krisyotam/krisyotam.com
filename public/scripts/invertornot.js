@@ -1,9 +1,9 @@
 /**
  * ╔═══════════════════════════════════════════════════════════════════════════╗
  * ║                                                                           ║
- * ║               I N V E R T   O R   N O T                                   ║
+ * ║                        I N V E R T   O R   N O T                          ║
  * ║                                                                           ║
- * ║        "Intelligent Dark Mode Image Inversion"                            ║
+ * ║                 "Intelligent Dark Mode Image Inversion"                   ║
  * ║                                                                           ║
  * ╠═══════════════════════════════════════════════════════════════════════════╣
  * ║                                                                           ║
