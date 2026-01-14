@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
-    "build:lowmem": "NEXT_WORKER_COUNT=1 NODE_OPTIONS='--max-old-space-size=512' DISABLE_ESLINT_PLUGIN=true NEXT_DISABLE_TYPE_CHECKING=1 next build --webpack",
+    "build:lowmem": "NEXT_WORKER_COUNT=1 NODE_OPTIONS='--max-old-space-size=8192' DISABLE_ESLINT_PLUGIN=true NEXT_DISABLE_TYPE_CHECKING=1 next build --webpack",
     "start": "next start",
     "lint": "next lint",
     "compile-legal": "node scripts/compile-legal-docs.js",
