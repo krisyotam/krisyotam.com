@@ -1,6 +1,7 @@
 node_modules
 .next
 .env.local
+.env.production
 tsconfig.tsbuildinfo
 .venv
 .nixpacks
