@@ -13,8 +13,9 @@ set -euo pipefail
 #               Uses fzf for selection and queries content.db directly.
 ###############################################################################
 
-PROJECT_ROOT="${KRIS_CREATE_ROOT:-$HOME/Dev/krisyotam.com}"
+PROJECT_ROOT="${KRIS_CREATE_ROOT:-$HOME/dev/krisyotam.com}"
 DB_PATH="$PROJECT_ROOT/public/data/content.db"
+SYSTEM_DB_PATH="$PROJECT_ROOT/public/data/system.db"
 
 have() { command -v "$1" >/dev/null 2>&1; }
 
@@ -27,6 +28,14 @@ db() {
 
 db_exec() {
   sqlite3 "$DB_PATH" "$1"
+}
+
+sysdb() {
+  sqlite3 -separator $'\t' "$SYSTEM_DB_PATH" "$1"
+}
+
+sysdb_exec() {
+  sqlite3 "$SYSTEM_DB_PATH" "$1"
 }
 
 ###############################################################################
@@ -306,6 +315,94 @@ list_content_by_tag() {
 }
 
 ###############################################################################
+# people functions (system.db)
+###############################################################################
+
+# Common person types for selection
+person_types=(Philosopher Mathematician Scientist Writer Poet Artist Musician Historian Economist Theologian Programmer Entrepreneur Polymath Other)
+
+list_people() {
+  sysdb "SELECT name || ' [' || type || ']' || '\t' || id || '\t' || slug FROM people ORDER BY name"
+}
+
+create_person() {
+  local name ptype image wiki slug
+
+  name="$(prompt 'Name')"
+  [[ -z "$name" ]] && { echo "Name required"; return 1; }
+
+  ptype="$(printf "%s\n" "${person_types[@]}" | fzf --prompt="Type> " --height=50% --layout=reverse --border)"
+  [[ -z "$ptype" ]] && { echo "Type required"; return 1; }
+
+  image="$(prompt 'Image URL (optional)')"
+  wiki="$(prompt 'Wiki/Info URL (optional)')"
+  slug="$(slugify "$name")"
+
+  sysdb_exec "INSERT INTO people (slug, name, type, image, wiki) VALUES ('$slug', '$name', '$ptype', '$image', '$wiki')"
+  echo "Created person: $name ($ptype)"
+}
+
+edit_person() {
+  local id="$1"
+  local data old_slug old_name old_type old_image old_wiki
+
+  data=$(sysdb "SELECT slug, name, type, COALESCE(image, ''), COALESCE(wiki, '') FROM people WHERE id = $id")
+  IFS=$'\t' read -r old_slug old_name old_type old_image old_wiki <<< "$data"
+
+  while true; do
+    clear
+    echo "Editing Person: $old_name"
+    echo "─────────────────────────────────"
+    echo "1) Name:   $old_name"
+    echo "2) Type:   $old_type"
+    echo "3) Image:  ${old_image:0:50}..."
+    echo "4) Wiki:   ${old_wiki:0:50}..."
+    echo "s) Save changes"
+    echo "q) Cancel"
+    echo
+    read -rp "Edit field> " field
+
+    case "$field" in
+      1)
+        old_name="$(prompt 'Name' "$old_name")"
+        old_slug="$(slugify "$old_name")"
+        ;;
+      2)
+        old_type="$(printf "%s\n" "${person_types[@]}" | fzf --prompt="Type> " --height=50% --layout=reverse --border --query="$old_type")" || true
+        ;;
+      3) old_image="$(prompt 'Image URL' "$old_image")" ;;
+      4) old_wiki="$(prompt 'Wiki/Info URL' "$old_wiki")" ;;
+      s)
+        sysdb_exec "UPDATE people SET
+          slug='$old_slug',
+          name='$(echo "$old_name" | sed "s/'/''/g")',
+          type='$old_type',
+          image='$old_image',
+          wiki='$old_wiki'
+          WHERE id=$id"
+        echo "Saved!"
+        read -rp "Press Enter…" _
+        return
+        ;;
+      q) return ;;
+    esac
+  done
+}
+
+delete_person() {
+  local id="$1"
+  local name
+  name=$(sysdb "SELECT name FROM people WHERE id = $id")
+
+  echo "Delete person '$name'?"
+  read -rp "(y/N)> " confirm
+  [[ "$confirm" == "y" || "$confirm" == "Y" ]] || return 0
+
+  sysdb_exec "DELETE FROM people WHERE id=$id"
+  echo "Deleted person: $name"
+}
+
+###############################################################################
 # content/post functions
 ###############################################################################
 
@@ -550,6 +647,71 @@ tag_menu() {
   done
 }
 
+people_menu() {
+  while true; do
+    clear
+    print_banner
+    echo "People"
+    echo "─────────────────────────────────"
+
+    local choice
+    choice="$(printf "%s\n" "List/Edit Person" "Create New" "Delete Person" "Back" |
+      fzf --prompt="people> " --height=50% --layout=reverse --border)" || return
+
+    case "$choice" in
+      "List/Edit Person")
+        local selection id
+        selection="$(list_people | fzf --prompt="select> " --delimiter=$'\t' --with-nth=1 \
+          --height=70% --layout=reverse --border \
+          --preview="
+            id=\$(echo {} | awk -F'\t' '{print \$2}')
+            sqlite3 '$SYSTEM_DB_PATH' \"
+              SELECT
+                'Name:  ' || name || char(10) ||
+                'Type:  ' || type || char(10) ||
+                'Slug:  ' || slug || char(10) ||
+                'Image: ' || COALESCE(image, '(none)') || char(10) ||
+                'Wiki:  ' || COALESCE(wiki, '(none)')
+              FROM people WHERE id = \$id
+            \"
+          ")" || continue
+        id="$(echo "$selection" | awk -F'\t' '{print $2}')"
+
+        while true; do
+          local name ptype
+          name=$(sysdb "SELECT name FROM people WHERE id = $id")
+          ptype=$(sysdb "SELECT type FROM people WHERE id = $id")
+          echo
+          echo "Person: $name [$ptype]"
+          echo "1) Edit"
+          echo "2) Delete"
+          echo "3) Back"
+          read -rp "Action> " act
+
+          case "$act" in
+            1) edit_person "$id" ;;
+            2) delete_person "$id"; break ;;
+            3) break ;;
+          esac
+        done
+        ;;
+      "Create New")
+        create_person
+        read -rp "Press Enter…" _
+        ;;
+      "Delete Person")
+        local selection id
+        selection="$(list_people | fzf --prompt="delete> " --delimiter=$'\t' --with-nth=1 \
+          --height=70% --layout=reverse --border)" || continue
+        id="$(echo "$selection" | awk -F'\t' '{print $2}')"
+        delete_person "$id"
+        read -rp "Press Enter…" _
+        ;;
+      "Back") return ;;
+    esac
+  done
+}
+
 content_menu() {
   while true; do
     clear
@@ -645,13 +807,14 @@ main_menu() {
     print_banner
 
     local choice
-    choice="$(printf "%s\n" "Manage Content" "Manage Categories" "Manage Tags" "Quit" |
+    choice="$(printf "%s\n" "Manage Content" "Manage Categories" "Manage Tags" "Manage People" "Quit" |
       fzf --prompt="main> " --height=50% --layout=reverse --border)" || exit 0
 
     case "$choice" in
       "Manage Content") content_menu ;;
       "Manage Categories") category_menu ;;
       "Manage Tags") tag_menu ;;
+      "Manage People") people_menu ;;
       "Quit") exit 0 ;;
     esac
   done

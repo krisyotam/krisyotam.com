@@ -36,23 +36,26 @@ const Dropcap: React.FC<DropcapProps> = ({
   const folder = dropcapTypes.includes(type) ? type : "gothic-traditional";
   const src = `/fonts/dropcaps/${folder}/dropcap-${letter}.png`;
 
-  const shouldInvert = darkModeInvertTypes.includes(type);  return (
+  const shouldInvert = darkModeInvertTypes.includes(type);
+
+  return (
     <span
       className={`dropcap-image-wrapper ${className}`}
-      style={{ 
-        display: "inline-block", 
+      style={{
+        display: "inline-block",
         lineHeight: 0,
-        margin: "0.5rem 0.25rem 0 0 !important", // mt-2 + force right margin, 0 bottom margin
-        padding: "0 !important" // force remove padding
+        verticalAlign: "top",
+        margin: "0.5rem 0 0 0",
+        padding: 0
       }}
       onContextMenu={(e) => e.preventDefault()}
     >
       <span
         className={`${shouldInvert ? "dark:invert" : ""}`}
-        style={{ 
+        style={{
           display: "inline-block",
-          margin: "0 !important",
-          padding: "0 !important"
+          margin: 0,
+          padding: 0
         }}
       >
         <Image
@@ -64,8 +67,9 @@ const Dropcap: React.FC<DropcapProps> = ({
           onDragStart={(e) => e.preventDefault()}
           className="dropcap-image"
           style={{
-            margin: "0 !important",
-            padding: "0 !important"
+            display: "block",
+            margin: 0,
+            padding: 0
           }}
         />
       </span>

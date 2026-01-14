@@ -1,0 +1,387 @@
+   ,                     _                               
+  /|   /       o        (_|   |                          
+   |__/   ,_       ,      |   |  __ _|_  __,   _  _  _   
+   | \   /  |  |  / \_    |   | /  \_|  /  |  / |/ |/ |  
+   |  \_/   |_/|_/ \/      \_/|/\__/ |_/\_/|_/  |  |  |_/
+                           /|                          
+                           \|   Hand-crafted since 2025
+                        
+    The humans.txt file explains the team, technology, and graphic assets 
+    behind this site.
+
+# This principal document following the philosophy layed out at humanstxt.org 
+# has been responsible for replacing several monotropic files such as my sites 
+# colophon.md, contributers.md, inspirations.md, ect. It serves as a great tool 
+# to provide in one simple, elegant plain text file the extent of all of the ideas 
+# on and off the interwebs that have shaped me and by extension the lifeblood of 
+# this site. I can only hope to properly convey the scale of the ideas, lessons, 
+# principles, guides, ect. that have shaped me since the start of this project. 
+# — Authors Note (Jan. 12, 2026)
+
+Abstract
+
+   This document defines a date and time format for use in Internet
+   protocols that is a profile of the ISO 8601 standard for
+   representation of dates and times using the Gregorian calendar.
+
+Table of Contents
+
+   1. People .................................................. 2
+   2. Definitions ............................................. 3
+   3. Two Digit Years ......................................... 4
+   4. Local Time .............................................. 4
+   4.1. Coordinated Universal Time (UTC) ...................... 4
+   4.2. Local Offsets ......................................... 5
+   4.3. Unknown Local Offset Convention ....................... 9
+   5.8. Examples ............................................. 10
+   6. References ............................................. 10
+   7. Security Considerations ................................ 11
+
+#*********************************************************************************************************
+# @title PEOPLE
+# @description 
+#   - a list of the editors, scripters, and contributers to the site 
+********************************************************************************************************
+
+==============================
+@section WRITER
+@description 
+==============================
+
+@name Kris Yotam
+@site https://krisyotam.com
+@bio https://krisyotam.com/me
+@comment 
+    - myself the sole essayist, lead developer, and archivist
+
+==============================
+@section DEVELOPER
+@description 
+==============================
+
+==============================
+@section SCRIPTER
+@description 
+==============================
+
+==============================
+@section EDITOR
+@description 
+==============================
+
+==============================
+@section TUTOR
+@description 
+==============================
+
+==============================
+@section PENTESTER
+@description 
+==============================
+
+==============================
+@section ARTIST
+@description 
+    - art has been used from several noteable artists, as well as 
+      wonderfully talented lesser known artists. Mainly as thumbnails. 
+      A large majority of them are probably unaware. If any of you want 
+      your work removed please contact me at [removal@krisyotam.com]
+==============================
+
+@name 
+@site 
+@bio 
+@comment 
+
+Kris Yotam
+I
+
+@name Tailwind CSS
+@url https://tailwindcss.com
+@repo https://github.com/tailwindlabs/tailwindcss
+@description
+    - utility-first css framework
+
+==============================
+@section MARKDOWN & CONTENT
+@description these projects are part of the unified collective and deserve support
+==============================
+
+@name unified / remark / rehype
+@url https://unifiedjs.com
+@repo https://github.com/unifiedjs/unified
+@donate https://opencollective.com/unified
+http://www.krisyotam.com 
+
+Daniel Burka
+Visual design, web development
+http://www.gv.com/team/daniel-burka
+
+Jake Knapp
+Content, page layout
+http://www.gv.com/team/jake-knapp
+
+John Zeratsky
+Content, copywriting, information architecture
+http://www.gv.com/team/john-zeratsky
+
+Laura Melahn
+Content, copywriting
+http://www.gv.com/team/laura-melahn
+
+Michael Margolis
+User research
+http://www.gv.com/team/michael-margolis
+
+_______________________________________________________________________________
+*********************************************************************************************************
+# @title COLOPHON
+# @description frameworks, scripts, tools, ect. their creators and donation urls
+*********************************************************************************************************
+
+==============================
+@section FRAMEWORKS
+==============================
+
+@name Next.js
+@url https://nextjs.org
+@repo https://github.com/vercel/next.js
+@description
+    - react framework powering this website
+
+@name React
+@url https://react.dev
+@repo https://github.com/facebook/react
+@description
+
+@name Tailwind CSS
+@url https://tailwindcss.com
+@repo https://github.com/tailwindlabs/tailwindcss
+@description
+    - utility-first css framework
+
+==============================
+@section MARKDOWN & CONTENT
+@description these projects are part of the unified collective and deserve support
+==============================
+
+@name unified / remark / rehype
+@url https://unifiedjs.com
+@repo https://github.com/unifiedjs/unified
+@donate https://opencollective.com/unified
+    - ui library for building interfaces
+
+@name Tailwind CSS
+@url https://tailwindcss.com
+@repo https://github.com/tailwindlabs/tailwindcss
+@description
+    - utility-first css framework
+
+==============================
+@section MARKDOWN & CONTENT
+@description these projects are part of the unified collective and deserve support
+==============================
+
+@name unified / remark / rehype
+@url https://unifiedjs.com
+@repo https://github.com/unifiedjs/unified
+@donate https://opencollective.com/unified
+@description
+    - ecosystem for processing markdown and html
+    - powers all content rendering on this site
+    - used by Node.js, Vercel, Netlify, GitHub, Mozilla, and many more
+
+@name react-markdown
+@url https://remarkjs.github.io/react-markdown
+@repo https://github.com/remarkjs/react-markdown
+@donate https://opencollective.com/unified
+@description
+    - markdown component for react
+    - part of the unified collective
+
+@name KaTeX
+@url https://katex.org
+@repo https://github.com/KaTeX/KaTeX
+@description
+    - ecosystem for processing markdown and html
+    - powers all content rendering on this site
+    - used by Node.js, Vercel, Netlify, GitHub, Mozilla, and many more
+
+@name react-markdown
+@url https://remarkjs.github.io/react-markdown
+@repo https://github.com/remarkjs/react-markdown
+@donate https://opencollective.com/unified
+@description
+    - markdown component for react
+    - part of the unified collective
+
+@name KaTeX
+@url https://katex.org
+@repo https://github.com/KaTeX/KaTeX
+@donate https://opencollective.com/katex
+@description
+    - fast math typesetting for the web
+    - created by Emily Eisenberg and Sophie Alpert
+
+@name gray-matter
+@url https://github.com/jonschlinkert/gray-matter
+@repo https://github.com/jonschlinkert/gray-matter
+@donate https://github.com/sponsors/jonschlinkert
+@description
+    - yaml front matter parser
+    - used by Gatsby, Netlify, Astro, TinaCMS, and many others
+
+==============================
+@section UTILITIES
+==============================
+==============================
+@section UI COMPONENTS
+==============================
+
+@name Radix UI
+@url https://radix-ui.com
+@repo https://github.com/radix-ui/primitives
+@description
+    - unstyled accessible ui primitives
+    - foundation for most interactive components
+
+@name cmdk
+@url https://cmdk.paco.me
+==============================
+@section UTILITIES
+==============================
+@repo https://github.com/pacocoursey/cmdk
+@donate https://github.com/sponsors/pacocoursey
+@description
+    - command palette component
+    - created by Paco Coursey
+
+@name Sonner
+@url https://sonner.emilkowal.ski
+@repo https://github.com/emilkowalski/sonner
+@donate https://github.com/sponsors/emilkowalski
+@description
+    - toast notification component
+    - created by Emil Kowalski
+
+@name Vaul
+@url https://vaul.emilkowal.ski
+@repo https://github.com/emilkowalski/vaul
+@donate https://github.com/sponsors/emilkowalski
+@description
+    - drawer component for react
+    - created by Emil Kowalski
+
+@name Embla Carousel
+@url https://embla-carousel.com
+@repo https://github.com/davidjerleke/embla-carousel
+@donate https://github.com/sponsors/davidjerleke
+@description
+    - lightweight carousel with fluid motion
+    - created by David Jerleke
+
+@name Lucide
+@url https://lucide.dev
+@repo https://github.com/lucide-icons/lucide
+@description
+    - beautiful icon toolkit
+    - community fork of Feather Icons
+
+==============================
+@section UTILITIES
+==============================
+
+@name Zod
+@url https://zod.dev
+@repo https://github.com/colinhacks/zod
+@donate https://github.com/sponsors/colinhacks
+@description
+    - typescript-first schema validation
+    - created by Colin McDonnell
+    - used extensively for form validation and api contracts
+
+@name date-fns
+@url https://date-fns.org
+@repo https://github.com/date-fns/date-fns
+@donate https://opencollective.com/date-fns
+@description
+    - modern javascript date utility library
+
+@name Framer Motion
+@url https://motion.dev
+@repo https://github.com/framer/motion
+@description
+    - animation library for react
+    - powers all animations on this site
+
+==============================
+@section DATA & STORAGE
+==============================
+
+@name better-sqlite3
+@url https://github.com/WiseLibs/better-sqlite3
+@repo https://github.com/WiseLibs/better-sqlite3
+@donate https://github.com/sponsors/JoshuaWise
+@description
+    - fastest sqlite3 library for node.js
+    - created by Joshua Wise
+    - used by thousands of developers worldwide
+
+@name Supabase
+@url https://supabase.com
+@repo https://github.com/supabase/supabase
+@description
+    - open source firebase alternative
+    - handles auth and database
+
+==============================
+@section MAPS & VISUALIZATION
+==============================
+
+@name Mapbox GL
+@url https://mapbox.com
+@repo https://github.com/mapbox/mapbox-gl-js
+@description
+    - interactive maps library
+    - powers the /globe page
+
+@name cobe
+@url https://cobe.vercel.app
+@repo https://github.com/shuding/cobe
+@donate https://github.com/sponsors/shuding
+@description
+    - 5kb webgl globe library
+    - created by Shu Ding
+    - inspired by the GitHub globe project
+
+_______________________________________________________________________________
+*********************************************************************************************************
+# @title INSPIRATION
+# @description this site has taken, and adapted features from a great many previous and still standing 
+# creative works. here are their names. 
+*********************************************************************************************************
+
+@name Gwern Branwen
+@url https://gwern.net
+@description 
+    - (404-guesser.js, utility.js, and nginxredirectguesser.hs) inspired my 404.js
+    - nginx.conf permanent redirects inspired my magic-urls.js
+    - Header design inspired by Gwern's post header's 
+
+@name Fabian Schultz
+@url https://www.fabianschultz.com/
+@description 
+
+@name Seirdy
+@url https://seirdy.one/
+@description 
+
+@name Guillermo Rauch
+@url https://rauchg.com
+@description 
+
+@name Lillian Weng
+@url https://lilianweng.github.io/
+@description 
+    - Inspired my citation component with her formatting defined at the bottom of her post pages
++

@@ -60,12 +60,10 @@ export async function GET() {
     };
 
     // Get stats from other JSON files that weren't migrated
-    const archive = readJsonFile("data/doc/archive.json");
     const certifications = readJsonFile("data/about/certifications.json");
     const lectureNotes = readJsonFile("data/lecture-notes/lecture-notes.json");
 
     const jsonStats = {
-      offsite: countEntries(archive, "item"),
       certifications: countEntries(certifications, "certification"),
       lectureNotes: countEntries(lectureNotes, "note"),
     };

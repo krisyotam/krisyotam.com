@@ -91,7 +91,9 @@ export function generatePageMetadata(options: PageMetadataOptions): Metadata {
     alternates: {
       canonical: canonicalUrl,
       types: {
-        'application/rss+xml': `${siteConfig.url}/feed.xml`,
+        'application/rss+xml': `${siteConfig.url}/rss.xml`,
+        'application/atom+xml': `${siteConfig.url}/atom.xml`,
+        'application/feed+json': `${siteConfig.url}/feed.json`,
       },
     },
     openGraph: {
@@ -312,7 +314,6 @@ export const contentTypes = [
   'papers',
   'progymnasmata',
   'reviews',
-  'sequences',
   'verse',
 ] as const
 
@@ -329,7 +330,6 @@ export function getContentTypeLabel(type: ContentType): string {
     papers: 'Papers',
     progymnasmata: 'Progymnasmata',
     reviews: 'Reviews',
-    sequences: 'Sequences',
     verse: 'Verse',
   }
   return labels[type]

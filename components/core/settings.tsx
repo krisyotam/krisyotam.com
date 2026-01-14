@@ -272,33 +272,28 @@ export function SettingsMenu() {
         setIsLoading(true)
 
         const [
-          postsData, directoryData, essaysData, papersData, fictionData,
-          newsData, notesData, progymnasmataData, labData, lecturesData, linksData,
+          postsData, essaysData, papersData, fictionData,
+          notesData, progymnasmataData,
         ] = await Promise.all([
           safelyFetchData("/api/posts/search"),
-          safelyFetchData("/api/directory"),
           safelyFetchData("/api/essays/essays"),
           safelyFetchData("/api/papers"),
-          safelyFetchData("/api/fiction/fiction"),
-          safelyFetchData("/api/news"),
+          safelyFetchData("/api/fiction"),
           safelyFetchData("/api/notes"),
           safelyFetchData("/api/progymnasmata"),
-          safelyFetchData("/api/lab/labs"),
-          safelyFetchData("/api/lectures"),
-          safelyFetchData("/api/links"),
         ])
 
         setPosts(postsData || [])
-        setPages(directoryData?.pages?.filter((page: Page) => page["show-status"] === "active") || [])
+        setPages([])
         setEssays(essaysData || [])
         setPapers(papersData || [])
         setFiction(fictionData || [])
-        setNews(newsData || [])
+        setNews([])
         setQuickNotes(notesData || [])
         setProgymnasmata(progymnasmataData || [])
-        setLab(labData || [])
-        setLectures(lecturesData || [])
-        setLinks(linksData || [])
+        setLab([])
+        setLectures([])
+        setLinks([])
       } catch (error) {
         console.error("Error fetching data:", error)
       } finally {

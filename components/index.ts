@@ -62,7 +62,7 @@ export { default as PlaylistCard } from './playlist-card';
 export { default as ProfileBento } from './profile-bento';
 export { default as SiteStickerCarousel } from './site-sticker-carousel';
 export { default as PersonalityCarousel } from './personality-carousel';
-export { default as Archive } from './archive';
+// Archive component removed - documents hosted locally
 export { default as PGP } from './pgp';
 // export { ContactInfo } from './contact-info'; // File missing or no named export
 export { default as CoreSkills } from './core-skills';

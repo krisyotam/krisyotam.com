@@ -46,22 +46,15 @@ const baseConfig = {
       // --- short URLs ---
       { source: '/roti',   destination: '/rules-of-the-internet' },
 
-      // next.config.js
+      // --- feed URLs ---
+      { source: '/rss.xml',  destination: '/feeds/rss.xml' },
+      { source: '/atom.xml', destination: '/feeds/atom.xml' },
+      { source: '/feed.json', destination: '/feeds/feed.json' },
 
-      {
-        source: '/doc/:path*.:ext',
-        destination: 'https://hel1.your-objectstorage.com/doc/:path*.:ext',
-      },
-      {
-        source: '/src/:path*.:ext',
-        destination: 'https://hel1.your-objectstorage.com/src/:path*.:ext',
-      },
-      {
-        source: '/archive/:path*.:ext',
-        destination: 'https://hel1.your-objectstorage.com/public-archive/:path*.:ext',
-      },
-  ]
-},
+      // --- /doc, /src, /archive ---
+      // Handled by nginx directory listing (local files on server)
+    ]
+  },
 
 
   /* ==========================================================================

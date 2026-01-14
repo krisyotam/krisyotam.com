@@ -32,30 +32,6 @@ export const staticMetadata: Record<string, Metadata> = {
       creator: '@krisyotam'
     }
   },
-  archive: {
-    title: 'Archive',
-    description: 'Archive of all posts, articles, and content on this site.',
-    openGraph: {
-      title: 'Archive',
-      description: 'Archive of all posts, articles, and content on this site.',
-      images: [
-        {
-          url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
-          width: 1200,
-          height: 630,
-          alt: 'Archive'
-        }
-      ],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Archive',
-      description: 'Archive of all posts, articles, and content on this site.',
-      images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
-      creator: '@krisyotam'
-    }
-  },
   art: {
     title: 'Art',
     description: 'Art, illustrations, and visual creative work.',

@@ -183,44 +183,42 @@ export default function GlobePage() {
         // Add location markers
         locations.forEach((place) => {
           const el = document.createElement("div")
-          el.className = `h-4 w-4 cursor-pointer rounded-full border-2 pin-${place.type.toLowerCase()} bg-clip-content p-0.5 hover:scale-125 transition-transform duration-200`
+          el.className = `h-4 w-4 cursor-pointer rounded-xl border-2 pin-${place.type.toLowerCase()} bg-clip-content p-0.5`
           el.setAttribute("aria-label", `${place.name}, ${place.type}`)
           el.setAttribute("role", "button")
 
-          // Create popup content with modern design
+          // Create popup content matching comments.tsx bento design
           const popupContent = `
             <div class="location-popup">
-              <div class="location-popup-header">
+              <div class="location-popup-row">
                 <div class="location-popup-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                     <circle cx="12" cy="10" r="3"></circle>
                   </svg>
                 </div>
-                <div class="location-popup-title">
-                  <h3 class="location-popup-name">${place.name}</h3>
-                  <p class="location-popup-type">${place.type}</p>
-                </div>
+                <div class="location-popup-name">${place.name}</div>
+                <div class="location-popup-type">${place.type}</div>
               </div>
-              
-              <div class="location-popup-stats">
+
+              <div class="location-popup-row">
                 <div class="location-popup-stat">
-                  <p class="location-popup-stat-label">Visited</p>
-                  <p class="location-popup-stat-value">${place.visitDate || 'Unknown'}</p>
+                  <span class="location-popup-stat-label">Visited</span>
+                  <span class="location-popup-stat-value">${place.visitDate || 'Unknown'}</span>
                 </div>
                 <div class="location-popup-stat">
-                  <p class="location-popup-stat-label">Duration</p>
-                  <p class="location-popup-stat-value">${place.duration || 'N/A'}</p>
+                  <span class="location-popup-stat-label">Duration</span>
+                  <span class="location-popup-stat-value">${place.duration || 'N/A'}</span>
                 </div>
               </div>
 
-              <p class="location-popup-description">${place.description}</p>
+              <div class="location-popup-description">${place.description}</div>
 
-              <div class="location-popup-actions">
+              <div class="location-popup-row location-popup-actions">
                 <button class="location-popup-button" onclick="window.open('https://www.google.com/maps/search/${encodeURIComponent(place.name)}', '_blank')">
                   View on Maps
                 </button>
-                <button class="location-popup-button location-popup-button-primary" onclick="window.openStreetView([${place.coordinates[0]}, ${place.coordinates[1]}], '${place.name.replace(/'/g, "\\'")}')">
+                <button class="location-popup-button" onclick="window.openStreetView([${place.coordinates[0]}, ${place.coordinates[1]}], '${place.name.replace(/'/g, "\\'")}')">
                   Street View
                 </button>
               </div>
@@ -230,9 +228,7 @@ export default function GlobePage() {
           // Add marker with popup
           const marker = new mapboxgl.Marker({
             element: el,
-            anchor: "center",
-            rotationAlignment: "map",
-            pitchAlignment: "map",
+            anchor: "bottom",
           })
             .setLngLat(place.coordinates as [number, number])
             .setPopup(

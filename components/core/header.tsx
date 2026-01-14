@@ -24,7 +24,7 @@
  * ╚═══════════════════════════════════════════════════════════════════════════╝
  */
 
-import { formatDate, formatDateRange } from "@/lib/date"
+import { formatDate, formatDateRange, getTodayISO } from "@/lib/date"
 import Link from "next/link"
 import { ArrowLeft, Info } from "lucide-react"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
@@ -296,10 +296,9 @@ export function Header({
       let formattedDate = ""
 
       if (start_date) {
-        // Only show range if end_date is provided, otherwise just show start_date
-        formattedDate = end_date?.trim()
-          ? formatDateRange(start_date, end_date)
-          : formatDateRange(start_date)
+        // Always show both dates - if end_date is empty, use current date (means ongoing)
+        const effectiveEndDate = end_date?.trim() || getTodayISO()
+        formattedDate = formatDateRange(start_date, effectiveEndDate)
       } else if (end_date) {
         formattedDate = formatDate(end_date.split("T")[0])
       }

@@ -1,8 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
-import { useQuery } from "@apollo/client"
-import { GET_READING_STATES } from "@/lib/queries"
+import React, { useState } from "react"
 import { ReadingBookCard } from "@/components/reading-book-card"
 import { BlogPostsTable } from "@/components/blog-posts-table"
 import { ShortStoriesTable } from "@/components/short-stories-table"
@@ -62,10 +60,6 @@ export function ReadingSubTabs({ activeTab, onTabChange, showBooks = false, want
   
   // Use preloaded data from context
   const { data: readingData, loading: readingLoading } = useReadingData()
-  
-  const { data } = useQuery(GET_READING_STATES)
-  const readingStates = data?.myReadingStates || []
-  const finishedBooks = readingStates.filter((state: ReadingState) => state.status === "FINISHED")
 
   // No need for individual loading anymore - data is preloaded
 

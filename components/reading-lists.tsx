@@ -1,25 +1,8 @@
 "use client"
 
 import { useState, useEffect, useMemo } from "react"
-import { useLazyQuery } from "@apollo/client"
-import { GET_BOOK_BY_ISBN } from "@/lib/queries"
 import { ReadingBookCard } from "@/components/reading-book-card"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AlertCircle } from "lucide-react"
 import { CustomSelect } from "@/components/ui/custom-select"
-
-interface Author {
-  name: string
-}
-
-interface BookData {
-  id: string
-  slug: string
-  title: string
-  subtitle?: string
-  authors: Author[]
-  cover?: string
-}
 
 interface LocalBook {
   title: string
@@ -38,22 +21,13 @@ interface ReadingListsData {
   lists: ReadingList[]
 }
 
-interface BookWithData extends LocalBook {
-  data?: BookData
-  loading?: boolean
-  error?: boolean
-}
-
 export function ReadingLists() {
   const [listsData, setListsData] = useState<ReadingListsData | null>(null)
   const [selectedList, setSelectedList] = useState<string>("")
-  const [booksWithData, setBooksWithData] = useState<Record<string, BookWithData>>({})
   const [currentPage, setCurrentPage] = useState(1)
-  const [getBookByISBN] = useLazyQuery(GET_BOOK_BY_ISBN, {
-    fetchPolicy: 'cache-first'
-  })
 
   const BOOKS_PER_PAGE = 5
+
   // Load the local JSON data
   useEffect(() => {
     fetch('/api/reading/lists')
@@ -73,7 +47,6 @@ export function ReadingLists() {
   // Reset page when list changes
   useEffect(() => {
     setCurrentPage(1)
-    setBooksWithData({}) // Clear previous books data
   }, [selectedList])
 
   // Get the currently selected list data
@@ -84,69 +57,14 @@ export function ReadingLists() {
   // Calculate pagination
   const { paginatedBooks, totalPages } = useMemo(() => {
     if (!currentList) return { paginatedBooks: [], totalPages: 0 }
-    
+
     const startIndex = (currentPage - 1) * BOOKS_PER_PAGE
     const endIndex = startIndex + BOOKS_PER_PAGE
     const paginatedBooks = currentList.books.slice(startIndex, endIndex)
     const totalPages = Math.ceil(currentList.books.length / BOOKS_PER_PAGE)
-    
+
     return { paginatedBooks, totalPages }
   }, [currentList, currentPage, BOOKS_PER_PAGE])
-
-  // Fetch book data for current page only
-  useEffect(() => {
-    if (!paginatedBooks.length) return
-
-    // Initialize books for current page
-    paginatedBooks.forEach(book => {
-      if (!booksWithData[book.isbn13]) {
-        setBooksWithData(prev => ({
-          ...prev,
-          [book.isbn13]: { ...book, loading: true }
-        }))
-
-        // Fetch book data one by one with a small delay to prevent overwhelming the API
-        setTimeout(() => {
-          getBookByISBN({ variables: { isbn13: book.isbn13 } })
-            .then(({ data }) => {
-              if (data?.book) {
-                setBooksWithData(prev => ({
-                  ...prev,
-                  [book.isbn13]: {
-                    ...prev[book.isbn13],
-                    data: data.book,
-                    loading: false,
-                    error: false
-                  }
-                }))
-              } else {
-                setBooksWithData(prev => ({
-                  ...prev,
-                  [book.isbn13]: {
-                    ...prev[book.isbn13],
-                    loading: false,
-                    error: true
-                  }
-                }))
-              }
-            })
-            .catch(error => {
-              console.error(`Error fetching book ${book.isbn13}:`, error)
-              setBooksWithData(prev => ({
-                ...prev,
-                [book.isbn13]: {
-                  ...prev[book.isbn13],
-                  loading: false,
-                  error: true
-                }
-              }))
-            })
-        }, Math.random() * 100) // Small random delay to stagger requests
-      }
-    })
-  }, [paginatedBooks, getBookByISBN, booksWithData])
-  // Get books to display (only current page)
-  const booksToDisplay = paginatedBooks.map(book => booksWithData[book.isbn13]).filter(Boolean)
 
   if (!listsData) {
     return <p className="text-muted-foreground">Loading lists...</p>
@@ -185,40 +103,17 @@ export function ReadingLists() {
 
       {/* Books display using ReadingBookCard */}
       <div className="space-y-6">
-        {booksToDisplay.length > 0 ? (
-          booksToDisplay.map((bookWithData) => {
-            if (!bookWithData) return null
-            
-            const bookData = bookWithData.data
-            const isLoading = bookWithData.loading
-            const hasError = bookWithData.error && !isLoading
-            
-            // Use fallback data for title if API fails
-            const displayTitle = bookData?.title || bookWithData.title
-            const displaySubtitle = bookData?.subtitle || ""
-            const displayAuthor = bookData?.authors?.map(a => a.name).join(", ") || "Unknown Author"
-            
-            // Use placeholder if no cover available instead of loading animation
-            const displayCover = (isLoading || hasError) 
-              ? "/placeholder.svg?height=100&width=100"
-              : bookData?.cover || "/placeholder.svg?height=100&width=100"
-            
-            return (
-              <ReadingBookCard
-                key={bookWithData.isbn13}
-                coverUrl={displayCover}
-                title={displayTitle}
-                subtitle={displaySubtitle}
-                author={displayAuthor}
-                rating={0}
-                onClick={() => {
-                  if (bookData?.slug) {
-                    window.open(`https://literal.club/book/${bookData.slug}`, "_blank")
-                  }
-                }}
-              />
-            )
-          })
+        {paginatedBooks.length > 0 ? (
+          paginatedBooks.map((book) => (
+            <ReadingBookCard
+              key={book.isbn13}
+              coverUrl="/placeholder.svg?height=100&width=100"
+              title={book.title}
+              subtitle=""
+              author="Unknown Author"
+              rating={0}
+            />
+          ))
         ) : (
           <div className="text-center py-8">
             <p className="text-muted-foreground">No books in this list yet.</p>

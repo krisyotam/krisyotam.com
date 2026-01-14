@@ -107,7 +107,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     news: 0.6,
     ocs: 0.5,
     progymnasmata: 0.6,
-    sequences: 0.7,
   }
 
   for (const type of contentTypes) {

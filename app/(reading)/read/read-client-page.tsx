@@ -1,7 +1,5 @@
 "use client"
 
-import { ApolloProvider } from "@apollo/client"
-import { client } from "@/lib/apollo-client"
 import { ReadingSubTabs } from "@/components/reading-sub-tabs"
 import { ReadingNavigation } from "@/components/reading-navigation"
 import { ReadingDataLoader } from "@/components/reading-data-loader"
@@ -25,7 +23,7 @@ export function ReadClientPage() {
 
     // Set initial state from hash
     handleHashChange()
-    
+
     // Listen for hash changes
     window.addEventListener('hashchange', handleHashChange)
     return () => window.removeEventListener('hashchange', handleHashChange)
@@ -38,15 +36,15 @@ export function ReadClientPage() {
   }
 
   return (
-    <ApolloProvider client={client}>
+    <>
       <ReadingNavigation />
       <ReadingDataLoader>
-        <ReadingSubTabs 
-          activeTab={activeSubTab} 
+        <ReadingSubTabs
+          activeTab={activeSubTab}
           onTabChange={handleSubTabChange}
           showBooks={true}
         />
       </ReadingDataLoader>
-    </ApolloProvider>
+    </>
   )
 }
