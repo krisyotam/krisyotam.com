@@ -1,6 +1,6 @@
 ################################################################################
 # Dependencies stage
-# - Installs production dependencies only
+# - Installs ALL dependencies (dev + prod) for build
 # - Uses legacy peer deps to avoid strict React peer conflicts in CI/Docker
 ################################################################################
 FROM node:20-alpine AS deps
@@ -10,14 +10,14 @@ WORKDIR /app
 # Copy dependency manifests first for better layer caching
 COPY package.json package-lock.json* ./
 
-# Install only production dependencies to minimize image size and memory usage
+# Install ALL dependencies (tailwind, postcss, etc. needed at build time)
 # --legacy-peer-deps is required due to React 19 peer incompatibilities
-RUN npm ci --omit=dev --legacy-peer-deps
+RUN npm ci --legacy-peer-deps
 
 
 ################################################################################
 # Build stage
-# - Reuses installed node_modules
+# - Reuses installed node_modules (includes dev deps for build)
 # - Runs a constrained, low-memory build for Next.js
 ################################################################################
 FROM node:20-alpine AS builder
@@ -33,6 +33,9 @@ COPY . .
 # Run the low-memory build
 # (uses NEXT_WORKER_COUNT and restricted NODE_OPTIONS)
 RUN npm run build:lowmem
+
+# Prune dev dependencies after build for smaller runtime image
+RUN npm prune --production --legacy-peer-deps
 
 
 ################################################################################
