@@ -39,6 +39,7 @@ export default function Human({
             width={192}
             height={192}
             className="!object-cover !w-full !h-full"
+            unoptimized={image?.includes('krisyotam.com')}
           />
         </div>
 

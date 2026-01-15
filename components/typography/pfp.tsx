@@ -32,6 +32,7 @@ export function Pfp({ src, url, alt, className }: PfpProps) {
             fill
             style={{ objectFit: "contain" }}
             className="rounded-md"
+            unoptimized={src?.includes('krisyotam.com')}
           />
         </div>
         <span className="book-title inline-block font-medium leading-none mt-[-20px] mb-8">

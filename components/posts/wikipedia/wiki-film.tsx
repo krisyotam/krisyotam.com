@@ -80,6 +80,7 @@ export function WikiFilm({
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 192px"
+            unoptimized={poster?.includes('krisyotam.com')}
           />
         </div>
         <div className="text-xs text-center mt-2 text-muted-foreground">

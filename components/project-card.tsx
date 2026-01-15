@@ -49,6 +49,7 @@ export function ProjectCard({
           width={600}
           height={400}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          unoptimized={image?.includes('krisyotam.com')}
         />
         <div className="absolute top-2 right-2">
           <Badge variant={status === "Completed" ? "default" : "secondary"}>{status}</Badge>
@@ -96,6 +97,7 @@ export function ProjectCard({
                     width={600}
                     height={400}
                     className="h-full w-full object-cover"
+                    unoptimized={image?.includes('krisyotam.com')}
                   />
                 </div>
 

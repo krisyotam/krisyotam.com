@@ -241,7 +241,7 @@ function calculateAge(birthday: string): number {
 function ProfileImage({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="aspect-square relative rounded-3xl overflow-hidden">
-      <Image src={src} alt={alt} fill className="object-cover" />
+      <Image src={src} alt={alt} fill className="object-cover" unoptimized={src?.includes('krisyotam.com')} />
     </div>
   );
 }
@@ -254,7 +254,7 @@ function ImageGrid2x2({ images }: { images: ImageItem[] }) {
     <div className="grid grid-cols-2 gap-2 aspect-square">
       {images.map((image, index) => (
         <div key={index} className="relative rounded-xl overflow-hidden">
-          <Image src={image.src} alt={image.alt} fill className="object-cover" />
+          <Image src={image.src} alt={image.alt} fill className="object-cover" unoptimized={image.src?.includes('krisyotam.com')} />
         </div>
       ))}
     </div>
@@ -290,7 +290,7 @@ function ImageGrid3x3({ images }: { images: ImageItem[] }) {
     <div className="grid grid-cols-3 gap-2 aspect-square">
       {images.map((image, index) => (
         <div key={index} className="relative rounded-xl overflow-hidden">
-          <Image src={image.src} alt={image.alt} fill className="object-cover" />
+          <Image src={image.src} alt={image.alt} fill className="object-cover" unoptimized={image.src?.includes('krisyotam.com')} />
         </div>
       ))}
     </div>
@@ -305,7 +305,7 @@ function ImageGrid3x2({ images }: { images: ImageItem[] }) {
     <div className="grid grid-cols-3 grid-rows-2 gap-2 aspect-[3/2]">
       {images.map((image, index) => (
         <div key={index} className="relative rounded-xl overflow-hidden">
-          <Image src={image.src} alt={image.alt} fill className="object-cover" />
+          <Image src={image.src} alt={image.alt} fill className="object-cover" unoptimized={image.src?.includes('krisyotam.com')} />
         </div>
       ))}
     </div>

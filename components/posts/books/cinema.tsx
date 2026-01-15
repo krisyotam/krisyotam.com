@@ -59,6 +59,7 @@ export default function Cinema({ books }: CinemaProps) {
               fill
               style={{ objectFit: "contain" }}
               className="book-image"
+              unoptimized={book.cover?.includes('krisyotam.com')}
             />
           </span>
           <span className="book-title">{book.title}</span>

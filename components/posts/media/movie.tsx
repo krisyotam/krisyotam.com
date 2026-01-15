@@ -30,6 +30,7 @@ export default function Movie({ poster, title, director, link, year }: MovieProp
             fill
             style={{ objectFit: "contain" }}
             className="movie-image"
+            unoptimized={poster?.includes('krisyotam.com')}
           />
         </span>
         <span className="movie-title inline-block font-medium">{title}</span>

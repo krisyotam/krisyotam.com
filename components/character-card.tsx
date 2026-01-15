@@ -15,7 +15,7 @@ export function CharacterCard({ imageUrl, name, book, slug }: CharacterCardProps
     <Card className="flex overflow-hidden transition-colors hover:bg-accent/50 group cursor-pointer h-full">
       <div className="w-[100px] bg-muted p-4 flex items-center justify-center">
         <div className="relative w-full h-[100px]">
-          <Image src={imageUrl || "/placeholder-square.svg"} alt={name} fill className="object-cover rounded-md" />
+          <Image src={imageUrl || "/placeholder-square.svg"} alt={name} fill className="object-cover rounded-md" unoptimized={imageUrl?.includes('krisyotam.com')} />
         </div>
       </div>
       <div className="flex-1 p-4 overflow-hidden flex flex-col justify-between">

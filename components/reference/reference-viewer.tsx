@@ -84,12 +84,13 @@ export function ReferenceViewer({
     if (['JPG', 'JPEG', 'PNG', 'GIF', 'SVG'].includes(format.toUpperCase())) {
       return (
         <div className="flex justify-center py-8">
-          <Image 
-            src={url} 
+          <Image
+            src={url}
             alt={title}
             width={800}
             height={600}
             className="max-w-full h-auto object-contain"
+            unoptimized={url?.includes('krisyotam.com')}
           />
         </div>
       )

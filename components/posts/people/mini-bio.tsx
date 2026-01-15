@@ -40,6 +40,7 @@ export default function MiniBio({
             width={256}
             height={256}
             className="object-cover w-full h-full block"
+            unoptimized={imgSrc?.includes('krisyotam.com')}
           />
         </div>
 

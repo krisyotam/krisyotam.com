@@ -34,6 +34,7 @@ export default function Video({
           fill
           style={{ objectFit: "cover" }}
           className="rounded-none"
+          unoptimized={image?.includes('krisyotam.com')}
         />
       </div>
 

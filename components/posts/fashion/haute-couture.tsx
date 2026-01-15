@@ -38,6 +38,7 @@ export default function HauteCouture({
             width={240}
             height={360}
             className="!object-cover !w-full !h-full"
+            unoptimized={image?.includes('krisyotam.com')}
           />
         </div>
 

@@ -55,6 +55,7 @@ export default function MangaPanelDisplay({
               width={layout === "horizontal" ? 640 : 240}
               height={layout === "horizontal" ? 360 : 360}
               className="!object-cover !w-full !h-full"
+              unoptimized={image?.includes('krisyotam.com')}
             />
           </div>
 
@@ -103,6 +104,7 @@ export default function MangaPanelDisplay({
               alt={`${mangaTitle} - ${pageName}`}
               fill
               className="!object-cover"
+              unoptimized={image?.includes('krisyotam.com')}
             />
           </div>
         </div>

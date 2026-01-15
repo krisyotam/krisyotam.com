@@ -96,6 +96,7 @@ export function EnhancedImageDisplay({
                 height={height}
                 className={isWrap ? "object-contain w-full h-auto !m-0" : "object-cover !m-0"}
                 data-enhanced
+                unoptimized={getCurrentSrc(imagesArray[currentImageIndex])?.includes('krisyotam.com')}
               />
             </div>
             {/* Always show overlay */}
@@ -136,6 +137,7 @@ export function EnhancedImageDisplay({
                 className="object-contain max-h-[80vh] !m-0"
                 data-enhanced
                 priority
+                unoptimized={getCurrentSrc(imagesArray[currentImageIndex])?.includes('krisyotam.com')}
               />
             </div>
 

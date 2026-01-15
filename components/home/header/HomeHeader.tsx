@@ -24,6 +24,7 @@ export function HomeHeader() {
               className="rounded-md logo-light select-none pointer-events-none"
               onContextMenu={(e) => e.preventDefault()}
               priority
+              unoptimized
             />
             <Image
               src="https://krisyotam.com/doc/site/krisyotam-personal-crest-darkmode.png"
@@ -33,6 +34,7 @@ export function HomeHeader() {
               className="rounded-md logo-dark select-none pointer-events-none"
               onContextMenu={(e) => e.preventDefault()}
               priority
+              unoptimized
             />
           </div>
           <div className="flex flex-col items-center gap-1 mt-0">
@@ -71,6 +73,7 @@ export function HomeHeader() {
               className="rounded-md logo-light select-none pointer-events-none"
               onContextMenu={(e) => e.preventDefault()}
               priority
+              unoptimized
             />
             <Image
               src="https://krisyotam.com/doc/site/krisyotam-dark.png"
@@ -80,6 +83,7 @@ export function HomeHeader() {
               className="rounded-md logo-dark select-none pointer-events-none"
               onContextMenu={(e) => e.preventDefault()}
               priority
+              unoptimized
             />
           </div>
           <div className="flex flex-col items-center gap-2 mt-6">

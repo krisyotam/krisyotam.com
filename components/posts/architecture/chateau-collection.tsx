@@ -101,6 +101,7 @@ export default function ChateauCollection({
                 width={640}
                 height={360}
                 className="!object-cover !w-full !h-full"
+                unoptimized={currentImage?.image?.includes('krisyotam.com')}
               />
             </div>
 
@@ -203,6 +204,7 @@ export default function ChateauCollection({
                 fill
                 className="!object-cover"
                 sizes="90vw"
+                unoptimized={safeImages[modalImageIndex]?.image?.includes('krisyotam.com')}
               />
             </div>
           </div>

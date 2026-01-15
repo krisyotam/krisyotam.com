@@ -37,6 +37,7 @@ export default function PlaylistCard({
             width={400}
             height={400}
             className="h-full w-full object-cover transition-all duration-300"
+            unoptimized={coverImage?.includes('krisyotam.com')}
           />
         </div>
 

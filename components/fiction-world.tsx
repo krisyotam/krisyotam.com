@@ -34,6 +34,7 @@ export default function FictionWorld({
               alt={`${name} from ${novel}`}
               fill
               className={`object-cover transition-all duration-500 ${isHovered ? "brightness-100 scale-105" : "brightness-50"}`}
+              unoptimized={imageSrc?.includes('krisyotam.com')}
             />
           </div>
 

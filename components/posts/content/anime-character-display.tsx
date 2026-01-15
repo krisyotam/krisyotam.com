@@ -66,6 +66,7 @@ export default function AnimeCharacterDisplay({
               display: "block",
             }}
             priority
+            unoptimized={image?.includes('krisyotam.com')}
           />
         </div>
 

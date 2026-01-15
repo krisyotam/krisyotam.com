@@ -55,6 +55,7 @@ export function ProgymnasmataEntryPage({ entry }: ProgymnasmataEntryPageProps) {
                 fill
                 className="object-cover"
                 priority
+                unoptimized={entry.image?.includes('krisyotam.com')}
               />
             </div>
           )}

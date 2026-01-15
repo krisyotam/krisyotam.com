@@ -78,6 +78,7 @@ export default function MangaPanelDisplayCollection({
                 width={layout === "horizontal" ? 640 : 240}
                 height={layout === "horizontal" ? 360 : 360}
                 className="!object-cover !w-full !h-full"
+                unoptimized={currentPanel?.image?.includes('krisyotam.com')}
               />
             </div>
 
@@ -155,6 +156,7 @@ export default function MangaPanelDisplayCollection({
               alt={`${mangaTitle} - ${currentPanel?.pageName || "Panel"}`}
               fill
               className="!object-cover"
+              unoptimized={currentPanel?.image?.includes('krisyotam.com')}
             />
 
             {safePanels.length > 1 && (

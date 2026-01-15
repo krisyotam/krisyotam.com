@@ -56,6 +56,7 @@ export function Image({
           alt={alt ?? ""}
           width={scaledWidth}
           height={scaledHeight}
+          unoptimized={src?.includes('krisyotam.com')}
         />
       ) : (
         <NextImage
@@ -64,6 +65,7 @@ export function Image({
           width={800} // Provide a safe default
           height={600}
           style={{ maxWidth: "100%", height: "auto" }}
+          unoptimized={src?.includes('krisyotam.com')}
         />
       )}
       {alt && <Caption>{alt}</Caption>}

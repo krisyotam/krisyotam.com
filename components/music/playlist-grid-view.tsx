@@ -56,6 +56,7 @@ export default function PlaylistGrid({ playlists, searchQuery = "", activeGenre 
                         width={400}
                         height={400}
                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        unoptimized={playlist.coverImage?.includes('krisyotam.com')}
                       />
                     </div>
 

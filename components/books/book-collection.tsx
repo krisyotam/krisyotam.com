@@ -66,6 +66,7 @@ export default function BookCollection({ books = [], title, className }: BookCol
               alt={`${currentBook.title} by ${currentBook.author}`}
               fill
               className="object-cover"
+              unoptimized={currentBook.coverImage?.includes('krisyotam.com')}
             />
           </div>
 

@@ -133,6 +133,7 @@ function FamilyMemberDetail({
                 alt={member.name}
                 fill
                 className="object-cover"
+                unoptimized={member.imageUrl?.includes('krisyotam.com')}
               />
             </div>
           </div>
@@ -259,6 +260,7 @@ function FamilyTreeNode({
                 alt={member.name}
                 fill
                 className="object-cover"
+                unoptimized={member.imageUrl?.includes('krisyotam.com')}
               />
             </div>
             <div className="flex-1 min-w-0">
@@ -334,6 +336,7 @@ function FamilyTreeNode({
               alt={member.name}
               fill
               className="object-cover"
+              unoptimized={member.imageUrl?.includes('krisyotam.com')}
             />
           </div>
 

@@ -20,6 +20,7 @@ export function PlaylistCard({ playlistName, creator, songCount, lastUpdated, co
           width={64}
           alt="Playlist Cover"
           className="w-16 h-16"
+          unoptimized={coverImage?.includes('krisyotam.com')}
         />
         <div className="flex flex-col justify-center">
           <h3 className="text-sm font-medium tracking-tight">{playlistName}</h3>

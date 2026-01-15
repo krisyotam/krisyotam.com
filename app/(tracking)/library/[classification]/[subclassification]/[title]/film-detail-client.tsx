@@ -120,6 +120,7 @@ export function FilmDetailClient({ film }: FilmDetailClientProps) {
                   width={80}
                   height={120}
                   className="rounded shadow-lg object-cover"
+                  unoptimized={film.posterUrl?.includes('krisyotam.com')}
                 />
               </CardContent>
             </Card>

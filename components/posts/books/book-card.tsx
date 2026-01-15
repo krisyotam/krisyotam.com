@@ -53,6 +53,7 @@ export function BookCard({ title, slug, cover, authors }: BookCardProps) {
                 fill
                 className="!object-cover"
                 style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+                unoptimized={cover?.includes('krisyotam.com')}
               />
             </div>
             <CardContent className="!p-4 !bg-card" style={{ overflow: "hidden" }}>

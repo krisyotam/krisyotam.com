@@ -161,6 +161,7 @@ export function FeaturedPost({ posts, className = "" }: FeaturedPostProps) {
               className="object-cover transition-transform group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
               priority={currentIndex === 0}
+              unoptimized={thumbnailUrl?.includes('krisyotam.com')}
             />
             
             {/* Overlay with navigation */}

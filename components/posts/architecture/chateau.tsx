@@ -57,6 +57,7 @@ export default function Chateau({
               width={640}
               height={360}
               className="!object-cover !w-full !h-full"
+              unoptimized={image?.includes('krisyotam.com')}
             />
           </div>
 
@@ -104,6 +105,7 @@ export default function Chateau({
                 fill
                 className="!object-cover"
                 sizes="90vw"
+                unoptimized={image?.includes('krisyotam.com')}
               />
             </div>
           </div>

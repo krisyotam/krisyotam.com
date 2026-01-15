@@ -28,6 +28,7 @@ export default function Book({ cover, name, author, link }: BookProps) {
             fill
             style={{ objectFit: "contain" }}
             className="book-image"
+            unoptimized={cover?.includes('krisyotam.com')}
           />
         </span>
         <span className="book-title inline-block font-medium">{name}</span>

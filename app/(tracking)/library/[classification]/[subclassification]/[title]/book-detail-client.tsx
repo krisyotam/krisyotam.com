@@ -130,6 +130,7 @@ export function BookDetailClient({ book }: BookDetailClientProps) {
                     width={80}
                     height={100}
                     className="rounded shadow-lg object-cover"
+                    unoptimized={book.coverUrl?.includes('krisyotam.com')}
                   />
                 ) : (
                   <div className="text-6xl text-primary">

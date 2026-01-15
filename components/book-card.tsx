@@ -40,7 +40,7 @@ export function BookCard({ isbn, title, authors, rating, isInteractive = false }
           {loading ? (
             <div className="w-full h-full bg-muted animate-pulse" />
           ) : (
-            <Image src={coverUrl || "/placeholder.svg"} alt={title} fill className="object-cover" />
+            <Image src={coverUrl || "/placeholder.svg"} alt={title} fill className="object-cover" unoptimized={coverUrl?.includes('krisyotam.com')} />
           )}
         </div>
       </div>

@@ -54,6 +54,7 @@ export default function SiteStickerCarousel({ sites }: SiteStickerCarouselProps)
                   fill
                   style={{ objectFit: "contain" }}
                   className="rounded-md"
+                  unoptimized={currentSite.siteSticker?.includes('krisyotam.com')}
                 />
               </Link>
             </div>

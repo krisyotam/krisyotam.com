@@ -25,6 +25,7 @@ export default function Product({ image, title, description, link }: ProductProp
             fill
             style={{ objectFit: "contain" }}
             className="product-image"
+            unoptimized={image?.includes('krisyotam.com')}
           />
         </span>
         <span className="product-title inline-block font-medium text-base">{title}</span>

@@ -25,6 +25,7 @@ export default function ProductGrid({ items }: ProductGridProps) {
                   width={300}
                   height={300}
                   className="object-contain max-w-full max-h-full transition-transform duration-300 group-hover:scale-105"
+                  unoptimized={product.imageUrl?.includes('krisyotam.com')}
                 />
               </div>
             </div>

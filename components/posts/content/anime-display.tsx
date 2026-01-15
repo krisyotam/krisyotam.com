@@ -38,6 +38,7 @@ export default function AnimeDisplay({
             width={240}
             height={360}
             className="!object-cover !w-full !h-full"
+            unoptimized={coverImage?.includes('krisyotam.com')}
           />
         </div>
 

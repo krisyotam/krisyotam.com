@@ -34,6 +34,7 @@ export function TraktProfileHeader({
             fill
             sizes="128px"
             className="object-cover"
+            unoptimized={avatar?.includes('krisyotam.com')}
           />
         </div>
 

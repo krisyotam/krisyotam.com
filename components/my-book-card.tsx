@@ -27,7 +27,7 @@ export function MyBookCard({ book }: MyBookCardProps) {
     <Card className="flex overflow-hidden transition-colors hover:bg-accent/50 group cursor-pointer h-full">
       <div className="w-[100px] bg-muted p-4 flex items-center justify-center">
         <div className="relative w-full h-[100px]">
-          <Image src={imageUrl || "/placeholder.svg"} alt={book.title} fill className="object-cover" />
+          <Image src={imageUrl || "/placeholder.svg"} alt={book.title} fill className="object-cover" unoptimized={imageUrl?.includes('krisyotam.com')} />
         </div>
       </div>
       <div className="flex-1 p-4 overflow-hidden flex flex-col justify-between">

@@ -34,6 +34,7 @@ export default function OcCharacterDisplay({
           sizes="(max-width: 768px) 100vw, 300px"
           className="object-cover"
           priority
+          unoptimized={image?.includes('krisyotam.com')}
         />
       </div>
 

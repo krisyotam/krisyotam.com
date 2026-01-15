@@ -58,6 +58,7 @@ export function WikiPerson({
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 192px"
+            unoptimized={image?.includes('krisyotam.com')}
           />
         </div>
       </div>

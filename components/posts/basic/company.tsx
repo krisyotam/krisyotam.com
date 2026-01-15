@@ -38,7 +38,7 @@ export default function Company({
       <div className="!space-y-6">
         <div className="!h-32 !flex !items-center !justify-center">
           <div className="!w-56 !h-24 !relative">
-            <Image src={logo || "/placeholder.svg"} alt={`${name} logo`} fill className="!object-contain" />
+            <Image src={logo || "/placeholder.svg"} alt={`${name} logo`} fill className="!object-contain" unoptimized={logo?.includes('krisyotam.com')} />
           </div>
         </div>
 

@@ -76,6 +76,7 @@ function PaintingPreview({ item }: { item: PaintingItem }) {
           className="object-cover transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           style={{ outline: 'none' }}
+          unoptimized={item.imageUrl?.includes('krisyotam.com')}
         />
       </div>
       <div className="p-4 flex-grow flex flex-col">
@@ -101,6 +102,7 @@ function BookPreview({ item }: { item: BookItem }) {
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          unoptimized={item.imageUrl?.includes('krisyotam.com')}
         />
       </div>
       <div className="p-4 flex-grow flex flex-col">
@@ -126,6 +128,7 @@ function MoviePreview({ item }: { item: MovieItem }) {
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          unoptimized={item.imageUrl?.includes('krisyotam.com')}
         />
       </div>
       <div className="p-4 flex-grow flex flex-col">
@@ -215,6 +218,7 @@ function UnifiedModal({ item }: { item: Item }) {
                 fill
                 className="object-contain"
                 sizes="100vw"
+                unoptimized={paintingItem.imageUrl?.includes('krisyotam.com')}
               />
             </div>
             <div className="p-6">

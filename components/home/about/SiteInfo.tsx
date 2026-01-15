@@ -41,6 +41,7 @@ export default function SiteInfo() {
                     fill
                     style={{ objectFit: "contain" }}
                     className="rounded-md"
+                    unoptimized
                   />
                 </div>
                 <div className="dark:hidden block w-full h-full relative">
@@ -50,6 +51,7 @@ export default function SiteInfo() {
                     fill
                     style={{ objectFit: "contain" }}
                     className="rounded-md"
+                    unoptimized
                   />
                 </div>
               </div>

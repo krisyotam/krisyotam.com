@@ -110,6 +110,7 @@ export function CompanyCard({
                 height={28}
                 className="rounded-md object-cover"
                 style={{ width: "28px", height: "28px" }} // Ensure square dimensions
+                unoptimized={logo?.includes('krisyotam.com')}
               />
             </div>
             <div>
