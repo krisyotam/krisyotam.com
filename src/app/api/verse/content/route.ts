@@ -12,7 +12,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    const filePath = path.join(process.cwd(), "app", "(content)", "verse", "content", type, `${slug}.mdx`);
+    const filePath = path.join(process.cwd(), "src", "app", "(content)", "verse", "content", type, `${slug}.mdx`);
     const content = await fs.promises.readFile(filePath, "utf-8");
     
     // Return the raw content with line breaks preserved
