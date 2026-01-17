@@ -26,10 +26,10 @@
     ],
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ],
       "@essays/*": [
-        "./app/essays/*"
+        "./src/app/essays/*"
       ]
     }
   },
@@ -38,15 +38,15 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "types/**/*.d.ts",
+    "src/types/**/*.d.ts",
     "global.d.ts",
-    "app/(documents)/doc/[...file]/route.ts",
+    "src/app/(documents)/doc/[...file]/route.ts",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     "**/*.mdx",
-    "components/archive",
-    "lib/archive"
+    "src/components/archive",
+    "src/lib/archive"
   ]
 }

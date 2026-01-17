@@ -92,9 +92,17 @@ const baseConfig = {
       { protocol: 'https', hostname: 'imgs.search.brave.com', pathname: '/**' },
       // Content platforms
       { protocol: 'https', hostname: 'substackcdn.com', pathname: '/**' },
+      // Book covers (Open Library)
+      { protocol: 'https', hostname: 'covers.openlibrary.org', pathname: '/**' },
+      // Spotify album art
+      { protocol: 'https', hostname: 'i.scdn.co', pathname: '/**' },
       // External sites with images
       { protocol: 'https', hostname: 'tezukaosamu.net', pathname: '/**' },
       { protocol: 'https', hostname: 'understandingslavery.com', pathname: '/**' },
+      // Wikipedia images
+      { protocol: 'https', hostname: 'upload.wikimedia.org', pathname: '/**' },
+      // Recipe images
+      { protocol: 'https', hostname: 'cookingwithcassandra.com', pathname: '/**' },
       // Own domain (doc storage)
       { protocol: 'https', hostname: 'krisyotam.com', pathname: '/doc/**' },
       { protocol: 'https', hostname: 'www.krisyotam.com', pathname: '/doc/**' },

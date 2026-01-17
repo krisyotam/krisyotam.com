@@ -11,29 +11,19 @@ import { useState } from "react"
 import { AccordionItem } from "./accordion"
 import {
   AboutMe,
-  Profile,
   Personality,
   PersonalityMorals,
   Intelligence,
-  InterestingPeople,
-  OnMyMethod,
-  MyMission,
   Certifications,
-  CoreValues,
-  ExperienceComponent,
-  CoreSkillsComponent,
-  PersonalPhilosophy,
   AreasOfInterest,
-  Practice,
-  Companies,
   MySites,
-  OtherSites,
   SiteInfo,
   Hosting,
   AboutThisSite,
   SupportMe,
   RecommendedContent,
   Uses,
+  TestimonialsSection,
 } from "./about"
 import Favorites from "@/components/Favorites"
 
@@ -91,12 +81,6 @@ export function HomeAbout() {
           onToggle={() => toggleSection(2)}
         />
         <AccordionItem
-          title="Profile"
-          content={<Profile />}
-          isOpen={openSections.includes(3)}
-          onToggle={() => toggleSection(3)}
-        />
-        <AccordionItem
           title="Intelligence"
           content={<Intelligence />}
           isOpen={openSections.includes(4)}
@@ -115,52 +99,10 @@ export function HomeAbout() {
           onToggle={() => toggleSection(6)}
         />
         <AccordionItem
-          title="On My Method"
-          content={<OnMyMethod />}
-          isOpen={openSections.includes(7)}
-          onToggle={() => toggleSection(7)}
-        />
-        <AccordionItem
-          title="My Mission"
-          content={<MyMission />}
-          isOpen={openSections.includes(8)}
-          onToggle={() => toggleSection(8)}
-        />
-        <AccordionItem
           title="Certifications"
           content={<Certifications />}
           isOpen={openSections.includes(9)}
           onToggle={() => toggleSection(9)}
-        />
-        <AccordionItem
-          title="Core Values"
-          content={<CoreValues />}
-          isOpen={openSections.includes(10)}
-          onToggle={() => toggleSection(10)}
-        />
-        <AccordionItem
-          title="Experience"
-          content={<ExperienceComponent />}
-          isOpen={openSections.includes(11)}
-          onToggle={() => toggleSection(11)}
-        />
-        <AccordionItem
-          title="Practice"
-          content={<Practice />}
-          isOpen={openSections.includes(12)}
-          onToggle={() => toggleSection(12)}
-        />
-        <AccordionItem
-          title="Core Skills"
-          content={<CoreSkillsComponent />}
-          isOpen={openSections.includes(13)}
-          onToggle={() => toggleSection(13)}
-        />
-        <AccordionItem
-          title="Personal Philosophy"
-          content={<PersonalPhilosophy />}
-          isOpen={openSections.includes(14)}
-          onToggle={() => toggleSection(14)}
         />
         <AccordionItem
           title="Areas of Interest"
@@ -169,16 +111,10 @@ export function HomeAbout() {
           onToggle={() => toggleSection(15)}
         />
         <AccordionItem
-          title="Companies"
-          content={<Companies />}
+          title="Testimonials"
+          content={<TestimonialsSection />}
           isOpen={openSections.includes(16)}
           onToggle={() => toggleSection(16)}
-        />
-        <AccordionItem
-          title="Other Sites"
-          content={<OtherSites />}
-          isOpen={openSections.includes(17)}
-          onToggle={() => toggleSection(17)}
         />
         <AccordionItem
           title="Site Info"

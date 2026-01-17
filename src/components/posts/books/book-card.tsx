@@ -40,7 +40,7 @@ export function BookCard({ title, slug, cover, authors }: BookCardProps) {
       <style jsx>{resetStyles}</style>
       <div className="book-card-wrapper">
         <Link
-          href={`https://literal.club/book/${slug}`}
+          href={`https://openlibrary.org/search?q=${encodeURIComponent(title)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="!block !no-underline !text-inherit hover:!no-underline hover:!text-inherit !border-none !outline-none focus:!outline-none focus:!ring-0"

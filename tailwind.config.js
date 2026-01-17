@@ -2,14 +2,14 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx,css}",
-    "./lib/**/*.{js,ts,jsx,tsx}",
-    "./utils/**/*.{js,ts,jsx,tsx}",
-    "./contexts/**/*.{js,ts,jsx,tsx}",
-    "./hooks/**/*.{js,ts,jsx,tsx}",
-    "./styles/**/*.{css,scss}"
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx,css}",
+    "./src/lib/**/*.{js,ts,jsx,tsx}",
+    "./src/utils/**/*.{js,ts,jsx,tsx}",
+    "./src/contexts/**/*.{js,ts,jsx,tsx}",
+    "./src/hooks/**/*.{js,ts,jsx,tsx}",
+    "./src/styles/**/*.{css,scss}"
   ],
   safelist: [
     // Ensure dark prose styles are preserved

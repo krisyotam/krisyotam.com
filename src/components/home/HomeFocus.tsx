@@ -7,7 +7,7 @@
 
 import { InfiniteMovingQuotes } from "@/components/InfiniteMovingQuotes"
 import { BentoNav } from "@/components/bento-nav"
-import { ThemeImageCompare, TestimonialsSection } from "./about"
+import { ThemeImageCompare } from "./about"
 
 export function HomeFocus() {
   return (
@@ -24,9 +24,6 @@ export function HomeFocus() {
           <ThemeImageCompare />
           <p className="mt-2 text-center text-xs text-muted-foreground">hover to view site in dark mode</p>
         </div>
-
-        {/* Comment showcase */}
-        <TestimonialsSection />
       </div>
     </div>
   )

@@ -51,7 +51,11 @@ export function HomeGridView({ posts }: HomeGridViewProps) {
       try {
         const response = await fetch("/api/poems")
         const data = await response.json()
-        // Filter active poems and shuffle
+        // Filter active poems and shuffle - ensure data is an array
+        if (!Array.isArray(data)) {
+          setRandomPoems([])
+          return
+        }
         const activePoems = data.filter((poem: Poem) => poem.status === "Finished")
         const shuffledPoems = activePoems.sort(() => 0.5 - Math.random())
         setRandomPoems(shuffledPoems.slice(0, 2))

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Card } from "@/components/ui/card"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
 
 const SPOTIFY_CLIENT_ID = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID
 const SPOTIFY_CLIENT_SECRET = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET
@@ -11,9 +12,11 @@ let accessToken: string | null = null
 let refreshToken: string | null = null
 
 export function CurrentlyListening() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [track, setTrack] = useState({
     name: "Loading...",
     artist: "Loading...",
+    album: "",
     albumCover: "/assets/fallback/fallback_album_cover.svg",
     spotifyLink: "#",
   })
@@ -75,7 +78,8 @@ export function CurrentlyListening() {
         const track = data.items[0].track
         setTrack({
           name: track.name,
-          artist: `${track.artists.map((artist: { name: string }) => artist.name).join(", ")} - ${track.album.name}`,
+          artist: track.artists.map((artist: { name: string }) => artist.name).join(", "),
+          album: track.album.name,
           albumCover: track.album.images[0]?.url || "/assets/fallback/fallback_album_cover.svg",
           spotifyLink: track.external_urls.spotify,
         })
@@ -83,6 +87,7 @@ export function CurrentlyListening() {
         setTrack({
           name: "Ave Maria",
           artist: "Hannah Holgersson",
+          album: "",
           albumCover: "/assets/fallback/fallback_cover.jpg",
           spotifyLink: "#",
         })
@@ -92,6 +97,7 @@ export function CurrentlyListening() {
       setTrack({
         name: "Ave Maria",
         artist: "Hannah Holgersson",
+        album: "",
         albumCover: "/assets/fallback/fallback_cover.jpg",
         spotifyLink: "#",
       })
@@ -116,22 +122,42 @@ export function CurrentlyListening() {
   }, [accessToken]) // Added accessToken to dependencies
 
   return (
-    <Card className="flex overflow-hidden h-[100px] dark:bg-[#121212] dark:border-[#232323]">
-      <div className="w-[100px] bg-muted dark:bg-[#1a1a1a] p-4 flex items-center justify-center">
-        <a href={track.spotifyLink} target="_blank" rel="noopener noreferrer" className="relative w-full h-full">
-          <Image
-            src={track.albumCover || "/placeholder.svg"}
-            alt="Album cover"
-            fill
-            className="object-cover rounded-md transition-transform duration-300 hover:scale-110"
-          />
-        </a>
-      </div>
-      <div className="flex-1 p-4 overflow-hidden flex flex-col justify-center">
-        <div className="font-normal text-sm truncate dark:text-[#fafafa]">{track.name}</div>
-        <div className="text-gray-600 dark:text-[#a1a1a1] text-sm truncate">{track.artist}</div>
-      </div>
-    </Card>
+    <>
+      <Card className="flex overflow-hidden h-[100px] dark:bg-[#121212] dark:border-[#232323]">
+        <div
+          className="w-[100px] bg-muted dark:bg-[#1a1a1a] p-4 flex items-center justify-center cursor-pointer"
+          onClick={() => setIsModalOpen(true)}
+        >
+          <div className="relative w-full h-full">
+            <Image
+              src={track.albumCover || "/placeholder.svg"}
+              alt="Album cover"
+              fill
+              className="object-cover rounded-md transition-transform duration-300 hover:scale-110"
+            />
+          </div>
+        </div>
+        <div className="flex-1 p-4 overflow-hidden flex flex-col justify-center">
+          <div className="font-normal text-sm truncate dark:text-[#fafafa]">{track.name}</div>
+          <div className="text-gray-600 dark:text-[#a1a1a1] text-sm truncate">
+            {track.artist}{track.album ? ` - ${track.album}` : ""}
+          </div>
+        </div>
+      </Card>
+
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="p-0 border-0 bg-transparent max-w-fit [&>button]:hidden">
+          <div className="relative w-[300px] h-[300px]">
+            <Image
+              src={track.albumCover || "/placeholder.svg"}
+              alt="Album cover"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }
 

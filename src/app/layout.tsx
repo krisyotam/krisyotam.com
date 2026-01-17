@@ -16,7 +16,7 @@ import { siteConfig } from '@/lib/seo'
 
 // Define fontSans using localFont
 const fontSans = localFont({
-  src: '../public/fonts/outfit.woff2',
+  src: '../../public/fonts/outfit.woff2',
   variable: '--font-sans',
 });
 
@@ -105,7 +105,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#0c0c0c" media="(prefers-color-scheme: dark)" />
         <DarkModeScript />
       </head>
-      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
+      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)} suppressHydrationWarning>
         <ThemeProvider 
           attribute="class" 
           defaultTheme="system" 

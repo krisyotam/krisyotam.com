@@ -26,3 +26,20 @@ Since 2025
     <docs>http://opml.org/spec2.opml</docs>
   </head>
   <body>
+    <outline text="Film Reviews" title="Film Reviews">
+      <outline type="rss" text="Roger Ebert" title="Roger Ebert" xmlUrl="https://www.rogerebert.com/feed" htmlUrl="https://www.rogerebert.com"/>
+    </outline>
+    <outline text="Lesswrong" title="Lesswrong">
+      <outline type="rss" text="Scott Alexander" title="Scott Alexander" xmlUrl="https://www.greaterwrong.com/users/scottalexander?show=posts&amp;format=rss" htmlUrl="https://www.greaterwrong.com/users/scottalexander"/>
+      <outline type="rss" text="Gwern" title="Gwern" xmlUrl="https://www.greaterwrong.com/users/gwern?show=posts&amp;format=rss" htmlUrl="https://www.greaterwrong.com/users/gwern"/>
+      <outline type="rss" text="Paul Christiano" title="Paul Christiano" xmlUrl="https://www.greaterwrong.com/users/paulfchristiano?show=posts&amp;format=rss" htmlUrl="https://www.greaterwrong.com/users/paulfchristiano"/>
+      <outline type="rss" text="Nate Soares" title="Nate Soares" xmlUrl="https://www.greaterwrong.com/users/so8res?show=posts&amp;format=rss" htmlUrl="https://www.greaterwrong.com/users/so8res"/>
+      <outline type="rss" text="Evan Hubinger" title="Evan Hubinger" xmlUrl="https://www.greaterwrong.com/users/evhub?show=posts&amp;format=rss" htmlUrl="https://www.greaterwrong.com/users/evhub"/>
+      <outline type="rss" text="Zvi" title="Zvi" xmlUrl="https://www.greaterwrong.com/users/zvi?show=posts&amp;format=rss" htmlUrl="https://www.greaterwrong.com/users/zvi"/>
+      <outline type="rss" text="Benito" title="Benito" xmlUrl="https://www.greaterwrong.com/users/benito?show=posts&amp;format=rss" htmlUrl="https://www.greaterwrong.com/users/benito"/>
+      <outline type="rss" text="Kaj Sotala" title="Kaj Sotala" xmlUrl="https://www.greaterwrong.com/users/kaj_sotala?show=posts&amp;format=rss" htmlUrl="https://www.greaterwrong.com/users/kaj_sotala"/>
+      <outline type="rss" text="Ruby" title="Ruby" xmlUrl="https://www.greaterwrong.com/users/ruby?show=posts&amp;format=rss" htmlUrl="https://www.greaterwrong.com/users/ruby"/>
+      <outline type="rss" text="Ozzie Gooen" title="Ozzie Gooen" xmlUrl="https://www.greaterwrong.com/users/ozziegooen?show=posts&amp;format=rss" htmlUrl="https://www.greaterwrong.com/users/ozziegooen"/>
+    </outline>
+  </body>
+</opml>

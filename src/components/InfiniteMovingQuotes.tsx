@@ -108,10 +108,10 @@ export const InfiniteMovingQuotes = ({
 					pauseOnHover && "hover:[animation-play-state:paused]"
 				)}
 			>
-				{items.map((item) => (
+				{items.map((item, index) => (
 					<li
 						className="relative w-[350px] md:w-[450px] max-w-full shrink-0 h-[110px] md:h-[130px] overflow-hidden rounded-none border border-border bg-card text-card-foreground px-8 py-6"
-						key={item.text + item.author + (item.source || "")}
+						key={`${index}-${item.text.slice(0, 20)}`}
 					>
 						<blockquote>
 							<div

@@ -52,7 +52,6 @@ const CONFIG = {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const BANNED_DOMAINS = [
-  { name: "Literal", domain: "literal.club" },
   { name: "Amazon", domain: "amazon.com" },
   { name: "Oxford English Dictionary", domain: "oed.com" },
   { name: "Github", domain: "github.com" },

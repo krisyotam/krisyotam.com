@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback, useMemo } from "react"
+import { useState, useCallback, useMemo, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
@@ -84,9 +84,11 @@ export default function CoreSkills({ data = DEFAULT_SKILLS_DATA, className }: Co
     })
   }, [data])
 
-  // Memoize the shuffled skills to prevent reshuffling on re-renders
-  const shuffledSkills = useMemo(() => {
-    return [...allSkills].sort(() => Math.random() - 0.5)
+  // Shuffle skills only on client to avoid hydration mismatch
+  const [shuffledSkills, setShuffledSkills] = useState<SkillItem[]>([])
+
+  useEffect(() => {
+    setShuffledSkills([...allSkills].sort(() => Math.random() - 0.5))
   }, [allSkills])
 
   // Use useCallback for event handlers to prevent recreation on re-renders
