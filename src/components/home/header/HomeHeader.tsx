@@ -17,7 +17,7 @@ export function HomeHeader() {
         <CardContent className="p-0 flex flex-col items-center justify-between h-full">
           <div className="relative w-[360px] h-[360px] mt-8 -mb-8">
             <Image
-              src="https://krisyotam.com/doc/site/krisyotam-personal-crest.png"
+              src="https://krisyotam.com/doc/assets/logos/krisyotam-personal-crest.png"
               alt="Kris Yotam Logo"
               fill
               style={{ objectFit: "contain" }}
@@ -27,7 +27,7 @@ export function HomeHeader() {
               unoptimized
             />
             <Image
-              src="https://krisyotam.com/doc/site/krisyotam-personal-crest-darkmode.png"
+              src="https://krisyotam.com/doc/assets/logos/krisyotam-personal-crest-darkmode.png"
               alt="Kris Yotam Logo (Dark Mode)"
               fill
               style={{ objectFit: "contain" }}
@@ -66,7 +66,7 @@ export function HomeHeader() {
         <CardContent className="p-0 flex flex-col items-center justify-between h-full">
           <div className="relative w-[340px] h-[340px] mt-8">
             <Image
-              src="https://krisyotam.com/doc/site/krisyotam-light.png"
+              src="https://krisyotam.com/doc/assets/logos/krisyotam-light.png"
               alt="Kris Yotam QR Code"
               fill
               style={{ objectFit: "contain" }}
@@ -76,7 +76,7 @@ export function HomeHeader() {
               unoptimized
             />
             <Image
-              src="https://krisyotam.com/doc/site/krisyotam-dark.png"
+              src="https://krisyotam.com/doc/assets/logos/krisyotam-dark.png"
               alt="Kris Yotam QR Code (Dark Mode)"
               fill
               style={{ objectFit: "contain" }}

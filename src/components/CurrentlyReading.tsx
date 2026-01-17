@@ -8,7 +8,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog"
 const CURRENT_BOOK = {
   title: "My Year of Rest and Relaxation",
   author: "Ottessa Moshfegh",
-  coverImage: "https://krisyotam.com/doc/imgs/books/2018-my-year-of-rest-and-relaxation-ottessa-moshfegh.jpg",
+  coverImage: "https://krisyotam.com/doc/media/images/literature/2018-my-year-of-rest-and-relaxation-ottessa-moshfegh.jpg",
 }
 
 export function CurrentlyReading() {

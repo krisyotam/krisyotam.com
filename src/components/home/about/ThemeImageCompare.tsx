@@ -37,11 +37,11 @@ export function ThemeImageCompare({ className }: { className?: string }) {
   const [entryEdge, setEntryEdge] = useState<Edge>(null);
 
   const primaryImage = isDark
-    ? "https://www.krisyotam.com/doc/site/krisyotam-site-dark.png"
-    : "https://www.krisyotam.com/doc/site/krisyotam-site-light.png";
+    ? "https://www.krisyotam.com/doc/assets/logos/krisyotam-site-dark.png"
+    : "https://www.krisyotam.com/doc/assets/logos/krisyotam-site-light.png";
   const secondaryImage = isDark
-    ? "https://www.krisyotam.com/doc/site/krisyotam-site-light.png"
-    : "https://www.krisyotam.com/doc/site/krisyotam-site-dark.png";
+    ? "https://www.krisyotam.com/doc/assets/logos/krisyotam-site-light.png"
+    : "https://www.krisyotam.com/doc/assets/logos/krisyotam-site-dark.png";
 
   const handleMouseEnter = useCallback((e: React.MouseEvent) => {
     if (!containerRef.current) return;
