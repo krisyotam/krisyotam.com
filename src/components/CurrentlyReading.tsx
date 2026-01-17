@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 
@@ -22,13 +21,12 @@ export function CurrentlyReading() {
           className="w-[100px] h-[100px] bg-muted dark:bg-[#1a1a1a] p-2 flex items-center justify-center overflow-hidden cursor-pointer"
           onClick={() => setIsModalOpen(true)}
         >
-          <div className="relative w-[60px] h-[90px]">
+          <div className="relative w-[60px] h-[90px] flex items-center justify-center">
             {CURRENT_BOOK.coverImage ? (
-              <Image
+              <img
                 src={CURRENT_BOOK.coverImage}
                 alt="Book cover"
-                fill
-                className="object-contain rounded-sm transition-transform duration-300 hover:scale-110"
+                className="max-w-full max-h-full object-contain rounded-sm transition-transform duration-300 hover:scale-110"
               />
             ) : (
               <div className="w-full h-full bg-muted-foreground/20 rounded-sm flex items-center justify-center">
@@ -46,14 +44,11 @@ export function CurrentlyReading() {
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="p-0 border-0 bg-transparent max-w-fit [&>button]:hidden">
           {CURRENT_BOOK.coverImage && (
-            <div className="relative w-[300px] h-[450px]">
-              <Image
-                src={CURRENT_BOOK.coverImage}
-                alt="Book cover"
-                fill
-                className="object-contain"
-              />
-            </div>
+            <img
+              src={CURRENT_BOOK.coverImage}
+              alt="Book cover"
+              className="max-w-[300px] max-h-[450px] object-contain"
+            />
           )}
         </DialogContent>
       </Dialog>

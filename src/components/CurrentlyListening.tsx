@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 
@@ -128,14 +127,11 @@ export function CurrentlyListening() {
           className="w-[100px] bg-muted dark:bg-[#1a1a1a] p-4 flex items-center justify-center cursor-pointer"
           onClick={() => setIsModalOpen(true)}
         >
-          <div className="relative w-full h-full">
-            <Image
-              src={track.albumCover || "/placeholder.svg"}
-              alt="Album cover"
-              fill
-              className="object-cover rounded-md transition-transform duration-300 hover:scale-110"
-            />
-          </div>
+          <img
+            src={track.albumCover || "/placeholder.svg"}
+            alt="Album cover"
+            className="w-full h-full object-cover rounded-md transition-transform duration-300 hover:scale-110"
+          />
         </div>
         <div className="flex-1 p-4 overflow-hidden flex flex-col justify-center">
           <div className="font-normal text-sm truncate dark:text-[#fafafa]">{track.name}</div>
@@ -147,14 +143,11 @@ export function CurrentlyListening() {
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="p-0 border-0 bg-transparent max-w-fit [&>button]:hidden">
-          <div className="relative w-[300px] h-[300px]">
-            <Image
-              src={track.albumCover || "/placeholder.svg"}
-              alt="Album cover"
-              fill
-              className="object-cover"
-            />
-          </div>
+          <img
+            src={track.albumCover || "/placeholder.svg"}
+            alt="Album cover"
+            className="w-[300px] h-[300px] object-cover"
+          />
         </DialogContent>
       </Dialog>
     </>
