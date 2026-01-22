@@ -118,7 +118,7 @@ export default function BlogPageClient({ post, allPosts, children, headerOnly, c
         importance={post.importance ?? 5}
       />
 
-      <div className="note-content flex-1">{children}</div>
+      <div className="content flex-1">{children}</div>
 
       <div className="mt-8 w-full">
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />

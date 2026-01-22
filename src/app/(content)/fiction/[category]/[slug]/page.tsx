@@ -146,7 +146,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
             <TOC headings={headings} />
           )}
 
-          <div className="note-content">
+          <div className="content">
             <Story />
           </div>
           <NotePageClient note={story} allNotes={stories} contentOnly={true} />

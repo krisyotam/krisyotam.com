@@ -170,7 +170,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
             <TOC headings={headings} />
           )}
 
-          <div className="news-content">
+          <div className="content">
             <NewsArticle />
           </div>
           <NewsPageClient article={article} allNews={news} contentOnly={true} />

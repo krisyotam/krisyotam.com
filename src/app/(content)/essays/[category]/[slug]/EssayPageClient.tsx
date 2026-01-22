@@ -120,7 +120,7 @@ export default function EssayPageClient({ essayData: essayItem, allEssays, child
       />
       
       {/* MDX body */}
-      <div className="essays-content">{children}</div>
+      <div className="content">{children}</div>
       
       <div className="mt-8">
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />

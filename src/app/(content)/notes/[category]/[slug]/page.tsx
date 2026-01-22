@@ -156,7 +156,7 @@ export default async function NotePage({ params }: NotePageProps) {
         <main id="content" className="container max-w-[672px] mx-auto px-4">
           {headings.length > 0 && <TOC headings={headings} />}
 
-          <div className="note-content">
+          <div className="content">
             <Note />
           </div>
 

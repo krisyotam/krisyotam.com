@@ -1,5 +1,3 @@
-import "./review.css";
-
 export default function ReviewLayout({
   children,
 }: {

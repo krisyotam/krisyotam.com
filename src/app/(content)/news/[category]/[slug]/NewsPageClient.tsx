@@ -134,7 +134,7 @@ export default function NewsPageClient({ article, allNews, children, headerOnly,
       />
       
       {/* MDX body */}
-      <div className="news-content">{children}</div>
+      <div className="content">{children}</div>
       
       <div className="mt-8">
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />

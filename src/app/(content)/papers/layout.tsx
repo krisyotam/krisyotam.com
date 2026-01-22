@@ -1,5 +1,3 @@
-import "./papers.css";
-
 export default function PapersLayout({
   children,
 }: {

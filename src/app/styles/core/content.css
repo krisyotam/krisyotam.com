@@ -1,0 +1,330 @@
+/* =============================================================================
+ * content.css — Unified prose styling for all content routes
+ * Applies to: blog, essays, fiction, news, notes, now, papers, reviews, til, ocs
+ *
+ * Supports: .content (generic) and .essays-content (essays-specific)
+ * =============================================================================
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
+
+/* root wrapper ----------------------------------------------------------- */
+.content,
+.essays-content {
+  font-family: "Source Serif 4", Baskerville, "Libre Baskerville",
+    "Droid Serif", "Times New Roman", Times, serif, "Noto Emoji", Quivira;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #000;
+  hyphens: auto;
+}
+
+/* headings --------------------------------------------------------------- */
+.content h1, .essays-content h1,
+.content h2, .essays-content h2,
+.content h3, .essays-content h3 {
+  font: 600 1rem/1.2 inherit;
+  letter-spacing: -0.01em;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.6);
+  color: #333;
+  scroll-margin-top: 5rem;
+}
+
+.content h1, .essays-content h1 {
+  font-size: 22px;
+}
+
+.content h2, .essays-content h2 {
+  font-size: 18px;
+}
+
+.content h3, .essays-content h3 {
+  font-size: 16px;
+  border-bottom-color: rgba(0, 0, 0, 0.4);
+}
+
+.content h4, .essays-content h4 {
+  font: 600 1rem/1.2 inherit;
+  letter-spacing: -0.01em;
+  font-size: 15px;
+  border: none;
+  color: #333;
+  scroll-margin-top: 5rem;
+}
+
+/* prose blocks ----------------------------------------------------------- */
+.content p, .essays-content p {
+  text-align: justify;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.content p:empty, .essays-content p:empty {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+}
+
+.content blockquote, .essays-content blockquote {
+  margin: 0.5rem 0;
+  padding: 0.5rem 1.5rem;
+  font-style: italic;
+  border-left: 3px solid rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* links ------------------------------------------------------------------ */
+.content a, .essays-content a {
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px dotted #666;
+  transition: border-color 0.2s ease;
+}
+
+.content a:hover, .essays-content a:hover {
+  border-bottom-color: #000;
+}
+
+/* lists ------------------------------------------------------------------ */
+.content ul, .essays-content ul,
+.content ol, .essays-content ol {
+  padding-left: 1.25rem;
+}
+
+.content li, .essays-content li {
+  line-height: 1.4;
+}
+
+.content h4 + ul, .essays-content h4 + ul,
+.content h4 + ol, .essays-content h4 + ol {
+  margin-top: 0;
+}
+
+.content h4 + p + ul, .essays-content h4 + p + ul,
+.content h4 + p + ol, .essays-content h4 + p + ol {
+  margin-top: 0;
+}
+
+.content li + li, .essays-content li + li {
+  margin-top: 0.05rem;
+}
+
+.content li > ul, .essays-content li > ul,
+.content li > ol, .essays-content li > ol {
+  margin-top: 0.05rem;
+  margin-bottom: 0.05rem;
+}
+
+/* code ------------------------------------------------------------------- */
+.content code, .essays-content code {
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+.content pre, .essays-content pre {
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.content pre > code, .essays-content pre > code {
+  background: transparent;
+  padding: 0;
+}
+
+/* tables ----------------------------------------------------------------- */
+.content table, .essays-content table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  font-size: 0.9em !important;
+  line-height: 1.4 !important;
+  table-layout: fixed !important;
+  margin: 0.75rem 0;
+}
+
+.content thead, .essays-content thead {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.15) !important;
+}
+
+.content th, .essays-content th,
+.content td, .essays-content td {
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  padding: 0.5rem !important;
+}
+
+.content th, .essays-content th {
+  background: rgba(0, 0, 0, 0.03) !important;
+  font-weight: 600 !important;
+}
+
+.content .table-wrapper, .essays-content .table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+/* images ----------------------------------------------------------------- */
+.content img, .essays-content img {
+  display: block;
+  max-width: 100%;
+  margin: 0.5rem auto;
+}
+
+.content figure, .essays-content figure {
+  margin: 0.5rem 0;
+}
+
+.content figcaption, .essays-content figcaption {
+  font-size: 0.85em;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.7);
+  margin-top: 0.25rem;
+}
+
+/* horizontal rule -------------------------------------------------------- */
+.content hr, .essays-content hr {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  margin: 1rem 0;
+}
+
+/* definition lists ------------------------------------------------------- */
+.content dl, .essays-content dl {
+  margin: 0.5rem 0 0.75rem;
+}
+
+.content dt, .essays-content dt {
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.content dd, .essays-content dd {
+  margin-left: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* task lists ------------------------------------------------------------- */
+.content input[type="checkbox"], .essays-content input[type="checkbox"] {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+/* footnotes -------------------------------------------------------------- */
+.content .footnotes, .essays-content .footnotes {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 1.5rem;
+  padding-top: 0.75rem;
+  font-size: 0.9em;
+}
+
+.content .footnotes ol, .essays-content .footnotes ol {
+  margin-left: 1rem;
+}
+
+.content .footnotes li, .essays-content .footnotes li {
+  margin-bottom: 0.25rem;
+}
+
+.content .footnote-ref, .essays-content .footnote-ref {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.content .footnote-backref, .essays-content .footnote-backref {
+  font-size: 0.8em;
+  text-decoration: none;
+}
+
+/* abbreviations ---------------------------------------------------------- */
+.content abbr, .essays-content abbr {
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.5);
+  cursor: help;
+}
+
+/* keyboard --------------------------------------------------------------- */
+.content kbd, .essays-content kbd {
+  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* =============================================================================
+ * Dark Mode
+ * ========================================================================== */
+
+.dark .content, .dark .essays-content {
+  color: #e5e5e5;
+}
+
+.dark .content h1, .dark .essays-content h1,
+.dark .content h2, .dark .essays-content h2,
+.dark .content h3, .dark .essays-content h3,
+.dark .content h4, .dark .essays-content h4 {
+  color: #e5e5e5;
+  border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+.dark .content a, .dark .essays-content a {
+  color: #e5e5e5;
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .content a:hover, .dark .essays-content a:hover {
+  border-bottom-color: #fff;
+}
+
+.dark .content code, .dark .essays-content code,
+.dark .content kbd, .dark .essays-content kbd {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark .content blockquote, .dark .essays-content blockquote {
+  border-left-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark .content table, .dark .essays-content table {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .content th, .dark .essays-content th,
+.dark .content td, .dark .essays-content td {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .content th, .dark .essays-content th {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.dark .content tr:nth-child(even), .dark .essays-content tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.dark .content hr, .dark .essays-content hr {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .content figcaption, .dark .essays-content figcaption {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .content abbr, .dark .essays-content abbr {
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .content kbd, .dark .essays-content kbd {
+  border-color: rgba(255, 255, 255, 0.2);
+}

@@ -180,7 +180,7 @@ export default async function OCSPage({ params }: OCSPageProps) {
             <TOC headings={headings} />
           )}
 
-          <div className="ocs-content">
+          <div className="content">
             <Character />
           </div>
           <OCSPageClient character={character} allCharacters={ocs} contentOnly={true} />

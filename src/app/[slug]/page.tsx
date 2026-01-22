@@ -138,7 +138,7 @@ export default async function SlugPage({ params }: PageProps) {
             </div>
             <main id="content" className="container max-w-[672px] mx-auto px-4">
               {headings.length > 0 && <TOC headings={headings} />}
-              <div className="note-content">
+              <div className="content">
                 <Note />
               </div>
               <NotePageClient note={note} allNotes={notes} contentOnly={true} />

@@ -155,7 +155,7 @@ export default async function PaperPage({ params }: PaperPageProps) {
         <main id="content" className="container max-w-[672px] mx-auto px-4">
           {headings.length > 0 && <TOC headings={headings} />}
 
-          <div className="papers-content">
+          <div className="content">
             <PaperArticle />
           </div>
 

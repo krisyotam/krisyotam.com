@@ -16,7 +16,7 @@ import { siteConfig } from '@/lib/seo'
 
 // Define fontSans using localFont
 const fontSans = localFont({
-  src: '../../public/fonts/outfit.woff2',
+  src: '../../public/fonts/text/outfit/Outfit-Regular.woff2',
   variable: '--font-sans',
 });
 

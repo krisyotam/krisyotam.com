@@ -104,7 +104,7 @@ export default function FictionPageClient({ note, allNotes, children, headerOnly
       />
       
       {/* MDX body */}
-      <div className="note-content">{children}</div>
+      <div className="content">{children}</div>
       
       <div className="mt-8">
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />

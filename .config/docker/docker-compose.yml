@@ -10,3 +10,8 @@ services:
     restart: always
     environment:
       - NODE_ENV=production
+    volumes:
+      - survey_data:/app/public/data
+
+volumes:
+  survey_data:

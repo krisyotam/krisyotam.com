@@ -21,7 +21,8 @@ import { Header, type HeaderStatus, type HeaderConfidence } from "@/components/c
 import { Footer } from "@/components/footer"
 import { Citation } from "@/components/citation"
 import { Comments } from "@/components/core/comments"
-import { useEffect, useState, type JSX } from "react"
+import { VerseDisplay } from "@/components/content/verse"
+import { useEffect, useState } from "react"
 import type { VersePost } from "@/lib/data"
 
 // =============================================================================
@@ -74,37 +75,6 @@ export default function PoemPageClient({ poem, type, slug }: PoemPageClientProps
   const typeSlug = verseType.toLowerCase().replace(/\s+/g, "-")
 
   // =============================================================================
-  // Helpers
-  // =============================================================================
-
-  // Function to render poem content with proper line breaks and stanza spacing
-  const renderPoemContent = (content: string) => {
-    const lines = content.split('\n')
-    const elements: JSX.Element[] = []
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i]
-
-      if (line.trim() === '') {
-        // Empty line - add stanza break
-        elements.push(<div key={`stanza-${i}`} className="h-4" />)
-      } else {
-        // Non-empty line with hover effect
-        elements.push(
-          <div
-            key={i}
-            className="leading-relaxed px-1 hover:bg-secondary/80 dark:hover:bg-secondary/60 transition-colors duration-150 rounded-sm cursor-pointer"
-          >
-            {line}
-          </div>
-        )
-      }
-    }
-
-    return elements
-  }
-
-  // =============================================================================
   // Render
   // =============================================================================
 
@@ -128,19 +98,11 @@ export default function PoemPageClient({ poem, type, slug }: PoemPageClientProps
           backHref={`/verse?type=${typeSlug}`}
         />
 
-        <div className="p-6 my-6 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))] overflow-y-auto max-h-[500px]">
-          {isLoading ? (
-            <div className="flex items-center justify-center py-8">
-              <div className="text-muted-foreground animate-pulse">Loading...</div>
-            </div>
-          ) : error ? (
-            <div className="text-red-500 py-4 text-center">{error}</div>
-          ) : (
-            <div className="poem-content">
-              {renderPoemContent(poemContent)}
-            </div>
-          )}
-        </div>
+        <VerseDisplay
+          content={poemContent}
+          isLoading={isLoading}
+          error={error}
+        />
 
         <Comments />
 

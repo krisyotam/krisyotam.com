@@ -4,9 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
 
 import { PageHeader } from "@/components/core"
-import { CustomSelect } from "@/components/ui/custom-select"
-import { Input } from "@/components/ui/input"
-import type { SelectOption } from "@/components/ui/custom-select"
+import { Navigation } from "@/components/content/navigation"
 
 interface BlogrollClientProps {
   initialCategoryFilter?: string
@@ -15,16 +13,8 @@ interface BlogrollClientProps {
 interface BlogrollEntry {
   title: string
   url: string
-  description: string
   category: string
   tags: string[]
-  slug: string
-  publishDate?: string
-  status?: "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"
-  confidence?: "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain"
-  importance?: number
-  socials?: string[]
-  importantUrls?: string[]
 }
 
 export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClientProps) {
@@ -79,7 +69,6 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
     const matchesSearch =
       !searchQuery ||
       entry.title.toLowerCase().includes(searchLower) ||
-      entry.description.toLowerCase().includes(searchLower) ||
       entry.category.toLowerCase().includes(searchLower) ||
       entry.tags.some(tag => tag.toLowerCase().includes(searchLower))
 
@@ -95,8 +84,9 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
     }
   }
 
-  function getEntryUrl(entry: BlogrollEntry) {
-    return `/blogroll/${entry.slug}`
+  function openExternalUrl(url: string) {
+    const fullUrl = url.startsWith('http') ? url : `https://${url}`
+    window.open(fullUrl, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -109,48 +99,20 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
       />
 
       <div className="mt-8">
-        <div className="mb-6 flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setViewMode('list')}
-              className={`text-sm px-3 py-1 rounded-none border ${viewMode === 'list' ? 'bg-muted/50' : 'bg-transparent'}`}
-              aria-pressed={viewMode === 'list'}
-            >
-              List
-            </button>
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`text-sm px-3 py-1 rounded-none border ${viewMode === 'grid' ? 'bg-muted/50' : 'bg-transparent'}`}
-              aria-pressed={viewMode === 'grid'}
-            >
-              Grid
-            </button>
-          </div>
-          <div className="flex items-center gap-2 whitespace-nowrap">
-            <label htmlFor="category-filter" className="text-sm text-muted-foreground">
-              Filter by category:
-            </label>
-            <CustomSelect
-              id="category-filter"
-              value={categoryFilter}
-              onValueChange={handleCategoryChange}
-              options={[
-                { value: "All", label: "All Categories" },
-                ...categories.map(cat => ({ value: cat, label: cat })),
-              ]}
-              className="text-sm min-w-[140px]"
-            />
-          </div>
-          <div className="relative flex-1">
-            <Input
-              type="text"
-              placeholder="Search blogroll..."
-              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
-              onChange={(e) => setSearchQuery(e.target.value)}
-              value={searchQuery}
-            />
-          </div>
-        </div>
+        <Navigation
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          searchPlaceholder="Search blogroll..."
+          showCategoryFilter={true}
+          categoryOptions={[
+            { value: "All", label: "All Categories" },
+            ...categories.map(cat => ({ value: cat, label: cat })),
+          ]}
+          selectedCategory={categoryFilter}
+          onCategoryChange={handleCategoryChange}
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
+        />
 
         {loading ? (
           <div className="flex justify-center items-center py-24">
@@ -172,11 +134,11 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
                 <tbody>
                   {filteredEntries.map((entry, index) => (
                     <tr
-                      key={entry.slug}
+                      key={`${entry.title}-${index}`}
                       className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
                         index % 2 === 0 ? "bg-transparent" : "bg-muted/5"
                       }`}
-                      onClick={() => router.push(getEntryUrl(entry))}
+                      onClick={() => openExternalUrl(entry.url)}
                     >
                       <td className="py-2 px-3 font-medium break-words whitespace-normal">{entry.title}</td>
                       <td className="py-2 px-3">
@@ -195,7 +157,7 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
             ) : (
               <div className="w-full">
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-0 border border-border">
-                  {filteredEntries.map((entry) => {
+                  {filteredEntries.map((entry, index) => {
                     let host = ''
                     try {
                       const urlStr = entry.url.startsWith('http') ? entry.url : `https://${entry.url}`
@@ -206,9 +168,9 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
 
                     return (
                       <div
-                        key={entry.slug}
+                        key={`${entry.title}-${index}`}
                         className="p-6 border-r border-b border-border last:border-r-0 hover:bg-secondary/5 cursor-pointer"
-                        onClick={() => router.push(getEntryUrl(entry))}
+                        onClick={() => openExternalUrl(entry.url)}
                       >
                         <div className="font-medium mb-1 break-words whitespace-normal">{entry.title}</div>
                         <div className="text-xs italic text-muted-foreground break-words whitespace-normal">{host}</div>

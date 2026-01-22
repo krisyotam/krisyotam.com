@@ -99,7 +99,7 @@ export function PageDescription({ title, description, className, icons }: PageDe
                         <div className="border-t border-border pt-3 flex items-center justify-center">
                           {icons.map((ic: IconEntry, idx: number) => {
                             const found = ICONS_DATA.find((x) => x.slug === ic.slug)
-                            const src = found ? `/icons/${found.svg}` : `/icons/${ic.slug}.svg`
+                            const src = found ? `/fonts/icons/${found.svg}` : `/fonts/icons/${ic.slug}.svg`
                             const extra = idx > 0 ? 'pl-4 border-l border-border ml-4' : ''
                             return (
                               <a key={ic.slug} href={ic.url} target="_blank" rel="noopener noreferrer" className={`inline-block p-1 hover:opacity-80 ${extra}`}>
@@ -162,7 +162,7 @@ export function PageDescription({ title, description, className, icons }: PageDe
                       <div className="border-t border-border pt-3 flex items-center justify-center">
                         {icons.map((ic: IconEntry, idx: number) => {
                           const found = ICONS_DATA.find((x: any) => x.slug === ic.slug)
-                          const src = found ? `/icons/${found.svg}` : `/icons/${ic.slug}.svg`
+                          const src = found ? `/fonts/icons/${found.svg}` : `/fonts/icons/${ic.slug}.svg`
                           const extra = idx > 0 ? 'pl-4 border-l border-border ml-4' : ''
                           return (
                             <a key={ic.slug} href={ic.url} target="_blank" rel="noopener noreferrer" className={`inline-block p-1 hover:opacity-80 ${extra}`}>

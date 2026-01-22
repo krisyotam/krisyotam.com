@@ -51,7 +51,7 @@ export default function ResearchList({
                   className="flex items-center opacity-80 hover:opacity-100"
                 >
                   <img
-                    src="/icons/arena.svg"
+                    src="/fonts/icons/arena.svg"
                     alt="Are.na"
                     className="h-5 w-5"
                   />

@@ -1,3 +1,37 @@
+# ==============================================================================
+# DOCUMENT: takes-on-llms.mdx
+# TYPE:     NOTES
+#
+# RATIONALE:
+#   This document uses human-readable YAML front matter as a durable metadata
+#   layer. In the event of database loss or corruption, content and metadata
+#   can be reconstructed directly from source files.
+#
+# REQUIREMENTS:
+#   - YAML front matter MUST be present
+#   - @type @author, and @path MUST be defined
+#
+# @author Kris Yotam
+# @type notes
+# @path src/app/(content)/notes/content/manuals-of-style/takes-on-llms.mdx
+# ==============================================================================
+
+# ==============================================================================
+title: "Takes on LLMs"
+slug: takes-on-llms
+date: 2025-06-29
+updated: 2026-01-05 16:38:21
+status: Finished
+certainty: certain
+importance: 
+author: "Kris Yotam"
+description: "Preferred terminology, formatting, and technical writing style when documenting and reasoning about LLMs"
+tags: [Architecture, Llms, Transformers, Ai, Language Models]
+category: manuals-of-style
+sequences: []
+cover: 
+# ==============================================================================
+
 <Collapse title="Manuals of Style">
 The following is a [Style Guide](https://en.wikipedia.org/wiki/Style_guide). Part of my [Manuals of Style](/notes/manuals-of-style) series, this document outlines conventions for llm use on krisyotam.com.
 </Collapse>
@@ -34,4 +68,3 @@ understanding rather than fleeting commentary. Write for an intelligent audience
 | 6 | Code, Tables, & Media     | **LLM Action:** Label code blocks with language. Adhere to Bash (long flags, `set -e`), Haskell (`ghc -Wall -Werror`, qualified imports), and Elisp (byte-clean) rules. Format table captions. For images: ensure illustrative purpose, provide full MoS-compliant `<figure>` captions, note AI model+date if generated. Apply `.invert` / `.invert-not` if default dark-mode inversion is problematic. | MoS Code & Media                                            |
 | 7 | Final Self-Check          | **LLM Action:** Rigorously apply the “Pre-Handoff Checklist” (below).                                                                                                                                                                                                                                    | Quality Assurance                                           |
 | 8 | Meta-Block Insertion      | **LLM Action:** Insert the concise HTML meta-block (template below) *after* YAML frontmatter and *before* the main text.                                                                                                                                                                                | Transparency for Editor                                    |
-

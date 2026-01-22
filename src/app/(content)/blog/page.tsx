@@ -14,8 +14,6 @@ import BlogClientPage from "./BlogClientPage";
 import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
 import type { Metadata } from "next";
 import type { BlogMeta } from "@/types/content";
-import "./blog.css";
-import "./blog-grid.css";
 import { staticMetadata } from "@/lib/staticMetadata";
 
 // =============================================================================

@@ -35,7 +35,7 @@ export default function ResearchGrid({
                   className="w-9 h-9 border border-border flex items-center justify-center bg-background"
                   aria-label="Open on Are.na"
                 >
-                  <img src="/icons/arena.svg" alt="Are.na" className="h-5 w-5" />
+                  <img src="/fonts/icons/arena.svg" alt="Are.na" className="h-5 w-5" />
                 </button>
               </div>
             )}

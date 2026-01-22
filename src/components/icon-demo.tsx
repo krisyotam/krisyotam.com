@@ -49,7 +49,7 @@ export default function IconDemo({ pageSize = 36 }: IconDemoProps) {
               >
                 {/* show the actual icon file centered and larger for demo */}
                 <img
-                  src={`/icons/${it.svg}`}
+                  src={`/fonts/icons/${it.svg}`}
                   alt={it.slug}
                   className="link-icon-img"
                   style={{ width: 28, height: 28, display: "block" }}

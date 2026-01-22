@@ -1,5 +1,3 @@
-import "./news.css";
-
 export default function NewsLayout({
   children,
 }: {

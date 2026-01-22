@@ -118,13 +118,35 @@ const baseConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 
   /* ============================================================================
+     OUTPUT FILE TRACING
+     Include MDX content files in standalone build for API routes that read them.
+  ============================================================================ */
+  outputFileTracingIncludes: {
+    '/api/verse/content': ['./src/app/(content)/verse/content/**/*.mdx'],
+  },
+
+  /* ============================================================================
      WEBPACK EXTENSIONS
-     MDX raw import support + canvas externalization
+     MDX raw import support + canvas externalization + frontmatter stripping
   ============================================================================ */
   webpack(config) {
+    // Raw MDX import support
     config.module.rules.push({
       test: /\.mdx\?raw$/,
       type: 'asset/source',
+    })
+
+    // Add frontmatter stripping loader for MDX files in (content) directory
+    // This runs BEFORE MDX compilation to strip # === delimited blocks
+    config.module.rules.unshift({
+      test: /\.mdx$/,
+      include: /\(content\)/,
+      enforce: 'pre',
+      use: [
+        {
+          loader: './src/lib/frontmatter.js',
+        },
+      ],
     })
 
     config.externals = [...(config.externals || []), { canvas: 'canvas' }]

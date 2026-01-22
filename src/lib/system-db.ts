@@ -32,16 +32,8 @@ export interface BlogrollEntry {
   id: number;
   title: string;
   url: string;
-  description: string;
   category: string;
-  slug: string;
-  publishDate: string | null;
-  status: string;
-  confidence: string | null;
-  importance: string | null;
   tags: string[];
-  socials: { platform: string; url: string }[];
-  importantUrls: { title: string; url: string }[];
 }
 
 export interface ChangelogEntry {
@@ -165,8 +157,7 @@ export function getAllBlogrollEntries(): BlogrollEntry[] {
     const entries = db
       .prepare(
         `
-      SELECT id, title, url, description, category, slug,
-             publish_date as publishDate, status, confidence, importance
+      SELECT id, title, url, category
       FROM blogroll
       ORDER BY title ASC
     `
@@ -174,63 +165,11 @@ export function getAllBlogrollEntries(): BlogrollEntry[] {
       .all() as any[];
 
     return entries.map((entry) => ({
-      ...entry,
+      id: entry.id,
+      title: entry.title,
+      url: entry.url,
+      category: entry.category,
       tags: getBlogrollTags(db, entry.id),
-      socials: getBlogrollSocials(db, entry.id),
-      importantUrls: getBlogrollImportantUrls(db, entry.id),
-    }));
-  } finally {
-    db.close();
-  }
-}
-
-export function getBlogrollBySlug(slug: string): BlogrollEntry | null {
-  const db = getDb();
-  try {
-    const entry = db
-      .prepare(
-        `
-      SELECT id, title, url, description, category, slug,
-             publish_date as publishDate, status, confidence, importance
-      FROM blogroll
-      WHERE slug = ?
-    `
-      )
-      .get(slug) as any;
-
-    if (!entry) return null;
-
-    return {
-      ...entry,
-      tags: getBlogrollTags(db, entry.id),
-      socials: getBlogrollSocials(db, entry.id),
-      importantUrls: getBlogrollImportantUrls(db, entry.id),
-    };
-  } finally {
-    db.close();
-  }
-}
-
-export function getBlogrollByCategory(category: string): BlogrollEntry[] {
-  const db = getDb();
-  try {
-    const entries = db
-      .prepare(
-        `
-      SELECT id, title, url, description, category, slug,
-             publish_date as publishDate, status, confidence, importance
-      FROM blogroll
-      WHERE category = ?
-      ORDER BY title ASC
-    `
-      )
-      .all(category) as any[];
-
-    return entries.map((entry) => ({
-      ...entry,
-      tags: getBlogrollTags(db, entry.id),
-      socials: getBlogrollSocials(db, entry.id),
-      importantUrls: getBlogrollImportantUrls(db, entry.id),
     }));
   } finally {
     db.close();
@@ -260,28 +199,6 @@ function getBlogrollTags(db: Database.Database, blogrollId: number): string[] {
     .prepare(`SELECT tag FROM blogroll_tags WHERE blogroll_id = ?`)
     .all(blogrollId) as { tag: string }[];
   return tags.map((t) => t.tag);
-}
-
-function getBlogrollSocials(
-  db: Database.Database,
-  blogrollId: number
-): { platform: string; url: string }[] {
-  return db
-    .prepare(
-      `SELECT platform, url FROM blogroll_socials WHERE blogroll_id = ?`
-    )
-    .all(blogrollId) as { platform: string; url: string }[];
-}
-
-function getBlogrollImportantUrls(
-  db: Database.Database,
-  blogrollId: number
-): { title: string; url: string }[] {
-  return db
-    .prepare(
-      `SELECT title, url FROM blogroll_important_urls WHERE blogroll_id = ?`
-    )
-    .all(blogrollId) as { title: string; url: string }[];
 }
 
 // ============================================================================

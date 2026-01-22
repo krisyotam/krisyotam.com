@@ -120,7 +120,7 @@ export default function PaperPageClient({ paperData: paperItem, allPapers, child
       />
       
       {/* MDX body */}
-      <div className="papers-content">{children}</div>
+      <div className="content">{children}</div>
       
       <div className="mt-8">
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />

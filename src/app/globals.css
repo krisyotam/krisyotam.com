@@ -3,6 +3,7 @@
    ========================================================================== */
    @import 'katex/dist/katex.min.css';
    @import './styles/themes/index.css';
+   @import './styles/core/content.css';
    @tailwind base;
    @tailwind components;
    @tailwind utilities;
@@ -1549,5 +1550,23 @@ p .katex-display {
 
 .footnote-backref:hover {
   opacity: 1;
+}
+
+/* =============================================================================
+   FORMSMD STYLES
+   ========================================================================== */
+[data-survey-slug] .fmd-root {
+  --fmd-main-container-width: 100%;
+}
+
+[data-survey-slug] .fmd-root .fmd-form-control:focus,
+[data-survey-slug] .fmd-root .fmd-form-control:focus-visible,
+[data-survey-slug] .fmd-root input:focus,
+[data-survey-slug] .fmd-root input:focus-visible,
+[data-survey-slug] .fmd-root textarea:focus,
+[data-survey-slug] .fmd-root textarea:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: inherit !important;
 }
 

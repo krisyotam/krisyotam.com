@@ -1,3 +1,37 @@
+# ==============================================================================
+# DOCUMENT: design-of-this-website.mdx
+# TYPE:     NOTES
+#
+# RATIONALE:
+#   This document uses human-readable YAML front matter as a durable metadata
+#   layer. In the event of database loss or corruption, content and metadata
+#   can be reconstructed directly from source files.
+#
+# REQUIREMENTS:
+#   - YAML front matter MUST be present
+#   - @type @author, and @path MUST be defined
+#
+# @author Kris Yotam
+# @type notes
+# @path src/app/(content)/notes/content/website/design-of-this-website.mdx
+# ==============================================================================
+
+# ==============================================================================
+title: "Design Of This Website"
+slug: design-of-this-website
+date: 2025-06-03
+updated: 2026-01-05 16:38:21
+status: In Progress
+certainty: certain
+importance: 10
+author: "Kris Yotam"
+description: "Meta page describing krisyotam.com, the self-documenting website’s implementation, experiments, and technical decisions using Markdown and static hosting."
+tags: [Design, Website, Krisyotamcom, Architecture]
+category: website
+sequences: []
+cover: 
+# ==============================================================================
+
 <Box>**krisyotam.com** is a hybrid static, dynamic site using next.js, and currently hosted on vercel. The goals of this site differ 
 slightly from other "blogs" and it is designed to be fast, practical, and aesthetically pleasing. So you won't tend to see large thumbnail images, 
 frequent pop-ups, or pestering notifications to join a email list. </Box>

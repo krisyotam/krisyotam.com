@@ -1,5 +1,3 @@
-import "../../fiction.css";          
-
 export default function StoryLayout({
   children,
 }: {

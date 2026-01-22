@@ -186,7 +186,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
             <TOC headings={headings} />
           )}
 
-          <div className="review-content">
+          <div className="content">
             <Review />
           </div>
           <ReviewPageClient review={review} allReviews={reviews} contentOnly={true} />

@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import "../../essays.css";
 
 export const metadata: Metadata = {
   title: "Essay",

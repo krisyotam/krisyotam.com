@@ -1,5 +1,3 @@
-import "../../ocs.css";
-
 export default function OCSLayout({
   children,
 }: {

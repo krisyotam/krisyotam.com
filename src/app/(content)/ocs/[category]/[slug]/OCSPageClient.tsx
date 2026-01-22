@@ -123,7 +123,7 @@ export default function OCSPageClient({ character, allCharacters, children, head
       />
       
       {/* MDX body */}
-      <div className="ocs-content">{children}</div>
+      <div className="content">{children}</div>
       
       <div className="mt-8">
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />

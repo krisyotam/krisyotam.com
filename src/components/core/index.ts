@@ -32,3 +32,5 @@ export {
   ArticlePageJsonLd,
   HomePageJsonLd,
 } from './SEO'
+export { Survey } from './survey'
+export type { SurveySchema, SurveyQuestion } from '@/lib/survey-parser'

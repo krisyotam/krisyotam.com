@@ -279,7 +279,7 @@ export function LinkIcon({ href, className = "" }: LinkIconProps) {
   return (
     <span className={className} style={wrapperStyle} aria-hidden>
       <img
-        src={`/icons/${svg}`}
+        src={`/fonts/icons/${svg}`}
         alt=""
         style={imgStyle}
         loading="lazy"

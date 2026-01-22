@@ -119,7 +119,7 @@ export default function ReviewPageClient({ review, allReviews, children, headerO
       />
       
       {/* MDX body */}
-      <div className="review-content">{children}</div>
+      <div className="content">{children}</div>
       
       <div className="mt-8">
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={rawMarkdown} />

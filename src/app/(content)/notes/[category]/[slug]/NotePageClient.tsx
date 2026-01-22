@@ -124,7 +124,7 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
       />
       
       {/* MDX body -------------------------------------------------------- */}
-      <div className="note-content">{children}</div>
+      <div className="content">{children}</div>
 
       <div className="mt-8">
         <Comments />
