@@ -18,7 +18,7 @@ RUN npm ci --legacy-peer-deps
 ################################################################################
 # Build stage
 # - Reuses installed node_modules (includes dev deps for build)
-# - Runs a constrained, low-memory build for Next.js
+# - Runs production build for Next.js
 ################################################################################
 FROM node:20-alpine AS builder
 
@@ -84,10 +84,9 @@ COPY --from=deps /app/node_modules ./node_modules
 # Copy application source
 COPY . .
 
-# Run the low-memory build
-# (uses NEXT_WORKER_COUNT and restricted NODE_OPTIONS)
+# Run the production build
 # --webpack flag required for MDX support (Turbopack doesn't support it)
-RUN npm run build:lowmem
+RUN npm run build
 
 # Prune dev dependencies after build for smaller runtime image
 RUN npm prune --production --legacy-peer-deps
