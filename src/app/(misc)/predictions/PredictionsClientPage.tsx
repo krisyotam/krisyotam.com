@@ -24,7 +24,7 @@ export function PredictionsClientPage() {
   useEffect(() => {
     async function fetchPredictions() {
       try {
-        const response = await fetch("/api/predictions");
+        const response = await fetch("/api/data?type=predictions");
         const data = await response.json();
         setPredictions(data.predictions);
         setFilteredPredictions(data.predictions);

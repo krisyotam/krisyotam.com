@@ -37,7 +37,7 @@ export function formatQuoteWithLineBreaks(text: string, maxCharsPerLine = 75): s
  */
 export async function getNewRandomQuote(): Promise<{ text: string; author: string }> {
   try {
-    const response = await fetch(`/api/random-quote?ts=${Date.now()}`, {
+    const response = await fetch(`/api/reference?type=quotes&random=true&ts=${Date.now()}`, {
       cache: 'no-store',
     });
     return await response.json();

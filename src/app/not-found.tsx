@@ -43,7 +43,7 @@ function useUrlSuggester() {
 
       const script = document.createElement("script")
       script.id = "url-suggester-script"
-      script.src = `/api/get-script?t=${Date.now()}`
+      script.src = `/api/utils?type=get-script?t=${Date.now()}`
       script.async = true
       document.body.appendChild(script)
     }

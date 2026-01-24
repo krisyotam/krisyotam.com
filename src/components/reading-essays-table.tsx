@@ -33,9 +33,9 @@ export function ReadingEssaysTable({ data }: ReadingEssaysTableProps) {
     if (!data) {
       const loadEssays = async () => {
         try {
-          const response = await fetch('/api/reading/essays')
+          const response = await fetch('/api/media?source=reading&type=essays')
           const responseData = await response.json()
-          setEssays(responseData['essays'] || [])
+          setEssays(responseData.essays || [])
         } catch (error) {
           console.error('Error loading essays:', error)
           setEssays([])

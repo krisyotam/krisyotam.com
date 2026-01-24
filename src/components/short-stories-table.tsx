@@ -32,9 +32,9 @@ export function ShortStoriesTable({ data }: ShortStoriesTableProps) {
     if (!data) {
       const loadShortStories = async () => {
         try {
-          const response = await fetch('/api/reading/short-stories')
+          const response = await fetch('/api/media?source=reading&type=short-stories')
           const responseData = await response.json()
-          setShortStories(responseData['short-stories'] || [])
+          setShortStories(responseData.stories || [])
         } catch (error) {
           console.error('Error loading short stories:', error)
           setShortStories([])

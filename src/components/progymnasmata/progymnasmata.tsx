@@ -29,7 +29,7 @@ export function Progymnasmata() {
   useEffect(() => {
     async function fetchEntries() {
       try {
-        const res = await fetch("/api/progymnasmata/entries");
+        const res = await fetch("/api/content?type=progymnasmata");
         const data: ProgymnasmataEntry[] = await res.json();
         data.sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()

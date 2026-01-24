@@ -37,7 +37,7 @@ export default function SourcesClientPage() {
   useEffect(() => {
     const fetchSources = async () => {
       try {
-        const response = await fetch("/api/sources")
+        const response = await fetch("/api/data?type=sources")
         if (!response.ok) {
           throw new Error("Failed to fetch sources")
         }

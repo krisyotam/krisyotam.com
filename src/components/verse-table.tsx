@@ -33,7 +33,7 @@ export function VerseTable({ data }: VerseTableProps) {
     if (!data) {
       const loadVerses = async () => {
         try {
-          const response = await fetch('/api/reading/verse')
+          const response = await fetch('/api/media?source=reading&type=verse')
           const responseData = await response.json()
           setVerses(responseData.verse || [])
         } catch (error) {

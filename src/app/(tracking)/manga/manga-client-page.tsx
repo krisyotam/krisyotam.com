@@ -89,8 +89,8 @@ export default function MangaClientPage() {
       try {
         setLoading(true);
 
-        // 1) fetch everything from /api/mal/user-data
-        const response = await fetch("/api/mal/user-data");
+        // 1) fetch everything from /api/media?source=mal&type=user-data
+        const response = await fetch("/api/media?source=mal&type=user-data");
         if (!response.ok) {
           try {
             const errorData = await response.json();
@@ -133,7 +133,7 @@ export default function MangaClientPage() {
         if (username) {
           try {
             const peopleResp = await fetch(
-              `/api/mal/fav-people?username=${encodeURIComponent(username)}`
+              `/api/media?source=mal&type=fav-people?username=${encodeURIComponent(username)}`
             );
             if (peopleResp.ok) {
               const peopleJson: PersonItem[] = await peopleResp.json();

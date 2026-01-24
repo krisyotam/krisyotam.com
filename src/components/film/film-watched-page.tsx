@@ -21,7 +21,7 @@ export default function FilmWatchedPage() {
   useEffect(() => {
     async function fetchWatched() {
       try {
-        const res = await fetch("/api/film/watched")
+        const res = await fetch("/api/film?resource=watched")
         const data = await res.json()
         setWatched(data)
       } catch (err) {

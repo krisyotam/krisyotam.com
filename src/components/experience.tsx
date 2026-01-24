@@ -41,7 +41,7 @@ export default function Experience() {
   useEffect(() => {
     async function fetchStats() {
       try {
-        const res = await fetch('/api/content-stats')
+        const res = await fetch('/api/content?type=stats')
         const data = await res.json()
         setStats(data)
       } catch (error) {

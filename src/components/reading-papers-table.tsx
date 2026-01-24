@@ -33,9 +33,9 @@ export function ReadingPapersTable({ data }: ReadingPapersTableProps) {
     if (!data) {
       const loadPapers = async () => {
         try {
-          const response = await fetch('/api/reading/papers')
+          const response = await fetch('/api/media?source=reading&type=papers')
           const responseData = await response.json()
-          setPapers(responseData['papers'] || [])
+          setPapers(responseData.papers || [])
         } catch (error) {
           console.error('Error loading papers:', error)
           setPapers([])

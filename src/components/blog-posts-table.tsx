@@ -33,9 +33,9 @@ export function BlogPostsTable({ data }: BlogPostsTableProps) {
     if (!data) {
       const loadBlogPosts = async () => {
         try {
-          const response = await fetch('/api/reading/blogs')
+          const response = await fetch('/api/media?source=reading&type=blogs')
           const responseData = await response.json()
-          setBlogPosts(responseData['blog-posts'] || responseData['blogs'] || [])
+          setBlogPosts(responseData.blogs || [])
         } catch (error) {
           console.error('Error loading blog posts:', error)
           setBlogPosts([])

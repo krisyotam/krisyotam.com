@@ -17,7 +17,7 @@ export function QuotesFeed() {
   useEffect(() => {
     async function fetchQuotes() {
       try {
-        const response = await fetch('/api/quotes');
+        const response = await fetch('/api/reference?type=quotes');
         if (response.ok) {
           const data = await response.json();
           setQuotes(data.quotes || []);

@@ -13,7 +13,7 @@ export function QuoteOfTheDay() {
   useEffect(() => {
     async function fetchRandomQuote() {
       try {
-        const response = await fetch('/api/random-quote')
+        const response = await fetch('/api/reference?type=quotes&random=true')
         if (response.ok) {
           const data = await response.json()
           setQuote({ text: data.text || "", author: data.author || "" })

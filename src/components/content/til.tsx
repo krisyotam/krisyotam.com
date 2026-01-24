@@ -214,7 +214,7 @@ export function TilFeed({ entries }: TilFeedProps) {
       await Promise.all(
         entries.map(async ({ entry }) => {
           try {
-            const res = await fetch(`/api/til/reactions?slug=${entry.slug}`)
+            const res = await fetch(`/api/interactions?resource=reactions&type=til&slug=${entry.slug}`)
             if (res.ok) {
               const data = await res.json()
               reactions[entry.slug] = data.reactions || {}
@@ -240,7 +240,7 @@ export function TilFeed({ entries }: TilFeedProps) {
     if (!isAuthenticated) return
 
     try {
-      const res = await fetch("/api/til/reactions", {
+      const res = await fetch("/api/interactions?resource=reactions&type=til", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slug, reactionType }),

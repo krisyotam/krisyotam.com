@@ -38,7 +38,7 @@ export default function GlobePage() {
   useEffect(() => {
     async function fetchLocations() {
       try {
-        const response = await fetch("/api/locations");
+        const response = await fetch("/api/data?type=locations");
         if (!response.ok) throw new Error("Failed to fetch locations");
         const data = await response.json();
         setLocations(data.locations || []);

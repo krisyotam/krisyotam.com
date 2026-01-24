@@ -94,7 +94,7 @@ export default function AnimeClientPage() {
     async function fetchUserData() {
       try {
         console.log("Fetching user data...");
-        const response = await fetch("/api/mal/user-data");
+        const response = await fetch("/api/media?source=mal&type=user-data");
 
         if (!response.ok) {
           throw new Error(`Failed to fetch user data: ${response.status}`);

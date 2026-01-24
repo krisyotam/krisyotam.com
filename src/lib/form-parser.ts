@@ -27,12 +27,36 @@
  * ============================================================================
  */
 
-import type { SurveySchema, SurveyField, FieldType } from "@/components/core/survey";
 import matter from "gray-matter";
 
 // ============================================================================
 // Types
 // ============================================================================
+
+type FieldType = "text" | "email" | "textarea" | "select" | "radio" | "checkbox" | "number" | "url" | "tel" | "date";
+
+interface SurveyField {
+  name: string;
+  label: string;
+  type: FieldType;
+  required?: boolean;
+  placeholder?: string;
+  description?: string;
+  options?: string[];
+  min?: number;
+  max?: number;
+  minLength?: number;
+  maxLength?: number;
+}
+
+interface SurveySchema {
+  slug: string;
+  title: string;
+  description?: string;
+  submitLabel?: string;
+  successMessage?: string;
+  fields: SurveyField[];
+}
 
 interface FormFrontmatter {
   slug: string;

@@ -30,7 +30,7 @@ export function ReadingLists() {
 
   // Load the local JSON data
   useEffect(() => {
-    fetch('/api/reading/lists')
+    fetch('/api/media?source=reading&type=lists')
       .then(response => response.json())
       .then((data: ReadingListsData) => {
         setListsData(data)

@@ -38,7 +38,7 @@ export default function ShopClient() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("/api/shop")
+        const response = await fetch("/api/data?type=shop")
         if (!response.ok) throw new Error("Failed to load shop items")
         const data = await response.json()
         setItems(Array.isArray(data) ? data : [])

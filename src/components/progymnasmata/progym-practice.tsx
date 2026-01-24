@@ -38,7 +38,7 @@ export default function ProgymPractice() {
   useEffect(() => {
     async function fetchStats() {
       try {
-        const res = await fetch('/api/progymnasmata')
+        const res = await fetch('/api/content?type=progymnasmata')
         const data: ProgymItem[] = await res.json()
 
         // Count exercises per category

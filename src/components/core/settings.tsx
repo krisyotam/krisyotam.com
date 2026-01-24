@@ -275,12 +275,12 @@ export function SettingsMenu() {
           postsData, essaysData, papersData, fictionData,
           notesData, progymnasmataData,
         ] = await Promise.all([
-          safelyFetchData("/api/posts/search"),
-          safelyFetchData("/api/essays/essays"),
-          safelyFetchData("/api/papers"),
-          safelyFetchData("/api/fiction"),
-          safelyFetchData("/api/notes"),
-          safelyFetchData("/api/progymnasmata"),
+          safelyFetchData("/api/content?type=blog"),
+          safelyFetchData("/api/content?type=essays"),
+          safelyFetchData("/api/content?type=papers"),
+          safelyFetchData("/api/content?type=fiction"),
+          safelyFetchData("/api/content?type=notes"),
+          safelyFetchData("/api/content?type=progymnasmata"),
         ])
 
         setPosts(postsData || [])

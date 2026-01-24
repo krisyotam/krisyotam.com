@@ -25,7 +25,7 @@ const TikzRenderer = ({ children }: TikzProps) => {
       : children?.toString() || '';
 
     // Send directly to the API for rendering
-    fetch('/api/tikz', {
+    fetch('/api/utils?type=tikz', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code: tikzCode }),

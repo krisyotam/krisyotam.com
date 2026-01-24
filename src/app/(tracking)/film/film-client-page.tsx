@@ -39,6 +39,7 @@ export default function FilmClientPage() {
       try {
         console.log("FilmClientPage: Fetching API data")
         // Fetch API data
+        // Fetch all film data from unified API
         const [
           watchedStatsRes,
           genresRes,
@@ -53,7 +54,7 @@ export default function FilmClientPage() {
           favCompaniesRes,
           favCharactersRes,
         ] = await Promise.all([
-          fetch("/api/film/watched-stats")
+          fetch("/api/film?resource=stats")
             .then((res) => {
               console.log("FilmClientPage: Watched stats response status:", res.status)
               return res.json()
@@ -62,7 +63,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching watched stats:", err)
               return { moviesWatched: 0, tvShowsWatched: 0, timeWatchedHours: 0 }
             }),
-          fetch("/api/trakt/genres")
+          fetch("/api/film?source=trakt&resource=genres")
             .then((res) => {
               console.log("FilmClientPage: Trakt genres response status:", res.status)
               return res.json()
@@ -71,7 +72,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching Trakt genres:", err)
               return []
             }),
-          fetch("/api/trakt/recent-movies?limit=20")
+          fetch("/api/film?source=trakt&resource=recent&type=movies&limit=20")
             .then((res) => {
               console.log("FilmClientPage: Trakt recent movies response status:", res.status)
               return res.json()
@@ -80,7 +81,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching Trakt recent movies:", err)
               return []
             }),
-          fetch("/api/trakt/recent-shows?limit=20")
+          fetch("/api/film?source=trakt&resource=recent&type=shows&limit=20")
             .then((res) => {
               console.log("FilmClientPage: Trakt recent shows response status:", res.status)
               return res.json()
@@ -89,7 +90,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching Trakt recent shows:", err)
               return []
             }),
-          fetch("/api/film/watched?limit=20")
+          fetch("/api/film?resource=watched&limit=20")
             .then((res) => {
               console.log("FilmClientPage: Watched movies response status:", res.status)
               return res.json()
@@ -98,7 +99,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching watched movies:", err)
               return []
             }),
-          fetch("/api/trakt/most-watched-shows?limit=20")
+          fetch("/api/film?source=trakt&resource=most-watched&type=shows&limit=20")
             .then((res) => {
               console.log("FilmClientPage: Trakt most watched shows response status:", res.status)
               return res.json()
@@ -107,7 +108,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching Trakt most watched shows:", err)
               return []
             }),
-          fetch("/api/film/favorite-movies?limit=20")
+          fetch("/api/film?resource=favorites&type=movies&limit=20")
             .then((res) => {
               console.log("FilmClientPage: Favorite movies response status:", res.status)
               return res.json()
@@ -116,7 +117,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching favorite movies:", err)
               return []
             }),
-          fetch("/api/film/favorite-shows?limit=20")
+          fetch("/api/film?resource=favorites&type=shows&limit=20")
             .then((res) => {
               console.log("FilmClientPage: Favorite shows response status:", res.status)
               return res.json()
@@ -125,8 +126,8 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching favorite shows:", err)
               return []
             }),
-          // JSON-based favorites
-          fetch("/api/film/fav-directors")
+          // DB-based favorites
+          fetch("/api/film?resource=favorites&type=directors")
             .then((res) => {
               console.log("FilmClientPage: Favorite directors response status:", res.status)
               return res.json()
@@ -135,7 +136,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching favorite directors:", err)
               return []
             }),
-          fetch("/api/film/fav-actors")
+          fetch("/api/film?resource=favorites&type=actors")
             .then((res) => {
               console.log("FilmClientPage: Favorite actors response status:", res.status)
               return res.json()
@@ -144,7 +145,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching favorite actors:", err)
               return []
             }),
-          fetch("/api/film/fav-companies")
+          fetch("/api/film?resource=favorites&type=companies")
             .then((res) => {
               console.log("FilmClientPage: Favorite companies response status:", res.status)
               return res.json()
@@ -153,7 +154,7 @@ export default function FilmClientPage() {
               console.error("FilmClientPage: Error fetching favorite companies:", err)
               return []
             }),
-          fetch("/api/film/fav-characters")
+          fetch("/api/film?resource=favorites&type=characters")
             .then((res) => {
               console.log("FilmClientPage: Favorite characters response status:", res.status)
               return res.json()

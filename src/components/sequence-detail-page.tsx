@@ -11,7 +11,7 @@ interface SequenceDetailPageProps {
 
 async function fetchSequence(slug: string): Promise<{ sequence: Sequence; postUrls: Record<string, string> } | null> {
   try {
-    const response = await fetch(`/api/sequences/${slug}`);
+    const response = await fetch(`/api/content?type=sequences&slug=${slug}`);
     if (!response.ok) {
       if (response.status === 404) return null;
       throw new Error('Failed to fetch sequence');

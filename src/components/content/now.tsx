@@ -215,7 +215,7 @@ export function NowFeed({ entries }: NowFeedProps) {
       await Promise.all(
         entries.map(async ({ entry }) => {
           try {
-            const res = await fetch(`/api/now/reactions?slug=${entry.slug}`)
+            const res = await fetch(`/api/interactions?resource=reactions&type=now&slug=${entry.slug}`)
             if (res.ok) {
               const data = await res.json()
               reactions[entry.slug] = data.reactions || {}
@@ -241,7 +241,7 @@ export function NowFeed({ entries }: NowFeedProps) {
     if (!isAuthenticated) return
 
     try {
-      const res = await fetch("/api/now/reactions", {
+      const res = await fetch("/api/interactions?resource=reactions&type=now", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slug, reactionType }),

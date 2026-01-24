@@ -76,7 +76,7 @@ export function Favorites() {
   const [cards, setCards] = useState<CardType[]>([]);
 
   React.useEffect(() => {
-    fetch(`/api/favorites?section=${section}`)
+    fetch(`/api/data?type=favorites&section=${section}`)
       .then((res) => res.json())
       .then((data: CardType[]) => {
         if (section === "music") {

@@ -84,7 +84,7 @@ export function Comments({ pageSlug }: CommentsProps) {
   const fetchComments = useCallback(async (page = 1) => {
     setLoading(true)
     try {
-      const res = await fetch(`/api/comments?pageSlug=${encodeURIComponent(slug)}&page=${page}`)
+      const res = await fetch(`/api/interactions?type=comments&pageSlug=${encodeURIComponent(slug)}&page=${page}`)
       const data = await res.json()
       if (page === 1) {
         setComments(data.comments)
@@ -124,7 +124,7 @@ export function Comments({ pageSlug }: CommentsProps) {
     setError(null)
 
     try {
-      const res = await fetch("/api/comments", {
+      const res = await fetch("/api/interactions?type=comments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ pageSlug: slug, content }),
@@ -153,7 +153,7 @@ export function Comments({ pageSlug }: CommentsProps) {
     if (!deleteConfirm) return
 
     try {
-      const res = await fetch(`/api/comments?id=${deleteConfirm}`, {
+      const res = await fetch(`/api/interactions?type=comments&id=${deleteConfirm}`, {
         method: "DELETE",
       })
 
@@ -191,7 +191,7 @@ export function Comments({ pageSlug }: CommentsProps) {
     }
 
     try {
-      const res = await fetch("/api/comments/reactions", {
+      const res = await fetch("/api/interactions?type=comment-reactions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ commentId, reactionType }),
@@ -233,7 +233,7 @@ export function Comments({ pageSlug }: CommentsProps) {
     setError(null)
 
     try {
-      const res = await fetch("/api/comments", {
+      const res = await fetch("/api/interactions?type=comments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ pageSlug: slug, content: replyContent, parentId }),
@@ -279,7 +279,7 @@ export function Comments({ pageSlug }: CommentsProps) {
     setError(null)
 
     try {
-      const res = await fetch("/api/comments", {
+      const res = await fetch("/api/interactions?type=comments", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ commentId, content: editContent }),

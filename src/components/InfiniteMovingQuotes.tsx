@@ -49,7 +49,7 @@ export const InfiniteMovingQuotes = ({
 	React.useEffect(() => {
 		async function fetchQuotes() {
 			try {
-				const response = await fetch('/api/quotes');
+				const response = await fetch('/api/reference?type=quotes');
 				if (response.ok) {
 					const data = await response.json();
 					const validQuotes = (data.quotes || []).filter(

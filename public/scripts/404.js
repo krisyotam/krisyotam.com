@@ -59,7 +59,7 @@ if (typeof window.URL_SUGGESTER_LOADED === 'undefined') {
    */
   async function collectPaths() {
     try {
-      const response = await fetch('/api/404-suggester')
+      const response = await fetch('/api/utils?type=404-suggester')
 
       if (!response.ok) {
         console.warn(`404 Suggester: API responded with status ${response.status}`)

@@ -119,7 +119,8 @@ async function fetchFeed(
   feed: "content" | "infra",
   q?: string
 ): Promise<Entry[]> {
-  const url = new URL("/api/changelog", window.location.origin)
+  const url = new URL("/api/data", window.location.origin)
+  url.searchParams.set("type", "changelog")
   url.searchParams.set("feed", feed)
   if (q?.trim()) url.searchParams.set("q", q)
 

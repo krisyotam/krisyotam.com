@@ -12,7 +12,7 @@ function RandomBlogSection() {
   useEffect(() => {
     async function fetchBlog() {
       try {
-        const res = await fetch("/api/blogroll");
+        const res = await fetch("/api/data?type=blogroll");
         const data = await res.json();
         const blogs = Array.isArray(data.blogs) ? data.blogs : [];
         if (blogs.length > 0) {
@@ -64,7 +64,7 @@ export default function SiteFooter({ lastUpdated, rawMarkdown }: { lastUpdated?:
   useEffect(() => {
     async function fetchQuote() {
       try {
-        const res = await fetch("/api/quotes");
+        const res = await fetch("/api/reference?type=quotes");
         const data = await res.json();
         if (Array.isArray(data.quotes) && data.quotes.length > 0) {
           const q = data.quotes[Math.floor(Math.random() * data.quotes.length)];

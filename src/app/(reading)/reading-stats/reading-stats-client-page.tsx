@@ -11,7 +11,7 @@ interface ReadingLogEntry {
 }
 
 interface ReadingLogData {
-  "reading-log": ReadingLogEntry[]
+  log: ReadingLogEntry[]
 }
 
 interface DailyStats {
@@ -38,7 +38,7 @@ export function ReadingStatsClient() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/reading/reading-log')
+        const response = await fetch('/api/media?source=reading&type=log')
         if (response.ok) {
           const result = await response.json()
           setData(result)
@@ -57,14 +57,14 @@ export function ReadingStatsClient() {
     return null
   }
 
-  if (!data || !data["reading-log"]) {
+  if (!data || !data.log) {
     return <div>No reading log data available.</div>
   }
 
   // Calculate daily stats
   const dailyStats = new Map<string, { minutes: number }>()
   
-  data["reading-log"].forEach(entry => {
+  data.log.forEach(entry => {
     const existing = dailyStats.get(entry.date) || { minutes: 0 }
     dailyStats.set(entry.date, {
       minutes: existing.minutes + entry.minutes
@@ -74,7 +74,7 @@ export function ReadingStatsClient() {
   // Calculate type stats
   const typeStats = new Map<string, { minutes: number; count: number }>()
   
-  data["reading-log"].forEach(entry => {
+  data.log.forEach(entry => {
     const existing = typeStats.get(entry.type) || { minutes: 0, count: 0 }
     typeStats.set(entry.type, {
       minutes: existing.minutes + entry.minutes,
@@ -85,7 +85,7 @@ export function ReadingStatsClient() {
   // Calculate author stats
   const authorStats = new Map<string, { minutes: number; titles: Set<string> }>()
   
-  data["reading-log"].forEach(entry => {
+  data.log.forEach(entry => {
     const existing = authorStats.get(entry.author) || { minutes: 0, titles: new Set() }
     existing.titles.add(entry.title)
     authorStats.set(entry.author, {
@@ -111,7 +111,7 @@ export function ReadingStatsClient() {
   const totalMinutes = sortedDailyStats.reduce((sum, day) => sum + day.minutes, 0)
   const totalDays = sortedDailyStats.length
   const avgMinutesPerDay = totalDays > 0 ? Math.round(totalMinutes / totalDays) : 0
-  const totalEntries = data["reading-log"].length
+  const totalEntries = data.log.length
 
   return (
     <div className="mt-4 space-y-8">

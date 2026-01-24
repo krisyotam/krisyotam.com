@@ -49,7 +49,7 @@ export function HomeGridView({ posts }: HomeGridViewProps) {
     // Fetch and set random poems from verse.json
     const fetchPoems = async () => {
       try {
-        const response = await fetch("/api/poems")
+        const response = await fetch("/api/content?type=poems")
         const data = await response.json()
         // Filter active poems and shuffle - ensure data is an array
         if (!Array.isArray(data)) {

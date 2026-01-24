@@ -25,7 +25,7 @@ export default function SupportersPage() {
   useEffect(() => {
     async function fetchSupporters() {
       try {
-        const response = await fetch('/api/supporters')
+        const response = await fetch('/api/data?type=supporters')
         const data = await response.json()
         // Duplicate for seamless loop
         setSupporters([...data.supporters, ...data.supporters])

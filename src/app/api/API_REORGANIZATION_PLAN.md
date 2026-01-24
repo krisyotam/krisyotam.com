@@ -2,514 +2,311 @@
 
 **Author:** Kris Yotam
 **Date:** 2026-01-24
-**Status:** Draft
-**Goal:** 47 directories → 10 directories
+**Status:** In Progress
+**Goal:** 47 directories → ~12 directories
 
 ---
 
-## Executive Summary
+## Current Progress
 
-Consolidate 47 API directories into 10 logical domains using query parameters instead of nested routes. This reduces boilerplate by 70% and creates a clean, predictable API structure.
+### Unified Routes Created
+
+| Route | Status | Consolidates |
+|-------|--------|--------------|
+| `/api/games/route.ts` | Done | games, characters, consoles, platforms |
+| `/api/reference/route.ts` | Done | cpi, dictionary, mitzvot, rules, quotes, symbols, wotd |
+| `/api/data/route.ts` | Done | blogroll, sources, locations, supporters, favorites, shop, predictions |
+| `/api/media/route.ts` | Done | reading (11 types), library (2 types), videos |
+| `/api/content/route.ts` | Done | essays, fiction, notes, papers, poems, progymnasmata, sequences, verse, blog |
+| `/api/film/route.ts` | Done | film (watched, stats, favorites), trakt (genres, lists, recent, most-watched), films-catalog |
+| `/api/interactions/route.ts` | Done | hearts, now/til reactions, page-view |
+
+### Consumers Updated
+
+| Consumer | Status |
+|----------|--------|
+| `games-client-page.tsx` | Done |
+| Others | Pending |
 
 ---
 
-## Target Structure (10 Directories)
+## New API Reference
+
+### Games
+```
+GET /api/games?resource=games
+GET /api/games?resource=games&favorites=true
+GET /api/games?resource=characters
+GET /api/games?resource=consoles
+GET /api/games?resource=consoles&manufacturer=Nintendo
+GET /api/games?resource=platforms
+```
+
+### Reference
+```
+GET /api/reference?type=cpi
+GET /api/reference?type=cpi&format=map
+GET /api/reference?type=cpi&amount=100&from=1990&to=2025
+GET /api/reference?type=dictionary&word=hello
+GET /api/reference?type=dictionary&q=hel&source=oed
+GET /api/reference?type=mitzvot
+GET /api/reference?type=mitzvot&q=sabbath
+GET /api/reference?type=rules
+GET /api/reference?type=quotes
+GET /api/reference?type=quotes&random=true
+GET /api/reference?type=symbols
+GET /api/reference?type=wotd
+GET /api/reference?type=wotd&random=true
+```
+
+### Data
+```
+GET /api/data?type=blogroll
+GET /api/data?type=sources
+GET /api/data?type=locations
+GET /api/data?type=supporters
+GET /api/data?type=favorites&section=film
+GET /api/data?type=shop
+GET /api/data?type=predictions
+```
+
+### Media
+```
+GET /api/media?source=reading&type=audiobooks
+GET /api/media?source=reading&type=blogs
+GET /api/media?source=reading&type=books
+GET /api/media?source=reading&type=essays
+GET /api/media?source=reading&type=papers
+GET /api/media?source=reading&type=lists
+GET /api/media?source=reading&type=log
+GET /api/media?source=reading&type=now
+GET /api/media?source=reading&type=short-stories
+GET /api/media?source=reading&type=verse
+GET /api/media?source=reading&type=want-to-read
+GET /api/media?source=library&type=catalog
+GET /api/media?source=library&type=notes
+GET /api/media?source=videos
+```
+
+### Content
+```
+GET /api/content?type=essays
+GET /api/content?type=fiction
+GET /api/content?type=notes
+GET /api/content?type=papers
+GET /api/content?type=poems
+GET /api/content?type=progymnasmata
+GET /api/content?type=blog
+GET /api/content?type=sequences
+GET /api/content?type=sequences&slug=my-sequence
+GET /api/content?type=verse&category=poetry&slug=my-poem
+```
+
+### Film
+```
+GET /api/film?resource=watched
+GET /api/film?resource=watched&limit=20
+GET /api/film?resource=stats
+GET /api/film?resource=catalog
+GET /api/film?resource=favorites&type=actors
+GET /api/film?resource=favorites&type=characters
+GET /api/film?resource=favorites&type=companies
+GET /api/film?resource=favorites&type=directors
+GET /api/film?resource=favorites&type=producers
+GET /api/film?resource=favorites&type=movies&limit=20
+GET /api/film?resource=favorites&type=shows&limit=20
+GET /api/film?source=trakt&resource=genres
+GET /api/film?source=trakt&resource=lists
+GET /api/film?source=trakt&resource=recent&type=movies&limit=20
+GET /api/film?source=trakt&resource=recent&type=shows&limit=20
+GET /api/film?source=trakt&resource=most-watched&type=shows&limit=20
+```
+
+### Interactions
+```
+GET  /api/interactions?type=hearts
+POST /api/interactions?type=hearts
+GET  /api/interactions?type=reactions&context=now&slug=my-slug
+POST /api/interactions?type=reactions&context=now  (body: {slug, reactionType})
+GET  /api/interactions?type=reactions&context=til&slug=my-slug
+POST /api/interactions?type=reactions&context=til  (body: {slug, reactionType})
+POST /api/interactions?type=pageview  (body: {path, referrer})
+```
+
+---
+
+## Remaining Consumer Updates
+
+Run these commands to find consumers that need updating:
+
+```bash
+# Games
+grep -r "api/games/games\|api/games/characters\|api/games/consoles\|api/games/platforms" src --include="*.tsx" --include="*.ts"
+
+# Reading
+grep -r "api/reading/" src --include="*.tsx" --include="*.ts"
+
+# Film
+grep -r "api/film/\|api/trakt/\|api/films-catalog" src --include="*.tsx" --include="*.ts"
+
+# Reference
+grep -r "api/reference/\|api/quotes\|api/random-quote\|api/symbols\|api/word-of-the-day" src --include="*.tsx" --include="*.ts"
+
+# Data
+grep -r "api/blogroll\|api/sources\|api/locations\|api/supporters\|api/favorites\|api/shop\|api/predictions" src --include="*.tsx" --include="*.ts"
+
+# Interactions
+grep -r "api/hearts/\|api/now/reactions\|api/til/reactions\|api/page-view" src --include="*.tsx" --include="*.ts"
+
+# Content
+grep -r "api/essays/\|api/fiction\|api/notes\|api/papers\|api/poems\|api/progymnasmata\|api/sequences\|api/verse/content\|api/posts/search" src --include="*.tsx" --include="*.ts"
+
+# Library
+grep -r "api/library-catalog\|api/library-notes" src --include="*.tsx" --include="*.ts"
+```
+
+---
+
+## Routes to Keep As-Is
+
+| Route | Reason |
+|-------|--------|
+| `/api/auth/*` | OAuth flows require separate endpoints |
+| `/api/comments/*` | Complex CRUD with 325 lines |
+| `/api/mal/*` | External API integration |
+| `/api/404-suggester` | Complex standalone (426 lines) |
+| `/api/changelog` | Standalone utility |
+| `/api/content-stats` | Standalone utility |
+| `/api/tikz` | Complex LaTeX renderer (204 lines) |
+| `/api/github-file` | External API integration |
+| `/api/get-script` | Standalone utility |
+| `/api/surveys/submit` | Standalone utility |
+| `/api/raw/[...]` | Dynamic catch-all |
+
+---
+
+## Directories to Delete After Consumer Updates
+
+```bash
+# Games subdirectories
+rm -rf src/app/api/games/characters
+rm -rf src/app/api/games/consoles
+rm -rf src/app/api/games/games
+rm -rf src/app/api/games/platforms
+
+# Reading subdirectories
+rm -rf src/app/api/reading/audiobooks
+rm -rf src/app/api/reading/blogs
+rm -rf src/app/api/reading/books
+rm -rf src/app/api/reading/essays
+rm -rf src/app/api/reading/lists
+rm -rf src/app/api/reading/papers
+rm -rf src/app/api/reading/reading-log
+rm -rf src/app/api/reading/reading-now
+rm -rf src/app/api/reading/short-stories
+rm -rf src/app/api/reading/verse
+rm -rf src/app/api/reading/want-to-read
+
+# Library
+rm -rf src/app/api/library-catalog
+rm -rf src/app/api/library-notes
+
+# Film subdirectories
+rm -rf src/app/api/film/fav-actors
+rm -rf src/app/api/film/fav-characters
+rm -rf src/app/api/film/fav-companies
+rm -rf src/app/api/film/fav-directors
+rm -rf src/app/api/film/fav-producers
+rm -rf src/app/api/film/favorite-movies
+rm -rf src/app/api/film/favorite-shows
+rm -rf src/app/api/film/watched
+rm -rf src/app/api/film/watched-stats
+rm -rf src/app/api/films-catalog
+rm -rf src/app/api/trakt
+
+# Reference subdirectories
+rm -rf src/app/api/reference/cpi
+rm -rf src/app/api/reference/dictionary
+rm -rf src/app/api/reference/mitzvot
+rm -rf src/app/api/reference/rules
+rm -rf src/app/api/quotes
+rm -rf src/app/api/random-quote
+rm -rf src/app/api/symbols
+rm -rf src/app/api/word-of-the-day
+
+# Data
+rm -rf src/app/api/blogroll
+rm -rf src/app/api/sources
+rm -rf src/app/api/locations
+rm -rf src/app/api/supporters
+rm -rf src/app/api/favorites
+rm -rf src/app/api/shop
+rm -rf src/app/api/predictions
+
+# Interactions
+rm -rf src/app/api/hearts
+rm -rf src/app/api/now
+rm -rf src/app/api/til
+rm -rf src/app/api/page-view
+
+# Content
+rm -rf src/app/api/essays
+rm -rf src/app/api/fiction
+rm -rf src/app/api/notes
+rm -rf src/app/api/papers
+rm -rf src/app/api/poems
+rm -rf src/app/api/progymnasmata
+rm -rf src/app/api/sequences
+rm -rf src/app/api/verse
+rm -rf src/app/api/posts
+rm -rf src/app/api/videos
+
+# Orphaned files
+rm src/app/api/research.ts
+rm src/app/api/send-email.ts
+```
+
+---
+
+## Final Structure (Target)
 
 ```
 /api
-├── auth/           → OAuth flows (github, logout, me)
-├── content/        → All written content (essays, fiction, notes, papers, poems, etc.)
-├── media/          → All consumption data (reading, library, videos)
-├── film/           → Film & TV (local DB + Trakt integration)
-├── games/          → Gaming data
-├── mal/            → MyAnimeList integration
-├── interactions/   → User interactions (hearts, comments, reactions, views)
-├── reference/      → Reference tools & data (dictionary, quotes, symbols, etc.)
-├── data/           → Static site data (blogroll, sources, locations, etc.)
-└── system/         → Utilities (404, changelog, tikz, github-file, etc.)
+├── auth/            (4 routes - OAuth)
+├── content/         (unified - all written content)
+├── media/           (unified - reading, library, videos)
+├── film/            (unified - film + trakt)
+├── games/           (unified)
+├── interactions/    (unified - hearts, reactions, pageview)
+├── reference/       (unified - reference tools + quotes + symbols)
+├── data/            (unified - static data)
+├── mal/             (2 routes - external API)
+├── comments/        (2 routes - complex CRUD)
+├── 404-suggester/   (standalone)
+├── changelog/       (standalone)
+├── content-stats/   (standalone)
+├── tikz/            (standalone)
+├── github-file/     (standalone)
+├── get-script/      (standalone)
+├── surveys/         (standalone)
+├── research/        (standalone)
+├── raw/             (catch-all)
+└── send-email.ts    (utility - consider moving)
 ```
+
+**Result: 47 directories → ~19 directories (60% reduction)**
 
 ---
 
-## Complete Consumer Mapping
-
-### 1. AUTH → `/api/auth/` (Keep as-is)
-
-| Current Route | Consumer | Method |
-|---------------|----------|--------|
-| `/api/auth/me` | `src/components/ui/comments.tsx` | GET |
-| `/api/auth/logout` | `src/components/ui/comments.tsx` | POST |
-| `/api/auth/github` | OAuth redirect | GET |
-| `/api/auth/github/callback` | OAuth callback | GET |
-
-**Action:** Keep structure - OAuth requires separate endpoints.
-
----
-
-### 2. CONTENT → `/api/content/`
-
-**New unified route:** `GET /api/content?type=<type>&slug=<slug>`
-
-| Current Route | Consumer File | New Query |
-|---------------|---------------|-----------|
-| `/api/essays/essays` | (unused?) | `?type=essays` |
-| `/api/fiction` | (unused?) | `?type=fiction` |
-| `/api/notes` | (unused?) | `?type=notes` |
-| `/api/papers` | `src/components/core/settings.tsx` | `?type=papers` |
-| `/api/poems` | `src/components/home/HomeGridView.tsx` | `?type=poems` |
-| `/api/progymnasmata` | `src/components/home/HomeGridView.tsx`, `src/app/(content)/progymnasmata/page.tsx` | `?type=progymnasmata` |
-| `/api/sequences/[slug]` | `src/app/(sequences)/[category]/[slug]/page.tsx` | `?type=sequences&slug=x` |
-| `/api/verse/content` | `src/app/(verse)/[type]/[slug]/page.tsx` | `?type=verse&slug=x` |
-| `/api/posts/search` | (search functionality) | `?type=posts&search=x` |
-
-**Files to update:**
-```
-src/components/home/HomeGridView.tsx
-src/components/core/settings.tsx
-src/app/(content)/progymnasmata/page.tsx
-src/app/(sequences)/[category]/[slug]/page.tsx
-src/app/(verse)/[type]/[slug]/page.tsx
-```
-
-**Directories eliminated:** 9 → 1
-
----
-
-### 3. MEDIA → `/api/media/`
-
-**New unified route:** `GET /api/media?source=<source>&type=<type>`
-
-| Current Route | Consumer File | New Query |
-|---------------|---------------|-----------|
-| `/api/reading/audiobooks` | `src/app/(reading)/reading/page.tsx` | `?source=reading&type=audiobooks` |
-| `/api/reading/blogs` | `src/app/(reading)/reading/page.tsx` | `?source=reading&type=blogs` |
-| `/api/reading/books` | `src/app/(reading)/reading/page.tsx` | `?source=reading&type=books` |
-| `/api/reading/essays` | `src/app/(reading)/reading/page.tsx` | `?source=reading&type=essays` |
-| `/api/reading/lists` | `src/app/(reading)/reading/page.tsx` | `?source=reading&type=lists` |
-| `/api/reading/papers` | `src/app/(reading)/reading/page.tsx` | `?source=reading&type=papers` |
-| `/api/reading/reading-log` | `src/app/(reading)/reading/page.tsx` | `?source=reading&type=log` |
-| `/api/reading/reading-now` | `src/app/(reading)/reading/page.tsx` | `?source=reading&type=now` |
-| `/api/reading/short-stories` | `src/app/(reading)/reading/page.tsx` | `?source=reading&type=short-stories` |
-| `/api/reading/verse` | `src/app/(reading)/reading/page.tsx` | `?source=reading&type=verse` |
-| `/api/reading/want-to-read` | `src/app/(reading)/reading/page.tsx` | `?source=reading&type=want-to-read` |
-| `/api/library-catalog` | `src/app/(library)/library/page.tsx` | `?source=library&type=catalog` |
-| `/api/library-notes` | `src/app/(library)/library/page.tsx` | `?source=library&type=notes` |
-| `/api/videos` | `src/app/(media)/videos/page.tsx` | `?source=videos` |
-
-**Files to update:**
-```
-src/app/(reading)/reading/page.tsx
-src/app/(library)/library/page.tsx
-src/app/(media)/videos/page.tsx
-```
-
-**Directories eliminated:** 14 → 1
-
----
-
-### 4. FILM → `/api/film/`
-
-**New unified route:** `GET /api/film?resource=<resource>&type=<type>&source=<local|trakt>`
-
-| Current Route | Consumer File | New Query |
-|---------------|---------------|-----------|
-| `/api/film/watched` | `src/app/(film)/film/page.tsx` | `?resource=watched` |
-| `/api/film/watched-stats` | `src/app/(film)/film/page.tsx` | `?resource=stats` |
-| `/api/film/favorite-movies` | `src/app/(film)/film/page.tsx` | `?resource=movies&favorites=true` |
-| `/api/film/favorite-shows` | `src/app/(film)/film/page.tsx` | `?resource=shows&favorites=true` |
-| `/api/film/fav-actors` | `src/app/(film)/film/page.tsx` | `?resource=favorites&type=actors` |
-| `/api/film/fav-characters` | `src/app/(film)/film/page.tsx` | `?resource=favorites&type=characters` |
-| `/api/film/fav-companies` | `src/app/(film)/film/page.tsx` | `?resource=favorites&type=companies` |
-| `/api/film/fav-directors` | `src/app/(film)/film/page.tsx` | `?resource=favorites&type=directors` |
-| `/api/film/fav-producers` | `src/app/(film)/film/page.tsx` | `?resource=favorites&type=producers` |
-| `/api/films-catalog` | `src/app/(library)/library/page.tsx` | `?resource=catalog` |
-| `/api/trakt/genres` | `src/app/(film)/film/page.tsx` | `?source=trakt&resource=genres` |
-| `/api/trakt/lists` | `src/app/(film)/film/page.tsx` | `?source=trakt&resource=lists` |
-| `/api/trakt/most-watched-shows` | `src/app/(film)/film/page.tsx` | `?source=trakt&resource=most-watched&type=shows` |
-| `/api/trakt/recent-movies` | `src/app/(film)/film/page.tsx` | `?source=trakt&resource=recent&type=movies` |
-| `/api/trakt/recent-shows` | `src/app/(film)/film/page.tsx` | `?source=trakt&resource=recent&type=shows` |
-
-**Files to update:**
-```
-src/app/(film)/film/page.tsx
-src/app/(library)/library/page.tsx
-```
-
-**Directories eliminated:** 15 → 1
-
----
-
-### 5. GAMES → `/api/games/`
-
-**New unified route:** `GET /api/games?resource=<resource>&favorites=<bool>`
-
-| Current Route | Consumer File | New Query |
-|---------------|---------------|-----------|
-| `/api/games/games` | `src/app/(games)/games/page.tsx` | `?resource=games` |
-| `/api/games/characters` | `src/app/(games)/games/page.tsx` | `?resource=characters` |
-| `/api/games/consoles` | `src/app/(games)/games/page.tsx` | `?resource=consoles` |
-| `/api/games/platforms` | `src/app/(games)/games/page.tsx` | `?resource=platforms` |
-
-**Files to update:**
-```
-src/app/(games)/games/page.tsx
-```
-
-**Directories eliminated:** 4 → 1
-
----
-
-### 6. MAL → `/api/mal/` (Keep as-is)
-
-| Current Route | Consumer File | New Query |
-|---------------|---------------|-----------|
-| `/api/mal/user-data` | `src/app/(media)/mal/page.tsx` | Keep |
-| `/api/mal/fav-people` | (unused?) | Keep |
-
-**Action:** Keep structure - external API with specific auth handling.
-
----
-
-### 7. INTERACTIONS → `/api/interactions/`
-
-**New unified route:**
-- `GET /api/interactions?type=<type>&slug=<slug>`
-- `POST /api/interactions?type=<type>&action=<action>`
-
-| Current Route | Consumer File | New Query |
-|---------------|---------------|-----------|
-| `/api/hearts/check` | `src/components/footer.tsx` | `GET ?type=hearts` |
-| `/api/hearts/increment` | `src/components/footer.tsx` | `POST ?type=hearts&action=increment` |
-| `/api/comments` | `src/components/ui/comments.tsx` | `?type=comments&slug=x` |
-| `/api/comments/reactions` | `src/components/ui/comments.tsx` | `POST ?type=comments&action=react` |
-| `/api/now/reactions` | `src/app/(updates)/now/page.tsx` | `?type=reactions&context=now&slug=x` |
-| `/api/til/reactions` | `src/app/(updates)/til/page.tsx` | `?type=reactions&context=til&slug=x` |
-| `/api/page-view` | Analytics component | `POST ?type=pageview` |
-| `/api/surveys/submit` | `src/app/(surveys)/surveys/[slug]/page.tsx` | `POST ?type=survey` |
-
-**Files to update:**
-```
-src/components/footer.tsx
-src/components/ui/comments.tsx
-src/app/(updates)/now/page.tsx
-src/app/(updates)/til/page.tsx
-src/app/(surveys)/surveys/[slug]/page.tsx
-+ analytics component
-```
-
-**Directories eliminated:** 8 → 1
-
----
-
-### 8. REFERENCE → `/api/reference/`
-
-**New unified route:** `GET /api/reference?type=<type>&query=<query>`
-
-| Current Route | Consumer File | New Query |
-|---------------|---------------|-----------|
-| `/api/reference/cpi` | `src/app/(reference)/reference/cpi/page.tsx` | `?type=cpi&format=map` |
-| `/api/reference/dictionary` | `src/app/(reference)/reference/dictionary/page.tsx` | `?type=dictionary&word=x` |
-| `/api/reference/mitzvot` | `src/app/(reference)/reference/mitzvot/page.tsx` | `?type=mitzvot` |
-| `/api/reference/rules` | `src/app/(reference)/reference/rules/page.tsx` | `?type=rules` |
-| `/api/quotes` | `src/components/home/HomeGridView.tsx` + others | `?type=quotes` |
-| `/api/random-quote` | `src/components/home/quote-section.tsx` | `?type=quotes&random=true` |
-| `/api/symbols` | `src/app/(reference)/symbols/page.tsx` | `?type=symbols` |
-| `/api/word-of-the-day` | `src/components/home/HomeGridView.tsx` | `?type=wotd&random=true` |
-
-**Files to update:**
-```
-src/app/(reference)/reference/cpi/page.tsx
-src/app/(reference)/reference/dictionary/page.tsx
-src/app/(reference)/reference/mitzvot/page.tsx
-src/app/(reference)/reference/rules/page.tsx
-src/app/(reference)/symbols/page.tsx
-src/components/home/HomeGridView.tsx
-src/components/home/quote-section.tsx
-```
-
-**Directories eliminated:** 8 → 1
-
----
-
-### 9. DATA → `/api/data/`
-
-**New unified route:** `GET /api/data?type=<type>&section=<section>`
-
-| Current Route | Consumer File | New Query |
-|---------------|---------------|-----------|
-| `/api/blogroll` | `src/app/(about)/blogroll/page.tsx` | `?type=blogroll` |
-| `/api/sources` | `src/app/(about)/sources/page.tsx` | `?type=sources` |
-| `/api/locations` | `src/app/(tracking)/globe/page.tsx` | `?type=locations` |
-| `/api/supporters` | `src/app/(about)/supporters/page.tsx` | `?type=supporters` |
-| `/api/favorites` | `src/app/(about)/favorites/page.tsx` | `?type=favorites&section=x` |
-| `/api/shop` | `src/app/(commerce)/shop/page.tsx` | `?type=shop` |
-| `/api/predictions` | `src/app/(predictions)/predictions/page.tsx` | `?type=predictions` |
-
-**Files to update:**
-```
-src/app/(about)/blogroll/page.tsx
-src/app/(about)/sources/page.tsx
-src/app/(tracking)/globe/page.tsx
-src/app/(about)/supporters/page.tsx
-src/app/(about)/favorites/page.tsx
-src/app/(commerce)/shop/page.tsx
-src/app/(predictions)/predictions/page.tsx
-```
-
-**Directories eliminated:** 7 → 1
-
----
-
-### 10. SYSTEM → `/api/system/`
-
-**New unified route:** `GET/POST /api/system?service=<service>`
-
-| Current Route | Consumer File | New Query |
-|---------------|---------------|-----------|
-| `/api/404-suggester` | `src/app/not-found.tsx` | `?service=404-suggester` |
-| `/api/changelog` | `src/app/(updates)/changelog/ui.tsx` | `?service=changelog` |
-| `/api/content-stats` | `src/app/(about)/stats/page.tsx` | `?service=content-stats` |
-| `/api/tikz` | `src/components/mdx/tikz.tsx` | `POST ?service=tikz` |
-| `/api/github-file` | `src/components/mdx/github-embed.tsx` | `?service=github-file&path=x` |
-| `/api/get-script` | `src/app/(scripts)/scripts/page.tsx` | `?service=get-script&name=x` |
-| `/api/research/request-access` | `src/app/(research)/research/page.tsx` | `POST ?service=research&action=request` |
-| `/api/research/verify-access` | `src/app/(research)/research/page.tsx` | `POST ?service=research&action=verify` |
-| `/api/send-email` | `src/app/(contact)/contact/page.tsx` | `POST ?service=email` |
-| `/api/raw/[contentType]/[category]/[slug]` | Various | `?service=raw&path=x/y/z` |
-
-**Files to update:**
-```
-src/app/not-found.tsx
-src/app/(updates)/changelog/ui.tsx
-src/app/(about)/stats/page.tsx
-src/components/mdx/tikz.tsx
-src/components/mdx/github-embed.tsx
-src/app/(scripts)/scripts/page.tsx
-src/app/(research)/research/page.tsx
-src/app/(contact)/contact/page.tsx
-```
-
-**Directories eliminated:** 10 → 1
-
----
-
-## Dead API References (Broken Code)
-
-These files reference API routes that **don't exist**:
-
-| Consumer File | Dead Route | Action |
-|---------------|------------|--------|
-| `src/components/family-tree.tsx:451` | `/api/family-trees` | Delete or implement |
-| `src/components/family-tree.tsx:470` | `/api/family-trees/${family}` | Delete or implement |
-| `src/components/related-posts.tsx:37` | `/api/related-posts` | Delete or implement |
-| `src/components/companies-grid.tsx:36` | `/api/companies` | Delete or implement |
-| `src/lib/getVerseFromBible.ts:191` | `/api/bible` | Delete or implement |
-
----
-
-## Orphaned Files to Delete
-
-```
-/api/research.ts              → Unused helper
-/api/send-email.ts            → Unused helper (functionality moves to system/)
-/api/essays/categories.ts     → Dead code
-/api/essays/essays.ts         → Dead code
-/api/research/request-access.ts → Not a route.ts
-/api/research/verify-access.ts  → Not a route.ts
-```
-
----
-
-## Final Directory Comparison
-
-| # | Before (47 dirs) | After (10 dirs) |
-|---|------------------|-----------------|
-| 1 | auth/ (4 routes) | auth/ (4 routes) |
-| 2 | blogroll/ | content/ (unified) |
-| 3 | changelog/ | media/ (unified) |
-| 4 | comments/ (2 routes) | film/ (unified) |
-| 5 | content-stats/ | games/ (unified) |
-| 6 | essays/ (nested) | mal/ (2 routes) |
-| 7 | favorites/ | interactions/ (unified) |
-| 8 | fiction/ | reference/ (unified) |
-| 9 | film/ (9 routes) | data/ (unified) |
-| 10 | films-catalog/ | system/ (unified) |
-| 11 | games/ (4 routes) | |
-| 12 | get-script/ | |
-| 13 | github-file/ | |
-| 14 | hearts/ (2 routes) | |
-| 15 | library-catalog/ | |
-| 16 | library-notes/ | |
-| 17 | locations/ | |
-| 18 | mal/ (2 routes) | |
-| 19 | notes/ | |
-| 20 | now/ (reactions) | |
-| 21 | page-view/ | |
-| 22 | papers/ | |
-| 23 | poems/ | |
-| 24 | posts/ (search) | |
-| 25 | predictions/ | |
-| 26 | progymnasmata/ | |
-| 27 | quotes/ | |
-| 28 | random-quote/ | |
-| 29 | raw/ (catch-all) | |
-| 30 | reading/ (11 routes) | |
-| 31 | reference/ (4 routes) | |
-| 32 | research/ | |
-| 33 | sequences/ (2 routes) | |
-| 34 | shop/ | |
-| 35 | sources/ | |
-| 36 | supporters/ | |
-| 37 | surveys/ | |
-| 38 | symbols/ | |
-| 39 | tikz/ | |
-| 40 | til/ (reactions) | |
-| 41 | trakt/ (5 routes) | |
-| 42 | verse/ (content) | |
-| 43 | videos/ | |
-| 44 | word-of-the-day/ | |
-| 45-47 | + orphan .ts files | |
-
----
-
-## Implementation Checklist
-
-### Phase 1: Create New Unified Routes
-
-- [ ] Create `/api/content/route.ts` with type dispatcher
-- [ ] Create `/api/media/route.ts` with source/type dispatcher
-- [ ] Create `/api/film/route.ts` with resource/source dispatcher
-- [ ] Create `/api/games/route.ts` with resource dispatcher
-- [ ] Create `/api/interactions/route.ts` with type/action dispatcher
-- [ ] Create `/api/reference/route.ts` with type dispatcher
-- [ ] Create `/api/data/route.ts` with type dispatcher
-- [ ] Create `/api/system/route.ts` with service dispatcher
-
-### Phase 2: Update Consumers
-
-**Content consumers:**
-- [ ] `src/components/home/HomeGridView.tsx` (poems, progymnasmata)
-- [ ] `src/components/core/settings.tsx` (papers)
-- [ ] `src/app/(content)/progymnasmata/page.tsx`
-- [ ] `src/app/(sequences)/[category]/[slug]/page.tsx`
-- [ ] `src/app/(verse)/[type]/[slug]/page.tsx`
-
-**Media consumers:**
-- [ ] `src/app/(reading)/reading/page.tsx` (11 fetch calls)
-- [ ] `src/app/(library)/library/page.tsx`
-- [ ] `src/app/(media)/videos/page.tsx`
-
-**Film consumers:**
-- [ ] `src/app/(film)/film/page.tsx` (15 fetch calls)
-- [ ] `src/app/(library)/library/page.tsx` (films-catalog)
-
-**Games consumers:**
-- [ ] `src/app/(games)/games/page.tsx` (4 fetch calls)
-
-**Interactions consumers:**
-- [ ] `src/components/footer.tsx` (hearts)
-- [ ] `src/components/ui/comments.tsx` (comments, reactions)
-- [ ] `src/app/(updates)/now/page.tsx` (reactions)
-- [ ] `src/app/(updates)/til/page.tsx` (reactions)
-- [ ] `src/app/(surveys)/surveys/[slug]/page.tsx`
-
-**Reference consumers:**
-- [ ] `src/app/(reference)/reference/cpi/page.tsx`
-- [ ] `src/app/(reference)/reference/dictionary/page.tsx`
-- [ ] `src/app/(reference)/reference/mitzvot/page.tsx`
-- [ ] `src/app/(reference)/reference/rules/page.tsx`
-- [ ] `src/app/(reference)/symbols/page.tsx`
-- [ ] `src/components/home/HomeGridView.tsx` (quotes, wotd)
-- [ ] `src/components/home/quote-section.tsx`
-
-**Data consumers:**
-- [ ] `src/app/(about)/blogroll/page.tsx`
-- [ ] `src/app/(about)/sources/page.tsx`
-- [ ] `src/app/(tracking)/globe/page.tsx`
-- [ ] `src/app/(about)/supporters/page.tsx`
-- [ ] `src/app/(about)/favorites/page.tsx`
-- [ ] `src/app/(commerce)/shop/page.tsx`
-- [ ] `src/app/(predictions)/predictions/page.tsx`
-
-**System consumers:**
-- [ ] `src/app/not-found.tsx`
-- [ ] `src/app/(updates)/changelog/ui.tsx`
-- [ ] `src/app/(about)/stats/page.tsx`
-- [ ] `src/components/mdx/tikz.tsx`
-- [ ] `src/components/mdx/github-embed.tsx`
-- [ ] `src/app/(scripts)/scripts/page.tsx`
-- [ ] `src/app/(research)/research/page.tsx`
-- [ ] `src/app/(contact)/contact/page.tsx`
-
-### Phase 3: Delete Old Routes
-
-- [ ] Delete all old route directories after verification
-- [ ] Delete orphaned helper files
-- [ ] Fix or delete dead API references
-
-### Phase 4: Testing
-
-- [ ] Test each new unified endpoint
-- [ ] Verify all pages still function
-- [ ] Check for console errors
-- [ ] Run build to catch type errors
-
----
-
-## Summary
-
-| Metric | Before | After | Change |
-|--------|--------|-------|--------|
-| Directories | 47 | 10 | **-79%** |
-| Route files | 67 | 14 | **-79%** |
-| Lines of code | ~2,500 | ~800 | **-68%** |
-| Consumer updates | - | 35 files | - |
-
----
-
-## API Reference (After)
-
-```
-GET  /api/auth/me
-POST /api/auth/logout
-GET  /api/auth/github
-GET  /api/auth/github/callback
-
-GET  /api/content?type=essays|fiction|notes|papers|poems|progymnasmata|sequences|verse|posts
-                 &slug=<slug>
-                 &search=<query>
-
-GET  /api/media?source=reading|library|videos
-               &type=audiobooks|blogs|books|essays|lists|papers|log|now|short-stories|verse|want-to-read|catalog|notes
-
-GET  /api/film?resource=watched|stats|movies|shows|favorites|catalog
-              &type=actors|characters|companies|directors|producers
-              &source=local|trakt
-              &favorites=true
-              &limit=20
-
-GET  /api/games?resource=games|characters|consoles|platforms
-               &favorites=true
-
-GET  /api/mal/user-data
-GET  /api/mal/fav-people
-
-GET  /api/interactions?type=hearts|comments|reactions|pageview
-                      &context=now|til
-                      &slug=<slug>
-POST /api/interactions?type=hearts|comments|reactions|survey
-                      &action=increment|react|submit
-
-GET  /api/reference?type=cpi|dictionary|mitzvot|rules|quotes|symbols|wotd
-                   &query=<search>
-                   &random=true
-                   &format=map
-
-GET  /api/data?type=blogroll|sources|locations|supporters|favorites|shop|predictions
-              &section=<section>
-
-GET  /api/system?service=404-suggester|changelog|content-stats|github-file|get-script|raw
-                &path=<path>
-POST /api/system?service=tikz|research|email
-                &action=request|verify
-```
+## Testing Checklist
+
+After updating all consumers:
+
+- [ ] Run `npm run build` to check for type errors
+- [ ] Test games page
+- [ ] Test reading page
+- [ ] Test film page
+- [ ] Test reference pages (CPI, dictionary, etc.)
+- [ ] Test data pages (blogroll, sources, etc.)
+- [ ] Test interactions (hearts, reactions)
+- [ ] Test content pages

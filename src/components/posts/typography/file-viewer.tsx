@@ -66,7 +66,7 @@ export default function FileViewer({ url, className }: FileViewerProps) {
       setIsLoading(true);
       setError(null);
       try {
-        const apiUrl = `/api/github-file?url=${encodeURIComponent(url)}`;
+        const apiUrl = `/api/utils?type=github-file?url=${encodeURIComponent(url)}`;
         const res = await fetch(apiUrl);
         const json = await res.json();
         if (!res.ok) throw new Error(json.error || "Failed to fetch file content");

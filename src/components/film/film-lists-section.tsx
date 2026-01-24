@@ -41,7 +41,7 @@ export function FilmListsSection() {
     async function fetchLists() {
       try {
         console.log("Fetching Trakt lists")
-        const response = await fetch("/api/trakt/lists")
+        const response = await fetch("/api/film?source=trakt&resource=lists")
         
         if (!response.ok) {
           throw new Error(`Failed to fetch lists: ${response.status}`)

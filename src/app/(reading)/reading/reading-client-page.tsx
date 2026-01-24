@@ -19,9 +19,9 @@ function CurrentlyReadingContent() {
   useEffect(() => {
     const loadBooks = async () => {
       try {
-        const response = await fetch('/api/reading/reading-now')
+        const response = await fetch('/api/media?source=reading&type=now')
         const data = await response.json()
-        setBooks(data['reading-now'] || [])
+        setBooks(data.now || [])
       } catch (error) {
         console.error('Error loading currently reading books:', error)
         setBooks([])

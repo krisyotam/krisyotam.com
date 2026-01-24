@@ -73,11 +73,11 @@ export function CatalogContent() {
     async function fetchData() {
       try {
         // Fetch books
-        const booksResponse = await fetch("/api/library-catalog")
+        const booksResponse = await fetch("/api/media?source=library&type=catalog")
         const booksData = await booksResponse.json()
 
         // Fetch films
-        const filmsResponse = await fetch("/api/films-catalog")
+        const filmsResponse = await fetch("/api/film?resource=catalog")
         const filmsData = await filmsResponse.json()
 
         if (Array.isArray(booksData)) {

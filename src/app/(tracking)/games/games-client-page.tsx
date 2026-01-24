@@ -81,12 +81,12 @@ export default function GameClientPage() {
       setLoading(true)
       
       try {
-        // Fetch data from API routes
+        // Fetch data from unified API route
         const [gamesRes, charactersRes, consolesRes, platformsRes] = await Promise.all([
-          fetch('/api/games/games'),
-          fetch('/api/games/characters'),
-          fetch('/api/games/consoles'),
-          fetch('/api/games/platforms')
+          fetch('/api/games?resource=games'),
+          fetch('/api/games?resource=characters'),
+          fetch('/api/games?resource=consoles'),
+          fetch('/api/games?resource=platforms')
         ])
 
         if (!gamesRes.ok) throw new Error(`Failed to fetch games data: ${gamesRes.status}`)

@@ -30,7 +30,7 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
   useEffect(() => {
     async function fetchEntries() {
       try {
-        const res = await fetch("/api/blogroll")
+        const res = await fetch("/api/data?type=blogroll")
         if (!res.ok) throw new Error(`HTTP ${res.status} – ${res.statusText}`)
 
         const data = await res.json()

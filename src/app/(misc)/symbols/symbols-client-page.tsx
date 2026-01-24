@@ -77,7 +77,7 @@ export function SymbolsClient() {
   useEffect(() => {
     async function fetchSymbols() {
       try {
-        const response = await fetch('/api/symbols')
+        const response = await fetch('/api/reference?type=symbols')
         if (!response.ok) throw new Error('Failed to fetch symbols')
         const data = await response.json()
         setSymbols(data.symbols || [])

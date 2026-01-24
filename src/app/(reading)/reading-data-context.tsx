@@ -150,7 +150,7 @@ export function ReadingDataProvider({ children }: ReadingDataProviderProps) {
     setError(null)
     
     try {
-      // Load all data in parallel for maximum speed
+      // Load all data in parallel from unified media API
       const [
         booksResponse,
         audiobooksResponse,
@@ -162,15 +162,15 @@ export function ReadingDataProvider({ children }: ReadingDataProviderProps) {
         readingLogResponse,
         wantToReadResponse
       ] = await Promise.all([
-        fetch('/api/reading/books'),
-        fetch('/api/reading/audiobooks'),
-        fetch('/api/reading/blogs'),
-        fetch('/api/reading/short-stories'),
-        fetch('/api/reading/verse'),
-        fetch('/api/reading/essays'),
-        fetch('/api/reading/papers'),
-        fetch('/api/reading/reading-log'),
-        fetch('/api/reading/want-to-read')
+        fetch('/api/media?source=reading&type=books'),
+        fetch('/api/media?source=reading&type=audiobooks'),
+        fetch('/api/media?source=reading&type=blogs'),
+        fetch('/api/media?source=reading&type=short-stories'),
+        fetch('/api/media?source=reading&type=verse'),
+        fetch('/api/media?source=reading&type=essays'),
+        fetch('/api/media?source=reading&type=papers'),
+        fetch('/api/media?source=reading&type=log'),
+        fetch('/api/media?source=reading&type=want-to-read')
       ])
 
       // Check for any failed requests
@@ -203,17 +203,17 @@ export function ReadingDataProvider({ children }: ReadingDataProviderProps) {
         wantToReadResponse.json()
       ])
 
-      // Update state with all the loaded data
+      // Update state with all the loaded data (unified API response format)
       setData({
         books: booksData.books || [],
         audiobooks: audiobooksData.audiobooks || [],
-        blogPosts: blogsData['blog-posts'] || [],
-        shortStories: shortStoriesData['short-stories'] || [],
+        blogPosts: blogsData.blogs || [],
+        shortStories: shortStoriesData.stories || [],
         verse: verseData.verse || [],
         essays: essaysData.essays || [],
         papers: papersData.papers || [],
-        readingLog: readingLogData['reading-log'] || [],
-        wantToRead: wantToReadData['want-to-read'] || []
+        readingLog: readingLogData.log || [],
+        wantToRead: wantToReadData.wantToRead || []
       })
 
     } catch (err) {

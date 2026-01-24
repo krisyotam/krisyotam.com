@@ -13,7 +13,7 @@ export function HeartButton() {
     // Check if user has already liked
     const checkLiked = async () => {
       try {
-        const response = await fetch('/api/hearts/check')
+        const response = await fetch('/api/interactions?resource=hearts&action=check')
         const data = await response.json()
         setHasLiked(data.hasLiked)
         setCount(data.count)
@@ -31,7 +31,7 @@ export function HeartButton() {
     if (hasLiked) return
 
     try {
-      const response = await fetch('/api/hearts/increment', {
+      const response = await fetch('/api/interactions?resource=hearts&action=increment', {
         method: 'POST'
       })
       const data = await response.json()
