@@ -30,7 +30,7 @@ interface SurveyProps {
   className?: string;
 }
 
-type Answer = string | number | boolean | string[] | File | null;
+type Answer = string | number | boolean | string[] | Record<string, string> | File | null;
 
 // ============================================================================
 // Component
@@ -507,7 +507,7 @@ function QuestionInput({ question, value, onChange, isFocused }: QuestionInputPr
       );
 
     case "matrix":
-      const matrixValue = (value as unknown as Record<string, string>) || {};
+      const matrixValue = (value as Record<string, string>) || {};
       return (
         <div className="survey-matrix">
           <div className="survey-matrix-header">
