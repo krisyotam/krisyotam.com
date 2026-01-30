@@ -7,3 +7,4 @@ tsconfig.tsbuildinfo
 .nixpacks
 downloads/
 *.mp4
+*.db

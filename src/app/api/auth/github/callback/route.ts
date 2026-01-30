@@ -36,8 +36,9 @@ export async function GET(request: Request) {
     const tokenData = await tokenResponse.json()
 
     if (tokenData.error) {
-      console.error("GitHub OAuth error:", tokenData.error)
-      return NextResponse.redirect(new URL(returnUrl, request.url))
+      console.error("GitHub OAuth error:", tokenData.error, tokenData.error_description)
+      // Return error to user for debugging
+      return NextResponse.redirect(new URL(`${returnUrl}?auth_error=${encodeURIComponent(tokenData.error_description || tokenData.error)}`, request.url))
     }
 
     // Get user info

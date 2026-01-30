@@ -54,7 +54,7 @@ export default function PoemPageClient({ poem, type, slug }: PoemPageClientProps
       try {
         setIsLoading(true)
         setError(null)
-        const response = await fetch(`/api/verse/content?type=${type}&slug=${slug}`)
+        const response = await fetch(`/api/content?type=verse&category=${type}&slug=${slug}`)
 
         if (!response.ok) {
           throw new Error('Failed to fetch poem content')
