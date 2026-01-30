@@ -27,14 +27,14 @@ export const metadata: Metadata = staticMetadata.reviews;
 // Page Component
 // =============================================================================
 
-export default function ReviewsPage() {
+export default async function ReviewsPage() {
   // Fetch reviews and categories from database
   const reviewsData = getActiveContentByType('reviews');
   const categoriesData = getCategoriesByContentType('reviews');
 
   // Build slugs for view count lookup (format: reviews/category/slug)
   const slugs = reviewsData.map(review => `reviews/${encodeURIComponent(review.category)}/${encodeURIComponent(review.slug)}`);
-  const viewCounts = getViewCounts(slugs);
+  const viewCounts = await getViewCounts(slugs);
 
   // Map and sort reviews by date (newest first) with views
   const reviews: (ReviewMeta & { views: number })[] = reviewsData

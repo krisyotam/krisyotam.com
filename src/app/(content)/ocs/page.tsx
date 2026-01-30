@@ -37,7 +37,7 @@ export default async function OCSPage() {
     const categorySlug = character.category.toLowerCase().replace(/\s+/g, "-");
     return `ocs/${categorySlug}/${encodeURIComponent(character.slug)}`;
   });
-  const viewCounts = getViewCounts(slugs);
+  const viewCounts = await getViewCounts(slugs);
 
   // Map to OCSMeta type and sort by date (newest first) with views
   const ocs: (OCSMeta & { views: number })[] = ocsData

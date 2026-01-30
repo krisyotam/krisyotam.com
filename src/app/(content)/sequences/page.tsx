@@ -37,7 +37,7 @@ export default async function SequencesPage() {
 
   // Build slugs for view count lookup (format: sequences/slug)
   const slugs = activeSequences.map(sequence => `sequences/${sequence.slug}`);
-  const viewCounts = getViewCounts(slugs);
+  const viewCounts = await getViewCounts(slugs);
 
   // Add views to sequences
   const sequencesWithViews = activeSequences.map(sequence => ({

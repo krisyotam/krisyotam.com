@@ -34,7 +34,7 @@ export default async function EssaysPage() {
 
   // Build slugs for view count lookup (format: essays/category/slug)
   const slugs = allEssays.map(essay => `essays/${essay.category}/${essay.slug}`);
-  const viewCounts = getViewCounts(slugs);
+  const viewCounts = await getViewCounts(slugs);
 
   // Transform to Post format with views
   const essays: (Post & { views: number })[] = allEssays.map(essay => {

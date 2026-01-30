@@ -33,7 +33,7 @@ export default async function NotesPage() {
 
   // Build slugs for view count lookup (format: notes/category/slug)
   const slugs = rawNotes.map(note => `notes/${note.category}/${note.slug}`);
-  const viewCounts = getViewCounts(slugs);
+  const viewCounts = await getViewCounts(slugs);
 
   // Sort notes by date (newest first) and add views
   const notes = [...rawNotes]

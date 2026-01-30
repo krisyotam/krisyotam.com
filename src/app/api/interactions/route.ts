@@ -105,14 +105,14 @@ export async function GET(request: Request) {
         }
 
         // Get top-level comments with pagination
-        const { comments, total } = getComments(pageSlug, page, COMMENTS_PER_PAGE);
+        const { comments, total } = await getComments(pageSlug, page, COMMENTS_PER_PAGE);
 
         // Get replies for these comments
         const commentIds = comments.map((c) => c.id);
         const replies: Record<string, any[]> = {};
 
         for (const id of commentIds) {
-          const commentReplies = getReplies(id);
+          const commentReplies = await getReplies(id);
           if (commentReplies.length > 0) {
             replies[id] = commentReplies;
           }
@@ -125,7 +125,7 @@ export async function GET(request: Request) {
         ];
 
         // Get reactions for all comments
-        const commentReactionsData = getCommentReactions(allCommentIds);
+        const commentReactionsData = await getCommentReactions(allCommentIds);
 
         // Get current user's reactions
         let userReactionsData: Record<string, string[]> = {};
@@ -134,7 +134,7 @@ export async function GET(request: Request) {
         if (userCookie) {
           try {
             const user = JSON.parse(userCookie.value);
-            userReactionsData = getUserCommentReactions(allCommentIds, user.id);
+            userReactionsData = await getUserCommentReactions(allCommentIds, user.id);
           } catch {}
         }
 
@@ -168,9 +168,9 @@ export async function GET(request: Request) {
       // ======================================================================
       case "hearts": {
         const cookieStore = await cookies();
-        const hasLiked = cookieStore.has("has_liked");
-        const count = getLikeCount("home");
-        return NextResponse.json({ count, hasLiked });
+        const hasLikedCookie = cookieStore.has("has_liked");
+        const count = await getLikeCount("home");
+        return NextResponse.json({ count, hasLiked: hasLikedCookie });
       }
 
       // ======================================================================
@@ -288,7 +288,7 @@ export async function POST(request: Request) {
 
         // If this is a reply, verify parent exists and is not itself a reply
         if (parentId) {
-          const parentComment = getComment(parentId);
+          const parentComment = await getComment(parentId);
 
           if (!parentComment) {
             return NextResponse.json({ error: "Parent comment not found" }, { status: 404 });
@@ -299,7 +299,7 @@ export async function POST(request: Request) {
           }
         }
 
-        const comment = createComment({
+        const comment = await createComment({
           pageSlug,
           content: content.trim(),
           userId: user.id,
@@ -346,7 +346,7 @@ export async function POST(request: Request) {
           return NextResponse.json({ error: "Invalid reaction type" }, { status: 400 });
         }
 
-        const action = toggleCommentReaction(commentId, user.id, reactionType);
+        const action = await toggleCommentReaction(commentId, user.id, reactionType);
         return NextResponse.json({ action });
       }
 
@@ -365,7 +365,7 @@ export async function POST(request: Request) {
                    request.headers.get("x-real-ip") || "";
         const { country } = await lookupCity(ip);
 
-        const newCount = addLike("home", country, ip);
+        const newCount = await addLike("home", country, ip);
 
         (await cookies()).set("has_liked", "true", {
           httpOnly: true,
@@ -479,10 +479,10 @@ export async function POST(request: Request) {
         const { country } = await lookupCity(ip);
 
         // Record the view
-        recordView(slug, country, referrer);
+        await recordView(slug, country, referrer);
 
         // Return updated count
-        const count = getViewCount(slug);
+        const count = await getViewCount(slug);
         return NextResponse.json({ ok: true, count });
       }
 
@@ -539,7 +539,7 @@ export async function PUT(request: Request) {
     }
 
     // First verify the comment exists and belongs to this user
-    const comment = getComment(commentId);
+    const comment = await getComment(commentId);
 
     if (!comment) {
       return NextResponse.json({ error: "Comment not found" }, { status: 404 });
@@ -550,7 +550,7 @@ export async function PUT(request: Request) {
     }
 
     // Update the comment
-    const updatedComment = updateComment(commentId, content.trim());
+    const updatedComment = await updateComment(commentId, content.trim());
 
     if (!updatedComment) {
       return NextResponse.json({ error: "Failed to update comment" }, { status: 500 });
@@ -603,7 +603,7 @@ export async function DELETE(request: Request) {
     }
 
     // First verify the comment exists
-    const comment = getComment(commentId);
+    const comment = await getComment(commentId);
 
     if (!comment) {
       return NextResponse.json({ error: "Comment not found" }, { status: 404 });
@@ -616,7 +616,7 @@ export async function DELETE(request: Request) {
     }
 
     // Soft delete
-    const success = deleteComment(commentId);
+    const success = await deleteComment(commentId);
 
     if (!success) {
       return NextResponse.json({ error: "Failed to delete comment" }, { status: 500 });

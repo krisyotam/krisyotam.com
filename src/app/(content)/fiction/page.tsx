@@ -45,7 +45,7 @@ export const metadata: Metadata = staticMetadata.fiction;
 // Page Component
 // =============================================================================
 
-export default function FictionPage() {
+export default async function FictionPage() {
   // Fetch active fiction content from database
   const fictionData = getActiveContentByType('fiction');
 
@@ -57,7 +57,7 @@ export default function FictionPage() {
     const categorySlug = story.category.toLowerCase().replace(/\s+/g, "-");
     return `fiction/${categorySlug}/${story.slug}`;
   });
-  const viewCounts = getViewCounts(slugs);
+  const viewCounts = await getViewCounts(slugs);
 
   // Sort fiction by date (newest first) and add views
   const stories = fictionData

@@ -37,7 +37,7 @@ export default async function BlogPage() {
     const categorySlug = post.category.toLowerCase().replace(/\s+/g, "-");
     return `blog/${categorySlug}/${post.slug}`;
   });
-  const viewCounts = getViewCounts(slugs);
+  const viewCounts = await getViewCounts(slugs);
 
   // Transform and sort posts with views
   const posts: (BlogMeta & { views: number })[] = rawPosts
