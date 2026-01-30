@@ -66,10 +66,12 @@ const Dropcap: React.FC<DropcapProps> = ({
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
           className="dropcap-image"
+          unoptimized
           style={{
             display: "block",
             margin: 0,
-            padding: 0
+            padding: 0,
+            imageRendering: "crisp-edges"
           }}
         />
       </span>
