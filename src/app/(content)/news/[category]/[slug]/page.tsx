@@ -19,6 +19,7 @@ import { getActiveContentByType } from "@/lib/data";
 import NewsPageClient from "./NewsPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
+import { ViewTracker } from "@/components/view-tracker";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 import type { NewsMeta, NewsStatus, NewsConfidence } from "@/types/content";
 
@@ -155,8 +156,11 @@ export default async function NewsPage({ params }: NewsPageProps) {
   // Dynamically import the MDX file based on category and slug
   const NewsArticle = (await import(`@/app/(content)/news/content/${category}/${slug}.mdx`)).default;
 
+  const viewSlug = `news/${category}/${slug}`;
+
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
+      <ViewTracker slug={viewSlug} />
       <div className="max-w-6xl mx-auto px-4">
         {/* Header section - full width */}
         <div className="mb-8">

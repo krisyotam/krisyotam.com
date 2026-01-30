@@ -19,6 +19,7 @@ import { getActiveContentByType, getContentByType } from "@/lib/data";
 import ReviewPageClient from "./ReviewPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
+import { ViewTracker } from "@/components/view-tracker";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 import type { ReviewMeta, ReviewStatus, ReviewConfidence } from "@/types/content";
 
@@ -171,8 +172,11 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
   // Dynamically import the MDX file based on category and slug
   const Review = (await import(`@/app/(content)/reviews/content/${resolvedParams.category}/${resolvedParams.slug}.mdx`)).default;
 
+  const viewSlug = `reviews/${resolvedParams.category}/${resolvedParams.slug}`;
+
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
+      <ViewTracker slug={viewSlug} />
       <div className="max-w-6xl mx-auto px-4">
         {/* Header section - full width */}
         <div className="mb-8">

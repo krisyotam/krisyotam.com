@@ -19,6 +19,7 @@ import { getContentByType } from "@/lib/data";
 import NotePageClient from "./NotePageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
+import { ViewTracker } from "@/components/view-tracker";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 import type { NoteMeta } from "@/types/content";
 
@@ -144,8 +145,11 @@ export default async function NotePage({ params }: NotePageProps) {
     await import(`@/app/(content)/notes/content/${category}/${slug}.mdx`)
   ).default;
 
+  const viewSlug = `notes/${category}/${slug}`;
+
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
+      <ViewTracker slug={viewSlug} />
       <div className="max-w-6xl mx-auto px-4">
         {/* Header section */}
         <div className="mb-8">

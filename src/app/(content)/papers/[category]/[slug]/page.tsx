@@ -19,6 +19,7 @@ import { getContentByType } from "@/lib/data";
 import PapersPageClient from "./PapersPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
+import { ViewTracker } from "@/components/view-tracker";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/content";
 
@@ -139,8 +140,11 @@ export default async function PaperPage({ params }: PaperPageProps) {
     await import(`@/app/(content)/papers/content/${category}/${slug}.mdx`)
   ).default;
 
+  const viewSlug = `papers/${category}/${slug}`;
+
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
+      <ViewTracker slug={viewSlug} />
       <div className="max-w-6xl mx-auto px-4">
         {/* Header section */}
         <div className="mb-8">

@@ -18,6 +18,7 @@ import { getContentByType } from "@/lib/data";
 import ProgymnasmataPageClient from "./ProgymnasmataPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
+import { ViewTracker } from "@/components/view-tracker";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 
 // =============================================================================
@@ -72,8 +73,11 @@ export default async function ProgymnasmataSlugPage({ params }: PageProps) {
     return notFound();
   }
 
+  const viewSlug = `progymnasmata/${category}/${slug}`;
+
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">
+      <ViewTracker slug={viewSlug} />
       <div className="max-w-6xl mx-auto px-4">
         {/* Header section - full width */}
         <div className="mb-8">
