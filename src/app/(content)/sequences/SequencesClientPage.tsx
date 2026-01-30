@@ -235,12 +235,15 @@ export default function SequencesClientPage({
                   </>
                 )}
               </span>
-              <span>
-                {new Date(
-                  sequence.end_date && sequence.end_date.trim()
-                    ? sequence.end_date
-                    : sequence.start_date || ""
-                ).getFullYear()}
+              <span className="flex items-center gap-2">
+                <span>
+                  {new Date(
+                    sequence.end_date && sequence.end_date.trim()
+                      ? sequence.end_date
+                      : sequence.start_date || ""
+                  ).getFullYear()}
+                </span>
+                <span>{(sequence.views ?? 0).toLocaleString()} views</span>
               </span>
             </div>
           </div>
@@ -257,6 +260,7 @@ export default function SequencesClientPage({
           <th className="py-2 text-left font-medium px-3">Category</th>
           <th className="py-2 text-left font-medium px-3">Posts</th>
           <th className="py-2 text-left font-medium px-3">Year</th>
+          <th className="py-2 text-right font-medium px-3">Views</th>
         </tr>
       </thead>
       <tbody>
@@ -292,6 +296,9 @@ export default function SequencesClientPage({
                   ? sequence.end_date
                   : sequence.start_date || ""
               ).getFullYear()}
+            </td>
+            <td className="py-2 px-3 text-right text-muted-foreground">
+              {(sequence.views ?? 0).toLocaleString()}
             </td>
           </tr>
         ))}

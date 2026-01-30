@@ -12,6 +12,7 @@
 
 import ReviewClientPage from "./ReviewClientPage";
 import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
+import { getViewCounts } from "@/lib/analytics-db";
 import type { Metadata } from "next";
 import type { ReviewMeta, ReviewStatus, ReviewConfidence } from "@/types/content";
 import { staticMetadata } from "@/lib/staticMetadata";
@@ -31,23 +32,31 @@ export default function ReviewsPage() {
   const reviewsData = getActiveContentByType('reviews');
   const categoriesData = getCategoriesByContentType('reviews');
 
-  // Map and sort reviews by date (newest first)
-  const reviews: ReviewMeta[] = reviewsData
-    .map(review => ({
-      title: review.title,
-      subtitle: review.subtitle,
-      preview: review.preview,
-      start_date: review.start_date,
-      end_date: review.end_date,
-      slug: review.slug,
-      tags: review.tags,
-      category: review.category,
-      status: review.status as ReviewStatus,
-      confidence: review.confidence as ReviewConfidence,
-      importance: review.importance,
-      cover_image: review.cover_image,
-      state: (review.state as "active" | "hidden" | undefined) || "active"
-    }))
+  // Build slugs for view count lookup (format: reviews/category/slug)
+  const slugs = reviewsData.map(review => `reviews/${encodeURIComponent(review.category)}/${encodeURIComponent(review.slug)}`);
+  const viewCounts = getViewCounts(slugs);
+
+  // Map and sort reviews by date (newest first) with views
+  const reviews: (ReviewMeta & { views: number })[] = reviewsData
+    .map(review => {
+      const viewSlug = `reviews/${encodeURIComponent(review.category)}/${encodeURIComponent(review.slug)}`;
+      return {
+        title: review.title,
+        subtitle: review.subtitle,
+        preview: review.preview,
+        start_date: review.start_date,
+        end_date: review.end_date,
+        slug: review.slug,
+        tags: review.tags,
+        category: review.category,
+        status: review.status as ReviewStatus,
+        confidence: review.confidence as ReviewConfidence,
+        importance: review.importance,
+        cover_image: review.cover_image,
+        state: (review.state as "active" | "hidden" | undefined) || "active",
+        views: viewCounts[viewSlug] ?? 0
+      };
+    })
     .sort((a, b) => {
       const aDate = a.end_date || a.start_date;
       const bDate = b.end_date || b.start_date;

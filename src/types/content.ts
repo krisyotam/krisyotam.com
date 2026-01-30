@@ -128,6 +128,7 @@ export interface BlogMeta {
   importance?: number
   cover_image?: string
   state?: ContentState
+  views?: number
 }
 
 
@@ -230,6 +231,7 @@ export interface ReviewMeta {
   importance?: number
   cover_image?: string
   state?: ContentState
+  views?: number
 }
 
 export interface ReviewCategory {
@@ -315,6 +317,7 @@ export interface OCSMeta {
   importance?: number
   cover_image?: string
   state?: ContentState
+  views?: number
 }
 
 export interface OCSCategory {

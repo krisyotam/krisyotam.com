@@ -12,6 +12,7 @@
 
 import FictionClientPage from "./FictionClientPage";
 import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
+import { getViewCounts } from "@/lib/analytics-db";
 import type { Metadata } from "next";
 import { staticMetadata } from "@/lib/staticMetadata";
 
@@ -51,13 +52,27 @@ export default function FictionPage() {
   // Fetch categories for the client component
   const categories = getCategoriesByContentType('fiction');
 
-  // Sort fiction by date (newest first)
+  // Build slugs for view count lookup (format: fiction/category/slug)
+  const slugs = fictionData.map(story => {
+    const categorySlug = story.category.toLowerCase().replace(/\s+/g, "-");
+    return `fiction/${categorySlug}/${story.slug}`;
+  });
+  const viewCounts = getViewCounts(slugs);
+
+  // Sort fiction by date (newest first) and add views
   const stories = fictionData
+    .map(story => {
+      const categorySlug = story.category.toLowerCase().replace(/\s+/g, "-");
+      return {
+        ...story,
+        views: viewCounts[`fiction/${categorySlug}/${story.slug}`] ?? 0
+      };
+    })
     .sort((a, b) => {
       const aDate = a.end_date || a.start_date;
       const bDate = b.end_date || b.start_date;
       return new Date(bDate).getTime() - new Date(aDate).getTime();
-    }) as Story[];
+    }) as (Story & { views: number })[];
 
   return (
     <div className="fiction-container">

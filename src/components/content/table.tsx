@@ -28,6 +28,7 @@ export interface ContentItem {
   state?: string;
   type?: string; // Content type (essays, notes, papers, etc.)
   route?: string; // URL route override
+  views?: number; // View count
 }
 
 interface ContentTableProps {
@@ -50,6 +51,10 @@ interface ContentTableProps {
    */
   showType?: boolean;
   /**
+   * Whether to show views column (default: false)
+   */
+  showViews?: boolean;
+  /**
    * Custom empty state message
    */
   emptyMessage?: string;
@@ -61,24 +66,19 @@ export function ContentTable({
   showCategoryLinks = false,
   formatCategoryNames = true,
   showType = false,
+  showViews = true,
   emptyMessage = "No items found.",
 }: ContentTableProps) {
   const router = useRouter();
 
-  // Helper to format date as "Month DD, YYYY"
+  // Helper to format date as "YYYY.MM.DD"
   function formatDate(dateString: string): string {
     if (!dateString) return "";
     try {
-      // Parse the date parts from the string to avoid timezone issues
       const [year, month, day] = dateString.split("-").map((num) => parseInt(num, 10));
-      const date = new Date(year, month - 1, day);
-
-      return date.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        timeZone: "UTC", // Use UTC to preserve the exact date
-      });
+      const mm = String(month).padStart(2, "0");
+      const dd = String(day).padStart(2, "0");
+      return `${year}.${mm}.${dd}`;
     } catch (error) {
       return dateString;
     }
@@ -137,6 +137,7 @@ export function ContentTable({
             {showType && <th className="py-2 text-left font-medium px-3">Type</th>}
             <th className="py-2 text-left font-medium px-3">Category</th>
             <th className="py-2 text-left font-medium px-3">Date</th>
+            {showViews && <th className="py-2 text-right font-medium px-3">Views</th>}
           </tr>
         </thead>
         <tbody>
@@ -168,6 +169,11 @@ export function ContentTable({
                 )}
               </td>
               <td className="py-2 px-3">{getDisplayDate(item)}</td>
+              {showViews && (
+                <td className="py-2 px-3 text-right text-muted-foreground">
+                  {(item.views ?? 0).toLocaleString()}
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

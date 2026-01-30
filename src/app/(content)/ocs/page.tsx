@@ -12,6 +12,7 @@
 
 import OCSClientPage from "./OCSClientPage";
 import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
+import { getViewCounts } from "@/lib/analytics-db";
 import type { Metadata } from "next";
 import type { OCSMeta, OCSStatus, OCSConfidence } from "@/types/content";
 import { staticMetadata } from "@/lib/staticMetadata";
@@ -31,24 +32,36 @@ export default async function OCSPage() {
   const ocsData = getActiveContentByType('ocs');
   const categories = getCategoriesByContentType('ocs');
 
-  // Map to OCSMeta type and sort by date (newest first)
-  const ocs: OCSMeta[] = ocsData
-    .map(character => ({
-      title: character.title,
-      subtitle: character.subtitle,
-      preview: character.preview,
-      start_date: character.start_date,
-      end_date: character.end_date,
-      slug: character.slug,
-      tags: character.tags,
-      category: character.category,
-      book: character.category, // OCS uses category as book
-      status: character.status as OCSStatus,
-      confidence: character.confidence as OCSConfidence,
-      importance: character.importance,
-      cover_image: character.cover_image,
-      state: (character.state as "active" | "hidden" | undefined) || "active"
-    }))
+  // Build slugs for view count lookup (format: ocs/category/slug)
+  const slugs = ocsData.map(character => {
+    const categorySlug = character.category.toLowerCase().replace(/\s+/g, "-");
+    return `ocs/${categorySlug}/${encodeURIComponent(character.slug)}`;
+  });
+  const viewCounts = getViewCounts(slugs);
+
+  // Map to OCSMeta type and sort by date (newest first) with views
+  const ocs: (OCSMeta & { views: number })[] = ocsData
+    .map(character => {
+      const categorySlug = character.category.toLowerCase().replace(/\s+/g, "-");
+      const viewSlug = `ocs/${categorySlug}/${encodeURIComponent(character.slug)}`;
+      return {
+        title: character.title,
+        subtitle: character.subtitle,
+        preview: character.preview,
+        start_date: character.start_date,
+        end_date: character.end_date,
+        slug: character.slug,
+        tags: character.tags,
+        category: character.category,
+        book: character.category, // OCS uses category as book
+        status: character.status as OCSStatus,
+        confidence: character.confidence as OCSConfidence,
+        importance: character.importance,
+        cover_image: character.cover_image,
+        state: (character.state as "active" | "hidden" | undefined) || "active",
+        views: viewCounts[viewSlug] ?? 0
+      };
+    })
     .sort((a, b) => {
       const dateA = (a.end_date && a.end_date.trim()) ? a.end_date : a.start_date;
       const dateB = (b.end_date && b.end_date.trim()) ? b.end_date : b.start_date;

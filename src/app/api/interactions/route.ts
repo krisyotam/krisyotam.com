@@ -29,32 +29,24 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createServerClient } from "@/lib/supabase";
-import redis from "@/lib/redis";
 import { canDeleteAnyComment } from "@/lib/comments-config";
+import {
+  getLikeCount,
+  addLike,
+  getComments,
+  getReplies,
+  createComment,
+  updateComment,
+  deleteComment,
+  getComment,
+  getCommentReactions,
+  getUserCommentReactions,
+  toggleCommentReaction,
+} from "@/lib/analytics-db";
+import redis from "@/lib/redis";
 
 const COMMENTS_PER_PAGE = 10;
 const VALID_COMMENT_REACTIONS = ["thumbsUp", "thumbsDown", "party", "heart", "rocket", "eyes"];
-
-// ============================================================================
-// Redis helpers for hearts
-// ============================================================================
-
-const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
-const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
-
-async function getRedisValue(key: string): Promise<number> {
-  const response = await fetch(`${REDIS_URL}/get/${key}`, {
-    headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
-  });
-  const data = await response.json();
-  return parseInt(data.result) || 0;
-}
-
-async function setRedisValue(key: string, value: number): Promise<void> {
-  await fetch(`${REDIS_URL}/set/${key}/${value}`, {
-    headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
-  });
-}
 
 // ============================================================================
 // Page view helper
@@ -97,7 +89,7 @@ export async function GET(request: Request) {
 
     switch (type) {
       // ======================================================================
-      // Comments
+      // Comments (SQLite)
       // ======================================================================
       case "comments": {
         const pageSlug = searchParams.get("pageSlug");
@@ -110,46 +102,17 @@ export async function GET(request: Request) {
           });
         }
 
-        const supabase = createServerClient();
-        const offset = (page - 1) * COMMENTS_PER_PAGE;
-
-        // Get top-level comments with pagination (exclude soft-deleted, parent_id is null)
-        const { data: comments, error: commentsError, count } = await supabase
-          .from("comments")
-          .select("*", { count: "exact" })
-          .eq("page_slug", pageSlug)
-          .is("deleted_at", null)
-          .is("parent_id", null)
-          .order("created_at", { ascending: false })
-          .range(offset, offset + COMMENTS_PER_PAGE - 1);
-
-        if (commentsError) {
-          console.error("Error fetching comments:", commentsError);
-          return NextResponse.json({
-            comments: [],
-            pagination: { page: 1, totalPages: 0, totalComments: 0, hasMore: false }
-          });
-        }
+        // Get top-level comments with pagination
+        const { comments, total } = getComments(pageSlug, page, COMMENTS_PER_PAGE);
 
         // Get replies for these comments
-        const commentIds = comments?.map((c) => c.id) || [];
-        let replies: Record<string, any[]> = {};
+        const commentIds = comments.map((c) => c.id);
+        const replies: Record<string, any[]> = {};
 
-        if (commentIds.length > 0) {
-          const { data: repliesData } = await supabase
-            .from("comments")
-            .select("*")
-            .in("parent_id", commentIds)
-            .is("deleted_at", null)
-            .order("created_at", { ascending: true });
-
-          if (repliesData) {
-            for (const reply of repliesData) {
-              if (!replies[reply.parent_id]) {
-                replies[reply.parent_id] = [];
-              }
-              replies[reply.parent_id].push(reply);
-            }
+        for (const id of commentIds) {
+          const commentReplies = getReplies(id);
+          if (commentReplies.length > 0) {
+            replies[id] = commentReplies;
           }
         }
 
@@ -159,79 +122,52 @@ export async function GET(request: Request) {
           ...Object.values(replies).flat().map((r) => r.id),
         ];
 
-        // Get reactions for all comments (including replies)
-        let commentReactions: Record<string, Record<string, number>> = {};
-        let commentUserReactions: Record<string, string[]> = {};
+        // Get reactions for all comments
+        const commentReactionsData = getCommentReactions(allCommentIds);
 
-        if (allCommentIds.length > 0) {
-          const { data: reactionsData } = await supabase
-            .from("comment_reactions")
-            .select("*")
-            .in("comment_id", allCommentIds);
-
-          // Aggregate reactions by comment
-          if (reactionsData) {
-            for (const reaction of reactionsData) {
-              if (!commentReactions[reaction.comment_id]) {
-                commentReactions[reaction.comment_id] = {};
-              }
-              if (!commentReactions[reaction.comment_id][reaction.reaction_type]) {
-                commentReactions[reaction.comment_id][reaction.reaction_type] = 0;
-              }
-              commentReactions[reaction.comment_id][reaction.reaction_type]++;
-            }
-
-            // Get current user's reactions
-            const cookieStore = await cookies();
-            const userCookie = cookieStore.get("github_user");
-            if (userCookie) {
-              try {
-                const user = JSON.parse(userCookie.value);
-                for (const reaction of reactionsData) {
-                  if (reaction.user_id === user.id) {
-                    if (!commentUserReactions[reaction.comment_id]) {
-                      commentUserReactions[reaction.comment_id] = [];
-                    }
-                    commentUserReactions[reaction.comment_id].push(reaction.reaction_type);
-                  }
-                }
-              } catch {}
-            }
-          }
+        // Get current user's reactions
+        let userReactionsData: Record<string, string[]> = {};
+        const cookieStore = await cookies();
+        const userCookie = cookieStore.get("github_user");
+        if (userCookie) {
+          try {
+            const user = JSON.parse(userCookie.value);
+            userReactionsData = getUserCommentReactions(allCommentIds, user.id);
+          } catch {}
         }
 
-        const totalPages = Math.ceil((count || 0) / COMMENTS_PER_PAGE);
+        const totalPages = Math.ceil(total / COMMENTS_PER_PAGE);
 
         // Build comments with replies and reactions
-        const commentsWithReplies = comments?.map((comment) => ({
+        const commentsWithReplies = comments.map((comment) => ({
           ...comment,
-          reactions: commentReactions[comment.id] || {},
-          userReactions: commentUserReactions[comment.id] || [],
+          reactions: commentReactionsData[comment.id] || {},
+          userReactions: userReactionsData[comment.id] || [],
           replies: (replies[comment.id] || []).map((reply) => ({
             ...reply,
-            reactions: commentReactions[reply.id] || {},
-            userReactions: commentUserReactions[reply.id] || [],
+            reactions: commentReactionsData[reply.id] || {},
+            userReactions: userReactionsData[reply.id] || [],
           })),
-        })) || [];
+        }));
 
         return NextResponse.json({
           comments: commentsWithReplies,
           pagination: {
             page,
             totalPages,
-            totalComments: count || 0,
+            totalComments: total,
             hasMore: page < totalPages,
           },
         });
       }
 
       // ======================================================================
-      // Hearts
+      // Hearts (Likes)
       // ======================================================================
       case "hearts": {
         const cookieStore = await cookies();
         const hasLiked = cookieStore.has("has_liked");
-        const count = await getRedisValue("heart_count");
+        const count = getLikeCount("home");
         return NextResponse.json({ count, hasLiked });
       }
 
@@ -324,7 +260,7 @@ export async function POST(request: Request) {
 
     switch (type) {
       // ======================================================================
-      // Comments - Create
+      // Comments - Create (SQLite)
       // ======================================================================
       case "comments": {
         const cookieStore = await cookies();
@@ -348,15 +284,9 @@ export async function POST(request: Request) {
           return NextResponse.json({ error: "pageSlug and content are required" }, { status: 400 });
         }
 
-        const supabase = createServerClient();
-
         // If this is a reply, verify parent exists and is not itself a reply
         if (parentId) {
-          const { data: parentComment } = await supabase
-            .from("comments")
-            .select("parent_id")
-            .eq("id", parentId)
-            .single();
+          const parentComment = getComment(parentId);
 
           if (!parentComment) {
             return NextResponse.json({ error: "Parent comment not found" }, { status: 404 });
@@ -367,23 +297,14 @@ export async function POST(request: Request) {
           }
         }
 
-        const { data: comment, error } = await supabase
-          .from("comments")
-          .insert({
-            page_slug: pageSlug,
-            content: content.trim(),
-            user_id: user.id,
-            username: user.username,
-            avatar_url: user.avatar_url,
-            parent_id: parentId || null,
-          })
-          .select()
-          .single();
-
-        if (error) {
-          console.error("Error creating comment:", error);
-          return NextResponse.json({ error: "Failed to create comment" }, { status: 500 });
-        }
+        const comment = createComment({
+          pageSlug,
+          content: content.trim(),
+          userId: user.id,
+          username: user.username,
+          avatarUrl: user.avatar_url,
+          parentId: parentId || null,
+        });
 
         return NextResponse.json({
           comment: {
@@ -395,7 +316,7 @@ export async function POST(request: Request) {
       }
 
       // ======================================================================
-      // Comment Reactions - Toggle
+      // Comment Reactions - Toggle (SQLite)
       // ======================================================================
       case "comment-reactions": {
         const cookieStore = await cookies();
@@ -423,51 +344,12 @@ export async function POST(request: Request) {
           return NextResponse.json({ error: "Invalid reaction type" }, { status: 400 });
         }
 
-        const supabase = createServerClient();
-
-        // Check if reaction already exists
-        const { data: existing } = await supabase
-          .from("comment_reactions")
-          .select("id")
-          .eq("comment_id", commentId)
-          .eq("user_id", user.id)
-          .eq("reaction_type", reactionType)
-          .single();
-
-        if (existing) {
-          // Remove reaction (toggle off)
-          const { error } = await supabase
-            .from("comment_reactions")
-            .delete()
-            .eq("id", existing.id);
-
-          if (error) {
-            console.error("Error removing comment reaction:", error);
-            return NextResponse.json({ error: "Failed to remove reaction" }, { status: 500 });
-          }
-
-          return NextResponse.json({ action: "removed" });
-        } else {
-          // Add reaction
-          const { error } = await supabase
-            .from("comment_reactions")
-            .insert({
-              comment_id: commentId,
-              user_id: user.id,
-              reaction_type: reactionType,
-            });
-
-          if (error) {
-            console.error("Error adding comment reaction:", error);
-            return NextResponse.json({ error: "Failed to add reaction" }, { status: 500 });
-          }
-
-          return NextResponse.json({ action: "added" });
-        }
+        const action = toggleCommentReaction(commentId, user.id, reactionType);
+        return NextResponse.json({ action });
       }
 
       // ======================================================================
-      // Hearts
+      // Hearts (Likes)
       // ======================================================================
       case "hearts": {
         const cookieStore = await cookies();
@@ -476,9 +358,12 @@ export async function POST(request: Request) {
           return NextResponse.json({ error: "Already liked" }, { status: 400 });
         }
 
-        const count = await getRedisValue("heart_count");
-        const newCount = count + 1;
-        await setRedisValue("heart_count", newCount);
+        // Get region from IP for analytics
+        const ip = request.headers.get("x-forwarded-for")?.split(",")[0] ||
+                   request.headers.get("x-real-ip") || "";
+        const { country } = await lookupCity(ip);
+
+        const newCount = addLike("home", country, ip);
 
         (await cookies()).set("has_liked", "true", {
           httpOnly: true,
@@ -613,7 +498,7 @@ export async function POST(request: Request) {
 }
 
 // ============================================================================
-// PUT Handler (Comments Edit)
+// PUT Handler (Comments Edit - SQLite)
 // ============================================================================
 
 export async function PUT(request: Request) {
@@ -649,16 +534,10 @@ export async function PUT(request: Request) {
       return NextResponse.json({ error: "commentId and content are required" }, { status: 400 });
     }
 
-    const supabase = createServerClient();
-
     // First verify the comment exists and belongs to this user
-    const { data: comment, error: fetchError } = await supabase
-      .from("comments")
-      .select("user_id")
-      .eq("id", commentId)
-      .single();
+    const comment = getComment(commentId);
 
-    if (fetchError || !comment) {
+    if (!comment) {
       return NextResponse.json({ error: "Comment not found" }, { status: 404 });
     }
 
@@ -667,18 +546,9 @@ export async function PUT(request: Request) {
     }
 
     // Update the comment
-    const { data: updatedComment, error } = await supabase
-      .from("comments")
-      .update({
-        content: content.trim(),
-        edited_at: new Date().toISOString(),
-      })
-      .eq("id", commentId)
-      .select()
-      .single();
+    const updatedComment = updateComment(commentId, content.trim());
 
-    if (error) {
-      console.error("Error updating comment:", error);
+    if (!updatedComment) {
       return NextResponse.json({ error: "Failed to update comment" }, { status: 500 });
     }
 
@@ -693,7 +563,7 @@ export async function PUT(request: Request) {
 }
 
 // ============================================================================
-// DELETE Handler (Comments Delete)
+// DELETE Handler (Comments Delete - SQLite)
 // ============================================================================
 
 export async function DELETE(request: Request) {
@@ -728,16 +598,10 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: "Comment ID is required" }, { status: 400 });
     }
 
-    const supabase = createServerClient();
-
     // First verify the comment exists
-    const { data: comment, error: fetchError } = await supabase
-      .from("comments")
-      .select("user_id")
-      .eq("id", commentId)
-      .single();
+    const comment = getComment(commentId);
 
-    if (fetchError || !comment) {
+    if (!comment) {
       return NextResponse.json({ error: "Comment not found" }, { status: 404 });
     }
 
@@ -747,14 +611,10 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: "You can only delete your own comments" }, { status: 403 });
     }
 
-    // Soft delete - set deleted_at timestamp
-    const { error } = await supabase
-      .from("comments")
-      .update({ deleted_at: new Date().toISOString() })
-      .eq("id", commentId);
+    // Soft delete
+    const success = deleteComment(commentId);
 
-    if (error) {
-      console.error("Error deleting comment:", error);
+    if (!success) {
       return NextResponse.json({ error: "Failed to delete comment" }, { status: 500 });
     }
 

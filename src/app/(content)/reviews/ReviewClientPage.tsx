@@ -210,6 +210,7 @@ export default function ReviewClientPage({
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <span>{new Date((review.end_date && review.end_date.trim()) || review.start_date).getFullYear()}</span>
+              <span>{(review.views ?? 0).toLocaleString()} views</span>
             </div>
           </div>
         </div>

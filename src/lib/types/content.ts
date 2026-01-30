@@ -36,6 +36,7 @@ export interface Post {
   path?: string
   publication_year?: number
   author?: string
+  views?: number
 }
 
 export interface PostsData {
@@ -117,6 +118,8 @@ export interface Sequence {
   tags: string[]
   posts: SequencePost[]
   sections?: SequenceSection[]
+  id: number
+  views?: number
 }
 
 export interface SequencesData {

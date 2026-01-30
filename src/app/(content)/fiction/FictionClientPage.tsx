@@ -38,6 +38,7 @@ interface Story {
   importance?: number;
   preview: string;
   state: string;
+  views?: number;
 }
 
 interface FictionClientPageProps {
@@ -182,6 +183,7 @@ export default function FictionClientPage({ stories, initialCategory = "all", ca
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <span>{new Date(story.end_date || story.start_date).getFullYear()}</span>
+              <span>{(story.views ?? 0).toLocaleString()} views</span>
             </div>
           </div>
         </div>

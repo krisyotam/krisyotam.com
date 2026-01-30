@@ -537,6 +537,7 @@ export interface Sequence {
   tags: string[]
   posts: SequencePost[]
   sections?: { title: string; posts: SequencePost[] }[]
+  views?: number
 }
 
 /**

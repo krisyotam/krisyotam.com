@@ -200,6 +200,7 @@ export default function BlogClientPage({
 
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <span>{new Date(note.end_date || note.start_date).getFullYear()}</span>
+              <span>{(note.views ?? 0).toLocaleString()} views</span>
             </div>
           </div>
         </div>

@@ -174,6 +174,7 @@ export default function OCSClientPage({ ocs, initialCategory = "all", categories
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <span>{new Date(character.end_date || character.start_date).getFullYear()}</span>
+              <span>{(character.views ?? 0).toLocaleString()} views</span>
             </div>
           </div>
         </div>

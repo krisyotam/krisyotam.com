@@ -13,6 +13,7 @@
 import SequencesClientPage from "./SequencesClientPage";
 import { staticMetadata } from "@/lib/staticMetadata";
 import { getSequencesData, getCategoriesData } from "@/lib/data";
+import { getViewCounts } from "@/lib/analytics-db";
 import type { Metadata } from "next";
 
 // =============================================================================
@@ -34,6 +35,16 @@ export default async function SequencesPage() {
     (sequence) => sequence.state === "active"
   );
 
+  // Build slugs for view count lookup (format: sequences/slug)
+  const slugs = activeSequences.map(sequence => `sequences/${sequence.slug}`);
+  const viewCounts = getViewCounts(slugs);
+
+  // Add views to sequences
+  const sequencesWithViews = activeSequences.map(sequence => ({
+    ...sequence,
+    views: viewCounts[`sequences/${sequence.slug}`] ?? 0
+  }));
+
   // Get unique categories from sequences
   const sequenceCategories = Array.from(
     new Set(activeSequences.map((s) => s.category).filter(Boolean))
@@ -46,7 +57,7 @@ export default async function SequencesPage() {
 
   return (
     <SequencesClientPage
-      sequences={activeSequences}
+      sequences={sequencesWithViews}
       categories={relevantCategories}
     />
   );

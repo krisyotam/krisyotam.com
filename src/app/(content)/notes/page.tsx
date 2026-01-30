@@ -12,6 +12,7 @@
 
 import NotesClientPage from "./NotesClientPage";
 import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data";
+import { getViewCounts } from "@/lib/analytics-db";
 import type { Metadata } from "next";
 import { staticMetadata } from "@/lib/staticMetadata";
 
@@ -30,12 +31,21 @@ export default async function NotesPage() {
   const rawNotes = getActiveContentByType('notes');
   const categories = getCategoriesByContentType('notes');
 
-  // Sort notes by date (newest first)
-  const notes = [...rawNotes].sort((a, b) => {
-    const aDate = a.end_date || a.start_date;
-    const bDate = b.end_date || b.start_date;
-    return new Date(bDate).getTime() - new Date(aDate).getTime();
-  });
+  // Build slugs for view count lookup (format: notes/category/slug)
+  const slugs = rawNotes.map(note => `notes/${note.category}/${note.slug}`);
+  const viewCounts = getViewCounts(slugs);
+
+  // Sort notes by date (newest first) and add views
+  const notes = [...rawNotes]
+    .map(note => ({
+      ...note,
+      views: viewCounts[`notes/${note.category}/${note.slug}`] ?? 0
+    }))
+    .sort((a, b) => {
+      const aDate = a.end_date || a.start_date;
+      const bDate = b.end_date || b.start_date;
+      return new Date(bDate).getTime() - new Date(aDate).getTime();
+    });
 
   return (
     <div className="notes-container">
