@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Comments } from "@/components/core/comments";
 import { Footnotes } from "@/components/core/footnotes";
+import { ViewTracker } from "@/components/view-tracker";
 import type { Post } from "@/lib/posts";
 
 interface Props {
@@ -22,6 +23,8 @@ function slugifyCategory(category: string) {
 }
 
 export default function EssayPageClient({ essayData: essayItem, allEssays, children, headerOnly = false, contentOnly = false }: Props) {
+  const viewSlug = `essays/${essayItem.category}/${essayItem.slug}`;
+
   // Function to map essay status to PageHeader compatible status
   const mapEssayStatusToPageHeaderStatus = (essayStatus: string): "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" => {
     const statusMap: Record<string, "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"> = {
@@ -104,6 +107,7 @@ export default function EssayPageClient({ essayData: essayItem, allEssays, child
   // Default: render everything (for backwards compatibility)
   return (
     <>
+      <ViewTracker slug={viewSlug} />
       <PostHeader
         title={essayItem.title}
         subtitle={essayItem.subtitle}

@@ -11,6 +11,7 @@ import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Citation } from "@/components/citation";
 import { Comments } from "@/components/core/comments";
 import { Footnotes } from "@/components/core/footnotes";
+import { ViewTracker } from "@/components/view-tracker";
 
 interface OCSMeta {
   title: string;
@@ -39,6 +40,8 @@ interface Props {
 
 export default function OCSPageClient({ character, allCharacters, children, headerOnly, contentOnly }: Props) {
   if (!character) notFound();
+
+  const viewSlug = `ocs/${character.category.toLowerCase().replace(/\s+/g, "-")}/${character.slug}`;
 
   /* prev / next */
   const sorted = [...allCharacters].sort(
@@ -105,6 +108,7 @@ export default function OCSPageClient({ character, allCharacters, children, head
   // Legacy layout - render everything together
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
+      <ViewTracker slug={viewSlug} />
       {/* clean page header (outside .ocs-content) */}
       <PostHeader 
         className=""     

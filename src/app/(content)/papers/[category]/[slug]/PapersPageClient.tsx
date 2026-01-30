@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Comments } from "@/components/core/comments";
 import { Footnotes } from "@/components/core/footnotes";
+import { ViewTracker } from "@/components/view-tracker";
 import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/content";
 
 interface Props {
@@ -22,6 +23,8 @@ function slugifyCategory(category: string) {
 }
 
 export default function PaperPageClient({ paperData: paperItem, allPapers, children, headerOnly, contentOnly }: Props) {
+  const viewSlug = `papers/${paperItem.category.toLowerCase().replace(/\s+/g, "-")}/${paperItem.slug}`;
+
   // Function to map paper status to PageHeader compatible status
   const mapPaperStatusToPageHeaderStatus = (paperStatus: PaperStatus): "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" => {
     const statusMap: Record<PaperStatus, "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished"> = {
@@ -106,6 +109,7 @@ export default function PaperPageClient({ paperData: paperItem, allPapers, child
   // Legacy layout - render everything together
   return (
     <div className="papers-container pt-16 pb-8">
+      <ViewTracker slug={viewSlug} />
       <PageHeader
         title={paperItem.title}
         subtitle={paperItem.subtitle}

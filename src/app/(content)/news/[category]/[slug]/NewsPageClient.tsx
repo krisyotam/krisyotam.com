@@ -11,6 +11,7 @@ import { Footer } from "@/app/(content)/essays/components/footer";
 import { Citation } from "@/components/citation";
 import { Comments } from "@/components/core/comments";
 import { Footnotes } from "@/components/core/footnotes";
+import { ViewTracker } from "@/components/view-tracker";
 
 interface NewsMeta {
   title: string;
@@ -38,6 +39,8 @@ interface Props {
 
 export default function NewsPageClient({ article, allNews, children, headerOnly, contentOnly }: Props) {
   if (!article) notFound();
+
+  const viewSlug = `news/${article.category.toLowerCase().replace(/\s+/g, "-")}/${article.slug}`;
 
   // Map news status to PostHeader compatible status
   function mapNewsStatus(status?: string) {
@@ -116,6 +119,7 @@ export default function NewsPageClient({ article, allNews, children, headerOnly,
   // Legacy layout - render everything together
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
+      <ViewTracker slug={viewSlug} />
       {/* clean page header (outside .news-content) */}
       <PostHeader 
         className=""     

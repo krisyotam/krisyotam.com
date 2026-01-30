@@ -19,6 +19,7 @@ import SiteFooter from "@/components/typography/expanded-footer-block";
 import { PageHeader } from "@/components/core";
 import { Comments } from "@/components/core/comments";
 import { Footnotes } from "@/components/core/footnotes";
+import { ViewTracker } from "@/components/view-tracker";
 
 // =============================================================================
 // Types
@@ -50,6 +51,7 @@ interface ProgymnasmataClientProps {
 // =============================================================================
 
 export default function ProgymnasmataPageClient({ post, headerOnly, contentOnly }: ProgymnasmataClientProps) {
+  const viewSlug = `progymnasmata/${post.category.toLowerCase().replace(/\s+/g, "-")}/${post.slug}`;
   const lastUpdated = (post.end_date && post.end_date.trim()) || new Date().toISOString().split('T')[0];
 
   if (headerOnly) {
@@ -91,6 +93,7 @@ export default function ProgymnasmataPageClient({ post, headerOnly, contentOnly 
 
   return (
     <div className="container max-w-[672px] mx-auto px-4 pb-8">
+      <ViewTracker slug={viewSlug} />
       {/* MDX content is rendered in the server component */}
       <div className="mt-8">
         <SiteFooter lastUpdated={lastUpdated} rawMarkdown={""} />

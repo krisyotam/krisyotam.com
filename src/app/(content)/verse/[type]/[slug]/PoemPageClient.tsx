@@ -22,6 +22,7 @@ import { Footer } from "@/components/footer"
 import { Citation } from "@/components/citation"
 import { Comments } from "@/components/core/comments"
 import { VerseDisplay } from "@/components/content/verse"
+import { ViewTracker } from "@/components/view-tracker"
 import { useEffect, useState } from "react"
 import type { VersePost } from "@/lib/data"
 
@@ -40,6 +41,8 @@ interface PoemPageClientProps {
 // =============================================================================
 
 export default function PoemPageClient({ poem, type, slug }: PoemPageClientProps) {
+  const viewSlug = `verse/${type}/${slug}`;
+
   // State for poem content and loading state
   const [poemContent, setPoemContent] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
@@ -80,6 +83,7 @@ export default function PoemPageClient({ poem, type, slug }: PoemPageClientProps
 
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-8">
+      <ViewTracker slug={viewSlug} />
       <div className="container max-w-[672px] mx-auto px-4">
         <Header
           variant="post"

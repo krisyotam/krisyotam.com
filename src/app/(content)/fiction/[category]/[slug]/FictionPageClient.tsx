@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import { notFound } from "next/navigation";
 import { PostHeader } from "@/components/core";
@@ -7,6 +9,7 @@ import { Footer } from "@/components/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Comments } from "@/components/core/comments";
 import { Footnotes } from "@/components/core/footnotes";
+import { ViewTracker } from "@/components/view-tracker";
 import type { NoteMeta } from "@/types/content";
 
 interface FictionItem extends Omit<NoteMeta, 'date'> {
@@ -25,6 +28,8 @@ interface Props {
 
 export default function FictionPageClient({ note, allNotes, children, headerOnly, contentOnly }: Props) {
   if (!note) notFound();
+
+  const viewSlug = `fiction/${note.category.toLowerCase().replace(/\s+/g, "-")}/${note.slug}`;
 
   /* prev / next */
   const sorted = [...allNotes].sort(
@@ -87,6 +92,7 @@ export default function FictionPageClient({ note, allNotes, children, headerOnly
 
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
+      <ViewTracker slug={viewSlug} />
       {/* clean page header (outside .note-content) */}
       <PostHeader 
         className=""     

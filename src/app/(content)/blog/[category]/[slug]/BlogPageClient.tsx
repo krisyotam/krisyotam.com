@@ -9,6 +9,7 @@ import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Citation } from "@/components/citation";
 import { Comments } from "@/components/core/comments";
 import { Footnotes } from "@/components/core/footnotes";
+import { ViewTracker } from "@/components/view-tracker";
 
 interface BlogMeta {
   title: string;
@@ -43,6 +44,8 @@ interface Props {
 
 export default function BlogPageClient({ post, allPosts, children, headerOnly, contentOnly }: Props) {
   if (!post) notFound();
+
+  const viewSlug = `blog/${post.category.toLowerCase().replace(/\s+/g, "-")}/${post.slug}`;
 
   const sorted = [...allPosts].sort((a, b) => {
     const dateA = (a.end_date && a.end_date.trim()) || a.start_date;
@@ -103,6 +106,7 @@ export default function BlogPageClient({ post, allPosts, children, headerOnly, c
 
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-16 flex flex-col min-h-screen">
+      <ViewTracker slug={viewSlug} />
       <PostHeader
         title={post.title}
         subtitle={post.subtitle}

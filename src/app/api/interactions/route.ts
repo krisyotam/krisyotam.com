@@ -33,6 +33,7 @@ import { canDeleteAnyComment } from "@/lib/comments-config";
 import {
   getLikeCount,
   addLike,
+  hasLiked,
   getComments,
   getReplies,
   createComment,
@@ -42,8 +43,9 @@ import {
   getCommentReactions,
   getUserCommentReactions,
   toggleCommentReaction,
+  recordView,
+  getViewCount,
 } from "@/lib/analytics-db";
-import redis from "@/lib/redis";
 
 const COMMENTS_PER_PAGE = 10;
 const VALID_COMMENT_REACTIONS = ["thumbsUp", "thumbsDown", "party", "heart", "rocket", "eyes"];
@@ -460,26 +462,28 @@ export async function POST(request: Request) {
       }
 
       // ======================================================================
-      // Page View
+      // Page View (SQLite)
       // ======================================================================
       case "pageview": {
         const body = await request.json();
-        const { path, referrer } = body;
+        const { slug, referrer } = body;
+
+        if (!slug) {
+          return NextResponse.json({ error: "slug is required" }, { status: 400 });
+        }
+
         const ip =
           request.headers.get("x-forwarded-for")?.split(",")[0] ||
           request.headers.get("x-real-ip") ||
           "";
-        const { country, city, flag } = await lookupCity(ip);
-        const day = new Date().toISOString().slice(0, 10);
+        const { country } = await lookupCity(ip);
 
-        await Promise.all([
-          redis.zincrby("visits_by_day", 1, day),
-          redis.zincrby("referrers", 1, referrer || ""),
-          redis.zincrby("paths", 1, path),
-          redis.zincrby("cities", 1, `${country}|${city}|${flag}`),
-        ]);
+        // Record the view
+        recordView(slug, country, referrer);
 
-        return NextResponse.json({ ok: true });
+        // Return updated count
+        const count = getViewCount(slug);
+        return NextResponse.json({ ok: true, count });
       }
 
       default:

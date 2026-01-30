@@ -11,6 +11,7 @@ import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Citation } from "@/components/citation";
 import { Comments } from "@/components/core/comments";
 import { Footnotes } from "@/components/core/footnotes";
+import { ViewTracker } from "@/components/view-tracker";
 
 interface NoteMeta {
   title: string;
@@ -39,6 +40,8 @@ interface Props {
 
 export default function NotePageClient({ note, allNotes, children, headerOnly, contentOnly }: Props) {
   if (!note) notFound();
+
+  const viewSlug = `notes/${note.category}/${note.slug}`;
 
   /* prev / next */
   const sorted = [...allNotes].sort(
@@ -106,6 +109,7 @@ export default function NotePageClient({ note, allNotes, children, headerOnly, c
   // Render full layout (legacy)
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
+      <ViewTracker slug={viewSlug} />
       {/* clean page header (outside .note-content) ----------------------- */}
       <PostHeader 
         className=""     

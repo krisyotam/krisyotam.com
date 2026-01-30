@@ -11,6 +11,7 @@ import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Citation } from "@/components/citation";
 import { Comments } from "@/components/core/comments";
 import { Footnotes } from "@/components/core/footnotes";
+import { ViewTracker } from "@/components/view-tracker";
 
 interface ReviewMeta {
   title: string;
@@ -38,6 +39,8 @@ interface Props {
 
 export default function ReviewPageClient({ review, allReviews, children, headerOnly, contentOnly }: Props) {
   if (!review) notFound();
+
+  const viewSlug = `reviews/${review.category.toLowerCase().replace(/\s+/g, "-")}/${review.slug}`;
 
   /* prev / next */
   const sorted = [...allReviews].sort((a, b) => {
@@ -101,6 +104,7 @@ export default function ReviewPageClient({ review, allReviews, children, headerO
   // Legacy layout - render everything together
   return (
     <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
+      <ViewTracker slug={viewSlug} />
       {/* clean page header (outside .review-content) */}
       <PostHeader 
         className=""     
