@@ -24,9 +24,6 @@ export function ViewTracker({ slug }: ViewTrackerProps) {
     if (tracked.current) return
     tracked.current = true
 
-    // Don't track in development
-    if (process.env.NODE_ENV === "development") return
-
     // Record the view
     fetch("/api/interactions?type=pageview", {
       method: "POST",
