@@ -19,7 +19,7 @@ import { getActiveContentByType, getContentByType } from "@/lib/data";
 import OCSPageClient from "./OCSPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
-import { ViewTracker } from "@/components/view-tracker";
+import { ViewTracker } from "@/components/core/view-tracker";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 import type { OCSMeta, OCSStatus, OCSConfidence } from "@/types/content";
 

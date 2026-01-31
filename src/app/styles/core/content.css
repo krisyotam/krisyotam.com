@@ -2,235 +2,336 @@
  * content.css — Unified prose styling for all content routes
  * Applies to: blog, essays, fiction, news, notes, now, papers, reviews, til, ocs
  *
+ * Typography: IBM Plex family (loaded via next/font/local in layout.tsx)
+ * - Serif: Body text
+ * - Sans: UI elements
+ * - Mono: Code blocks
+ *
  * Supports: .content (generic) and .essays-content (essays-specific)
  * =============================================================================
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
+/* =============================================================================
+ * BASE CONTENT STYLES
+ * ============================================================================= */
 
-/* root wrapper ----------------------------------------------------------- */
 .content,
 .essays-content {
-  font-family: "Source Serif 4", Baskerville, "Libre Baskerville",
-    "Droid Serif", "Times New Roman", Times, serif, "Noto Emoji", Quivira;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #000;
+  font-family: var(--font-serif), 'Source Serif 4', Georgia, serif;
+  font-size: 1.125rem; /* 18px - more readable than 16px */
+  line-height: 1.7;
+  color: hsl(var(--foreground));
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   hyphens: auto;
 }
 
-/* headings --------------------------------------------------------------- */
+/* =============================================================================
+ * HEADINGS
+ * ============================================================================= */
+
 .content h1, .essays-content h1,
 .content h2, .essays-content h2,
-.content h3, .essays-content h3 {
-  font: 600 1rem/1.2 inherit;
-  letter-spacing: -0.01em;
-  border-bottom: 1px dotted rgba(0, 0, 0, 0.6);
-  color: #333;
+.content h3, .essays-content h3,
+.content h4, .essays-content h4 {
+  font-family: var(--font-serif), 'Source Serif 4', Georgia, serif;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: hsl(var(--foreground));
+  margin-top: 2rem;
+  margin-bottom: 0.5rem; /* Reduced from 1rem - tighter spacing to content below */
   scroll-margin-top: 5rem;
 }
 
 .content h1, .essays-content h1 {
-  font-size: 22px;
+  font-size: 1.625rem; /* 26px */
+  border-bottom: 1px solid hsl(var(--border));
+  padding-bottom: 0.25rem; /* Reduced from 0.5rem */
 }
 
 .content h2, .essays-content h2 {
-  font-size: 18px;
+  font-size: 1.5rem; /* 24px */
+  border-bottom: 1px dotted hsl(var(--border) / 0.6);
+  padding-bottom: 0.125rem; /* Reduced from 0.25rem */
 }
 
 .content h3, .essays-content h3 {
-  font-size: 16px;
-  border-bottom-color: rgba(0, 0, 0, 0.4);
+  font-size: 1.25rem; /* 20px */
+  border-bottom: 1px dotted hsl(var(--border) / 0.4);
+  padding-bottom: 0.125rem; /* Reduced from 0.25rem */
 }
 
 .content h4, .essays-content h4 {
-  font: 600 1rem/1.2 inherit;
-  letter-spacing: -0.01em;
-  font-size: 15px;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
   border: none;
-  color: #333;
-  scroll-margin-top: 5rem;
 }
 
-/* prose blocks ----------------------------------------------------------- */
+/* First heading in content shouldn't have top margin */
+.content > h1:first-child, .essays-content > h1:first-child,
+.content > h2:first-child, .essays-content > h2:first-child,
+.content > h3:first-child, .essays-content > h3:first-child {
+  margin-top: 0;
+}
+
+/* =============================================================================
+ * PARAGRAPHS
+ * ============================================================================= */
+
 .content p, .essays-content p {
   text-align: justify;
-  margin: 0 !important;
-  padding: 0 !important;
+  text-align-last: left;
+  margin: 0 0 1.25rem 0;
+  padding: 0;
+}
+
+.content p:last-child, .essays-content p:last-child {
+  margin-bottom: 0;
 }
 
 .content p:empty, .essays-content p:empty {
-  margin: 0 !important;
-  padding: 0 !important;
-  height: 0 !important;
+  display: none;
 }
+
+/* =============================================================================
+ * BLOCKQUOTES
+ * ============================================================================= */
 
 .content blockquote, .essays-content blockquote {
-  margin: 0.5rem 0;
-  padding: 0.5rem 1.5rem;
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
   font-style: italic;
-  border-left: 3px solid rgba(0, 0, 0, 0.15);
-  background: rgba(0, 0, 0, 0.03);
+  border-left: 3px solid hsl(var(--border));
+  background: hsl(var(--muted) / 0.3);
+  color: hsl(var(--muted-foreground));
 }
 
-/* links ------------------------------------------------------------------ */
+.content blockquote p, .essays-content blockquote p {
+  margin: 0;
+  text-align: left;
+}
+
+.content blockquote cite, .essays-content blockquote cite {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.9em;
+  font-style: normal;
+  color: hsl(var(--muted-foreground));
+}
+
+/* =============================================================================
+ * LINKS
+ * ============================================================================= */
+
 .content a, .essays-content a {
-  color: #333;
-  text-decoration: none;
-  border-bottom: 1px dotted #666;
-  transition: border-color 0.2s ease;
+  color: hsl(var(--foreground));
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+  transition: text-decoration-color 0.15s ease;
 }
 
 .content a:hover, .essays-content a:hover {
-  border-bottom-color: #000;
+  text-decoration-style: solid;
+  text-decoration-color: hsl(var(--foreground));
 }
 
-/* lists ------------------------------------------------------------------ */
+/* =============================================================================
+ * LISTS
+ * ============================================================================= */
+
 .content ul, .essays-content ul,
 .content ol, .essays-content ol {
-  padding-left: 1.25rem;
+  margin: 1rem 0 1.25rem 0;
+  padding-left: 1.5rem;
+}
+
+.content ul, .essays-content ul {
+  list-style-type: disc;
+}
+
+.content ol, .essays-content ol {
+  list-style-type: decimal;
 }
 
 .content li, .essays-content li {
-  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
 }
 
-.content h4 + ul, .essays-content h4 + ul,
-.content h4 + ol, .essays-content h4 + ol {
-  margin-top: 0;
-}
-
-.content h4 + p + ul, .essays-content h4 + p + ul,
-.content h4 + p + ol, .essays-content h4 + p + ol {
-  margin-top: 0;
-}
-
-.content li + li, .essays-content li + li {
-  margin-top: 0.05rem;
+.content li:last-child, .essays-content li:last-child {
+  margin-bottom: 0;
 }
 
 .content li > ul, .essays-content li > ul,
 .content li > ol, .essays-content li > ol {
-  margin-top: 0.05rem;
-  margin-bottom: 0.05rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-/* code ------------------------------------------------------------------- */
+/* =============================================================================
+ * CODE
+ * ============================================================================= */
+
 .content code, .essays-content code {
-  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
-  font-size: 0.85em;
-  background: rgba(0, 0, 0, 0.05);
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
+  font-family: var(--font-mono), 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  font-size: 0.875em;
+  background: hsl(var(--muted));
+  padding: 0.15em 0.4em;
+  border-radius: 0;
+  white-space: nowrap;
 }
 
 .content pre, .essays-content pre {
-  margin: 0.5rem 0;
-  padding: 0.75rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
   overflow-x: auto;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid hsl(var(--border));
+  border-radius: 0;
+  background: hsl(var(--muted) / 0.5);
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
-.content pre > code, .essays-content pre > code {
+.content pre code, .essays-content pre code {
   background: transparent;
   padding: 0;
+  white-space: pre;
+  font-size: inherit;
 }
 
-/* tables ----------------------------------------------------------------- */
+/* =============================================================================
+ * TABLES
+ * ============================================================================= */
+
 .content table, .essays-content table {
-  width: 100% !important;
-  border-collapse: collapse !important;
-  font-size: 0.9em !important;
-  line-height: 1.4 !important;
-  table-layout: fixed !important;
-  margin: 0.75rem 0;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+  line-height: 1.5;
+  margin: 1.5rem 0;
 }
 
 .content thead, .essays-content thead {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.15) !important;
+  border-bottom: 2px solid hsl(var(--border));
 }
 
 .content th, .essays-content th,
 .content td, .essays-content td {
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  padding: 0.5rem !important;
+  border: 1px solid hsl(var(--border));
+  padding: 0.75rem;
+  text-align: left;
 }
 
 .content th, .essays-content th {
-  background: rgba(0, 0, 0, 0.03) !important;
-  font-weight: 600 !important;
+  background: hsl(var(--muted) / 0.5);
+  font-weight: 600;
+}
+
+.content tbody tr:nth-child(even), .essays-content tbody tr:nth-child(even) {
+  background: hsl(var(--muted) / 0.2);
 }
 
 .content .table-wrapper, .essays-content .table-wrapper {
   max-width: 100%;
   overflow-x: auto;
-  margin: 0.75rem 0;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin: 1.5rem 0;
+  border: 1px solid hsl(var(--border) / 0.5);
   border-radius: 4px;
 }
 
-/* images ----------------------------------------------------------------- */
+/* =============================================================================
+ * IMAGES & FIGURES
+ * ============================================================================= */
+
 .content img, .essays-content img {
   display: block;
   max-width: 100%;
-  margin: 0.5rem auto;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: 4px;
 }
 
 .content figure, .essays-content figure {
-  margin: 0.5rem 0;
+  margin: 1.5rem 0;
 }
 
 .content figcaption, .essays-content figcaption {
-  font-size: 0.85em;
+  font-size: 0.9em;
   text-align: center;
-  color: rgba(0, 0, 0, 0.7);
-  margin-top: 0.25rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.5rem;
+  font-style: italic;
 }
 
-/* horizontal rule -------------------------------------------------------- */
+/* =============================================================================
+ * HORIZONTAL RULES
+ * ============================================================================= */
+
 .content hr, .essays-content hr {
   border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
-  margin: 1rem 0;
+  border-top: 1px solid hsl(var(--border));
+  margin: 2rem 0;
 }
 
-/* definition lists ------------------------------------------------------- */
+/* =============================================================================
+ * DEFINITION LISTS
+ * ============================================================================= */
+
 .content dl, .essays-content dl {
-  margin: 0.5rem 0 0.75rem;
+  margin: 1rem 0 1.5rem;
 }
 
 .content dt, .essays-content dt {
   font-weight: 600;
-  margin-top: 0.25rem;
+  margin-top: 1rem;
+}
+
+.content dt:first-child, .essays-content dt:first-child {
+  margin-top: 0;
 }
 
 .content dd, .essays-content dd {
-  margin-left: 1.25rem;
-  margin-bottom: 0.25rem;
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: hsl(var(--muted-foreground));
 }
 
-/* task lists ------------------------------------------------------------- */
+/* =============================================================================
+ * TASK LISTS
+ * ============================================================================= */
+
 .content input[type="checkbox"], .essays-content input[type="checkbox"] {
   margin-right: 0.5rem;
   vertical-align: middle;
 }
 
-/* footnotes -------------------------------------------------------------- */
+.content ul:has(input[type="checkbox"]), .essays-content ul:has(input[type="checkbox"]) {
+  list-style: none;
+  padding-left: 0;
+}
+
+/* =============================================================================
+ * FOOTNOTES
+ * ============================================================================= */
+
 .content .footnotes, .essays-content .footnotes {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  margin-top: 1.5rem;
-  padding-top: 0.75rem;
+  border-top: 1px solid hsl(var(--border));
+  margin-top: 3rem;
+  padding-top: 1.5rem;
   font-size: 0.9em;
 }
 
 .content .footnotes ol, .essays-content .footnotes ol {
-  margin-left: 1rem;
+  padding-left: 1.5rem;
 }
 
 .content .footnotes li, .essays-content .footnotes li {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .content .footnote-ref, .essays-content .footnote-ref {
@@ -243,88 +344,90 @@
 .content .footnote-backref, .essays-content .footnote-backref {
   font-size: 0.8em;
   text-decoration: none;
-}
-
-/* abbreviations ---------------------------------------------------------- */
-.content abbr, .essays-content abbr {
-  border-bottom: 1px dotted rgba(0, 0, 0, 0.5);
-  cursor: help;
-}
-
-/* keyboard --------------------------------------------------------------- */
-.content kbd, .essays-content kbd {
-  font-family: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
-  font-size: 0.85em;
-  background: rgba(0, 0, 0, 0.05);
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-left: 0.25rem;
 }
 
 /* =============================================================================
- * Dark Mode
- * ========================================================================== */
+ * ABBREVIATIONS
+ * ============================================================================= */
 
-.dark .content, .dark .essays-content {
-  color: #e5e5e5;
+.content abbr, .essays-content abbr {
+  text-decoration: underline dotted;
+  cursor: help;
 }
 
-.dark .content h1, .dark .essays-content h1,
-.dark .content h2, .dark .essays-content h2,
-.dark .content h3, .dark .essays-content h3,
-.dark .content h4, .dark .essays-content h4 {
-  color: #e5e5e5;
-  border-bottom-color: rgba(255, 255, 255, 0.3);
+/* =============================================================================
+ * KEYBOARD
+ * ============================================================================= */
+
+.content kbd, .essays-content kbd {
+  font-family: var(--font-mono), 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  font-size: 0.85em;
+  background: hsl(var(--muted));
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  border: 1px solid hsl(var(--border));
+  box-shadow: inset 0 -1px 0 hsl(var(--border));
 }
 
-.dark .content a, .dark .essays-content a {
-  color: #e5e5e5;
-  border-bottom-color: rgba(255, 255, 255, 0.5);
+/* =============================================================================
+ * STRONG & EMPHASIS
+ * ============================================================================= */
+
+.content strong, .essays-content strong {
+  font-weight: 600;
 }
 
-.dark .content a:hover, .dark .essays-content a:hover {
-  border-bottom-color: #fff;
+.content em, .essays-content em {
+  font-style: italic;
 }
 
-.dark .content code, .dark .essays-content code,
-.dark .content kbd, .dark .essays-content kbd {
-  background: rgba(255, 255, 255, 0.1);
+/* =============================================================================
+ * SMALL TEXT
+ * ============================================================================= */
+
+.content small, .essays-content small {
+  font-size: 0.875em;
+  color: hsl(var(--muted-foreground));
 }
 
-.dark .content blockquote, .dark .essays-content blockquote {
-  border-left-color: rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
+/* =============================================================================
+ * SUPERSCRIPT & SUBSCRIPT
+ * ============================================================================= */
+
+.content sup, .essays-content sup,
+.content sub, .essays-content sub {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
 }
 
-.dark .content table, .dark .essays-content table {
-  border-color: rgba(255, 255, 255, 0.1);
+.content sup, .essays-content sup {
+  top: -0.5em;
 }
 
-.dark .content th, .dark .essays-content th,
-.dark .content td, .dark .essays-content td {
-  border-color: rgba(255, 255, 255, 0.1) !important;
+.content sub, .essays-content sub {
+  bottom: -0.25em;
 }
 
-.dark .content th, .dark .essays-content th {
-  background: rgba(255, 255, 255, 0.05) !important;
+/* =============================================================================
+ * DETAILS/SUMMARY
+ * ============================================================================= */
+
+.content details, .essays-content details {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  background: hsl(var(--muted) / 0.3);
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
 }
 
-.dark .content tr:nth-child(even), .dark .essays-content tr:nth-child(even) {
-  background: rgba(255, 255, 255, 0.02);
+.content summary, .essays-content summary {
+  cursor: pointer;
+  font-weight: 500;
 }
 
-.dark .content hr, .dark .essays-content hr {
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-.dark .content figcaption, .dark .essays-content figcaption {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.dark .content abbr, .dark .essays-content abbr {
-  border-bottom-color: rgba(255, 255, 255, 0.5);
-}
-
-.dark .content kbd, .dark .essays-content kbd {
-  border-color: rgba(255, 255, 255, 0.2);
+.content details[open] summary, .essays-content details[open] summary {
+  margin-bottom: 0.75rem;
 }

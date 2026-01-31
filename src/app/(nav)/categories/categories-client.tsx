@@ -5,7 +5,6 @@ import Link from "next/link"
 import { PageHeader } from "@/components/core"
 import { Input } from "@/components/ui/input"
 import { PageDescription } from "@/components/core"
-import { Table } from "@/components/shared/table"
 
 interface Category {
   name: string
@@ -21,27 +20,9 @@ interface CategoriesClientProps {
 export function CategoriesClient({ categories, currentDate }: CategoriesClientProps) {
   const [searchQuery, setSearchQuery] = useState("")
 
-  // Filter categories based on search
   const filteredCategories = categories.filter((category) => {
     return category.name.toLowerCase().includes(searchQuery.toLowerCase())
   })
-
-  const columns = [
-    {
-      header: "Title",
-      key: "name",
-      render: (item: Category) => (
-        <Link href={`/category/${item.slug}`} className="text-foreground">
-          {item.name}
-        </Link>
-      )
-    },
-    {
-      header: "# of Posts",
-      key: "count",
-      align: "right" as const
-    }
-  ]
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
@@ -71,18 +52,44 @@ export function CategoriesClient({ categories, currentDate }: CategoriesClientPr
             </div>
           </div>
 
-          <Table 
-            columns={columns}
-            data={filteredCategories}
-            emptyMessage="No categories found."
-          />
+          {filteredCategories.length === 0 ? (
+            <p className="text-muted-foreground">No categories found.</p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
+                <thead>
+                  <tr className="border-b border-border bg-muted/50 text-foreground">
+                    <th className="py-2 text-left font-medium px-3">Title</th>
+                    <th className="py-2 text-right font-medium px-3"># of Posts</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredCategories.map((category, index) => (
+                    <tr
+                      key={category.slug}
+                      className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
+                        index % 2 === 0 ? "bg-transparent" : "bg-muted/5"
+                      }`}
+                    >
+                      <td className="py-2 px-3">
+                        <Link href={`/category/${category.slug}`} className="text-foreground hover:text-primary">
+                          {category.name}
+                        </Link>
+                      </td>
+                      <td className="py-2 px-3 text-right">{category.count}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
-        
-        <PageDescription 
+
+        <PageDescription
           title="About Categories"
           description="Browse all content categories on this site. Each category represents a collection of related articles and essays."
         />
       </div>
     </div>
   )
-} 
+}

@@ -7,7 +7,7 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { HeartButton } from "@/components/heart-button"
+import { HeartButton } from "@/components/ui/heart-button"
 import Image from "next/image"
 
 export function HomeHeader() {

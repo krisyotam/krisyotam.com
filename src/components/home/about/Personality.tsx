@@ -1,6 +1,6 @@
 "use client"
 
-import PersonalityCarousel from "@/components/personality-carousel"
+import PersonalityCarousel from "@/components/about/personality-carousel"
 
 const PERSONALITY_ASSESSMENTS_DATA = {
   mbti: {

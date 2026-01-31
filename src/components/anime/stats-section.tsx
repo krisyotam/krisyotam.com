@@ -1,68 +1,46 @@
-import type React from "react"
-import { BookOpen, Clock, Calendar } from "lucide-react"
-
-interface StatCardProps {
-  title: string
-  icon: React.ReactNode
-  value: string | number
-  description: string
-}
-
-function StatCard({ title, icon, value, description }: StatCardProps) {
-  return (
-    <div className="p-6 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))] w-full text-center">
-      {icon}
-      <div className="text-3xl font-bold mb-1 dark:text-white">{value}</div>
-      <div className="text-gray-500 dark:text-zinc-400">{description}</div>
-    </div>
-  )
-}
-
 interface StatsSectionProps {
   profile: any
   activeTab: "anime" | "manga"
 }
 
 export function StatsSection({ profile, activeTab }: StatsSectionProps) {
-  // Get the correct stats based on active tab
   const animeStats = profile.anime_statistics || {}
   const mangaStats = profile.manga_statistics || {}
-
-  // Use the appropriate stats object based on the active tab
   const stats = activeTab === "anime" ? animeStats : mangaStats
 
-  // Set up labels based on active tab
-  const contentType = activeTab === "anime" ? "Anime" : "Manga"
-  const ongoingLabel = activeTab === "anime" ? "Currently Watching" : "Currently Reading"
-  const episodeLabel = activeTab === "anime" ? "Episodes Watched" : "Chapters Read"
+  const contentType = activeTab === "anime" ? "entries" : "entries"
+  const ongoingLabel = activeTab === "anime" ? "watching" : "reading"
+  const episodeLabel = activeTab === "anime" ? "episodes" : "chapters"
 
-  // Get the correct values based on active tab
   const ongoingCount = activeTab === "anime" ? stats.num_watching : stats.num_reading
   const episodeCount = activeTab === "anime" ? stats.num_episodes : stats.num_chapters
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <StatCard
-        title={`Total ${contentType}`}
-        icon={<BookOpen className="h-8 w-8 mx-auto mb-2 text-gray-700 dark:text-zinc-300" />}
-        value={(stats.num_items || 0).toLocaleString()}
-        description={`Total ${contentType} Entries`}
-      />
-      
-      <StatCard
-        title="Currently Active"
-        icon={<Clock className="h-8 w-8 mx-auto mb-2 text-gray-700 dark:text-zinc-300" />}
-        value={(ongoingCount || 0).toLocaleString()}
-        description={ongoingLabel}
-      />
-      
-      <StatCard
-        title="Time Spent"
-        icon={<Calendar className="h-8 w-8 mx-auto mb-2 text-gray-700 dark:text-zinc-300" />}
-        value={(stats.num_days || 0).toFixed(1)}
-        description="Days Total"
-      />
+    <div className="border border-border bg-muted/30 dark:bg-[hsl(var(--popover))]">
+      <div className="flex flex-wrap items-center justify-between px-4 py-3 gap-x-6 gap-y-2">
+        {/* Stats */}
+        <div className="flex items-center gap-6 text-sm">
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-xl font-semibold text-foreground">{(stats.num_items || 0).toLocaleString()}</span>
+            <span className="text-muted-foreground">{contentType}</span>
+          </div>
+          <div className="hidden sm:block w-px h-4 bg-border" />
+          <div className="hidden sm:flex items-baseline gap-1.5">
+            <span className="text-xl font-semibold text-foreground">{(ongoingCount || 0).toLocaleString()}</span>
+            <span className="text-muted-foreground">{ongoingLabel}</span>
+          </div>
+          <div className="hidden md:block w-px h-4 bg-border" />
+          <div className="hidden md:flex items-baseline gap-1.5">
+            <span className="text-xl font-semibold text-foreground">{(episodeCount || 0).toLocaleString()}</span>
+            <span className="text-muted-foreground">{episodeLabel}</span>
+          </div>
+          <div className="hidden lg:block w-px h-4 bg-border" />
+          <div className="hidden lg:flex items-baseline gap-1.5">
+            <span className="text-xl font-semibold text-foreground">{(stats.num_days || 0).toFixed(1)}</span>
+            <span className="text-muted-foreground">days</span>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
-

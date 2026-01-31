@@ -1,13 +1,13 @@
 "use client";
 
 import { PostHeader } from "@/components/core";
-import { Citation } from "@/components/citation";
-import { LiveClock } from "@/components/live-clock";
-import { Footer } from "@/components/footer";
+import { Citation } from "@/components/core/citation";
+import { LiveClock } from "@/components/ui/live-clock";
+import { Footer } from "@/components/core/footer";
 import SiteFooter from "@/components/typography/expanded-footer-block";
 import { Comments } from "@/components/core/comments";
 import { Footnotes } from "@/components/core/footnotes";
-import { ViewTracker } from "@/components/view-tracker";
+import { ViewTracker } from "@/components/core/view-tracker";
 import type { Post } from "@/lib/posts";
 
 interface Props {

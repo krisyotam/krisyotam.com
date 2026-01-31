@@ -5,8 +5,8 @@ import { ArrowLeft, Download, FileText } from 'lucide-react';
 import Link from 'next/link';
 import { PageHeader } from '@/components/core';
 import { PDFViewer } from '../components/pdf-viewer';
-import { Citation } from '@/components/citation';
-import { Footer } from '@/app/(content)/essays/components/footer';
+import { Citation } from '@/components/core/citation';
+import { Footer } from '@/components/core/footer';
 
 // Import legal data
 import legalData from '../legal.json';

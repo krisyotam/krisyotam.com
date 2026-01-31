@@ -3,10 +3,10 @@
 
 import Image from "next/image";
 import { PostHeader } from "@/components/core";
-import { LiveClock } from "@/components/live-clock";
+import { LiveClock } from "@/components/ui/live-clock";
 import type { ProgymnasmataEntry } from "@/types/content";
-import { Footer } from "@/app/(content)/essays/components/footer";
-import { Citation } from "@/components/citation";
+import { Footer } from "@/components/core/footer";
+import { Citation } from "@/components/core/citation";
 
 interface ProgymnasmataEntryPageProps {
   entry: ProgymnasmataEntry;

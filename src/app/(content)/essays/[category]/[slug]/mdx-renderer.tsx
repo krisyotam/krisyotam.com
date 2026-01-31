@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from "react"
 import { MarginCard } from "@/components/margin-notes"
-import { Bibliography } from "@/components/bibliography"
-import RelatedPosts from "@/components/related-posts"
+import { Bibliography } from "@/components/core/bibliography"
+import RelatedPosts from "@/components/core/related-posts"
 import type { TOCHeading, MarginNote, BibliographyEntry } from "@/lib/mdx"
 
 interface MDXRendererProps {

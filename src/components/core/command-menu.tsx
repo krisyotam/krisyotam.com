@@ -4,71 +4,92 @@ import { useState, useEffect } from "react"
 import { Command } from "cmdk"
 import { useRouter } from "next/navigation"
 import {
-  Home, User, FileText, Sun, Moon, List, Quote, Users, Gift, Mail,
-  Earth, Clock, Brain, Bitcoin, Music, Film, StickyNote,
-  SquareLibrary, Feather, Layers, Building,
+  Home, Sun, Moon, List, Quote, Gift, Mail,
+  Earth, Clock, Brain, Music, Film, StickyNote,
+  SquareLibrary, Feather, Layers, User, Bitcoin,
   BookMarked, Video, HeartHandshake,
-  AreaChart, Tag, Gamepad2, Clapperboard, PenBox, UserSquare,
+  AreaChart, Tag, Gamepad2, Clapperboard,
   BookOpenText, FileEdit, PencilLine, Keyboard, Palette,
-  NotebookPen, FilePen
-} from "lucide-react";
+  Rss, Users, Sparkles, ScrollText, Pen, Newspaper, Star, FileText
+} from "lucide-react"
 
-
-import { SnowEffect } from "../snow-effect"
+import { SnowEffect } from "@/components/ui/snow-effect"
 import { useTheme } from "next-themes"
 
-const menuItems = [
-  // Primary navigation
-  { icon: Home, label: "Home", path: "/" },
-  { icon: FileText, label: "Papers", path: "/papers" },
-  { icon: FilePen, label: "Essays", path: "/essays" },
-  { icon: NotebookPen, label: "Blog Posts", path: "/blog" },
-  { icon: PenBox, label: "Reviews", path: "/reviews" },
-  { icon: PenBox, label: "Fiction", path: "/fiction" },
-  { icon: StickyNote, label: "Notes", path: "/notes" },
-  { icon: Quote, label: "Quotes", path: "/quotes" },
-  { icon: List, label: "Categories", path: "/categories" },
-  { icon: Tag, label: "Tags", path: "/tags" },
-  { icon: Layers, label: "Sequences", path: "/sequences" },
-  { icon: HeartHandshake, label: "Supporters", path: "/supporters" },
-  { icon: User, label: "About", path: "/me" },
-
-  // Content sections
-  { icon: Feather, label: "Verse", path: "/verse" },
-  { icon: BookMarked, label: "Reading", path: "/reading" },
-  { icon: Clock, label: "Now", path: "/now" },
-  { icon: Brain, label: "Today I Learned", path: "/til" },
-  { icon: PencilLine, label: "Progymnasmata", path: "/progymnasmata" },
-
-  // Media and tracking
-  { icon: Film, label: "Film", path: "/film" },
-  { icon: BookOpenText, label: "Manga", path: "/manga" },
-  { icon: Clapperboard, label: "Anime", path: "/anime" },
-  { icon: Gamepad2, label: "Games", path: "/games" },
-  { icon: Video, label: "Videos", path: "/videos" },
-  { icon: SquareLibrary, label: "Library", path: "/library" },
-  { icon: Earth, label: "Globe", path: "/globe" },
-  { icon: Music, label: "Music", path: "/music" },
-
-  // Creative
-  { icon: Palette, label: "Art", path: "/art" },
-  { icon: UserSquare, label: "OCs", path: "/ocs" },
-
-  // Site info
-  { icon: AreaChart, label: "Stats", path: "/stats" },
-  { icon: FileEdit, label: "Changelog", path: "/changelog" },
-  { icon: Users, label: "Profile", path: "/profile" },
-  { icon: Building, label: "Companies", path: "/companies" },
-  { icon: Users, label: "Sources", path: "/sources" },
-  { icon: Keyboard, label: "Type", path: "/type" },
-
-  // Engagement
-  { icon: Gift, label: "Wishlist", path: "https://www.amazon.com/hz/wishlist/ls/1ID8ZRMZ7CMDI?ref_=wl_share" },
-  { icon: Bitcoin, label: "Donate", path: "/donate" },
-  { icon: Mail, label: "Contact", path: "/contact" },
-  { icon: FileText, label: "RSS", path: "/rss.xml" },
-];
-
+// Organized menu sections
+const menuSections = [
+  {
+    heading: "Home",
+    items: [
+      { icon: Home, label: "Home", path: "/" },
+    ]
+  },
+  {
+    heading: "Content",
+    items: [
+      { icon: ScrollText, label: "Papers", path: "/papers" },
+      { icon: Pen, label: "Essays", path: "/essays" },
+      { icon: Newspaper, label: "Blog", path: "/blog" },
+      { icon: Star, label: "Reviews", path: "/reviews" },
+      { icon: Sparkles, label: "Fiction", path: "/fiction" },
+      { icon: StickyNote, label: "Notes", path: "/notes" },
+      { icon: Feather, label: "Verse", path: "/verse" },
+      { icon: PencilLine, label: "Progymnasmata", path: "/progymnasmata" },
+      { icon: Brain, label: "Today I Learned", path: "/til" },
+      { icon: Clock, label: "Now", path: "/now" },
+    ]
+  },
+  {
+    heading: "Media",
+    items: [
+      { icon: Film, label: "Film", path: "/film" },
+      { icon: Clapperboard, label: "Anime", path: "/anime" },
+      { icon: BookOpenText, label: "Manga", path: "/manga" },
+      { icon: Gamepad2, label: "Games", path: "/games" },
+      { icon: Music, label: "Music", path: "/music" },
+      { icon: Video, label: "Videos", path: "/videos" },
+      { icon: Palette, label: "Art", path: "/art" },
+      { icon: Users, label: "OCs", path: "/ocs" },
+    ]
+  },
+  {
+    heading: "Reading",
+    items: [
+      { icon: BookMarked, label: "Reading", path: "/reading" },
+      { icon: SquareLibrary, label: "Library", path: "/library" },
+    ]
+  },
+  {
+    heading: "Browse",
+    items: [
+      { icon: List, label: "Categories", path: "/categories" },
+      { icon: Tag, label: "Tags", path: "/tags" },
+      { icon: Layers, label: "Sequences", path: "/sequences" },
+      { icon: Quote, label: "Quotes", path: "/quotes" },
+    ]
+  },
+  {
+    heading: "Site",
+    items: [
+      { icon: User, label: "About", path: "/me" },
+      { icon: AreaChart, label: "Stats", path: "/stats" },
+      { icon: FileEdit, label: "Changelog", path: "/changelog" },
+      { icon: Earth, label: "Globe", path: "/globe" },
+      { icon: FileText, label: "Sources", path: "/sources" },
+      { icon: Keyboard, label: "Type", path: "/type" },
+    ]
+  },
+  {
+    heading: "Connect",
+    items: [
+      { icon: Rss, label: "RSS", path: "/rss.xml" },
+      { icon: Bitcoin, label: "Donate", path: "/donate" },
+      { icon: Gift, label: "Wishlist", path: "https://www.amazon.com/hz/wishlist/ls/1ID8ZRMZ7CMDI?ref_=wl_share" },
+      { icon: HeartHandshake, label: "Supporters", path: "/supporters" },
+      { icon: Mail, label: "Contact", path: "/contact" },
+    ]
+  },
+]
 
 export function CommandMenu() {
   const [open, setOpen] = useState(false)
@@ -141,17 +162,23 @@ export function CommandMenu() {
         />
 
         <Command.List className="py-2 px-2 max-h-[50vh] overflow-y-auto">
-          <Command.Group heading="Pages" className="px-2 py-1.5 text-xs text-gray-400 dark:text-gray-500">
-            {menuItems.map((item, index) => (
-              <Command.Item
-                key={`${item.path}-${index}`}
-                onSelect={() => runCommand(() => router.push(item.path))}
-                className="flex items-center gap-2 px-2 py-1.5 rounded-sm text-sm text-gray-600 dark:text-gray-300 hover:bg-accent hover:text-accent-foreground cursor-pointer"
-              >
-                <item.icon size={14} /> {item.label}
-              </Command.Item>
-            ))}
-          </Command.Group>
+          {menuSections.map((section) => (
+            <Command.Group
+              key={section.heading}
+              heading={section.heading}
+              className="px-2 py-1.5 text-xs text-muted-foreground uppercase tracking-wide"
+            >
+              {section.items.map((item, index) => (
+                <Command.Item
+                  key={`${item.path}-${index}`}
+                  onSelect={() => runCommand(() => router.push(item.path))}
+                  className="flex items-center gap-2 px-2 py-1.5 rounded-sm text-sm text-gray-600 dark:text-gray-300 hover:bg-accent hover:text-accent-foreground cursor-pointer"
+                >
+                  <item.icon size={14} /> {item.label}
+                </Command.Item>
+              ))}
+            </Command.Group>
+          ))}
         </Command.List>
 
         <div className="flex items-center justify-between px-2 py-2 border-t border-border">
@@ -167,4 +194,3 @@ export function CommandMenu() {
     </>
   )
 }
-

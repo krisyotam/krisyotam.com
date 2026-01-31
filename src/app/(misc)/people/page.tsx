@@ -3,9 +3,9 @@ import path from "path"
 import React from "react"
 import "../../(tracking)/film/film.css"
 import { PageHeader } from "@/components/core"
-import { TraktSectionHeader } from "@/components/trakt/trakt-section-header"
-import { TraktFavActorCard } from "@/components/trakt/trakt-fav-actor-card"
-import { TraktHorizontalScroll } from "@/components/trakt/trakt-horizontal-scroll"
+import { TraktSectionHeader } from "@/components/core/section-header"
+import { ActorCard } from "@/components/trakt/ActorCard"
+import { PaginatedCardGrid } from "@/components/trakt/PaginatedCardGrid"
 import { PageDescription } from "@/components/core"
 
 type Person = {
@@ -62,16 +62,16 @@ export default function PeoplePage() {
             types.map((type) => (
               <section key={type} className="film-section">
                 <TraktSectionHeader title={type + "s"} count={groupedPeople[type].length} />
-                <TraktHorizontalScroll squareButtons={true}>
+                <PaginatedCardGrid squareButtons={true}>
                   {groupedPeople[type].map((p) => (
-                    <TraktFavActorCard
+                    <ActorCard
                       key={p.slug}
                       id={p.slug}
                       name={p.name}
                       image={p.image || "/imgs/placeholder.svg"}
                     />
                   ))}
-                </TraktHorizontalScroll>
+                </PaginatedCardGrid>
               </section>
             ))
           )}

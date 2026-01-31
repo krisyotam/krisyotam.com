@@ -1,5 +1,5 @@
 import { PageHeader } from "@/components/core"
-import { LibraryTabs } from "@/components/library-tabs"
+import { LibraryTabs } from "@/components/library/library-tabs"
 import { PageDescription } from "@/components/core"
 import { staticMetadata } from "@/lib/staticMetadata"
 import type { Metadata } from "next"

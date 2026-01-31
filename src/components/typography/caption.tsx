@@ -1,10 +1,13 @@
-import type { ReactNode } from "react"
+import Balancer from "react-wrap-balancer";
+import type { ReactNode } from "react";
 
 export function Caption({ children }: { children: ReactNode }) {
   return (
-    <span className="block w-full text-xs my-3 font-mono text-gray-500 dark:text-gray-400 text-center leading-normal">
-      {children}
+    <span className="block w-full text-xs mt-0.5 mb-3 font-mono text-gray-500 !text-center leading-normal">
+      <Balancer>
+        <span className="[&>a]:post-link">{children}</span>
+      </Balancer>
     </span>
-  )
+  );
 }
 

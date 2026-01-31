@@ -79,7 +79,6 @@ export {
 } from './tooltip';
 
 export * from './dropdown-menu';
-export * from './code-block';
 export * from './3d-marquee';
 export * from './marquee';
 export * from './button-alt';
@@ -114,4 +113,15 @@ export * from './sonner';
 export * from './toggle-group';
 export * from './toggle';
 export * from './use-mobile';
-export * from './use-toast'; 
+export * from './use-toast';
+
+// Utility components moved from root
+export { SnowEffect } from './snow-effect';
+export { ScrollbarController } from './scrollbar-controller';
+export { default as FixOutlineIssue } from './fix-outline-issue';
+export { HeaderUnderlineDetector } from './header-underline-detector';
+export { DarkModeClasses } from './dark-mode-classes';
+export { DarkModeScript } from './dark-mode-script';
+export { ThemeProvider } from './theme-provider';
+export { LiveClock } from './live-clock';
+export { HeartButton } from './heart-button'; 

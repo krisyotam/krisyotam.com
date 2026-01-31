@@ -200,11 +200,11 @@ export default function Bible({ children }: BibleProps) {
   }
 
   return (
-    <div className="relative inline-block" onMouseEnter={() => setIsOpen(true)}>
+    <span className="relative inline-block" onMouseEnter={() => setIsOpen(true)}>
       <span className="cursor-help underline text-primary">{children}</span>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 pointer-events-none">
+        <span className="fixed inset-0 z-50 pointer-events-none block">
           <motion.div
             ref={modalRef}
             drag
@@ -266,8 +266,8 @@ export default function Bible({ children }: BibleProps) {
               )}
             </div>
           </motion.div>
-        </div>
+        </span>
       )}
-    </div>
+    </span>
   );
 }

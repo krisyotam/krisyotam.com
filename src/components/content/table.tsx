@@ -149,7 +149,7 @@ export function ContentTable({
               }`}
               onClick={() => router.push(getItemUrl(item))}
             >
-              <td className="py-2 px-3 font-medium">{item.title}</td>
+              <td className="py-2 px-3">{item.title}</td>
               {showType && item.type && (
                 <td className="py-2 px-3 text-muted-foreground">
                   {formatTypeDisplayName(item.type)}

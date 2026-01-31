@@ -5,8 +5,8 @@
  * @description Focus section with sliding quotes, bento nav, theme compare, and testimonials
  */
 
-import { InfiniteMovingQuotes } from "@/components/InfiniteMovingQuotes"
-import { BentoNav } from "@/components/bento-nav"
+import { InfiniteMovingQuotes } from "@/components/quotes/InfiniteMovingQuotes"
+import { BentoNav } from "@/components/home/bento-nav"
 import { ThemeImageCompare } from "./about"
 
 export function HomeFocus() {

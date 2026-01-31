@@ -12,8 +12,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import ContactInfo from "@/components/contact-info";
-import PGP from "@/components/pgp";
+import ContactInfo from "@/components/contact/contact-info";
+import PGP from "@/components/contact/pgp";
 import { Card } from "@/components/ui/card";
 import { Users, Hash } from "lucide-react";
 import { PageHeader } from "@/components/core";
@@ -23,7 +23,7 @@ import { PageHeader } from "@/components/core";
 // ============================================================================
 
 const ContactFormWithNoSSR = dynamic(
-  () => import("@/components/ContactForm"),
+  () => import("@/components/contact/ContactForm"),
   {
     ssr: false,
     loading: () => <p>Loading form...</p>,

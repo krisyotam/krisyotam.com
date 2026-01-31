@@ -16,8 +16,8 @@
 
 import { PostHeader } from "@/components/core";
 import { Survey } from "@/components/core";
-import { Footer } from "@/components/footer";
-import { LiveClock } from "@/components/live-clock";
+import { Footer } from "@/components/core/footer";
+import { LiveClock } from "@/components/ui/live-clock";
 import type { SurveySchema } from "@/lib/survey-parser";
 
 interface SurveyPageClientProps {

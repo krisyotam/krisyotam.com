@@ -1,5 +1,5 @@
 import { PageHeader } from "@/components/core"
-import { CompaniesGrid } from "@/components/companies-grid"
+import { CompaniesGrid } from "@/components/companies/companies-grid"
 import { staticMetadata } from "@/lib/staticMetadata"
 import type { Metadata } from "next"
 

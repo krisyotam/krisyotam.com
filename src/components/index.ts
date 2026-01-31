@@ -1,85 +1,98 @@
 // Core Components
-export { default as TableOfContents } from './table-of-contents';
-export { BlogPost } from './blog-post';
-export { PostWrapper } from './post-wrapper';
-export { PostHeader } from './core';
-// export { default as PostFooter } from './post-footer'; // File missing or not a module
-export { PostMap } from './post-map';
-// LinkTags removed - dead code
-export type { MarginNote } from './margin-notes';
-export { default as Footnotes } from './footnotes';
-
-// Navigation Components
-// MainNav and MobileNav removed - unused
-// export { default as Breadcrumbs } from './breadcrumbs'; // File missing
-// export { default as Pagination } from './pagination'; // File missing
-
-// Link Components
-export { InternalLink } from './internal-link';
-// export { default as ExternalLink } from './external-link'; // File missing
-// export { default as UniversalLink } from './universal-link'; // File missing
+export { PostHeader, CategoryHeader, PageHeader } from './core';
 export { UniversalLinkModal, Popups } from './core/popups';
 
-// Book Components
+// Book Components (from posts/books)
 export { default as Book } from './posts/books/book';
 export { BookCard } from './posts/books/book-card';
-export { BookList } from './book-list';
-// export { MyBooksContents } from './mybooks-contents'; // File missing or no named export
-export { MyBookCard } from './my-book-card';
-export { MyBookList } from './my-book-list';
-
-// Typography Components
-export { default as Dropcap } from './dropcap';
-export { default as Inflation } from './inflation';
-// export { PoetryComponent as Poetry } from './poetry'; // File missing or no named export
-// MarginNote already exported above
-// Footnotes already exported above
-
-// Note Components
-// export { default as NoteCard } from './note-card'; // File missing
-// export { default as NoteList } from './note-list'; // File missing
-// export { default as NoteHeader } from './note-header'; // File missing
-// export { default as NoteFooter } from './note-footer'; // File missing
-
-// UI Components
-// export * from './ui'; // Commented out to avoid duplicate Pagination export
 
 // Content Components
-export { ContentTable } from './shared/content-table';
-export { CategoryHeader } from './core';
-// DELETED_BY_SCRIPT: export { DirectoryCategoryHeader } from './directory-category-header';
-// DELETED_BY_SCRIPT: export { DirectoryPageHeader } from './directory-page-header';
+export { ContentTable } from './content/table';
 export { DocsHeader } from './docs/docs-header';
-export { PageHeader } from './core';
-// PostHeader already exported above
-export { TagHeader } from './tag-header';
-
-// Playlist Components
-export { default as PlaylistList } from './playlist-list';
-export { default as PlaylistCard } from './playlist-card';
-
-// Other Components
-export { default as ProfileBento } from './profile-bento';
-export { default as SiteStickerCarousel } from './site-sticker-carousel';
-export { default as PersonalityCarousel } from './personality-carousel';
-// Archive component removed - documents hosted locally
-export { default as PGP } from './pgp';
-// export { ContactInfo } from './contact-info'; // File missing or no named export
-export { default as CoreSkills } from './core-skills';
-export { default as Experience } from './experience';
-export { default as Wishlist } from './wishlist';
-export { default as FictionWorld } from './fiction-world';
-export { default as RelatedPosts } from './related-posts';
 
 // Subdirectory exports
 export * from './typography';
 export * from './posts';
-// export * from './references'; // Not a module
 export * from './mdx';
 export * from './art';
 export * from './anime';
 export * from './trakt';
 export * from './predictions';
 export * from './progymnasmata';
+export * from './reading';
+export * from './sequences';
+export * from './stats';
 
-export { FavoriteCard as FavoriteCardComponent } from './anime'; 
+// Home components
+export { default as BentoNav } from './home/bento-nav';
+export { BlogPost } from './home/blog-post';
+export { FeaturedPost } from './home/featured-post';
+export { WordOfTheDay } from './home/about/WordOfTheDay';
+export { Favorites } from './home/about/Favorites';
+export { default as SiteStickerCarousel } from './home/about/site-sticker-carousel';
+
+// About components (from components/about)
+export { default as ProfileBento } from './about/profile-bento';
+export { default as PersonalityCarousel } from './about/personality-carousel';
+export { default as IntelligenceCarousel } from './about/intelligence-carousel';
+export { default as PersonalBio } from './about/personal-bio';
+export { default as NameBreakdown } from './about/name-breakdown';
+export { default as CoreSkills } from './about/core-skills';
+export { default as Experience } from './about/experience';
+export { Tree as FamilyTree } from './about/family-tree';
+
+// Contact components
+export { default as PGP } from './contact/pgp';
+
+// Library components
+export { LibraryTabs } from './library/library-tabs';
+export { LibraryBookCard } from './library/library-book-card';
+export { LibraryNotesContent } from './library/library-notes-content';
+export { CatalogContent } from './library/catalog-content';
+
+// Music components
+export { CurrentlyListening } from './music/CurrentlyListening';
+export { default as PlaylistList } from './music/playlist-list';
+export { PlaylistCard } from './music/playlist-card';
+
+// Quotes components
+export { QuoteCard } from './quotes/quote-card';
+export { QuoteOfTheDay } from './quotes/QuoteOfTheDay';
+export { QuotesFeed } from './quotes/quotes-feed';
+export { InfiniteMovingQuotes } from './quotes/InfiniteMovingQuotes';
+
+// Companies components
+export { CompaniesGrid } from './companies/companies-grid';
+export { CompanyCard } from './companies/company-card';
+
+// UI components
+export { SnowEffect } from './ui/snow-effect';
+export { ScrollbarController } from './ui/scrollbar-controller';
+export { default as FixOutlineIssue } from './ui/fix-outline-issue';
+export { HeaderUnderlineDetector } from './ui/header-underline-detector';
+export { DarkModeClasses } from './ui/dark-mode-classes';
+export { DarkModeScript } from './ui/dark-mode-script';
+export { ThemeProvider } from './ui/theme-provider';
+export { LiveClock } from './ui/live-clock';
+export { HeartButton } from './ui/heart-button';
+
+// Core components
+export { Citation } from './core/citation';
+export { Bibliography } from './core/bibliography';
+export { default as Dropcap } from './core/dropcap';
+export { Poetry } from './core/poetry';
+export { default as LinkIcon } from './core/link-icon';
+export { default as TimeStamp } from './core/time-stamp';
+export { default as SimpleBib } from './core/simplebib';
+export { Footer } from './core/footer';
+export { ViewTracker } from './core/view-tracker';
+export { default as RelatedPosts } from './core/related-posts';
+
+// MDX components
+export { default as TableOfContents } from './mdx/table-of-contents';
+export { InternalLink } from './mdx/internal-link';
+export { EnhancedLink } from './mdx/enhanced-link';
+export { default as Inflation } from './mdx/inflation';
+export { WebsitePreview } from './mdx/website-preview';
+
+export { FavoriteCard as FavoriteCardComponent } from './anime';

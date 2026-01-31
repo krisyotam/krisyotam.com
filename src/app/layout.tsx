@@ -1,11 +1,11 @@
 import "../app/globals.css"
 import "katex/dist/katex.min.css"
 import type { Metadata, Viewport } from "next"
-import { ThemeProvider } from "../components/theme-provider"
-import { ScrollbarController } from "../components/scrollbar-controller"
-import { DarkModeScript } from "../components/dark-mode-script"
-import { DarkModeClasses } from "../components/dark-mode-classes"
-import { HeaderUnderlineDetector } from "../components/header-underline-detector"
+import { ThemeProvider } from "@/components/ui/theme-provider"
+import { ScrollbarController } from "@/components/ui/scrollbar-controller"
+import { DarkModeScript } from "@/components/ui/dark-mode-script"
+import { DarkModeClasses } from "@/components/ui/dark-mode-classes"
+import { HeaderUnderlineDetector } from "@/components/ui/header-underline-detector"
 import { Wrapper } from "../components/core/wrapper"
 import type React from "react"
 import Script from "next/script"
@@ -14,10 +14,39 @@ import { cn } from '../lib/utils'
 import localFont from 'next/font/local'
 import { siteConfig } from '@/lib/seo'
 
-// Define fontSans using localFont
+// IBM Plex Sans - UI and headings
 const fontSans = localFont({
-  src: '../../public/fonts/text/outfit/Outfit-Regular.woff2',
+  src: [
+    { path: '../../public/fonts/text/ibm-plex-sans/IBMPlexSans-Regular.woff2', weight: '400', style: 'normal' },
+    { path: '../../public/fonts/text/ibm-plex-sans/IBMPlexSans-Italic.woff2', weight: '400', style: 'italic' },
+    { path: '../../public/fonts/text/ibm-plex-sans/IBMPlexSans-Medium.woff2', weight: '500', style: 'normal' },
+    { path: '../../public/fonts/text/ibm-plex-sans/IBMPlexSans-Bold.woff2', weight: '700', style: 'normal' },
+  ],
   variable: '--font-sans',
+  display: 'swap',
+});
+
+// Source Serif 4 - Body text and content (Gwern's choice)
+const fontSerif = localFont({
+  src: [
+    { path: '../../public/fonts/text/source-serif-4/SourceSerif4-Variable.woff2', style: 'normal' },
+    { path: '../../public/fonts/text/source-serif-4/SourceSerif4-VariableItalic.woff2', style: 'italic' },
+  ],
+  variable: '--font-serif',
+  display: 'swap',
+  fallback: ['Georgia', 'serif'],
+});
+
+// IBM Plex Mono - Code blocks
+const fontMono = localFont({
+  src: [
+    { path: '../../public/fonts/mono/ibm-plex-mono/IBMPlexMono-Regular.woff2', weight: '400', style: 'normal' },
+    { path: '../../public/fonts/mono/ibm-plex-mono/IBMPlexMono-Italic.woff2', weight: '400', style: 'italic' },
+    { path: '../../public/fonts/mono/ibm-plex-mono/IBMPlexMono-Medium.woff2', weight: '500', style: 'normal' },
+    { path: '../../public/fonts/mono/ibm-plex-mono/IBMPlexMono-Bold.woff2', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-mono',
+  display: 'swap',
 });
 
 // Enhanced metadata for the site
@@ -105,7 +134,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#0c0c0c" media="(prefers-color-scheme: dark)" />
         <DarkModeScript />
       </head>
-      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)} suppressHydrationWarning>
+      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable, fontSerif.variable, fontMono.variable)} suppressHydrationWarning>
         <ThemeProvider 
           attribute="class" 
           defaultTheme="system" 

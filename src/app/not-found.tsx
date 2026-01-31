@@ -23,10 +23,10 @@ import { useRouter } from "next/navigation"
 // =============================================================================
 
 import { Search } from "lucide-react"
-import { LiveClock } from "@/components/live-clock"
+import { LiveClock } from "@/components/ui/live-clock"
 import { PageHeader } from "@/components/core"
 import { Card } from "@/components/ui/card"
-import { Footer } from "@/components/footer"
+import { Footer } from "@/components/core/footer"
 import SiteFooter from "@/components/typography/expanded-footer-block"
 
 // =============================================================================

@@ -1,29 +1,23 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { PageHeader } from "@/components/core"
-import { PageDescription } from "@/components/core"
-import { TraktHorizontalScroll } from "@/components/trakt/trakt-horizontal-scroll"
-import { FilmStatsSection } from "@/components/film/film-stats-section"
-import { FilmGenresSection } from "@/components/film/film-genres-section"
-import { TraktMovieCard } from "@/components/trakt/trakt-movie-card"
-import { TraktShowCard } from "@/components/trakt/trakt-show-card"
-import { TraktFavActorCard } from "@/components/trakt/trakt-fav-actor-card"
-import { TraktFavCompanyCard } from "@/components/trakt/trakt-fav-company-card"
-import { TraktFavCharacterCard } from "@/components/trakt/trakt-fav-character-card"
-import { TraktFavDirectorCard } from "@/components/trakt/trakt-fav-director-card"
-import { TraktEmptyState } from "@/components/trakt/trakt-empty-state"
-import { TraktSectionHeader } from "@/components/trakt/trakt-section-header"
+import { useRouter, usePathname } from "next/navigation"
+import { cn } from "@/lib/utils"
+import { PaginatedCardGrid } from "@/components/trakt/PaginatedCardGrid"
+import { FilmCard } from "@/components/trakt/FilmCard"
+import { ActorCard } from "@/components/trakt/ActorCard"
+import { CompanyCard } from "@/components/trakt/CompanyCard"
+import { FavCharacterCard } from "@/components/trakt/FavCharacterCard"
+import { DirectorCard } from "@/components/trakt/DirectorCard"
+import { TraktSectionHeader } from "@/components/core/section-header"
 
 export default function FilmClientPage() {
+  const router = useRouter()
+  const pathname = usePathname()
   const [watchedStats, setWatchedStats] = useState<any>(null)
-  const [recentMovies, setRecentMovies] = useState<any[]>([])
-  const [recentShows, setRecentShows] = useState<any[]>([])
   const [mostWatchedMovies, setMostWatchedMovies] = useState<any[]>([])
-  const [mostWatchedShows, setMostWatchedShows] = useState<any[]>([])
   const [mostWatchedGenres, setMostWatchedGenres] = useState<any[]>([])
   const [favoriteMovies, setFavoriteMovies] = useState<any[]>([])
-  const [favoriteShows, setFavoriteShows] = useState<any[]>([])
   const [favDirectors, setFavDirectors] = useState<any[]>([])
   const [favActors, setFavActors] = useState<any[]>([])
   const [favCompanies, setFavCompanies] = useState<any[]>([])
@@ -33,185 +27,54 @@ export default function FilmClientPage() {
 
   useEffect(() => {
     async function fetchData() {
-      console.log("FilmClientPage: Starting to fetch data")
       setLoading(true)
-
       try {
-        console.log("FilmClientPage: Fetching API data")
-        // Fetch API data
-        // Fetch all film data from unified API
         const [
           watchedStatsRes,
           genresRes,
-          recentMoviesRes,
-          recentShowsRes,
           watchedMoviesRes,
-          mostWatchedShowsRes,
           favoriteMoviesRes,
-          favoriteShowsRes,
           favDirectorsRes,
           favActorsRes,
           favCompaniesRes,
           favCharactersRes,
         ] = await Promise.all([
-          fetch("/api/film?resource=stats")
-            .then((res) => {
-              console.log("FilmClientPage: Watched stats response status:", res.status)
-              return res.json()
-            })
-            .catch((err) => {
-              console.error("FilmClientPage: Error fetching watched stats:", err)
-              return { moviesWatched: 0, tvShowsWatched: 0, timeWatchedHours: 0 }
-            }),
-          fetch("/api/film?source=trakt&resource=genres")
-            .then((res) => {
-              console.log("FilmClientPage: Trakt genres response status:", res.status)
-              return res.json()
-            })
-            .catch((err) => {
-              console.error("FilmClientPage: Error fetching Trakt genres:", err)
-              return []
-            }),
-          fetch("/api/film?source=trakt&resource=recent&type=movies&limit=20")
-            .then((res) => {
-              console.log("FilmClientPage: Trakt recent movies response status:", res.status)
-              return res.json()
-            })
-            .catch((err) => {
-              console.error("FilmClientPage: Error fetching Trakt recent movies:", err)
-              return []
-            }),
-          fetch("/api/film?source=trakt&resource=recent&type=shows&limit=20")
-            .then((res) => {
-              console.log("FilmClientPage: Trakt recent shows response status:", res.status)
-              return res.json()
-            })
-            .catch((err) => {
-              console.error("FilmClientPage: Error fetching Trakt recent shows:", err)
-              return []
-            }),
-          fetch("/api/film?resource=watched&limit=20")
-            .then((res) => {
-              console.log("FilmClientPage: Watched movies response status:", res.status)
-              return res.json()
-            })
-            .catch((err) => {
-              console.error("FilmClientPage: Error fetching watched movies:", err)
-              return []
-            }),
-          fetch("/api/film?source=trakt&resource=most-watched&type=shows&limit=20")
-            .then((res) => {
-              console.log("FilmClientPage: Trakt most watched shows response status:", res.status)
-              return res.json()
-            })
-            .catch((err) => {
-              console.error("FilmClientPage: Error fetching Trakt most watched shows:", err)
-              return []
-            }),
-          fetch("/api/film?resource=favorites&type=movies&limit=20")
-            .then((res) => {
-              console.log("FilmClientPage: Favorite movies response status:", res.status)
-              return res.json()
-            })
-            .catch((err) => {
-              console.error("FilmClientPage: Error fetching favorite movies:", err)
-              return []
-            }),
-          fetch("/api/film?resource=favorites&type=shows&limit=20")
-            .then((res) => {
-              console.log("FilmClientPage: Favorite shows response status:", res.status)
-              return res.json()
-            })
-            .catch((err) => {
-              console.error("FilmClientPage: Error fetching favorite shows:", err)
-              return []
-            }),
-          // DB-based favorites
-          fetch("/api/film?resource=favorites&type=directors")
-            .then((res) => {
-              console.log("FilmClientPage: Favorite directors response status:", res.status)
-              return res.json()
-            })
-            .catch((err) => {
-              console.error("FilmClientPage: Error fetching favorite directors:", err)
-              return []
-            }),
-          fetch("/api/film?resource=favorites&type=actors")
-            .then((res) => {
-              console.log("FilmClientPage: Favorite actors response status:", res.status)
-              return res.json()
-            })
-            .catch((err) => {
-              console.error("FilmClientPage: Error fetching favorite actors:", err)
-              return []
-            }),
-          fetch("/api/film?resource=favorites&type=companies")
-            .then((res) => {
-              console.log("FilmClientPage: Favorite companies response status:", res.status)
-              return res.json()
-            })
-            .catch((err) => {
-              console.error("FilmClientPage: Error fetching favorite companies:", err)
-              return []
-            }),
-          fetch("/api/film?resource=favorites&type=characters")
-            .then((res) => {
-              console.log("FilmClientPage: Favorite characters response status:", res.status)
-              return res.json()
-            })
-            .catch((err) => {
-              console.error("FilmClientPage: Error fetching favorite characters:", err)
-              return []
-            }),
+          fetch("/api/film?resource=stats").then(res => res.json()).catch(() => ({ moviesWatched: 0, tvShowsWatched: 0, timeWatchedHours: 0 })),
+          fetch("/api/film?source=trakt&resource=genres").then(res => res.json()).catch(() => []),
+          fetch("/api/film?resource=watched&limit=20").then(res => res.json()).catch(() => []),
+          fetch("/api/film?resource=favorites&type=movies&limit=20").then(res => res.json()).catch(() => []),
+          fetch("/api/film?resource=favorites&type=directors").then(res => res.json()).catch(() => []),
+          fetch("/api/film?resource=favorites&type=actors").then(res => res.json()).catch(() => []),
+          fetch("/api/film?resource=favorites&type=companies").then(res => res.json()).catch(() => []),
+          fetch("/api/film?resource=favorites&type=characters").then(res => res.json()).catch(() => []),
         ])
 
-        console.log("FilmClientPage: API data fetched, setting state")
-
-        // Log received data
-        console.log("FilmClientPage: Recent movies received:", recentMoviesRes.length)
-        if (recentMoviesRes.length > 0) {
-          console.log("FilmClientPage: Sample movie data:", {
-            title: recentMoviesRes[0].title,
-            posterUrl: recentMoviesRes[0].posterUrl,
-          })
-        }
-
-        console.log("FilmClientPage: Recent shows received:", recentShowsRes.length)
-        if (recentShowsRes.length > 0) {
-          console.log("FilmClientPage: Sample show data:", {
-            title: recentShowsRes[0].title,
-            posterUrl: recentShowsRes[0].posterUrl,
-          })
-        }
-
-        // Set API data
         setWatchedStats(watchedStatsRes)
         setMostWatchedGenres(genresRes)
-        setRecentMovies(recentMoviesRes)
-        setRecentShows(recentShowsRes)
         setMostWatchedMovies(watchedMoviesRes)
-        setMostWatchedShows(mostWatchedShowsRes)
         setFavoriteMovies(favoriteMoviesRes)
-        setFavoriteShows(favoriteShowsRes)
-        
-        // Set JSON-based favorites data
         setFavDirectors(favDirectorsRes)
         setFavActors(favActorsRes)
         setFavCompanies(favCompaniesRes)
         setFavCharacters(favCharactersRes)
-
-        console.log("FilmClientPage: All data fetched and state set")
       } catch (err) {
-        console.error("FilmClientPage: Error fetching film data:", err)
         setError("Failed to load film data. Please try again later.")
       } finally {
         setLoading(false)
-        console.log("FilmClientPage: Loading complete")
       }
     }
-
     fetchData()
   }, [])
+
+  const handleTabClick = (tab: "overview" | "watched") => {
+    if (tab === "overview") {
+      router.push("/film")
+    } else {
+      router.push("/film/watched")
+    }
+  }
+
+  const activeTab = pathname === "/film" ? "overview" : "watched"
 
   if (loading) {
     return (
@@ -225,148 +88,151 @@ export default function FilmClientPage() {
   }
 
   if (error) {
-    console.error("FilmClientPage: Rendering error state:", error)
     return (
-      <div
-        className="bg-gray-200 dark:bg-zinc-800 border border-gray-300 dark:border-zinc-700 text-gray-800 dark:text-zinc-200 px-4 py-3 rounded relative"
-        role="alert"
-      >
+      <div className="bg-gray-200 dark:bg-zinc-800 border border-gray-300 dark:border-zinc-700 text-gray-800 dark:text-zinc-200 px-4 py-3 rounded relative" role="alert">
         <strong className="font-bold">Error: </strong>
         <span className="block sm:inline">{error}</span>
       </div>
     )
   }
 
-  console.log("FilmClientPage: Rendering content with data")
-  console.log("FilmClientPage: Recent movies count:", recentMovies.length)
-  console.log("FilmClientPage: Recent shows count:", recentShows.length)
+  const formattedHours = (watchedStats?.timeWatchedHours || 0).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 1 })
 
   return (
     <div>
-      {/* Stats Section */}
-      <section className="film-section">
-        <FilmStatsSection
-          moviesCount={watchedStats?.moviesWatched || 0}
-          tvShowsCount={watchedStats?.tvShowsWatched || 0}
-          hoursWatched={watchedStats?.timeWatchedHours || 0}
-        />
-      </section>
+      {/* Tab Navigation */}
+      <div className="flex space-x-4 border-b mb-4">
+        <button
+          onClick={() => handleTabClick("overview")}
+          className={cn(
+            "px-4 py-2 text-sm font-medium transition-colors hover:text-primary",
+            activeTab === "overview"
+              ? "border-b-2 border-primary text-primary"
+              : "text-muted-foreground"
+          )}
+        >
+          Overview
+        </button>
+        <button
+          onClick={() => handleTabClick("watched")}
+          className={cn(
+            "px-4 py-2 text-sm font-medium transition-colors hover:text-primary",
+            activeTab === "watched"
+              ? "border-b-2 border-primary text-primary"
+              : "text-muted-foreground"
+          )}
+        >
+          Watched
+        </button>
+      </div>
 
-      {/* Genres Section */}
-      {/* Most Watched Genres Section */}
+      {/* Unified Stats Bar */}
       <section className="film-section">
-        <TraktSectionHeader title="Most Watched Genres" />
-        <FilmGenresSection genres={mostWatchedGenres} />
+        <div className="border border-border bg-muted/30 dark:bg-[hsl(var(--popover))]">
+          <div className="flex flex-wrap items-center justify-between px-4 py-3 gap-x-6 gap-y-2">
+            {/* Stats */}
+            <div className="flex items-center gap-6 text-sm">
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-xl font-semibold text-foreground">{(watchedStats?.moviesWatched || 0).toLocaleString()}</span>
+                <span className="text-muted-foreground">films</span>
+              </div>
+              <div className="hidden sm:block w-px h-4 bg-border" />
+              <div className="hidden sm:flex items-baseline gap-1.5">
+                <span className="text-xl font-semibold text-foreground">{(watchedStats?.tvShowsWatched || 0).toLocaleString()}</span>
+                <span className="text-muted-foreground">this year</span>
+              </div>
+              <div className="hidden md:block w-px h-4 bg-border" />
+              <div className="hidden md:flex items-baseline gap-1.5">
+                <span className="text-xl font-semibold text-foreground">{formattedHours}</span>
+                <span className="text-muted-foreground">hours</span>
+              </div>
+            </div>
+            {/* Top Genres */}
+            {mostWatchedGenres && mostWatchedGenres.length > 0 && (
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <span className="hidden lg:inline">Top:</span>
+                {mostWatchedGenres.slice(0, 4).map((genre: { genre: string; count: number }, i: number) => (
+                  <span key={genre.genre} className="text-foreground">
+                    {genre.genre}{i < Math.min(mostWatchedGenres.length, 4) - 1 && <span className="text-muted-foreground ml-2">·</span>}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </section>
 
       {/* Favorite Movies Section */}
       <section className="film-section">
         <TraktSectionHeader title="Favorite Films" />
-        {favoriteMovies && favoriteMovies.length > 0 ? (
-          <TraktHorizontalScroll squareButtons={true}>
+        {favoriteMovies && favoriteMovies.length > 0 && (
+          <PaginatedCardGrid squareButtons={true}>
             {favoriteMovies.map((movie) => (
-              <TraktMovieCard
-                key={movie.id}
-                id={movie.id}
-                title={movie.title}
-                year={movie.year}
-                posterUrl={movie.posterUrl}
-              />
+              <FilmCard key={movie.id} id={movie.id} title={movie.title} year={movie.year} posterUrl={movie.posterUrl} />
             ))}
-          </TraktHorizontalScroll>
-        ) : (
-          <TraktEmptyState message="No favorite movies available." />
+          </PaginatedCardGrid>
         )}
       </section>
 
-      {/* Favorite Directors Section - JSON-based */}
+      {/* Favorite Directors Section */}
       <section className="film-section">
         <TraktSectionHeader title="Favorite Directors" />
-        {favDirectors && favDirectors.length > 0 ? (
-          <TraktHorizontalScroll squareButtons={true}>
+        {favDirectors && favDirectors.length > 0 && (
+          <PaginatedCardGrid squareButtons={true}>
             {favDirectors.map((director) => (
-              <TraktFavDirectorCard key={director.id} id={director.id} name={director.name} image={director.image} />
+              <DirectorCard key={director.id} id={director.id} name={director.name} image={director.image} />
             ))}
-          </TraktHorizontalScroll>
-        ) : (
-          <TraktEmptyState message="No favorite directors available." />
+          </PaginatedCardGrid>
         )}
       </section>
 
-      {/* Favorite Actors Section - JSON-based */}
+      {/* Favorite Actors Section */}
       <section className="film-section">
         <TraktSectionHeader title="Favorite Actors" />
-        {favActors && favActors.length > 0 ? (
-          <TraktHorizontalScroll squareButtons={true}>
+        {favActors && favActors.length > 0 && (
+          <PaginatedCardGrid squareButtons={true}>
             {favActors.map((actor) => (
-              <TraktFavActorCard key={actor.id} id={actor.id} name={actor.name} image={actor.image} />
+              <ActorCard key={actor.id} id={actor.id} name={actor.name} image={actor.image} />
             ))}
-          </TraktHorizontalScroll>
-        ) : (
-          <TraktEmptyState message="No favorite actors available." />
+          </PaginatedCardGrid>
         )}
       </section>
 
-      {/* Favorite Characters Section - JSON-based */}
+      {/* Favorite Characters Section */}
       <section className="film-section">
         <TraktSectionHeader title="Favorite Characters" />
-        {favCharacters && favCharacters.length > 0 ? (
-          <TraktHorizontalScroll squareButtons={true}>
+        {favCharacters && favCharacters.length > 0 && (
+          <PaginatedCardGrid squareButtons={true}>
             {favCharacters.map((character) => (
-              <TraktFavCharacterCard
-                key={character.id}
-                id={character.id}
-                name={character.name}
-                image={character.image}
-                actor={character.actor} // Pass the actor name to the component
-              />
+              <FavCharacterCard key={character.id} id={character.id} name={character.name} image={character.image} actor={character.actor} />
             ))}
-          </TraktHorizontalScroll>
-        ) : (
-          <TraktEmptyState message="No favorite characters available." />
+          </PaginatedCardGrid>
         )}
       </section>
 
       {/* Watched Movies Section */}
       <section className="film-section">
         <TraktSectionHeader title="Watched" />
-        {mostWatchedMovies && mostWatchedMovies.length > 0 ? (
-          <TraktHorizontalScroll squareButtons={true}>
+        {mostWatchedMovies && mostWatchedMovies.length > 0 && (
+          <PaginatedCardGrid squareButtons={true}>
             {mostWatchedMovies.map((movie) => (
-              <TraktMovieCard
-                key={movie.id}
-                id={movie.id}
-                title={movie.title}
-                year={movie.year}
-                posterUrl={movie.posterUrl}
-              />
+              <FilmCard key={movie.id} id={movie.id} title={movie.title} year={movie.year} posterUrl={movie.posterUrl} />
             ))}
-          </TraktHorizontalScroll>
-        ) : (
-          <TraktEmptyState message="No most watched movies available." />
+          </PaginatedCardGrid>
         )}
       </section>
 
-      {/* Favorite Film Companies Section - JSON-based */}
+      {/* Favorite Film Companies Section */}
       <section className="film-section">
         <TraktSectionHeader title="Favorite Film Companies" />
-        {favCompanies && favCompanies.length > 0 ? (
-          <TraktHorizontalScroll squareButtons={true}>
+        {favCompanies && favCompanies.length > 0 && (
+          <PaginatedCardGrid squareButtons={true}>
             {favCompanies.map((company) => (
-              <TraktFavCompanyCard
-                key={company.id}
-                id={company.id}
-                name={company.name}
-                image={company.image}
-                description={company.description}
-              />
+              <CompanyCard key={company.id} id={company.id} name={company.name} image={company.image} description={company.description} />
             ))}
-          </TraktHorizontalScroll>
-        ) : (
-          <TraktEmptyState message="No favorite film companies available." />
+          </PaginatedCardGrid>
         )}
       </section>
     </div>
   )
 }
-

@@ -18,7 +18,7 @@ import { getContentByType } from "@/lib/data";
 import ProgymnasmataPageClient from "./ProgymnasmataPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
-import { ViewTracker } from "@/components/view-tracker";
+import { ViewTracker } from "@/components/core/view-tracker";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 
 // =============================================================================

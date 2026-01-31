@@ -16,7 +16,9 @@ export { Small } from "./small";
 export { Muted } from "./muted";
 export { HR } from "./hr";
 export { Callout } from "./callout";
-export { Snippet } from "./snippet";
+export { CodeBlock } from "./code";
 export { Figure } from "./figure";
+// Note: Image is a server component (uses fs/promises) - import directly if needed
+// For client contexts, use @/components/posts/images/basic-image-display instead
 export { Caption } from "./caption";
 export { FootNotes, Ref, FootNote } from "./footnotes";

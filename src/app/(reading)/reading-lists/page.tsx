@@ -1,9 +1,7 @@
-import { ReadingListsClientPage } from "./reading-lists-client-page"
-import { PageHeader } from "@/components/core"
-import { PageDescription } from "@/components/core"
+import { ReadingPageContent } from "@/components/reading"
+import { PageHeader, PageDescription } from "@/components/core"
 import type { Metadata } from "next"
 
-// Force dynamic rendering to prevent Apollo Client issues during static export
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
@@ -18,32 +16,19 @@ export const metadata: Metadata = {
 }
 
 export default function ReadingListsPage() {
-  const readingListsPageData = {
-    title: "Reading Lists",
-    subtitle: "",
-    start_date: new Date().toISOString(),
-    end_date: "",
-    preview: "Curated reading lists and book collections",
-    status: "In Progress" as const,
-    confidence: "certain" as const,
-    importance: 5,
-  }
-
   return (
     <main className="max-w-[650px] mx-auto px-4 py-12">
       <PageHeader
-        title={readingListsPageData.title}
-        subtitle={readingListsPageData.subtitle}
-        start_date={readingListsPageData.start_date}
-        end_date={readingListsPageData.end_date}
-        preview={readingListsPageData.preview}
-        status={readingListsPageData.status}
-        confidence={readingListsPageData.confidence}
-        importance={readingListsPageData.importance}
+        title="Reading Lists"
+        subtitle=""
+        start_date={new Date().toISOString()}
+        end_date=""
+        preview="Curated reading lists and book collections"
+        status="In Progress"
+        confidence="certain"
+        importance={5}
       />
-
-      <ReadingListsClientPage />
-      
+      <ReadingPageContent page="reading-lists" />
       <PageDescription
         title="About Reading Lists"
         description="Themed collections and curated lists of books organized by topic, genre, or purpose. These lists help organize my reading goals and recommendations."

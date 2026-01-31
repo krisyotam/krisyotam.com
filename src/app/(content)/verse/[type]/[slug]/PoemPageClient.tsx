@@ -18,11 +18,11 @@
 // =============================================================================
 
 import { Header, type HeaderStatus, type HeaderConfidence } from "@/components/core/header"
-import { Footer } from "@/components/footer"
-import { Citation } from "@/components/citation"
+import { Footer } from "@/components/core/footer"
+import { Citation } from "@/components/core/citation"
 import { Comments } from "@/components/core/comments"
 import { VerseDisplay } from "@/components/content/verse"
-import { ViewTracker } from "@/components/view-tracker"
+import { ViewTracker } from "@/components/core/view-tracker"
 import { useEffect, useState } from "react"
 import type { VersePost } from "@/lib/data"
 

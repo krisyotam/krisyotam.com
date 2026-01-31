@@ -20,7 +20,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { PageHeader } from "@/components/core";
-import { CategoriesTable } from "@/components/categories-table";
+import { CategoriesTable } from "@/components/sequences/categories-table";
 
 // =============================================================================
 // Types

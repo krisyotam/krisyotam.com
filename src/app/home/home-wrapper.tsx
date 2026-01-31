@@ -1,7 +1,7 @@
 import { getActivePosts } from "@/lib/posts"
 import { getRandomQuote as getRandomQuoteFromDb } from "@/lib/system-db"
 import { HomeClient } from "@/components/home/HomeClient"
-import FixOutlineIssue from "@/components/fix-outline-issue"
+import FixOutlineIssue from "@/components/ui/fix-outline-issue"
 
 function getRandomQuote() {
   const quote = getRandomQuoteFromDb()

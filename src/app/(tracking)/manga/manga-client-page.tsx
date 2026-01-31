@@ -8,7 +8,7 @@ import {
   AnimeFavoriteCard,
 } from "@/components/anime/anime-cards";
 import { StatsSection } from "@/components/anime/stats-section";
-import { TraktSectionHeader } from "@/components/trakt/trakt-section-header";
+import { TraktSectionHeader } from "@/components/core/section-header";
 import { TabSwitcher } from "@/components/anime/tab-switcher";
 import { Pagination } from "@/components/anime/pagination";
 import { PageDescription } from "@/components/core";
@@ -133,7 +133,7 @@ export default function MangaClientPage() {
         if (username) {
           try {
             const peopleResp = await fetch(
-              `/api/media?source=mal&type=fav-people?username=${encodeURIComponent(username)}`
+              `/api/media?source=mal&type=fav-people&username=${encodeURIComponent(username)}`
             );
             if (peopleResp.ok) {
               const peopleJson: PersonItem[] = await peopleResp.json();
@@ -285,14 +285,14 @@ export default function MangaClientPage() {
         />
 
         {/* Tab Navigation */}
-        <div className="mb-8">
+        <div className="mb-4">
           <TabSwitcher activeTab="manga" />
         </div>
 
         {errorMessage}
 
         {/* Stats Section */}
-        <section className="mb-10">
+        <section className="mb-6">
           {profile?.manga_statistics && (
             <StatsSection profile={profile} activeTab="manga" />
           )}

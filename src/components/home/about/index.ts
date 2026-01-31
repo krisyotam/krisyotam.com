@@ -21,3 +21,8 @@ export { default as RecommendedContent } from './RecommendedContent'
 export { ThemeImageCompare } from './ThemeImageCompare'
 export { default as TestimonialsSection } from './testimonials'
 export { default as Uses } from './Uses'
+
+// Moved from root
+export { WordOfTheDay } from './WordOfTheDay'
+export { Favorites } from './Favorites'
+export { default as SiteStickerCarousel } from './site-sticker-carousel'

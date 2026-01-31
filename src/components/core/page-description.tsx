@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { HelpCircle, X, ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
-import { ICONS_DATA } from "@/components/link-icon"
+import { ICONS_DATA } from "@/components/core/link-icon"
 
 interface IconEntry {
   slug: string

@@ -10,7 +10,7 @@
  * =============================================================================
  */
 
-import SequenceDetailPage from "@/components/sequence-detail-page";
+import SequenceDetailPage from "@/components/sequences/sequence-detail-page";
 import { getSequencesData, getSequenceBySlug } from "@/lib/data";
 import type { Metadata } from "next";
 

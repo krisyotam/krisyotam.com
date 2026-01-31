@@ -2,7 +2,7 @@
 
 import React from "react"
 import Collapse from "@/components/posts/typography/collapse"
-import Dropcap from "@/components/dropcap"
+import Dropcap from "@/components/core/dropcap"
 
 export default function AboutThisSite() {
   return (

@@ -4,14 +4,14 @@
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { LiveClock } from "@/components/live-clock";
+import { LiveClock } from "@/components/ui/live-clock";
 import { PostHeader } from "@/components/core";
 import SiteFooter from "@/components/typography/expanded-footer-block";
-import { Footer } from "@/app/(content)/essays/components/footer";
-import { Citation } from "@/components/citation";
+import { Footer } from "@/components/core/footer";
+import { Citation } from "@/components/core/citation";
 import { Comments } from "@/components/core/comments";
 import { Footnotes } from "@/components/core/footnotes";
-import { ViewTracker } from "@/components/view-tracker";
+import { ViewTracker } from "@/components/core/view-tracker";
 
 interface NewsMeta {
   title: string;

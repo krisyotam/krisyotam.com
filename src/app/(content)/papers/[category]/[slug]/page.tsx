@@ -19,7 +19,7 @@ import { getContentByType } from "@/lib/data";
 import PapersPageClient from "./PapersPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
-import { ViewTracker } from "@/components/view-tracker";
+import { ViewTracker } from "@/components/core/view-tracker";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 import type { PaperMeta, PaperStatus, PaperConfidence } from "@/types/content";
 

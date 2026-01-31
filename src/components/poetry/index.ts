@@ -1,1 +1,0 @@
-export { Poetry as PoetryComponent } from '../poetry' 

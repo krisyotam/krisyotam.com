@@ -6,9 +6,9 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { getGallery } from "@/lib/content-db";
 import { PageHeader } from "@/components/core";
-import { Citation } from "@/components/citation";
-import { LiveClock } from "@/components/live-clock";
-import { Footer } from "@/components/footer";
+import { Citation } from "@/components/core/citation";
+import { LiveClock } from "@/components/ui/live-clock";
+import { Footer } from "@/components/core/footer";
 import { Box } from "@/components/posts/typography/box";
 
 interface GalleryPageProps {

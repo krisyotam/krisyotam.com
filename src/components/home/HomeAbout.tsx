@@ -25,7 +25,7 @@ import {
   Uses,
   TestimonialsSection,
 } from "./about"
-import Favorites from "@/components/Favorites"
+import Favorites from "@/components/home/about/Favorites"
 
 export function HomeAbout() {
   const [openSections, setOpenSections] = useState<number[]>([0])

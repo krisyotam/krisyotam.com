@@ -1,6 +1,6 @@
 "use client"
 
-import IntelligenceCarousel from "@/components/intelligence-carousel"
+import IntelligenceCarousel from "@/components/about/intelligence-carousel"
 
 const IQ_ASSESSMENTS_DATA = {
   realIQ: {

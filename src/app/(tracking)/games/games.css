@@ -5,7 +5,11 @@
 }
 
 .games-section {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.games-stats-section {
+  margin-bottom: 1rem;
 }
 
 .games-section-header {

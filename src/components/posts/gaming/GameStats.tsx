@@ -1,5 +1,3 @@
-import { Gamepad2, Clock, Layers } from "lucide-react"
-
 interface GameStatsSectionProps {
   gamesCount: number
   hoursPlayed: number
@@ -15,23 +13,25 @@ export function GameStatsSection({ gamesCount, hoursPlayed, genresCount }: GameS
   const timeString = days > 0 ? `${days}d ${hours}h` : `${hours}h`
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg shadow-md border border-gray-200 dark:border-zinc-800 p-6 text-center">
-        <Gamepad2 className="h-8 w-8 mx-auto mb-2 text-gray-700 dark:text-zinc-300" />
-        <div className="text-3xl font-bold mb-1 dark:text-white">{gamesCount.toLocaleString()}</div>
-        <div className="text-gray-500 dark:text-zinc-400">Games Played</div>
-      </div>
-
-      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg shadow-md border border-gray-200 dark:border-zinc-800 p-6 text-center">
-        <Clock className="h-8 w-8 mx-auto mb-2 text-gray-700 dark:text-zinc-300" />
-        <div className="text-3xl font-bold mb-1 dark:text-white">{timeString}</div>
-        <div className="text-gray-500 dark:text-zinc-400">Total Playtime</div>
-      </div>
-
-      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg shadow-md border border-gray-200 dark:border-zinc-800 p-6 text-center">
-        <Layers className="h-8 w-8 mx-auto mb-2 text-gray-700 dark:text-zinc-300" />
-        <div className="text-3xl font-bold mb-1 dark:text-white">{genresCount.toLocaleString()}</div>
-        <div className="text-gray-500 dark:text-zinc-400">Genres Played</div>
+    <div className="border border-border bg-muted/30 dark:bg-[hsl(var(--popover))]">
+      <div className="flex flex-wrap items-center justify-between px-4 py-3 gap-x-6 gap-y-2">
+        {/* Stats */}
+        <div className="flex items-center gap-6 text-sm">
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-xl font-semibold text-foreground">{gamesCount.toLocaleString()}</span>
+            <span className="text-muted-foreground">games</span>
+          </div>
+          <div className="hidden sm:block w-px h-4 bg-border" />
+          <div className="hidden sm:flex items-baseline gap-1.5">
+            <span className="text-xl font-semibold text-foreground">{timeString}</span>
+            <span className="text-muted-foreground">playtime</span>
+          </div>
+          <div className="hidden md:block w-px h-4 bg-border" />
+          <div className="hidden md:flex items-baseline gap-1.5">
+            <span className="text-xl font-semibold text-foreground">{genresCount.toLocaleString()}</span>
+            <span className="text-muted-foreground">genres</span>
+          </div>
+        </div>
       </div>
     </div>
   )

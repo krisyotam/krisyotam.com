@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import Link from 'next/link'
 import { PostHeader } from "@/components/core"
-import { Citation } from '@/components/citation'
-import { Footer } from '@/app/(content)/essays/components/footer'
+import { Citation } from '@/components/core/citation'
+import { Footer } from '@/components/core/footer'
 
 interface Symbol {
   id: number

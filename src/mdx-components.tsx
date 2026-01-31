@@ -3,25 +3,25 @@ import React from "react"
 import Image, { type ImageProps } from "next/image"
 import * as Typography from "@/components/typography"
 import { Spoiler } from "spoiled"
-import { InternalLink } from "@/components/internal-link"
-import SimpleBib from "@/components/simplebib"
-import { EnhancedLink } from "@/components/enhanced-link"
+import { InternalLink } from "@/components/mdx/internal-link"
+import SimpleBib from "@/components/core/simplebib"
+import { EnhancedLink } from "@/components/mdx/enhanced-link"
 import Books from "@/components/posts/books/books"
 import Cinema from "@/components/posts/books/cinema"
 import { Tweet } from "@/components/typography/tweet"
 import { Pfp } from "@/components/typography/pfp"
 import Redacted from "@/components/typography/redacted"
-import DateComponent from "@/components/time-stamp"
+import DateComponent from "@/components/core/time-stamp"
 import TikZ from '@/components/typography/tikz'
-import { CodeBlock } from '@/components/ui/code-block'
+import { CodeBlock } from '@/components/typography/code'
 
 // Import all post-related components
 import MiniBio from '@/components/posts/people/mini-bio'
-import Dropcap from '@/components/dropcap'
+import Dropcap from '@/components/core/dropcap'
 import Bible from "@/components/references/christianity/1611bible"
 import { Box } from "@/components/posts/typography/box"
 import { Column, ColumnContainer } from "@/components/posts/typography/column"
-import NameBreakdown from '@/components/name-breakdown'
+import NameBreakdown from '@/components/about/name-breakdown'
 import { Age } from "@/components/posts/typography/age"
 import { Excerpt } from "@/components/posts/typography/excerpt"
 import { Quote } from "@/components/posts/typography/quote"
@@ -33,7 +33,7 @@ import Essay from "@/components/posts/typography/essay"
 import Notice from "@/components/posts/typography/notice"
 import OcCharacterDisplay from "@/components/posts/characters/oc-character-display"
 import CharacterDisplay from "@/components/posts/characters/character-display"
-import Inflation from "@/components/inflation"
+import Inflation from "@/components/mdx/inflation"
 import { EnhancedImageDisplay } from "@/components/posts/images/enhanced-image-display"
 import { Image as BasicImage } from "@/components/posts/images/basic-image-display"
 import { Video as BasicVideo } from "@/components/posts/images/basic-video"
@@ -54,8 +54,8 @@ import Chateau from "@/components/posts/architecture/chateau"
 import ChateauCollection from "@/components/posts/architecture/chateau-collection"
 import Human from "@/components/posts/basic/human"
 import Company from "@/components/posts/basic/company"
-import { QuotesFeed } from "@/components/quotes-feed"; // Add this import
-import { Tree } from "@/components/family-tree"
+import { QuotesFeed } from "@/components/quotes/quotes-feed"; // Add this import
+import { Tree } from "@/components/about/family-tree"
 import WebsiteDemo from "@/components/posts/website/website"
 import { WikiPerson } from "@/components/posts/wikipedia/wiki-person"
 import { WikiFilm } from "@/components/posts/wikipedia/wiki-film"
@@ -65,7 +65,7 @@ import AnimeCharacterDisplay from "@/components/posts/content/anime-character-di
 import { Art7x4 } from "@/components/posts/art/art-7x4"
 import RatingDisplay from "@/components/posts/content/rating"
 import Paper from "@/components/typography/paper"
-import { WebsitePreview } from "@/components/website-preview"
+import { WebsitePreview } from "@/components/mdx/website-preview"
 import { Math } from "@/components/typography/math"
 
 // Define components for MDX
@@ -109,40 +109,18 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     hr: () => <Typography.HR />,
     table: ({ children }) => <table className="w-full border-collapse my-6" data-mdx-table="true">{children}</table>,
     
-    // Handle code blocks with proper styling
-    pre: ({ children, className }) => {
+    // Handle code blocks with CodeBlock component (rauchg style)
+    pre: ({ children }) => {
       // Type for code element children
       interface CodeProps { className?: string; children?: React.ReactNode }
-      // Check if this is a code block with language
-      if (React.isValidElement<CodeProps>(children) &&
-          children.props?.className &&
-          children.props.className.startsWith('language-')) {
 
-        // Extract language from className (e.g., "language-javascript" -> "javascript")
-        let language = children.props.className.replace('language-', '');
-        
-        // Extract filename if present in format ```lang(filename.ext)
-        let filename: string | undefined = undefined;
-        const filenameMatch = language.match(/^(.+?)\((.+?)\)$/);
-        if (filenameMatch) {
-          language = filenameMatch[1]; // Get the language part
-          filename = filenameMatch[2]; // Get the filename part
-        }
-        
-        // Use CodeBlock for syntax highlighting with wrapper for proper styling
-        return (
-          <div className="code-block-wrapper">
-            <CodeBlock language={language} filename={filename}>{children}</CodeBlock>
-          </div>
-        );
+      // Extract code content from children
+      let codeContent = children;
+      if (React.isValidElement<CodeProps>(children) && children.props?.children) {
+        codeContent = children.props.children;
       }
-      
-      // Default styling for pre that matches Box component
-      return (
-        <pre className="p-6 rounded-none my-6 bg-muted/50 dark:bg-[hsl(var(--popover))] font-mono text-sm overflow-x-auto">
-          {children}
-        </pre>
-      );
+
+      return <CodeBlock>{codeContent}</CodeBlock>;
     },
     // Custom table components with explicit styling to prevent boldness
     th: ({ children, ...props }) => (
@@ -166,19 +144,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </td>
     ),
 
-    // Custom image component - use regular img for external URLs since we can't know dimensions
-    img: (props) => (
-      <div className="my-6 text-center">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={props.src}
-          alt={props.alt || ""}
-          style={{ width: "100%", height: "auto", maxWidth: "100%", margin: "0 auto" }}
-          loading="lazy"
-        />
-        {props.title && <Typography.Caption>{props.title}</Typography.Caption>}
-      </div>
-    ),
+    // Image component
+    img: BasicImage,
 
     // Custom components
     Tikz: TikZ,
@@ -210,6 +177,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Large: Typography.Large,
     Small: Typography.Small,
     Muted: Typography.Muted,
+    FootNotes: Typography.FootNotes,
+    FootNote: Typography.FootNote,
+    Ref: Typography.Ref,
+    Figure: Typography.Figure,
+    Image: BasicImage,
+    Caption: Typography.Caption,
     
     // Text formatting and layout components
     InternalLink,

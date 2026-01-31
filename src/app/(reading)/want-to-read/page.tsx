@@ -1,6 +1,5 @@
-import WantToReadClientPage from "./want-to-read-client-page"
-import { PageHeader } from "@/components/core"
-import { PageDescription } from "@/components/core"
+import { ReadingPageContent } from "@/components/reading"
+import { PageHeader, PageDescription } from "@/components/core"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -15,29 +14,19 @@ export const metadata: Metadata = {
 }
 
 export default function WantToReadPage() {
-  const pageData = {
-    title: "Want to Read",
-    subtitle: "",
-    start_date: new Date().toISOString(),
-    end_date: "",
-    preview: "A compilation of books I wish to read",
-    status: "In Progress" as const,
-    confidence: "certain" as const,
-    importance: 7,
-  }
   return (
     <main className="max-w-[650px] mx-auto px-4 py-12">
       <PageHeader
-        title={pageData.title}
-        subtitle={pageData.subtitle}
-        start_date={pageData.start_date}
-        end_date={pageData.end_date}
-        preview={pageData.preview}
-        status={pageData.status}
-        confidence={pageData.confidence}
-        importance={pageData.importance}
+        title="Want to Read"
+        subtitle=""
+        start_date={new Date().toISOString()}
+        end_date=""
+        preview="A compilation of books I wish to read"
+        status="In Progress"
+        confidence="certain"
+        importance={7}
       />
-      <WantToReadClientPage />
+      <ReadingPageContent page="want-to-read" />
       <PageDescription
         title="About the Want to Read Page"
         description="This is my to-read list - books and content I'm planning to read in the future. Items are tracked through StoryGraph and other reading platforms."

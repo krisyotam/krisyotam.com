@@ -6,7 +6,7 @@
  */
 
 import { Post } from "@/lib/posts"
-import { FeaturedPost } from "@/components/featured-post"
+import { FeaturedPost } from "@/components/home/featured-post"
 
 interface HomeFeaturedProps {
   posts: Post[]

@@ -1,14 +1,13 @@
-export * from './trakt-fav-director-card';
-export * from './trakt-horizontal-scroll';
-export * from './trakt-fav-character-card';
-export * from './trakt-profile-header';
-export * from './trakt-empty-state';
-export * from './trakt-stats-section';
-export * from './trakt-show-card';
-export * from './trakt-section-header';
-export * from './trakt-movie-card';
-export * from './trakt-help-modal';
-export * from './trakt-fav-producer-card';
-export * from './trakt-fav-company-card';
-export * from './trakt-fav-actor-card';
-export * from './trakt-episode-card'; 
+// Card components
+export { ActorCard, ActorCard as TraktFavActorCard } from './ActorCard';
+export { FilmCard, FilmCard as TraktMovieCard } from './FilmCard';
+export { ShowCard, ShowCard as TraktShowCard } from './ShowCard';
+export { DirectorCard, DirectorCard as TraktFavDirectorCard } from './DirectorCard';
+export { CompanyCard, CompanyCard as TraktFavCompanyCard } from './CompanyCard';
+export { FavCharacterCard, FavCharacterCard as TraktFavCharacterCard } from './FavCharacterCard';
+export { CharacterCard } from './character-card';
+export { ProducerCard, ProducerCard as TraktFavProducerCard } from './ProducerCard';
+export { EpisodeCard, EpisodeCard as TraktEpisodeCard } from './EpisodeCard';
+
+// Utility components
+export { PaginatedCardGrid, PaginatedCardGrid as HorizontalScroll, PaginatedCardGrid as TraktHorizontalScroll } from './PaginatedCardGrid';

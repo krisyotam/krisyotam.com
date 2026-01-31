@@ -19,7 +19,7 @@ import { getActiveContentByType } from "@/lib/data";
 import NewsPageClient from "./NewsPageClient";
 import { TOC } from "@/components/core/toc";
 import { Sidenotes } from "@/components/core/sidenotes";
-import { ViewTracker } from "@/components/view-tracker";
+import { ViewTracker } from "@/components/core/view-tracker";
 import { extractHeadingsFromMDX } from "@/lib/mdx";
 import type { NewsMeta, NewsStatus, NewsConfidence } from "@/types/content";
 

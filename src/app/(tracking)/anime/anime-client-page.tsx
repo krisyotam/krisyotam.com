@@ -10,7 +10,7 @@ import {
   AnimeFavoriteCard,
 } from "@/components/anime/anime-cards";
 import { StatsSection } from "@/components/anime/stats-section";
-import { TraktSectionHeader } from "@/components/trakt/trakt-section-header";
+import { TraktSectionHeader } from "@/components/core/section-header";
 import { Pagination } from "@/components/anime/pagination";
 import { PageDescription } from "@/components/core";
 
@@ -244,14 +244,14 @@ export default function AnimeClientPage() {
         />
 
         {/* Tab Navigation */}
-        <div className="mb-8">
+        <div className="mb-4">
           <TabSwitcher activeTab="anime" />
         </div>
 
         {errorMessage}
 
         {/* Stats Section */}
-        <section className="mb-10">
+        <section className="mb-6">
           {profile?.anime_statistics && (
             <StatsSection profile={profile} activeTab="anime" />
           )}

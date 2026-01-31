@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import LinkIcon from "@/components/link-icon"
+import LinkIcon from "@/components/core/link-icon"
 
 interface AProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string
