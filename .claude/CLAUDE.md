@@ -1,5 +1,33 @@
 
-# MDX Content 
+# Git Commits
+
+All commits for this repository MUST be made using the git.js script:
+
+```bash
+# Interactive mode
+node public/scripts/keep/git.js
+
+# Headless mode (for automation)
+node public/scripts/keep/git.js --headless --content "content entry" --kind daily
+node public/scripts/keep/git.js --headless --infra "infrastructure entry" --kind daily
+node public/scripts/keep/git.js --headless --content "content" --infra "infra" --kind reflection
+node public/scripts/keep/git.js --headless --message "regular commit message"
+```
+
+Options:
+- `--headless` - Run without prompts
+- `--content "text"` - Content changelog entry (essays, blog posts, etc.)
+- `--infra "text"` - Infrastructure changelog entry (code changes, bug fixes, etc.)
+- `--kind TYPE` - Entry type: daily, reflection, milestone (default: daily)
+- `--message "text"` - Regular commit message (skips changelog)
+- `--no-push` - Skip pushing to remote
+
+The script automatically updates the changelog database (public/data/system.db) and formats commit messages.
+
+Do NOT use raw git commands for commits. If git.js is missing functionality, update it first then use it.
+
+
+# MDX Content
 Uses a industry standard w/ pretty yaml for documentation purposes which allows us to retain information even if the database 
 was somehow to be lost or corrupted it could be restored by gathering data from pretty yaml. 
 The comment header notice goes in every file the only edits being name is the DOCUMENT, and TYPE which are variables. 

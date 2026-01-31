@@ -10,4 +10,4 @@ export { ProducerCard, ProducerCard as TraktFavProducerCard } from './ProducerCa
 export { EpisodeCard, EpisodeCard as TraktEpisodeCard } from './EpisodeCard';
 
 // Utility components
-export { PaginatedCardGrid, PaginatedCardGrid as HorizontalScroll, PaginatedCardGrid as TraktHorizontalScroll } from './PaginatedCardGrid';
+export { PaginatedCardGrid, PaginatedCardGrid as TraktHorizontalScroll } from './PaginatedCardGrid';

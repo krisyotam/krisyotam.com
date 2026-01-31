@@ -1,23 +1,21 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { MarginCard } from "@/components/margin-notes"
 import { Bibliography } from "@/components/core/bibliography"
 import RelatedPosts from "@/components/core/related-posts"
-import type { TOCHeading, MarginNote, BibliographyEntry } from "@/lib/mdx"
+import type { BibliographyEntry } from "@/lib/mdx"
 
 interface MDXRendererProps {
   children: React.ReactNode
   frontmatter: {
-    headings?: TOCHeading[]
-    marginNotes?: MarginNote[]
     bibliography?: BibliographyEntry[]
+    [key: string]: unknown
   }
   slug: string
 }
 
 export function MDXRenderer({ children, frontmatter, slug }: MDXRendererProps) {
-  const { headings = [], marginNotes = [], bibliography = [] } = frontmatter
+  const { bibliography = [] } = frontmatter
 
   useEffect(() => {
     if (typeof document === "undefined") return

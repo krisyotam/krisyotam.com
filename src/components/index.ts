@@ -8,7 +8,6 @@ export { BookCard } from './posts/books/book-card';
 
 // Content Components
 export { ContentTable } from './content/table';
-export { DocsHeader } from './docs/docs-header';
 
 // Subdirectory exports
 export * from './typography';
@@ -24,7 +23,7 @@ export * from './sequences';
 export * from './stats';
 
 // Home components
-export { default as BentoNav } from './home/bento-nav';
+export { BentoNav } from './home/bento-nav';
 export { BlogPost } from './home/blog-post';
 export { FeaturedPost } from './home/featured-post';
 export { WordOfTheDay } from './home/about/WordOfTheDay';
@@ -53,7 +52,7 @@ export { CatalogContent } from './library/catalog-content';
 // Music components
 export { CurrentlyListening } from './music/CurrentlyListening';
 export { default as PlaylistList } from './music/playlist-list';
-export { PlaylistCard } from './music/playlist-card';
+export { default as PlaylistCard } from './music/playlist-card';
 
 // Quotes components
 export { QuoteCard } from './quotes/quote-card';

@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useEffect } from "react"
-import { EssayModalProvider } from "./essay-modal-provider"
 import { MDXRenderer } from "./mdx-renderer"
 import { EssayPostMeta } from "./essay-post-meta"
 
@@ -53,16 +52,16 @@ export function EssayPostContent({ category, slug, mdxData, postData }: EssayPos
   const url = `https://krisyotam.com/essays/${category}/${slug}`
 
   return (
-    <EssayModalProvider>
-      {/* Add the meta component for extra tags */}
-      <EssayPostMeta 
+    <>
+      <EssayPostMeta
         title={`${title}${subtitle}`}
         description={description}
         imageUrl={coverUrl}
         url={url}
-      />      <MDXRenderer frontmatter={frontmatter} slug={slug}>
+      />
+      <MDXRenderer frontmatter={frontmatter} slug={slug}>
         {React.createElement(content)}
       </MDXRenderer>
-    </EssayModalProvider>
+    </>
   )
 }

@@ -1,3 +1,3 @@
 // Sequences components
 export { CategoriesTable } from './categories-table';
-export { SequenceDetailPage } from './sequence-detail-page';
+export { default as SequenceDetailPage } from './sequence-detail-page';
