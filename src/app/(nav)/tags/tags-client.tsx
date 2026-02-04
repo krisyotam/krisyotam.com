@@ -3,48 +3,44 @@
 import { useState } from "react"
 import Link from "next/link"
 import { PageHeader } from "@/components/core"
-import { PageDescription } from "@/components/core"
 import { Navigation } from "@/components/content/navigation"
 
-interface Category {
-  name: string
+interface Tag {
+  title: string
   slug: string
   count: number
 }
 
-interface CategoriesClientProps {
-  categories: Category[]
-  currentDate: string
+interface TagsClientProps {
+  tags: Tag[]
 }
 
-export function CategoriesClient({ categories, currentDate }: CategoriesClientProps) {
+export function TagsClient({ tags }: TagsClientProps) {
   const [searchQuery, setSearchQuery] = useState("")
 
-  const filteredCategories = categories.filter((category) => {
-    return category.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredTags = tags.filter((tag) => {
+    return tag.title.toLowerCase().includes(searchQuery.toLowerCase())
   })
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
         <PageHeader
-          title="Categories"
-          subtitle="Content organized by topic"
-          start_date={currentDate}
-          end_date=""
-          preview="Browse articles and essays by subject area to explore related ideas across the site."
+          title="Tags"
+          subtitle="Content organized by tag across all types"
+          start_date="2025-01-01"
+          end_date={new Date().toISOString().split('T')[0]}
+          preview="Browse posts by tag to explore related ideas across the site."
           status="Finished"
           confidence="certain"
-          importance={8}
-          backText="Home"
-          backHref="/"
+          importance={7}
           className="mb-3"
         />
 
         <Navigation
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
-          searchPlaceholder="Search categories..."
+          searchPlaceholder="Search tags..."
           viewMode="list"
           onViewModeChange={() => {}}
           showViewToggle={false}
@@ -52,31 +48,33 @@ export function CategoriesClient({ categories, currentDate }: CategoriesClientPr
         />
 
         <main>
-          {filteredCategories.length === 0 ? (
-            <p className="text-muted-foreground">No categories found.</p>
+          {filteredTags.length === 0 ? (
+            <p className="text-muted-foreground">No tags found.</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
                 <thead>
                   <tr className="border-b border-border bg-muted/50 text-foreground">
-                    <th className="py-2 text-left font-medium px-3">Title</th>
+                    <th className="py-2 text-left font-medium px-3">Tag</th>
                     <th className="py-2 text-right font-medium px-3"># of Posts</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredCategories.map((category, index) => (
+                  {filteredTags.map((tag, index) => (
                     <tr
-                      key={category.slug}
+                      key={tag.slug}
                       className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
                         index % 2 === 0 ? "bg-transparent" : "bg-muted/5"
                       }`}
                     >
                       <td className="py-2 px-3">
-                        <Link href={`/category/${category.slug}`} className="text-foreground hover:text-primary">
-                          {category.name}
+                        <Link href={`/tag/${tag.slug}`} className="text-foreground">
+                          {tag.title}
                         </Link>
                       </td>
-                      <td className="py-2 px-3 text-right">{category.count}</td>
+                      <td className="py-2 px-3 text-right text-muted-foreground">
+                        {tag.count}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -84,11 +82,6 @@ export function CategoriesClient({ categories, currentDate }: CategoriesClientPr
             </div>
           )}
         </main>
-
-        <PageDescription
-          title="About Categories"
-          description="Browse all content categories on this site. Each category represents a collection of related articles and essays."
-        />
       </div>
     </div>
   )

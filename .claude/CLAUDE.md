@@ -45,6 +45,9 @@
         - "philosophy" "Notes and writings on metaphysics, epistemology, ethics, logic, and related fields"
         - "security" "Topics related to privacy, cryptography, threat models, and defensive computing practices"
         - "history" "Analyis and documentation of past events, periods, and historical narratives"
+      - Metadata
+        - Status: includes one of the following {Abandoned, Notes, Draft, In Progress, Finished}, Tag pages are always "In Progress"
+        - Confidence: includes {certain, highley likely, likely, possible, unlikely, highly unlikely, remote, impossible} Categories where the information is very verifiable and highly professionally sourced skews towards "certain" where a tag like "Conspiracies" would skew toward hig
   [ Tags ]
   Tags exist under categories, one level deep. They refine, not replace categories.
     - Tags should be in relation to top level categories
@@ -58,7 +61,7 @@
       - 3 Tags per piece of content
         - 3 is a minimum for the amount of tags I want used for a piece of content. Try to reuse as many that make sense as possible and be scarce with creation of new tags only if needed. 
         - Special Case: if a post is trule only explained by one or two tags that is fine. if a post needs more than 3 that is fine. 
-    - Apply from [Categories] the following: "Are Lowercase", "One True Language"
+    - Apply from [Categories] the following: "Are Lowercase", "One True Language", "Metadata"
     
     
 
