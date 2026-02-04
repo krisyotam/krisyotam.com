@@ -12,8 +12,14 @@ interface ImageItem {
   darkSrc?: string;
 }
 
-interface EnhancedImageDisplayProps {
-  images: ImageItem[] | ImageItem;
+interface ImgProps {
+  // Enhanced usage
+  images?: ImageItem[] | ImageItem;
+  // Standard img props (for backwards compatibility with <img> tags)
+  src?: string;
+  alt?: string;
+  caption?: string;
+  // Common props
   className?: string;
   type?: "default" | "wrap";
   width?: number;
@@ -21,19 +27,35 @@ interface EnhancedImageDisplayProps {
   align?: "center" | "left" | "right";
 }
 
-export function EnhancedImageDisplay({
+export function Img({
   images,
+  src,
+  alt,
+  caption,
   className = "",
   type = "default",
   width = 300,
   height = 200,
   align = "center",
-}: EnhancedImageDisplayProps) {
+}: ImgProps) {
   const { resolvedTheme } = useTheme();
-  const imagesArray = Array.isArray(images) ? images : [images];
+
+  // Support both enhanced and standard img props
+  const resolvedImages: ImageItem[] = images
+    ? (Array.isArray(images) ? images : [images])
+    : src
+      ? [{ src, alt: alt || "", caption }]
+      : [];
+
+  const imagesArray = resolvedImages;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const hasMultipleImages = imagesArray.length > 1;
+
+  // Guard for empty images
+  if (imagesArray.length === 0) {
+    return null;
+  }
 
   const openModal = (index: number) => {
     setCurrentImageIndex(index);
@@ -107,6 +129,26 @@ export function EnhancedImageDisplay({
               </div>
             </div>
           </div>
+          {/* Dots navigation for multiple images */}
+          {hasMultipleImages && (
+            <div className="flex justify-center gap-1.5 mt-2">
+              {imagesArray.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentImageIndex(index);
+                  }}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    index === currentImageIndex
+                      ? "bg-foreground"
+                      : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                  }`}
+                  aria-label={`Go to image ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
           {/* Caption is always forced below the image, outside overlay/group */}
           {imagesArray[currentImageIndex].caption && (
             <div
@@ -149,22 +191,43 @@ export function EnhancedImageDisplay({
             )}
           </div>
 
-          {/* Buttons stay same */}
+          {/* Navigation arrows */}
           {hasMultipleImages && (
             <>
               <button
-                onClick={prevImage}
+                onClick={(e) => { e.stopPropagation(); prevImage(); }}
                 className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-black/50 text-white rounded-full hover:bg-black/70"
               >
                 <ChevronLeft className="h-6 w-6" />
               </button>
               <button
-                onClick={nextImage}
+                onClick={(e) => { e.stopPropagation(); nextImage(); }}
                 className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-black/50 text-white rounded-full hover:bg-black/70"
               >
                 <ChevronRight className="h-6 w-6" />
               </button>
             </>
+          )}
+
+          {/* Dots navigation in modal */}
+          {hasMultipleImages && (
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+              {imagesArray.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentImageIndex(index);
+                  }}
+                  className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                    index === currentImageIndex
+                      ? "bg-white"
+                      : "bg-white/40 hover:bg-white/60"
+                  }`}
+                  aria-label={`Go to image ${index + 1}`}
+                />
+              ))}
+            </div>
           )}
         </div>
       )}

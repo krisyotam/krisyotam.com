@@ -69,8 +69,16 @@ function stripFrontmatter(raw: string): string {
   return lines.slice(contentStartIndex).join("\n").trim();
 }
 
-function getContentData(): Map<string, Array<{ slug: string; category: string }>> {
-  const contentMap = new Map<string, Array<{ slug: string; category: string }>>();
+interface ContentDataItem {
+  slug: string;
+  category: string;
+  start_date?: string;
+  end_date?: string;
+  views?: number;
+}
+
+function getContentData(): Map<string, Array<ContentDataItem>> {
+  const contentMap = new Map<string, Array<ContentDataItem>>();
 
   const typeMapping: Record<PostType, string> = {
     essay: "essays",
@@ -85,9 +93,12 @@ function getContentData(): Map<string, Array<{ slug: string; category: string }>
     const content = getContentByType(contentType);
     contentMap.set(
       postType,
-      content.map((c) => ({
+      content.map((c: any) => ({
         slug: c.slug,
         category: c.category,
+        start_date: c.start_date || c.date,
+        end_date: c.end_date,
+        views: c.views ?? 0,
       }))
     );
   }
@@ -95,10 +106,24 @@ function getContentData(): Map<string, Array<{ slug: string; category: string }>
   return contentMap;
 }
 
+function getPostDates(
+  type: PostType,
+  slug: string,
+  contentData: Map<string, Array<ContentDataItem>>
+): { start_date?: string; end_date?: string; views?: number } {
+  const items = contentData.get(type) || [];
+  const item = items.find((i) => i.slug === slug);
+  return {
+    start_date: item?.start_date,
+    end_date: item?.end_date,
+    views: item?.views ?? 0,
+  };
+}
+
 function getPostUrl(
   type: PostType,
   slug: string,
-  contentData: Map<string, Array<{ slug: string; category: string }>>
+  contentData: Map<string, Array<ContentDataItem>>
 ): string {
   let category = "";
 
@@ -215,6 +240,7 @@ export async function GET(request: Request) {
 
           const contentData = getContentData();
           const postUrls: Record<string, string> = {};
+          const postDates: Record<string, { start_date?: string; end_date?: string; views?: number }> = {};
           const allPosts = sequence.sections
             ? sequence.sections.flatMap((section) => section.posts)
             : sequence.posts || [];
@@ -224,33 +250,46 @@ export async function GET(request: Request) {
             const postType = post.content_type || (post as any).type;
             if (postSlug && postType) {
               postUrls[postSlug] = getPostUrl(postType as PostType, postSlug, contentData);
+              postDates[postSlug] = getPostDates(postType as PostType, postSlug, contentData);
             }
           }
 
           const transformedSequence = {
             ...sequence,
-            posts: sequence.posts?.map((p) => ({
-              slug: p.content_slug,
-              order: p.position,
-              type: p.content_type,
-              title: p.title,
-              preview: p.preview,
-              status: p.status,
-            })),
-            sections: sequence.sections?.map((s) => ({
-              title: s.title,
-              posts: s.posts.map((p) => ({
+            posts: sequence.posts?.map((p) => {
+              const postData = postDates[p.content_slug] || {};
+              return {
                 slug: p.content_slug,
                 order: p.position,
                 type: p.content_type,
                 title: p.title,
                 preview: p.preview,
                 status: p.status,
-              })),
+                start_date: postData.start_date,
+                end_date: postData.end_date,
+                views: postData.views ?? 0,
+              };
+            }),
+            sections: sequence.sections?.map((s) => ({
+              title: s.title,
+              posts: s.posts.map((p) => {
+                const postData = postDates[p.content_slug] || {};
+                return {
+                  slug: p.content_slug,
+                  order: p.position,
+                  type: p.content_type,
+                  title: p.title,
+                  preview: p.preview,
+                  status: p.status,
+                  start_date: postData.start_date,
+                  end_date: postData.end_date,
+                  views: postData.views ?? 0,
+                };
+              }),
             })),
           };
 
-          return NextResponse.json({ sequence: transformedSequence, postUrls });
+          return NextResponse.json({ sequence: transformedSequence, postUrls, postDates });
         }
 
         // Return all active sequences

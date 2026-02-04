@@ -2,12 +2,12 @@
  * Home Focus Section Component
  * @author Kris Yotam
  * @date 2025-12-29
- * @description Focus section with sliding quotes, bento nav, theme compare, and testimonials
+ * @description Focus section with sliding quotes, site info tabs, bento nav, theme compare
  */
 
 import { InfiniteMovingQuotes } from "@/components/quotes/InfiniteMovingQuotes"
 import { BentoNav } from "@/components/home/bento-nav"
-import { ThemeImageCompare } from "./about"
+import { ThemeImageCompare, SiteInfoTabs } from "./about"
 
 export function HomeFocus() {
   return (
@@ -15,6 +15,9 @@ export function HomeFocus() {
       <div className="space-y-6 md:space-y-8">
         {/* Sliding Quotes Animation (trim internal bottom padding) */}
         <InfiniteMovingQuotes className="[&>ul]:py-1 md:[&>ul]:py-2" />
+
+        {/* Site Info Tabs - About This Site & Support Me */}
+        <SiteInfoTabs />
 
         {/* Bento navigation */}
         <BentoNav />

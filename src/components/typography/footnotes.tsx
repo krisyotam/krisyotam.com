@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import { A } from "@/components/mdx/a"
+import { A } from "./a"
 import { P } from "./p"
 
 export const FootNotes = ({ children }: { children: ReactNode }) => (

@@ -19,9 +19,6 @@ import {
   MySites,
   SiteInfo,
   Hosting,
-  AboutThisSite,
-  SupportMe,
-  RecommendedContent,
   Uses,
   TestimonialsSection,
 } from "./about"
@@ -41,13 +38,6 @@ export function HomeAbout() {
   }
   return (
     <>
-      {/* About This Site Collapse */}
-      <div className="mb-6">
-        <AboutThisSite />
-        <SupportMe />
-        <RecommendedContent />
-      </div>
-
       {/* About Accordion */}
       <div className="mb-8">
         <AccordionItem

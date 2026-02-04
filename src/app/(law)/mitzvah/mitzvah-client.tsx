@@ -165,7 +165,7 @@ export function MitzvahClient() {
   useEffect(() => {
     async function fetchMitzvot() {
       try {
-        const response = await fetch("/api/reference/mitzvot")
+        const response = await fetch("/api/reference?type=mitzvot")
         if (!response.ok) throw new Error("Failed to fetch mitzvot")
         const data = await response.json()
         setMitzvahData(data)

@@ -1,3 +1,69 @@
+#################################################################################
+#                                                                               #
+#   ██████╗██╗      █████╗ ██╗   ██╗██████╗ ███████╗   ███╗   ███╗██████╗       #
+#  ██╔════╝██║     ██╔══██╗██║   ██║██╔══██╗██╔════╝   ████╗ ████║██╔══██╗      #
+#  ██║     ██║     ███████║██║   ██║██║  ██║█████╗     ██╔████╔██║██║  ██║      #
+#  ██║     ██║     ██╔══██║██║   ██║██║  ██║██╔══╝     ██║╚██╔╝██║██║  ██║      #
+#  ╚██████╗███████╗██║  ██║╚██████╔╝██████╔╝███████╗   ██║ ╚═╝ ██║██████╔╝      #
+#   ╚═════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝     ╚═╝╚═════╝       #
+#                                                                               #
+#  File      : CLAUDE.md                                                        #
+#  Project   : krisyotam.com                                                    #
+#  Author    : Kris Yotam                                                       #
+#  Date      : 2026-02-04                                                       #
+#  Purpose   : Claude guidance + project-specific conventions for krisyotam.com #
+#                                                                               #
+#################################################################################
+
+# Taxonomy: Categories, Tags
+  [ Categories ]
+  Categories are Top-level tags, stable, general, and intentionally limited. 
+  They function as primary entry points for navigation and retrieval.
+    - Use as few as possible
+      - Categories should be rare and durable. Adding a new one shoudl feel expensive.
+    - Categories must not overlap
+      - Ex. "philosophy" & "ethics" cannot both be categories, since philosophy is more general "ethics" is demoted to a tag. 
+    - Categories are plural by convention
+      - Ex. books, films, ideas
+      - Special Case: a category that is obviouslly referred to in the singular i.e. software, hardware
+    - Categories are lower-case
+      - In the database categories are lowercase, the site can manipulate the data when a change in format is needed aesthetically. "Avant-Garde" is to be submitted as "avant-garde" and "Philosophy" as "philsophy" 
+    - Categories are single words
+      - i.e. most field names are singular, and in the case they are plural like "Marine Biology" it is a subset of the category "Biology"
+      - Special Case: some field names at top level require two words i.e. "Computer Science" which is a top level field and thus a category.
+    - Keep Categories on a general level.
+      - i.e. It is preferred to have "Sports" over "Soccer" or "Weightlifting" as a Category. The other's as less general and tags. 
+    - Omit Categories that are obvious
+      - If it has a top level route in my site i.e. (papers, essays, blog, til, notes) it is obvious. Also things such as "Post" or "2026" ect. are to obvious and communicated via other formats. 
+    - Keep one true language.
+      - i.e. all tags are in english, "Philosophy" is taken over "Filosofia" in all cases
+      - Special Case: the category is a field like "fiqh", "tafsir", ect. with no clean english alternative at all or well known. Other examples include: Otaku, Leitmotif, Ennui, "Avant-Garde"
+    - Explain Categories
+      - i.e. the description of a category should be to the point, specific. The following are key pairs in the fomrat [Category] [Description]
+        - "software" "Programs, tools, and systems used to perform computational tasks or manage inforamtion"
+        - "hardware" "Physical computing equipment, components, and peripherals."
+        - "philosophy" "Notes and writings on metaphysics, epistemology, ethics, logic, and related fields"
+        - "security" "Topics related to privacy, cryptography, threat models, and defensive computing practices"
+        - "history" "Analyis and documentation of past events, periods, and historical narratives"
+  [ Tags ]
+  Tags exist under categories, one level deep. They refine, not replace categories.
+    - Tags should be in relation to top level categories
+      - i.e. where "sports" is a category sports (soccer, golf, ping-pong) is the relationship between 3 tgags and a category
+    - Use few new tags as possible per item. 
+      - i.e. the value of a tag increases the more it is used so rather than "jogging, sprinting, distance" prefer "running" which can class under "sports" as a category but also holds anything related to topics: distance running, sprinting, marathons, ect. 
+      - Tags should remain stable
+        - i.e. "soccer" is to be preferred to "world-cup-2022". for things that need classification this deep they have their own internal system for there route for ex. /reviews
+      - Tags should be specific
+        - "Marine Biology" is preferred to "Biology" as biology is to general and therefor considered a category
+      - 3 Tags per piece of content
+        - 3 is a minimum for the amount of tags I want used for a piece of content. Try to reuse as many that make sense as possible and be scarce with creation of new tags only if needed. 
+        - Special Case: if a post is trule only explained by one or two tags that is fine. if a post needs more than 3 that is fine. 
+    - Apply from [Categories] the following: "Are Lowercase", "One True Language"
+    
+    
+
+
+
 
 # Git Commits
 
@@ -25,6 +91,50 @@ Options:
 The script automatically updates the changelog database (public/data/system.db) and formats commit messages.
 
 Do NOT use raw git commands for commits. If git.js is missing functionality, update it first then use it.
+
+
+# Vercel Deployments & Builds
+
+IMPORTANT: Do NOT run `npm run build` locally - it freezes the system. Use Vercel CLI for all build testing.
+
+## Project Info
+- Project: krisyotam.com (offlinedevs/krisyotam.com)
+- Production is self-hosted via Dokploy, Vercel is used for preview builds and testing only
+
+## Build Testing
+```bash
+# Preview deployment (creates a unique URL for testing)
+vercel
+
+# Check deployment status
+vercel ls
+
+# View deployment logs
+vercel logs <deployment-url>
+```
+
+## Environment Variables
+```bash
+# List all env vars
+vercel env list
+
+# Add a new env var (must add to each environment separately)
+echo "value" | vercel env add VAR_NAME production
+echo "value" | vercel env add VAR_NAME preview
+echo "value" | vercel env add VAR_NAME development
+
+# Remove an env var
+vercel env rm VAR_NAME -y
+
+# Pull env vars to local .env.local
+vercel env pull
+```
+
+## Workflow
+1. Make code changes locally
+2. Run `vercel` to create a preview deployment
+3. Check the preview URL for errors
+4. If build passes, commit and push to trigger Dokploy production deploy
 
 
 # MDX Content
@@ -152,4 +262,3 @@ if a specific type of metadata for ex. origin is not needed it does not need to 
  * @date {YYYY-MM-DD}
  * @updated {YYYY-MM-DD}
  * ========================================================================== */
-

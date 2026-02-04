@@ -51,7 +51,7 @@ export function RulesOfTheInternetClient() {
   useEffect(() => {
     async function fetchRules() {
       try {
-        const response = await fetch("/api/reference/rules")
+        const response = await fetch("/api/reference?type=rules")
         if (!response.ok) throw new Error("Failed to fetch rules")
         const data = await response.json()
         setRulesData(data)

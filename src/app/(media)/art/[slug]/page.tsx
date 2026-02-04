@@ -5,7 +5,7 @@ export const revalidate = false;
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { getArt } from "@/lib/content-db";
-import { Art } from "@/components/art/art";
+import { Art } from "@/components/core/art";
 import { PageHeader } from "@/components/core";
 import { Citation } from "@/components/core/citation";
 import { LiveClock } from "@/components/ui/live-clock";
@@ -93,7 +93,7 @@ export default async function ArtworkPage(props: ArtPageProps) {
       />
 
       <div className="my-8">
-        <Art imageUrl={artwork.image_url || ""} dimension={artwork.dimension || ""} />
+        <Art imageUrl={artwork.image_url || ""} dimension={artwork.dimension || ""} disableHover />
       </div>
 
       {artwork.bio && (

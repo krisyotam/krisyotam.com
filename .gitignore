@@ -8,3 +8,5 @@ tsconfig.tsbuildinfo
 downloads/
 *.mp4
 *.db
+.vercel
+.env*.local

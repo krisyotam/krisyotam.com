@@ -21,6 +21,7 @@ export { default as RecommendedContent } from './RecommendedContent'
 export { ThemeImageCompare } from './ThemeImageCompare'
 export { default as TestimonialsSection } from './testimonials'
 export { default as Uses } from './Uses'
+export { default as SiteInfoTabs } from './SiteInfoTabs'
 
 // Moved from root
 export { WordOfTheDay } from './WordOfTheDay'

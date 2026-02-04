@@ -26,9 +26,10 @@ interface AProps {
   children: ReactNode
   className?: string
   isInternal?: boolean
+  id?: string
 }
 
-export function A({ href, children, className = "", isInternal = false }: AProps) {
+export function A({ href, children, className = "", isInternal = false, id }: AProps) {
   const [isHovering, setIsHovering] = useState(false)
   const hoverTimerRef = useRef<NodeJS.Timeout | null>(null)
   const linkRef = useRef<HTMLAnchorElement>(null)
@@ -86,6 +87,7 @@ export function A({ href, children, className = "", isInternal = false }: AProps
       <a
         ref={linkRef}
         href={href}
+        id={id}
         className={cn(
           "border-b border-dotted border-gray-500 hover:border-gray-900 dark:border-gray-500 dark:hover:border-white transition-colors inline-flex items-center wiki-external-link",
           className,
@@ -110,6 +112,7 @@ export function A({ href, children, className = "", isInternal = false }: AProps
       <a
         ref={linkRef}
         href={href}
+        id={id}
         className={cn(
           "text-primary/80 hover:text-primary transition-colors",
           "border-b border-primary/30 hover:border-primary/60 wiki-internal-link",
@@ -130,6 +133,7 @@ export function A({ href, children, className = "", isInternal = false }: AProps
     <a
       ref={linkRef}
       href={href}
+      id={id}
       className={cn(
         "border-b border-dotted border-gray-500 hover:border-gray-900 dark:border-gray-500 dark:hover:border-white transition-colors",
         className,

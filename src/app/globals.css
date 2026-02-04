@@ -864,14 +864,14 @@
    
    .dropcap-image-wrapper {
      float: left;
-     margin-right: 0.25em !important;    /* force smaller right margin */
-     margin-top: 0.1em !important;       /* align to baseline */
-     margin-bottom: -8px !important;        /* force remove bottom margin */
-     margin-left: 0 !important;          /* force remove left margin */
+     margin-right: -0.5em !important;    /* aggressive pull text closer */
+     margin-top: 0 !important;
+     margin-bottom: -2em !important;
+     margin-left: -0.05em !important;
      line-height: 0;
-     padding: 0 !important;  /* force remove any padding */
-     display: inline-block !important;   /* ensure proper float behavior */
-     clear: none !important;             /* don't clear other floats */
+     padding: 0 !important;
+     display: inline-block !important;
+     clear: none !important;
    }
 
    /* Ensure no extra space is created after the dropcap container */
@@ -901,7 +901,13 @@
      /* width: 3em; */
      /* height: auto; */
    }
-   
+
+   /* Smaller dropcap for SiteInfoTabs - override negative margins */
+   .dropcap-tabs.dropcap-image-wrapper {
+     margin-right: 0.25em !important;
+     margin-bottom: -0.8em !important;
+   }
+
    .dropcap-image {
      /* disable any outlines, highlights, shadows, or filters */
      outline: none !important;
@@ -1444,25 +1450,263 @@ p .katex-display {
 
 /* =============================================================================
    SIDENOTES (Gwern-style)
+   Based on gwern.net/static/css/default.css
    ========================================================================== */
 
+/* CSS Variables for sidenotes */
+:root {
+  --sidenote-max-width: 380px;
+  --sidenote-padding: 10px;
+  --sidenote-border-width: 3px;
+  --sidenote-border-color: hsl(var(--muted-foreground) / 0.5);
+  --sidenote-highlight-color: hsl(var(--muted-foreground) / 0.7);
+  --sidenote-self-link-border-color: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Sidenote Columns */
+#sidenote-column-left,
+#sidenote-column-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: calc(50vw - (var(--content-width, 672px) / 2 + 96px));
+  max-width: var(--sidenote-max-width);
+  pointer-events: none;
+  z-index: 1;
+}
+
+#sidenote-column-left {
+  right: calc(100% + 64px);
+}
+
+#sidenote-column-right {
+  left: calc(100% + 64px);
+}
+
+#sidenote-column-left:empty,
+#sidenote-column-right:empty {
+  display: none;
+}
+
 /* Sidenote column responsive hiding */
-@media (max-width: 1199px) {
-  .sidenote-column {
+@media (max-width: 1399px) {
+  .sidenote-column,
+  #sidenote-column-left,
+  #sidenote-column-right {
     display: none !important;
   }
 }
 
-/* Sidenote column - hide scrollbar but keep scroll */
-.sidenote-column {
-  scrollbar-width: none !important; /* Firefox */
-  -ms-overflow-style: none !important; /* IE/Edge */
+/* Sidenote Blocks */
+.sidenote {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  opacity: 0.85;
+  padding: 2em 0 0 0;
+  font-size: 0.85em;
+  line-height: 1.5;
+  transition:
+    opacity 0.25s ease-in,
+    transform 0.25s ease-in,
+    top 0.15s ease-out;
+  pointer-events: auto;
 }
 
-.sidenote-column::-webkit-scrollbar {
-  display: none !important; /* Chrome/Safari/Opera */
-  width: 0 !important;
-  height: 0 !important;
+.sidenote.hidden {
+  display: none;
+}
+
+/* Sidenote hover/active states */
+.sidenote:hover,
+.sidenote.targeted,
+.sidenote.displaced,
+.sidenote.highlighted {
+  background-color: hsl(var(--background));
+  opacity: 1.0;
+  box-shadow: 0 0 0 16px hsl(var(--background));
+}
+
+.sidenote.targeted {
+  z-index: 1;
+}
+
+.sidenote.displaced {
+  z-index: 2;
+}
+
+.sidenote.highlighted,
+.sidenote:hover {
+  z-index: 3;
+}
+
+/* Double border (2-lined window aesthetic) via ::after pseudo-element */
+.sidenote::after {
+  content: "";
+  position: absolute;
+  width: calc(100% + 2 * var(--sidenote-padding));
+  height: calc(100% + 2 * var(--sidenote-padding));
+  top: calc(-1 * (var(--sidenote-padding) + var(--sidenote-border-width)));
+  left: calc(-1 * (var(--sidenote-padding) + var(--sidenote-border-width)));
+  border: 0px solid hsl(var(--background));
+  pointer-events: none;
+  transition:
+    border-color 0.15s ease 0.05s,
+    border-style 0.15s ease 0.05s;
+}
+
+/* The double border appears on hover/targeted/highlighted */
+.sidenote:hover::after,
+.sidenote.targeted::after,
+.sidenote.displaced::after,
+.sidenote.highlighted::after {
+  border: 3px double var(--sidenote-highlight-color);
+}
+
+/* Cut-off indicator (ellipsis for long sidenotes) */
+.sidenote.cut-off::before {
+  content: "…";
+  position: absolute;
+  border: 1px dotted var(--sidenote-border-color);
+  top: calc(100% - 1px);
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: fit-content;
+  z-index: 2;
+  background-color: hsl(var(--background));
+  padding: 0.125em 0.5em 0.5em 0.5em;
+  font-size: 1.25em;
+  font-weight: 600;
+  line-height: 0.5;
+  pointer-events: none;
+}
+
+.sidenote.cut-off:hover::before {
+  visibility: hidden;
+}
+
+/* Outer wrapper - dotted top/bottom borders */
+.sidenote-outer-wrapper {
+  max-height: 600px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  border-style: dotted;
+  border-color: var(--sidenote-border-color);
+  border-width: 1px 0;
+}
+
+.sidenote:hover .sidenote-outer-wrapper,
+.sidenote.displaced .sidenote-outer-wrapper,
+.sidenote.highlighted .sidenote-outer-wrapper {
+  max-height: calc(100vh - (2em + 2 * (var(--sidenote-padding) + var(--sidenote-border-width) + 2px)));
+}
+
+.sidenote.cut-off .sidenote-outer-wrapper {
+  overflow-y: scroll;
+  overscroll-behavior: none;
+  padding-right: 0.5em;
+}
+
+/* Scrollbar styles for cut-off sidenotes */
+.sidenote.cut-off .sidenote-outer-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidenote.cut-off .sidenote-outer-wrapper::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+.sidenote.cut-off .sidenote-outer-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Inner wrapper */
+.sidenote-inner-wrapper {
+  position: relative;
+  margin: 0.5em 0;
+}
+
+.sidenote-inner-wrapper > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Sidenote self-link (boxed number badge) */
+.sidenote-self-link {
+  font-weight: 600;
+  position: absolute;
+  top: -1px;
+  background-color: hsl(var(--background));
+  background-image: none !important;
+  border-style: dotted;
+  border-color: var(--sidenote-self-link-border-color);
+  border-width: 1px 1px 0px 1px;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  text-decoration: none !important;
+  color: hsl(var(--foreground)) !important;
+  transition:
+    border-color 0.15s ease 0.05s,
+    border-style 0.15s ease 0.05s;
+}
+
+/* Position self-link based on column */
+#sidenote-column-left .sidenote-self-link {
+  right: 0;
+}
+
+#sidenote-column-right .sidenote-self-link {
+  left: 0;
+}
+
+/* Self-link hover/targeted state - double border */
+.sidenote.targeted > .sidenote-self-link,
+.sidenote > .sidenote-self-link:hover {
+  border-width: 3px;
+  border-style: double;
+  top: -3px;
+}
+
+#sidenote-column-left .sidenote.targeted > .sidenote-self-link,
+#sidenote-column-left .sidenote > .sidenote-self-link:hover {
+  right: -2px;
+}
+
+#sidenote-column-right .sidenote.targeted > .sidenote-self-link,
+#sidenote-column-right .sidenote > .sidenote-self-link:hover {
+  left: -2px;
+}
+
+/* Connecting line from self-link to content */
+.sidenote.targeted > .sidenote-self-link::before,
+.sidenote > .sidenote-self-link:hover::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -3px;
+  width: calc(100% + 64px);
+  max-width: var(--sidenote-max-width);
+  border-bottom: 3px double var(--sidenote-self-link-border-color);
+  transition:
+    border-color 0.15s ease 0.05s,
+    border-style 0.15s ease 0.05s;
+}
+
+#sidenote-column-left .sidenote.targeted > .sidenote-self-link::before,
+#sidenote-column-left .sidenote > .sidenote-self-link:hover::before {
+  right: -1px;
+}
+
+#sidenote-column-right .sidenote.targeted > .sidenote-self-link::before,
+#sidenote-column-right .sidenote > .sidenote-self-link:hover::before {
+  left: -1px;
 }
 
 /* Citation highlighting when hovering its sidenote */
@@ -1472,41 +1716,23 @@ p .katex-display {
   box-shadow: 0 0 0 2px hsl(var(--muted));
 }
 
-/* Sidenote hover effects */
-.sidenote:hover {
-  background-color: hsl(var(--background));
-  box-shadow: 0 0 0 12px hsl(var(--background));
-}
-
-/* Sidenote content - hide scrollbar but keep scroll */
-.sidenote-content-wrapper {
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-}
-
-.sidenote-content-wrapper::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-}
-
 /* Sidenote content prose adjustments */
-.sidenote-content p {
+.sidenote-inner-wrapper p {
   margin: 0 0 0.5em 0;
 }
 
-.sidenote-content p:last-child {
+.sidenote-inner-wrapper p:last-child {
   margin-bottom: 0;
 }
 
-.sidenote-content a {
+.sidenote-inner-wrapper a {
   color: hsl(var(--foreground));
   text-decoration: underline;
   text-decoration-style: dotted;
   text-underline-offset: 2px;
 }
 
-.sidenote-content a:hover {
+.sidenote-inner-wrapper a:hover {
   text-decoration-style: solid;
 }
 

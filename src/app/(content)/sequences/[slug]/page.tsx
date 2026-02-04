@@ -10,7 +10,7 @@
  * =============================================================================
  */
 
-import SequenceDetailPage from "@/components/sequences/sequence-detail-page";
+import { SequenceComponent } from "@/components/core";
 import { getSequencesData, getSequenceBySlug } from "@/lib/data";
 import type { Metadata } from "next";
 
@@ -76,5 +76,5 @@ export async function generateMetadata({
 
 export default async function SequencePage({ params }: SequencePageProps) {
   const { slug } = await params;
-  return <SequenceDetailPage slug={slug} />;
+  return <SequenceComponent slug={slug} />;
 }

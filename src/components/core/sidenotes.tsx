@@ -6,36 +6,56 @@
  * ╠═══════════════════════════════════════════════════════════════════════════╣
  * ║  @author   Kris Yotam                                                     ║
  * ║  @date     2026-01-02                                                     ║
+ * ║  @updated  2026-02-03                                                     ║
  * ╠═══════════════════════════════════════════════════════════════════════════╣
  * ║                                                                           ║
  * ║  Transforms footnotes into margin sidenotes on wide viewports.            ║
  * ║                                                                           ║
  * ║  Features:                                                                ║
- * ║  • Dotted top/bottom borders on sidenote content                          ║
+ * ║  • Double border (3px double) on hover - Gwern's "2-lined" aesthetic      ║
+ * ║  • Dotted top/bottom borders on content wrapper                           ║
  * ║  • Boxed number badge with connecting line on hover                       ║
  * ║  • Bidirectional highlighting (citation ↔ sidenote)                       ║
- * ║  • Smart positioning to avoid overlaps                                    ║
+ * ║  • Smart positioning aligned with citations                               ║
+ * ║  • Collision detection to avoid overlaps                                  ║
+ * ║  • Support for both left and right columns                                ║
  * ║  • Responsive: sidenotes on desktop, footnotes on mobile                  ║
- * ║  • User-configurable via settings menu (default: off)                     ║
  * ║                                                                           ║
- * ║  Based on: gwern.net/static/css/default.css                               ║
+ * ║  Based on: gwern.net/static/js/sidenotes.js & css/default.css             ║
  * ╚═══════════════════════════════════════════════════════════════════════════╝
  */
 
 import { useState, useEffect, useRef, useCallback } from "react"
-import { cn } from "@/lib/utils"
 
 /* ═══════════════════════════════════════════════════════════════════════════
    CONFIGURATION
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const CONFIG = {
-  minWidth: 1200,
+  // Minimum viewport width for sidenotes (px)
+  minWidth: 1400,
+
+  // Minimum vertical spacing between sidenotes (px)
   sidenoteSpacing: 60,
-  maxHeight: 500,
-  contentWidth: 672,     // Match your content max-width
-  gapFromContent: 16,    // Small aesthetic gap from content
-  headerOffset: 380,     // Start sidenotes below the header bottom
+
+  // Padding around sidenotes (px)
+  sidenotePadding: 10,
+
+  // Border width for highlight state (px)
+  sidenoteBorderWidth: 3,
+
+  // Maximum height before sidenote becomes scrollable (px)
+  maxHeight: 600,
+
+  // Gap from content edge to sidenote column (px)
+  gapFromContent: 64,
+
+  // Maximum width of sidenote column (px)
+  maxSidenoteWidth: 380,
+
+  // Which columns to use
+  useLeftColumn: false,
+  useRightColumn: true,
 }
 
 const STORAGE_KEY = "settings_sidenotesEnabled"
@@ -49,6 +69,13 @@ interface Sidenote {
   number: number
   content: string
   citationElement: HTMLElement | null
+}
+
+interface PositionedSidenote extends Sidenote {
+  top: number
+  column: "left" | "right"
+  height: number
+  isCutOff: boolean
 }
 
 interface SidenotesProps {
@@ -67,22 +94,24 @@ const sidenoteId = (num: number) => `sn-${num}`
    ═══════════════════════════════════════════════════════════════════════════ */
 
 export function Sidenotes({ containerSelector = "#content, article, main", enabled = true }: SidenotesProps) {
-  const [sidenotes, setSidenotes] = useState<Sidenote[]>([])
+  const [sidenotes, setSidenotes] = useState<PositionedSidenote[]>([])
   const [isWideViewport, setIsWideViewport] = useState(false)
   const [activeId, setActiveId] = useState<string | null>(null)
   const [ready, setReady] = useState(false)
-  const [userEnabled, setUserEnabled] = useState(false) // Default OFF
+  const [userEnabled, setUserEnabled] = useState(true)
 
-  const columnRef = useRef<HTMLDivElement>(null)
+  const leftColumnRef = useRef<HTMLDivElement>(null)
+  const rightColumnRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLElement | null>(null)
+  const markdownBodyRef = useRef<HTMLElement | null>(null)
 
   // ─── Load User Setting ────────────────────────────────────────────────────
   useEffect(() => {
-    // Load from localStorage (default: off)
     const stored = localStorage.getItem(STORAGE_KEY)
-    setUserEnabled(stored === "true")
+    if (stored !== null) {
+      setUserEnabled(stored === "true")
+    }
 
-    // Listen for settings changes from the settings menu
     const handleSettingChange = (e: CustomEvent<{ enabled: boolean }>) => {
       setUserEnabled(e.detail.enabled)
     }
@@ -102,10 +131,13 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
   }, [])
 
   // ─── Parse Footnotes ───────────────────────────────────────────────────────
-  const parseFootnotes = useCallback(() => {
+  const parseFootnotes = useCallback((): Sidenote[] => {
     const container = document.querySelector(containerSelector) as HTMLElement
     if (!container) return []
     containerRef.current = container
+
+    // Find the markdown body (for positioning reference)
+    markdownBodyRef.current = container.closest("article") || container
 
     const footnoteSection = container.querySelector(
       "section[data-footnotes], .footnotes, section.footnotes"
@@ -150,15 +182,147 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
     return parsed
   }, [containerSelector])
 
+  // ─── Calculate Sidenote Positions ──────────────────────────────────────────
+  const calculatePositions = useCallback((parsedSidenotes: Sidenote[]): PositionedSidenote[] => {
+    if (!markdownBodyRef.current) return []
+
+    const bodyRect = markdownBodyRef.current.getBoundingClientRect()
+    const positioned: PositionedSidenote[] = []
+
+    // Track occupied ranges for each column
+    const occupiedLeft: { top: number; bottom: number }[] = []
+    const occupiedRight: { top: number; bottom: number }[] = []
+
+    parsedSidenotes.forEach((note, index) => {
+      // Determine which column (odd = right, even = left when both enabled)
+      let column: "left" | "right" = "right"
+      if (CONFIG.useLeftColumn && CONFIG.useRightColumn) {
+        column = note.number % 2 === 0 ? "left" : "right"
+      } else if (CONFIG.useLeftColumn) {
+        column = "left"
+      }
+
+      const occupied = column === "left" ? occupiedLeft : occupiedRight
+
+      // Calculate ideal top position (aligned with citation)
+      let idealTop = 0
+      if (note.citationElement) {
+        const citationRect = note.citationElement.getBoundingClientRect()
+        idealTop = citationRect.top - bodyRect.top + 4
+      }
+
+      // Estimate height (will be refined after render)
+      const estimatedHeight = 100
+
+      // Find non-overlapping position
+      let finalTop = Math.max(0, idealTop)
+
+      // Check for collisions and push down if needed
+      for (const range of occupied) {
+        if (finalTop < range.bottom && finalTop + estimatedHeight + CONFIG.sidenoteSpacing > range.top) {
+          finalTop = range.bottom + CONFIG.sidenoteSpacing
+        }
+      }
+
+      // Add to occupied ranges
+      occupied.push({
+        top: finalTop,
+        bottom: finalTop + estimatedHeight + CONFIG.sidenoteSpacing,
+      })
+
+      positioned.push({
+        ...note,
+        top: finalTop,
+        column,
+        height: estimatedHeight,
+        isCutOff: false,
+      })
+    })
+
+    return positioned
+  }, [])
+
+  // ─── Recalculate Positions After Render ────────────────────────────────────
+  const recalculatePositions = useCallback(() => {
+    if (!markdownBodyRef.current || sidenotes.length === 0) return
+
+    const bodyRect = markdownBodyRef.current.getBoundingClientRect()
+    const occupiedLeft: { top: number; bottom: number }[] = []
+    const occupiedRight: { top: number; bottom: number }[] = []
+
+    const newPositions = sidenotes.map((note) => {
+      const occupied = note.column === "left" ? occupiedLeft : occupiedRight
+      const sidenoteEl = document.getElementById(note.id)
+      const actualHeight = sidenoteEl?.offsetHeight || note.height
+
+      // Calculate ideal top position (aligned with citation)
+      let idealTop = 0
+      if (note.citationElement) {
+        const citationRect = note.citationElement.getBoundingClientRect()
+        idealTop = citationRect.top - bodyRect.top + 4
+      }
+
+      // Find non-overlapping position
+      let finalTop = Math.max(0, idealTop)
+
+      for (const range of occupied) {
+        if (finalTop < range.bottom && finalTop + actualHeight + CONFIG.sidenoteSpacing > range.top) {
+          finalTop = range.bottom + CONFIG.sidenoteSpacing
+        }
+      }
+
+      occupied.push({
+        top: finalTop,
+        bottom: finalTop + actualHeight + CONFIG.sidenoteSpacing,
+      })
+
+      // Check if content is cut off
+      const outerWrapper = sidenoteEl?.querySelector(".sidenote-outer-wrapper") as HTMLElement
+      const isCutOff = outerWrapper ? outerWrapper.scrollHeight > outerWrapper.offsetHeight + 2 : false
+
+      return {
+        ...note,
+        top: finalTop,
+        height: actualHeight,
+        isCutOff,
+      }
+    })
+
+    setSidenotes(newPositions)
+  }, [sidenotes])
+
   // ─── Initialize ────────────────────────────────────────────────────────────
   useEffect(() => {
     if (!enabled || !userEnabled) return
+
     const timer = setTimeout(() => {
-      setSidenotes(parseFootnotes())
+      const parsed = parseFootnotes()
+      const positioned = calculatePositions(parsed)
+      setSidenotes(positioned)
       setReady(true)
     }, 300)
+
     return () => clearTimeout(timer)
-  }, [enabled, userEnabled, parseFootnotes])
+  }, [enabled, userEnabled, parseFootnotes, calculatePositions])
+
+  // ─── Recalculate on resize ─────────────────────────────────────────────────
+  useEffect(() => {
+    if (!ready) return
+
+    const handleResize = () => {
+      requestAnimationFrame(recalculatePositions)
+    }
+
+    window.addEventListener("resize", handleResize)
+
+    // Initial recalculation after render
+    const timer = setTimeout(recalculatePositions, 100)
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+      clearTimeout(timer)
+    }
+  }, [ready, recalculatePositions])
 
   // ─── Hide original footnotes ───────────────────────────────────────────────
   useEffect(() => {
@@ -200,17 +364,17 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
   }, [ready, isWideViewport])
 
   // ─── Hover handlers ────────────────────────────────────────────────────────
-  const handleSidenoteEnter = (note: Sidenote) => {
+  const handleSidenoteEnter = (note: PositionedSidenote) => {
     setActiveId(note.id)
     note.citationElement?.classList.add("sidenote-citation-active")
   }
 
-  const handleSidenoteLeave = (note: Sidenote) => {
+  const handleSidenoteLeave = (note: PositionedSidenote) => {
     setActiveId(null)
     note.citationElement?.classList.remove("sidenote-citation-active")
   }
 
-  const scrollToCitation = (note: Sidenote) => {
+  const scrollToCitation = (note: PositionedSidenote) => {
     note.citationElement?.scrollIntoView({ behavior: "smooth", block: "center" })
     setActiveId(note.id)
     setTimeout(() => setActiveId(null), 2000)
@@ -219,85 +383,71 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
   // ─── Early return ──────────────────────────────────────────────────────────
   if (!enabled || !userEnabled || !ready || !isWideViewport || sidenotes.length === 0) return null
 
+  const leftSidenotes = sidenotes.filter(n => n.column === "left")
+  const rightSidenotes = sidenotes.filter(n => n.column === "right")
+
   /* ═════════════════════════════════════════════════════════════════════════
      RENDER
      ═════════════════════════════════════════════════════════════════════════ */
 
-  return (
-    <div
-      ref={columnRef}
-      className="sidenote-column fixed pointer-events-auto z-10 overflow-y-auto overflow-x-hidden"
-      style={{
-        // Position: start right after content ends + small gap
-        left: `calc(50% + ${CONFIG.contentWidth / 2}px + ${CONFIG.gapFromContent}px)`,
-        // Start below header
-        top: CONFIG.headerOffset,
-        // Height: from header to bottom
-        height: `calc(100vh - ${CONFIG.headerOffset}px)`,
-        // Width: fill remaining space minus some padding from viewport edge
-        width: `calc((100vw - ${CONFIG.contentWidth}px) / 2 - ${CONFIG.gapFromContent}px - 24px)`,
-        maxWidth: "380px",
-        paddingTop: "1rem",
-        paddingBottom: "4rem",
-      }}
-    >
-      {sidenotes.map((note) => {
-        const isActive = activeId === note.id
+  const renderSidenote = (note: PositionedSidenote) => {
+    const isActive = activeId === note.id
+    const isHighlighted = isActive
 
-        return (
+    return (
+      <div
+        key={note.id}
+        id={note.id}
+        className={`sidenote ${isActive ? "targeted" : ""} ${isHighlighted ? "highlighted" : ""} ${note.isCutOff ? "cut-off" : ""}`}
+        style={{ top: note.top }}
+        onMouseEnter={() => handleSidenoteEnter(note)}
+        onMouseLeave={() => handleSidenoteLeave(note)}
+      >
+        {/* Number badge - sidenote-self-link */}
+        <a
+          href={`#user-content-fnref-${note.number}`}
+          onClick={(e) => { e.preventDefault(); scrollToCitation(note) }}
+          className="sidenote-self-link"
+        >
+          {note.number}
+        </a>
+
+        {/* Outer wrapper with dotted borders */}
+        <div className="sidenote-outer-wrapper">
+          {/* Inner wrapper with content */}
           <div
-            key={note.id}
-            id={note.id}
-            className={cn(
-              "sidenote relative w-full pt-7",
-              "transition-opacity duration-200",
-              isActive ? "opacity-100 z-20" : "opacity-85 hover:opacity-100"
-            )}
-            style={{ marginBottom: CONFIG.sidenoteSpacing }}
-            onMouseEnter={() => handleSidenoteEnter(note)}
-            onMouseLeave={() => handleSidenoteLeave(note)}
-          >
-            {/* Number badge - sits ABOVE the content, overlapping top border */}
-            <a
-              href={`#user-content-fnref-${note.number}`}
-              onClick={(e) => { e.preventDefault(); scrollToCitation(note) }}
-              className={cn(
-                "sidenote-number",
-                "absolute top-0 left-0 z-10",
-                "w-7 h-7 flex items-center justify-center",
-                "text-sm font-semibold",
-                "border border-dotted border-b-0",
-                "transition-all duration-150",
-                isActive
-                  ? "border-foreground"
-                  : "border-muted-foreground/50 hover:border-foreground"
-              )}
-              style={{ backgroundColor: "hsl(var(--background))" }}
-            >
-              {note.number}
-            </a>
+            className="sidenote-inner-wrapper"
+            dangerouslySetInnerHTML={{ __html: note.content }}
+          />
+        </div>
+      </div>
+    )
+  }
 
-            {/* Content wrapper with top/bottom borders */}
-            <div
-              className={cn(
-                "sidenote-content-wrapper",
-                "border-y border-dotted",
-                "transition-all duration-150",
-                isActive ? "border-foreground" : "border-muted-foreground/40"
-              )}
-              style={{ maxHeight: CONFIG.maxHeight, overflowY: "auto" }}
-            >
-              {/* Inner content */}
-              <div
-                className="sidenote-content py-3 px-2 text-sm leading-relaxed"
-                style={{ fontSize: "0.85em", lineHeight: "1.5" }}
-                dangerouslySetInnerHTML={{ __html: note.content }}
-              />
-            </div>
-          </div>
-        )
-      })}
-    </div>
+  return (
+    <>
+      {/* Left Column */}
+      {CONFIG.useLeftColumn && (
+        <div
+          ref={leftColumnRef}
+          id="sidenote-column-left"
+          className="sidenote-column"
+        >
+          {leftSidenotes.map(renderSidenote)}
+        </div>
+      )}
+
+      {/* Right Column */}
+      {CONFIG.useRightColumn && (
+        <div
+          ref={rightColumnRef}
+          id="sidenote-column-right"
+          className="sidenote-column"
+        >
+          {rightSidenotes.map(renderSidenote)}
+        </div>
+      )}
+    </>
   )
 }
 

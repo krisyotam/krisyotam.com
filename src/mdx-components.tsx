@@ -3,9 +3,7 @@ import React from "react"
 import Image, { type ImageProps } from "next/image"
 import * as Typography from "@/components/typography"
 import { Spoiler } from "spoiled"
-import { InternalLink } from "@/components/mdx/internal-link"
 import SimpleBib from "@/components/core/simplebib"
-import { EnhancedLink } from "@/components/mdx/enhanced-link"
 import Books from "@/components/posts/books/books"
 import Cinema from "@/components/posts/books/cinema"
 import { Tweet } from "@/components/typography/tweet"
@@ -31,13 +29,10 @@ import Collapse from "@/components/posts/typography/collapse"
 import FileViewer from "@/components/posts/typography/file-viewer"
 import Essay from "@/components/posts/typography/essay"
 import Notice from "@/components/posts/typography/notice"
-import OcCharacterDisplay from "@/components/posts/characters/oc-character-display"
-import CharacterDisplay from "@/components/posts/characters/character-display"
-import Inflation from "@/components/mdx/inflation"
-import { EnhancedImageDisplay } from "@/components/posts/images/enhanced-image-display"
-import { Image as BasicImage } from "@/components/posts/images/basic-image-display"
-import { Video as BasicVideo } from "@/components/posts/images/basic-video"
-import { EnhancedVideoDisplay } from "@/components/posts/images/enhanced-video-display"
+import Inflation from "@/components/core/inflation"
+import IconDemo from "@/components/core/icon-demo"
+import { Img } from "@/components/core/img"
+import { Video } from "@/components/core/video"
 import TryHackMe from "@/components/posts/ctfs/tryhackme"
 import Book from "@/components/posts/books/book"
 import { BookCard } from "@/components/posts/books/book-card"
@@ -46,26 +41,20 @@ import MangaDisplay from "@/components/posts/content/manga-display"
 import MovieDisplay from "@/components/posts/content/movie-display"
 import Movie from "@/components/posts/media/movie"
 import HauteCouture from "@/components/posts/fashion/haute-couture"
-import PoemDisplay from "@/components/posts/poetry/poem-display"
+import { Verse } from "@/components/content/verse"
 import HauteCoutureCollection from "@/components/posts/fashion/haute-couture-collection"
 import MangaPanelDisplay from "@/components/posts/content/manga-panel-display"
 import MangaPanelDisplayCollection from "@/components/posts/content/manga-panel-display-collection"
-import Chateau from "@/components/posts/architecture/chateau"
-import ChateauCollection from "@/components/posts/architecture/chateau-collection"
-import Human from "@/components/posts/basic/human"
-import Company from "@/components/posts/basic/company"
 import { QuotesFeed } from "@/components/quotes/quotes-feed"; // Add this import
 import { Tree } from "@/components/about/family-tree"
-import WebsiteDemo from "@/components/posts/website/website"
+import WebsiteDemo from "@/components/core/website-demo"
 import { WikiPerson } from "@/components/posts/wikipedia/wiki-person"
 import { WikiFilm } from "@/components/posts/wikipedia/wiki-film"
-import Product from "@/components/posts/basic/product"
 import { RedditEmbed } from "@/components/typography/reddit-embed"
 import AnimeCharacterDisplay from "@/components/posts/content/anime-character-display"
-import { Art7x4 } from "@/components/posts/art/art-7x4"
+import { Art, Art7x4 } from "@/components/core/art"
 import RatingDisplay from "@/components/posts/content/rating"
 import Paper from "@/components/typography/paper"
-import { WebsitePreview } from "@/components/mdx/website-preview"
 import { Math } from "@/components/typography/math"
 
 // Define components for MDX
@@ -94,11 +83,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     },
     p: ({ children }) => <Typography.P>{children}</Typography.P>,
     a: ({ href, children, ...props }) => {
-      // Use the EnhancedLink component for all links
       return (
-        <EnhancedLink href={href || "#"} {...props}>
+        <Typography.A href={href || "#"} {...props}>
           {children}
-        </EnhancedLink>
+        </Typography.A>
       )
     },
     blockquote: ({ children }) => <Typography.Blockquote>{children}</Typography.Blockquote>,
@@ -145,7 +133,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
 
     // Image component
-    img: BasicImage,
+    img: Img,
 
     // Custom components
     Tikz: TikZ,
@@ -181,11 +169,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     FootNote: Typography.FootNote,
     Ref: Typography.Ref,
     Figure: Typography.Figure,
-    Image: BasicImage,
     Caption: Typography.Caption,
     
     // Text formatting and layout components
-    InternalLink,
     Excerpt,
     Spoiler,
     PoemBox,
@@ -197,23 +183,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     
     // References and specialized components
     Inflation,
-    // Character and people components
-    OcCharacterDisplay,
-    CharacterDisplay,
-    Human,
-    Company,
+    // People components
     Tree,
     WikiPerson,
     WikiFilm,
     
-    // Product components
-    Product,
-    
     // Images and media components
-    EnhancedImageDisplay,
-    BasicImage,
-    BasicVideo,
-    EnhancedVideoDisplay,
+    Img,
+    Video,
     
     // Books and reading components
     BookCard,
@@ -223,13 +200,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Movie,
     MangaPanelDisplay,
     MangaPanelDisplayCollection,
-    PoemDisplay,
+    Verse,
     
     // Fashion and architecture components
     HauteCouture,
     HauteCoutureCollection,
-    Chateau,
-    ChateauCollection,
     
     // Code components
     CodeBlock,
@@ -239,16 +214,17 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       // Website embedding component
     WebsiteDemo,
       // Art components
+    Art,
     Art7x4,
     
     // Rating components
     RatingDisplay,
 
     // Custom quotes feed component
-    QuotesFeed, // Add this component
-    
-    // Website components
-    WebsitePreview,
+    QuotesFeed,
+
+    // Demo components
+    IconDemo,
 
     // Math component for LaTeX
     Math,

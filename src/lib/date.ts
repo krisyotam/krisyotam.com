@@ -141,6 +141,35 @@ export function formatNumeric(input: DateInput): string {
 }
 
 /**
+ * Year-first numeric date: "2025.01.15"
+ */
+export function formatYMD(input: DateInput): string {
+  const date = parseDate(input)
+  if (!date) return "Invalid date"
+
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, "0")
+  const day = String(date.getDate()).padStart(2, "0")
+
+  return `${year}.${month}.${day}`
+}
+
+/**
+ * Year-first date range: "2025.01.01 - 2025.01.15"
+ */
+export function formatYMDRange(start: DateInput, end?: DateInput): string {
+  const startDate = parseDate(start)
+  if (!startDate) return "Invalid date"
+
+  if (!end) return formatYMD(startDate)
+
+  const endDate = parseDate(end)
+  if (!endDate) return formatYMD(startDate)
+
+  return `${formatYMD(startDate)} - ${formatYMD(endDate)}`
+}
+
+/**
  * ISO date: "2025-01-15"
  */
 export function formatISO(input: DateInput): string {

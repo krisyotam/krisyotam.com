@@ -12,7 +12,6 @@ export { ContentTable } from './content/table';
 // Subdirectory exports
 export * from './typography';
 export * from './posts';
-export * from './mdx';
 export * from './art';
 export * from './anime';
 export * from './trakt';
@@ -87,11 +86,8 @@ export { Footer } from './core/footer';
 export { ViewTracker } from './core/view-tracker';
 export { default as RelatedPosts } from './core/related-posts';
 
-// MDX components
-export { default as TableOfContents } from './mdx/table-of-contents';
-export { InternalLink } from './mdx/internal-link';
-export { EnhancedLink } from './mdx/enhanced-link';
-export { default as Inflation } from './mdx/inflation';
-export { WebsitePreview } from './mdx/website-preview';
+// Core utility components
+export { default as Inflation } from './core/inflation';
+export { default as IconDemo } from './core/icon-demo';
 
 export { FavoriteCard as FavoriteCardComponent } from './anime';
