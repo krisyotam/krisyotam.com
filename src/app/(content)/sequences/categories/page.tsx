@@ -30,11 +30,16 @@ export const metadata: Metadata = {
 export default async function SequencesCategoriesPage() {
   const data = await getSequencesData();
 
+  // Filter to only active, non-hidden sequences
+  const visibleSequences = data.sequences.filter(
+    (sequence) => sequence.state === "active" && sequence.status !== "hidden"
+  );
+
   // Get unique categories and count sequences in each
   const categoryCounts = new Map<string, number>();
   const categoryPreviews = new Map<string, string[]>();
 
-  data.sequences.forEach((sequence) => {
+  visibleSequences.forEach((sequence) => {
     if (sequence.category) {
       const count = categoryCounts.get(sequence.category) || 0;
       categoryCounts.set(sequence.category, count + 1);

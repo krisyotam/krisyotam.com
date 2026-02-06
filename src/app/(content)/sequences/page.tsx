@@ -30,9 +30,9 @@ export default async function SequencesPage() {
   const sequencesData = await getSequencesData();
   const categoriesData = await getCategoriesData();
 
-  // Filter to only active sequences
+  // Filter to only active sequences (exclude hidden)
   const activeSequences = sequencesData.sequences.filter(
-    (sequence) => sequence.state === "active"
+    (sequence) => sequence.state === "active" && sequence.status !== "hidden"
   );
 
   // Build slugs for view count lookup (format: sequences/slug)

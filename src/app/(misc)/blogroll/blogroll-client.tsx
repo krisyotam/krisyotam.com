@@ -15,6 +15,11 @@ interface BlogrollEntry {
   url: string
   category: string
   tags: string[]
+  rss: string | null
+  lastPostDate: string | null
+  lastPostTitle: string | null
+  lastChecked: string | null
+  activityScore: number
 }
 
 export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClientProps) {
@@ -62,18 +67,55 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
     new Set(entries.map(entry => entry.category).filter(Boolean))
   ).sort()
 
-  // Filter by category + search
-  const filteredEntries = entries.filter(entry => {
-    const matchesCategory = categoryFilter === "All" || entry.category === categoryFilter
-    const searchLower = searchQuery.toLowerCase()
-    const matchesSearch =
-      !searchQuery ||
-      entry.title.toLowerCase().includes(searchLower) ||
-      entry.category.toLowerCase().includes(searchLower) ||
-      entry.tags.some(tag => tag.toLowerCase().includes(searchLower))
+  // Filter by category + search, then sort by activity
+  const filteredEntries = entries
+    .filter(entry => {
+      const matchesCategory = categoryFilter === "All" || entry.category === categoryFilter
+      const searchLower = searchQuery.toLowerCase()
+      const matchesSearch =
+        !searchQuery ||
+        entry.title.toLowerCase().includes(searchLower) ||
+        entry.category.toLowerCase().includes(searchLower) ||
+        entry.tags.some(tag => tag.toLowerCase().includes(searchLower))
 
-    return matchesCategory && matchesSearch
-  })
+      return matchesCategory && matchesSearch
+    })
+    .sort((a, b) => {
+      // Sort by last post date (most recent first), with no-data entries at the bottom
+      const dateA = a.lastPostDate || '1900-01-01'
+      const dateB = b.lastPostDate || '1900-01-01'
+      if (dateA !== dateB) {
+        return dateB.localeCompare(dateA)
+      }
+      // For same date, sort alphabetically
+      return a.title.localeCompare(b.title)
+    })
+
+  // Helper to format last post date
+  function formatLastPost(entry: BlogrollEntry): string {
+    if (!entry.lastPostDate) return ''
+    const date = new Date(entry.lastPostDate)
+    const now = new Date()
+    const days = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24))
+
+    if (days === 0) return 'today'
+    if (days === 1) return 'yesterday'
+    if (days < 7) return `${days}d ago`
+    if (days < 30) return `${Math.floor(days / 7)}w ago`
+    if (days < 365) return `${Math.floor(days / 30)}mo ago`
+    return `${Math.floor(days / 365)}y ago`
+  }
+
+  // Get activity indicator color based on score
+  function getActivityColor(score: number): string {
+    if (score >= 90) return 'bg-green-500'
+    if (score >= 70) return 'bg-green-400'
+    if (score >= 50) return 'bg-yellow-400'
+    if (score >= 30) return 'bg-orange-400'
+    if (score >= 10) return 'bg-orange-500'
+    if (score > 0) return 'bg-red-400'
+    return 'bg-gray-400'
+  }
 
   function handleCategoryChange(newCategory: string) {
     setCategoryFilter(newCategory)
@@ -98,7 +140,7 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
         preview="a curated collection of novel and obscure blogs I read, and have read, over the years"
       />
 
-      <div className="mt-8">
+      <div className="my-3">
         <Navigation
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
@@ -112,8 +154,11 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
           onCategoryChange={handleCategoryChange}
           viewMode={viewMode}
           onViewModeChange={setViewMode}
+          className="mb-0"
         />
+      </div>
 
+      <div>
         {loading ? (
           <div className="flex justify-center items-center py-24">
             <svg className="animate-spin h-8 w-8 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -127,31 +172,59 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
               <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
                 <thead>
                   <tr className="border-b border-border bg-muted/50 text-foreground">
+                    <th className="py-2 text-left font-medium px-3 w-8"></th>
                     <th className="py-2 text-left font-medium px-3">Title</th>
                     <th className="py-2 text-left font-medium px-3">Tags</th>
+                    <th className="py-2 text-right font-medium px-3 hidden sm:table-cell">Last Post</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredEntries.map((entry, index) => (
-                    <tr
-                      key={`${entry.title}-${index}`}
-                      className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
-                        index % 2 === 0 ? "bg-transparent" : "bg-muted/5"
-                      }`}
-                      onClick={() => openExternalUrl(entry.url)}
-                    >
-                      <td className="py-2 px-3 font-medium break-words whitespace-normal">{entry.title}</td>
-                      <td className="py-2 px-3">
-                        <div className="flex flex-wrap gap-1">
-                          {entry.tags.slice(0, 3).map((tag, i) => (
-                            <span key={i} className="px-1.5 py-0.5 text-xs bg-muted/50 rounded-sm">
-                              {tag}
+                  {filteredEntries.map((entry, index) => {
+                    const visibleTags = entry.tags.slice(0, 1)
+                    const remainingCount = entry.tags.length - 1
+
+                    return (
+                      <tr
+                        key={`${entry.title}-${index}`}
+                        className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
+                          index % 2 === 0 ? "bg-transparent" : "bg-muted/5"
+                        }`}
+                        onClick={() => openExternalUrl(entry.url)}
+                      >
+                        <td className="py-2 px-3">
+                          <div
+                            className={`w-2 h-2 rounded-full ${getActivityColor(entry.activityScore)}`}
+                            title={`Activity: ${entry.activityScore}/100`}
+                          />
+                        </td>
+                        <td className="py-2 px-3 font-medium break-words whitespace-normal">
+                          {entry.title}
+                          {entry.lastPostDate && (
+                            <span className="sm:hidden text-xs text-muted-foreground ml-2">
+                              ({formatLastPost(entry)})
                             </span>
-                          ))}
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                          )}
+                        </td>
+                        <td className="py-2 px-3">
+                          <div className="flex items-center gap-1">
+                            {visibleTags.map((tag, i) => (
+                              <span key={i} className="px-1.5 py-0.5 text-xs bg-muted/50 rounded-sm whitespace-nowrap">
+                                {tag}
+                              </span>
+                            ))}
+                            {remainingCount > 0 && (
+                              <span className="text-xs text-muted-foreground whitespace-nowrap">
+                                +{remainingCount}
+                              </span>
+                            )}
+                          </div>
+                        </td>
+                        <td className="py-2 px-3 hidden sm:table-cell text-muted-foreground text-xs text-right whitespace-nowrap">
+                          {formatLastPost(entry) || '—'}
+                        </td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </table>
             ) : (
@@ -169,11 +242,31 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
                     return (
                       <div
                         key={`${entry.title}-${index}`}
-                        className="p-6 border-r border-b border-border last:border-r-0 hover:bg-secondary/5 cursor-pointer"
+                        className="relative p-4 border-r border-b border-border last:border-r-0 hover:bg-secondary/5 cursor-pointer flex flex-col min-h-[100px]"
                         onClick={() => openExternalUrl(entry.url)}
                       >
-                        <div className="font-medium mb-1 break-words whitespace-normal">{entry.title}</div>
-                        <div className="text-xs italic text-muted-foreground break-words whitespace-normal">{host}</div>
+                        {/* Activity indicator - top right */}
+                        <div
+                          className={`absolute top-3 right-3 w-2 h-2 rounded-full ${getActivityColor(entry.activityScore)}`}
+                          title={`Activity: ${entry.activityScore}/100`}
+                        />
+
+                        {/* Title */}
+                        <div className="font-medium text-sm leading-snug pr-5 mb-auto">
+                          {entry.title}
+                        </div>
+
+                        {/* Footer: host + date */}
+                        <div className="mt-3 space-y-0.5">
+                          <div className="text-xs text-muted-foreground truncate">
+                            {host}
+                          </div>
+                          {entry.lastPostDate && (
+                            <div className="text-[11px] text-muted-foreground/60">
+                              {formatLastPost(entry)}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     )
                   })}

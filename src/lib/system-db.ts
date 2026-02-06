@@ -34,6 +34,11 @@ export interface BlogrollEntry {
   url: string;
   category: string;
   tags: string[];
+  rss: string | null;
+  lastPostDate: string | null;
+  lastPostTitle: string | null;
+  lastChecked: string | null;
+  activityScore: number;
 }
 
 export interface ChangelogEntry {
@@ -151,13 +156,44 @@ function getDb(): Database.Database {
 // Blogroll Functions
 // ============================================================================
 
+/**
+ * Calculate activity score based on recency of last post
+ * Higher score = more recent activity
+ * Score ranges from 0-100, with decay over time
+ */
+function calculateActivityScore(lastPostDate: string | null): number {
+  if (!lastPostDate) return 0;
+
+  const now = new Date();
+  const postDate = new Date(lastPostDate);
+  const daysSincePost = Math.floor((now.getTime() - postDate.getTime()) / (1000 * 60 * 60 * 24));
+
+  // Score calculation:
+  // - Posts within last 7 days: 100
+  // - Posts within last 30 days: 90-99
+  // - Posts within last 90 days: 70-89
+  // - Posts within last 180 days: 50-69
+  // - Posts within last 365 days: 30-49
+  // - Posts within last 2 years: 10-29
+  // - Older posts: 1-9
+  // - No data: 0
+
+  if (daysSincePost <= 7) return 100;
+  if (daysSincePost <= 30) return 90 + Math.floor((30 - daysSincePost) / 3);
+  if (daysSincePost <= 90) return 70 + Math.floor((90 - daysSincePost) / 3);
+  if (daysSincePost <= 180) return 50 + Math.floor((180 - daysSincePost) / 5);
+  if (daysSincePost <= 365) return 30 + Math.floor((365 - daysSincePost) / 10);
+  if (daysSincePost <= 730) return 10 + Math.floor((730 - daysSincePost) / 40);
+  return Math.max(1, 10 - Math.floor(daysSincePost / 365));
+}
+
 export function getAllBlogrollEntries(): BlogrollEntry[] {
   const db = getDb();
   try {
     const entries = db
       .prepare(
         `
-      SELECT id, title, url, category
+      SELECT id, title, url, category, rss, last_post_date, last_post_title, last_checked
       FROM blogroll
       ORDER BY title ASC
     `
@@ -170,6 +206,11 @@ export function getAllBlogrollEntries(): BlogrollEntry[] {
       url: entry.url,
       category: entry.category,
       tags: getBlogrollTags(db, entry.id),
+      rss: entry.rss || null,
+      lastPostDate: entry.last_post_date || null,
+      lastPostTitle: entry.last_post_title || null,
+      lastChecked: entry.last_checked || null,
+      activityScore: calculateActivityScore(entry.last_post_date),
     }));
   } finally {
     db.close();

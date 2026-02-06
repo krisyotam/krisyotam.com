@@ -10,7 +10,7 @@ import {
   AnimeFavoriteCard,
 } from "@/components/anime/anime-cards";
 import { StatsSection } from "@/components/anime/stats-section";
-import { TraktSectionHeader } from "@/components/core/section-header";
+import { MediaSectionHeader } from "@/components/core/section-header";
 import { Pagination } from "@/components/anime/pagination";
 import { PageDescription } from "@/components/core";
 
@@ -260,7 +260,7 @@ export default function AnimeClientPage() {
         {/* Currently Watching Section */}
         {malDataAvailable && (
           <section className="mb-10">
-            <TraktSectionHeader title="Currently Watching" count={watching.length} />
+            <MediaSectionHeader title="Currently Watching" count={watching.length} />
             <div className="mt-4">
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {paginatedWatching.length > 0 ? (
@@ -298,7 +298,7 @@ export default function AnimeClientPage() {
         {/* Completed Section */}
         {malDataAvailable && (
           <section className="mb-10">
-            <TraktSectionHeader title="Completed Anime" count={completed.length} />
+            <MediaSectionHeader title="Completed Anime" count={completed.length} />
             <div className="mt-4">
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {paginatedCompleted.length > 0 ? (
@@ -329,7 +329,7 @@ export default function AnimeClientPage() {
         {/* Favorite Anime Section */}
         {malDataAvailable && (
           <section className="mb-10">
-            <TraktSectionHeader title="Favorite Anime" count={favorites.anime.length} />
+            <MediaSectionHeader title="Favorite Anime" count={favorites.anime.length} />
             <div className="mt-4">
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {paginatedFavorites.length > 0 ? (
@@ -359,7 +359,7 @@ export default function AnimeClientPage() {
 
         {/* Favorite Characters Section */}
         <section className="mb-10">
-          <TraktSectionHeader
+          <MediaSectionHeader
             title="Favorite Characters"
             count={favorites.characters.length}
           />
@@ -394,7 +394,7 @@ export default function AnimeClientPage() {
 
         {/* Favorite People Section */}
         <section className="mb-10">
-          <TraktSectionHeader title="Favorite People" count={favorites.people.length} />
+          <MediaSectionHeader title="Favorite People" count={favorites.people.length} />
           <div className="mt-4">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {paginatedPeople.length > 0 ? (
@@ -423,7 +423,7 @@ export default function AnimeClientPage() {
 
         {/* Favorite Companies Section (from JSON) */}
         <section className="mb-10">
-          <TraktSectionHeader
+          <MediaSectionHeader
             title="Favorite Companies"
             count={sortedFavCompanies.length}
           />

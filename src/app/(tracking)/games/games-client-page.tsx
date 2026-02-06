@@ -8,7 +8,7 @@ import { GameCard, GameCards } from "@/components/posts/gaming/GameCard"
 import { CharacterCard, CharacterCards } from "@/components/posts/gaming/CharacterCard"
 import { ConsoleCard, ConsoleCards } from "@/components/posts/gaming/ConsoleCard"
 import { PlatformCard, PlatformCards } from "@/components/posts/gaming/PlatformCard"
-import { TraktSectionHeader } from "@/components/core/section-header"
+import { MediaSectionHeader } from "@/components/core/section-header"
 import { HorizontalScroll, ScrollItem } from "@/components/posts/gaming/HorizontalScroll"
 import { EmptyState } from "@/components/posts/gaming/EmptyState"
 import { Button } from "@/components/ui/button"
@@ -196,7 +196,7 @@ export default function GameClientPage() {
 
       {/* Recently played games - with pagination */}
       <section className="games-section">
-        <TraktSectionHeader title="Recently Played" count={recentlyPlayed.length} />
+        <MediaSectionHeader title="Recently Played" count={recentlyPlayed.length} />
         {recentlyPlayed.length > 0 ? (
           <>
             <GameCards 
@@ -239,7 +239,7 @@ export default function GameClientPage() {
 
       {/* Favorite games - with pagination */}
       <section className="games-section">
-        <TraktSectionHeader title="Favorite Games" count={favoriteGames.length} />
+        <MediaSectionHeader title="Favorite Games" count={favoriteGames.length} />
         {favoriteGames.length > 0 ? (
           <>
             <GameCards 
@@ -282,7 +282,7 @@ export default function GameClientPage() {
 
       {/* Most played games - with pagination */}
       <section className="games-section">
-        <TraktSectionHeader title="Most Played" count={mostPlayed.length} />
+        <MediaSectionHeader title="Most Played" count={mostPlayed.length} />
         {mostPlayed.length > 0 ? (
           <>
             <GameCards 
@@ -325,7 +325,7 @@ export default function GameClientPage() {
 
       {/* Favorite characters - with pagination */}
       <section className="games-section">
-        <TraktSectionHeader title="Favorite Characters" count={characters.length} />
+        <MediaSectionHeader title="Favorite Characters" count={characters.length} />
         {characters.length > 0 ? (
           <>
             <CharacterCards 
@@ -368,7 +368,7 @@ export default function GameClientPage() {
 
       {/* Consoles - with pagination */}
       <section className="games-section">
-        <TraktSectionHeader title="Gaming Consoles" count={consoles.length} />
+        <MediaSectionHeader title="Gaming Consoles" count={consoles.length} />
         {consoles.length > 0 ? (
           <>
             <ConsoleCards 
@@ -411,7 +411,7 @@ export default function GameClientPage() {
 
       {/* Gaming Platforms - with pagination */}
       <section className="games-section">
-        <TraktSectionHeader title="Game Platforms" count={platforms.length} />
+        <MediaSectionHeader title="Game Platforms" count={platforms.length} />
         {platforms.length > 0 ? (
           <>
             <PlatformCards 

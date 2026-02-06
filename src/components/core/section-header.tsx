@@ -31,5 +31,5 @@ export function SectionHeader({ title, count }: SectionHeaderProps) {
   )
 }
 
-// Legacy alias for backwards compatibility
-export const TraktSectionHeader = SectionHeader
+// Alias for media pages
+export const MediaSectionHeader = SectionHeader

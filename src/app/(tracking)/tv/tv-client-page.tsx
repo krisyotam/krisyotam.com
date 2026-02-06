@@ -9,18 +9,17 @@ import { ActorCard } from "@/components/trakt/ActorCard"
 import { CompanyCard } from "@/components/trakt/CompanyCard"
 import { FavCharacterCard } from "@/components/trakt/FavCharacterCard"
 import { DirectorCard } from "@/components/trakt/DirectorCard"
-import { MediaSectionHeader } from "@/components/core/section-header"
+import { MediaSectionHeader } from "@/components/core"
 
-export default function FilmClientPage() {
+export default function TvClientPage() {
   const router = useRouter()
   const pathname = usePathname()
   const [watchedStats, setWatchedStats] = useState<any>(null)
-  const [mostWatchedMovies, setMostWatchedMovies] = useState<any[]>([])
-  const [mostWatchedGenres, setMostWatchedGenres] = useState<any[]>([])
-  const [favoriteMovies, setFavoriteMovies] = useState<any[]>([])
-  const [favDirectors, setFavDirectors] = useState<any[]>([])
+  const [watchedShows, setWatchedShows] = useState<any[]>([])
+  const [favoriteShows, setFavoriteShows] = useState<any[]>([])
+  const [favShowrunners, setFavShowrunners] = useState<any[]>([])
   const [favActors, setFavActors] = useState<any[]>([])
-  const [favCompanies, setFavCompanies] = useState<any[]>([])
+  const [favNetworks, setFavNetworks] = useState<any[]>([])
   const [favCharacters, setFavCharacters] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -31,34 +30,31 @@ export default function FilmClientPage() {
       try {
         const [
           watchedStatsRes,
-          genresRes,
-          watchedMoviesRes,
-          favoriteMoviesRes,
-          favDirectorsRes,
+          watchedShowsRes,
+          favoriteShowsRes,
+          favShowrunnersRes,
           favActorsRes,
-          favCompaniesRes,
+          favNetworksRes,
           favCharactersRes,
         ] = await Promise.all([
-          fetch("/api/film?resource=stats").then(res => res.json()).catch(() => ({ moviesWatched: 0, tvShowsWatched: 0, timeWatchedHours: 0 })),
-          fetch("/api/film?source=trakt&resource=genres").then(res => res.json()).catch(() => []),
-          fetch("/api/film?resource=watched&limit=20").then(res => res.json()).catch(() => []),
-          fetch("/api/film?resource=favorites&type=movies&limit=20").then(res => res.json()).catch(() => []),
-          fetch("/api/film?resource=favorites&type=directors").then(res => res.json()).catch(() => []),
-          fetch("/api/film?resource=favorites&type=actors").then(res => res.json()).catch(() => []),
-          fetch("/api/film?resource=favorites&type=companies").then(res => res.json()).catch(() => []),
-          fetch("/api/film?resource=favorites&type=characters").then(res => res.json()).catch(() => []),
+          fetch("/api/tv?resource=stats").then(res => res.json()).catch(() => ({ showsWatched: 0, episodesWatched: 0, timeWatchedHours: 0, topGenres: [] })),
+          fetch("/api/tv?resource=watched&limit=20").then(res => res.json()).catch(() => []),
+          fetch("/api/tv?resource=favorites&type=shows").then(res => res.json()).catch(() => []),
+          fetch("/api/tv?resource=favorites&type=showrunners").then(res => res.json()).catch(() => []),
+          fetch("/api/tv?resource=favorites&type=actors").then(res => res.json()).catch(() => []),
+          fetch("/api/tv?resource=favorites&type=networks").then(res => res.json()).catch(() => []),
+          fetch("/api/tv?resource=favorites&type=characters").then(res => res.json()).catch(() => []),
         ])
 
         setWatchedStats(watchedStatsRes)
-        setMostWatchedGenres(genresRes)
-        setMostWatchedMovies(watchedMoviesRes)
-        setFavoriteMovies(favoriteMoviesRes)
-        setFavDirectors(favDirectorsRes)
+        setWatchedShows(watchedShowsRes)
+        setFavoriteShows(favoriteShowsRes)
+        setFavShowrunners(favShowrunnersRes)
         setFavActors(favActorsRes)
-        setFavCompanies(favCompaniesRes)
+        setFavNetworks(favNetworksRes)
         setFavCharacters(favCharactersRes)
       } catch (err) {
-        setError("Failed to load film data. Please try again later.")
+        setError("Failed to load TV data. Please try again later.")
       } finally {
         setLoading(false)
       }
@@ -68,20 +64,20 @@ export default function FilmClientPage() {
 
   const handleTabClick = (tab: "overview" | "watched") => {
     if (tab === "overview") {
-      router.push("/film")
+      router.push("/tv")
     } else {
-      router.push("/film/watched")
+      router.push("/tv/watched")
     }
   }
 
-  const activeTab = pathname === "/film" ? "overview" : "watched"
+  const activeTab = pathname === "/tv" ? "overview" : "watched"
 
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[50vh]">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 dark:border-zinc-100 mx-auto mb-4"></div>
-          <p className="dark:text-zinc-300">Loading film data...</p>
+          <p className="dark:text-zinc-300">Loading TV data...</p>
         </div>
       </div>
     )
@@ -97,6 +93,7 @@ export default function FilmClientPage() {
   }
 
   const formattedHours = (watchedStats?.timeWatchedHours || 0).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 1 })
+  const topGenres = watchedStats?.topGenres || []
 
   return (
     <div>
@@ -127,19 +124,19 @@ export default function FilmClientPage() {
       </div>
 
       {/* Unified Stats Bar */}
-      <section className="film-section">
+      <section className="tv-section">
         <div className="border border-border bg-muted/30 dark:bg-[hsl(var(--popover))]">
           <div className="flex flex-wrap items-center justify-between px-4 py-3 gap-x-6 gap-y-2">
             {/* Stats */}
             <div className="flex items-center gap-6 text-sm">
               <div className="flex items-baseline gap-1.5">
-                <span className="text-xl font-semibold text-foreground">{(watchedStats?.moviesWatched || 0).toLocaleString()}</span>
-                <span className="text-muted-foreground">films</span>
+                <span className="text-xl font-semibold text-foreground">{(watchedStats?.showsWatched || 0).toLocaleString()}</span>
+                <span className="text-muted-foreground">shows</span>
               </div>
               <div className="hidden sm:block w-px h-4 bg-border" />
               <div className="hidden sm:flex items-baseline gap-1.5">
-                <span className="text-xl font-semibold text-foreground">{(watchedStats?.tvShowsWatched || 0).toLocaleString()}</span>
-                <span className="text-muted-foreground">this year</span>
+                <span className="text-xl font-semibold text-foreground">{(watchedStats?.episodesWatched || 0).toLocaleString()}</span>
+                <span className="text-muted-foreground">episodes</span>
               </div>
               <div className="hidden md:block w-px h-4 bg-border" />
               <div className="hidden md:flex items-baseline gap-1.5">
@@ -148,12 +145,12 @@ export default function FilmClientPage() {
               </div>
             </div>
             {/* Top Genres */}
-            {mostWatchedGenres && mostWatchedGenres.length > 0 && (
+            {topGenres && topGenres.length > 0 && (
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <span className="hidden lg:inline">Top:</span>
-                {mostWatchedGenres.slice(0, 4).map((genre: { genre: string; count: number }, i: number) => (
+                {topGenres.slice(0, 4).map((genre: { genre: string; count: number }, i: number) => (
                   <span key={genre.genre} className="text-foreground">
-                    {genre.genre}{i < Math.min(mostWatchedGenres.length, 4) - 1 && <span className="text-muted-foreground ml-2">·</span>}
+                    {genre.genre}{i < Math.min(topGenres.length, 4) - 1 && <span className="text-muted-foreground ml-2">·</span>}
                   </span>
                 ))}
               </div>
@@ -162,75 +159,99 @@ export default function FilmClientPage() {
         </div>
       </section>
 
-      {/* Favorite Movies Section */}
-      <section className="film-section">
-        <MediaSectionHeader title="Favorite Films" />
-        {favoriteMovies && favoriteMovies.length > 0 && (
+      {/* Favorite Shows Section */}
+      <section className="tv-section">
+        <MediaSectionHeader title="Favorite Shows" />
+        {favoriteShows && favoriteShows.length > 0 ? (
           <PaginatedCardGrid squareButtons={true}>
-            {favoriteMovies.map((movie) => (
-              <FilmCard key={movie.id} id={movie.id} title={movie.title} year={movie.year} posterUrl={movie.posterUrl} />
+            {favoriteShows.map((show) => (
+              <FilmCard key={show.id} id={show.id} title={show.title} year={show.year} posterUrl={show.posterUrl} />
             ))}
           </PaginatedCardGrid>
+        ) : (
+          <div className="tv-empty-state">
+            <p className="tv-empty-state-message">No favorite shows yet</p>
+          </div>
         )}
       </section>
 
-      {/* Favorite Directors Section */}
-      <section className="film-section">
-        <MediaSectionHeader title="Favorite Directors" />
-        {favDirectors && favDirectors.length > 0 && (
+      {/* Favorite Showrunners Section */}
+      <section className="tv-section">
+        <MediaSectionHeader title="Favorite Showrunners" />
+        {favShowrunners && favShowrunners.length > 0 ? (
           <PaginatedCardGrid squareButtons={true}>
-            {favDirectors.map((director) => (
-              <DirectorCard key={director.id} id={director.id} name={director.name} image={director.image} />
+            {favShowrunners.map((showrunner) => (
+              <DirectorCard key={showrunner.id} id={showrunner.id} name={showrunner.name} image={showrunner.image} />
             ))}
           </PaginatedCardGrid>
+        ) : (
+          <div className="tv-empty-state">
+            <p className="tv-empty-state-message">No favorite showrunners yet</p>
+          </div>
         )}
       </section>
 
       {/* Favorite Actors Section */}
-      <section className="film-section">
+      <section className="tv-section">
         <MediaSectionHeader title="Favorite Actors" />
-        {favActors && favActors.length > 0 && (
+        {favActors && favActors.length > 0 ? (
           <PaginatedCardGrid squareButtons={true}>
             {favActors.map((actor) => (
               <ActorCard key={actor.id} id={actor.id} name={actor.name} image={actor.image} />
             ))}
           </PaginatedCardGrid>
+        ) : (
+          <div className="tv-empty-state">
+            <p className="tv-empty-state-message">No favorite actors yet</p>
+          </div>
         )}
       </section>
 
       {/* Favorite Characters Section */}
-      <section className="film-section">
+      <section className="tv-section">
         <MediaSectionHeader title="Favorite Characters" />
-        {favCharacters && favCharacters.length > 0 && (
+        {favCharacters && favCharacters.length > 0 ? (
           <PaginatedCardGrid squareButtons={true}>
             {favCharacters.map((character) => (
               <FavCharacterCard key={character.id} id={character.id} name={character.name} image={character.image} actor={character.actor} />
             ))}
           </PaginatedCardGrid>
+        ) : (
+          <div className="tv-empty-state">
+            <p className="tv-empty-state-message">No favorite characters yet</p>
+          </div>
         )}
       </section>
 
-      {/* Watched Movies Section */}
-      <section className="film-section">
+      {/* Watched Shows Section */}
+      <section className="tv-section">
         <MediaSectionHeader title="Watched" />
-        {mostWatchedMovies && mostWatchedMovies.length > 0 && (
+        {watchedShows && watchedShows.length > 0 ? (
           <PaginatedCardGrid squareButtons={true}>
-            {mostWatchedMovies.map((movie) => (
-              <FilmCard key={movie.id} id={movie.id} title={movie.title} year={movie.year} posterUrl={movie.posterUrl} />
+            {watchedShows.map((show) => (
+              <FilmCard key={show.id} id={show.id} title={show.title} year={show.year} posterUrl={show.posterUrl} />
             ))}
           </PaginatedCardGrid>
+        ) : (
+          <div className="tv-empty-state">
+            <p className="tv-empty-state-message">No watched shows yet</p>
+          </div>
         )}
       </section>
 
-      {/* Favorite Film Companies Section */}
-      <section className="film-section">
-        <MediaSectionHeader title="Favorite Film Companies" />
-        {favCompanies && favCompanies.length > 0 && (
+      {/* Favorite Networks Section */}
+      <section className="tv-section">
+        <MediaSectionHeader title="Favorite Networks" />
+        {favNetworks && favNetworks.length > 0 ? (
           <PaginatedCardGrid squareButtons={true}>
-            {favCompanies.map((company) => (
-              <CompanyCard key={company.id} id={company.id} name={company.name} image={company.image} description={company.description} />
+            {favNetworks.map((network) => (
+              <CompanyCard key={network.id} id={network.id} name={network.name} image={network.image} description={network.description} />
             ))}
           </PaginatedCardGrid>
+        ) : (
+          <div className="tv-empty-state">
+            <p className="tv-empty-state-message">No favorite networks yet</p>
+          </div>
         )}
       </section>
     </div>

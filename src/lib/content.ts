@@ -14,6 +14,8 @@ import {
   getActiveContentByType,
   getTagsByContentType,
   getCategoriesByContentType,
+  getCategoriesData,
+  getTagsData,
   type Post,
   type TagData,
   type CategoryData
@@ -149,32 +151,27 @@ export async function getActiveUniversalPosts(): Promise<UniversalPost[]> {
 
 /**
  * Get all tags from all content types, merged by slug
+ * Only returns tags that exist in the main tags table
  */
 export async function getAllUniversalTags(): Promise<{ slug: string; title: string; count: number; types: string[] }[]> {
   const posts = await getActiveUniversalPosts()
+
+  // Load all valid tags from the tags table
+  const { tags: validTags } = await getTagsData()
+  const validTagSlugs = new Set(validTags.map(t => t.slug))
+  const tagMetaMap = new Map(validTags.map(t => [t.slug, { slug: t.slug, title: t.title }]))
+
   const tagMap = new Map<string, { title: string; count: number; types: Set<string> }>()
 
-  // Load tag metadata from all content types
-  const tagMetaMap = new Map<string, TagData>()
-  for (const contentType of DB_CONTENT_TYPES) {
-    try {
-      const tags = getTagsByContentType(contentType.type)
-      for (const tag of tags) {
-        if (!tagMetaMap.has(tag.slug)) {
-          tagMetaMap.set(tag.slug, tag)
-        }
-      }
-    } catch (error) {
-      // Content type may not have tags
-    }
-  }
-
-  // Count posts per tag
+  // Count posts per tag, but only for valid tags
   posts.forEach(post => {
     if (!post.tags) return
 
     post.tags.forEach(tag => {
       const slug = slugify(tag)
+
+      // Only count if this tag exists in the tags table
+      if (!validTagSlugs.has(slug)) return
 
       if (!tagMap.has(slug)) {
         const meta = tagMetaMap.get(slug)
@@ -208,31 +205,26 @@ export async function getAllUniversalTags(): Promise<{ slug: string; title: stri
 
 /**
  * Get all categories from all content types, merged by slug
+ * Only returns categories that exist in the main categories table
  */
 export async function getAllUniversalCategories(): Promise<{ slug: string; title: string; count: number; types: string[] }[]> {
   const posts = await getActiveUniversalPosts()
+
+  // Load all valid categories from the categories table
+  const { categories: validCategories } = await getCategoriesData()
+  const validCategorySlugs = new Set(validCategories.map(c => c.slug))
+  const categoryMetaMap = new Map(validCategories.map(c => [c.slug, { slug: c.slug, title: c.title }]))
+
   const categoryMap = new Map<string, { title: string; count: number; types: Set<string> }>()
 
-  // Load category metadata from all content types
-  const categoryMetaMap = new Map<string, CategoryData>()
-  for (const contentType of DB_CONTENT_TYPES) {
-    try {
-      const categories = getCategoriesByContentType(contentType.type)
-      for (const category of categories) {
-        if (!categoryMetaMap.has(category.slug)) {
-          categoryMetaMap.set(category.slug, category)
-        }
-      }
-    } catch (error) {
-      // Content type may not have categories
-    }
-  }
-
-  // Count posts per category
+  // Count posts per category, but only for valid categories
   posts.forEach(post => {
     if (!post.category) return
 
     const slug = slugify(post.category)
+
+    // Only count if this category exists in the categories table
+    if (!validCategorySlugs.has(slug)) return
 
     if (!categoryMap.has(slug)) {
       const meta = categoryMetaMap.get(slug)

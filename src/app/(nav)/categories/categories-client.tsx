@@ -17,6 +17,17 @@ interface CategoriesClientProps {
   currentDate: string
 }
 
+/**
+ * Convert lowercase/hyphenated strings to Title Case
+ * e.g., "computer-science" → "Computer Science", "philosophy" → "Philosophy"
+ */
+function toProperCase(str: string): string {
+  return str
+    .split("-")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ")
+}
+
 export function CategoriesClient({ categories, currentDate }: CategoriesClientProps) {
   const [searchQuery, setSearchQuery] = useState("")
 
@@ -73,7 +84,7 @@ export function CategoriesClient({ categories, currentDate }: CategoriesClientPr
                     >
                       <td className="py-2 px-3">
                         <Link href={`/category/${category.slug}`} className="text-foreground hover:text-primary">
-                          {category.name}
+                          {toProperCase(category.name)}
                         </Link>
                       </td>
                       <td className="py-2 px-3 text-right">{category.count}</td>

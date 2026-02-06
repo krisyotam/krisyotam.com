@@ -66,8 +66,8 @@ export default async function CategoryPage(props: CategoryPageProps) {
   }));
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground pt-16">
-      <div className="max-w-6xl mx-auto px-4">
+    <div className="relative min-h-screen bg-background text-foreground">
+      <div className="max-w-4xl mx-auto p-8 md:p-16 lg:p-24">
         <PageHeader
           title={categoryTitle}
           subtitle={categoryMeta?.subtitle || `Posts in the "${categoryTitle}" category`}

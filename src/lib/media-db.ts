@@ -30,12 +30,14 @@ export interface FavActor {
   id: number;
   name: string;
   image: string;
+  sort_order: number;
 }
 
 export interface FavDirector {
   id: number;
   name: string;
   image: string;
+  sort_order: number;
 }
 
 export interface FavFilmCharacter {
@@ -43,6 +45,7 @@ export interface FavFilmCharacter {
   name: string;
   image: string;
   actor: string;
+  sort_order: number;
 }
 
 export interface FavFilmCompany {
@@ -50,6 +53,7 @@ export interface FavFilmCompany {
   name: string;
   image: string;
   description: string;
+  sort_order: number;
 }
 
 export interface FavProducer {
@@ -57,6 +61,7 @@ export interface FavProducer {
   name: string;
   description: string;
   works: string[];
+  sort_order: number;
 }
 
 export interface Movie {
@@ -126,7 +131,7 @@ export interface MusicPlaylist {
 export function getFavActors(): FavActor[] {
   const db = getDb();
   try {
-    return db.prepare("SELECT * FROM fav_actors ORDER BY id").all() as FavActor[];
+    return db.prepare("SELECT * FROM fav_actors ORDER BY sort_order, id").all() as FavActor[];
   } finally {
     db.close();
   }
@@ -135,7 +140,7 @@ export function getFavActors(): FavActor[] {
 export function getFavDirectors(): FavDirector[] {
   const db = getDb();
   try {
-    return db.prepare("SELECT * FROM fav_directors ORDER BY id").all() as FavDirector[];
+    return db.prepare("SELECT * FROM fav_directors ORDER BY sort_order, id").all() as FavDirector[];
   } finally {
     db.close();
   }
@@ -144,7 +149,7 @@ export function getFavDirectors(): FavDirector[] {
 export function getFavFilmCharacters(): FavFilmCharacter[] {
   const db = getDb();
   try {
-    return db.prepare("SELECT * FROM fav_film_characters ORDER BY id").all() as FavFilmCharacter[];
+    return db.prepare("SELECT * FROM fav_film_characters ORDER BY sort_order, id").all() as FavFilmCharacter[];
   } finally {
     db.close();
   }
@@ -153,7 +158,7 @@ export function getFavFilmCharacters(): FavFilmCharacter[] {
 export function getFavFilmCompanies(): FavFilmCompany[] {
   const db = getDb();
   try {
-    return db.prepare("SELECT * FROM fav_film_companies ORDER BY id").all() as FavFilmCompany[];
+    return db.prepare("SELECT * FROM fav_film_companies ORDER BY sort_order, id").all() as FavFilmCompany[];
   } finally {
     db.close();
   }
@@ -162,7 +167,7 @@ export function getFavFilmCompanies(): FavFilmCompany[] {
 export function getFavProducers(): FavProducer[] {
   const db = getDb();
   try {
-    const rows = db.prepare("SELECT * FROM fav_producers ORDER BY id").all() as any[];
+    const rows = db.prepare("SELECT * FROM fav_producers ORDER BY sort_order, id").all() as any[];
     return rows.map((row) => ({
       ...row,
       works: JSON.parse(row.works || "[]"),
@@ -1107,6 +1112,129 @@ export function getReadingLog(): ReadingLogEntry[] {
   const db = getDb();
   try {
     return db.prepare("SELECT * FROM reading_log ORDER BY date DESC").all() as ReadingLogEntry[];
+  } finally {
+    db.close();
+  }
+}
+
+// ============================================================================
+// TV TYPE DEFINITIONS
+// ============================================================================
+
+export interface TvWatched {
+  id: number;
+  tmdb_id: number | null;
+  name: string;
+  year: string | null;
+  synopsis: string | null;
+  poster: string | null;
+  rating: string | null;
+  watched_date: string | null;
+  creator: string | null;
+  cast: string | null;
+  networks: string | null;
+  countries: string | null;
+  languages: string | null;
+  genres: string | null;
+  runtime: string | null;
+  seasons: number | null;
+  episodes: number | null;
+  status: string | null;
+  sort_order: number;
+}
+
+export interface FavTvActor {
+  id: number;
+  name: string;
+  image: string | null;
+  sort_order: number;
+}
+
+export interface FavTvCharacter {
+  id: number;
+  name: string;
+  image: string | null;
+  actor: string | null;
+  show: string | null;
+  sort_order: number;
+}
+
+export interface FavTvNetwork {
+  id: number;
+  name: string;
+  image: string | null;
+  description: string | null;
+  sort_order: number;
+}
+
+export interface FavShowrunner {
+  id: number;
+  name: string;
+  image: string | null;
+  sort_order: number;
+}
+
+export interface FavTvShow {
+  id: number;
+  name: string;
+  year: string | null;
+  poster: string | null;
+  sort_order: number;
+}
+
+// ============================================================================
+// TV QUERIES
+// ============================================================================
+
+export function getTvWatched(): TvWatched[] {
+  const db = getDb();
+  try {
+    return db.prepare("SELECT * FROM tv_watched ORDER BY sort_order, id").all() as TvWatched[];
+  } finally {
+    db.close();
+  }
+}
+
+export function getFavTvActors(): FavTvActor[] {
+  const db = getDb();
+  try {
+    return db.prepare("SELECT * FROM fav_tv_actors ORDER BY sort_order, id").all() as FavTvActor[];
+  } finally {
+    db.close();
+  }
+}
+
+export function getFavTvCharacters(): FavTvCharacter[] {
+  const db = getDb();
+  try {
+    return db.prepare("SELECT * FROM fav_tv_characters ORDER BY sort_order, id").all() as FavTvCharacter[];
+  } finally {
+    db.close();
+  }
+}
+
+export function getFavTvNetworks(): FavTvNetwork[] {
+  const db = getDb();
+  try {
+    return db.prepare("SELECT * FROM fav_tv_networks ORDER BY sort_order, id").all() as FavTvNetwork[];
+  } finally {
+    db.close();
+  }
+}
+
+export function getFavShowrunners(): FavShowrunner[] {
+  const db = getDb();
+  try {
+    return db.prepare("SELECT * FROM fav_showrunners ORDER BY sort_order, id").all() as FavShowrunner[];
+  } finally {
+    db.close();
+  }
+}
+
+export function getFavTvShows(): FavTvShow[] {
+  const db = getDb();
+  try {
+    return db.prepare("SELECT * FROM fav_tv_shows ORDER BY sort_order, id").all() as FavTvShow[];
   } finally {
     db.close();
   }

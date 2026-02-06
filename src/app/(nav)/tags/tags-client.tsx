@@ -15,6 +15,17 @@ interface TagsClientProps {
   tags: Tag[]
 }
 
+/**
+ * Convert lowercase/hyphenated strings to Title Case
+ * e.g., "action-movie" → "Action Movie", "philosophy" → "Philosophy"
+ */
+function toProperCase(str: string): string {
+  return str
+    .split("-")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ")
+}
+
 export function TagsClient({ tags }: TagsClientProps) {
   const [searchQuery, setSearchQuery] = useState("")
 
@@ -69,7 +80,7 @@ export function TagsClient({ tags }: TagsClientProps) {
                     >
                       <td className="py-2 px-3">
                         <Link href={`/tag/${tag.slug}`} className="text-foreground">
-                          {tag.title}
+                          {toProperCase(tag.title)}
                         </Link>
                       </td>
                       <td className="py-2 px-3 text-right text-muted-foreground">

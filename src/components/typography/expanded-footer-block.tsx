@@ -117,14 +117,22 @@ export default function SiteFooter({ lastUpdated, rawMarkdown }: { lastUpdated?:
           <div className="flex-1 h-px bg-border"></div>  {/* right line */}
         </div>
 
-        {/* Survey Button */}
-        <div className="text-center mb-6">
+        {/* Action Buttons */}
+        <div className="flex justify-center gap-4 mb-6">
           <a href="/surveys/anonymous-feedback">
             <Button
               variant="outline"
               className="rounded-none border-2 px-6 py-2 font-mono text-sm tracking-wide hover:bg-muted bg-transparent"
             >
               Send Anonymous Feedback
+            </Button>
+          </a>
+          <a href="https://krisyotam.substack.com/" target="_blank" rel="noopener noreferrer">
+            <Button
+              variant="outline"
+              className="rounded-none border-2 px-6 py-2 font-mono text-sm tracking-wide hover:bg-muted bg-transparent"
+            >
+              Subscribe to Newsletter
             </Button>
           </a>
         </div>

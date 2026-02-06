@@ -130,7 +130,14 @@ export function ContentTable({
 
   return (
     <div>
-      <table className="w-full text-sm border border-border overflow-hidden shadow-sm">
+      <table className="w-full text-sm border border-border overflow-hidden shadow-sm table-fixed">
+        <colgroup>
+          <col className="w-[45%]" />
+          {showType && <col className="w-[12%]" />}
+          <col className="w-[18%]" />
+          <col className="w-[15%]" />
+          {showViews && <col className="w-[10%]" />}
+        </colgroup>
         <thead>
           <tr className="border-b border-border bg-muted/50 text-foreground">
             <th className="py-2 text-left font-medium px-3">Title</th>
@@ -149,13 +156,13 @@ export function ContentTable({
               }`}
               onClick={() => router.push(getItemUrl(item))}
             >
-              <td className="py-2 px-3">{item.title}</td>
+              <td className="py-2 px-3 truncate">{item.title}</td>
               {showType && item.type && (
-                <td className="py-2 px-3 text-muted-foreground">
+                <td className="py-2 px-3 text-muted-foreground truncate">
                   {formatTypeDisplayName(item.type)}
                 </td>
               )}
-              <td className="py-2 px-3">
+              <td className="py-2 px-3 truncate">
                 {showCategoryLinks ? (
                   <Link
                     href={getCategoryUrl(item.category)}
@@ -168,9 +175,9 @@ export function ContentTable({
                   formatCategoryDisplayName(item.category)
                 )}
               </td>
-              <td className="py-2 px-3">{getDisplayDate(item)}</td>
+              <td className="py-2 px-3 whitespace-nowrap">{getDisplayDate(item)}</td>
               {showViews && (
-                <td className="py-2 px-3 text-right text-muted-foreground">
+                <td className="py-2 px-3 text-right text-muted-foreground whitespace-nowrap">
                   {(item.views ?? 0).toLocaleString()}
                 </td>
               )}

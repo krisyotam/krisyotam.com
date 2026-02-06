@@ -8,7 +8,7 @@ import {
   AnimeFavoriteCard,
 } from "@/components/anime/anime-cards";
 import { StatsSection } from "@/components/anime/stats-section";
-import { TraktSectionHeader } from "@/components/core/section-header";
+import { MediaSectionHeader } from "@/components/core/section-header";
 import { TabSwitcher } from "@/components/anime/tab-switcher";
 import { Pagination } from "@/components/anime/pagination";
 import { PageDescription } from "@/components/core";
@@ -301,7 +301,7 @@ export default function MangaClientPage() {
         {/* Currently Reading */}
         {malDataAvailable && (
           <section className="mb-10">
-            <TraktSectionHeader
+            <MediaSectionHeader
               title="Currently Reading"
               count={reading.length}
             />
@@ -338,7 +338,7 @@ export default function MangaClientPage() {
         {/* Completed Manga */}
         {malDataAvailable && (
           <section className="mb-10">
-            <TraktSectionHeader
+            <MediaSectionHeader
               title="Completed Manga"
               count={completed.length}
             />
@@ -375,7 +375,7 @@ export default function MangaClientPage() {
         {/* Favorite Manga */}
         {malDataAvailable && (
           <section className="mb-10">
-            <TraktSectionHeader
+            <MediaSectionHeader
               title="Favorite Manga"
               count={favorites.manga.length}
             />
@@ -411,7 +411,7 @@ export default function MangaClientPage() {
 
         {/* Favorite Characters */}
         <section className="mb-10">
-          <TraktSectionHeader
+          <MediaSectionHeader
             title="Favorite Characters"
             count={favorites.characters.length}
           />
@@ -446,7 +446,7 @@ export default function MangaClientPage() {
 
         {/* Favorite People */}
         <section className="mb-10">
-          <TraktSectionHeader
+          <MediaSectionHeader
             title="Favorite People"
             count={sortedFavPeople.length}
           />
@@ -478,7 +478,7 @@ export default function MangaClientPage() {
 
         {/* Favorite Companies (from JSON) */}
         <section className="mb-10">
-          <TraktSectionHeader
+          <MediaSectionHeader
             title="Favorite Companies"
             count={sortedFavCompanies.length}
           />

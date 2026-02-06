@@ -24,6 +24,8 @@ const fontSans = localFont({
   ],
   variable: '--font-sans',
   display: 'swap',
+  adjustFontFallback: 'Arial',
+  preload: true,
 });
 
 // Source Serif 4 - Body text and content (Gwern's choice)
@@ -34,7 +36,9 @@ const fontSerif = localFont({
   ],
   variable: '--font-serif',
   display: 'swap',
-  fallback: ['Georgia', 'serif'],
+  adjustFontFallback: 'Times New Roman',
+  fallback: ['Georgia', 'Times New Roman', 'serif'],
+  preload: true,
 });
 
 // IBM Plex Mono - Code blocks
@@ -47,6 +51,8 @@ const fontMono = localFont({
   ],
   variable: '--font-mono',
   display: 'swap',
+  adjustFontFallback: 'Courier New',
+  preload: true,
 });
 
 // Enhanced metadata for the site

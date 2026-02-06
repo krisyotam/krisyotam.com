@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { TraktSectionHeader } from "@/components/core/section-header"
+import { MediaSectionHeader } from "@/components/core/section-header"
 
 interface WatchedFilm {
   id: string
@@ -53,7 +53,7 @@ export default function FilmWatchedPage() {
 
   return (
     <section className="space-y-6">
-      <TraktSectionHeader title={`You have seen ${watched.length} films`} />
+      <MediaSectionHeader title={`You have seen ${watched.length} films`} />
 
       {/* Filters */}
       <div className="flex flex-wrap gap-4">
