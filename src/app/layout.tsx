@@ -51,7 +51,7 @@ const fontMono = localFont({
   ],
   variable: '--font-mono',
   display: 'swap',
-  adjustFontFallback: 'Courier New',
+  adjustFontFallback: false,
   preload: true,
 });
 
