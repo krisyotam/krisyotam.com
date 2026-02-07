@@ -140,15 +140,22 @@ The script automatically updates the changelog database (public/data/system.db) 
 Do NOT use raw git commands for commits. If git.js is missing functionality, update it first then use it.
 
 
-# Vercel Deployments & Builds
+# Builds
 
-IMPORTANT: Do NOT run `npm run build` locally - it freezes the system. Use Vercel CLI for all build testing.
+## CRITICAL: Build Commands
+- **ALWAYS** use `npm run build` for local and production builds
+- **NEVER** use `npm run build:lowmem` - this is deprecated and should not be used
+- Docker/Dokploy uses `npm run build` (see .config/docker/Dockerfile line 89)
 
-## Project Info
+## Local Build
+```bash
+npm run build
+```
+
+## Vercel (Preview Only)
 - Project: krisyotam.com (offlinedevs/krisyotam.com)
-- Production is self-hosted via Dokploy, Vercel is used for preview builds and testing only
+- Production is self-hosted via Dokploy, Vercel is used for preview builds only
 
-## Build Testing
 ```bash
 # Preview deployment (creates a unique URL for testing)
 vercel
