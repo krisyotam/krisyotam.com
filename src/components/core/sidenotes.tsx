@@ -53,8 +53,8 @@ const CONFIG = {
   // Maximum width of sidenote column (px)
   maxSidenoteWidth: 380,
 
-  // Minimum top offset - prevents sidenotes from appearing above content header (px)
-  minTopOffset: 80,
+  // Minimum top offset - small buffer at top of content area (px)
+  minTopOffset: 20,
 
   // Which columns to use (alternating: odd=right, even=left)
   useLeftColumn: true,
@@ -102,6 +102,7 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
   const [activeId, setActiveId] = useState<string | null>(null)
   const [ready, setReady] = useState(false)
   const [userEnabled, setUserEnabled] = useState(true)
+  const [columnPositions, setColumnPositions] = useState<{ left: number; right: number; topOffset: number } | null>(null)
 
   const leftColumnRef = useRef<HTMLDivElement>(null)
   const rightColumnRef = useRef<HTMLDivElement>(null)
@@ -132,6 +133,39 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
     window.addEventListener("resize", checkWidth)
     return () => window.removeEventListener("resize", checkWidth)
   }, [])
+
+  // ─── Calculate Column Positions ───────────────────────────────────────────
+  const calculateColumnPositions = useCallback(() => {
+    if (!markdownBodyRef.current) return
+
+    const contentRect = markdownBodyRef.current.getBoundingClientRect()
+    const columnWidth = Math.min(
+      (window.innerWidth - contentRect.width) / 2 - 48,
+      CONFIG.maxSidenoteWidth
+    )
+
+    // Calculate the top offset: distance from page top to content element
+    // This ensures sidenote columns start at the same vertical level as content
+    const scrollTop = window.scrollY || document.documentElement.scrollTop
+    const topOffset = contentRect.top + scrollTop
+
+    // Left column: ends just before content starts
+    // Right column: starts just after content ends
+    setColumnPositions({
+      left: contentRect.left - columnWidth - CONFIG.gapFromContent,
+      right: contentRect.right + CONFIG.gapFromContent,
+      topOffset,
+    })
+  }, [])
+
+  // ─── Update Column Positions on Resize ────────────────────────────────────
+  useEffect(() => {
+    if (!ready || !isWideViewport) return
+
+    calculateColumnPositions()
+    window.addEventListener("resize", calculateColumnPositions)
+    return () => window.removeEventListener("resize", calculateColumnPositions)
+  }, [ready, isWideViewport, calculateColumnPositions])
 
   // ─── Parse Footnotes ───────────────────────────────────────────────────────
   const parseFootnotes = useCallback((): Sidenote[] => {
@@ -318,14 +352,46 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
 
     window.addEventListener("resize", handleResize)
 
-    // Initial recalculation after render
-    const timer = setTimeout(recalculatePositions, 100)
+    // Initial recalculation after render - use multiple attempts to ensure DOM is ready
+    const timer1 = setTimeout(recalculatePositions, 100)
+    const timer2 = setTimeout(recalculatePositions, 500)
 
     return () => {
       window.removeEventListener("resize", handleResize)
-      clearTimeout(timer)
+      clearTimeout(timer1)
+      clearTimeout(timer2)
     }
   }, [ready, recalculatePositions])
+
+  // ─── Scroll listener for cut-off sidenotes ─────────────────────────────────
+  // When user scrolls to bottom of a cut-off sidenote, hide the "more" indicator
+  useEffect(() => {
+    if (!ready || !isWideViewport) return
+
+    const handleScroll = (e: Event) => {
+      const target = e.target as HTMLElement
+      if (!target.classList.contains("sidenote-outer-wrapper")) return
+
+      const sidenote = target.closest(".sidenote")
+      if (!sidenote || !sidenote.classList.contains("cut-off")) return
+
+      // Check if scrolled to bottom (with small buffer for tolerance)
+      const isAtBottom = target.scrollTop + target.offsetHeight >= target.scrollHeight - 2
+
+      if (isAtBottom) {
+        sidenote.classList.add("hide-more-indicator")
+      } else {
+        sidenote.classList.remove("hide-more-indicator")
+      }
+    }
+
+    // Use event delegation on the document with capture for scroll events
+    document.addEventListener("scroll", handleScroll, true)
+
+    return () => {
+      document.removeEventListener("scroll", handleScroll, true)
+    }
+  }, [ready, isWideViewport])
 
   // ─── Hide original footnotes ───────────────────────────────────────────────
   useEffect(() => {
@@ -427,25 +493,41 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
     )
   }
 
+  // Calculate column width for inline styles
+  const columnWidth = columnPositions ? Math.min(
+    (window.innerWidth - (markdownBodyRef.current?.getBoundingClientRect().width || 672)) / 2 - 48,
+    CONFIG.maxSidenoteWidth
+  ) : CONFIG.maxSidenoteWidth
+
   return (
     <>
       {/* Left Column */}
-      {CONFIG.useLeftColumn && (
+      {CONFIG.useLeftColumn && columnPositions && (
         <div
           ref={leftColumnRef}
           id="sidenote-column-left"
           className="sidenote-column"
+          style={{
+            left: columnPositions.left,
+            top: columnPositions.topOffset,
+            width: columnWidth,
+          }}
         >
           {leftSidenotes.map(renderSidenote)}
         </div>
       )}
 
       {/* Right Column */}
-      {CONFIG.useRightColumn && (
+      {CONFIG.useRightColumn && columnPositions && (
         <div
           ref={rightColumnRef}
           id="sidenote-column-right"
           className="sidenote-column"
+          style={{
+            left: columnPositions.right,
+            top: columnPositions.topOffset,
+            width: columnWidth,
+          }}
         >
           {rightSidenotes.map(renderSidenote)}
         </div>

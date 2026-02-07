@@ -113,6 +113,13 @@ export interface QuoteEntry {
   source: string | null;
 }
 
+export interface ExcerptEntry {
+  id: number;
+  text: string;
+  author: string;
+  source: string | null;
+}
+
 export interface LocationEntry {
   id: number;
   name: string;
@@ -898,6 +905,83 @@ export function getShopCategories(): string[] {
       .all() as { category: string }[];
 
     return categories.map((c) => c.category);
+  } finally {
+    db.close();
+  }
+}
+
+// ============================================================================
+// Excerpts Functions
+// ============================================================================
+
+export function getAllExcerpts(): ExcerptEntry[] {
+  const db = getDb();
+  try {
+    return db
+      .prepare(
+        `
+      SELECT id, text, author, source
+      FROM excerpts
+      ORDER BY author ASC
+    `
+      )
+      .all() as ExcerptEntry[];
+  } finally {
+    db.close();
+  }
+}
+
+export function getRandomExcerpt(): ExcerptEntry | null {
+  const db = getDb();
+  try {
+    return (
+      (db
+        .prepare(
+          `
+      SELECT id, text, author, source
+      FROM excerpts
+      ORDER BY RANDOM()
+      LIMIT 1
+    `
+        )
+        .get() as ExcerptEntry) || null
+    );
+  } finally {
+    db.close();
+  }
+}
+
+export function getExcerptsByAuthor(author: string): ExcerptEntry[] {
+  const db = getDb();
+  try {
+    return db
+      .prepare(
+        `
+      SELECT id, text, author, source
+      FROM excerpts
+      WHERE author = ?
+      ORDER BY id ASC
+    `
+      )
+      .all(author) as ExcerptEntry[];
+  } finally {
+    db.close();
+  }
+}
+
+export function getExcerptAuthors(): string[] {
+  const db = getDb();
+  try {
+    const authors = db
+      .prepare(
+        `
+      SELECT DISTINCT author FROM excerpts WHERE author IS NOT NULL AND author != ''
+      ORDER BY author ASC
+    `
+      )
+      .all() as { author: string }[];
+
+    return authors.map((a) => a.author);
   } finally {
     db.close();
   }

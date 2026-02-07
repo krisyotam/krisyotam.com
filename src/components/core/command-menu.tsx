@@ -10,7 +10,8 @@ import {
   BookMarked, Video, HeartHandshake,
   AreaChart, Tag, Gamepad2, Clapperboard,
   BookOpenText, FileEdit, PencilLine, Keyboard, Palette,
-  Rss, Users, Sparkles, ScrollText, Pen, Newspaper, Star, FileText
+  Rss, Users, Sparkles, ScrollText, Pen, Newspaper, Star, FileText,
+  NotebookPen, TextQuote
 } from "lucide-react"
 
 import { SnowEffect } from "@/components/ui/snow-effect"
@@ -30,6 +31,7 @@ const menuSections = [
       { icon: ScrollText, label: "Papers", path: "/papers" },
       { icon: Pen, label: "Essays", path: "/essays" },
       { icon: Newspaper, label: "Blog", path: "/blog" },
+      { icon: NotebookPen, label: "Diary", path: "/diary" },
       { icon: Star, label: "Reviews", path: "/reviews" },
       { icon: Sparkles, label: "Fiction", path: "/fiction" },
       { icon: StickyNote, label: "Notes", path: "/notes" },
@@ -66,6 +68,7 @@ const menuSections = [
       { icon: Tag, label: "Tags", path: "/tags" },
       { icon: Layers, label: "Sequences", path: "/sequences" },
       { icon: Quote, label: "Quotes", path: "/quotes" },
+      { icon: TextQuote, label: "Excerpts", path: "/excerpts" },
     ]
   },
   {

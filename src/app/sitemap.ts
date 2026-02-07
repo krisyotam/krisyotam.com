@@ -99,6 +99,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const contentPriorities: Record<ContentType, number> = {
     essays: 0.9,
     blog: 0.8,
+    diary: 0.7,
     papers: 0.8,
     notes: 0.7,
     fiction: 0.7,

@@ -133,6 +133,27 @@ export interface BlogMeta {
 
 
 /* =============================================================================
+ * DIARY
+ * =============================================================================
+ * Quick, unpolished entries with minimal metadata.
+ * No status, certainty, or importance - just raw thoughts.
+ * ============================================================================= */
+
+export interface DiaryMeta {
+  title: string
+  preview?: string
+  start_date: string
+  end_date?: string
+  slug: string
+  tags: string[]
+  category: string
+  cover_image?: string
+  state?: ContentState
+  views?: number
+}
+
+
+/* =============================================================================
  * NOTES
  * =============================================================================
  * Study notes, learning materials, and reference documentation.

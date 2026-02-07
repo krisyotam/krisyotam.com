@@ -64,8 +64,76 @@
         - Special Case: if a post is trule only explained by one or two tags that is fine. if a post needs more than 3 that is fine. 
     - Apply from [Categories] the following: "Are Lowercase", "One True Language", "Metadata"
 
-# Applying Categories / Tags 
-    
+# Applying Categories / Tags
+
+When creating content via createPost.js, Claude must determine metadata automatically.
+Use this guidance to make consistent, thoughtful decisions.
+
+## Metadata Determination Guide
+
+### Status (Completion Level)
+Assess based on the content's apparent completeness:
+
+| Status | When to Use |
+|--------|-------------|
+| Notes | Raw thoughts, bullet points, unstructured ideas |
+| Draft | Has structure but incomplete arguments or missing sections |
+| In Progress | Substantially complete, being actively refined |
+| Finished | Complete, polished, ready for readers |
+| Abandoned | Explicitly marked as no longer being developed |
+
+Default: "Draft" for new entries (user will develop the content)
+
+### Certainty (Epistemic Confidence)
+Assess based on verifiability and source quality:
+
+| Certainty | When to Use |
+|-----------|-------------|
+| certain | Mathematical proofs, well-documented facts, primary sources |
+| highly likely | Peer-reviewed research, expert consensus, strong evidence |
+| likely | Well-reasoned analysis, reputable secondary sources |
+| possible | Informed speculation, interpretive work, philosophical arguments |
+| unlikely | Contrarian positions, minority views with some merit |
+| highly unlikely | Speculative theories with limited support |
+| remote | Highly speculative, little evidence |
+| impossible | For cataloging purposes only (e.g., analyzing conspiracy theories) |
+
+Default: "possible" for opinion/analysis, "likely" for factual content
+
+### Importance (1-10 Scale)
+Rate based on potential impact on the target reader (see Reader Avatar below):
+
+| Range | Criteria |
+|-------|----------|
+| 1-3 | Niche interest, personal notes, limited audience appeal |
+| 4-5 | Moderate interest, useful for specific domains |
+| 6-7 | Broad appeal, significant insight or synthesis |
+| 8-9 | Essential reading, major contribution to understanding |
+| 10 | Rare - paradigm-shifting, foundational work |
+
+Default: 5 (moderate importance)
+
+### Category Selection
+Choose the MOST RELEVANT single category from the global pool:
+- culture, film, history, literature, philosophy, psychology, science, technology, theology
+- Exceptions: on-myself (personal reflections), manuals-of-style (meta/process), website (site-related)
+
+For type-specific categories:
+- Progymnasmata: chreia, commonplace, comparison, confirmation, description, encomium, fable, impersonation, introduction-of-a-law, maxim, narrative, refutation, thesis, vituperation
+- Reviews: anime, book, bookstores, film, manga, television
+
+### Tag Selection
+Select 3+ tags that:
+1. Are lowercase and stable (not event-specific)
+2. Refine rather than duplicate the category
+3. Maximize reuse of existing tags
+4. Are specific but not overly narrow
+
+Examples:
+- Category "philosophy" + tags: ethics, virtue, stoicism
+- Category "technology" + tags: programming, web-development, javascript
+- Category "literature" + tags: poetry, modernism, translation
+
 # Reader Avatar 
 {
   "avatar_id": "polymath_reader_v1",
@@ -110,6 +178,95 @@
 
 
 
+
+
+# Creating Posts
+
+When the user asks to create a new post (blog, essay, note, diary entry, paper, review, TIL, now update, or progymnasmata), use the createPost.js workflow:
+
+## Slug URL Rules
+
+Slugs are URL-safe identifiers derived from titles. They MUST be:
+
+1. **Explanative** — The slug should clearly indicate the content
+   - Good: `girl-interrupted` for a review of Girl Interrupted
+   - Bad: `review-1` or `gi-2026`
+
+2. **Simple** — Keep it minimal, no unnecessary words
+   - Good: `girl-interrupted`
+   - Bad: `my-review-of-the-movie-girl-interrupted-1999`
+
+3. **Globally Unique** — No two pieces of content across ANY route can share the same slug
+   - This is required for magic-urls to function properly
+   - Before creating, verify the slug doesn't exist in: papers, blog, essays, notes, diary, progymnasmata, reviews, til, now
+   - If a conflict exists, make the slug more specific (e.g., `stoicism` → `stoicism-daily-practice`)
+
+4. **Lowercase with hyphens** — No spaces, underscores, or special characters
+   - Good: `a-room-of-my-own`
+   - Bad: `A_Room_Of_My_Own` or `a room of my own`
+
+Examples:
+| Title | Slug |
+|-------|------|
+| Girl Interrupted | `girl-interrupted` |
+| A Room of My Own | `a-room-of-my-own` |
+| Why I Use Vim | `why-i-use-vim` |
+| The Brothers Karamazov (Review) | `the-brothers-karamazov` |
+
+## Workflow
+
+1. **Ask the user** for the required information based on post type:
+
+   | Post Type | Ask For |
+   |-----------|---------|
+   | papers, blog, essays, notes, diary, progymnasmata | Title, Preview/description |
+   | reviews | Title, Preview/description, Rating (1-10) |
+   | til | Title, Full content |
+   | now | Full content only |
+
+2. **Call generateMetadata.js** with the collected info plus your metadata decisions:
+
+   ```bash
+   node public/scripts/keep/generateMetadata.js --type TYPE --title "TITLE" --preview "PREVIEW" --category CATEGORY --tags "tag1,tag2,tag3" [--status STATUS] [--certainty CERTAINTY] [--importance N]
+   ```
+
+3. **Determine metadata** following the rules in "Applying Categories / Tags" section:
+   - Category: Choose from global pool or type-specific categories
+   - Tags: Select 3+ relevant tags (lowercase, stable, specific)
+   - Status/Certainty/Importance: Use the Metadata Determination Guide
+
+## Example
+
+User: "Create a new blog post about functional programming"
+
+Claude asks: "What's the title and a brief preview/description?"
+
+User: "Title: Why I Switched to Haskell. Preview: My journey from imperative to functional programming."
+
+Claude runs:
+```bash
+node public/scripts/keep/generateMetadata.js --type blog --title "Why I Switched to Haskell" --preview "My journey from imperative to functional programming" --category technology --tags "functional-programming,haskell,programming" --status Draft --certainty likely --importance 6
+```
+
+## Important Notes
+
+- Do NOT ask the user for category, tags, status, certainty, or importance — determine these yourself
+- For reviews, the user MUST provide the rating (it's their subjective opinion)
+- Always use generateMetadata.js directly; do not manually create database entries or MDX files
+
+## Diary Route Restrictions
+
+The `/diary` route has special restrictions to prevent tag/category sprawl:
+
+- **NO NEW TAGS** — Diary entries must use only existing tags from the database
+- **NO NEW CATEGORIES** — Diary entries must use only existing global categories
+
+Before creating a diary entry, query existing tags:
+```bash
+sqlite3 public/data/content.db "SELECT slug FROM tags ORDER BY slug"
+```
+
+Pick 3 relevant tags from the existing pool. If no perfect match exists, use the closest general tags (e.g., use `personal` instead of creating `personal-reflection`).
 
 
 # Git Commits
@@ -320,6 +477,240 @@ Props:
 - `icons`: Optional array of `{ slug: string, url: string }` for icon links
 
 The component renders as a help button (?) in the bottom-left corner that opens a modal with the description.
+
+
+# Canonical Content Routes
+
+Content routes are routes in `src/app/(content)/` whose primary content is MDX files stored in a `content/` subdirectory.
+Not all routes in `(content)` are "content routes" — only those with MDX content qualify (e.g., /notes, /essays, /papers, /blog, /diary).
+Routes like /til that exist in (content) but don't use MDX content subdirectories are NOT canonical content routes.
+
+## Directory Structure
+
+Each canonical content route follows this structure:
+
+```
+src/app/(content)/[route]/
+├── page.tsx                      # Server: Index page (fetches data, passes to client)
+├── [Route]ClientPage.tsx         # Client: List view with search/filter/navigation
+├── [category]/
+│   ├── page.tsx                  # Server: Category-filtered view
+│   └── [slug]/
+│       ├── page.tsx              # Server: Detail page (imports MDX, extracts headings)
+│       └── [Route]PageClient.tsx # Client: Header + footer sections
+├── categories/
+│   ├── page.tsx                  # Server: List categories for this route
+│   └── [Route]CategoriesClientPage.tsx
+├── tags/
+│   ├── page.tsx                  # Server: List tags for this route
+│   └── [Route]TagsClientPage.tsx
+├── tag/
+│   └── [slug]/
+│       ├── page.tsx              # Server: Filter by tag within this route
+│       └── [Route]TaggedPage.tsx
+└── content/
+    └── [category]/
+        └── *.mdx                 # MDX content files with YAML frontmatter
+```
+
+**NOTE**: Route-specific category/tag pages exist for filtering within each route, but they MUST use
+categories and tags from the GLOBAL pool (see Categories & Tags section below).
+
+## Index Page Pattern (`/[route]/page.tsx`)
+
+Server component responsibilities:
+1. Fetch all active content via `getActiveContentByType('[route]')`
+2. Fetch categories via `getCategoriesByContentType('[route]')` — MUST use global categories
+3. Optionally fetch view counts for analytics
+4. Sort by date (newest first)
+5. Pass data to client component
+
+```tsx
+export default async function RoutePage() {
+  const items = getActiveContentByType('route');
+  const categories = getCategoriesByContentType('route');  // Global categories
+  return <RouteClientPage items={items} categories={categories} />;
+}
+```
+
+## Client List Page Pattern (`[Route]ClientPage.tsx`)
+
+Components used:
+- `PageHeader` — Title and metadata display
+- `Navigation` — Search bar, category dropdown, view toggle (from `@/components/content/navigation`)
+- `ContentTable` — Sortable list view (from `@/components/content/content-table`)
+- `PageDescription` — Help modal (bottom-left "?")
+
+Features:
+- Search: Filters by title, tags, category (case-insensitive)
+- Category filter: Dropdown using global categories
+- View toggle: List/Grid modes
+- URL sync: Category selection updates URL to `/[route]/[category]`
+
+## Detail Page Pattern (`/[route]/[category]/[slug]/page.tsx`)
+
+Server component responsibilities:
+1. `generateStaticParams()` — Generate all slug combinations
+2. `generateMetadata()` — OG/Twitter meta tags
+3. Dynamically import MDX file
+4. Extract headings for TOC via `extractHeadingsFromMDX()`
+5. Render with ViewTracker for analytics
+
+```tsx
+export default async function DetailPage({ params }) {
+  const { category, slug } = await params;
+  const item = findItem(category, slug);
+  const headings = await extractHeadingsFromMDX('route', slug, category);
+  const Content = (await import(`@/app/(content)/route/content/${category}/${slug}.mdx`)).default;
+
+  return (
+    <div className="relative min-h-screen pt-16">
+      <ViewTracker slug={`route/${category}/${slug}`} />
+
+      {/* Header section */}
+      <RoutePageClient item={item} headerOnly={true} />
+
+      {/* Main content */}
+      <main id="content" className="container max-w-[672px] mx-auto px-4">
+        {headings.length > 0 && <TOC headings={headings} />}
+        <div className="content"><Content /></div>
+        <RoutePageClient item={item} contentOnly={true} />
+      </main>
+
+      <Sidenotes containerSelector="#content" />
+    </div>
+  );
+}
+```
+
+## Client Detail Page Pattern (`[Route]PageClient.tsx`)
+
+Two rendering modes controlled by props:
+- `headerOnly={true}` — Renders `PostHeader` with title, dates, tags, category, status, confidence, importance
+- `contentOnly={true}` — Renders footer section: Comments, Citation, LiveClock, Footer
+
+Standard metadata displayed in header:
+- Title, subtitle
+- Start date, end date (or updated date)
+- Category (linked)
+- Tags (linked)
+- Status, Confidence, Importance (for most routes)
+- Back button to index
+
+## Categories & Tags (GLOBAL POOL)
+
+All content routes share a GLOBAL pool of categories and tags. This means:
+- The same categories and tags are available across all content types
+- Categories and tags must follow the rules in the Taxonomy section above
+- Route-specific pages (`/notes/categories`, `/notes/tags`) filter content within that route but use global data
+
+**Data Sources:**
+- Categories: `getCategoriesByContentType('[route]')` from `@/lib/data`
+- Tags: `getTagsByContentType('[route]')` from `@/lib/data`
+
+**Global Navigation Routes (cross-type):**
+- `/categories` — Lists all categories across all content types
+- `/category/[slug]` — Shows all content from any type in this category
+- `/tags` — Lists all tags across all content types
+- `/tag/[slug]` — Shows all content with this tag across types
+
+**Route-Specific Pages (within-type filtering):**
+- `/[route]/categories` — Lists categories used by this content type
+- `/[route]/tags` — Lists tags used by this content type
+- `/[route]/tag/[slug]` — Shows content of this type with the tag
+
+**Allowed Exception Categories:** `on-myself`, `manuals-of-style`, `website`
+
+The `PostHeader` component links tags to `/tag/[slug]` and categories to `/category/[slug]` (global).
+The Navigation component's category dropdown filters WITHIN the current route (`/notes/[category]`).
+
+## MDX Frontmatter (Standard)
+
+```yaml
+# ==============================================================================
+# DOCUMENT: filename.mdx
+# TYPE:     ROUTE_TYPE
+# @author Kris Yotam
+# @type route
+# @path src/app/(content)/route/content/category/slug.mdx
+# ==============================================================================
+
+title: "Post Title"
+slug: post-slug
+date: YYYY-MM-DD
+updated: YYYY-MM-DD
+status: Notes|Draft|In Progress|Finished|Abandoned
+certainty: certain|likely|possible|unlikely|remote|impossible
+importance: 0-10
+author: "Kris Yotam"
+description: "Preview text"
+tags: [tag1, tag2, tag3]
+category: category-name
+sequences: []
+cover: https://image-url
+# ==============================================================================
+```
+
+## Simplified MDX Frontmatter (Diary)
+
+For routes like /diary that don't need full metadata:
+
+```yaml
+# ==============================================================================
+# DOCUMENT: filename.mdx
+# TYPE:     DIARY
+# @author Kris Yotam
+# @type diary
+# @path src/app/(content)/diary/content/category/slug.mdx
+# ==============================================================================
+
+title: "Entry Title"
+slug: entry-slug
+preview: "Brief description"
+start_date: YYYY-MM-DD
+end_date: YYYY-MM-DD
+tags: [tag1, tag2, tag3]
+category: category-name
+# ==============================================================================
+```
+
+Note: Diary entries omit status, certainty, and importance fields.
+
+## URL Patterns
+
+### Route-Specific URLs
+| Pattern | Purpose |
+|---------|---------|
+| `/[route]` | Index — all content |
+| `/[route]/[category]` | Filter by category (within route) |
+| `/[route]/[category]/[slug]` | Detail page |
+| `/[route]/categories` | List categories for this route |
+| `/[route]/tags` | List tags for this route |
+| `/[route]/tag/[slug]` | Filter by tag (within route) |
+
+### Global Category/Tag URLs
+| Pattern | Purpose |
+|---------|---------|
+| `/categories` | List all categories (global) |
+| `/category/[slug]` | All content in category (global) |
+| `/tags` | List all tags (global) |
+| `/tag/[slug]` | All content with tag (global) |
+
+## Key Components
+
+From `@/components/core/`:
+- `PageHeader` / `PostHeader` — Unified header
+- `TOC` — Table of contents from headings
+- `ViewTracker` — Analytics
+- `Sidenotes` — Footnote rendering
+- `PageDescription` — Help modal
+- `Citation` — BibTeX block
+- `Comments` — Discussion section
+- `Footer` — Site footer
+
+From `@/components/content/`:
+- `Navigation` — Search + category filter + view toggle
+- `ContentTable` — Sortable list view
 
 
 # Styles

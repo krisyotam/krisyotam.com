@@ -69,7 +69,7 @@ export default function QuotesPage() {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
-      <div className="max-w-4xl mx-auto p-6 md:p-12 lg:p-16">
+      <div className="container max-w-[672px] mx-auto px-4 pt-16 pb-8">
         <PageHeader
           title={quotesPageData.title}
           subtitle={quotesPageData.subtitle}

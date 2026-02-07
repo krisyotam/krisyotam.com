@@ -306,6 +306,7 @@ export function generateBreadcrumbJsonLd(
 
 export const contentTypes = [
   'blog',
+  'diary',
   'essays',
   'fiction',
   'news',
@@ -322,6 +323,7 @@ export type ContentType = (typeof contentTypes)[number]
 export function getContentTypeLabel(type: ContentType): string {
   const labels: Record<ContentType, string> = {
     blog: 'Blog',
+    diary: 'Diary',
     essays: 'Essays',
     fiction: 'Fiction',
     news: 'News',

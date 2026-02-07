@@ -120,6 +120,13 @@ export interface HeaderProps {
   secondaryInfo?: string
 
   /* ─────────────────────────────────────────────────────────────────────────
+   * Display Options
+   * ───────────────────────────────────────────────────────────────────────── */
+
+  /** Hide the status/confidence/importance metadata section */
+  hideStatus?: boolean
+
+  /* ─────────────────────────────────────────────────────────────────────────
    * Navigation Props
    * ───────────────────────────────────────────────────────────────────────── */
 
@@ -264,6 +271,7 @@ export function Header({
   category,
   categoryHref,
   secondaryInfo,
+  hideStatus = false,
   backText,
   backHref,
   className,
@@ -359,60 +367,63 @@ export function Header({
 
         {/* ─────────────────────────────────────────────────────────────────────
          * Metadata Section (Status, Confidence, Importance)
+         * Hidden when hideStatus is true (e.g., for diary entries)
          * ───────────────────────────────────────────────────────────────────── */}
-        <div className="flex flex-wrap justify-center items-center gap-x-3 text-sm font-mono mb-6">
-          {/* Status */}
-          <HoverCard>
-            <HoverCardTrigger asChild>
-              <div className={cn("flex items-center gap-1 cursor-help", getStatusColor(status))}>
-                <Info className="h-3 w-3" />
-                <span className="font-medium">status: {status}</span>
-              </div>
-            </HoverCardTrigger>
-            <HoverCardContent className="w-80 text-sm bg-card text-card-foreground border-border p-4 font-serif">
-              <div className="space-y-2">
-                <h4 className="font-medium text-foreground">Status Indicator</h4>
-                <p className="text-muted-foreground whitespace-pre-wrap">{STATUS_EXPLANATION}</p>
-              </div>
-            </HoverCardContent>
-          </HoverCard>
+        {!hideStatus && (
+          <div className="flex flex-wrap justify-center items-center gap-x-3 text-sm font-mono mb-6">
+            {/* Status */}
+            <HoverCard>
+              <HoverCardTrigger asChild>
+                <div className={cn("flex items-center gap-1 cursor-help", getStatusColor(status))}>
+                  <Info className="h-3 w-3" />
+                  <span className="font-medium">status: {status}</span>
+                </div>
+              </HoverCardTrigger>
+              <HoverCardContent className="w-80 text-sm bg-card text-card-foreground border-border p-4 font-serif">
+                <div className="space-y-2">
+                  <h4 className="font-medium text-foreground">Status Indicator</h4>
+                  <p className="text-muted-foreground whitespace-pre-wrap">{STATUS_EXPLANATION}</p>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
 
-          <span className="text-muted-foreground">·</span>
+            <span className="text-muted-foreground">·</span>
 
-          {/* Confidence */}
-          <HoverCard>
-            <HoverCardTrigger asChild>
-              <div className={cn("flex items-center gap-1 cursor-help", getConfidenceColor(confidence))}>
-                <Info className="h-3 w-3" />
-                <span className="font-medium">certainty: {confidence}</span>
-              </div>
-            </HoverCardTrigger>
-            <HoverCardContent className="w-80 text-sm bg-card text-card-foreground border-border p-4 font-serif">
-              <div className="space-y-2">
-                <h4 className="font-medium text-foreground">Confidence Rating</h4>
-                <p className="text-muted-foreground whitespace-pre-wrap">{CONFIDENCE_EXPLANATION}</p>
-              </div>
-            </HoverCardContent>
-          </HoverCard>
+            {/* Confidence */}
+            <HoverCard>
+              <HoverCardTrigger asChild>
+                <div className={cn("flex items-center gap-1 cursor-help", getConfidenceColor(confidence))}>
+                  <Info className="h-3 w-3" />
+                  <span className="font-medium">certainty: {confidence}</span>
+                </div>
+              </HoverCardTrigger>
+              <HoverCardContent className="w-80 text-sm bg-card text-card-foreground border-border p-4 font-serif">
+                <div className="space-y-2">
+                  <h4 className="font-medium text-foreground">Confidence Rating</h4>
+                  <p className="text-muted-foreground whitespace-pre-wrap">{CONFIDENCE_EXPLANATION}</p>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
 
-          <span className="text-muted-foreground">·</span>
+            <span className="text-muted-foreground">·</span>
 
-          {/* Importance */}
-          <HoverCard>
-            <HoverCardTrigger asChild>
-              <div className={cn("flex items-center gap-1 cursor-help", getImportanceColor(importance))}>
-                <Info className="h-3 w-3" />
-                <span className="font-medium">importance: {importance}/10</span>
-              </div>
-            </HoverCardTrigger>
-            <HoverCardContent className="w-80 text-sm bg-card text-card-foreground border-border p-4 font-serif">
-              <div className="space-y-2">
-                <h4 className="font-medium text-foreground">Importance Rating</h4>
-                <p className="text-muted-foreground whitespace-pre-wrap">{IMPORTANCE_EXPLANATION}</p>
-              </div>
-            </HoverCardContent>
-          </HoverCard>
-        </div>
+            {/* Importance */}
+            <HoverCard>
+              <HoverCardTrigger asChild>
+                <div className={cn("flex items-center gap-1 cursor-help", getImportanceColor(importance))}>
+                  <Info className="h-3 w-3" />
+                  <span className="font-medium">importance: {importance}/10</span>
+                </div>
+              </HoverCardTrigger>
+              <HoverCardContent className="w-80 text-sm bg-card text-card-foreground border-border p-4 font-serif">
+                <div className="space-y-2">
+                  <h4 className="font-medium text-foreground">Importance Rating</h4>
+                  <p className="text-muted-foreground whitespace-pre-wrap">{IMPORTANCE_EXPLANATION}</p>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
+          </div>
+        )}
 
         {/* ─────────────────────────────────────────────────────────────────────
          * Post-specific Elements (Tags & Category)

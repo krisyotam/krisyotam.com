@@ -17,14 +17,15 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
+import Image from "next/image"
 
 // =============================================================================
 // Components
 // =============================================================================
 
-import { Search } from "lucide-react"
+import { Search, ArrowLeft } from "lucide-react"
 import { LiveClock } from "@/components/ui/live-clock"
-import { PageHeader } from "@/components/core"
 import { Card } from "@/components/ui/card"
 import { Footer } from "@/components/core/footer"
 import SiteFooter from "@/components/typography/expanded-footer-block"
@@ -121,14 +122,28 @@ export default function NotFound() {
     <div className="min-h-screen bg-background text-foreground pt-16">
       <div className="max-w-6xl mx-auto px-4">
 
-        {/* Header */}
+        {/* Lain 404 Image */}
         <div className="mb-8 container max-w-[672px] mx-auto px-4">
-          <PageHeader
-            title="404 - Page not found"
-            preview="We couldn't find the page you requested. Below are a few suggestions that might help you find what you were looking for."
-            backText="Home"
-            backHref="/"
-          />
+          <Link
+            href="/"
+            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 group font-serif italic"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            Return to Home
+          </Link>
+          <div className="border border-border p-6 flex flex-col items-center">
+            <Image
+              src="/images/404.png"
+              alt="404 - Nothing of value was found"
+              width={400}
+              height={400}
+              className="mb-4"
+              priority
+            />
+            <p className="text-sm text-muted-foreground text-center">
+              Present Day, Present Time (ahahaha)
+            </p>
+          </div>
         </div>
 
         {/* Main Content */}

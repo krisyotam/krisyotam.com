@@ -205,7 +205,7 @@ export const OPTIONAL_CATEGORY_TYPES: ContentType[] = ["notes", "blog", "verse"]
  * Get the base content directory for a content type.
  */
 export function getContentBasePath(contentType: ContentType): string {
-  return path.join(process.cwd(), "app", "(content)", contentType, "content")
+  return path.join(process.cwd(), "src", "app", "(content)", contentType, "content")
 }
 
 /**
@@ -305,6 +305,38 @@ export async function extractHeadings(
 }
 
 /**
+ * Strip custom frontmatter from MDX content.
+ * Removes everything between # ===... blocks at the start of the file.
+ */
+function stripCustomFrontmatter(content: string): string {
+  const lines = content.split('\n')
+  let contentStartIndex = 0
+  let frontmatterBlockCount = 0
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim()
+    // Count # ===... delimiter lines
+    if (line.startsWith('# ') && line.includes('='.repeat(10))) {
+      frontmatterBlockCount++
+      // After the fourth delimiter (end of YAML block), content starts
+      // Structure: 1) comment header start, 2) comment header end,
+      //            3) YAML block start, 4) YAML block end
+      if (frontmatterBlockCount >= 4) {
+        contentStartIndex = i + 1
+        break
+      }
+    }
+  }
+
+  // Skip any empty lines after the frontmatter
+  while (contentStartIndex < lines.length && lines[contentStartIndex].trim() === '') {
+    contentStartIndex++
+  }
+
+  return lines.slice(contentStartIndex).join('\n')
+}
+
+/**
  * Extract headings from a raw MDX/MD string.
  */
 export async function extractHeadingsFromContent(
@@ -312,9 +344,12 @@ export async function extractHeadingsFromContent(
 ): Promise<TableOfContentsItem[]> {
   const headings: TableOfContentsItem[] = []
 
+  // Strip custom frontmatter before parsing
+  const strippedContent = stripCustomFrontmatter(content)
+
   try {
     const processor = remark().use(remarkMdx).use(remarkMath)
-    const ast = processor.parse(content)
+    const ast = processor.parse(strippedContent)
 
     visit(ast, "heading", (node: MdastHeading) => {
       let text = ""
