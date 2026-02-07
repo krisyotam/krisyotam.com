@@ -1476,11 +1476,11 @@ p .katex-display {
 }
 
 #sidenote-column-left {
-  right: calc(100% + 64px);
+  right: calc(100% + 16px);
 }
 
 #sidenote-column-right {
-  left: calc(100% + 64px);
+  left: calc(100% + 16px);
 }
 
 #sidenote-column-left:empty,
@@ -1691,7 +1691,7 @@ p .katex-display {
   display: block;
   position: absolute;
   bottom: -3px;
-  width: calc(100% + 64px);
+  width: calc(100% + 16px);
   max-width: var(--sidenote-max-width);
   border-bottom: 3px double var(--sidenote-self-link-border-color);
   transition:

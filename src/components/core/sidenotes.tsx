@@ -48,10 +48,13 @@ const CONFIG = {
   maxHeight: 600,
 
   // Gap from content edge to sidenote column (px)
-  gapFromContent: 64,
+  gapFromContent: 16,
 
   // Maximum width of sidenote column (px)
   maxSidenoteWidth: 380,
+
+  // Minimum top offset - prevents sidenotes from appearing above content header (px)
+  minTopOffset: 80,
 
   // Which columns to use (alternating: odd=right, even=left)
   useLeftColumn: true,
@@ -214,8 +217,8 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
       // Estimate height (will be refined after render)
       const estimatedHeight = 100
 
-      // Find non-overlapping position
-      let finalTop = Math.max(0, idealTop)
+      // Find non-overlapping position (ensure minimum offset below header)
+      let finalTop = Math.max(CONFIG.minTopOffset, idealTop)
 
       // Check for collisions and push down if needed
       for (const range of occupied) {
@@ -262,8 +265,8 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
         idealTop = citationRect.top - bodyRect.top + 4
       }
 
-      // Find non-overlapping position
-      let finalTop = Math.max(0, idealTop)
+      // Find non-overlapping position (ensure minimum offset below header)
+      let finalTop = Math.max(CONFIG.minTopOffset, idealTop)
 
       for (const range of occupied) {
         if (finalTop < range.bottom && finalTop + actualHeight + CONFIG.sidenoteSpacing > range.top) {
