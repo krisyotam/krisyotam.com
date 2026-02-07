@@ -53,8 +53,8 @@ const CONFIG = {
   // Maximum width of sidenote column (px)
   maxSidenoteWidth: 380,
 
-  // Which columns to use
-  useLeftColumn: false,
+  // Which columns to use (alternating: odd=right, even=left)
+  useLeftColumn: true,
   useRightColumn: true,
 }
 
