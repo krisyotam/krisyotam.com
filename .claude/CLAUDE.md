@@ -294,7 +294,28 @@ if a specific type of metadata for ex. origin is not needed it does not need to 
  */
 
 
-# Styles 
+# Page Description
+
+When adding a "page description" to any page, use the `PageDescription` component from `@/components/core`.
+
+```tsx
+import { PageDescription } from "@/components/core"
+
+<PageDescription
+  title="About this page"
+  description="Brief, articulate explanation of the page's purpose."
+/>
+```
+
+Props:
+- `title`: Header text for the description modal
+- `description`: The page explanation text
+- `icons`: Optional array of `{ slug: string, url: string }` for icon links
+
+The component renders as a help button (?) in the bottom-left corner that opens a modal with the description.
+
+
+# Styles
 
 /* ============================================================================
  * FILE:  {FILE}

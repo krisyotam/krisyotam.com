@@ -118,6 +118,7 @@ function fetchUrl(url, maxRedirects = 5) {
 
 /**
  * Parse a date string from various formats
+ * Caps dates at today - no future dates allowed
  */
 function parseDate(dateStr) {
   if (!dateStr) return null;
@@ -125,6 +126,12 @@ function parseDate(dateStr) {
   // Try various date formats
   const date = new Date(dateStr);
   if (!isNaN(date.getTime())) {
+    // Cap at today's date - no future dates
+    const today = new Date();
+    today.setHours(23, 59, 59, 999); // End of today
+    if (date > today) {
+      return today.toISOString().split("T")[0];
+    }
     return date.toISOString().split("T")[0];
   }
 
@@ -197,19 +204,29 @@ function extractLatestFromRss(xml) {
  * Returns { date, title, rss } where rss is the derived feed URL.
  */
 const PLATFORM_HANDLERS = {
-  /*y
-  y
-  ;
-  u
-  9*
-   * Substack - All substacks use /feed for RSS
-   * Works with both substack.com subdomains and custom domains
+  /**
+   * Substack - Uses publication_url for RSS feed
+   * The url field is the profile (substack.com/@username)
+   * The publication_url field is the publication (username.substack.com)
    */
   substack: async (blog) => {
     try {
-      // Derive RSS URL: just append /feed to the base URL
-      let baseUrl = blog.url.replace(/\/+$/, ""); // Remove trailing slashes
-      const rssUrl = `${baseUrl}/feed`;
+      // Use publication_url if available, otherwise try to derive from url
+      let baseUrl = blog.publication_url;
+
+      if (!baseUrl) {
+        // Fallback: try to extract username from profile URL and derive publication URL
+        const profileMatch = blog.url.match(/substack\.com\/@([^\/\?]+)/);
+        if (profileMatch) {
+          baseUrl = `https://${profileMatch[1]}.substack.com`;
+          log(`  [Substack] Derived publication URL from profile: ${baseUrl}`);
+        } else {
+          // Last resort: assume url is the publication URL
+          baseUrl = blog.url.replace(/\/+$/, "");
+        }
+      }
+
+      const rssUrl = `${baseUrl.replace(/\/+$/, "")}/feed`;
 
       log(`  [Substack] Fetching RSS: ${rssUrl}`);
       const rssContent = await fetchUrl(rssUrl);
@@ -604,7 +621,7 @@ async function main() {
 
   try {
     // Get all blogs
-    let query = "SELECT id, title, url, rss, platform FROM blogroll ORDER BY title";
+    let query = "SELECT id, title, url, rss, platform, publication_url FROM blogroll ORDER BY title";
     if (LIMIT) {
       query += ` LIMIT ${LIMIT}`;
     }

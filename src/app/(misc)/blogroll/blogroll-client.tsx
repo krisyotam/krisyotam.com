@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
 
-import { PageHeader } from "@/components/core"
+import { PageHeader, PageDescription } from "@/components/core"
 import { Navigation } from "@/components/content/navigation"
 
 interface BlogrollClientProps {
@@ -282,6 +282,11 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
           </>
         )}
       </div>
+
+      <PageDescription
+        title="About this blogroll"
+        description="A personal collection of blogs curated from years of reading across philosophy, mathematics, technology, literature, and the obscure corners of the internet. Each entry represents a voice I've found worth returning to. The list is maintained and updated as I discover new writers and retire dormant links. Topics range from theoretical computer science and formal logic to film criticism and personal essays. If you write a blog and think it might belong here, you can submit it for consideration at krisyotam.com/surveys/submit-blog."
+      />
     </main>
   )
 }
