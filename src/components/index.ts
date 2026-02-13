@@ -2,24 +2,16 @@
 export { PostHeader, CategoryHeader, PageHeader } from './core';
 export { UniversalLinkModal, Popups } from './core/popups';
 
-// Book Components (from posts/books)
-export { default as Book } from './posts/books/book';
-export { BookCard } from './posts/books/book-card';
+// Book Components
+export { default as Book } from './books/post-book';
+export { BookCard } from './books/book-card';
 
 // Content Components
 export { ContentTable } from './content/table';
 
 // Subdirectory exports
 export * from './typography';
-export * from './posts';
 export * from './art';
-export * from './anime';
-export * from './trakt';
-export * from './predictions';
-export * from './progymnasmata';
-export * from './reading';
-export * from './sequences';
-export * from './stats';
 
 // Home components
 export { BentoNav } from './home/bento-nav';
@@ -42,26 +34,12 @@ export { Tree as FamilyTree } from './about/family-tree';
 // Contact components
 export { default as PGP } from './contact/pgp';
 
-// Library components
-export { LibraryTabs } from './library/library-tabs';
-export { LibraryBookCard } from './library/library-book-card';
-export { LibraryNotesContent } from './library/library-notes-content';
-export { CatalogContent } from './library/catalog-content';
-
-// Music components
-export { CurrentlyListening } from './music/CurrentlyListening';
-export { default as PlaylistList } from './music/playlist-list';
-export { default as PlaylistCard } from './music/playlist-card';
 
 // Quotes components
-export { QuoteCard } from './quotes/quote-card';
-export { QuoteOfTheDay } from './quotes/QuoteOfTheDay';
-export { QuotesFeed } from './quotes/quotes-feed';
-export { InfiniteMovingQuotes } from './quotes/InfiniteMovingQuotes';
-
-// Companies components
-export { CompaniesGrid } from './companies/companies-grid';
-export { CompanyCard } from './companies/company-card';
+export { QuoteCard } from './typography/quoteCard';
+export { QuoteOfTheDay } from './quotes/quoteOfTheDay';
+export { QuotesFeed } from './quotes/quotesFeed';
+export { InfiniteMovingQuotes } from './quotes/infiniteMovingQuotes';
 
 // UI components
 export { SnowEffect } from './ui/snow-effect';
@@ -90,4 +68,3 @@ export { default as RelatedPosts } from './core/related-posts';
 export { default as Inflation } from './core/inflation';
 export { default as IconDemo } from './core/icon-demo';
 
-export { FavoriteCard as FavoriteCardComponent } from './anime';

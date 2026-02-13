@@ -12,10 +12,10 @@ import {
   MovieItem
 } from "./types"
 import { Badge } from "@/components/ui/badge"
-import { PoemBox } from "@/components/posts/typography/poem"
-import { Quote } from "@/components/posts/typography/quote"
-import Book from "@/components/posts/books/book"
-import Movie from "@/components/posts/media/movie"
+import { PoemBox } from "@/components/typography/poem"
+import { Quote } from "@/components/typography/quote"
+import Book from "@/components/archive/book"
+import Frame from "@/components/typography/frame"
 
 export default function BentoCard({ item }: { item: Item }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -259,10 +259,10 @@ function UnifiedModal({ item }: { item: Item }) {
         return (
           <div className="flex flex-col">
             <div className="relative w-full flex justify-center py-8">
-              <Movie
-                poster={movieItem.imageUrl}
+              <Frame
+                cover={movieItem.imageUrl}
                 title={movieItem.title}
-                director={movieItem.author}
+                creator={movieItem.author}
                 link="#"
                 year={movieItem.year}
               />

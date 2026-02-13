@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import MasonryGrid from "@/components/art/masonry-grid";
+import MasonryGrid from "@/components/art/masonryGrid";
 import { PageHeader } from "@/components/core";
 import { PageDescription } from "@/components/core";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
-import { ArtworkItem } from "@/components/art/art-card-base";
+import { ArtworkItem } from "@/components/art/artCard";
 
 const defaultArtPageData = {
   title: "Art",

@@ -44,29 +44,8 @@ type PostType = "essay" | "note" | "paper" | "review" | "fiction" | "verse";
 // Helper Functions
 // ============================================================================
 
-const DELIMITER = "# ==============================================================================";
-
 function stripFrontmatter(raw: string): string {
-  const lines = raw.split("\n");
-  let delimiterCount = 0;
-  let contentStartIndex = 0;
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (line === DELIMITER) {
-      delimiterCount++;
-      if (delimiterCount === 4) {
-        contentStartIndex = i + 1;
-        break;
-      }
-    }
-  }
-
-  if (delimiterCount < 4) {
-    return raw;
-  }
-
-  return lines.slice(contentStartIndex).join("\n").trim();
+  return raw.trim();
 }
 
 interface ContentDataItem {

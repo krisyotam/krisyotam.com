@@ -1,4 +1,4 @@
-import { ReadingPageContent } from "@/components/reading"
+import { ReadingPageContent } from "@/components/media/reading"
 import { PageHeader, PageDescription } from "@/components/core"
 import type { Metadata } from "next"
 

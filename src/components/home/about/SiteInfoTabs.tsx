@@ -10,7 +10,7 @@
 
 import { useState, useRef } from "react"
 import Dropcap from "@/components/core/dropcap"
-import { Notice } from "@/components/posts/typography/notice"
+import { Notice } from "@/components/typography/notice"
 
 const tabs = [
   { id: "about", label: "About This Site" },

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useTheme } from "next-themes"
 import { PageHeader, PageHeaderProps, PageDescription } from '@/components/core'
-import { Box } from "@/components/posts/typography/box"
+import { Box } from "@/components/typography/box"
 import {
   Table,
   TableBody,

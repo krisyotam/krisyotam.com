@@ -45,6 +45,8 @@ import {
   getWantToRead,
   getLibraryBooks,
   getLibraryNotes,
+  getAll404Blocks,
+  get404BlockCount,
 } from "@/lib/media-db";
 import { getActiveVideos, getCategoryBySlug } from "@/lib/content-db";
 import {
@@ -290,9 +292,87 @@ export async function GET(request: Request) {
         }
       }
 
+      // ========================================================================
+      // 404 Blocks
+      // ========================================================================
+      case "404": {
+        const IMG_BASE = "https://krisyotam.com/doc/assets/404/img/";
+        const AUDIO_BASE = "https://krisyotam.com/doc/assets/404/audio/";
+        const VIDEO_BASE = "https://krisyotam.com/doc/assets/404/videos/";
+
+        const TIER_RATES: Record<string, number> = {
+          common: 0.50,
+          uncommon: 0.25,
+          rare: 0.15,
+          legendary: 0.08,
+          mythic: 0.02,
+        };
+
+        const blocks = getAll404Blocks();
+        const counts = get404BlockCount();
+
+        if (blocks.length === 0) {
+          return NextResponse.json({ error: "No 404 blocks found" }, { status: 404 });
+        }
+
+        const resolveUrls = (b: typeof blocks[0]) => ({
+          id: b.id,
+          img: b.img.startsWith("http") ? b.img : IMG_BASE + b.img,
+          msg: b.msg,
+          status: b.status,
+          invert: b.invert,
+          audio: b.audio
+            ? b.audio.startsWith("http") ? b.audio : AUDIO_BASE + b.audio
+            : null,
+          video: b.video
+            ? b.video.startsWith("http") ? b.video : VIDEO_BASE + b.video
+            : null,
+        });
+
+        // Return all blocks for the cards index page
+        if (type === "all") {
+          return NextResponse.json({
+            blocks: blocks.map(resolveUrls),
+            counts,
+            tierRates: TIER_RATES,
+          });
+        }
+
+        // Weighted random selection: pick a tier first, then a random item within it
+        const tierEntries = Object.entries(TIER_RATES).filter(([tier]) => (counts[tier] || 0) > 0);
+        const totalWeight = tierEntries.reduce((sum, [, w]) => sum + w, 0);
+        let roll = Math.random() * totalWeight;
+        let selectedTier = tierEntries[0][0];
+        for (const [tier, weight] of tierEntries) {
+          roll -= weight;
+          if (roll <= 0) {
+            selectedTier = tier;
+            break;
+          }
+        }
+
+        const tierBlocks = blocks.filter((b) => b.status === selectedTier);
+        const selected = tierBlocks[Math.floor(Math.random() * tierBlocks.length)];
+        const resolved = resolveUrls(selected);
+
+        const tierRate = TIER_RATES[selected.status] || 0;
+        const itemsInTier = counts[selected.status] || 1;
+        const pullChance = tierRate / itemsInTier;
+
+        return NextResponse.json({
+          block: resolved,
+          pull: {
+            tierRate,
+            itemsInTier,
+            chance: pullChance,
+          },
+          counts,
+        });
+      }
+
       default:
         return NextResponse.json(
-          { error: `Unknown source: ${source}. Valid sources: reading, library, videos, mal` },
+          { error: `Unknown source: ${source}. Valid sources: reading, library, videos, mal, 404` },
           { status: 400 }
         );
     }

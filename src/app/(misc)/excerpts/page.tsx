@@ -15,7 +15,7 @@
  */
 
 import { useState, useEffect, useMemo } from "react"
-import { ExcerptCard } from "@/components/excerpts/excerpt-card"
+import { ExcerptCard } from "@/components/typography/excerptCard"
 import { PageHeader } from "@/components/core"
 import { PageDescription } from "@/components/core"
 

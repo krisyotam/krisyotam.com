@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react"
 import { PostHeader } from "@/components/core"
-import Collapse from "@/components/posts/typography/collapse"
-import Video from "@/components/posts/media/video"
+import { PageDescription } from "@/components/core"
+import { Navigation } from "@/components/content/navigation"
+import Video from "@/components/typography/video"
 
 interface VideoData {
   slug: string
@@ -25,6 +26,8 @@ export default function VideosPage() {
   const [videos, setVideos] = useState<VideoData[]>([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
+  const [selectedCategory, setSelectedCategory] = useState("all")
 
   useEffect(() => {
     async function fetchVideos() {
@@ -42,11 +45,19 @@ export default function VideosPage() {
     fetchVideos()
   }, [])
 
-  // apply search filter
+  // Get unique categories for filter
+  const categories = Array.from(new Set(videos.map(v => v.category).filter(Boolean)))
+  const categoryOptions = [
+    { value: "all", label: "All Categories" },
+    ...categories.map(c => ({ value: c, label: c }))
+  ]
+
+  // Apply search and category filter
   const filtered = videos.filter((v) => {
-    if (!searchQuery.trim()) return true
+    const matchesCategory = selectedCategory === "all" || v.category === selectedCategory
+    if (!searchQuery.trim()) return matchesCategory
     const q = searchQuery.toLowerCase()
-    return (
+    return matchesCategory && (
       v.title.toLowerCase().includes(q) ||
       v.tags.some((t) => t.toLowerCase().includes(q))
     )
@@ -68,42 +79,18 @@ export default function VideosPage() {
         />
       </div>
 
-      {/* About Videos section */}
-      <div className="max-w-2xl mx-auto mb-8">
-        <Collapse title="About Videos">
-          <div className="space-y-4 text-sm text-muted-foreground">
-            <p>
-              Conversations about the nature of intelligence, consciousness, love, and power.
-            </p>
-            <ol className="list-decimal list-inside space-y-2">
-              <li>
-                Subscribe to the <a href="#" className="text-foreground underline hover:text-primary">Kris Yotam</a> YouTube channel.
-              </li>
-              <li>
-                Subscribe on <a href="#" className="text-foreground underline hover:text-primary">Apple Podcasts</a>, <a href="#" className="text-foreground underline hover:text-primary">Spotify</a>, <a href="#" className="text-foreground underline hover:text-primary">RSS</a>. If you enjoy it, consider rating it 5 stars.
-              </li>
-              <li>
-                Connect on <a href="#" className="text-foreground underline hover:text-primary">Twitter</a>, <a href="#" className="text-foreground underline hover:text-primary">LinkedIn</a>, <a href="#" className="text-foreground underline hover:text-primary">Instagram</a>, <a href="#" className="text-foreground underline hover:text-primary">TikTok</a>, <a href="#" className="text-foreground underline hover:text-primary">Facebook</a>, <a href="#" className="text-foreground underline hover:text-primary">Reddit</a>.
-              </li>
-              <li>
-                The best way to support this podcast is to support the <a href="#" className="text-foreground underline hover:text-primary">Sponsors</a>. They're awesome! But also, consider monthly donations on <a href="#" className="text-foreground underline hover:text-primary">Patreon</a> or a one-time gift via <a href="#" className="text-foreground underline hover:text-primary">PayPal</a>.
-              </li>
-              <li>
-                To contact me, please check out the <a href="#" className="text-foreground underline hover:text-primary">Contact Page</a>.
-              </li>
-            </ol>
-          </div>
-        </Collapse>
-      </div>
-
-      {/* search bar */}
-      <div className="max-w-2xl mx-auto mb-6">
-        <input
-          type="text"
-          placeholder="Search title or tags…"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full p-2 border rounded-md"
+      {/* Navigation */}
+      <div className="max-w-2xl mx-auto">
+        <Navigation
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          searchPlaceholder="Search videos..."
+          showCategoryFilter={true}
+          categoryOptions={categoryOptions}
+          selectedCategory={selectedCategory}
+          onCategoryChange={setSelectedCategory}
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
         />
       </div>
 
@@ -111,7 +98,7 @@ export default function VideosPage() {
       {loading ? (
         <div className="max-w-2xl mx-auto text-center py-12">Loading videos...</div>
       ) : (
-        <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className={`max-w-2xl mx-auto ${viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 gap-4" : "flex flex-col gap-4"}`}>
           {filtered.map((video) => (
             <Video
               key={video.slug}
@@ -125,6 +112,12 @@ export default function VideosPage() {
           ))}
         </div>
       )}
+
+      {/* Page Description */}
+      <PageDescription
+        title="About Videos"
+        description="Conversations about the nature of intelligence, consciousness, love, and power. Subscribe to the [Kris Yotam](https://youtube.com/@krisyotam) YouTube channel, [Apple Podcasts](https://podcasts.apple.com), [Spotify](https://spotify.com), or [RSS](/feeds/rss.xml). Connect on [Twitter](https://twitter.com/kaborakris), [LinkedIn](https://linkedin.com/in/krisyotam), [Instagram](https://instagram.com/krisyotam), and [Reddit](https://reddit.com/u/krisyotam). Support the channel through [Patreon](https://patreon.com/krisyotam) or [PayPal](https://paypal.me/krisyotam)."
+      />
     </main>
   )
 }

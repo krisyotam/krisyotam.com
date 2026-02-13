@@ -19,6 +19,44 @@ interface PageDescriptionProps {
   icons?: IconEntry[]
 }
 
+/**
+ * Parse markdown-style links [text](url) into React elements
+ */
+function parseMarkdownLinks(text: string): React.ReactNode[] {
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g
+  const parts: React.ReactNode[] = []
+  let lastIndex = 0
+  let match
+
+  while ((match = linkRegex.exec(text)) !== null) {
+    // Add text before the link
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index))
+    }
+    // Add the link
+    const [, linkText, url] = match
+    parts.push(
+      <a
+        key={`${url}-${match.index}`}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-foreground underline hover:text-primary"
+      >
+        {linkText}
+      </a>
+    )
+    lastIndex = match.index + match[0].length
+  }
+
+  // Add remaining text after the last link
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex))
+  }
+
+  return parts.length > 0 ? parts : [text]
+}
+
 export function PageDescription({ title, description, className, icons }: PageDescriptionProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
@@ -91,7 +129,7 @@ export function PageDescription({ title, description, className, icons }: PageDe
 
                   <div className="p-4">
                     <p className="font-serif text-sm leading-relaxed text-muted-foreground">
-                      {description}
+                      {parseMarkdownLinks(description)}
                     </p>
 
                     {Array.isArray(icons) && icons.length > 0 && (
@@ -154,7 +192,7 @@ export function PageDescription({ title, description, className, icons }: PageDe
                 
                 <div className="p-4">
                   <p className="font-serif text-sm leading-relaxed text-muted-foreground">
-                    {description}
+                    {parseMarkdownLinks(description)}
                   </p>
 
                   {Array.isArray(icons) && icons.length > 0 && (

@@ -1,8 +1,8 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import PlaylistGrid from "@/components/music/playlist-grid-view"
-import { PlaylistCard as PlaylistListItem } from "@/components/music/playlist-list-view"
+import PlaylistGrid from "@/components/media/music/playlist-grid-view"
+import { PlaylistCard as PlaylistListItem } from "@/components/media/music/playlist-list-view"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { LayoutGrid, List, Search } from "lucide-react"

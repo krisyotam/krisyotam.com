@@ -1,8 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { FilmCard } from "@/components/trakt/FilmCard"
-import { ShowCard } from "@/components/trakt/ShowCard"
+import { FilmCard, ShowCard } from "@/components/content/MediaCard"
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select"
 import { List, Clock, Lock, Globe } from "lucide-react"
 

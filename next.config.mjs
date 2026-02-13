@@ -90,8 +90,13 @@ const baseConfig = {
       // Search engine image proxies
       { protocol: 'https', hostname: 'external-content.duckduckgo.com', pathname: '/**' },
       { protocol: 'https', hostname: 'imgs.search.brave.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'kagi.com', pathname: '/proxy/**' },
       // Content platforms
       { protocol: 'https', hostname: 'substackcdn.com', pathname: '/**' },
+      // YouTube thumbnails
+      { protocol: 'https', hostname: 'i.ytimg.com', pathname: '/**' },
+      // Unsplash images
+      { protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' },
       // Book covers (Open Library)
       { protocol: 'https', hostname: 'covers.openlibrary.org', pathname: '/**' },
       // Spotify album art
@@ -134,19 +139,6 @@ const baseConfig = {
     config.module.rules.push({
       test: /\.mdx\?raw$/,
       type: 'asset/source',
-    })
-
-    // Add frontmatter stripping loader for MDX files in (content) directory
-    // This runs BEFORE MDX compilation to strip # === delimited blocks
-    config.module.rules.unshift({
-      test: /\.mdx$/,
-      include: /\(content\)/,
-      enforce: 'pre',
-      use: [
-        {
-          loader: './src/lib/frontmatter.js',
-        },
-      ],
     })
 
     config.externals = [...(config.externals || []), { canvas: 'canvas' }]

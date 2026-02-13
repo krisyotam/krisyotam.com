@@ -24,6 +24,10 @@
  *   GET /api/reference?type=symbols                → All symbols
  *   GET /api/reference?type=wotd                   → Word of the day
  *   GET /api/reference?type=wotd&random=true       → Random word
+ *   GET /api/reference?type=bible&book=John&chapter=3&verse=16 → Single verse
+ *   GET /api/reference?type=bible&book=Genesis&chapter=1&verse=1&endVerse=5 → Verse range
+ *   GET /api/reference?type=bible&book=Psalms&chapter=23       → Entire chapter
+ *   GET /api/reference?type=bible&books=true       → List all book names
  *
  * @type api
  * @path src/app/api/reference/route.ts
@@ -47,6 +51,10 @@ import {
   getAllInternetRules,
   searchInternetRules,
   getAllSymbols,
+  getBibleVerse,
+  getBibleVerseRange,
+  getBibleChapter,
+  getBibleBooks,
 } from "@/lib/reference-db";
 import {
   getAllQuotes,
@@ -64,7 +72,7 @@ export async function GET(request: Request) {
 
     if (!type) {
       return NextResponse.json(
-        { error: "Missing 'type' parameter. Valid types: cpi, dictionary, mitzvot, rules, quotes, excerpts, symbols, wotd" },
+        { error: "Missing 'type' parameter. Valid types: bible, cpi, dictionary, mitzvot, rules, quotes, excerpts, symbols, wotd" },
         { status: 400 }
       );
     }
@@ -310,9 +318,90 @@ export async function GET(request: Request) {
         return NextResponse.json(word);
       }
 
+      // ========================================================================
+      // Bible (KJV 1611)
+      // ========================================================================
+      case "bible": {
+        const book = searchParams.get("book");
+        const chapter = searchParams.get("chapter");
+        const verse = searchParams.get("verse");
+        const endVerse = searchParams.get("endVerse");
+        const listBooks = searchParams.get("books") === "true";
+
+        // List all book names
+        if (listBooks) {
+          return NextResponse.json({ books: getBibleBooks() });
+        }
+
+        // Validate required parameters
+        if (!book || !chapter) {
+          return NextResponse.json(
+            { error: "Missing required parameters: book, chapter" },
+            { status: 400 }
+          );
+        }
+
+        const chapterNum = parseInt(chapter, 10);
+        if (isNaN(chapterNum)) {
+          return NextResponse.json(
+            { error: "Invalid chapter number" },
+            { status: 400 }
+          );
+        }
+
+        // Get entire chapter
+        if (!verse) {
+          const verses = getBibleChapter(book, chapterNum);
+          if (verses.length === 0) {
+            return NextResponse.json(
+              { error: "Chapter not found", book, chapter: chapterNum },
+              { status: 404 }
+            );
+          }
+          return NextResponse.json({ verses });
+        }
+
+        const verseNum = parseInt(verse, 10);
+        if (isNaN(verseNum)) {
+          return NextResponse.json(
+            { error: "Invalid verse number" },
+            { status: 400 }
+          );
+        }
+
+        // Get verse range
+        if (endVerse) {
+          const endVerseNum = parseInt(endVerse, 10);
+          if (isNaN(endVerseNum)) {
+            return NextResponse.json(
+              { error: "Invalid endVerse number" },
+              { status: 400 }
+            );
+          }
+          const verses = getBibleVerseRange(book, chapterNum, verseNum, endVerseNum);
+          if (verses.length === 0) {
+            return NextResponse.json(
+              { error: "Verses not found", book, chapter: chapterNum, verse: verseNum, endVerse: endVerseNum },
+              { status: 404 }
+            );
+          }
+          return NextResponse.json({ verses });
+        }
+
+        // Get single verse
+        const result = getBibleVerse(book, chapterNum, verseNum);
+        if (!result) {
+          return NextResponse.json(
+            { error: "Verse not found", book, chapter: chapterNum, verse: verseNum },
+            { status: 404 }
+          );
+        }
+        return NextResponse.json({ verse: result });
+      }
+
       default:
         return NextResponse.json(
-          { error: `Unknown type: ${type}. Valid types: cpi, dictionary, mitzvot, rules, quotes, symbols, wotd` },
+          { error: `Unknown type: ${type}. Valid types: bible, cpi, dictionary, mitzvot, rules, quotes, symbols, wotd` },
           { status: 400 }
         );
     }

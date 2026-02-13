@@ -44,13 +44,13 @@ export async function getDefinitionFromOED(
   try {
     // Call the dictionary API
     const response = await fetch(
-      `/api/reference/dictionary?word=${encodeURIComponent(cleaned)}`
+      `/api/reference?type=dictionary&word=${encodeURIComponent(cleaned)}`
     );
 
     if (!response.ok) {
       // Try lowercase for Merriam-Webster fallback
       const fallbackResponse = await fetch(
-        `/api/reference/dictionary?word=${encodeURIComponent(cleaned.toLowerCase())}`
+        `/api/reference?type=dictionary&word=${encodeURIComponent(cleaned.toLowerCase())}`
       );
 
       if (!fallbackResponse.ok) {

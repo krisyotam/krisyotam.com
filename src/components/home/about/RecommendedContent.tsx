@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import Collapse from "@/components/posts/typography/collapse"
+import Collapse from "@/components/typography/collapse"
 import Link from 'next/link'
 
 export default function RecommendedContent() {

@@ -1239,3 +1239,124 @@ export function getFavTvShows(): FavTvShow[] {
     db.close();
   }
 }
+
+// ============================================================================
+// VIDEOS TYPE DEFINITIONS
+// ============================================================================
+
+export interface Video {
+  id: number;
+  slug: string;
+  title: string;
+  subtitle: string | null;
+  preview: string | null;
+  image: string | null;
+  video: string | null;
+  category: string | null;
+  tags: string[];
+  date: string | null;
+  status: string;
+  confidence: string;
+  importance: number;
+  state: string;
+}
+
+// ============================================================================
+// VIDEOS QUERIES
+// ============================================================================
+
+export function getVideos(): Video[] {
+  const db = getDb();
+  try {
+    const rows = db.prepare("SELECT * FROM videos WHERE state = 'active' ORDER BY date DESC").all() as any[];
+    return rows.map((row) => ({
+      ...row,
+      tags: row.tags ? JSON.parse(row.tags) : [],
+    }));
+  } finally {
+    db.close();
+  }
+}
+
+export function getVideoBySlug(slug: string): Video | null {
+  const db = getDb();
+  try {
+    const row = db.prepare("SELECT * FROM videos WHERE slug = ?").get(slug) as any;
+    if (!row) return null;
+    return {
+      ...row,
+      tags: row.tags ? JSON.parse(row.tags) : [],
+    };
+  } finally {
+    db.close();
+  }
+}
+
+export function getVideosByCategory(category: string): Video[] {
+  const db = getDb();
+  try {
+    const rows = db.prepare("SELECT * FROM videos WHERE category = ? AND state = 'active' ORDER BY date DESC").all(category) as any[];
+    return rows.map((row) => ({
+      ...row,
+      tags: row.tags ? JSON.parse(row.tags) : [],
+    }));
+  } finally {
+    db.close();
+  }
+}
+
+// ============================================================================
+// 404 BLOCKS
+// ============================================================================
+
+export interface Block404 {
+  id: number;
+  img: string;
+  msg: string;
+  status: "common" | "uncommon" | "rare" | "legendary" | "mythic";
+  invert: "y" | "n";
+  audio: string | null;
+  video: string | null;
+}
+
+export function getAll404Blocks(): Block404[] {
+  const db = getDb();
+  try {
+    return db.prepare("SELECT * FROM blocks_404").all() as Block404[];
+  } finally {
+    db.close();
+  }
+}
+
+export function get404BlocksByStatus(status: string): Block404[] {
+  const db = getDb();
+  try {
+    return db
+      .prepare("SELECT * FROM blocks_404 WHERE status = ?")
+      .all(status) as Block404[];
+  } finally {
+    db.close();
+  }
+}
+
+export function get404BlockCount(): Record<string, number> {
+  const db = getDb();
+  try {
+    const rows = db
+      .prepare("SELECT status, COUNT(*) as count FROM blocks_404 GROUP BY status")
+      .all() as { status: string; count: number }[];
+    const counts: Record<string, number> = {
+      common: 0,
+      uncommon: 0,
+      rare: 0,
+      legendary: 0,
+      mythic: 0,
+    };
+    for (const row of rows) {
+      counts[row.status] = row.count;
+    }
+    return counts;
+  } finally {
+    db.close();
+  }
+}

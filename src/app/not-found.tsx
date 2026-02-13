@@ -18,7 +18,6 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import Image from "next/image"
 
 // =============================================================================
 // Components
@@ -28,6 +27,7 @@ import { Search, ArrowLeft } from "lucide-react"
 import { LiveClock } from "@/components/ui/live-clock"
 import { Card } from "@/components/ui/card"
 import { Footer } from "@/components/core/footer"
+import { Block404 } from "@/components/core"
 import SiteFooter from "@/components/typography/expanded-footer-block"
 
 // =============================================================================
@@ -122,8 +122,8 @@ export default function NotFound() {
     <div className="min-h-screen bg-background text-foreground pt-16">
       <div className="max-w-6xl mx-auto px-4">
 
-        {/* Lain 404 Image */}
-        <div className="mb-8 container max-w-[672px] mx-auto px-4">
+        {/* 404 Block */}
+        <div className="mb-3 container max-w-[672px] mx-auto px-4">
           <Link
             href="/"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 group font-serif italic"
@@ -131,23 +131,11 @@ export default function NotFound() {
             <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
             Return to Home
           </Link>
-          <div className="border border-border p-6 flex flex-col items-center">
-            <Image
-              src="/images/404.png"
-              alt="404 - Nothing of value was found"
-              width={400}
-              height={400}
-              className="mb-4"
-              priority
-            />
-            <p className="text-sm text-muted-foreground text-center">
-              Present Day, Present Time (ahahaha)
-            </p>
-          </div>
+          <Block404 />
         </div>
 
         {/* Main Content */}
-        <main className="container max-w-[672px] mx-auto px-4 space-y-6">
+        <main className="container max-w-[672px] mx-auto px-4 space-y-3">
           <SearchBar
             value={searchTerm}
             onChange={setSearchTerm}

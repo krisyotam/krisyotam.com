@@ -204,7 +204,7 @@ export default function Bible({ children }: BibleProps) {
       <span className="cursor-help underline text-primary">{children}</span>
 
       {isOpen && (
-        <span className="fixed inset-0 z-50 pointer-events-none block">
+        <span className="fixed inset-0 z-[200] pointer-events-none block">
           <motion.div
             ref={modalRef}
             drag

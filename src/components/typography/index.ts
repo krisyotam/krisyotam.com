@@ -19,6 +19,6 @@ export { Callout } from "./callout";
 export { CodeBlock } from "./code";
 export { Figure } from "./figure";
 // Note: Image is a server component (uses fs/promises) - import directly if needed
-// For client contexts, use @/components/posts/images/basic-image-display instead
+// For client contexts, use a client-compatible image component instead
 export { Caption } from "./caption";
 export { FootNotes, Ref, FootNote } from "./footnotes";

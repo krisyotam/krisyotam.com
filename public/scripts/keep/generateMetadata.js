@@ -561,66 +561,9 @@ function insertSystemEntry(args) {
  * Generate MDX frontmatter
  */
 function generateFrontmatter(args) {
-  const lines = [
-    '# ==============================================================================',
-    `# DOCUMENT: ${args.slug}.mdx`,
-    `# TYPE:     ${args.type.toUpperCase()}`,
-    '#',
-    '# RATIONALE:',
-    '#   This document uses human-readable YAML front matter as a durable metadata',
-    '#   layer. In the event of database loss or corruption, content and metadata',
-    '#   can be reconstructed directly from source files.',
-    '#',
-    '# REQUIREMENTS:',
-    '#   - YAML front matter MUST be present',
-    '#   - @type @author, and @path MUST be defined',
-    '#',
-    '# @author Kris Yotam',
-    `# @type ${args.type}`,
-    `# @path src/app/(content)/${args.type}/content/${args.category || ''}/${args.slug}.mdx`,
-    '# ==============================================================================',
-    '',
-  ];
-
-  // Build YAML frontmatter based on type
-  if (args.type === 'diary') {
-    // Simplified frontmatter for diary
-    lines.push(
-      '# ==============================================================================',
-      `title: "${args.title}"`,
-      `slug: ${args.slug}`,
-      `preview: "${args.preview || ''}"`,
-      `start_date: ${args.date}`,
-      `end_date: ${args.date}`,
-      `tags: [${args.tags.join(', ')}]`,
-      `category: ${args.category || ''}`,
-      '# =============================================================================='
-    );
-  } else if (['til', 'now'].includes(args.type)) {
-    // No frontmatter for TIL/Now - just content
-    return null;
-  } else {
-    // Full frontmatter for standard types
-    lines.push(
-      '# ==============================================================================',
-      `title: "${args.title}"`,
-      `slug: ${args.slug}`,
-      `date: ${args.date}`,
-      `updated: ${args.date}`,
-      `status: ${args.status || 'Draft'}`,
-      `certainty: ${args.certainty || 'possible'}`,
-      `importance: ${args.importance || 5}`,
-      `author: "Kris Yotam"`,
-      `description: "${args.preview || ''}"`,
-      `tags: [${args.tags.join(', ')}]`,
-      `category: ${args.category || ''}`,
-      'sequences: []',
-      'cover: ""',
-      '# =============================================================================='
-    );
-  }
-
-  return lines.join('\n');
+  // Frontmatter no longer stored in MDX files — metadata lives in content.db.
+  // Use public/scripts/keep/export.sh to reconstruct full files from DB when needed.
+  return null;
 }
 
 /**
@@ -639,13 +582,12 @@ function createMdxFile(args) {
     filePath = path.join(CONTENT_DIR, 'now/content', `${args.slug}.mdx`);
     content = args.content || 'Update content goes here...';
   } else {
-    // Standard types: category subfolder, with frontmatter
+    // Standard types: category subfolder, no frontmatter (metadata in DB)
     const category = args.category || 'uncategorized';
     const categoryDir = path.join(CONTENT_DIR, args.type, 'content', category);
     filePath = path.join(categoryDir, `${args.slug}.mdx`);
 
-    const frontmatter = generateFrontmatter(args);
-    content = `${frontmatter}\n\nContent goes here...\n`;
+    content = 'Content goes here...\n';
   }
 
   if (args.dryRun) {

@@ -39,6 +39,10 @@ interface ContentTableProps {
    */
   basePath?: string;
   /**
+   * Whether to show category column (default: true)
+   */
+  showCategory?: boolean;
+  /**
    * Whether to show category links (default: false)
    */
   showCategoryLinks?: boolean;
@@ -63,6 +67,7 @@ interface ContentTableProps {
 export function ContentTable({
   items,
   basePath = "",
+  showCategory = true,
   showCategoryLinks = false,
   formatCategoryNames = true,
   showType = false,
@@ -132,9 +137,9 @@ export function ContentTable({
     <div>
       <table className="w-full text-sm border border-border overflow-hidden shadow-sm table-fixed">
         <colgroup>
-          <col className="w-[45%]" />
+          <col className={showCategory ? "w-[45%]" : "w-[63%]"} />
           {showType && <col className="w-[12%]" />}
-          <col className="w-[18%]" />
+          {showCategory && <col className="w-[18%]" />}
           <col className="w-[15%]" />
           {showViews && <col className="w-[10%]" />}
         </colgroup>
@@ -142,7 +147,7 @@ export function ContentTable({
           <tr className="border-b border-border bg-muted/50 text-foreground">
             <th className="py-2 text-left font-medium px-3">Title</th>
             {showType && <th className="py-2 text-left font-medium px-3">Type</th>}
-            <th className="py-2 text-left font-medium px-3">Category</th>
+            {showCategory && <th className="py-2 text-left font-medium px-3">Category</th>}
             <th className="py-2 text-left font-medium px-3">Date</th>
             {showViews && <th className="py-2 text-right font-medium px-3">Views</th>}
           </tr>
@@ -162,19 +167,21 @@ export function ContentTable({
                   {formatTypeDisplayName(item.type)}
                 </td>
               )}
-              <td className="py-2 px-3 truncate">
-                {showCategoryLinks ? (
-                  <Link
-                    href={getCategoryUrl(item.category)}
-                    className="text-foreground hover:text-primary"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {formatCategoryDisplayName(item.category)}
-                  </Link>
-                ) : (
-                  formatCategoryDisplayName(item.category)
-                )}
-              </td>
+              {showCategory && (
+                <td className="py-2 px-3 truncate">
+                  {showCategoryLinks ? (
+                    <Link
+                      href={getCategoryUrl(item.category)}
+                      className="text-foreground hover:text-primary"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {formatCategoryDisplayName(item.category)}
+                    </Link>
+                  ) : (
+                    formatCategoryDisplayName(item.category)
+                  )}
+                </td>
+              )}
               <td className="py-2 px-3 whitespace-nowrap">{getDisplayDate(item)}</td>
               {showViews && (
                 <td className="py-2 px-3 text-right text-muted-foreground whitespace-nowrap">

@@ -349,45 +349,12 @@ vercel env pull
 
 
 # MDX Content
-Uses a industry standard w/ pretty yaml for documentation purposes which allows us to retain information even if the database 
-was somehow to be lost or corrupted it could be restored by gathering data from pretty yaml. 
-The comment header notice goes in every file the only edits being name is the DOCUMENT, and TYPE which are variables. 
-TYPE is the type in (content) for ex. ESSAYS, PAPERS, BLOG, ect. and DOCUMENT is the filenmae for ex. thispost.mdx the rest is a a
-defaualt informataive template for future editors, ect. 
-
-# ==============================================================================
-# DOCUMENT: filename
-# TYPE:     PUBLICATION UNIT
-#
-# RATIONALE:
-#   This document uses human-readable YAML front matter as a durable metadata
-#   layer. In the event of database loss or corruption, content and metadata
-#   can be reconstructed directly from source files.
-#
-# REQUIREMENTS:
-#   - YAML front matter MUST be present
-#   - @type @author, and @path MUST be defined
-#
-# @author Kris Yotam
-# @type 
-# @path 
-# ==============================================================================
-
-# ==============================================================================
-title: "Post Title"
-slug: post-title
-date: YYYY-MM-DD
-updated: YYYY-MM-DD
-status: 
-certainty: 
-importance: 
-author: "Kris Yotam"
-description: 
-tags: [tag, tag2, tag3]
-category: 
-sequences: [example-slug, example-slug-II, example-slug-III]
-cover: https://krisyotam.com/doc/path-to-file
-# ==============================================================================
+MDX files are content-only — no frontmatter. All metadata lives in `content.db`.
+To reconstruct full MDX files with frontmatter (for archival or migration), run:
+```bash
+bash public/scripts/keep/export.sh
+```
+This exports to `~/export/` with the original comment header + YAML frontmatter prepended.
 
 
 # Constants
@@ -624,57 +591,10 @@ All content routes share a GLOBAL pool of categories and tags. This means:
 The `PostHeader` component links tags to `/tag/[slug]` and categories to `/category/[slug]` (global).
 The Navigation component's category dropdown filters WITHIN the current route (`/notes/[category]`).
 
-## MDX Frontmatter (Standard)
+## MDX Content Files
 
-```yaml
-# ==============================================================================
-# DOCUMENT: filename.mdx
-# TYPE:     ROUTE_TYPE
-# @author Kris Yotam
-# @type route
-# @path src/app/(content)/route/content/category/slug.mdx
-# ==============================================================================
-
-title: "Post Title"
-slug: post-slug
-date: YYYY-MM-DD
-updated: YYYY-MM-DD
-status: Notes|Draft|In Progress|Finished|Abandoned
-certainty: certain|likely|possible|unlikely|remote|impossible
-importance: 0-10
-author: "Kris Yotam"
-description: "Preview text"
-tags: [tag1, tag2, tag3]
-category: category-name
-sequences: []
-cover: https://image-url
-# ==============================================================================
-```
-
-## Simplified MDX Frontmatter (Diary)
-
-For routes like /diary that don't need full metadata:
-
-```yaml
-# ==============================================================================
-# DOCUMENT: filename.mdx
-# TYPE:     DIARY
-# @author Kris Yotam
-# @type diary
-# @path src/app/(content)/diary/content/category/slug.mdx
-# ==============================================================================
-
-title: "Entry Title"
-slug: entry-slug
-preview: "Brief description"
-start_date: YYYY-MM-DD
-end_date: YYYY-MM-DD
-tags: [tag1, tag2, tag3]
-category: category-name
-# ==============================================================================
-```
-
-Note: Diary entries omit status, certainty, and importance fields.
+MDX files are content-only (no frontmatter). All metadata lives in `content.db`.
+To reconstruct full files with frontmatter for archival, run `bash public/scripts/keep/export.sh`.
 
 ## URL Patterns
 

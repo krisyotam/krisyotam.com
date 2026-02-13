@@ -9,9 +9,9 @@ import NameBreakdown from "@/components/about/name-breakdown"
 const ABOUT_ME_CONTENT = "Hi! I am Kris Yotam, a Applied Researcher, Essayist, Critic, and Blogger. I write about a wide variety of topics, and if you are interested in my work you can even view my notes at notes.krisyotam.com"
 import PersonalBio from "@/components/about/personal-bio"
 import { WordOfTheDay } from "@/components/home/about/WordOfTheDay"
-import { QuoteOfTheDay } from "@/components/quotes/QuoteOfTheDay"
-import { CurrentlyListening } from "@/components/music/CurrentlyListening"
-import { CurrentlyReading } from "@/components/reading"
+import { QuoteOfTheDay } from "@/components/quotes/quoteOfTheDay"
+import { CurrentlyListening } from "@/components/media/music/CurrentlyListening"
+import { CurrentlyReading } from "@/components/media/reading"
 
 export default function AboutMe() {
   return (

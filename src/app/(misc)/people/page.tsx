@@ -4,8 +4,8 @@ import React from "react"
 import "../../(tracking)/film/film.css"
 import { PageHeader } from "@/components/core"
 import { MediaSectionHeader } from "@/components/core/section-header"
-import { ActorCard } from "@/components/trakt/ActorCard"
-import { PaginatedCardGrid } from "@/components/trakt/PaginatedCardGrid"
+import { ActorCard } from "@/components/content/PersonCard"
+import { PaginatedCardGrid } from "@/components/content/PaginatedCardGrid"
 import { PageDescription } from "@/components/core"
 
 type Person = {
@@ -121,7 +121,7 @@ export default function PeoplePage() {
 
         <PageDescription
           title="People"
-          description="People I admire from various fields."
+          description="I am often asked who my favorite person is in this or that respect, which has led to a great deal of thought on the figures who have influenced me most in various ways. I present to you the most coherent answer I could possibly give to such a question."
         />
       </div>
     </div>

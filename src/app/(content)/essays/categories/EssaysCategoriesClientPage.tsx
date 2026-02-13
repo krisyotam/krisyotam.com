@@ -67,11 +67,11 @@ export default function EssaysCategoriesClientPage({ categories }: EssaysCategor
             start_date: category.date,
             slug: category.slug,
             tags: [],
-            category: category.preview
+            category: ""
           }))}
           basePath="/essays/category"
-          showCategoryLinks={false}
-          formatCategoryNames={false}
+          showCategory={false}
+          showViews={false}
           emptyMessage="No categories found matching your criteria."
         />
 

@@ -3,9 +3,11 @@
  * Bible Verse Lookup Library
  * Author: Kris Yotam
  * Date: 2026-01-04
+ * Updated: 2026-02-09
  * Filename: getVerseFromBible.ts
  * Description: Provides Bible verse lookup from the KJV 1611 translation
- *              via API. Designed for client-side use.
+ *              via the reference API (backed by SQLite database).
+ *              Designed for client-side use.
  * ============================================================================
  */
 
@@ -179,6 +181,7 @@ async function fetchRefPart(refPart: string): Promise<VerseResult[]> {
   try {
     // Build API URL
     const params = new URLSearchParams({
+      type: "bible",
       book: bookName,
       chapter: chapterNum.toString(),
       verse: verseStart.toString(),
@@ -188,7 +191,7 @@ async function fetchRefPart(refPart: string): Promise<VerseResult[]> {
       params.set("endVerse", verseEnd.toString());
     }
 
-    const response = await fetch(`/api/bible?${params.toString()}`);
+    const response = await fetch(`/api/reference?${params.toString()}`);
 
     if (!response.ok) {
       console.error("API error:", response.status);

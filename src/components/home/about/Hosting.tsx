@@ -1,6 +1,6 @@
 "use client"
 
-import { Box } from "@/components/posts/typography/box"
+import { Box } from "@/components/typography/box"
 import { Button } from "@/components/ui/button"
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"

@@ -101,7 +101,7 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
   const [isWideViewport, setIsWideViewport] = useState(false)
   const [activeId, setActiveId] = useState<string | null>(null)
   const [ready, setReady] = useState(false)
-  const [userEnabled, setUserEnabled] = useState(true)
+  const [userEnabled, setUserEnabled] = useState(false) // Default OFF until positioning is fixed
   const [columnPositions, setColumnPositions] = useState<{ left: number; right: number; topOffset: number } | null>(null)
 
   const leftColumnRef = useRef<HTMLDivElement>(null)
@@ -144,10 +144,18 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
       CONFIG.maxSidenoteWidth
     )
 
-    // Calculate the top offset: distance from page top to content element
-    // This ensures sidenote columns start at the same vertical level as content
-    const scrollTop = window.scrollY || document.documentElement.scrollTop
-    const topOffset = contentRect.top + scrollTop
+    // Find the positioned ancestor (element with position: relative/absolute/fixed)
+    // The sidenote columns will be positioned relative to this ancestor
+    let positionedAncestor: HTMLElement | null = markdownBodyRef.current.parentElement
+    while (positionedAncestor && positionedAncestor !== document.body) {
+      const style = window.getComputedStyle(positionedAncestor)
+      if (style.position !== 'static') break
+      positionedAncestor = positionedAncestor.parentElement
+    }
+
+    // Calculate offset relative to the positioned ancestor (not document)
+    const ancestorRect = positionedAncestor?.getBoundingClientRect() || { top: 0, left: 0 }
+    const topOffset = contentRect.top - ancestorRect.top
 
     // Left column: ends just before content starts
     // Right column: starts just after content ends
@@ -219,18 +227,30 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
     return parsed
   }, [containerSelector])
 
-  // ─── Calculate Sidenote Positions ──────────────────────────────────────────
+  // ─── Calculate Sidenote Positions (Initial layout with estimated heights) ──
   const calculatePositions = useCallback((parsedSidenotes: Sidenote[]): PositionedSidenote[] => {
     if (!markdownBodyRef.current) return []
 
-    const bodyRect = markdownBodyRef.current.getBoundingClientRect()
-    const positioned: PositionedSidenote[] = []
+    const body = markdownBodyRef.current
+    const bodyTop = body.offsetTop
+    const estimatedHeight = 100
 
-    // Track occupied ranges for each column
-    const occupiedLeft: { top: number; bottom: number }[] = []
-    const occupiedRight: { top: number; bottom: number }[] = []
+    // Helper: get citation's absolute position (scroll-independent)
+    const getCitationTop = (citationEl: HTMLElement): number => {
+      let top = 0
+      let el: HTMLElement | null = citationEl
+      while (el && el !== document.body) {
+        top += el.offsetTop
+        el = el.offsetParent as HTMLElement | null
+      }
+      return top - bodyTop
+    }
 
-    parsedSidenotes.forEach((note, index) => {
+    // Step 1: Assign columns and calculate ideal positions
+    const leftNotes: (Sidenote & { column: "left"; posInCell: number })[] = []
+    const rightNotes: (Sidenote & { column: "right"; posInCell: number })[] = []
+
+    parsedSidenotes.forEach((note) => {
       // Determine which column (odd = right, even = left when both enabled)
       let column: "left" | "right" = "right"
       if (CONFIG.useLeftColumn && CONFIG.useRightColumn) {
@@ -239,94 +259,221 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
         column = "left"
       }
 
-      const occupied = column === "left" ? occupiedLeft : occupiedRight
-
       // Calculate ideal top position (aligned with citation)
-      let idealTop = 0
+      let idealTop = CONFIG.minTopOffset
       if (note.citationElement) {
-        const citationRect = note.citationElement.getBoundingClientRect()
-        idealTop = citationRect.top - bodyRect.top + 4
+        idealTop = Math.max(CONFIG.minTopOffset, getCitationTop(note.citationElement) + 4)
       }
 
-      // Estimate height (will be refined after render)
-      const estimatedHeight = 100
+      if (column === "left") {
+        leftNotes.push({ ...note, column, posInCell: idealTop })
+      } else {
+        rightNotes.push({ ...note, column, posInCell: idealTop })
+      }
+    })
 
-      // Find non-overlapping position (ensure minimum offset below header)
-      let finalTop = Math.max(CONFIG.minTopOffset, idealTop)
+    // Step 2: Sort by position
+    leftNotes.sort((a, b) => a.posInCell - b.posInCell)
+    rightNotes.sort((a, b) => a.posInCell - b.posInCell)
 
-      // Check for collisions and push down if needed
-      for (const range of occupied) {
-        if (finalTop < range.bottom && finalTop + estimatedHeight + CONFIG.sidenoteSpacing > range.top) {
-          finalTop = range.bottom + CONFIG.sidenoteSpacing
+    // Step 3: Simple collision resolution for initial layout (will be refined after render)
+    const resolveCollisions = (notes: { posInCell: number }[]) => {
+      for (let i = 1; i < notes.length; i++) {
+        const prevNote = notes[i - 1]
+        const thisNote = notes[i]
+        const minTop = prevNote.posInCell + estimatedHeight + CONFIG.sidenoteSpacing
+        if (thisNote.posInCell < minTop) {
+          thisNote.posInCell = minTop
         }
       }
+    }
 
-      // Add to occupied ranges
-      occupied.push({
-        top: finalTop,
-        bottom: finalTop + estimatedHeight + CONFIG.sidenoteSpacing,
-      })
+    resolveCollisions(leftNotes)
+    resolveCollisions(rightNotes)
 
-      positioned.push({
+    // Step 4: Build positioned array
+    const positioned: PositionedSidenote[] = parsedSidenotes.map((note) => {
+      const column: "left" | "right" = CONFIG.useLeftColumn && CONFIG.useRightColumn
+        ? (note.number % 2 === 0 ? "left" : "right")
+        : CONFIG.useLeftColumn ? "left" : "right"
+
+      const columnNotes = column === "left" ? leftNotes : rightNotes
+      const adjustedNote = columnNotes.find(n => n.number === note.number)
+
+      return {
         ...note,
-        top: finalTop,
+        top: adjustedNote?.posInCell ?? CONFIG.minTopOffset,
         column,
         height: estimatedHeight,
         isCutOff: false,
-      })
+      }
     })
 
     return positioned
   }, [])
 
-  // ─── Recalculate Positions After Render ────────────────────────────────────
+  // ─── Recalculate Positions After Render (Gwern-style bidirectional adjustment) ────
   const recalculatePositions = useCallback(() => {
-    if (!markdownBodyRef.current || sidenotes.length === 0) return
+    if (!markdownBodyRef.current || !columnPositions) return
 
-    const bodyRect = markdownBodyRef.current.getBoundingClientRect()
-    const occupiedLeft: { top: number; bottom: number }[] = []
-    const occupiedRight: { top: number; bottom: number }[] = []
+    // Get the actual column elements
+    const leftColumn = leftColumnRef.current
+    const rightColumn = rightColumnRef.current
+    if (!leftColumn && !rightColumn) return
 
-    const newPositions = sidenotes.map((note) => {
-      const occupied = note.column === "left" ? occupiedLeft : occupiedRight
-      const sidenoteEl = document.getElementById(note.id)
-      const actualHeight = sidenoteEl?.offsetHeight || note.height
+    // Get column positions relative to viewport
+    const leftColumnRect = leftColumn?.getBoundingClientRect()
+    const rightColumnRect = rightColumn?.getBoundingClientRect()
 
-      // Calculate ideal top position (aligned with citation)
-      let idealTop = 0
-      if (note.citationElement) {
-        const citationRect = note.citationElement.getBoundingClientRect()
-        idealTop = citationRect.top - bodyRect.top + 4
-      }
+    // Read current sidenotes from state via closure (we'll use functional update)
+    setSidenotes(currentSidenotes => {
+      if (currentSidenotes.length === 0) return currentSidenotes
 
-      // Find non-overlapping position (ensure minimum offset below header)
-      let finalTop = Math.max(CONFIG.minTopOffset, idealTop)
+      const body = markdownBodyRef.current
+      if (!body) return currentSidenotes
 
-      for (const range of occupied) {
-        if (finalTop < range.bottom && finalTop + actualHeight + CONFIG.sidenoteSpacing > range.top) {
-          finalTop = range.bottom + CONFIG.sidenoteSpacing
+      // Separate sidenotes by column
+      const leftNotes: (PositionedSidenote & { posInCell: number; actualHeight: number })[] = []
+      const rightNotes: (PositionedSidenote & { posInCell: number; actualHeight: number })[] = []
+
+      // Step 1: Set all sidenotes to their ideal positions (aligned with citations)
+      currentSidenotes.forEach((note) => {
+        const sidenoteEl = document.getElementById(note.id)
+        const actualHeight = sidenoteEl?.offsetHeight || 100
+
+        // Get the column's viewport top for this sidenote
+        const columnRect = note.column === "left" ? leftColumnRect : rightColumnRect
+        const columnViewportTop = columnRect?.top ?? 0
+
+        // Re-query the citation element (stored refs may be stale after re-renders)
+        const citationSelectors = [
+          `sup[id="user-content-fnref-${note.number}"]`,
+          `a[href="#user-content-fn-${note.number}"]`,
+          `sup[id*="fnref-${note.number}"]`,
+          `sup[id*="fnref${note.number}"]`,
+        ]
+        let citationEl: HTMLElement | null = null
+        for (const sel of citationSelectors) {
+          citationEl = document.querySelector(sel) as HTMLElement
+          if (citationEl) break
+        }
+
+        // Calculate ideal top position: citation viewport position relative to column viewport position
+        // This gives us the offset within the column where the sidenote should appear
+        let idealTop = CONFIG.minTopOffset
+        if (citationEl) {
+          const citationRect = citationEl.getBoundingClientRect()
+          // Simple subtraction: how far down from column top is the citation?
+          idealTop = Math.max(CONFIG.minTopOffset, citationRect.top - columnViewportTop + 4)
+        }
+
+        const noteWithPos = {
+          ...note,
+          posInCell: idealTop,
+          actualHeight,
+          height: actualHeight,
+        }
+
+        if (note.column === "left") {
+          leftNotes.push(noteWithPos)
+        } else {
+          rightNotes.push(noteWithPos)
+        }
+      })
+
+      // Step 2: Sort each column's sidenotes by their ideal position
+      leftNotes.sort((a, b) => a.posInCell - b.posInCell)
+      rightNotes.sort((a, b) => a.posInCell - b.posInCell)
+
+      // Step 3: Bidirectional adjustment function (Gwern's algorithm)
+      const adjustColumnPositions = (notes: typeof leftNotes) => {
+        if (notes.length === 0) return
+
+        // Helper: get distance between two consecutive sidenotes
+        // Positive = gap exists, Negative = overlap
+        const getDistance = (noteA: typeof notes[0], noteB: typeof notes[0]) => {
+          return noteB.posInCell - (noteA.posInCell + noteA.actualHeight + CONFIG.sidenoteSpacing)
+        }
+
+        // Helper: shift notes up by a given amount
+        const shiftNotesUp = (noteIndexes: number[], shiftDistance: number) => {
+          noteIndexes.forEach(idx => {
+            notes[idx].posInCell -= shiftDistance
+          })
+        }
+
+        // Helper: recursively push notes up to resolve overlap
+        const pushNotesUp = (pushWhich: number[], pushForce: number, bruteStrength = false): number => {
+          if (pushWhich.length === 0 || pushForce <= 0) return pushForce
+
+          const firstIdx = pushWhich[0]
+          // How much room is there to push up?
+          const roomToPush = firstIdx === 0
+            ? Math.max(0, notes[firstIdx].posInCell - CONFIG.minTopOffset)
+            : Math.max(0, getDistance(notes[firstIdx - 1], notes[firstIdx]))
+
+          // How much should each note move?
+          const pushDistance = bruteStrength
+            ? pushForce
+            : Math.floor(pushForce / pushWhich.length)
+
+          if (pushDistance <= roomToPush) {
+            // Enough room - shift all notes and return remaining force
+            shiftNotesUp(pushWhich, pushDistance)
+            return pushForce - pushDistance
+          } else {
+            // Not enough room - shift by what we can, then try to involve more notes
+            shiftNotesUp(pushWhich, roomToPush)
+            if (firstIdx === 0) {
+              // Hit the top, can't push more
+              return pushForce - roomToPush
+            }
+            // Add the note above to the push set and recurse
+            const newPushWhich = [firstIdx - 1, ...pushWhich]
+            return pushNotesUp(newPushWhich, pushForce - roomToPush, bruteStrength)
+          }
+        }
+
+        // Check each sidenote after the first for overlap with the one above
+        for (let i = 1; i < notes.length; i++) {
+          const prevNote = notes[i - 1]
+          const thisNote = notes[i]
+
+          // Calculate overlap (negative distance means overlap)
+          const overlapAbove = Math.max(0, -1 * getDistance(prevNote, thisNote))
+          if (overlapAbove === 0) continue
+
+          // Split the overlap: push notes above UP, push current note DOWN
+          const pushUpForce = Math.round(overlapAbove / 2)
+          const remainingOverlap = pushNotesUp([i - 1], pushUpForce)
+          thisNote.posInCell += (overlapAbove - pushUpForce) + remainingOverlap
         }
       }
 
-      occupied.push({
-        top: finalTop,
-        bottom: finalTop + actualHeight + CONFIG.sidenoteSpacing,
+      // Apply bidirectional adjustment to each column
+      adjustColumnPositions(leftNotes)
+      adjustColumnPositions(rightNotes)
+
+      // Step 4: Build the final positions array
+      const newPositions = currentSidenotes.map((note) => {
+        const columnNotes = note.column === "left" ? leftNotes : rightNotes
+        const adjustedNote = columnNotes.find(n => n.id === note.id)
+
+        const sidenoteEl = document.getElementById(note.id)
+        const outerWrapper = sidenoteEl?.querySelector(".sidenote-outer-wrapper") as HTMLElement
+        const isCutOff = outerWrapper ? outerWrapper.scrollHeight > outerWrapper.offsetHeight + 2 : false
+
+        return {
+          ...note,
+          top: adjustedNote?.posInCell ?? note.top,
+          height: adjustedNote?.actualHeight ?? note.height,
+          isCutOff,
+        }
       })
 
-      // Check if content is cut off
-      const outerWrapper = sidenoteEl?.querySelector(".sidenote-outer-wrapper") as HTMLElement
-      const isCutOff = outerWrapper ? outerWrapper.scrollHeight > outerWrapper.offsetHeight + 2 : false
-
-      return {
-        ...note,
-        top: finalTop,
-        height: actualHeight,
-        isCutOff,
-      }
+      return newPositions
     })
-
-    setSidenotes(newPositions)
-  }, [sidenotes])
+  }, [columnPositions]) // Depends on columnPositions for correct position calculation
 
   // ─── Initialize ────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -344,7 +491,7 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
 
   // ─── Recalculate on resize ─────────────────────────────────────────────────
   useEffect(() => {
-    if (!ready) return
+    if (!ready || !columnPositions) return
 
     const handleResize = () => {
       requestAnimationFrame(recalculatePositions)
@@ -352,16 +499,14 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
 
     window.addEventListener("resize", handleResize)
 
-    // Initial recalculation after render - use multiple attempts to ensure DOM is ready
-    const timer1 = setTimeout(recalculatePositions, 100)
-    const timer2 = setTimeout(recalculatePositions, 500)
+    // Additional recalculation after images load (they can change heights)
+    const timer = setTimeout(recalculatePositions, 500)
 
     return () => {
       window.removeEventListener("resize", handleResize)
-      clearTimeout(timer1)
-      clearTimeout(timer2)
+      clearTimeout(timer)
     }
-  }, [ready, recalculatePositions])
+  }, [ready, columnPositions, recalculatePositions])
 
   // ─── Scroll listener for cut-off sidenotes ─────────────────────────────────
   // When user scrolls to bottom of a cut-off sidenote, hide the "more" indicator
@@ -370,7 +515,7 @@ export function Sidenotes({ containerSelector = "#content, article, main", enabl
 
     const handleScroll = (e: Event) => {
       const target = e.target as HTMLElement
-      if (!target.classList.contains("sidenote-outer-wrapper")) return
+      if (!target?.classList?.contains("sidenote-outer-wrapper")) return
 
       const sidenote = target.closest(".sidenote")
       if (!sidenote || !sidenote.classList.contains("cut-off")) return

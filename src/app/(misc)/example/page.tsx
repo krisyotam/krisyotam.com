@@ -1,5 +1,5 @@
 import { PageHeader, PageDescription } from "@/components/core"
-import { Box } from "@/components/posts/typography/box"
+import { Box } from "@/components/typography/box"
 import Link from "next/link"
 
 export default function ExampleTagsPage() {

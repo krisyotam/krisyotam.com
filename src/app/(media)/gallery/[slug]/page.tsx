@@ -9,7 +9,7 @@ import { PageHeader } from "@/components/core";
 import { Citation } from "@/components/core/citation";
 import { LiveClock } from "@/components/ui/live-clock";
 import { Footer } from "@/components/core/footer";
-import { Box } from "@/components/posts/typography/box";
+import { Box } from "@/components/typography/box";
 
 interface GalleryPageProps {
   params: Promise<{ slug: string }>;

@@ -1,8 +1,8 @@
 "use client"
 
 import React from "react"
-import Collapse from "@/components/posts/typography/collapse"
-import { Notice } from "@/components/posts/typography/notice"
+import Collapse from "@/components/typography/collapse"
+import { Notice } from "@/components/typography/notice"
 
 export default function SupportMe() {
   return (

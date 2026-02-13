@@ -1,105 +1,86 @@
-/**
- * =============================================================================
- * Sequences Categories Client Page
- * =============================================================================
- *
- * Client-side component for displaying sequence categories.
- * Receives data as props from server component.
- * Fetches data from content.db via lib/data.ts functions.
- *
- * Author: Kris Yotam
- * =============================================================================
- */
-
 "use client";
 
-// =============================================================================
-// Imports
-// =============================================================================
-
 import { useState } from "react";
-import Link from "next/link";
+import { ContentTable } from "@/components/content";
 import { PageHeader } from "@/components/core";
-import { CategoriesTable } from "@/components/sequences/categories-table";
+import { PageDescription } from "@/components/core";
 
-// =============================================================================
-// Types
-// =============================================================================
+/* default page-level metadata for the header */
+const defaultCategoriesPageData = {
+  title: "\"Sequences\" Categories",
+  subtitle: "",
+  date: new Date().toISOString(),
+  preview: "Browse all sequence categories and explore different topics and themes.",
+  status: "Finished" as const,
+  confidence: "certain" as const,
+  importance: 8,
+};
 
-interface Category {
+interface SequenceCategory {
   slug: string;
   title: string;
   preview: string;
-  count: number;
+  date: string;
+  status: string;
+  confidence: string;
   importance: number;
 }
 
 interface SequencesCategoriesClientPageProps {
-  categories: Category[];
+  categories: SequenceCategory[];
 }
 
-// =============================================================================
-// Page Component
-// =============================================================================
-
-export default function SequencesCategoriesClientPage({
-  categories,
-}: SequencesCategoriesClientPageProps) {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  // Filter categories by search term
-  const filteredCategories = categories.filter(
-    (category) =>
-      category.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      category.preview.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // =============================================================================
-  // Render
-  // =============================================================================
+export default function SequencesCategoriesClientPage({ categories }: SequencesCategoriesClientPageProps) {
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <PageHeader
-        title="Sequence Categories"
-        subtitle="Browse all categories of sequences"
-        start_date="2025-01-01"
-        end_date={new Date().toISOString().split("T")[0]}
-        preview="Find sequences organized by subject matter"
-        status="In Progress"
-        confidence="certain"
-        importance={8}
-        backHref="/sequences"
-        backText="Sequences"
-      />
+    <>
+      <style jsx global>{`
+        .sequences-container {
+          font-family: 'Geist', sans-serif;
+        }
+      `}</style>
 
-      <div className="mb-8">
-        <input
-          type="text"
-          placeholder="Search categories..."
-          className="w-full p-2 border rounded-md dark:bg-gray-800 dark:border-gray-700"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+      <div className="sequences-container container max-w-[672px] mx-auto px-4 pt-16 pb-8">
+        <PageHeader {...defaultCategoriesPageData} backText="Sequences" backHref="/sequences" />
+
+        {/* Search bar */}
+        <div className="mb-6">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search categories..."
+              className="w-full h-9 px-3 py-2 border rounded-none text-sm bg-background hover:bg-secondary/50 focus:outline-none focus:bg-secondary/50"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+            />
+          </div>
+        </div>
+
+        {/* Categories table */}
+        <ContentTable
+          items={categories.filter((category) => {
+            const q = searchQuery.toLowerCase();
+            return !q || category.title.toLowerCase().includes(q) || category.preview.toLowerCase().includes(q) || category.status.toLowerCase().includes(q);
+          }).sort((a, b) => b.importance - a.importance).map(category => ({
+            title: category.title,
+            start_date: category.date,
+            slug: category.slug,
+            tags: [],
+            category: ""
+          }))}
+          basePath="/sequences/category"
+          showCategory={false}
+          showViews={false}
+          emptyMessage="No categories found matching your criteria."
+        />
+
+        {/* PageDescription component */}
+        <PageDescription
+          title="About Categories"
+          description="This is an overview of all sequence categories. Each category represents a different theme or topic area. Click on any category to explore the sequences within that category. Use the search bar to find specific categories by title or description."
         />
       </div>
-
-      <CategoriesTable
-        categories={filteredCategories.map((category) => ({
-          ...category,
-          name: category.title,
-          href: `/sequences/category/${category.slug}`,
-          count: category.count || 0,
-        }))}
-      />
-
-      <div className="mt-8">
-        <Link
-          href="/sequences"
-          className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-        >
-          Back to all sequences
-        </Link>
-      </div>
-    </div>
+    </>
   );
 }

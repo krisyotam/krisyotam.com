@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Box } from "@/components/posts/typography/box"
+import { Box } from "@/components/typography/box"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import format from "date-fns/format"
 

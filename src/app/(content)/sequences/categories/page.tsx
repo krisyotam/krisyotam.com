@@ -3,7 +3,7 @@
  * Sequences Categories Page
  * =============================================================================
  *
- * Listing page for all sequence categories.
+ * Server component that displays all sequence categories.
  * Fetches data from content.db via lib/data.ts functions.
  *
  * Author: Kris Yotam
@@ -11,7 +11,7 @@
  */
 
 import SequencesCategoriesClientPage from "./SequencesCategoriesClientPage";
-import { getSequencesData } from "@/lib/data";
+import { getSequencesData, getCategoriesByContentType } from "@/lib/data";
 import type { Metadata } from "next";
 
 // =============================================================================
@@ -28,46 +28,33 @@ export const metadata: Metadata = {
 // =============================================================================
 
 export default async function SequencesCategoriesPage() {
+  // Fetch sequences data and global categories
   const data = await getSequencesData();
+  const allCategories = getCategoriesByContentType('sequences');
 
   // Filter to only active, non-hidden sequences
   const visibleSequences = data.sequences.filter(
     (sequence) => sequence.state === "active" && sequence.status !== "hidden"
   );
 
-  // Get unique categories and count sequences in each
-  const categoryCounts = new Map<string, number>();
-  const categoryPreviews = new Map<string, string[]>();
+  // Get unique categories that exist in active sequences
+  const existingCategorySlugs = new Set(
+    visibleSequences.map(seq => seq.category?.toLowerCase().replace(/\s+/g, "-"))
+  );
 
-  visibleSequences.forEach((sequence) => {
-    if (sequence.category) {
-      const count = categoryCounts.get(sequence.category) || 0;
-      categoryCounts.set(sequence.category, count + 1);
-
-      const previews = categoryPreviews.get(sequence.category) || [];
-      if (previews.length < 3) {
-        // Collect up to 3 titles per category for preview
-        previews.push(sequence.title);
-        categoryPreviews.set(sequence.category, previews);
-      }
-    }
-  });
-
-  // Format the categories
-  const categories = Array.from(categoryCounts.keys())
-    .map((category) => {
-      const slug = category.toLowerCase().replace(/\s+/g, "-");
-      const preview = categoryPreviews.get(category)?.join(", ");
-
-      return {
-        slug,
-        title: category,
-        preview: `${preview} and more...`,
-        count: categoryCounts.get(category) || 0,
-        importance: 5, // Default importance
-      };
-    })
-    .sort((a, b) => b.count - a.count); // Sort by count descending
+  // Filter, transform and sort categories by importance
+  const categories = allCategories
+    .filter(category => existingCategorySlugs.has(category.slug))
+    .map(category => ({
+      slug: category.slug,
+      title: category.title,
+      preview: category.preview || `Sequences in the ${category.title} category.`,
+      date: category.date || new Date().toISOString().split('T')[0],
+      status: category.status || "Active",
+      confidence: category.confidence || "certain",
+      importance: category.importance || 5,
+    }))
+    .sort((a, b) => b.importance - a.importance);
 
   return (
     <div className="sequences-container">

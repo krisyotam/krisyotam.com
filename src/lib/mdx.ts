@@ -147,6 +147,7 @@ export type ContentType =
   | "essays"
   | "notes"
   | "blog"
+  | "diary"
   | "fiction"
   | "papers"
   | "reviews"
@@ -195,7 +196,7 @@ export const CATEGORIZED_CONTENT_TYPES: ContentType[] = [
 export const FLAT_CONTENT_TYPES: ContentType[] = ["til", "now", "shortform"]
 
 /** Content types that optionally use categories */
-export const OPTIONAL_CATEGORY_TYPES: ContentType[] = ["notes", "blog", "verse"]
+export const OPTIONAL_CATEGORY_TYPES: ContentType[] = ["notes", "blog", "diary", "verse"]
 
 /* -----------------------------------------------------------------------------
  * PATH RESOLUTION
@@ -309,31 +310,7 @@ export async function extractHeadings(
  * Removes everything between # ===... blocks at the start of the file.
  */
 function stripCustomFrontmatter(content: string): string {
-  const lines = content.split('\n')
-  let contentStartIndex = 0
-  let frontmatterBlockCount = 0
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim()
-    // Count # ===... delimiter lines
-    if (line.startsWith('# ') && line.includes('='.repeat(10))) {
-      frontmatterBlockCount++
-      // After the fourth delimiter (end of YAML block), content starts
-      // Structure: 1) comment header start, 2) comment header end,
-      //            3) YAML block start, 4) YAML block end
-      if (frontmatterBlockCount >= 4) {
-        contentStartIndex = i + 1
-        break
-      }
-    }
-  }
-
-  // Skip any empty lines after the frontmatter
-  while (contentStartIndex < lines.length && lines[contentStartIndex].trim() === '') {
-    contentStartIndex++
-  }
-
-  return lines.slice(contentStartIndex).join('\n')
+  return content
 }
 
 /**

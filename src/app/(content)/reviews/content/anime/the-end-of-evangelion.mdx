@@ -1,47 +1,5 @@
-# ==============================================================================
-# DOCUMENT: the-end-of-evangelion.mdx
-# TYPE:     REVIEWS
-#
-# RATIONALE:
-#   This document uses human-readable YAML front matter as a durable metadata
-#   layer. In the event of database loss or corruption, content and metadata
-#   can be reconstructed directly from source files.
-#
-# REQUIREMENTS:
-#   - YAML front matter MUST be present
-#   - @type @author, and @path MUST be defined
-#
-# @author Kris Yotam
-# @type reviews
-# @path src/app/(content)/reviews/content/anime/the-end-of-evangelion.mdx
-# ==============================================================================
-
-# ==============================================================================
-title: "Neon Genesis Evangelion"
-slug: the-end-of-evangelion
-date: 2025-05-05
-updated: 2026-01-05 16:38:21
-status: In Progress
-certainty: likely
-importance: 8
-author: "Kris Yotam"
-description: "An in-depth exploration of Neon Genesis Evangelion, examining its psychological themes, visual storytelling, and cultural impact."
-tags: [Analysis, Anime, Mecha, Psychological, Hideaki Anno]
-category: anime
-sequences: []
-cover: https://krisyotam.com/doc/media/images/anime/1995-neon-genesis-evangelion-hideaki-anno.jpg
-# ==============================================================================
-
 <div className="flex flex-col items-center gap-8 mt-4 mb-8">
-  <AnimeDisplay
-    coverImage="https://i.postimg.cc/P5bYzRp2/neon-genesis-evanglion.jpg"
-    title="Neon Genesis Evangelion"
-    studio="Gainax"
-    director="Hideaki Anno"
-    year={1995}
-    episodes={26}
-    genre="Mecha/Psychological"
-  />
+  <img src="https://i.postimg.cc/P5bYzRp2/neon-genesis-evanglion.jpg" alt="Neon Genesis Evangelion" className="w-80 rounded-md" />
   <RatingDisplay
     ratings={{
       story: 4.7,
@@ -126,36 +84,12 @@ The tragic necessity of <Spoiler>Shinji having to kill Kaworu</Spoiler> forms on
 
 <div className="flex flex-wrap justify-center gap-8 my-8">
   <div className="flex gap-8">
-    <AnimeCharacterDisplay
-      image="https://i.postimg.cc/rpJHbjb9/shinji-ikari.jpg"
-      characterName="Shinji Ikari"
-      voiceActor="Megumi Ogata"
-      animeName="Neon Genesis Evangelion"
-      animeYear={1995}
-    />
-    <AnimeCharacterDisplay
-      image="https://i.postimg.cc/wMV3RSbm/asuka-langley-soryu.jpg"
-      characterName="Asuka Langley Soryu"
-      voiceActor="Yuko Miyamura"
-      animeName="Neon Genesis Evangelion"
-      animeYear={1995}
-    />
+    <img src="https://i.postimg.cc/rpJHbjb9/shinji-ikari.jpg" alt="Shinji Ikari" className="w-48 rounded-md object-cover aspect-[3/4]" />
+    <img src="https://i.postimg.cc/wMV3RSbm/asuka-langley-soryu.jpg" alt="Asuka Langley Soryu" className="w-48 rounded-md object-cover aspect-[3/4]" />
   </div>
   <div className="flex gap-8">
-    <AnimeCharacterDisplay
-      image="https://i.postimg.cc/63bm63B2/misato-katsuragi.webp"
-      characterName="Misato Katsuragi"
-      voiceActor="Kotono Mitsuishi"
-      animeName="Neon Genesis Evangelion"
-      animeYear={1995}
-    />
-    <AnimeCharacterDisplay
-      image="https://i.postimg.cc/d02F0Gf7/rei-ayanami.jpg"
-      characterName="Rei Ayanami"
-      voiceActor="Amanda Winn-Lee"
-      animeName="Neon Genesis Evangelion"
-      animeYear={1995}
-    />
+    <img src="https://i.postimg.cc/63bm63B2/misato-katsuragi.webp" alt="Misato Katsuragi" className="w-48 rounded-md object-cover aspect-[3/4]" />
+    <img src="https://i.postimg.cc/d02F0Gf7/rei-ayanami.jpg" alt="Rei Ayanami" className="w-48 rounded-md object-cover aspect-[3/4]" />
   </div>
 </div>
 

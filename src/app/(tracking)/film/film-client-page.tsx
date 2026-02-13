@@ -3,12 +3,10 @@
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { PaginatedCardGrid } from "@/components/trakt/PaginatedCardGrid"
-import { FilmCard } from "@/components/trakt/FilmCard"
-import { ActorCard } from "@/components/trakt/ActorCard"
-import { CompanyCard } from "@/components/trakt/CompanyCard"
-import { FavCharacterCard } from "@/components/trakt/FavCharacterCard"
-import { DirectorCard } from "@/components/trakt/DirectorCard"
+import { PaginatedCardGrid } from "@/components/content/PaginatedCardGrid"
+import { FilmCard } from "@/components/content/MediaCard"
+import { ActorCard, DirectorCard, FavCharacterCard } from "@/components/content/PersonCard"
+import { CompanyCard } from "@/components/content/CompanyCard"
 import { MediaSectionHeader } from "@/components/core/section-header"
 
 export default function FilmClientPage() {
@@ -228,7 +226,7 @@ export default function FilmClientPage() {
         {favCompanies && favCompanies.length > 0 && (
           <PaginatedCardGrid squareButtons={true}>
             {favCompanies.map((company) => (
-              <CompanyCard key={company.id} id={company.id} name={company.name} image={company.image} description={company.description} />
+              <CompanyCard key={company.id} name={company.name} imageUrl={company.image} description={company.description} />
             ))}
           </PaginatedCardGrid>
         )}

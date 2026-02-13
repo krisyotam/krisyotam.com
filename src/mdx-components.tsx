@@ -4,8 +4,8 @@ import Image, { type ImageProps } from "next/image"
 import * as Typography from "@/components/typography"
 import { Spoiler } from "spoiled"
 import SimpleBib from "@/components/core/simplebib"
-import Books from "@/components/posts/books/books"
-import Cinema from "@/components/posts/books/cinema"
+import Books from "@/components/books/books"
+import Frame, { FrameList, Cinema } from "@/components/typography/frame"
 import { Tweet } from "@/components/typography/tweet"
 import { Pfp } from "@/components/typography/pfp"
 import Redacted from "@/components/typography/redacted"
@@ -14,46 +14,35 @@ import TikZ from '@/components/typography/tikz'
 import { CodeBlock } from '@/components/typography/code'
 
 // Import all post-related components
-import MiniBio from '@/components/posts/people/mini-bio'
 import Dropcap from '@/components/core/dropcap'
 import Bible from "@/components/references/christianity/1611bible"
-import { Box } from "@/components/posts/typography/box"
-import { Column, ColumnContainer } from "@/components/posts/typography/column"
+import { Box } from "@/components/typography/box"
+import { Column, ColumnContainer } from "@/components/typography/column"
 import NameBreakdown from '@/components/about/name-breakdown'
-import { Age } from "@/components/posts/typography/age"
-import { Excerpt } from "@/components/posts/typography/excerpt"
-import { Quote } from "@/components/posts/typography/quote"
+import { Age } from "@/components/typography/age"
+import { Excerpt } from "@/components/typography/excerpt"
+import { Quote } from "@/components/typography/quote"
 import Define from "@/components/references/language/oed"
-import { PoemBox } from "@/components/posts/typography/poem"
-import Collapse from "@/components/posts/typography/collapse"
-import FileViewer from "@/components/posts/typography/file-viewer"
-import Essay from "@/components/posts/typography/essay"
-import Notice from "@/components/posts/typography/notice"
+import { PoemBox } from "@/components/typography/poem"
+import Collapse from "@/components/typography/collapse"
+import FileViewer from "@/components/typography/file-viewer"
+import Essay from "@/components/typography/essay"
+import Notice from "@/components/typography/notice"
 import Inflation from "@/components/core/inflation"
 import IconDemo from "@/components/core/icon-demo"
 import { Img } from "@/components/core/img"
 import { Video } from "@/components/core/video"
-import TryHackMe from "@/components/posts/ctfs/tryhackme"
-import Book from "@/components/posts/books/book"
-import { BookCard } from "@/components/posts/books/book-card"
-import AnimeDisplay from "@/components/posts/content/anime-display"
-import MangaDisplay from "@/components/posts/content/manga-display"
-import MovieDisplay from "@/components/posts/content/movie-display"
-import Movie from "@/components/posts/media/movie"
-import HauteCouture from "@/components/posts/fashion/haute-couture"
+import Book from "@/components/books/post-book"
+import { BookCard } from "@/components/books/book-card"
 import { Verse } from "@/components/content/verse"
-import HauteCoutureCollection from "@/components/posts/fashion/haute-couture-collection"
-import MangaPanelDisplay from "@/components/posts/content/manga-panel-display"
-import MangaPanelDisplayCollection from "@/components/posts/content/manga-panel-display-collection"
-import { QuotesFeed } from "@/components/quotes/quotes-feed"; // Add this import
+import { QuotesFeed } from "@/components/quotes/quotesFeed";
 import { Tree } from "@/components/about/family-tree"
 import WebsiteDemo from "@/components/core/website-demo"
-import { WikiPerson } from "@/components/posts/wikipedia/wiki-person"
-import { WikiFilm } from "@/components/posts/wikipedia/wiki-film"
+import { WikiPerson } from "@/components/typography/wikiPerson"
+import { WikiFilm } from "@/components/typography/wikiFilm"
 import { RedditEmbed } from "@/components/typography/reddit-embed"
-import AnimeCharacterDisplay from "@/components/posts/content/anime-character-display"
 import { Art, Art7x4 } from "@/components/core/art"
-import RatingDisplay from "@/components/posts/content/rating"
+import RatingDisplay from "@/components/content/rating"
 import Paper from "@/components/typography/paper"
 import { Math } from "@/components/typography/math"
 
@@ -142,19 +131,18 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     SimpleBib,
     Books,
     Cinema,
+    FilmList: FrameList,
+    FrameList,
+    Frame,
     Box,
     Column,
     ColumnContainer,
     Collapse,
     Quote,
-    MiniBio,
     Bible,
     NameBreakdown,
     Define,
     Book,
-    AnimeDisplay,
-    MangaDisplay,
-    MangaPanel: MangaPanelDisplay,
     Dropcap,
     Paper,
     Pfp,
@@ -195,23 +183,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // Books and reading components
     BookCard,
     // Content display components
-    AnimeCharacterDisplay,
-    MovieDisplay,
-    Movie,
-    MangaPanelDisplay,
-    MangaPanelDisplayCollection,
+    Movie: Frame,
+    Film: Frame,
     Verse,
-    
-    // Fashion and architecture components
-    HauteCouture,
-    HauteCoutureCollection,
-    
+
     // Code components
     CodeBlock,
     
-    // Special content components
-    TryHackMe,
-      // Website embedding component
+    // Website embedding component
     WebsiteDemo,
       // Art components
     Art,

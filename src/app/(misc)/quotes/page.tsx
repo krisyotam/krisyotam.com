@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useMemo } from "react"
-import { QuoteCard } from "@/components/quotes/quote-card"
+import { QuoteCard } from "@/components/typography/quoteCard"
 import { PageHeader } from "@/components/core"
 import { PageDescription } from "@/components/core"
 

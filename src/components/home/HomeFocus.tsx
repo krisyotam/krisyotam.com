@@ -5,7 +5,7 @@
  * @description Focus section with sliding quotes, site info tabs, bento nav, theme compare
  */
 
-import { InfiniteMovingQuotes } from "@/components/quotes/InfiniteMovingQuotes"
+import { InfiniteMovingQuotes } from "@/components/quotes/infiniteMovingQuotes"
 import { BentoNav } from "@/components/home/bento-nav"
 import { ThemeImageCompare, SiteInfoTabs } from "./about"
 

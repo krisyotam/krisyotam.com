@@ -6,11 +6,13 @@ import { PageHeader } from "@/components/core";
 import {
   CompletedAnimeCard,
   AnimeFavoriteCard,
-} from "@/components/anime/anime-cards";
-import { StatsSection } from "@/components/anime/stats-section";
+} from "@/components/content/MediaCard";
+import { PersonCard } from "@/components/content/PersonCard";
+import { CompanyCard } from "@/components/content/CompanyCard";
+import { StatsSection } from "@/components/media/anime/stats-section";
 import { MediaSectionHeader } from "@/components/core/section-header";
-import { TabSwitcher } from "@/components/anime/tab-switcher";
-import { Pagination } from "@/components/anime/pagination";
+import { TabSwitcher } from "@/components/media/anime/tab-switcher";
+import { Pagination } from "@/components/media/anime/pagination";
 import { PageDescription } from "@/components/core";
 
 // Favorite animation studios/companies data embedded directly
@@ -423,7 +425,11 @@ export default function MangaClientPage() {
                     key={character.id || character.name || index}
                     className="w-full min-w-0"
                   >
-                    <AnimeFavoriteCard item={character} type="character" />
+                    <PersonCard
+                      name={character.name || "Unknown"}
+                      imageUrl={character.images?.jpg?.image_url || character.picture?.large || "/placeholder.svg?height=180&width=120"}
+                      url={character.url || `https://myanimelist.net/character/${character.id || character.mal_id}`}
+                    />
                   </div>
                 ))
               ) : (
@@ -455,7 +461,11 @@ export default function MangaClientPage() {
               {paginatedPeople.length ? (
                 paginatedPeople.map((person, index) => (
                   <div key={person.name || index} className="w-full min-w-0">
-                    <AnimeFavoriteCard item={person} type="character" />
+                    <PersonCard
+                      name={person.name || "Unknown"}
+                      imageUrl={person.images?.jpg?.image_url || person.picture?.large || "/placeholder.svg?height=180&width=120"}
+                      url={person.url || `https://myanimelist.net/people/${person.id || person.mal_id}`}
+                    />
                   </div>
                 ))
               ) : (
@@ -487,10 +497,10 @@ export default function MangaClientPage() {
               {paginatedCompanies.length ? (
                 paginatedCompanies.map((company, index) => (
                   <div key={company.name || index} className="w-full min-w-0">
-                    <AnimeFavoriteCard
-                      item={company}
-                      type="character"
-                      isCompany
+                    <CompanyCard
+                      name={company.name || "Unknown"}
+                      imageUrl={company.photolink || "/placeholder.svg?height=150&width=150"}
+                      url={company.link}
                     />
                   </div>
                 ))

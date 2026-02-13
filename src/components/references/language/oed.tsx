@@ -77,7 +77,7 @@ export default function Define({ children, className }: DefineProps) {
   }, [isOpen]);
 
   return (
-    <div className="relative inline-block">
+    <span className="relative inline">
       <span
         className={`cursor-help underline decoration-dotted ${className ?? ""}`}
         onMouseEnter={() => setIsOpen(true)}
@@ -86,38 +86,40 @@ export default function Define({ children, className }: DefineProps) {
       </span>
 
       {isOpen && (
-        <motion.div
-          ref={modalRef}
-          drag
-          dragMomentum={false}
-          dragConstraints={constraints}
-          style={{ x, y }}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          className="absolute bottom-full left-0 mb-2 ml-4 w-80 bg-popover text-popover-foreground rounded-lg shadow-lg border border-border overflow-hidden pointer-events-auto z-50"
-        >
-          {/* Header with word and X button */}
-          <div className="flex items-center justify-between px-3 py-2 bg-muted/50 border-b border-border cursor-move">
-            <div className="text-sm font-semibold truncate">{word}</div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="p-1 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <X size={16} />
-            </button>
-          </div>
+        <span className="fixed inset-0 z-[200] pointer-events-none">
+          <motion.div
+            ref={modalRef}
+            drag
+            dragMomentum={false}
+            dragConstraints={{ top: 0, left: 0, right: window.innerWidth - 320, bottom: window.innerHeight - 300 }}
+            style={{ x, y }}
+            initial={{ opacity: 0, scale: 0.95, x: window.innerWidth / 2 - 160, y: window.innerHeight / 3 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="absolute w-80 bg-popover text-popover-foreground rounded-lg shadow-lg border border-border overflow-hidden pointer-events-auto"
+          >
+            {/* Header with word and X button */}
+            <div className="flex items-center justify-between px-3 py-2 bg-muted/50 border-b border-border cursor-move">
+              <span className="text-sm font-semibold truncate">{word}</span>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-1 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X size={16} />
+              </button>
+            </div>
 
-          {/* Scrollable content */}
-          <div className="p-3 max-h-60 overflow-y-auto text-sm">
-            {loading
-              ? "Loading definition..."
-              : definition
-              ? definition
-              : "Definition not found."}
-          </div>
-        </motion.div>
+            {/* Scrollable content */}
+            <div className="p-3 max-h-60 overflow-y-auto text-sm">
+              {loading
+                ? "Loading definition..."
+                : definition
+                ? definition
+                : "Definition not found."}
+            </div>
+          </motion.div>
+        </span>
       )}
-    </div>
+    </span>
   );
 }
