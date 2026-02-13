@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import { PageHeader } from "@/components/core"
 import { PageDescription } from "@/components/core"
-import { GameStatsSection } from "@/components/media/gaming/GameStats"
 import { GameCard } from "@/components/content/MediaCard"
 import { GameCharacterCard as CharacterCard } from "@/components/content/PersonCard"
 import { ConsoleCard } from "@/components/content/CompanyCard"
@@ -179,11 +178,26 @@ export default function GameClientPage() {
       />
 
       <section className="games-stats-section">
-        <GameStatsSection
-          gamesCount={totalGames}
-          hoursPlayed={totalHours}
-          genresCount={genresCount}
-        />
+        <div className="border border-border bg-muted/30 dark:bg-[hsl(var(--popover))]">
+          <div className="flex flex-wrap items-center justify-between px-4 py-3 gap-x-6 gap-y-2">
+            <div className="flex items-center gap-6 text-sm">
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-xl font-semibold text-foreground">{totalGames.toLocaleString()}</span>
+                <span className="text-muted-foreground">games</span>
+              </div>
+              <div className="hidden sm:block w-px h-4 bg-border" />
+              <div className="hidden sm:flex items-baseline gap-1.5">
+                <span className="text-xl font-semibold text-foreground">{Math.floor(totalHours / 24) > 0 ? `${Math.floor(totalHours / 24)}d ${totalHours % 24}h` : `${totalHours}h`}</span>
+                <span className="text-muted-foreground">playtime</span>
+              </div>
+              <div className="hidden md:block w-px h-4 bg-border" />
+              <div className="hidden md:flex items-baseline gap-1.5">
+                <span className="text-xl font-semibold text-foreground">{genresCount.toLocaleString()}</span>
+                <span className="text-muted-foreground">genres</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Recently Played */}

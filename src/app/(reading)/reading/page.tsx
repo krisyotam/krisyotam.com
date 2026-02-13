@@ -1,4 +1,4 @@
-import { ReadingPageContent } from "@/components/media/reading"
+import { ReadingPageContent } from "@/components/media/reading/reading"
 import { PageHeader, PageDescription } from "@/components/core"
 import { staticMetadata } from "@/lib/staticMetadata"
 import type { Metadata } from "next"

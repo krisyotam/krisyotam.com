@@ -11,7 +11,7 @@ import PersonalBio from "@/components/about/personal-bio"
 import { WordOfTheDay } from "@/components/home/about/WordOfTheDay"
 import { QuoteOfTheDay } from "@/components/quotes/quoteOfTheDay"
 import { CurrentlyListening } from "@/components/media/music/CurrentlyListening"
-import { CurrentlyReading } from "@/components/media/reading"
+import { CurrentlyReading } from "@/components/media/reading/reading"
 
 export default function AboutMe() {
   return (
