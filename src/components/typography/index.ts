@@ -1,14 +1,6 @@
 // File: /components/typography/index.ts
-export { H1 } from "./h1";
-export { H2 } from "./h2";
-export { H3 } from "./h3";
-export { H4 } from "./h4";
-export { P } from "./p";
+export { H1, H2, H3, H4 } from "./h";
 export { A } from "./a";
-export { Blockquote } from "./blockquote";
-export { UL } from "./ul";
-export { OL } from "./ol";
-export { LI } from "./li";
 export { Code } from "./code";
 export { Lead } from "./lead";
 export { Large } from "./large";
@@ -18,7 +10,6 @@ export { HR } from "./hr";
 export { Callout } from "./callout";
 export { CodeBlock } from "./code";
 export { Figure } from "./figure";
-// Note: Image is a server component (uses fs/promises) - import directly if needed
-// For client contexts, use a client-compatible image component instead
 export { Caption } from "./caption";
 export { FootNotes, Ref, FootNote } from "./footnotes";
+export { Quote, Excerpt } from "./quote";

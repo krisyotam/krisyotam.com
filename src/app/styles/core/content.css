@@ -97,24 +97,60 @@
 }
 
 /* =============================================================================
- * BLOCKQUOTES
+ * BLOCKQUOTES — 3-level nested emphasis (gwern-style)
+ *
+ * Each nesting level gets a progressively darker background and border.
+ * After level 3 the cycle repeats. Font size scales down 0.95× per level.
  * ============================================================================= */
 
-.content blockquote, .essays-content blockquote {
+.content blockquote,
+.essays-content blockquote {
+  --bq-bg-1: hsl(var(--muted) / 0.25);
+  --bq-bg-2: hsl(var(--muted) / 0.45);
+  --bq-bg-3: hsl(var(--muted) / 0.65);
+  --bq-border-1: hsl(var(--border));
+  --bq-border-2: hsl(var(--border) / 0.8);
+  --bq-border-3: hsl(var(--border) / 0.6);
+
   margin: 1.5rem 0;
-  padding: 1rem 1.5rem;
-  font-style: italic;
-  border-left: 3px solid hsl(var(--border));
-  background: hsl(var(--muted) / 0.3);
+  padding: 0.9em 1.25em;
+  border: 1px solid var(--bq-border-1);
+  background: var(--bq-bg-1);
   color: hsl(var(--muted-foreground));
+  font-size: 0.95em;
+  line-height: 1.65;
+  overflow: visible;
 }
 
-.content blockquote p, .essays-content blockquote p {
+/* Level 2 */
+.content blockquote blockquote,
+.essays-content blockquote blockquote {
+  border-color: var(--bq-border-2);
+  background: var(--bq-bg-2);
+}
+
+/* Level 3 */
+.content blockquote blockquote blockquote,
+.essays-content blockquote blockquote blockquote {
+  border-color: var(--bq-border-3);
+  background: var(--bq-bg-3);
+}
+
+/* Level 4+ cycles back to level 1 */
+.content blockquote blockquote blockquote blockquote,
+.essays-content blockquote blockquote blockquote blockquote {
+  border-color: var(--bq-border-1);
+  background: var(--bq-bg-1);
+}
+
+.content blockquote p,
+.essays-content blockquote p {
   margin: 0;
   text-align: left;
 }
 
-.content blockquote cite, .essays-content blockquote cite {
+.content blockquote cite,
+.essays-content blockquote cite {
   display: block;
   margin-top: 0.75rem;
   font-size: 0.9em;
@@ -128,16 +164,7 @@
 
 .content a, .essays-content a {
   color: hsl(var(--foreground));
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.15em;
-  transition: text-decoration-color 0.15s ease;
-}
-
-.content a:hover, .essays-content a:hover {
-  text-decoration-style: solid;
-  text-decoration-color: hsl(var(--foreground));
+  text-decoration: none;
 }
 
 /* =============================================================================
@@ -151,7 +178,7 @@
 }
 
 .content ul, .essays-content ul {
-  list-style-type: disc;
+  list-style-type: none;
 }
 
 .content ol, .essays-content ol {
@@ -161,6 +188,19 @@
 .content li, .essays-content li {
   margin-bottom: 0.5rem;
   line-height: 1.6;
+}
+
+/* Em-dash bullets for unordered lists */
+.content ul > li, .essays-content ul > li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.content ul > li::before, .essays-content ul > li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: hsl(var(--muted-foreground) / 0.6);
 }
 
 .content li:last-child, .essays-content li:last-child {

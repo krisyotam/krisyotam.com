@@ -1,6 +1,5 @@
-// components/Quote.tsx
 import { cn } from "@/lib/utils";
-import React, { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export interface QuoteProps {
   children: ReactNode;
@@ -8,35 +7,61 @@ export interface QuoteProps {
   className?: string;
 }
 
+export interface ExcerptProps {
+  children: ReactNode;
+  title: string;
+  author: string;
+  version?: string;
+  year?: string;
+  className?: string;
+}
+
+const baseStyles = [
+  "my-6",
+  "p-[0.9em_1.25em]",
+  "border",
+  "border-[hsl(var(--border))]",
+  "bg-[hsl(var(--muted)/0.25)]",
+  "text-[hsl(var(--muted-foreground))]",
+  "text-[0.95em]",
+  "leading-[1.65]",
+].join(" ");
+
+const footerStyles = [
+  "mt-3",
+  "pt-3",
+  "border-t",
+  "border-[hsl(var(--border))]",
+  "text-sm",
+  "text-[hsl(var(--muted-foreground))]",
+  "text-right",
+].join(" ");
+
 export function Quote({ children, author, className }: QuoteProps) {
-  const base = [
-    "p-6",
-    "rounded-none",
-    "my-6",
-    "bg-muted/50",                        // Light mode background
-    "dark:bg-[#1A1A1A] !important",       // Match blockquote dark background exactly
-    "border-l-4",
-    "border-[hsl(var(--border))]",        // Light mode border
-    "dark:border-zinc-800 !important",    // Match blockquote dark border exactly
-  ].join(" ");
-
-  const footer = [
-    "mt-4",
-    "pt-4",
-    "border-t",
-    "border-[hsl(var(--border))]",
-    "dark:border-zinc-800 !important",
-    "text-sm",
-    "text-muted-foreground",
-    "dark:text-zinc-400 !important",      // Refined footer text color in dark
-    "flex",
-    "justify-end",
-  ].join(" ");
-
   return (
-    <div className={cn(base, className)}>
+    <div className={cn(baseStyles, className)}>
       <div>{children}</div>
-      <div className={footer}>– {author}</div>
+      <div className={footerStyles}>— {author}</div>
+    </div>
+  );
+}
+
+export function Excerpt({
+  children,
+  title,
+  author,
+  version,
+  year,
+  className,
+}: ExcerptProps) {
+  return (
+    <div className={cn(baseStyles, className)}>
+      <div>{children}</div>
+      <div className={footerStyles}>
+        {title}
+        {version ? `, ${version}` : ""}
+        {year ? `, ${year}` : ""} — {author}
+      </div>
     </div>
   );
 }

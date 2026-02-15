@@ -23,7 +23,7 @@
 
 "use client"
 
-import { useMemo, type ReactNode, type JSX } from "react"
+import React, { useMemo, type ReactNode, type JSX } from "react"
 import { cn } from "@/lib/utils"
 
 // =============================================================================
@@ -231,6 +231,27 @@ export function Verse({
   const rawContent = useMemo(() => {
     if (content) return content
     if (typeof children === "string") return children
+    // MDX transforms text into React elements (<p> with <br>)
+    // Extract the raw text back out
+    if (children) {
+      const extractText = (node: ReactNode): string => {
+        if (typeof node === "string") return node
+        if (typeof node === "number") return String(node)
+        if (!React.isValidElement(node)) return ""
+        const props = node.props as { children?: ReactNode }
+        if (node.type === "br") return "\n"
+        if (node.type === "p") {
+          const inner = React.Children.toArray(props.children).map(extractText).join("")
+          return inner + "\n\n"
+        }
+        if (props.children) {
+          return React.Children.toArray(props.children).map(extractText).join("")
+        }
+        return ""
+      }
+      const text = React.Children.toArray(children).map(extractText).join("").trim()
+      if (text) return text
+    }
     return ""
   }, [children, content])
 
@@ -375,8 +396,153 @@ export function Verse({
 // Backward Compatibility Aliases
 // =============================================================================
 
-export { Verse as PoemBox }
+/** PoemBox — handles MDX React children and wraps in the /verse-style frame */
+
+type PoemItem =
+  | { type: "line"; content: ReactNode[] }
+  | { type: "stanza" }
+
+function extractItems(children: ReactNode): PoemItem[] {
+  const items: PoemItem[] = []
+  const nodes = React.Children.toArray(children)
+
+  nodes.forEach((node, idx) => {
+    if (React.isValidElement<{ children?: ReactNode }>(node) && node.type === "p") {
+      const inline = React.Children.toArray(node.props.children)
+      let current: ReactNode[] = []
+      inline.forEach(child => {
+        if (React.isValidElement(child) && child.type === "br") {
+          items.push({ type: "line", content: current })
+          current = []
+        } else {
+          current.push(child)
+        }
+      })
+      if (current.length) items.push({ type: "line", content: current })
+      if (
+        idx < nodes.length - 1 &&
+        React.isValidElement(nodes[idx + 1]) &&
+        (nodes[idx + 1] as React.ReactElement).type === "p"
+      ) {
+        items.push({ type: "stanza" })
+      }
+    } else if (typeof node === "string") {
+      const parts = node.split("\n")
+      parts.forEach((text, i) => {
+        if (text) {
+          items.push({ type: "line", content: [text] })
+        } else if (i < parts.length - 1) {
+          items.push({ type: "stanza" })
+        }
+      })
+    } else {
+      items.push({ type: "line", content: [node] })
+    }
+  })
+
+  return items
+}
+
+interface PoemBoxProps {
+  children: ReactNode
+  className?: string
+  disableHover?: boolean
+  author?: string
+  title?: string
+}
+
+export function PoemBox({ children, className, disableHover = false, author, title }: PoemBoxProps) {
+  const items = extractItems(children)
+  const lineClass = disableHover
+    ? "px-1 transition-colors"
+    : "px-1 transition-colors hover:bg-secondary/80 dark:hover:bg-secondary/60 cursor-pointer"
+
+  return (
+    <div className={cn(
+      "p-6 my-6 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))] space-y-1",
+      className
+    )}>
+      {(title || author) && (
+        <div className="text-center mb-6 pb-4 border-b border-[hsl(var(--border))]">
+          {title && (
+            <h3 className="text-lg font-medium font-serif m-0 mb-2 p-0 text-center">{title}</h3>
+          )}
+          {author && (
+            <p className="text-sm text-muted-foreground italic m-0 p-0 text-center">
+              By {author}
+            </p>
+          )}
+        </div>
+      )}
+
+      {items.map((item, idx) => {
+        if (item.type === "stanza") {
+          return (
+            <React.Fragment key={idx}>
+              <div className={lineClass} style={{ height: "1.5rem" }}>&nbsp;</div>
+            </React.Fragment>
+          )
+        }
+        return (
+          <div key={idx} className={lineClass}>
+            {item.content}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 export { Verse as Poem }
+
+// =============================================================================
+// VerseBox — compact verse for embedding in posts (not /verse route)
+// =============================================================================
+
+interface VerseBoxProps {
+  children: ReactNode
+  className?: string
+  author?: string
+  title?: string
+}
+
+/** VerseBox — compact post-embedded verse with tight line spacing, no hover */
+export function VerseBox({ children, className, author, title }: VerseBoxProps) {
+  const items = extractItems(children)
+
+  return (
+    <div className={cn(
+      "px-6 py-4 my-6 rounded-none bg-muted/50 dark:bg-[hsl(var(--popover))]",
+      className
+    )}>
+      {(title || author) && (
+        <div className="text-center mb-4 pb-3 border-b border-[hsl(var(--border))]">
+          {title && (
+            <h3 className="text-base font-medium font-serif m-0 mb-1 p-0 text-center">{title}</h3>
+          )}
+          {author && (
+            <p className="text-sm text-muted-foreground italic m-0 p-0 text-center">
+              {author}
+            </p>
+          )}
+        </div>
+      )}
+
+      <div style={{ lineHeight: "1.35", fontSize: "0.92em" }}>
+        {items.map((item, idx) => {
+          if (item.type === "stanza") {
+            return <div key={idx} style={{ height: "0.75em" }} />
+          }
+          return (
+            <div key={idx} className="py-[1px]">
+              {item.content}
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
 
 // =============================================================================
 // Display Component (for poem pages)

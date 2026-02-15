@@ -156,12 +156,24 @@ export function ContentTable({
           {items.map((item, index) => (
             <tr
               key={item.slug}
-              className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer ${
+              className={`border-b border-border hover:bg-secondary/50 transition-colors cursor-pointer relative ${
                 index % 2 === 0 ? "bg-transparent" : "bg-muted/5"
               }`}
-              onClick={() => router.push(getItemUrl(item))}
+              onClick={(e) => {
+                // Don't navigate if clicking a link inside the row (e.g. category link)
+                if ((e.target as HTMLElement).closest("a")) return;
+                router.push(getItemUrl(item));
+              }}
             >
-              <td className="py-2 px-3 truncate">{item.title}</td>
+              <td className="py-2 px-3 truncate">
+                <Link
+                  href={getItemUrl(item)}
+                  className="text-inherit no-underline hover:no-underline after:absolute after:inset-0 after:content-['']"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {item.title}
+                </Link>
+              </td>
               {showType && item.type && (
                 <td className="py-2 px-3 text-muted-foreground truncate">
                   {formatTypeDisplayName(item.type)}
@@ -172,7 +184,7 @@ export function ContentTable({
                   {showCategoryLinks ? (
                     <Link
                       href={getCategoryUrl(item.category)}
-                      className="text-foreground hover:text-primary"
+                      className="text-foreground hover:text-primary relative z-10"
                       onClick={(e) => e.stopPropagation()}
                     >
                       {formatCategoryDisplayName(item.category)}

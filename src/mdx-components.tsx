@@ -20,10 +20,9 @@ import { Box } from "@/components/typography/box"
 import { Column, ColumnContainer } from "@/components/typography/column"
 import NameBreakdown from '@/components/about/name-breakdown'
 import { Age } from "@/components/typography/age"
-import { Excerpt } from "@/components/typography/excerpt"
-import { Quote } from "@/components/typography/quote"
+import { Quote, Excerpt } from "@/components/typography/quote"
 import Define from "@/components/references/language/oed"
-import { PoemBox } from "@/components/typography/poem"
+import { PoemBox, VerseBox } from "@/components/content/verse"
 import Collapse from "@/components/typography/collapse"
 import FileViewer from "@/components/typography/file-viewer"
 import Essay from "@/components/typography/essay"
@@ -49,7 +48,7 @@ import { Math } from "@/components/typography/math"
 // Define components for MDX
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    // Map HTML elements to Typography components
+    // Headings — click-to-copy anchor behavior
     h1: ({ children, id }) => {
       const headingId =
         id || (typeof children === "string" ? children.toLowerCase().replace(/[^\w]+/g, "-") : undefined)
@@ -70,7 +69,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         id || (typeof children === "string" ? children.toLowerCase().replace(/[^\w]+/g, "-") : undefined)
       return <Typography.H4 id={headingId}>{children}</Typography.H4>
     },
-    p: ({ children }) => <Typography.P>{children}</Typography.P>,
+    // Links — hover preview + external detection
     a: ({ href, children, ...props }) => {
       return (
         <Typography.A href={href || "#"} {...props}>
@@ -78,11 +77,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </Typography.A>
       )
     },
-    blockquote: ({ children }) => <Typography.Blockquote>{children}</Typography.Blockquote>,
-    ul: ({ children }) => <Typography.UL>{children}</Typography.UL>,
-    ol: ({ children }) => <Typography.OL>{children}</Typography.OL>,
-    li: ({ children }) => <Typography.LI>{children}</Typography.LI>,
+    // Inline code styling
     code: ({ children }) => <Typography.Code>{children}</Typography.Code>,
+    // Custom ornament HR
     hr: () => <Typography.HR />,
     table: ({ children }) => <table className="w-full border-collapse my-6" data-mdx-table="true">{children}</table>,
     
@@ -163,6 +160,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Excerpt,
     Spoiler,
     PoemBox,
+    VerseBox,
     FileViewer,
     Age,
     RedditEmbed,

@@ -33,7 +33,120 @@ One of the largest challenges of this site, and a critical barrier to law 8 was 
 much simpler mdx blog post was a difficult decision. For the mitzvah, I felt that the content was important enough to warrant its own page, but for something like "Rules of the Internet" their happen to be dozens of equally important sets of rules, laws, ect. that I can compile into lists to store for people to access. 
 Going forward it would be much simpler to have these implemented as a mdx blog post. This is where the decision to create Hierarchical Content pages comes from, and why I have [Essays](/essays), [Blog Posts](/blog), and [Notes](/notes). 
 
-# LLM Digestion 
+# Typography
+
+## Blockquotes
+
+### Level 1
+
+> This is a single blockquote. It should have a light background and a subtle border around all four sides. The font is slightly smaller than body text (0.95em) and the line-height is comfortable for reading longer passages.
+
+### Level 2
+
+> This is level 1.
+>
+> > This is level 2 — notice the background gets darker and the border shifts. The font compounds down to roughly 0.90em at this depth. This is useful for quoting a source that itself contains a quotation.
+
+### Level 3
+
+> First-level context or commentary goes here.
+>
+> > A second-level quote, perhaps from a book or article.
+> >
+> > > A third-level quote — the deepest emphasis. The background is noticeably darker now. After this level, the cycle would repeat back to level 1 colors.
+
+### Consecutive blockquotes
+
+> First blockquote in a series.
+
+> Second blockquote, immediately following. These should have clear visual separation.
+
+> Third consecutive blockquote.
+
+### Mixed content in blockquotes
+
+> Blockquotes can contain **bold text**, *italic text*, and [links](https://example.com).
+>
+> They can also contain multiple paragraphs. This is the second paragraph inside the same blockquote.
+>
+> > And nested quotes can appear after regular paragraphs within a parent quote.
+> >
+> > — An attribution line
+
+## Quote & Excerpt
+
+### Quote Component
+
+<Quote author="Marcus Aurelius">
+You have power over your mind — not outside events. Realize this, and you will find strength.
+</Quote>
+
+### Excerpt Component
+
+<Excerpt title="Meditations" author="Marcus Aurelius" version="Book IV" year="180">
+The happiness of your life depends upon the quality of your thoughts: therefore, guard accordingly, and take care that you entertain no notions unsuitable to virtue and reasonable nature.
+</Excerpt>
+
+### Quote vs Blockquote
+
+> This is a standard markdown blockquote. It uses the `>` syntax and is styled purely by CSS. No attribution built in.
+
+<Quote author="Seneca">
+We suffer more often in imagination than in reality.
+</Quote>
+
+## Collapse
+
+<Collapse title="Simple text content">
+When collapsed this is just a minimal bar with a downward chevron on the right. Click it and the content appears inside a sideways-U frame: top bar, left strip, bottom bar — right side open.
+</Collapse>
+
+<Collapse title="Nested blockquotes">
+
+> This is a level-1 blockquote inside a collapse.
+>
+> > This is a level-2 nested blockquote. The darker background should still be visible and readable within the collapse frame.
+> >
+> > > A third level of nesting — testing how deep quotes interact with the collapse container.
+
+</Collapse>
+
+<Collapse title="Table inside collapse">
+
+| Streamer | Game | Peak Viewers |
+|----------|------|-------------|
+| Pokimane | Just Chatting | 40,000 |
+| Clix | Fortnite | 120,000 |
+| Npesta | Geometry Dash | 15,000 |
+| xQc | Variety | 150,000 |
+
+</Collapse>
+
+<Collapse title="Mixed rich content">
+
+Here is a paragraph with **bold**, *italic*, and `inline code` inside a collapse.
+
+> A blockquote for good measure.
+
+- First item with an em-dash bullet
+- Second item
+- Third item
+
+1. Ordered list item one
+2. Ordered list item two
+3. Ordered list item three
+
+<Quote author="Marcus Aurelius">
+A Quote component nested inside a Collapse — testing component-in-component rendering.
+</Quote>
+
+</Collapse>
+
+<Collapse title="Starts expanded" open={true}>
+This collapse starts expanded via the `open` prop so you can see the sideways-U frame immediately without clicking.
+</Collapse>
+
+# LLM Digestion
 <Quote author="Gary Taylor">
-What has been done, thought, written, or spoken is not culture; culture is only that fraction which is remembered. 
+What has been done, thought, written, or spoken is not culture; culture is only that fraction which is remembered.
 </Quote>

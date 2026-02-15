@@ -128,9 +128,9 @@ export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
   if (block.type === "p" && block.props?.startArticle) {
     return (
       <article className="paragraph-article">
-        <Typography.P {...block.props}>
+        <p {...block.props}>
           {(block as TextContentBlock).content}
-        </Typography.P>
+        </p>
       </article>
     )
   }
@@ -166,7 +166,7 @@ export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
 
     case "p":
       const pBlock = block as TextContentBlock
-      return <Typography.P {...pBlock.props}>{pBlock.content}</Typography.P>
+      return <p {...pBlock.props}>{pBlock.content}</p>
 
     case "a":
       const aBlock = block as LinkContentBlock
@@ -177,47 +177,47 @@ export const ContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
       )
 
     case "blockquote":
-      return <Typography.Blockquote {...block.props}>{(block as TextContentBlock).content}</Typography.Blockquote>
+      return <blockquote {...block.props}>{(block as TextContentBlock).content}</blockquote>
 
     case "ul":
       const ulBlock = block as ListContentBlock
       return (
-        <Typography.UL {...ulBlock.props}>
+        <ul {...ulBlock.props}>
           {ulBlock.items.map((item, index) => {
             if (typeof item === "string") {
-              return <Typography.LI key={index}>{item}</Typography.LI>
+              return <li key={index}>{item}</li>
             } else {
               return <ContentBlock key={index} block={item} />
             }
           })}
-        </Typography.UL>
+        </ul>
       )
 
     case "ol":
       const olBlock = block as ListContentBlock
       return (
-        <Typography.OL {...olBlock.props}>
+        <ol {...olBlock.props}>
           {olBlock.items.map((item, index) => {
             if (typeof item === "string") {
-              return <Typography.LI key={index}>{item}</Typography.LI>
+              return <li key={index}>{item}</li>
             } else {
               return <ContentBlock key={index} block={item} />
             }
           })}
-        </Typography.OL>
+        </ol>
       )
 
     case "li":
       const liBlock = block as ListItemContentBlock
       if (typeof liBlock.content === "string") {
-        return <Typography.LI {...liBlock.props}>{liBlock.content}</Typography.LI>
+        return <li {...liBlock.props}>{liBlock.content}</li>
       } else {
         return (
-          <Typography.LI {...liBlock.props}>
+          <li {...liBlock.props}>
             {liBlock.content.map((child, index) => (
               <ContentBlock key={index} block={child} />
             ))}
-          </Typography.LI>
+          </li>
         )
       }
 

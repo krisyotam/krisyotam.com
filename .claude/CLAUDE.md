@@ -357,6 +357,51 @@ bash public/scripts/keep/export.sh
 This exports to `~/export/` with the original comment header + YAML frontmatter prepended.
 
 
+# Post Images (In-Content)
+
+Images used inside post content (not cover images) are stored on stargate at:
+
+```
+/mnt/storage/doc/assets/bundle/<content-type>/<post-slug>/<image-name>.png
+```
+
+Public URL:
+```
+https://krisyotam.com/doc/assets/bundle/<content-type>/<post-slug>/<image-name>.png
+```
+
+| Content Type | Path |
+|-------------|------|
+| Blog | `/doc/assets/bundle/blog/<slug>/` |
+| Essays | `/doc/assets/bundle/essays/<slug>/` |
+| Papers | `/doc/assets/bundle/papers/<slug>/` |
+| Notes | `/doc/assets/bundle/notes/<slug>/` |
+| Diary | `/doc/assets/bundle/diary/<slug>/` |
+| Reviews | `/doc/assets/bundle/reviews/<slug>/` |
+| Progymnasmata | `/doc/assets/bundle/progymnasmata/<slug>/` |
+
+To add an image to a post:
+1. Create the directory on stargate: `ssh server "mkdir -p /mnt/storage/doc/assets/bundle/<type>/<slug>"`
+2. Upload: `scp image.png server:/mnt/storage/doc/assets/bundle/<type>/<slug>/`
+3. Reference in MDX: `![Alt text](https://krisyotam.com/doc/assets/bundle/<type>/<slug>/image.png)`
+
+
+# Database: `status` vs `state`
+
+Content tables (notes, blog, essays, papers, etc.) have TWO separate fields for visibility:
+
+| Column   | Purpose                  | Values                                                        |
+|----------|--------------------------|---------------------------------------------------------------|
+| `status` | **Editorial status**     | Notes, Draft, In Progress, Finished, Published, Abandoned     |
+| `state`  | **Visibility toggle**    | `active` (shown on site) / `hidden` (excluded from all views) |
+
+**CRITICAL:** To hide or show a post, ALWAYS change `state`, NEVER `status`.
+- Hide a post: `UPDATE notes SET state='hidden' WHERE slug='example';`
+- Show a post: `UPDATE notes SET state='active' WHERE slug='example';`
+
+`status` reflects the author's editorial progress and must never be overwritten for visibility purposes.
+
+
 # Constants
  [] any owner var will always be set to Kris Yotam, as I am the primary sole developer even though occasionally friends or a prof. might look at a code base all creations within it are assumed to be mine. 
  [] 

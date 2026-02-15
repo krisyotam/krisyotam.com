@@ -12,7 +12,7 @@ import {
   MovieItem
 } from "./types"
 import { Badge } from "@/components/ui/badge"
-import { PoemBox } from "@/components/typography/poem"
+import { PoemBox } from "@/components/content/verse"
 import { Quote } from "@/components/typography/quote"
 import Book from "@/components/archive/book"
 import Frame from "@/components/typography/frame"
