@@ -341,11 +341,8 @@ export async function GET(request: Request) {
         const filePath = path.join(
           process.cwd(),
           "src",
-          "app",
-          "(content)",
-          "verse",
           "content",
-          category,
+          "verse",
           `${slug}.mdx`
         );
 

@@ -137,7 +137,7 @@ export default async function PaperPage({ params }: PaperPageProps) {
 
   // Dynamically import MDX file
   const PaperArticle = (
-    await import(`@/app/(content)/papers/content/${category}/${slug}.mdx`)
+    await import(`@/content/papers/${slug}.mdx`)
   ).default;
 
   const viewSlug = `papers/${category}/${slug}`;

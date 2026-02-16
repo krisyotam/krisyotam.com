@@ -68,7 +68,7 @@ export default async function ProgymnasmataSlugPage({ params }: PageProps) {
   // Dynamically import the MDX file
   let MdxContent;
   try {
-    MdxContent = (await import(`@/app/(content)/progymnasmata/content/${category}/${slug}.mdx`)).default;
+    MdxContent = (await import(`@/content/progymnasmata/${slug}.mdx`)).default;
   } catch {
     return notFound();
   }

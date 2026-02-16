@@ -170,7 +170,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
   const headings = await extractHeadingsFromMDX('reviews', resolvedParams.slug, resolvedParams.category);
 
   // Dynamically import the MDX file based on category and slug
-  const Review = (await import(`@/app/(content)/reviews/content/${resolvedParams.category}/${resolvedParams.slug}.mdx`)).default;
+  const Review = (await import(`@/content/reviews/${resolvedParams.slug}.mdx`)).default;
 
   const viewSlug = `reviews/${resolvedParams.category}/${resolvedParams.slug}`;
 

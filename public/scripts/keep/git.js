@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /**
  * =============================================================================
- * Git Commit with Changelog Integration (v2)
+ * Git Commit with Changelog Integration (v3)
  * =============================================================================
  *
  * A CLI tool for committing changes with automatic changelog database updates.
+ * Syncs all ~/content/ repos before committing the main site repo.
  *
  * Interactive Mode (default):
  *   node public/scripts/keep/git.js
@@ -12,7 +13,7 @@
  * Headless Mode:
  *   node public/scripts/keep/git.js --headless --content "entry" --kind daily
  *   node public/scripts/keep/git.js --headless --infra "entry" --kind milestone
- *   node public/scripts/keep/git.js --headless --content "content entry" --infra "infra entry" --kind reflection
+ *   node public/scripts/keep/git.js --headless --content "content" --infra "infra" --kind reflection
  *   node public/scripts/keep/git.js --headless --message "regular commit msg"
  *
  * Flags:
@@ -22,6 +23,7 @@
  *   --kind         Entry type: daily, reflection, milestone (default: daily)
  *   --message      Regular commit message (skips changelog)
  *   --no-push      Skip pushing to remote
+ *   --no-sync      Skip syncing content repos
  *
  * Database: public/data/system.db
  *   - changelog_content: Content-related updates
@@ -56,6 +58,7 @@ function parseArgs() {
     kind: 'daily',
     message: null,
     noPush: false,
+    noSync: false,
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -65,6 +68,8 @@ function parseArgs() {
       parsed.headless = true;
     } else if (arg === '--no-push') {
       parsed.noPush = true;
+    } else if (arg === '--no-sync') {
+      parsed.noSync = true;
     } else if (arg === '--content' && args[i + 1]) {
       parsed.content = args[++i];
     } else if (arg === '--infra' && args[i + 1]) {
@@ -103,6 +108,7 @@ Options:
   --kind TYPE         Entry type: daily, reflection, milestone (default: daily)
   --message "text"    Regular commit message (skips changelog)
   --no-push           Skip pushing to remote
+  --no-sync           Skip syncing content repos
   --help, -h          Show this help
 
 Examples:
@@ -166,10 +172,6 @@ function select(prompt, options) {
 // Date Utilities
 // =============================================================================
 
-/**
- * Get date parts formatted for changelog tables
- * @returns {Object} { id, day, weekday, month, year }
- */
 function getDateParts() {
   const now = new Date();
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -185,16 +187,37 @@ function getDateParts() {
 }
 
 // =============================================================================
-// Database Operations
+// Content Repo Sync
 // =============================================================================
 
 /**
- * Insert or replace a changelog entry
- * @param {Database} db - better-sqlite3 database instance
- * @param {string} table - Table name (changelog_content or changelog_infra)
- * @param {string} text - The changelog entry text
- * @param {string} kind - Entry type: daily, reflection, milestone
+ * Sync all ~/content/ repos by calling the `sync` script.
+ * This ensures content repos are committed and pushed before the main
+ * site repo commit, preventing build errors from stale submodules.
  */
+function syncContentRepos() {
+  console.log('\nSyncing content repos...');
+
+  try {
+    execSync('sync --quiet', {
+      stdio: ['inherit', 'pipe', 'pipe'],
+      env: { ...process.env, PATH: `${process.env.HOME}/.local/bin:${process.env.PATH}` },
+    });
+    console.log('Content repos synced.\n');
+  } catch (err) {
+    const stderr = err.stderr ? err.stderr.toString().trim() : '';
+    const stdout = err.stdout ? err.stdout.toString().trim() : '';
+    const output = stderr || stdout || err.message;
+
+    console.error(`\nContent sync issue: ${output}`);
+    console.error('Continuing with site commit anyway.\n');
+  }
+}
+
+// =============================================================================
+// Database Operations
+// =============================================================================
+
 function insertChangelog(db, table, text, kind = 'daily') {
   const { id, day, weekday, month, year } = getDateParts();
 
@@ -206,17 +229,32 @@ function insertChangelog(db, table, text, kind = 'daily') {
   stmt.run(id, day, weekday, month, year, text, kind);
 }
 
+function writeChangelog(contentEntry, infraEntry, kind) {
+  try {
+    const db = new Database(DB_PATH);
+
+    if (contentEntry) {
+      insertChangelog(db, 'changelog_content', contentEntry, kind);
+      console.log('  -> Content changelog entry added');
+    }
+
+    if (infraEntry) {
+      insertChangelog(db, 'changelog_infra', infraEntry, kind);
+      console.log('  -> Infra changelog entry added');
+    }
+
+    db.close();
+    return true;
+  } catch (err) {
+    console.error('Database error:', err.message);
+    return false;
+  }
+}
+
 // =============================================================================
 // Commit Message Formatting
 // =============================================================================
 
-/**
- * Format a unified commit message with sections
- * @param {string|null} contentEntry - Content changelog text
- * @param {string|null} infraEntry - Infra changelog text
- * @param {string} kind - Entry type
- * @returns {string} Formatted commit message
- */
 function formatCommitMessage(contentEntry, infraEntry, kind) {
   const date = getDateParts();
   const dateStr = `${date.month} ${date.day}, ${date.year}`;
@@ -225,7 +263,6 @@ function formatCommitMessage(contentEntry, infraEntry, kind) {
   const sections = [];
 
   if (contentEntry && infraEntry) {
-    // Both entries - unified format
     sections.push(`[${kindLabel}] ${dateStr}`);
     sections.push('');
     sections.push('== Content ==');
@@ -234,10 +271,8 @@ function formatCommitMessage(contentEntry, infraEntry, kind) {
     sections.push('== Infrastructure ==');
     sections.push(infraEntry);
   } else if (contentEntry) {
-    // Content only
     sections.push(`[Content/${kindLabel}] ${contentEntry}`);
   } else if (infraEntry) {
-    // Infra only
     sections.push(`[Infra/${kindLabel}] ${infraEntry}`);
   }
 
@@ -254,7 +289,6 @@ function executeGit(commitMessage, noPush = false) {
     execSync('git add .', { stdio: 'inherit' });
 
     console.log('Committing...');
-    // Use heredoc style for multi-line commit messages
     const escapedMsg = commitMessage.replace(/'/g, "'\\''");
     execSync(`git commit -m $'${escapedMsg.replace(/\n/g, '\\n')}'`, { stdio: 'inherit' });
 
@@ -279,13 +313,11 @@ function executeGit(commitMessage, noPush = false) {
 // =============================================================================
 
 async function runHeadless(args) {
-  // If regular message provided, skip changelog
   if (args.message) {
     console.log('Headless mode: Regular commit');
     return executeGit(args.message, args.noPush);
   }
 
-  // Must have at least content or infra
   if (!args.content && !args.infra) {
     console.error('Headless mode requires --content, --infra, or --message');
     process.exit(1);
@@ -296,27 +328,8 @@ async function runHeadless(args) {
   if (args.content) console.log(`  Content: ${args.content}`);
   if (args.infra) console.log(`  Infra: ${args.infra}`);
 
-  // Insert into database
-  try {
-    const db = new Database(DB_PATH);
+  writeChangelog(args.content, args.infra, args.kind);
 
-    if (args.content) {
-      insertChangelog(db, 'changelog_content', args.content, args.kind);
-      console.log('  -> Content changelog entry added');
-    }
-
-    if (args.infra) {
-      insertChangelog(db, 'changelog_infra', args.infra, args.kind);
-      console.log('  -> Infra changelog entry added');
-    }
-
-    db.close();
-  } catch (err) {
-    console.error('Database error:', err.message);
-    process.exit(1);
-  }
-
-  // Format and execute commit
   const commitMessage = formatCommitMessage(args.content, args.infra, args.kind);
   return executeGit(commitMessage, args.noPush);
 }
@@ -343,7 +356,6 @@ async function runInteractive(args) {
   let commitMessage = '';
 
   if (feedChoice === 'Skip changelog (regular commit)') {
-    // Regular commit
     commitMessage = await question('\nCommit message: ');
 
     if (!commitMessage.trim()) {
@@ -352,7 +364,6 @@ async function runInteractive(args) {
       return;
     }
   } else {
-    // Changelog commit
     const needsContent = feedChoice.includes('Content');
     const needsInfra = feedChoice.includes('Infrastructure');
 
@@ -380,26 +391,8 @@ async function runInteractive(args) {
       infraEntry = infraEntry.trim();
     }
 
-    // Insert into database
-    try {
-      const db = new Database(DB_PATH);
+    writeChangelog(contentEntry, infraEntry, kind);
 
-      if (contentEntry) {
-        insertChangelog(db, 'changelog_content', contentEntry, kind);
-        console.log('\n✓ Content changelog entry added');
-      }
-
-      if (infraEntry) {
-        insertChangelog(db, 'changelog_infra', infraEntry, kind);
-        console.log('✓ Infra changelog entry added');
-      }
-
-      db.close();
-    } catch (err) {
-      console.error('\nDatabase error (continuing with commit):', err.message);
-    }
-
-    // Format commit message
     commitMessage = formatCommitMessage(contentEntry, infraEntry, kind);
   }
 
@@ -428,6 +421,11 @@ async function main() {
   const args = parseArgs();
 
   try {
+    // Sync content repos first (unless --no-sync)
+    if (!args.noSync) {
+      syncContentRepos();
+    }
+
     if (args.headless) {
       await runHeadless(args);
     } else {

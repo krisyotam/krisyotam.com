@@ -172,31 +172,19 @@ export type ContentType =
  * CONSTANTS
  * ----------------------------------------------------------------------------- */
 
-/** Content types that require a category parameter */
-export const CATEGORIZED_CONTENT_TYPES: ContentType[] = [
-  "essays",
-  "fiction",
-  "papers",
-  "reviews",
-  "news",
-  "ocs",
-  "dossiers",
-  "cases",
-  "conspiracies",
-  "libers",
-  "proofs",
-  "problems",
-  "lectures",
-  "lab",
-  "links",
-  "progymnasmata",
+/** @deprecated All content types are now flat (no category subdirectories) */
+export const CATEGORIZED_CONTENT_TYPES: ContentType[] = []
+
+/** All content types use flat structure */
+export const FLAT_CONTENT_TYPES: ContentType[] = [
+  "essays", "fiction", "papers", "reviews", "news", "ocs",
+  "dossiers", "cases", "conspiracies", "libers", "proofs",
+  "problems", "lectures", "lab", "links", "progymnasmata",
+  "notes", "blog", "diary", "verse", "til", "now", "shortform",
 ]
 
-/** Content types that use flat structure (no category) */
-export const FLAT_CONTENT_TYPES: ContentType[] = ["til", "now", "shortform"]
-
-/** Content types that optionally use categories */
-export const OPTIONAL_CATEGORY_TYPES: ContentType[] = ["notes", "blog", "diary", "verse"]
+/** @deprecated All content is flat now */
+export const OPTIONAL_CATEGORY_TYPES: ContentType[] = []
 
 /* -----------------------------------------------------------------------------
  * PATH RESOLUTION
@@ -206,11 +194,12 @@ export const OPTIONAL_CATEGORY_TYPES: ContentType[] = ["notes", "blog", "diary",
  * Get the base content directory for a content type.
  */
 export function getContentBasePath(contentType: ContentType): string {
-  return path.join(process.cwd(), "src", "app", "(content)", contentType, "content")
+  return path.join(process.cwd(), "src", "content", contentType)
 }
 
 /**
  * Resolve the full path to an MDX file.
+ * All content is flat — category parameter is ignored.
  */
 export function resolveMdxPath(
   contentType: ContentType,
@@ -218,34 +207,7 @@ export function resolveMdxPath(
   category?: string
 ): string | null {
   const basePath = getContentBasePath(contentType)
-
-  // Categorized content requires a category
-  if (CATEGORIZED_CONTENT_TYPES.includes(contentType)) {
-    if (!category) {
-      console.error(`Category is required for ${contentType} content type`)
-      return null
-    }
-    return path.join(basePath, category, `${slug}.mdx`)
-  }
-
-  // Flat content types
-  if (FLAT_CONTENT_TYPES.includes(contentType)) {
-    return path.join(basePath, `${slug}.mdx`)
-  }
-
-  // Optional category types - try with category first, then without
-  if (OPTIONAL_CATEGORY_TYPES.includes(contentType)) {
-    if (category) {
-      const categoryPath = path.join(basePath, category, `${slug}.mdx`)
-      if (fs.existsSync(categoryPath)) {
-        return categoryPath
-      }
-    }
-    return path.join(basePath, `${slug}.mdx`)
-  }
-
-  console.error(`Unknown content type: ${contentType}`)
-  return null
+  return path.join(basePath, `${slug}.mdx`)
 }
 
 /* -----------------------------------------------------------------------------

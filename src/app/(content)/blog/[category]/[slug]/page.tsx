@@ -147,14 +147,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
   // Dynamically import MDX file - try nested structure first, then fallback
   let Post;
   try {
-    Post = (await import(`@/app/(content)/blog/content/${category}/${slug}.mdx`)).default;
+    Post = (await import(`@/content/blog/${slug}.mdx`)).default;
   } catch (error) {
-    try {
-      Post = (await import(`@/app/(content)/blog/content/${slug}.mdx`)).default;
-    } catch (fallbackError) {
-      console.error(`Could not find MDX file for ${category}/${slug}`);
-      notFound();
-    }
+    console.error(`Could not find MDX file for blog/${slug}`);
+    notFound();
   }
 
   const viewSlug = `blog/${category}/${slug}`;

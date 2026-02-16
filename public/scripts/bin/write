@@ -18,7 +18,7 @@ set -euo pipefail
 ###############################################################################
 
 PROJECT_ROOT="${KRIS_WRITE_ROOT:-$HOME/Dev/krisyotam.com}"
-APP_CONTENT="$PROJECT_ROOT/app/(content)"
+APP_CONTENT="$PROJECT_ROOT/src/content"
 DB_PATH="$PROJECT_ROOT/public/data/content.db"
 
 ###############################################################################
@@ -113,7 +113,7 @@ resolve_file() {
   local cat
   cat=$(db "SELECT COALESCE(category_slug, '') FROM $type WHERE slug = '$slug'")
 
-  local f="$APP_CONTENT/$type/content/$cat/$slug.mdx"
+  local f="$APP_CONTENT/$type/$slug.mdx"
   [[ -f "$f" ]] && printf "%s" "$f"
 }
 

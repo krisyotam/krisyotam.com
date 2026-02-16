@@ -16,9 +16,9 @@
 
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
+ROOT="/home/krisyotam/dev/krisyotam.com"
 DB="$ROOT/public/data/content.db"
-CONTENT_BASE="$ROOT/src/app/(content)"
+CONTENT_BASE="$HOME/content"
 EXPORT_DIR="$HOME/export"
 
 # Standard content types with DB metadata
@@ -81,7 +81,7 @@ gen_header() {
 #
 # @author Kris Yotam
 # @type ${type}
-# @path src/app/(content)/${type}/content/${category}/${slug}.mdx
+# @path src/content/${type}/${slug}.mdx
 # ==============================================================================
 EOF
 }
@@ -135,7 +135,7 @@ skipped=0
 for type in "${STANDARD_TYPES[@]}"; do
   [[ -n "$FILTER_TYPE" && "$type" != "$FILTER_TYPE" ]] && continue
 
-  content_dir="$CONTENT_BASE/$type/content"
+  content_dir="$CONTENT_BASE/$type"
   [[ ! -d "$content_dir" ]] && continue
 
   echo "--- Processing: $type ---"
@@ -145,7 +145,7 @@ for type in "${STANDARD_TYPES[@]}"; do
     [[ -z "$slug" ]] && continue
 
     # Find the MDX file
-    mdx_file="$content_dir/${category}/${slug}.mdx"
+    mdx_file="$content_dir/${slug}.mdx"
     if [[ ! -f "$mdx_file" ]]; then
       echo "  SKIP (no file): $slug"
       ((skipped++)) || true

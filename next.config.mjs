@@ -4,6 +4,64 @@ import withMDX from '@next/mdx'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
+import { createRequire } from 'module'
+import path from 'path'
+import fs from 'fs'
+
+const require = createRequire(import.meta.url)
+
+/* ============================================================================
+   SEXY URLS — query content.db directly for slug → canonical path rewrites
+============================================================================ */
+function buildSexyUrls() {
+  const dbPath = path.join(process.cwd(), 'public', 'data', 'content.db')
+  if (!fs.existsSync(dbPath)) return []
+
+  const Database = require('better-sqlite3')
+  const db = new Database(dbPath, { readonly: true })
+
+  const CONTENT_TYPES = [
+    'blog', 'diary', 'essays', 'fiction', 'news', 'notes',
+    'ocs', 'papers', 'progymnasmata', 'reviews', 'verse',
+  ]
+
+  const RESERVED = new Set([
+    'blog', 'diary', 'essays', 'fiction', 'news', 'notes', 'ocs',
+    'papers', 'progymnasmata', 'reviews', 'verse', 'til', 'now',
+    'categories', 'category', 'tags', 'tag', 'feeds', 'api',
+    'search', 'archive', 'library', 'media', 'rules-of-the-internet',
+    'me', 'logo', 'about', 'design', 'donate', 'faq', 'roti',
+    'rss.xml', 'atom.xml', 'feed.json',
+    '_next', 'doc', 'src', 'public', 'data', 'scripts',
+    'sitemap.xml', 'robots.txt', 'favicon.ico', 'clippings',
+  ])
+
+  const rewrites = []
+  const seen = new Set()
+
+  for (const type of CONTENT_TYPES) {
+    try {
+      const query = type === 'verse'
+        ? `SELECT slug, category_slug, verse_type FROM ${type} WHERE slug IS NOT NULL AND slug != '' AND state = 'active'`
+        : `SELECT slug, category_slug FROM ${type} WHERE slug IS NOT NULL AND slug != '' AND state = 'active'`
+
+      const rows = db.prepare(query).all()
+      for (const row of rows) {
+        if (RESERVED.has(row.slug) || seen.has(row.slug)) continue
+        seen.add(row.slug)
+        const category = type === 'verse'
+          ? (row.verse_type || 'uncategorized')
+          : (row.category_slug || 'uncategorized')
+        rewrites.push({ source: `/${row.slug}`, destination: `/${type}/${category}/${row.slug}` })
+      }
+    } catch { /* table may not exist */ }
+  }
+
+  db.close()
+  return rewrites
+}
+
+const sexyUrls = buildSexyUrls()
 
 /* ============================================================================
    CORE NEXT.JS CONFIG
@@ -53,6 +111,9 @@ const baseConfig = {
 
       // --- /doc, /src, /archive ---
       // Handled by nginx directory listing (local files on server)
+
+      // --- sexy URLs: krisyotam.com/{slug} -> /{type}/{category}/{slug} ---
+      ...sexyUrls,
     ]
   },
 
@@ -127,7 +188,7 @@ const baseConfig = {
      Include MDX content files in standalone build for API routes that read them.
   ============================================================================ */
   outputFileTracingIncludes: {
-    '/api/verse/content': ['./src/app/(content)/verse/content/**/*.mdx'],
+    '/api/verse/content': ['./src/content/verse/*.mdx'],
   },
 
   /* ============================================================================

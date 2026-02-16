@@ -142,7 +142,7 @@ export default async function NotePage({ params }: NotePageProps) {
 
   // Dynamically import MDX file
   const Note = (
-    await import(`@/app/(content)/notes/content/${category}/${slug}.mdx`)
+    await import(`@/content/notes/${slug}.mdx`)
   ).default;
 
   const viewSlug = `notes/${category}/${slug}`;

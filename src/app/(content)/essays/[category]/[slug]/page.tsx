@@ -114,7 +114,7 @@ export default async function EssayPage({ params }: EssayPageProps) {
 
   // Dynamically import MDX file
   const EssayArticle = (
-    await import(`@/app/(content)/essays/content/${category}/${slug}.mdx`)
+    await import(`@/content/essays/${slug}.mdx`)
   ).default;
 
   const viewSlug = `essays/${category}/${slug}`;

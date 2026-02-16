@@ -51,61 +51,61 @@ interface ContentPathConfig {
 export const CONTENT_PATHS: Record<string, ContentPathConfig> = {
   // Long-form essays
   essays: {
-    basePath: 'src/app/(content)/essays/content',
+    basePath: 'src/content/essays',
     hasCategory: true,
   },
 
   // Blog posts
   blog: {
-    basePath: 'src/app/(content)/blog/content',
+    basePath: 'src/content/blog',
     hasCategory: true,
   },
 
   // Fiction (short stories, flash fiction)
   fiction: {
-    basePath: 'src/app/(content)/fiction/content',
+    basePath: 'src/content/fiction',
     hasCategory: true,
   },
 
   // News/announcements
   news: {
-    basePath: 'src/app/(content)/news/content',
+    basePath: 'src/content/news',
     hasCategory: true,
   },
 
   // Notes and shorter pieces
   notes: {
-    basePath: 'src/app/(content)/notes/content',
+    basePath: 'src/content/notes',
     hasCategory: true,
   },
 
   // Original characters
   ocs: {
-    basePath: 'src/app/(content)/ocs/content',
+    basePath: 'src/content/ocs',
     hasCategory: true,
   },
 
   // Academic papers
   papers: {
-    basePath: 'src/app/(content)/papers/content',
+    basePath: 'src/content/papers',
     hasCategory: true,
   },
 
   // Progymnasmata exercises
   progymnasmata: {
-    basePath: 'src/app/(content)/progymnasmata/content',
+    basePath: 'src/content/progymnasmata',
     hasCategory: true,
   },
 
   // Reviews (books, films, anime, etc.)
   reviews: {
-    basePath: 'src/app/(content)/reviews/content',
+    basePath: 'src/content/reviews',
     hasCategory: true,
   },
 
   // Poetry/verse
   verse: {
-    basePath: 'src/app/(content)/verse/content',
+    basePath: 'src/content/verse',
     hasCategory: true,
   },
 }

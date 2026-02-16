@@ -164,7 +164,7 @@ export default async function OCSPage({ params }: OCSPageProps) {
   const headings = await extractHeadingsFromMDX('ocs', slug, category);
 
   // Dynamically import the MDX file based on category and slug
-  const Character = (await import(`@/app/(content)/ocs/content/${category}/${slug}.mdx`)).default;
+  const Character = (await import(`@/content/ocs/${slug}.mdx`)).default;
 
   const viewSlug = `ocs/${category}/${slug}`;
 

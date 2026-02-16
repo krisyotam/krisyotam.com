@@ -67,10 +67,10 @@ const Database = require('better-sqlite3');
 // Configuration
 // =============================================================================
 
-const PROJECT_ROOT = path.resolve(__dirname, '../../..');
+const PROJECT_ROOT = '/home/krisyotam/dev/krisyotam.com';
 const CONTENT_DB = path.join(PROJECT_ROOT, 'public/data/content.db');
 const SYSTEM_DB = path.join(PROJECT_ROOT, 'public/data/system.db');
-const CONTENT_DIR = path.join(PROJECT_ROOT, 'src/app/(content)');
+const CONTENT_REPO_DIR = path.join(PROJECT_ROOT, 'src', 'content');
 
 // Valid values for validation
 const VALID_TYPES = [
@@ -574,18 +574,16 @@ function createMdxFile(args) {
   let content;
 
   if (args.type === 'til') {
-    // TIL: date-based filename, no frontmatter
-    filePath = path.join(CONTENT_DIR, 'til/content', `${args.slug}.mdx`);
+    // TIL: date-based filename, no frontmatter (til lives in site repo, not content repos)
+    filePath = path.join(PROJECT_ROOT, 'src/app/(content)/til/content', `${args.slug}.mdx`);
     content = `# ${args.title}\n\n${args.content || 'Content goes here...'}`;
   } else if (args.type === 'now') {
-    // Now: month-based filename, no frontmatter
-    filePath = path.join(CONTENT_DIR, 'now/content', `${args.slug}.mdx`);
+    // Now: month-based filename, no frontmatter (now lives in site repo, not content repos)
+    filePath = path.join(PROJECT_ROOT, 'src/app/(content)/now/content', `${args.slug}.mdx`);
     content = args.content || 'Update content goes here...';
   } else {
-    // Standard types: category subfolder, no frontmatter (metadata in DB)
-    const category = args.category || 'uncategorized';
-    const categoryDir = path.join(CONTENT_DIR, args.type, 'content', category);
-    filePath = path.join(categoryDir, `${args.slug}.mdx`);
+    // Standard types: flat in src/content/{type}/
+    filePath = path.join(CONTENT_REPO_DIR, args.type, `${args.slug}.mdx`);
 
     content = 'Content goes here...\n';
   }

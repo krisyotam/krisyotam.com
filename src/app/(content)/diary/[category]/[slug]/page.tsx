@@ -148,14 +148,12 @@ export default async function DiaryEntryPage({ params }: DiaryPageProps) {
   // Dynamically import MDX or MD file
   let Entry;
   try {
-    // Try .mdx first
-    Entry = (await import(`@/app/(content)/diary/content/${category}/${slug}.mdx`)).default;
+    Entry = (await import(`@/content/diary/${slug}.mdx`)).default;
   } catch (mdxError) {
     try {
-      // Fall back to .md
-      Entry = (await import(`@/app/(content)/diary/content/${category}/${slug}.md`)).default;
+      Entry = (await import(`@/content/diary/${slug}.md`)).default;
     } catch (mdError) {
-      console.error(`Could not find MDX or MD file for diary/${category}/${slug}`);
+      console.error(`Could not find MDX or MD file for diary/${slug}`);
       notFound();
     }
   }

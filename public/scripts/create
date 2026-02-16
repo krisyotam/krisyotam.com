@@ -888,7 +888,7 @@ sequence_menu() {
 # Content directory mapping
 get_content_dir() {
   local table="$1"
-  echo "$PROJECT_ROOT/app/(content)/$table/content"
+  echo "$PROJECT_ROOT/src/content/$table"
 }
 
 # Certainty options (stored as 'confidence' in database)

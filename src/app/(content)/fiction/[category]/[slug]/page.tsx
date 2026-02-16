@@ -130,7 +130,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
   const headings = await extractHeadingsFromMDX('fiction', resolvedParams.slug, resolvedParams.category);
 
   // Dynamically import the MDX file based on category and slug
-  const Story = (await import(`@/app/(content)/fiction/content/${resolvedParams.category}/${resolvedParams.slug}.mdx`)).default;
+  const Story = (await import(`@/content/fiction/${resolvedParams.slug}.mdx`)).default;
 
   const viewSlug = `fiction/${resolvedParams.category}/${resolvedParams.slug}`;
 

@@ -81,8 +81,18 @@ ENV TMDB_READ_ACCESS_TOKEN=$TMDB_READ_ACCESS_TOKEN
 # Reuse dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
 
-# Copy application source
+# Copy application source (includes submodule content if clone was recursive)
 COPY . .
+
+# Ensure content submodule has MDX files
+# If submodule wasn't initialized during clone, fetch from GitHub using token
+RUN if [ ! "$(ls src/content/blog/*.mdx 2>/dev/null)" ]; then \
+      echo "Fetching content..." && \
+      rm -rf src/content && \
+      apk add --no-cache git 2>/dev/null || true && \
+      git clone --depth 1 "https://x-access-token:${GITHUB_TOKEN}@github.com/krisyotam/content.git" src/content && \
+      rm -rf src/content/.git; \
+    fi
 
 # Run the production build
 # --webpack flag required for MDX support (Turbopack doesn't support it)
