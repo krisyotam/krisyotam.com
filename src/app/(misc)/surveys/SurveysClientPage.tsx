@@ -26,7 +26,7 @@ interface SurveysClientPageProps {
 export default function SurveysClientPage({ surveys }: SurveysClientPageProps) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("list");
 
   // Filter surveys based on search
   const filteredSurveys = useMemo(() => {

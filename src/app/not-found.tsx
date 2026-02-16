@@ -114,6 +114,10 @@ export default function NotFound() {
 
   useUrlSuggester()
 
+  useEffect(() => {
+    document.title = "404 | Not Found"
+  }, [])
+
   const handleSearch = (query: string) => {
     router.push(`/search?q=${encodeURIComponent(query)}`)
   }

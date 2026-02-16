@@ -18,7 +18,7 @@ import type { Metadata } from "next";
 // =============================================================================
 
 export const metadata: Metadata = {
-  title: "Diary Tags | Kris Yotam",
+  title: "Diary Tags",
   description: "Browse diary entries by tag.",
 };
 

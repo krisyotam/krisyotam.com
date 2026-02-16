@@ -59,7 +59,7 @@ const fontMono = localFont({
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    template: `%s`,
   },
   description: siteConfig.description,
   keywords: [...siteConfig.keywords],

@@ -76,7 +76,7 @@ export async function generateMetadata(
   const url = `https://krisyotam.com/diary/${category}/${slug}`;
 
   return {
-    title: `${entry.title} | Diary | Kris Yotam`,
+    title: `${entry.title} | Diary`,
     description: entry.preview || `Diary entry: ${entry.title}`,
     openGraph: {
       title: entry.title,

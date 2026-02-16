@@ -96,7 +96,7 @@ export default function PapersClientPage({
 }: PapersClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("list");
   const router = useRouter();
 
   // Build category list
@@ -128,7 +128,9 @@ export default function PapersClientPage({
         preview: categoryData.preview || "",
         status: mapPaperStatusToPageHeaderStatus(categoryData.status as PaperStatus),
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-        importance: categoryData.importance
+        importance: categoryData.importance,
+        backText: "Papers",
+        backHref: "/papers",
       };
     }
 

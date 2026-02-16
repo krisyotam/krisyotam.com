@@ -90,7 +90,7 @@ export async function generateMetadata(
   const url = `https://krisyotam.com/reviews/${resolvedParams.category}/${resolvedParams.slug}`;
 
   return {
-    title: `${reviewData.title} | ${reviewData.category} Reviews | Kris Yotam`,
+    title: `${reviewData.title} | ${reviewData.category} Reviews`,
     description: reviewData.preview || `Review of ${reviewData.title}`,
     openGraph: {
       title: reviewData.title,

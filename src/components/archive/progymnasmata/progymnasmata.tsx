@@ -94,9 +94,7 @@ export function Progymnasmata() {
   };
 
   const handleViewContent = (entry: ProgymnasmataEntry) => {
-    router.push(
-      `/progymnasmata/${entry.type.toLowerCase()}/${entry.slug}`
-    );
+    router.push(`/${entry.slug}`);
   };
 
   return (

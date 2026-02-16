@@ -35,7 +35,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 
   return (
     <Card className="p-4 bg-card border border-border hover:bg-accent/50 transition-colors">
-      <Link href={slugPath} className="no-underline">
+      <Link href={`/${slugPath}`} className="no-underline">
         <h3 className="font-medium mb-1 line-clamp-1">{post.title}</h3>
         <p className="text-sm text-muted-foreground mb-2 line-clamp-2">{post.preview}</p>
 

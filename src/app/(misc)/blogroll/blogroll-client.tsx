@@ -27,7 +27,7 @@ export function BlogrollClient({ initialCategoryFilter = "All" }: BlogrollClient
   const [loading, setLoading] = useState(true)
   const [categoryFilter, setCategoryFilter] = useState<string>(initialCategoryFilter)
   const [searchQuery, setSearchQuery] = useState("")
-  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list')
+  const [viewMode, setViewMode] = useState<'list' | 'grid' | 'directory'>('list')
   const router = useRouter()
   const pathname = usePathname()
 

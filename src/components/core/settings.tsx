@@ -340,7 +340,7 @@ export function SettingsMenu() {
           date: displayDate,
           status: post.status || "Draft",
           category: post.category,
-          path: `/blog/${new Date(displayDate).getFullYear()}/${post.slug}`,
+          path: `/${post.slug}`,
           resultType: "post" as const,
         }
       }))
@@ -368,7 +368,7 @@ export function SettingsMenu() {
         date: essay.date,
         status: essay.status || "Published",
         category: essay.category,
-        path: `/essays/${essay.slug}`,
+        path: `/${essay.slug}`,
         resultType: "essay" as const,
       })))
 
@@ -382,7 +382,7 @@ export function SettingsMenu() {
         date: paper.date,
         status: paper.status || "Published",
         category: "Academic",
-        path: `/papers/${paper.slug}`,
+        path: `/${paper.slug}`,
         resultType: "paper" as const,
       })))
 
@@ -396,7 +396,7 @@ export function SettingsMenu() {
         date: item.date,
         status: item.status || "Published",
         category: "Fiction",
-        path: `/fiction/${item.slug}`,
+        path: `/${item.slug}`,
         resultType: "fiction" as const,
       })))
 
@@ -410,7 +410,7 @@ export function SettingsMenu() {
         date: item.date,
         status: item.status || "Published",
         category: "News",
-        path: `/news/${item.slug}`,
+        path: `/${item.slug}`,
         resultType: "news" as const,
       })))
 
@@ -424,7 +424,7 @@ export function SettingsMenu() {
         date: item.date,
         status: item.status || "Published",
         category: "Note",
-        path: `/notes/${item.slug}`,
+        path: `/${item.slug}`,
         resultType: "note" as const,
       })))
 
@@ -438,7 +438,7 @@ export function SettingsMenu() {
         date: item.date,
         status: item.status || "Published",
         category: "Progymnasmata",
-        path: `/progymnasmata/${item.slug}`,
+        path: `/${item.slug}`,
         resultType: "progymnasmata" as const,
       })))
 

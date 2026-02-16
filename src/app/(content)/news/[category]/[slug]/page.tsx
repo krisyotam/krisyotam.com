@@ -86,7 +86,7 @@ export async function generateMetadata({ params }: NewsPageProps, parent: Resolv
   const url = `https://krisyotam.com/news/${category}/${slug}`;
 
   return {
-    title: `${newsArticle.title} | ${newsArticle.category} News | Kris Yotam`,
+    title: `${newsArticle.title} | ${newsArticle.category} News`,
     description: newsArticle.preview || `News article about ${newsArticle.title}`,
     openGraph: {
       title: newsArticle.title,

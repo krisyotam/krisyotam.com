@@ -23,12 +23,12 @@ export async function generateMetadata(props: LegalDocPageProps): Promise<Metada
 
   if (!document) {
     return {
-      title: 'Document Not Found | Kris Yotam',
+      title: 'Document Not Found',
     };
   }
 
   return {
-    title: `${document.name} | Kris Yotam`,
+    title: `${document.name}`,
     description: `${document.name} - Legal document for Kris Yotam's website`,
   };
 }

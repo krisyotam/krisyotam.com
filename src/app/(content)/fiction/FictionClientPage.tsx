@@ -85,7 +85,7 @@ function formatDate(dateString: string): string {
 export default function FictionClientPage({ stories, initialCategory = "all", categories }: FictionClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("list");
   const router = useRouter();
 
   const categoryNames = ["all", ...Array.from(new Set(stories.map(n => n.category)))];
@@ -115,7 +115,9 @@ export default function FictionClientPage({ stories, initialCategory = "all", ca
         preview: categoryData.preview || "",
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-        importance: categoryData.importance || 5
+        importance: categoryData.importance || 5,
+        backText: "Fiction",
+        backHref: "/fiction",
       };
     }
 
@@ -148,8 +150,7 @@ export default function FictionClientPage({ stories, initialCategory = "all", ca
 
   // Helper to build the correct route for a story
   function getStoryUrl(story: Story) {
-    const categorySlug = story.category.toLowerCase().replace(/\s+/g, "-");
-    return `/fiction/${categorySlug}/${encodeURIComponent(story.slug)}`;
+    return `/${story.slug}`;
   }
 
   const GridView = () => (

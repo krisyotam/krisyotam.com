@@ -54,7 +54,7 @@ const defaultOCSPageData = {
 export default function OCSClientPage({ ocs, initialCategory = "all", categories: categoriesFromDb = [] }: OCSClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("list");
   const router = useRouter();
 
   // Helper function to create category slug
@@ -88,7 +88,9 @@ export default function OCSClientPage({ ocs, initialCategory = "all", categories
         preview: categoryData.preview,
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-        importance: categoryData.importance
+        importance: categoryData.importance,
+        backText: "OCS",
+        backHref: "/ocs",
       };
     }
 
@@ -130,7 +132,7 @@ export default function OCSClientPage({ ocs, initialCategory = "all", categories
 
   // Helper to build the correct route for an OC
   function getOCUrl(character: OCSMeta) {
-    return `/ocs/${slugifyCategory(character.category)}/${encodeURIComponent(character.slug)}`;
+    return `/${character.slug}`;
   }
 
   // Helper to format date as "Month DD, YYYY"

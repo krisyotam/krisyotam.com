@@ -68,6 +68,10 @@ function formatCategoryDisplayName(category: string): string {
     .join(' ');
 }
 
+function slugifyCategory(category: string) {
+  return category.toLowerCase().replace(/\s+/g, "-");
+}
+
 // =============================================================================
 // Component
 // =============================================================================
@@ -79,7 +83,7 @@ export default function EssaysClientPage({
 }: EssaysClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("list");
   const router = useRouter();
 
   // Build category options from data
@@ -108,7 +112,9 @@ export default function EssaysClientPage({
         preview: categoryData.preview || "",
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-        importance: categoryData.importance
+        importance: categoryData.importance,
+        backText: "Essays",
+        backHref: "/essays",
       };
     }
 
@@ -131,6 +137,11 @@ export default function EssaysClientPage({
 
   function handleCategoryChange(selectedValue: string) {
     setActiveCategory(selectedValue);
+    if (selectedValue === "all") {
+      router.push("/essays");
+    } else {
+      router.push(`/essays/${slugifyCategory(selectedValue)}`);
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -158,7 +169,7 @@ export default function EssaysClientPage({
   // ---------------------------------------------------------------------------
 
   function getEssayUrl(note: Post) {
-    return `/essays/${note.category}/${note.slug}`;
+    return `/${note.slug}`;
   }
 
   // ---------------------------------------------------------------------------

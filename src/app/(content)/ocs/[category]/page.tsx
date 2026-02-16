@@ -70,12 +70,12 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
       url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
       width: 1200,
       height: 630,
-      alt: `${categoryData.title} | Kris Yotam`
+      alt: `${categoryData.title}`
     }
   ];
 
   return {
-    title: `${categoryData.title} | OCs | Kris Yotam`,
+    title: `${categoryData.title} | OCs`,
     description: categoryData.preview,
     openGraph: {
       title: categoryData.title,

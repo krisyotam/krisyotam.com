@@ -445,7 +445,7 @@ export const staticMetadata: Record<string, Metadata> = {
     }
   },
   home: {
-    title: siteConfig.name,
+    title: { absolute: siteConfig.name },
     description: siteConfig.description,
     openGraph: {
       title: siteConfig.name,

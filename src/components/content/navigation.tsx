@@ -34,7 +34,7 @@
 
 "use client";
 
-import { Search, LayoutGrid, List } from "lucide-react";
+import { Search, LayoutGrid, List, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CustomSelect, SelectOption } from "@/components/ui/custom-select";
 import { cn } from "@/lib/utils";
@@ -53,10 +53,11 @@ export interface NavigationProps {
   categoryPlaceholder?: string;
 
   // View mode functionality
-  viewMode: "grid" | "list";
-  onViewModeChange: (mode: "grid" | "list") => void;
+  viewMode: "grid" | "list" | "directory";
+  onViewModeChange: (mode: "grid" | "list" | "directory") => void;
   showViewToggle?: boolean;
   showGridOption?: boolean;
+  showDirectoryOption?: boolean;
 
   // Optional styling
   className?: string;
@@ -75,6 +76,7 @@ export function Navigation({
   onViewModeChange,
   showViewToggle = true,
   showGridOption = true,
+  showDirectoryOption = false,
   className,
 }: NavigationProps) {
   return (
@@ -109,6 +111,18 @@ export function Navigation({
       {/* View mode toggle - icon-based buttons */}
       {showViewToggle && (
         <div className="flex items-center gap-2">
+          {showDirectoryOption && (
+            <Button
+              variant="outline"
+              size="icon"
+              className={cn("rounded-none", viewMode === "directory" && "bg-secondary/50")}
+              onClick={() => onViewModeChange("directory")}
+              aria-label="Directory view"
+              aria-pressed={viewMode === "directory"}
+            >
+              <Layers className="h-4 w-4" />
+            </Button>
+          )}
           <Button
             variant="outline"
             size="icon"

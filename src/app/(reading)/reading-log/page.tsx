@@ -3,11 +3,11 @@ import { PageHeader, PageDescription } from "@/components/core"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Reading Log | Kris Yotam",
+  title: "Reading Log",
   description: "Time-tracked reading sessions and activity log",
   keywords: "reading log, time tracking, reading sessions",
   openGraph: {
-    title: "Reading Log | Kris Yotam",
+    title: "Reading Log",
     description: "Time-tracked reading sessions and activity log",
     type: "website",
   },

@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/core"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "TV | Kris Yotam",
+  title: "TV",
   description: "My TV watching activity, stats, and curated collections",
 }
 

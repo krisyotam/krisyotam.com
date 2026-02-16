@@ -31,7 +31,7 @@ export function PostTableRow({ post }: PostTableRowProps) {
     <tr className="border-t border-border hover:bg-secondary/50 transition-colors">
       <td className="py-2 pr-4 text-sm text-muted-foreground font-mono">{formattedDate}</td>
       <td className="py-2 pr-4">
-        <Link href={slugPath} className="no-underline">
+        <Link href={`/${slugPath}`} className="no-underline">
           {post.title}
         </Link>
       </td>

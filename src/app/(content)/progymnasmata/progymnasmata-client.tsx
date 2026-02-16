@@ -67,7 +67,7 @@ export function ProgymnasmataClient({
 }: ProgymnasmataClientProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("list");
   const router = useRouter();
 
   const safeCategories = Array.isArray(categories) ? categories : [];
@@ -108,7 +108,7 @@ export function ProgymnasmataClient({
   }
 
   function getPostUrl(post: ProgymnasmataPost) {
-    return `/progymnasmata/${post.category.toLowerCase()}/${post.slug}`;
+    return `/${post.slug}`;
   }
 
   // Find the active category object from categories
@@ -126,6 +126,7 @@ export function ProgymnasmataClient({
   const headerStatus = activeCategoryObj?.status || "In Progress";
   const headerConfidence = activeCategoryObj?.confidence || "likely";
   const headerImportance = typeof activeCategoryObj?.importance === "number" ? activeCategoryObj.importance : 7;
+  const isCategory = initialCategory !== "all" && !!initialCategory;
 
   return (
     <>
@@ -144,6 +145,7 @@ export function ProgymnasmataClient({
           status={headerStatus as ("Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished" | "Published" | "Planned" | "Active")}
           confidence={headerConfidence as ("impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain" | "speculative")}
           importance={headerImportance}
+          {...(isCategory ? { backText: "Progymnasmata", backHref: "/progymnasmata" } : {})}
         />
 
         {/* Navigation with search, filter, and view toggle */}

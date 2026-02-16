@@ -72,7 +72,7 @@ function slugifyCategory(category: string) {
 export default function NewsClientPage({ news, initialCategory = "all", categories }: NewsClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("list");
   const router = useRouter();
 
   const categoryNames = ["all", ...Array.from(new Set(news.map(n => n.category)))];
@@ -101,7 +101,9 @@ export default function NewsClientPage({ news, initialCategory = "all", categori
         preview: categoryData.preview || "",
         status: mapNewsStatusToPageHeaderStatus(categoryData.status as NewsStatus),
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-        importance: categoryData.importance || 5
+        importance: categoryData.importance || 5,
+        backText: "News",
+        backHref: "/news",
       };
     }
 

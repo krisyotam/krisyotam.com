@@ -99,14 +99,18 @@ export default function VerseTypeClient({ typeSlug, verseTypes, poems }: VerseTy
     preview: typeData.preview,
     status: typeData.status as "In Progress" | "Draft" | "Finished" | "Abandoned" | "Notes",
     confidence: typeData.confidence as "likely" | "certain" | "possible" | "unlikely" | "highly likely" | "highly unlikely" | "remote" | "impossible",
-    importance: typeData.importance
+    importance: typeData.importance,
+    backText: "Verse",
+    backHref: "/verse",
   } : {
     title: "Verse",
     date: "2025-01-01",
     preview: "A collection of original verse",
     status: "In Progress" as const,
     confidence: "likely" as const,
-    importance: 7
+    importance: 7,
+    backText: "Verse",
+    backHref: "/verse",
   }
 
   return (

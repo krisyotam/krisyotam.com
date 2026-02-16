@@ -56,6 +56,39 @@ export interface View {
   referrer: string | null
 }
 
+export interface HistorySnapshot {
+  id: number
+  period_start: string
+  period_end: string
+  total_visitors: number
+  total_views: number
+  avg_duration_seconds: number
+  bounce_rate: number
+  created_at: string
+}
+
+export interface HistoryDimensionRow {
+  id: number
+  snapshot_id: number
+  visitors: number
+}
+
+export interface HistoryReferrer extends HistoryDimensionRow { referrer: string }
+export interface HistoryCountry extends HistoryDimensionRow { country: string }
+export interface HistoryCity extends HistoryDimensionRow { city: string; country: string }
+export interface HistoryBrowser extends HistoryDimensionRow { browser: string }
+export interface HistoryDevice extends HistoryDimensionRow { device: string }
+export interface HistoryOS extends HistoryDimensionRow { os: string }
+
+export interface FullSnapshot extends HistorySnapshot {
+  referrers: HistoryReferrer[]
+  countries: HistoryCountry[]
+  cities: HistoryCity[]
+  browsers: HistoryBrowser[]
+  devices: HistoryDevice[]
+  os: HistoryOS[]
+}
+
 // =============================================================================
 // Database Connection
 // =============================================================================
@@ -342,4 +375,135 @@ export async function getViewCounts(slugs: string[]): Promise<Record<string, num
   for (const slug of slugs) counts[slug] = 0
   for (const r of results) counts[r.slug] = r.count
   return counts
+}
+
+// =============================================================================
+// History Snapshots
+// =============================================================================
+
+/**
+ * Create a monthly snapshot with all dimension data
+ */
+export async function createSnapshot(data: {
+  periodStart: string
+  periodEnd: string
+  totalVisitors: number
+  totalViews: number
+  avgDurationSeconds: number
+  bounceRate: number
+  referrers: { referrer: string; visitors: number }[]
+  countries: { country: string; visitors: number }[]
+  cities: { city: string; country: string; visitors: number }[]
+  browsers: { browser: string; visitors: number }[]
+  devices: { device: string; visitors: number }[]
+  os: { os: string; visitors: number }[]
+}): Promise<HistorySnapshot | null> {
+  if (!isDatabaseAvailable()) return null
+
+  const sql = getDb()
+
+  // Insert snapshot
+  const snapResult = await sql`
+    INSERT INTO history_snapshots (period_start, period_end, total_visitors, total_views, avg_duration_seconds, bounce_rate)
+    VALUES (${data.periodStart}, ${data.periodEnd}, ${data.totalVisitors}, ${data.totalViews}, ${data.avgDurationSeconds}, ${data.bounceRate})
+    ON CONFLICT (period_start, period_end) DO UPDATE SET
+      total_visitors = EXCLUDED.total_visitors,
+      total_views = EXCLUDED.total_views,
+      avg_duration_seconds = EXCLUDED.avg_duration_seconds,
+      bounce_rate = EXCLUDED.bounce_rate,
+      created_at = NOW()
+    RETURNING *
+  ` as HistorySnapshot[]
+
+  const snapshot = snapResult[0]
+  if (!snapshot) return null
+
+  // Clear old dimension data for this snapshot (in case of upsert)
+  await Promise.all([
+    sql`DELETE FROM history_referrers WHERE snapshot_id = ${snapshot.id}`,
+    sql`DELETE FROM history_countries WHERE snapshot_id = ${snapshot.id}`,
+    sql`DELETE FROM history_cities WHERE snapshot_id = ${snapshot.id}`,
+    sql`DELETE FROM history_browsers WHERE snapshot_id = ${snapshot.id}`,
+    sql`DELETE FROM history_devices WHERE snapshot_id = ${snapshot.id}`,
+    sql`DELETE FROM history_os WHERE snapshot_id = ${snapshot.id}`,
+  ])
+
+  // Insert dimension data
+  for (const r of data.referrers) {
+    await sql`INSERT INTO history_referrers (snapshot_id, referrer, visitors) VALUES (${snapshot.id}, ${r.referrer}, ${r.visitors})`
+  }
+  for (const r of data.countries) {
+    await sql`INSERT INTO history_countries (snapshot_id, country, visitors) VALUES (${snapshot.id}, ${r.country}, ${r.visitors})`
+  }
+  for (const r of data.cities) {
+    await sql`INSERT INTO history_cities (snapshot_id, city, country, visitors) VALUES (${snapshot.id}, ${r.city}, ${r.country}, ${r.visitors})`
+  }
+  for (const r of data.browsers) {
+    await sql`INSERT INTO history_browsers (snapshot_id, browser, visitors) VALUES (${snapshot.id}, ${r.browser}, ${r.visitors})`
+  }
+  for (const r of data.devices) {
+    await sql`INSERT INTO history_devices (snapshot_id, device, visitors) VALUES (${snapshot.id}, ${r.device}, ${r.visitors})`
+  }
+  for (const r of data.os) {
+    await sql`INSERT INTO history_os (snapshot_id, os, visitors) VALUES (${snapshot.id}, ${r.os}, ${r.visitors})`
+  }
+
+  return snapshot
+}
+
+/**
+ * List all snapshots (for month picker)
+ */
+export async function getSnapshots(): Promise<HistorySnapshot[]> {
+  if (!isDatabaseAvailable()) return []
+
+  const sql = getDb()
+  return await sql`
+    SELECT * FROM history_snapshots ORDER BY period_start DESC
+  ` as HistorySnapshot[]
+}
+
+/**
+ * Get full snapshot by ID with all dimension data
+ */
+export async function getSnapshotById(id: number): Promise<FullSnapshot | null> {
+  if (!isDatabaseAvailable()) return null
+
+  const sql = getDb()
+  const snapResult = await sql`SELECT * FROM history_snapshots WHERE id = ${id}`
+  const snapshot = snapResult[0] as HistorySnapshot | undefined
+  if (!snapshot) return null
+
+  const [referrers, countries, cities, browsers, devices, os] = await Promise.all([
+    sql`SELECT * FROM history_referrers WHERE snapshot_id = ${id} ORDER BY visitors DESC`,
+    sql`SELECT * FROM history_countries WHERE snapshot_id = ${id} ORDER BY visitors DESC`,
+    sql`SELECT * FROM history_cities WHERE snapshot_id = ${id} ORDER BY visitors DESC`,
+    sql`SELECT * FROM history_browsers WHERE snapshot_id = ${id} ORDER BY visitors DESC`,
+    sql`SELECT * FROM history_devices WHERE snapshot_id = ${id} ORDER BY visitors DESC`,
+    sql`SELECT * FROM history_os WHERE snapshot_id = ${id} ORDER BY visitors DESC`,
+  ])
+
+  return {
+    ...snapshot,
+    referrers: referrers as unknown as HistoryReferrer[],
+    countries: countries as unknown as HistoryCountry[],
+    cities: cities as unknown as HistoryCity[],
+    browsers: browsers as unknown as HistoryBrowser[],
+    devices: devices as unknown as HistoryDevice[],
+    os: os as unknown as HistoryOS[],
+  }
+}
+
+/**
+ * Get timeline of visitor/view totals across all snapshots
+ */
+export async function getHistoryTimeline(): Promise<{ period_start: string; period_end: string; total_visitors: number; total_views: number }[]> {
+  if (!isDatabaseAvailable()) return []
+
+  const sql = getDb()
+  return await sql`
+    SELECT period_start, period_end, total_visitors, total_views
+    FROM history_snapshots
+    ORDER BY period_start ASC
+  ` as { period_start: string; period_end: string; total_visitors: number; total_views: number }[]
 }

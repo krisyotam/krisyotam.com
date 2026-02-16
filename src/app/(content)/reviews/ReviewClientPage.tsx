@@ -76,7 +76,7 @@ export default function ReviewClientPage({
 }: ReviewClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("list");
   const router = useRouter();
 
   const categoryList = ["all", ...Array.from(new Set(reviews.map(r => r.category)))];
@@ -109,7 +109,9 @@ export default function ReviewClientPage({
         preview: categoryData.preview,
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-        importance: categoryData.importance
+        importance: categoryData.importance,
+        backText: "Reviews",
+        backHref: "/reviews",
       };
     }
 
@@ -163,7 +165,7 @@ export default function ReviewClientPage({
   // ---------------------------------------------------------------------------
 
   function getReviewUrl(review: ReviewMeta) {
-    return `/reviews/${encodeURIComponent(review.category)}/${encodeURIComponent(review.slug)}`;
+    return `/${review.slug}`;
   }
 
   function formatDate(dateString: string): string {

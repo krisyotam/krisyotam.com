@@ -75,7 +75,7 @@ export default function DiaryClientPage({
 }: DiaryClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("list");
   const router = useRouter();
 
   // Build category options
@@ -104,6 +104,8 @@ export default function DiaryClientPage({
         start_date: categoryData.date || "2025-01-01",
         end_date: categoryData.date || new Date().toISOString().split('T')[0],
         preview: categoryData.preview || "",
+        backText: "Diary",
+        backHref: "/diary",
       };
     }
 
@@ -151,8 +153,7 @@ export default function DiaryClientPage({
   // ---------------------------------------------------------------------------
 
   function getDiaryUrl(entry: DiaryMeta) {
-    const categorySlug = entry.category.toLowerCase().replace(/\s+/g, "-");
-    return `/diary/${categorySlug}/${encodeURIComponent(entry.slug)}`;
+    return `/${entry.slug}`;
   }
 
   // ---------------------------------------------------------------------------

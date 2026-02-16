@@ -89,7 +89,7 @@ export async function generateMetadata({ params }: StoryPageProps): Promise<Meta
   }
 
   return {
-    title: `${story.title} | ${story.category} | Kris Yotam`,
+    title: `${story.title} | ${story.category}`,
     description: `Story: ${story.title} in ${story.category} category`,
   };
 }

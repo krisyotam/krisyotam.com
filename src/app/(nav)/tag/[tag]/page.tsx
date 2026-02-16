@@ -2,7 +2,7 @@
 import { notFound } from "next/navigation";
 import { getAllUniversalTags, getUniversalPostsByTag, getTagMeta, type UniversalPost } from "@/lib/content";
 import { PageHeader } from "@/components/core";
-import { ContentTable } from "@/components/content";
+import TagPageClient from "./TagPageClient";
 import type { Metadata } from "next";
 
 export const dynamic = "force-static";
@@ -25,7 +25,7 @@ export async function generateMetadata(props: TagPageProps): Promise<Metadata> {
   const tagTitle = tagMeta?.title || params.tag.split("-").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");
 
   return {
-    title: `${tagTitle} | Tags | Kris Yotam`,
+    title: `${tagTitle} | Tags`,
     description: tagMeta?.preview || `Browse all posts tagged with ${tagTitle}`,
   };
 }
@@ -78,11 +78,8 @@ export default async function TagPage(props: TagPageProps) {
           importance={tagMeta?.importance || 7}
         />
 
-        <main className="mt-8">
-          <ContentTable
-            items={tableData}
-            showType={true}
-          />
+        <main>
+          <TagPageClient items={tableData} />
         </main>
       </div>
     </div>

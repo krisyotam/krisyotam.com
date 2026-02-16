@@ -76,12 +76,12 @@ export async function generateMetadata(
       url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
       width: 1200,
       height: 630,
-      alt: `${categoryData.title} | Kris Yotam`
+      alt: `${categoryData.title}`
     }
   ];
 
   return {
-    title: `${categoryData.title} | Reviews | Kris Yotam`,
+    title: `${categoryData.title} | Reviews`,
     description: categoryData.preview || `Reviews in the ${categoryData.title} category`,
     openGraph: {
       title: categoryData.title,

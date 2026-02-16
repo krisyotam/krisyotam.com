@@ -28,7 +28,7 @@ interface ProjectsClientProps {
 export function ProjectsClient({ projects, categories, isActive }: ProjectsClientProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("");
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("list");
 
   useEffect(() => {
     if (categories.length > 0 && !activeCategory) {

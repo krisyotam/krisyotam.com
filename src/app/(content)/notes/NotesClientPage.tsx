@@ -98,7 +98,7 @@ export default function NotesClientPage({
 }: NotesClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("list");
   const router = useRouter();
 
   // Build category list
@@ -131,7 +131,9 @@ export default function NotesClientPage({
         preview: categoryData.preview || "",
         status: categoryData.status as "Abandoned" | "Notes" | "Draft" | "In Progress" | "Finished",
         confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
-        importance: categoryData.importance
+        importance: categoryData.importance,
+        backText: "Notes",
+        backHref: "/notes",
       };
     }
 
@@ -186,7 +188,7 @@ export default function NotesClientPage({
   // ---------------------------------------------------------------------------
 
   function getNoteUrl(note: Note) {
-    return `/notes/${note.category}/${note.slug}`;
+    return `/${note.slug}`;
   }
 
   // ---------------------------------------------------------------------------

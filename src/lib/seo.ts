@@ -81,7 +81,7 @@ export function generatePageMetadata(options: PageMetadataOptions): Metadata {
   const canonicalUrl = url || siteConfig.url
 
   const metadata: Metadata = {
-    title: title === siteConfig.name ? title : `${title} | ${siteConfig.name}`,
+    title,
     description,
     keywords: [...siteConfig.keywords, ...tags],
     authors: authors.map(name => ({ name })),

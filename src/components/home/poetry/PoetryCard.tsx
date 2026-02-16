@@ -14,9 +14,8 @@ interface PoetryCardProps {
 }
 
 export function PoetryCard({ poem }: PoetryCardProps) {
-  // Generate the correct URL pattern: /verse/[type]/[slug]
-  const typeSlug = (poem.type ?? "").toLowerCase().replace(/\s+/g, "-");
-  const poetryPath = `/verse/${encodeURIComponent(typeSlug)}/${encodeURIComponent(poem.slug ?? "")}`;
+  // Use sexy URL: /{slug}
+  const poetryPath = `/${poem.slug ?? ""}`;
 
   // Use start_date and format it
   const dateToUse = poem.start_date || poem.dateCreated || "";

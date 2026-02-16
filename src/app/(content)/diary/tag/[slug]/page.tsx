@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
   const title = tagData?.title || slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
   return {
-    title: `${title} | Diary Tags | Kris Yotam`,
+    title: `${title} | Diary Tags`,
     description: tagData?.preview || `Diary entries tagged with ${title}`,
   };
 }

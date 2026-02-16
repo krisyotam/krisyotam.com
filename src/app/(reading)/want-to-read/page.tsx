@@ -3,11 +3,11 @@ import { PageHeader, PageDescription } from "@/components/core"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Want to Read | Kris Yotam",
+  title: "Want to Read",
   description: "A compilation of books I wish to read",
   keywords: ["want to read", "tbr", "to be read", "reading list", "books"],
   openGraph: {
-    title: "Want to Read | Kris Yotam",
+    title: "Want to Read",
     description: "A compilation of books I wish to read",
     type: "website",
   },

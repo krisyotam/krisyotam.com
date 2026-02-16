@@ -26,7 +26,7 @@ export default function VideosPage() {
   const [videos, setVideos] = useState<VideoData[]>([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("grid")
   const [selectedCategory, setSelectedCategory] = useState("all")
 
   useEffect(() => {

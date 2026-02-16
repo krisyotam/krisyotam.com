@@ -85,24 +85,30 @@ async function selineRequest<T>(endpoint: string, body: Record<string, unknown>)
  * Get visitor and pageview data over time
  */
 export async function getVisitorData(options: SelineRequestOptions = {}): Promise<DataResponse> {
-  const { period = '30d', interval = '1 day', ...rest } = options;
-  return selineRequest<DataResponse>('/data', { period, interval, ...rest });
+  const { period, interval = '1 day', range, ...rest } = options;
+  const body: Record<string, unknown> = { interval, ...rest };
+  if (range) { body.range = range; } else { body.period = period || '30d'; }
+  return selineRequest<DataResponse>('/data', body);
 }
 
 /**
  * Get aggregated visit metrics (bounce rate, duration, views per visit)
  */
 export async function getVisitMetrics(options: SelineRequestOptions = {}): Promise<VisitMetrics> {
-  const { period = '30d', ...rest } = options;
-  return selineRequest<VisitMetrics>('/visit-metrics', { period, ...rest });
+  const { period, range, ...rest } = options;
+  const body: Record<string, unknown> = { ...rest };
+  if (range) { body.range = range; } else { body.period = period || '30d'; }
+  return selineRequest<VisitMetrics>('/visit-metrics', body);
 }
 
 /**
  * Get stats by dimension (referrer, country, city, browser, device, os)
  */
 export async function getStats(type: StatsType, options: SelineRequestOptions = {}): Promise<StatsResponse> {
-  const { period = '30d', limit = 10, ...rest } = options;
-  return selineRequest<StatsResponse>('/stats', { type, period, limit, ...rest });
+  const { period, limit = 10, range, ...rest } = options;
+  const body: Record<string, unknown> = { type, limit, ...rest };
+  if (range) { body.range = range; } else { body.period = period || '30d'; }
+  return selineRequest<StatsResponse>('/stats', body);
 }
 
 /**

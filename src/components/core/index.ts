@@ -52,3 +52,5 @@ export type { SequenceHeaderProps, SequenceStatus, SequenceConfidence } from './
 export { SequenceComponent } from './sequence'
 export type { SequenceComponentProps } from './sequence'
 export { default as Block404 } from './404-block'
+export { Directory } from './directory'
+export type { DirectoryProps, DirectoryItem } from './directory'

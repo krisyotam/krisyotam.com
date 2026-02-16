@@ -80,7 +80,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const tagTitle = dbTag?.title || originalTag;
 
   return {
-    title: `${tagTitle} Papers | Kris Yotam`,
+    title: `${tagTitle} Papers`,
     description: `Papers tagged with ${tagTitle}`,
   };
 }

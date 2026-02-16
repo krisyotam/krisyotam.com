@@ -34,7 +34,7 @@ const fs = require('fs')
  * ═══════════════════════════════════════════════════════════════════════════ */
 
 /** Path to the sacred content database */
-const DB_PATH = path.join(__dirname, '..', 'data', 'content.db')
+const DB_PATH = '/home/krisyotam/dev/krisyotam.com/public/data/content.db'
 
 /** Content types and their corresponding tables in the database */
 const CONTENT_TYPES = [
@@ -237,12 +237,100 @@ function clearCache() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+ * MODULAR FEATURES (selective flags)
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+/**
+ * Get only the slug-to-path mappings (for redirect/rewrite use)
+ * @returns {Object} slug → {type, category, path}
+ */
+function getSlugMap() {
+  return getMagicUrls().mappings
+}
+
+/**
+ * Get only the reverse path-to-slug mappings (for canonical URL generation)
+ * @returns {Object} path → slug
+ */
+function getReverseMap() {
+  return getMagicUrls().reverse
+}
+
+/**
+ * Find the closest matching slug using Levenshtein distance
+ * For typo correction: krisyotam.com/wrong-url → krisyotam.com/right-url
+ * @param {string} input The mistyped slug
+ * @param {number} maxDistance Maximum edit distance to consider (default: 3)
+ * @returns {{slug: string, path: string, distance: number}|null} Closest match or null
+ */
+function findClosestSlug(input, maxDistance = 3) {
+  const { mappings } = getMagicUrls()
+  const slugs = Object.keys(mappings)
+  let best = null
+  let bestDist = maxDistance + 1
+
+  for (const slug of slugs) {
+    const d = levenshtein(input, slug)
+    if (d < bestDist) {
+      bestDist = d
+      best = { slug, path: mappings[slug].path, distance: d }
+    }
+  }
+
+  return best
+}
+
+/**
+ * Find multiple close matches for a slug (for 404 suggestions)
+ * @param {string} input The mistyped slug
+ * @param {number} n Number of suggestions to return (default: 5)
+ * @returns {Array<{slug: string, path: string, distance: number}>}
+ */
+function findSimilarSlugs(input, n = 5) {
+  const { mappings } = getMagicUrls()
+  const results = Object.keys(mappings).map(slug => ({
+    slug,
+    path: mappings[slug].path,
+    distance: levenshtein(input, slug),
+  }))
+  results.sort((a, b) => a.distance - b.distance)
+  return results.slice(0, n)
+}
+
+/**
+ * Bounded Levenshtein distance
+ */
+function levenshtein(a, b) {
+  if (a === b) return 0
+  const m = a.length, n = b.length
+  const dp = Array.from({ length: m + 1 }, (_, i) => i)
+  for (let j = 1; j <= n; j++) {
+    let prev = dp[0]
+    dp[0] = j
+    for (let i = 1; i <= m; i++) {
+      const temp = dp[i]
+      dp[i] = a[i - 1] === b[j - 1]
+        ? prev
+        : 1 + Math.min(prev, dp[i], dp[i - 1])
+      prev = temp
+    }
+  }
+  return dp[m]
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
  * EXPORTS
  * ═══════════════════════════════════════════════════════════════════════════ */
 
 module.exports = {
+  // Core
   getMagicUrls,
   lookupSlug,
   lookupPath,
   clearCache,
+  // Modular
+  getSlugMap,
+  getReverseMap,
+  findClosestSlug,
+  findSimilarSlugs,
 }

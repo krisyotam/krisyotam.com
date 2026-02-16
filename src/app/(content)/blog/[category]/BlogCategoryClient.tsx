@@ -74,7 +74,9 @@ export default function BlogCategoryClient({ posts, allPosts, category, categori
       confidence: categoryData.confidence as "impossible" | "remote" | "highly unlikely" | "unlikely" | "possible" | "likely" | "highly likely" | "certain",
       importance: categoryData.importance,
       start_date: categoryData.date || "Undefined",
-      end_date: new Date().toISOString().split('T')[0]
+      end_date: new Date().toISOString().split('T')[0],
+      backText: "Blog",
+      backHref: "/blog",
     } : {
       title: category,
       preview: `Posts in the ${category} category`,
@@ -82,7 +84,9 @@ export default function BlogCategoryClient({ posts, allPosts, category, categori
       confidence: "certain" as const,
       importance: 8,
       start_date: "Undefined",
-      end_date: new Date().toISOString().split('T')[0]
+      end_date: new Date().toISOString().split('T')[0],
+      backText: "Blog",
+      backHref: "/blog",
     };
   };
 

@@ -46,7 +46,7 @@ interface TilClientPageProps {
 export default function TilClientPage({ entriesWithContent, initialCategory = "all" }: TilClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("list");
   const router = useRouter();
 
   // Extract entries from the content wrapper

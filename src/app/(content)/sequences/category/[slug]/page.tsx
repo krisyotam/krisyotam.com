@@ -78,7 +78,7 @@ export async function generateMetadata({
 
     if (sequenceCategory) {
       return {
-        title: `${sequenceCategory} Sequences | Kris Yotam`,
+        title: `${sequenceCategory} Sequences`,
         description: `Sequences in the ${sequenceCategory} category`,
       };
     }
@@ -89,7 +89,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${category.title} Sequences | Kris Yotam`,
+    title: `${category.title} Sequences`,
     description: category.preview || `Sequences in the ${category.title} category`,
   };
 }

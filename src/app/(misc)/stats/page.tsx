@@ -1,6 +1,7 @@
 import { staticMetadata } from '@/lib/staticMetadata';
 import { Metadata } from 'next';
 import { getAllStats } from '@/lib/seline';
+import { getSnapshots } from '@/lib/analytics-db';
 
 export const metadata: Metadata = {
   ...staticMetadata.stats,
@@ -29,10 +30,12 @@ async function getData() {
 }
 
 export default async function StatsPage() {
-  const stats = await getData();
+  const [stats, snapshots] = await Promise.all([
+    getData(),
+    getSnapshots().catch(() => []),
+  ]);
 
-  // Import the client component
   const StatsClient = (await import('./stats-client')).default;
 
-  return <StatsClient stats={stats} />;
+  return <StatsClient stats={stats} snapshots={snapshots} />;
 }

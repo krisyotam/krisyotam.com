@@ -21,7 +21,7 @@ import type { DiaryMeta } from "@/types/content";
 // =============================================================================
 
 export const metadata: Metadata = {
-  title: "Diary | Kris Yotam",
+  title: "Diary",
   description: "Quick, unpolished entries and raw thoughts.",
 };
 

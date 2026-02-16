@@ -68,6 +68,7 @@ interface SiteMap {
 interface SuggesterResponse {
   paths: string[];
   map: SiteMap;
+  displayMap?: Record<string, string>;
   error?: string;
 }
 
@@ -96,7 +97,36 @@ function pushIfInternal(arr: string[], candidate: string): void {
   }
 }
 
-function extractPathsFromDatabase(out: string[]): void {
+// Static site pages (non-content routes)
+const STATIC_PAGES = [
+  "/", "/home",
+  "/blog", "/essays", "/notes", "/papers", "/diary", "/fiction",
+  "/reviews", "/news", "/ocs", "/progymnasmata", "/verse", "/til", "/now",
+  "/sequences",
+  "/categories", "/tags",
+  "/library", "/reading", "/reading-log", "/reading-lists", "/reading-stats",
+  "/read", "/want-to-read",
+  "/anime", "/manga", "/film", "/tv", "/music", "/games", "/globe",
+  "/art", "/gallery", "/cards", "/videos",
+  "/stats", "/contact", "/subscribe", "/supporters", "/blogroll",
+  "/people", "/quotes", "/excerpts", "/sources", "/predictions", "/surveys",
+  "/symbols", "/type", "/example",
+  "/portfolio", "/profile",
+  "/legal", "/shop",
+  "/changelog",
+  "/mitzvah", "/rules-of-the-internet",
+  "/search",
+  // Vanity URLs
+  "/me", "/about", "/logo", "/design", "/donate", "/faq",
+];
+
+function extractPathsFromDatabase(out: string[], displayMap: Record<string, string>): void {
+  // Add static pages
+  for (const page of STATIC_PAGES) {
+    out.push(page);
+    displayMap[page] = page;
+  }
+
   if (!fs.existsSync(DB_PATH)) {
     console.warn("404 Suggester API: content.db not found at", DB_PATH);
     return;
@@ -119,12 +149,34 @@ function extractPathsFromDatabase(out: string[]): void {
           )
           .all() as ContentRow[];
 
+        // Collect unique categories for this content type
+        const categorySlugs = new Set<string>();
+
         for (const row of rows) {
           const slug = row.slug;
           const category = row.category_slug || "uncategorized";
-          out.push(`/${type}/${category}/${slug}`);
-          out.push(`/${type}/${slug}`);
-          out.push(`/${slug}`);
+          const sexyUrl = `/${slug}`;
+          const fullPath = `/${type}/${category}/${slug}`;
+          const typePath = `/${type}/${slug}`;
+
+          // Add all path forms for matching
+          out.push(fullPath);
+          out.push(typePath);
+          out.push(sexyUrl);
+
+          // Map all forms to the sexy URL for display
+          displayMap[fullPath] = sexyUrl;
+          displayMap[typePath] = sexyUrl;
+          displayMap[sexyUrl] = sexyUrl;
+
+          if (category) categorySlugs.add(category);
+        }
+
+        // Add content type category pages (e.g. /essays/philosophy)
+        for (const cat of categorySlugs) {
+          const categoryPage = `/${type}/${cat}`;
+          out.push(categoryPage);
+          displayMap[categoryPage] = categoryPage;
         }
       } catch {
         // Table might not exist, skip silently
@@ -141,6 +193,8 @@ function extractPathsFromDatabase(out: string[]): void {
       for (const cat of categories) {
         out.push(`/category/${cat.slug}`);
         out.push(`/categories/${cat.slug}`);
+        displayMap[`/category/${cat.slug}`] = `/category/${cat.slug}`;
+        displayMap[`/categories/${cat.slug}`] = `/category/${cat.slug}`;
       }
     } catch {
       // Categories table might not exist
@@ -154,6 +208,8 @@ function extractPathsFromDatabase(out: string[]): void {
       for (const tag of tags) {
         out.push(`/tag/${tag.slug}`);
         out.push(`/tags/${tag.slug}`);
+        displayMap[`/tag/${tag.slug}`] = `/tag/${tag.slug}`;
+        displayMap[`/tags/${tag.slug}`] = `/tag/${tag.slug}`;
       }
     } catch {
       // Tags table might not exist
@@ -341,8 +397,9 @@ export async function GET(
       case "404-suggester": {
         const dataDir = path.join(process.cwd(), "data");
         const collected: string[] = [];
+        const displayMap: Record<string, string> = {};
 
-        extractPathsFromDatabase(collected);
+        extractPathsFromDatabase(collected, displayMap);
 
         const map: SiteMap = { rootFiles: [], folders: {} };
 
@@ -413,7 +470,7 @@ export async function GET(
           })
           .map((s) => (s.startsWith("/") ? s : `/${s}`));
 
-        return NextResponse.json({ paths: unique, map });
+        return NextResponse.json({ paths: unique, map, displayMap });
       }
 
       // ======================================================================

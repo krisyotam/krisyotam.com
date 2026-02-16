@@ -74,8 +74,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // Find a poem with an image to use as the featured image
   const featuredPoem = poemsOfType.find(poem => poem.cover_image && poem.cover_image.length > 0)
   const title = matchedCategory
-    ? `${matchedCategory.title} | Verse | Kris Yotam`
-    : "Verse | Kris Yotam"
+    ? `${matchedCategory.title} | Verse`
+    : "Verse"
   const description = matchedCategory
     ? matchedCategory.preview
     : "A collection of poems, haikus, and other verse forms."
@@ -85,8 +85,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description,
     openGraph: {
       title: matchedCategory
-        ? `${matchedCategory.title} Collection | Kris Yotam`
-        : "Poetry Collection | Kris Yotam",
+        ? `${matchedCategory.title} Collection`
+        : "Poetry Collection",
       description: matchedCategory?.preview || description,
       type: "website",
       images: featuredPoem?.cover_image
@@ -110,8 +110,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: "summary_large_image",
       title: matchedCategory
-        ? `${matchedCategory.title} Collection | Kris Yotam`
-        : "Poetry Collection | Kris Yotam",
+        ? `${matchedCategory.title} Collection`
+        : "Poetry Collection",
       description,
       images: featuredPoem?.cover_image
         ? [featuredPoem.cover_image]

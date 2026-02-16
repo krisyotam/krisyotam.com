@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${originalCategory} Notes | Kris Yotam`,
+    title: `${originalCategory} Notes`,
     description: `Notes in the ${originalCategory} category`,
   };
 }

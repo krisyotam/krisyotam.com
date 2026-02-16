@@ -1,6 +1,11 @@
+import type { Metadata } from "next"
 import Database from "better-sqlite3"
 import path from "path"
 import React from "react"
+
+export const metadata: Metadata = {
+  title: "People",
+}
 import "../../(tracking)/film/film.css"
 import { PageHeader } from "@/components/core"
 import { MediaSectionHeader } from "@/components/core/section-header"

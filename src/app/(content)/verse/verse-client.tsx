@@ -143,8 +143,7 @@ export function VerseClient({ initialType = "All", verseTypes, poems }: VerseCli
 
   // Helper to build the correct route for a poem
   function getPoemUrl(poem: VersePost) {
-    const typeSlug = slugifyType(poem.verse_type ?? "")
-    return `/verse/${encodeURIComponent(typeSlug)}/${encodeURIComponent(poem.slug ?? "")}`
+    return `/${poem.slug ?? ""}`
   }
 
   function handleTypeChange(selectedValue: string) {

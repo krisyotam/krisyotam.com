@@ -72,19 +72,7 @@ export default function RelatedPostsClient({
         <div className="space-y-2">
           {currentEntries.map((post) => {
             // Generate correct URL based on post type
-            const getPostUrl = () => {
-              if (post.path === 'essays') {
-                return `/essays/${post.category}/${post.slug}`
-              } else if (post.category) {
-                // For blog posts, use category-based routing
-                const categorySlug = post.category.toLowerCase().replace(/\s+/g, "-")
-                return `/blog/${categorySlug}/${post.slug}`
-              } else {
-                // Fallback to year-based routing if category is not available
-                const year = getYear(post.date)
-                return `/blog/${year}/${post.slug}`
-              }
-            }
+            const getPostUrl = () => `/${post.slug}`
             
             return (
               <Link

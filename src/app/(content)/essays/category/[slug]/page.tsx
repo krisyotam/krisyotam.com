@@ -66,7 +66,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const categoryTitle = customCategory?.title || originalCategory;
 
   return {
-    title: `${categoryTitle} Essays | Kris Yotam`,
+    title: `${categoryTitle} Essays`,
     description: `Essays in the ${categoryTitle} category`,
   };
 }

@@ -105,17 +105,9 @@ export function ContentTable({
       .join(" ");
   }
 
-  // Helper to build the correct route for an item
+  // Helper to build the correct route for an item (sexy URL)
   function getItemUrl(item: ContentItem) {
-    // If item has a route field, use it directly
-    if (item.route) {
-      const categorySlug = item.category.toLowerCase().replace(/\s+/g, "-");
-      return `${item.route}/${categorySlug}/${encodeURIComponent(item.slug)}`;
-    }
-
-    // Otherwise use basePath
-    const categorySlug = item.category.toLowerCase().replace(/\s+/g, "-");
-    return `${basePath}/${categorySlug}/${encodeURIComponent(item.slug)}`;
+    return `/${item.slug}`;
   }
 
   // Helper to format content type display name

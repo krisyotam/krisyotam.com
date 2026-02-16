@@ -2,7 +2,7 @@
 import { notFound } from "next/navigation";
 import { getAllUniversalCategories, getUniversalPostsByCategory, getCategoryMeta, type UniversalPost } from "@/lib/content";
 import { PageHeader } from "@/components/core";
-import { ContentTable } from "@/components/content";
+import CategoryPageClient from "./CategoryPageClient";
 import type { Metadata } from "next";
 
 export const dynamic = "force-static";
@@ -25,7 +25,7 @@ export async function generateMetadata(props: CategoryPageProps): Promise<Metada
   const categoryTitle = categoryMeta?.title || params.category.split("-").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");
 
   return {
-    title: `${categoryTitle} | Categories | Kris Yotam`,
+    title: `${categoryTitle} | Categories`,
     description: categoryMeta?.preview || `Browse all posts in the ${categoryTitle} category`,
   };
 }
@@ -78,11 +78,8 @@ export default async function CategoryPage(props: CategoryPageProps) {
           importance={categoryMeta?.importance || 7}
         />
 
-        <main className="mt-8">
-          <ContentTable
-            items={tableData}
-            showType={true}
-          />
+        <main>
+          <CategoryPageClient items={tableData} />
         </main>
       </div>
     </div>

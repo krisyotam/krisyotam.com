@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${originalCategory} | Progymnasmata | Kris Yotam`,
+    title: `${originalCategory} | Progymnasmata`,
     description: `Progymnasmata exercises in the ${originalCategory} category`,
   };
 }

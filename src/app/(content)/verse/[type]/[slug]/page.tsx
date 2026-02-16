@@ -64,7 +64,7 @@ export async function generateMetadata(
 
   // Construct metadata with OpenGraph properties
   return {
-    title: `${poem.title} | ${poem.verse_type} | Kris Yotam`,
+    title: `${poem.title} | ${poem.verse_type}`,
     description: poem.description || `${poem.title} by Kris Yotam`,
     openGraph: {
       title: poem.title,

@@ -82,7 +82,7 @@ export async function generateMetadata({ params }: OCSPageProps, parent: Resolvi
   const url = `https://krisyotam.com/ocs/${category}/${slug}`;
 
   return {
-    title: `${characterData.title} | ${characterData.category} Characters | Kris Yotam`,
+    title: `${characterData.title} | ${characterData.category} Characters`,
     description: characterData.preview || `Character profile for ${characterData.title}`,
     openGraph: {
       title: characterData.title,

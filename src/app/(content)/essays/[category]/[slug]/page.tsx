@@ -68,7 +68,7 @@ export async function generateMetadata(
   const url = `https://krisyotam.com/essays/${category}/${slug}`;
 
   return {
-    title: `${essayItem.title} | Kris Yotam`,
+    title: `${essayItem.title}`,
     description: essayItem.preview || "Read more on Kris Yotam's essays",
     openGraph: {
       title: essayItem.title,

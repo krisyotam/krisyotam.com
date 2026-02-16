@@ -9,7 +9,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const params = await props.params;
   const decodedCategory = decodeURIComponent(params.category)
   return {
-    title: `${decodedCategory} | Blogroll | Kris Yotam`,
+    title: `${decodedCategory} | Blogroll`,
     description: `Websites and authors in the ${decodedCategory} category.`,
   }
 }

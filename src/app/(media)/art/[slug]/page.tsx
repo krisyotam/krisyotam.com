@@ -41,7 +41,7 @@ export async function generateMetadata(props: ArtPageProps, parent: ResolvingMet
   const url = `https://krisyotam.com/art/${params.slug}`;
 
   return {
-    title: `${artwork.title} | Kris Yotam`,
+    title: `${artwork.title}`,
     description: artwork.description || "View this artwork by Kris Yotam",
     openGraph: {
       title: artwork.title,

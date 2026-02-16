@@ -97,7 +97,7 @@ export default function SequencesClientPage({
   const [categoryDisplayName, setCategoryDisplayName] = useState<
     string | undefined
   >(categoryName);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("grid");
   const router = useRouter();
 
   // Update activeCategory when props change
@@ -188,7 +188,7 @@ export default function SequencesClientPage({
         <article
           key={sequence.slug}
           className="border border-border bg-card hover:bg-secondary/50 transition-colors cursor-pointer"
-          onClick={() => router.push(`/sequences/${sequence.slug}`)}
+          onClick={() => router.push(`/${sequence.slug}`)}
         >
           {/* Cover Image Area */}
           <div className="aspect-[16/9] bg-muted/30 border-b border-border flex items-center justify-center">
@@ -273,7 +273,7 @@ export default function SequencesClientPage({
           >
             <td className="py-2 px-3">
               <Link
-                href={`/sequences/${sequence.slug}`}
+                href={`/${sequence.slug}`}
                 className="font-medium"
               >
                 {sequence.title}

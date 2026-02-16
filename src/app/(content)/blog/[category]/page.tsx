@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: BlogCategoryPageProps): Promi
   const description = `Blog posts in the ${categoryTitle} category`;
 
   return {
-    title: `${categoryTitle} | Blog | Kris Yotam`,
+    title: `${categoryTitle} | Blog`,
     description,
     openGraph: {
       title: `${categoryTitle} Blog Posts`,

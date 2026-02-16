@@ -4,7 +4,7 @@ This site was originally vibe coded via vercel. I swapped over to vscode and sta
 I however still dont understand at the code i.e. level of functions, ect. what is going on. I need to fix this. So I will be 
 taking some time away for krisyotam.com, possibly around 2 months. 
 
-# What Will I be doing in the meantime? 
+# What Will I be doing in the meantime?4 
 -----------------------
 In the meantime I will progressively learn html, css, js, react, next as well as all the additional things like project structure, 
 proper git management, apis, ect. In order to create a more beneficial relationshiop between me and ai. Allowing me to fully comprehend all the code in the project and shift to the more meaningul task of producing it myself except for in repetivie structures offloading that work to a trusted assistant i.e. you claude. 

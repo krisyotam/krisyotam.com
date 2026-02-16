@@ -46,7 +46,7 @@ interface NowClientPageProps {
 export default function NowClientPage({ entriesWithContent, initialCategory = "all" }: NowClientPageProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
+  const [viewMode, setViewMode] = useState<"grid" | "list" | "directory">("list");
   const router = useRouter();
 
   // Extract entries from the content wrapper

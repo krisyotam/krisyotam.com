@@ -22,12 +22,12 @@ function buildSexyUrls() {
 
   const CONTENT_TYPES = [
     'blog', 'diary', 'essays', 'fiction', 'news', 'notes',
-    'ocs', 'papers', 'progymnasmata', 'reviews', 'verse',
+    'ocs', 'papers', 'progymnasmata', 'reviews', 'sequences', 'verse',
   ]
 
   const RESERVED = new Set([
     'blog', 'diary', 'essays', 'fiction', 'news', 'notes', 'ocs',
-    'papers', 'progymnasmata', 'reviews', 'verse', 'til', 'now',
+    'papers', 'progymnasmata', 'reviews', 'sequences', 'verse', 'til', 'now',
     'categories', 'category', 'tags', 'tag', 'feeds', 'api',
     'search', 'archive', 'library', 'media', 'rules-of-the-internet',
     'me', 'logo', 'about', 'design', 'donate', 'faq', 'roti',
@@ -49,10 +49,14 @@ function buildSexyUrls() {
       for (const row of rows) {
         if (RESERVED.has(row.slug) || seen.has(row.slug)) continue
         seen.add(row.slug)
-        const category = type === 'verse'
-          ? (row.verse_type || 'uncategorized')
-          : (row.category_slug || 'uncategorized')
-        rewrites.push({ source: `/${row.slug}`, destination: `/${type}/${category}/${row.slug}` })
+        if (type === 'sequences') {
+          rewrites.push({ source: `/${row.slug}`, destination: `/sequences/${row.slug}` })
+        } else {
+          const category = type === 'verse'
+            ? (row.verse_type || 'uncategorized')
+            : (row.category_slug || 'uncategorized')
+          rewrites.push({ source: `/${row.slug}`, destination: `/${type}/${category}/${row.slug}` })
+        }
       }
     } catch { /* table may not exist */ }
   }

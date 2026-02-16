@@ -68,10 +68,17 @@ if (typeof window.URL_SUGGESTER_LOADED === 'undefined') {
 
       const body = await response.json()
 
-      // Expose the site map on window for debugging and potential UI enhancements
+      // Expose the site map and display map on window
       if (body && body.map) {
         try {
           window.URL_SUGGESTER_MAP = body.map
+        } catch (e) {
+          // Ignore in restrictive environments
+        }
+      }
+      if (body && body.displayMap) {
+        try {
+          window.URL_SUGGESTER_DISPLAY_MAP = body.displayMap
         } catch (e) {
           // Ignore in restrictive environments
         }
@@ -361,11 +368,8 @@ if (typeof window.URL_SUGGESTER_LOADED === 'undefined') {
    * @param {number} maxDistance Maximum edit distance to consider
    * @returns {{path: string, url: string}[]} Array of URL suggestions
    */
-  function findSimilarUrls(paths, targetPath, n = MAX_SUGGESTIONS, maxDistance = MAX_DISTANCE) {
-    // Quick filter based on length difference
-    const potentialMatches = paths.filter(
-      (path) => Math.abs(path.length - targetPath.length) <= maxDistance
-    )
+  function findSimilarUrls(paths, targetPath, n = MAX_SUGGESTIONS) {
+    const displayMap = window.URL_SUGGESTER_DISPLAY_MAP || {}
 
     // Apply folder preference boost if applicable
     const folderPrefix = (function () {
@@ -380,32 +384,33 @@ if (typeof window.URL_SUGGESTER_LOADED === 'undefined') {
       return null
     })()
 
-    // Score all potential matches
-    const scored = potentialMatches
-      .map((path) => {
-        const score = compositeScore(targetPath, path)
-        const folderBoost = folderPrefix && path.startsWith(folderPrefix) ? 0.15 : 0
-        return { path, score: score - folderBoost }
+    // Score ALL paths — always show closest suggestions even if nothing is close
+    const scored = paths
+      .map((p) => {
+        const score = compositeScore(targetPath, p)
+        const folderBoost = folderPrefix && p.startsWith(folderPrefix) ? 0.15 : 0
+        return { path: p, score: score - folderBoost }
       })
       .filter((item) => Number.isFinite(item.score))
 
-    // Sort by score (ascending)
+    // Sort by score (ascending — lower is better)
     scored.sort((a, b) => a.score - b.score)
 
-    // Deduplicate while preserving order
-    const seenUrls = new Set()
+    // Deduplicate by display URL (sexy URL) so the same content doesn't appear multiple times
+    const seenDisplay = new Set()
     const uniqueSuggestions = []
 
     for (const item of scored) {
-      if (seenUrls.has(item.path)) continue
-      seenUrls.add(item.path)
-      uniqueSuggestions.push(item)
+      const display = displayMap[item.path] || item.path
+      if (seenDisplay.has(display)) continue
+      seenDisplay.add(display)
+      uniqueSuggestions.push({ path: item.path, display })
       if (uniqueSuggestions.length >= n) break
     }
 
     return uniqueSuggestions.map((item) => ({
-      path: item.path,
-      url: window.location.origin + item.path
+      path: item.display,
+      url: window.location.origin + item.display
     }))
   }
 
@@ -440,7 +445,7 @@ if (typeof window.URL_SUGGESTER_LOADED === 'undefined') {
       ? suggestions
           .map((item) => `<li class="py-3 px-4"><a class="link-live block" href="${item.url}"><code>${item.path}</code></a></li>`)
           .join('')
-      : `<li class="py-3 px-4"><strong>No similar URLs found.</strong></li>`
+      : `<li class="py-3 px-4"><em>Loading suggestions...</em></li>`
 
     let suggestionsElement
 

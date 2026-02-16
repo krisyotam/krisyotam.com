@@ -5,11 +5,11 @@ import type { Metadata } from "next"
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: "Read | Kris Yotam",
+  title: "Read",
   description: "books, blog posts, short stories, papers, essays, and verse completed since 2024",
   keywords: "reading log, books read, blog posts, short stories, verse, ratings, reviews",
   openGraph: {
-    title: "Read | Kris Yotam",
+    title: "Read",
     description: "books, blog posts, short stories, papers, essays, and verse completed since 2024",
     type: "website",
   },

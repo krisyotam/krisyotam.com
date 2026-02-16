@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   const title = categoryData?.title || category.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
   return {
-    title: `${title} | Diary | Kris Yotam`,
+    title: `${title} | Diary`,
     description: categoryData?.preview || `Diary entries in ${title} category`,
   };
 }

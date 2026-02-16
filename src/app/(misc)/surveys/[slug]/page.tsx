@@ -98,7 +98,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${survey.meta.title} | Kris Yotam`,
+    title: `${survey.meta.title}`,
     description: survey.meta.description || `Complete the ${survey.meta.title} survey`,
     openGraph: {
       title: survey.meta.title,
