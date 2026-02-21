@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card"
 import { ChevronDown, ChevronUp, AlertCircle, Shield, XCircle } from 'lucide-react'
 
 interface Rule {
+  title: string
   rule: string
 }
 
@@ -69,7 +70,7 @@ export default function ContactInfo({ notice, rules, blacklistNotes }: ContactIn
                       key={index}
                       className={`!border-b !border-border dark:!border-zinc-800 ${index === rules.length - 1 ? "!border-b-0" : ""}`}
                     >
-                      <td className="!py-2 !px-3 !text-foreground dark:!text-zinc-300">{index + 1}.</td>
+                      <td className="!py-2 !px-3 !text-muted-foreground dark:!text-zinc-500 !whitespace-nowrap !align-top !text-xs !font-medium !uppercase !tracking-wide">{rule.title}</td>
                       <td className="!py-2 !pr-3 !text-foreground dark:!text-zinc-300">{rule.rule}</td>
                     </tr>
                   ))}
