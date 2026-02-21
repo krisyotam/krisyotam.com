@@ -26,7 +26,7 @@ export default function ContactInfo({ notice, rules, blacklistNotes }: ContactIn
   }
 
   return (
-    <div className="!flex !flex-col !gap-4 !mb-6 !w-full">
+    <div className="!flex !flex-col !gap-4 !mb-4 !w-full">
       {/* Notice Bento */}
       <Card className="!p-4 !bg-card dark:bg-[#1A1A1A] !text-card-foreground dark:!text-zinc-100 !border-border dark:!border-zinc-800">
         <div className="!flex !items-start !gap-3">
@@ -61,7 +61,7 @@ export default function ContactInfo({ notice, rules, blacklistNotes }: ContactIn
 
         {expandedRules && (
           <div className="!mt-3">
-            <div className="!border !border-border dark:!border-zinc-800 !rounded-md !overflow-hidden">
+            <div className="!border !border-border dark:!border-zinc-800 !rounded-none !overflow-hidden">
               <table className="!w-full !text-sm">
                 <tbody>
                   {rules.map((rule, index) => (

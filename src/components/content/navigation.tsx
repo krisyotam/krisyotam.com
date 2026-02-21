@@ -80,7 +80,7 @@ export function Navigation({
   className,
 }: NavigationProps) {
   return (
-    <div className={cn("mb-6 flex items-center gap-4 flex-wrap", className)} suppressHydrationWarning>
+    <div className={cn("mb-4 mt-1 flex items-center gap-4 flex-wrap", className)} suppressHydrationWarning>
       {/* Search bar - takes most of the horizontal space */}
       <div className="flex-1 min-w-[240px] relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />

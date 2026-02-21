@@ -33,7 +33,7 @@ function buildSexyUrls() {
     'me', 'logo', 'about', 'design', 'donate', 'faq', 'roti',
     'rss.xml', 'atom.xml', 'feed.json',
     '_next', 'doc', 'src', 'public', 'data', 'scripts',
-    'sitemap.xml', 'robots.txt', 'favicon.ico', 'clippings',
+    'sitemap.xml', 'robots.txt', 'favicon.ico', 'clippings', 'pgp',
   ])
 
   const rewrites = []
@@ -107,6 +107,7 @@ const baseConfig = {
 
       // --- short URLs ---
       { source: '/roti',   destination: '/rules-of-the-internet' },
+      { source: '/pgp',    destination: '/pgp.asc' },
 
       // --- feed URLs ---
       { source: '/rss.xml',  destination: '/feeds/rss.xml' },

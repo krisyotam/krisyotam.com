@@ -311,7 +311,11 @@ Do NOT use raw git commands for commits. If git.js is missing functionality, upd
 
 # Builds
 
-## CRITICAL: Build Commands
+## ABSOLUTE RULE: DO NOT BUILD UNLESS TOLD
+
+**NEVER** run `npm run build`, `npm run dev`, `make`, or ANY build/compile command unless Kris **explicitly** says "build" in his message. This has frozen the system multiple times. No exceptions. No "let me just test the build." No "rebuilding to apply changes." If the task requires a build step, tell Kris and let him decide.
+
+## Build Commands (when explicitly asked)
 - **ALWAYS** use `npm run build` for local and production builds
 - **NEVER** use `npm run build:lowmem` - this is deprecated and should not be used
 - Docker/Dokploy uses `npm run build` (see .config/docker/Dockerfile line 89)
