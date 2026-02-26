@@ -62,6 +62,7 @@
 const fs = require('fs');
 const path = require('path');
 const Database = require('better-sqlite3');
+const matter = require('gray-matter');
 
 // =============================================================================
 // Configuration
@@ -558,39 +559,70 @@ function insertSystemEntry(args) {
 // =============================================================================
 
 /**
- * Generate MDX frontmatter
+ * Build frontmatter object from args for writing to MDX files.
  */
-function generateFrontmatter(args) {
-  // Frontmatter no longer stored in MDX files — metadata lives in content.db.
-  // Use public/scripts/keep/export.sh to reconstruct full files from DB when needed.
-  return null;
+function buildFrontmatter(args) {
+  const fm = {
+    title: args.title,
+    slug: args.slug,
+    type: args.type,
+    category: args.category || '',
+    start_date: args.date,
+    end_date: args.date,
+    state: args.state || 'active',
+  };
+
+  if (args.preview) fm.preview = args.preview;
+
+  // Quality ratings (not for diary, til, now)
+  if (!NO_RATINGS_TYPES.includes(args.type)) {
+    fm.status = args.status || 'Draft';
+    fm.confidence = args.certainty || 'possible';
+    fm.importance = args.importance || 5;
+  }
+
+  // Tags
+  if (args.tags && args.tags.length > 0) fm.tags = args.tags;
+
+  // Review rating
+  if (args.type === 'reviews' && args.rating) fm.rating = args.rating;
+
+  return fm;
 }
 
 /**
- * Create MDX file
+ * Create MDX file with YAML frontmatter prepended.
  */
 function createMdxFile(args) {
   let filePath;
-  let content;
+  let body;
 
   if (args.type === 'til') {
     // TIL: date-based filename, no frontmatter (til lives in site repo, not content repos)
     filePath = path.join(PROJECT_ROOT, 'src/app/(content)/til/content', `${args.slug}.mdx`);
-    content = `# ${args.title}\n\n${args.content || 'Content goes here...'}`;
+    body = `# ${args.title}\n\n${args.content || 'Content goes here...'}`;
   } else if (args.type === 'now') {
     // Now: month-based filename, no frontmatter (now lives in site repo, not content repos)
     filePath = path.join(PROJECT_ROOT, 'src/app/(content)/now/content', `${args.slug}.mdx`);
-    content = args.content || 'Update content goes here...';
+    body = args.content || 'Update content goes here...';
   } else {
-    // Standard types: flat in src/content/{type}/
+    // Standard types: flat in src/content/{type}/ with frontmatter
     filePath = path.join(CONTENT_REPO_DIR, args.type, `${args.slug}.mdx`);
+    body = 'Content goes here...\n';
+  }
 
-    content = 'Content goes here...\n';
+  // Build file content: frontmatter + body for standard types, plain body for til/now
+  let content;
+  if (['til', 'now'].includes(args.type)) {
+    content = body;
+  } else {
+    const fm = buildFrontmatter(args);
+    content = matter.stringify(body, fm);
   }
 
   if (args.dryRun) {
     console.log('[DRY RUN] Would create file:', filePath);
-    console.log('[DRY RUN] Content preview:', content.slice(0, 200) + '...');
+    console.log('[DRY RUN] Content preview:', content.slice(0, 300) + '...');
     return true;
   }
 

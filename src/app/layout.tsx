@@ -4,7 +4,6 @@ import type { Metadata, Viewport } from "next"
 import { ThemeProvider } from "@/components/ui/theme-provider"
 import { ScrollbarController } from "@/components/ui/scrollbar-controller"
 import { DarkModeScript } from "@/components/ui/dark-mode-script"
-import { DarkModeClasses } from "@/components/ui/dark-mode-classes"
 import { HeaderUnderlineDetector } from "@/components/ui/header-underline-detector"
 import { Wrapper } from "../components/core/wrapper"
 import type React from "react"
@@ -154,7 +153,6 @@ export default function RootLayout({
               {/* Lazy-loaded interactive components */}
               <Wrapper showModal={SHOW_UNIVERSAL_LINK_MODAL} />
               <ScrollbarController />
-              <DarkModeClasses />
               <HeaderUnderlineDetector />
             </div>
           </MDXProviderWrapper>

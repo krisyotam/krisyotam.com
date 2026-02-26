@@ -7,7 +7,7 @@ import { Notice } from "@/components/typography/notice"
 export default function SupportMe() {
   return (
     <Collapse title="Support Me" className="w-full mb-4">
-      <div className="prose dark:prose-invert prose-sm max-w-none">
+      <div className="content max-w-none text-sm">
         <Notice type="info">
           These methods have not yet been fully set up yet. You will know they have been set up when this notice is removed. Until then, if you'd like to support me, please see the "Buy Me a Tea" option above!
         </Notice>

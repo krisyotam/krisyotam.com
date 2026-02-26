@@ -46,7 +46,6 @@ export { SnowEffect } from './ui/snow-effect';
 export { ScrollbarController } from './ui/scrollbar-controller';
 export { default as FixOutlineIssue } from './ui/fix-outline-issue';
 export { HeaderUnderlineDetector } from './ui/header-underline-detector';
-export { DarkModeClasses } from './ui/dark-mode-classes';
 export { DarkModeScript } from './ui/dark-mode-script';
 export { ThemeProvider } from './ui/theme-provider';
 export { LiveClock } from './ui/live-clock';

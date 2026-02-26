@@ -120,6 +120,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
     // Image component
     img: Img,
+    Img,
 
     // Custom components
     Tikz: TikZ,

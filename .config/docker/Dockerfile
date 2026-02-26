@@ -94,6 +94,9 @@ RUN if [ ! "$(ls src/content/blog/*.mdx 2>/dev/null)" ]; then \
       rm -rf src/content/.git; \
     fi
 
+# Sync frontmatter from MDX files into content.db before build
+RUN node public/scripts/keep/syncContent.js
+
 # Run the production build
 # --webpack flag required for MDX support (Turbopack doesn't support it)
 RUN npm run build

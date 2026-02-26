@@ -1,0 +1,142 @@
+/* ============================================================================
+ * FILE:  search.css
+ * ROLE:  STYLESHEET
+ *
+ * PURPOSE:
+ *   Gwern-inspired search overlay styles. Clean, minimal, no border-radius.
+ *   Uses hsl(var(--*)) theme tokens for light/dark compatibility.
+ *
+ * @type styles
+ * @path src/components/core/search.css
+ *
+ * @date 2026-02-26
+ * @updated 2026-02-26
+ * ========================================================================== */
+
+/* Overlay backdrop — positioning is inline, CSS adds aesthetics only */
+.search-overlay {
+  cursor: default;
+}
+
+/* Centered container — positioning is inline so HMR can't break layout */
+.search-container {
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+}
+
+/* Form row: input + button */
+.search-form {
+  display: flex;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.search-input {
+  flex: 1;
+  height: 40px;
+  padding: 0 12px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: hsl(var(--foreground));
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.search-input::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+.search-input:focus {
+  outline: 2px solid hsl(var(--muted-foreground));
+  outline-offset: -2px;
+}
+
+.search-btn {
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-left: 1px solid hsl(var(--border));
+  background: hsl(var(--muted));
+  color: hsl(var(--foreground));
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Results list */
+.search-results {
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.search-result-link {
+  display: block;
+  padding: 10px 12px;
+  border-bottom: 1px solid hsl(var(--border));
+  text-decoration: none;
+  color: hsl(var(--foreground));
+}
+
+.search-result-link:last-child {
+  border-bottom: none;
+}
+
+.search-result-link:hover {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.search-result-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.search-result-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-result-type {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: hsl(var(--muted-foreground));
+  flex-shrink: 0;
+}
+
+.search-result-preview {
+  font-size: 12px;
+  color: hsl(var(--muted-foreground));
+  margin: 4px 0 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.search-result-meta {
+  font-size: 11px;
+  color: hsl(var(--muted-foreground));
+  margin-top: 4px;
+}
+
+/* Empty / loading states */
+.search-empty,
+.search-loading {
+  padding: 24px 12px;
+  text-align: center;
+  font-size: 13px;
+  color: hsl(var(--muted-foreground));
+}

@@ -309,6 +309,48 @@ The script automatically updates the changelog database (public/data/system.db) 
 Do NOT use raw git commands for commits. If git.js is missing functionality, update it first then use it.
 
 
+# Scripts
+
+All scripts live in `public/scripts/keep/`. There is no root `scripts/` directory.
+
+## Naming Convention
+
+Scripts use **camelCase** filenames: `syncContent.js`, `generateMetadata.js`, `createPost.js`.
+Never use kebab-case (`sync-content.js`) or snake_case (`sync_content.js`) for script names.
+
+## syncContent.js (prebuild sync)
+
+Runs automatically before every `dev` and `build` (via package.json). Parses YAML frontmatter from
+all `src/content/{type}/*.mdx` files and upserts into `content.db`. The filesystem is the source of
+truth — the database is a derived cache.
+
+```bash
+# Manual run
+node public/scripts/keep/syncContent.js
+
+# Verbose (logs every update)
+node public/scripts/keep/syncContent.js --verbose
+```
+
+## Script Registry
+
+| Script | Purpose |
+|--------|---------|
+| `syncContent.js` | Prebuild: frontmatter → content.db sync |
+| `generateMetadata.js` | CLI for creating content entries with metadata |
+| `createPost.js` | Interactive post creation workflow |
+| `git.js` | Git commit + changelog integration |
+| `export.sh` | Export MDX files with comment headers for archival |
+| `blogActivity.js` | Check blogroll RSS feed activity |
+| `blogUpdate.js` | Import blogs from Are.na into blogroll |
+| `createSurvey.js` | Generate survey files |
+| `hashAndTimestamp.js` | SHA256 hash + Proof of Existence timestamping |
+| `content.go` | TUI for browsing content.db |
+| `sitemap.go` | Generate XML sitemap from content |
+| `doc.py` | List Hetzner S3 bucket contents |
+| `sync.sh` | Sync local mirrors to Hetzner Object Storage |
+
+
 # Builds
 
 ## ABSOLUTE RULE: DO NOT BUILD UNLESS TOLD
@@ -389,12 +431,12 @@ Canonical routes (`/{type}/{category}/{slug}`) still work. The `[slug]/page.tsx`
 provides fallback redirect for any slug not in the generated JSON.
 
 ## MDX Files
-MDX files are content-only — no frontmatter. All metadata lives in `content.db`.
-To reconstruct full MDX files with frontmatter (for archival or migration), run:
+MDX files contain YAML frontmatter as the source of truth for all metadata (title, category, tags, status, dates, etc.).
+The database (`content.db`) is a derived cache rebuilt from frontmatter at build time via `syncContent.js`.
+To export full MDX files with comment headers (for archival), run:
 ```bash
 bash public/scripts/keep/export.sh
 ```
-This exports to `~/export/` with the original comment header + YAML frontmatter prepended.
 
 
 # Post Images (In-Content)
@@ -677,8 +719,9 @@ The Navigation component's category dropdown filters WITHIN the current route (`
 
 ## MDX Content Files
 
-MDX files are content-only (no frontmatter). All metadata lives in `content.db`.
-To reconstruct full files with frontmatter for archival, run `bash public/scripts/keep/export.sh`.
+MDX files contain YAML frontmatter as the source of truth for all metadata.
+The database (`content.db`) is rebuilt from frontmatter via `syncContent.js` at every dev/build.
+To export full files with comment headers for archival, run `bash public/scripts/keep/export.sh`.
 
 ## URL Patterns
 

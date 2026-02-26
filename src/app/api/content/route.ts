@@ -27,6 +27,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import matter from "gray-matter";
 import {
   getContentByType,
   getActiveContentByType,
@@ -45,7 +46,7 @@ type PostType = "essay" | "note" | "paper" | "review" | "fiction" | "verse";
 // ============================================================================
 
 function stripFrontmatter(raw: string): string {
-  return raw.trim();
+  return matter(raw).content.trim();
 }
 
 interface ContentDataItem {

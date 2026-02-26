@@ -11,8 +11,8 @@
  * ║  A unified settings menu providing site-wide search and user preferences. ║
  * ║                                                                           ║
  * ║  Features:                                                                ║
- * ║  • Global search across all content types (posts, essays, papers, etc.)   ║
- * ║  • Draggable, resizable search window                                     ║
+ * ║  • Global search across all content types via /api/search                 ║
+ * ║  • Gwern-inspired clean search overlay                                    ║
  * ║  • User preferences (link previews, color themes, sidenotes)              ║
  * ║  • Quick access to RSS, FAQ, Changelog, and GitHub                        ║
  * ║  • Keyboard shortcuts (Escape to close)                                   ║
@@ -23,42 +23,28 @@
 import type React from "react"
 import { useState, useRef, useEffect, useCallback } from "react"
 import {
-  Search, Settings, Rss, X, Maximize, Move,
+  Search, Settings, Rss, X,
   CircleHelp, GitCompare, Github, ExternalLink,
   Palette, PanelRightOpen
 } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
-import { motion, useMotionValue } from "framer-motion"
-import { Post } from "@/lib/posts"
+import "./search.css"
 
 /* ═══════════════════════════════════════════════════════════════════════════
    TYPES
    ═══════════════════════════════════════════════════════════════════════════ */
 
-interface Page {
+interface SearchItem {
   title: string
-  subtitle: string
   preview: string
-  date: string
-  "show-status": string
-  status: string
-  confidence: string
-  importance: number
-  path: string
+  slug: string
   type: string
-}
-
-interface SearchResult {
-  title: string
-  subtitle?: string
-  preview?: string
-  date: string
-  status: string
-  category?: string
-  path: string
-  resultType: "post" | "page" | "essay" | "paper" | "fiction" | "news" | "note" | "progymnasmata" | "lab" | "lecture" | "link"
+  category: string
+  tags: string[]
+  start_date: string
+  url: string
 }
 
 type LinkModalMode = "all" | "external" | "off"
@@ -84,27 +70,14 @@ export function SettingsMenu() {
   const [spinDirection, setSpinDirection] = useState<"left" | "right" | null>(null)
   const [isOpen, setIsOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [isMaximized, setIsMaximized] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [isLinkHoverMenuVisible, setIsLinkHoverMenuVisible] = useState(false)
 
   /* ─── Search State ───────────────────────────────────────────────────────── */
   const [searchQuery, setSearchQuery] = useState("")
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
+  const [searchResults, setSearchResults] = useState<SearchItem[]>([])
+  const [content, setContent] = useState<SearchItem[]>([])
   const [isLoading, setIsLoading] = useState(false)
-
-  /* ─── Data State ─────────────────────────────────────────────────────────── */
-  const [posts, setPosts] = useState<Post[]>([])
-  const [pages, setPages] = useState<Page[]>([])
-  const [essays, setEssays] = useState<any[]>([])
-  const [papers, setPapers] = useState<any[]>([])
-  const [fiction, setFiction] = useState<any[]>([])
-  const [news, setNews] = useState<any[]>([])
-  const [quickNotes, setQuickNotes] = useState<any[]>([])
-  const [progymnasmata, setProgymnasmata] = useState<any[]>([])
-  const [lab, setLab] = useState<any[]>([])
-  const [lectures, setLectures] = useState<any[]>([])
-  const [links, setLinks] = useState<any[]>([])
 
   /* ─── User Settings State ────────────────────────────────────────────────── */
   const [universalLinkModalEnabled, setUniversalLinkModalEnabled] = useState(true)
@@ -115,7 +88,6 @@ export function SettingsMenu() {
   /* ─── Refs ───────────────────────────────────────────────────────────────── */
   const dropdownRef = useRef<HTMLDivElement>(null)
   const searchInputRef = useRef<HTMLInputElement>(null)
-  const searchWindowRef = useRef<HTMLDivElement>(null)
   const linkOptionRef = useRef<HTMLButtonElement>(null)
   const linkSubmenuRef = useRef<HTMLDivElement>(null)
   const hideSubmenuTimerRef = useRef<NodeJS.Timeout | null>(null)
@@ -123,8 +95,6 @@ export function SettingsMenu() {
   /* ─── Hooks ──────────────────────────────────────────────────────────────── */
   const router = useRouter()
   const { theme } = useTheme()
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
 
   /* ═════════════════════════════════════════════════════════════════════════
      SUBMENU HANDLERS
@@ -220,82 +190,22 @@ export function SettingsMenu() {
   }
 
   /* ═════════════════════════════════════════════════════════════════════════
-     SEARCH WINDOW POSITIONING
-     ═════════════════════════════════════════════════════════════════════════ */
-
-  useEffect(() => {
-    if (isSearchOpen && !isMaximized && searchWindowRef.current) {
-      const windowWidth = window.innerWidth
-      const windowHeight = window.innerHeight
-      const modalWidth = 600
-      const modalHeight = 400
-
-      x.set((windowWidth - modalWidth) / 2)
-      y.set((windowHeight - modalHeight) / 3)
-    }
-  }, [isSearchOpen, isMaximized, x, y])
-
-  const getConstraints = () => {
-    if (!searchWindowRef.current) return {}
-    const width = isMaximized ? window.innerWidth * 0.9 : 600
-    const height = isMaximized ? window.innerHeight * 0.9 : 400
-
-    return {
-      top: 0,
-      left: 0,
-      right: window.innerWidth - width,
-      bottom: window.innerHeight - height,
-    }
-  }
-
-  /* ═════════════════════════════════════════════════════════════════════════
      DATA FETCHING
      ═════════════════════════════════════════════════════════════════════════ */
-
-  const safelyFetchData = async (url: string) => {
-    try {
-      const response = await fetch(url)
-      if (!response.ok) {
-        console.warn(`Failed to fetch from ${url}: ${response.status}`)
-        return []
-      }
-      return await response.json()
-    } catch (error) {
-      console.warn(`Error fetching data from ${url}:`, error)
-      return []
-    }
-  }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true)
-
-        const [
-          postsData, essaysData, papersData, fictionData,
-          notesData, progymnasmataData,
-        ] = await Promise.all([
-          safelyFetchData("/api/content?type=blog"),
-          safelyFetchData("/api/content?type=essays"),
-          safelyFetchData("/api/content?type=papers"),
-          safelyFetchData("/api/content?type=fiction"),
-          safelyFetchData("/api/content?type=notes"),
-          safelyFetchData("/api/content?type=progymnasmata"),
-        ])
-
-        setPosts(postsData || [])
-        setPages([])
-        setEssays(essaysData || [])
-        setPapers(papersData || [])
-        setFiction(fictionData || [])
-        setNews([])
-        setQuickNotes(notesData || [])
-        setProgymnasmata(progymnasmataData || [])
-        setLab([])
-        setLectures([])
-        setLinks([])
+        const res = await fetch("/api/search")
+        if (!res.ok) {
+          console.warn(`Search API returned ${res.status}`)
+          return
+        }
+        const data: SearchItem[] = await res.json()
+        setContent(data)
       } catch (error) {
-        console.error("Error fetching data:", error)
+        console.error("Error fetching search data:", error)
       } finally {
         setIsLoading(false)
       }
@@ -315,176 +225,23 @@ export function SettingsMenu() {
     }
 
     const query = searchQuery.toLowerCase()
-    let results: SearchResult[] = []
 
-    // Helper to check if item matches query
-    const matchesQuery = (item: any, fields: string[]) => {
-      return fields.some(field => {
-        const value = item[field]
-        if (Array.isArray(value)) {
-          return value.some((v: string) => v?.toLowerCase().includes(query))
-        }
-        return value?.toLowerCase?.().includes(query)
-      })
+    const matchesQuery = (item: SearchItem) => {
+      if (item.title?.toLowerCase().includes(query)) return true
+      if (item.preview?.toLowerCase().includes(query)) return true
+      if (item.category?.toLowerCase().includes(query)) return true
+      if (item.type?.toLowerCase().includes(query)) return true
+      if (item.tags?.some(t => t.toLowerCase().includes(query))) return true
+      return false
     }
 
-    // Search posts
-    results.push(...posts
-      .filter(post => matchesQuery(post, ["title", "subtitle", "preview", "category", "tags"]) && post.state !== "hidden")
-      .map(post => {
-        const displayDate = (post.end_date && post.end_date.trim()) ? post.end_date : post.start_date
-        return {
-          title: post.title,
-          subtitle: post.subtitle,
-          preview: post.preview,
-          date: displayDate,
-          status: post.status || "Draft",
-          category: post.category,
-          path: `/${post.slug}`,
-          resultType: "post" as const,
-        }
-      }))
+    const results = content
+      .filter(matchesQuery)
+      .sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime())
+      .slice(0, 15)
 
-    // Search pages
-    results.push(...pages
-      .filter(page => matchesQuery(page, ["title", "subtitle", "preview"]))
-      .map(page => ({
-        title: page.title,
-        subtitle: page.subtitle,
-        preview: page.preview,
-        date: page.date,
-        status: page.status,
-        path: page.path,
-        resultType: "page" as const,
-      })))
-
-    // Search essays
-    results.push(...essays
-      .filter(essay => matchesQuery(essay, ["title", "subtitle", "preview", "tags", "category"]))
-      .map(essay => ({
-        title: essay.title,
-        subtitle: essay.subtitle,
-        preview: essay.preview,
-        date: essay.date,
-        status: essay.status || "Published",
-        category: essay.category,
-        path: `/${essay.slug}`,
-        resultType: "essay" as const,
-      })))
-
-    // Search papers
-    results.push(...papers
-      .filter(paper => paper.state !== "hidden" && matchesQuery(paper, ["title", "subtitle", "preview", "tags"]))
-      .map(paper => ({
-        title: paper.title,
-        subtitle: paper.subtitle,
-        preview: paper.preview,
-        date: paper.date,
-        status: paper.status || "Published",
-        category: "Academic",
-        path: `/${paper.slug}`,
-        resultType: "paper" as const,
-      })))
-
-    // Search fiction
-    results.push(...fiction
-      .filter(item => matchesQuery(item, ["title", "subtitle", "preview"]))
-      .map(item => ({
-        title: item.title,
-        subtitle: item.subtitle,
-        preview: item.preview,
-        date: item.date,
-        status: item.status || "Published",
-        category: "Fiction",
-        path: `/${item.slug}`,
-        resultType: "fiction" as const,
-      })))
-
-    // Search news
-    results.push(...news
-      .filter(item => matchesQuery(item, ["title", "subtitle", "preview"]))
-      .map(item => ({
-        title: item.title,
-        subtitle: item.subtitle,
-        preview: item.preview,
-        date: item.date,
-        status: item.status || "Published",
-        category: "News",
-        path: `/${item.slug}`,
-        resultType: "news" as const,
-      })))
-
-    // Search notes
-    results.push(...quickNotes
-      .filter(item => matchesQuery(item, ["title", "subtitle", "preview", "content"]))
-      .map(item => ({
-        title: item.title,
-        subtitle: item.subtitle,
-        preview: item.preview || item.content?.substring(0, 100),
-        date: item.date,
-        status: item.status || "Published",
-        category: "Note",
-        path: `/${item.slug}`,
-        resultType: "note" as const,
-      })))
-
-    // Search progymnasmata
-    results.push(...progymnasmata
-      .filter(item => matchesQuery(item, ["title", "preview"]))
-      .map(item => ({
-        title: item.title,
-        subtitle: item.subtitle,
-        preview: item.preview,
-        date: item.date,
-        status: item.status || "Published",
-        category: "Progymnasmata",
-        path: `/${item.slug}`,
-        resultType: "progymnasmata" as const,
-      })))
-
-    // Search lab
-    results.push(...lab
-      .filter(item => matchesQuery(item, ["title", "description", "tags"]))
-      .map(item => ({
-        title: item.title,
-        preview: item.description,
-        date: item.date,
-        status: item.status || "Published",
-        category: "Lab",
-        path: `/lab/${item.slug}`,
-        resultType: "lab" as const,
-      })))
-
-    // Search lectures
-    results.push(...lectures
-      .filter(item => matchesQuery(item, ["title", "description", "tags"]))
-      .map(item => ({
-        title: item.title,
-        preview: item.description,
-        date: item.date,
-        status: item.status || "Published",
-        category: "Lecture",
-        path: `/lectures/${item.slug}`,
-        resultType: "lecture" as const,
-      })))
-
-    // Search links
-    results.push(...links
-      .filter(item => matchesQuery(item, ["title", "description", "url", "tags"]))
-      .map(item => ({
-        title: item.title,
-        preview: item.description,
-        date: item.date || new Date().toISOString(),
-        status: "Link",
-        category: item.category || "External Link",
-        path: item.url,
-        resultType: "link" as const,
-      })))
-
-    // Sort by date and limit
-    results.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    setSearchResults(results.slice(0, 10))
-  }, [searchQuery, posts, pages, essays, papers, fiction, news, quickNotes, progymnasmata, lab, lectures, links])
+    setSearchResults(results)
+  }, [searchQuery, content])
 
   /* ═════════════════════════════════════════════════════════════════════════
      EVENT HANDLERS
@@ -548,36 +305,16 @@ export function SettingsMenu() {
     setIsOpen(false)
   }
 
-  const toggleMaximize = () => {
-    const newMaximizedState = !isMaximized
-    setIsMaximized(newMaximizedState)
-
-    if (newMaximizedState && searchWindowRef.current) {
-      const windowWidth = window.innerWidth
-      const windowHeight = window.innerHeight
-      const modalWidth = windowWidth * 0.9
-      const modalHeight = windowHeight * 0.9
-
-      x.set((windowWidth - modalWidth) / 2)
-      y.set((windowHeight - modalHeight) / 2)
-    }
-  }
-
   const closeSearch = () => {
     setIsSearchOpen(false)
-    setIsMaximized(false)
     setSearchQuery("")
   }
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (searchResults.length > 0) {
-      const firstResult = searchResults[0]
-      if (firstResult.resultType === "link" && firstResult.path?.startsWith("http")) {
-        createModal(firstResult.path, firstResult.title, window.innerWidth / 2, window.innerHeight / 2)
-      } else {
-        router.push(firstResult.path)
-      }
+      const first = searchResults[0]
+      router.push(first.url)
       setIsSearchOpen(false)
       setIsOpen(false)
       setSearchQuery("")
@@ -764,112 +501,6 @@ export function SettingsMenu() {
   )
 
   /* ═════════════════════════════════════════════════════════════════════════
-     RENDER: SEARCH WINDOW
-     ═════════════════════════════════════════════════════════════════════════ */
-
-  const SearchWindow = () => (
-    <>
-      {isMaximized && (
-        <div className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm" onClick={closeSearch} />
-      )}
-      <div className="fixed inset-0 z-50 pointer-events-none">
-        <motion.div
-          ref={searchWindowRef}
-          drag={!isMaximized}
-          dragMomentum={false}
-          dragConstraints={getConstraints()}
-          style={{ x, y }}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className={`absolute bg-background border border-border shadow-md overflow-hidden pointer-events-auto ${
-            isMaximized ? "w-[90vw] h-[90vh]" : "w-[600px]"
-          }`}
-        >
-          {/* Title Bar */}
-          <div className="search-handle flex h-10 items-center justify-between border-b border-border bg-muted/50 px-3 cursor-move">
-            <div className="flex items-center space-x-2">
-              <button onClick={closeSearch} className="p-1 hover:bg-accent hover:text-accent-foreground" aria-label="Close">
-                <X className="h-3 w-3" />
-              </button>
-              <button onClick={toggleMaximize} className="p-1 hover:bg-accent hover:text-accent-foreground" aria-label="Maximize">
-                <Maximize className="h-3 w-3" />
-              </button>
-            </div>
-            <div className="flex-1 text-center text-sm font-medium">krisyotam.com search</div>
-            <div className="flex items-center">
-              <Move className="h-4 w-4 text-muted-foreground" />
-            </div>
-          </div>
-
-          {/* Search Input */}
-          <div className="flex border-b border-border">
-            <div className="flex-1 p-2">
-              <form onSubmit={handleSearchSubmit} className="flex">
-                <input
-                  ref={searchInputRef}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="search..."
-                  className="flex h-9 w-full border-l border-y border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                />
-                <button
-                  type="submit"
-                  className="inline-flex h-9 items-center justify-center border-r border-y border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground"
-                >
-                  Search
-                </button>
-              </form>
-            </div>
-          </div>
-
-          {/* Results */}
-          <div className={`${isMaximized ? "max-h-[calc(90vh-120px)]" : "max-h-[300px]"} overflow-y-auto`}>
-            {isLoading ? (
-              <div className="flex items-center justify-center p-8">
-                <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-                <span className="ml-2 text-sm text-muted-foreground">Searching...</span>
-              </div>
-            ) : searchResults.length > 0 ? (
-              <div className="p-2">
-                {searchResults.map((result, index) => (
-                  <Link
-                    key={index}
-                    href={result.path}
-                    onClick={() => {
-                      setIsSearchOpen(false)
-                      setIsOpen(false)
-                    }}
-                    className="block px-3 py-2 hover:bg-accent hover:text-accent-foreground"
-                  >
-                    <div className="flex items-center justify-between">
-                      <h4 className="text-sm font-medium">{result.title}</h4>
-                      <span className="ml-2 bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
-                        {result.resultType === "post" ? result.category : result.resultType}
-                      </span>
-                    </div>
-                    <p className="mt-1 text-xs text-muted-foreground line-clamp-1">{result.preview}</p>
-                    <div className="mt-1 flex items-center text-xs text-muted-foreground">
-                      <span>{new Date(result.date).toLocaleDateString()}</span>
-                      <span className="mx-1">•</span>
-                      <span>{result.status}</span>
-                      <span className="mx-1">•</span>
-                      <span className="text-xs text-muted-foreground truncate">{result.path}</span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            ) : searchQuery.trim() !== "" ? (
-              <div className="p-4 text-center text-sm text-muted-foreground">No results found</div>
-            ) : null}
-          </div>
-        </motion.div>
-      </div>
-    </>
-  )
-
-  /* ═════════════════════════════════════════════════════════════════════════
      RENDER: MAIN COMPONENT
      ═════════════════════════════════════════════════════════════════════════ */
 
@@ -955,7 +586,85 @@ export function SettingsMenu() {
 
       {/* Modals */}
       {isSettingsOpen && <SettingsModal />}
-      {isSearchOpen && <SearchWindow />}
+
+      {/* Search overlay — inlined to avoid remount on state change */}
+      {/* Critical positioning via inline styles so HMR can't break layout */}
+      {isSearchOpen && (
+        <>
+          <div
+            className="search-overlay"
+            style={{ position: "fixed", inset: 0, zIndex: 50, background: "rgba(0,0,0,0.2)" }}
+            onClick={closeSearch}
+          />
+          <div
+            className="search-container"
+            style={{
+              position: "fixed",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 51,
+              width: 560,
+              maxWidth: "calc(100vw - 2rem)",
+              maxHeight: "calc(100vh - 4rem)",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <form onSubmit={handleSearchSubmit} className="search-form">
+              <input
+                ref={searchInputRef}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape") {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    closeSearch()
+                  }
+                }}
+                placeholder="search..."
+                className="search-input"
+              />
+              <button type="submit" className="search-btn">
+                Search
+              </button>
+            </form>
+            <div className="search-results">
+              {isLoading ? (
+                <div className="search-loading">Loading...</div>
+              ) : searchResults.length > 0 ? (
+                searchResults.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.url}
+                    onClick={() => {
+                      setIsSearchOpen(false)
+                      setIsOpen(false)
+                      setSearchQuery("")
+                    }}
+                    className="search-result-link"
+                  >
+                    <div className="search-result-header">
+                      <h4 className="search-result-title">{item.title}</h4>
+                      <span className="search-result-type">{item.type}</span>
+                    </div>
+                    {item.preview && (
+                      <p className="search-result-preview">{item.preview}</p>
+                    )}
+                    <div className="search-result-meta">
+                      {item.start_date && new Date(item.start_date).toLocaleDateString()}
+                      {item.category && <> &middot; {item.category}</>}
+                    </div>
+                  </Link>
+                ))
+              ) : searchQuery.trim() !== "" ? (
+                <div className="search-empty">No results found</div>
+              ) : null}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }

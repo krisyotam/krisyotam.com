@@ -7,7 +7,7 @@ import Dropcap from "@/components/core/dropcap"
 export default function AboutThisSite() {
   return (
     <Collapse title="About This Site" className="w-full mt-6 mb-4">
-      <div className="prose dark:prose-invert prose-sm max-w-none">
+      <div className="content max-w-none text-sm">
         <p>
           <Dropcap type="william-morris-gothic">T</Dropcap>his site belongs to <strong>Kris Yotam</strong>. I write about AI, mathematics, art, philosophy, psychology, literature, history, and much more. I am an undergraduate student in Mathematics with a specialization in Pure Mathematics.
         </p>

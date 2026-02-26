@@ -225,16 +225,22 @@ export function readMdxFile(
   const filePath = resolveMdxPath(contentType, slug, category)
   if (!filePath) return null
 
-  if (!fs.existsSync(filePath)) {
+  let raw: string | null = null
+
+  if (fs.existsSync(filePath)) {
+    raw = fs.readFileSync(filePath, "utf8")
+  } else {
     const mdPath = filePath.replace(/\.mdx$/, ".md")
     if (fs.existsSync(mdPath)) {
-      return fs.readFileSync(mdPath, "utf8")
+      raw = fs.readFileSync(mdPath, "utf8")
+    } else {
+      console.log(`MDX file not found: ${filePath}`)
+      return null
     }
-    console.log(`MDX file not found: ${filePath}`)
-    return null
   }
 
-  return fs.readFileSync(filePath, "utf8")
+  // Strip YAML frontmatter so heading extraction and rendering see only body
+  return matter(raw).content
 }
 
 /**

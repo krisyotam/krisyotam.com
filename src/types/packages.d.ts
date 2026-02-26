@@ -29,10 +29,3 @@ declare module 'react-syntax-highlighter/dist/cjs/styles/hljs' {
   export const github: any
   export const a11yDark: any
 }
-
-
-/* -----------------------------------------------------------------------------
- * mapbox-gl-globe-minimap
- * ----------------------------------------------------------------------------- */
-
-declare module 'mapbox-gl-globe-minimap'

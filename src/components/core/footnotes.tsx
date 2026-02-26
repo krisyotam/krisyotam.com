@@ -210,7 +210,7 @@ export function Footnotes({ containerSelector = "#content, article, main", class
 
               {/* ─── Content ───────────────────────────────────────────────── */}
               <div
-                className="footnote-content prose prose-sm dark:prose-invert max-w-none inline"
+                className="footnote-content content max-w-none inline text-sm"
                 dangerouslySetInnerHTML={{ __html: footnote.content }}
               />
 

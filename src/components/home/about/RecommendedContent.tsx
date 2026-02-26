@@ -7,7 +7,7 @@ import Link from 'next/link'
 export default function RecommendedContent() {
   return (
     <Collapse title="Recommended" className="w-full mb-4">
-      <div className="prose dark:prose-invert prose-sm max-w-none">
+      <div className="content max-w-none text-sm">
         <p>
           New to this site? There's a ton here so take your time. Here are some recommendations 
           for thing's you should check out as a new reader.
