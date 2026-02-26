@@ -11,7 +11,7 @@
  * =============================================================================
  */
 
-import { getEssaysData, getBlogData, getCategoriesData } from "@/lib/data"
+import { getContentByType, getCategoriesData } from "@/lib/data"
 
 // Re-export types for backward compatibility
 export type { Post, PostsData, CategoryData, CategoriesData } from "@/lib/types/content"
@@ -70,13 +70,8 @@ export async function getAllPosts(): Promise<Post[]> {
     return cachedPosts
   }
 
-  // Use the lib functions that ensure files are included in Vercel build
-  const essaysData = await getEssaysData()
-  const blogData = await getBlogData()
-
-  const essays = (essaysData?.posts || []).map(post => ({ ...post, path: 'essays' }))
-  // blogData is already an array, not an object with posts property
-  const blogPosts = (blogData || []).map(post => ({ ...post, path: 'blog' }))
+  const essays = getContentByType('essays').map(post => ({ ...post, path: 'essays' }))
+  const blogPosts = getContentByType('blog').map(post => ({ ...post, path: 'blog' }))
 
   const sortedPosts = [...essays, ...blogPosts].sort(
     (a, b) => {

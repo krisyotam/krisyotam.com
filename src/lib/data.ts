@@ -197,54 +197,6 @@ export function getActiveContentByType(type: string): Post[] {
   }
 }
 
-/**
- * Get essays data
- */
-export async function getEssaysData(): Promise<PostsData> {
-  return { posts: getContentByType('essays') }
-}
-
-/**
- * Get blog data
- */
-export async function getBlogData(): Promise<Post[]> {
-  return getContentByType('blog')
-}
-
-/**
- * Get notes data
- */
-export async function getNotesData(): Promise<Post[]> {
-  return getContentByType('notes')
-}
-
-/**
- * Get papers data
- */
-export async function getPapersData(): Promise<Post[]> {
-  return getContentByType('papers')
-}
-
-/**
- * Get reviews data
- */
-export async function getReviewsData(): Promise<Post[]> {
-  return getContentByType('reviews')
-}
-
-/**
- * Get fiction data
- */
-export async function getFictionData(): Promise<Post[]> {
-  return getContentByType('fiction')
-}
-
-/**
- * Get verse data
- */
-export async function getVerseData(): Promise<Post[]> {
-  return getContentByType('verse')
-}
 
 // =============================================================================
 // Verse Type Functions
@@ -388,26 +340,6 @@ export function getAllVerseContent(): VersePost[] {
   }
 }
 
-/**
- * Get news data
- */
-export async function getNewsData(): Promise<Post[]> {
-  return getContentByType('news')
-}
-
-/**
- * Get progymnasmata data
- */
-export async function getProgymnasmataData(): Promise<Post[]> {
-  return getContentByType('progymnasmata')
-}
-
-/**
- * Get OCs data
- */
-export async function getOcsData(): Promise<Post[]> {
-  return getContentByType('ocs')
-}
 
 // =============================================================================
 // Category Functions
