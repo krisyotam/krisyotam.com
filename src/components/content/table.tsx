@@ -28,6 +28,7 @@ export interface ContentItem {
   state?: string;
   type?: string; // Content type (essays, notes, papers, etc.)
   route?: string; // URL route override
+  url?: string; // Direct URL override (used for documents served outside Next.js)
   views?: number; // View count
 }
 
@@ -105,9 +106,9 @@ export function ContentTable({
       .join(" ");
   }
 
-  // Helper to build the correct route for an item (sexy URL)
+  // Helper to build the correct route for an item (sexy URL, or direct URL for documents)
   function getItemUrl(item: ContentItem) {
-    return `/${item.slug}`;
+    return item.url || `/${item.slug}`;
   }
 
   // Helper to format content type display name

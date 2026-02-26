@@ -1600,6 +1600,30 @@ export const staticMetadata: Record<string, Metadata> = {
       creator: '@krisyotam'
     }
   },
+  documents: {
+    title: 'Documents',
+    description: 'Primary-source documents, datasets, and reference materials.',
+    openGraph: {
+      title: 'Documents',
+      description: 'Primary-source documents, datasets, and reference materials.',
+      images: [
+        {
+          url: 'https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png',
+          width: 1200,
+          height: 630,
+          alt: 'Documents'
+        }
+      ],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Documents',
+      description: 'Primary-source documents, datasets, and reference materials.',
+      images: ['https://i.postimg.cc/ryWkqZxQ/krisyotam-personal-crest.png'],
+      creator: '@krisyotam'
+    }
+  },
   blog: {
     title: 'Blog',
     description: 'informal ramblings, thought experiments, and idea play across topics and characters',

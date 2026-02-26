@@ -16,6 +16,7 @@ import {
   getCategoriesByContentType,
   getCategoriesData,
   getTagsData,
+  getDocumentUrlMap,
   type Post,
   type TagData,
   type CategoryData
@@ -42,6 +43,7 @@ export interface UniversalPost {
   cover_image?: string
   type: string
   route: string
+  url?: string
 }
 
 export interface TagMeta {
@@ -84,6 +86,7 @@ const DB_CONTENT_TYPES = [
   { type: 'reviews', route: 'reviews' },
   { type: 'sequences', route: 'sequences' },
   { type: 'verse', route: 'verse' },
+  { type: 'documents', route: 'documents' },
 ] as const
 
 type ContentType = typeof DB_CONTENT_TYPES[number]['type']
@@ -105,6 +108,7 @@ function slugify(str: string): string {
  */
 export async function getAllUniversalPosts(): Promise<UniversalPost[]> {
   const allPosts: UniversalPost[] = []
+  const docUrls = getDocumentUrlMap()
 
   for (const contentType of DB_CONTENT_TYPES) {
     try {
@@ -126,6 +130,7 @@ export async function getAllUniversalPosts(): Promise<UniversalPost[]> {
         cover_image: post.cover_image,
         type: contentType.type,
         route: `/${contentType.route}`,
+        ...(contentType.type === 'documents' && docUrls[post.slug] ? { url: docUrls[post.slug] } : {}),
       }))
 
       allPosts.push(...transformedPosts)

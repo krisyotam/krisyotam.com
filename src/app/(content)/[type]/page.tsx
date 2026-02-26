@@ -4,7 +4,7 @@ export const revalidate = false
 
 import { notFound } from "next/navigation"
 import ContentClientPage from "./ContentClientPage"
-import { getActiveContentByType, getCategoriesByContentType } from "@/lib/data"
+import { getActiveContentByType, getCategoriesByContentType, getDocumentUrlMap } from "@/lib/data"
 import { getViewCounts } from "@/lib/analytics-db"
 import { CONTENT_TYPES, VALID_TYPES } from "./config"
 import { staticMetadata } from "@/lib/staticMetadata"
@@ -34,6 +34,9 @@ export default async function ContentIndexPage({ params }: PageProps) {
   })
   const viewCounts = await getViewCounts(slugs)
 
+  // For documents, get direct URLs to the files (served by nginx, not Next.js)
+  const docUrls = type === 'documents' ? getDocumentUrlMap() : {}
+
   const posts = rawPosts
     .map(post => {
       const categorySlug = post.category.toLowerCase().replace(/\s+/g, "-")
@@ -41,7 +44,8 @@ export default async function ContentIndexPage({ params }: PageProps) {
       return {
         ...post,
         importance: typeof post.importance === 'string' ? parseInt(post.importance as string, 10) : post.importance,
-        views: viewCounts[viewSlug] ?? 0
+        views: viewCounts[viewSlug] ?? 0,
+        ...(docUrls[post.slug] ? { url: docUrls[post.slug] } : {}),
       }
     })
     .sort((a, b) => {

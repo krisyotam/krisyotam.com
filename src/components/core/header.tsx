@@ -248,7 +248,7 @@ function getBackLinkText(variant: HeaderVariant, backText: string): string {
   if (variant === "category") {
     return backText
   }
-  return `Return to ${backText}`
+  return `Back to ${backText}`
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

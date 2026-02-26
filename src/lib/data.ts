@@ -660,3 +660,53 @@ export async function getNowData(): Promise<NowData> {
     return { now: [] }
   }
 }
+
+// =============================================================================
+// Document Functions
+// =============================================================================
+
+export interface DocumentMeta {
+  file_path: string
+  file_type: string
+  file_size: number | null
+  source_url: string | null
+  author: string | null
+}
+
+/**
+ * Get a map of document slug → /doc/ URL for all active documents
+ */
+export function getDocumentUrlMap(): Record<string, string> {
+  const db = getDb()
+  try {
+    const rows = db.prepare(`
+      SELECT slug, file_path FROM documents WHERE state = 'active'
+    `).all() as { slug: string; file_path: string }[]
+
+    const map: Record<string, string> = {}
+    for (const row of rows) {
+      map[row.slug] = `https://krisyotam.com/doc/${row.file_path}`
+    }
+    return map
+  } finally {
+    db.close()
+  }
+}
+
+/**
+ * Get document metadata (file_path, file_type, etc.) by slug
+ */
+export function getDocumentFilePath(slug: string): DocumentMeta | null {
+  const db = getDb()
+  try {
+    const row = db.prepare(`
+      SELECT file_path, file_type, file_size, source_url, author
+      FROM documents
+      WHERE slug = ?
+    `).get(slug) as DocumentMeta | undefined
+
+    return row || null
+  } finally {
+    db.close()
+  }
+}

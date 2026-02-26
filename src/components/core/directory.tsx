@@ -48,6 +48,7 @@ export interface DirectoryItem {
   cover_image?: string
   state?: string
   views?: number
+  url?: string
 }
 
 export interface DirectoryProps {
@@ -147,7 +148,7 @@ function DirectoryEntry({
   const isOpen = accordion ? (isOpenAccordion ?? false) : localOpen
   const toggle = accordion ? (onToggleAccordion ?? (() => {})) : () => setLocalOpen(!localOpen)
 
-  const itemUrl = `/${item.slug}`
+  const itemUrl = item.url || `/${item.slug}`
   const dateDisplay = formatItemDate(item.start_date, item.end_date)
 
   // ── Collapsed: thick card with side bar, full metadata ──────────────

@@ -21,6 +21,7 @@ export const CONTENT_TYPES: Record<string, ContentTypeConfig> = {
   progymnasmata: { label: "Progymnasmata", singular: "Progymnasmata", gridAspect: "16/9", gridCols: 2, defaultView: "list", showViewToggle: true, formatCategoryNames: false, description: "Classical rhetorical exercises in the ancient tradition.", contentDir: "progymnasmata" },
   news: { label: "News", singular: "News Article", gridAspect: "16/9", gridCols: 2, defaultView: "list", showViewToggle: false, formatCategoryNames: false, description: "News articles and current commentary.", contentDir: "news" },
   ocs: { label: "Original Characters", singular: "Character", gridAspect: "3/4", gridCols: 3, defaultView: "list", showViewToggle: true, formatCategoryNames: false, description: "Original character profiles and lore.", contentDir: "ocs" },
+  documents: { label: "Documents", singular: "Document", gridAspect: "16/9", gridCols: 2, defaultView: "list", showViewToggle: false, formatCategoryNames: true, description: "Primary-source documents, datasets, and reference materials.", contentDir: "documents" },
 }
 
 export const VALID_TYPES = Object.keys(CONTENT_TYPES)

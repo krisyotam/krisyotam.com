@@ -63,6 +63,7 @@ export default async function TagPage(props: TagPageProps) {
     cover_image: post.cover_image,
     type: post.type, // This is the content type (essays, notes, etc.)
     route: post.route, // This is the URL route
+    url: post.url, // Direct URL for documents (served outside Next.js)
   }));
 
   return (
@@ -76,6 +77,8 @@ export default async function TagPage(props: TagPageProps) {
           status={status}
           confidence={confidence}
           importance={tagMeta?.importance || 7}
+          backText="Tags"
+          backHref="/tags"
         />
 
         <main>

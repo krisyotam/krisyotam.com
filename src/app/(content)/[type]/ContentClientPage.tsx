@@ -22,6 +22,7 @@ interface ContentPost {
   cover_image?: string
   state?: string
   views?: number
+  url?: string
 }
 
 interface CategoryData {
@@ -123,7 +124,7 @@ export default function ContentClientPage({ type, posts, categories = [], initia
         <div
           key={p.slug}
           className="border border-border bg-card hover:bg-secondary/50 transition-colors cursor-pointer"
-          onClick={() => router.push(`/${p.slug}`)}
+          onClick={() => { if (p.url) { window.location.href = p.url } else { router.push(`/${p.slug}`) } }}
         >
           <div
             style={{ aspectRatio: config.gridAspect }}

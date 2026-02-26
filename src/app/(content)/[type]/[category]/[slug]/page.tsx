@@ -21,6 +21,7 @@ function slugifyCategory(c: string) {
 export async function generateStaticParams() {
   const results: { type: string; category: string; slug: string }[] = []
   for (const type of VALID_TYPES) {
+    if (type === 'documents') continue // Documents link directly to /doc/ (nginx), no detail page
     const posts = getContentByType(type)
     posts.forEach(p => results.push({
       type,
@@ -77,6 +78,9 @@ export default async function ContentDetailPage({ params }: Props) {
       : postData.importance,
   }
 
+  const viewSlug = `${type}/${category}/${slug}`
+
+  // Standard MDX content types
   const headings = await extractHeadingsFromMDX(type, slug, category)
 
   let Post
@@ -86,8 +90,6 @@ export default async function ContentDetailPage({ params }: Props) {
     console.error(`Could not find MDX file for ${type}/${slug}`)
     notFound()
   }
-
-  const viewSlug = `${type}/${category}/${slug}`
 
   return (
     <div className="relative min-h-screen bg-background text-foreground pt-16">

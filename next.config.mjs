@@ -1,6 +1,7 @@
 // next.config.mjs
 
 import withMDX from '@next/mdx'
+import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
@@ -23,10 +24,11 @@ function buildSexyUrls() {
   const CONTENT_TYPES = [
     'blog', 'diary', 'essays', 'fiction', 'news', 'notes',
     'ocs', 'papers', 'progymnasmata', 'reviews', 'sequences', 'verse',
+    // 'documents' excluded — documents link directly to /doc/ (nginx)
   ]
 
   const RESERVED = new Set([
-    'blog', 'diary', 'essays', 'fiction', 'news', 'notes', 'ocs',
+    'blog', 'diary', 'documents', 'essays', 'fiction', 'news', 'notes', 'ocs',
     'papers', 'progymnasmata', 'reviews', 'sequences', 'verse', 'til', 'now',
     'categories', 'category', 'tags', 'tag', 'feeds', 'api',
     'search', 'archive', 'library', 'media', 'rules-of-the-internet',
@@ -241,6 +243,7 @@ const nextConfig = withMDX({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [
+      remarkFrontmatter,
       [remarkGfm, { strict: true, singleTilde: false }],
       remarkMath,
     ],
