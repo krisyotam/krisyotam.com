@@ -45,8 +45,6 @@
   ],
   "exclude": [
     "node_modules",
-    "**/*.mdx",
-    "src/components/archive",
-    "src/lib/archive"
+    "**/*.mdx"
   ]
 }

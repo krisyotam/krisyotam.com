@@ -128,7 +128,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     SimpleBib,
     Books,
     Cinema,
-    FilmList: FrameList,
     FrameList,
     Frame,
     Box,
@@ -175,14 +174,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     WikiFilm,
     
     // Images and media components
-    Img,
     Video,
-    
+
     // Books and reading components
     BookCard,
     // Content display components
     Movie: Frame,
-    Film: Frame,
     Verse,
 
     // Code components
