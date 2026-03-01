@@ -36,7 +36,7 @@ export function WordOfTheDay() {
   useEffect(() => {
     async function fetchWord() {
       try {
-        const res = await fetch("/api/word-of-the-day?random=true");
+        const res = await fetch("/api/reference?type=wotd&random=true");
         if (res.ok) {
           const data = await res.json();
           setWord({

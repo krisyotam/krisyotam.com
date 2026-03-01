@@ -3,9 +3,10 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, FileText } from "lucide-react"
+import { ChevronLeft, ChevronRight, FileText, Info } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip"
 
 interface PersonalityAssessmentsData {
   mbti: MBTIData
@@ -63,9 +64,10 @@ interface HEXACOData {
 
 interface PersonalityCarouselProps {
   data: PersonalityAssessmentsData
+  description?: string
 }
 
-export default function PersonalityCarousel({ data }: PersonalityCarouselProps) {
+export default function PersonalityCarousel({ data, description }: PersonalityCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const assessments = [
     { key: "mbti", label: "MBTI" },
@@ -490,29 +492,45 @@ export default function PersonalityCarousel({ data }: PersonalityCarouselProps) 
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <Button variant="outline" size="icon" onClick={handlePrevious}>
-          <ChevronLeft className="h-4 w-4" />
-        </Button>
-        <div className="flex gap-2">
-          {assessments.map((assessment, index) => (
-            <Button
-              key={assessment.key}
-              variant={index === currentIndex ? "default" : "outline"}
-              size="sm"
-              onClick={() => setCurrentIndex(index)}
-            >
-              {assessment.label}
+    <TooltipProvider>
+      <div className="space-y-4">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="icon" onClick={handlePrevious}>
+              <ChevronLeft className="h-4 w-4" />
             </Button>
-          ))}
+            {description && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="icon" className="h-8 w-8">
+                    <Info className="h-4 w-4 text-muted-foreground" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="bottom" className="max-w-xs">
+                  <p className="text-xs">{description}</p>
+                </TooltipContent>
+              </Tooltip>
+            )}
+          </div>
+          <div className="flex gap-2">
+            {assessments.map((assessment, index) => (
+              <Button
+                key={assessment.key}
+                variant={index === currentIndex ? "default" : "outline"}
+                size="sm"
+                onClick={() => setCurrentIndex(index)}
+              >
+                {assessment.label}
+              </Button>
+            ))}
+          </div>
+          <Button variant="outline" size="icon" onClick={handleNext}>
+            <ChevronRight className="h-4 w-4" />
+          </Button>
         </div>
-        <Button variant="outline" size="icon" onClick={handleNext}>
-          <ChevronRight className="h-4 w-4" />
-        </Button>
-      </div>
 
-      <div className="bg-muted/30 rounded-lg p-4">{renderCurrentAssessment()}</div>
-    </div>
+        <div className="bg-muted/30 rounded-lg p-4">{renderCurrentAssessment()}</div>
+      </div>
+    </TooltipProvider>
   )
 }

@@ -16,7 +16,7 @@ interface BentoNavProps {
 export function BentoNav({
   items = [
     { label: "ME", href: "/me" },
-    { label: "LOGO", href: "/logo" },
+    { label: "TUI", href: "/tui" },
     { label: "ABOUT", href: "/about" },
     { label: "DESIGN", href: "/design" },
     { label: "DONATE", href: "/donate" },

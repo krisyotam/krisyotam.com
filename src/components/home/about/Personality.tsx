@@ -182,11 +182,10 @@ const PERSONALITY_ASSESSMENTS_DATA = {
 export default function Personality() {
   return (
     <div className="py-4">
-      <p className="text-lg text-muted-foreground font-light mb-6">
-        Results from various personality assessments that provide insight into my cognitive preferences,
-        behavioral tendencies, and working style.
-      </p>
-      <PersonalityCarousel data={PERSONALITY_ASSESSMENTS_DATA} />
+      <PersonalityCarousel
+        data={PERSONALITY_ASSESSMENTS_DATA}
+        description="Results from various personality assessments that provide insight into my cognitive preferences, behavioral tendencies, and working style."
+      />
     </div>
   )
 } 

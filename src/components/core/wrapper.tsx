@@ -18,6 +18,7 @@
 
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
+import { usePathname } from "next/navigation"
 
 // ============================================================================
 // LAZY-LOADED COMPONENTS
@@ -51,6 +52,11 @@ interface WrapperProps {
 // ============================================================================
 
 export function Wrapper({ showModal = true }: WrapperProps) {
+  const pathname = usePathname()
+
+  // Suppress all overlays on the TUI page (it has its own full-screen UI)
+  if (pathname === "/tui") return null
+
   return (
     <>
       <Suspense fallback={null}>

@@ -109,7 +109,7 @@ const STATIC_PAGES = [
   "/anime", "/manga", "/film", "/tv", "/music", "/games", "/globe",
   "/art", "/gallery", "/cards", "/videos",
   "/stats", "/contact", "/subscribe", "/supporters", "/blogroll",
-  "/people", "/quotes", "/excerpts", "/sources", "/predictions", "/surveys",
+  "/people", "/quotes", "/sources", "/predictions", "/surveys",
   "/symbols", "/type", "/example",
   "/portfolio", "/profile",
   "/legal", "/shop",

@@ -1,10 +1,8 @@
 "use client"
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import NameBreakdown from "@/components/about/name-breakdown"
+import writingStats from "@/../public/data/writing-stats.json"
 
 const ABOUT_ME_CONTENT = "Hi! I am Kris Yotam, a Applied Researcher, Essayist, Critic, and Blogger. I write about a wide variety of topics, and if you are interested in my work you can even view my notes at notes.krisyotam.com"
 import PersonalBio from "@/components/about/personal-bio"
@@ -17,81 +15,96 @@ export default function AboutMe() {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <Card className="col-span-1 md:col-span-2 bg-muted/50 hover:bg-muted/70 transition-colors">
-          <CardContent className="p-4">
-            <h3 className="text-lg font-medium mb-2">About Me</h3>
-            <p className="text-muted-foreground">{ABOUT_ME_CONTENT}</p>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
-          <CardContent className="p-4 flex flex-col justify-between h-full">
-            <div>
-              <h3 className="text-lg font-medium mb-2">Connect</h3>
-              <p className="text-muted-foreground">Find me online and reach out.</p>
+        {/* About Me */}
+        <div className="col-span-1 md:col-span-2 border border-border">
+          <div className="flex items-stretch border-b border-border">
+            <div className="px-3 py-2 text-xs font-medium uppercase tracking-wider text-muted-foreground bg-muted/30">
+              About
             </div>
-            <div className="flex gap-2 mt-4">
-              <Button variant="outline" size="sm" className="w-full">
-                <Link
-                  href="https://github.com/krisyotam"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-no-preview="true"
-                  className="hover:text-gray-400 transition-colors"
-                >
-                  GitHub
-                </Link>
-              </Button>
-              <Button variant="outline" size="sm" className="w-full">
-                <Link
-                  href="https://x.com/krisyotam"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-no-preview="true"
-                  className="hover:text-gray-400 transition-colors"
-                >
-                  Twitter
-                </Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+          <div className="px-4 py-3">
+            <p className="text-sm text-muted-foreground leading-relaxed">{ABOUT_ME_CONTENT}</p>
+          </div>
+        </div>
 
-        <Card className="col-span-1 md:col-span-2 bg-muted/50 hover:bg-muted/70 transition-colors">
-          <CardContent className="p-4">
-            <h3 className="text-lg font-medium mb-2">Current Focus</h3>
-            <div className="flex flex-wrap gap-2">
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">
-                Pure Mathematics
-              </span>
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">
-                Expositional Writing
-              </span>
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">Poetry</span>
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">
-                Web Development
-              </span>
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">
-                Classical Education
-              </span>
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">AI/ML</span>
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">
-                Open Source
-              </span>
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded">
-                Classical Pedagogy
-              </span>
+        {/* Connect */}
+        <div className="border border-border flex flex-col">
+          <div className="flex items-stretch border-b border-border">
+            <div className="px-3 py-2 text-xs font-medium uppercase tracking-wider text-muted-foreground bg-muted/30">
+              Connect
             </div>
-          </CardContent>
-        </Card>
+          </div>
+          <div className="flex-1 flex flex-col">
+            <Link
+              href="https://github.com/krisyotam"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-no-preview="true"
+              className="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-muted/30 transition-colors border-b border-border"
+            >
+              <span>GitHub</span>
+              <span className="text-xs text-muted-foreground">@krisyotam</span>
+            </Link>
+            <Link
+              href="https://x.com/krisyotam"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-no-preview="true"
+              className="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-muted/30 transition-colors border-b border-border"
+            >
+              <span>Twitter</span>
+              <span className="text-xs text-muted-foreground">@krisyotam</span>
+            </Link>
+            <Link
+              href="mailto:kris@krisyotam.com"
+              data-no-preview="true"
+              className="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-muted/30 transition-colors"
+            >
+              <span>Email</span>
+              <span className="text-xs text-muted-foreground">kris@krisyotam.com</span>
+            </Link>
+          </div>
+        </div>
 
-        <Card className="bg-muted/50 hover:bg-muted/70 transition-colors">
-          <CardContent className="p-4">
-            <h3 className="text-lg font-medium mb-2">Location</h3>
-            <p className="text-muted-foreground">Based in the United States</p>
-            <p className="text-xs text-muted-foreground mt-2">Working remotely & globally</p>
-          </CardContent>
-        </Card>
+        {/* Writing */}
+        <div className="col-span-1 md:col-span-2 border border-border">
+          <div className="flex items-stretch border-b border-border">
+            <div className="px-3 py-2 text-xs font-medium uppercase tracking-wider text-muted-foreground bg-muted/30">
+              Writing
+            </div>
+          </div>
+          <div className="flex items-stretch">
+            <div className="flex-1 text-center px-3 py-3 border-r border-border">
+              <span className="text-2xl font-bold tabular-nums">{writingStats.total}</span>
+              <span className="block text-xs text-muted-foreground mt-0.5">posts</span>
+            </div>
+            <div className="flex-1 text-center px-3 py-3 border-r border-border">
+              <span className="text-2xl font-bold tabular-nums">{writingStats.totalCategories}</span>
+              <span className="block text-xs text-muted-foreground mt-0.5">categories</span>
+            </div>
+            <div className="flex-1 text-center px-3 py-3 border-r border-border">
+              <span className="text-2xl font-bold tabular-nums">{writingStats.totalTags}</span>
+              <span className="block text-xs text-muted-foreground mt-0.5">tags</span>
+            </div>
+            <div className="flex-1 text-center px-3 py-3">
+              <span className="text-2xl font-bold tabular-nums">{Object.keys(writingStats.counts).length}</span>
+              <span className="block text-xs text-muted-foreground mt-0.5">types</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Location */}
+        <div className="border border-border flex flex-col">
+          <div className="flex items-stretch border-b border-border">
+            <div className="px-3 py-2 text-xs font-medium uppercase tracking-wider text-muted-foreground bg-muted/30">
+              Location
+            </div>
+          </div>
+          <div className="flex-1 flex flex-col justify-center px-4 py-3">
+            <span className="text-sm">United States</span>
+            <span className="text-xs text-muted-foreground mt-1">Working remotely & globally</span>
+          </div>
+        </div>
       </div>
 
       <div className="mb-6">

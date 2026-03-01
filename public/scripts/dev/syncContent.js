@@ -245,4 +245,80 @@ function syncTags(db, contentType, contentId, tags) {
   }
 }
 
+/**
+ * Generate writing-stats.json from content.db after sync.
+ * Used by the WritingStats client component on /home.
+ */
+function generateWritingStats() {
+  const db = new Database(CONTENT_DB, { readonly: true });
+
+  const types = CONTENT_TYPES;
+  const counts = {};
+  let total = 0;
+
+  for (const type of types) {
+    const row = db.prepare(`SELECT COUNT(*) as cnt FROM ${type} WHERE state = 'active'`).get();
+    counts[type] = row.cnt;
+    total += row.cnt;
+  }
+
+  // Most active category
+  const parts = types
+    .filter(t => {
+      try { db.prepare(`SELECT category_slug FROM ${t} LIMIT 1`).get(); return true; } catch { return false; }
+    })
+    .map(t => `SELECT category_slug FROM ${t} WHERE state = 'active' AND category_slug IS NOT NULL`);
+
+  let topCategory = null;
+  if (parts.length > 0) {
+    const union = parts.join(' UNION ALL ');
+    const catRow = db.prepare(`
+      SELECT c.title, COUNT(*) as cnt
+      FROM (${union}) sub
+      JOIN categories c ON sub.category_slug = c.slug
+      GROUP BY c.slug ORDER BY cnt DESC LIMIT 1
+    `).get();
+    if (catRow) topCategory = catRow.title;
+  }
+
+  // Most recent post date
+  const dateParts = types
+    .filter(t => {
+      try { db.prepare(`SELECT start_date FROM ${t} LIMIT 1`).get(); return true; } catch { return false; }
+    })
+    .map(t => `SELECT start_date FROM ${t} WHERE state = 'active' AND start_date IS NOT NULL`);
+
+  let latestDate = null;
+  if (dateParts.length > 0) {
+    const dateUnion = dateParts.join(' UNION ALL ');
+    const dateRow = db.prepare(`SELECT start_date FROM (${dateUnion}) ORDER BY start_date DESC LIMIT 1`).get();
+    if (dateRow) latestDate = dateRow.start_date;
+  }
+
+  // Total tags used
+  const tagRow = db.prepare('SELECT COUNT(DISTINCT tag_id) as cnt FROM content_tags').get();
+  const totalTags = tagRow ? tagRow.cnt : 0;
+
+  // Total categories used
+  const catCountRow = db.prepare('SELECT COUNT(*) as cnt FROM categories WHERE state = \'active\'').get();
+  const totalCategories = catCountRow ? catCountRow.cnt : 0;
+
+  const stats = {
+    total,
+    counts,
+    topCategory,
+    latestDate,
+    totalTags,
+    totalCategories,
+    generatedAt: new Date().toISOString(),
+  };
+
+  const outPath = path.join(PROJECT_ROOT, 'public', 'data', 'writing-stats.json');
+  fs.writeFileSync(outPath, JSON.stringify(stats, null, 2));
+  console.log(`[sync] Generated writing-stats.json (${total} total entries)`);
+
+  db.close();
+}
+
 main();
+generateWritingStats();

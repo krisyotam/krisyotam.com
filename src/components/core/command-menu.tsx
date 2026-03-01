@@ -11,7 +11,7 @@ import {
   AreaChart, Tag, Gamepad2, Clapperboard,
   BookOpenText, FileEdit, PencilLine, Keyboard, Palette,
   Rss, Users, Sparkles, ScrollText, Pen, Newspaper, Star, FileText,
-  NotebookPen, TextQuote
+  NotebookPen, Terminal,
 } from "lucide-react"
 
 import { SnowEffect } from "@/components/ui/snow-effect"
@@ -68,7 +68,6 @@ const menuSections = [
       { icon: Tag, label: "Tags", path: "/tags" },
       { icon: Layers, label: "Sequences", path: "/sequences" },
       { icon: Quote, label: "Quotes", path: "/quotes" },
-      { icon: TextQuote, label: "Excerpts", path: "/excerpts" },
     ]
   },
   {
@@ -80,6 +79,7 @@ const menuSections = [
       { icon: Earth, label: "Globe", path: "/globe" },
       { icon: FileText, label: "Sources", path: "/sources" },
       { icon: Keyboard, label: "Type", path: "/type" },
+      { icon: Terminal, label: "TUI", path: "/tui" },
     ]
   },
   {

@@ -1,3 +1,8 @@
+"use client"
+
+import { useState } from "react"
+import { Badge } from "@/components/ui/badge"
+
 interface QuoteCardProps {
   text: string
   author?: string
@@ -7,14 +12,29 @@ interface QuoteCardProps {
   notes?: string
 }
 
-import { Badge } from "@/components/ui/badge"
+const COLLAPSE_THRESHOLD = 280
 
 export function QuoteCard({ text, author, source, dateFirstSeen, tags, notes }: QuoteCardProps) {
+  const isLong = text.length > COLLAPSE_THRESHOLD
+  const [expanded, setExpanded] = useState(false)
+
   return (
     <div className="relative bg-white border border-border text-foreground shadow-sm h-full flex flex-col overflow-hidden dark:bg-card dark:text-card-foreground">
       <div className="p-4 flex flex-col h-full">
-        <div className="text-2xl text-muted-foreground mb-2">“</div>
-        <p className="text-sm font-medium mb-3 flex-grow leading-snug">{text}</p>
+        <div className="text-2xl text-muted-foreground mb-2">&ldquo;</div>
+        <div
+          className={`text-sm font-medium mb-3 flex-grow leading-relaxed whitespace-pre-wrap ${isLong && !expanded ? "line-clamp-6" : ""}`}
+        >
+          {text}
+        </div>
+        {isLong && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="text-xs text-muted-foreground hover:text-foreground mb-3 text-left"
+          >
+            {expanded ? "Show less" : "Show more"}
+          </button>
+        )}
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <div>
             {author && <div className="font-medium text-[13px] text-foreground">{author}</div>}
@@ -38,4 +58,3 @@ export function QuoteCard({ text, author, source, dateFirstSeen, tags, notes }: 
     </div>
   )
 }
-

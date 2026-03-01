@@ -1,0 +1,21 @@
+{
+  "total": 230,
+  "counts": {
+    "blog": 13,
+    "diary": 4,
+    "essays": 10,
+    "fiction": 2,
+    "news": 11,
+    "notes": 5,
+    "ocs": 30,
+    "papers": 17,
+    "progymnasmata": 14,
+    "reviews": 36,
+    "verse": 88
+  },
+  "topCategory": "Film Reviews",
+  "latestDate": "2026-02-07",
+  "totalTags": 243,
+  "totalCategories": 19,
+  "generatedAt": "2026-03-01T06:25:00.177Z"
+}

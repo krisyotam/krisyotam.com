@@ -63,7 +63,8 @@ export default function QuotesPage() {
     return quotes.filter((item) => {
       const author = (item.author || "").toLowerCase()
       const text = (item.text || "").toLowerCase()
-      return author.includes(q) || text.includes(q)
+      const source = (item.source || "").toLowerCase()
+      return author.includes(q) || text.includes(q) || source.includes(q)
     })
   }, [quotes, search])
 
@@ -88,7 +89,7 @@ export default function QuotesPage() {
               type="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by author or text..."
+              placeholder="Search by author, text, or source..."
               className="w-full rounded-none border border-border bg-input px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
             {search ? (

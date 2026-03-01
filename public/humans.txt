@@ -1,137 +1,98 @@
-   ,                     _                               
-  /|   /       o        (_|   |                          
-   |__/   ,_       ,      |   |  __ _|_  __,   _  _  _   
-   | \   /  |  |  / \_    |   | /  \_|  /  |  / |/ |/ |  
-   |  \_/   |_/|_/ \/      \_/|/\__/ |_/\_/|_/  |  |  |_/
-                           /|                          
-                           \|   Hand-crafted since 2025
-                        
-    The humans.txt file explains the team, technology, and graphic assets 
-    behind this site.
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                              HUMANS.TXT                                   ║
+# ║                    krisyotam.com Team & Colophon                          ║
+# ╠═══════════════════════════════════════════════════════════════════════════╣
+# ║  @author   Kris Yotam                                                     ║
+# ║  @date     2025-01-01                                                     ║
+# ║  @updated  2026-02-28                                                     ║
+# ║  @url      https://krisyotam.com/humans.txt                               ║
+# ╠═══════════════════════════════════════════════════════════════════════════╣
+# ║                                                                           ║
+# ║  This file explains the team, technology, and creative influences         ║
+# ║  behind this site. Following the philosophy at humanstxt.org.             ║
+# ║                                                                           ║
+# ║  Hand-crafted since 2025.                                                 ║
+# ║                                                                           ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
 
-# This principal document following the philosophy layed out at humanstxt.org 
-# has been responsible for replacing several monotropic files such as my sites 
-# colophon.md, contributers.md, inspirations.md, ect. It serves as a great tool 
-# to provide in one simple, elegant plain text file the extent of all of the ideas 
-# on and off the interwebs that have shaped me and by extension the lifeblood of 
-# this site. I can only hope to properly convey the scale of the ideas, lessons, 
-# principles, guides, ect. that have shaped me since the start of this project. 
+# This principal document following the philosophy layed out at humanstxt.org
+# has been responsible for replacing several monotropic files such as my sites
+# colophon.md, contributers.md, inspirations.md, ect. It serves as a great tool
+# to provide in one simple, elegant plain text file the extent of all of the ideas
+# on and off the interwebs that have shaped me and by extension the lifeblood of
+# this site. I can only hope to properly convey the scale of the ideas, lessons,
+# principles, guides, ect. that have shaped me since the start of this project.
 # — Authors Note (Jan. 12, 2026)
-
-Abstract
-
-   This document defines a date and time format for use in Internet
-   protocols that is a profile of the ISO 8601 standard for
-   representation of dates and times using the Gregorian calendar.
 
 Table of Contents
 
-   1. People .................................................. 2
-   2. Definitions ............................................. 3
-   3. Two Digit Years ......................................... 4
-   4. Local Time .............................................. 4
-   4.1. Coordinated Universal Time (UTC) ...................... 4
-   4.2. Local Offsets ......................................... 5
-   4.3. Unknown Local Offset Convention ....................... 9
-   5.8. Examples ............................................. 10
-   6. References ............................................. 10
-   7. Security Considerations ................................ 11
+   1. People .................................................. 1
+   2. Colophon ................................................ 2
+      2.1. Frameworks ......................................... 2
+      2.2. Markdown & Content ................................. 2
+      2.3. UI Components ...................................... 3
+      2.4. Utilities .......................................... 3
+      2.5. Data & Storage ..................................... 4
+      2.6. Maps & Visualization ............................... 4
+      2.7. Infrastructure ..................................... 4
+   3. Inspiration ............................................. 5
 
-#*********************************************************************************************************
+_______________________________________________________________________________
+*********************************************************************************************************
 # @title PEOPLE
-# @description 
-#   - a list of the editors, scripters, and contributers to the site 
-********************************************************************************************************
+# @description
+#   - a list of the editors, scripters, and contributers to the site
+*********************************************************************************************************
 
 ==============================
 @section WRITER
-@description 
+@description
 ==============================
 
 @name Kris Yotam
 @site https://krisyotam.com
 @bio https://krisyotam.com/me
-@comment 
+@comment
     - myself the sole essayist, lead developer, and archivist
 
 ==============================
 @section DEVELOPER
-@description 
+@description
 ==============================
+
+@name Kris Yotam
+@site https://krisyotam.com
+@comment
+    - full stack development, infrastructure, deployment
 
 ==============================
 @section SCRIPTER
-@description 
+@description
 ==============================
 
 ==============================
 @section EDITOR
-@description 
+@description
 ==============================
 
 ==============================
 @section TUTOR
-@description 
+@description
 ==============================
 
 ==============================
 @section PENTESTER
-@description 
+@description
 ==============================
 
 ==============================
 @section ARTIST
-@description 
-    - art has been used from several noteable artists, as well as 
-      wonderfully talented lesser known artists. Mainly as thumbnails. 
-      A large majority of them are probably unaware. If any of you want 
+@description
+    - art has been used from several noteable artists, as well as
+      wonderfully talented lesser known artists. Mainly as thumbnails.
+      A large majority of them are probably unaware. If any of you want
       your work removed please contact me at [removal@krisyotam.com]
 ==============================
-
-@name 
-@site 
-@bio 
-@comment 
-
-Kris Yotam
-I
-
-@name Tailwind CSS
-@url https://tailwindcss.com
-@repo https://github.com/tailwindlabs/tailwindcss
-@description
-    - utility-first css framework
-
-==============================
-@section MARKDOWN & CONTENT
-@description these projects are part of the unified collective and deserve support
-==============================
-
-@name unified / remark / rehype
-@url https://unifiedjs.com
-@repo https://github.com/unifiedjs/unified
-@donate https://opencollective.com/unified
-http://www.krisyotam.com 
-
-Daniel Burka
-Visual design, web development
-http://www.gv.com/team/daniel-burka
-
-Jake Knapp
-Content, page layout
-http://www.gv.com/team/jake-knapp
-
-John Zeratsky
-Content, copywriting, information architecture
-http://www.gv.com/team/john-zeratsky
-
-Laura Melahn
-Content, copywriting
-http://www.gv.com/team/laura-melahn
-
-Michael Margolis
-User research
-http://www.gv.com/team/michael-margolis
 
 _______________________________________________________________________________
 *********************************************************************************************************
@@ -144,38 +105,36 @@ _______________________________________________________________________________
 ==============================
 
 @name Next.js
+@version 16.1
 @url https://nextjs.org
 @repo https://github.com/vercel/next.js
 @description
     - react framework powering this website
+    - created by Guillermo Rauch and the Vercel team
 
 @name React
+@version 19.2
 @url https://react.dev
 @repo https://github.com/facebook/react
 @description
-
-@name Tailwind CSS
-@url https://tailwindcss.com
-@repo https://github.com/tailwindlabs/tailwindcss
-@description
-    - utility-first css framework
-
-==============================
-@section MARKDOWN & CONTENT
-@description these projects are part of the unified collective and deserve support
-==============================
-
-@name unified / remark / rehype
-@url https://unifiedjs.com
-@repo https://github.com/unifiedjs/unified
-@donate https://opencollective.com/unified
     - ui library for building interfaces
+    - created by Jordan Walke at Meta
 
 @name Tailwind CSS
+@version 3.4
 @url https://tailwindcss.com
 @repo https://github.com/tailwindlabs/tailwindcss
 @description
     - utility-first css framework
+    - created by Adam Wathan
+
+@name TypeScript
+@version 5.8
+@url https://typescriptlang.org
+@repo https://github.com/microsoft/TypeScript
+@description
+    - typed superset of javascript
+    - created by Anders Hejlsberg at Microsoft
 
 ==============================
 @section MARKDOWN & CONTENT
@@ -191,21 +150,12 @@ _______________________________________________________________________________
     - powers all content rendering on this site
     - used by Node.js, Vercel, Netlify, GitHub, Mozilla, and many more
 
-@name react-markdown
-@url https://remarkjs.github.io/react-markdown
-@repo https://github.com/remarkjs/react-markdown
-@donate https://opencollective.com/unified
+@name MDX
+@url https://mdxjs.com
+@repo https://github.com/mdx-js/mdx
 @description
-    - markdown component for react
-    - part of the unified collective
-
-@name KaTeX
-@url https://katex.org
-@repo https://github.com/KaTeX/KaTeX
-@description
-    - ecosystem for processing markdown and html
-    - powers all content rendering on this site
-    - used by Node.js, Vercel, Netlify, GitHub, Mozilla, and many more
+    - markdown with jsx components
+    - all site content is authored in mdx
 
 @name react-markdown
 @url https://remarkjs.github.io/react-markdown
@@ -214,6 +164,24 @@ _______________________________________________________________________________
 @description
     - markdown component for react
     - part of the unified collective
+
+@name remark-math / rehype-katex
+@url https://github.com/remarkjs/remark-math
+@repo https://github.com/remarkjs/remark-math
+@description
+    - math typesetting pipeline for unified
+    - remark-math parses latex, rehype-katex renders it
+
+@name remark-gfm
+@url https://github.com/remarkjs/remark-gfm
+@repo https://github.com/remarkjs/remark-gfm
+@description
+    - github flavored markdown support (tables, strikethrough, autolinks)
+
+@name rehype-slug / rehype-highlight
+@url https://github.com/rehypejs/rehype-slug
+@description
+    - heading anchors and syntax highlighting for code blocks
 
 @name KaTeX
 @url https://katex.org
@@ -231,9 +199,13 @@ _______________________________________________________________________________
     - yaml front matter parser
     - used by Gatsby, Netlify, Astro, TinaCMS, and many others
 
-==============================
-@section UTILITIES
-==============================
+@name next-mdx-remote
+@url https://github.com/hashicorp/next-mdx-remote
+@repo https://github.com/hashicorp/next-mdx-remote
+@description
+    - remote mdx loading for next.js
+    - created by HashiCorp
+
 ==============================
 @section UI COMPONENTS
 ==============================
@@ -244,12 +216,10 @@ _______________________________________________________________________________
 @description
     - unstyled accessible ui primitives
     - foundation for most interactive components
+    - dialog, tooltip, tabs, hover-card, scroll-area, separator, progress, label
 
 @name cmdk
 @url https://cmdk.paco.me
-==============================
-@section UTILITIES
-==============================
 @repo https://github.com/pacocoursey/cmdk
 @donate https://github.com/sponsors/pacocoursey
 @description
@@ -272,20 +242,59 @@ _______________________________________________________________________________
     - drawer component for react
     - created by Emil Kowalski
 
-@name Embla Carousel
-@url https://embla-carousel.com
-@repo https://github.com/davidjerleke/embla-carousel
-@donate https://github.com/sponsors/davidjerleke
-@description
-    - lightweight carousel with fluid motion
-    - created by David Jerleke
-
 @name Lucide
 @url https://lucide.dev
 @repo https://github.com/lucide-icons/lucide
 @description
     - beautiful icon toolkit
     - community fork of Feather Icons
+
+@name Tabler Icons
+@url https://tabler.io/icons
+@repo https://github.com/tabler/tabler-icons
+@description
+    - open source svg icon set
+    - over 5000 icons
+
+@name Headless UI
+@url https://headlessui.com
+@repo https://github.com/tailwindlabs/headlessui
+@description
+    - unstyled accessible ui components
+    - created by Tailwind Labs
+
+@name Recharts
+@url https://recharts.org
+@repo https://github.com/recharts/recharts
+@description
+    - composable charting library for react
+    - used for data visualization and stats pages
+
+@name react-syntax-highlighter
+@url https://github.com/react-syntax-highlighter/react-syntax-highlighter
+@repo https://github.com/react-syntax-highlighter/react-syntax-highlighter
+@description
+    - syntax highlighting for code blocks in react
+
+@name react-tweet
+@url https://react-tweet.vercel.app
+@repo https://github.com/vercel/react-tweet
+@description
+    - embedded tweet component
+    - created by Vercel
+
+@name react-day-picker
+@url https://daypicker.dev
+@repo https://github.com/gpbl/react-day-picker
+@description
+    - date picker component for react
+
+@name react-resizable-panels
+@url https://github.com/bvaughn/react-resizable-panels
+@repo https://github.com/bvaughn/react-resizable-panels
+@description
+    - resizable panel groups for react
+    - created by Brian Vaughn
 
 ==============================
 @section UTILITIES
@@ -314,6 +323,62 @@ _______________________________________________________________________________
     - animation library for react
     - powers all animations on this site
 
+@name class-variance-authority
+@url https://cva.style
+@repo https://github.com/joe-bell/cva
+@description
+    - variant-driven component styling
+    - created by Joe Bell
+
+@name clsx / tailwind-merge
+@url https://github.com/lukeed/clsx
+@description
+    - conditional classname utilities
+    - clsx by Luke Edwards, tailwind-merge by dcastil
+
+@name react-hook-form
+@url https://react-hook-form.com
+@repo https://github.com/react-hook-form/react-hook-form
+@description
+    - performant form management for react
+
+@name react-wrap-balancer
+@url https://react-wrap-balancer.vercel.app
+@repo https://github.com/shuding/react-wrap-balancer
+@description
+    - text wrapping balancer for headings
+    - created by Shu Ding
+
+@name next-themes
+@url https://github.com/pacocoursey/next-themes
+@repo https://github.com/pacocoursey/next-themes
+@description
+    - theme management for next.js (dark/light mode)
+    - created by Paco Coursey
+
+@name next-seo
+@url https://github.com/garmeeh/next-seo
+@repo https://github.com/garmeeh/next-seo
+@description
+    - seo management for next.js
+
+@name Stripe
+@url https://stripe.com
+@repo https://github.com/stripe/stripe-node
+@description
+    - payment processing
+
+@name Nodemailer
+@url https://nodemailer.com
+@repo https://github.com/nodemailer/nodemailer
+@description
+    - email sending for node.js
+
+@name spoiled
+@url https://github.com/nicholasgasior/spoiled
+@description
+    - spoiler tag component
+
 ==============================
 @section DATA & STORAGE
 ==============================
@@ -325,7 +390,7 @@ _______________________________________________________________________________
 @description
     - fastest sqlite3 library for node.js
     - created by Joshua Wise
-    - used by thousands of developers worldwide
+    - primary database driver for content.db and system.db
 
 @name Supabase
 @url https://supabase.com
@@ -334,16 +399,28 @@ _______________________________________________________________________________
     - open source firebase alternative
     - handles auth and database
 
+@name Upstash Redis
+@url https://upstash.com
+@repo https://github.com/upstash/upstash-redis
+@description
+    - serverless redis for rate limiting and caching
+
+@name Neon
+@url https://neon.tech
+@repo https://github.com/neondatabase/serverless
+@description
+    - serverless postgres
+
 ==============================
 @section MAPS & VISUALIZATION
 ==============================
 
-@name Mapbox GL
-@url https://mapbox.com
-@repo https://github.com/mapbox/mapbox-gl-js
+@name MapLibre GL
+@url https://maplibre.org
+@repo https://github.com/maplibre/maplibre-gl-js
 @description
-    - interactive maps library
-    - powers the /globe page
+    - open source map rendering library
+    - community fork of Mapbox GL JS
 
 @name cobe
 @url https://cobe.vercel.app
@@ -354,34 +431,93 @@ _______________________________________________________________________________
     - created by Shu Ding
     - inspired by the GitHub globe project
 
+==============================
+@section INFRASTRUCTURE
+==============================
+
+@name Docker
+@url https://docker.com
+@description
+    - containerization platform
+    - site runs in docker swarm via dokploy
+
+@name Dokploy
+@url https://dokploy.com
+@repo https://github.com/Dokploy/dokploy
+@description
+    - open source deployment platform
+    - manages docker swarm deployments
+
+@name nginx
+@url https://nginx.org
+@description
+    - reverse proxy and tls termination
+    - all traffic routes through nginx on stargate
+
+@name Let's Encrypt / certbot
+@url https://letsencrypt.org
+@description
+    - free tls certificates
+    - auto-renewed via certbot timer
+
+@name Tor
+@url https://torproject.org
+@description
+    - hidden service access to the site
+    - .onion mirror available
+
+@name Hetzner Object Storage
+@url https://hetzner.com
+@description
+    - s3-compatible storage for documents and media
+
+@name Geist
+@url https://vercel.com/font
+@repo https://github.com/vercel/geist-font
+@description
+    - sans-serif typeface by vercel
+    - primary ui font
+
+@name Source Serif 4
+@url https://github.com/adobe-fonts/source-serif
+@description
+    - variable serif typeface by adobe
+    - used for long-form content
+
 _______________________________________________________________________________
 *********************************************************************************************************
 # @title INSPIRATION
-# @description this site has taken, and adapted features from a great many previous and still standing 
-# creative works. here are their names. 
+# @description this site has taken, and adapted features from a great many previous and still standing
+# creative works. here are their names.
 *********************************************************************************************************
 
 @name Gwern Branwen
 @url https://gwern.net
-@description 
+@description
     - (404-guesser.js, utility.js, and nginxredirectguesser.hs) inspired my 404.js
     - nginx.conf permanent redirects inspired my magic-urls.js
-    - Header design inspired by Gwern's post header's 
+    - Header design inspired by Gwern's post headers
+    - sidenotes, link annotations, and metadata-rich page design
+    - the gold standard for personal sites
 
 @name Fabian Schultz
 @url https://www.fabianschultz.com/
-@description 
+@description
+    - minimal portfolio design language
 
 @name Seirdy
 @url https://seirdy.one/
-@description 
+@description
+    - accessibility-first site design
+    - lightweight and standards-compliant
 
 @name Guillermo Rauch
 @url https://rauchg.com
-@description 
+@description
+    - clean minimal blog layout
 
 @name Lillian Weng
 @url https://lilianweng.github.io/
-@description 
-    - Inspired my citation component with her formatting defined at the bottom of her post pages
-+
+@description
+    - inspired my citation component with her formatting defined at the bottom of her post pages
+    - excellent long-form technical writing structure

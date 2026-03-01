@@ -15,7 +15,7 @@ import {
   PersonalityMorals,
   Intelligence,
   Certifications,
-  AreasOfInterest,
+
   MySites,
   SiteInfo,
   Hosting,
@@ -93,12 +93,6 @@ export function HomeAbout() {
           content={<Certifications />}
           isOpen={openSections.includes(9)}
           onToggle={() => toggleSection(9)}
-        />
-        <AccordionItem
-          title="Areas of Interest"
-          content={<AreasOfInterest />}
-          isOpen={openSections.includes(15)}
-          onToggle={() => toggleSection(15)}
         />
         <AccordionItem
           title="Testimonials"

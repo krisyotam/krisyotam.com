@@ -1,11 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
+import { ExternalLink, Award, BookOpen, GraduationCap, Sparkles } from "lucide-react"
 import Link from "next/link"
 import { CustomSelect } from "@/components/ui/custom-select"
 
@@ -308,106 +308,115 @@ export default function InterestingPeople() {
                         Details
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[700px] p-0 overflow-hidden">
-                      <DialogHeader className="px-6 pt-6 pb-4 bg-muted/30">
-                        <DialogTitle className="text-2xl font-serif">{selectedBlog?.title}</DialogTitle>
-                        <div className="flex flex-wrap gap-1.5 mt-3">
-                          {selectedBlog?.tags?.map((tag: string, index: number) => (
-                            <Badge key={index} variant="secondary" className="font-normal text-xs">
-                              {tag}
-                            </Badge>
-                          ))}
+                    <DialogContent className="sm:max-w-[600px] p-0 overflow-hidden">
+                      <DialogHeader className="px-6 pt-6 pb-0">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="space-y-1 min-w-0">
+                            <DialogTitle className="text-xl font-semibold tracking-tight">
+                              {selectedBlog?.author?.name || selectedBlog?.title}
+                            </DialogTitle>
+                            <p className="text-sm text-muted-foreground">{selectedBlog?.author?.position}</p>
+                          </div>
+                          <Button variant="outline" size="sm" asChild className="shrink-0">
+                            <Link
+                              href={selectedBlog?.url || "#"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
+                              Visit
+                            </Link>
+                          </Button>
                         </div>
                       </DialogHeader>
-                      <ScrollArea className="max-h-[70vh] overflow-y-auto p-6">
-                        <div className="space-y-5">
+
+                      <ScrollArea className="max-h-[70vh] overflow-y-auto">
+                        <div className="px-6 pb-6 pt-4 space-y-5">
                           {/* Description */}
-                          <Card className="border-0 shadow-sm overflow-hidden">
-                            <CardHeader className="bg-background py-3 px-4 border-b">
-                              <CardTitle className="text-base font-medium">About</CardTitle>
-                            </CardHeader>
-                            <CardContent className="p-4 text-sm">
-                              <p className="leading-relaxed">{selectedBlog?.description}</p>
-                            </CardContent>
-                          </Card>
+                          <p className="text-sm leading-relaxed text-muted-foreground">
+                            {selectedBlog?.description}
+                          </p>
 
-                          {/* Author */}
-                          <Card className="border-0 shadow-sm overflow-hidden">
-                            <CardHeader className="bg-background py-3 px-4 border-b">
-                              <CardTitle className="text-base font-medium">Author</CardTitle>
-                            </CardHeader>
-                            <CardContent className="p-4 space-y-3 text-sm">
-                              <div className="flex items-baseline">
-                                <span className="text-muted-foreground w-24">Name:</span>
-                                <span className="font-medium">{selectedBlog?.author?.name}</span>
-                              </div>
-                              <div className="flex items-baseline">
-                                <span className="text-muted-foreground w-24">Position:</span>
-                                <span>{selectedBlog?.author?.position}</span>
-                              </div>
-                              <div>
-                                <span className="text-muted-foreground block mb-1.5">Achievements:</span>
-                                <ul className="list-disc list-inside pl-1 space-y-1">
-                                  {selectedBlog?.author?.achievements?.map(
-                                    (achievement: any, index: number) => (
-                                      <li key={index} className="leading-tight">{achievement}</li>
-                                    ),
-                                  )}
-                                </ul>
-                              </div>
-                            </CardContent>
-                          </Card>
+                          {/* Tags */}
+                          <div className="flex flex-wrap gap-1.5">
+                            {selectedBlog?.tags?.map((tag: string, i: number) => (
+                              <Badge key={i} variant="secondary" className="font-normal text-xs">
+                                {tag}
+                              </Badge>
+                            ))}
+                            <Badge variant="outline" className="font-normal text-xs">
+                              {selectedBlog?.category}
+                            </Badge>
+                          </div>
 
-                          {/* Highlights */}
-                          <Card className="border-0 shadow-sm overflow-hidden">
-                            <CardHeader className="bg-background py-3 px-4 border-b">
-                              <CardTitle className="text-base font-medium">Highlights</CardTitle>
-                            </CardHeader>
-                            <CardContent className="p-4 text-sm">
-                              <ul className="list-disc list-inside pl-1 space-y-1.5">
-                                {selectedBlog?.blogHighlights?.map(
-                                  (highlight: any, index: number) => (
-                                    <li key={index} className="leading-tight">{highlight}</li>
+                          {/* Research Areas / Expertise */}
+                          {(selectedBlog?.author?.researchAreas || selectedBlog?.author?.expertise) && (
+                            <div className="space-y-2">
+                              <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                                <GraduationCap className="h-3.5 w-3.5" />
+                                {selectedBlog?.author?.researchAreas ? "Research Areas" : "Expertise"}
+                              </div>
+                              <div className="flex flex-wrap gap-1.5">
+                                {(selectedBlog?.author?.researchAreas || selectedBlog?.author?.expertise)?.map(
+                                  (area: string, i: number) => (
+                                    <Badge key={i} variant="outline" className="font-normal text-xs">
+                                      {area}
+                                    </Badge>
+                                  ),
+                                )}
+                              </div>
+                            </div>
+                          )}
+
+                          <div className="border-t border-border" />
+
+                          {/* Achievements */}
+                          {selectedBlog?.author?.achievements && selectedBlog.author.achievements.length > 0 && (
+                            <div className="space-y-2.5">
+                              <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                                <Award className="h-3.5 w-3.5" />
+                                Achievements
+                              </div>
+                              <ul className="space-y-1.5">
+                                {selectedBlog.author.achievements.map(
+                                  (achievement: string, i: number) => (
+                                    <li key={i} className="flex items-start gap-2 text-sm">
+                                      <span className="text-muted-foreground mt-1.5 h-1 w-1 rounded-full bg-muted-foreground shrink-0" />
+                                      {achievement}
+                                    </li>
                                   ),
                                 )}
                               </ul>
-                            </CardContent>
-                          </Card>
+                            </div>
+                          )}
+
+                          {/* Highlights */}
+                          {selectedBlog?.blogHighlights && selectedBlog.blogHighlights.length > 0 && (
+                            <div className="space-y-2.5">
+                              <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                                <Sparkles className="h-3.5 w-3.5" />
+                                Highlights
+                              </div>
+                              <ul className="space-y-1.5">
+                                {selectedBlog.blogHighlights.map(
+                                  (highlight: string, i: number) => (
+                                    <li key={i} className="flex items-start gap-2 text-sm">
+                                      <span className="text-muted-foreground mt-1.5 h-1 w-1 rounded-full bg-muted-foreground shrink-0" />
+                                      {highlight}
+                                    </li>
+                                  ),
+                                )}
+                              </ul>
+                            </div>
+                          )}
 
                           {/* Reader Level */}
-                          <Card className="border-0 shadow-sm overflow-hidden">
-                            <CardHeader className="bg-background py-3 px-4 border-b">
-                              <CardTitle className="text-base font-medium">Reader Level</CardTitle>
-                            </CardHeader>
-                            <CardContent className="p-4 text-sm">
-                              <p className="leading-relaxed">{selectedBlog?.readerLevel}</p>
-                            </CardContent>
-                          </Card>
-
-                          <div className="flex justify-center pt-2 pb-4">
-                            <Button asChild>
-                              <Link 
-                                href={selectedBlog?.url || "#"} 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="flex items-center gap-2"
-                              >
-                                <span>Visit Website</span>
-                                <svg 
-                                  width="16" 
-                                  height="16" 
-                                  viewBox="0 0 16 16" 
-                                  fill="none" 
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="opacity-80"
-                                >
-                                  <path d="M12 8.66667V12.6667C12 13.0203 11.8595 13.3594 11.6095 13.6095C11.3594 13.8595 11.0203 14 10.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V5.33333C2 4.97971 2.14048 4.64057 2.39052 4.39052C2.64057 4.14048 2.97971 4 3.33333 4H7.33333" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                  <path d="M10 2H14V6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                  <path d="M6.66669 9.33333L14 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                </svg>
-                              </Link>
-                            </Button>
-                          </div>
+                          {selectedBlog?.readerLevel && (
+                            <div className="flex items-start gap-2 text-sm bg-muted/30 rounded-md px-3 py-2.5">
+                              <BookOpen className="h-3.5 w-3.5 text-muted-foreground mt-0.5 shrink-0" />
+                              <span className="text-muted-foreground">{selectedBlog.readerLevel}</span>
+                            </div>
+                          )}
                         </div>
                       </ScrollArea>
                     </DialogContent>

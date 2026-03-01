@@ -59,8 +59,6 @@ import {
 import {
   getAllQuotes,
   getRandomQuote,
-  getAllExcerpts,
-  getRandomExcerpt,
   getWordOfTheDay,
   getRandomWord,
 } from "@/lib/system-db";
@@ -72,7 +70,7 @@ export async function GET(request: Request) {
 
     if (!type) {
       return NextResponse.json(
-        { error: "Missing 'type' parameter. Valid types: bible, cpi, dictionary, mitzvot, rules, quotes, excerpts, symbols, wotd" },
+        { error: "Missing 'type' parameter. Valid types: bible, cpi, dictionary, mitzvot, rules, quotes, symbols, wotd" },
         { status: 400 }
       );
     }
@@ -270,28 +268,6 @@ export async function GET(request: Request) {
         }
 
         return NextResponse.json({ quotes: getAllQuotes() });
-      }
-
-      // ========================================================================
-      // Excerpts
-      // ========================================================================
-      case "excerpts": {
-        const random = searchParams.get("random") === "true";
-
-        if (random) {
-          const excerpt = getRandomExcerpt();
-          if (!excerpt) {
-            return NextResponse.json(
-              { error: "No excerpts available" },
-              { status: 404, headers: { "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0" } }
-            );
-          }
-          return NextResponse.json(excerpt, {
-            headers: { "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0" },
-          });
-        }
-
-        return NextResponse.json({ excerpts: getAllExcerpts() });
       }
 
       // ========================================================================

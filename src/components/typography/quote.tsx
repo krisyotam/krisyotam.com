@@ -4,14 +4,7 @@ import type { ReactNode } from "react";
 export interface QuoteProps {
   children: ReactNode;
   author: string;
-  className?: string;
-}
-
-export interface ExcerptProps {
-  children: ReactNode;
-  title: string;
-  author: string;
-  version?: string;
+  source?: string;
   year?: string;
   className?: string;
 }
@@ -37,31 +30,24 @@ const footerStyles = [
   "text-right",
 ].join(" ");
 
-export function Quote({ children, author, className }: QuoteProps) {
-  return (
-    <div className={cn(baseStyles, className)}>
-      <div>{children}</div>
-      <div className={footerStyles}>— {author}</div>
-    </div>
-  );
-}
-
-export function Excerpt({
-  children,
-  title,
-  author,
-  version,
-  year,
-  className,
-}: ExcerptProps) {
+export function Quote({ children, author, source, year, className }: QuoteProps) {
   return (
     <div className={cn(baseStyles, className)}>
       <div>{children}</div>
       <div className={footerStyles}>
-        {title}
-        {version ? `, ${version}` : ""}
-        {year ? `, ${year}` : ""} — {author}
+        — {author}
+        {source ? `, ${source}` : ""}
+        {year ? ` (${year})` : ""}
       </div>
     </div>
   );
+}
+
+// Backward compat: Excerpt is now just Quote with a title mapped to source
+export function Excerpt({ children, title, author, version, year, className }: {
+  children: ReactNode; title: string; author: string;
+  version?: string; year?: string; className?: string;
+}) {
+  const src = [title, version].filter(Boolean).join(", ");
+  return <Quote author={author} source={src} year={year} className={className}>{children}</Quote>;
 }

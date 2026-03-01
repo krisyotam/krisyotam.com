@@ -4,9 +4,9 @@
   "private": true,
   "description": "Personal website of Kris Yotam - using Next.js 16.1 with React 19",
   "scripts": {
-    "sync": "node public/scripts/keep/syncContent.js",
-    "dev": "node public/scripts/keep/syncContent.js && next dev --webpack",
-    "build": "node public/scripts/keep/syncContent.js && next build --webpack",
+    "sync": "node public/scripts/dev/syncContent.js",
+    "dev": "node public/scripts/dev/syncContent.js && next dev --webpack",
+    "build": "node public/scripts/dev/syncContent.js && next build --webpack",
     "build:lowmem": "NEXT_WORKER_COUNT=1 NODE_OPTIONS='--max-old-space-size=8192' DISABLE_ESLINT_PLUGIN=true NEXT_DISABLE_TYPE_CHECKING=1 next build --webpack",
     "start": "next start",
     "lint": "next lint",
