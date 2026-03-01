@@ -313,10 +313,10 @@ export function Popups() {
 
   // Custom event for external triggers
   useEffect(() => {
-    const handler = (e: CustomEvent) => { const { url, title } = e.detail; if (isEnabled && mode !== "off" && shouldPreview(url)) createModal(url, title) }
+    const handler = (e: CustomEvent) => { const { url, title, force } = e.detail; if (force ? (isEnabled && !isBanned(url)) : (isEnabled && mode !== "off" && shouldPreview(url))) createModal(url, title) }
     window.addEventListener("openUniversalLinkModal", handler as EventListener)
     return () => window.removeEventListener("openUniversalLinkModal", handler as EventListener)
-  }, [isEnabled, mode, shouldPreview, createModal])
+  }, [isEnabled, mode, isBanned, shouldPreview, createModal])
 
   // Keyboard shortcuts
   useEffect(() => {

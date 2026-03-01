@@ -381,82 +381,107 @@ function TopBars({ totalFiles }: { totalFiles: number }) {
         </div>
       </div>
 
-      {/* Bar 3: Workspace grid — 3 rows x 5 cols */}
+      {/* Bar 3: Navigation grid — command menu items */}
       <div
         style={{
           flex: "1 1 33%",
           border: `2px solid ${P9.border}`,
           overflow: "hidden",
-          background: "#FFFFFF",
+          background: P9.body,
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <div
           style={{
+            background: P9.titleBar,
+            padding: "1px 8px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
             fontFamily: "var(--font-mono), monospace",
-            fontSize: "11px",
+            fontSize: "12px",
+            borderBottom: `1px solid ${P9.borderInner}`,
+            minHeight: "18px",
+          }}
+        >
+          <span>navigate(1)</span>
+          <span style={{ color: P9.textMuted }}>site</span>
+        </div>
+        <div
+          style={{
+            fontFamily: "var(--font-mono), monospace",
+            fontSize: "10px",
             display: "grid",
             gridTemplateColumns: "repeat(5, 1fr)",
+            flex: 1,
           }}
         >
           {[
-            { n: "1", l: "tui" },
-            { n: "2", l: "www" },
-            { n: "3", l: "term" },
-            { n: "4", l: "mail" },
-            { n: "5", l: "doc", href: "https://krisyotam.com/doc" },
-            { n: "6", l: "dev" },
-            { n: "7", l: "irc", href: "https://krisyotam.com/contact" },
-            { n: "8", l: "notes", href: "https://notes.krisyotam.com" },
-            { n: "9", l: "acme" },
-            { n: "10", l: "rio" },
-            { n: "11", l: "helix" },
-            { n: "12", l: "git", href: "https://git.krisyotam.com/krisyotam" },
-            { n: "13", l: "chat" },
-            { n: "14", l: "WTF" },
-            { n: "15", l: "stats" },
-            { n: "16", l: "sam" },
-            { n: "17", l: "mk" },
-            { n: "18", l: "plumb" },
-            { n: "19", l: "faces" },
-            { n: "20", l: "dump" },
-          ].map((ws) => {
-            const isLink = !!ws.href
-            const cellStyle: React.CSSProperties = {
-              padding: "1px 3px",
-              textAlign: "center",
-              background: isLink ? P9.wsHighlight : "#D8D8D0",
-              color: isLink ? "#fff" : P9.text,
-              border: "1px solid #FFFFFF",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              cursor: isLink ? "pointer" : "default",
-              textDecoration: "none",
-              display: "block",
-              fontSize: "inherit",
-              fontFamily: "inherit",
-            }
-
-            if (isLink) {
-              return (
-                <a
-                  key={ws.n}
-                  href={ws.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={cellStyle}
-                >
-                  {ws.n}|{ws.l}
-                </a>
-              )
-            }
-
-            return (
-              <div key={ws.n} style={cellStyle}>
-                {ws.n}|{ws.l}
-              </div>
-            )
-          })}
+            { label: "home", path: "/" },
+            { label: "papers", path: "/papers" },
+            { label: "essays", path: "/essays" },
+            { label: "blog", path: "/blog" },
+            { label: "diary", path: "/diary" },
+            { label: "reviews", path: "/reviews" },
+            { label: "fiction", path: "/fiction" },
+            { label: "notes", path: "/notes" },
+            { label: "verse", path: "/verse" },
+            { label: "til", path: "/til" },
+            { label: "now", path: "/now" },
+            { label: "film", path: "/film" },
+            { label: "anime", path: "/anime" },
+            { label: "manga", path: "/manga" },
+            { label: "games", path: "/games" },
+            { label: "music", path: "/music" },
+            { label: "reading", path: "/reading" },
+            { label: "library", path: "/library" },
+            { label: "tags", path: "/tags" },
+            { label: "quotes", path: "/quotes" },
+            { label: "about", path: "/me" },
+            { label: "stats", path: "/stats" },
+            { label: "globe", path: "/globe" },
+            { label: "sources", path: "/sources" },
+            { label: "contact", path: "/contact" },
+          ].map((item) => (
+            <div
+              key={item.path}
+              onClick={() => {
+                const url = `${window.location.origin}${item.path}`
+                window.dispatchEvent(
+                  new CustomEvent("openUniversalLinkModal", {
+                    detail: { url, title: item.label, force: true },
+                  })
+                )
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = P9.wsHighlight
+                e.currentTarget.style.color = "#fff"
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "#D8D8D0"
+                e.currentTarget.style.color = P9.text
+              }}
+              style={{
+                padding: "1px 3px",
+                textAlign: "center",
+                background: "#D8D8D0",
+                color: P9.text,
+                border: "1px solid #FFFFFF",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "inherit",
+                fontSize: "inherit",
+              }}
+            >
+              {item.label}
+            </div>
+          ))}
         </div>
       </div>
     </div>

@@ -54,17 +54,21 @@ interface WrapperProps {
 export function Wrapper({ showModal = true }: WrapperProps) {
   const pathname = usePathname()
 
-  // Suppress all overlays on the TUI page (it has its own full-screen UI)
-  if (pathname === "/tui") return null
+  const isTui = pathname === "/tui"
 
   return (
     <>
-      <Suspense fallback={null}>
-        <CommandMenu />
-      </Suspense>
-      <Suspense fallback={null}>
-        <SettingsMenu />
-      </Suspense>
+      {/* Suppress command menu and settings on TUI (it has its own UI) */}
+      {!isTui && (
+        <>
+          <Suspense fallback={null}>
+            <CommandMenu />
+          </Suspense>
+          <Suspense fallback={null}>
+            <SettingsMenu />
+          </Suspense>
+        </>
+      )}
       {showModal && (
         <Suspense fallback={null}>
           <UniversalLinkModal />
