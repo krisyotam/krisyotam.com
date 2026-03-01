@@ -419,7 +419,6 @@ function TopBars({ totalFiles }: { totalFiles: number }) {
         >
           {[
             { label: "home", path: "/" },
-            { label: "papers", path: "/papers" },
             { label: "essays", path: "/essays" },
             { label: "blog", path: "/blog" },
             { label: "diary", path: "/diary" },
@@ -432,28 +431,19 @@ function TopBars({ totalFiles }: { totalFiles: number }) {
             { label: "film", path: "/film" },
             { label: "anime", path: "/anime" },
             { label: "manga", path: "/manga" },
-            { label: "games", path: "/games" },
-            { label: "music", path: "/music" },
             { label: "reading", path: "/reading" },
             { label: "library", path: "/library" },
             { label: "tags", path: "/tags" },
-            { label: "quotes", path: "/quotes" },
             { label: "about", path: "/me" },
             { label: "stats", path: "/stats" },
             { label: "globe", path: "/globe" },
-            { label: "sources", path: "/sources" },
             { label: "contact", path: "/contact" },
           ].map((item) => (
-            <div
+            <a
               key={item.path}
-              onClick={() => {
-                const url = `${window.location.origin}${item.path}`
-                window.dispatchEvent(
-                  new CustomEvent("openUniversalLinkModal", {
-                    detail: { url, title: item.label, force: true },
-                  })
-                )
-              }}
+              href={item.path}
+              target="_blank"
+              rel="noopener noreferrer"
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = P9.wsHighlight
                 e.currentTarget.style.color = "#fff"
@@ -480,7 +470,7 @@ function TopBars({ totalFiles }: { totalFiles: number }) {
               }}
             >
               {item.label}
-            </div>
+            </a>
           ))}
         </div>
       </div>
