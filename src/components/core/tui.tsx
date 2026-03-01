@@ -340,13 +340,13 @@ function TopBars({ totalFiles }: { totalFiles: number }) {
             <span style={{ fontWeight: "bold", marginLeft: "4px" }}>/usr/krisyotam</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-            <svg width="12" height="10" viewBox="0 0 12 10" title="New folder">
+            <svg width="12" height="10" viewBox="0 0 12 10" aria-label="New folder">
               <rect x="0" y="2" width="10" height="8" fill="none" stroke={P9.text} strokeWidth="1" />
               <rect x="0" y="2" width="5" height="2" fill={P9.text} />
               <line x1="9" y1="0" x2="9" y2="6" stroke={P9.text} strokeWidth="1.2" />
               <line x1="6.5" y1="3" x2="11.5" y2="3" stroke={P9.text} strokeWidth="1.2" />
             </svg>
-            <svg width="12" height="10" viewBox="0 0 12 10" title="New file">
+            <svg width="12" height="10" viewBox="0 0 12 10" aria-label="New file">
               <rect x="0" y="0" width="8" height="10" fill="none" stroke={P9.text} strokeWidth="1" />
               <line x1="9" y1="2" x2="9" y2="8" stroke={P9.text} strokeWidth="1.2" />
               <line x1="6.5" y1="5" x2="11.5" y2="5" stroke={P9.text} strokeWidth="1.2" />
