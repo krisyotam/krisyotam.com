@@ -64,6 +64,57 @@ const BANNED_DOMAINS = [
   { name: "Medium", domain: "medium.com" },
 ] as const
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONTENT TYPE DETECTION
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+type ContentType = "pdf" | "code" | "image" | "video" | "audio" | "local-page" | "external"
+
+const CODE_EXTENSIONS = new Set(["js", "ts", "css", "html", "py", "hs", "sh", "json", "md", "mdx", "xml", "conf", "diff", "c", "go", "rs", "yaml", "yml", "toml"])
+const IMAGE_EXTENSIONS = new Set(["png", "jpg", "jpeg", "gif", "svg", "webp", "bmp", "ico"])
+const VIDEO_EXTENSIONS = new Set(["mp4", "webm"])
+const AUDIO_EXTENSIONS = new Set(["mp3", "ogg", "wav"])
+
+const LANG_MAP: Record<string, string> = {
+  js: "JavaScript", ts: "TypeScript", py: "Python", hs: "Haskell",
+  css: "CSS", html: "HTML", json: "JSON", md: "Markdown", mdx: "MDX",
+  sh: "Shell", c: "C", go: "Go", rs: "Rust", yaml: "YAML", yml: "YAML",
+  xml: "XML", conf: "Config", diff: "Diff", toml: "TOML",
+}
+
+const FILE_TYPES: ContentType[] = ["pdf", "code", "image", "video", "audio"]
+
+const getExtension = (url: string): string => {
+  try {
+    const pathname = new URL(url, window.location.origin).pathname
+    const dot = pathname.lastIndexOf(".")
+    if (dot === -1) return ""
+    return pathname.slice(dot + 1).toLowerCase()
+  } catch { return "" }
+}
+
+const getContentType = (url: string, isInternalFn: (url: string) => boolean): ContentType => {
+  const ext = getExtension(url)
+  if (ext === "pdf") return "pdf"
+  if (CODE_EXTENSIONS.has(ext)) return "code"
+  if (IMAGE_EXTENSIONS.has(ext)) return "image"
+  if (VIDEO_EXTENSIONS.has(ext)) return "video"
+  if (AUDIO_EXTENSIONS.has(ext)) return "audio"
+  if (isInternalFn(url)) return "local-page"
+  return "external"
+}
+
+const getDimensionsForType = (type: ContentType): { width: number; height: number } => {
+  switch (type) {
+    case "pdf": return { width: 550, height: 750 }
+    case "code": return { width: 700, height: 500 }
+    case "video": return { width: 640, height: 400 }
+    case "audio": return { width: 400, height: 120 }
+    case "image": return { width: 640, height: 480 }
+    default: return { width: 600, height: 500 }
+  }
+}
+
 const DEFAULT_SIZE = { width: 600, height: 500 }
 
 const ZOOM_SHORTCUTS: Record<string, ZoomPosition> = {
@@ -89,6 +140,7 @@ type Modal = {
   zoomPosition: ZoomPosition
   savedPosition?: { x: number; y: number }
   savedSize?: { width: number; height: number }
+  contentType: ContentType
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -190,10 +242,12 @@ export function Popups() {
     if (openUrls.current.has(url) || !url || url === "#" || url.startsWith("javascript:")) return
     if (isBanned(url) || (isInternal(url) && mode !== "all")) return
     const id = `popup-${Date.now()}`
+    const contentType = getContentType(url, isInternal)
+    const dims = getDimensionsForType(contentType)
     const modal: Modal = {
       id, url, title: title || getDomain(url),
-      position: { x: window.innerWidth / 2 - 300, y: window.innerHeight / 2 - 250 },
-      size: { ...DEFAULT_SIZE }, isPinned: false, isMinimized: false, zoomPosition: null,
+      position: { x: window.innerWidth / 2 - dims.width / 2, y: window.innerHeight / 2 - dims.height / 2 },
+      size: { ...dims }, isPinned: false, isMinimized: false, zoomPosition: null, contentType,
     }
     setModals(prev => [...prev, modal])
     openUrls.current.add(url)
@@ -240,9 +294,11 @@ export function Popups() {
   }, [modals, updateModal])
 
   const restoreSize = useCallback((id: string) => {
-    updateModal(id, { zoomPosition: null, size: { ...DEFAULT_SIZE }, position: { x: window.innerWidth / 2 - DEFAULT_SIZE.width / 2, y: window.innerHeight / 2 - DEFAULT_SIZE.height / 2 } })
+    const modal = modals.find(m => m.id === id)
+    const dims = modal ? getDimensionsForType(modal.contentType) : DEFAULT_SIZE
+    updateModal(id, { zoomPosition: null, size: { ...dims }, position: { x: window.innerWidth / 2 - dims.width / 2, y: window.innerHeight / 2 - dims.height / 2 } })
     setSubmenu(s => ({ ...s, minimize: null }))
-  }, [updateModal])
+  }, [modals, updateModal])
 
   // ─── Navigation ────────────────────────────────────────────────────────────
   const navigate = useCallback((dir: 1 | -1) => {
@@ -348,6 +404,38 @@ export function Popups() {
      RENDER
      ═════════════════════════════════════════════════════════════════════════ */
 
+  const getDisplayTitle = (modal: Modal): string => {
+    try {
+      const parsed = new URL(modal.url, window.location.origin)
+      if (parsed.hostname === window.location.hostname || modal.url.startsWith("/")) {
+        return parsed.pathname + parsed.hash
+      }
+    } catch { /* fall through */ }
+    if (FILE_TYPES.includes(modal.contentType)) return modal.url
+    return modal.title
+  }
+
+  const renderFooter = (modal: Modal) => {
+    const ext = getExtension(modal.url)
+    let left = ""
+    let right = ""
+    switch (modal.contentType) {
+      case "pdf": left = "PDF"; right = modal.url.split("/").pop() || ""; break
+      case "code": left = LANG_MAP[ext] || ext.toUpperCase(); break
+      case "image": left = "Image"; break
+      case "video": left = "Video"; break
+      case "audio": left = "Audio"; break
+      case "local-page": left = "Page"; right = getDomain(window.location.href); break
+      case "external": left = getDomain(modal.url); right = "External"; break
+    }
+    return (
+      <div className="h-6 border-t-2 border-border bg-muted/30 flex items-center justify-between px-3 text-[10px] text-muted-foreground uppercase tracking-wide">
+        <span>{left}</span>
+        <span>{right}</span>
+      </div>
+    )
+  }
+
   const renderZoomSubmenu = (id: string, isVisible: boolean) => {
     const modal = modals.find(m => m.id === id)
     const grid = [["top-left", "top", "top-right"], ["left", "full", "right"], ["bottom-left", "bottom", "bottom-right"]] as const
@@ -394,7 +482,7 @@ export function Popups() {
           <button onClick={e => { e.stopPropagation(); e.altKey ? setModals(prev => prev.map(m => ({ ...m, isPinned: !modal.isPinned }))) : updateModal(modal.id, { isPinned: !modal.isPinned }) }} className={cn(btnCls, modal.isPinned && "text-foreground")} title={modal.isPinned ? "[c]: Unpin" : "[c]: Pin"}>{modal.isPinned ? <PinOff className="h-4 w-4" /> : <Pin className="h-4 w-4" />}</button>
           <button onClick={e => { e.stopPropagation(); minimize(modal.id) }} {...submenuHandlers("minimize", modal.id)} className={btnCls} title="[t]: Minimize"><Minimize2 className="h-4 w-4" /></button>
         </div>
-        <div className="flex-1 px-4 truncate text-center text-sm font-medium text-muted-foreground">{modal.title}</div>
+        <div className={cn("flex-1 px-4 truncate text-center font-medium text-muted-foreground", FILE_TYPES.includes(modal.contentType) ? "font-mono text-xs" : "text-sm")}>{getDisplayTitle(modal)}</div>
         {isFocused && (
           <div className="flex items-center">
             <button onClick={() => { navigator.clipboard.writeText(modal.url); setCopied(true) }} className={btnCls} title="Copy URL">{copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}</button>
@@ -423,6 +511,7 @@ export function Popups() {
               <div className="absolute inset-0 flex items-center justify-center bg-background"><div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary" /></div>
               <iframe src={modal.url} className="w-full h-full border-0" title={`Preview: ${modal.url}`} sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox" referrerPolicy="no-referrer" onLoad={e => { const p = e.currentTarget.parentElement; if (p?.firstChild !== e.currentTarget) p?.firstChild?.remove() }} />
             </div>
+            {renderFooter(modal)}
           </div>
         )
       })}

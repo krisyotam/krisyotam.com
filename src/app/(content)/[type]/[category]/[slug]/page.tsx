@@ -11,6 +11,7 @@ import { Sidenotes } from "@/components/core/sidenotes"
 import { ViewTracker } from "@/components/core/view-tracker"
 import { extractHeadingsFromMDX } from "@/lib/mdx"
 import { CONTENT_TYPES, VALID_TYPES } from "../../config"
+import { getWordCount } from "@/lib/mdx-wordcount"
 
 interface Props { params: Promise<{ type: string; category: string; slug: string }> }
 
@@ -82,6 +83,7 @@ export default async function ContentDetailPage({ params }: Props) {
 
   // Standard MDX content types
   const headings = await extractHeadingsFromMDX(type, slug, category)
+  const wordCount = getWordCount(config.contentDir, slug)
 
   let Post
   try {
@@ -101,7 +103,7 @@ export default async function ContentDetailPage({ params }: Props) {
         <main id="content" className="container max-w-[672px] mx-auto px-4">
           {headings.length > 0 && <TOC headings={headings} />}
           <div className="content"><Post /></div>
-          <ContentPageClient type={type} post={post} allPosts={allPosts} contentOnly={true} />
+          <ContentPageClient type={type} post={post} allPosts={allPosts} contentOnly={true} wordCount={wordCount} />
         </main>
         <Sidenotes containerSelector="#content" />
       </div>

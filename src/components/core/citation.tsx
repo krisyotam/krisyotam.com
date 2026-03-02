@@ -1,16 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Clipboard, Check } from "lucide-react";
 
 interface CitationProps {
   title: string;
   slug?: string;
-  start_date?: string; // ISO string ("YYYY-MM-DD")
-  end_date?: string; // ISO string ("YYYY-MM-DD") 
-  date?: string; // Legacy support - ISO string
+  start_date?: string;
+  end_date?: string;
+  date?: string;
   url: string;
   author?: string;
 }
@@ -19,7 +16,6 @@ export function Citation({ title, slug, start_date, end_date, date, url, author 
   const [copiedHuman, setCopiedHuman] = useState(false);
   const [copiedBib, setCopiedBib] = useState(false);
 
-  // Parse date with fallback logic
   const displayDate = end_date || start_date || date || new Date().toISOString();
   const d = new Date(displayDate);
   const year = d.getFullYear();
@@ -27,16 +23,15 @@ export function Citation({ title, slug, start_date, end_date, date, url, author 
 
   const authorName = author || "Yotam, Kris";
   const journal = "krisyotam.com";
-  
-  // Ensure URL always uses krisyotam.com as base, regardless of environment
-  const normalizedUrl = url ? url.replace(/http:\/\/localhost:3000/g, "https://krisyotam.com")
-                               .replace(/http:\/\/127.0.0.1:3000/g, "https://krisyotam.com")
-                             : "https://krisyotam.com";
 
-  // Human-readable citation
+  const normalizedUrl = url
+    ? url.replace(/http:\/\/localhost:3000/g, "https://krisyotam.com")
+         .replace(/http:\/\/127.0.0.1:3000/g, "https://krisyotam.com")
+    : "https://krisyotam.com";
+
   const humanCitation = `${authorName}. (${month} ${year}). ${title}. ${journal}. ${normalizedUrl}`;
-  // BibTeX key & entry
-  const key = slug ? `yotam${year}${slug}` : `yotam${year}${title.toLowerCase().replace(/\s+/g, '-')}`;
+
+  const key = slug ? `yotam${year}${slug}` : `yotam${year}${title.toLowerCase().replace(/\s+/g, "-")}`;
   const bibtex = [
     `@article{${key},`,
     `  title   = "${title}",`,
@@ -64,52 +59,49 @@ export function Citation({ title, slug, start_date, end_date, date, url, author 
   };
 
   return (
-    <Card className="relative w-full p-4 bg-card text-card-foreground border-border rounded-none">
-      <h3 className="text-sm font-medium mb-4">Citation</h3>
-
-      {/* Human-readable */}
-      <div className="relative mb-3">
-        <p className="text-xs text-muted-foreground mb-1">Cited as:</p>
-        <div className="border-l-2 border-muted pl-4 pr-8 py-2">
-          <p className="text-sm">{humanCitation}</p>
+    <article className="border border-border">
+      {/* Header strip */}
+      <div className="flex items-stretch border-b border-border">
+        <div className="w-16 flex items-center justify-center px-2 py-2 border-r border-border bg-muted/30 flex-shrink-0">
+          <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Citation</span>
         </div>
-        <Button
-          variant="ghost"
-          size="sm"
+        <div className="flex-1 flex items-center px-3 py-2">
+          <span className="text-xs text-muted-foreground">{authorName} &middot; {month} {year}</span>
+        </div>
+      </div>
+
+      {/* Human-readable citation */}
+      <div className="flex items-stretch border-b border-border">
+        <button
           onClick={() => copyText(humanCitation, true)}
-          className="absolute top-2 right-2 p-1"
+          className="w-16 flex items-center justify-center px-2 py-2 border-r border-border bg-muted/30 hover:bg-muted/50 transition-colors flex-shrink-0"
           aria-label="Copy human citation"
         >
-          {copiedHuman ? (
-            <Check className="h-4 w-4 text-green-500" />
-          ) : (
-            <Clipboard className="h-4 w-4" />
-          )}
-        </Button>
+          <span className="text-[10px] uppercase tracking-wide text-muted-foreground whitespace-nowrap">
+            {copiedHuman ? "Copied" : "Cite"}
+          </span>
+        </button>
+        <div className="flex-1 px-3 py-2">
+          <p className="text-sm text-foreground">{humanCitation}</p>
+        </div>
       </div>
-
-      <p className="text-center text-xs text-muted-foreground my-2">Or</p>
 
       {/* BibTeX */}
-      <div className="relative">
-        <pre className="language-bibtex whitespace-pre-wrap font-mono text-sm bg-muted p-3 rounded">
-          <code>{bibtex}</code>
-        </pre>
-        <Button
-          variant="ghost"
-          size="sm"
+      <div className="flex items-stretch">
+        <button
           onClick={() => copyText(bibtex, false)}
-          className="absolute top-2 right-2 p-1"
+          className="w-16 flex items-start justify-center px-2 py-2 border-r border-border bg-muted/30 hover:bg-muted/50 transition-colors flex-shrink-0"
           aria-label="Copy BibTeX"
         >
-          {copiedBib ? (
-            <Check className="h-4 w-4 text-green-500" />
-          ) : (
-            <Clipboard className="h-4 w-4" />
-          )}
-        </Button>
+          <span className="text-[10px] uppercase tracking-wide text-muted-foreground whitespace-nowrap">
+            {copiedBib ? "Copied" : "BibTeX"}
+          </span>
+        </button>
+        <div className="flex-1 px-3 py-2 overflow-x-auto">
+          <pre className="font-mono text-xs text-foreground whitespace-pre">{bibtex}</pre>
+        </div>
       </div>
-    </Card>
+    </article>
   );
 }
 

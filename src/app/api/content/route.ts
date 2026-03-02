@@ -192,6 +192,16 @@ export async function GET(request: Request) {
         return NextResponse.json(progymnasmata);
       }
 
+      case "reviews": {
+        const reviews = getContentByType("reviews");
+        return NextResponse.json(reviews);
+      }
+
+      case "diary": {
+        const diary = getContentByType("diary");
+        return NextResponse.json(diary);
+      }
+
       // ========================================================================
       // Poems (from verse.json)
       // ========================================================================
@@ -333,10 +343,8 @@ export async function GET(request: Request) {
 
       case "verse": {
         if (!slug || !category) {
-          return NextResponse.json(
-            { error: "Missing 'slug' or 'category' parameter for verse content" },
-            { status: 400 }
-          );
+          const verseList = getContentByType("verse");
+          return NextResponse.json(verseList);
         }
 
         const filePath = path.join(

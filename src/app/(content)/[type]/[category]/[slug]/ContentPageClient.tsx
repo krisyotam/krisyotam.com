@@ -32,13 +32,14 @@ interface Props {
   children?: React.ReactNode
   headerOnly?: boolean
   contentOnly?: boolean
+  wordCount?: number
 }
 
 function slugifyCategory(c: string) {
   return c.toLowerCase().replace(/\s+/g, "-")
 }
 
-export default function ContentPageClient({ type, post, allPosts, children, headerOnly, contentOnly }: Props) {
+export default function ContentPageClient({ type, post, allPosts, children, headerOnly, contentOnly, wordCount }: Props) {
   if (!post) notFound()
   const config = CONTENT_TYPES[type]
   if (!config) notFound()
@@ -72,7 +73,7 @@ export default function ContentPageClient({ type, post, allPosts, children, head
       <div className="mt-8 w-full">
         <Comments />
         <Footnotes containerSelector="#content" />
-        <SiteFooter lastUpdated={lastUpdated} rawMarkdown="" />
+        <SiteFooter lastUpdated={lastUpdated} wordCount={wordCount} />
         <Citation
           title={post.title}
           slug={post.slug}

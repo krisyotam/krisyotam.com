@@ -443,16 +443,19 @@ if (typeof window.URL_SUGGESTER_LOADED === 'undefined') {
 
     const suggestionsHtml = suggestions.length > 0
       ? suggestions
-          .map((item) => `<li class="py-3 px-4"><a class="link-live block" href="${item.url}"><code>${item.path}</code></a></li>`)
+          .map((item, i) => {
+            const isLast = i === suggestions.length - 1
+            const borderClass = isLast ? '' : ' border-b border-border'
+            return `<div class="flex items-stretch${borderClass}"><div class="w-16 flex items-center justify-center px-2 py-2 border-r border-border flex-shrink-0"><span class="text-xs font-mono text-muted-foreground">${i + 1}</span></div><a class="flex-1 flex items-center px-3 py-2 text-sm text-foreground hover:bg-muted/30 transition-colors font-mono" href="${item.url}">${item.path}</a></div>`
+          })
           .join('')
-      : `<li class="py-3 px-4"><em>Loading suggestions...</em></li>`
+      : `<div class="flex items-stretch"><div class="w-16 flex items-center justify-center px-2 py-2 border-r border-border flex-shrink-0"></div><div class="flex-1 px-3 py-2 text-sm text-muted-foreground italic">Loading suggestions...</div></div>`
 
     let suggestionsElement
 
     if (isDedicatedContainer) {
-      // Only produce the inner list so the page's card header remains
       suggestionsElement = elementFromHTML(
-        `<div><ul class="divide-y divide-border">${suggestionsHtml}</ul></div>`
+        `<div>${suggestionsHtml}</div>`
       )
     } else {
       // Full fallback section

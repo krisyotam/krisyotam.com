@@ -37,6 +37,7 @@ const DB_PATH = path.join(process.cwd(), "public", "data", "content.db");
 
 const CONTENT_TYPES = [
   "blog",
+  "diary",
   "essays",
   "fiction",
   "news",
@@ -45,6 +46,7 @@ const CONTENT_TYPES = [
   "papers",
   "progymnasmata",
   "reviews",
+  "sequences",
   "verse",
 ] as const;
 
@@ -481,6 +483,7 @@ export async function GET(
           process.cwd(),
           "public",
           "scripts",
+          "prod",
           "404.js"
         );
         const scriptContent = await fsPromises.readFile(scriptPath, "utf-8");

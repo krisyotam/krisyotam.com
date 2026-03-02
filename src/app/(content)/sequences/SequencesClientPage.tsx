@@ -273,7 +273,7 @@ export default function SequencesClientPage({
           >
             <td className="py-2 px-3">
               <Link
-                href={`/${sequence.slug}`}
+                href={`/sequences/${sequence.slug}`}
                 className="font-medium"
               >
                 {sequence.title}

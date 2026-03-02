@@ -26,7 +26,7 @@ const inlineScrollStyles = `
     }
   }
   .animate-scroll {
-    animation: scroll 2000s linear infinite;
+    animation: scroll 6000s linear infinite;
   }
 `;
 
@@ -53,7 +53,7 @@ export const InfiniteMovingQuotes = ({
 				if (response.ok) {
 					const data = await response.json();
 					const validQuotes = (data.quotes || []).filter(
-						(q: Quote) => q.text && q.author && q.text.length <= 180
+						(q: Quote) => q.text && q.author && q.text.length <= 120
 					);
 					if (validQuotes.length > 0) {
 						setItems(validQuotes);

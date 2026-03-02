@@ -426,9 +426,9 @@
    
    .dropcap-image-wrapper {
      float: left;
-     margin-right: -0.5em !important;    /* aggressive pull text closer */
-     margin-top: 0 !important;
-     margin-bottom: -2em !important;
+     margin-right: 0.25em !important;
+     margin-top: 0.15em !important;
+     margin-bottom: 0 !important;
      margin-left: -0.05em !important;
      line-height: 0;
      padding: 0 !important;
@@ -464,10 +464,10 @@
      /* height: auto; */
    }
 
-   /* Smaller dropcap for SiteInfoTabs - override negative margins */
+   /* Smaller dropcap for SiteInfoTabs */
    .dropcap-tabs.dropcap-image-wrapper {
-     margin-right: 0.25em !important;
-     margin-bottom: -0.8em !important;
+     margin-right: 0.2em !important;
+     margin-bottom: 0 !important;
    }
 
    .dropcap-image {
@@ -480,10 +480,8 @@
    }
    
    .dropcap-image {
-     /* make it big enough to admire — 10em is the intended size */
-     width: 10em !important;
-     height: 10em !important;
-     /* keep it perfectly square */
+     width: 8em !important;
+     height: 8em !important;
      object-fit: contain;
    }
    

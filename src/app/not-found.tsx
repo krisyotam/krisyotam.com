@@ -25,9 +25,9 @@ import Link from "next/link"
 
 import { Search, ArrowLeft } from "lucide-react"
 import { LiveClock } from "@/components/ui/live-clock"
-import { Card } from "@/components/ui/card"
 import { Footer } from "@/components/core/footer"
 import { Block404 } from "@/components/core"
+import { DiscoveryBlock } from "@/components/core/discovery-block"
 import SiteFooter from "@/components/typography/expanded-footer-block"
 
 // =============================================================================
@@ -44,7 +44,7 @@ function useUrlSuggester() {
 
       const script = document.createElement("script")
       script.id = "url-suggester-script"
-      script.src = `/api/utils?type=get-script?t=${Date.now()}`
+      script.src = `/api/utils?type=get-script&t=${Date.now()}`
       script.async = true
       document.body.appendChild(script)
     }
@@ -94,13 +94,17 @@ function SearchBar({ value, onChange, onSearch }: SearchBarProps) {
 
 function SuggestionsCard() {
   return (
-    <Card className="w-full">
-      <div className="p-4 border-b border-border">
-        <h3 className="text-lg font-medium">Suggested pages</h3>
-        <p className="text-sm text-muted-foreground">Did you mean one of these?</p>
+    <article className="border border-border">
+      <div className="flex items-stretch border-b border-border">
+        <div className="w-16 flex items-center justify-center px-2 py-2 border-r border-border bg-muted/30 flex-shrink-0">
+          <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">Pages</span>
+        </div>
+        <div className="flex-1 flex items-center px-3 py-2">
+          <span className="text-xs text-muted-foreground">Did you mean one of these?</span>
+        </div>
       </div>
-      <div id="url-suggestions-container" className="divide-y divide-border" />
-    </Card>
+      <div id="url-suggestions-container" />
+    </article>
   )
 }
 
@@ -146,16 +150,13 @@ export default function NotFound() {
             onSearch={handleSearch}
           />
           <SuggestionsCard />
-        </main>
-
-        {/* Footer */}
-        <div className="mt-8 container max-w-[672px] mx-auto px-4">
+          <DiscoveryBlock />
           <SiteFooter lastUpdated={new Date().toISOString().slice(0, 10)} rawMarkdown="" />
           <div className="mt-4">
             <LiveClock />
           </div>
           <Footer />
-        </div>
+        </main>
 
       </div>
     </div>

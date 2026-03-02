@@ -52,14 +52,17 @@ export function A({ href, children, className = "", isInternal = false, id }: AP
       clearTimeout(hoverTimerRef.current)
     }
 
+    // Capture the element ref before the event object is recycled
+    const el = linkRef.current
     // Set timer to emit event after delay
     hoverTimerRef.current = setTimeout(() => {
-      const rect = e.currentTarget.getBoundingClientRect()
+      if (!el) return
+      const rect = el.getBoundingClientRect()
       const x = rect.left + rect.width / 2
       const y = rect.top
 
       // Emit event for universal-link-modal to handle
-      linkEvents.emit(href, typeof children === "string" ? children : e.currentTarget.textContent || "", x, y)
+      linkEvents.emit(href, typeof children === "string" ? children : el.textContent || "", x, y)
     }, 500)
   }
 
